@@ -1,0 +1,3634 @@
+openapi: 3.0.0
+info:
+  version: 2019-12-03
+  x-release: v4
+  title: AWS Outposts
+  description: Amazon Web Services Outposts is a fully managed service that extends Amazon Web Services infrastructure, APIs, and tools to customer premises. By providing local access to Amazon Web Services managed infrastructure, Amazon Web Services Outposts enables customers to build and run applications on premises using the same programming interfaces as in Amazon Web Services Regions, while using local compute and storage resources for lower latency and local data processing needs.
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_awscloud_profile_image.png
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: outposts
+  x-aws-signingName: outposts
+  x-origin:
+    - contentType: application/json
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/outposts-2019-12-03.normal.json
+      converter:
+        url: https://github.com/mermade/aws2openapi
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/outposts/
+servers:
+  - url: http://outposts.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Outposts multi-region endpoint
+  - url: https://outposts.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Outposts multi-region endpoint
+  - url: http://outposts.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Outposts endpoint for China (Beijing) and China (Ningxia)
+  - url: https://outposts.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Outposts endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  "/orders/{OrderId}/cancel":
+    post:
+      operationId: CancelOrder
+      description: Cancels the specified order for an Outpost.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelOrderOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "483":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: OrderId
+          in: path
+          required: true
+          description: " The ID of the order. "
+          schema:
+            type: string
+            pattern: oo-[a-f0-9]{17}$
+            minLength: 1
+            maxLength: 20
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /orders:
+    post:
+      operationId: CreateOrder
+      description: Creates an order for an Outpost.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOrderOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "483":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "485":
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceQuotaExceededException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - OutpostIdentifier
+                - LineItems
+                - PaymentOption
+              properties:
+                OutpostIdentifier:
+                  description: " The ID or the Amazon Resource Name (ARN) of the Outpost. "
+                  type: string
+                  pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+                  minLength: 1
+                  maxLength: 180
+                LineItems:
+                  description: The line items that make up the order.
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/LineItemRequest"
+                  minItems: 1
+                  maxItems: 20
+                PaymentOption:
+                  description: The payment option.
+                  type: string
+                  enum:
+                    - ALL_UPFRONT
+                    - NO_UPFRONT
+                    - PARTIAL_UPFRONT
+                PaymentTerm:
+                  description: The payment terms.
+                  type: string
+                  enum:
+                    - THREE_YEARS
+                    - ONE_YEAR
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /outposts:
+    post:
+      operationId: CreateOutpost
+      description: <p>Creates an Outpost.</p> <p>You can specify either an Availability one or an AZ ID.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOutpostOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "485":
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceQuotaExceededException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - SiteId
+              properties:
+                Name:
+                  description: The name of the Outpost.
+                  type: string
+                  pattern: ^[\S ]+$
+                  minLength: 1
+                  maxLength: 255
+                Description:
+                  description: The description of the Outpost.
+                  type: string
+                  pattern: ^[\S ]*$
+                  minLength: 0
+                  maxLength: 1000
+                SiteId:
+                  description: The ID of the site.
+                  type: string
+                  pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/)?(os-[a-f0-9]{17})$
+                  minLength: 1
+                  maxLength: 255
+                AvailabilityZone:
+                  description: The Availability Zone.
+                  type: string
+                  pattern: ^([a-zA-Z]+-){1,3}([a-zA-Z]+)?(\d+[a-zA-Z]?)?$
+                  minLength: 1
+                  maxLength: 1000
+                AvailabilityZoneId:
+                  description: The ID of the Availability Zone.
+                  type: string
+                  pattern: ^[a-zA-Z]+\d-[a-zA-Z]+\d$
+                  minLength: 1
+                  maxLength: 255
+                Tags:
+                  description: The tags to apply to the Outpost.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: "#/components/schemas/TagValue"
+                SupportedHardwareType:
+                  description: " The type of hardware for this Outpost. "
+                  type: string
+                  enum:
+                    - RACK
+                    - SERVER
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: ListOutposts
+      description: <p>Lists the Outposts for your Amazon Web Services account.</p> <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOutpostsOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: string
+            pattern: ^(\d+)##(\S+)$
+            description: The pagination token.
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: integer
+            description: The maximum page size.
+            minimum: 1
+            maximum: 1000
+        - name: LifeCycleStatusFilter
+          in: query
+          required: false
+          description: Filters the results by the lifecycle status.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/LifeCycleStatus"
+            minItems: 1
+            maxItems: 5
+        - name: AvailabilityZoneFilter
+          in: query
+          required: false
+          description: Filters the results by Availability Zone (for example, <code>us-east-1a</code>).
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/AvailabilityZone"
+            minItems: 1
+            maxItems: 5
+        - name: AvailabilityZoneIdFilter
+          in: query
+          required: false
+          description: Filters the results by AZ ID (for example, <code>use1-az1</code>).
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/AvailabilityZoneId"
+            minItems: 1
+            maxItems: 5
+  /sites:
+    post:
+      operationId: CreateSite
+      description: " Creates a site for an Outpost. "
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateSiteOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "484":
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceQuotaExceededException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+              properties:
+                Name:
+                  description: The name of the site.
+                  type: string
+                  pattern: ^[\S ]+$
+                  minLength: 1
+                  maxLength: 1000
+                Description:
+                  description: The description of the site.
+                  type: string
+                  pattern: ^[\S ]+$
+                  minLength: 1
+                  maxLength: 1001
+                Notes:
+                  description: "Additional information that you provide about site access requirements, electrician scheduling, personal protective equipment, or regulation of equipment materials that could affect your installation process. "
+                  type: string
+                  pattern: ^[\S \n]+$
+                  minLength: 1
+                  maxLength: 2000
+                Tags:
+                  description: " The tags to apply to a site. "
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: "#/components/schemas/TagValue"
+                OperatingAddress:
+                  description: " Information about an address. "
+                  type: object
+                  properties:
+                    ContactName:
+                      allOf:
+                        - $ref: "#/components/schemas/ContactName"
+                        - description: The name of the contact.
+                    ContactPhoneNumber:
+                      allOf:
+                        - $ref: "#/components/schemas/ContactPhoneNumber"
+                        - description: The phone number of the contact.
+                    AddressLine1:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine1"
+                        - description: The first line of the address.
+                    AddressLine2:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine2"
+                        - description: The second line of the address.
+                    AddressLine3:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine3"
+                        - description: The third line of the address.
+                    City:
+                      allOf:
+                        - $ref: "#/components/schemas/City"
+                        - description: The city for the address.
+                    StateOrRegion:
+                      allOf:
+                        - $ref: "#/components/schemas/StateOrRegion"
+                        - description: The state for the address.
+                    DistrictOrCounty:
+                      allOf:
+                        - $ref: "#/components/schemas/DistrictOrCounty"
+                        - description: The district or county for the address.
+                    PostalCode:
+                      allOf:
+                        - $ref: "#/components/schemas/PostalCode"
+                        - description: The postal code for the address.
+                    CountryCode:
+                      allOf:
+                        - $ref: "#/components/schemas/CountryCode"
+                        - description: The ISO-3166 two-letter country code for the address.
+                    Municipality:
+                      allOf:
+                        - $ref: "#/components/schemas/Municipality"
+                        - description: The municipality for the address.
+                ShippingAddress:
+                  description: " Information about an address. "
+                  type: object
+                  properties:
+                    ContactName:
+                      allOf:
+                        - $ref: "#/components/schemas/ContactName"
+                        - description: The name of the contact.
+                    ContactPhoneNumber:
+                      allOf:
+                        - $ref: "#/components/schemas/ContactPhoneNumber"
+                        - description: The phone number of the contact.
+                    AddressLine1:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine1"
+                        - description: The first line of the address.
+                    AddressLine2:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine2"
+                        - description: The second line of the address.
+                    AddressLine3:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine3"
+                        - description: The third line of the address.
+                    City:
+                      allOf:
+                        - $ref: "#/components/schemas/City"
+                        - description: The city for the address.
+                    StateOrRegion:
+                      allOf:
+                        - $ref: "#/components/schemas/StateOrRegion"
+                        - description: The state for the address.
+                    DistrictOrCounty:
+                      allOf:
+                        - $ref: "#/components/schemas/DistrictOrCounty"
+                        - description: The district or county for the address.
+                    PostalCode:
+                      allOf:
+                        - $ref: "#/components/schemas/PostalCode"
+                        - description: The postal code for the address.
+                    CountryCode:
+                      allOf:
+                        - $ref: "#/components/schemas/CountryCode"
+                        - description: The ISO-3166 two-letter country code for the address.
+                    Municipality:
+                      allOf:
+                        - $ref: "#/components/schemas/Municipality"
+                        - description: The municipality for the address.
+                RackPhysicalProperties:
+                  description: ' Information about the physical and logistical details for racks at sites. For more information about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network readiness checklist</a> in the Amazon Web Services Outposts User Guide. '
+                  type: object
+                  properties:
+                    PowerDrawKva:
+                      allOf:
+                        - $ref: "#/components/schemas/PowerDrawKva"
+                        - description: "The power draw available at the hardware placement position for the rack. "
+                    PowerPhase:
+                      allOf:
+                        - $ref: "#/components/schemas/PowerPhase"
+                        - description: The power option that you can provide for hardware.
+                    PowerConnector:
+                      allOf:
+                        - $ref: "#/components/schemas/PowerConnector"
+                        - description: "The power connector for the hardware. "
+                    PowerFeedDrop:
+                      allOf:
+                        - $ref: "#/components/schemas/PowerFeedDrop"
+                        - description: The position of the power feed.
+                    UplinkGbps:
+                      allOf:
+                        - $ref: "#/components/schemas/UplinkGbps"
+                        - description: "The uplink speed the rack supports for the connection to the Region. "
+                    UplinkCount:
+                      allOf:
+                        - $ref: "#/components/schemas/UplinkCount"
+                        - description: The number of uplinks each Outpost network device.
+                    FiberOpticCableType:
+                      allOf:
+                        - $ref: "#/components/schemas/FiberOpticCableType"
+                        - description: "The type of fiber used to attach the Outpost to the network. "
+                    OpticalStandard:
+                      allOf:
+                        - $ref: "#/components/schemas/OpticalStandard"
+                        - description: 'The type of optical standard used to attach the Outpost to the network. This field is dependent on uplink speed, fiber type, and distance to the upstream device. For more information about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> in the Amazon Web Services Outposts User Guide. '
+                    MaximumSupportedWeightLbs:
+                      allOf:
+                        - $ref: "#/components/schemas/MaximumSupportedWeightLbs"
+                        - description: "The maximum rack weight that this site can support. <code>NO_LIMIT</code> is over 2000 lbs (907 kg). "
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: ListSites
+      description: <p>Lists the Outpost sites for your Amazon Web Services account. Use filters to return specific results.</p> <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSitesOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: string
+            pattern: ^(\d+)##(\S+)$
+            description: The pagination token.
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: integer
+            description: The maximum page size.
+            minimum: 1
+            maximum: 1000
+        - name: OperatingAddressCountryCodeFilter
+          in: query
+          required: false
+          description: Filters the results by country code.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/CountryCode"
+        - name: OperatingAddressStateOrRegionFilter
+          in: query
+          required: false
+          description: Filters the results by state or region.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/StateOrRegion"
+        - name: OperatingAddressCityFilter
+          in: query
+          required: false
+          description: Filters the results by city.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/City"
+  "/outposts/{OutpostId}":
+    delete:
+      operationId: DeleteOutpost
+      description: Deletes the specified Outpost.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteOutpostOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: OutpostId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the Outpost. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+            minLength: 1
+            maxLength: 180
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: GetOutpost
+      description: Gets information about the specified Outpost.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOutpostOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "482":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: OutpostId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the Outpost. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+            minLength: 1
+            maxLength: 180
+    patch:
+      operationId: UpdateOutpost
+      description: " Updates an Outpost. "
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateOutpostOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: OutpostId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the Outpost. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+            minLength: 1
+            maxLength: 180
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the Outpost.
+                  type: string
+                  pattern: ^[\S ]+$
+                  minLength: 1
+                  maxLength: 255
+                Description:
+                  description: The description of the Outpost.
+                  type: string
+                  pattern: ^[\S ]*$
+                  minLength: 0
+                  maxLength: 1000
+                SupportedHardwareType:
+                  description: " The type of hardware for this Outpost. "
+                  type: string
+                  enum:
+                    - RACK
+                    - SERVER
+  "/sites/{SiteId}":
+    delete:
+      operationId: DeleteSite
+      description: Deletes the specified site.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteSiteOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: SiteId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the site. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/)?(os-[a-f0-9]{17})$
+            description: The ID of the site.
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: GetSite
+      description: Gets information about the specified Outpost site.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSiteOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "482":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: SiteId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the site. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/)?(os-[a-f0-9]{17})$
+            description: The ID of the site.
+            minLength: 1
+            maxLength: 255
+    patch:
+      operationId: UpdateSite
+      description: Updates the specified site.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateSiteOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: SiteId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the site. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/)?(os-[a-f0-9]{17})$
+            description: The ID of the site.
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the site.
+                  type: string
+                  pattern: ^[\S ]+$
+                  minLength: 1
+                  maxLength: 1000
+                Description:
+                  description: The description of the site.
+                  type: string
+                  pattern: ^[\S ]+$
+                  minLength: 1
+                  maxLength: 1001
+                Notes:
+                  description: Notes about a site.
+                  type: string
+                  pattern: ^[\S \n]+$
+                  minLength: 1
+                  maxLength: 2000
+  "/catalog/item/{CatalogItemId}":
+    get:
+      operationId: GetCatalogItem
+      description: Gets information about the specified catalog item.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCatalogItemOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: CatalogItemId
+          in: path
+          required: true
+          description: The ID of the catalog item.
+          schema:
+            type: string
+            pattern: OR-[A-Z0-9]{7}
+            minLength: 1
+            maxLength: 10
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/connections/{ConnectionId}":
+    get:
+      operationId: GetConnection
+      description: <note> <p> Amazon Web Services uses this action to install Outpost servers.</p> </note> <p> Gets information about the specified connection. </p> <p> Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html"> Amazon Web Services managed policies for Amazon Web Services Outposts</a> and <a href="https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html"> Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail</a> in the <i>Amazon Web Services Outposts User Guide</i>. </p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetConnectionResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: ConnectionId
+          in: path
+          required: true
+          description: " The ID of the connection. "
+          schema:
+            type: string
+            pattern: ^[a-zA-Z0-9+/=]{1,1024}$
+            minLength: 1
+            maxLength: 1024
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/orders/{OrderId}":
+    get:
+      operationId: GetOrder
+      description: Gets information about the specified order.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrderOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: OrderId
+          in: path
+          required: true
+          description: The ID of the order.
+          schema:
+            type: string
+            pattern: oo-[a-f0-9]{17}$
+            minLength: 1
+            maxLength: 20
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/outposts/{OutpostId}/instanceTypes":
+    get:
+      operationId: GetOutpostInstanceTypes
+      description: Gets the instance types for the specified Outpost.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOutpostInstanceTypesOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "482":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: OutpostId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the Outpost. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+            minLength: 1
+            maxLength: 180
+        - name: NextToken
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: string
+            pattern: ^(\d+)##(\S+)$
+            description: The pagination token.
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: integer
+            description: The maximum page size.
+            minimum: 1
+            maximum: 1000
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/sites/{SiteId}/address#AddressType":
+    get:
+      operationId: GetSiteAddress
+      description: " Gets the site address of the specified site. "
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSiteAddressOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: SiteId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the site. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/)?(os-[a-f0-9]{17})$
+            description: The ID of the site.
+            minLength: 1
+            maxLength: 255
+        - name: AddressType
+          in: query
+          required: true
+          description: "The type of the address you request. "
+          schema:
+            type: string
+            enum:
+              - SHIPPING_ADDRESS
+              - OPERATING_ADDRESS
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/outposts/{OutpostId}/assets":
+    get:
+      operationId: ListAssets
+      description: <p>Lists the hardware assets for the specified Outpost.</p> <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAssetsOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: OutpostId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the Outpost. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+            minLength: 1
+            maxLength: 180
+        - name: HostIdFilter
+          in: query
+          required: false
+          description: Filters the results by the host ID of a Dedicated Host.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/HostId"
+        - name: MaxResults
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: integer
+            description: The maximum page size.
+            minimum: 1
+            maximum: 1000
+        - name: NextToken
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: string
+            pattern: ^(\d+)##(\S+)$
+            description: The pagination token.
+            minLength: 1
+            maxLength: 2048
+        - name: StatusFilter
+          in: query
+          required: false
+          description: Filters the results by state.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/AssetState"
+            minItems: 1
+            maxItems: 2
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /catalog/items:
+    get:
+      operationId: ListCatalogItems
+      description: <p>Lists the items in the catalog.</p> <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCatalogItemsOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: string
+            pattern: ^(\d+)##(\S+)$
+            description: The pagination token.
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: integer
+            description: The maximum page size.
+            minimum: 1
+            maximum: 1000
+        - name: ItemClassFilter
+          in: query
+          required: false
+          description: Filters the results by item class.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/CatalogItemClass"
+        - name: SupportedStorageFilter
+          in: query
+          required: false
+          description: Filters the results by storage option.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/SupportedStorageEnum"
+        - name: EC2FamilyFilter
+          in: query
+          required: false
+          description: Filters the results by EC2 family (for example, M5).
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Family"
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /list-orders:
+    get:
+      operationId: ListOrders
+      description: Lists the Outpost orders for your Amazon Web Services account.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrdersOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "482":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: OutpostIdentifierFilter
+          in: query
+          required: false
+          description: " The ID or the Amazon Resource Name (ARN) of the Outpost. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+            minLength: 1
+            maxLength: 180
+        - name: NextToken
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: string
+            pattern: ^(\d+)##(\S+)$
+            description: The pagination token.
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          required: false
+          description: ""
+          schema:
+            type: integer
+            description: The maximum page size.
+            minimum: 1
+            maximum: 1000
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/tags/{ResourceArn}":
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags for the specified resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTagsForResourceResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$
+            maxLength: 1011
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    post:
+      operationId: TagResource
+      description: Adds tags to the specified resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TagResourceResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$
+            maxLength: 1011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The tags to add to the resource.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: "#/components/schemas/TagValue"
+  /connections:
+    post:
+      operationId: StartConnection
+      description: <note> <p> Amazon Web Services uses this action to install Outpost servers.</p> </note> <p> Starts the connection required for Outpost server installation. </p> <p> Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html"> Amazon Web Services managed policies for Amazon Web Services Outposts</a> and <a href="https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html"> Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail</a> in the <i>Amazon Web Services Outposts User Guide</i>. </p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StartConnectionResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DeviceSerialNumber
+                - AssetId
+                - ClientPublicKey
+                - NetworkInterfaceDeviceIndex
+              properties:
+                DeviceSerialNumber:
+                  description: " The serial number of the dongle. "
+                  type: string
+                  pattern: ^(\w+)$
+                  minLength: 1
+                  maxLength: 100
+                AssetId:
+                  description: " The ID of the Outpost server. "
+                  type: string
+                  pattern: ^(\w+)$
+                  minLength: 1
+                  maxLength: 100
+                ClientPublicKey:
+                  description: " The public key of the client. "
+                  type: string
+                  pattern: ^[a-zA-Z0-9/+]{43}=$
+                  minLength: 44
+                  maxLength: 44
+                NetworkInterfaceDeviceIndex:
+                  description: " The device index of the network interface on the Outpost server. "
+                  type: integer
+                  minimum: 0
+                  maximum: 1
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/tags/{ResourceArn}#tagKeys":
+    delete:
+      operationId: UntagResource
+      description: Removes tags from the specified resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UntagResourceResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$
+            maxLength: 1011
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/TagKey"
+            minItems: 1
+            maxItems: 50
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/sites/{SiteId}/address":
+    put:
+      operationId: UpdateSiteAddress
+      description: <p>Updates the address of the specified site.</p> <p>You can't update a site address if there is an order in progress. You must wait for the order to complete or cancel the order.</p> <p>You can update the operating address before you place an order at the site, or after all Outposts that belong to the site have been deactivated.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateSiteAddressOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: SiteId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the site. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/)?(os-[a-f0-9]{17})$
+            description: The ID of the site.
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AddressType
+                - Address
+              properties:
+                AddressType:
+                  description: " The type of the address. "
+                  type: string
+                  enum:
+                    - SHIPPING_ADDRESS
+                    - OPERATING_ADDRESS
+                Address:
+                  description: " Information about an address. "
+                  type: object
+                  properties:
+                    ContactName:
+                      allOf:
+                        - $ref: "#/components/schemas/ContactName"
+                        - description: The name of the contact.
+                    ContactPhoneNumber:
+                      allOf:
+                        - $ref: "#/components/schemas/ContactPhoneNumber"
+                        - description: The phone number of the contact.
+                    AddressLine1:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine1"
+                        - description: The first line of the address.
+                    AddressLine2:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine2"
+                        - description: The second line of the address.
+                    AddressLine3:
+                      allOf:
+                        - $ref: "#/components/schemas/AddressLine3"
+                        - description: The third line of the address.
+                    City:
+                      allOf:
+                        - $ref: "#/components/schemas/City"
+                        - description: The city for the address.
+                    StateOrRegion:
+                      allOf:
+                        - $ref: "#/components/schemas/StateOrRegion"
+                        - description: The state for the address.
+                    DistrictOrCounty:
+                      allOf:
+                        - $ref: "#/components/schemas/DistrictOrCounty"
+                        - description: The district or county for the address.
+                    PostalCode:
+                      allOf:
+                        - $ref: "#/components/schemas/PostalCode"
+                        - description: The postal code for the address.
+                    CountryCode:
+                      allOf:
+                        - $ref: "#/components/schemas/CountryCode"
+                        - description: The ISO-3166 two-letter country code for the address.
+                    Municipality:
+                      allOf:
+                        - $ref: "#/components/schemas/Municipality"
+                        - description: The municipality for the address.
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/sites/{SiteId}/rackPhysicalProperties":
+    patch:
+      operationId: UpdateSiteRackPhysicalProperties
+      description: <p>Update the physical and logistical details for a rack at a site. For more information about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network readiness checklist</a> in the Amazon Web Services Outposts User Guide. </p> <p>To update a rack at a site with an order of <code>IN_PROGRESS</code>, you must wait for the order to complete or cancel the order.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateSiteRackPhysicalPropertiesOutput"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      parameters:
+        - name: SiteId
+          in: path
+          required: true
+          description: " The ID or the Amazon Resource Name (ARN) of the site. "
+          schema:
+            type: string
+            pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/)?(os-[a-f0-9]{17})$
+            description: The ID of the site.
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PowerDrawKva:
+                  description: The power draw, in kVA, available at the hardware placement position for the rack.
+                  type: string
+                  enum:
+                    - POWER_5_KVA
+                    - POWER_10_KVA
+                    - POWER_15_KVA
+                    - POWER_30_KVA
+                PowerPhase:
+                  description: "<p>The power option that you can provide for hardware. </p> <ul> <li> <p>Single-phase AC feed: 200 V to 277 V, 50 Hz or 60 Hz</p> </li> <li> <p>Three-phase AC feed: 346 V to 480 V, 50 Hz or 60 Hz</p> </li> </ul>"
+                  type: string
+                  enum:
+                    - SINGLE_PHASE
+                    - THREE_PHASE
+                PowerConnector:
+                  description: <p>The power connector that Amazon Web Services should plan to provide for connections to the hardware. Note the correlation between <code>PowerPhase</code> and <code>PowerConnector</code>. </p> <ul> <li> <p>Single-phase AC feed</p> <ul> <li> <p> <b>L6-30P</b> – (common in US); 30A; single phase</p> </li> <li> <p> <b>IEC309 (blue)</b> – P+N+E, 6hr; 32 A; single phase</p> </li> </ul> </li> <li> <p>Three-phase AC feed</p> <ul> <li> <p> <b>AH530P7W (red)</b> – 3P+N+E, 7hr; 30A; three phase</p> </li> <li> <p> <b>AH532P6W (red)</b> – 3P+N+E, 6hr; 32A; three phase</p> </li> </ul> </li> </ul>
+                  type: string
+                  enum:
+                    - L6_30P
+                    - IEC309
+                    - AH530P7W
+                    - AH532P6W
+                PowerFeedDrop:
+                  description: "Indicates whether the power feed comes above or below the rack. "
+                  type: string
+                  enum:
+                    - ABOVE_RACK
+                    - BELOW_RACK
+                UplinkGbps:
+                  description: "The uplink speed the rack should support for the connection to the Region. "
+                  type: string
+                  enum:
+                    - UPLINK_1G
+                    - UPLINK_10G
+                    - UPLINK_40G
+                    - UPLINK_100G
+                UplinkCount:
+                  description: "<p>Racks come with two Outpost network devices. Depending on the supported uplink speed at the site, the Outpost network devices provide a variable number of uplinks. Specify the number of uplinks for each Outpost network device that you intend to use to connect the rack to your network. Note the correlation between <code>UplinkGbps</code> and <code>UplinkCount</code>. </p> <ul> <li> <p>1Gbps - Uplinks available: 1, 2, 4, 6, 8</p> </li> <li> <p>10Gbps - Uplinks available: 1, 2, 4, 8, 12, 16</p> </li> <li> <p>40 and 100 Gbps- Uplinks available: 1, 2, 4</p> </li> </ul>"
+                  type: string
+                  enum:
+                    - UPLINK_COUNT_1
+                    - UPLINK_COUNT_2
+                    - UPLINK_COUNT_3
+                    - UPLINK_COUNT_4
+                    - UPLINK_COUNT_5
+                    - UPLINK_COUNT_6
+                    - UPLINK_COUNT_7
+                    - UPLINK_COUNT_8
+                    - UPLINK_COUNT_12
+                    - UPLINK_COUNT_16
+                FiberOpticCableType:
+                  description: "The type of fiber that you will use to attach the Outpost to your network. "
+                  type: string
+                  enum:
+                    - SINGLE_MODE
+                    - MULTI_MODE
+                OpticalStandard:
+                  description: '<p>The type of optical standard that you will use to attach the Outpost to your network. This field is dependent on uplink speed, fiber type, and distance to the upstream device. For more information about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> in the Amazon Web Services Outposts User Guide. </p> <ul> <li> <p> <code>OPTIC_10GBASE_SR</code>: 10GBASE-SR</p> </li> <li> <p> <code>OPTIC_10GBASE_IR</code>: 10GBASE-IR</p> </li> <li> <p> <code>OPTIC_10GBASE_LR</code>: 10GBASE-LR</p> </li> <li> <p> <code>OPTIC_40GBASE_SR</code>: 40GBASE-SR</p> </li> <li> <p> <code>OPTIC_40GBASE_ESR</code>: 40GBASE-ESR</p> </li> <li> <p> <code>OPTIC_40GBASE_IR4_LR4L</code>: 40GBASE-IR (LR4L)</p> </li> <li> <p> <code>OPTIC_40GBASE_LR4</code>: 40GBASE-LR4</p> </li> <li> <p> <code>OPTIC_100GBASE_SR4</code>: 100GBASE-SR4</p> </li> <li> <p> <code>OPTIC_100GBASE_CWDM4</code>: 100GBASE-CWDM4</p> </li> <li> <p> <code>OPTIC_100GBASE_LR4</code>: 100GBASE-LR4</p> </li> <li> <p> <code>OPTIC_100G_PSM4_MSA</code>: 100G PSM4 MSA</p> </li> <li> <p> <code>OPTIC_1000BASE_LX</code>: 1000Base-LX</p> </li> <li> <p> <code>OPTIC_1000BASE_SX</code> : 1000Base-SX</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - OPTIC_10GBASE_SR
+                    - OPTIC_10GBASE_IR
+                    - OPTIC_10GBASE_LR
+                    - OPTIC_40GBASE_SR
+                    - OPTIC_40GBASE_ESR
+                    - OPTIC_40GBASE_IR4_LR4L
+                    - OPTIC_40GBASE_LR4
+                    - OPTIC_100GBASE_SR4
+                    - OPTIC_100GBASE_CWDM4
+                    - OPTIC_100GBASE_LR4
+                    - OPTIC_100G_PSM4_MSA
+                    - OPTIC_1000BASE_LX
+                    - OPTIC_1000BASE_SX
+                MaximumSupportedWeightLbs:
+                  description: "The maximum rack weight that this site can support. <code>NO_LIMIT</code> is over 2000lbs. "
+                  type: string
+                  enum:
+                    - NO_LIMIT
+                    - MAX_1400_LBS
+                    - MAX_1600_LBS
+                    - MAX_1800_LBS
+                    - MAX_2000_LBS
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CancelOrderOutput:
+      type: object
+      properties: {}
+    ValidationException: {}
+    ConflictException: {}
+    AccessDeniedException: {}
+    NotFoundException: {}
+    InternalServerException: {}
+    CreateOrderOutput:
+      type: object
+      properties:
+        Order:
+          allOf:
+            - $ref: "#/components/schemas/Order"
+            - description: Information about this order.
+    LineItemRequest:
+      type: object
+      properties:
+        CatalogItemId:
+          allOf:
+            - $ref: "#/components/schemas/SkuCode"
+            - description: The ID of the catalog item.
+        Quantity:
+          allOf:
+            - $ref: "#/components/schemas/LineItemQuantity"
+            - description: The quantity of a line item request.
+      description: Information about a line item request.
+    ServiceQuotaExceededException: {}
+    CreateOutpostOutput:
+      type: object
+      properties:
+        Outpost:
+          $ref: "#/components/schemas/Outpost"
+    TagValue:
+      type: string
+      pattern: ^[\S \n]+$
+      maxLength: 256
+    CreateSiteOutput:
+      type: object
+      properties:
+        Site:
+          $ref: "#/components/schemas/Site"
+    ContactName:
+      type: string
+      pattern: ^\S[\S ]*$
+      minLength: 1
+      maxLength: 255
+    ContactPhoneNumber:
+      type: string
+      pattern: ^[\S ]+$
+      minLength: 1
+      maxLength: 20
+    AddressLine1:
+      type: string
+      pattern: ^\S[\S ]*$
+      minLength: 1
+      maxLength: 180
+    AddressLine2:
+      type: string
+      pattern: ^\S[\S ]*$
+      minLength: 0
+      maxLength: 60
+    AddressLine3:
+      type: string
+      pattern: ^\S[\S ]*$
+      minLength: 0
+      maxLength: 60
+    City:
+      type: string
+      pattern: ^\S[\S ]*$
+      minLength: 1
+      maxLength: 50
+    StateOrRegion:
+      type: string
+      pattern: ^\S[\S ]*$
+      minLength: 1
+      maxLength: 50
+    DistrictOrCounty:
+      type: string
+      pattern: ^\S[\S ]*
+      minLength: 1
+      maxLength: 60
+    PostalCode:
+      type: string
+      pattern: ^[a-zA-Z0-9 -]+$
+      minLength: 1
+      maxLength: 20
+    CountryCode:
+      type: string
+      pattern: ^[A-Z]{2}$
+      minLength: 2
+      maxLength: 2
+    Municipality:
+      type: string
+      pattern: ^\S[\S ]*$
+      minLength: 0
+      maxLength: 180
+    PowerDrawKva:
+      type: string
+      enum:
+        - POWER_5_KVA
+        - POWER_10_KVA
+        - POWER_15_KVA
+        - POWER_30_KVA
+    PowerPhase:
+      type: string
+      enum:
+        - SINGLE_PHASE
+        - THREE_PHASE
+    PowerConnector:
+      type: string
+      enum:
+        - L6_30P
+        - IEC309
+        - AH530P7W
+        - AH532P6W
+    PowerFeedDrop:
+      type: string
+      enum:
+        - ABOVE_RACK
+        - BELOW_RACK
+    UplinkGbps:
+      type: string
+      enum:
+        - UPLINK_1G
+        - UPLINK_10G
+        - UPLINK_40G
+        - UPLINK_100G
+    UplinkCount:
+      type: string
+      enum:
+        - UPLINK_COUNT_1
+        - UPLINK_COUNT_2
+        - UPLINK_COUNT_3
+        - UPLINK_COUNT_4
+        - UPLINK_COUNT_5
+        - UPLINK_COUNT_6
+        - UPLINK_COUNT_7
+        - UPLINK_COUNT_8
+        - UPLINK_COUNT_12
+        - UPLINK_COUNT_16
+    FiberOpticCableType:
+      type: string
+      enum:
+        - SINGLE_MODE
+        - MULTI_MODE
+    OpticalStandard:
+      type: string
+      enum:
+        - OPTIC_10GBASE_SR
+        - OPTIC_10GBASE_IR
+        - OPTIC_10GBASE_LR
+        - OPTIC_40GBASE_SR
+        - OPTIC_40GBASE_ESR
+        - OPTIC_40GBASE_IR4_LR4L
+        - OPTIC_40GBASE_LR4
+        - OPTIC_100GBASE_SR4
+        - OPTIC_100GBASE_CWDM4
+        - OPTIC_100GBASE_LR4
+        - OPTIC_100G_PSM4_MSA
+        - OPTIC_1000BASE_LX
+        - OPTIC_1000BASE_SX
+    MaximumSupportedWeightLbs:
+      type: string
+      enum:
+        - NO_LIMIT
+        - MAX_1400_LBS
+        - MAX_1600_LBS
+        - MAX_1800_LBS
+        - MAX_2000_LBS
+    DeleteOutpostOutput:
+      type: object
+      properties: {}
+    DeleteSiteOutput:
+      type: object
+      properties: {}
+    GetCatalogItemOutput:
+      type: object
+      properties:
+        CatalogItem:
+          allOf:
+            - $ref: "#/components/schemas/CatalogItem"
+            - description: Information about this catalog item.
+    GetConnectionResponse:
+      type: object
+      properties:
+        ConnectionId:
+          allOf:
+            - $ref: "#/components/schemas/ConnectionId"
+            - description: " The ID of the connection. "
+        ConnectionDetails:
+          allOf:
+            - $ref: "#/components/schemas/ConnectionDetails"
+            - description: " Information about the connection. "
+    GetOrderOutput:
+      type: object
+      properties:
+        Order:
+          $ref: "#/components/schemas/Order"
+    GetOutpostOutput:
+      type: object
+      properties:
+        Outpost:
+          $ref: "#/components/schemas/Outpost"
+    GetOutpostInstanceTypesOutput:
+      type: object
+      properties:
+        InstanceTypes:
+          $ref: "#/components/schemas/InstanceTypeListDefinition"
+        NextToken:
+          $ref: "#/components/schemas/Token"
+        OutpostId:
+          allOf:
+            - $ref: "#/components/schemas/OutpostId"
+            - description: " The ID of the Outpost. "
+        OutpostArn:
+          $ref: "#/components/schemas/OutpostArn"
+    GetSiteOutput:
+      type: object
+      properties:
+        Site:
+          $ref: "#/components/schemas/Site"
+    GetSiteAddressOutput:
+      type: object
+      properties:
+        SiteId:
+          $ref: "#/components/schemas/SiteId"
+        AddressType:
+          allOf:
+            - $ref: "#/components/schemas/AddressType"
+            - description: "The type of the address you receive. "
+        Address:
+          allOf:
+            - $ref: "#/components/schemas/Address"
+            - description: " Information about the address. "
+    ListAssetsOutput:
+      type: object
+      properties:
+        Assets:
+          allOf:
+            - $ref: "#/components/schemas/AssetListDefinition"
+            - description: Information about the hardware assets.
+        NextToken:
+          $ref: "#/components/schemas/Token"
+    HostId:
+      type: string
+      pattern: ^[A-Za-z0-9-]*$
+      minLength: 1
+      maxLength: 50
+    AssetState:
+      type: string
+      enum:
+        - ACTIVE
+        - RETIRING
+    ListCatalogItemsOutput:
+      type: object
+      properties:
+        CatalogItems:
+          allOf:
+            - $ref: "#/components/schemas/CatalogItemListDefinition"
+            - description: Information about the catalog items.
+        NextToken:
+          $ref: "#/components/schemas/Token"
+    CatalogItemClass:
+      type: string
+      enum:
+        - RACK
+        - SERVER
+    SupportedStorageEnum:
+      type: string
+      enum:
+        - EBS
+        - S3
+    Family:
+      type: string
+      pattern: "[a-z0-9]+"
+      minLength: 1
+      maxLength: 10
+    ListOrdersOutput:
+      type: object
+      properties:
+        Orders:
+          allOf:
+            - $ref: "#/components/schemas/OrderSummaryListDefinition"
+            - description: " Information about the orders. "
+        NextToken:
+          $ref: "#/components/schemas/Token"
+    ListOutpostsOutput:
+      type: object
+      properties:
+        Outposts:
+          $ref: "#/components/schemas/outpostListDefinition"
+        NextToken:
+          $ref: "#/components/schemas/Token"
+    LifeCycleStatus:
+      type: string
+      pattern: ^[ A-Za-z]+$
+      description: The life cycle status.
+      minLength: 1
+      maxLength: 20
+    AvailabilityZone:
+      type: string
+      pattern: ^([a-zA-Z]+-){1,3}([a-zA-Z]+)?(\d+[a-zA-Z]?)?$
+      description: The Availability Zone.
+      minLength: 1
+      maxLength: 1000
+    AvailabilityZoneId:
+      type: string
+      pattern: ^[a-zA-Z]+\d-[a-zA-Z]+\d$
+      description: The ID of the Availability Zone.
+      minLength: 1
+      maxLength: 255
+    ListSitesOutput:
+      type: object
+      properties:
+        Sites:
+          $ref: "#/components/schemas/siteListDefinition"
+        NextToken:
+          $ref: "#/components/schemas/Token"
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagMap"
+            - description: The resource tags.
+    StartConnectionResponse:
+      type: object
+      properties:
+        ConnectionId:
+          allOf:
+            - $ref: "#/components/schemas/ConnectionId"
+            - description: " The ID of the connection. "
+        UnderlayIpAddress:
+          allOf:
+            - $ref: "#/components/schemas/UnderlayIpAddress"
+            - description: " The underlay IP address. "
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: ^(?!aws:)[a-zA-Z+-=._:/]+$
+      minLength: 1
+      maxLength: 128
+    UpdateOutpostOutput:
+      type: object
+      properties:
+        Outpost:
+          $ref: "#/components/schemas/Outpost"
+    UpdateSiteOutput:
+      type: object
+      properties:
+        Site:
+          $ref: "#/components/schemas/Site"
+    UpdateSiteAddressOutput:
+      type: object
+      properties:
+        AddressType:
+          allOf:
+            - $ref: "#/components/schemas/AddressType"
+            - description: " The type of the address. "
+        Address:
+          allOf:
+            - $ref: "#/components/schemas/Address"
+            - description: " Information about an address. "
+    UpdateSiteRackPhysicalPropertiesOutput:
+      type: object
+      properties:
+        Site:
+          $ref: "#/components/schemas/Site"
+    AccountId:
+      type: string
+      pattern: \d{12}
+      description: The ID of the Amazon Web Services account.
+      minLength: 12
+      maxLength: 12
+    Address:
+      type: object
+      required:
+        - AddressLine1
+        - City
+        - StateOrRegion
+        - PostalCode
+        - CountryCode
+      properties:
+        ContactName:
+          allOf:
+            - $ref: "#/components/schemas/ContactName"
+            - description: The name of the contact.
+        ContactPhoneNumber:
+          allOf:
+            - $ref: "#/components/schemas/ContactPhoneNumber"
+            - description: The phone number of the contact.
+        AddressLine1:
+          allOf:
+            - $ref: "#/components/schemas/AddressLine1"
+            - description: The first line of the address.
+        AddressLine2:
+          allOf:
+            - $ref: "#/components/schemas/AddressLine2"
+            - description: The second line of the address.
+        AddressLine3:
+          allOf:
+            - $ref: "#/components/schemas/AddressLine3"
+            - description: The third line of the address.
+        City:
+          allOf:
+            - $ref: "#/components/schemas/City"
+            - description: The city for the address.
+        StateOrRegion:
+          allOf:
+            - $ref: "#/components/schemas/StateOrRegion"
+            - description: The state for the address.
+        DistrictOrCounty:
+          allOf:
+            - $ref: "#/components/schemas/DistrictOrCounty"
+            - description: The district or county for the address.
+        PostalCode:
+          allOf:
+            - $ref: "#/components/schemas/PostalCode"
+            - description: The postal code for the address.
+        CountryCode:
+          allOf:
+            - $ref: "#/components/schemas/CountryCode"
+            - description: The ISO-3166 two-letter country code for the address.
+        Municipality:
+          allOf:
+            - $ref: "#/components/schemas/Municipality"
+            - description: The municipality for the address.
+      description: " Information about an address. "
+    AddressType:
+      type: string
+      enum:
+        - SHIPPING_ADDRESS
+        - OPERATING_ADDRESS
+    Arn:
+      type: string
+      pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$
+      maxLength: 1011
+    AssetId:
+      type: string
+      pattern: ^(\w+)$
+      minLength: 1
+      maxLength: 100
+    RackId:
+      type: string
+      pattern: ^[\S \n]+$
+      minLength: 5
+      maxLength: 20
+    AssetType:
+      type: string
+      enum:
+        - COMPUTE
+    ComputeAttributes:
+      type: object
+      properties:
+        HostId:
+          allOf:
+            - $ref: "#/components/schemas/HostId"
+            - description: " The host ID of the Dedicated Host on the asset. "
+        State:
+          allOf:
+            - $ref: "#/components/schemas/ComputeAssetState"
+            - description: <p>The state.</p> <ul> <li> <p>ACTIVE - The asset is available and can provide capacity for new compute resources.</p> </li> <li> <p>ISOLATED - The asset is undergoing maintenance and can't provide capacity for new compute resources. Existing compute resources on the asset are not affected.</p> </li> <li> <p>RETIRING - The underlying hardware for the asset is degraded. Capacity for new compute resources is reduced. Amazon Web Services sends notifications for resources that must be stopped before the asset can be replaced.</p> </li> </ul>
+      description: " Information about compute hardware assets. "
+    AssetLocation:
+      type: object
+      properties:
+        RackElevation:
+          allOf:
+            - $ref: "#/components/schemas/RackElevation"
+            - description: " The position of an asset in a rack measured in rack units. "
+      description: " Information about the position of the asset in a rack. "
+    AssetInfo:
+      type: object
+      properties:
+        AssetId:
+          allOf:
+            - $ref: "#/components/schemas/AssetId"
+            - description: " The ID of the asset. "
+        RackId:
+          allOf:
+            - $ref: "#/components/schemas/RackId"
+            - description: " The rack ID of the asset. "
+        AssetType:
+          allOf:
+            - $ref: "#/components/schemas/AssetType"
+            - description: " The type of the asset. "
+        ComputeAttributes:
+          allOf:
+            - $ref: "#/components/schemas/ComputeAttributes"
+            - description: " Information about compute hardware assets. "
+        AssetLocation:
+          allOf:
+            - $ref: "#/components/schemas/AssetLocation"
+            - description: " The position of an asset in a rack. "
+      description: " Information about hardware assets. "
+    AssetListDefinition:
+      type: array
+      items:
+        $ref: "#/components/schemas/AssetInfo"
+    RackElevation:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 99
+    AvailabilityZoneIdList:
+      type: array
+      items:
+        $ref: "#/components/schemas/AvailabilityZoneId"
+      minItems: 1
+      maxItems: 5
+    AvailabilityZoneList:
+      type: array
+      items:
+        $ref: "#/components/schemas/AvailabilityZone"
+      minItems: 1
+      maxItems: 5
+    CIDR:
+      type: string
+      pattern: ^([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]{1,2}$
+      minLength: 9
+      maxLength: 18
+    CIDRList:
+      type: array
+      items:
+        $ref: "#/components/schemas/CIDR"
+    OrderId:
+      type: string
+      pattern: oo-[a-f0-9]{17}$
+      minLength: 1
+      maxLength: 20
+    CancelOrderInput:
+      type: object
+      title: CancelOrderInput
+      properties: {}
+    SkuCode:
+      type: string
+      pattern: OR-[A-Z0-9]{7}
+      minLength: 1
+      maxLength: 10
+    CatalogItemStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - DISCONTINUED
+    EC2CapacityListDefinition:
+      type: array
+      items:
+        $ref: "#/components/schemas/EC2Capacity"
+    CatalogItemPowerKva:
+      type: number
+      format: float
+    CatalogItemWeightLbs:
+      type: integer
+    SupportedUplinkGbpsListDefinition:
+      type: array
+      items:
+        $ref: "#/components/schemas/SupportedUplinkGbps"
+    SupportedStorageList:
+      type: array
+      items:
+        $ref: "#/components/schemas/SupportedStorageEnum"
+    CatalogItem:
+      type: object
+      properties:
+        CatalogItemId:
+          allOf:
+            - $ref: "#/components/schemas/SkuCode"
+            - description: " The ID of the catalog item. "
+        ItemStatus:
+          allOf:
+            - $ref: "#/components/schemas/CatalogItemStatus"
+            - description: " The status of a catalog item. "
+        EC2Capacities:
+          allOf:
+            - $ref: "#/components/schemas/EC2CapacityListDefinition"
+            - description: " Information about the EC2 capacity of an item. "
+        PowerKva:
+          allOf:
+            - $ref: "#/components/schemas/CatalogItemPowerKva"
+            - description: " Information about the power draw of an item. "
+        WeightLbs:
+          allOf:
+            - $ref: "#/components/schemas/CatalogItemWeightLbs"
+            - description: " The weight of the item in pounds. "
+        SupportedUplinkGbps:
+          allOf:
+            - $ref: "#/components/schemas/SupportedUplinkGbpsListDefinition"
+            - description: " The uplink speed this catalog item requires for the connection to the Region. "
+        SupportedStorage:
+          allOf:
+            - $ref: "#/components/schemas/SupportedStorageList"
+            - description: " The supported storage options for the catalog item. "
+      description: " Information about a catalog item. "
+    CatalogItemClassList:
+      type: array
+      items:
+        $ref: "#/components/schemas/CatalogItemClass"
+    CatalogItemListDefinition:
+      type: array
+      items:
+        $ref: "#/components/schemas/CatalogItem"
+    CityList:
+      type: array
+      items:
+        $ref: "#/components/schemas/City"
+    ComputeAssetState:
+      type: string
+      enum:
+        - ACTIVE
+        - ISOLATED
+        - RETIRING
+    WireGuardPublicKey:
+      type: string
+      pattern: ^[a-zA-Z0-9/+]{43}=$
+      minLength: 44
+      maxLength: 44
+    ServerEndpoint:
+      type: string
+      pattern: ^([0-9]{1,3}\.){3}[0-9]{1,3}:[0-9]{1,5}$
+      minLength: 9
+      maxLength: 21
+    ConnectionDetails:
+      type: object
+      properties:
+        ClientPublicKey:
+          allOf:
+            - $ref: "#/components/schemas/WireGuardPublicKey"
+            - description: " The public key of the client. "
+        ServerPublicKey:
+          allOf:
+            - $ref: "#/components/schemas/WireGuardPublicKey"
+            - description: " The public key of the server. "
+        ServerEndpoint:
+          allOf:
+            - $ref: "#/components/schemas/ServerEndpoint"
+            - description: " The endpoint for the server. "
+        ClientTunnelAddress:
+          allOf:
+            - $ref: "#/components/schemas/CIDR"
+            - description: " The client tunnel address. "
+        ServerTunnelAddress:
+          allOf:
+            - $ref: "#/components/schemas/CIDR"
+            - description: " The server tunnel address. "
+        AllowedIps:
+          allOf:
+            - $ref: "#/components/schemas/CIDRList"
+            - description: " The allowed IP addresses. "
+      description: " Information about a connection. "
+    ConnectionId:
+      type: string
+      pattern: ^[a-zA-Z0-9+/=]{1,1024}$
+      minLength: 1
+      maxLength: 1024
+    CountryCodeList:
+      type: array
+      items:
+        $ref: "#/components/schemas/CountryCode"
+    OutpostIdentifier:
+      type: string
+      pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+      minLength: 1
+      maxLength: 180
+    LineItemRequestListDefinition:
+      type: array
+      items:
+        $ref: "#/components/schemas/LineItemRequest"
+      minItems: 1
+      maxItems: 20
+    PaymentOption:
+      type: string
+      enum:
+        - ALL_UPFRONT
+        - NO_UPFRONT
+        - PARTIAL_UPFRONT
+    PaymentTerm:
+      type: string
+      enum:
+        - THREE_YEARS
+        - ONE_YEAR
+    CreateOrderInput:
+      type: object
+      required:
+        - OutpostIdentifier
+        - LineItems
+        - PaymentOption
+      title: CreateOrderInput
+      properties:
+        OutpostIdentifier:
+          allOf:
+            - $ref: "#/components/schemas/OutpostIdentifier"
+            - description: " The ID or the Amazon Resource Name (ARN) of the Outpost. "
+        LineItems:
+          allOf:
+            - $ref: "#/components/schemas/LineItemRequestListDefinition"
+            - description: The line items that make up the order.
+        PaymentOption:
+          allOf:
+            - $ref: "#/components/schemas/PaymentOption"
+            - description: The payment option.
+        PaymentTerm:
+          allOf:
+            - $ref: "#/components/schemas/PaymentTerm"
+            - description: The payment terms.
+    Order:
+      type: object
+      properties:
+        OutpostId:
+          allOf:
+            - $ref: "#/components/schemas/OutpostIdOnly"
+            - description: " The ID of the Outpost in the order. "
+        OrderId:
+          allOf:
+            - $ref: "#/components/schemas/OrderId"
+            - description: The ID of the order.
+        Status:
+          allOf:
+            - $ref: "#/components/schemas/OrderStatus"
+            - description: "<p>The status of the order.</p> <ul> <li> <p> <code>PREPARING</code> - Order is received and being prepared.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Order is either being built, shipped, or installed. To get more details, see the line item status.</p> </li> <li> <p> <code>COMPLETED</code> - Order is complete.</p> </li> <li> <p> <code>CANCELLED</code> - Order is cancelled.</p> </li> <li> <p> <code>ERROR</code> - Customer should contact support.</p> </li> </ul> <note> <p>The following status are deprecated: <code>RECEIVED</code>, <code>PENDING</code>, <code>PROCESSING</code>, <code>INSTALLING</code>, and <code>FULFILLED</code>. </p> </note>"
+        LineItems:
+          allOf:
+            - $ref: "#/components/schemas/LineItemListDefinition"
+            - description: The line items for the order
+        PaymentOption:
+          allOf:
+            - $ref: "#/components/schemas/PaymentOption"
+            - description: The payment option for the order.
+        OrderSubmissionDate:
+          allOf:
+            - $ref: "#/components/schemas/ISO8601Timestamp"
+            - description: The submission date for the order.
+        OrderFulfilledDate:
+          allOf:
+            - $ref: "#/components/schemas/ISO8601Timestamp"
+            - description: The fulfillment date of the order.
+        PaymentTerm:
+          allOf:
+            - $ref: "#/components/schemas/PaymentTerm"
+            - description: The payment term.
+        OrderType:
+          allOf:
+            - $ref: "#/components/schemas/OrderType"
+            - description: The type of order.
+      description: Information about an order.
+    OutpostName:
+      type: string
+      pattern: ^[\S ]+$
+      description: The name of the Outpost.
+      minLength: 1
+      maxLength: 255
+    OutpostDescription:
+      type: string
+      pattern: ^[\S ]*$
+      description: The description of the Outpost.
+      minLength: 0
+      maxLength: 1000
+    SiteId:
+      type: string
+      pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/)?(os-[a-f0-9]{17})$
+      description: The ID of the site.
+      minLength: 1
+      maxLength: 255
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: "#/components/schemas/TagValue"
+    SupportedHardwareType:
+      type: string
+      enum:
+        - RACK
+        - SERVER
+    CreateOutpostInput:
+      type: object
+      required:
+        - Name
+        - SiteId
+      title: CreateOutpostInput
+      properties:
+        Name:
+          $ref: "#/components/schemas/OutpostName"
+        Description:
+          $ref: "#/components/schemas/OutpostDescription"
+        SiteId:
+          allOf:
+            - $ref: "#/components/schemas/SiteId"
+            - description: " The ID or the Amazon Resource Name (ARN) of the site. "
+        AvailabilityZone:
+          $ref: "#/components/schemas/AvailabilityZone"
+        AvailabilityZoneId:
+          $ref: "#/components/schemas/AvailabilityZoneId"
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagMap"
+            - description: The tags to apply to the Outpost.
+        SupportedHardwareType:
+          allOf:
+            - $ref: "#/components/schemas/SupportedHardwareType"
+            - description: " The type of hardware for this Outpost. "
+    Outpost:
+      type: object
+      properties:
+        OutpostId:
+          allOf:
+            - $ref: "#/components/schemas/OutpostId"
+            - description: " The ID of the Outpost. "
+        OwnerId:
+          $ref: "#/components/schemas/OwnerId"
+        OutpostArn:
+          $ref: "#/components/schemas/OutpostArn"
+        SiteId:
+          $ref: "#/components/schemas/SiteId"
+        Name:
+          $ref: "#/components/schemas/OutpostName"
+        Description:
+          $ref: "#/components/schemas/OutpostDescription"
+        LifeCycleStatus:
+          $ref: "#/components/schemas/LifeCycleStatus"
+        AvailabilityZone:
+          $ref: "#/components/schemas/AvailabilityZone"
+        AvailabilityZoneId:
+          $ref: "#/components/schemas/AvailabilityZoneId"
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagMap"
+            - description: The Outpost tags.
+        SiteArn:
+          $ref: "#/components/schemas/SiteArn"
+        SupportedHardwareType:
+          allOf:
+            - $ref: "#/components/schemas/SupportedHardwareType"
+            - description: " The hardware type. "
+      description: Information about an Outpost.
+    SiteName:
+      type: string
+      pattern: ^[\S ]+$
+      description: The name of the site.
+      minLength: 1
+      maxLength: 1000
+    SiteDescription:
+      type: string
+      pattern: ^[\S ]+$
+      description: The description of the site.
+      minLength: 1
+      maxLength: 1001
+    SiteNotes:
+      type: string
+      pattern: ^[\S \n]+$
+      minLength: 1
+      maxLength: 2000
+    RackPhysicalProperties:
+      type: object
+      properties:
+        PowerDrawKva:
+          allOf:
+            - $ref: "#/components/schemas/PowerDrawKva"
+            - description: "The power draw available at the hardware placement position for the rack. "
+        PowerPhase:
+          allOf:
+            - $ref: "#/components/schemas/PowerPhase"
+            - description: The power option that you can provide for hardware.
+        PowerConnector:
+          allOf:
+            - $ref: "#/components/schemas/PowerConnector"
+            - description: "The power connector for the hardware. "
+        PowerFeedDrop:
+          allOf:
+            - $ref: "#/components/schemas/PowerFeedDrop"
+            - description: The position of the power feed.
+        UplinkGbps:
+          allOf:
+            - $ref: "#/components/schemas/UplinkGbps"
+            - description: "The uplink speed the rack supports for the connection to the Region. "
+        UplinkCount:
+          allOf:
+            - $ref: "#/components/schemas/UplinkCount"
+            - description: The number of uplinks each Outpost network device.
+        FiberOpticCableType:
+          allOf:
+            - $ref: "#/components/schemas/FiberOpticCableType"
+            - description: "The type of fiber used to attach the Outpost to the network. "
+        OpticalStandard:
+          allOf:
+            - $ref: "#/components/schemas/OpticalStandard"
+            - description: 'The type of optical standard used to attach the Outpost to the network. This field is dependent on uplink speed, fiber type, and distance to the upstream device. For more information about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> in the Amazon Web Services Outposts User Guide. '
+        MaximumSupportedWeightLbs:
+          allOf:
+            - $ref: "#/components/schemas/MaximumSupportedWeightLbs"
+            - description: "The maximum rack weight that this site can support. <code>NO_LIMIT</code> is over 2000 lbs (907 kg). "
+      description: ' Information about the physical and logistical details for racks at sites. For more information about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network readiness checklist</a> in the Amazon Web Services Outposts User Guide. '
+    CreateSiteInput:
+      type: object
+      required:
+        - Name
+      title: CreateSiteInput
+      properties:
+        Name:
+          $ref: "#/components/schemas/SiteName"
+        Description:
+          $ref: "#/components/schemas/SiteDescription"
+        Notes:
+          allOf:
+            - $ref: "#/components/schemas/SiteNotes"
+            - description: "Additional information that you provide about site access requirements, electrician scheduling, personal protective equipment, or regulation of equipment materials that could affect your installation process. "
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagMap"
+            - description: " The tags to apply to a site. "
+        OperatingAddress:
+          allOf:
+            - $ref: "#/components/schemas/Address"
+            - description: " The location to install and power on the hardware. This address might be different from the shipping address. "
+        ShippingAddress:
+          allOf:
+            - $ref: "#/components/schemas/Address"
+            - description: " The location to ship the hardware. This address might be different from the operating address. "
+        RackPhysicalProperties:
+          allOf:
+            - $ref: "#/components/schemas/RackPhysicalProperties"
+            - description: ' Information about the physical and logistical details for the rack at this site. For more information about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network readiness checklist</a> in the Amazon Web Services Outposts User Guide. '
+    Site:
+      type: object
+      properties:
+        SiteId:
+          $ref: "#/components/schemas/SiteId"
+        AccountId:
+          $ref: "#/components/schemas/AccountId"
+        Name:
+          $ref: "#/components/schemas/SiteName"
+        Description:
+          $ref: "#/components/schemas/SiteDescription"
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagMap"
+            - description: The site tags.
+        SiteArn:
+          $ref: "#/components/schemas/SiteArn"
+        Notes:
+          allOf:
+            - $ref: "#/components/schemas/SiteNotes"
+            - description: " Notes about a site. "
+        OperatingAddressCountryCode:
+          allOf:
+            - $ref: "#/components/schemas/CountryCode"
+            - description: " The ISO-3166 two-letter country code where the hardware is installed and powered on. "
+        OperatingAddressStateOrRegion:
+          allOf:
+            - $ref: "#/components/schemas/StateOrRegion"
+            - description: " State or region where the hardware is installed and powered on. "
+        OperatingAddressCity:
+          allOf:
+            - $ref: "#/components/schemas/City"
+            - description: " City where the hardware is installed and powered on. "
+        RackPhysicalProperties:
+          allOf:
+            - $ref: "#/components/schemas/RackPhysicalProperties"
+            - description: " Information about the physical and logistical details for a rack at the site. "
+      description: Information about a site.
+    OutpostId:
+      type: string
+      pattern: ^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$
+      minLength: 1
+      maxLength: 180
+    DeleteOutpostInput:
+      type: object
+      title: DeleteOutpostInput
+      properties: {}
+    DeleteSiteInput:
+      type: object
+      title: DeleteSiteInput
+      properties: {}
+    DeviceSerialNumber:
+      type: string
+      pattern: ^(\w+)$
+      minLength: 1
+      maxLength: 100
+    MaxSize:
+      type: string
+    Quantity:
+      type: string
+    EC2Capacity:
+      type: object
+      properties:
+        Family:
+          allOf:
+            - $ref: "#/components/schemas/Family"
+            - description: " The family of the EC2 capacity. "
+        MaxSize:
+          allOf:
+            - $ref: "#/components/schemas/MaxSize"
+            - description: " The maximum size of the EC2 capacity. "
+        Quantity:
+          allOf:
+            - $ref: "#/components/schemas/Quantity"
+            - description: " The quantity of the EC2 capacity. "
+      description: " Information about EC2 capacity. "
+    EC2FamilyList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Family"
+    GetCatalogItemInput:
+      type: object
+      title: GetCatalogItemInput
+      properties: {}
+    GetConnectionRequest:
+      type: object
+      title: GetConnectionRequest
+      properties: {}
+    GetOrderInput:
+      type: object
+      title: GetOrderInput
+      properties: {}
+    GetOutpostInput:
+      type: object
+      title: GetOutpostInput
+      properties: {}
+    Token:
+      type: string
+      pattern: ^(\d+)##(\S+)$
+      description: The pagination token.
+      minLength: 1
+      maxLength: 2048
+    MaxResults1000:
+      type: integer
+      description: The maximum page size.
+      minimum: 1
+      maximum: 1000
+    GetOutpostInstanceTypesInput:
+      type: object
+      title: GetOutpostInstanceTypesInput
+      properties: {}
+    InstanceTypeListDefinition:
+      type: array
+      description: Information about the instance types.
+      items:
+        $ref: "#/components/schemas/InstanceTypeItem"
+    OutpostArn:
+      type: string
+      pattern: ^arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/op-[a-f0-9]{17}$
+      description: The Amazon Resource Name (ARN) of the Outpost.
+      minLength: 1
+      maxLength: 255
+    GetSiteAddressInput:
+      type: object
+      title: GetSiteAddressInput
+      properties: {}
+    GetSiteInput:
+      type: object
+      title: GetSiteInput
+      properties: {}
+    HostIdList:
+      type: array
+      items:
+        $ref: "#/components/schemas/HostId"
+    ISO8601Timestamp:
+      type: string
+      format: date-time
+    InstanceType:
+      type: string
+      description: The instance type.
+    InstanceTypeItem:
+      type: object
+      properties:
+        InstanceType:
+          $ref: "#/components/schemas/InstanceType"
+      description: Information about an instance type.
+    LifeCycleStatusList:
+      type: array
+      items:
+        $ref: "#/components/schemas/LifeCycleStatus"
+      minItems: 1
+      maxItems: 5
+    LineItemId:
+      type: string
+      pattern: ooi-[a-f0-9]{17}
+    LineItemQuantity:
+      type: integer
+      minimum: 1
+      maximum: 20
+    LineItemStatus:
+      type: string
+      enum:
+        - PREPARING
+        - BUILDING
+        - SHIPPED
+        - DELIVERED
+        - INSTALLING
+        - INSTALLED
+        - ERROR
+        - CANCELLED
+        - REPLACED
+    ShipmentInformation:
+      type: object
+      properties:
+        ShipmentTrackingNumber:
+          allOf:
+            - $ref: "#/components/schemas/TrackingId"
+            - description: " The tracking number of the shipment. "
+        ShipmentCarrier:
+          allOf:
+            - $ref: "#/components/schemas/ShipmentCarrier"
+            - description: " The carrier of the shipment. "
+      description: " Information about a line item shipment. "
+    LineItemAssetInformationList:
+      type: array
+      items:
+        $ref: "#/components/schemas/LineItemAssetInformation"
+    LineItem:
+      type: object
+      properties:
+        CatalogItemId:
+          allOf:
+            - $ref: "#/components/schemas/SkuCode"
+            - description: " The ID of the catalog item. "
+        LineItemId:
+          allOf:
+            - $ref: "#/components/schemas/LineItemId"
+            - description: The ID of the line item.
+        Quantity:
+          allOf:
+            - $ref: "#/components/schemas/LineItemQuantity"
+            - description: The quantity of the line item.
+        Status:
+          allOf:
+            - $ref: "#/components/schemas/LineItemStatus"
+            - description: The status of the line item.
+        ShipmentInformation:
+          allOf:
+            - $ref: "#/components/schemas/ShipmentInformation"
+            - description: " Information about a line item shipment. "
+        AssetInformationList:
+          allOf:
+            - $ref: "#/components/schemas/LineItemAssetInformationList"
+            - description: " Information about assets. "
+        PreviousLineItemId:
+          allOf:
+            - $ref: "#/components/schemas/LineItemId"
+            - description: The ID of the previous line item.
+        PreviousOrderId:
+          allOf:
+            - $ref: "#/components/schemas/OrderId"
+            - description: The ID of the previous order.
+      description: Information about a line item.
+    MacAddressList:
+      type: array
+      items:
+        $ref: "#/components/schemas/MacAddress"
+    LineItemAssetInformation:
+      type: object
+      properties:
+        AssetId:
+          allOf:
+            - $ref: "#/components/schemas/AssetId"
+            - description: " The ID of the asset. "
+        MacAddressList:
+          allOf:
+            - $ref: "#/components/schemas/MacAddressList"
+            - description: " The MAC addresses of the asset. "
+      description: " Information about a line item asset. "
+    LineItemListDefinition:
+      type: array
+      items:
+        $ref: "#/components/schemas/LineItem"
+    LineItemStatusCounts:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/LineItemQuantity"
+    StatusList:
+      type: array
+      items:
+        $ref: "#/components/schemas/AssetState"
+      minItems: 1
+      maxItems: 2
+    ListAssetsInput:
+      type: object
+      title: ListAssetsInput
+      properties: {}
+    ListCatalogItemsInput:
+      type: object
+      title: ListCatalogItemsInput
+      properties: {}
+    ListOrdersInput:
+      type: object
+      title: ListOrdersInput
+      properties: {}
+    OrderSummaryListDefinition:
+      type: array
+      items:
+        $ref: "#/components/schemas/OrderSummary"
+    ListOutpostsInput:
+      type: object
+      title: ListOutpostsInput
+      properties: {}
+    outpostListDefinition:
+      type: array
+      description: Information about the Outposts.
+      items:
+        $ref: "#/components/schemas/Outpost"
+    StateOrRegionList:
+      type: array
+      items:
+        $ref: "#/components/schemas/StateOrRegion"
+    ListSitesInput:
+      type: object
+      title: ListSitesInput
+      properties: {}
+    siteListDefinition:
+      type: array
+      description: Information about the sites.
+      items:
+        $ref: "#/components/schemas/Site"
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    MacAddress:
+      type: string
+      pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+      minLength: 17
+      maxLength: 17
+    NetworkInterfaceDeviceIndex:
+      type: integer
+      minimum: 0
+      maximum: 1
+    OutpostIdOnly:
+      type: string
+      pattern: ^op-[a-f0-9]{17}$
+      minLength: 1
+      maxLength: 20
+    OrderStatus:
+      type: string
+      enum:
+        - RECEIVED
+        - PENDING
+        - PROCESSING
+        - INSTALLING
+        - FULFILLED
+        - CANCELLED
+        - PREPARING
+        - IN_PROGRESS
+        - COMPLETED
+        - ERROR
+    OrderType:
+      type: string
+      enum:
+        - OUTPOST
+        - REPLACEMENT
+    OrderSummary:
+      type: object
+      properties:
+        OutpostId:
+          allOf:
+            - $ref: "#/components/schemas/OutpostIdOnly"
+            - description: " The ID of the Outpost. "
+        OrderId:
+          allOf:
+            - $ref: "#/components/schemas/OrderId"
+            - description: " The ID of the order. "
+        OrderType:
+          allOf:
+            - $ref: "#/components/schemas/OrderType"
+            - description: The type of order.
+        Status:
+          allOf:
+            - $ref: "#/components/schemas/OrderStatus"
+            - description: "<p>The status of the order.</p> <ul> <li> <p> <code>PREPARING</code> - Order is received and is being prepared.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Order is either being built, shipped, or installed. For more information, see the <code>LineItem</code> status.</p> </li> <li> <p> <code>COMPLETED</code> - Order is complete.</p> </li> <li> <p> <code>CANCELLED</code> - Order is cancelled.</p> </li> <li> <p> <code>ERROR</code> - Customer should contact support.</p> </li> </ul> <note> <p>The following statuses are deprecated: <code>RECEIVED</code>, <code>PENDING</code>, <code>PROCESSING</code>, <code>INSTALLING</code>, and <code>FULFILLED</code>. </p> </note>"
+        LineItemCountsByStatus:
+          allOf:
+            - $ref: "#/components/schemas/LineItemStatusCounts"
+            - description: " The status of all line items in the order. "
+        OrderSubmissionDate:
+          allOf:
+            - $ref: "#/components/schemas/ISO8601Timestamp"
+            - description: " The submission date for the order. "
+        OrderFulfilledDate:
+          allOf:
+            - $ref: "#/components/schemas/ISO8601Timestamp"
+            - description: " The fulfilment date for the order. "
+      description: " A summary of line items in your order. "
+    OwnerId:
+      type: string
+      pattern: \d{12}
+      description: The Amazon Web Services account ID of the Outpost owner.
+      minLength: 12
+      maxLength: 12
+    SiteArn:
+      type: string
+      pattern: ^arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:site/(os-[a-f0-9]{17})$
+      description: The Amazon Resource Name (ARN) of the site.
+      minLength: 1
+      maxLength: 255
+    ShipmentCarrier:
+      type: string
+      enum:
+        - DHL
+        - DBS
+        - FEDEX
+        - UPS
+    TrackingId:
+      type: string
+      pattern: ^[a-zA-Z0-9]+$
+      minLength: 6
+      maxLength: 42
+    StartConnectionRequest:
+      type: object
+      required:
+        - DeviceSerialNumber
+        - AssetId
+        - ClientPublicKey
+        - NetworkInterfaceDeviceIndex
+      title: StartConnectionRequest
+      properties:
+        DeviceSerialNumber:
+          allOf:
+            - $ref: "#/components/schemas/DeviceSerialNumber"
+            - description: " The serial number of the dongle. "
+        AssetId:
+          allOf:
+            - $ref: "#/components/schemas/AssetId"
+            - description: " The ID of the Outpost server. "
+        ClientPublicKey:
+          allOf:
+            - $ref: "#/components/schemas/WireGuardPublicKey"
+            - description: " The public key of the client. "
+        NetworkInterfaceDeviceIndex:
+          allOf:
+            - $ref: "#/components/schemas/NetworkInterfaceDeviceIndex"
+            - description: " The device index of the network interface on the Outpost server. "
+    UnderlayIpAddress:
+      type: string
+      pattern: ^([0-9]{1,3}\.){3}[0-9]{1,3}$
+      minLength: 7
+      maxLength: 15
+    SupportedUplinkGbps:
+      type: integer
+    TagKeyList:
+      type: array
+      items:
+        $ref: "#/components/schemas/TagKey"
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagMap"
+            - description: The tags to add to the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateOutpostInput:
+      type: object
+      title: UpdateOutpostInput
+      properties:
+        Name:
+          $ref: "#/components/schemas/OutpostName"
+        Description:
+          $ref: "#/components/schemas/OutpostDescription"
+        SupportedHardwareType:
+          allOf:
+            - $ref: "#/components/schemas/SupportedHardwareType"
+            - description: " The type of hardware for this Outpost. "
+    UpdateSiteAddressInput:
+      type: object
+      required:
+        - AddressType
+        - Address
+      title: UpdateSiteAddressInput
+      properties:
+        AddressType:
+          allOf:
+            - $ref: "#/components/schemas/AddressType"
+            - description: " The type of the address. "
+        Address:
+          allOf:
+            - $ref: "#/components/schemas/Address"
+            - description: " The address for the site. "
+    UpdateSiteInput:
+      type: object
+      title: UpdateSiteInput
+      properties:
+        Name:
+          $ref: "#/components/schemas/SiteName"
+        Description:
+          $ref: "#/components/schemas/SiteDescription"
+        Notes:
+          allOf:
+            - $ref: "#/components/schemas/SiteNotes"
+            - description: Notes about a site.
+    UpdateSiteRackPhysicalPropertiesInput:
+      type: object
+      title: UpdateSiteRackPhysicalPropertiesInput
+      properties:
+        PowerDrawKva:
+          allOf:
+            - $ref: "#/components/schemas/PowerDrawKva"
+            - description: The power draw, in kVA, available at the hardware placement position for the rack.
+        PowerPhase:
+          allOf:
+            - $ref: "#/components/schemas/PowerPhase"
+            - description: "<p>The power option that you can provide for hardware. </p> <ul> <li> <p>Single-phase AC feed: 200 V to 277 V, 50 Hz or 60 Hz</p> </li> <li> <p>Three-phase AC feed: 346 V to 480 V, 50 Hz or 60 Hz</p> </li> </ul>"
+        PowerConnector:
+          allOf:
+            - $ref: "#/components/schemas/PowerConnector"
+            - description: <p>The power connector that Amazon Web Services should plan to provide for connections to the hardware. Note the correlation between <code>PowerPhase</code> and <code>PowerConnector</code>. </p> <ul> <li> <p>Single-phase AC feed</p> <ul> <li> <p> <b>L6-30P</b> – (common in US); 30A; single phase</p> </li> <li> <p> <b>IEC309 (blue)</b> – P+N+E, 6hr; 32 A; single phase</p> </li> </ul> </li> <li> <p>Three-phase AC feed</p> <ul> <li> <p> <b>AH530P7W (red)</b> – 3P+N+E, 7hr; 30A; three phase</p> </li> <li> <p> <b>AH532P6W (red)</b> – 3P+N+E, 6hr; 32A; three phase</p> </li> </ul> </li> </ul>
+        PowerFeedDrop:
+          allOf:
+            - $ref: "#/components/schemas/PowerFeedDrop"
+            - description: "Indicates whether the power feed comes above or below the rack. "
+        UplinkGbps:
+          allOf:
+            - $ref: "#/components/schemas/UplinkGbps"
+            - description: "The uplink speed the rack should support for the connection to the Region. "
+        UplinkCount:
+          allOf:
+            - $ref: "#/components/schemas/UplinkCount"
+            - description: "<p>Racks come with two Outpost network devices. Depending on the supported uplink speed at the site, the Outpost network devices provide a variable number of uplinks. Specify the number of uplinks for each Outpost network device that you intend to use to connect the rack to your network. Note the correlation between <code>UplinkGbps</code> and <code>UplinkCount</code>. </p> <ul> <li> <p>1Gbps - Uplinks available: 1, 2, 4, 6, 8</p> </li> <li> <p>10Gbps - Uplinks available: 1, 2, 4, 8, 12, 16</p> </li> <li> <p>40 and 100 Gbps- Uplinks available: 1, 2, 4</p> </li> </ul>"
+        FiberOpticCableType:
+          allOf:
+            - $ref: "#/components/schemas/FiberOpticCableType"
+            - description: "The type of fiber that you will use to attach the Outpost to your network. "
+        OpticalStandard:
+          allOf:
+            - $ref: "#/components/schemas/OpticalStandard"
+            - description: '<p>The type of optical standard that you will use to attach the Outpost to your network. This field is dependent on uplink speed, fiber type, and distance to the upstream device. For more information about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> in the Amazon Web Services Outposts User Guide. </p> <ul> <li> <p> <code>OPTIC_10GBASE_SR</code>: 10GBASE-SR</p> </li> <li> <p> <code>OPTIC_10GBASE_IR</code>: 10GBASE-IR</p> </li> <li> <p> <code>OPTIC_10GBASE_LR</code>: 10GBASE-LR</p> </li> <li> <p> <code>OPTIC_40GBASE_SR</code>: 40GBASE-SR</p> </li> <li> <p> <code>OPTIC_40GBASE_ESR</code>: 40GBASE-ESR</p> </li> <li> <p> <code>OPTIC_40GBASE_IR4_LR4L</code>: 40GBASE-IR (LR4L)</p> </li> <li> <p> <code>OPTIC_40GBASE_LR4</code>: 40GBASE-LR4</p> </li> <li> <p> <code>OPTIC_100GBASE_SR4</code>: 100GBASE-SR4</p> </li> <li> <p> <code>OPTIC_100GBASE_CWDM4</code>: 100GBASE-CWDM4</p> </li> <li> <p> <code>OPTIC_100GBASE_LR4</code>: 100GBASE-LR4</p> </li> <li> <p> <code>OPTIC_100G_PSM4_MSA</code>: 100G PSM4 MSA</p> </li> <li> <p> <code>OPTIC_1000BASE_LX</code>: 1000Base-LX</p> </li> <li> <p> <code>OPTIC_1000BASE_SX</code> : 1000Base-SX</p> </li> </ul>'
+        MaximumSupportedWeightLbs:
+          allOf:
+            - $ref: "#/components/schemas/MaximumSupportedWeightLbs"
+            - description: "The maximum rack weight that this site can support. <code>NO_LIMIT</code> is over 2000lbs. "
+security:
+  - hmac: []

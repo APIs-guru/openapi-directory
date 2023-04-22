@@ -1,0 +1,28 @@
+{
+  "apis": {
+    "simplyrets.com": {
+      "added": "2015-11-11T23:36:53.000Z",
+      "info": {
+        "description": "The SimplyRETS API is an exciting step towards making it easier for\ndevelopers and real estate agents to build something awesome with\nreal estate data!\n\nThe documentation below makes live requests to our API using the\ntrial data. To get set up with the API using live MLS data, you\nmust have RETS credentials from your MLS, which you can then use to\ncreate an app with SimplyRETS. For more information on that\nprocess, please see our [FAQ](https://simplyrets.com/faq), [Getting\nStarted](https://simplyrets.com/blog/getting-set-up.html) page, or\n[contact us](https://simplyrets.com/\\#home-contact).\n\nBelow you'll find the API endpoints, query parameters, response bodies,\nand other information about using the SimplyRETS API. You can run\nqueries by clicking the 'Try it Out' button at the bottom of each\nsection.\n\n### Authentication\nThe SimplyRETS API uses Basic Authentication. When you create an\napp, you'll get a set of API credentials to access your\nlistings. If you're trying out the test data, you can use\n`simplyrets:simplyrets` for connecting to the API.\n\n### Media Types\nThe SimplyRETS API uses the `Accept` header to allow clients to\ncontrol media types (content versions). We maintain backwards\ncompatibility with API clients by allowing them to specify a\ncontent version. We highly recommend setting and explicity media\ntype when your application reaches production. Both the structure\nand content of our API response bodies is subject to change so we\ncan add new features while respecting the stability of applications\nwhich have already been developed.\n\nTo always use the latest SimplyRETS content version, simply use\n`application/json` in your application `Accept` header.\n\nIf you want to pin your clients media type to a specific version,\nyou can use the vendor-specific SimplyRETS media type, e.g.\n`application/vnd.simplyrets-v0.1+json\"`\n\nTo view all valid content-types for making an `OPTIONS`, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n\nThe default media types used in our API responses may change in the\nfuture. If you're building an application and care about the\nstability of the API, be sure to request a specific media type in the\nAccept header as shown in the examples below.\n\nThe wordpress plugin automatically sets the `Accept` header for the\ncompatible SimplyRETS media types.\n\n### Pagination\n\nTo paginate through listings, start your query with these\nparameters: 'limit=500&lastId=0'. The 'lastId' is the important\npart, you can use any limit up to 500. When you receive the\nresponse from the API with the results, check the 'Link' header for\nthe 'next' link. That link is pre-built to access the next 'page'\nof listings. Alternatively, you can use the last listing's 'mlsId'\nfrom the previous request and use that in the next query. For\nexample:\n\nFirst query:\n\ncurl -u username:password 'https://api.simplyrets.com/properties?limit=500&lastId=0'\n\nIf the 'mlsId' in the last listing of the results is '1234567', then the next query will be:\n\ncurl -u username:password 'https://api.simplyrets.com/properties?limit=500&lastId=1234567'\n\n...and so one until you have reached the final page of listings.\n\nThere a few pieces of useful information about each request stored\nin the HTTP Headers:\n\n- `X-Total-Count` shows you the total amount of listings that match\n  your current query.\n- `Link` contains pre-built pagination links for accessing the next\n'page' of listings that match your query.\n\n### RETS Vendor Compliance\n\nMany RETS vendors have strict requirements for showing disclaimers\nwith specific information embedded. For example, in many areas it's\nrequired to show the timestamp of the time the listings were\nrefreshed inside a disclaimer or on a listing page.\n\nThe timestamp of the last listing refresh timestamp can be found in\none of two spots:\n\n- The `X-SimplyRETS-LastUpdate` header from `GET /properties` or `GET /properties/{mlsId}`\n\n- Calling the API root `/` or properties api endpoint `/properties`\n  with an OPTIONS request\n\n  - `OPTIONS /`\n\n    This request will show the last update timestamp for all RETS\n    vendors associated with your application. Look for the\n    `updates` list in the JSON response.\n\n  - `OPTIONS /properties`\n\n    Using this request, look for the `lastUpdate` field in the JSON\n    response.\n",
+        "title": "SimplyRETS",
+        "version": "1.0.0",
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://docs.simplyrets.com/api/assets/resources.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "simplyrets.com",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2019-02-13T10:31:07.000Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/simplyrets.com/1.0.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/simplyrets.com/1.0.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/simplyrets.com/1.0.0.json"
+    }
+  }
+}

@@ -1,0 +1,5586 @@
+openapi: 3.0.0
+servers:
+  - url: //cfportal.contract-p.fit/api
+x-hasEquivalentPaths: true
+info:
+  description: |
+    This OpenAPI describes the API exposed by the contract.fit backend.
+
+    ## Security
+
+    ### Authentication
+
+    All endpoints are protected: you need to make authenticated calls. There are 3 authentication mechanisms:
+    - HTTP Basic (Username + Password)
+    - JWT Token
+    - API-Key
+
+    By default you should have an account allowing you to bootstrap your tenant and create users and roles, using Basic Auth or after creating a Token  - see */auth* endpoints.
+
+    If you are missing credentials or permissions, please [contact us](https://contract.fit/contact-us).
+
+    ### Authorization
+
+    The security system is RBAC based: users must be granted scoped roles, allowing them to access resources.
+    Each role grants a defined set of permissions, which can be restricted to a given inbox or document - see */roles* endpoints.
+
+    ## Upload and Processing
+
+    Below is a short description of common use cases of the API.
+
+    ### Simple Upload
+
+    The easiest and simplest way to get started is to use POST /documents : it will make a synchronous upload of your file and wait for the result.
+
+    This is a simplified version of POST /documents/{inbox_id} with less arguments and settings; it may not be suitable for real workload as it offers less capabilities.
+
+    ### Upload to Inbox
+
+    The favored endpoint to upload files is POST /documents/{inbox_id}: it is also highly recommended to make async call using sync=false.
+
+    **Sync / Async**
+
+    For convenience uploads can be synchronous: it will make the request blocks until the document is processed.
+
+    It is however discouraged to rely on sync requests, as our service is designed to process documents asynchronously. You might run into timeouts and unprocessed document depending on factors such as server load and number of pending documents.
+
+    Asynchronous calls will only schedule the processing and directly return the document ID without waiting: the document will be processed as soon as possible. You can then wait for the processed result using GET */documents/{document_id}*.
+
+    ### Reprocessing
+
+    You can reprocess a document using POST */documents/{document_id}/reprocess* : it will schedule an async processing of the document (note: it is not possible to make a sync reprocessing)
+  title: Contract.fit API
+  version: "1.0"
+  x-apisguru-categories:
+    - text
+  x-origin:
+    - format: openapi
+      url: https://cfportal.contract-p.fit/swagger.json
+      version: "3.0"
+  x-providerName: contract-p.fit
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - basic: []
+  - token: []
+tags:
+  - description: File manipulation endpoint
+    name: documents
+  - description: Inbox manipulation endpoint
+    name: inboxes
+  - description: Project manipulation endpoint
+    name: projects
+  - description: Format manipulation endpoint
+    name: formats
+  - description: Integrations manipulation endpoint
+    name: integrations
+  - description: Connection manipulation endpoint
+    name: connections
+  - description: User manipulation endpoint
+    name: auth
+  - description: various endpoints to manage third party credentials
+    name: sso
+  - description: User manipulation endpoint
+    name: users
+  - description: Role manipulation endpoint
+    name: roles
+  - description: Settings endpoint
+    name: settings
+  - description: SettingThreshold manipulation endpoint
+    name: threshold_settings
+  - description: Style endpoint
+    name: style
+  - description: stats manipulation endpoint
+    name: stats
+  - description: SettingSampling manipulation endpoint
+    name: sampling_settings
+  - description: Predictor settings manipulation endpoint
+    name: predictor_settings
+  - description: Rule config manipulation endpoint
+    name: rule_config
+  - description: Data Retention Settings manipulation endpoint
+    name: data_retention_settings
+  - description: Report manipulation endpoint
+    name: reports
+  - description: About the contract.fit solution
+    name: about
+  - description: tenant manipulation endpoints
+    name: tenant
+paths:
+  /about/release_notes:
+    get:
+      operationId: get_release_notes
+      responses:
+        "200":
+          description: Success
+      tags:
+        - about
+  /about/version:
+    get:
+      operationId: get_version
+      responses:
+        "200":
+          description: Success
+      tags:
+        - about
+  /auth:
+    post:
+      description: Login with the provided credentials (POST data) and return a JWT Token for this user.
+      operationId: post_auth
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenReplyModel"
+          description: Success
+        "401":
+          description: Wrong credentials
+      summary: Login and retrieve a JWT Token
+      tags:
+        - auth
+  /auth/api-key:
+    get:
+      description: "**Permission required:** view_api_keys"
+      operationId: get_api_keys_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/APIKeyModel"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: API-Key not found
+      summary: Get all API-Key
+      tags:
+        - auth
+    post:
+      description: |-
+        API Keys are simple randomly generated strings bound to roles that grant access to resources.
+
+        Every API Key maps to attributes defining its validity and can be revoked at any time.
+
+        API Key can be passed in the **X-API-Key** HTTP Header and in the querystring **&api_key=**
+
+
+        **Permission required:** edit_backend_settings
+      operationId: post_api_keys_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/APIKeyRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Role not found
+      summary: Create a new API Key
+      tags:
+        - auth
+  "/auth/api-key/inbox/{inbox_id}":
+    get:
+      description: "**Permission required:** view_api_keys"
+      operationId: get_api_keys_inbox_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/APIKeyModel"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: API-Key not found
+      summary: Get all API-Keys for this inbox
+      tags:
+        - auth
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        The requesting user needs to have inbox level permissions
+
+        API Keys are simple randomly generated strings bound to roles that grant access to resources.
+
+        Every API Key maps to attributes defining its validity and can be revoked at any time.
+
+        API Key can be passed in the **X-API-Key** HTTP Header and in the querystring **&api_key=**
+
+
+        **Permission required:** edit_backend_settings
+      operationId: post_api_keys_inbox_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/APIKeyRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Role not found
+      summary: Create a new API Key on inbox level
+      tags:
+        - auth
+  "/auth/api-key/{key}":
+    delete:
+      description: |-
+        Completely remove an API Key, thus disabling it. The token won't be recoverable
+
+        **Permission required:** edit_backend_settings
+      operationId: delete_api_key_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Delete an API Key
+      tags:
+        - auth
+    get:
+      description: "**Permission required:** view_api_keys"
+      operationId: get_api_key_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get details of an API-Key
+      tags:
+        - auth
+    parameters:
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        **roles** can't be modified after creation: you need to create a new token if you want other roles.
+
+        **Permission required:** edit_backend_settings
+      operationId: patch_api_key_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Edit an API-Key
+      tags:
+        - auth
+  /auth/ephemeral:
+    post:
+      description: Ephemeral tokens are short lived tokens that can be used to temporary grant access to resources.
+      operationId: post_ephemeral_token_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenReplyModel"
+          description: Success
+        "404":
+          description: User not found
+      summary: Create a new ephemeral token
+      tags:
+        - auth
+  /auth/get_JWT:
+    post:
+      deprecated: true
+      description: |-
+        ## This endpoint is *deprecated* : use /auth/ephemeral and /auth/token instead
+
+        This endpoint requires authentication and requires the user to have the role **edit_users**: you can
+        then request a JWT on behalf of another user, specified in the request **username** attribute.
+
+        This endpoint has 2 modes depending on the presence or absence of the *roles* attribute in the request
+        data:
+
+        ## Regular token
+
+        When sending only a **username**: a regular JWT Token bound to the given user is created and returned.
+
+        ## Temporary token
+
+        When sending **username** AND a list **roles** of **role** (defined by the UID, optional the inbox to restrict access to):
+        a temporary token is created that will behave like a regular user with the given roles until the access token expires.
+
+        **Permission required:** edit_users
+      operationId: post_get_jwt_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/TokenModelBase"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenReplyModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Create a new JWT Token
+      tags:
+        - auth
+  /auth/reset_password:
+    post:
+      operationId: post_reset_password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPasswordModelPost"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Reset Denied
+      summary: Reset the user password
+      tags:
+        - auth
+  /auth/token:
+    post:
+      description: |-
+        Bearer tokens can be used to authenticated without session or without sending credentials.
+
+        If the user making the request has sufficient privileges, he is allowed to create a token on behalf of another user.
+        Otherwise only a token for the request current user is allowed.
+
+
+        **Permission required:** edit_users
+      operationId: post_token_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/TokenModelBase"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenReplyModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Create a new token
+      tags:
+        - auth
+  /connections:
+    get:
+      description: |-
+        Return the list of set up connections
+
+        **Permission required:** edit_integrations
+      operationId: get_connections_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ConnectionModelGet"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all Connections
+      tags:
+        - connections
+    post:
+      description: |-
+        Create a new connection bound to the given scope (can be a project or inbox)
+
+        **Permission required:** edit_integrations
+      operationId: post_connections_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ConnectionModelPost"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConnectionModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Create connection
+      tags:
+        - connections
+  "/connections/{connection_id}":
+    delete:
+      description: |-
+        Delete the given connection.
+
+        **WARNING** This will completely remove the connection, this is not recoverable
+
+        **Permission required:** edit_integrations
+      operationId: delete_connection_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Delete a connection
+      tags:
+        - connections
+    get:
+      description: |-
+        Return the connection attributes
+
+        **Permission required:** edit_integrations
+      operationId: get_connection_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConnectionModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get connection
+      tags:
+        - connections
+    parameters:
+      - in: path
+        name: connection_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        attributes
+
+        **Permission required:** edit_integrations
+      operationId: patch_connection_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ConnectionModelPost"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConnectionModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update connection
+      tags:
+        - connections
+  /data_retention_settings:
+    get:
+      description: "**Permission required:** read_data_retention_settings"
+      operationId: get_data_retention_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DataRetentionModel"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all data retention settings
+      tags:
+        - data_retention_settings
+  "/data_retention_settings/{level}/{id}":
+    delete:
+      description: "**Permission required:** edit_data_retention_settings"
+      operationId: delete_data_retention_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Delete scoped sampling settings
+      tags:
+        - data_retention_settings
+    get:
+      description: "**Permission required:** read_data_retention_settings"
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataRetentionModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get scoped data retention settings
+      tags:
+        - data_retention_settings
+    parameters:
+      - in: path
+        name: level
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: "**Permission required:** edit_data_retention_settings"
+      operationId: patch_data_retention_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataRetentionModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataRetentionModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update scoped data retention settings
+      tags:
+        - data_retention_settings
+  /documents/:
+    post:
+      description: |-
+        This endpoint is a simplified version of the upload document to inbox one - synchronous mode.
+
+        The upload file will be upload to the given inbox if provided, else fallback to the **invoice** inbox.
+        The file will be processed synchronously, ie the request will blocks until the document was processed
+        *or* until it timeout; in this case the document might **not** be correctly processed.
+
+
+        For a more reliable processing use the /documents/{inbox_id} endpoint in async mode
+
+
+        **Permission required:** upload
+      operationId: post_simple_documents_resource
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                experimental:
+                  description: Use the experimental processing workflow
+                  type: boolean
+                file:
+                  description: File to process
+                  format: binary
+                  type: string
+                inbox_id:
+                  description: Inbox to use. Default to the **invoice** inbox
+                  type: string
+                key_value_flag:
+                  default: true
+                  description: If true the result will only contains mapping of prediction = value
+                  type: boolean
+              required:
+                - file
+              type: object
+        required: true
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Upload a new document
+      tags:
+        - documents
+  /documents/custom_output:
+    post:
+      description: |-
+        Using the provided filter on documents, will generate a custom output.
+
+        **Note:** only excel output is supported at the moment.
+
+        **Permission required:** review
+      operationId: post_document_custom_output_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomOutputPost"
+        required: true
+      responses:
+        "200":
+          description: File Attached
+        "403":
+          description: Permission insufficient
+      summary: Generate custom output for documents
+      tags:
+        - documents
+  /documents/enrich:
+    post:
+      operationId: post_enrichment_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrichmentModelPost"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      tags:
+        - documents
+  "/documents/file_query/{data_type}":
+    parameters:
+      - description: "Define the data that you want to get out. Possible options: ['document', 'reverse', 'text']"
+        in: path
+        name: data_type
+        required: true
+        schema:
+          default: document
+          type: string
+    post:
+      operationId: post_document_data_resource
+      requestBody:
+        $ref: "#/components/requestBodies/DocumentIds"
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Unsupported argument
+        "403":
+          description: Permission insufficient
+        "422":
+          description: Document list invalid
+      tags:
+        - documents
+  "/documents/query/{query_type}":
+    parameters:
+      - in: path
+        name: query_type
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: post_document_query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AggregationPipelinePost"
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+        - documents
+  "/documents/{document_id}":
+    delete:
+      description: |-
+        how parameter: if how == "FULL", we delete the entire document, including its source files
+        if how == "SOURCE_FILES", we only remove the (source) files and we set the archived flag. In practice this means
+        all information in the database (json) remains available, but you can no longer download / visualise the original document.
+
+        **WARNING** The removal (of source files and in the database) is permanent
+
+
+        **Permission required:** review
+      operationId: delete_document_delete_resource
+      parameters:
+        - in: query
+          name: how
+          schema:
+            default: predicted
+            enum:
+              - FULL
+              - SOURCE_FILES
+            type: string
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Delete the document
+      tags:
+        - documents
+    get:
+      description: |-
+        Simple endpoint that will fetch the given document
+
+        **Permission required:** review
+      operationId: get_document_delete_resource
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Get the document
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/compare_versions":
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: post_document_compare_versions_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VersionCompare"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      tags:
+        - documents
+  "/documents/{document_id}/custom_output":
+    get:
+      description: |-
+        If you have a custom output configured (this is set by contract.fit team), This allows you to
+        get the custom output formatted document.
+
+
+        **Permission required:** review
+      operationId: get_document_transform_resource
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: No custom output
+      summary: Get custom output formatted document
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/feedback":
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        Send a feedback for the given document and optionally evaluate.
+
+        When a document is to be reviewed, this endpoint is used to send the user feedback.
+
+        **Permission required:** submit
+      operationId: post_document_submit_eval_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VersionPost"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Submit a feedback
+      tags:
+        - documents
+  "/documents/{document_id}/last_version":
+    get:
+      description: |-
+        Get the latest possible version for this document, optionally with constraints on the source or name
+
+        **Permission required:** review
+      operationId: get_document_last_version_resource
+      parameters:
+        - description: Return a specific named version, default is latest
+          in: query
+          name: name
+          schema:
+            type: string
+        - description: human or machine (default either)
+          in: query
+          name: source
+          schema:
+            type: string
+        - description: Do you want to receive unevaluated version (for display, default) or evaluated (for stats)
+          in: query
+          name: is_evaluated
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Get latest version
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/original_file":
+    get:
+      description: |-
+        Return the document original file, as attachment.
+
+        **Permission required:** review
+      operationId: get_document_original_file_resource
+      responses:
+        "200":
+          description: File attached
+        "403":
+          description: Permission insufficient
+      summary: Get document original file
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/page/{page_range}":
+    get:
+      operationId: get_document_page_image_resource
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      tags:
+        - documents
+    parameters:
+      - description: The number of the page, starting from 0. A range of pages, separated by ":" is also allowed to return a zip file.
+        in: path
+        name: page_range
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/page_thumbnail/{page_range}":
+    get:
+      operationId: get_document_page_image_thumbnail_resource
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: page_range
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/process_table_annotation":
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        A fast and convenient annotation tool that converts a table-level annotation to cell-level feedback.
+
+        **Permission required:** review
+      operationId: post_document_process_table_annotation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TableAnnotationPost"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Process a table-level annotation
+      tags:
+        - documents
+  "/documents/{document_id}/reprocess":
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        This endpoint schedules (async) reprocessing for the given document;
+        it will call the async processing with the given desired version name,
+        similar to the async document upload but skipping OCR.
+        It works asynchronously, so results need to be consulted by a separate call (or webhook)
+
+
+        **Permission required:** upload
+      operationId: post_reprocess_document_resource
+      parameters:
+        - in: query
+          name: name
+          schema:
+            default: reprocessed
+            type: string
+        - description: If human repcrocessing is triggered, the last version will become the passed version. No processing is done.
+          in: query
+          name: reviewer
+          schema:
+            default: Machine
+            enum:
+              - Human
+              - Machine
+            type: string
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Schedule document reprocessing
+      tags:
+        - documents
+  "/documents/{document_id}/reverse/{page_range}":
+    get:
+      operationId: get_document_reverse_resource
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      tags:
+        - documents
+    parameters:
+      - description: The number of the page, starting from 0. A range of pages, separated by ":" is also allowed to return a zip file.
+        in: path
+        name: page_range
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/status_data":
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        Update the given document status data with the request user and date.
+
+        Each document defines some status:
+        - lock
+        - escalate
+        - reject
+        - delete
+        - archive
+        - submitted
+
+        These fields have 3 attributes:
+        - status true / false
+        - since: datetime (UTC)
+        - by: user ID
+
+        By calling this endpoint you can update the given status data with the request user
+        (the one authenticated) and the current datetime.
+        **Note** : You cannot pass a user in the request nor a datetime
+
+        **Permission required:** review
+      operationId: post_document_status_data_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusDataPost"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update document status
+      tags:
+        - documents
+  "/documents/{document_id}/text":
+    get:
+      description: |-
+        Return the optimal text for the document; will either be the OCR text, the native text,
+        the raw text or a translated version.
+
+        To ease the data volume from the DB, we lazy load only the relevant text for the document.
+
+        **Permission required:** review
+      operationId: get_document_text_resource
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Get the document text
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/workflow":
+    get:
+      description: |-
+        **WARNING experimental use only**
+
+
+        **Permission required:** upload
+      operationId: get_document_workflow_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowModel"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get the document Workflow
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{inbox_id}":
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        This endpoint uploads a new file to the given inbox and will process the file.
+
+        ## Upload mode: sync
+
+        When sync=true (default), the call will block and wait for the processing to complete.
+
+        If you have a custom output configured (this is set by contract.fit team),
+        passing mimetype *application/vnd.cf.custom* will allow you to get the custom output formatted result
+
+        Since it might yield inconsistent results if a timeout is raised while waiting,
+        it is recommended to use the **async** mode.
+
+        ## Upload mode: async
+
+        When sync=false, the call will schedule the processing and return without waiting for completion.
+        It will return the document ID, so that the processed document can be retrieved at a later date.
+
+        **Permission required:** upload
+      operationId: post_documents_resource
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                experimental:
+                  description: Use the experimental processing workflow
+                  type: boolean
+                file:
+                  description: File to process
+                  format: binary
+                  type: string
+                key_value_flag:
+                  default: false
+                  description: If true the result will only contains mapping of prediction = value
+                  type: boolean
+                sync:
+                  default: true
+                  description: Flag enable sync or async processing
+                  type: boolean
+              required:
+                - file
+              type: object
+        required: true
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "415":
+          description: Image Recognition Error
+      summary: Upload a new doc to the inbox
+      tags:
+        - documents
+  "/documents/{inbox_id}/copy_inbox":
+    parameters:
+      - description: The uuid of the inbox where the document(s) should be copied to
+        in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        Copy documents in the provided list to another inbox.
+
+        If the destination inbox is the same as the original inbox, the request will be aborted, no duplicates
+        will be created
+
+
+        **Permission required:** review
+      operationId: patch_document_copy_resource
+      requestBody:
+        $ref: "#/components/requestBodies/DocumentIds"
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Copy documents to another inbox
+      tags:
+        - documents
+  "/documents/{inbox_id}/move_inbox":
+    parameters:
+      - description: The uuid of the inbox where the document(s) have to be moved
+        in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        Move documents in the provided list to another inbox.
+
+        If the destination inbox is the same as the original inbox, the request will be aborted.
+
+
+        **Permission required:** review
+      operationId: patch_document_move_resource
+      requestBody:
+        $ref: "#/components/requestBodies/DocumentIds"
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Move documents to another inbox
+      tags:
+        - documents
+  /formats:
+    get:
+      description: |-
+        Return the formats
+
+        **Deprecated**: display_name
+        **Deprecated**: default_format
+      operationId: get_formats_resource
+      responses:
+        "200":
+          description: Success
+      summary: Get lists of format
+      tags:
+        - formats
+    post:
+      description: |-
+        Create an new format
+
+        **Deprecated**: display_name
+        **Deprecated**: default_format
+
+        **Permission required:** edit_format_settings
+      operationId: post_formats_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FormatModelPost"
+        required: true
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Create format
+      tags:
+        - formats
+  /formats/document_types:
+    get:
+      description: "**Permission required:** edit_format_settings"
+      operationId: get_formats_doc_types_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentTypeModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get supported document_types
+      tags:
+        - formats
+  "/formats/{format_id}":
+    delete:
+      description: |-
+        **WARNING** This will completely remove the documents, this is **not recoverable**
+
+        **Permission required:** edit_format_settings
+      operationId: delete_format_resource
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Permission insufficient
+      summary: Delete the format
+      tags:
+        - formats
+    get:
+      description: |-
+        Return the given format attributes
+
+        **Deprecated**: display_name
+        **Deprecated**: default_format
+
+        **Permission required:** edit_format_settings / review
+      operationId: get_format_resource
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Get format attributes
+      tags:
+        - formats
+    parameters:
+      - in: path
+        name: format_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        settings with the given attributes
+
+        **Deprecated**: display_name
+        **Deprecated**: default_format
+
+        **Permission required:** edit_format_settings
+      operationId: patch_format_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FormatModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormatModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update the format
+      tags:
+        - formats
+  "/formats/{scope}/tag_fields":
+    get:
+      description: |-
+        Get the tag fields values bound to the given scope.
+
+        Scope can be an inbox or a project
+
+
+        **Permission required:** edit_format_settings / review
+      operationId: get_format_tag_fields_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TagFieldModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get tags values
+      tags:
+        - formats
+    parameters:
+      - in: path
+        name: scope
+        required: true
+        schema:
+          type: string
+  /inboxes:
+    get:
+      description: Simply return the list of inboxes
+      operationId: get_inboxes_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/InboxModelGet"
+                type: array
+          description: Success
+      summary: Get list of inboxes
+      tags:
+        - inboxes
+    post:
+      description: |-
+        Create a new inbox in the given **project**
+
+        **Permission required:** create_inbox
+      operationId: post_inboxes_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InboxModelPost"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InboxModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Project Not Found
+      summary: Create an inbox
+      tags:
+        - inboxes
+  "/inboxes/{inbox_id}":
+    delete:
+      description: |-
+        Delete the given inbox.
+
+        **WARNING** This will completely remove the inbox, this is not recoverable
+      operationId: delete_inbox_resource
+      responses:
+        "204":
+          description: Success
+        "404":
+          description: Not Found
+      summary: Delete an inbox
+      tags:
+        - inboxes
+    get:
+      description: |-
+        Get the given inbox attributes
+
+        **Permission required:** view_list
+      operationId: get_inbox_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InboxModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Get Inbox attributes
+      tags:
+        - inboxes
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        Update the given inbox with the provided arguments
+
+        **Permission required:** view_list
+      operationId: patch_inbox_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InboxModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InboxModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Update inbox
+      tags:
+        - inboxes
+  "/inboxes/{inbox_id}/document_versions":
+    get:
+      operationId: get_inbox_document_versions_resource
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      tags:
+        - inboxes
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+  "/inboxes/{inbox_id}/documents":
+    delete:
+      description: |-
+        in the given inbox.
+
+        how parameter: if how == "FULL", we delete the entire document, including its source files
+        if how == "SOURCE_FILES", we only remove the (source) files and we set the archived flag. In practice this means
+        all information in the database (json) remains available, but you can no longer download / visualise the original document.
+
+        what parameter: if what == "DONE", we will only delete files which have status_data.feedback == True
+        if what == "ALL" we will delete all files
+
+        Start_date and end_date: when specified we will only delete files which are received after (respectively before) the timestamp
+
+        **WARNING** This will completely remove the documents, this is **not recoverable**
+      operationId: delete_inbox_document_resource
+      parameters:
+        - in: query
+          name: how
+          schema:
+            default: FULL
+            enum:
+              - FULL
+              - SOURCE_FILES
+            type: string
+        - in: query
+          name: what
+          schema:
+            default: ALL
+            enum:
+              - ALL
+              - DONE
+            type: string
+        - in: query
+          name: start_date
+          schema:
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+      summary: Delete documents
+      tags:
+        - inboxes
+    get:
+      description: "**Permission required:** view_list"
+      operationId: get_inbox_document_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DocumentModelGet"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Get documents in the inbox
+      tags:
+        - inboxes
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+  "/inboxes/{inbox_id}/paginated":
+    get:
+      description: "**Permission required:** view_list"
+      operationId: get_inbox_paginated_resource
+      parameters:
+        - description: Page number to fetch
+          in: query
+          name: page
+          schema:
+            default: 1
+            type: integer
+        - description: Results per page
+          in: query
+          name: per_page
+          schema:
+            default: 20
+            type: integer
+        - in: query
+          name: start_receive_date
+          schema:
+            format: date-time
+            type: string
+        - in: query
+          name: end_receive_date
+          schema:
+            format: date-time
+            type: string
+        - description: comma seperated list of fields to order by
+          in: query
+          name: order_by
+          schema:
+            type: string
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DocumentModelPaginated"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Get paginated list of documents in the inbox
+      tags:
+        - inboxes
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+  "/inboxes/{inbox_id}/reprocess":
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        This endpoint schedule reprocessing for documents in the given inbox; this will call the async processing,
+        just like async document upload
+
+
+        **Permission required:** upload
+      operationId: post_inbox_reprocess_resource
+      parameters:
+        - in: query
+          name: name
+          schema:
+            default: predicted
+            type: string
+        - description: If human repcrocessing is triggered, the last version will become the passed version. No processing is done.
+          in: query
+          name: reviewer
+          schema:
+            default: Machine
+            enum:
+              - Human
+              - Machine
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                hints:
+                  description: 'Additional hints as a dictionary. Example: {"VAT_number":{"blacklist":"XXXX.XXX.XXX", "whitelist": ["YYYY.YYY.YYY", "ZZZZ.ZZZ.ZZZ"]}}'
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Schedule inbox reprocessing
+      tags:
+        - inboxes
+  /integrations/:
+    get:
+      description: |-
+        Return the list of set up integrations
+
+        **Permission required:** read_integrations
+      operationId: get_integration_resources
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all integrations
+      tags:
+        - integrations
+    post:
+      description: |-
+        Create a new integration. Each type of integration has its own initialization logic and thus may
+        yield suitable error codes depending on the underlying issue, such as credentials or connectivity issue.
+
+        **Permission required:** edit_integrations
+      operationId: post_integration_resources
+      requestBody:
+        $ref: "#/components/requestBodies/IntegrationModelGet"
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Create integration
+      tags:
+        - integrations
+  "/integrations/{integration_id}":
+    delete:
+      description: |-
+        Delete the given integration.
+
+        **WARNING** This will completely remove the integration, this is not recoverable
+
+        **Permission required:** edit_integrations
+      operationId: delete_integration_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Delete an integration
+      tags:
+        - integrations
+    get:
+      description: |-
+        Return the given integration attributes
+
+        **Permission required:** read_integrations
+      operationId: get_integration_resource
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Get integration attributes
+      tags:
+        - integrations
+    parameters:
+      - in: path
+        name: integration_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        Update the given integration attributes
+
+        **Permission required:** edit_integrations
+      operationId: patch_integration_resource
+      requestBody:
+        $ref: "#/components/requestBodies/IntegrationModelGet"
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Update integration
+      tags:
+        - integrations
+  "/integrations/{integration_id}/activate":
+    get:
+      operationId: get_email_integration_activation_resource
+      parameters:
+        - in: query
+          name: secret
+          required: true
+          schema:
+            type: string
+      responses:
+        "302":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      tags:
+        - integrations
+    parameters:
+      - in: path
+        name: integration_id
+        required: true
+        schema:
+          type: string
+  /predictor_settings:
+    get:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: get_predictor_settings_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PredictorModelGet"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all predictor settings
+      tags:
+        - predictor_settings
+  "/predictor_settings/{scope}":
+    delete:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: delete_predictor_setting_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Delete scoped predictor settings
+      tags:
+        - predictor_settings
+    get:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: get_predictor_setting_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PredictorModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get scoped predictor settings
+      tags:
+        - predictor_settings
+    parameters:
+      - in: path
+        name: scope
+        required: true
+        schema:
+          type: string
+    patch:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: patch_predictor_setting_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PredictorSettingModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PredictorModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update scoped predictor settings
+      tags:
+        - predictor_settings
+  /projects:
+    get:
+      description: |-
+        Return the list of projects in the organization
+
+
+        **Deprecated**: default_format
+      operationId: get_projects_resource
+      responses:
+        "200":
+          description: Success
+      summary: Get the list of projects
+      tags:
+        - projects
+    post:
+      description: |-
+        Simply create a new project
+
+        **Deprecated**: default_format
+
+        **Permission required:** create_inbox
+      operationId: post_projects_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectModelPost"
+        required: true
+      responses:
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Format Not Found
+      summary: Create a project
+      tags:
+        - projects
+  "/projects/{project_id}":
+    delete:
+      description: |-
+        Delete the given project.
+
+        **WARNING** This will completely remove the project, this is not recoverable
+
+        **Permission required:** edit_format_settings
+      operationId: delete_project_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Delete project
+      tags:
+        - projects
+    get:
+      description: |-
+        Get the attributes of the given project
+
+
+        **Deprecated**: default_format
+      operationId: get_project_resource
+      responses:
+        "404":
+          description: Not Found
+      summary: Get project attributes
+      tags:
+        - projects
+    parameters:
+      - in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        Update the project attributes with the provided arguments
+
+
+        **Deprecated**: default_format
+
+        **Permission required:** edit_format_settings
+      operationId: patch_project_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectModelPatch"
+        required: true
+      responses:
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Update project
+      tags:
+        - projects
+  /reports:
+    get:
+      description: |-
+        Return the list of reports
+
+        **Permission required:** read_reports
+      operationId: get_reports_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ReportModelGet"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all reports
+      tags:
+        - reports
+    post:
+      description: |-
+        Create a new report
+
+        **Permission required:** edit_reports
+      operationId: post_reports_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ReportModelPost"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "405":
+          description: Missing fields
+      summary: Create report
+      tags:
+        - reports
+  /reports/generate:
+    post:
+      description: |-
+        **Note**: start_date and end_date filter on status update
+
+        **Permission required:** read_reports
+      operationId: post_generate_report_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportModelFullGenerate"
+        required: true
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Generate report based on input
+      tags:
+        - reports
+  "/reports/{report_id}":
+    delete:
+      description: |-
+        Delete the given report.
+
+        **WARNING** This will completely remove the report, this is not recoverable
+
+        **Permission required:** edit_reports
+      operationId: delete_report_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Report Not Found
+      summary: Delete a report
+      tags:
+        - reports
+    get:
+      description: |-
+        Return report attributes
+
+        **Permission required:** read_reports
+      operationId: get_report_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Report Not Found
+      summary: Get report
+      tags:
+        - reports
+    parameters:
+      - in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        Modify the report with the given arguments
+
+        **Permission required:** edit_reports
+      operationId: patch_report_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ReportModelPost"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportModelPost"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Report Not Found
+      summary: Update report
+      tags:
+        - reports
+  "/reports/{report_id}/generate":
+    parameters:
+      - in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        **Note**: start_date and end_date filter on status update
+
+        **Permission required:** read_reports
+      operationId: post_generate_report_id_resource
+      parameters:
+        - in: query
+          name: delivery_method
+          required: true
+          schema:
+            enum:
+              - download
+              - email
+            type: string
+        - in: query
+          name: email
+          schema:
+            type: string
+        - in: query
+          name: start_date
+          schema:
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Generate report based on report id
+      tags:
+        - reports
+  /roles:
+    get:
+      description: Return the list of roles
+      operationId: get_roles_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/RoleModelGet"
+                type: array
+          description: Success
+      summary: Get all roles
+      tags:
+        - roles
+    post:
+      description: |-
+        Create a new role
+
+        **Permission required:** edit_users
+      operationId: post_roles_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleModelPost"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "405":
+          description: Missing fields
+      summary: Create role
+      tags:
+        - roles
+  "/roles/{role_id}":
+    delete:
+      description: |-
+        Delete the given role.
+
+        **WARNING** This will completely remove the role, this is not recoverable
+
+        **Permission required:** edit_users
+      operationId: delete_role_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Role Not Found
+      summary: Delete a role
+      tags:
+        - roles
+    get:
+      description: Return role attributes
+      operationId: get_role_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleModelGet"
+          description: Success
+        "404":
+          description: Role Not Found
+      summary: Get role
+      tags:
+        - roles
+    parameters:
+      - in: path
+        name: role_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        Modify the role with the given arguments
+
+        **Permission required:** edit_users
+      operationId: patch_role_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Role Not Found
+      summary: Update role
+      tags:
+        - roles
+  /rule_config:
+    get:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: get_rule_configs_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/RuleConfigModelGet"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all rule configs
+      tags:
+        - rule_config
+  /rule_config/rule_entity/:
+    post:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: post_debug_rule_entity_resource
+      requestBody:
+        $ref: "#/components/requestBodies/dictionary"
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Get the regexes that are generated by the rule
+      tags:
+        - rule_config
+  "/rule_config/rule_entity/{document_id}":
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: post_debug_rule_entity_document_resource
+      requestBody:
+        $ref: "#/components/requestBodies/dictionary"
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Evaluate a rule on a document
+      tags:
+        - rule_config
+  "/rule_config/where_to_search/{document_id}":
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        Returns a list of strings per granularity. If no granularity is specified. It is considered to be the whole document
+
+        **Permission required:** edit_predictor_settings
+      operationId: post_debug_where_to_search
+      requestBody:
+        $ref: "#/components/requestBodies/dictionary"
+      responses:
+        "403":
+          description: Permission insufficient
+      summary: Get the text a where_to_search specification will generate
+      tags:
+        - rule_config
+  "/rule_config/{scope}":
+    delete:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: delete_rule_config_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Delete scoped rule config
+      tags:
+        - rule_config
+    get:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: get_rule_config_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RuleConfigModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get scoped rule config
+      tags:
+        - rule_config
+    parameters:
+      - in: path
+        name: scope
+        required: true
+        schema:
+          type: string
+    patch:
+      description: "**Permission required:** edit_predictor_settings"
+      operationId: patch_rule_config_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleConfigModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RuleConfigModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update scoped rule config
+      tags:
+        - rule_config
+  /sampling_settings:
+    get:
+      description: "**Permission required:** edit_sampling_settings / review"
+      operationId: get_setting_samplings_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SamplingModelGet"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all sampling settings
+      tags:
+        - sampling_settings
+  "/sampling_settings/{scope}":
+    delete:
+      description: "**Permission required:** edit_sampling_settings"
+      operationId: delete_setting_sampling_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Delete scoped sampling settings
+      tags:
+        - sampling_settings
+    get:
+      description: "**Permission required:** edit_sampling_settings / review"
+      operationId: get_setting_sampling_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SamplingModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get scoped sampling settings
+      tags:
+        - sampling_settings
+    parameters:
+      - in: path
+        name: scope
+        required: true
+        schema:
+          type: string
+    patch:
+      description: "**Permission required:** edit_sampling_settings"
+      operationId: patch_setting_sampling_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SamplingModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SamplingModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update scoped sampling settings
+      tags:
+        - sampling_settings
+  /settings/dashboard:
+    get:
+      description: Get the dashboard settings for the given scope (project or inbox)
+      operationId: get_dashboard_settings_atomic_resource
+      parameters:
+        - in: query
+          name: scope
+          schema:
+            type: string
+        - in: query
+          name: full
+          schema:
+            default: false
+            type: boolean
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSettingsModelGet"
+          description: Success
+      summary: Get scoped dashboard setting
+      tags:
+        - settings
+    patch:
+      description: |-
+        Update the dashboard settings for the given scope (project or inbox)
+
+        **Permission required:** edit_dashboard_settings
+      operationId: patch_dashboard_settings_atomic_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DashboardSettingsModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSettingsModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update scoped dashboard setting
+      tags:
+        - settings
+  /settings/review:
+    get:
+      description: Get the review settings for the given scope (project or inbox)
+      operationId: get_review_settings_atomic_resource
+      parameters:
+        - in: query
+          name: scope
+          schema:
+            type: string
+        - in: query
+          name: full
+          schema:
+            default: false
+            type: boolean
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewSettingsModelGet"
+          description: Success
+      summary: Get scoped review setting
+      tags:
+        - settings
+    patch:
+      description: |-
+        Update the review settings for the given scope (project or inbox)
+
+        **Permission required:** edit_review_settings
+      operationId: patch_review_settings_atomic_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewSettingsModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewSettingsModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update scoped review setting
+      tags:
+        - settings
+  /sso/config:
+    get:
+      operationId: get_sso_config_resources
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SsoConfigModelGet"
+          description: Success
+      tags:
+        - sso
+    post:
+      operationId: post_sso_config_resources
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SsoConfigModel"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      tags:
+        - sso
+  "/sso/config/{sso_config_id}":
+    delete:
+      description: |-
+        Return the given integration attributes
+
+        **Permission required:** edit_integrations
+      operationId: delete_sso_config_resources
+      responses:
+        "204":
+          description: No content
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Get integration attributes
+      tags:
+        - sso
+    parameters:
+      - in: path
+        name: sso_config_id
+        required: true
+        schema:
+          type: string
+  /sso/login:
+    post:
+      operationId: post_oauth_login_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SsoModel"
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+        - sso
+  /stats/usage:
+    get:
+      operationId: get_usage_stats_resource
+      parameters:
+        - in: query
+          name: inbox_id
+          schema:
+            type: string
+        - in: query
+          name: start_date
+          required: true
+          schema:
+            default: 2023-01-31T13:36:39
+            type: string
+        - in: query
+          name: end_date
+          required: true
+          schema:
+            default: 2023-03-02T13:36:39
+            type: string
+        - description: "Set to 'true' to get data in an excel. (Default output format: JSON)"
+          in: query
+          name: excel_output
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "200":
+          description: Success
+      tags:
+        - stats
+  "/stats/{inbox_id}":
+    get:
+      description: |-
+        Compute and return statistics on the given inbox, optionally restricted to a date range and a field.
+
+        Stats will return per field:
+        - accuracy
+        - precision
+        - f1 score
+        - recall
+
+        **Note** Depending on the date range and fields, computation might be intensive
+
+        **Permission required:** view_statistics
+      operationId: get_stats_resource
+      parameters:
+        - description: The field names to include in the stats. If left empty, all fields are included.Additionally, `__all_fields__` field name is also added, and aggregates the stats for all fields
+          in: query
+          name: field_name
+          schema:
+            type: string
+        - description: "The minimum upload time of the file. If left empty, no filter is applied. "
+          in: query
+          name: start_date
+          schema:
+            default: null
+            format: date-time
+            type: string
+        - description: "The maximum upload time of the file. If left empty, no filter is applied. "
+          in: query
+          name: end_date
+          schema:
+            default: null
+            format: date-time
+            type: string
+        - description: "The name of the version to evaluate. If left empty, latest evaluated version is chosen. "
+          in: query
+          name: version_name
+          schema:
+            pattern: ^[A-z0-9_-]+$
+            type: string
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get inbox statistics
+      tags:
+        - stats
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+  "/stats/{inbox_id}/automation_blockers":
+    get:
+      description: "**Permission required:** view_statistics"
+      operationId: get_automation_blockers_stats
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            default: 2023-02-02T13:36:39.252495
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            default: 2023-03-02T13:36:39.252527
+            format: date-time
+            type: string
+        - description: provide the version name to evaluate
+          in: query
+          name: version_name
+          schema:
+            default: predicted
+            pattern: ^[A-z0-9_-]+$
+            type: string
+        - in: query
+          name: include_detail
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "400":
+          description: Not Supported
+        "403":
+          description: Permission insufficient
+      summary: Get summary or details of automation blockers
+      tags:
+        - stats
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+  "/stats/{inbox_id}/blue_dots":
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        Compute and return the blue dots statistics, optionally restricted to date range, fields and versions
+
+        **Permission required:** submit
+      operationId: post_blue_dots_resource
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                end_date:
+                  default: 2023-03-02T13:36:39.250962
+                  format: date-time
+                  type: string
+                fields_to_exclude:
+                  default: ""
+                  description: gross_amount,due_date
+                  type: string
+                level:
+                  default: file
+                  description: "possible values: file, field"
+                  type: string
+                option_level_fields:
+                  default: ""
+                  description: invoice,receipt
+                  type: string
+                start_date:
+                  default: 2023-02-02T13:36:39.250933
+                  format: date-time
+                  type: string
+                version_name:
+                  default: submitted
+                  description: provide the version name to evaluate
+                  pattern: ^[A-z0-9_-]+$
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad Request
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Document evaluation missing
+      summary: Get the Blue Dots statistics for the inbox
+      tags:
+        - stats
+  "/stats/{inbox_id}/evaluated_versions":
+    get:
+      description: |-
+        If filter_on_version_date is True, the document
+        versions are filtered by timestamp, otherwise, documents are filtered by receive_time.
+
+        **Permission required:** view_statistics
+      operationId: get_evaluated_versions
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            default: 2023-02-02T13:36:39.251355
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            default: 2023-03-02T13:36:39.251385
+            format: date-time
+            type: string
+        - in: query
+          name: filter_versions
+          schema:
+            default: false
+            type: boolean
+        - in: query
+          name: last_one_only
+          schema:
+            default: true
+            type: boolean
+        - description: filter the version by name. If not specified, all version names are considered
+          in: query
+          name: version_name
+          schema:
+            pattern: ^[A-z0-9_-]+$
+            type: string
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get the documents with evaluated versions
+      tags:
+        - stats
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+  "/stats/{inbox_id}/processing":
+    get:
+      description: |-
+        **This endpoint is in _preview_ and its interface may change.**
+
+        Compute statistics over the documents in the inbox. These stats include:
+        - mean
+        - min
+        - max
+        - standard deviation
+        - 50th percentile
+        - 95th percentile
+        - 99th percentile
+
+        Documents are grouped by their page count: this is currently the *only* supported group by attribute.
+
+        Documents can be further filter by any given start or end date: the filter will apply to the start
+        processing date, and *not* to the done date.
+
+        **Permission required:** view_statistics
+      operationId: get_processing_stats
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            default: 2023-02-02T13:36:39.251761
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            default: 2023-03-02T13:36:39.251794
+            format: date-time
+            type: string
+        - description: Group stats per this given attribute. Only **pages** is supported
+          in: query
+          name: group_by
+          schema:
+            default: pages
+            type: string
+      responses:
+        "400":
+          description: Not Supported
+        "403":
+          description: Permission insufficient
+      summary: Get processing runtime stats
+      tags:
+        - stats
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+  "/stats/{inbox_id}/volume":
+    get:
+      operationId: get_volume_stats
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            default: 2023-02-02T13:36:39.252098
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            default: 2023-03-02T13:36:39.252127
+            format: date-time
+            type: string
+        - in: query
+          name: status
+          schema:
+            default: to_review
+            type: string
+        - in: query
+          name: user
+          schema:
+            type: string
+      responses:
+        "400":
+          description: Not Supported
+        "403":
+          description: Permission insufficient
+      summary: "**Permission required:** view_statistics"
+      tags:
+        - stats
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+  "/stats/{scope}/accuracy":
+    get:
+      description: "**Permission required:** view_statistics"
+      operationId: get_accuracy_resource
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            default: 2023-02-02T13:36:39.250494
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            default: 2023-03-02T13:36:39.250527
+            format: date-time
+            type: string
+        - in: query
+          name: stp_files_only
+          schema:
+            default: false
+            type: boolean
+        - in: query
+          name: stp_fields_only
+          schema:
+            default: false
+            type: boolean
+        - description: provide the version name to evaluate
+          in: query
+          name: version_name
+          schema:
+            pattern: ^[A-z0-9_-]+$
+            type: string
+        - description: Choose to filter the results by doctype, process label, ...
+          in: query
+          name: filter_by
+          schema:
+            pattern: ^[A-z0-9_-]+$
+            type: string
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get the Accuracy counts on documents, sections and fields in the given inbox
+      tags:
+        - stats
+    parameters:
+      - in: path
+        name: scope
+        required: true
+        schema:
+          type: string
+  "/stats/{scope}/stp":
+    get:
+      description: "**Permission required:** view_statistics"
+      operationId: get_stp_resource
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            default: 2023-02-02T13:36:39.250021
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            default: 2023-03-02T13:36:39.250091
+            format: date-time
+            type: string
+        - description: Provide the evaluated version name to inspect automation (of the predictions) for
+          in: query
+          name: version_name
+          schema:
+            default: predicted
+            pattern: ^[A-z0-9_-]+$
+            type: string
+        - description: Choose to filter the results by doctype, process label, ...
+          in: query
+          name: filter_by
+          schema:
+            pattern: ^[A-z0-9_-]+$
+            type: string
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get the STP counts on documents, sections and fields in the given inbox
+      tags:
+        - stats
+    parameters:
+      - in: path
+        name: scope
+        required: true
+        schema:
+          type: string
+  /style/custom.css:
+    get:
+      operationId: get_style_sheet_resource
+      responses:
+        "200":
+          description: File Content
+        "204":
+          description: No Style
+      summary: Get the custom CSS file
+      tags:
+        - style
+    post:
+      description: "**Permission required:** edit_dashboard_settings"
+      operationId: post_style_sheet_resource
+      requestBody:
+        $ref: "#/components/requestBodies/post_style_sheet_resource"
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "422":
+          description: File input invalid
+      summary: Upload the custom logo
+      tags:
+        - style
+  /style/logo.png:
+    get:
+      operationId: get_style_logo_resource
+      responses:
+        "200":
+          description: File Content
+      summary: Get the custom logo
+      tags:
+        - style
+    post:
+      description: "**Permission required:** edit_dashboard_settings"
+      operationId: post_style_logo_resource
+      requestBody:
+        $ref: "#/components/requestBodies/post_style_sheet_resource"
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "422":
+          description: File input invalid
+      summary: Upload the custom logo
+      tags:
+        - style
+  /tenant:
+    delete:
+      operationId: delete_tenant_resource
+      responses:
+        "204":
+          description: Success
+        "401":
+          description: Unauthorized
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      tags:
+        - tenant
+  /tenant/activate:
+    patch:
+      operationId: patch_activate_tenant_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TenantModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantModelGet"
+          description: Success
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "405":
+          description: Invalid input
+      tags:
+        - tenant
+  /threshold_settings:
+    get:
+      description: "**Permission required:** read_thresholds_settings / review"
+      operationId: get_settings_threshold_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SettingThresholdModelGet"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all thresholds settings
+      tags:
+        - threshold_settings
+  "/threshold_settings/{scope}":
+    delete:
+      description: "**Permission required:** edit_thresholds_settings"
+      operationId: delete_setting_threshold_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Threshold Not Found
+      summary: Delete the thresholds settings
+      tags:
+        - threshold_settings
+    get:
+      description: "**Permission required:** read_thresholds_settings / review"
+      operationId: get_setting_threshold_resource
+      parameters:
+        - in: query
+          name: default
+          schema:
+            default: false
+            type: boolean
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettingThresholdModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get the scoped thresholds settings
+      tags:
+        - threshold_settings
+    parameters:
+      - in: path
+        name: scope
+        required: true
+        schema:
+          type: string
+    patch:
+      description: "**Permission required:** edit_thresholds_settings"
+      operationId: patch_setting_threshold_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettingThresholdModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettingThresholdModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Update the scoped thresholds settings
+      tags:
+        - threshold_settings
+  /users:
+    get:
+      description: |-
+        Return the list of users
+
+        **Permission required:** edit_users
+      operationId: get_users_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/UserModelGet"
+                type: array
+          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get all users
+      tags:
+        - users
+    post:
+      description: |-
+        Create a new user with the provided attributes and roles
+
+        **Permission required:** edit_users
+      operationId: post_users_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserModelPost"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserModelGet"
+          description: Success
+        "400":
+          description: Missing field
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+        "406":
+          description: Role does not exist
+      summary: Create user
+      tags:
+        - users
+  /users/me:
+    get:
+      description: Return user info of the authenticated used making the call
+      operationId: get_me
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserModelGet"
+          description: Success
+      summary: Return info on the current user
+      tags:
+        - users
+  /users/me/change_password:
+    post:
+      description: Update the current authenticated user password
+      operationId: post_change_password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangePasswordModelPost"
+        required: true
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Password mismatch
+      summary: Change the current user password
+      tags:
+        - users
+  "/users/{user_id}":
+    delete:
+      description: |-
+        Delete the given user.
+
+        **WARNING** This will completely remove the user, this is not recoverable
+      operationId: delete_user_resource
+      responses:
+        "204":
+          description: Success
+        "404":
+          description: User Not Found
+      summary: Delete a user
+      tags:
+        - users
+    get:
+      description: |-
+        Return user attribute
+
+        **Permission required:** edit_users
+      operationId: get_user_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserModelGet"
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: User Not Found
+      summary: Get user
+      tags:
+        - users
+    parameters:
+      - in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        Update the given user with the provided attributes
+
+        **Permission required:** edit_users
+      operationId: patch_user_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserModelPatch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserModelGet"
+          description: Success
+        "400":
+          description: Missing fields
+        "403":
+          description: Permission insufficient
+        "404":
+          description: User Not Found
+      summary: Update user
+      tags:
+        - users
+components:
+  requestBodies:
+    APIKeyRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/APIKeyRequest"
+      required: true
+    ConnectionModelPost:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ConnectionModelPost"
+      required: true
+    DocumentIds:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DocumentIds"
+      required: true
+    IntegrationModelGet:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/IntegrationModelGet"
+      required: true
+    ReportModelPost:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReportModelPost"
+      required: true
+    TokenModelBase:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TokenModelBase"
+      required: true
+    dictionary:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/dictionary"
+      required: true
+    post_style_sheet_resource:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              file:
+                description: File to handle
+                format: binary
+                type: string
+            required:
+              - file
+            type: object
+      required: true
+  responses:
+    AlfredException:
+      description: Handle Alfred specific exceptions
+    ConflictError:
+      description: Handle Conflict exceptions, as they define their own message
+    Exception:
+      description: Return JSON instead of HTML for HTTP errors
+    MaskError:
+      description: When any error occurs on mask
+    ParseError:
+      description: When a mask can't be parsed
+  schemas:
+    APIKeyModel:
+      properties:
+        active:
+          description: Is the API Key active or not
+          type: boolean
+        expire_at:
+          description: The date at which the API Key will expire
+          format: date-time
+          type: string
+        roles:
+          description: the user roles
+          items:
+            $ref: "#/components/schemas/TokenRoleModel"
+          type: array
+        token:
+          description: Token value
+          type: string
+        user:
+          description: Bearer user
+          type: string
+      required:
+        - active
+        - token
+        - user
+      type: object
+    APIKeyRequest:
+      additionalProperties: false
+      properties:
+        active:
+          description: Is the API Key active or not
+          type: boolean
+        expire_at:
+          description: Expiration date
+          format: date-time
+          type: string
+        roles:
+          description: Roles to grant to this token bearer
+          items:
+            $ref: "#/components/schemas/TokenRoleModel"
+          type: array
+        user:
+          description: User to give to the bearer
+          type: string
+      required:
+        - roles
+        - user
+      type: object
+    AggregationPipelinePost:
+      properties:
+        filter:
+          $ref: "#/components/schemas/FilterModel"
+        type:
+          enum:
+            - inbox
+            - get-todo-count
+            - get-todo-escalated-count
+            - get-oldest-todo
+            - get-oldest-escalated-todo
+            - get-finished-me
+            - get-finished-team
+            - next-document
+            - prev-document
+            - get-next-uuid
+            - avg-time
+          example: inbox
+          type: string
+      type: object
+    AnnotationOptions:
+      properties:
+        add_text:
+          default: false
+          type: boolean
+        include:
+          default: false
+          type: boolean
+      type: object
+    AuthModel:
+      properties:
+        password:
+          description: the user password
+          type: string
+        username:
+          description: the user username
+          type: string
+      required:
+        - password
+        - username
+      type: object
+    ChangePasswordModelPost:
+      properties:
+        new_password:
+          description: the new user's password
+          type: string
+        old_password:
+          description: the old user's password
+          type: string
+      type: object
+    ColumnsHeaders:
+      properties:
+        columns_headers:
+          items:
+            $ref: "#/components/schemas/SequenceColumnsAtomModel"
+          type: array
+        inline_headers:
+          items:
+            $ref: "#/components/schemas/SequenceColumnsAtomModel"
+          type: array
+      type: object
+    ConnectionModelGet:
+      allOf:
+        - $ref: "#/components/schemas/ConnectionModelPost"
+        - properties:
+            id:
+              type: string
+          required:
+            - id
+          type: object
+    ConnectionModelPost:
+      properties:
+        event:
+          enum:
+            - document_predict
+            - document_evaluate
+            - document_text
+            - document_split
+            - document_delete
+          example: document_predict
+          type: string
+        integration:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        routing:
+          items:
+            $ref: "#/components/schemas/RoutingAtom"
+          type: array
+        scope:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        what:
+          enum:
+            - original
+            - reply_to
+            - ready
+            - submit
+          example: original
+          type: string
+      required:
+        - event
+        - integration
+        - what
+      type: object
+    CustomAtom:
+      properties: {}
+      type: object
+    CustomOutputPost:
+      properties:
+        custom:
+          $ref: "#/components/schemas/CustomAtom"
+        excel:
+          $ref: "#/components/schemas/ExcelAtom"
+        filter:
+          $ref: "#/components/schemas/FilterAtom"
+      type: object
+    DashboardSettingsModelGet:
+      properties:
+        autolearning:
+          type: boolean
+        dashboard_timeout:
+          type: integer
+        default_date_range:
+          type: object
+        default_inbox_size:
+          type: object
+        default_inbox_sorting:
+          type: object
+        flexible_filters:
+          items:
+            type: object
+          type: array
+        navigation_menu:
+          type: object
+        process_unreadable:
+          type: boolean
+        sequence_columns_of_inbox:
+          $ref: "#/components/schemas/ColumnsHeaders"
+        show_digital_annotations:
+          type: boolean
+        show_filters:
+          type: object
+        show_inbox_actions:
+          type: object
+        studio_format_options:
+          type: object
+        upload_options:
+          type: object
+        welcome_counters:
+          type: boolean
+        welcome_counters_options:
+          type: object
+      type: object
+    DashboardSettingsModelPatch:
+      properties:
+        scope:
+          type: string
+        settings:
+          $ref: "#/components/schemas/DashboardSettingsModelGet"
+      type: object
+    DataRetentionAtomModel:
+      properties:
+        age:
+          default: -1
+          example: 30
+          type: integer
+        how:
+          default: FULL
+          enum:
+            - FULL
+            - SOURCE_FILES
+          example: FULL
+          type: string
+        what:
+          default: ALL
+          enum:
+            - ALL
+            - DONE
+          example: ALL
+          type: string
+      type: object
+    DataRetentionModel:
+      properties:
+        scope:
+          $ref: "#/components/schemas/ScopeModel"
+        settings:
+          items:
+            $ref: "#/components/schemas/DataRetentionAtomModel"
+          type: array
+      type: object
+    DataRetentionModelPatch:
+      properties:
+        settings:
+          items:
+            $ref: "#/components/schemas/DataRetentionAtomModel"
+          type: array
+      type: object
+    DocumentIds:
+      properties:
+        document_ids:
+          items:
+            example: abcdef123456789abcdef123
+            type: string
+          type: array
+      type: object
+    DocumentModelGet:
+      properties:
+        escalate:
+          $ref: "#/components/schemas/StateModelGet"
+        feedback:
+          type: object
+        files:
+          items:
+            $ref: "#/components/schemas/FileModelGet"
+          type: array
+        flag_for_review:
+          type: boolean
+        id:
+          type: string
+        inbox:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        last_version:
+          type: string
+        lock:
+          $ref: "#/components/schemas/StateModelGet"
+        meta_information:
+          type: object
+        opened_by:
+          items:
+            $ref: "#/components/schemas/StateModelGet"
+          type: array
+        original_filename:
+          type: string
+        page_count:
+          type: integer
+        prediction:
+          type: object
+        reject:
+          $ref: "#/components/schemas/StateModelGet"
+        status_data:
+          $ref: "#/components/schemas/StatusDataModel"
+        submitted:
+          $ref: "#/components/schemas/StateModelGet"
+        timings:
+          $ref: "#/components/schemas/TimingsModelGet"
+        usage_data:
+          type: object
+        versions:
+          items:
+            type: object
+          type: array
+      required:
+        - id
+        - inbox
+        - original_filename
+        - page_count
+      type: object
+    DocumentModelPaginated:
+      properties:
+        page:
+          description: Current page number
+          type: integer
+        per_page:
+          description: Number of results per page
+          type: integer
+        results:
+          items:
+            $ref: "#/components/schemas/DocumentModelGet"
+          type: array
+        total:
+          description: Total number of results
+          type: integer
+      type: object
+    DocumentTypeModel:
+      properties:
+        display_name:
+          type: string
+        field_name:
+          type: string
+      required:
+        - field_name
+      type: object
+    DocumentTypeModelGet:
+      properties:
+        document_types:
+          items:
+            $ref: "#/components/schemas/DocumentTypeModel"
+          type: array
+      type: object
+    EnrichmentModelPost:
+      properties: {}
+      type: object
+    EvaluationAtom:
+      properties:
+        gold:
+          type: string
+        text:
+          type: string
+        textual_coord:
+          items:
+            type: integer
+          maxItems: 6
+          minItems: 6
+          type: array
+        visual_coord:
+          items:
+            type: integer
+          maxItems: 6
+          minItems: 6
+          type: array
+      required:
+        - gold
+        - text
+        - textual_coord
+      type: object
+    EvaluationsOptions:
+      properties:
+        additional_column:
+          type: string
+        include:
+          default: false
+          type: boolean
+      type: object
+    ExcelAtom:
+      properties:
+        add_automation_blockers:
+          example: false
+          type: boolean
+        add_confidence:
+          example: false
+          type: boolean
+        add_text:
+          example: true
+          type: boolean
+        enable_key_value:
+          example: false
+          type: boolean
+        multiple_value_separator:
+          example: ;
+          maxLength: 1
+          minLength: 1
+          type: string
+      required:
+        - enable_key_value
+      type: object
+    ExtraModel:
+      properties:
+        entity_id:
+          description: your entity id
+          example: spn:d6b4feb1-a0bb-408a-b813-6e4eba3e5fef
+          type: string
+        specification_url:
+          description: Federation metadata document
+          example: https://login.microsoftonline.com/e8656a10-4ec3-4cea-aa49-cbe9424c312d/federationmetadata/2007-06/federationmetadata.xml
+          type: string
+      type: object
+    FieldSettingsDictModel:
+      properties:
+        "*":
+          additionalProperties:
+            $ref: "#/components/schemas/FieldSettingsModel"
+          type: object
+      type: object
+    FieldSettingsModel:
+      properties:
+        default_value:
+          type: string
+        expected_pattern:
+          type: string
+        nested_field_patterns:
+          $ref: "#/components/schemas/SpanDictModel"
+        override_default_patterns:
+          type: boolean
+      type: object
+    FieldsInMetadata:
+      properties:
+        annotations:
+          items:
+            type: string
+          type: array
+        lines:
+          items:
+            type: string
+          type: array
+        meta_information:
+          items:
+            type: string
+          type: array
+      type: object
+    FileModelGet:
+      properties:
+        embedded_attachment:
+          type: boolean
+        filehash:
+          type: string
+        filename:
+          type: string
+        leaf:
+          type: boolean
+        page:
+          type: integer
+        page_count:
+          type: integer
+      type: object
+    FilterAtom:
+      properties:
+        end_date:
+          format: date-time
+          type: string
+        list:
+          items:
+            type: string
+          type: array
+        start_date:
+          format: date-time
+          type: string
+        type:
+          enum:
+            - project
+            - inbox
+            - document
+          example: project
+          type: string
+      required:
+        - type
+      type: object
+    FilterModel:
+      properties:
+        _id:
+          $ref: "#/components/schemas/Filter_OId_Model_Doc"
+        inbox:
+          $ref: "#/components/schemas/Filter_OId_List_Model"
+        timing_fields:
+          $ref: "#/components/schemas/Filter_Timings_Field_Model"
+        timings:
+          $ref: "#/components/schemas/Filter_Timings_Model"
+      type: object
+    Filter_OId_List_Model:
+      properties:
+        $in:
+          items:
+            $ref: "#/components/schemas/Filter_OId_Model"
+          type: array
+      type: object
+    Filter_OId_Model:
+      properties:
+        $oid:
+          description: Inbox ID
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+      type: object
+    Filter_OId_Model_Doc:
+      properties:
+        $oid:
+          description: Document ID
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+      type: object
+    Filter_Time_Model:
+      properties:
+        $gt:
+          format: date-time
+          type: string
+        $gte:
+          format: date-time
+          type: string
+        $lt:
+          format: date-time
+          type: string
+        $lte:
+          format: date-time
+          type: string
+      type: object
+    Filter_Timings_Field_Model:
+      properties:
+        timeFrom:
+          type: string
+        timeTo:
+          type: string
+      type: object
+    Filter_Timings_Model:
+      properties:
+        done_time:
+          $ref: "#/components/schemas/Filter_Time_Model"
+        feedback_time:
+          $ref: "#/components/schemas/Filter_Time_Model"
+        receive_time:
+          $ref: "#/components/schemas/Filter_Time_Model"
+        review_start_time:
+          $ref: "#/components/schemas/Filter_Time_Model"
+        start_time:
+          $ref: "#/components/schemas/Filter_Time_Model"
+      type: object
+    FormatModelGet:
+      properties:
+        document_types:
+          items:
+            $ref: "#/components/schemas/DocumentTypeModel"
+          type: array
+        id:
+          type: string
+        labels:
+          items:
+            $ref: "#/components/schemas/LabelModel"
+          type: array
+        name:
+          type: string
+        separators:
+          default: []
+          items:
+            $ref: "#/components/schemas/SectionModel"
+          type: array
+        table_types:
+          items:
+            $ref: "#/components/schemas/TableModel"
+          type: array
+      required:
+        - id
+      type: object
+    FormatModelPatch:
+      properties:
+        display_name:
+          type: string
+        document_types:
+          items:
+            $ref: "#/components/schemas/DocumentTypeModel"
+          type: array
+        labels:
+          items:
+            $ref: "#/components/schemas/LabelModel"
+          type: array
+        name:
+          type: string
+        separators:
+          default: []
+          items:
+            $ref: "#/components/schemas/SectionModel"
+          type: array
+        table_types:
+          items:
+            $ref: "#/components/schemas/TableModel"
+          type: array
+      type: object
+    FormatModelPost:
+      properties:
+        display_name:
+          type: string
+        document_types:
+          items:
+            $ref: "#/components/schemas/DocumentTypeModel"
+          type: array
+        labels:
+          items:
+            $ref: "#/components/schemas/LabelModel"
+          type: array
+        name:
+          type: string
+        separators:
+          default: []
+          items:
+            $ref: "#/components/schemas/SectionModel"
+          type: array
+        table_types:
+          items:
+            $ref: "#/components/schemas/TableModel"
+          type: array
+      required:
+        - labels
+        - name
+      type: object
+    InboxModelGet:
+      allOf:
+        - $ref: "#/components/schemas/InboxModelPost"
+        - properties:
+            id:
+              type: string
+          required:
+            - id
+          type: object
+    InboxModelPatch:
+      properties:
+        name:
+          type: string
+        project:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+      type: object
+    InboxModelPost:
+      properties:
+        name:
+          type: string
+        project:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+      required:
+        - name
+        - project
+      type: object
+    IntegrationModelGet:
+      properties:
+        type:
+          enum:
+            - webhook
+            - dropbox
+            - office365
+            - email
+            - imap
+            - sftp
+            - smtp
+            - service_bus
+          example: webhook
+          type: string
+      type: object
+    KeyValyePairSettingsModel:
+      properties:
+        classification_cutoff:
+          type: integer
+        rule_config:
+          type: object
+        splitting_cutoff:
+          type: integer
+        uer_pre_config:
+          type: object
+      type: object
+    LabelModel:
+      properties:
+        category:
+          default: annotation
+          enum:
+            - annotation
+            - tag
+            - separator
+            - computed
+          example: annotation
+          type: string
+        count_in_evaluation:
+          default: true
+          description: A flag that determines whether to count this field for evaluation
+          type: boolean
+        description:
+          description: A description of this field
+          type: string
+        display_name:
+          type: string
+        field_name:
+          type: string
+        formula:
+          description: An excel-like formula for conditional logic
+          type: string
+        initialized:
+          default: true
+          type: boolean
+        is_library:
+          default: false
+          type: boolean
+        mandatory:
+          default: true
+          type: boolean
+        mandatory_if:
+          description: A value to decide if mandatory based on other field
+          type: object
+        multiple:
+          default: true
+          type: boolean
+        options:
+          items:
+            $ref: "#/components/schemas/OptionModel"
+          type: array
+        scope:
+          default: section
+          enum:
+            - document
+            - page
+            - section
+          example: section
+          type: string
+        type:
+          default: string
+          enum:
+            - string
+            - date
+            - integer
+            - float
+            - currency
+            - alphanumeric
+            - national_identification_number_be
+            - boolean
+            - datetime
+            - address
+          example: string
+          type: string
+        visible:
+          default: true
+          type: boolean
+        visible_if:
+          description: A value to decide if shown in UI
+          type: object
+      required:
+        - field_name
+      type: object
+    MetadataOptions:
+      properties:
+        columns:
+          items:
+            type: string
+          type: array
+        fields:
+          $ref: "#/components/schemas/FieldsInMetadata"
+        include:
+          default: false
+          type: boolean
+        rename:
+          type: object
+      type: object
+    OptionModel:
+      properties:
+        active:
+          type: boolean
+        display_name:
+          type: string
+        name:
+          type: string
+      required:
+        - active
+        - name
+      type: object
+    PermissionsModel:
+      properties:
+        create_dropbox_user:
+          default: false
+          type: boolean
+        create_inbox:
+          default: false
+          type: boolean
+        create_webhook:
+          default: false
+          type: boolean
+        de_escalate_document:
+          default: false
+          type: boolean
+        delete_tenant:
+          default: false
+          type: boolean
+        delete_webhook:
+          default: false
+          type: boolean
+        edit_backend_settings:
+          default: false
+          type: boolean
+        edit_beats:
+          default: false
+          type: boolean
+        edit_dashboard_settings:
+          default: false
+          type: boolean
+        edit_data_retention_settings:
+          default: false
+          type: boolean
+        edit_flow_settings:
+          default: false
+          type: boolean
+        edit_format_settings:
+          default: false
+          type: boolean
+        edit_integration_settings:
+          default: false
+          type: boolean
+        edit_integrations:
+          default: false
+          type: boolean
+        edit_predictor_settings:
+          default: false
+          type: boolean
+        edit_reports:
+          default: false
+          type: boolean
+        edit_retention_settings:
+          default: false
+          type: boolean
+        edit_review_settings:
+          default: false
+          type: boolean
+        edit_roles:
+          default: false
+          type: boolean
+        edit_sampling_settings:
+          default: false
+          type: boolean
+        edit_security_settings:
+          default: false
+          type: boolean
+        edit_templates:
+          default: false
+          type: boolean
+        edit_thresholds_settings:
+          default: false
+          type: boolean
+        edit_translations:
+          default: false
+          type: boolean
+        edit_users:
+          default: false
+          type: boolean
+        escalate_document:
+          default: false
+          type: boolean
+        never_twice:
+          default: false
+          type: boolean
+        pick_next_escalated:
+          default: false
+          type: boolean
+        read_beats:
+          default: false
+          type: boolean
+        read_data_retention_settings:
+          default: false
+          type: boolean
+        read_feedback:
+          default: false
+          type: boolean
+        read_integrations:
+          default: false
+          type: boolean
+        read_release_notes:
+          default: false
+          type: boolean
+        read_reports:
+          default: false
+          type: boolean
+        read_thresholds_settings:
+          default: false
+          type: boolean
+        read_webhook:
+          default: false
+          type: boolean
+        reject_document:
+          default: false
+          type: boolean
+        release_lock:
+          default: false
+          type: boolean
+        review:
+          default: false
+          type: boolean
+        submit:
+          default: false
+          type: boolean
+        update_webhook:
+          default: false
+          type: boolean
+        upload:
+          default: false
+          type: boolean
+        versions:
+          default: false
+          type: boolean
+        view_api_keys:
+          default: false
+          type: boolean
+        view_list:
+          default: false
+          type: boolean
+        view_projects:
+          default: false
+          type: boolean
+        view_statistics:
+          default: false
+          type: boolean
+        view_templates:
+          default: false
+          type: boolean
+        write_feedback:
+          default: false
+          type: boolean
+        write_release_notes:
+          default: false
+          type: boolean
+      type: object
+    PredictorModelGet:
+      allOf:
+        - $ref: "#/components/schemas/PredictorSettingModel"
+        - properties:
+            scope:
+              type: string
+          required:
+            - scope
+          type: object
+    PredictorSettingModel:
+      properties:
+        blacklist:
+          type: object
+        expected_values:
+          type: object
+        fallback:
+          type: object
+        key_value_pairs:
+          $ref: "#/components/schemas/KeyValyePairSettingsModel"
+        table_extraction_settings:
+          $ref: "#/components/schemas/TableExtractionSettingsModel"
+        whitelist:
+          type: object
+      type: object
+    ProjectModelPatch:
+      properties:
+        default_document_type:
+          description: This format is chosen as fallback
+          type: string
+        default_format:
+          description: This format is chosen as fallback
+          type: string
+        formats:
+          items:
+            description: format IDs
+            type: string
+          minItems: 1
+          type: array
+        name:
+          type: string
+        split_into_sections:
+          type: boolean
+        sub_page_splitting:
+          type: boolean
+        timeout:
+          example: 10
+          type: integer
+      type: object
+    ProjectModelPost:
+      properties:
+        default_document_type:
+          description: This format is chosen as fallback
+          type: string
+        default_format:
+          description: This format is chosen as fallback
+          type: string
+        formats:
+          items:
+            description: format IDs
+            type: string
+          minItems: 1
+          type: array
+        name:
+          type: string
+        split_into_sections:
+          default: true
+          type: boolean
+        sub_page_splitting:
+          default: false
+          type: boolean
+        timeout:
+          example: 10
+          type: integer
+      required:
+        - formats
+        - name
+        - split_into_sections
+        - sub_page_splitting
+      type: object
+    ReportModelFullGenerate:
+      allOf:
+        - $ref: "#/components/schemas/ReportModelPost"
+        - properties:
+            delivery_method:
+              default: download
+              enum:
+                - email
+                - download
+              example: email
+              type: string
+            email:
+              type: string
+            end_date:
+              format: date-time
+              type: string
+            start_date:
+              format: date-time
+              type: string
+          type: object
+    ReportModelGet:
+      allOf:
+        - $ref: "#/components/schemas/ReportModelPost"
+        - properties:
+            id:
+              type: string
+          required:
+            - id
+          type: object
+    ReportModelPost:
+      properties:
+        annotations:
+          $ref: "#/components/schemas/AnnotationOptions"
+        automation_blockers:
+          $ref: "#/components/schemas/SimpleInclude"
+        automation_score:
+          $ref: "#/components/schemas/SimpleInclude"
+        automation_what_if:
+          $ref: "#/components/schemas/SimpleInclude"
+        cover:
+          $ref: "#/components/schemas/SimpleInclude"
+        documents:
+          items:
+            example: abcdef123456789abcdef123
+            maxLength: 24
+            minLength: 24
+            pattern: "[A-z0-9]"
+            type: string
+          type: array
+        elapse_time:
+          $ref: "#/components/schemas/SimpleInclude"
+        evaluations:
+          $ref: "#/components/schemas/EvaluationsOptions"
+        field_automation:
+          $ref: "#/components/schemas/SimpleInclude"
+        inboxes:
+          items:
+            example: abcdef123456789abcdef123
+            maxLength: 24
+            minLength: 24
+            pattern: "[A-z0-9]"
+            type: string
+          type: array
+        lines:
+          $ref: "#/components/schemas/SimpleInclude"
+        metadata:
+          $ref: "#/components/schemas/MetadataOptions"
+        name:
+          type: string
+        page_classification:
+          $ref: "#/components/schemas/SimpleInclude"
+        projects:
+          items:
+            example: abcdef123456789abcdef123
+            maxLength: 24
+            minLength: 24
+            pattern: "[A-z0-9]"
+            type: string
+          type: array
+        sections:
+          $ref: "#/components/schemas/SimpleInclude"
+        separator:
+          default: "|"
+          type: string
+        sources:
+          default:
+            - human
+            - machine
+          items:
+            enum:
+              - human
+              - machine
+            example: human
+            type: string
+          type: array
+        text:
+          $ref: "#/components/schemas/SimpleInclude"
+        version_name:
+          type: string
+      type: object
+    ResetPasswordModelPost:
+      properties:
+        new_password:
+          description: the new user's password
+          type: string
+        token:
+          description: the token to reset the password
+          type: string
+        user_name:
+          description: the username
+          type: string
+      type: object
+    ReviewSettingsModelGet:
+      properties:
+        default_zoom:
+          type: object
+        first_toolbar:
+          type: object
+        lock_expiry:
+          type: object
+        review_options:
+          type: object
+        second_toolbar:
+          type: object
+      type: object
+    ReviewSettingsModelPatch:
+      properties:
+        scope:
+          type: string
+        settings:
+          $ref: "#/components/schemas/ReviewSettingsModelGet"
+      type: object
+    RoleModelGet:
+      allOf:
+        - $ref: "#/components/schemas/RoleModelPost"
+        - properties:
+            id:
+              type: string
+          required:
+            - id
+          type: object
+    RoleModelPatch:
+      properties:
+        name:
+          type: string
+        permissions:
+          $ref: "#/components/schemas/PermissionsModel"
+      type: object
+    RoleModelPost:
+      properties:
+        name:
+          type: string
+        permissions:
+          $ref: "#/components/schemas/PermissionsModel"
+      required:
+        - name
+        - permissions
+      type: object
+    RoutingAtom:
+      properties:
+        and_conditions:
+          type: object
+        target:
+          type: string
+      type: object
+    RuleConfigModel:
+      properties:
+        rule_config:
+          type: object
+      type: object
+    RuleConfigModelGet:
+      allOf:
+        - $ref: "#/components/schemas/RuleConfigModel"
+        - properties:
+            scope:
+              type: string
+          required:
+            - scope
+          type: object
+    SamplingModelGet:
+      allOf:
+        - $ref: "#/components/schemas/SamplingModelPatch"
+        - properties:
+            scope:
+              type: string
+          required:
+            - scope
+          type: object
+    SamplingModelPatch:
+      properties:
+        auto_reject_FFR:
+          type: integer
+        auto_submit_FFR:
+          type: integer
+        second_pass_FFR:
+          type: integer
+        second_pass_STP:
+          type: integer
+      type: object
+    ScopeModel:
+      properties:
+        id:
+          type: string
+        level:
+          type: string
+      type: object
+    SectionAtom:
+      properties:
+        confidence:
+          type: integer
+        document_type:
+          type: string
+        format:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        page:
+          type: integer
+      required:
+        - page
+      type: object
+    SectionModel:
+      properties:
+        name:
+          type: string
+        page:
+          type: integer
+      required:
+        - name
+        - page
+      type: object
+    SequenceColumnsAtomModel:
+      properties:
+        checked:
+          type: boolean
+        field:
+          type: string
+        label:
+          type: string
+      type: object
+    SettingThresholdModelGet:
+      allOf:
+        - $ref: "#/components/schemas/SettingThresholdModelPatch"
+        - properties:
+            scope:
+              default: ""
+              type: string
+          type: object
+    SettingThresholdModelPatch:
+      properties:
+        thresholds:
+          $ref: "#/components/schemas/ThresholdModel"
+      type: object
+    SimpleInclude:
+      properties:
+        include:
+          default: false
+          type: boolean
+      type: object
+    SpanDictModel:
+      properties:
+        "*":
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    SsoConfigModel:
+      properties:
+        extra:
+          $ref: "#/components/schemas/ExtraModel"
+        provider:
+          description: "usually your company name, only used for visualisation: log in as <provider> employee"
+          type: string
+        type:
+          default: saml
+          description: Type of SSO integration, for now only SAML is supported
+          enum:
+            - saml
+          example: saml
+          type: string
+        url:
+          description: SAML-P sign-on endpoint
+          example: https://login.microsoftonline.com/e8656a10-4ec3-4cea-aa49-cbe9424c312d/saml2
+          type: string
+      required:
+        - provider
+      type: object
+    SsoConfigModelGet:
+      properties:
+        extra:
+          $ref: "#/components/schemas/ExtraModel"
+        id:
+          type: string
+        provider:
+          description: "usually your company name, only used for visualisation: log in as <provider> employee"
+          type: string
+        type:
+          default: saml
+          description: Type of SSO integration, for now only SAML is supported
+          enum:
+            - saml
+          example: saml
+          type: string
+        url:
+          description: SAML-P sign-on endpoint
+          example: https://login.microsoftonline.com/e8656a10-4ec3-4cea-aa49-cbe9424c312d/saml2
+          type: string
+      required:
+        - id
+        - provider
+      type: object
+    SsoModel:
+      properties:
+        token:
+          description: the access token (JWT for oauth or SAML response)
+          type: string
+        type:
+          description: the type of SSO token
+          enum:
+            - oauth
+            - saml
+          example: oauth
+          type: string
+      type: object
+    StateModelGet:
+      properties:
+        by:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        since:
+          format: date-time
+          type: string
+        value:
+          type: boolean
+      type: object
+    StatusDataModel:
+      properties:
+        archived:
+          type: boolean
+        data:
+          type: boolean
+        escalate:
+          type: boolean
+        feedback:
+          type: boolean
+        lock:
+          type: boolean
+        ready_accepted:
+          type: boolean
+        ready_attempts:
+          type: integer
+        reject:
+          type: boolean
+        reject_accepted:
+          type: boolean
+        reject_attempts:
+          type: integer
+        sampling:
+          type: boolean
+        submit_accepted:
+          type: boolean
+        submit_attempts:
+          type: integer
+        success:
+          type: boolean
+      type: object
+    StatusDataPost:
+      properties:
+        escalate:
+          $ref: "#/components/schemas/StateModelGet"
+        last_version:
+          type: string
+        lock:
+          $ref: "#/components/schemas/StateModelGet"
+        opened_by:
+          $ref: "#/components/schemas/StateModelGet"
+        reject:
+          $ref: "#/components/schemas/StateModelGet"
+        status_data:
+          $ref: "#/components/schemas/StatusDataModel"
+        submitted:
+          $ref: "#/components/schemas/StateModelGet"
+        timings:
+          $ref: "#/components/schemas/TimingsModelGet"
+      type: object
+    TableAnnotationPost:
+      properties:
+        bottom_right:
+          items:
+            type: integer
+          maxItems: 3
+          minItems: 3
+          type: array
+        columns:
+          items:
+            $ref: "#/components/schemas/column_bound"
+          type: array
+        first_row_y_bounds:
+          items:
+            type: integer
+          maxItems: 2
+          minItems: 2
+          type: array
+        header_bottom_y:
+          type: integer
+        name:
+          type: string
+        top_left:
+          items:
+            type: integer
+          maxItems: 3
+          minItems: 3
+          type: array
+      type: object
+    TableExtractionSettingsModel:
+      properties:
+        field_settings:
+          $ref: "#/components/schemas/FieldSettingsDictModel"
+      type: object
+    TableModel:
+      properties:
+        collapsed:
+          type: boolean
+        columns:
+          items:
+            $ref: "#/components/schemas/LabelModel"
+          type: array
+        contains_line_items:
+          type: boolean
+        initialized:
+          type: boolean
+        label:
+          type: string
+        scope:
+          default: section
+          enum:
+            - document
+            - page
+            - section
+          example: section
+          type: string
+      type: object
+    TagFieldModelGet:
+      properties:
+        tag_fields:
+          type: object
+      type: object
+    TenantModelGet:
+      properties:
+        id:
+          type: string
+      required:
+        - id
+      type: object
+    TenantModelPatch:
+      properties:
+        code:
+          type: integer
+        email:
+          type: string
+      type: object
+    ThresholdModel:
+      properties:
+        annotations:
+          type: object
+        lines:
+          type: object
+        sections:
+          type: object
+      type: object
+    TimingsModelGet:
+      properties:
+        done_time:
+          format: date-time
+          type: string
+        feedback_time:
+          format: date-time
+          type: string
+        processing_period:
+          type: number
+        receive_time:
+          format: date-time
+          type: string
+        start_time:
+          format: date-time
+          type: string
+        submit_time:
+          format: date-time
+          type: string
+      type: object
+    TokenModelBase:
+      properties:
+        roles:
+          description: the user roles
+          items:
+            $ref: "#/components/schemas/TokenRoleModel"
+          type: array
+        username:
+          description: the user username
+          type: string
+      required:
+        - username
+      type: object
+    TokenReplyModel:
+      properties:
+        authentication_token:
+          type: string
+      required:
+        - authentication_token
+      type: object
+    TokenRoleModel:
+      properties:
+        document_id:
+          description: limited to a document
+          type: string
+        inbox:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        role:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+      required:
+        - role
+      type: object
+    UserModelGet:
+      properties:
+        active:
+          description: Inactive users have to reset their password first
+          type: boolean
+        confirmed_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        roles:
+          description: the user roles
+          items:
+            $ref: "#/components/schemas/UserRoleModel"
+          type: array
+        username:
+          description: the user username
+          type: string
+      required:
+        - active
+        - id
+        - roles
+        - username
+      type: object
+    UserModelPatch:
+      properties:
+        roles:
+          description: the user roles
+          items:
+            $ref: "#/components/schemas/UserRoleModelPatch"
+          type: array
+        username:
+          description: the user username
+          type: string
+      type: object
+    UserModelPost:
+      properties:
+        active:
+          description: Inactive users have to reset their password first
+          type: boolean
+        password:
+          description: the user password
+          type: string
+        roles:
+          description: the user roles
+          items:
+            $ref: "#/components/schemas/UserRoleModel"
+          type: array
+        username:
+          description: the user username
+          type: string
+      required:
+        - active
+        - roles
+        - username
+      type: object
+    UserRoleModel:
+      properties:
+        document_id:
+          description: limited to a document
+          type: string
+        inbox:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        role:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+      required:
+        - role
+      type: object
+    UserRoleModelPatch:
+      properties:
+        inbox:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        role:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+      type: object
+    VersionCompare:
+      properties:
+        cmp_version_1:
+          type: string
+        cmp_version_2:
+          type: string
+        name:
+          type: string
+      required:
+        - cmp_version_1
+        - cmp_version_2
+        - name
+      type: object
+    VersionPost:
+      properties:
+        annotations:
+          $ref: "#/components/schemas/annotations"
+        cmp_version:
+          type: string
+        evaluate:
+          default: true
+          type: boolean
+        lines:
+          $ref: "#/components/schemas/lines"
+        name:
+          type: string
+        sections:
+          items:
+            $ref: "#/components/schemas/SectionAtom"
+          type: array
+      type: object
+    WorkflowModel:
+      properties:
+        graph:
+          type: object
+        links:
+          type: object
+        nodes:
+          type: object
+      type: object
+    annotations:
+      properties:
+        string:
+          items:
+            $ref: "#/components/schemas/EvaluationAtom"
+          type: array
+      type: object
+    cells:
+      properties:
+        string:
+          $ref: "#/components/schemas/EvaluationAtom"
+      type: object
+    column_bound:
+      properties:
+        field_name:
+          type: string
+        x_bounds:
+          items:
+            type: integer
+          maxItems: 2
+          minItems: 2
+          type: array
+      type: object
+    dictionary:
+      properties: {}
+      type: object
+    lines:
+      properties:
+        string:
+          items:
+            $ref: "#/components/schemas/cells"
+          type: array
+      type: object
+  securitySchemes:
+    basic:
+      description: username and password
+      scheme: basic
+      type: http
+    token:
+      in: header
+      name: Authorization
+      type: apiKey

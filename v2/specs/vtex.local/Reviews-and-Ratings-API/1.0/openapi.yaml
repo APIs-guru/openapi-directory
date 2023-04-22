@@ -1,0 +1,936 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server URL
+    url: https://{accountName}.myvtex.com/reviews-and-ratings/api
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL.
+info:
+  contact: {}
+  description: "\r
+
+    Reviews & Ratings is a [VTEX IO native solution](https://developers.vtex.com/vtex-developer-docs/docs/vtex-reviews-and-ratings) that allows shoppers to submit reviews and ratings for products, as well as see them while navigating the store.\r
+
+    \r
+
+    ## Rating\r
+
+    \r
+
+    - [Get Product Rating](https://developers.vtex.com/vtex-rest-api/reference/getproductrating)\r
+
+    \r
+
+    ## Review\r
+
+    \r
+
+    - [Get Review by Review ID](https://developers.vtex.com/vtex-rest-api/reference/getreviewbyreviewid)\r
+
+    - [Delete Review](https://developers.vtex.com/vtex-rest-api/reference/deletereview)\r
+
+    - [Update a Review](https://developers.vtex.com/vtex-rest-api/reference/editreview)\r
+
+    - [Get a list of Reviews](https://developers.vtex.com/vtex-rest-api/reference/getalistofreviews)\r
+
+    - [Create Multiple Reviews](https://developers.vtex.com/vtex-rest-api/reference/savemultiplereviews)\r
+
+    - [Delete Multiple Reviews](https://developers.vtex.com/vtex-rest-api/reference/deletemultiplereviews)\r
+
+    - [Create a Review](https://developers.vtex.com/vtex-rest-api/reference/savereview)"
+  title: Reviews and Ratings API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Reviews and Ratings API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Reviews-and-Ratings-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: Rating
+  - name: Review
+paths:
+  "/rating/{productId}":
+    get:
+      deprecated: false
+      description: Retrieves the rating of a specific product.
+      operationId: GetProductRating
+      parameters:
+        - description: Product ID.
+          in: path
+          name: productId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                example:
+                  average: 3.86
+                  totalCount: 7
+                properties:
+                  average:
+                    description: Avarage rating of the product.
+                    example: 3.86
+                    type: number
+                  totalCount:
+                    description: Total amount of ranting of the product.
+                    example: 7
+                    type: number
+                type: object
+          description: OK
+      summary: Get Product Rating
+      tags:
+        - Rating
+  /review:
+    post:
+      deprecated: false
+      description: Creates a single review
+      operationId: SaveReview
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              productId: "65444"
+              rating: 5
+              reviewerName: Arturo
+              text: It is the best product that I have seen
+              title: Good Product
+            schema:
+              $ref: "#/components/schemas/SaveReviewRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                example:
+                  approved: false
+                  id: 5323fdaa-c012-11ec-835d-0ebee58edbb3
+                  locale: en-US
+                  location: null
+                  pastReviews: null
+                  productId: "65444"
+                  rating: 5
+                  reviewDateTime: 04/19/2022 18:55:58
+                  reviewerName: Arturo
+                  searchDate: 2022-04-19T18:55:58Z
+                  shopperId: user@email.com
+                  sku: "2"
+                  text: It is the best product that I have seen
+                  title: Good Product
+                  verifiedPurchaser: false
+                properties:
+                  approved:
+                    description: If the review was approved (`true`) or not (`false`).
+                    type: boolean
+                  id:
+                    description: Review ID.
+                    type: string
+                  locale:
+                    description: Review's locale.
+                    nullable: true
+                    type: string
+                  location:
+                    description: Review's origin location.
+                    nullable: true
+                    type: string
+                  pastReviews:
+                    description: Past reviews of the same product.
+                    nullable: true
+                    type: string
+                  productId:
+                    description: Product ID.
+                    type: string
+                  rating:
+                    description: Customer rating.
+                    type: number
+                  reviewDateTime:
+                    description: Review's date and time.
+                    type: string
+                  reviewerName:
+                    description: Reviewer name.
+                    type: string
+                  searchDate:
+                    description: Review's search date.
+                    type: string
+                  shopperId:
+                    description: Shopper email.
+                    type: string
+                  sku:
+                    description: SKU ID.
+                    nullable: true
+                    type: string
+                  text:
+                    description: Review's text.
+                    type: string
+                  title:
+                    description: Review's title.
+                    type: string
+                  verifiedPurchaser:
+                    description: If the reviewer is a verified purchaser (`true`) or not (`false`).
+                    type: boolean
+                type: object
+          description: OK
+      summary: Create a Review
+      tags:
+        - Review
+  "/review/{reviewId}":
+    delete:
+      deprecated: false
+      description: Deletes an existing review.
+      operationId: DeleteReview
+      parameters:
+        - description: Review ID.
+          in: path
+          name: reviewId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: If the review was deleted (`true`) or not (`false`).
+                example: true
+                type: boolean
+          description: OK
+      summary: Delete Review
+      tags:
+        - Review
+    get:
+      deprecated: false
+      description: Retrieves information of a product review by its ID.
+      operationId: GetReviewbyReviewId
+      parameters:
+        - description: Review ID.
+          in: path
+          name: reviewId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                example:
+                  approved: false
+                  id: 5323fdaa-c012-11ec-835d-0ebee58edbb3
+                  locale: en-US
+                  location: null
+                  pastReviews: null
+                  productId: "1"
+                  rating: 5
+                  reviewDateTime: 04/19/2022 18:55:58
+                  reviewerName: Arturo
+                  searchDate: 2022-04-19T18:55:58Z
+                  shopperId: user@email.com
+                  sku: "2"
+                  text: Great product.
+                  title: Great product
+                  verifiedPurchaser: false
+                properties:
+                  approved:
+                    description: If the review was approved (`true`) or not (`false`).
+                    type: boolean
+                  id:
+                    description: Review ID.
+                    type: string
+                  locale:
+                    description: Review's locale.
+                    nullable: true
+                    type: string
+                  location:
+                    description: Review's origin location.
+                    nullable: true
+                    type: string
+                  pastReviews:
+                    description: Past reviews of the same product.
+                    nullable: true
+                    type: string
+                  productId:
+                    description: Product ID.
+                    type: string
+                  rating:
+                    description: Customer rating.
+                    type: number
+                  reviewDateTime:
+                    description: Review's date and time.
+                    type: string
+                  reviewerName:
+                    description: Reviewer name.
+                    type: string
+                  searchDate:
+                    description: Review's search date.
+                    type: string
+                  shopperId:
+                    description: Shopper email.
+                    type: string
+                  sku:
+                    description: SKU ID.
+                    nullable: true
+                    type: string
+                  text:
+                    description: Review's text.
+                    type: string
+                  title:
+                    description: Review's title.
+                    type: string
+                  verifiedPurchaser:
+                    description: If the reviewer is a verified purchaser (`true`) or not (`false`).
+                    type: boolean
+                type: object
+          description: OK
+      summary: Get Review by Review ID
+      tags:
+        - Review
+    patch:
+      deprecated: false
+      description: Updates the information of a review.
+      operationId: EditReview
+      parameters:
+        - description: Review ID.
+          in: path
+          name: reviewId
+          required: true
+          schema:
+            example: 5323fdaa-c012-11ec-835d-0ebee58edbb3
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ""
+              example:
+                locale: en-US
+                productId: "1"
+                rating: 5
+                reviewerName: Arturo
+                shopperId: user@email.com
+                text: Great product.
+                title: Great product
+                verifiedPurchaser: false
+              properties:
+                locale:
+                  description: Review's locale.
+                  nullable: true
+                  type: string
+                productId:
+                  description: Product ID.
+                  type: string
+                rating:
+                  description: Customer rating.
+                  type: number
+                reviewerName:
+                  description: Reviewer name.
+                  type: string
+                shopperId:
+                  description: Shopper email.
+                  type: string
+                text:
+                  description: Review's text.
+                  type: string
+                title:
+                  description: Review's title.
+                  type: string
+                verifiedPurchaser:
+                  description: If the reviewer is a verified purchaser (`true`) or not (`false`).
+                  type: boolean
+              required:
+                - productId
+                - rating
+                - title
+                - text
+                - reviewerName
+              type: object
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                example:
+                  approved: false
+                  id: 5323fdaa-c012-11ec-835d-0ebee58edbb3
+                  locale: en-US
+                  location: null
+                  pastReviews: null
+                  productId: "1"
+                  rating: 5
+                  reviewDateTime: 04/19/2022 18:55:58
+                  reviewerName: Arturo
+                  searchDate: 2022-04-19T18:55:58Z
+                  shopperId: user@email.com
+                  sku: "2"
+                  text: Great product.
+                  title: Great product
+                  verifiedPurchaser: false
+                properties:
+                  approved:
+                    description: If the review was approved (`true`) or not (`false`).
+                    type: boolean
+                  id:
+                    description: Review ID.
+                    type: string
+                  locale:
+                    description: Review's locale.
+                    nullable: true
+                    type: string
+                  location:
+                    description: Review's origin location.
+                    nullable: true
+                    type: string
+                  pastReviews:
+                    description: Past reviews of the same product.
+                    nullable: true
+                    type: string
+                  productId:
+                    description: Product ID.
+                    type: string
+                  rating:
+                    description: Customer rating.
+                    type: number
+                  reviewDateTime:
+                    description: Review's date and time.
+                    type: string
+                  reviewerName:
+                    description: Reviewer name.
+                    type: string
+                  searchDate:
+                    description: Review's search date.
+                    type: string
+                  shopperId:
+                    description: Shopper email.
+                    type: string
+                  sku:
+                    description: SKU ID.
+                    nullable: true
+                    type: string
+                  text:
+                    description: Review's text.
+                    type: string
+                  title:
+                    description: Review's title.
+                    type: string
+                  verifiedPurchaser:
+                    description: If the reviewer is a verified purchaser (`true`) or not (`false`).
+                    type: boolean
+                type: object
+          description: OK
+      summary: Update a Review
+      tags:
+        - Review
+  /reviews:
+    delete:
+      deprecated: false
+      description: Deletes multiple reviews at once.
+      operationId: DeleteMultipleReviews
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              - babefcf4-e0f7-11ec-835d-16c4e59c4351
+              - qweqweee-e0f7-11ec-835d-16c4e59c4351
+              - asdffggg-e0f7-11ec-835d-16c4e59c4351
+            schema:
+              default:
+                - "1"
+                - "2"
+                - c66d8bc0-787c-11ec-82ac-028dd4526e77
+              description: Array of reviews IDs.
+              items:
+                description: Review ID.
+                type: string
+              type: array
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: If the review was deleted (`true`) or not (`false`).
+                example: true
+                type: boolean
+          description: OK
+      summary: Delete Multiple Reviews
+      tags:
+        - Review
+    get:
+      deprecated: false
+      description: Retrieves a list of reviews.
+      operationId: GetalistofReviews
+      parameters:
+        - description: Returns Reviews that contain the search term in `productId`, `sku`, `shopperId`, or `reviewerName`.
+          explode: true
+          in: query
+          name: search_term
+          required: true
+          schema:
+            example: search_term
+            type: string
+          style: form
+        - description: Zero base starting record number, `0` is the default value.
+          explode: true
+          in: query
+          name: from
+          required: true
+          schema:
+            example: "0"
+            type: string
+          style: form
+        - description: Zero base ending record number, `3` is the default value.
+          explode: true
+          in: query
+          name: to
+          required: true
+          schema:
+            example: "3"
+            type: string
+          style: form
+        - description: Case-sensitive fieldName to order records (optionally add `:asc` or `:desc`).
+          explode: true
+          in: query
+          name: order_by
+          required: true
+          schema:
+            example: :asc
+            type: string
+          style: form
+        - description: Status of the review, approved (`true`) or not (`false`).
+          explode: true
+          in: query
+          name: status
+          required: true
+          schema:
+            example: true
+            type: boolean
+          style: form
+        - description: Filter the reviews by product ID.
+          explode: true
+          in: query
+          name: product_id
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: form
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                example:
+                  data:
+                    - approved: true
+                      id: "1"
+                      locale: null
+                      location: ""
+                      pastReviews: null
+                      productId: "880035"
+                      rating: 3
+                      reviewDateTime: 06/02/2021 20:58:43
+                      reviewerName: anon
+                      searchDate: 2021-06-02T20:58:43Z
+                      shopperId: anon@email.com
+                      sku: null
+                      text: anon
+                      title: anon
+                      verifiedPurchaser: false
+                    - approved: true
+                      id: "2"
+                      locale: null
+                      location: ""
+                      pastReviews: null
+                      productId: "880035"
+                      rating: 5
+                      reviewDateTime: 06/02/2021 21:00:00
+                      reviewerName: Brian
+                      searchDate: 2021-06-02T21:00:00Z
+                      shopperId: brian@email.com.br
+                      sku: null
+                      text: it's cool
+                      title: logged in
+                      verifiedPurchaser: false
+                    - approved: true
+                      id: c66d8bc0-787c-11ec-82ac-028dd4526e77
+                      locale: ko-KR
+                      location: null
+                      pastReviews: null
+                      productId: "880035"
+                      rating: 3
+                      reviewDateTime: 01/18/2022 16:36:33
+                      reviewerName: ko-KR
+                      searchDate: 2022-01-18T16:36:33Z
+                      shopperId: user@email.com
+                      sku: null
+                      text: ko-KR
+                      title: Korean
+                      verifiedPurchaser: false
+                  range:
+                    from: 0
+                    to: 3
+                    total: 26
+                properties:
+                  data:
+                    description: Array of reviews.
+                    items:
+                      description: Review's information.
+                      properties:
+                        approved:
+                          description: If the review was approved (`true`) or not (`false`).
+                          type: boolean
+                        id:
+                          description: Review ID.
+                          type: string
+                        locale:
+                          description: Review's locale.
+                          nullable: true
+                          type: string
+                        location:
+                          description: Review's origin location.
+                          nullable: true
+                          type: string
+                        pastReviews:
+                          description: Past reviews of the same product.
+                          nullable: true
+                          type: string
+                        productId:
+                          description: Product ID.
+                          type: string
+                        rating:
+                          description: Customer rating.
+                          type: number
+                        reviewDateTime:
+                          description: Review's date and time.
+                          type: string
+                        reviewerName:
+                          description: Reviewer name.
+                          type: string
+                        searchDate:
+                          description: Review's search date.
+                          type: string
+                        shopperId:
+                          description: Shopper email.
+                          type: string
+                        sku:
+                          description: SKU ID.
+                          nullable: true
+                          type: string
+                        text:
+                          description: Review's text.
+                          type: string
+                        title:
+                          description: Review's title.
+                          type: string
+                        verifiedPurchaser:
+                          description: If the reviewer is a verified purchaser (`true`) or not (`false`).
+                          type: boolean
+                      type: object
+                    type: array
+                  range:
+                    description: Range of the review's list.
+                    properties:
+                      from:
+                        description: Zero base starting record number.
+                        type: number
+                      to:
+                        description: Zero base ending record number.
+                        type: number
+                      total:
+                        description: Total number of reviews on the list.
+                        type: number
+                    type: object
+                type: object
+          description: OK
+      summary: Get a list of Reviews
+      tags:
+        - Review
+    post:
+      deprecated: false
+      description: Creates multiple reviews.
+      operationId: SaveMultipleReviews
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              - approved: false
+                productId: "1"
+                rating: 4
+                reviewerName: Arturo
+                text: test multiple reviews
+                title: test multiple reviews
+                verifiedPurchaser: false
+              - approved: false
+                productId: "2"
+                rating: 4
+                reviewerName: Arturo
+                text: test review 2 multiple reviews
+                title: test review 2 multiple reviews
+                verifiedPurchaser: false
+            schema:
+              description: ""
+              items:
+                $ref: "#/components/schemas/SaveMultipleReviewsRequest"
+              type: array
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - 8e1a5e11-c0c9-11ec-835d-0a591b8a3ec1
+                - 9257c203-c0c9-11ec-835d-0e02dd207951
+              schema:
+                description: List of review IDs.
+                items:
+                  description: Review ID.
+                  type: string
+                type: array
+          description: OK
+      summary: Create Multiple Reviews
+      tags:
+        - Review
+components:
+  schemas:
+    SaveMultipleReviewsRequest:
+      example:
+        approved: false
+        productId: "1"
+        rating: 4
+        reviewerName: Arturo
+        text: Great product!
+        title: Great product
+        verifiedPurchaser: false
+      properties:
+        approved:
+          description: If the review was approved (`true`) or not (`false`).
+          type: boolean
+        id:
+          description: Review ID.
+          type: string
+        productId:
+          description: Product ID.
+          type: string
+        rating:
+          description: Customer rating.
+          type: number
+        reviewerName:
+          description: Reviewer name.
+          type: string
+        text:
+          description: Review's text.
+          type: string
+        title:
+          description: Review's title.
+          type: string
+        verifiedPurchaser:
+          description: If the reviewer is a verified purchaser (`true`) or not (`false`).
+          type: boolean
+      required:
+        - productId
+        - rating
+        - title
+        - text
+        - reviewerName
+        - approved
+        - verifiedPurchaser
+      title: SaveMultipleReviewsRequest
+      type: object
+    SaveReviewRequest:
+      example:
+        productId: "65444"
+        rating: 5
+        reviewerName: Arturo
+        text: It is the best product that I have seen
+        title: Good Product
+      properties:
+        productId:
+          description: Product ID.
+          type: string
+        rating:
+          description: Customer rating.
+          format: int32
+          type: integer
+        reviewerName:
+          description: Reviewer name.
+          type: string
+        text:
+          description: Review's text.
+          type: string
+        title:
+          description: Review's title.
+          type: string
+      required:
+        - productId
+        - rating
+        - title
+        - text
+        - reviewerName
+      title: SaveReviewRequest
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

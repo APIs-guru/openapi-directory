@@ -1,0 +1,825 @@
+openapi: 3.1.0
+servers:
+  - description: Production
+    url: https://api.codat.io
+info:
+  contact:
+    email: support@codat.io
+    name: Codat
+  description: |-
+    Codat's Banking API allows you to access standardised data from over bank accounts via third party providers.
+
+    Standardize how you connect to your customers’ bank accounts. Retrieve bank account and bank transaction data in the same way via our partnerships with Plaid and TrueLayer.
+
+    [Read more...](https://docs.codat.io/banking-api/overview)
+
+    [See our OpenAPI spec](https://github.com/codatio/oas) 
+  summary: Codat's standardized API for accessing banking data.
+  termsOfService: https://www.codat.io/legals/
+  title: Banking API
+  version: 2.1.0
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_static.codat.io_public_branding_codat-icon-blue.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Banking.json
+      version: "3.1"
+  x-providerName: codat.io
+  x-serviceName: banking
+security:
+  - auth_header: []
+tags:
+  - description: Where payments are made or received, and bank transactions are recorded.
+    name: Accounts
+  - description: Balances for a bank account including end-of-day batch balance or running balances per transaction.
+    name: Account balances
+  - description: An immutable source of up-to-date information on income and expenditure.
+    name: Transactions
+  - description: Hierarchical categories associated with a transaction for greater contextual meaning to transaction activity.
+    name: Transaction categories
+paths:
+  "/companies/{companyId}/connections/{connectionId}/data/banking-accountBalances":
+    get:
+      description: Gets a list of balances for a bank account including end-of-day batch balance or running balances per transaction.
+      operationId: list-account-balances
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/pageSize"
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/orderBy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountBalances"
+          description: Success
+      summary: List account balances
+      tags:
+        - Account balances
+  "/companies/{companyId}/connections/{connectionId}/data/banking-accounts":
+    get:
+      description: Gets a list of all bank accounts of the SMB, with rich data like balances, account numbers and institutions holdingthe accounts.
+      operationId: list-accounts
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/pageSize"
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/orderBy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Accounts"
+          description: Success
+      summary: List accounts
+      tags:
+        - Accounts
+  "/companies/{companyId}/connections/{connectionId}/data/banking-accounts/{accountId}":
+    get:
+      deprecated: true
+      description: Gets a specified bank account for a given company
+      operationId: get-account
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+        - description: Unique identifier for an account
+          in: path
+          name: accountId
+          required: true
+          schema:
+            example: 8a210b68-6988-11ed-a1eb-0242ac120002
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+          description: Success
+      summary: Get account
+      tags:
+        - Accounts
+      x-internal: true
+  "/companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories":
+    get:
+      description: Gets a list of hierarchical categories associated with a transaction for greater contextual meaning to transactionactivity.
+      operationId: list-transaction-categories
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/pageSize"
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/orderBy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionCategories"
+          description: Success
+      summary: List all transaction categories
+      tags:
+        - Transaction categories
+    parameters:
+      - $ref: "#/components/parameters/companyId"
+      - $ref: "#/components/parameters/connectionId"
+  "/companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories/{transactionCategoryId}":
+    get:
+      deprecated: true
+      description: Gets a specified bank transaction category for a given company
+      operationId: get-transaction-category
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionCategory"
+          description: Success
+      summary: Get transaction category
+      tags:
+        - Transaction categories
+      x-internal: true
+    parameters:
+      - $ref: "#/components/parameters/companyId"
+      - $ref: "#/components/parameters/connectionId"
+      - description: The unique identifier for a banking transaction category
+        in: path
+        name: transactionCategoryId
+        required: true
+        schema:
+          type: string
+  "/companies/{companyId}/connections/{connectionId}/data/banking-transactions":
+    get:
+      description: Gets a list of transactions incurred by a bank account.
+      operationId: list-transactions
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/pageSize"
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/orderBy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transactions"
+              x-speakeasy-usage-example: true
+          description: Success
+      summary: List transactions
+      tags:
+        - Transactions
+    parameters:
+      - $ref: "#/components/parameters/companyId"
+      - $ref: "#/components/parameters/connectionId"
+  "/companies/{companyId}/connections/{connectionId}/data/banking-transactions/{transactionId}":
+    get:
+      deprecated: true
+      description: Gets a specified bank transaction for a given company
+      operationId: get-transaction
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+          description: Success
+      summary: Get bank transaction
+      tags:
+        - Transactions
+      x-internal: true
+    parameters:
+      - $ref: "#/components/parameters/companyId"
+      - description: The unique identifier for a transaction
+        in: path
+        name: transactionId
+        required: true
+        schema:
+          type: string
+      - $ref: "#/components/parameters/connectionId"
+  "/companies/{companyId}/data/banking-transactions":
+    get:
+      description: Gets a list of transactions incurred by a company across all bank accounts.
+      operationId: list-bank-transactions
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/pageSize"
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/orderBy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transactions"
+          description: Success
+      summary: List banking transactions
+      tags:
+        - Transactions
+    parameters:
+      - $ref: "#/components/parameters/companyId"
+components:
+  parameters:
+    companyId:
+      in: path
+      name: companyId
+      required: true
+      schema:
+        description: Unique identifier for your SMB in Codat.
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        format: uuid
+        type: string
+    connectionId:
+      in: path
+      name: connectionId
+      required: true
+      schema:
+        description: Unique identifier for a company's data connection.
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        format: uuid
+        type: string
+    orderBy:
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+      in: query
+      name: orderBy
+      required: false
+      schema:
+        example: -modifiedDate
+        type: string
+      x-stoplight:
+        id: 4je9lwo02netu
+    page:
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+      in: query
+      name: page
+      required: true
+      schema:
+        default: 1
+        example: 1
+        format: int32
+        minimum: 0
+        type: integer
+      x-stoplight:
+        id: 1318joqblpp4e
+    pageSize:
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+      in: query
+      name: pageSize
+      schema:
+        default: 100
+        example: 100
+        format: int32
+        maximum: 5000
+        minimum: 1
+        type: integer
+      x-stoplight:
+        id: s2ika6rltk5y6
+    query:
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+      in: query
+      name: query
+      required: false
+      schema:
+        type: string
+      x-stoplight:
+        id: gupdb9kt30hfq
+  schemas:
+    Account:
+      allOf:
+        - properties:
+            balance:
+              $ref: "#/components/schemas/AccountBalance/definitions/accountBalanceAmounts"
+              description: An object containing bank balance data.
+            currency:
+              description: The currency code for the account.
+              minLength: 1
+              type: string
+            holder:
+              description: The name of the person or company who holds the account.
+              nullable: true
+              type: string
+            id:
+              description: The ID of the account from the provider.
+              minLength: 1
+              type: string
+            identifiers:
+              $ref: "#/components/schemas/Account/definitions/accountIdentifiers"
+            informalName:
+              description: The friendly name of the account, chosen by the holder. This may not have been set by the account holder and therefore is not always available.
+              nullable: true
+              type: string
+            institution:
+              $ref: "#/components/schemas/Account/definitions/accountInstitution"
+            name:
+              description: The name of the account according to the provider.
+              minLength: 1
+              type: string
+            type:
+              $ref: "#/components/schemas/AccountType"
+          type: object
+        - $ref: "#/components/schemas/ModifiedDates"
+      definitions:
+        accountIdentifierType:
+          description: Type of account
+          enum:
+            - Account
+            - Card
+            - Credit
+            - Depository
+            - Investment
+            - Loan
+            - Other
+          type: string
+          x-internal: true
+        accountIdentifiers:
+          additionalProperties: false
+          description: An object containing bank account identification information.
+          properties:
+            bankCode:
+              description: |-
+                The local (usually national) routing number for the account.
+
+                This is known by different names in different countries:
+                * BSB code (Australia)
+                * routing number (Canada, USA)
+                * sort code (UK)
+              nullable: true
+              type: string
+            bic:
+              description: The ISO 9362 code (commonly called SWIFT code, SWIFT-BIC or BIC) for the account.
+              nullable: true
+              type: string
+            iban:
+              description: The international bank account number (IBAN) for the account, if known.
+              nullable: true
+              type: string
+            maskedAccountNumber:
+              description: A portion of the actual account `number` to help account identification where number is tokenised (Plaid only)
+              nullable: true
+              type: string
+            number:
+              description: The account number for the account. When combined with the`bankCode`, this is usually enough to uniquely identify an account within a jurisdiction.
+              nullable: true
+              type: string
+            subtype:
+              description: Detailed account category
+              nullable: true
+              type: string
+            type:
+              $ref: "#/components/schemas/Account/definitions/accountIdentifierType"
+          required:
+            - type
+          title: Account Identifiers
+          type: object
+          x-internal: true
+        accountInstitution:
+          additionalProperties: false
+          description: The bank or other financial institution providing the account.
+          properties:
+            id:
+              description: The institution's ID, according to the provider.
+              type: string
+            name:
+              description: The institution's name, according to the underlying provider.
+              type: string
+          title: Account Institution
+          type: object
+          x-internal: true
+      description: |-
+        This data type provides a list of all the SMB's bank accounts, with rich data like balances, account numbers, and institutions holding the accounts.
+
+        Explore our [data coverage](https://knowledge.codat.io/supported-features/banking?view=tab-by-data-type&dataType=banking-accounts).
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.
+      examples:
+        - results:
+            - balance:
+                available: -459987.97
+                current: -459964.9
+                limit: 5000
+              currency: GBP
+              holder: Codat Ltd
+              id: 1703194f-7805-4da8-bac0-2ba5da4a4216
+              identifiers:
+                bankCode: "009911"
+                bic: LOYDGB21006
+                iban: GB29 LOYD 4773 2346 7626 29
+                maskedAccountNumber: LOYDGB21006
+                number: "46762629"
+                subtype: checking
+                type: Depository
+              informalName: Codat
+              institution:
+                id: lloyds-bank
+                name: Lloyds Bank
+              modifiedDate: 2022-05-23T16:32:50Z
+              name: Business Current Account
+              sourceModifiedDate: 2021-08-14T05:04:12
+              type: Debit
+      required:
+        - id
+        - name
+        - type
+        - balance
+        - identifiers
+        - currency
+        - institution
+      title: Account
+      type: object
+    AccountBalance:
+      allOf:
+        - properties:
+            accountId:
+              description: The unique identifier of the account.
+              minLength: 1
+              type: string
+            balance:
+              $ref: "#/components/schemas/AccountBalance/definitions/accountBalanceAmounts"
+            date:
+              $ref: "#/components/schemas/DateTime"
+              description: Date of the balance.
+          type: object
+        - $ref: "#/components/schemas/ModifiedDates"
+      definitions:
+        accountBalanceAmounts:
+          additionalProperties: false
+          description: Depending on the data provided by the underlying bank, not all balances are always available.
+          properties:
+            available:
+              description: The balance available in the account, including any pending transactions. This doesn't include additional funds available from any overdrafts.
+              nullable: true
+              type: number
+            current:
+              description: The balance of the account only including cleared transactions.
+              type: number
+            limit:
+              description: The minimum allowed balance for the account. For example, a $100.00 overdraft would show as a limit of `-100.00`.
+              nullable: true
+              type: number
+          title: Account Balance Amounts
+          type: object
+          x-internal: true
+      description: |-
+        The Banking Account Balances data type provides a list of balances for a bank account including end-of-day batch balance or running balances per transaction.
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.
+
+        > **How often should I pull Account Balances?**
+        >
+        > Because these balances are closing balances, we recommend you pull Account Balance no more frequently than daily. If you require a live intraday balance, this can be found for each account on the [Account](https://docs.codat.io/banking-api#/schemas/Account) data type.
+        > 
+        > Whilst you can choose to sync hourly, this may incur usage charges from Plaid or TrueLayer.
+      examples:
+        - accountBalances:
+            - accountId: cce404db-27f7-4286-95db-622b53596cf4
+              balance:
+                available: 714374.48
+                current: 714374.57
+                limit: 5000
+              date: 2021-03-18T00:00:00
+            - accountId: cce404db-27f7-4286-95db-622b53596cf4
+              balance:
+                available: 714374.48
+                current: 714374.57
+                limit: 5000
+              date: 2021-03-19T00:00:00
+            - accountId: cce404db-27f7-4286-95db-622b53596cf4
+              balance:
+                available: 714195.66
+                current: 714204.39
+                limit: 5000
+              date: 2021-03-22T00:00:00
+            - accountId: 2f593774-1075-4805-a552-84eecc7eb264
+              balance:
+                available: -644945.42
+                current: -644925.84
+                limit: 0
+              date: 2022-03-09T00:00:00
+      required:
+        - accountId
+        - balance
+        - date
+      title: Account Balance
+      type: object
+    AccountBalances:
+      allOf:
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/AccountBalance"
+              type: array
+          type: object
+        - $ref: "#/components/schemas/PagingInfo"
+      x-internal: true
+    AccountType:
+      description: |-
+        The type of transactions and balances on the account.  
+        For Credit accounts, positive balances are liabilities, and positive transactions **reduce** liabilities.  
+        For Debit accounts, positive balances are assets, and positive transactions **increase** assets.
+      enum:
+        - Unknown
+        - Credit
+        - Debit
+      title: Bank Account Type
+      type: string
+      x-internal: true
+    Accounts:
+      allOf:
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/Account"
+              type: array
+          type: object
+        - $ref: "#/components/schemas/PagingInfo"
+      x-internal: true
+    DateTime:
+      description: |-
+        In Codat's data model, dates and times are represented using the <a class="external" href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:
+
+        ```
+        2020-10-08T22:40:50Z
+        2021-01-01T00:00:00
+        ```
+
+
+
+        When syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:
+
+        - Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`
+        - Unqualified local time: `2021-11-15T01:00:00`
+        - UTC time offsets: `2021-11-15T01:00:00-05:00`
+
+        > Time zones
+        > 
+        > Not all dates from Codat will contain information about time zones.  
+        > Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced.
+      example: 2022-10-23T00:00:00Z
+      title: Date time
+      type: string
+    HRef:
+      properties:
+        href:
+          format: uri-reference
+          type: string
+      title: Hypertext reference
+      type: object
+      x-internal: true
+    Links:
+      examples:
+        - current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+          self:
+            href: /companies/{id}/data/{dataType}
+      properties:
+        current:
+          $ref: "#/components/schemas/HRef"
+        next:
+          $ref: "#/components/schemas/HRef"
+        previous:
+          $ref: "#/components/schemas/HRef"
+        self:
+          $ref: "#/components/schemas/HRef"
+      required:
+        - self
+        - current
+      type: object
+      x-internal: true
+    ModifiedDate:
+      properties:
+        modifiedDate:
+          $ref: "#/components/schemas/DateTime"
+          description: The date on which this record was last modified in Codat.
+      title: ModifiedDate
+      type: object
+      x-internal: true
+    ModifiedDates:
+      allOf:
+        - $ref: "#/components/schemas/ModifiedDate"
+        - $ref: "#/components/schemas/SourceModifiedDate"
+      x-internal: true
+    PagingInfo:
+      examples:
+        - _links:
+            current:
+              href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+            pageNumber: 1
+            pageSize: 10
+            self:
+              href: /companies/{id}/data/{dataType}
+            totalResults: 1
+      properties:
+        _links:
+          $ref: "#/components/schemas/Links"
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        totalResults:
+          type: integer
+      required:
+        - pageNumber
+        - pageSize
+        - totalResults
+        - _links
+      type: object
+      x-internal: true
+    SourceModifiedDate:
+      properties:
+        sourceModifiedDate:
+          $ref: "#/components/schemas/DateTime"
+          description: The date on which this record was last modified in the originating system
+      title: Source Modified Date
+      type: object
+      x-internal: true
+    Transaction:
+      allOf:
+        - properties:
+            accountId:
+              description: The unique identifier of the bank account.
+              minLength: 1
+              type: string
+            amount:
+              description: The amount of the bank transaction.
+              type: number
+            authorizedDate:
+              $ref: "#/components/schemas/DateTime"
+              description: The date the bank transaction was authorized.
+            code:
+              $ref: "#/components/schemas/Transaction/definitions/transactionCode"
+            currency:
+              description: The currency of the bank transaction.
+              minLength: 1
+              type: string
+            description:
+              description: The description of the bank transaction.
+              nullable: true
+              type: string
+            id:
+              description: The unique identifier of the bank transaction.
+              minLength: 1
+              type: string
+            merchantName:
+              description: The name of the merchant.
+              nullable: true
+              type: string
+            postedDate:
+              $ref: "#/components/schemas/DateTime"
+              description: The date the bank transaction was cleared.
+            transactionCategoryRef:
+              $ref: "#/components/schemas/TransactionCategory/definitions/transactionCategoryRef"
+          type: object
+        - $ref: "#/components/schemas/ModifiedDates"
+      definitions:
+        transactionCode:
+          description: Code to identify the underlying transaction.
+          enum:
+            - Unknown
+            - Fee
+            - Payment
+            - Cash
+            - Transfer
+            - Interest
+            - Cashback
+            - Cheque
+            - DirectDebit
+            - Purchase
+            - StandingOrder
+            - Adjustment
+            - Credit
+            - Other
+            - NotSupported
+          type: string
+          x-internal: true
+      description: |-
+        The Banking Transactions data type provides an immutable source of up-to-date information on income and expenditure.
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.
+
+        View the coverage for banking transactions in the [Data Coverage Explorer](https://knowledge.codat.io/supported-features/banking?view=tab-by-data-type&dataType=banking-transactions).
+      examples:
+        - accountId: 1703194f-7805-4da8-bac0-2ba5da4a4216
+          amount: 5062.39
+          authorizedDate: 2021-07-06T00:00:00
+          currency: GBP
+          description: Payments for direct income ce149943-c157-43fc-aac7-42a716b655b6
+          id: 0130b5bb-1419-40f6-8a27-7362d0381229
+          merchantName: New Look
+          modifiedDate: 2022-05-23T16:32:50Z
+          postedDate: 2021-07-06T00:00:00
+          sourceModifiedDate: 2021-06-28T10:48:12
+          transactionCategoryRef:
+            id: health-and-fitness-sports
+      required:
+        - id
+        - accountId
+        - currency
+      title: Transaction
+      type: object
+    TransactionCategories:
+      allOf:
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/TransactionCategory"
+              type: array
+          type: object
+        - $ref: "#/components/schemas/PagingInfo"
+      x-internal: true
+    TransactionCategory:
+      allOf:
+        - description: Status of the bank transaction category.
+          properties:
+            hasChildren:
+              description: A Boolean indicating whether there are other bank transaction categories beneath this one in the hierarchy.
+              type: boolean
+            id:
+              description: The unique identifier of the bank transaction category.
+              minLength: 1
+              type: string
+            name:
+              description: The name of the bank transaction category.
+              minLength: 1
+              type: string
+            parentId:
+              description: The unique identifier of the parent bank transaction category.
+              nullable: true
+              type: string
+            status:
+              $ref: "#/components/schemas/TransactionCategory/definitions/transactionCategoryStatus"
+          type: object
+        - $ref: "#/components/schemas/ModifiedDates"
+      definitions:
+        transactionCategoryRef:
+          description: An object of bank transaction category reference data.
+          properties:
+            id:
+              description: The unique category reference id for the bank transaction.
+              minLength: 1
+              type: string
+            name:
+              description: The category name reference for the bank transaction.
+              nullable: true
+              type: string
+          required:
+            - id
+          type: object
+          x-internal: true
+        transactionCategoryStatus:
+          enum:
+            - Unknown
+            - Active
+            - Archived
+          type: string
+          x-internal: true
+      description: |-
+        The Banking Transaction Categories data type provides a list of hierarchical categories associated with a transaction for greater contextual meaning to transaction activity.
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.
+      examples:
+        - hasChildren: true
+          id: auto-and-transport
+          modifiedDate: 2022-05-23T16:32:50
+          name: Auto & Transport
+          sourceModifiedDate: 2021-04-24T07:59:10
+          status: Active
+      required:
+        - id
+        - name
+      title: Transaction Category
+      type: object
+    Transactions:
+      allOf:
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/Transaction"
+              type: array
+          type: object
+        - $ref: "#/components/schemas/PagingInfo"
+      x-internal: true
+  securitySchemes:
+    auth_header:
+      description: The word "Basic" followed by a space and your API Key, base64 encoded, which can be found [here](https://app.codat.io/developers/api-keys)
+      in: header
+      name: Authorization
+      type: apiKey
+x-speakeasy-retries:
+  backoff:
+    exponent: 1.5
+    initialInterval: 500
+    maxElapsedTime: 3600000
+    maxInterval: 60000
+  retryConnectionErrors: true
+  statusCodes:
+    - 408
+    - 429
+    - 5XX
+  strategy: backoff

@@ -1,0 +1,146 @@
+{
+  "openapi": "3.0.1",
+  "servers": [
+    {
+      "url": "https://flex-api.twilio.com"
+    }
+  ],
+  "info": {
+    "contact": {
+      "email": "support@twilio.com",
+      "name": "Twilio Support",
+      "url": "https://support.twilio.com"
+    },
+    "description": "This is the public Twilio REST API.",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "title": "Twilio - Flex",
+    "version": "1.42.0",
+    "x-apisguru-categories": [
+      "telecom",
+      "messaging"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_static1.twilio.com_marketing_bundles_marketing_img_logos_wordmark-red.svg"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_flex_v2.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "twilio.com",
+    "x-serviceName": "twilio_flex_v2"
+  },
+  "paths": {
+    "/v2/WebChats": {
+      "description": "TODO: Resource-level docs",
+      "post": {
+        "description": "",
+        "operationId": "CreateWebChannel",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "AddressSid": {
+                    "description": "The SID of the Conversations Address. See [Address Configuration Resource](https://www.twilio.com/docs/conversations/api/address-configuration-resource) for configuration details. When a conversation is created on the Flex backend, the callback URL will be set to the corresponding Studio Flow SID or webhook URL in your address configuration.",
+                    "type": "string"
+                  },
+                  "ChatFriendlyName": {
+                    "description": "The Conversation's friendly name. See the [Conversation resource](https://www.twilio.com/docs/conversations/api/conversation-resource) for an example.",
+                    "type": "string"
+                  },
+                  "CustomerFriendlyName": {
+                    "description": "The Conversation participant's friendly name. See the [Conversation Participant Resource](https://www.twilio.com/docs/conversations/api/conversation-participant-resource) for an example.",
+                    "type": "string"
+                  },
+                  "PreEngagementData": {
+                    "description": "The pre-engagement data.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "AddressSid"
+                ],
+                "title": "CreateWebChannelRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/flex.v2.web_channel"
+                }
+              }
+            },
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "x-maturity": [
+          "GA"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://flex-api.twilio.com"
+        }
+      ],
+      "x-twilio": {
+        "className": "web_channels",
+        "defaultOutputProperties": [
+          "conversation_sid"
+        ],
+        "mountName": "web_channels",
+        "pathType": "list"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "flex.v2.web_channel": {
+        "properties": {
+          "conversation_sid": {
+            "description": "The unique string representing the [Conversation resource](https://www.twilio.com/docs/conversations/api/conversation-resource) created.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^CH[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "identity": {
+            "description": "The unique string representing the User created and should be authorized to participate in the Conversation. For more details, see [User Identity & Access Tokens](https://www.twilio.com/docs/conversations/identity).",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "accountSid_authToken": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "x-maturity": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
+}

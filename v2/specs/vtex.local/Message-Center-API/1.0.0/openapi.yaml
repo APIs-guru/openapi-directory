@@ -1,0 +1,136 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  license:
+    name: MIT
+  title: Message Center API
+  version: 1.0.0
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Message Center API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Message-Center-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+paths:
+  "/api/mail-service/pvt/providers/{EmailProvider}/dkim":
+    post:
+      description: Create DKIM keys for sender that was setup in VTEX mail servers
+      operationId: createDKIM
+      parameters:
+        - description: E-mail address for sender that was setup in VTEX mail servers
+          in: path
+          name: EmailProvider
+          required: true
+          schema:
+            default: help@valdie.co
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                created:
+                  summary: created summary
+                  value:
+                    dkimKeys:
+                      - "'n3zbltwizctxpgcmqrars4bmfdd3zlyo._domainkey.valdie.co','CNAME','n3zbltwizctxpgcmqrars4bmfdd3zlyo.dkim.amazonses.com'"
+                      - "'sq4iae4be52fhqq3wm44btttvndeecfv._domainkey.valdie.co','CNAME','sq4iae4be52fhqq3wm44btttvndeecfv.dkim.amazonses.com'"
+                      - "'n4z6g2g7yfy4pnhjklfesxrrkt4o2ha4._domainkey.valdie.co','CNAME','n4z6g2g7yfy4pnhjklfesxrrkt4o2ha4.dkim.amazonses.com'"
+                    status: created
+                emailNotFound:
+                  summary: emailNotFound summary
+                  value:
+                    dkimKeys: null
+                    status: emailNotFound
+                emailNotVerified:
+                  summary: emailNotVerified summary
+                  value:
+                    dkimKeys: null
+                    status: emailNotVerified
+              schema:
+                $ref: "#/components/schemas/200_OK"
+          description: OK
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: unauthorized summary
+                  value:
+                    status: 401
+                    title: Unauthorized
+                    traceId: 00-f8949e0e2a80ff4481b4375908349701-a6a7ecf8b50a2043-00
+                    type: https://tools.ietf.org/html/rfc7235#section-3.1
+              schema:
+                $ref: "#/components/schemas/401_Unauthorized"
+          description: Unauthorized
+      summary: Generate DKIM keys
+      tags:
+        - DKIM Configuration
+components:
+  schemas:
+    200_OK:
+      additionalProperties: true
+      properties:
+        dkimKeys:
+          additionalProperties: true
+          items: {}
+          nullable: true
+          type: array
+        status:
+          enum:
+            - emailNotFound
+            - emailNotVerified
+            - created
+          type: string
+      required:
+        - status
+      type: object
+    401_Unauthorized:
+      additionalProperties: true
+      properties:
+        status:
+          enum:
+            - 401
+          type: integer
+        title:
+          enum:
+            - Unauthorized
+          type: string
+        traceId:
+          pattern: ^00-[0-9a-f]{32}-[0-9a-f]{16}-00$
+          type: string
+        type:
+          enum:
+            - https://tools.ietf.org/html/rfc7235#section-3.1
+          type: string
+      required:
+        - type
+        - title
+        - status
+        - traceId
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

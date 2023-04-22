@@ -1,0 +1,670 @@
+{
+  "apis": {
+    "nexmo.com:account": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "name": "Vonage.com",
+          "url": "https://developer.nexmo.com"
+        },
+        "description": "Enables users to manage their Vonage API Account by programmable means. More information is available here: <https://developer.nexmo.com/account/overview>.",
+        "title": "Account API",
+        "version": "1.0.4",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/account.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "account"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/account/1.0.4/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/account/1.0.4/openapi.yaml",
+      "openapiVer": "3.0.2",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:account/1.0.4.json"
+    },
+    "nexmo.com:application": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@nexmo.com",
+          "name": "Nexmo.com",
+          "url": "https://developer.nexmo.com/",
+          "x-twitter": "Nexmo"
+        },
+        "description": "<div class=\"Vlt-callout Vlt-callout--critical\"> <i></i> <div class=\"Vlt-callout__content\">\n  <h4>Applications V1 is deprecated</h4>\n  This version of the API has been deprecated. Please use <a href=\"/api/application.v2\">version 2</a> going forwards\n</div> </div>\nA Nexmo application contains the security and configuration information you need to connect to Nexmo endpoints and easily use our products.",
+        "license": {
+          "name": "The MIT License (MIT)",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "https://www.nexmo.com/terms-of-use",
+        "title": "Nexmo Application API",
+        "version": "1.0.2",
+        "x-apiClientRegistration": "https://dashboard.nexmo.com/sign-up",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/application.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "application"
+      },
+      "externalDocs": {
+        "url": "https://developer.nexmo.com/api/developer/application",
+        "x-sha1": "d8836c374e2a7504bd2cd59e05fcee440f67cb44"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/application/1.0.2/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/application/1.0.2/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:application/1.0.2.json"
+    },
+    "nexmo.com:application.v2": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@nexmo.com",
+          "name": "Vonage",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "Vonage provides an Application API to allow management of your Vonage Applications.\n\nThis API is backwards compatible with version 1. Applications created using version 1 of the API can also be managed using version 2 (this version) of the API.\n",
+        "title": "Application API",
+        "version": "2.1.4",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/application.v2.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "application.v2"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/application.v2/2.1.4/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/application.v2/2.1.4/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:application.v2/2.1.4.json"
+    },
+    "nexmo.com:audit": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Vonage Audit API allows you to view details of changes to your account. More information is available at <https://developer.nexmo.com/audit/overview>.\n_Please note that the Audit API is currently in Beta_\n",
+        "license": {
+          "name": "The MIT License (MIT)",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "https://www.nexmo.com/terms-of-use",
+        "title": "Audit API",
+        "version": "1.0.4",
+        "x-label": "Beta",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/audit.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "audit"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/audit/1.0.4/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/audit/1.0.4/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:audit/1.0.4.json"
+    },
+    "nexmo.com:conversation": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Conversation API enables you to build conversation features where communication can take place across multiple mediums including IP Messaging, PSTN Voice, SMS and WebRTC Audio and Video. The context of the conversations is maintained though each communication event taking place within a conversation, no matter the medium.",
+        "title": "Conversation API",
+        "version": "2.0.1",
+        "x-label": "Beta",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/conversation.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "conversation"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/conversation/2.0.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/conversation/2.0.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:conversation/2.0.1.json"
+    },
+    "nexmo.com:conversation.v2": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Conversation API enables you to build conversation features where communication can take place across multiple mediums including IP Messaging, PSTN Voice, SMS and WebRTC Audio and Video. The context of the conversations is maintained though each communication event taking place within a conversation, no matter the medium.",
+        "title": "Conversation API",
+        "version": "1.0.1",
+        "x-label": "Beta",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/conversation.v2.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "conversation.v2"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/conversation.v2/1.0.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/conversation.v2/1.0.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:conversation.v2/1.0.1.json"
+    },
+    "nexmo.com:conversion": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@nexmo.com",
+          "name": "Nexmo.com",
+          "url": "https://developer.nexmo.com/",
+          "x-twitter": "Nexmo"
+        },
+        "description": "The Conversion API allows you to tell Nexmo about the reliability of your 2FA communications. Sending conversion data back to us means that Nexmo can deliver messages faster and more reliably.\nThe conversion data you send us is confidential: Nexmo does not share it with third parties.\nIn order to identify the carriers who provide the best performance, Nexmo continually tests the routes we use to deliver SMS and voice calls. Using Adaptive Routing™, Nexmo actively reroutes messages through different carrier routes and ensures faster and more reliable delivery for your messages. The route choice is made using millions of real-time conversion data points.",
+        "license": {
+          "name": "The MIT License (MIT)",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "https://www.nexmo.com/terms-of-use",
+        "title": "Nexmo Conversion API",
+        "version": "1.0.1",
+        "x-apiClientRegistration": "https://dashboard.nexmo.com/sign-up",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/conversion.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "conversion"
+      },
+      "externalDocs": {
+        "url": "https://developer.nexmo.com/api/conversion",
+        "x-sha1": "8ad8bc6b0c51af4ca458c13cfced6124783ab113"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/conversion/1.0.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/conversion/1.0.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:conversion/1.0.1.json"
+    },
+    "nexmo.com:dispatch": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Dispatch API enables the developer to specify a multiple message workflow. A workflow follows a template. The first one we are adding is the failover template. The failover template instructs the Messages API to first send a message to the specified channel. If that message fails immediately or if the condition_status is not reached within the given time period the next message is sent. The developer will also receive status webhooks from the messages resource for each delivery and read event. This API is currently in Beta.",
+        "title": "Dispatch API",
+        "version": "0.3.4",
+        "x-label": "Beta",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/dispatch.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "dispatch"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/dispatch/0.3.4/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/dispatch/0.3.4/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:dispatch/0.3.4.json"
+    },
+    "nexmo.com:external-accounts": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The External Accounts API is used to manage accounts for Viber Business Messages, Facebook Messenger and Whatsapp for use in the [Messages](https://developer.nexmo.com/messages/overview) and [Dispatch](https://developer.nexmo.com/dispatch/overview) APIs.",
+        "title": "External Accounts API",
+        "version": "0.1.5",
+        "x-label": "Developer Preview",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/external-accounts.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "external-accounts"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/external-accounts/0.1.5/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/external-accounts/0.1.5/openapi.yaml",
+      "openapiVer": "3.0.1",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:external-accounts/0.1.5.json"
+    },
+    "nexmo.com:media": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@nexmo.com",
+          "name": "Nexmo DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Media API can be used to query, download and delete media items such as audio files for use with other Nexmo APIs.",
+        "title": "Media API",
+        "version": "1.0.2",
+        "x-label": "BETA",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/media.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "media"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/media/1.0.2/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/media/1.0.2/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:media/1.0.2.json"
+    },
+    "nexmo.com:messages-olympus": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@nexmo.com",
+          "name": "Nexmo DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Messages API consolidates and normalises exchanges across all messaging channels. It allows you to use a single API to interact with our various channels such as SMS, MMS, WhatsApp, Viber and Facebook Messenger",
+        "title": "Messages API",
+        "version": "1.4.0",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/messages-olympus.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "messages-olympus"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/messages-olympus/1.4.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/messages-olympus/1.4.0/openapi.yaml",
+      "openapiVer": "3.0.1",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:messages-olympus/1.4.0.json"
+    },
+    "nexmo.com:number-insight": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Number Insight API delivers real-time intelligence about the validity, reachability and roaming status of a phone number and tells you how to format the number correctly in your application. There are three levels of Number Insight API available: [Basic, Standard and Advanced](https://developer.nexmo.com/number-insight/overview#basic-standard-and-advanced-apis). The advanced API is available asynchronously as well as synchronously.",
+        "license": {
+          "name": "The MIT License (MIT)",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "https://www.nexmo.com/terms-of-use",
+        "title": "Number Insight API",
+        "version": "1.2.1",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/number-insight.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "number-insight"
+      },
+      "externalDocs": {
+        "url": "https://developer.nexmo.com/api/number-insight",
+        "x-sha1": "081f6d985e2e4a75586da1654fde880a96885405"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/number-insight/1.2.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/number-insight/1.2.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:number-insight/1.2.1.json"
+    },
+    "nexmo.com:numbers": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com"
+        },
+        "description": "The Numbers API enables you to manage your existing numbers and buy new virtual numbers for use with the Vonage APIs. Further information is here: <https://developer.nexmo.com/numbers/overview>",
+        "license": {
+          "name": "The MIT License (MIT)",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "https://www.nexmo.com/terms-of-use",
+        "title": "Numbers API",
+        "version": "1.0.20",
+        "x-apiClientRegistration": "https://dashboard.nexmo.com/sign-up",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/numbers.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "numbers"
+      },
+      "externalDocs": {
+        "description": "Numbers product documentation on the Vonage Developer Portal",
+        "url": "https://developer.nexmo.com/numbers/overview"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/numbers/1.0.20/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/numbers/1.0.20/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:numbers/1.0.20.json"
+    },
+    "nexmo.com:pricing": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@nexmo.com",
+          "name": "Nexmo DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The API to retrieve pricing information.\nPlease note the Pricing API is rate limited to one request per second.",
+        "title": "Pricing API",
+        "version": "0.0.3",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/pricing.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "pricing"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/pricing/0.0.3/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/pricing/0.0.3/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:pricing/0.0.3.json"
+    },
+    "nexmo.com:redact": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The [Redact API](/redact/overview) helps organisations meet their privacy compliance obligations. It provides controlled, on-demand redaction of private information from transactional records in the long-term storage. Note, Redact API does not have the capability to redact the short-lived server logs that are retained for a few weeks. For SMS customers that need immediate redaction, Vonage suggests using [Advanced Auto-redact](/redact/overview#auto-redact-vs-redact-api).",
+        "title": "Redact API",
+        "version": "1.0.6",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/redact.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "redact"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/redact/1.0.6/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/redact/1.0.6/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:redact/1.0.6.json"
+    },
+    "nexmo.com:reports": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The [Reports API](/reports/overview) enables you to request a report of activity for your Vonage account.\n\nDepending on your query pattern, you can choose from one of the two versions of the Reports API: asynchronous and synchronous. The asynchronous version is optimized for infrequent and large data queries (from several records to tens of millions). The synchronous version is optimized for frequent and periodic retrievals of small batches of data records (from one record to tens of thousand per query).\n\nOnly synchronous version supports retrival of data records by message/record ID.\n\nVonage recommends that you limit asynchronous queries to a maximum of 20 million records, by setting the start and end dates accordingly. On average, the asynchronous Reports API takes 5 - 10 minutes to generate 1 million records.\n",
+        "license": {
+          "name": "The MIT License (MIT)",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "https://www.nexmo.com/terms-of-use",
+        "title": "Reports API",
+        "version": "2.2.2",
+        "x-label": "Beta",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/reports.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "reports"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/reports/2.2.2/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/reports/2.2.2/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:reports/2.2.2.json"
+    },
+    "nexmo.com:sms": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "With the SMS API you can send SMS from your account and lookup messages both messages that you've sent as well as messages sent to your virtual numbers. Numbers are specified in E.164 format. More SMS API documentation is at <https://developer.nexmo.com/messaging/sms/overview>",
+        "title": "SMS API",
+        "version": "1.2.0",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/sms.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "sms"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/sms/1.2.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/sms/1.2.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:sms/1.2.0.json"
+    },
+    "nexmo.com:subaccounts": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Subaccounts API enables you to create subaccounts under your primary account. Subaccounts facilitate differential product configuration, reporting, and billing. The Subaccounts API is released initially with restricted availability. You can read more about the API in the [Subaccounts documentation](/account/subaccounts/overview).",
+        "title": "Subaccounts API",
+        "version": "1.0.8",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/subaccounts.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "subaccounts"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/subaccounts/1.0.8/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/subaccounts/1.0.8/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:subaccounts/1.0.8.json"
+    },
+    "nexmo.com:verify": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Verify API helps you to implement 2FA (two-factor authentication) in your applications. This is useful for:\n\n* Protecting against spam, by preventing spammers from creating multiple accounts\n* Monitoring suspicious activity, by forcing an account user to verify ownership of a number\n* Ensuring that you can reach your users at any time because you have their correct phone number\nMore information is available at <https://developer.nexmo.com/verify>",
+        "license": {
+          "name": "The MIT License (MIT)",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "https://www.nexmo.com/terms-of-use",
+        "title": "Verify API",
+        "version": "1.2.4",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/verify.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "verify"
+      },
+      "externalDocs": {
+        "description": "More information on the Verify product on our Developer Portal",
+        "url": "https://developer.nexmo.com/verify"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/verify/1.2.4/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/verify/1.2.4/openapi.yaml",
+      "openapiVer": "3.0.3",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:verify/1.2.4.json"
+    },
+    "nexmo.com:voice": {
+      "added": "2020-11-02T14:04:45.860Z",
+      "info": {
+        "contact": {
+          "email": "devrel@vonage.com",
+          "name": "Vonage DevRel",
+          "url": "https://developer.nexmo.com/"
+        },
+        "description": "The Voice API lets you create outbound calls, control in-progress calls and get information about historical calls. More information about the Voice API can be found at <https://developer.nexmo.com/voice/voice-api/overview>.",
+        "title": "Voice API",
+        "version": "1.3.10",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/voice.yml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "nexmo.com",
+        "x-serviceName": "voice"
+      },
+      "updated": "2023-03-24T18:44:13.782Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/voice/1.3.10/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/voice/1.3.10/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/nexmo.com:voice/1.3.10.json"
+    }
+  }
+}

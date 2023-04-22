@@ -1,0 +1,38 @@
+{
+  "added": "2023-02-17T11:02:20.620Z",
+  "info": {
+    "contact": {
+      "email": "developer-experience@adyen.com",
+      "name": "Adyen Developer Experience team",
+      "url": "https://www.adyen.help/hc/en-us/community/topics",
+      "x-twitter": "Adyen"
+    },
+    "description": "The Configuration API enables you to create a platform where you can onboard your users as account holders and create balance accounts, cards, and business accounts.\n\n## Authentication\nYour Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication. For example:\n\n```\ncurl\n-H \"Content-Type: application/json\" \\\n-U \"ws@BalancePlatform.YOUR_BALANCE_PLATFORM\":\"YOUR_WS_PASSWORD\" \\\n...\n```\n## Versioning\nThe Configuration API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://balanceplatform-api-test.adyen.com/bcl/v1/accountHolders\n```\n## Going live\nWhen going live, your Adyen contact will provide your API credential for the live environment. You can then use the API key or the username and password to send requests to `https://balanceplatform-api-live.adyen.com/bcl/v1`.",
+    "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+    "title": "Configuration API",
+    "version": "1",
+    "x-apisguru-categories": [
+      "payment"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_adyen.com_.resources_adyen-website_themes_images_apple-icon-180x180.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BalancePlatformService-v1.json",
+        "version": "3.1"
+      }
+    ],
+    "x-preferred": false,
+    "x-providerName": "adyen.com",
+    "x-publicVersion": true,
+    "x-serviceName": "BalancePlatformService",
+    "x-timestamp": "2023-03-29T11:22:17Z"
+  },
+  "updated": "2023-03-30T23:19:12.239Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformService/1/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformService/1/openapi.yaml",
+  "openapiVer": "3.1.0",
+  "link": "https://api.apis.guru/v2/specs/adyen.com:BalancePlatformService/1.json"
+}

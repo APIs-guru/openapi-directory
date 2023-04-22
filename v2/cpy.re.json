@@ -1,0 +1,48 @@
+{
+  "apis": {
+    "cpy.re:peertube": {
+      "added": "2019-07-04T11:06:56.000Z",
+      "info": {
+        "contact": {
+          "name": "PeerTube Community",
+          "url": "https://joinpeertube.org"
+        },
+        "description": "The PeerTube API is built on HTTP(S) and is RESTful. You can use your favorite\nHTTP/REST library for your programming language to use PeerTube. The spec API is fully compatible with\n[openapi-generator](https://github.com/OpenAPITools/openapi-generator/wiki/API-client-generator-HOWTO)\nwhich generates a client SDK in the language of your choice - we generate some client SDKs automatically:\n\n- [Python](https://framagit.org/framasoft/peertube/clients/python)\n- [Go](https://framagit.org/framasoft/peertube/clients/go)\n- [Kotlin](https://framagit.org/framasoft/peertube/clients/kotlin)\n\nSee the [REST API quick start](https://docs.joinpeertube.org/api/rest-getting-started) for a few\nexamples of using the PeerTube API.\n\n# Authentication\n\nWhen you sign up for an account on a PeerTube instance, you are given the possibility\nto generate sessions on it, and authenticate there using an access token. Only __one\naccess token can currently be used at a time__.\n\n## Roles\n\nAccounts are given permissions based on their role. There are three roles on\nPeerTube: Administrator, Moderator, and User. See the [roles guide](https://docs.joinpeertube.org/admin/managing-users#roles) for a detail of their permissions.\n\n# Errors\n\nThe API uses standard HTTP status codes to indicate the success or failure\nof the API call, completed by a [RFC7807-compliant](https://tools.ietf.org/html/rfc7807) response body.\n\n```\nHTTP 1.1 404 Not Found\nContent-Type: application/problem+json; charset=utf-8\n\n{\n  \"detail\": \"Video not found\",\n  \"docs\": \"https://docs.joinpeertube.org/api/rest-reference.html#operation/getVideo\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"type\": \"about:blank\"\n}\n```\n\nWe provide error `type` values for [a growing number of cases](https://github.com/Chocobozzz/PeerTube/blob/develop/shared/models/server/server-error-code.enum.ts),\nbut it is still optional. Types are used to disambiguate errors that bear the same status code\nand are non-obvious:\n\n```\nHTTP 1.1 403 Forbidden\nContent-Type: application/problem+json; charset=utf-8\n\n{\n  \"detail\": \"Cannot get this video regarding follow constraints\",\n  \"docs\": \"https://docs.joinpeertube.org/api/rest-reference.html#operation/getVideo\",\n  \"status\": 403,\n  \"title\": \"Forbidden\",\n  \"type\": \"https://docs.joinpeertube.org/api/rest-reference.html#section/Errors/does_not_respect_follow_constraints\"\n}\n```\n\nHere a 403 error could otherwise mean that the video is private or blocklisted.\n\n### Validation errors\n\nEach parameter is evaluated on its own against a set of rules before the route validator\nproceeds with potential testing involving parameter combinations. Errors coming from validation\nerrors appear earlier and benefit from a more detailed error description:\n\n```\nHTTP 1.1 400 Bad Request\nContent-Type: application/problem+json; charset=utf-8\n\n{\n  \"detail\": \"Incorrect request parameters: id\",\n  \"docs\": \"https://docs.joinpeertube.org/api/rest-reference.html#operation/getVideo\",\n  \"instance\": \"/api/v1/videos/9c9de5e8-0a1e-484a-b099-e80766180\",\n  \"invalid-params\": {\n    \"id\": {\n      \"location\": \"params\",\n      \"msg\": \"Invalid value\",\n      \"param\": \"id\",\n      \"value\": \"9c9de5e8-0a1e-484a-b099-e80766180\"\n    }\n  },\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"type\": \"about:blank\"\n}\n```\n\nWhere `id` is the name of the field concerned by the error, within the route definition.\n`invalid-params.<field>.location` can be either 'params', 'body', 'header', 'query' or 'cookies', and\n`invalid-params.<field>.value` reports the value that didn't pass validation whose `invalid-params.<field>.msg`\nis about.\n\n### Deprecated error fields\n\nSome fields could be included with previous versions. They are still included but their use is deprecated:\n- `error`: superseded by `detail`\n- `code`: superseded by `type` (which is now an URI)\n\n# Rate limits\n\nWe are rate-limiting all endpoints of PeerTube's API. Custom values can be set by administrators:\n\n| Endpoint (prefix: `/api/v1`) | Calls         | Time frame   |\n|------------------------------|---------------|--------------|\n| `/*`                         | 50            | 10 seconds   |\n| `POST /users/token`          | 15            | 5 minutes    |\n| `POST /users/register`       | 2<sup>*</sup> | 5 minutes    |\n| `POST /users/ask-send-verify-email` | 3      | 5 minutes    |\n\nDepending on the endpoint, <sup>*</sup>failed requests are not taken into account. A service\nlimit is announced by a `429 Too Many Requests` status code.\n\nYou can get details about the current state of your rate limit by reading the\nfollowing headers:\n\n| Header                  | Description                                                |\n|-------------------------|------------------------------------------------------------|\n| `X-RateLimit-Limit`     | Number of max requests allowed in the current time period  |\n| `X-RateLimit-Remaining` | Number of remaining requests in the current time period    |\n| `X-RateLimit-Reset`     | Timestamp of end of current time period as UNIX timestamp  |\n| `Retry-After`           | Seconds to delay after the first `429` is received         |\n\n# CORS\n\nThis API features [Cross-Origin Resource Sharing (CORS)](https://fetch.spec.whatwg.org/),\nallowing cross-domain communication from the browser for some routes:\n\n| Endpoint                    |\n|------------------------- ---|\n| `/api/*`                    |\n| `/download/*`               |\n| `/lazy-static/*`            |\n| `/.well-known/webfinger`    |\n\nIn addition, all routes serving ActivityPub are CORS-enabled for all origins.\n",
+        "license": {
+          "name": "AGPLv3.0",
+          "url": "https://github.com/Chocobozzz/PeerTube/blob/master/LICENSE"
+        },
+        "title": "PeerTube",
+        "version": "5.1.0",
+        "x-apisguru-categories": [
+          "social"
+        ],
+        "x-logo": {
+          "altText": "PeerTube Project Homepage",
+          "url": "https://api.apis.guru/v2/cache/logo/https_joinpeertube.org_img_brand.png"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Chocobozzz/PeerTube/develop/support/doc/api/openapi.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "cpy.re",
+        "x-serviceName": "peertube"
+      },
+      "externalDocs": {
+        "url": "https://docs.joinpeertube.org/api/rest-reference.html"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/cpy.re/peertube/5.1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/cpy.re/peertube/5.1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/cpy.re:peertube/5.1.0.json"
+    }
+  }
+}

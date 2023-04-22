@@ -1,0 +1,2180 @@
+openapi: 3.0.3
+servers:
+  - url: https://api.nowpayments.io
+  - url: https://api.nowpayments.ioo
+info:
+  contact: {}
+  description: |-
+    NOWPayments is a non-custodial cryptocurrency payment processing platform. Accept payments in a wide range of cryptos and get them instantly converted into a coin of your choice and sent to your wallet. Keeping it simple – no excess.
+
+    # Sandbox
+
+    Before production usage, you can test our API using the Sandbox. Details can be found [here](https://documenter.getpostman.com/view/7907941/T1LSCRHC)
+
+    # Authentication
+
+    To use the NOWPayments API you should do the following:
+
+    *   Sign up at [nowpayments.io](https://nowpayments.io)
+    *   Specify your outcome wallet
+    *   Generate an API key
+        
+
+    # Standard e-commerce flow for NOWPayments API:
+
+    1.  API - Check API availability with the ["GET API status"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#9998079f-dcc8-4e07-9ac7-3d52f0fd733a) method. If required, check the list of available payment currencies with the ["GET available currencies"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#1c268f89-4fe7-471e-81b4-5a3153577b73) method.
+    2.  UI - Ask a customer to select item/items for purchase to determine the total sum;
+    3.  UI - Ask a customer to select payment currency
+    4.  API - Get the minimum payment amount for the selected currency pair (payment currency to your Outcome Wallet currency) with the ["GET Minimum payment amount"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#41b02221-2d58-4fcf-9529-59d3763d6434) method;
+    5.  API - Get the estimate of the total amount in crypto with ["GET Estimated price"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#7025cacf-7040-4c7b-a83f-f9ff0a22a822) and check that it is larger than the minimum payment amount from step 4;
+    6.  API - Call the ["POST Create payment"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#5e37f3ad-0fa1-4292-af51-5c7f95730486) method to create a payment and get the deposit address (in our example, the generated BTC wallet address is returned from this method);
+    7.  UI - Ask a customer to send the payment to the generated deposit address (in our example, user has to send BTC coins);
+    8.  UI - A customer sends coins, NOWPayments processes and exchanges them (if required), and settles the payment to your Outcome Wallet (in our example, to your ETH address);
+    9.  API - You can get the payment status either via our IPN callbacks or manually, using ["GET Payment Status"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#0b77a8e3-2344-4760-a0bd-247da067db6d) and display it to a customer so that they know when their payment has been processed.
+    10.  API - you call the list of payments made to your account via the ["GET List of payments"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#c8399c0e-d798-4f01-83ae-ddaa6905c2da) method. Additionally, you can see all of this information in your [Account](https://account.nowpayments.io/payments) on NOWPayments website.
+        
+
+    ## Alternative flow
+
+    1.  API - Check API availability with the ["GET API status"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#9998079f-dcc8-4e07-9ac7-3d52f0fd733a) method. If required, check the list of available payment currencies with the ["GET available currencies"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#1c268f89-4fe7-471e-81b4-5a3153577b73) method.
+    2.  UI - Ask a customer to select item/items for purchase to determine the total sum;
+    3.  UI - Ask a customer to select payment currency
+    4.  API - Get the minimum payment amount for the selected currency pair (payment currency to your Outcome Wallet currency) with the ["GET Minimum payment amount"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#41b02221-2d58-4fcf-9529-59d3763d6434) method;
+    5.  API - Get the estimate of the total amount in crypto with ["GET Estimated price"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#7025cacf-7040-4c7b-a83f-f9ff0a22a822) and check that it is larger than the minimum payment amount from step 4;
+    6.  API - Call the ["POST Create Invoice](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#3e3ce25e-f43f-4636-bbd9-11560e46048b) method to create an invoice. Set "success_url" - parameter so that the user will be redirected to your website after successful payment.
+    7.  UI - display the invoice url or redirect the user to the generated link.
+    8.  NOWPayments - the customer completes the payment and is redirected back to your website (only if "success_url" parameter is configured correctly!).
+    9.  API - You can get the payment status either via our IPN callbacks or manually, using ["GET Payment Status"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#0b77a8e3-2344-4760-a0bd-247da067db6d) and display it to a customer so that they know when their payment has been processed.
+    10.  API - you call the list of payments made to your account via the ["GET List of payments"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#c8399c0e-d798-4f01-83ae-ddaa6905c2da) method. Additionally, you can see all of this information in your [Account](https://account.nowpayments.io/invoices) on NOWPayments website.
+        
+
+    # API Documentation
+
+    ## Instant Payments Notifications
+
+    IPN (Instant payment notifications, or callbacks) are used to notify you when transaction status is changed.  
+    To use them, you should complete the following steps:
+
+    1.  Generate and save the IPN Secret key in Store Settings tab at the Dashboard.
+    2.  Insert your URL address where you want to get callbacks in create_payment request. The parameter name is ipn_callback_url. You will receive payment updates (statuses) to this URL address.
+    3.  You will receive all the parameters at the URL address you specified in (2) by POST request.  
+        The POST request will contain the *x-nowpayments-sig* parameter in the header.  
+        The body of the request is similiar to a [get payment status](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#0b77a8e3-2344-4760-a0bd-247da067db6d) response body.  
+        Example:  
+        {"payment_id":5077125051,"payment_status":"waiting","pay_address":"0xd1cDE08A07cD25adEbEd35c3867a59228C09B606","price_amount":170,"price_currency":"usd","pay_amount":155.38559757,"actually_paid":0,"pay_currency":"mana","order_id":"2","order_description":"Apple Macbook Pro 2019 x 1","purchase_id":"6084744717","created_at":"2021-04-12T14:22:54.942Z","updated_at":"2021-04-12T14:23:06.244Z","outcome_amount":1131.7812095,"outcome_currency":"trx"}
+    4.  Sort all the parameters from the POST request in alphabetical order.
+    5.  Convert them to string using  
+        [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) (params, Object.keys(params).sort()) or the same function.
+    6.  Sign a string with an IPN-secret key with HMAC and sha-512 key
+    7.  Compare the signed string from the previous step with the x-nowpayments-sig , which is stored in the header of the callback request.  
+        If these strings are similar it is a success.  
+        Otherwise, contact us on [support@nowpayments.io](mailto:support@nowpayments.io) to solve the problem.
+        
+
+    Example of creating a signed string at Node.JS
+
+    ```
+    const hmac = crypto.createHmac('sha512', notificationsKey);
+    hmac.update(JSON.stringify(params, Object.keys(params).sort()));
+    const signature = hmac.digest('hex');
+
+    ```
+
+    Example of comparing signed strings in PHP
+
+    ```
+    function check_ipn_request_is_valid()
+        {
+            $error_msg = "Unknown error";
+            $auth_ok = false;
+            $request_data = null;
+            if (isset($_SERVER['HTTP_X_NOWPAYMENTS_SIG']) && !empty($_SERVER['HTTP_X_NOWPAYMENTS_SIG'])) {
+                $recived_hmac = $_SERVER['HTTP_X_NOWPAYMENTS_SIG'];
+                $request_json = file_get_contents('php://input');
+                $request_data = json_decode($request_json, true);
+                ksort($request_data);
+                $sorted_request_json = json_encode($request_data, JSON_UNESCAPED_SLASHES);
+                if ($request_json !== false && !empty($request_json)) {
+                    $hmac = hash_hmac("sha512", $sorted_request_json, trim($this->ipn_secret));
+                    if ($hmac == $recived_hmac) {
+                        $auth_ok = true;
+                    } else {
+                        $error_msg = 'HMAC signature does not match';
+                    }
+                } else {
+                    $error_msg = 'Error reading POST data';
+                }
+            } else {
+                $error_msg = 'No HMAC signature sent.';
+            }
+        }
+
+    ```
+
+    ## Recurrent payment notifications
+
+    If an error is detected, the payment is flagged and will receive additional recurrent notifications (number of recurrent notifications can be changed in your Store Settings-> Instant Payment Notifications).
+
+    If an error is received again during processing of the payment, recurrent notifications will be initiated again.
+
+    Example: "Timeout" is set to 1 minute and "Number of recurrent notifications" is set to 3.
+
+    Once an error is detected, you will receive 3 notifications at 1 minute intervals.
+
+    ## Several payments for one order
+
+    If you want to create several payments for one Order you should do the following:
+
+    *   Create a payment for the full order amount.
+    *   Save "purchase_id" which will be in "create_payment" response
+    *   Create next payment or payments with this "purchase_id" in "create_payment" request.
+    *   **Only works for partially_paid payments**
+        
+
+    It may be useful if you want to give your customers opportunity to pay a full order with several payments, for example, one part in BTC and one part in ETH. Also, if your customer accidentally paid you only part of a full amount, you can automatically ask them to make another payment.
+
+    ## Packages
+
+    Please find our out-of-the box packages for easy integration below:
+
+    [JavaScript package](https://www.npmjs.com/package/@nowpaymentsio/nowpayments-api-js)
+
+    \[PHP package\]  
+    ([https://packagist.org/packages/nowpayments/nowpayments-api-php](https://packagist.org/packages/nowpayments/nowpayments-api-php))
+
+    More coming soon!
+
+    ## Payments
+  title: NOWPayments API
+  version: 1.0.0
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_pbs.twimg.com_profile_images_1351091723833909248_9Jqk2Tiu_400x400.jpg
+  x-origin:
+    - format: postman
+      url: https://www.postman.com/collections/7907941-9f217404-4263-42ad-b6b1-03a3d95b7d22-S1a32n38
+      version: 2.x
+  x-providerName: nowpayments.io
+tags:
+  - description: |-
+      Streamline your workflows by sending payments to your customers on a regular basis with NOWPayments.  
+      This feature involves creating a plan for payments and individual recurring payments for each user.  
+      First you need to create a Recurring Payment plan:
+    name: Recurring Payments API (Email Subscriptions feature)
+  - description: NOWPayments allows you to create sub-partner accounts for your users, enabling full-fledged crypto billing solution.
+    name: Billing (sub-partner API)
+  - name: Payments API
+  - name: Currencies
+  - name: Payouts API
+paths:
+  /v1/estimate:
+    get:
+      description: |-
+        This is a method for calculating the approximate price in cryptocurrency for a given value in Fiat currency. You will need to provide the initial cost in the Fiat currency (amount, currency_from) and the necessary cryptocurrency (currency_to)
+        Currently following fiat currencies are available: usd, eur, nzd, brl, gbp.
+      operationId: getEstimatedPrice
+      parameters:
+        - in: query
+          name: amount
+          schema:
+            example: "3999.5000"
+            type: string
+        - in: query
+          name: currency_from
+          schema:
+            example: usd
+            type: string
+        - in: query
+          name: currency_to
+          schema:
+            example: btc
+            type: string
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    amount_from: 3999.5
+                    currency_from: usd
+                    currency_to: btc
+                    estimated_amount: 0.17061637
+              schema:
+                properties:
+                  amount_from:
+                    example: 3999.5
+                    type: number
+                  currency_from:
+                    example: usd
+                    type: string
+                  currency_to:
+                    example: btc
+                    type: string
+                  estimated_amount:
+                    example: 0.17061637
+                    type: number
+                type: object
+          description: "200"
+          headers:
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 605abb081ca11669-ARN
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Tue, 22 Dec 2020 15:03:37 GMT
+                type: string
+            Expect-CT:
+              schema:
+                example: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+                type: string
+            NEL:
+              schema:
+                example: '{"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=Be6PnrVenND3qBzQJTWszI2slyEd9pXNhEyFMkukSYUC1m3om7zFPg%2BQq%2F6xT2ridpvoQiRE5q8CWGblOvjJ7%2Bup%2B3ZwGuN7TNvHk04WYiWIlRk%3D"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: cloudflare
+                type: string
+            Strict-Transport-Security:
+              schema:
+                example: max-age=15768000
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            Vary:
+              schema:
+                example: Origin
+                type: string
+            X-Content-Type-Options:
+              schema:
+                example: nosniff
+                type: string
+            X-DNS-Prefetch-Control:
+              schema:
+                example: off
+                type: string
+            X-Download-Options:
+              schema:
+                example: noopen
+                type: string
+            X-Frame-Options:
+              schema:
+                example: SAMEORIGIN
+                type: string
+            X-XSS-Protection:
+              schema:
+                example: 1; mode=block
+                type: string
+            cf-request-id:
+              schema:
+                example: 072c9339110000166928295000000001
+                type: string
+      summary: Get estimated price
+      tags:
+        - Payments API
+  /v1/min-amount:
+    get:
+      description: |-
+        Get the minimum payment amount for a specific pair.
+
+        You can provide both currencies in the pair or just currency\_from, and we will calculate the minimum payment amount for currency\_from and currency which you have specified as the outcome in the Store Settings.
+
+        You can also specify one of the fiat currencies in the currency\_from. In this case, the minimum payment will be calculated in this fiat currency.
+
+        You can also add field fiat\_equivalent (optional field) to get the fiat equivalent of the minimum amount.
+
+        In the case of several outcome wallets we will calculate the minimum amount in the same way we route your payment to a specific wallet.
+      operationId: getTheMinimumPaymentAmount
+      parameters:
+        - in: query
+          name: currency_from
+          schema:
+            example: eth
+            type: string
+        - in: query
+          name: currency_to
+          schema:
+            example: trx
+            type: string
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    currency_from: eth
+                    currency_to: trx
+                    fiat_equivalent: 35.40626584
+                    min_amount: 0.0078999
+              schema:
+                properties:
+                  currency_from:
+                    example: eth
+                    type: string
+                  currency_to:
+                    example: trx
+                    type: string
+                  fiat_equivalent:
+                    example: 35.40626584
+                    type: number
+                  min_amount:
+                    example: 0.0078999
+                    type: number
+                type: object
+          description: "200"
+          headers:
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 605abd48af901669-ARN
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Tue, 22 Dec 2020 15:05:09 GMT
+                type: string
+            Expect-CT:
+              schema:
+                example: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+                type: string
+            NEL:
+              schema:
+                example: '{"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=JE3EB5TyT0ppi%2B%2FTPlGcGUDcr2ry9EL%2BhHtpB8%2BYtZMjD087RoOl6UD9284JzS7VANH4ZivF8A7jHMl42n8GLxJL1u7fyKvugNSiViphSjgmGKc%3D"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: cloudflare
+                type: string
+            Strict-Transport-Security:
+              schema:
+                example: max-age=15768000
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            Vary:
+              schema:
+                example: Origin
+                type: string
+            X-Content-Type-Options:
+              schema:
+                example: nosniff
+                type: string
+            X-DNS-Prefetch-Control:
+              schema:
+                example: off
+                type: string
+            X-Download-Options:
+              schema:
+                example: noopen
+                type: string
+            X-Frame-Options:
+              schema:
+                example: SAMEORIGIN
+                type: string
+            X-XSS-Protection:
+              schema:
+                example: 1; mode=block
+                type: string
+            cf-request-id:
+              schema:
+                example: 072c94a16a0000166954256000000001
+                type: string
+      summary: Get the minimum payment amount
+      tags:
+        - Payments API
+  /v1/payment/:
+    get:
+      description: |-
+        Returns the entire list of all transactions, created with certain API key.
+        The list of optional parameters:
+        - limit - number of records in one page. (possible values: from 1 to 500)
+        - page - the page number you want to get (possible values: from 0 to **page count - 1**)
+        - sortBy - sort the received list by a paramenter. Set to **created_at** by default (possible values: payment_id, payment_status, pay_address, price_amount, price_currency, pay_amount, actually_paid, pay_currency, order_id, order_description, purchase_id, outcome_amount, outcome_currency)
+        - orderBy - display the list in ascending or descending order. Set to **asc** by default (possible values: asc, desc)
+        - dateFrom - select the displayed period start date (date format: YYYY-MM-DD or yy-MM-ddTHH:mm:ss.SSSZ).
+        - dateTo - select the displayed period end date (date format: YYYY-MM-DD or yy-MM-ddTHH:mm:ss.SSSZ).
+      operationId: getListOfPayments
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            example: "10"
+            type: string
+        - in: query
+          name: page
+          schema:
+            example: "0"
+            type: string
+        - in: query
+          name: sortBy
+          schema:
+            example: created_at
+            type: string
+        - in: query
+          name: orderBy
+          schema:
+            example: asc
+            type: string
+        - in: query
+          name: dateFrom
+          schema:
+            example: 2020-01-01
+            type: string
+        - in: query
+          name: dateTo
+          schema:
+            example: 2021-01-01
+            type: string
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    data:
+                      - actually_paid: 180
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 178.9005
+                        outcome_currency: trx
+                        pay_address: TNDFkiSmBQorNFacb3735q8MnT29sn8BLn
+                        pay_amount: 165.652609
+                        pay_currency: trx
+                        payment_id: 5524759814
+                        payment_status: finished
+                        price_amount: 5
+                        price_currency: usd
+                        purchase_id: "4944856743"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 164.6248468
+                        outcome_currency: trx
+                        pay_address: TVKHbLc47BnMbdE7QN4X5Q1FtyZLGGiTo8
+                        pay_amount: 165.652609
+                        pay_currency: trx
+                        payment_id: 5867063509
+                        payment_status: expired
+                        price_amount: 5
+                        price_currency: usd
+                        purchase_id: "5057851130"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 0.1687052
+                        outcome_currency: btc
+                        pay_address: 3EZ2uTdVDAMFXTfc6uLDDKR6o8qKBZXVkj
+                        pay_amount: 0.17070286
+                        pay_currency: btc
+                        payment_id: 5745459419
+                        payment_status: waiting
+                        price_amount: 3999.5
+                        price_currency: usd
+                        purchase_id: "5837122679"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 0.8019402
+                        outcome_currency: btc
+                        pay_address: 394UZCUdx3NN8VDsCZW8c6AzP7cXEXA8Xq
+                        pay_amount: 0.8102725
+                        pay_currency: btc
+                        payment_id: 4650948408
+                        payment_status: waiting
+                        price_amount: 3999.5
+                        price_currency: usd
+                        purchase_id: "5094859409"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 988.9016296
+                        outcome_currency: bcd
+                        pay_address: 3EWJaZBaRWbPjSBTpgFcvxpnXLJzFDCHqW
+                        pay_amount: 993.87178656
+                        pay_currency: bcd
+                        payment_id: 5605634688
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "5817305007"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 1.8451261
+                        outcome_currency: bch
+                        pay_address: qzkshdh94vhdcyuejjf8ltcy2cl246hw0c68t36z69
+                        pay_amount: 1.85459941
+                        pay_currency: bch
+                        payment_id: 5241856814
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "5941190675"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 56.151958
+                        outcome_currency: btg
+                        pay_address: AYyecr8WKVpj2PNonjyUpn9sCHFyFMLdN1
+                        pay_amount: 56.4344495
+                        pay_currency: btg
+                        payment_id: 5751462089
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "6229667127"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 489.9433465
+                        outcome_currency: dai
+                        pay_address: "0x6C3E920D0fdAF45c75b6c00f25Aa6a58429d4efB"
+                        pay_amount: 496.84604252
+                        pay_currency: dai
+                        payment_id: 6100223670
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "5376931412"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 0.025819
+                        outcome_currency: btc
+                        pay_address: 3C85TUuBKEkoZZsTawiJhYZtVVLgE4GWqj
+                        pay_amount: 0.02596608
+                        pay_currency: btc
+                        payment_id: 4460859238
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "5652098489"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 153789.0997188
+                        outcome_currency: doge
+                        pay_address: DLmK6vLURgHoWVZrQztthSqV71CBePG5k5
+                        pay_amount: 154569.92936569
+                        pay_currency: doge
+                        payment_id: 4948632928
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "4811984625"
+                    limit: 10
+                    page: 0
+                    pagesCount: 6
+                    total: 59
+              schema:
+                properties:
+                  data:
+                    example:
+                      - actually_paid: 180
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 178.9005
+                        outcome_currency: trx
+                        pay_address: TNDFkiSmBQorNFacb3735q8MnT29sn8BLn
+                        pay_amount: 165.652609
+                        pay_currency: trx
+                        payment_id: 5524759814
+                        payment_status: finished
+                        price_amount: 5
+                        price_currency: usd
+                        purchase_id: "4944856743"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 164.6248468
+                        outcome_currency: trx
+                        pay_address: TVKHbLc47BnMbdE7QN4X5Q1FtyZLGGiTo8
+                        pay_amount: 165.652609
+                        pay_currency: trx
+                        payment_id: 5867063509
+                        payment_status: expired
+                        price_amount: 5
+                        price_currency: usd
+                        purchase_id: "5057851130"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 0.1687052
+                        outcome_currency: btc
+                        pay_address: 3EZ2uTdVDAMFXTfc6uLDDKR6o8qKBZXVkj
+                        pay_amount: 0.17070286
+                        pay_currency: btc
+                        payment_id: 5745459419
+                        payment_status: waiting
+                        price_amount: 3999.5
+                        price_currency: usd
+                        purchase_id: "5837122679"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 0.8019402
+                        outcome_currency: btc
+                        pay_address: 394UZCUdx3NN8VDsCZW8c6AzP7cXEXA8Xq
+                        pay_amount: 0.8102725
+                        pay_currency: btc
+                        payment_id: 4650948408
+                        payment_status: waiting
+                        price_amount: 3999.5
+                        price_currency: usd
+                        purchase_id: "5094859409"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 988.9016296
+                        outcome_currency: bcd
+                        pay_address: 3EWJaZBaRWbPjSBTpgFcvxpnXLJzFDCHqW
+                        pay_amount: 993.87178656
+                        pay_currency: bcd
+                        payment_id: 5605634688
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "5817305007"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 1.8451261
+                        outcome_currency: bch
+                        pay_address: qzkshdh94vhdcyuejjf8ltcy2cl246hw0c68t36z69
+                        pay_amount: 1.85459941
+                        pay_currency: bch
+                        payment_id: 5241856814
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "5941190675"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 56.151958
+                        outcome_currency: btg
+                        pay_address: AYyecr8WKVpj2PNonjyUpn9sCHFyFMLdN1
+                        pay_amount: 56.4344495
+                        pay_currency: btg
+                        payment_id: 5751462089
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "6229667127"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 489.9433465
+                        outcome_currency: dai
+                        pay_address: "0x6C3E920D0fdAF45c75b6c00f25Aa6a58429d4efB"
+                        pay_amount: 496.84604252
+                        pay_currency: dai
+                        payment_id: 6100223670
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "5376931412"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 0.025819
+                        outcome_currency: btc
+                        pay_address: 3C85TUuBKEkoZZsTawiJhYZtVVLgE4GWqj
+                        pay_amount: 0.02596608
+                        pay_currency: btc
+                        payment_id: 4460859238
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "5652098489"
+                      - actually_paid: 0
+                        order_description: Apple Macbook Pro 2019 x 1
+                        order_id: RGDBP-21314
+                        outcome_amount: 153789.0997188
+                        outcome_currency: doge
+                        pay_address: DLmK6vLURgHoWVZrQztthSqV71CBePG5k5
+                        pay_amount: 154569.92936569
+                        pay_currency: doge
+                        payment_id: 4948632928
+                        payment_status: expired
+                        price_amount: 500
+                        price_currency: usd
+                        purchase_id: "4811984625"
+                    items:
+                      properties:
+                        actually_paid:
+                          example: 180
+                          type: number
+                        order_description:
+                          example: Apple Macbook Pro 2019 x 1
+                          type: string
+                        order_id:
+                          example: RGDBP-21314
+                          type: string
+                        outcome_amount:
+                          example: 178.9005
+                          type: number
+                        outcome_currency:
+                          example: trx
+                          type: string
+                        pay_address:
+                          example: TNDFkiSmBQorNFacb3735q8MnT29sn8BLn
+                          type: string
+                        pay_amount:
+                          example: 165.652609
+                          type: number
+                        pay_currency:
+                          example: trx
+                          type: string
+                        payment_id:
+                          example: 5524759814
+                          type: number
+                        payment_status:
+                          example: finished
+                          type: string
+                        price_amount:
+                          example: 5
+                          type: number
+                        price_currency:
+                          example: usd
+                          type: string
+                        purchase_id:
+                          example: "4944856743"
+                          type: string
+                      type: object
+                    type: array
+                  limit:
+                    example: 10
+                    type: number
+                  page:
+                    example: 0
+                    type: number
+                  pagesCount:
+                    example: 6
+                    type: number
+                  total:
+                    example: 59
+                    type: number
+                type: object
+          description: "200"
+          headers:
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 605abddd7db41669-ARN
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Tue, 22 Dec 2020 15:05:33 GMT
+                type: string
+            Expect-CT:
+              schema:
+                example: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+                type: string
+            NEL:
+              schema:
+                example: '{"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=4Sj25uNN8wdCtby0RbHx%2FbSLll68tMBpk%2FVG%2BQxVvo3wGnCf6Zu1DPFpwjsTBVasLRcoOsZVemVR6eVlvGP3HF9uJ1VOuaj%2Be9TCiwikq16Y5Vg%3D"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: cloudflare
+                type: string
+            Strict-Transport-Security:
+              schema:
+                example: max-age=15768000
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            Vary:
+              schema:
+                example: Origin
+                type: string
+            X-Content-Type-Options:
+              schema:
+                example: nosniff
+                type: string
+            X-DNS-Prefetch-Control:
+              schema:
+                example: off
+                type: string
+            X-Download-Options:
+              schema:
+                example: noopen
+                type: string
+            X-Frame-Options:
+              schema:
+                example: SAMEORIGIN
+                type: string
+            X-XSS-Protection:
+              schema:
+                example: 1; mode=block
+                type: string
+            cf-request-id:
+              schema:
+                example: 072c94fe6c00001669e783e000000001
+                type: string
+      summary: Get list of payments
+      tags:
+        - Payments API
+  "/v1/payment/{id}/update-merchant-estimate":
+    parameters:
+      - description: payment ID, for which you want to get the estimate
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    post:
+      description: |-
+        This endpoint is required to get the current estimate on the payment, and update the current estimate.  
+        Please note! Calling this estimate before `expiration_estimate_date` will return the current estimate, it won’t be updated.
+
+        `:id` \- payment ID, for which you want to get the estimate
+
+        Response:  
+        `id` \- payment ID  
+        `token_id` - id of api key used to create this payment (please discard this parameter)  
+        `pay_amount` - payment estimate, the exact amount the user will have to send to complete the payment  
+        `expiration_estimate_date` - expiration date of this estimate
+      operationId: getUpdatePaymentEstimate
+      parameters:
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    expiration_estimate_date: 2022-08-12T13:14:28.536Z
+                    id: "4455667788"
+                    pay_amount: 0.04671013
+                    token_id: "5566778899"
+              schema:
+                properties:
+                  expiration_estimate_date:
+                    example: 2022-08-12T13:14:28.536Z
+                    type: string
+                  id:
+                    example: "4455667788"
+                    type: string
+                  pay_amount:
+                    example: 0.04671013
+                    type: number
+                  token_id:
+                    example: "5566778899"
+                    type: string
+                type: object
+          description: "200"
+          headers:
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 73995c778c69c2e1-VIE
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Fri, 12 Aug 2022 12:54:43 GMT
+                type: string
+            Expect-CT:
+              schema:
+                example: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+                type: string
+            NEL:
+              schema:
+                example: '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=UlD77RlowCWTg1qTZ2LeHmo1PgG3zxPObaiXYfhalA0YMLx%2BN07RVybi%2BZ%2BM4TkZr5jAjyQN5IMEcOW88%2FFqbuIQhrYnNXIBWUq6QwBFc4nG3FZMlvkLybT0QbYxAutJE4b1rL8%3D"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: cloudflare
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            alt-svc:
+              schema:
+                example: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+                type: string
+            strict-transport-security:
+              schema:
+                example: max-age=15768000
+                type: string
+            vary:
+              schema:
+                example: Origin, Accept-Encoding
+                type: string
+            x-content-type-options:
+              schema:
+                example: nosniff
+                type: string
+            x-dns-prefetch-control:
+              schema:
+                example: off
+                type: string
+            x-download-options:
+              schema:
+                example: noopen
+                type: string
+            x-frame-options:
+              schema:
+                example: SAMEORIGIN
+                type: string
+            x-xss-protection:
+              schema:
+                example: 1; mode=block
+                type: string
+      summary: Get/Update payment estimate
+      tags:
+        - Payments API
+  "/v1/payment/{payment_id}":
+    get:
+      description: |-
+        Get the actual information about the payment. You need to provide the ID of the payment in the request.
+
+        NOTE! You should make the get payment status request with the same API key that you used in the create payment request.
+        Here is the list of avalable statuses:
+        - waiting - waiting for the customer to send the payment. The initial status of each payment.
+        - confirming - the transaction is being processed on the blockchain. Appears when NOWPayments detect the funds from the user on the blockchain.
+        - confirmed -  the process is confirmed by the blockchain. Customer’s funds have accumulated enough confirmations.
+        - sending - the funds are being sent to your personal wallet. We are in the process of sending the funds to you.
+        - partially_paid -  it shows that the customer sent the less than the actual price. Appears when the funds have arrived in your wallet.
+        - finished - the funds have reached your personal address and the payment is finished.
+        - failed -  the payment wasn't completed due to the error of some kind.
+        - refunded -  the funds were refunded back to the user.
+        - expired - the user didn't send the funds to the specified address in the 24 hour time window.
+
+        Additional info:
+        - outcome_amount - this parameter shows the amount that will be (or is already) received on your Outcome Wallet once the transaction is settled.
+        - outcome_currency - this parameter shows the currency in which the transaction will be settled.
+        - invoice_id - this parameter shows invoice ID from which the payment was created
+      operationId: getPaymentStatus
+      parameters:
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    actually_paid: 180
+                    created_at: 2020-12-16T14:30:43.306Z
+                    order_description: Apple Macbook Pro 2019 x 1
+                    order_id: RGDBP-21314
+                    outcome_amount: 178.9005
+                    outcome_currency: trx
+                    pay_address: TNDFkiSmBQorNFacb3735q8MnT29sn8BLn
+                    pay_amount: 165.652609
+                    pay_currency: trx
+                    payment_id: 5524759814
+                    payment_status: finished
+                    price_amount: 5
+                    price_currency: usd
+                    purchase_id: "4944856743"
+                    updated_at: 2020-12-16T14:40:46.523Z
+              schema:
+                properties:
+                  actually_paid:
+                    example: 180
+                    type: number
+                  created_at:
+                    example: 2020-12-16T14:30:43.306Z
+                    type: string
+                  order_description:
+                    example: Apple Macbook Pro 2019 x 1
+                    type: string
+                  order_id:
+                    example: RGDBP-21314
+                    type: string
+                  outcome_amount:
+                    example: 178.9005
+                    type: number
+                  outcome_currency:
+                    example: trx
+                    type: string
+                  pay_address:
+                    example: TNDFkiSmBQorNFacb3735q8MnT29sn8BLn
+                    type: string
+                  pay_amount:
+                    example: 165.652609
+                    type: number
+                  pay_currency:
+                    example: trx
+                    type: string
+                  payment_id:
+                    example: 5524759814
+                    type: number
+                  payment_status:
+                    example: finished
+                    type: string
+                  price_amount:
+                    example: 5
+                    type: number
+                  price_currency:
+                    example: usd
+                    type: string
+                  purchase_id:
+                    example: "4944856743"
+                    type: string
+                  updated_at:
+                    example: 2020-12-16T14:40:46.523Z
+                    type: string
+                type: object
+          description: "200"
+          headers:
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 60294baa3828fe40-HEL
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Wed, 16 Dec 2020 15:04:13 GMT
+                type: string
+            Expect-CT:
+              schema:
+                example: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+                type: string
+            NEL:
+              schema:
+                example: '{"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=zEbhqHJbg3q36U8j53OXNXd%2Bko6cS9sMgMStn1FBVWWkPsG8UrIRJyCEhmY1qK%2FXx3U%2FGPx54%2BOtE2Btl8ZwU9i9wZ%2BJkAo8q7FqZydfMMQgcb4%3D"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: cloudflare
+                type: string
+            Strict-Transport-Security:
+              schema:
+                example: max-age=15768000
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            Vary:
+              schema:
+                example: Origin
+                type: string
+            X-Content-Type-Options:
+              schema:
+                example: nosniff
+                type: string
+            X-DNS-Prefetch-Control:
+              schema:
+                example: off
+                type: string
+            X-Download-Options:
+              schema:
+                example: noopen
+                type: string
+            X-Frame-Options:
+              schema:
+                example: SAMEORIGIN
+                type: string
+            X-XSS-Protection:
+              schema:
+                example: 1; mode=block
+                type: string
+            cf-request-id:
+              schema:
+                example: 070dad9e670000fe402dae0000000001
+                type: string
+      summary: Get payment status
+      tags:
+        - Payments API
+    parameters:
+      - in: path
+        name: payment_id
+        required: true
+        schema:
+          type: string
+  "/v1/payout/{withdrawals-id}/verify":
+    parameters:
+      - in: path
+        name: withdrawals-id
+        required: true
+        schema:
+          example: "5000000191"
+          type: string
+    post:
+      description: |-
+        This method is required to verify payouts by using your 2fa code.  
+        You’ll have 10 attempts to verify the payout. If it is not verified after 10 attempts, the payout will remain in ‘creating’ status.  
+        Payout will be processed only when it is verified.
+
+        Make sure to have your 2fa authentication enabled in your NOWPayments Account (in Account Settings).  
+        When 2fa is disabled, the code automatically goes to your registration email.  
+        The code sent by email is valid for one hour.
+
+        Next is a description of the required request fields:
+
+        - :batch-withdrawal-id - payout id you received in `2. Create payout` method
+        - verification_code - 2fa code you received with your Google Auth app or via email
+            
+
+        In order to establish an automatic verification of payouts, you should switch 2FA through the application.  
+        There are several libraries for different frameworks aimed on generating a 2FA codes based on a secret key from your account settings.  
+        e.g: Speakeasy for JavaScript.  
+        We do not recommend to change any default settings.  
+
+        ```
+        const 2faVerificationCode = speakeasy.totp({
+              your_2fa_secret_key,
+              encoding: 'base32',
+        })
+        ```
+      operationId: verifyPayout
+      parameters:
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              verification_code: "123456"
+            schema:
+              properties:
+                verification_code:
+                  example: "123456"
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            text/plain:
+              examples:
+                "200":
+                  value: OK
+          description: "200"
+      summary: Verify payout
+      tags:
+        - Payouts API
+  /v1/sub-partner:
+    get:
+      description: This method returns the entire list of your sub-partners.
+      operationId: getSubPartners
+      parameters:
+        - description: int or array of int (optional)
+          in: query
+          name: id
+          schema:
+            example: "111"
+            type: string
+        - description: (optional) default 0
+          in: query
+          name: offset
+          schema:
+            example: "0"
+            type: string
+        - description: (optional) default 10
+          in: query
+          name: limit
+          schema:
+            example: "10"
+            type: string
+        - description: ASC / DESC (optional) default ASC
+          in: query
+          name: order
+          schema:
+            example: DESC
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Get sub-partners
+      tags:
+        - Billing (sub-partner API)
+  "/v1/sub-partner/balance/{id}":
+    get:
+      description: |-
+        This request can be made only from a whitelisted IP.  
+        If IP whitelisting is disabled, this request can be made by any user that has an API key.
+      operationId: getSubPartnerBalance
+      parameters:
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    result:
+                      balances:
+                        usddtrc20:
+                          amount: 0.7
+                          pendingAmount: 0
+                        usdtbsc:
+                          amount: 1.0001341847350678
+                          pendingAmount: 0
+                      subPartnerId: "111394288"
+              schema:
+                properties:
+                  result:
+                    properties:
+                      balances:
+                        properties:
+                          usddtrc20:
+                            properties:
+                              amount:
+                                example: 0.7
+                                type: number
+                              pendingAmount:
+                                example: 0
+                                type: number
+                            type: object
+                          usdtbsc:
+                            properties:
+                              amount:
+                                example: 1.0001341847350678
+                                type: number
+                              pendingAmount:
+                                example: 0
+                                type: number
+                            type: object
+                        type: object
+                      subPartnerId:
+                        example: "111394288"
+                        type: string
+                    type: object
+                type: object
+          description: "200"
+      summary: Get sub-partner balance
+      tags:
+        - Billing (sub-partner API)
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/sub-partner/transfer/{id}":
+    get:
+      description: Get the actual information about the transfer. You need to provide the transfer ID in the request.
+      operationId: getTransfer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    result:
+                      amount: "1"
+                      created_at: 2022-10-09T22:09:02.181Z
+                      currency: usdtbsc
+                      from_sub_id: "111394288"
+                      id: "327209161"
+                      status: FINISHED
+                      to_sub_id: "1515573197"
+                      updated_at: 2022-10-09T22:10:01.853Z
+              schema:
+                properties:
+                  result:
+                    properties:
+                      amount:
+                        example: "1"
+                        type: string
+                      created_at:
+                        example: 2022-10-09T22:09:02.181Z
+                        type: string
+                      currency:
+                        example: usdtbsc
+                        type: string
+                      from_sub_id:
+                        example: "111394288"
+                        type: string
+                      id:
+                        example: "327209161"
+                        type: string
+                      status:
+                        example: FINISHED
+                        type: string
+                      to_sub_id:
+                        example: "1515573197"
+                        type: string
+                      updated_at:
+                        example: 2022-10-09T22:10:01.853Z
+                        type: string
+                    type: object
+                type: object
+          description: "200"
+      summary: Get transfer
+      tags:
+        - Billing (sub-partner API)
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  /v1/sub-partner/transfers:
+    get:
+      description: Returns the entire list of transfers created by your sub-partners.
+      operationId: getAllTransfers
+      parameters:
+        - description: int or array of int (optional)
+          in: query
+          name: id
+          schema:
+            example: "111"
+            type: string
+        - description: |-
+            string or array of string 
+            "WAITING"/"CREATED"/"FINISHED"/"REJECTED"
+            (optional)
+          in: query
+          name: status
+          schema:
+            example: CREATED
+            type: string
+        - description: (optional) default 10
+          in: query
+          name: limit
+          schema:
+            example: "10"
+            type: string
+        - description: (optional) default 0
+          in: query
+          name: offset
+          schema:
+            example: "0"
+            type: string
+        - description: ASC / DESC (optional) default ASC
+          in: query
+          name: order
+          schema:
+            example: ASC
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    count: 7
+                    result:
+                      - amount: "1"
+                        created_at: 2022-10-09T18:53:21.975Z
+                        currency: usdtbsc
+                        from_sub_id: "5209391548"
+                        id: "111394288"
+                        status: FINISHED
+                        to_sub_id: "111394288"
+                        updated_at: 2022-10-09T18:55:00.696Z
+                      - amount: "1"
+                        created_at: 2022-10-09T19:08:32.440Z
+                        currency: usdtbsc
+                        from_sub_id: "111394288"
+                        id: "148427051"
+                        status: FINISHED
+                        to_sub_id: "5209391548"
+                        updated_at: 2022-10-09T19:10:01.209Z
+                      - amount: "2"
+                        created_at: 2022-10-09T21:19:51.936Z
+                        currency: usdtbsc
+                        from_sub_id: "5209391548"
+                        id: "1631380403"
+                        status: FINISHED
+                        to_sub_id: "111394288"
+                        updated_at: 2022-10-09T21:21:00.671Z
+                      - amount: "2"
+                        created_at: 2022-10-09T21:22:17.125Z
+                        currency: usdtbsc
+                        from_sub_id: "5209391548"
+                        id: "1167886259"
+                        status: FINISHED
+                        to_sub_id: "111394288"
+                        updated_at: 2022-10-09T21:24:00.662Z
+                      - amount: "1"
+                        created_at: 2022-10-09T21:25:29.231Z
+                        currency: usdtbsc
+                        from_sub_id: "111394288"
+                        id: "48471014"
+                        status: FINISHED
+                        to_sub_id: "5209391548"
+                        updated_at: 2022-10-09T21:27:00.676Z
+                      - amount: "1"
+                        created_at: 2022-10-09T21:54:57.713Z
+                        currency: usdtbsc
+                        from_sub_id: "111394288"
+                        id: "1304149238"
+                        status: FINISHED
+                        to_sub_id: "5209391548"
+                        updated_at: 2022-10-09T21:56:01.056Z
+                      - amount: "1"
+                        created_at: 2022-10-09T22:09:02.181Z
+                        currency: usdtbsc
+                        from_sub_id: "111394288"
+                        id: "327209161"
+                        status: FINISHED
+                        to_sub_id: "1515573197"
+                        updated_at: 2022-10-09T22:10:01.853Z
+              schema:
+                properties:
+                  count:
+                    example: 7
+                    type: number
+                  result:
+                    example:
+                      - amount: "1"
+                        created_at: 2022-10-09T18:53:21.975Z
+                        currency: usdtbsc
+                        from_sub_id: "5209391548"
+                        id: "111394288"
+                        status: FINISHED
+                        to_sub_id: "111394288"
+                        updated_at: 2022-10-09T18:55:00.696Z
+                      - amount: "1"
+                        created_at: 2022-10-09T19:08:32.440Z
+                        currency: usdtbsc
+                        from_sub_id: "111394288"
+                        id: "148427051"
+                        status: FINISHED
+                        to_sub_id: "5209391548"
+                        updated_at: 2022-10-09T19:10:01.209Z
+                      - amount: "2"
+                        created_at: 2022-10-09T21:19:51.936Z
+                        currency: usdtbsc
+                        from_sub_id: "5209391548"
+                        id: "1631380403"
+                        status: FINISHED
+                        to_sub_id: "111394288"
+                        updated_at: 2022-10-09T21:21:00.671Z
+                      - amount: "2"
+                        created_at: 2022-10-09T21:22:17.125Z
+                        currency: usdtbsc
+                        from_sub_id: "5209391548"
+                        id: "1167886259"
+                        status: FINISHED
+                        to_sub_id: "111394288"
+                        updated_at: 2022-10-09T21:24:00.662Z
+                      - amount: "1"
+                        created_at: 2022-10-09T21:25:29.231Z
+                        currency: usdtbsc
+                        from_sub_id: "111394288"
+                        id: "48471014"
+                        status: FINISHED
+                        to_sub_id: "5209391548"
+                        updated_at: 2022-10-09T21:27:00.676Z
+                      - amount: "1"
+                        created_at: 2022-10-09T21:54:57.713Z
+                        currency: usdtbsc
+                        from_sub_id: "111394288"
+                        id: "1304149238"
+                        status: FINISHED
+                        to_sub_id: "5209391548"
+                        updated_at: 2022-10-09T21:56:01.056Z
+                      - amount: "1"
+                        created_at: 2022-10-09T22:09:02.181Z
+                        currency: usdtbsc
+                        from_sub_id: "111394288"
+                        id: "327209161"
+                        status: FINISHED
+                        to_sub_id: "1515573197"
+                        updated_at: 2022-10-09T22:10:01.853Z
+                    items:
+                      properties:
+                        amount:
+                          example: "1"
+                          type: string
+                        created_at:
+                          example: 2022-10-09T18:53:21.975Z
+                          type: string
+                        currency:
+                          example: usdtbsc
+                          type: string
+                        from_sub_id:
+                          example: "5209391548"
+                          type: string
+                        id:
+                          example: "111394288"
+                          type: string
+                        status:
+                          example: FINISHED
+                          type: string
+                        to_sub_id:
+                          example: "111394288"
+                          type: string
+                        updated_at:
+                          example: 2022-10-09T18:55:00.696Z
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: "200"
+      summary: Get all transfers
+      tags:
+        - Billing (sub-partner API)
+  /v1/subscriptions:
+    get:
+      description: The method allows you to view the entire list of recurring payments filtered by payment status and/or payment plan id
+      operationId: getManyRecurringPayments
+      parameters:
+        - description: '"WAITING_PAY" / "PAID" /  "PARTIALLY_PAID" / "EXPIRED"'
+          in: query
+          name: status
+          schema:
+            example: PARTIALLY_PAID
+            type: string
+        - in: query
+          name: subscription_plan_id
+          schema:
+            example: "111394288"
+            type: string
+        - description: true / false
+          in: query
+          name: is_active
+          schema:
+            example: "false"
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "10"
+            type: string
+        - in: query
+          name: offset
+          schema:
+            example: "0"
+            type: string
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    count: 2
+                    result:
+                      - created_at: 2022-10-09T22:15:50.808Z
+                        expire_date: 2022-10-11T00:02:00.025Z
+                        id: "1515573197"
+                        is_active: true
+                        status: PAID
+                        subscriber:
+                          sub_partner_id: "111394288"
+                        subscription_plan_id: "111394288"
+                        updated_at: 2022-10-09T22:15:50.808Z
+                      - created_at: 2022-10-06T16:40:28.880Z
+                        expire_date: 2022-10-07T16:46:00.910Z
+                        id: "111394288"
+                        is_active: false
+                        status: WAITING_PAY
+                        subscriber:
+                          email: mikhail.s@changenow.io
+                        subscription_plan_id: "111394288"
+                        updated_at: 2022-10-06T16:40:28.880Z
+              schema:
+                properties:
+                  count:
+                    example: 2
+                    type: number
+                  result:
+                    example:
+                      - created_at: 2022-10-09T22:15:50.808Z
+                        expire_date: 2022-10-11T00:02:00.025Z
+                        id: "1515573197"
+                        is_active: true
+                        status: PAID
+                        subscriber:
+                          sub_partner_id: "111394288"
+                        subscription_plan_id: "111394288"
+                        updated_at: 2022-10-09T22:15:50.808Z
+                      - created_at: 2022-10-06T16:40:28.880Z
+                        expire_date: 2022-10-07T16:46:00.910Z
+                        id: "111394288"
+                        is_active: false
+                        status: WAITING_PAY
+                        subscriber:
+                          email: mikhail.s@changenow.io
+                        subscription_plan_id: "111394288"
+                        updated_at: 2022-10-06T16:40:28.880Z
+                    items:
+                      properties:
+                        created_at:
+                          example: 2022-10-09T22:15:50.808Z
+                          type: string
+                        expire_date:
+                          example: 2022-10-11T00:02:00.025Z
+                          type: string
+                        id:
+                          example: "1515573197"
+                          type: string
+                        is_active:
+                          example: true
+                          type: boolean
+                        status:
+                          example: PAID
+                          type: string
+                        subscriber:
+                          properties:
+                            email:
+                              example: mikhail.s@changenow.io
+                              type: string
+                            sub_partner_id:
+                              example: "111394288"
+                              type: string
+                          type: object
+                        subscription_plan_id:
+                          example: "111394288"
+                          type: string
+                        updated_at:
+                          example: 2022-10-09T22:15:50.808Z
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: "200"
+      summary: Get many recurring payments
+      tags:
+        - Recurring Payments API (Email Subscriptions feature)
+  /v1/subscriptions/plans:
+    get:
+      description: This method allows you to obtain information about all the payment plans you’ve created.
+      operationId: getManyPlans
+      parameters:
+        - description: Number
+          in: query
+          name: limit
+          schema:
+            example: "10"
+            type: string
+        - description: Number
+          in: query
+          name: offset
+          schema:
+            example: "3"
+            type: string
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    count: 2
+                    result:
+                      - amount: 0.1
+                        cancel_url: null
+                        created_at: 2022-10-04T16:10:06.214Z
+                        currency: USD
+                        id: "76215585"
+                        interval_day: "3"
+                        ipn_callback_url: null
+                        partially_paid_url: null
+                        success_url: null
+                        title: second sub plan
+                        updated_at: 2022-10-04T16:10:06.214Z
+                      - amount: 0.5
+                        cancel_url: null
+                        created_at: 2022-10-04T16:28:55.423Z
+                        currency: USD
+                        id: "1062307590"
+                        interval_day: "1"
+                        ipn_callback_url: null
+                        partially_paid_url: null
+                        success_url: null
+                        title: second sub plan
+                        updated_at: 2022-10-04T16:28:55.423Z
+              schema:
+                properties:
+                  count:
+                    example: 2
+                    type: number
+                  result:
+                    example:
+                      - amount: 0.1
+                        cancel_url: null
+                        created_at: 2022-10-04T16:10:06.214Z
+                        currency: USD
+                        id: "76215585"
+                        interval_day: "3"
+                        ipn_callback_url: null
+                        partially_paid_url: null
+                        success_url: null
+                        title: second sub plan
+                        updated_at: 2022-10-04T16:10:06.214Z
+                      - amount: 0.5
+                        cancel_url: null
+                        created_at: 2022-10-04T16:28:55.423Z
+                        currency: USD
+                        id: "1062307590"
+                        interval_day: "1"
+                        ipn_callback_url: null
+                        partially_paid_url: null
+                        success_url: null
+                        title: second sub plan
+                        updated_at: 2022-10-04T16:28:55.423Z
+                    items:
+                      properties:
+                        amount:
+                          example: 0.1
+                          type: number
+                        cancel_url:
+                          example: null
+                          nullable: true
+                        created_at:
+                          example: 2022-10-04T16:10:06.214Z
+                          type: string
+                        currency:
+                          example: USD
+                          type: string
+                        id:
+                          example: "76215585"
+                          type: string
+                        interval_day:
+                          example: "3"
+                          type: string
+                        ipn_callback_url:
+                          example: null
+                          nullable: true
+                        partially_paid_url:
+                          example: null
+                          nullable: true
+                        success_url:
+                          example: null
+                          nullable: true
+                        title:
+                          example: second sub plan
+                          type: string
+                        updated_at:
+                          example: 2022-10-04T16:10:06.214Z
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: "200"
+      summary: Get many plans
+      tags:
+        - Recurring Payments API (Email Subscriptions feature)
+  "/v1/subscriptions/plans/{plan-id}":
+    get:
+      description: |-
+        This method allows you to obtain information about your payment plan.  
+        (you need to specify your payment plan id in the request).
+      operationId: getOnePlan
+      parameters:
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    result:
+                      amount: 2
+                      cancel_url: null
+                      created_at: 2022-10-04T16:10:06.214Z
+                      currency: USD
+                      id: "76215585"
+                      interval_day: "1"
+                      ipn_callback_url: null
+                      partially_paid_url: null
+                      success_url: null
+                      title: test plan
+                      updated_at: 2022-10-04T16:10:06.214Z
+              schema:
+                properties:
+                  result:
+                    properties:
+                      amount:
+                        example: 2
+                        type: number
+                      cancel_url:
+                        example: null
+                        nullable: true
+                      created_at:
+                        example: 2022-10-04T16:10:06.214Z
+                        type: string
+                      currency:
+                        example: USD
+                        type: string
+                      id:
+                        example: "76215585"
+                        type: string
+                      interval_day:
+                        example: "1"
+                        type: string
+                      ipn_callback_url:
+                        example: null
+                        nullable: true
+                      partially_paid_url:
+                        example: null
+                        nullable: true
+                      success_url:
+                        example: null
+                        nullable: true
+                      title:
+                        example: test plan
+                        type: string
+                      updated_at:
+                        example: 2022-10-04T16:10:06.214Z
+                        type: string
+                    type: object
+                type: object
+          description: "200"
+        "404":
+          content:
+            application/json:
+              examples:
+                "404":
+                  value:
+                    code: NOT_FOUND
+                    message: subscription plan not found
+                    status: false
+                    statusCode: 404
+              schema:
+                properties:
+                  code:
+                    example: NOT_FOUND
+                    type: string
+                  message:
+                    example: subscription plan not found
+                    type: string
+                  status:
+                    example: false
+                    type: boolean
+                  statusCode:
+                    example: 404
+                    type: number
+                type: object
+          description: "404"
+      summary: Get one plan
+      tags:
+        - Recurring Payments API (Email Subscriptions feature)
+    parameters:
+      - in: path
+        name: plan-id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: This method allows you to add necessary changes to a created plan. They won’t affect users who have already paid; however, the changes will take effect when a new payment is to be made.
+      operationId: updatePlan
+      requestBody:
+        content:
+          application/json:
+            example:
+              amount: 2
+              currency: usd
+              interval_day: 1
+              title: test plan
+            schema:
+              properties:
+                amount:
+                  example: 2
+                  type: number
+                currency:
+                  example: usd
+                  type: string
+                interval_day:
+                  example: 1
+                  type: number
+                title:
+                  example: test plan
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Update plan
+      tags:
+        - Recurring Payments API (Email Subscriptions feature)
+  "/v1/subscriptions/{sub_id}":
+    delete:
+      description: |-
+        Completely removes a particular payment from the recurring payment plan.  
+        You need to specify the payment plan id in the request.
+      operationId: deleteRecurringPayment
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    result: ok
+              schema:
+                properties:
+                  result:
+                    example: ok
+                    type: string
+                type: object
+          description: "200"
+        "404":
+          content:
+            application/json:
+              examples:
+                "404":
+                  value:
+                    code: NOT_FOUND
+                    message: subscription not found
+                    status: false
+                    statusCode: 404
+              schema:
+                properties:
+                  code:
+                    example: NOT_FOUND
+                    type: string
+                  message:
+                    example: subscription not found
+                    type: string
+                  status:
+                    example: false
+                    type: boolean
+                  statusCode:
+                    example: 404
+                    type: number
+                type: object
+          description: "404"
+      summary: Delete recurring payment
+      tags:
+        - Recurring Payments API (Email Subscriptions feature)
+    get:
+      description: |-
+        Get information about a particular recurring payment via its ID.
+
+        Here’s the list of available statuses:  
+        \- WAITING_PAY  
+        \- PAID  
+        \- PARTIALLY_PAID  
+        \- EXPIRED
+      operationId: getOneRecurringPayment
+      parameters:
+        - in: header
+          name: x-api-key
+          schema:
+            example: "{{your_api_key}}"
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "200":
+                  value:
+                    result:
+                      created_at: 2022-10-09T22:15:50.808Z
+                      expire_date: 2022-10-12T00:02:00.025Z
+                      id: "1515573197"
+                      is_active: true
+                      status: PAID
+                      subscriber:
+                        sub_partner_id: "111394288"
+                      subscription_plan_id: "111394288"
+                      updated_at: 2022-10-09T22:15:50.808Z
+              schema:
+                properties:
+                  result:
+                    properties:
+                      created_at:
+                        example: 2022-10-09T22:15:50.808Z
+                        type: string
+                      expire_date:
+                        example: 2022-10-12T00:02:00.025Z
+                        type: string
+                      id:
+                        example: "1515573197"
+                        type: string
+                      is_active:
+                        example: true
+                        type: boolean
+                      status:
+                        example: PAID
+                        type: string
+                      subscriber:
+                        properties:
+                          sub_partner_id:
+                            example: "111394288"
+                            type: string
+                        type: object
+                      subscription_plan_id:
+                        example: "111394288"
+                        type: string
+                      updated_at:
+                        example: 2022-10-09T22:15:50.808Z
+                        type: string
+                    type: object
+                type: object
+          description: "200"
+        "404":
+          content:
+            application/json:
+              examples:
+                "404":
+                  value:
+                    code: NOT_FOUND
+                    message: subscription not found
+                    status: false
+                    statusCode: 404
+              schema:
+                properties:
+                  code:
+                    example: NOT_FOUND
+                    type: string
+                  message:
+                    example: subscription not found
+                    type: string
+                  status:
+                    example: false
+                    type: boolean
+                  statusCode:
+                    example: 404
+                    type: number
+                type: object
+          description: "404"
+      summary: Get one recurring payment
+      tags:
+        - Recurring Payments API (Email Subscriptions feature)
+    parameters:
+      - in: path
+        name: sub_id
+        required: true
+        schema:
+          type: string

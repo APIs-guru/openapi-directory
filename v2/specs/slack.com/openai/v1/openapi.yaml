@@ -1,0 +1,64 @@
+openapi: 3.0.1
+servers:
+  - url: https://slack.com/api
+info:
+  description: A plugin that allows users to interact with Slack using ChatGPT
+  title: Slack AI Plugin
+  version: v1
+  x-apisguru-categories:
+    - developer_tools
+    - collaboration
+    - messaging
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/http_static.tumblr.com_wvuzcz9_LlKncfhmp_slack_logo_240.png
+  x-origin:
+    - format: openapi
+      url: https://api.slack.com/specs/openapi/ai-plugin.yaml
+      version: "3.0"
+  x-providerName: slack.com
+  x-serviceName: openai
+paths:
+  /ai.alpha.search.messages:
+    post:
+      description: Search for messages matching a query
+      operationId: ai_alpha_search_messages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/searchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  ok:
+                    description: Boolean indicating whether or not the request was successful
+                    type: boolean
+                  results:
+                    items:
+                      $ref: "#/components/schemas/Result"
+                    type: array
+                required:
+                  - ok
+                type: object
+          description: Success response
+components:
+  schemas:
+    Result:
+      properties:
+        message:
+          type: string
+        permalink:
+          type: string
+      type: object
+    searchRequest:
+      properties:
+        query:
+          description: Search query
+          type: string
+      required:
+        - query
+      type: object

@@ -1,0 +1,384 @@
+openapi: 3.0.3
+servers:
+  - url: https://api.tokenmetrics.com
+info:
+  contact: {}
+  title: Endpoints
+  version: 1.0.0
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_files.readme.io_53cd56d-2d5efc7-logo.svg
+  x-origin:
+    - format: postman
+      url: https://www.postman.com/collections/25954042-3a7b5f30-f598-4f9e-ba5f-4ebb58a1f18d
+      version: 2.x
+  x-providerName: tokenmetrics.com
+tags: []
+paths:
+  /v1/correlation:
+    get:
+      description: Correlation
+      operationId: correlation
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Correlation
+  /v1/indices:
+    get:
+      description: Indices
+      operationId: indices
+      parameters:
+        - in: query
+          name: exchanges
+          schema:
+            example: binance
+            type: string
+        - in: query
+          name: timeHorizon
+          schema:
+            example: daily
+            type: string
+        - in: query
+          name: lowCap
+          schema:
+            example: "true"
+            type: string
+        - in: query
+          name: startDate
+          schema:
+            example: 2023-01-10
+            type: string
+        - in: query
+          name: endDate
+          schema:
+            example: 2023-01-11
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Indices
+  /v1/investor-grades:
+    get:
+      description: Investor Grades
+      operationId: investorGrades
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: startDate
+          schema:
+            example: 2023-01-10
+            type: string
+        - in: query
+          name: endDate
+          schema:
+            example: 2023-01-11
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Investor Grades
+  /v1/market-indicator:
+    get:
+      description: Market Indicator
+      operationId: marketIndicator
+      parameters:
+        - in: query
+          name: startDate
+          schema:
+            example: 2023-01-10
+            type: string
+        - in: query
+          name: endDate
+          schema:
+            example: 2023-01-11
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Market Indicator
+  /v1/price:
+    get:
+      description: Price
+      operationId: price
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: startDate
+          schema:
+            example: 2023-01-10
+            type: string
+        - in: query
+          name: endDate
+          schema:
+            example: 2023-01-11
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+        - in: query
+          name: page
+          schema:
+            example: "1"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Price
+  /v1/price-prediction:
+    get:
+      description: Price Prediction
+      operationId: pricePrediction
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: date
+          schema:
+            example: 2023-02-01
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Price Prediction
+  /v1/quantmetrics-tier-1:
+    get:
+      description: Quantmetrics Tier 1
+      operationId: quantmetricsTier1
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: date
+          schema:
+            example: 2023-02-01
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Quantmetrics Tier 1
+  /v1/quantmetrics-tier-2:
+    get:
+      description: Quantmetrics Tier 2
+      operationId: quantmetricsTier2
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: date
+          schema:
+            example: 2023-02-01
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Quantmetrics Tier 2
+  /v1/resistance-support:
+    get:
+      description: Resistance & Support
+      operationId: resistanceSupport
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: startDate
+          schema:
+            example: 2023-01-10
+            type: string
+        - in: query
+          name: endDate
+          schema:
+            example: 2023-01-11
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Resistance & Support
+  /v1/scenario-analysis:
+    get:
+      description: Scenario Analysis
+      operationId: scenarioAnalysis
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Scenario Analysis
+  /v1/sentiments:
+    get:
+      description: Sentiments
+      operationId: sentiments
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: startDate
+          schema:
+            example: 2023-01-10
+            type: string
+        - in: query
+          name: endDate
+          schema:
+            example: 2023-01-11
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Sentiments
+  /v1/tokens:
+    get:
+      description: Tokens
+      operationId: tokens
+      parameters:
+        - in: query
+          name: token_ids
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: token_names
+          schema:
+            example: Hivemapper, Sei_Network, Layer_Zero, Lyra Huobi
+            type: string
+        - in: query
+          name: token_symbols
+          schema:
+            example: bds, bds, btc
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Tokens
+  /v1/trader-grades:
+    get:
+      description: Trader Grades
+      operationId: traderGrades
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: startDate
+          schema:
+            example: 2023-01-10
+            type: string
+        - in: query
+          name: endDate
+          schema:
+            example: 2023-01-11
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Trader Grades
+  /v1/trading-indicator:
+    get:
+      description: Trading Indicator
+      operationId: tradingIndicator
+      parameters:
+        - in: query
+          name: tokens
+          schema:
+            example: 3375, 3306
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1000"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Trading Indicator

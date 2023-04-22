@@ -1,0 +1,4642 @@
+openapi: 3.0.3
+servers:
+  - url: https://unify.apideck.com
+info:
+  contact:
+    email: hello@apideck.com
+    url: https://developers.apideck.com
+  description: |+
+    Welcome to the File Storage API.
+
+    You can use this API to access all File Storage API endpoints.
+
+    ## Base URL
+
+    The base URL for all API requests is `https://unify.apideck.com`
+
+    We also provide a [Mock API](https://developers.apideck.com/mock-api) that can be used for testing purposes: `https://mock-api.apideck.com`
+
+    ## Headers
+
+    Custom headers that are expected as part of the request. Note that [RFC7230](https://tools.ietf.org/html/rfc7230) states header names are case insensitive.
+
+    | Name                  | Type    | Required | Description                                                                                                                                                    |
+    | --------------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | x-apideck-consumer-id | String  | Yes      | The id of the customer stored inside Apideck Vault. This can be a user id, account id, device id or whatever entity that can have integration within your app. |
+    | x-apideck-service-id  | String  | No       | Describe the service you want to call (e.g., pipedrive). Only needed when a customer has activated multiple integrations for the same Unified API.             |
+    | x-apideck-raw         | Boolean | No       | Include raw response. Mostly used for debugging purposes.                                                                                                      |
+    | x-apideck-app-id      | String  | Yes      | The application id of your Unify application. Available at https://app.apideck.com/unify/api-keys.                                                             |
+    | Authorization         | String  | Yes      | Bearer API KEY                                                                                                                                                 |
+
+    ## Authorization
+
+    You can interact with the API through the authorization methods below.
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+
+    ## Pagination
+
+    All API resources have support for bulk retrieval via list APIs.  Apideck uses cursor-based pagination via the optional `cursor` and `limit` parameters.
+
+    To fetch the first page of results, call the list API without a `cursor` parameter. Afterwards you can fetch subsequent pages by providing a cursor parameter. You will find the next cursor in the response body in `meta.cursors.next`. If `meta.cursors.next` is `null` you're at the end of the list.
+
+    In the REST API you can also use the `links` from the response for added convenience. Simply call the URL in `links.next` to get the next page of results.
+
+    ### Query Parameters
+
+    | Name   | Type   | Required | Description                                                                                                        |
+    | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------ |
+    | cursor | String | No       | Cursor to start from. You can find cursors for next & previous pages in the meta.cursors property of the response. |
+    | limit  | Number | No       | Number of results to return. Minimum 1, Maximum 200, Default 20                                                    |
+
+    ### Response Body
+
+    | Name                  | Type   | Description                                                        |
+    | --------------------- | ------ | ------------------------------------------------------------------ |
+    | meta.cursors.previous | String | Cursor to navigate to the previous page of results through the API |
+    | meta.cursors.current  | String | Cursor to navigate to the current page of results through the API  |
+    | meta.cursors.next     | String | Cursor to navigate to the next page of results through the API     |
+    | meta.items_on_page    | Number | Number of items returned in the data property of the response      |
+    | links.previous        | String | Link to navigate to the previous page of results through the API   |
+    | links.current         | String | Link to navigate to the current page of results through the API    |
+    | links.next            | String | Link to navigate to the next page of results through the API       |
+
+    ⚠️ `meta.cursors.previous`/`links.previous` is not available for all connectors.
+
+    ## SDKs and API Clients
+
+    We currently offer a [Node.js](https://developers.apideck.com/sdks/node), [PHP](https://developers.apideck.com/sdks/php) and [.NET](https://developers.apideck.com/sdks/dot-net) SDK.
+    Need another SDK? [Request the SDK of your choice](https://integrations.apideck.com/request).
+
+    ## Debugging
+
+    Because of the nature of the abstraction we do in Apideck Unify we still provide the option to the receive raw requests and responses being handled underlying. By including the raw flag `?raw=true` in your requests you can still receive the full request. Please note that this increases the response size and can introduce extra latency.
+
+    ## Errors
+
+    The API returns standard HTTP response codes to indicate success or failure of the API requests. For errors, we also return a customized error message inside the JSON response. You can see the returned HTTP status codes below.
+
+    | Code | Title                | Description                                                                                                                                                                                              |
+    | ---- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | 200  | OK                   | The request message has been successfully processed, and it has produced a response. The response message varies, depending on the request method and the requested data.                                |
+    | 201  | Created              | The request has been fulfilled and has resulted in one or more new resources being created.                                                                                                              |
+    | 204  | No Content           | The server has successfully fulfilled the request and that there is no additional content to send in the response payload body.                                                                          |
+    | 400  | Bad Request          | The receiving server cannot understand the request because of malformed syntax. Do not repeat the request without first modifying it; check the request for errors, fix them and then retry the request. |
+    | 401  | Unauthorized         | The request has not been applied because it lacks valid authentication credentials for the target resource.                                                                                              |
+    | 402  | Payment Required     | Subscription data is incomplete or out of date. You'll need to provide payment details to continue.                                                                                                      |
+    | 403  | Forbidden            | You do not have the appropriate user rights to access the request. Do not repeat the request.                                                                                                            |
+    | 404  | Not Found            | The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.                                                                           |
+    | 409  | Conflict             | The request could not be completed due to a conflict with the current state of the target resource.                                                                                                      |
+    | 422  | Unprocessable Entity | The server understands the content type of the request entity, and the syntax of the request entity is correct but was unable to process the contained instructions.                                     |
+    | 429  | Too Many Requests    | You sent too many requests in a given amount of time ("rate limit"). Try again later                                                                                                                     |
+    | 5xx  | Server Errors        | Something went wrong with the Unify API. These errors are logged on our side. You can contact our team to resolve the issue.                                                                             |
+
+    ### Handling errors
+
+    The Unify API and SDKs can produce errors for many reasons, such as a failed requests due to misconfigured integrations, invalid parameters, authentication errors, and network unavailability.
+
+    ### Error Types
+
+    #### RequestValidationError
+
+    Request is not valid for the current endpoint. The response body will include details on the validation error. Check the spelling and types of your attributes, and ensure you are not passing data that is outside of the specification.
+
+    #### UnsupportedFiltersError
+
+    Filters in the request are valid, but not supported by the connector. Remove the unsupported filter(s) to get a successful response.
+
+    #### UnsupportedSortFieldError
+
+    Sort field (`sort[by]`) in the request is valid, but not supported by the connector. Replace or remove the sort field to get a successful response.
+
+    #### InvalidCursorError
+
+    Pagination cursor in the request is not valid for the current connector. Make sure to use a cursor returned from the API, for the same connector.
+
+    #### ConnectorExecutionError
+
+    A Unified API request made via one of our downstream connectors returned an unexpected error. The `status_code` returned is proxied through to error response along with their original response via the error detail.
+
+    #### UnauthorizedError
+
+    We were unable to authorize the request as made. This can happen for a number of reasons, from missing header params to passing an incorrect authorization token. Verify your Api Key is being set correctly in the authorization header. ie: `Authorization: 'Bearer sk_live_***'`
+
+    #### ConnectorCredentialsError
+
+    A request using a given connector has not been authorized. Ensure the connector you are trying to use has been configured correctly and been authorized for use.
+
+    #### ConnectorDisabledError
+
+    A request has been made to a connector that has since been disabled. This may be temporary - You can contact our team to resolve the issue.
+
+    #### ConnectorRateLimitError
+
+    You sent too many request to a connector. These rate limits vary from connector to connector. You will need to try again later.
+
+    #### RequestLimitError
+
+    You have reached the number of requests included in your Free Tier Subscription. You will no be able to make further requests until this limit resets at the end of the month, or talk to us about upgrading your subscription to continue immediately.
+
+    #### EntityNotFoundError
+
+    You've made a request for a resource or route that does not exist. Verify your path parameters or any identifiers used to fetch this resource.
+
+    #### OAuthCredentialsNotFoundError
+
+    When adding a connector integration that implements OAuth, both a `client_id` and `client_secret` must be provided before any authorizations can be performed. Verify the integration has been configured properly before continuing.
+
+    #### IntegrationNotFoundError
+
+    The requested connector integration could not be found associated to your `application_id`. Verify your `application_id` is correct, and that this connector has been added and configured for your application.
+
+    #### ConnectionNotFoundError
+
+    A valid connection could not be found associated to your `application_id`. Something _may_ have interrupted the authorization flow. You may need to start the connector authorization process again.
+
+    #### ConnectionSettingsError
+
+    The connector has required settings that were not supplied. Verify `connection.settings` contains all required settings for the connector to be callable.
+
+    #### ConnectorNotFoundError
+
+    A request was made for an unknown connector. Verify your `service_id` is spelled correctly, and that this connector is enabled for your provided `unified_api`.
+
+    #### OAuthRedirectUriError
+
+    A request was made either in a connector authorization flow, or attempting to revoke connector access without a valid `redirect_uri`. This is the url the user should be returned to on completion of process.
+
+    #### OAuthInvalidStateError
+
+    The state param is required and is used to ensure the outgoing authorization state has not been altered before the user is redirected back. It also contains required params needed to identify the connector being used. If this has been altered, the authorization will not succeed.
+
+    #### OAuthCodeExchangeError
+
+    When attempting to exchange the authorization code for an `access_token` during an OAuth flow, an error occurred. This may be temporary. You can reattempt authorization or contact our team to resolve the issue.
+
+    #### OAuthConnectorError
+
+    It seems something went wrong on the connector side. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
+
+    #### MappingError
+
+    There was an error attempting to retrieve the mapping for a given attribute. We've been notified and are working to fix this issue.
+
+    #### ConnectorMappingNotFoundError
+
+    It seems the implementation for this connector is incomplete. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
+
+    #### ConnectorResponseMappingNotFoundError
+
+    We were unable to retrieve the response mapping for this connector. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
+
+    #### ConnectorOperationMappingNotFoundError
+
+    Connector mapping has not been implemented for the requested operation. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
+
+    #### ConnectorWorkflowMappingError
+
+    The composite api calls required for this operation have not been mapped entirely. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
+
+    #### ConnectorOperationUnsupportedError
+
+    You're attempting a call that is not supported by the connector. It's likely this operation is supported by another connector, but we're unable to implement for this one.
+
+    #### PaginationNotSupportedError
+
+    Pagination is not yet supported for this connector, try removing limit and/or cursor from the query. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
+
+    ## API Design
+
+    ### API Styles and data formats
+
+    #### REST API
+
+    The API is organized around [REST](https://restfulapi.net/), providing simple and predictable URIs to access and modify objects. Requests support standard HTTP methods like GET, PUT, POST, and DELETE and standard status codes. JSON is returned by all API responses, including errors. In all API requests, you must set the content-type HTTP header to application/json. All API requests must be made over HTTPS. Calls made over HTTP will fail.
+
+    ##### Available HTTP methods
+
+    The Apideck API uses HTTP verbs to understand if you want to read (GET), delete (DELETE) or create (POST) an object. When your web application cannot do a POST or DELETE, we provide the ability to set the method through the query parameter \_method.
+
+    ```
+    POST /messages
+    GET /messages
+    GET /messages/{messageId}
+    PATCH /messages/{messageId}
+    DELETE /messages/{messageId}
+    ```
+
+    Response bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise. For some endpoints and use cases we divert from REST to provide a better developer experience.
+
+    ### Schema
+
+    All API requests and response bodies adhere to a common JSON format representing individual items, collections of items, links to related items and additional meta data.
+
+    ### Meta
+
+    Meta data can be represented as a top level member named “meta”. Any information may be provided in the meta data. It’s most common use is to return the total number of records when requesting a collection of resources.
+
+    ### Idempotence (upcoming)
+
+    To prevent the creation of duplicate resources, every POST method (such as one that creates a consumer record) must specify a unique value for the X-Unique-Transaction-ID header name. Uniquely identifying each unique POST request ensures that the API processes a given request once and only once.
+
+    Uniquely identifying new resource-creation POSTs is especially important when the outcome of a response is ambiguous because of a transient service interruption, such as a server-side timeout or network disruption. If a service interruption occurs, then the client application can safely retry the uniquely identified request without creating duplicate operations. (API endpoints that guarantee that every uniquely identified request is processed only once no matter how many times that uniquely identifiable request is made are described as idempotent.)
+
+    ### Request IDs
+
+    Each API request has an associated request identifier. You can find this value in the response headers, under Request-Id. You can also find request identifiers in the URLs of individual request logs in your Dashboard. If you need to contact us about a specific request, providing the request identifier will ensure the fastest possible resolution.
+
+    ### Fixed field types
+
+    #### Dates
+
+    The dates returned by the API are all represented in UTC (ISO8601 format).
+
+    This example `2019-11-14T00:55:31.820Z` is defined by the ISO 8601 standard. The T in the middle separates the year-month-day portion from the hour-minute-second portion. The Z on the end means UTC, that is, an offset-from-UTC of zero hours-minutes-seconds. The Z is pronounced "Zulu" per military/aviation tradition.
+
+    The ISO 8601 standard is more modern. The formats are wisely designed to be easy to parse by machine as well as easy to read by humans across cultures.
+
+    #### Prices and Currencies
+
+    All prices returned by the API are represented as integer amounts in a currency’s smallest unit. For example, $5 USD would be returned as 500 (i.e, 500 cents).
+
+    For zero-decimal currencies, amounts will still be provided as an integer but without the need to divide by 100. For example, an amount of ¥5 (JPY) would be returned as 5.
+
+    All currency codes conform to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+
+    ## Support
+
+    If you have problems or need help with your case, you can always reach out to our Support.
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: File storage API
+  version: 9.3.0
+  x-apideck-api: file-storage
+  x-apideck-sdk-support: true
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_developers.apideck.com_icon.png
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/file-storage.yml
+      version: "3.0"
+  x-providerName: apideck.com
+  x-serviceName: file-storage
+  x-tags:
+    - partner
+externalDocs:
+  description: Apideck Developer Docs
+  url: https://developers.apideck.com
+security:
+  - apiKey: []
+tags:
+  - description: Files resource represents files stored in the cloud storage services. It provides methods for managing and accessing the files, such as uploading, downloading, and deleting files. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
+    name: Files
+    x-apideck-model:
+      $ref: "#/components/schemas/UnifiedFile"
+    x-apideck-resource-id: files
+  - description: Folders resource represents the folders within a drive in the cloud storage service. It provides methods for managing and accessing the folders, such as creating, deleting, and listing files & folders in a given folder.
+    name: Folders
+    x-apideck-model:
+      $ref: "#/components/schemas/Folder"
+    x-apideck-resource-id: folders
+  - description: Shared links resource represents the links to files and folders in the cloud storage service that have been shared with other users. It provides methods for managing and accessing the shared links, such as creating, deleting, and listing shared links. A shared link allows other users to access the file or folder that it points to, either by viewing it online or by downloading it.
+    name: Shared Links
+    x-apideck-model:
+      $ref: "#/components/schemas/SharedLink"
+    x-apideck-resource-id: shared-links
+  - description: Upload sessions resource represents the sessions used for uploading files to the cloud storage service. It provides methods for managing and accessing the upload sessions, such as creating and resuming upload sessions. An upload session allows for efficient uploading of large files by breaking them into smaller chunks and uploading each chunk individually.
+    name: Upload Sessions
+    x-apideck-model:
+      $ref: "#/components/schemas/UploadSession"
+    x-apideck-resource-id: upload-sessions
+  - description: Drives resource represents logical containers for storing folders and files in the cloud storage service. It provides methods for managing and accessing the drives, such as creating, deleting, and listing drives.
+    name: Drives
+    x-apideck-model:
+      $ref: "#/components/schemas/Drive"
+    x-apideck-resource-id: drives
+  - description: Drive Groups resource represents the groups of drives in the cloud storage service. It provides methods for managing and accessing the drive groups, such as creating, deleting, and listing drive groups. A drive group is a logical grouping of drives, which can be used to manage the drives in the cloud storage service.
+    name: Drive Groups
+    x-apideck-model:
+      $ref: "#/components/schemas/DriveGroup"
+    x-apideck-resource-id: drive-groups
+paths:
+  /file-storage/drive-groups:
+    get:
+      description: List DriveGroups
+      operationId: driveGroupsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/driveGroupsFilter"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetDriveGroupsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List DriveGroups
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: driveGroups
+    post:
+      description: Create DriveGroup
+      operationId: driveGroupsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DriveGroup"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateDriveGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create DriveGroup
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              driveGroup: {
+                name: 'accounting',
+                display_name: 'accounting',
+                description: 'A description'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/drive-groups/{id}":
+    delete:
+      description: Delete DriveGroup
+      operationId: driveGroupsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteDriveGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete DriveGroup
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get DriveGroup
+      operationId: driveGroupsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetDriveGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get DriveGroup
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update DriveGroup
+      operationId: driveGroupsUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DriveGroup"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateDriveGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update DriveGroup
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              driveGroup: {
+                name: 'accounting',
+                display_name: 'accounting',
+                description: 'A description'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /file-storage/drives:
+    get:
+      description: List Drives
+      operationId: drivesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/drivesFilter"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetDrivesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Drives
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.drivesAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: drives
+    post:
+      description: Create Drive
+      operationId: drivesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Drive"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateDriveResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Drive
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              drive: {
+                name: 'Project Resources',
+                description: 'A description'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.drivesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/drives/{id}":
+    delete:
+      description: Delete Drive
+      operationId: drivesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteDriveResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Drive
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.drivesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Drive
+      operationId: drivesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetDriveResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Drive
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.drivesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Drive
+      operationId: drivesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Drive"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateDriveResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Drive
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              drive: {
+                name: 'Project Resources',
+                description: 'A description'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.drivesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /file-storage/files:
+    get:
+      description: List Files
+      operationId: filesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/filesFilter"
+        - $ref: "#/components/parameters/filesSort"
+        - $ref: "#/components/parameters/passThrough"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFilesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Files
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: files
+    post:
+      description: Upload file (max 100MB). Please use the [Upload Sessions API](#operation/uploadSessionsStart) to upload bigger files. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
+      operationId: filesUpload
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/metadata"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          "*/*":
+            schema:
+              format: binary
+              type: string
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateFileResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
+      summary: Upload file
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: onedrive
+          description: OneDrive limits file uploads to 4MB. Please use the [Upload Sessions API](#operation/uploadSessionsStart) to upload bigger files.
+        - connector: sharepoint
+          description: Sharepoint limits file uploads to 4MB. Please use the [Upload Sessions API](#operation/uploadSessionsStart) to upload bigger files.
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              metadata: 'REPLACE_WITH_METADATA'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesUpload({
+                filesUpload: 'string'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
+  /file-storage/files/search:
+    post:
+      description: Search Files
+      operationId: filesSearch
+      parameters:
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/passThrough"
+        - $ref: "#/components/parameters/fields"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilesSearch"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFilesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Search Files
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesSearch({
+                filesSearch: {
+                  query: 'logo jpg'
+                }
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/files/{id}":
+    delete:
+      description: Delete File
+      operationId: filesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteFileResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete File
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get File
+      operationId: filesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFileResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get File
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Rename or move File
+      operationId: filesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateFileRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateFileResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Rename or move File
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              file: {
+                name: 'New Name.pdf',
+                description: 'Renamed PDF Document',
+                parent_folder_id: '1234'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.filesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/files/{id}/download":
+    get:
+      description: Download File
+      operationId: filesDownload
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFileDownloadResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Download File
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesDownload({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+  /file-storage/folders:
+    post:
+      description: Create Folder
+      operationId: foldersAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFolderRequest"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateFolderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Folder
+      tags:
+        - Folders
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              folder: {
+                name: 'Documents',
+                description: 'My Personal Documents',
+                parent_folder_id: '1234',
+                drive_id: '1234'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.foldersAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/folders/{id}":
+    delete:
+      description: Delete Folder
+      operationId: foldersDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteFolderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Folder
+      tags:
+        - Folders
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.foldersDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Folder
+      operationId: foldersOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFolderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Folder
+      tags:
+        - Folders
+      x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: dropbox
+          description: Dropbox does not support getting metadata for the `root` folder.
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.foldersOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Rename or move Folder
+      operationId: foldersUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateFolderRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateFolderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Rename or move Folder
+      tags:
+        - Folders
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              folder: {
+                name: 'Documents',
+                description: 'My Personal Documents',
+                parent_folder_id: '1234'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.foldersUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/folders/{id}/copy":
+    post:
+      description: Copy Folder
+      operationId: foldersCopy
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CopyFolderRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateFolderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Copy Folder
+      tags:
+        - Folders
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              folder: {
+                name: 'Documents',
+                parent_folder_id: '1234'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.foldersCopy(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+  /file-storage/shared-links:
+    get:
+      description: List SharedLinks
+      operationId: sharedLinksAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetSharedLinksResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List SharedLinks
+      tags:
+        - Shared Links
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.sharedLinksAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: sharedLinks
+    post:
+      description: Create Shared Link
+      operationId: sharedLinksAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SharedLink"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateSharedLinkResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Shared Link
+      tags:
+        - Shared Links
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              sharedLink: {
+                download_url: 'https://www.box.com/shared/static/rh935iit6ewrmw0unyul.jpeg',
+                target_id: 'string',
+                scope: 'company',
+                password: 'string'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.sharedLinksAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/shared-links/{id}":
+    delete:
+      description: Delete Shared Link
+      operationId: sharedLinksDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteSharedLinkResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Shared Link
+      tags:
+        - Shared Links
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.sharedLinksDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Shared Link
+      operationId: sharedLinksOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetSharedLinkResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Shared Link
+      tags:
+        - Shared Links
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.sharedLinksOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Shared Link
+      operationId: sharedLinksUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SharedLink"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateSharedLinkResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Shared Link
+      tags:
+        - Shared Links
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              sharedLink: {
+                download_url: 'https://www.box.com/shared/static/rh935iit6ewrmw0unyul.jpeg',
+                target_id: 'string',
+                scope: 'company',
+                password: 'string'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.sharedLinksUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /file-storage/upload-sessions:
+    post:
+      description: Start an Upload Session. Upload sessions are used to upload large files, use the [Upload File](#operation/filesUpload) endpoint to upload smaller files (up to 100MB). Note that the base URL is upload.apideck.com instead of unify.apideck.com. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
+      operationId: uploadSessionsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUploadSessionRequest"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateUploadSessionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
+      summary: Start Upload Session
+      tags:
+        - Upload Sessions
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              uploadSession: {
+                name: 'Documents',
+                parent_folder_id: '1234',
+                drive_id: '1234',
+                size: 1810673
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.uploadSessionsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/upload-sessions/{id}":
+    delete:
+      description: Abort Upload Session. Note that the base URL is upload.apideck.com instead of unify.apideck.com. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
+      operationId: uploadSessionsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteUploadSessionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Abort Upload Session
+      tags:
+        - Upload Sessions
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.uploadSessionsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Upload Session. Use the `part_size` to split your file into parts. Upload the parts to the [Upload part of File](#operation/uploadSessionsUpload) endpoint. Note that the base URL is upload.apideck.com instead of unify.apideck.com. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
+      operationId: uploadSessionsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetUploadSessionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
+      summary: Get Upload Session
+      tags:
+        - Upload Sessions
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.uploadSessionsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    put:
+      description: Upload part of File to Upload Session (max 100MB). Get `part_size` from [Get Upload Session](#operation/uploadSessionsOne) first. Every File part (except the last one) uploaded to this endpoint should have Content-Length equal to `part_size`. Note that the base URL is upload.apideck.com instead of unify.apideck.com. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
+      operationId: uploadSessionsUpload
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/partNumber"
+        - $ref: "#/components/parameters/digestPart"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          "*/*":
+            schema:
+              example: <binary string>
+              format: binary
+              type: string
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateUploadSessionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
+      summary: Upload part of File to Upload Session
+      tags:
+        - Upload Sessions
+      x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: box
+          description: Box requires a SHA1 digest of the uploaded chunk to be sent. More info in the Box API documentation [here](https://developer.box.com/reference/put-files-upload-sessions-id/#param-digest).
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              digest: 'REPLACE_WITH_DIGEST'
+            })
+
+            const params = {
+              id: 'id_example',
+              partNumber: 0,
+              body: '<binary string>'
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.uploadSessionsUpload(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
+  "/file-storage/upload-sessions/{id}/finish":
+    post:
+      description: Finish Upload Session. Only call this endpoint after all File parts have been uploaded to [Upload part of File](#operation/uploadSessionsUpload). Note that the base URL is upload.apideck.com instead of unify.apideck.com. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
+      operationId: uploadSessionsFinish
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/digestPart"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+      responses:
+        "201":
+          $ref: "#/components/responses/GetFileResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
+      summary: Finish Upload Session
+      tags:
+        - Upload Sessions
+      x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: box
+          description: Box requires a SHA1 digest of the whole file to be sent when committing the upload session. More info in the Box API documentation [here](https://developer.box.com/reference/post-files-upload-sessions-id-commit/#param-digest).
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              digest: 'REPLACE_WITH_DIGEST'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.uploadSessionsFinish({
+                id: 'id_example',
+                uploadSessionsFinish: {}
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+components:
+  parameters:
+    applicationId:
+      description: The ID of your Unify application
+      example: dSBdXd2H6Mqwfg0atXHXYcysLJE9qyn1VwBtXHX
+      in: header
+      name: x-apideck-app-id
+      required: true
+      schema:
+        type: string
+    consumerId:
+      description: ID of the consumer which you want to get or push data from
+      in: header
+      name: x-apideck-consumer-id
+      required: true
+      schema:
+        type: string
+    cursor:
+      description: Cursor to start from. You can find cursors for next/previous pages in the meta.cursors property of the response.
+      in: query
+      name: cursor
+      schema:
+        nullable: true
+        type: string
+    digest:
+      description: The RFC3230 message digest of the whole file. Only required for the Box connector. More information on the Box API docs [here](https://developer.box.com/reference/post-files-upload-sessions-id-commit/#param-digest)
+      in: header
+      name: digest
+      required: false
+      schema:
+        example: sha=fpRyg5eVQletdZqEKaFlqwBXJzM=
+        type: string
+    digestPart:
+      description: The RFC3230 message digest of the uploaded part. Only required for the Box connector. More information on the Box API docs [here](https://developer.box.com/reference/put-files-upload-sessions-id/#param-digest)
+      in: header
+      name: digest
+      required: false
+      schema:
+        example: sha=fpRyg5eVQletdZqEKaFlqwBXJzM=
+        type: string
+    driveGroupsFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/DriveGroupsFilter"
+      style: deepObject
+    drivesFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/DrivesFilter"
+      style: deepObject
+    fields:
+      description: "The 'fields' parameter allows API users to specify the fields they want to include in the API response. If this parameter is not present, the API will return all available fields. If this parameter is present, only the fields specified in the comma-separated string will be included in the response. Nested properties can also be requested by using a dot notation. <br /><br />Example: `fields=name,email,addresses.city`<br /><br />In the example above, the response will only include the fields \"name\", \"email\" and \"addresses.city\". If any other fields are available, they will be excluded."
+      example: id,updated_at
+      in: query
+      name: fields
+      schema:
+        nullable: true
+        type: string
+    filesFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/FilesFilter"
+      style: deepObject
+    filesSort:
+      description: Apply sorting
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/FilesSort"
+      style: deepObject
+    id:
+      description: ID of the record you are acting upon.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    limit:
+      description: Number of results to return. Minimum 1, Maximum 200, Default 20
+      in: query
+      name: limit
+      schema:
+        default: 20
+        maximum: 200
+        minimum: 1
+        type: integer
+    metadata:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateFileRequest"
+      description: Metadata to attach to the file
+      in: header
+      name: x-apideck-metadata
+      required: true
+    partNumber:
+      description: Part number of the file part being uploaded.
+      in: query
+      name: part_number
+      required: true
+      schema:
+        example: 0
+        maximum: 10000
+        minimum: 0
+        type: number
+    passThrough:
+      description: Optional unmapped key/values that will be passed through to downstream as query parameters
+      explode: true
+      in: query
+      name: pass_through
+      schema:
+        $ref: "#/components/schemas/PassThroughQuery"
+      style: deepObject
+    raw:
+      description: Include raw response. Mostly used for debugging purposes
+      in: query
+      name: raw
+      schema:
+        default: false
+        type: boolean
+    serviceId:
+      description: Provide the service id you want to call (e.g., pipedrive). Only needed when a consumer has activated multiple integrations for a Unified API.
+      in: header
+      name: x-apideck-service-id
+      schema:
+        type: string
+  responses:
+    BadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BadRequestResponse"
+      description: Bad Request
+    CreateDriveGroupResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateDriveGroupResponse"
+      description: DriveGroups
+    CreateDriveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateDriveResponse"
+      description: Drives
+    CreateFileResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateFileResponse"
+      description: Files
+    CreateFolderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateFolderResponse"
+      description: Folders
+    CreateSharedLinkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateSharedLinkResponse"
+      description: Shared Links
+    CreateUploadSessionResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateUploadSessionResponse"
+      description: UploadSessions
+    DeleteDriveGroupResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteDriveGroupResponse"
+      description: DriveGroups
+    DeleteDriveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteDriveResponse"
+      description: Drives
+    DeleteFileResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteFileResponse"
+      description: Files
+    DeleteFolderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteFolderResponse"
+      description: Folders
+    DeleteSharedLinkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteSharedLinkResponse"
+      description: Shared Links
+    DeleteUploadSessionResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteUploadSessionResponse"
+      description: UploadSessions
+    GetDriveGroupResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetDriveGroupResponse"
+      description: DriveGroups
+    GetDriveGroupsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetDriveGroupsResponse"
+      description: DriveGroups
+    GetDriveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetDriveResponse"
+      description: Drives
+    GetDrivesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetDrivesResponse"
+      description: Drives
+    GetFileDownloadResponse:
+      content:
+        "*/*":
+          schema:
+            format: binary
+            type: string
+      description: File Download
+    GetFileResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetFileResponse"
+      description: File
+    GetFilesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetFilesResponse"
+      description: Files
+    GetFolderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetFolderResponse"
+      description: Folders
+    GetFoldersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetFoldersResponse"
+      description: Folders
+    GetSharedLinkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetSharedLinkResponse"
+      description: Shared Link
+    GetSharedLinksResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetSharedLinksResponse"
+      description: Shared Links
+    GetUploadSessionResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetUploadSessionResponse"
+      description: UploadSessions
+    NotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NotFoundResponse"
+      description: The specified resource was not found
+    NotImplementedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NotImplementedResponse"
+      description: Not Implemented
+    PaymentRequiredResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaymentRequiredResponse"
+      description: Payment Required
+    TooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TooManyRequestsResponse"
+      description: Too Many Requests
+    UnauthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UnauthorizedResponse"
+      description: Unauthorized
+    UnexpectedErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UnexpectedErrorResponse"
+      description: Unexpected error
+    UnprocessableResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UnprocessableResponse"
+      description: Unprocessable
+    UpdateDriveGroupResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateDriveGroupResponse"
+      description: DriveGroups
+    UpdateDriveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateDriveResponse"
+      description: Drives
+    UpdateFileResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateFileResponse"
+      description: Files
+    UpdateFolderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateFolderResponse"
+      description: Folders
+    UpdateSharedLinkResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateSharedLinkResponse"
+      description: Shared Links
+    UpdateUploadSessionResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateUploadSessionResponse"
+      description: UploadSessions
+  schemas:
+    BadRequestResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: Missing property foobar
+              type: string
+            - example:
+                missing:
+                  - foobar: required
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Bad Request
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid Params
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestvalidationerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 400
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestValidationError
+          type: string
+      type: object
+      x-apideck-schema-id: BadRequest
+    CopyFolderRequest:
+      additionalProperties: false
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the folder.
+          example: Documents
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
+      required:
+        - parent_folder_id
+      type: object
+      x-apideck-schema-id: CopyFolderRequest
+    CreateDriveGroupResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateDriveGroupResponse
+    CreateDriveResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateDriveResponse
+    CreateFileRequest:
+      additionalProperties: false
+      properties:
+        description:
+          description: Optional description of the file.
+          example: My Personal Documents
+          type: string
+        drive_id:
+          description: ID of the drive to upload to.
+          example: "1234"
+          type: string
+        name:
+          description: The name of the file.
+          example: Documents
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
+      required:
+        - name
+        - parent_folder_id
+      type: object
+      x-apideck-schema-id: CreateFileRequest
+    CreateFileResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: files
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateFileResponse
+    CreateFolderRequest:
+      additionalProperties: false
+      properties:
+        description:
+          description: Optional description of the folder.
+          example: My Personal Documents
+          type: string
+        drive_id:
+          description: ID of the drive to create the folder in.
+          example: "1234"
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the folder.
+          example: Documents
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
+      required:
+        - name
+        - parent_folder_id
+      type: object
+      x-apideck-schema-id: CreateFolderRequest
+    CreateFolderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Folders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateFolderResponse
+    CreateSharedLinkResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateSharedLinkResponse
+    CreateUploadSessionRequest:
+      additionalProperties: false
+      properties:
+        drive_id:
+          description: ID of the drive to upload to.
+          example: "1234"
+          type: string
+        name:
+          description: The name of the file.
+          example: Documents
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
+        size:
+          $ref: "#/components/schemas/FileSize"
+      required:
+        - name
+        - parent_folder_id
+        - size
+      type: object
+      x-apideck-schema-id: CreateUploadSessionRequest
+    CreateUploadSessionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: UploadSessions
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateUploadSessionResponse
+    CreatedAt:
+      description: The date and time when the object was created.
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Created at (timestamp)
+      type: string
+    CreatedBy:
+      description: The user who created the object.
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Created by
+      type: string
+    DeleteDriveGroupResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteDriveGroupResponse
+    DeleteDriveResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteDriveResponse
+    DeleteFileResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: files
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteFileResponse
+    DeleteFolderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Folders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteFolderResponse
+    DeleteSharedLinkResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteSharedLinkResponse
+    DeleteUploadSessionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: UploadSessions
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteUploadSessionResponse
+    Description:
+      description: A description of the object.
+      example: A description
+      nullable: true
+      title: Description
+      type: string
+    DownstreamId:
+      description: The third-party API ID of original entity
+      example: "12345"
+      nullable: true
+      readOnly: true
+      type: string
+    Drive:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          $ref: "#/components/schemas/Description"
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the drive
+          example: Project Resources
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      required:
+        - id
+        - name
+      type: object
+      x-apideck-schema-id: Drive
+      x-apideck-weights:
+        created_at: critical
+        created_by: edge-case
+        id: critical
+        name: critical
+        updated_at: critical
+        updated_by: edge-case
+    DriveGroup:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          $ref: "#/components/schemas/Description"
+        display_name:
+          description: The display name of the drive group
+          example: accounting
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the drive group
+          example: accounting
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      required:
+        - id
+        - name
+      type: object
+      x-apideck-schema-id: DriveGroup
+      x-apideck-weights:
+        created_at: critical
+        created_by: edge-case
+        id: critical
+        name: critical
+        updated_at: critical
+        updated_by: edge-case
+    DriveGroupsFilter:
+      additionalProperties: false
+      properties:
+        parent_group_id:
+          description: ID of the drive group to filter on
+          example: "1234"
+          type: string
+      type: object
+      x-apideck-schema-id: DriveGroupsFilter
+      x-graphql-type-name: DriveGroupsFilter
+    DrivesFilter:
+      additionalProperties: false
+      properties:
+        group_id:
+          description: ID of the drive group to filter on
+          example: "1234"
+          type: string
+      type: object
+      x-apideck-schema-id: DrivesFilter
+      x-graphql-type-name: DrivesFilter
+    ExpiresAt:
+      example: 2022-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      type: string
+    FileSize:
+      description: The size of the file in bytes
+      example: 1810673
+      type: integer
+      x-apideck-schema-id: FileSize
+      x-graphql-type-name: FileSize
+    FileStorageEventType:
+      enum:
+        - "*"
+        - file-storage.file.created
+        - file-storage.file.updated
+        - file-storage.file.deleted
+      example: file-storage.file.created
+      type: string
+      x-apideck-enum-id: file-storage.event_type
+    FileType:
+      description: The type of resource. Could be file, folder or url
+      enum:
+        - file
+        - folder
+        - url
+      example: file
+      readOnly: true
+      type: string
+      x-apideck-enum-id: files.type
+      x-apideck-schema-id: FileType
+      x-graphql-type-name: FileType
+    FilesFilter:
+      additionalProperties: false
+      properties:
+        drive_id:
+          description: ID of the drive to filter on
+          example: "1234"
+          type: string
+        folder_id:
+          description: ID of the folder to filter on. The root folder has an alias "root"
+          example: root
+          type: string
+        shared:
+          description: Only return files and folders that are shared
+          type: boolean
+      type: object
+      x-apideck-schema-id: FilesFilter
+      x-graphql-type-name: FilesFilter
+    FilesSearch:
+      additionalProperties: false
+      example:
+        query: logo jpg
+      properties:
+        drive_id:
+          description: ID of the drive to filter on
+          example: "1234"
+          type: string
+        query:
+          description: The query to search for. May match across multiple fields.
+          example: logo jpg
+          type: string
+      required:
+        - query
+      type: object
+      x-apideck-schema-id: FilesSearch
+    FilesSort:
+      additionalProperties: false
+      example:
+        by: updated_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Files
+          enum:
+            - updated_at
+            - name
+          example: updated_at
+          type: string
+          x-apideck-enum-id: files.sort_by
+          x-graphql-type-name: FilesSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      type: object
+      x-apideck-schema-id: FilesSort
+      x-graphql-type-name: FilesSort
+    Folder:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          description: Optional description of the folder
+          example: My Personal Documents
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the folder
+          example: Documents
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+        parent_folders:
+          description: The parent folders of the file, starting from the root
+          items:
+            $ref: "#/components/schemas/LinkedFolder"
+          type: array
+        parent_folders_complete:
+          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a folder
+          readOnly: true
+          type: boolean
+        path:
+          description: The full path of the folder (includes the folder name)
+          example: /Personal/Documents
+          readOnly: true
+          type: string
+        size:
+          description: The size of the folder in bytes
+          example: 1810673
+          readOnly: true
+          type: integer
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      required:
+        - name
+        - parent_folders
+      type: object
+      x-apideck-schema-id: Folder
+      x-apideck-weights:
+        created_at: high
+        id: critical
+        name: critical
+        parent_folders: high
+        parent_folders_complete: critical
+        size: low
+        updated_at: critical
+    GetDriveGroupResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/DriveGroup"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetDriveGroupResponse
+      x-graphql-type-name: DriveGroup
+    GetDriveGroupsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/DriveGroup"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetDriveGroupsResponse
+      x-graphql-type-name: DriveGroupList
+    GetDriveResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Drive"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetDriveResponse
+      x-graphql-type-name: Drive
+    GetDrivesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Drive"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetDrivesResponse
+      x-graphql-type-name: DriveList
+    GetFileResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedFile"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: files
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetFileResponse
+      x-graphql-type-name: File
+    GetFilesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/UnifiedFile"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: files
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetFilesResponse
+      x-graphql-type-name: FileList
+    GetFolderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Folder"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Folders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetFolderResponse
+      x-graphql-type-name: Folder
+    GetFoldersResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Folder"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Folders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetFoldersResponse
+      x-graphql-type-name: FolderList
+    GetSharedLinkResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/SharedLink"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetSharedLinkResponse
+      x-graphql-type-name: SharedLink
+    GetSharedLinksResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/SharedLink"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetSharedLinksResponse
+      x-graphql-type-name: SharedLinkList
+    GetUploadSessionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UploadSession"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: UploadSessions
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetUploadSessionResponse
+      x-graphql-type-name: UploadSession
+    Id:
+      description: A unique identifier for an object.
+      example: "12345"
+      readOnly: true
+      title: ID
+      type: string
+    LinkedFolder:
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the folder
+          example: Personal
+          type: string
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: LinkedFolder
+      x-apideck-weights:
+        id: critical
+    Links:
+      description: Links to navigate to previous or next pages through the API
+      properties:
+        current:
+          description: Link to navigate to the current page through the API
+          example: https://unify.apideck.com/crm/companies
+          type: string
+        next:
+          description: Link to navigate to the previous page through the API
+          example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjM
+          nullable: true
+          type: string
+        previous:
+          description: Link to navigate to the previous page through the API
+          example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
+          nullable: true
+          type: string
+      type: object
+      x-apideck-schema-id: Links
+    Meta:
+      description: Response metadata
+      properties:
+        cursors:
+          description: Cursors to navigate to previous or next pages through the API
+          properties:
+            current:
+              description: Cursor to navigate to the current page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjI=
+              nullable: true
+              type: string
+            next:
+              description: Cursor to navigate to the next page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjM=
+              nullable: true
+              type: string
+            previous:
+              description: Cursor to navigate to the previous page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjE=
+              nullable: true
+              type: string
+          type: object
+        items_on_page:
+          description: Number of items returned in the data property of the response
+          example: 50
+          type: integer
+      type: object
+      x-apideck-schema-id: Meta
+    NotFoundResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: "Could not find widget with id: '123'"
+              type: string
+            - example:
+                not_found:
+                  entity: widget
+                  id: "123"
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Found
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unknown Widget
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#entitynotfounderror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 404
+          type: number
+        type_name:
+          description: The type of error returned
+          example: EntityNotFoundError
+          type: string
+      type: object
+      x-apideck-schema-id: NotFound
+    NotImplementedResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.OAuth2.flows'
+              type: string
+            - type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Implemented
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unmapped Attribute
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#mappingerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 501
+          type: number
+        type_name:
+          description: The type of error returned
+          example: MappingError
+          type: string
+      type: object
+      x-apideck-schema-id: NotImplemented
+    Owner:
+      properties:
+        email:
+          description: Email of the owner
+          example: hello@apideck.com
+          readOnly: true
+          type: string
+        id:
+          description: ID of the owner
+          example: "12345"
+          readOnly: true
+          type: string
+        name:
+          description: Name of the owner
+          example: Elon Musk
+          readOnly: true
+          type: string
+      readOnly: true
+      type: object
+      x-apideck-schema-id: Owner
+      x-apideck-weights:
+        id: critical
+    ParentFolderId:
+      description: The parent folder to create the new file within.
+      example: "1234"
+      type: string
+      x-apideck-schema-id: ParentFolderId
+    PassThroughQuery:
+      additionalProperties: true
+      properties:
+        example_downstream_property:
+          description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
+          type: string
+      type: object
+    PaymentRequiredResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+          example: You have reached your limit of 2000
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Payment Required
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Request Limit Reached
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestlimiterror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 402
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestLimitError
+          type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
+    SharedLink:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        download_url:
+          description: The URL that can be used to download the file.
+          example: https://www.box.com/shared/static/rh935iit6ewrmw0unyul.jpeg
+          type: string
+        expires_at:
+          $ref: "#/components/schemas/ExpiresAt"
+        password:
+          description: Optional password for the shared link.
+          nullable: true
+          type: string
+          writeOnly: true
+        password_protected:
+          description: Indicated if the shared link is password protected.
+          readOnly: true
+          type: boolean
+        scope:
+          description: The scope of the shared link.
+          enum:
+            - public
+            - company
+          example: company
+          type: string
+          x-apideck-enum-id: files.scope
+        target:
+          $ref: "#/components/schemas/SharedLinkTarget"
+        target_id:
+          description: The ID of the file or folder to link.
+          type: string
+          writeOnly: true
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        url:
+          description: The URL that can be used to view the file.
+          example: https://www.box.com/s/vspke7y05sb214wjokpk
+          readOnly: true
+          type: string
+      required:
+        - target_id
+      type: object
+      x-apideck-schema-id: SharedLink
+      x-apideck-weights:
+        created_at: medium
+        download_url: high
+        expires_at: high
+        password: low
+        password_protected: low
+        scope: high
+        target: critical
+        target_id: critical
+        updated_at: medium
+        url: critical
+    SharedLinkTarget:
+      additionalProperties: false
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the file
+          example: sample.jpg
+          type: string
+        type:
+          $ref: "#/components/schemas/FileType"
+      readOnly: true
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: SharedLinkTarget
+      x-apideck-weights:
+        id: critical
+    SortDirection:
+      default: asc
+      description: The direction in which to sort the results
+      enum:
+        - asc
+        - desc
+      type: string
+      x-apideck-enum-id: sort_direction
+      x-apideck-schema-id: SortDirection
+      x-graphql-type-name: SortDirection
+    TooManyRequestsResponse:
+      properties:
+        detail:
+          properties:
+            context:
+              type: string
+            error:
+              additionalProperties: true
+              type: object
+          type: object
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 6585)
+          example: Too Many Requests
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Connector Rate Limit Error
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#connectorratelimiterror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 429
+          type: number
+        type_name:
+          description: The type of error returned
+          example: ConnectorRateLimitError
+          type: string
+      type: object
+      x-apideck-schema-id: TooManyRequests
+    UnauthorizedResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+          example: Failed to generate valid JWT Session. Verify applicationId is correct
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unauthorized
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unauthorized Request
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#unauthorizederror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 401
+          type: number
+        type_name:
+          description: The type of error returned
+          example: UnauthorizedError
+          type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
+    UnexpectedErrorResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: "Missing Header: x-apideck-consumer-id"
+              type: string
+            - example:
+                missing:
+                  - x-apideck-consumer-id: required
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Bad Request
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid Params
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#unauthorizederror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 400
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestHeadersValidationError
+          type: string
+      type: object
+      x-apideck-schema-id: Error
+    UnifiedFile:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          description: Optional description of the file
+          example: A sample image
+          type: string
+        downloadable:
+          description: Whether the current user can download this file
+          type: boolean
+        downstream_id:
+          $ref: "#/components/schemas/DownstreamId"
+        id:
+          $ref: "#/components/schemas/Id"
+        mime_type:
+          description: The MIME type of the file.
+          example: image/jpeg
+          type: string
+        name:
+          description: The name of the file
+          example: sample.jpg
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+        parent_folders:
+          description: The parent folders of the file, starting from the root
+          items:
+            $ref: "#/components/schemas/LinkedFolder"
+          type: array
+        parent_folders_complete:
+          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a file
+          type: boolean
+        path:
+          description: The full path of the file or folder (includes the file name)
+          example: /Documents/sample.jpg
+          type: string
+        size:
+          $ref: "#/components/schemas/FileSize"
+        type:
+          $ref: "#/components/schemas/FileType"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      required:
+        - id
+        - name
+        - type
+      type: object
+      x-apideck-schema-id: UnifiedFile
+      x-apideck-weights:
+        created_at: high
+        downloadable: high
+        downstream_id: edge-case
+        id: critical
+        mime_type: high
+        name: critical
+        parent_folders: high
+        parent_folders_complete: critical
+        size: high
+        type: critical
+        updated_at: critical
+    UnifiedId:
+      properties:
+        id:
+          description: The unique identifier of the resource
+          example: "12345"
+          readOnly: true
+          title: Id
+          type: string
+      required:
+        - id
+      title: UnifiedId
+      type: object
+      x-apideck-schema-id: Id
+    UnprocessableResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+          example: Unprocessable request, please verify your request headers and body.
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unprocessable Entity
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid State
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#invalidstateerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 422
+          type: number
+        type_name:
+          description: The type of error returned
+          example: InvalidStateError
+          type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
+    UpdateDriveGroupResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateDriveGroupResponse
+    UpdateDriveResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateDriveResponse
+    UpdateFileRequest:
+      additionalProperties: false
+      properties:
+        description:
+          description: Optional description of the file.
+          example: Renamed PDF Document
+          type: string
+        name:
+          description: The name of the file.
+          example: New Name.pdf
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
+      type: object
+      x-apideck-schema-id: UpdateFileRequest
+    UpdateFileResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: files
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateFileResponse
+    UpdateFolderRequest:
+      additionalProperties: false
+      properties:
+        description:
+          description: Optional description of the folder.
+          example: My Personal Documents
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the folder.
+          example: Documents
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
+      type: object
+      x-apideck-schema-id: UpdateFolderRequest
+    UpdateFolderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Folders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateFolderResponse
+    UpdateSharedLinkResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateSharedLinkResponse
+    UpdateUploadSessionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: UploadSessions
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateUploadSessionResponse
+    UpdatedAt:
+      description: The date and time when the object was last updated.
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      nullable: true
+      readOnly: true
+      title: Updated at (timestamp)
+      type: string
+    UpdatedBy:
+      description: The user who last updated the object.
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Updated by
+      type: string
+    UploadSession:
+      additionalProperties: false
+      properties:
+        expires_at:
+          $ref: "#/components/schemas/ExpiresAt"
+        id:
+          $ref: "#/components/schemas/Id"
+        parallel_upload_supported:
+          description: Indicates if parts of the file can uploaded in parallel.
+          example: true
+          readOnly: true
+          type: boolean
+        part_size:
+          description: Size in bytes of each part of the file that you will upload. Uploaded parts need to be this size for the upload to be successful.
+          example: 1000000
+          readOnly: true
+          type: number
+        success:
+          description: Indicates if the upload session was completed successfully.
+          example: true
+          readOnly: true
+          type: boolean
+        uploaded_byte_range:
+          description: The range of bytes that was successfully uploaded.
+          example: 0-42
+          readOnly: true
+          type: string
+      type: object
+      x-apideck-schema-id: UploadSession
+      x-apideck-weights:
+        expires_at: medium
+        id: critical
+        parallel_upload_supported: critical
+        part_size: critical
+        success: critical
+        uploaded_byte_range: low
+    WebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+          x-apideck-schema-id: WebhookEvent
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/FileStorageEventType"
+          type: object
+      x-sdk-exclude: true
+  securitySchemes:
+    apiKey:
+      description: |
+        To use API you have to sign up and get your own API key. Unify API accounts have sandbox mode and live mode API keys. 
+        To change modes just use the appropriate key to get a live or test object. You can find your API keys on the unify settings of your Apideck app.
+        Your Apideck application_id can also be found on the same page.
+
+        Authenticate your API requests by including your test or live secret API key in the request header. 
+
+        - Bearer authorization header: `Authorization: Bearer <your-apideck-api-key>`
+        - Application id header: `x-apideck-app-id: <your-apideck-app-id>`
+
+        You should use the public keys on the SDKs and the secret keys to authenticate API requests.
+
+        **Do not share or include your secret API keys on client side code.** Your API keys carry significant privileges. Please ensure to keep them 100% secure and be sure to not share your secret API keys in areas that are publicly accessible like GitHub.
+
+        Learn how to set the Authorization header inside Postman https://learning.postman.com/docs/postman/sending-api-requests/authorization/#api-key
+
+        Go to Unify to grab your API KEY https://app.apideck.com/unify/api-keys
+      in: header
+      name: Authorization
+      type: apiKey
+x-webhooks:
+  FileCreated:
+    post:
+      description: Event broadcast when a file has been created.
+      operationId: fileCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/FileStorageEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: file
+              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: file-storage.file.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: dropbox
+              unified_api: file-storage
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: File Created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: file-storage.file.created
+  FileDeleted:
+    post:
+      description: Event broadcast when a file has been deleted.
+      operationId: fileDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/FileStorageEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: file
+              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: file-storage.file.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: dropbox
+              unified_api: file-storage
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: File Deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: file-storage.file.deleted
+  FileUpdated:
+    post:
+      description: Event broadcast when a file has been updated.
+      operationId: fileUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/FileStorageEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: file
+              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: file-storage.file.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: dropbox
+              unified_api: file-storage
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: File Updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: file-storage.file.updated

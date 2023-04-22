@@ -1,0 +1,2476 @@
+openapi: 3.0.0
+info:
+  version: 2017-07-01
+  x-release: v4
+  title: Amazon Translate
+  description: Provides translation of the input content from the source language to the target language.
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_awscloud_profile_image.png
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: translate
+  x-aws-signingName: translate
+  x-origin:
+    - contentType: application/json
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/translate-2017-07-01.normal.json
+      converter:
+        url: https://github.com/mermade/aws2openapi
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/translate/
+servers:
+  - url: http://translate.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Translate multi-region endpoint
+  - url: https://translate.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Translate multi-region endpoint
+  - url: http://translate.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Translate endpoint for China (Beijing) and China (Ningxia)
+  - url: https://translate.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Translate endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=AWSShineFrontendService_20170701.CreateParallelData:
+    post:
+      operationId: CreateParallelData
+      description: Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples that show how you want segments of text to be translated. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateParallelDataResponse"
+        "480":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "481":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "482":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "483":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "484":
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyTagsException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "486":
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConcurrentModificationException"
+        "487":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateParallelDataRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.CreateParallelData
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.DeleteParallelData:
+    post:
+      operationId: DeleteParallelData
+      description: Deletes a parallel data resource in Amazon Translate.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteParallelDataResponse"
+        "480":
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConcurrentModificationException"
+        "481":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "482":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteParallelDataRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.DeleteParallelData
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.DeleteTerminology:
+    post:
+      operationId: DeleteTerminology
+      description: A synchronous action that deletes a custom terminology.
+      responses:
+        "200":
+          description: Success
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "482":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteTerminologyRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.DeleteTerminology
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.DescribeTextTranslationJob:
+    post:
+      operationId: DescribeTextTranslationJob
+      description: Gets the properties associated with an asynchronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DescribeTextTranslationJobResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DescribeTextTranslationJobRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.DescribeTextTranslationJob
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.GetParallelData:
+    post:
+      operationId: GetParallelData
+      description: Provides information about a parallel data resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetParallelDataResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "482":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetParallelDataRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.GetParallelData
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.GetTerminology:
+    post:
+      operationId: GetTerminology
+      description: Retrieves a custom terminology.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTerminologyResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "482":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetTerminologyRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.GetTerminology
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ImportTerminology:
+    post:
+      operationId: ImportTerminology
+      description: <p>Creates or updates a custom terminology, depending on whether one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. The only supported merge strategy is OVERWRITE, where the imported terminology overwrites the existing terminology of the same name.</p> <p>If you import a terminology that overwrites an existing one, the new terminology takes up to 10 minutes to fully propagate. After that, translations have access to the new terminology.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportTerminologyResponse"
+        "480":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "481":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "482":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "483":
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyTagsException"
+        "484":
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConcurrentModificationException"
+        "485":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportTerminologyRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.ImportTerminology
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ListLanguages:
+    post:
+      operationId: ListLanguages
+      description: Provides a list of languages (RFC-5646 codes and names) that Amazon Translate supports.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLanguagesResponse"
+        "480":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "481":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "482":
+          description: UnsupportedDisplayLanguageCodeException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnsupportedDisplayLanguageCodeException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListLanguagesRequest"
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.ListLanguages
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ListParallelData:
+    post:
+      operationId: ListParallelData
+      description: Provides a list of your parallel data resources in Amazon Translate.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListParallelDataResponse"
+        "480":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "481":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListParallelDataRequest"
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.ListParallelData
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: Lists all tags associated with a given Amazon Translate resource. For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/tagging.html"> Tagging your resources</a>.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTagsForResourceResponse"
+        "480":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "481":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListTagsForResourceRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.ListTagsForResource
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ListTerminologies:
+    post:
+      operationId: ListTerminologies
+      description: Provides a list of custom terminologies associated with your account.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTerminologiesResponse"
+        "480":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "481":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListTerminologiesRequest"
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.ListTerminologies
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ListTextTranslationJobs:
+    post:
+      operationId: ListTextTranslationJobs
+      description: Gets a list of the batch translation jobs that you have submitted.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTextTranslationJobsResponse"
+        "480":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "481":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "482":
+          description: InvalidFilterException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidFilterException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListTextTranslationJobsRequest"
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.ListTextTranslationJobs
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.StartTextTranslationJob:
+    post:
+      operationId: StartTextTranslationJob
+      description: <p>Starts an asynchronous batch translation job. Use batch translation jobs to translate large volumes of text across multiple documents at once. For batch translation, you can input documents with different source languages (specify <code>auto</code> as the source language). You can specify one or more target languages. Batch translation translates each input document into each of the target languages. For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/async.html">Asynchronous batch processing</a>.</p> <p>Batch translation jobs can be described with the <a>DescribeTextTranslationJob</a> operation, listed with the <a>ListTextTranslationJobs</a> operation, and stopped with the <a>StopTextTranslationJob</a> operation.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StartTextTranslationJobResponse"
+        "480":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "481":
+          description: UnsupportedLanguagePairException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnsupportedLanguagePairException"
+        "482":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "483":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "484":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "485":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartTextTranslationJobRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.StartTextTranslationJob
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.StopTextTranslationJob:
+    post:
+      operationId: StopTextTranslationJob
+      description: <p>Stops an asynchronous batch translation job that is in progress.</p> <p>If the job's state is <code>IN_PROGRESS</code>, the job will be marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state. Otherwise, the job is put into the <code>STOPPED</code> state.</p> <p>Asynchronous batch translation jobs are started with the <a>StartTextTranslationJob</a> operation. You can use the <a>DescribeTextTranslationJob</a> or <a>ListTextTranslationJobs</a> operations to get a batch translation job's <code>JobId</code>.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StopTextTranslationJobResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StopTextTranslationJobRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.StopTextTranslationJob
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.TagResource:
+    post:
+      operationId: TagResource
+      description: Associates a specific tag with a resource. A tag is a key-value pair that adds as a metadata to a resource. For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/tagging.html"> Tagging your resources</a>.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TagResourceResponse"
+        "480":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "481":
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConcurrentModificationException"
+        "482":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "483":
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyTagsException"
+        "484":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TagResourceRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.TagResource
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.TranslateText:
+    post:
+      operationId: TranslateText
+      description: Translates input text from the source language to the target language. For a list of available languages and language codes, see <a href="https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html">Supported languages</a>.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TranslateTextResponse"
+        "480":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "481":
+          description: TextSizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TextSizeLimitExceededException"
+        "482":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "483":
+          description: UnsupportedLanguagePairException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnsupportedLanguagePairException"
+        "484":
+          description: DetectedLanguageLowConfidenceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetectedLanguageLowConfidenceException"
+        "485":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "486":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "487":
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TranslateTextRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.TranslateText
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.UntagResource:
+    post:
+      operationId: UntagResource
+      description: Removes a specific tag associated with an Amazon Translate resource. For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/tagging.html"> Tagging your resources</a>.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UntagResourceResponse"
+        "480":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "481":
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConcurrentModificationException"
+        "482":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "483":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UntagResourceRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.UntagResource
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=AWSShineFrontendService_20170701.UpdateParallelData:
+    post:
+      operationId: UpdateParallelData
+      description: Updates a previously created parallel data resource by importing a new input file from Amazon S3.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateParallelDataResponse"
+        "480":
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConcurrentModificationException"
+        "481":
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidParameterValueException"
+        "482":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "483":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "484":
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooManyRequestsException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "486":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "487":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateParallelDataRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.UpdateParallelData
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateParallelDataResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The custom name that you assigned to the parallel data resource.
+        Status:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataStatus"
+            - description: The status of the parallel data resource. When the resource is ready for you to use, the status is <code>ACTIVE</code>.
+    CreateParallelDataRequest:
+      type: object
+      required:
+        - Name
+        - ParallelDataConfig
+        - ClientToken
+      title: CreateParallelDataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: A custom name for the parallel data resource in Amazon Translate. You must assign a name that is unique in the account and region.
+        Description:
+          allOf:
+            - $ref: "#/components/schemas/Description"
+            - description: A custom description for the parallel data resource in Amazon Translate.
+        ParallelDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataConfig"
+            - description: Specifies the format and S3 location of the parallel data input file.
+        EncryptionKey:
+          $ref: "#/components/schemas/EncryptionKey"
+        ClientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientTokenString"
+            - description: A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagList"
+            - description: Tags to be associated with this resource. A tag is a key-value pair that adds metadata to a resource. Each tag key for the resource must be unique. For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/tagging.html"> Tagging your resources</a>.
+    InvalidParameterValueException: {}
+    InvalidRequestException: {}
+    LimitExceededException: {}
+    TooManyRequestsException: {}
+    TooManyTagsException: {}
+    ConflictException: {}
+    ConcurrentModificationException: {}
+    InternalServerException: {}
+    DeleteParallelDataResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the parallel data resource that is being deleted.
+        Status:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataStatus"
+            - description: The status of the parallel data deletion.
+    DeleteParallelDataRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteParallelDataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the parallel data resource that is being deleted.
+    ResourceNotFoundException: {}
+    DeleteTerminologyRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteTerminologyRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: "The name of the custom terminology being deleted. "
+    DescribeTextTranslationJobResponse:
+      type: object
+      properties:
+        TextTranslationJobProperties:
+          allOf:
+            - $ref: "#/components/schemas/TextTranslationJobProperties"
+            - description: An object that contains the properties associated with an asynchronous batch translation job.
+    DescribeTextTranslationJobRequest:
+      type: object
+      required:
+        - JobId
+      title: DescribeTextTranslationJobRequest
+      properties:
+        JobId:
+          allOf:
+            - $ref: "#/components/schemas/JobId"
+            - description: The identifier that Amazon Translate generated for the job. The <a>StartTextTranslationJob</a> operation returns this identifier in its response.
+    GetParallelDataResponse:
+      type: object
+      properties:
+        ParallelDataProperties:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataProperties"
+            - description: The properties of the parallel data resource that is being retrieved.
+        DataLocation:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataDataLocation"
+            - description: <p>The Amazon S3 location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30-minute expiration.</p> <important> <p>Amazon Translate doesn't scan all input files for the risk of CSV injection attacks. </p> <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it.</p> <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p> </important>
+        AuxiliaryDataLocation:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataDataLocation"
+            - description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30-minute expiration.
+        LatestUpdateAttemptAuxiliaryDataLocation:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataDataLocation"
+            - description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30-minute expiration.
+    GetParallelDataRequest:
+      type: object
+      required:
+        - Name
+      title: GetParallelDataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the parallel data resource that is being retrieved.
+    GetTerminologyResponse:
+      type: object
+      properties:
+        TerminologyProperties:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyProperties"
+            - description: The properties of the custom terminology being retrieved.
+        TerminologyDataLocation:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyDataLocation"
+            - description: <p>The Amazon S3 location of the most recent custom terminology input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30-minute expiration.</p> <important> <p>Amazon Translate doesn't scan all input files for the risk of CSV injection attacks. </p> <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it.</p> <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p> </important>
+        AuxiliaryDataLocation:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyDataLocation"
+            - description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a terminology resource. The location is returned as a presigned URL to that has a 30-minute expiration.
+    GetTerminologyRequest:
+      type: object
+      required:
+        - Name
+      title: GetTerminologyRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the custom terminology being retrieved.
+        TerminologyDataFormat:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyDataFormat"
+            - description: <p>The data format of the custom terminology being retrieved.</p> <p>If you don't specify this parameter, Amazon Translate returns a file with the same format as the file that was imported to create the terminology. </p> <p>If you specify this parameter when you retrieve a multi-directional terminology resource, you must specify the same format as the input file that was imported to create it. Otherwise, Amazon Translate throws an error.</p>
+    ImportTerminologyResponse:
+      type: object
+      properties:
+        TerminologyProperties:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyProperties"
+            - description: The properties of the custom terminology being imported.
+        AuxiliaryDataLocation:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyDataLocation"
+            - description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a terminology resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+    ImportTerminologyRequest:
+      type: object
+      required:
+        - Name
+        - MergeStrategy
+        - TerminologyData
+      title: ImportTerminologyRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the custom terminology being imported.
+        MergeStrategy:
+          allOf:
+            - $ref: "#/components/schemas/MergeStrategy"
+            - description: The merge strategy of the custom terminology being imported. Currently, only the OVERWRITE merge strategy is supported. In this case, the imported terminology will overwrite an existing terminology of the same name.
+        Description:
+          allOf:
+            - $ref: "#/components/schemas/Description"
+            - description: The description of the custom terminology being imported.
+        TerminologyData:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyData"
+            - description: The terminology data for the custom terminology being imported.
+        EncryptionKey:
+          allOf:
+            - $ref: "#/components/schemas/EncryptionKey"
+            - description: The encryption key for the custom terminology being imported.
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagList"
+            - description: Tags to be associated with this resource. A tag is a key-value pair that adds metadata to a resource. Each tag key for the resource must be unique. For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/tagging.html"> Tagging your resources</a>.
+    ListLanguagesResponse:
+      type: object
+      properties:
+        Languages:
+          allOf:
+            - $ref: "#/components/schemas/LanguagesList"
+            - description: The list of supported languages.
+        DisplayLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/DisplayLanguageCode"
+            - description: The language code passed in with the request.
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: " If the response does not include all remaining results, use the NextToken in the next request to fetch the next group of supported languages."
+    ListLanguagesRequest:
+      type: object
+      title: ListLanguagesRequest
+      properties:
+        DisplayLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/DisplayLanguageCode"
+            - description: "The language code for the language to use to display the language names in the response. The language code is <code>en</code> by default. "
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: "Include the NextToken value to fetch the next group of supported languages. "
+        MaxResults:
+          allOf:
+            - $ref: "#/components/schemas/MaxResultsInteger"
+            - description: The maximum number of results to return in each response.
+    UnsupportedDisplayLanguageCodeException: {}
+    ListParallelDataResponse:
+      type: object
+      properties:
+        ParallelDataPropertiesList:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataPropertiesList"
+            - description: The properties of the parallel data resources returned by this request.
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+    ListParallelDataRequest:
+      type: object
+      title: ListParallelDataRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: A string that specifies the next page of results to return in a paginated response.
+        MaxResults:
+          allOf:
+            - $ref: "#/components/schemas/MaxResultsInteger"
+            - description: The maximum number of parallel data resources returned for each request.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagList"
+            - description: 'Tags associated with the Amazon Translate resource being queried. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Translate. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. '
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: "#/components/schemas/ResourceArn"
+            - description: "The Amazon Resource Name (ARN) of the given Amazon Translate resource you are querying. "
+    ListTerminologiesResponse:
+      type: object
+      properties:
+        TerminologyPropertiesList:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyPropertiesList"
+            - description: The properties list of the custom terminologies returned on the list request.
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: " If the response to the ListTerminologies was truncated, the NextToken fetches the next group of custom terminologies."
+    ListTerminologiesRequest:
+      type: object
+      title: ListTerminologiesRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: "If the result of the request to ListTerminologies was truncated, include the NextToken to fetch the next group of custom terminologies. "
+        MaxResults:
+          allOf:
+            - $ref: "#/components/schemas/MaxResultsInteger"
+            - description: The maximum number of custom terminologies returned per list request.
+    ListTextTranslationJobsResponse:
+      type: object
+      properties:
+        TextTranslationJobPropertiesList:
+          allOf:
+            - $ref: "#/components/schemas/TextTranslationJobPropertiesList"
+            - description: A list containing the properties of each job that is returned.
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ListTextTranslationJobsRequest:
+      type: object
+      title: ListTextTranslationJobsRequest
+      properties:
+        Filter:
+          allOf:
+            - $ref: "#/components/schemas/TextTranslationJobFilter"
+            - description: The parameters that specify which batch translation jobs to retrieve. Filters include job name, job status, and submission time. You can only set one filter at a time.
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: The token to request the next page of results.
+        MaxResults:
+          allOf:
+            - $ref: "#/components/schemas/MaxResultsInteger"
+            - description: The maximum number of results to return in each page. The default value is 100.
+    InvalidFilterException: {}
+    StartTextTranslationJobResponse:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: "#/components/schemas/JobId"
+            - description: The identifier generated for the job. To get the status of a job, use this ID with the <a>DescribeTextTranslationJob</a> operation.
+        JobStatus:
+          allOf:
+            - $ref: "#/components/schemas/JobStatus"
+            - description: <p>The status of the job. Possible values include:</p> <ul> <li> <p> <code>SUBMITTED</code> - The job has been received and is queued for processing.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon Translate is processing the job.</p> </li> <li> <p> <code>COMPLETED</code> - The job was successfully completed and the output is available.</p> </li> <li> <p> <code>COMPLETED_WITH_ERROR</code> - The job was completed with errors. The errors can be analyzed in the job's output.</p> </li> <li> <p> <code>FAILED</code> - The job did not complete. To get details, use the <a>DescribeTextTranslationJob</a> operation.</p> </li> <li> <p> <code>STOP_REQUESTED</code> - The user who started the job has requested that it be stopped.</p> </li> <li> <p> <code>STOPPED</code> - The job has been stopped.</p> </li> </ul>
+    StartTextTranslationJobRequest:
+      type: object
+      required:
+        - InputDataConfig
+        - OutputDataConfig
+        - DataAccessRoleArn
+        - SourceLanguageCode
+        - TargetLanguageCodes
+        - ClientToken
+      title: StartTextTranslationJobRequest
+      properties:
+        JobName:
+          allOf:
+            - $ref: "#/components/schemas/JobName"
+            - description: The name of the batch translation job to be performed.
+        InputDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/InputDataConfig"
+            - description: Specifies the format and location of the input documents for the translation job.
+        OutputDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/OutputDataConfig"
+            - description: "Specifies the S3 folder to which your job output will be saved. "
+        DataAccessRoleArn:
+          allOf:
+            - $ref: "#/components/schemas/IamRoleArn"
+            - description: The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html">Identity and access management </a>.
+        SourceLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: The language code of the input language. Specify the language if all input documents share the same language. If you don't know the language of the source files, or your input documents contains different source languages, select <code>auto</code>. Amazon Translate auto detects the source language for each input document. For a list of supported language codes, see <a href="https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html">Supported languages</a>.
+        TargetLanguageCodes:
+          allOf:
+            - $ref: "#/components/schemas/TargetLanguageCodeStringList"
+            - description: <p>The target languages of the translation job. Enter up to 10 language codes. Each input file is translated into each target language.</p> <p>Each language code is 2 or 5 characters long. For a list of language codes, see <a href="https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html">Supported languages</a>.</p>
+        TerminologyNames:
+          allOf:
+            - $ref: "#/components/schemas/ResourceNameList"
+            - description: <p>The name of a custom terminology resource to add to the translation job. This resource lists examples source terms and the desired translation for each term.</p> <p>This parameter accepts only one custom terminology resource.</p> <p>If you specify multiple target languages for the job, translate uses the designated terminology for each requested target language that has an entry for the source term in the terminology file.</p> <p>For a list of available custom terminology resources, use the <a>ListTerminologies</a> operation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html">Custom terminology</a>.</p>
+        ParallelDataNames:
+          allOf:
+            - $ref: "#/components/schemas/ResourceNameList"
+            - description: <p>The name of a parallel data resource to add to the translation job. This resource consists of examples that show how you want segments of text to be translated. If you specify multiple target languages for the job, the parallel data file must include translations for all the target languages.</p> <p>When you add parallel data to a translation job, you create an <i>Active Custom Translation</i> job. </p> <p>This parameter accepts only one parallel data resource.</p> <note> <p>Active Custom Translation jobs are priced at a higher rate than other jobs that don't use parallel data. For more information, see <a href="http://aws.amazon.com/translate/pricing/">Amazon Translate pricing</a>.</p> </note> <p>For a list of available parallel data resources, use the <a>ListParallelData</a> operation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-parallel-data.html"> Customizing your translations with parallel data</a>.</p>
+        ClientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientTokenString"
+            - description: A unique identifier for the request. This token is generated for you when using the Amazon Translate SDK.
+        Settings:
+          allOf:
+            - $ref: "#/components/schemas/TranslationSettings"
+            - description: Settings to configure your translation output, including the option to set the formality level of the output text and the option to mask profane words and phrases.
+    UnsupportedLanguagePairException: {}
+    StopTextTranslationJobResponse:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: "#/components/schemas/JobId"
+            - description: The job ID of the stopped batch translation job.
+        JobStatus:
+          allOf:
+            - $ref: "#/components/schemas/JobStatus"
+            - description: The status of the designated job. Upon successful completion, the job's status will be <code>STOPPED</code>.
+    StopTextTranslationJobRequest:
+      type: object
+      required:
+        - JobId
+      title: StopTextTranslationJobRequest
+      properties:
+        JobId:
+          allOf:
+            - $ref: "#/components/schemas/JobId"
+            - description: The job ID of the job to be stopped.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: "#/components/schemas/ResourceArn"
+            - description: "The Amazon Resource Name (ARN) of the given Amazon Translate resource to which you want to associate the tags. "
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagList"
+            - description: Tags being associated with a specific Amazon Translate resource. There can be a maximum of 50 tags (both existing and pending) associated with a specific resource.
+    TranslateTextResponse:
+      type: object
+      required:
+        - TranslatedText
+        - SourceLanguageCode
+        - TargetLanguageCode
+      properties:
+        TranslatedText:
+          allOf:
+            - $ref: "#/components/schemas/TranslatedTextString"
+            - description: The translated text.
+        SourceLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: The language code for the language of the source text.
+        TargetLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: "The language code for the language of the target text. "
+        AppliedTerminologies:
+          allOf:
+            - $ref: "#/components/schemas/AppliedTerminologyList"
+            - description: The names of the custom terminologies applied to the input text by Amazon Translate for the translated text response.
+        AppliedSettings:
+          allOf:
+            - $ref: "#/components/schemas/TranslationSettings"
+            - description: Settings that configure the translation output.
+    TranslateTextRequest:
+      type: object
+      required:
+        - Text
+        - SourceLanguageCode
+        - TargetLanguageCode
+      title: TranslateTextRequest
+      properties:
+        Text:
+          allOf:
+            - $ref: "#/components/schemas/BoundedLengthString"
+            - description: The text to translate. The text string can be a maximum of 10,000 bytes long. Depending on your character set, this may be fewer than 10,000 characters.
+        TerminologyNames:
+          allOf:
+            - $ref: "#/components/schemas/ResourceNameList"
+            - description: The name of the terminology list file to be used in the TranslateText request. You can use 1 terminology list at most in a <code>TranslateText</code> request. Terminology lists can contain a maximum of 256 terms.
+        SourceLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: <p>The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see <a href="https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html">Supported languages</a>.</p> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call <a href="https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html">Amazon Comprehend</a> to determine the source language.</p> <note> <p>If you specify <code>auto</code>, you must send the <code>TranslateText</code> request in a region that supports Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported. </p> </note>
+        TargetLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: The language code requested for the language of the target text. The language must be a language supported by Amazon Translate.
+        Settings:
+          allOf:
+            - $ref: "#/components/schemas/TranslationSettings"
+            - description: Settings to configure your translation output, including the option to set the formality level of the output text and the option to mask profane words and phrases.
+    TextSizeLimitExceededException: {}
+    DetectedLanguageLowConfidenceException: {}
+    ServiceUnavailableException: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: "#/components/schemas/ResourceArn"
+            - description: " The Amazon Resource Name (ARN) of the given Amazon Translate resource from which you want to remove the tags. "
+        TagKeys:
+          allOf:
+            - $ref: "#/components/schemas/TagKeyList"
+            - description: "The initial part of a key-value pair that forms a tag being removed from a given resource. Keys must be unique and cannot be duplicated for a particular resource. "
+    UpdateParallelDataResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the parallel data resource being updated.
+        Status:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataStatus"
+            - description: The status of the parallel data resource that you are attempting to update. Your update request is accepted only if this status is either <code>ACTIVE</code> or <code>FAILED</code>.
+        LatestUpdateAttemptStatus:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataStatus"
+            - description: The status of the parallel data update attempt. When the updated parallel data resource is ready for you to use, the status is <code>ACTIVE</code>.
+        LatestUpdateAttemptAt:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The time that the most recent update was attempted.
+    UpdateParallelDataRequest:
+      type: object
+      required:
+        - Name
+        - ParallelDataConfig
+        - ClientToken
+      title: UpdateParallelDataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the parallel data resource being updated.
+        Description:
+          allOf:
+            - $ref: "#/components/schemas/Description"
+            - description: A custom description for the parallel data resource in Amazon Translate.
+        ParallelDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataConfig"
+            - description: Specifies the format and S3 location of the parallel data input file.
+        ClientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientTokenString"
+            - description: A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+    ResourceName:
+      type: string
+      pattern: ^([A-Za-z0-9-]_?)+$
+      minLength: 1
+      maxLength: 256
+    TermList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Term"
+    AppliedTerminology:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the custom terminology applied to the input text by Amazon Translate for the translated text response.
+        Terms:
+          allOf:
+            - $ref: "#/components/schemas/TermList"
+            - description: "The specific terms of the custom terminology applied to the input text by Amazon Translate for the translated text response. A maximum of 250 terms will be returned, and the specific terms applied will be the first 250 terms in the source text. "
+      description: The custom terminology applied to the input text by Amazon Translate for the translated text response. This is optional in the response and will only be present if you specified terminology input in the request. Currently, only one terminology can be applied per TranslateText request.
+    AppliedTerminologyList:
+      type: array
+      items:
+        $ref: "#/components/schemas/AppliedTerminology"
+    BoundedLengthString:
+      type: string
+      pattern: "[\\P{M}\\p{M}]{1,10000}"
+      minLength: 1
+      maxLength: 10000
+    ClientTokenString:
+      type: string
+      pattern: ^[a-zA-Z0-9-]+$
+      minLength: 1
+      maxLength: 64
+    ContentType:
+      type: string
+      pattern: ^[-\w.]+\/[-\w.+]+$
+      maxLength: 256
+    Description:
+      type: string
+      pattern: "[\\P{M}\\p{M}]{0,256}"
+      maxLength: 256
+    ParallelDataConfig:
+      type: object
+      required:
+        - S3Uri
+        - Format
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: "#/components/schemas/S3Uri"
+            - description: The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
+        Format:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataFormat"
+            - description: The format of the parallel data input file.
+      description: Specifies the format and S3 location of the parallel data input file.
+    EncryptionKey:
+      type: object
+      required:
+        - Type
+        - Id
+      properties:
+        Type:
+          allOf:
+            - $ref: "#/components/schemas/EncryptionKeyType"
+            - description: The type of encryption key used by Amazon Translate to encrypt this object.
+        Id:
+          allOf:
+            - $ref: "#/components/schemas/EncryptionKeyID"
+            - description: The Amazon Resource Name (ARN) of the encryption key being used to encrypt this object.
+      description: The encryption key used to encrypt this object.
+    TagList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Tag"
+      minItems: 0
+      maxItems: 200
+    ParallelDataStatus:
+      type: string
+      enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - DELETING
+        - FAILED
+    JobId:
+      type: string
+      pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      minLength: 1
+      maxLength: 32
+    TextTranslationJobProperties:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: "#/components/schemas/JobId"
+            - description: The ID of the translation job.
+        JobName:
+          allOf:
+            - $ref: "#/components/schemas/JobName"
+            - description: The user-defined name of the translation job.
+        JobStatus:
+          allOf:
+            - $ref: "#/components/schemas/JobStatus"
+            - description: The status of the translation job.
+        JobDetails:
+          allOf:
+            - $ref: "#/components/schemas/JobDetails"
+            - description: The number of documents successfully and unsuccessfully processed during the translation job.
+        SourceLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: The language code of the language of the source text. The language must be a language supported by Amazon Translate.
+        TargetLanguageCodes:
+          allOf:
+            - $ref: "#/components/schemas/TargetLanguageCodeStringList"
+            - description: The language code of the language of the target text. The language must be a language supported by Amazon Translate.
+        TerminologyNames:
+          allOf:
+            - $ref: "#/components/schemas/ResourceNameList"
+            - description: A list containing the names of the terminologies applied to a translation job. Only one terminology can be applied per <a>StartTextTranslationJob</a> request at this time.
+        ParallelDataNames:
+          allOf:
+            - $ref: "#/components/schemas/ResourceNameList"
+            - description: A list containing the names of the parallel data resources applied to the translation job.
+        Message:
+          allOf:
+            - $ref: "#/components/schemas/UnboundedLengthString"
+            - description: An explanation of any errors that may have occurred during the translation job.
+        SubmittedTime:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The time at which the translation job was submitted.
+        EndTime:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The time at which the translation job ended.
+        InputDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/InputDataConfig"
+            - description: The input configuration properties that were specified when the job was requested.
+        OutputDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/OutputDataConfig"
+            - description: The output configuration properties that were specified when the job was requested.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: "#/components/schemas/IamRoleArn"
+            - description: The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that granted Amazon Translate read access to the job's input data.
+        Settings:
+          allOf:
+            - $ref: "#/components/schemas/TranslationSettings"
+            - description: Settings that configure the translation output.
+      description: Provides information about a translation job.
+    Directionality:
+      type: string
+      enum:
+        - UNI
+        - MULTI
+    DisplayLanguageCode:
+      type: string
+      enum:
+        - de
+        - en
+        - es
+        - fr
+        - it
+        - ja
+        - ko
+        - pt
+        - zh
+        - zh-TW
+    EncryptionKeyType:
+      type: string
+      enum:
+        - KMS
+    EncryptionKeyID:
+      type: string
+      pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
+      minLength: 1
+      maxLength: 400
+    Formality:
+      type: string
+      enum:
+        - FORMAL
+        - INFORMAL
+    ParallelDataProperties:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The custom name assigned to the parallel data resource.
+        Arn:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataArn"
+            - description: The Amazon Resource Name (ARN) of the parallel data resource.
+        Description:
+          allOf:
+            - $ref: "#/components/schemas/Description"
+            - description: The description assigned to the parallel data resource.
+        Status:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataStatus"
+            - description: The status of the parallel data resource. When the parallel data is ready for you to use, the status is <code>ACTIVE</code>.
+        SourceLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: The source language of the translations in the parallel data file.
+        TargetLanguageCodes:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeStringList"
+            - description: The language codes for the target languages available in the parallel data file. All possible target languages are returned as an array.
+        ParallelDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataConfig"
+            - description: Specifies the format and S3 location of the parallel data input file.
+        Message:
+          allOf:
+            - $ref: "#/components/schemas/UnboundedLengthString"
+            - description: "Additional information from Amazon Translate about the parallel data resource. "
+        ImportedDataSize:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: The number of UTF-8 characters that Amazon Translate imported from the parallel data input file. This number includes only the characters in your translation examples. It does not include characters that are used to format your file. For example, if you provided a Translation Memory Exchange (.tmx) file, this number does not include the tags.
+        ImportedRecordCount:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: The number of records successfully imported from the parallel data input file.
+        FailedRecordCount:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: The number of records unsuccessfully imported from the parallel data input file.
+        SkippedRecordCount:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: The number of items in the input file that Amazon Translate skipped when you created or updated the parallel data resource. For example, Amazon Translate skips empty records, empty target texts, and empty lines.
+        EncryptionKey:
+          $ref: "#/components/schemas/EncryptionKey"
+        CreatedAt:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The time at which the parallel data resource was created.
+        LastUpdatedAt:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The time at which the parallel data resource was last updated.
+        LatestUpdateAttemptStatus:
+          allOf:
+            - $ref: "#/components/schemas/ParallelDataStatus"
+            - description: The status of the most recent update attempt for the parallel data resource.
+        LatestUpdateAttemptAt:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The time that the most recent update was attempted.
+      description: The properties of a parallel data resource.
+    ParallelDataDataLocation:
+      type: object
+      required:
+        - RepositoryType
+        - Location
+      properties:
+        RepositoryType:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: Describes the repository that contains the parallel data input file.
+        Location:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: <p>The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30-minute expiration.</p> <important> <p>Amazon Translate doesn't scan all input files for the risk of CSV injection attacks. </p> <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it.</p> <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p> </important>
+      description: The location of the most recent parallel data input file that was successfully imported into Amazon Translate.
+    TerminologyDataFormat:
+      type: string
+      enum:
+        - CSV
+        - TMX
+        - TSV
+    TerminologyProperties:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: The name of the custom terminology.
+        Description:
+          allOf:
+            - $ref: "#/components/schemas/Description"
+            - description: The description of the custom terminology properties.
+        Arn:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyArn"
+            - description: " The Amazon Resource Name (ARN) of the custom terminology. "
+        SourceLanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: The language code for the source text of the translation request for which the custom terminology is being used.
+        TargetLanguageCodes:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeStringList"
+            - description: The language codes for the target languages available with the custom terminology resource. All possible target languages are returned in array.
+        EncryptionKey:
+          allOf:
+            - $ref: "#/components/schemas/EncryptionKey"
+            - description: The encryption key for the custom terminology.
+        SizeBytes:
+          allOf:
+            - $ref: "#/components/schemas/Integer"
+            - description: The size of the file used when importing a custom terminology.
+        TermCount:
+          allOf:
+            - $ref: "#/components/schemas/Integer"
+            - description: The number of terms included in the custom terminology.
+        CreatedAt:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The time at which the custom terminology was created, based on the timestamp.
+        LastUpdatedAt:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The time at which the custom terminology was last update, based on the timestamp.
+        Directionality:
+          allOf:
+            - $ref: "#/components/schemas/Directionality"
+            - description: <p>The directionality of your terminology resource indicates whether it has one source language (uni-directional) or multiple (multi-directional). </p> <dl> <dt>UNI</dt> <dd> <p>The terminology resource has one source language (the first column in a CSV file), and all of its other languages are target languages.</p> </dd> <dt>MULTI</dt> <dd> <p>Any language in the terminology resource can be the source language.</p> </dd> </dl>
+        Message:
+          allOf:
+            - $ref: "#/components/schemas/UnboundedLengthString"
+            - description: Additional information from Amazon Translate about the terminology resource.
+        SkippedTermCount:
+          allOf:
+            - $ref: "#/components/schemas/Integer"
+            - description: The number of terms in the input file that Amazon Translate skipped when you created or updated the terminology resource.
+        Format:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyDataFormat"
+            - description: The format of the custom terminology input file.
+      description: The properties of the custom terminology.
+    TerminologyDataLocation:
+      type: object
+      required:
+        - RepositoryType
+        - Location
+      properties:
+        RepositoryType:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The repository type for the custom terminology data.
+        Location:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: <p>The Amazon S3 location of the most recent custom terminology input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30-minute expiration .</p> <important> <p>Amazon Translate doesn't scan all input files for the risk of CSV injection attacks. </p> <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it.</p> <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p> </important>
+      description: The location of the custom terminology data.
+    IamRoleArn:
+      type: string
+      pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
+      minLength: 20
+      maxLength: 2048
+    MergeStrategy:
+      type: string
+      enum:
+        - OVERWRITE
+    TerminologyData:
+      type: object
+      required:
+        - File
+        - Format
+      properties:
+        File:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyFile"
+            - description: The file containing the custom terminology data. Your version of the AWS SDK performs a Base64-encoding on this field before sending a request to the AWS service. Users of the SDK should not perform Base64-encoding themselves.
+        Format:
+          allOf:
+            - $ref: "#/components/schemas/TerminologyDataFormat"
+            - description: The data format of the custom terminology.
+        Directionality:
+          allOf:
+            - $ref: "#/components/schemas/Directionality"
+            - description: <p>The directionality of your terminology resource indicates whether it has one source language (uni-directional) or multiple (multi-directional).</p> <dl> <dt>UNI</dt> <dd> <p>The terminology resource has one source language (for example, the first column in a CSV file), and all of its other languages are target languages. </p> </dd> <dt>MULTI</dt> <dd> <p>Any language in the terminology resource can be the source language or a target language. A single multi-directional terminology resource can be used for jobs that translate different language pairs. For example, if the terminology contains English and Spanish terms, it can be used for jobs that translate English to Spanish and Spanish to English.</p> </dd> </dl> <p>When you create a custom terminology resource without specifying the directionality, it behaves as uni-directional terminology, although this parameter will have a null value.</p>
+      description: The data associated with the custom terminology. For information about the custom terminology file, see <a href="https://docs.aws.amazon.com/translate/latest/dg/creating-custom-terminology.html"> Creating a Custom Terminology</a>.
+    S3Uri:
+      type: string
+      pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+      maxLength: 1024
+    InputDataConfig:
+      type: object
+      required:
+        - S3Uri
+        - ContentType
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: "#/components/schemas/S3Uri"
+            - description: The URI of the AWS S3 folder that contains the input files. Amazon Translate translates all the files in the folder and all its sub-folders. The folder must be in the same Region as the API endpoint you are calling.
+        ContentType:
+          allOf:
+            - $ref: "#/components/schemas/ContentType"
+            - description: "<p>Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:</p> <ul> <li> <p> <code>text/html</code>: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the <code>html</code> element in each file.</p> </li> <li> <p> <code>text/plain</code>: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code>: The input data consists of one or more Word documents (.docx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.presentationml.presentation</code>: The input data consists of one or more PowerPoint Presentation files (.pptx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code>: The input data consists of one or more Excel Workbook files (.xlsx).</p> </li> <li> <p> <code>application/x-xliff+xml</code>: The input data consists of one or more XML Localization Interchange File Format (XLIFF) files (.xlf). Amazon Translate supports only XLIFF version 1.2.</p> </li> </ul> <important> <p>If you structure your input data as HTML, ensure that you set this parameter to <code>text/html</code>. By doing so, you cut costs by limiting the translation to the contents of the <code>html</code> element in each file. Otherwise, if you set this parameter to <code>text/plain</code>, your costs will cover the translation of every character.</p> </important>"
+      description: The input configuration properties for requesting a batch translation job.
+    Integer:
+      type: integer
+    JobDetails:
+      type: object
+      properties:
+        TranslatedDocumentsCount:
+          allOf:
+            - $ref: "#/components/schemas/Integer"
+            - description: The number of documents successfully processed during a translation job.
+        DocumentsWithErrorsCount:
+          allOf:
+            - $ref: "#/components/schemas/Integer"
+            - description: The number of documents that could not be processed during a translation job.
+        InputDocumentsCount:
+          allOf:
+            - $ref: "#/components/schemas/Integer"
+            - description: The number of documents used as input in a translation job.
+      description: The number of documents successfully and unsuccessfully processed during a translation job.
+    JobName:
+      type: string
+      pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      minLength: 1
+      maxLength: 256
+    JobStatus:
+      type: string
+      enum:
+        - SUBMITTED
+        - IN_PROGRESS
+        - COMPLETED
+        - COMPLETED_WITH_ERROR
+        - FAILED
+        - STOP_REQUESTED
+        - STOPPED
+    LocalizedNameString:
+      type: string
+      minLength: 1
+      maxLength: 256
+    LanguageCodeString:
+      type: string
+      minLength: 2
+      maxLength: 5
+    Language:
+      type: object
+      required:
+        - LanguageName
+        - LanguageCode
+      properties:
+        LanguageName:
+          allOf:
+            - $ref: "#/components/schemas/LocalizedNameString"
+            - description: Language name of the supported language.
+        LanguageCode:
+          allOf:
+            - $ref: "#/components/schemas/LanguageCodeString"
+            - description: Language code for the supported language.
+      description: A supported language.
+    LanguageCodeStringList:
+      type: array
+      items:
+        $ref: "#/components/schemas/LanguageCodeString"
+    LanguagesList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Language"
+    NextToken:
+      type: string
+      pattern: \p{ASCII}{0,8192}
+      maxLength: 8192
+    MaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 500
+    ParallelDataPropertiesList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ParallelDataProperties"
+    ResourceArn:
+      type: string
+      minLength: 1
+      maxLength: 512
+    TerminologyPropertiesList:
+      type: array
+      items:
+        $ref: "#/components/schemas/TerminologyProperties"
+    TextTranslationJobFilter:
+      type: object
+      properties:
+        JobName:
+          allOf:
+            - $ref: "#/components/schemas/JobName"
+            - description: Filters the list of jobs by name.
+        JobStatus:
+          allOf:
+            - $ref: "#/components/schemas/JobStatus"
+            - description: Filters the list of jobs based by job status.
+        SubmittedBeforeTime:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: Filters the list of jobs based on the time that the job was submitted for processing and returns only the jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+        SubmittedAfterTime:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: Filters the list of jobs based on the time that the job was submitted for processing and returns only the jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+      description: Provides information for filtering a list of translation jobs. For more information, see <a>ListTextTranslationJobs</a>.
+    TextTranslationJobPropertiesList:
+      type: array
+      items:
+        $ref: "#/components/schemas/TextTranslationJobProperties"
+    Long:
+      type: integer
+    OutputDataConfig:
+      type: object
+      required:
+        - S3Uri
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: "#/components/schemas/S3Uri"
+            - description: The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
+        EncryptionKey:
+          $ref: "#/components/schemas/EncryptionKey"
+      description: The output configuration properties for a batch translation job.
+    ParallelDataArn:
+      type: string
+      minLength: 1
+      maxLength: 512
+    ParallelDataFormat:
+      type: string
+      enum:
+        - TSV
+        - CSV
+        - TMX
+    String:
+      type: string
+      pattern: "[\\P{M}\\p{M}]{0,10000}"
+      maxLength: 10000
+    UnboundedLengthString:
+      type: string
+    Timestamp:
+      type: string
+      format: date-time
+    Profanity:
+      type: string
+      enum:
+        - MASK
+    ResourceNameList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ResourceName"
+    TargetLanguageCodeStringList:
+      type: array
+      items:
+        $ref: "#/components/schemas/LanguageCodeString"
+      minItems: 1
+    TranslationSettings:
+      type: object
+      properties:
+        Formality:
+          allOf:
+            - $ref: "#/components/schemas/Formality"
+            - description: <p>You can optionally specify the desired level of formality for translations to supported target languages. The formality setting controls the level of formal language usage (also known as <a href="https://en.wikipedia.org/wiki/Register_(sociolinguistics)">register</a>) in the translation output. You can set the value to informal or formal. If you don't specify a value for formality, or if the target language doesn't support formality, the translation will ignore the formality setting.</p> <p> If you specify multiple target languages for the job, translate ignores the formality setting for any unsupported target language.</p> <p>For a list of target languages that support formality, see <a href="https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages">Supported languages</a> in the Amazon Translate Developer Guide.</p>
+        Profanity:
+          allOf:
+            - $ref: "#/components/schemas/Profanity"
+            - description: <p>Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output.</p> <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words.</p> <p>Amazon Translate doesn't detect profanity in all of its supported languages. For languages that don't support profanity detection, see <a href="https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages">Unsupported languages</a> in the Amazon Translate Developer Guide.</p> <p>If you specify multiple target languages for the job, all the target languages must support profanity masking. If any of the target languages don't support profanity masking, the translation job won't mask profanity for any target language.</p>
+      description: Optional settings that configure the translation output. Use these settings for real time translations and asynchronous translation jobs.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: "#/components/schemas/TagKey"
+            - description: "The initial part of a key-value pair that forms a tag associated with a given resource. "
+        Value:
+          allOf:
+            - $ref: "#/components/schemas/TagValue"
+            - description: " The second part of a key-value pair that forms a tag associated with a given resource."
+      description: "A key-value pair that adds as a metadata to a resource used by Amazon Translate. "
+    TagKeyList:
+      type: array
+      items:
+        $ref: "#/components/schemas/TagKey"
+      minItems: 0
+      maxItems: 200
+    Term:
+      type: object
+      properties:
+        SourceText:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The source text of the term being translated by the custom terminology.
+        TargetText:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The target text of the term being translated by the custom terminology.
+      description: The term being translated by the custom terminology.
+    TerminologyArn:
+      type: string
+      minLength: 1
+      maxLength: 512
+    TerminologyFile:
+      type: string
+      maxLength: 10485760
+      format: password
+    TranslatedTextString:
+      type: string
+      pattern: "[\\P{M}\\p{M}]{0,20000}"
+      maxLength: 20000
+security:
+  - hmac: []

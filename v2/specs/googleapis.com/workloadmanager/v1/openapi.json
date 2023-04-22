@@ -1,0 +1,2168 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://workloadmanager.googleapis.com/"
+    }
+  ],
+  "info": {
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com",
+      "x-twitter": "youtube"
+    },
+    "description": "",
+    "license": {
+      "name": "Creative Commons Attribution 3.0",
+      "url": "http://creativecommons.org/licenses/by/3.0/"
+    },
+    "termsOfService": "https://developers.google.com/terms/",
+    "title": "Workload Manager API",
+    "version": "v1",
+    "x-apisguru-categories": [
+      "analytics",
+      "media"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg"
+    },
+    "x-origin": [
+      {
+        "format": "google",
+        "url": "https://workloadmanager.googleapis.com/$discovery/rest?version=v1",
+        "version": "v1"
+      }
+    ],
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "workloadmanager"
+  },
+  "externalDocs": {
+    "url": "https://cloud.google.com/workload-manager/docs"
+  },
+  "tags": [
+    {
+      "name": "projects"
+    }
+  ],
+  "paths": {
+    "/v1/{location}/insights:writeInsight": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Write the data insights to workload manager data warehouse.",
+        "operationId": "workloadmanager.projects.locations.insights.writeInsight",
+        "parameters": [
+          {
+            "description": "Required. The GCP location. The format is: projects/{project}/locations/{location}.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WriteInsightRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WriteInsightResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{name}": {
+      "delete": {
+        "description": "Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.",
+        "operationId": "workloadmanager.projects.locations.operations.delete",
+        "parameters": [
+          {
+            "description": "The name of the operation resource to be deleted.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "description": "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.",
+        "operationId": "workloadmanager.projects.locations.operations.get",
+        "parameters": [
+          {
+            "description": "The name of the operation resource.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{name}/executions:run": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Creates a new Execution in a given project and location.",
+        "operationId": "workloadmanager.projects.locations.evaluations.executions.run",
+        "parameters": [
+          {
+            "description": "Required. The resource name of the Execution using the form: 'projects/{project}/locations/{location}/evaluations/{evaluation}/executions/{execution}'",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunEvaluationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{name}/locations": {
+      "get": {
+        "description": "Lists information about the supported locations for this service.",
+        "operationId": "workloadmanager.projects.locations.list",
+        "parameters": [
+          {
+            "description": "The resource that owns the locations collection, if applicable.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A filter to narrow down results to a preferred subset. The filtering language accepts strings like `\"displayName=tokyo\"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of results to return. If not set, the service selects a default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListLocationsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{name}/operations": {
+      "get": {
+        "description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+        "operationId": "workloadmanager.projects.locations.operations.list",
+        "parameters": [
+          {
+            "description": "The name of the operation's parent resource.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The standard list filter.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The standard list page size.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The standard list page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOperationsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{name}:cancel": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+        "operationId": "workloadmanager.projects.locations.operations.cancel",
+        "parameters": [
+          {
+            "description": "The name of the operation resource to be cancelled.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelOperationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{parent}/evaluations": {
+      "get": {
+        "description": "Lists Evaluations in a given project and location.",
+        "operationId": "workloadmanager.projects.locations.evaluations.list",
+        "parameters": [
+          {
+            "description": "Required. Parent value for ListEvaluationsRequest",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filtering results",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Hint for how to order the results",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A token identifying a page of results the server should return.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEvaluationsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Creates a new Evaluation in a given project and location.",
+        "operationId": "workloadmanager.projects.locations.evaluations.create",
+        "parameters": [
+          {
+            "description": "Required. The resource prefix of the evaluation location using the form: `projects/{project_id}/locations/{location_id}`",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. Id of the requesting object",
+            "in": "query",
+            "name": "evaluationId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "in": "query",
+            "name": "requestId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Evaluation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{parent}/executions": {
+      "get": {
+        "description": "Lists Executions in a given project and location.",
+        "operationId": "workloadmanager.projects.locations.evaluations.executions.list",
+        "parameters": [
+          {
+            "description": "Required. The resource prefix of the Execution using the form: 'projects/{project}/locations/{location}/evaluations/{evaluation}'",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filtering results",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field to sort by. See https://google.aip.dev/132#ordering for more details.",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A token identifying a page of results the server should return.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListExecutionsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{parent}/results": {
+      "get": {
+        "description": "List the running result of a single Execution.",
+        "operationId": "workloadmanager.projects.locations.evaluations.executions.results.list",
+        "parameters": [
+          {
+            "description": "Required. The execution results. Format: {parent}/evaluations/*/executions/*/results",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filtering results",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A token identifying a page of results the server should return.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListExecutionResultsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{parent}/rules": {
+      "get": {
+        "description": "Lists rules in a given project.",
+        "operationId": "workloadmanager.projects.locations.rules.list",
+        "parameters": [
+          {
+            "description": "Required. The [project] on which to execute the request. The format is: projects/{project_id}/locations/{location} Currently, the pre-defined rules are global available to all projects and all regions",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter based on primary_category, secondary_category",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A token identifying a page of results the server should return.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRulesResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{parent}/scannedResources": {
+      "get": {
+        "description": "List all scanned resources for a single Execution.",
+        "operationId": "workloadmanager.projects.locations.evaluations.executions.scannedResources.list",
+        "parameters": [
+          {
+            "description": "Required. parent for ListScannedResourcesRequest",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filtering results",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field to sort by. See https://google.aip.dev/132#ordering for more details.",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A token identifying a page of results the server should return.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "rule name",
+            "in": "query",
+            "name": "rule",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListScannedResourcesResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "_.xgafv": {
+        "description": "V1 error format.",
+        "in": "query",
+        "name": "$.xgafv",
+        "schema": {
+          "enum": [
+            "1",
+            "2"
+          ],
+          "type": "string"
+        }
+      },
+      "access_token": {
+        "description": "OAuth access token.",
+        "in": "query",
+        "name": "access_token",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "alt": {
+        "description": "Data format for response.",
+        "in": "query",
+        "name": "alt",
+        "schema": {
+          "enum": [
+            "json",
+            "media",
+            "proto"
+          ],
+          "type": "string"
+        }
+      },
+      "callback": {
+        "description": "JSONP",
+        "in": "query",
+        "name": "callback",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "fields": {
+        "description": "Selector specifying which fields to include in a partial response.",
+        "in": "query",
+        "name": "fields",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "key": {
+        "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+        "in": "query",
+        "name": "key",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "oauth_token": {
+        "description": "OAuth 2.0 token for the current user.",
+        "in": "query",
+        "name": "oauth_token",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "prettyPrint": {
+        "description": "Returns response with indentations and line breaks.",
+        "in": "query",
+        "name": "prettyPrint",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "quotaUser": {
+        "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.",
+        "in": "query",
+        "name": "quotaUser",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "uploadType": {
+        "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
+        "in": "query",
+        "name": "uploadType",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "upload_protocol": {
+        "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
+        "in": "query",
+        "name": "upload_protocol",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "CancelOperationRequest": {
+        "description": "The request message for Operations.CancelOperation.",
+        "properties": {},
+        "type": "object"
+      },
+      "Empty": {
+        "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }",
+        "properties": {},
+        "type": "object"
+      },
+      "Evaluation": {
+        "description": "Message describing Evaluation object",
+        "properties": {
+          "createTime": {
+            "description": "Output only. [Output only] Create time stamp",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the Evaluation",
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels as key value pairs",
+            "type": "object"
+          },
+          "name": {
+            "description": "name of resource names have the form 'projects/{project_id}/locations/{location_id}/evaluations/{evaluation_id}'",
+            "type": "string"
+          },
+          "resourceFilter": {
+            "$ref": "#/components/schemas/ResourceFilter",
+            "description": "annotations as key value pairs"
+          },
+          "resourceStatus": {
+            "$ref": "#/components/schemas/ResourceStatus",
+            "description": "Output only. [Output only] The updated rule ids if exist.",
+            "readOnly": true
+          },
+          "ruleNames": {
+            "description": "the name of the rule",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "ruleVersions": {
+            "description": "Output only. [Output only] The updated rule ids if exist.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "schedule": {
+            "description": "crontab format schedule for scheduled evaluation, example: 0 */3 * * *",
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Output only. [Output only] Update time stamp",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Execution": {
+        "description": "Message describing Execution object",
+        "properties": {
+          "endTime": {
+            "description": "Output only. [Output only] End time stamp",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "evaluationId": {
+            "description": "Output only. [Output only] Evaluation ID",
+            "readOnly": true,
+            "type": "string"
+          },
+          "inventoryTime": {
+            "description": "Output only. [Output only] Inventory time stamp",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels as key value pairs",
+            "type": "object"
+          },
+          "name": {
+            "description": "The name of execution resource. The format is projects/{project}/locations/{location}/evaluations/{evaluation}/executions/{execution}",
+            "type": "string"
+          },
+          "runType": {
+            "description": "type represent whether the execution executed directly by user or scheduled according evaluation.schedule field.",
+            "enum": [
+              "TYPE_UNSPECIFIED",
+              "ONE_TIME",
+              "SCHEDULED"
+            ],
+            "type": "string"
+          },
+          "startTime": {
+            "description": "Output only. [Output only] Start time stamp",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "state": {
+            "description": "Output only. [Output only] State",
+            "enum": [
+              "STATE_UNSPECIFIED",
+              "RUNNING",
+              "SUCCEEDED",
+              "FAILED"
+            ],
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ExecutionResult": {
+        "description": "Message describing the result of an execution",
+        "properties": {
+          "documentationUrl": {
+            "description": "the document url of the rule",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/Resource",
+            "description": "the violate resource"
+          },
+          "rule": {
+            "description": "the rule which violate in execution",
+            "type": "string"
+          },
+          "severity": {
+            "description": "severity of violation",
+            "type": "string"
+          },
+          "violationDetails": {
+            "$ref": "#/components/schemas/ViolationDetails",
+            "description": "the details of violation in result"
+          },
+          "violationMessage": {
+            "description": "the violation message of an execution",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "GceInstanceFilter": {
+        "description": "Message describing compute engine instance filter",
+        "properties": {
+          "serviceAccounts": {
+            "description": "Service account of compute engine",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Insight": {
+        "description": "A presentation of host resource usage where the workload runs.",
+        "properties": {
+          "sapDiscovery": {
+            "$ref": "#/components/schemas/SapDiscovery",
+            "description": "The insights data for sap system discovery. This is a copy of SAP System proto and should get updated whenever that one changes."
+          },
+          "sapValidation": {
+            "$ref": "#/components/schemas/SapValidation",
+            "description": "The insights data for the sap workload validation."
+          },
+          "sentTime": {
+            "description": "Output only. [Output only] Create time stamp",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListEvaluationsResponse": {
+        "description": "Message for response to listing Evaluations",
+        "properties": {
+          "evaluations": {
+            "description": "The list of Evaluation",
+            "items": {
+              "$ref": "#/components/schemas/Evaluation"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token identifying a page of results the server should return.",
+            "type": "string"
+          },
+          "unreachable": {
+            "description": "Locations that could not be reached.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListExecutionResultsResponse": {
+        "description": "Message for response of list execution results",
+        "properties": {
+          "executionResults": {
+            "description": "The versions from the specified publisher.",
+            "items": {
+              "$ref": "#/components/schemas/ExecutionResult"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListExecutionsResponse": {
+        "description": "Message for response to listing Executions",
+        "properties": {
+          "executions": {
+            "description": "The list of Execution",
+            "items": {
+              "$ref": "#/components/schemas/Execution"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token identifying a page of results the server should return.",
+            "type": "string"
+          },
+          "unreachable": {
+            "description": "Locations that could not be reached.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListLocationsResponse": {
+        "description": "The response message for Locations.ListLocations.",
+        "properties": {
+          "locations": {
+            "description": "A list of locations that matches the specified filter in the request.",
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "The standard List next-page token.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListOperationsResponse": {
+        "description": "The response message for Operations.ListOperations.",
+        "properties": {
+          "nextPageToken": {
+            "description": "The standard List next-page token.",
+            "type": "string"
+          },
+          "operations": {
+            "description": "A list of operations that matches the specified filter in the request.",
+            "items": {
+              "$ref": "#/components/schemas/Operation"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListRulesResponse": {
+        "description": "Mesesage of response of list rules",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token identifying a page of results the server should return.",
+            "type": "string"
+          },
+          "rules": {
+            "description": "all rules in response",
+            "items": {
+              "$ref": "#/components/schemas/Rule"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListScannedResourcesResponse": {
+        "description": "Message for response to list scanned resources",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "scannedResources": {
+            "description": "All scanned resources in response",
+            "items": {
+              "$ref": "#/components/schemas/ScannedResource"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Location": {
+        "description": "A resource that represents Google Cloud Platform location.",
+        "properties": {
+          "displayName": {
+            "description": "The friendly name for this location, typically a nearby city name. For example, \"Tokyo\".",
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Cross-service attributes for the location. For example {\"cloud.googleapis.com/region\": \"us-east1\"}",
+            "type": "object"
+          },
+          "locationId": {
+            "description": "The canonical id for this location. For example: `\"us-east1\"`.",
+            "type": "string"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL."
+            },
+            "description": "Service-specific metadata. For example the available capacity at the given location.",
+            "type": "object"
+          },
+          "name": {
+            "description": "Resource name for the location, which may vary between implementations. For example: `\"projects/example-project/locations/us-east1\"`",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Operation": {
+        "description": "This resource represents a long-running operation that is the result of a network API call.",
+        "properties": {
+          "done": {
+            "description": "If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.",
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Status",
+            "description": "The error result of the operation in case of failure or cancellation."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL."
+            },
+            "description": "Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.",
+            "type": "object"
+          },
+          "name": {
+            "description": "The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.",
+            "type": "string"
+          },
+          "response": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL."
+            },
+            "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "OperationMetadata": {
+        "description": "Represents the metadata of the long-running operation.",
+        "properties": {
+          "apiVersion": {
+            "description": "Output only. API version used to start the operation.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Output only. The time the operation was created.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "endTime": {
+            "description": "Output only. The time the operation finished running.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "requestedCancellation": {
+            "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+            "readOnly": true,
+            "type": "boolean"
+          },
+          "statusMessage": {
+            "description": "Output only. Human-readable status of the operation, if any.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "target": {
+            "description": "Output only. Server-defined resource path for the target of the operation.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "verb": {
+            "description": "Output only. Name of the verb executed by the operation.",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Resource": {
+        "description": "Message represent resource in execution result",
+        "properties": {
+          "name": {
+            "description": "the name of the resource",
+            "type": "string"
+          },
+          "serviceAccount": {
+            "description": "the service account accosiate with resource",
+            "type": "string"
+          },
+          "type": {
+            "description": "the type of reresource",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ResourceFilter": {
+        "description": "Message describing resource filters",
+        "properties": {
+          "gceInstanceFilter": {
+            "$ref": "#/components/schemas/GceInstanceFilter",
+            "description": "Filter compute engine resource"
+          },
+          "inclusionLabels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The label used for filter resource",
+            "type": "object"
+          },
+          "resourceIdPatterns": {
+            "description": "The id pattern for filter resource",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "scopes": {
+            "description": "The scopes of evaluation resource",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ResourceStatus": {
+        "description": "Message describing resource status",
+        "properties": {
+          "rulesNewerVersions": {
+            "description": "the new version of rule id if exists",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "state": {
+            "description": "State of the resource",
+            "enum": [
+              "STATE_UNSPECIFIED",
+              "CREATING",
+              "ACTIVE",
+              "DELETING"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Rule": {
+        "description": "Message represent a rule",
+        "properties": {
+          "description": {
+            "description": "descrite rule in plain language",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "the name display in UI",
+            "type": "string"
+          },
+          "errorMessage": {
+            "description": "the message template for rule",
+            "type": "string"
+          },
+          "name": {
+            "description": "rule name",
+            "type": "string"
+          },
+          "primaryCategory": {
+            "description": "the primary category",
+            "type": "string"
+          },
+          "remediation": {
+            "description": "the remediation for the rule",
+            "type": "string"
+          },
+          "revisionId": {
+            "description": "Output only. the version of the rule",
+            "readOnly": true,
+            "type": "string"
+          },
+          "secondaryCategory": {
+            "description": "the secondary category",
+            "type": "string"
+          },
+          "severity": {
+            "description": "the severity of the rule",
+            "type": "string"
+          },
+          "uri": {
+            "description": "the docuement url for the rule",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "RunEvaluationRequest": {
+        "description": "Message for creating a Execution",
+        "properties": {
+          "execution": {
+            "$ref": "#/components/schemas/Execution",
+            "description": "Required. The resource being created"
+          },
+          "executionId": {
+            "description": "Required. Id of the requesting object If auto-generating Id server-side, remove this field and execution_id from the method_signature of Create RPC",
+            "type": "string"
+          },
+          "requestId": {
+            "description": "Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SapDiscovery": {
+        "description": "The schema of SAP system discovery data.",
+        "properties": {
+          "applicationLayer": {
+            "$ref": "#/components/schemas/SapDiscoveryComponent",
+            "description": "An SAP system may run without an application layer."
+          },
+          "databaseLayer": {
+            "$ref": "#/components/schemas/SapDiscoveryComponent",
+            "description": "An SAP System must have a database."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SapDiscoveryMetadata",
+            "description": "The metadata for SAP system discovery data."
+          },
+          "systemId": {
+            "description": "A combination of database SID, database instance URI and tenant DB name to make a unique identifier per-system.",
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Unix timestamp this system has been updated last.",
+            "format": "google-datetime",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SapDiscoveryComponent": {
+        "description": "Message describing the system component.",
+        "properties": {
+          "applicationType": {
+            "description": "The component is a SAP application.",
+            "type": "string"
+          },
+          "databaseType": {
+            "description": "The component is a SAP database.",
+            "type": "string"
+          },
+          "hostProject": {
+            "description": "Pantheon Project in which the resources reside.",
+            "type": "string"
+          },
+          "resources": {
+            "description": "The resources in a component.",
+            "items": {
+              "$ref": "#/components/schemas/SapDiscoveryResource"
+            },
+            "type": "array"
+          },
+          "sid": {
+            "description": "The sap identifier, used by the SAP software and helps differentiate systems for customers.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SapDiscoveryMetadata": {
+        "description": "Message describing SAP discovery system metadata",
+        "properties": {
+          "customerRegion": {
+            "description": "Customer region string for customer's use. Does not represent GCP region.",
+            "type": "string"
+          },
+          "definedSystem": {
+            "description": "Customer defined, something like \"E-commerce pre prod\"",
+            "type": "string"
+          },
+          "environmentType": {
+            "description": "Should be \"prod\", \"QA\", \"dev\", \"staging\", etc.",
+            "type": "string"
+          },
+          "sapProduct": {
+            "description": "This sap product name",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SapDiscoveryResource": {
+        "description": "Message describing a resource.",
+        "properties": {
+          "relatedResources": {
+            "description": "A list of resource URIs related to this resource.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "resourceKind": {
+            "description": "ComputeInstance, ComputeDisk, VPC, Bare Metal server, etc.",
+            "type": "string"
+          },
+          "resourceState": {
+            "description": "Indicates whether this is a new, updated, or missing resource.",
+            "enum": [
+              "RESOURCE_STATE_UNSPECIFIED",
+              "ADDED",
+              "UPDATED",
+              "REMOVED",
+              "REPLACED",
+              "MISSING"
+            ],
+            "type": "string"
+          },
+          "resourceType": {
+            "description": "The type of this resource.",
+            "enum": [
+              "RESOURCE_TYPE_UNSPECIFIED",
+              "COMPUTE",
+              "STORAGE",
+              "NETWORK"
+            ],
+            "type": "string"
+          },
+          "resourceUri": {
+            "description": "URI of the resource, includes project, location, and name.",
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Unix timestamp of when this resource last had its discovery data updated.",
+            "format": "google-datetime",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SapValidation": {
+        "description": "A presentation of SAP workload insight. The schema of SAP workloads validation related data.",
+        "properties": {
+          "validationDetails": {
+            "description": "A list of SAP validation metrics data.",
+            "items": {
+              "$ref": "#/components/schemas/SapValidationValidationDetail"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "SapValidationValidationDetail": {
+        "description": "Message describing the SAP validation metrics.",
+        "properties": {
+          "details": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The pairs of metrics data: field name & field value.",
+            "type": "object"
+          },
+          "sapValidationType": {
+            "description": "The SAP system that the validation data is from.",
+            "enum": [
+              "SAP_VALIDATION_TYPE_UNSPECIFIED",
+              "SYSTEM",
+              "COROSYNC",
+              "PACEMAKER",
+              "HANA",
+              "NETWEAVER"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ScannedResource": {
+        "description": "Message of scanned resource",
+        "properties": {
+          "resource": {
+            "description": "resource name",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Status": {
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
+        "properties": {
+          "code": {
+            "description": "The status code, which should be an enum value of google.rpc.Code.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "details": {
+            "description": "A list of messages that carry the error details. There is a common set of message types for APIs to use.",
+            "items": {
+              "additionalProperties": {
+                "description": "Properties of the object. Contains field @type with type URL."
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ViolationDetails": {
+        "description": "Message describing the violdation in execution result",
+        "properties": {
+          "asset": {
+            "description": "the name of asset",
+            "type": "string"
+          },
+          "observed": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "observed",
+            "type": "object"
+          },
+          "serviceAccount": {
+            "description": "the service account associate with resource",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "WriteInsightRequest": {
+        "description": "Request for sending the data insights.",
+        "properties": {
+          "insight": {
+            "$ref": "#/components/schemas/Insight",
+            "description": "Required. The metrics data details."
+          },
+          "requestId": {
+            "description": "Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "WriteInsightResponse": {
+        "description": "The response for write insights request.",
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Oauth2": {
+        "description": "Oauth 2.0 implicit authentication",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+            "scopes": {
+              "https://www.googleapis.com/auth/cloud-platform": "See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account."
+            }
+          }
+        },
+        "type": "oauth2"
+      },
+      "Oauth2c": {
+        "description": "Oauth 2.0 authorizationCode authentication",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+            "scopes": {
+              "https://www.googleapis.com/auth/cloud-platform": "See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account."
+            },
+            "tokenUrl": "https://accounts.google.com/o/oauth2/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  }
+}

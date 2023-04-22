@@ -1,0 +1,292 @@
+openapi: 3.0.0
+servers:
+  - url: https://playintegrity.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The Play Integrity API helps you check that you're interacting with your genuine app on a genuine Android device powered by Google Play services. The Play Integrity API has replaced SafetyNet Attestation and Android Device Verification.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Play Integrity API
+  version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://playintegrity.googleapis.com/$discovery/rest?version=v1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: playintegrity
+externalDocs:
+  url: https://developer.android.com/google/play/integrity
+tags:
+  - name: v1
+paths:
+  "/v1/{packageName}:decodeIntegrityToken":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Decodes the integrity token and returns the token payload.
+      operationId: playintegrity.decodeIntegrityToken
+      parameters:
+        - description: " Package name of the app the attached integrity token belongs to."
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DecodeIntegrityTokenRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DecodeIntegrityTokenResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/playintegrity
+          Oauth2c:
+            - https://www.googleapis.com/auth/playintegrity
+      tags:
+        - v1
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    AccountActivity:
+      description: Contains a signal helping apps differentiating between likely genuine users and likely non-genuine traffic (such as accounts being used for fraud, accounts used by automated traffic, or accounts used in device farms) based on the presence and volume of Play store activity.
+      properties:
+        activityLevel:
+          description: Required. Indicates the activity level of the account.
+          enum:
+            - ACTIVITY_LEVEL_UNSPECIFIED
+            - UNEVALUATED
+            - UNUSUAL
+            - UNKNOWN
+            - TYPICAL_BASIC
+            - TYPICAL_STRONG
+          type: string
+      type: object
+    AccountDetails:
+      description: Contains the account information such as the licensing status for the user in the scope.
+      properties:
+        accountActivity:
+          $ref: "#/components/schemas/AccountActivity"
+          description: Details about the account activity for the user in the scope.
+        appLicensingVerdict:
+          description: Required. Details about the licensing status of the user for the app in the scope.
+          enum:
+            - UNKNOWN
+            - LICENSED
+            - UNLICENSED
+            - UNEVALUATED
+          type: string
+      type: object
+    AppIntegrity:
+      description: Contains the application integrity information.
+      properties:
+        appRecognitionVerdict:
+          description: Required. Details about the app recognition verdict
+          enum:
+            - UNKNOWN
+            - PLAY_RECOGNIZED
+            - UNRECOGNIZED_VERSION
+            - UNEVALUATED
+          type: string
+        certificateSha256Digest:
+          description: The SHA256 hash of the requesting app's signing certificates (base64 web-safe encoded). Set iff app_recognition_verdict != UNEVALUATED.
+          items:
+            type: string
+          type: array
+        packageName:
+          description: Package name of the application under attestation. Set iff app_recognition_verdict != UNEVALUATED.
+          type: string
+        versionCode:
+          description: Version code of the application. Set iff app_recognition_verdict != UNEVALUATED.
+          format: int64
+          type: string
+      type: object
+    DecodeIntegrityTokenRequest:
+      description: Request to decode the integrity token.
+      properties:
+        integrityToken:
+          description: Encoded integrity token.
+          type: string
+      type: object
+    DecodeIntegrityTokenResponse:
+      description: Response containing the decoded integrity payload.
+      properties:
+        tokenPayloadExternal:
+          $ref: "#/components/schemas/TokenPayloadExternal"
+          description: Plain token payload generated from the decoded integrity token.
+      type: object
+    DeviceIntegrity:
+      description: Contains the device attestation information.
+      properties:
+        deviceRecognitionVerdict:
+          description: Details about the integrity of the device the app is running on
+          items:
+            enum:
+              - UNKNOWN
+              - MEETS_BASIC_INTEGRITY
+              - MEETS_DEVICE_INTEGRITY
+              - MEETS_STRONG_INTEGRITY
+              - MEETS_VIRTUAL_INTEGRITY
+            type: string
+          type: array
+      type: object
+    RequestDetails:
+      description: Contains the integrity request information.
+      properties:
+        nonce:
+          description: Nonce that was provided in the request (which is base64 web-safe no-wrap).
+          type: string
+        requestHash:
+          description: Request hash that was provided in the request.
+          type: string
+        requestPackageName:
+          description: "Required. Application package name this attestation was requested for. Note: This field makes no guarantees or promises on the caller integrity. For details on application integrity, check application_integrity."
+          type: string
+        timestampMillis:
+          description: Required. Timestamp, in milliseconds, of the integrity application request.
+          format: int64
+          type: string
+      type: object
+    TestingDetails:
+      description: Contains additional information generated for testing responses.
+      properties:
+        isTestingResponse:
+          description: Required. Indicates that the information contained in this payload is a testing response that is statically overridden for a tester.
+          type: boolean
+      type: object
+    TokenPayloadExternal:
+      description: Contains basic app information and integrity signals like device attestation and licensing details.
+      properties:
+        accountDetails:
+          $ref: "#/components/schemas/AccountDetails"
+          description: Required. Details about the Play Store account.
+        appIntegrity:
+          $ref: "#/components/schemas/AppIntegrity"
+          description: Required. Details about the application integrity.
+        deviceIntegrity:
+          $ref: "#/components/schemas/DeviceIntegrity"
+          description: Required. Details about the device integrity.
+        requestDetails:
+          $ref: "#/components/schemas/RequestDetails"
+          description: Required. Details about the integrity request.
+        testingDetails:
+          $ref: "#/components/schemas/TestingDetails"
+          description: Indicates that this payload is generated for testing purposes and contains any additional data that is linked with testing status.
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/playintegrity: "Private Service: https://www.googleapis.com/auth/playintegrity"
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/playintegrity: "Private Service: https://www.googleapis.com/auth/playintegrity"
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

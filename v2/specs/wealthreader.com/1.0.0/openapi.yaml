@@ -1,0 +1,866 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Wealth-Reader/api/1.0.0
+  - description: ""
+    url: https://api.wealthreader.com/
+info:
+  contact:
+    email: info@wealthreader.com
+  description: "Las APIs regulatorias basadas en PSD2 proporcionan acceso a cierta información financiera como saldos de cuentas bancarias y transacciones. Sin embargo, hay otras fuentes de información patrimonial que no son accesibles por estas APIs. La API de Wealth Reader amplía la información ofrecida por las APIs regulatorias proporcionando acceso en tiempo real a las fuentes patrimoniales adicionales en cualquier entidad del mundo. Existen otros dos documentos relacionados que te ayudarán a integrar la API de Wealth Reader. Uno es la guía de integración del widget Javascript: https://docs-es.wealthreader.com/, y el  otro una colección Postman basada en esta documentación."
+  title: Wealth Reader API
+  version: 1.0.0
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/.._.._i_favicon.png
+  x-origin:
+    - format: openapi
+      url: https://api.swaggerhub.com/apis/Wealth-Reader/api/1.0.0
+      version: "3.0"
+  x-providerName: wealthreader.com
+externalDocs:
+  url: https://docs-es.wealthreader.com/
+tags:
+  - description: Métodos utilizados para recuperar información de las entidades
+    name: entity-data
+  - description: Métodos utilizados para recuperar información de uso
+    name: usage-data
+paths:
+  /entities:
+    get:
+      description: |
+        Obtiene el listado de entidades soportadas y la información necesaria para dibujar el formulario de login de la entidad.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/entities"
+                type: array
+          description: listado de entidades
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: error
+      summary: Obtiene el listado de entidades soportadas
+      tags:
+        - entity-data
+    post:
+      description: |
+        Obtiene los activos financieros y el detalle de su composición de carteras de inversión compuestas por acciones o fondos, tarjetas de crédito, seguros y préstamos. Incluye información de titularidad de cada uno de los activos así como identificadores únicos que facilitan el tratamiento del dato. Es posible obtener datos Mock. Consulte con el equipo técnico cómo hacerlo.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                OTP:
+                  description: Solo necesario cuando se esté completando la seguda petición de un login con 2 factores de autenticación, si el tipo de desafío es OTP. Requiere la clave que la entidad le ha enviado al usario final
+                  required:
+                    - api_key
+                    - code
+                  type: string
+                SESSION:
+                  description: Solo necesario cuando se esté completando la seguda petición de un login con 2 factores de autenticación. Requiere el valor de SESSION obtenido en la primera petición
+                  type: string
+                api_key:
+                  description: Identifica al cliente en el servicio
+                  type: string
+                code:
+                  description: Nombre de la entidad. El listado completo está disponible con GET
+                  type: string
+                contract_code:
+                  description: Solo necesario cuando el usuario puede acceder a más de un contrato. El listado de contratos disponibles se obtiene al realizar una conexión con un usuario con opción a trabajar con varios contratos en su entidad (que al hacer login en su banca online ve como primera opción una pantalla de selección de contratos) y cuya llamada a la API no se le ha especificado un valor a contract_code
+                  type: string
+                document_type:
+                  description: Tipo de documento, requerido según la entidad. Si es requerido o no, está indicado en el listado de entidades. Ver definición.
+                  enum:
+                    - NIF
+                    - Pasaporte
+                    - Tarjeta de residencia
+                  example: NIF
+                  type: string
+                password:
+                  description: Contraseña
+                  type: string
+                second_password:
+                  description: Segunda contraseña, requerida según la entidad.
+                  type: string
+                token:
+                  description: "Valor para credenciales custodiadas, tokenizadas previamente mediante una llamada a este método con el valor de tokenize=true. Están disponibles los siguientes usuarios Mock: MOCKDATA, respuesta OK; MOCKOTP, respuesta con desafío OTP; MOCKLOGINKO, respuesta con error de login"
+                  type: string
+                tokenize:
+                  default: false
+                  description: "Indica si Wealth Reader debe custodiar los credenciales, de tal manera que incluído en el body de respuesta estará un token que permite conectar con la entidad sin necesidad de conocer los credenciales: document_type, user, password, second_password, contract_code"
+                  type: boolean
+                user:
+                  description: "Usuario. Están disponibles los siguientes usuarios Mock: MOCKDATA, respuesta OK; MOCKOTP, respuesta con desafío OTP; MOCKLOGINKO, respuesta con error de login"
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/entity-data"
+                type: array
+          description: datos obtenidos de la entidad
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: error
+      summary: Obtiene los activos financieros y el detalle de su composición
+      tags:
+        - entity-data
+  /error-codes:
+    get:
+      description: |
+        Listado de códigos de error. Presta especial atención a que no todos los códigos de error deben recibir el mismo tratamiento por parte de tu aplicación. Ante un error de password incorrecto no debes reintentar la llamada con los mismos parámetros, pero ante un error que te indique que la entidad está en mantenimiento sí puedes reintentarlo. Pide una sesión técnica con nuestro equipo para resolver cualquier duda sobre la gestión de errores.
+      parameters:
+        - description: Idioma de la respuesta
+          in: query
+          name: lang
+          required: false
+          schema:
+            default: es
+            enum:
+              - es
+              - en
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error-codes"
+                type: array
+          description: Códigos de error junto con su descripción, posible motivo y cómo proceder
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: error
+      summary: Listado de códigos de error
+      tags:
+        - entity-data
+components:
+  schemas:
+    accounts:
+      description: Cuentas bancarias. En cuentas europeas, solamente activado cuando el cliente de Wealth Reader cuenta con licencia PSD2
+      items:
+        type: object
+      properties:
+        balances:
+          properties:
+            available:
+              example: 14302.07
+              type: number
+            current:
+              example: 14302.07
+              type: number
+          type: object
+        code:
+          description: Código IBAN sin espacios
+          example: ES4914651234561234567890
+          type: string
+        currency:
+          example: EUR
+          type: string
+        name:
+          example: Cuenta NÓMINA
+          type: string
+        owners:
+          $ref: "#/components/schemas/owner"
+        transactions:
+          items:
+            properties:
+              amount:
+                example: -1.1
+                type: number
+              balance:
+                example: 14302.07
+                type: number
+              description:
+                example: Pago en TELPARK MADRID ES
+                type: string
+              operation_date:
+                example: 2022-12-30
+                format: date
+                type: string
+              uuid:
+                example: d0c2ea4c072cf4d7b0fd494d7728260d736e6b25
+                type: string
+              value_date:
+                example: 2022-12-30
+                format: date
+                type: string
+            type: object
+          type: array
+        uuid:
+          example: 8076932f04f73e27fe608fee4d12fca8708dec8c
+          type: string
+      required:
+        - uuid
+        - code
+        - name
+        - currency
+        - owners
+        - balances
+        - transactions
+      type: array
+    cards:
+      description: Tarjetas de crédito, débito y prepago
+      items:
+        type: object
+      properties:
+        anual_interest:
+          example: 17.48
+          type: number
+        balances:
+          properties:
+            available:
+              example: 3980
+              type: number
+            disposed:
+              example: 20
+              type: number
+            limit:
+              example: 4000
+              type: number
+          type: object
+        code:
+          description: Numeración con ofuscación PCI compliance
+          example: 516097********1234
+          type: string
+        currency:
+          example: EUR
+          type: string
+        linked_account:
+          example: ES4021005321592566566159
+          type: string
+        name:
+          example: Tarjeta Crédito
+          type: string
+        next_payment_date:
+          example: 2023-01-05
+          format: date
+          type: string
+        owner:
+          $ref: "#/components/schemas/owner"
+        status:
+          enum:
+            - active
+            - inactive
+            - cancelled
+          example: active
+          type: string
+        subtype:
+          enum:
+            - credit
+            - debit
+            - prepaid
+          example: credit
+          type: string
+        tae:
+          example: 18.95
+          type: number
+        transactions:
+          items:
+            type: object
+          properties:
+            amount:
+              example: -20
+              type: number
+            description:
+              example: Pago en AMZN MKTP ES123CM0ZM4
+              type: string
+            settled:
+              description: Indica si es un movimiento perteneciente a un extracto diferente del periodo de facturación actual
+              example: false
+              type: boolean
+            uuid:
+              example: 78ceedca9cd9d2f2bfbb2439795ab6a1fcefc12b
+              type: string
+            value_date:
+              example: 2022-12-28
+              format: date
+              type: string
+          required:
+            - uuid
+            - value_date
+            - amount
+            - description
+          type: array
+        uuid:
+          example: aefd89eade0a6a09d9b8eab4c22da6a6a37632e6
+          type: string
+      required:
+        - subtype
+        - uuid
+        - code
+        - name
+        - currency
+        - balances
+      type: array
+    contracts:
+      description: Solamente estará informado cuando el valor de code sea 2020 (usuario multicontrato)
+      items:
+        type: object
+      properties:
+        contract_id:
+          description: Identificador único del contrato. Valor a indicar para seleccionar el contrato al que se desea acceder
+          example: B12345678
+          type: string
+        description:
+          description: Descripción que acompaña al contract_id. Normalmente será el nombre de la sociedad o persona titular del contrato
+          example: WEALTH READER S.L.
+          type: string
+      required:
+        - contract_id
+        - description
+      type: array
+    entities:
+      items:
+        type: object
+      properties:
+        bic:
+          description: Código BIC. Solamente está indicado cuando la entidad es un banco
+          example: BMARES2M
+          type: string
+        code:
+          description: El código de la institución
+          example: bancamarch
+          type: string
+        inputs:
+          properties:
+            document_type:
+              properties:
+                name:
+                  description: Nombre del campo. Al ser el campo 'tipo de documento' un listado de valores desplegables, este string es un listado de valores separados por punto y coma
+                  example: DNI;Pasaporte
+                  type: string
+                placeholder:
+                  description: Etiqueta dentro del campo que aporta información adicional sobre cómo rellenar la información
+                  example: ""
+                  type: string
+                required:
+                  description: Indica si el campo es requerido
+                  example: 0
+                  type: boolean
+                validation_rule:
+                  description: Indica el tipo de dato que acepta este campo
+                  example: ""
+                  type: string
+              type: object
+            password:
+              properties:
+                name:
+                  description: Nombre del campo
+                  example: Clave de acceso
+                  type: string
+                placeholder:
+                  description: Etiqueta dentro del campo que aporta información adicional sobre cómo rellenar la información
+                  example: ""
+                  type: string
+                required:
+                  description: Indica si el campo es requerido
+                  example: 1
+                  type: boolean
+                validation_rule:
+                  description: Indica el tipo de dato que acepta este campo
+                  example: type='password'
+                  type: string
+              type: object
+            second_password:
+              properties:
+                name:
+                  description: Indica el tipo de dato que acepta este campo
+                  example: ""
+                  type: string
+                placeholder:
+                  description: Etiqueta dentro del campo que aporta información adicional sobre cómo rellenar la información
+                  example: ""
+                  type: string
+                required:
+                  description: Indica si el campo es requerido
+                  example: 0
+                  type: boolean
+                validation_rule:
+                  description: The validation rule for the field
+                  example: ""
+                  type: string
+              type: object
+            user:
+              properties:
+                name:
+                  description: Nombre del campo
+                  example: Nombre de usuario
+                  type: string
+                placeholder:
+                  description: Etiqueta dentro del campo que aporta información adicional sobre cómo rellenar la información
+                  example: Email
+                  type: string
+                required:
+                  description: Indica si el campo es requerido
+                  example: 1
+                  type: boolean
+                validation_rule:
+                  description: Indica el tipo de dato que acepta este campo
+                  example: type='email'
+                  type: string
+              type: object
+          type: object
+        logo:
+          description: Logotipo
+          example: https://cdn.wealthreader.com/bancamarch.svg
+          type: string
+        name:
+          description: The nombre de la institución
+          example: Bancamarch
+          type: string
+        statistics:
+          $ref: "#/components/schemas/statistics"
+      required:
+        - code
+        - name
+        - logo
+        - inputs
+        - statictics
+      type: array
+    entity-data:
+      anyOf:
+        - properties:
+            portfolios:
+              items: {}
+              type: array
+        - properties:
+            accounts:
+              items: {}
+              type: array
+        - properties:
+            cards:
+              items: {}
+              type: array
+        - properties:
+            properties:
+              items: {}
+              type: array
+      properties:
+        payload:
+          properties:
+            accounts:
+              $ref: "#/components/schemas/accounts"
+            cards:
+              $ref: "#/components/schemas/cards"
+            portfolios:
+              $ref: "#/components/schemas/portfolios"
+            properties:
+              $ref: "#/components/schemas/properties"
+            user_information:
+              $ref: "#/components/schemas/user_information"
+          type: object
+        statistics:
+          $ref: "#/components/schemas/statistics"
+        success:
+          example: true
+          type: boolean
+      required:
+        - success
+        - user_information
+        - statistics
+      type: object
+    error:
+      properties:
+        error:
+          $ref: "#/components/schemas/error-detail"
+        statistics:
+          $ref: "#/components/schemas/statistics"
+        success:
+          example: false
+          type: boolean
+      required:
+        - success
+        - error
+        - statistics
+      type: object
+    error-codes:
+      items:
+        items: {}
+        type: array
+      properties:
+        code:
+          description: Código de error
+          example: 2
+          type: integer
+        description:
+          description: Descripción del error
+          example: Llamada incorrecta
+          type: string
+        how_to_proceed:
+          description: Cómo actuar cuando se obtiene este código de error
+          example: El texto recibido en "message" detallará el motivo del error. Por ejemplo, "El parámetro "api_key" es obligatorio".
+          type: string
+        possible_reasons:
+          description: Posibles causas del error
+          example: Alguno de los parámetros requeridos no se ha enviado o se ha enviado en un formato incorrecto
+          type: string
+      required:
+        - name
+    error-detail:
+      properties:
+        code:
+          description: El código indica la familia del error. Por ejemplo, de 2000 a 2999 indican problemas en el login. Cada código de error debe tratarse de forma diferente. Por ejemplo, si el código indica "Login incorrecto", no se debe reintentar la llamada; si el código indica "entidad en mantenimiento" sí se puede reintentar más tarde. Puedes obtener el listado completo en el método error-codes.
+          example: 1000
+          format: unsigned
+          type: integer
+        contracts:
+          $ref: "#/components/schemas/contracts"
+        message:
+          description: Texto en el idioma de la entidad. Es seguro mostrárselo al usuario y en muchos casos le ayudará a corregir el error
+          example: Login incorrecto
+          type: string
+      required:
+        - code
+        - message
+      type: object
+    owner:
+      items:
+        items: {}
+        type: array
+      properties:
+        ID:
+          example: 12345678Z
+          type: string
+        name:
+          example: LUIS GARCIA BAQUERO
+          type: string
+        role:
+          enum:
+            - owner
+            - co-owner
+            - legal representative
+            - administrator
+            - attorney-in-fact
+            - authorised
+          example: owner
+          type: string
+      required:
+        - ID
+        - name
+        - role
+    portfolios:
+      description: Carteras de acciones, fondos y planes de pensiones
+      items:
+        type: object
+      properties:
+        annualized_volatility:
+          description: El valor será 0 cuando la entidad no lo proporcione
+          example: 0
+          type: number
+        code:
+          example: "1465010091400123456789"
+          type: string
+        composition:
+          description: Composición de la cartera
+          items:
+            type: object
+          properties:
+            DGS:
+              description: "Valor indicado siempre que la cartera sea subtype: pension-plans"
+              example: F0062
+              type: string
+            DGS_description:
+              description: "Valor indicado siempre que la cartera sea subtype: pension-plans"
+              example: ABANCA EMPLEO, FONDO DE PENSIONES
+              type: string
+            ISIN:
+              description: "Valor indicado siempre que la cartera sea subtype: funds o stocks"
+              example: ES0152743003
+              type: string
+            ISIN_description:
+              description: "Valor indicado siempre que la cartera sea subtype: funds o stocks"
+              example: Fondo Dinámico
+              type: string
+            currency:
+              description: Divisa en codificación ISO 4217
+              example: EUR
+              type: string
+            price:
+              description: Precio actual
+              example: 14.5577
+              type: number
+            shares:
+              description: Participaciones
+              example: 225.0077
+              type: number
+            total_amount:
+              description: Importe total
+              example: 3275.6
+              type: number
+            weighting:
+              description: Peso con respecto al resto de la composición de la cartera
+              example: 100
+              type: number
+          type: array
+        contracting_date:
+          example: 2016-04-27
+          format: date
+          type: string
+        contributions:
+          example: 3019.33
+          type: number
+        currency:
+          example: EUR
+          type: string
+        linked_account:
+          description: Código IBAN sin espacios. El valor será not-provided cuando la entidad no lo proporcione
+          example: ES4021005321592566566159
+          type: string
+        name:
+          example: Fondo Dinámico
+          type: string
+        owners:
+          $ref: "#/components/schemas/owner"
+        subtype:
+          enum:
+            - funds
+            - stocks
+            - pension-plans
+          example: funds
+          type: string
+        total_value:
+          example: 3275.6
+          type: number
+        transactions:
+          items:
+            type: object
+          oneOf:
+            - properties:
+                ISIN:
+                  type: string
+            - properties:
+                DGS:
+                  type: string
+          properties:
+            DGS:
+              description: "Valor indicado siempre que la cartera sea subtype: pension-plans"
+              example: F0062
+              type: string
+            ISIN:
+              description: "Valor indicado siempre que la cartera sea subtype: funds o stocks"
+              example: ES0152743003
+              type: string
+            currency:
+              example: EUR
+              type: string
+            exchange_rate:
+              example: 1
+              type: number
+            operation_date:
+              example: 2020-01-30
+              format: date
+              type: string
+            operation_pending:
+              description: Indicado cuando subtype=stocks. Indica si la operación está pendiente o no de ejecutarse.
+              example: false
+              type: boolean
+            operation_type:
+              enum:
+                - purchase
+                - sale
+                - subscription by transfer
+                - redemption by transfer
+              example: purchase
+              type: string
+            price:
+              example: 11.1438
+              type: number
+            reference_currency:
+              example: EUR
+              type: string
+            shares:
+              example: 1076.8273
+              type: number
+            total_amount:
+              example: 12000
+              type: number
+            uuid:
+              description: Identificador único asignado por Wealth Reader
+              example: 05e4563f5bbf2d06efd0a29ebe7edbbb4e1bff63
+              type: string
+            value_date:
+              example: 2020-01-30
+              format: date
+              type: string
+            value_time:
+              description: Indicado cuando subtype=stocks. La hora de ejecución de la operación.
+              example: 09:00
+              format: time
+              type: string
+          required:
+            - uuid
+            - value_date
+            - operation_type
+            - shares
+            - price
+            - total_amount
+            - reference_currency
+            - currency
+            - exchange_rate
+          type: array
+        uuid:
+          description: Identificador único asignado por Wealth Reader
+          example: 05e4563f5bbf2d06efd0a29ebe7edbbb4e1bff63
+          type: string
+        weighted_return:
+          example: 8.49
+          type: number
+        withholdings:
+          example: 0
+          type: number
+        yield:
+          example: 256.27
+          type: number
+      required:
+        - subtype
+        - uuid
+        - code
+        - name
+        - currency
+        - total_value
+        - weighted_return
+        - annualized_volatility
+        - yield
+        - contributions
+        - withholdings
+        - contracting_date
+        - linked_account
+        - owners
+        - composition
+        - transactions
+      type: array
+    properties:
+      description: Activos inmobiliarios
+      properties:
+        code:
+          description: Referencia catastral
+          type: string
+        currency:
+          type: string
+        description:
+          type: string
+        historic_prices:
+          items:
+            properties:
+              date:
+                format: date
+                type: string
+              price:
+                type: number
+            type: object
+          type: array
+        purpose:
+          type: string
+        trading_price:
+          type: number
+        trading_year:
+          type: number
+        uuid:
+          type: string
+      required:
+        - uuid
+        - code
+        - currency
+        - trading_price
+        - trading_year
+        - historic_prices
+      type: object
+    statistics:
+      properties:
+        SESSION:
+          description: Guarda siempre este valor, tanto si la conexión es correcta como si no. Es necesario para obtener soporte
+          example: "3463754e3540884"
+          type: string
+        execution_time:
+          description: Duración de la ejecución
+          example: 0.958119869232178
+          type: number
+        operation_id:
+          description: "El valor vendrá indicado cuando se haya invocado a la API a través del Widget que proporciona Wealth Reader. Para saber más sobre este tipo de integración, visita: https://docs-es.wealthreader.com/"
+          example: 1827C79229
+          type: string
+        token:
+          description: El valor vendrá indicado cuando se ha pedido la custodia de credenciales con la opción tokenize=true
+          example: FRJ0mHlaqZwLzu
+          type: string
+      required:
+        - SESSION
+        - execution_time
+      type: object
+    user_information:
+      description: Información relativa a la persona que hace login
+      properties:
+        ID:
+          example: 12345678Z
+          type: string
+        address:
+          example: CALLE BAILEN 41 1A
+          type: string
+        birth_date:
+          example: 1980-09-26
+          format: date
+          type: string
+        birth_place:
+          example: SEVILLA
+          type: string
+        cell_phone:
+          description: Número de teléfono con el prefijo internacional, sin espacios
+          example: "+34666123456"
+          type: string
+        city:
+          example: MADRID
+          type: string
+        country:
+          example: SPAIN
+          type: string
+        email:
+          example: lgarcia@gmail.com
+          type: string
+        gender:
+          enum:
+            - male
+            - female
+          example: male
+          type: string
+        job:
+          description: "El valor aquí es muy variable de una entidad a otra: de indicar solamente si es cuenta propia o cuenta ajena a indicar el tipo de profesión"
+          example: CUENTA PROPIA
+          type: string
+        marital_status:
+          enum:
+            - single
+            - married
+          example: married
+          type: string
+        name:
+          example: LUIS GARCIA BAQUERO
+          type: string
+        postal_code:
+          example: "28005"
+          type: string
+      required:
+        - ID
+        - name
+      type: object

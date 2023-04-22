@@ -1,0 +1,1345 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: Create shopper profiles and manage their information.
+  title: Profile System
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Profile System.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Profile-System
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: Profiles
+  - name: Addresses
+  - name: Prospects
+  - name: Purchase information
+  - name: Schemas
+paths:
+  /api/storage/profile-system/profiles:
+    post:
+      deprecated: false
+      description: "Creates new client profile.
+
+        \r
+
+        \r> Since your store's profile schema is customizable, the schema and examples presented below may differ from yours. Your integration must be adapted accordingly.
+
+        \r
+
+        \r> The `id` field returned by this request is the `profileId` used to retrieve information on a specific profile later.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: CreateClientProfile
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/ttl"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/profile"
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                document:
+                  birthDate: 1925-11-17
+                  document: "12345678911"
+                  documentType: CPF
+                  email: john.doe@example.com
+                  firstName: John
+                  lastName: Doe
+                id: c2cbebba-214e-40b2-b68f-98f862e755d5
+                meta:
+                  author: 82a2b53d-39be-4f49-bb7c-8971b58cb7dc
+                  creationDate: 2022-01-05T15:41:37.5009471+00:00
+                  lastUpdateDate: 2022-01-05T15:41:37.5009471+00:00
+                  version: 27112371-a71b-45d6-b3bc-93436a3a0b4f
+              schema:
+                type: object
+          description: Created
+      summary: Create client profile
+      tags:
+        - Profiles
+  /api/storage/profile-system/profiles/schema:
+    put:
+      deprecated: false
+      description: "Creates or updates profile schema.
+
+        \r
+
+        \r> Each account has one profile schema. Updating it with this request will substitute the previous version.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: CreateOrUpdateProfileSchema
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/schema"
+      responses:
+        "201":
+          content:
+            application/json:
+              example: {}
+              schema:
+                type: object
+          description: Created
+      summary: Create or update profile schema
+      tags:
+        - Schemas
+  "/api/storage/profile-system/profiles/{profileId}":
+    delete:
+      deprecated: false
+      description: "Deletes a client profile by `profileId`.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: DeleteClientProfile
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+      responses:
+        "204":
+          description: No content
+      summary: Delete client profile
+      tags:
+        - Profiles
+    get:
+      deprecated: false
+      description: "Retrieves the information of a specific client, by its `profileId`.
+
+        \r
+
+        \r> Since your store's profile schema is customizable, the schema and examples presented below may differ from yours. Your integration must be adapted accordingly.
+
+        \r
+
+        \r> For security and privacy reasons, this request returns masked profile data. For unmasked information, see Get unmasked profile.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetProfile
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - document:
+                    birthDate: 1925-11-17
+                    document: 1**********
+                    documentType: CPF
+                    email: j***.d**@e******.c**
+                    firstName: J***
+                    lastName: D**
+                  id: 70caf394-8534-447e-a0ca-1803c669c771
+                  meta:
+                    author: e40e0b6d-0605-4fa6-8176-1d69fbaf0818
+                    creationDate: 13/12/2021T00:00:00Z
+                    lastUpdate: 13/12/2021T00:00:00Z
+                    version: abc
+              schema:
+                items: {}
+                type: array
+          description: OK
+      summary: Get profile
+      tags:
+        - Profiles
+    patch:
+      deprecated: false
+      description: "Updates one or more fields of an existing client profile.
+
+        \r
+
+        \r> Since your store's profile schema is customizable, the schema and examples presented below may differ from yours. Your integration must be adapted accordingly.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: UpdateClientProfile
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+        - $ref: "#/components/parameters/ttl"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                birthDate:
+                  $ref: "#/components/schemas/profile/properties/birthDate"
+                document:
+                  $ref: "#/components/schemas/profile/properties/document"
+                documentType:
+                  $ref: "#/components/schemas/profile/properties/documentType"
+                email:
+                  $ref: "#/components/schemas/profile/properties/email"
+                firstName:
+                  $ref: "#/components/schemas/profile/properties/firstName"
+                lastName:
+                  $ref: "#/components/schemas/profile/properties/lastName"
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                document:
+                  birthDate: 17/11/1992
+                  document: "12345678911"
+                  documentType: CPF
+                  email: john.doe@gmail.com
+                  firstName: João
+                  lastName: Gomes
+                id: 70caf394-8534-447e-a0ca-1803c669c771
+                meta:
+                  author: e40e0b6d-0605-4fa6-8176-1d69fbaf0818
+                  creationDate: 13/12/2021T00:00:00Z
+                  lastUpdate: 15/12/2021T00:00:00Z
+                  version: bb996089-b77c-4bf3-be35-b99b6d91f91c
+              schema:
+                type: object
+          description: OK
+      summary: Updates client profile
+      tags:
+        - Profiles
+  "/api/storage/profile-system/profiles/{profileId}/addresses":
+    get:
+      deprecated: false
+      description: "Retrieves information of all addresses of a given client, by its `profileId`.
+
+        \r
+
+        \r> For security and privacy reasons, this request returns masked address data. For unmasked information, see Get unmasked client addresses.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetClientAddresses
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - document:
+                    administrativeAreaLevel1: RJ
+                    countryCode: BR
+                    countryName: B*****
+                    locality: L*******
+                    localityAreaLevel1: locality area
+                    postalCode: 2****-0**
+                    profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                    route: "51"
+                    streetNumber: "999"
+                  id: bf82180e-cf9e-4089-9af6-ae1518555992
+                  meta:
+                    author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                    creationDate: 2022-01-18T18:51:34.1293829+00:00
+                    lastUpdateDate: 2022-01-18T18:51:34.1293829+00:00
+                    version: c9c44895-4589-4d0d-a28d-e0e656ca1926
+              schema:
+                items: {}
+                type: array
+          description: OK
+      summary: Get client addresses
+      tags:
+        - Addresses
+    post:
+      deprecated: false
+      description: "Creates new address for a given client profile.
+
+        \r
+
+        \r> The `id` field returned by this request is the `addressId` used to retrieve or update information of a specific address later.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: CreateClientAddress
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/address"
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                document:
+                  administrativeAreaLevel1: RJ
+                  countryCode: BR
+                  countryName: Brasil
+                  locality: Locality
+                  localityAreaLevel1: locality area
+                  postalCode: 20200-000
+                  profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                  route: "51"
+                  streetNumber: "999"
+                id: bf82180e-cf9e-4089-9af6-ae1518555992
+                meta:
+                  author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                  creationDate: 2022-01-18T18:51:34.1293829+00:00
+                  lastUpdateDate: 2022-01-18T18:51:34.1293829+00:00
+                  version: c9c44895-4589-4d0d-a28d-e0e656ca1926
+              schema:
+                type: object
+          description: Created
+      summary: Create client address
+      tags:
+        - Addresses
+  "/api/storage/profile-system/profiles/{profileId}/addresses/unmask":
+    get:
+      deprecated: false
+      description: "Retrieves unmasked information of all addresses of a given client, by its `profileId`.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetUnmaskedClientAddresses
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - document:
+                    administrativeAreaLevel1: RJ
+                    countryCode: BR
+                    countryName: Brasil
+                    locality: Locality
+                    localityAreaLevel1: locality area
+                    postalCode: 20200-000
+                    profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                    route: "51"
+                    streetNumber: "999"
+                  id: bf82180e-cf9e-4089-9af6-ae1518555992
+                  meta:
+                    author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                    creationDate: 2022-01-18T18:51:34.1293829+00:00
+                    lastUpdateDate: 2022-01-18T18:51:34.1293829+00:00
+                    version: c9c44895-4589-4d0d-a28d-e0e656ca1926
+              schema:
+                items:
+                  additionalProperties: true
+                  type: object
+                type: array
+          description: OK
+      summary: Get unmasked client addresses
+      tags:
+        - Addresses
+  "/api/storage/profile-system/profiles/{profileId}/addresses/{addressId}":
+    delete:
+      deprecated: false
+      description: "Deletes a client's address by `profileId` and `addressId`.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: DeleteAddress
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/addressId"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "204":
+          description: No content
+      summary: Delete address
+      tags:
+        - Addresses
+    get:
+      deprecated: false
+      description: "Retrieves information of a specific address of a given client, by its respectives `adderssId` and `profileId`.
+
+        \r
+
+        \r> For security and privacy reasons, this request returns masked address data. For unmasked information, see Get unmasked address.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetAddress
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/addressId"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                document:
+                  administrativeAreaLevel1: RJ
+                  countryCode: BR
+                  countryName: B*****
+                  locality: L*******
+                  localityAreaLevel1: locality area
+                  postalCode: 2****-0**
+                  profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                  route: "51"
+                  streetNumber: "999"
+                id: bf82180e-cf9e-4089-9af6-ae1518555992
+                meta:
+                  author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                  creationDate: 2022-01-18T18:51:34.1293829+00:00
+                  lastUpdateDate: 2022-01-18T18:51:34.1293829+00:00
+                  version: c9c44895-4589-4d0d-a28d-e0e656ca1926
+              schema:
+                type: object
+          description: OK
+      summary: Get address
+      tags:
+        - Addresses
+    patch:
+      deprecated: false
+      description: "Updates one or more fields of an existing address for a given client profile.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: UpdateClientAddress
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/addressId"
+        - $ref: "#/components/parameters/alternativeKey"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                administrativeAreaLevel1:
+                  $ref: "#/components/schemas/address/properties/administrativeAreaLevel1"
+                countryCode:
+                  $ref: "#/components/schemas/address/properties/countryCode"
+                countryName:
+                  $ref: "#/components/schemas/address/properties/countryName"
+                locality:
+                  $ref: "#/components/schemas/address/properties/locality"
+                localityAreaLevel1:
+                  $ref: "#/components/schemas/address/properties/localityAreaLevel1"
+                postalCode:
+                  $ref: "#/components/schemas/address/properties/postalCode"
+                route:
+                  $ref: "#/components/schemas/address/properties/countryName"
+                streetNumber:
+                  $ref: "#/components/schemas/address/properties/countryName"
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                document:
+                  administrativeAreaLevel1: RJ
+                  countryCode: BR
+                  countryName: Brasil
+                  locality: Locality
+                  localityAreaLevel1: locality area
+                  postalCode: 20200-000
+                  profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                  route: "34"
+                  streetNumber: "333"
+                id: bf82180e-cf9e-4089-9af6-ae1518555992
+                meta:
+                  author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                  creationDate: 2022-01-18T18:51:34.1293829+00:00
+                  lastUpdateDate: 2022-01-18T21:08:02.9364099+00:00
+                  version: 86dfae79-1d23-43f2-a643-2fc8f1839461
+              schema:
+                type: object
+          description: OK
+      summary: Update client address
+      tags:
+        - Addresses
+  "/api/storage/profile-system/profiles/{profileId}/addresses/{addressId}/unmask":
+    get:
+      deprecated: false
+      description: "Retrieves unmasked information of a specific address of a given client, by its respectives `adderssId` and `profileId`.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetUnmaskedAddress
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/addressId"
+        - $ref: "#/components/parameters/reason"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                document:
+                  administrativeAreaLevel1: RJ
+                  countryCode: BR
+                  countryName: Brasil
+                  locality: Locality
+                  localityAreaLevel1: locality area
+                  postalCode: 20200-000
+                  profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                  route: "51"
+                  streetNumber: "999"
+                id: bf82180e-cf9e-4089-9af6-ae1518555992
+                meta:
+                  author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                  creationDate: 2022-01-18T18:51:34.1293829+00:00
+                  lastUpdateDate: 2022-01-18T18:51:34.1293829+00:00
+                  version: c9c44895-4589-4d0d-a28d-e0e656ca1926
+              schema:
+                type: object
+          description: OK
+      summary: Get unmasked address
+      tags:
+        - Addresses
+  "/api/storage/profile-system/profiles/{profileId}/addresses/{addressId}/versions/{addressVersionId}":
+    get:
+      deprecated: false
+      description: "Retrieves information of a specific version address of a given client.
+
+        \r
+
+        \r> For security and privacy reasons, this request returns masked address data by version. For unmasked information, see Get unmasked address by version.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetAddressByVersion
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/addressId"
+        - $ref: "#/components/parameters/addressVersionId"
+        - $ref: "#/components/parameters/reason"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                document:
+                  administrativeAreaLevel1: RJ
+                  countryCode: BR
+                  countryName: B*****
+                  locality: L*******
+                  localityAreaLevel1: locality area
+                  postalCode: 2****-0**
+                  profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                  route: "51"
+                  streetNumber: "999"
+                id: bf82180e-cf9e-4089-9af6-ae1518555992
+                meta:
+                  author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                  creationDate: 2022-01-18T18:51:34.1293829+00:00
+                  lastUpdateDate: 2022-01-18T18:51:34.1293829+00:00
+                  version: c9c44895-4589-4d0d-a28d-e0e656ca1926
+              schema:
+                type: object
+          description: OK
+      summary: Get address by version
+      tags:
+        - Addresses
+  "/api/storage/profile-system/profiles/{profileId}/addresses/{addressId}/versions/{addressVersionId}/unmask":
+    get:
+      deprecated: false
+      description: "Retrieves unmasked information of a specific address version of a given client.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetUnmaskedAddressByVersion
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/addressId"
+        - $ref: "#/components/parameters/addressVersionId"
+        - $ref: "#/components/parameters/reason"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                document:
+                  administrativeAreaLevel1: RJ
+                  countryCode: BR
+                  countryName: Brasil
+                  locality: Locality
+                  localityAreaLevel1: locality area
+                  postalCode: 20200-000
+                  profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                  route: "51"
+                  streetNumber: "999"
+                id: bf82180e-cf9e-4089-9af6-ae1518555992
+                meta:
+                  author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                  creationDate: 2022-01-18T18:51:34.1293829+00:00
+                  lastUpdateDate: 2022-01-18T18:51:34.1293829+00:00
+                  version: c9c44895-4589-4d0d-a28d-e0e656ca1926
+              schema:
+                type: object
+          description: OK
+      summary: Get unmasked address by version
+      tags:
+        - Addresses
+  "/api/storage/profile-system/profiles/{profileId}/purchase-info":
+    delete:
+      deprecated: false
+      description: "Deletes purchase informaiton by `profileId`.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: DeletePurchaseInformation
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "204":
+          description: No content
+      summary: Delete purchase information
+      tags:
+        - Purchase information
+    get:
+      deprecated: false
+      description: "Retrieves purchase information of a given client, by its `profileId`.
+
+        \r
+
+        \r> For security and privacy reasons, this request returns masked data. For unmasked information, see Get unmasked purchase information.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetPurchaseInformation
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - {}
+              schema:
+                items: {}
+                type: array
+          description: OK
+      summary: Get purchase information
+      tags:
+        - Purchase information
+    patch:
+      deprecated: false
+      description: "Updates one or more fields of existing purchase information for a given client profile.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: UpdatePurchaseInformation
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema:
+                type: object
+          description: OK
+      summary: Update purchase information
+      tags:
+        - Purchase information
+    post:
+      deprecated: false
+      description: "Creates purchase information for a given client profile.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: CreatePurchaseInformation
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/alternativeKey"
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+      responses:
+        "201":
+          content:
+            application/json:
+              example: {}
+              schema:
+                type: object
+          description: Created
+      summary: Create purchase information
+      tags:
+        - Purchase information
+  "/api/storage/profile-system/profiles/{profileId}/purchase-info/unmask":
+    get:
+      deprecated: false
+      description: "Retrieves unmasked purchase information of a given client, by its `profileId`.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetUnmaskedPurchaseInformation
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - document:
+                    administrativeAreaLevel1: RJ
+                    countryCode: BR
+                    countryName: Brasil
+                    locality: Locality
+                    localityAreaLevel1: locality area
+                    postalCode: 20200-000
+                    profileId: 70caf394-8534-447e-a0ca-1803c669c771
+                    route: "51"
+                    streetNumber: "999"
+                  id: bf82180e-cf9e-4089-9af6-ae1518555992
+                  meta:
+                    author: 80aa79a3-aa89-4912-a20e-8ef69af19a6c
+                    creationDate: 2022-01-18T18:51:34.1293829+00:00
+                    lastUpdateDate: 2022-01-18T18:51:34.1293829+00:00
+                    version: c9c44895-4589-4d0d-a28d-e0e656ca1926
+              schema:
+                items:
+                  type: object
+                type: array
+          description: OK
+      summary: Get unmasked purchase information
+      tags:
+        - Purchase information
+  "/api/storage/profile-system/profiles/{profileId}/unmask":
+    get:
+      deprecated: false
+      description: "Retrieves unmasked information of a specific client, by its `profileId`.
+
+        \r
+
+        \r> Since your store's profile schema is customizable, the schema and examples presented below may differ from yours. Your integration must be adapted accordingly.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetUnmaskedProfile
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/reason"
+        - $ref: "#/components/parameters/alternativeKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - document:
+                    birthDate: 1925-11-17
+                    document: "12345678911"
+                    documentType: CPF
+                    email: john.doe@example.com
+                    firstName: John
+                    lastName: Doe
+                  id: 70caf394-8534-447e-a0ca-1803c669c771
+                  meta:
+                    author: e40e0b6d-0605-4fa6-8176-1d69fbaf0818
+                    creationDate: 13/12/2021T00:00:00Z
+                    lastUpdate: 13/12/2021T00:00:00Z
+                    version: abc
+              schema:
+                items: {}
+                type: array
+          description: OK
+      summary: Get unmasked profile
+      tags:
+        - Profiles
+  "/api/storage/profile-system/profiles/{profileId}/versions/{profileVersionId}":
+    get:
+      deprecated: false
+      description: "Retrieves the information of a specific version of a client profile.
+
+        \r
+
+        \r> Since your store's profile schema is customizable, the schema and examples presented below may differ from yours. Your integration must be adapted accordingly.
+
+        \r
+
+        \r> For security and privacy reasons, this request returns masked profile data. For unmasked information, see Get unmasked profile by version.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetProfileByVersion
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/profileVersionId"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - document:
+                    birthDate: 1925-11-17
+                    document: 1********
+                    documentType: CPF
+                    email: j***********
+                    firstName: J***
+                    lastName: G****
+                  id: 70caf394-8534-447e-a0ca-1803c669c771
+                  meta:
+                    author: e40e0b6d-0605-4fa6-8176-1d69fbaf0818
+                    creationDate: 13/12/2021T00:00:00Z
+                    lastUpdate: 15/12/2021T00:00:00Z
+                    version: bb996089-b77c-4bf3-be35-b99b6d91f91c
+              schema:
+                items: {}
+                type: array
+          description: OK
+      summary: Get profile by version
+      tags:
+        - Profiles
+  "/api/storage/profile-system/profiles/{profileId}/versions/{profileVersionId}/unmask":
+    get:
+      deprecated: false
+      description: "Retrieves unmasked information of a specific version of a client profile.
+
+        \r
+
+        \r> Since your store's profile schema is customizable, the schema and examples presented below may differ from yours. Your integration must be adapted accordingly.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetUnmaskedProfileByVersion
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/profileId"
+        - $ref: "#/components/parameters/profileVersionId"
+        - $ref: "#/components/parameters/reason"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - document:
+                    birthDate: 1925-11-17
+                    document: "12345678911"
+                    documentType: CPF
+                    email: john.doe@example.com
+                    firstName: João
+                    lastName: Gomes
+                  id: 70caf394-8534-447e-a0ca-1803c669c771
+                  meta:
+                    author: e40e0b6d-0605-4fa6-8176-1d69fbaf0818
+                    creationDate: 13/12/2021T00:00:00Z
+                    lastUpdate: 15/12/2021T00:00:00Z
+                    version: bb996089-b77c-4bf3-be35-b99b6d91f91c
+              schema:
+                items: {}
+                type: array
+          description: OK
+      summary: Get unmasked profile by version
+      tags:
+        - Profiles
+  /api/storage/profile-system/prospects:
+    post:
+      deprecated: false
+      description: "Creates new prospect.
+
+        \r
+
+        \r> The `id` field returned by this request is the `prospectId` used to retrieve information on a specific prospect later.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: CreateProspect
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/prospect"
+      responses:
+        "201":
+          content:
+            application/json:
+              example: {}
+              schema:
+                type: object
+          description: Created
+      summary: Create prospect
+      tags:
+        - Prospects
+  "/api/storage/profile-system/prospects/{prospectId}":
+    delete:
+      deprecated: false
+      description: "Deletes a prospect by `prospectId`.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: DeleteProspect
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/prospectId"
+      responses:
+        "204":
+          description: No content
+      summary: Delete prospect
+      tags:
+        - Prospects
+    get:
+      deprecated: false
+      description: "Retrieves the information of a specific prospect, by its `prospectId`.
+
+        \r
+
+        \r> For security and privacy reasons, this request returns masked prospect data. For unmasked information, see Get unmasked prospect.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetProspect
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/prospectId"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - {}
+              schema:
+                items: {}
+                type: array
+          description: OK
+      summary: Get prospect
+      tags:
+        - Prospects
+    patch:
+      deprecated: false
+      description: "Updates one or more fields of an existing prospect.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: UpdateProspect
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/prospectId"
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema:
+                type: object
+          description: OK
+      summary: Update prospect
+      tags:
+        - Prospects
+  "/api/storage/profile-system/prospects/{prospectId}/unmask":
+    get:
+      deprecated: false
+      description: "Retrieves unmasked information of a specific prospect, by its `prospectId`.
+
+        \r
+
+        \r> Learn more about the [Profile System](https://developers.vtex.com/vtex-rest-api/docs/profile-system) and its other API endpoints."
+      operationId: GetUnmaskedProspect
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/prospectId"
+        - $ref: "#/components/parameters/reason"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - {}
+              schema:
+                items: {}
+                type: array
+          description: OK
+      summary: Get unmasked prospect
+      tags:
+        - Prospects
+components:
+  parameters:
+    Accept:
+      description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+      in: header
+      name: Accept
+      required: true
+      schema:
+        example: application/json
+        type: string
+      style: simple
+    Content-Type:
+      description: Type of the content being sent.
+      in: header
+      name: Content-Type
+      required: true
+      schema:
+        example: application/json
+        type: string
+      style: simple
+    addressId:
+      description: ID of a client's specific address as returned in the Create client address endpoint's response, in the `id` field.
+      in: path
+      name: addressId
+      required: true
+      schema:
+        example: bf82180e-cf9e-4089-9af6-ae1518555992
+        type: string
+      style: simple
+    addressVersionId:
+      description: ID of the version of a given client's address as returned by endpoints that create or update address information in the `version` field.
+      in: path
+      name: addressVersionId
+      required: true
+      schema:
+        example: 86dfae79-1d23-43f2-a643-2fc8f1839461
+        type: string
+      style: simple
+    alternativeKey:
+      description: "The `profileId` path parameter may be substituted by other profile fields in this request. When making this request, send the `alternativeKey` parameter with a value equal to the key of the field you wish to use as `profileId`.
+
+        \r
+
+        \r> Currently, there are two possible values for this parameter: `email` and `document`."
+      in: query
+      name: alternativeKey
+      required: false
+      schema:
+        example: email
+        type: string
+      style: form
+    onBehalfOf:
+      description: Identification of the unmasked information requester.
+      in: query
+      name: onBehalfOf
+      required: false
+      schema:
+        example: johndoe@store.com
+        type: string
+      style: form
+    profileId:
+      description: ID of the client's profile as returned by the Create profile endpoint's response, in the `id` field. It can also be an `alternativeKey` according to your custom profile schema. In this case, this request should also send the `alternativeKey` parameter.
+      in: path
+      name: profileId
+      required: true
+      schema:
+        example: 70caf394-8534-447e-a0ca-1803c669c771
+        type: string
+      style: simple
+    profileVersionId:
+      description: ID of the version of the client's profile as returned by endpoints that create or update profile information in the `version` field.
+      in: path
+      name: profileVersionId
+      required: true
+      schema:
+        example: 70caf394-8534-447e-a0ca-1803c669c771
+        type: string
+      style: simple
+    prospectId:
+      description: ID of the prospect as returned by the Create prospect endpoint's response, in the `id` field.
+      in: path
+      name: prospectId
+      required: true
+      schema:
+        example: 51clk394-8534-447e-a0ca-1803p669c987
+        type: string
+      style: simple
+    reason:
+      description: Reason for requesting unmasked data.
+      in: query
+      name: reason
+      required: true
+      schema:
+        example: data-validation
+        type: string
+      style: form
+    ttl:
+      description: "This parameter sets the the Time To Live (TTL), in days, of the specific document being created or updated with this request. After this period of time from the moment of the request, the document is deleted. By sending this parameter you override the TTL set for the schema.
+
+        \r
+
+        \r> Currently, the available default document schemas have no TTL. This means that documents are stored indefinitely, unless a TTL is sent when creating or updating."
+      in: query
+      name: ttl
+      required: false
+      schema:
+        example: 365
+        type: integer
+      style: form
+  schemas:
+    address:
+      properties:
+        administrativeAreaLevel1:
+          description: Name of administrative area, such as the state or province.
+          example: RJ
+          type: string
+        countryCode:
+          description: Two letter country code.
+          example: BR
+          type: string
+        countryName:
+          description: Name of the address country.
+          example: Brasil
+          type: string
+        locality:
+          description: Name of address locality, such as the city.
+          example: Locality
+          type: string
+        localityAreaLevel1:
+          description: Name of the address locality area, such as the neighborhood or district.
+          example: Locality area
+          type: string
+        postalCode:
+          description: Address postal code.
+          example: 20200-000
+          type: string
+        route:
+          description: Address route or street name.
+          example: "51"
+          type: string
+        streetNumber:
+          description: Address street number.
+          example: "999"
+          type: string
+      required:
+        - postalCode
+        - countryName
+        - administrativeAreaLevel1
+        - locality
+        - localityAreaLevel1
+        - route
+        - streetNumber
+      title: Address
+      type: object
+    profile:
+      properties:
+        birthDate:
+          description: Client's birth date in ISO 8601 format.
+          example: 1925-11-17
+          type: string
+        document:
+          description: Client's document.
+          example: "12345678900"
+          type: string
+        documentType:
+          description: Type of document informed in `document`.
+          example: CPF
+          type: string
+        email:
+          description: Client's email address.
+          example: john.doe@example.com
+          type: string
+        firstName:
+          description: Client's first name.
+          example: John
+          type: string
+        lastName:
+          description: Client's last name.
+          example: Doe
+          type: string
+      required:
+        - firstName
+        - lastName
+        - email
+        - document
+        - documentType
+      title: Profile.
+      type: object
+    prospect: {}
+    schema:
+      properties:
+        description:
+          description: Schema's human readable description.
+          example: This schema describes a b2c customer profile.
+          type: string
+        documentTTL:
+          description: Document time to live, in days. After this many days from its creation or update, any document cerated from this schema will be deleted.
+          example: 1825
+          type: integer
+        properties:
+          description: "Object describing each field in your desired schema. In this object, each property is a new object, describing the field according to: `type` (string); `sensitive` (boolean); `pii` (boolean) and; `items.type` (if field is array)."
+          properties:
+            "{fieldName}":
+              description: Schema of any given field described in the `properties` field.
+              properties:
+                items:
+                  description: Object containing the type of the items if the field is an array. Typically, arrays will contain strings and will be used for fields such as `email`.
+                  example:
+                    type: string
+                  type: object
+                pii:
+                  description: Indicates whether property is Personal Identifiable Information.
+                  example: true
+                  type: boolean
+                sensitive:
+                  description: Indicates whether property is sensitive data.
+                  example: true
+                  type: boolean
+                type:
+                  description: Schema property type.
+                  example: string
+                  type: string
+              required:
+                - type
+                - sensitive
+                - pii
+              type: object
+          type: object
+        required:
+          description: Schema required fields.
+          example:
+            - firstName
+            - lastName
+            - email
+            - document
+            - documentType
+          items:
+            description: Key of a field that is rqeuired in the schema.
+            type: string
+          type: array
+        title:
+          description: Schema title.
+          example: Client profile schema
+          type: string
+        type:
+          description: Schema type.
+          example: object
+          type: string
+        v-indexed:
+          description: ""
+          example:
+            - email
+            - document
+          items: {}
+          type: array
+        v-unique:
+          description: ""
+          example:
+            - email
+            - document
+          items: {}
+          type: array
+        version:
+          description: Schema version.
+          example: 1
+          type: integer
+      required:
+        - title
+        - type
+        - description
+        - required
+        - properties
+      title: Schema
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

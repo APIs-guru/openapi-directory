@@ -1,0 +1,73 @@
+openapi: 3.0.1
+servers:
+  - url: https://staging2.freetv-app.com
+info:
+  description: A plugin that allows the user to obtain and summary latest news using ChatGPT. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
+  title: News Plugin
+  version: v1
+  x-apisguru-categories:
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_s3.amazonaws.com_acps-iaa_freetv_tv-landing_tv-logo.png
+  x-origin:
+    - format: openapi
+      url: https://www.freetv-app.com/openapi.json
+      version: "3.0"
+  x-providerName: freetv-app.com
+paths:
+  /services:
+    get:
+      description: Get the current latest news to user
+      operationId: getLatestNews
+      parameters:
+        - in: query
+          name: mobile
+          required: true
+          schema:
+            enum:
+              - 1
+            type: integer
+        - in: query
+          name: funcs
+          required: true
+          schema:
+            enum:
+              - getLatestNewsForChatGPT
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+          description: OK
+      summary: Query the latest news
+components:
+  schemas:
+    ApiResponse:
+      properties:
+        getLatestNewsForChatGPT:
+          description: The list of latest news.
+          items:
+            $ref: "#/components/schemas/NewsItem"
+          title: Result of Latest News
+          type: array
+      required:
+        - getLatestNewsForChatGPT
+      title: ApiResponse
+      type: object
+    NewsItem:
+      properties:
+        created:
+          title: News Published Time
+          type: string
+        ref:
+          title: News Url
+          type: string
+        thumbnail:
+          title: News Thumbnail
+          type: string
+        title:
+          title: News Title
+          type: string
+      type: object

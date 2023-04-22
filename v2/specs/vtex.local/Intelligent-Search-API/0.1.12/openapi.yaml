@@ -1,0 +1,969 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX IO Intelligent Search server URL.
+    url: https://{accountName}.vtexcommercestable.com.br/api/io/_v/api/intelligent-search
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Your VTEX account name.
+info:
+  description: ">ℹ️ Onboarding guide\r
+
+    >\r
+
+    > Check the new [Search onboarding guide](https://developers.vtex.com/docs/guides/search-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Search and is organized by focusing on the developer's journey.\r
+
+    \r
+
+    This API is from the [VTEX Intelligent Search](https://help.vtex.com/en/tracks/vtex-intelligent-search--19wrbB7nEQcmwzDPl1l4Cb/3qgT47zY08biLP3d5os3DG) solution, an alternative to the platform’s native search, as it assists the customer in their purchase journey, and it presents results since the first interaction with the search bar.\r
+
+    \r
+
+    ## Index\r
+
+    - [Get list of the 10 most searched terms](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/top_searches)\r
+
+    - [Get list of suggested terms and attributes similar to the search term](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/autocomplete_suggestions)\r
+
+    - [Get attempt of correction of a misspelled term](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/correction_search)\r
+
+    - [Get list of banners registered for query](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/banners/-facets-)\r
+
+    - [Get list of suggested terms similar to the search term](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/search_suggestions)\r
+
+    - [Get list of products for a query](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/product_search/-facets-)\r
+
+    - [Get list of the possible facets for a given query](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/facets/-facets-)"
+  license:
+    name: MIT
+  title: Intelligent Search API
+  version: 0.1.12
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Intelligent Search API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Intelligent-Search-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+tags:
+  - name: Autocomplete
+  - name: Product List Page
+paths:
+  /autocomplete_suggestions:
+    get:
+      description: Lists the suggested terms and attributes similar to the search term.
+      parameters:
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/locale"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutocompleteSearchSuggestions"
+          description: OK
+        5XX:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Server error.
+      summary: Get list of suggested terms and attributes similar to the search term
+      tags:
+        - Autocomplete
+  "/banners/{facets}":
+    get:
+      description: Lists the banners registered for a given query. Check the [configuring banners documentation](https://help.vtex.com/en/tracks/vtex-intelligent-search--19wrbB7nEQcmwzDPl1l4Cb/4ViKEivLJtJsvpaW0aqIQ5) for a full explanation of the banner feature.
+      parameters:
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/facetsPath"
+        - $ref: "#/components/parameters/locale"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Banners"
+          description: OK
+      summary: Get list of banners registered for query
+      tags:
+        - Product List Page
+  /correction_search:
+    get:
+      description: Tries to correct a misspelled term from the search.
+      parameters:
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/locale"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Correction"
+          description: OK
+      summary: Get attempt of correction of a misspelled term
+      tags:
+        - Product List Page
+  "/facets/{facets}":
+    get:
+      description: Lists the possible facets for a given query
+      parameters:
+        - $ref: "#/components/parameters/facetsPath"
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/locale"
+        - $ref: "#/components/parameters/hideUnavailableItems"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Facets"
+          description: List of facets for the given query.
+      summary: Get list of the possible facets for a given query
+      tags:
+        - Product List Page
+  "/product_search/{facets}":
+    get:
+      description: Lists the products for a given query.
+      parameters:
+        - $ref: "#/components/parameters/facetsPath"
+        - $ref: "#/components/parameters/query"
+        - description: |-
+            Defines the simulation behavior.
+
+             * `default` - Calls the simulation for every single seller.
+             * `skip` - Never calls the simulation.
+             * `only1P` - Only calls the simulation for first party sellers.
+          in: query
+          name: simulationBehavior
+          schema:
+            default: default
+            enum:
+              - default
+              - skip
+              - only1P
+            nullable: true
+            type: string
+        - description: Number of products per page.
+          in: query
+          name: count
+          schema:
+            default: 24
+            nullable: true
+            type: number
+        - description: Current search page.
+          in: query
+          name: page
+          schema:
+            default: 1
+            nullable: true
+            type: number
+        - description: Defines the sort type. If null, the products will be sorted by relevance.
+          in: query
+          name: sort
+          schema:
+            enum:
+              - price:desc
+              - price:asc
+              - orders:desc
+              - name:desc
+              - name:asc
+              - release:desc
+              - discount:desc
+            nullable: true
+            type: string
+        - $ref: "#/components/parameters/locale"
+        - $ref: "#/components/parameters/hideUnavailableItems"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductSearch"
+          description: List of products for the given query.
+      summary: Get list of products for a query
+      tags:
+        - Product List Page
+  /search_suggestions:
+    get:
+      description: Lists suggested terms similar to the search term.
+      parameters:
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/locale"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchSuggestions"
+          description: OK
+        5XX:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Server error.
+      summary: Get list of suggested terms similar to the search term
+      tags:
+        - Product List Page
+  /top_searches:
+    get:
+      description: Lists the 10 most searched terms.
+      parameters:
+        - $ref: "#/components/parameters/locale"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TopSearches"
+          description: OK
+        5XX:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Server error.
+      summary: Get list of the 10 most searched terms
+      tags:
+        - Autocomplete
+components:
+  parameters:
+    facetsPath:
+      description: |
+        # Format
+
+        The `facets` parameter follows the format : `/${facetKey1}/${facetValue1}/${facetKey2}/${facetValue2}/.../${facetKeyN}/${facetValueN}`.
+
+        The order in which the terms appear is not relevant to the search.
+
+        You can also repeat the same `facetKey` several times for different values. For example: `category-1/shoes/color/blue/color/red/color/yellow`
+
+        # General filters
+
+        The `facets` parameter also allows the following general filters.
+
+        | `facetKey`      | Description                                                                                      | Example                                                                  |
+        | --------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+        | `price`         | Filter the search by a price range. The facet value follows the format `${minPrice}:${maxPrice}` | `/color/blue/price/100:500?query=shirt`                                  |
+        | `category-${n}` | Filter the search by category, where `n` represents the category tree level (1 = department, 2 = category, 3 = subcategory, and so on) | `category-1/clothing/category-2/shirts`                                  |
+        | `region-id`     | Filter the search by a region id (aka regionalization). The value is the region id               | `/color/blue/region-id/v2.26219C7C3DE42BAAD11CFB92CD0BFE91?query=shirt`. |
+      example: category-1/clothing/category-2/shirt/category-3/man
+      in: path
+      name: facets
+      required: true
+      schema:
+        default: /
+        nullable: true
+        type: string
+    fuzzy:
+      description: Indicates how the search engine will correct misspelled words by using fuzzy logic. It can be a number representing the max number of misspelled letters, or the string `auto` suggesting that the search-engine should set this value by itself.
+      in: query
+      name: fuzzy
+      schema:
+        type: string
+    hideUnavailableItems:
+      description: Whether the result should hide unavailable items (`true`), or not (`false`)
+      in: query
+      name: hideUnavailableItems
+      schema:
+        default: false
+        type: boolean
+    locale:
+      description: Indicates the target language as a BCP 47 language code. The Intelligent Search must have indexed the account in the target language.
+      example: en-US
+      in: query
+      name: locale
+      schema:
+        nullable: true
+        type: string
+    operator:
+      description: Indicates how the search-engine will deal with the fullText if there is more than one word. Set `and` if the returned products must have all the words in its metadata or `or` otherwise.
+      in: query
+      name: operator
+      schema:
+        enum:
+          - and
+          - or
+        type: string
+    query:
+      description: Search term. It can contain any character.
+      in: query
+      name: query
+      schema:
+        type: string
+  schemas:
+    AutocompleteSearchSuggestions:
+      example:
+        searches:
+          - attributes:
+              - key: departamento
+                labelKey: Departamento
+                labelValue: TVs e Vídeo
+                value: tvs-e-video
+              - key: categoria
+                labelKey: Categoria
+                labelValue: TVs
+                value: tvs
+              - key: subcategoria
+                labelKey: Subcategoria
+                labelValue: Receptor de Controle de Acesso
+                value: receptor-de-controle-de-acesso
+            count: 28861
+            term: tv
+          - count: 2308
+            term: smarth tv
+          - count: 975
+            term: painel para tv
+          - count: 589
+            term: rack tv
+      properties:
+        searches:
+          description: List of suggested facets and terms.
+          items:
+            properties:
+              attributes:
+                description: List of facets in which the term can be searched.
+                items:
+                  properties:
+                    key:
+                      description: Facet key.
+                      type: string
+                    labelKey:
+                      description: Human-readable format of the facet key.
+                      type: string
+                    labelValue:
+                      description: Human-readable format of the facet value.
+                      type: string
+                    value:
+                      description: Facet value.
+                      type: string
+                  type: object
+                nullable: true
+                type: array
+              count:
+                description: Number of times the term was searched.
+                type: number
+              term:
+                description: Search term.
+                type: string
+            type: object
+          type: array
+    Banners:
+      properties:
+        banners:
+          items:
+            properties:
+              area:
+                description: Banner area.
+                type: string
+              html:
+                description: Banner HTML.
+                type: string
+              id:
+                description: Banner id.
+                type: string
+              name:
+                description: Banner name.
+                type: string
+            type: object
+          type: array
+    Correction:
+      example:
+        correction:
+          correction: true
+          highlighted: mountain <em>bike</em>
+          misspelled: true
+          text: mountain bike
+      properties:
+        correction:
+          description: Object that indicates if the term was misspelled and suggests a possible correction.
+          properties:
+            correction:
+              description: Whether the API was able to suggest a correction (`true`) or not (`false`).
+              type: boolean
+            highlighted:
+              description: The same as `text`, but it highlights the corrected word. Useful when there is more than one word.
+              type: string
+            misspelled:
+              description: Whether the term was misspelled (`true`) or not (`false`).
+              type: boolean
+            text:
+              description: The corrected term. If the API was not able to correct the term, it will show the original search term.
+              type: string
+          type: object
+    Error:
+      properties:
+        message:
+          description: Error message
+          type: string
+        stack:
+          description: Error stack trace
+          type: string
+      required:
+        - stack
+        - message
+    Facets:
+      properties:
+        breadcrumb:
+          description: Generated breadcrumb for the given query.
+          items:
+            properties:
+              href:
+                description: Query link.
+                type: string
+              name:
+                description: Human-readable format of the facet key.
+                type: string
+          type: array
+        facets:
+          description: List of facets
+          items:
+            properties:
+              hidden:
+                description: Whether the client-side should hide the facet (`true`) or not (`false`)
+                type: boolean
+              name:
+                description: Human-readable format of the facet key.
+                type: string
+              quantity:
+                description: Number of possible values.
+                type: number
+              type:
+                description: |
+                  Facet type
+                   - `TEXT` - The value is a simple text.
+                   - `PRICERANGE` - The value contains the property `range` representing the minimum and the maximum price for the query.
+                enum:
+                  - TEXT
+                  - PRICERANGE
+                type: string
+              values:
+                description: Possible values.
+                items:
+                  properties:
+                    id:
+                      description: Value id
+                      type: string
+                    key:
+                      description: Facet key.
+                      type: string
+                    name:
+                      description: Human-readable format of the facet value
+                      type: string
+                    quantity:
+                      description: Number of resulting products.
+                      type: number
+                    selected:
+                      description: Whether the value is selected (`true`) or not (`false`).
+                      type: boolean
+                    value:
+                      description: Facet value.
+                      type: string
+                type: array
+          type: array
+        queryArgs:
+          description: Term and facets used in the query
+          properties:
+            query:
+              description: Search term used in the query.
+              type: string
+            selectedFacets:
+              description: Facets used in the query.
+              items:
+                properties:
+                  key:
+                    description: facet key.
+                    type: string
+                  value:
+                    description: facet value.
+                    type: string
+              type: array
+          type: object
+        sampling:
+          description: Indicates whether there was sampling in the aggregation of facets or not. In search results that have many products, only the first 30000 will be aggregated to avoid performance issues.
+          type: boolean
+      type: object
+    ProductSearch:
+      example:
+        correction:
+          misspelled: false
+        fuzzy: "0"
+        operator: and
+        products:
+          - brand: Sony
+            brandId: 2000005
+            cacheId: sp-2000003
+            categories:
+              - /Home & Decor/
+            categoriesIds:
+              - /40/
+            categoryId: "40"
+            clusterHighlights:
+              - id: "1970"
+                name: Summer
+            description: With this beautiful design piece you will never miss an appointment anymore. Yay.
+            items:
+              - attachments: []
+                complementName: ""
+                ean: "16001"
+                images:
+                  - cacheId: "155484"
+                    imageId: "155484"
+                    imageLabel: ""
+                    imageTag: ""
+                    imageText: ""
+                    imageUrl: https://storecomponents.vtexassets.com/arquivos/ids/155484/Frame.jpg?v=636793817478300000
+                  - cacheId: "155485"
+                    imageId: "155485"
+                    imageLabel: ""
+                    imageTag: ""
+                    imageText: ""
+                    imageUrl: https://storecomponents.vtexassets.com/arquivos/ids/155485/Frame-1.jpg?v=636793817642000000
+                  - cacheId: "155486"
+                    imageId: "155486"
+                    imageLabel: ""
+                    imageTag: ""
+                    imageText: ""
+                    imageUrl: https://storecomponents.vtexassets.com/arquivos/ids/155486/Frame-2.jpg?v=636793817785530000
+                isKit: false
+                itemId: "2000534"
+                measurementUnit: un
+                modalType: ""
+                name: "1"
+                nameComplete: Top Wood Clock 1
+                referenceId:
+                  - Key: RefId
+                    Value: "16001"
+                sellers:
+                  - addToCartLink: ""
+                    commertialOffer:
+                      AvailableQuantity: 10000
+                      BuyTogether: []
+                      CacheVersionUsedToCallCheckout: ""
+                      DeliverySlaSamples: []
+                      DeliverySlaSamplesPerRegion: {}
+                      GetInfoErrorMessage: null
+                      GiftSkuIds: []
+                      Installments:
+                        - InterestRate: 0
+                          Name: American Express à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: American Express
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                        - InterestRate: 0
+                          Name: Visa à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Visa
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                        - InterestRate: 0
+                          Name: Visa 2 vezes sem juros
+                          NumberOfInstallments: 2
+                          PaymentSystemName: Visa
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 98.99
+                        - InterestRate: 0
+                          Name: Visa 3 vezes sem juros
+                          NumberOfInstallments: 3
+                          PaymentSystemName: Visa
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 65.99
+                        - InterestRate: 0
+                          Name: Visa 4 vezes sem juros
+                          NumberOfInstallments: 4
+                          PaymentSystemName: Visa
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 49.49
+                        - InterestRate: 0
+                          Name: Visa 5 vezes sem juros
+                          NumberOfInstallments: 5
+                          PaymentSystemName: Visa
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 39.59
+                        - InterestRate: 0
+                          Name: Visa 6 vezes sem juros
+                          NumberOfInstallments: 6
+                          PaymentSystemName: Visa
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 32.99
+                        - InterestRate: 0
+                          Name: Diners à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Diners
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                        - InterestRate: 100
+                          Name: Diners 2 vezes com juros
+                          NumberOfInstallments: 2
+                          PaymentSystemName: Diners
+                          TotalValuePlusInterestRate: 200.96
+                          Value: 100.48
+                        - InterestRate: 0
+                          Name: Mastercard à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Mastercard
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                        - InterestRate: 0
+                          Name: Boleto Bancário à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Boleto Bancário
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                        - InterestRate: 0
+                          Name: Vale à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Vale
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                        - InterestRate: 0
+                          Name: Promissory à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Promissory
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                        - InterestRate: 0
+                          Name: Customer Credit à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Customer Credit
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                        - InterestRate: 0
+                          Name: Customer Credit 2 vezes sem juros
+                          NumberOfInstallments: 2
+                          PaymentSystemName: Customer Credit
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 98.99
+                        - InterestRate: 100
+                          Name: Customer Credit 3 vezes com juros
+                          NumberOfInstallments: 3
+                          PaymentSystemName: Customer Credit
+                          TotalValuePlusInterestRate: 203.91
+                          Value: 67.97
+                        - InterestRate: 0
+                          Name: Free à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Free
+                          TotalValuePlusInterestRate: 197.99
+                          Value: 197.99
+                      ItemMetadataAttachment: []
+                      ListPrice: 197.99
+                      Price: 197.99
+                      PriceValidUntil: 2023-04-01T13:13:20Z
+                      PriceWithoutDiscount: 197.99
+                      RewardValue: 0
+                      Tax: 0
+                      discountHighlights: []
+                      spotPrice: 197.99
+                      taxPercentage: 0
+                      teasers:
+                        - conditions:
+                            minimumQuantity: 0
+                            parameters:
+                              - name: PaymentMethodId
+                                value: "6"
+                          effects:
+                            parameters:
+                              - name: PercentualDiscount
+                                value: "8.0"
+                          name: 8% Boleto
+                    sellerDefault: true
+                    sellerId: "1"
+                    sellerName: VTEX
+                unitMultiplier: 1
+                variations: []
+                videos: []
+            link: /wood-clock/p
+            linkText: wood-clock
+            origin: intelligent-search
+            priceRange:
+              listPrice:
+                highPrice: 197.99
+                lowPrice: 197.99
+              sellingPrice:
+                highPrice: 197.99
+                lowPrice: 197.99
+            productClusters:
+              - id: "1970"
+                name: Summer
+            productId: "2000003"
+            productName: Top Wood Clock
+            productReference: clock120
+            properties:
+              - name: sellerId
+                originalName: sellerId
+                values:
+                  - "1"
+            skuSpecifications: []
+            specificationGroups:
+              - name: allSpecifications
+                originalName: allSpecifications
+                specifications:
+                  - name: sellerId
+                    originalName: sellerId
+                    values:
+                      - "1"
+          - brand: Sony
+            brandId: 2000005
+            cacheId: sp-2000214
+            categories:
+              - /Home & Decor/
+            categoriesIds:
+              - /40/
+            categoryId: "40"
+            clusterHighlights: []
+            description: ""
+            items:
+              - attachments: []
+                complementName: ""
+                ean: "2398428937489"
+                images:
+                  - cacheId: "155675"
+                    imageId: "155675"
+                    imageLabel: vtex
+                    imageTag: ""
+                    imageText: vtex
+                    imageUrl: https://storecomponents.vtexassets.com/arquivos/ids/155675/vtex.jpg?v=637655270451200000
+                isKit: false
+                itemId: "310124211"
+                measurementUnit: un
+                modalType: ""
+                name: kevin1sku
+                nameComplete: kevin1sku
+                referenceId:
+                  - Key: RefId
+                    Value: 2983678w63478
+                sellers:
+                  - addToCartLink: ""
+                    commertialOffer:
+                      AvailableQuantity: 10000
+                      BuyTogether: []
+                      CacheVersionUsedToCallCheckout: ""
+                      DeliverySlaSamples: []
+                      DeliverySlaSamplesPerRegion: {}
+                      GetInfoErrorMessage: null
+                      GiftSkuIds: []
+                      Installments:
+                        - InterestRate: 0
+                          Name: American Express à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: American Express
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                        - InterestRate: 0
+                          Name: Visa à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Visa
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                        - InterestRate: 0
+                          Name: Diners à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Diners
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                        - InterestRate: 0
+                          Name: Mastercard à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Mastercard
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                        - InterestRate: 0
+                          Name: Boleto Bancário à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Boleto Bancário
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                        - InterestRate: 0
+                          Name: Vale à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Vale
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                        - InterestRate: 0
+                          Name: Promissory à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Promissory
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                        - InterestRate: 0
+                          Name: Customer Credit à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Customer Credit
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                        - InterestRate: 0
+                          Name: Customer Credit 2 vezes sem juros
+                          NumberOfInstallments: 2
+                          PaymentSystemName: Customer Credit
+                          TotalValuePlusInterestRate: 10
+                          Value: 5
+                        - InterestRate: 100
+                          Name: Customer Credit 3 vezes com juros
+                          NumberOfInstallments: 3
+                          PaymentSystemName: Customer Credit
+                          TotalValuePlusInterestRate: 10.29
+                          Value: 3.43
+                        - InterestRate: 0
+                          Name: Free à vista
+                          NumberOfInstallments: 1
+                          PaymentSystemName: Free
+                          TotalValuePlusInterestRate: 10
+                          Value: 10
+                      ItemMetadataAttachment: []
+                      ListPrice: 10
+                      Price: 10
+                      PriceValidUntil: 2023-04-01T13:13:20Z
+                      PriceWithoutDiscount: 10
+                      RewardValue: 0
+                      Tax: 0
+                      discountHighlights: []
+                      spotPrice: 10
+                      taxPercentage: 0
+                      teasers:
+                        - conditions:
+                            minimumQuantity: 0
+                            parameters:
+                              - name: PaymentMethodId
+                                value: "6"
+                          effects:
+                            parameters:
+                              - name: PercentualDiscount
+                                value: "8.0"
+                          name: 8% Boleto
+                    sellerDefault: true
+                    sellerId: "1"
+                    sellerName: VTEX
+                unitMultiplier: 1
+                variations: []
+                videos: []
+            link: /kevin1-lkn/p
+            linkText: kevin1-lkn
+            origin: intelligent-search
+            priceRange:
+              listPrice:
+                highPrice: 10
+                lowPrice: 10
+              sellingPrice:
+                highPrice: 10
+                lowPrice: 10
+            productClusters: []
+            productId: "2000214"
+            productName: kevin1
+            properties:
+              - name: sellerId
+                originalName: sellerId
+                values:
+                  - "1"
+            skuSpecifications: []
+            specificationGroups:
+              - name: allSpecifications
+                originalName: allSpecifications
+                specifications:
+                  - name: sellerId
+                    originalName: sellerId
+                    values:
+                      - "1"
+        recordsFiltered: 5
+        translated: false
+      properties:
+        correction:
+          description: Object with information of misspelled terms.
+          properties:
+            misspelled:
+              description: Whether the term is misspelled (`true`) or not (`false`).
+              type: boolean
+          type: object
+        fuzzy:
+          description: Indicates how the search engine corrected the misspelled word by using fuzzy logic. It can be a number representing the max number of misspelled letters, or the string `auto` suggesting that the search-engine should set this value by itself.
+          type: string
+        operator:
+          description: |-
+            Indicates how the search-engine dealt with the fullText when there is more than one word.
+             * `and` - It means that the products contains all the words in the query.
+             * `or` - It means that the results will contain at least one word from the original search query. If `and` was not possible, `or` will be the fallback.
+          enum:
+            - and
+            - or
+          type: string
+        products:
+          description: List of products
+          items:
+            type: object
+          type: array
+        recordsFiltered:
+          description: Total number of products.
+          type: number
+        translated:
+          description: Whether the list of products was translated by the IS (`true`) or not (`false`).
+          type: boolean
+      type: object
+    SearchSuggestions:
+      example:
+        searches:
+          - count: 66
+            term: mountain bike
+          - count: 121
+            term: bike helmet
+          - count: 78
+            term: electric bike
+          - count: 161
+            term: bike rack
+          - count: 28
+            term: road bike
+      properties:
+        searches:
+          description: List of suggested terms.
+          items:
+            properties:
+              count:
+                description: Number of times the term was searched.
+                type: number
+              term:
+                description: Search term.
+                type: string
+            type: object
+          type: array
+    TopSearches:
+      example:
+        searches:
+          - count: 14
+            term: home
+          - count: 10
+            term: shirt
+          - count: 9
+            term: top
+          - count: 6
+            term: tops
+          - count: 5
+            term: camera
+          - count: 5
+            term: kit
+          - count: 2
+            term: work shirt
+          - count: 2
+            term: shirts
+          - count: 2
+            term: clothing
+          - count: 1
+            term: classic shoes
+      properties:
+        searches:
+          description: A list of the 10 most searched terms.
+          items:
+            properties:
+              count:
+                description: Number of times the term was searched.
+                type: number
+              term:
+                description: Search term.
+                type: string
+            type: object
+          maxItems: 10
+          minItems: 10
+          type: array
+      type: object

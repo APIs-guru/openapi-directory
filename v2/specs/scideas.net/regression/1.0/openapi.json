@@ -1,0 +1,267 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://services.scideas.net"
+    }
+  ],
+  "info": {
+    "contact": {
+      "email": "software@scideas.net",
+      "name": "scideas software",
+      "url": "https://scideas.net"
+    },
+    "description": "This data processing api uses regression analysis to allow you to find out which contributing variables have the most effect on an outcome. For example does buyer location or price most effect sales ?",
+    "termsOfService": "https://scideas.net/terms",
+    "title": "Regression analysis api",
+    "version": "1.0",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_scideas.net_media_logos_favicon_apple-touch-icon-57x57.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://services.scideas.net/regression/resources/openapi3.0.0-regression-1.0.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "scideas.net",
+    "x-serviceName": "regression"
+  },
+  "externalDocs": {
+    "url": "https://services.scideas.net/regression"
+  },
+  "paths": {
+    "/regression/api": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/regression_api_body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            },
+            "description": "A JSON array of data"
+          }
+        },
+        "summary": "Returns regression analysis."
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "error": {
+        "properties": {
+          "error": {
+            "description": "an error description",
+            "example": "invalid key",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "inline_response_200": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/result"
+          },
+          {
+            "$ref": "#/components/schemas/error"
+          }
+        ]
+      },
+      "regression_api_body": {
+        "properties": {
+          "convert_date_to": {
+            "description": "convert dates to either month (1-12) or week (1-52)",
+            "example": "month",
+            "type": "string"
+          },
+          "data": {
+            "example": [
+              "25,female,30.2,0,yes,southwest,33900.65",
+              "19,female,20.6,0,no,southwest,1731.677"
+            ],
+            "items": {
+              "description": "array of comma separated variable strings, one element from each line of the csv file",
+              "format": "string",
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "ignore_variables": {
+            "example": [
+              "VAT",
+              "post code"
+            ],
+            "items": {
+              "description": "array of variable names to ignore when processing",
+              "format": "string",
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "key": {
+            "description": "api key",
+            "example": "abc123",
+            "type": "string"
+          },
+          "outcome_variable": {
+            "description": "name of the desired outcome variable",
+            "example": "sales",
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "key",
+          "outcome_variable"
+        ],
+        "type": "object"
+      },
+      "result": {
+        "properties": {
+          "calls\"": {
+            "$ref": "#/components/schemas/result_calls"
+          },
+          "data_count": {
+            "description": "number of data rows processed",
+            "example": 9500,
+            "type": "integer"
+          },
+          "dates_converted_to": {
+            "description": "either month or week",
+            "example": "week",
+            "type": "string"
+          },
+          "footer": {
+            "description": "text for pdf footer",
+            "example": "acme products ltd",
+            "type": "string"
+          },
+          "header": {
+            "description": "text for pdf header",
+            "example": "sales regression analysis",
+            "type": "string"
+          },
+          "number_observations": {
+            "description": "number of data rows used for analysis",
+            "example": 9000,
+            "type": "integer"
+          },
+          "number_tests": {
+            "description": "number of data rows used to test model accuracy",
+            "example": 500,
+            "type": "integer"
+          },
+          "outcome_variable": {
+            "description": "the name of the variable processed as the outcome",
+            "example": "sales",
+            "type": "string"
+          },
+          "paid": {
+            "description": "yes if paid subscriber, otherwise no",
+            "example": "true",
+            "type": "string"
+          },
+          "pdf": {
+            "description": "url of pdf summary",
+            "example": "https://scideas.net/services/regression/api/pdf/abc123-1641901999.9268.pdf",
+            "type": "string"
+          },
+          "prediction_mean_accuracy": {
+            "description": "percentage accuracy of model created",
+            "example": 106,
+            "type": "integer"
+          },
+          "standardized_coefficients": {
+            "example": [
+              {
+                "coefficient": 0,
+                "variable": "state"
+              },
+              {
+                "coefficient": 2,
+                "variable": "discount"
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/result_standardized_coefficients"
+            },
+            "type": "array"
+          },
+          "summary": {
+            "example": [
+              "state has a negligible (0) influence.",
+              "discount has a small (2) influence. More discount makes sales higher"
+            ],
+            "items": {
+              "description": "array of text summaries, one per contributing varible",
+              "format": "string",
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "tested_variables": {
+            "example": [
+              "state",
+              "date",
+              "discount"
+            ],
+            "items": {
+              "description": "array of variable names included in the analysis",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "result_calls": {
+        "properties": {
+          "limit": {
+            "description": "number of api calls allowed per month",
+            "example": 100,
+            "type": "integer"
+          },
+          "limit_reached": {
+            "description": "true if monthly limit has been reached",
+            "example": false,
+            "type": "boolean"
+          },
+          "this_month": {
+            "description": "number of api calls this month",
+            "example": 47,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "result_standardized_coefficients": {
+        "properties": {
+          "coefficient": {
+            "description": "standardized regression coefficient for variable",
+            "type": "integer"
+          },
+          "variable": {
+            "description": "name of variable",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}

@@ -1,0 +1,247 @@
+openapi: 3.0.2
+servers:
+  - url: /sub
+  - url: https://retriever.openindex.ai
+info:
+  description: A retrieval API for querying and filtering documents based on natural language queries and metadata
+  title: OpenIndex Retrieval Plugin API
+  version: 1.0.0
+  x-apisguru-categories:
+    - machine_learning
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_retriever.openindex.ai_.well-known_logo.png
+  x-origin:
+    - format: openapi
+      url: https://retriever.openindex.ai/.well-known/openapi.yaml
+      version: "3.0"
+  x-providerName: openindex.ai
+paths:
+  /query:
+    post:
+      description: Accepts search query objects array each with query and optional filter. Break down complex questions into sub-questions. Refine results by criteria, e.g. time / source, don't do this often. Split queries if ResponseTooLargeError occurs.
+      operationId: query_query_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - HTTPBearer: []
+      summary: Query
+components:
+  schemas:
+    DocumentChunkMetadata:
+      properties:
+        author:
+          title: Author
+          type: string
+        collection_id:
+          title: Collection Id
+          type: string
+        created_at:
+          title: Created At
+          type: string
+        document_id:
+          title: Document Id
+          type: string
+        keywords:
+          items:
+            type: string
+          title: Keywords
+          type: array
+        language:
+          title: Language
+          type: string
+        source:
+          $ref: "#/components/schemas/Source"
+        source_id:
+          title: Source Id
+          type: string
+        time_period:
+          title: Time Period
+          type: string
+        updated_at:
+          title: Updated At
+          type: string
+        url:
+          title: Url
+          type: string
+        user_id:
+          title: User Id
+          type: string
+      title: DocumentChunkMetadata
+      type: object
+    DocumentChunkWithScore:
+      properties:
+        embedding:
+          items:
+            type: number
+          title: Embedding
+          type: array
+        id:
+          title: Id
+          type: string
+        metadata:
+          $ref: "#/components/schemas/DocumentChunkMetadata"
+        score:
+          title: Score
+          type: number
+        text:
+          title: Text
+          type: string
+      required:
+        - text
+        - metadata
+        - score
+      title: DocumentChunkWithScore
+      type: object
+    DocumentMetadataFilter:
+      properties:
+        author:
+          title: Author
+          type: string
+        collection_id:
+          title: Collection Id
+          type: string
+        document_id:
+          title: Document Id
+          type: string
+        end_date:
+          title: End Date
+          type: string
+        keywords:
+          items:
+            type: string
+          title: Keywords
+          type: array
+        language:
+          title: Language
+          type: string
+        source:
+          $ref: "#/components/schemas/Source"
+        source_id:
+          title: Source Id
+          type: string
+        start_date:
+          title: Start Date
+          type: string
+        time_period:
+          title: Time Period
+          type: string
+        user_id:
+          title: User Id
+          type: string
+      title: DocumentMetadataFilter
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: "#/components/schemas/ValidationError"
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    Query:
+      properties:
+        filter:
+          $ref: "#/components/schemas/DocumentMetadataFilter"
+        query:
+          title: Query
+          type: string
+        top_k:
+          default: 3
+          title: Top K
+          type: integer
+      required:
+        - query
+      title: Query
+      type: object
+    QueryRequest:
+      properties:
+        namespace:
+          title: Namespace
+          type: string
+        queries:
+          items:
+            $ref: "#/components/schemas/Query"
+          title: Queries
+          type: array
+      required:
+        - queries
+      title: QueryRequest
+      type: object
+    QueryResponse:
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/QueryResult"
+          title: Results
+          type: array
+      required:
+        - results
+      title: QueryResponse
+      type: object
+    QueryResult:
+      properties:
+        query:
+          title: Query
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/DocumentChunkWithScore"
+          title: Results
+          type: array
+      required:
+        - query
+        - results
+      title: QueryResult
+      type: object
+    Source:
+      description: An enumeration.
+      enum:
+        - email
+        - web
+        - file
+        - chat
+      title: Source
+      type: string
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+      type: object
+  securitySchemes:
+    HTTPBearer:
+      scheme: bearer
+      type: http

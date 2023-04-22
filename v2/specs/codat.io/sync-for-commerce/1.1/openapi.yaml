@@ -1,0 +1,1506 @@
+openapi: 3.1.0
+servers:
+  - description: Production
+    url: https://api.codat.io
+info:
+  contact:
+    email: syncforcommerce@codat.io
+    name: Codat
+    url: https://www.codat.io/
+  description: |-
+    The API for Sync for Commerce. Sync for Commerce is an API and a set of supporting tools. It has been built to enable e-commerce, point of sale platforms to provide high-quality integrations with numerous accounting platform through standardized API, seamlessly transforming business sale's data into accounting artefacts.
+    [Read More...](https://docs.codat.io/sfc/overview)
+  termsOfService: https://www.codat.io/legals/
+  title: Sync for Commerce API
+  version: "1.1"
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_static.codat.io_public_branding_codat-icon-blue.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Sync-Commerce.json
+      version: "3.1"
+  x-providerName: codat.io
+  x-serviceName: sync-for-commerce
+security:
+  - auth_header: []
+tags:
+  - description: Create new and manage existing sync for commerce companies.
+    name: Company management
+  - description: Expressively configure preferences for any given sync for commerce company.
+    name: Configuration
+  - description: Configure preferences for any given sync for commerce company using sync flow.
+    name: Sync flow preferences
+  - description: Initiate a sync of sync for commerce company data into their respective accounting software.
+    name: Sync
+  - description: View useful information about codat's integrations.
+    name: Integrations
+paths:
+  "/clients/{clientId}/config/ui/accounts/platform/{platformKey}":
+    get:
+      description: Enable retrieval for accounts which are visible on sync flow.
+      operationId: get-visible-accounts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisibleAccounts"
+          description: Success
+      summary: List visible accounts
+      tags:
+        - Sync flow preferences
+    parameters:
+      - in: path
+        name: clientId
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: platformKey
+        required: true
+        schema:
+          format: uuid
+          type: string
+  "/companies/{companyId}/sync/commerce/latest":
+    parameters:
+      - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+    post:
+      description: "Run a Commerce sync from the last successful sync up to the date provided (optional), otherwise UtcNow is used.\r
+
+        If there was no previously successful sync, the start date in the config is used."
+      operationId: request-sync
+      parameters:
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyncToLatestArgs"
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyncSummary"
+              x-speakeasy-usage-example: true
+          description: Success
+      summary: Run a Commerce sync from the last successful sync
+      tags:
+        - Sync
+  "/config/companies/{companyId}/sync/commerce":
+    get:
+      description: Retrieve current config preferences.
+      operationId: get-configuration
+      parameters:
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Configuration"
+          description: Success
+      summary: Retrieve config preferences set for a company.
+      tags:
+        - Configuration
+    post:
+      description: Make changes to configuration preferences.
+      operationId: set-configuration
+      parameters:
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Configuration"
+          description: Success
+      summary: Create or update configuration.
+      tags:
+        - Configuration
+  /config/integrations:
+    get:
+      description: Retrieve a list of available integrations support by datatype and state of release.
+      operationId: list-integrations
+      parameters:
+        - $ref: "#/paths/~1meta~1companies/get/parameters/0"
+        - $ref: "#/paths/~1meta~1companies/get/parameters/1"
+        - $ref: "#/paths/~1meta~1companies/get/parameters/2"
+        - $ref: "#/paths/~1meta~1companies/get/parameters/3"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Integrations"
+          description: Success
+      summary: List information on Codat's supported integrations
+      tags:
+        - Integrations
+  "/config/integrations/{platformKey}/branding":
+    get:
+      description: Retrieve Integration branding assets.
+      operationId: get-integration-branding
+      parameters:
+        - description: PlatformKey
+          in: path
+          name: platformKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Branding"
+                properties:
+                  logo:
+                    properties:
+                      full: {}
+          description: Success
+      summary: Get branding for an integration
+      tags:
+        - Integrations
+    parameters:
+      - description: Unique four letter identifier for the platform
+        in: path
+        name: platformKey
+        required: true
+        schema:
+          type: string
+  "/config/sync/commerce/{commerceKey}/{accountingKey}/start":
+    get:
+      description: Get a URL for Sync Flow including a one time passcode.
+      operationId: get-sync-flow-url
+      parameters:
+        - description: Commerce platform key
+          in: path
+          name: commerceKey
+          required: true
+          schema:
+            type: string
+        - description: Accounting platform key
+          in: path
+          name: accountingKey
+          required: true
+          schema:
+            type: string
+        - description: Identifier for your merchant, can be the merchant name or Codat company id.
+          in: query
+          name: merchantIdentifier
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyncFlowUrl"
+          description: Success
+      summary: Retrieve sync flow url
+      tags:
+        - Sync flow preferences
+    parameters:
+      - description: Unique identifier for commerce platform.
+        in: path
+        name: commerceKey
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier for accounting software.
+        in: path
+        name: accountingKey
+        required: true
+        schema:
+          type: string
+  /meta/companies:
+    get:
+      description: Retrieve a list of all companies the client has created.
+      operationId: list-companies
+      parameters:
+        - description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+          in: query
+          name: page
+          required: true
+          schema:
+            default: 1
+            examples:
+              - 1
+            format: int32
+            minimum: 0
+            type: integer
+          x-stoplight:
+            id: 1318joqblpp4e
+        - description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+          in: query
+          name: pageSize
+          schema:
+            default: 100
+            examples:
+              - 100
+            format: int32
+            maximum: 5000
+            minimum: 1
+            type: integer
+          x-stoplight:
+            id: s2ika6rltk5y6
+        - description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+          x-stoplight:
+            id: gupdb9kt30hfq
+        - description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+          in: query
+          name: orderBy
+          required: false
+          schema:
+            examples:
+              - -modifiedDate
+            type: string
+          x-stoplight:
+            id: 4je9lwo02netu
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Companies"
+          description: Success
+      summary: List companies
+      tags:
+        - Company management
+  /meta/companies/sync:
+    post:
+      description: Creates a Codat company with a commerce partner data connection.
+      operationId: create-company
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: string
+            schema:
+              $ref: "#/components/schemas/CreateCompany"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+          description: Success
+      summary: Create a sync for commerce company
+      tags:
+        - Company management
+  "/meta/companies/{companyId}/connections":
+    get:
+      description: Retrieve previously created data connections.
+      operationId: list-connections
+      parameters:
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+        - $ref: "#/paths/~1meta~1companies/get/parameters/0"
+        - $ref: "#/paths/~1meta~1companies/get/parameters/1"
+        - $ref: "#/paths/~1meta~1companies/get/parameters/2"
+        - $ref: "#/paths/~1meta~1companies/get/parameters/3"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Connections"
+          description: Success
+      summary: List data connections
+      tags:
+        - Company management
+    parameters:
+      - in: path
+        name: companyId
+        required: true
+        schema:
+          $ref: "#/components/schemas/Company/properties/id"
+    post:
+      description: Create a data connection for company.
+      operationId: create-connection
+      parameters:
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Connection"
+          description: Success
+      summary: Create a data connection
+      tags:
+        - Company management
+  "/meta/companies/{companyId}/connections/{connectionId}":
+    parameters:
+      - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+      - in: path
+        name: connectionId
+        required: true
+        schema:
+          $ref: "#/components/schemas/Connection/properties/id"
+    patch:
+      description: Update a data connection
+      operationId: update-connection
+      parameters:
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections~1%7BconnectionId%7D/parameters/1"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateConnection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Connection"
+          description: Success
+      summary: Update data connection
+      tags:
+        - Company management
+  "/meta/companies/{companyId}/sync/commerce/historic":
+    post:
+      description: Run a Commerce sync from the specified start date to the specified finish date in the request payload.
+      operationId: request-sync-for-date-range
+      parameters:
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DateRange"
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyncSummary"
+          description: Success
+      summary: Run a Commerce sync from a given date range
+      tags:
+        - Sync
+  "/meta/companies/{companyId}/sync/commerce/status":
+    get:
+      description: Check the sync history and sync status for a company.
+      operationId: get-sync-status
+      parameters:
+        - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+      responses:
+        "200":
+          description: Success
+      summary: Get status for a company's syncs
+      tags:
+        - Configuration
+    parameters:
+      - $ref: "#/paths/~1meta~1companies~1%7BcompanyId%7D~1connections/parameters/0"
+  "/sync/commerce/config/ui/accounts/platform/{commerceKey}":
+    patch:
+      description: To enable update of accounts visible preferences set on Sync Flow.
+      operationId: update-visible-accounts-sync-flow
+      parameters:
+        - in: path
+          name: commerceKey
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VisibleAccounts"
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisibleAccounts"
+          description: Success
+      summary: Update the visible accounts on Sync Flow
+      tags:
+        - Sync flow preferences
+  /sync/commerce/config/ui/text:
+    get:
+      description: To enable retrieval of preferences set for the text fields on Sync Flow.
+      operationId: get-config-text-sync-flow
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocalizationInfo"
+          description: Success
+      summary: Retrieve preferences for text fields on Sync Flow
+      tags:
+        - Sync flow preferences
+    patch:
+      description: To enable update of preferences set for the text fields on sync flow.
+      operationId: update-config-text-sync-flow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocalizationInfo"
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocalizationInfo"
+          description: Success
+      summary: Update preferences for text fields on sync flow
+      tags:
+        - Sync flow preferences
+components:
+  schemas:
+    AccountOption:
+      additionalProperties: false
+      properties:
+        classification:
+          description: Classification of the type of G/L account.
+          examples:
+            - Bank Nominal
+          type:
+            - string
+            - "null"
+        id:
+          description: Identifier for the account, unique for the company.
+          type: string
+        name:
+          description: Name of the account.
+          type:
+            - string
+            - "null"
+        nominalCode:
+          description: Reference given to each nominal account for a business. It ensures money is allocated to the correct account. This code isn't a unique identifier in the Codat system.
+          type:
+            - string
+            - "null"
+      title: Account option
+      type: object
+      x-internal: true
+    Branding:
+      examples:
+        - button:
+            default:
+              image:
+                alt: xero default button icon
+                src: https://static.codat.io/public/officialButtons/Full/8A156A5A-39CB-4F9D-856E-76EF9Q7A9607.png
+            hover:
+              image:
+                alt: xero hover button icon
+                src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
+          logo:
+            full:
+              image:
+                alt: xero full icon
+                src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
+            square:
+              image:
+                alt: xero square icon
+                src: https://static.codat.io/public/officialLogos/Square/8A156A5A-39CB-4F9D-856E-76EF9B2W3607.png
+          sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
+      properties:
+        button:
+          description: Button branding references.
+          properties:
+            default:
+              $ref: "#/paths/~1config~1integrations~1%7BplatformKey%7D~1branding/get/responses/200/content/application~1json/schema/properties/logo/properties/full"
+            hover:
+              $ref: "#/paths/~1config~1integrations~1%7BplatformKey%7D~1branding/get/responses/200/content/application~1json/schema/properties/logo/properties/full"
+          type: object
+          x-internal: true
+        logo:
+          description: Logo branding references.
+          properties:
+            full:
+              examples: []
+              properties:
+                image:
+                  description: Image reference.
+                  properties:
+                    alt:
+                      description: Alternative text when image is not available.
+                      type: string
+                    src:
+                      description: Source URL for image.
+                      format: uri
+                      type: string
+                  type: object
+                  x-internal: true
+              title: Branding Image
+              type: object
+              x-internal: true
+            square:
+              $ref: "#/paths/~1config~1integrations~1%7BplatformKey%7D~1branding/get/responses/200/content/application~1json/schema/properties/logo/properties/full"
+          type: object
+          x-internal: true
+        sourceId:
+          description: A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`.
+          examples:
+            - 35b92968-9851-4095-ad60-395c95cbcba4
+          format: uuid
+          type: string
+      title: Branding
+      type: object
+    Companies:
+      allOf:
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/Company"
+              type: array
+          type: object
+        - $ref: "#/components/schemas/PagingInfo"
+      x-internal: true
+    Company:
+      description: A company in Codat represent a small or medium sized business, whose data you wish to share
+      examples:
+        - created: 2022-01-01T12:00:00.000Z
+          createdByUserName: string
+          dataConnections:
+            - created: 2022-10-27T09:53:29Z
+              id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+              integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+              integrationKey: dfxm
+              lastSync: 2022-10-27T10:22:43.6464237Z
+              linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+              platformName: Basiq
+              sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+              sourceType: Banking
+              status: Linked
+          id: 0498e921-9b53-4396-a412-4f2f5983b0a2
+          lastSync: 2022-01-01T12:00:00.000Z
+          name: string
+          platform: string
+          redirect: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
+      properties:
+        created:
+          description: |-
+            In Codat's data model, dates and times are represented using the <a class="external" href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:
+
+            ```
+            2020-10-08T22:40:50Z
+            2021-01-01T00:00:00
+            ```
+
+
+
+            When syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:
+
+            - Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`
+            - Unqualified local time: `2021-11-15T01:00:00`
+            - UTC time offsets: `2021-11-15T01:00:00-05:00`
+
+            > Time zones
+            > 
+            > Not all dates from Codat will contain information about time zones.  
+            > Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced.
+          examples:
+            - 2022-10-23T00:00:00Z
+          title: Date time
+          type: string
+        createdByUserName:
+          type: string
+        dataConnections:
+          items:
+            $ref: "#/components/schemas/Connection"
+          type: array
+        description:
+          description: Additional information about the company. This can be used to store foreign IDs, references, etc.
+          type: string
+        id:
+          description: Unique identifier for your SMB in Codat.
+          examples:
+            - 8a210b68-6988-11ed-a1eb-0242ac120002
+          format: uuid
+          type: string
+        lastSync:
+          $ref: "#/components/schemas/Company/properties/created"
+        name:
+          description: The name of the company
+          examples:
+            - Codat Ltd.
+          type: string
+        platform:
+          deprecated: true
+          examples:
+            - Xero
+          type: string
+        redirect:
+          description: The `redirect` [Link URL](https://docs.codat.io/auth-flow/authorize-hosted-link) enabling the customer to start their auth flow journey for the company.
+          examples:
+            - https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
+          format: uri
+          type: string
+      required:
+        - id
+        - name
+        - redirect
+      title: Company
+      type: object
+    ConfigAccount:
+      additionalProperties: false
+      description: G/L account object for configuration.
+      properties:
+        accountOptions:
+          description: Object containing account options.
+          items:
+            $ref: "#/components/schemas/AccountOption"
+          type:
+            - array
+            - "null"
+        descriptionText:
+          description: Descriprtive text for sales configuration section.
+          type:
+            - string
+            - "null"
+        labelText:
+          description: Label text for sales configuration section.
+          type:
+            - string
+            - "null"
+        required:
+          description: Required section to be configured for sync.
+          type: boolean
+        selectedAccountId:
+          description: Selected account id from the list of available accounts.
+          type:
+            - string
+            - "null"
+      title: Account configuration
+      type: object
+      x-internal: true
+    Configuration:
+      additionalProperties: false
+      properties:
+        fees:
+          $ref: "#/components/schemas/Fees"
+        newPayments:
+          $ref: "#/components/schemas/NewPayments"
+        payments:
+          $ref: "#/components/schemas/Payments"
+        sales:
+          $ref: "#/components/schemas/Sales"
+      type: object
+    Connection:
+      definitions:
+        dataConnectionError:
+          properties:
+            errorMessage:
+              type: string
+            erroredOnUtc:
+              $ref: "#/components/schemas/Company/properties/created"
+            statusCode:
+              type: string
+            statusText:
+              type: string
+          title: Data connection error
+          type: object
+        dataConnectionSourceType:
+          description: The type of platform of the connection.
+          enum:
+            - Accounting
+            - Banking
+            - Commerce
+            - Other
+            - Unknown
+          example: Accounting
+          title: Source Type
+          type: string
+        dataConnectionStatus:
+          description: The current authorization status of the data connection.
+          enum:
+            - PendingAuth
+            - Linked
+            - Unlinked
+            - Deauthorized
+          title: Data connection status
+          type: string
+      description: A connection represents the link between a `company` and a source of data.
+      examples:
+        - created: 2022-10-27T09:53:29Z
+          id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+          integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+          integrationKey: dfxm
+          lastSync: 2022-10-27T10:22:43.6464237Z
+          linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+          platformName: Basiq
+          sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+          sourceType: Banking
+          status: Linked
+      properties:
+        additionalProperties: false
+        connectionInfo:
+          additionalProperties:
+            type: string
+          type: object
+        created:
+          $ref: "#/components/schemas/Company/properties/created"
+        dataConnectionErrors:
+          items:
+            $ref: "#/components/schemas/Connection/definitions/dataConnectionError"
+          type: array
+        id:
+          description: Unique identifier for a company's data connection.
+          examples:
+            - 2e9d2c44-f675-40ba-8049-353bfcb5e171
+          format: uuid
+          type: string
+        integrationId:
+          description: A Codat ID representing the integration.
+          examples:
+            - fd321cb6-7963-4506-b873-e99593a45e30
+          format: uuid
+          type: string
+        integrationKey:
+          description: A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future.
+          type: string
+        lastSync:
+          $ref: "#/components/schemas/Company/properties/created"
+        linkUrl:
+          examples:
+            - https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start
+          format: uri
+          type: string
+        platformName:
+          type: string
+        sourceId:
+          $ref: "#/components/schemas/Branding/properties/sourceId"
+        sourceType:
+          description: The type of platform of the connection.
+          enum:
+            - Accounting
+            - Banking
+            - Commerce
+            - Other
+            - Unknown
+          examples:
+            - Accounting
+          title: Source Type
+          type: string
+          x-internal: true
+        status:
+          $ref: "#/components/schemas/Connection/definitions/dataConnectionStatus"
+      required:
+        - id
+        - integrationId
+        - integrationKey
+        - sourceId
+        - platformName
+        - linkUrl
+        - status
+        - created
+        - sourceType
+      title: Connection
+      type: object
+    Connections:
+      allOf:
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/Connection"
+              type: array
+          type: object
+        - $ref: "#/components/schemas/PagingInfo"
+      x-internal: true
+    CreateCompany:
+      additionalProperties: false
+      properties:
+        name:
+          description: Name of the company in Codat with a partner-commerce data connection.
+          examples:
+            - Bob's Burgers
+          format: string
+          type: string
+      required:
+        - name
+      type: object
+      x-internal: true
+    Customer:
+      additionalProperties: false
+      properties:
+        customerOptions:
+          description: List of customer options from the list of customer records on the accounting software.
+          items:
+            $ref: "#/components/schemas/Option"
+          type:
+            - array
+            - "null"
+        selectedCustomerId:
+          description: Selected customer id from the list of customer records on the accounting software.
+          type:
+            - string
+            - "null"
+      type: object
+      x-internal: true
+    DateRange:
+      additionalProperties: false
+      properties:
+        finish:
+          $ref: "#/components/schemas/Company/properties/created"
+          description: Finish date of the Sync.
+        start:
+          $ref: "#/components/schemas/Company/properties/created"
+          description: Start date of the Sync.
+      title: Data range
+      type: object
+      x-internal: true
+    Fees:
+      additionalProperties: false
+      properties:
+        accounts:
+          additionalProperties:
+            $ref: "#/components/schemas/ConfigAccount"
+          type:
+            - object
+            - "null"
+        feesSupplier:
+          $ref: "#/components/schemas/FeesSupplier"
+        syncFees:
+          description: Boolean indicator to enable syncing fees.
+          type: boolean
+      type: object
+      x-internal: true
+    FeesSupplier:
+      additionalProperties: false
+      properties:
+        selectedSupplierId:
+          description: Selected supplier id from the list of supplier records on the accounting software.
+          type:
+            - string
+            - "null"
+        supplierOptions:
+          description: List of supplier options from the list of supplier records on the accounting software.
+          items:
+            $ref: "#/components/schemas/Option"
+          type:
+            - array
+            - "null"
+      title: Supplier fees
+      type: object
+      x-internal: true
+    Grouping:
+      additionalProperties: false
+      properties:
+        groupingLevels:
+          $ref: "#/components/schemas/GroupingLevels"
+        groupingPeriod:
+          $ref: "#/components/schemas/GroupingPeriod"
+      type: object
+      x-internal: true
+    GroupingLevels:
+      additionalProperties: false
+      properties:
+        invoiceLevel:
+          $ref: "#/components/schemas/InvoiceLevelSelection"
+        invoiceLineLevel:
+          $ref: "#/components/schemas/InvoiceLineLevelSelection"
+      title: Grouping levels
+      type: object
+      x-internal: true
+    GroupingPeriod:
+      additionalProperties: false
+      properties:
+        groupingPeriodOptions:
+          description: Array of grouping period options.
+          items:
+            type: string
+          type:
+            - array
+            - "null"
+        selectedGroupingPeriod:
+          description: Grouping period i.e. Daily sales.
+          type:
+            - string
+            - "null"
+      title: Grouping period
+      type: object
+      x-internal: true
+    HalRef:
+      properties:
+        href:
+          format: uri-reference
+          type: string
+      title: Hypertext reference
+      type: object
+      x-internal: true
+    Integration:
+      definitions:
+        dataTypeFeature:
+          description: Describes support for a given datatype and associated operations
+          examples:
+            - datatype: invoices
+              supportedFeatures:
+                - featureState: Release
+                  featureType: Get
+          properties:
+            dataType:
+              description: Available Data types
+              enum:
+                - accountTransactions
+                - balanceSheet
+                - bankAccounts
+                - bankTransactions
+                - billCreditNotes
+                - billPayments
+                - bills
+                - cashFlowStatement
+                - chartOfAccounts
+                - company
+                - creditNotes
+                - customers
+                - directCosts
+                - directIncomes
+                - invoices
+                - items
+                - journalEntries
+                - journals
+                - paymentMethods
+                - payments
+                - profitAndLoss
+                - purchaseOrders
+                - salesOrders
+                - suppliers
+                - taxRates
+                - trackingCategories
+                - transfers
+                - banking-accountBalances
+                - banking-accounts
+                - banking-transactionCategories
+                - banking-transactions
+                - commerce-companyInfo
+                - commerce-customers
+                - commerce-disputes
+                - commerce-locations
+                - commerce-orders
+                - commerce-paymentMethods
+                - commerce-payments
+                - commerce-productCategories
+                - commerce-products
+                - commerce-taxComponents
+                - commerce-transactions
+              example: invoices
+              type: string
+              x-internal: true
+            supportedFeatures:
+              items:
+                $ref: "#/components/schemas/Integration/definitions/supportedFeature"
+              type: array
+          required:
+            - datatype
+            - supportedFeatures
+          title: Data type feature
+          type: object
+        featureState:
+          enum:
+            - Release
+            - Beta
+            - Deprecated
+            - NotSupported
+            - NotImplemented
+          example: Release
+          title: Feature state
+          type: string
+        featureType:
+          enum:
+            - Get
+            - Post
+            - Categorization
+            - Delete
+            - Put
+            - GetAsPdf
+            - DownloadAttachment
+            - GetAttachment
+            - GetAttachments
+            - UploadAttachment
+          example: Get
+          type: string
+          x-internal: true
+        supportedFeature:
+          properties:
+            featureState:
+              $ref: "#/components/schemas/Integration/definitions/featureState"
+            featureType:
+              $ref: "#/components/schemas/Integration/definitions/featureType"
+          required:
+            - featureType
+            - featureState
+          type: object
+          x-internal: true
+      description: An integration that Codat supports
+      examples:
+        - dataProvidedBy: string
+          datatypeFeatures:
+            - datatype: invoices
+              supportedFeatures:
+                - featureState: release
+                  featureType: get
+          enabled: true
+          integrationId: 497a18ca-284e-40c0-985d-f72be35d468e
+          isBeta: true
+          isOfflineConnector: true
+          key: gbol
+          logoUrl: http://example.com
+          name: Xero
+          sourceId: accounting
+          sourceType: 8193a927-ab7a-45a3-9dc2-d357a4932dfe
+      properties:
+        dataProvidedBy:
+          type: string
+        datatypeFeatures:
+          items:
+            $ref: "#/components/schemas/Integration/definitions/dataTypeFeature"
+          type: array
+        enabled:
+          description: Whether this integration is enabled for your customers to use
+          type: boolean
+        integrationId:
+          $ref: "#/components/schemas/Connection/properties/integrationId"
+        isBeta:
+          type: boolean
+        isOfflineConnector:
+          type: boolean
+        key:
+          description: "A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/accounting-platform-keys), [banking](https://docs.codat.io/integrations/banking/banking-platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/commerce-platform-keys) platform keys. "
+          examples:
+            - gbol
+          maxLength: 4
+          minLength: 4
+          pattern: "[a-z]{4}"
+          type: string
+        logoUrl:
+          format: uri
+          type: string
+        name:
+          examples:
+            - Xero
+          type: string
+        sourceId:
+          $ref: "#/components/schemas/Branding/properties/sourceId"
+        sourceType:
+          $ref: "#/components/schemas/Connection/properties/sourceType"
+      required:
+        - key
+        - logoUrl
+        - name
+        - enabled
+      title: Integration
+      type: object
+    Integrations:
+      allOf:
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/Integration"
+              type: array
+          type: object
+        - $ref: "#/components/schemas/PagingInfo"
+      x-internal: true
+    InvoiceLevelSelection:
+      additionalProperties: false
+      properties:
+        groupByOptions:
+          description: Options for grouping sales.
+          items:
+            type: string
+          type:
+            - array
+            - "null"
+        selectedGroupByOptions:
+          description: Selected array of grouping options.
+          items:
+            type: string
+          type:
+            - array
+            - "null"
+      title: Invoice level selection
+      type: object
+      x-internal: true
+    InvoiceLineLevelSelection:
+      additionalProperties: false
+      properties:
+        groupByOptions:
+          description: Options for grouping on invoice lines.
+          items:
+            type: string
+          type:
+            - array
+            - "null"
+        selectedGroupByOptions:
+          description: Invoice line level selection.
+          items:
+            type: string
+          type:
+            - array
+            - "null"
+      title: Invoice line level selection
+      type: object
+      x-internal: true
+    InvoiceStatus:
+      additionalProperties: false
+      properties:
+        invoiceStatusOptions:
+          description: Options for invoice statuses.
+          items:
+            type: string
+          type:
+            - array
+            - "null"
+        selectedInvoiceStatus:
+          description: Selected option for invoice status for invoice to be synced.
+          examples:
+            - Submitted
+          type:
+            - string
+            - "null"
+      title: Invoice status
+      type: object
+      x-internal: true
+    Links:
+      examples:
+        - current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+          self:
+            href: /companies/{id}/data/{dataType}
+      properties:
+        current:
+          $ref: "#/components/schemas/HalRef"
+        next:
+          $ref: "#/components/schemas/HalRef"
+        previous:
+          $ref: "#/components/schemas/HalRef"
+        self:
+          $ref: "#/components/schemas/HalRef"
+      required:
+        - self
+        - current
+      type: object
+      x-internal: true
+    Localization:
+      properties:
+        required:
+          type: boolean
+        text:
+          description: Value of the property.
+          type:
+            - string
+            - "null"
+      type: object
+      x-internal: true
+    LocalizationInfo:
+      additionalProperties:
+        $ref: "#/components/schemas/Localization"
+      title: Localization info.
+      type: object
+    NewPayments:
+      additionalProperties: false
+      properties:
+        accounts:
+          additionalProperties:
+            $ref: "#/components/schemas/ConfigAccount"
+          type:
+            - object
+            - "null"
+        syncPayments:
+          description: Boolean indicator for syncing payments.
+          type: boolean
+      title: New payments
+      type: object
+      x-internal: true
+    NewTaxRates:
+      additionalProperties: false
+      properties:
+        accountingTaxRateOptions:
+          description: Array of accounting tax rate options.
+          items:
+            $ref: "#/components/schemas/Option"
+          type:
+            - array
+            - "null"
+        commerceTaxRateOptions:
+          description: Array of tax component options.
+          items:
+            $ref: "#/components/schemas/Option"
+          type:
+            - array
+            - "null"
+        defaultZeroTaxRateOptions:
+          description: Default zero tax rate selected for sync.
+          items:
+            $ref: "#/components/schemas/Option"
+          type:
+            - array
+            - "null"
+        selectedDefaultZeroTaxRateId:
+          description: Default tax rate selected for sync.
+          type:
+            - string
+            - "null"
+        taxRateMappings:
+          description: Array of tax component to rate mapppings.
+          items:
+            $ref: "#/components/schemas/TaxRateMapping"
+          type:
+            - array
+            - "null"
+      title: New tax rates
+      type: object
+      x-internal: true
+    Option:
+      additionalProperties: false
+      properties:
+        id:
+          description: Unique identifier for the option.
+          type: string
+        name:
+          description: Name value of the option.
+          type:
+            - string
+            - "null"
+      type: object
+      x-internal: true
+    PagingInfo:
+      examples:
+        - _links:
+            current:
+              href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+            pageNumber: 1
+            pageSize: 10
+            self:
+              href: /companies/{id}/data/{dataType}
+            totalResults: 1
+      properties:
+        _links:
+          $ref: "#/components/schemas/Links"
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        totalResults:
+          type: integer
+      required:
+        - pageNumber
+        - pageSize
+        - totalResults
+        - _links
+      type: object
+      x-internal: true
+    Payments:
+      additionalProperties: false
+      properties:
+        accounts:
+          additionalProperties:
+            $ref: "#/components/schemas/ConfigAccount"
+          type:
+            - object
+            - "null"
+        syncPayments:
+          description: Boolean indicator for syncing sales.
+          type: boolean
+      type: object
+      x-internal: true
+    Sales:
+      additionalProperties: false
+      properties:
+        accounts:
+          additionalProperties:
+            $ref: "#/components/schemas/ConfigAccount"
+          type:
+            - object
+            - "null"
+        grouping:
+          $ref: "#/components/schemas/Grouping"
+        invoiceStatus:
+          $ref: "#/components/schemas/InvoiceStatus"
+        newTaxRates:
+          $ref: "#/components/schemas/NewTaxRates"
+        salesCustomer:
+          $ref: "#/components/schemas/Customer"
+        syncSales:
+          description: Boolean indicator for syncing sales.
+          type: boolean
+        taxRates:
+          additionalProperties:
+            $ref: "#/components/schemas/TaxRateAmount"
+          type:
+            - object
+            - "null"
+      type: object
+      x-internal: true
+    SyncFlowUrl:
+      properties:
+        url:
+          description: Sync flow URL.
+          examples:
+            - https://sync-flow-integration.codat.io/57b6fad9-e3ca-447b-89db-e4ffa21e6ef3/aiwb/mqjo/start?otp=836415
+          type: string
+      title: Sync flow url
+      type: object
+    SyncSummary:
+      additionalProperties: false
+      properties:
+        commerceSyncId:
+          description: Unique identifier for the sync in Codat.
+          examples:
+            - 8d0a044e-b683-4fc9-bd0d-bfb2ca5731b7
+          format: guid
+          type: string
+        companyId:
+          description: Unique identifier for your SMB in Codat.
+          examples:
+            - f4637ec9-9fc0-4a02-8df0-c90d6dc86208
+          format: guid
+          type: string
+        dataConnections:
+          description: Array of containing objects data connection information for the company.
+          items:
+            $ref: "#/components/schemas/Connection"
+          type:
+            - array
+            - "null"
+        dataPushed:
+          description: Boolean indicator for data being pushed during a sync operation.
+          examples:
+            - true
+          type: boolean
+        errorMessage:
+          description: Friendly error message for the sync operation.
+          examples:
+            - Customer 3b9bf2ed-a618-4af2-80f2-f2b57fddc748 is not in an Active state. (Archived)
+          type:
+            - string
+            - "null"
+        syncDateRangeUtc:
+          $ref: "#/components/schemas/DateRange"
+        syncExceptionMessage:
+          description: Exception message for the sync operation.
+          examples:
+            - Customer 3b9bf2ed-a618-4af2-80f2-f2b57fddc748 is not in an Active state. (Archived)
+          type:
+            - string
+            - "null"
+        syncStatus:
+          description: Status of the sync of the company data. This is linked to status code.
+          examples:
+            - ValidateError, Pending
+          type:
+            - string
+            - "null"
+        syncStatusCode:
+          description: Numerical status code sync of the company data.
+          examples:
+            - 4000
+          format: int32
+          type: integer
+        syncUtc:
+          $ref: "#/components/schemas/Company/properties/created"
+          description: UTC DateTime for the Sync.
+          nullable: true
+      type: object
+    SyncToLatestArgs:
+      properties:
+        syncTo:
+          $ref: "#/components/schemas/Company/properties/created"
+          description: The DateTime, upto which Sync will run up to starting from the previous successful sync
+          nullable: true
+      title: Sync To Latest Args
+      type: object
+      x-internal: true
+    TaxRateAmount:
+      additionalProperties: false
+      properties:
+        selectedTaxRateId:
+          description: Selected tax rate id from the list of tax rates on the accounting software.
+          type:
+            - string
+            - "null"
+        taxRateOptions:
+          description: Array of tax rate options object.
+          items:
+            $ref: "#/components/schemas/Option"
+          type:
+            - array
+            - "null"
+      title: Tax rate amount
+      type: object
+      x-internal: true
+    TaxRateMapping:
+      additionalProperties: false
+      properties:
+        selectedAccountingTaxRateId:
+          description: Selected tax rate id from the list of tax rates on the accounting software.
+          type:
+            - string
+            - "null"
+        selectedCommerceTaxRateIds:
+          description: Selected tax component id from the list of tax components on the commerce software.
+          items:
+            type: string
+          type:
+            - array
+            - "null"
+      title: Tax rate mapping
+      type: object
+      x-internal: true
+    UpdateConnection:
+      additionalProperties: false
+      properties:
+        status:
+          description: The current authorization status of the data connection.
+          examples:
+            - Linked
+          type:
+            - string
+            - "null"
+      type: object
+      x-internal: true
+    VisibleAccounts:
+      properties:
+        visibleAccounts:
+          description: Visible accounts on sync flow.
+          items:
+            type: string
+          type:
+            - array
+            - "null"
+      title: Visible accounts
+      type: object
+  securitySchemes:
+    auth_header:
+      description: The word "Basic" followed by a space and your API Key, base64 encoded, which can be found [here](https://app.codat.io/developers/api-keys)
+      in: header
+      name: Authorization
+      type: apiKey
+x-speakeasy-retries:
+  backoff:
+    exponent: 1.5
+    initialInterval: 500
+    maxElapsedTime: 3600000
+    maxInterval: 60000
+  retryConnectionErrors: true
+  statusCodes:
+    - 408
+    - 429
+    - 5XX
+  strategy: backoff
+x-stoplight:
+  id: v6f6vc930irb5

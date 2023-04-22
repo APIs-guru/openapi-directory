@@ -1,0 +1,2372 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br/api/rns
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: |-
+    VTEX Subscriptions REST API Documentation
+
+    This documentation describes the available REST APIs for VTEX Subscription System.
+
+    With Subscriptions you can set up regularly scheduled deliveries.
+
+    All requests need authorization (VTEX Id authentication token or VTEX Appkey and Apptoken headers)
+  title: Subscriptions API (v2 - DEPRECATED)
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Subscriptions API (v2).json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Subscriptions-API-(v2)
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: Subscriptions
+  - name: Subscription Group
+  - name: Report
+  - name: Settings
+paths:
+  "/report/reportStatus/{reportId}":
+    get:
+      deprecated: false
+      description: Retrieves the Subscription's report status, filtering by its reportId.
+      operationId: GetreportstatusbyID
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Report ID.
+          in: path
+          name: reportId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get report status by ID
+      tags:
+        - Report
+  /report/subscriptionsByDate:
+    get:
+      deprecated: false
+      description: Retrieves a report with the subscriptions created at the date interval requested
+      operationId: Requestreportbydate
+      parameters:
+        - description: Email that the report will be sent to
+          explode: true
+          in: query
+          name: requesterEmail
+          required: true
+          schema:
+            example: user@vtex.com.br
+            type: string
+          style: form
+        - description: begin date of report interval, use format yyyyMMdd
+          explode: true
+          in: query
+          name: beginDate
+          required: true
+          schema:
+            example: 20190101
+            format: int32
+            type: integer
+          style: form
+        - description: end date of report interval, use format yyyyMMdd
+          explode: true
+          in: query
+          name: endDate
+          required: true
+          schema:
+            example: 20190701
+            format: int32
+            type: integer
+          style: form
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Retrieve Subscription report by date
+      tags:
+        - Report
+  /report/subscriptionsByStatus:
+    get:
+      deprecated: false
+      description: Retrieves Subscriptions' reports, filtering by status. The report will be sent by email, to the address inserted in the API's path.
+      operationId: RequestreportbyStatus
+      parameters:
+        - description: Email that the report will be sent to
+          explode: true
+          in: query
+          name: requesterEmail
+          required: true
+          schema:
+            example: user@vtex.com.br
+            type: string
+          style: form
+        - description: "Binary OR of the following status: 1 - ACTIVE; 2 - PAUSED; 4 - CANCELED; 8 - EXPIRED"
+          explode: true
+          in: query
+          name: status
+          required: true
+          schema:
+            example: 1
+            format: int32
+            type: integer
+          style: form
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Retrieve Subscription report by Status
+      tags:
+        - Report
+  /report/subscriptionsOrderByDate:
+    get:
+      deprecated: false
+      description: Retrieves a report regarding the Subscriptions created during the date interval of orders.
+      operationId: Requestreportbyorderdate
+      parameters:
+        - description: Email that the report will be sent to
+          explode: true
+          in: query
+          name: requesterEmail
+          required: true
+          schema:
+            example: user@vtex.com.br
+            type: string
+          style: form
+        - description: begin date of report interval, use format yyyyMMdd
+          explode: true
+          in: query
+          name: beginDate
+          required: true
+          schema:
+            example: 20190101
+            format: int32
+            type: integer
+          style: form
+        - description: end date of report interval, use format yyyyMMdd
+          explode: true
+          in: query
+          name: endDate
+          required: true
+          schema:
+            example: 20190701
+            format: int32
+            type: integer
+          style: form
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Retrieve Subscription report by order date
+      tags:
+        - Report
+  /report/subscriptionsScheduled:
+    get:
+      deprecated: false
+      description: Retrieves a report regarding the Subscriptions scheduled to execute at the date interval requested
+      operationId: Requestreportbyschedule
+      parameters:
+        - description: Email that the report will be sent to
+          explode: true
+          in: query
+          name: requesterEmail
+          required: true
+          schema:
+            example: user@vtex.com.br
+            type: string
+          style: form
+        - description: begin date of report interval, use format yyyyMMdd
+          explode: true
+          in: query
+          name: beginDate
+          required: true
+          schema:
+            example: 20190101
+            format: int32
+            type: integer
+          style: form
+        - description: end date of report interval, use format yyyyMMdd
+          explode: true
+          in: query
+          name: endDate
+          required: true
+          schema:
+            example: 20190701
+            format: int32
+            type: integer
+          style: form
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Retrieve Subscription report by schedule
+      tags:
+        - Report
+  /report/subscriptionsUpdated:
+    get:
+      deprecated: false
+      description: Retrieves a report regarding Subscriptions updated in the date interval chosen. The report will be sent by email, to the address inserted in the API's path.
+      operationId: Requestreportbyupdate
+      parameters:
+        - description: Email that the report will be sent to
+          explode: true
+          in: query
+          name: requesterEmail
+          required: true
+          schema:
+            example: user@vtex.com.br
+            type: string
+          style: form
+        - description: begin date of report interval, use format yyyyMMdd
+          explode: true
+          in: query
+          name: beginDate
+          required: true
+          schema:
+            example: 20190101
+            format: int32
+            type: integer
+          style: form
+        - description: end date of report interval, use format yyyyMMdd
+          explode: true
+          in: query
+          name: endDate
+          required: true
+          schema:
+            example: 20190701
+            format: int32
+            type: integer
+          style: form
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Request report by update
+      tags:
+        - Report
+  /settings:
+    get:
+      deprecated: false
+      description: Lists the current Subscriptions settings in your store.
+      operationId: GetSettings
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/settings"
+          description: OK
+      summary: Get Subscriptions Settings
+      tags:
+        - Settings
+    post:
+      deprecated: false
+      description: Edits Subscriptions settings in your store.
+      operationId: EditSettings
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/settings"
+        description: Request body
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/settings"
+          description: OK
+      summary: Edit Subscriptions settings
+      tags:
+        - Settings
+  /subscriptions:
+    get:
+      deprecated: false
+      description: Retrieves details of a given customer's subscriptions, searching by that customer's `customerId`.
+      operationId: Getsubscriptionstocustomer
+      parameters:
+        - description: Customer ID.
+          explode: true
+          in: query
+          name: customerId
+          required: true
+          schema:
+            example: user@vtex.com.br
+            type: string
+          style: form
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Retrieve customer's subscriptions
+      tags:
+        - Subscriptions
+  /subscriptions-group:
+    get:
+      deprecated: false
+      description: Retrieves all subscription groups in your store.
+      operationId: GetAllsubscriptiongroup
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: List All subscription groups
+      tags:
+        - Subscription Group
+  /subscriptions-group/list:
+    get:
+      deprecated: false
+      description: Retrieves a list of Subscription groups in your store.
+      operationId: Getsubscriptiongrouplist
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get subscription group list
+      tags:
+        - Subscription Group
+  "/subscriptions-group/nextPurchase/{dateStr}":
+    get:
+      deprecated: false
+      description: Lists details of a given subscription group's next purchase, filtering by dateStr.
+      operationId: GetNextpurchase
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Reference date that retrieves all next purchases, starting from the dateStr inserted. Must be in the format of {{yyyyMMdd}}
+          in: path
+          name: dateStr
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Next purchase
+      tags:
+        - Subscription Group
+  "/subscriptions-group/simulate/{groupId}":
+    get:
+      deprecated: false
+      description: Retrieves Subscription simulations, filtering by groupId.
+      operationId: GetSimulatebysubscription-group
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Simulation by subscription-group
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}":
+    get:
+      deprecated: false
+      description: Lists Subscription details, filtering by `groupId`.
+      operationId: GetSubscriptionbygroupId
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Subscription by groupId
+      tags:
+        - Subscription Group
+    patch:
+      deprecated: false
+      description: Updates a Subscription by `groupId`.
+      operationId: UpdateSubscriptionbygroupId
+      parameters:
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              isSkipped: true
+              item:
+                - SubscriptionId: string
+                  createdAt: 2019-06-20T18:27:41.23Z
+                  cycleCount: 0
+                  endpoint: string
+                  isSkipped: true
+                  lastUpdate: 2019-06-20T18:27:41.23Z
+                  metadata:
+                    - name: string
+                      properties:
+                        additionalProp1: string
+                        additionalProp2: string
+                        additionalProp3: string
+                  originalItemIndex: 0
+                  originalOrderId: string
+                  priceAtSubscriptionDate: 0
+                  quantity: 0
+                  sellingPrice: 0
+                  sku:
+                    detailUrl: string
+                    id: string
+                    imageUrl: string
+                    name: string
+                    nameComplete: string
+                    productName: string
+                  status: ACTIVE
+              metadata:
+                - name: string
+                  properties:
+                    additionalProp1: string
+                    additionalProp2: string
+                    additionalProp3: string
+              plan:
+                frequency:
+                  interval: 0
+                  periodicity: string
+                type: string
+                validity:
+                  begin: 2019-06-20T18:27:41.23Z
+                  end: 2019-06-20T18:27:41.23Z
+              purchaseSettings:
+                currencyCode: string
+                paymentMethod:
+                  paymentAccountId: string
+                  paymentSystem: string
+                purchaseDay: string
+                salesChannel: string
+                selectedSla: string
+                seller: string
+              shippingAddress:
+                additionalComponents:
+                  - longName: string
+                    shortName: string
+                    types:
+                      - string
+                addressId: string
+                addressName: string
+                addressType: string
+                city: string
+                complement: string
+                country: string
+                formattedAddress: string
+                geoCoordinate:
+                  - 0
+                neighborhood: string
+                number: string
+                postalCode: string
+                receiverName: string
+                reference: string
+                state: string
+                street: string
+              status: string
+            schema:
+              $ref: "#/components/schemas/UpdateSubscriptionbygroupIdRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Update Subscription by groupId
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}/additem":
+    post:
+      deprecated: false
+      description: Adds an SKU to a given Subscription, filtering by groupId.
+      operationId: Additemsubscription-groupId
+      parameters:
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              endpoint: string
+              priceAtSubscriptionDate: 0
+              quantity: 0
+              sellingPrice: 0
+              sku:
+                detailUrl: string
+                id: string
+                imageUrl: string
+                name: string
+                nameComplete: string
+                productName: string
+            schema:
+              $ref: "#/components/schemas/Additemsubscription-groupIdRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Add Subscription item by groupId
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}/addresses":
+    get:
+      deprecated: false
+      description: Lists addresses linked to a given Subscription group, filtering by groupId.
+      operationId: GetaddressesbygroupId
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: ""
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Get addresses by groupId
+      tags:
+        - Subscription Group
+    post:
+      deprecated: false
+      description: Insert address information of a given Subscription group, filtering by groupId.
+      operationId: InsertAddressesbygroupId
+      parameters:
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              additionalComponents:
+                - longName: string
+                  shortName: string
+                  types:
+                    - string
+              addressId: string
+              addressName: string
+              addressType: string
+              city: string
+              complement: string
+              country: string
+              formattedAddress: string
+              geoCoordinate:
+                - 0
+              neighborhood: string
+              number: string
+              postalCode: string
+              receiverName: string
+              reference: string
+              state: string
+              street: string
+            schema:
+              $ref: "#/components/schemas/InsertAddressesbygroupIdRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Insert Addresses by groupId
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}/cancel":
+    patch:
+      deprecated: false
+      description: Cancels Subscription by `groupId`
+      operationId: CancelSubscriptionbygroupId
+      parameters:
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Cancel Subscription by groupId
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}/config":
+    get:
+      deprecated: false
+      description: Retrieves details about a given subscription group's configuration, filtering by groupId.
+      operationId: GetConfigsubscriptionsgroup
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: List Subscription group's Configuration
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}/conversation-message":
+    get:
+      deprecated: false
+      description: Retrieves the conversation of a given Subscription group, filtering by groupId.
+      operationId: GetConversationMessagebygroupId
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Conversation Message by groupId
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}/frequency-options":
+    get:
+      deprecated: false
+      description: Lists frequency options of a given Subscription group, filtering by groupId.
+      operationId: GetfrequencyoptionsbygroupId
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get frequency options by groupId
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}/payment-systems":
+    get:
+      deprecated: false
+      description: Retrieves payment system's information of a given Subscription group, filtering by groupId.
+      operationId: GetpaymentSystembygroupId
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get payment System by groupId
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupId}/will-create":
+    get:
+      deprecated: false
+      description: Retrieves Subscription groups listed as 'will create', filtering by groupId.
+      operationId: GetwillcreatebygroupId
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Group ID.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: List 'Will create' by groupId
+      tags:
+        - Subscription Group
+  "/subscriptions-group/{groupid}/instances/{instanceId}/retry":
+    post:
+      deprecated: false
+      description: Permits the retry of a Subscription group, via API, filtering by groupId and instanceId.
+      operationId: RetrysubscriptionbygroupId
+      parameters:
+        - description: Group ID.
+          in: path
+          name: groupid
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+        - description: Instance ID.
+          in: path
+          name: instanceId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Retry subscription by groupId
+      tags:
+        - Subscription Group
+  /subscriptions/list:
+    get:
+      deprecated: false
+      description: Retrieves a list of Subscriptions linked to your store.
+      operationId: GetSubscriptionList
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Subscription List
+      tags:
+        - Subscriptions
+  "/subscriptions/{subscriptionId}":
+    get:
+      deprecated: false
+      description: Lists Subscription's details, searching by `subscriptionId`.
+      operationId: GetsubscriptionbyId
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Subscription ID.
+          in: path
+          name: subscriptionId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Retrieve subscription by ID
+      tags:
+        - Subscriptions
+    patch:
+      deprecated: false
+      description: Update, add or alter information of a given Subscription, filtering by `subscriptionId`.
+      operationId: UpdateSubscriptionsbySubscriptionId
+      parameters:
+        - description: Subscription ID.
+          in: path
+          name: subscriptionId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              isSkipped: true
+              item:
+                endpoint: string
+                priceAtSubscriptionDate: 0
+                quantity: 0
+                sellingPrice: 0
+                sku:
+                  detailUrl: string
+                  id: string
+                  imageUrl: string
+                  name: string
+                  nameComplete: string
+                  productName: string
+              metadata:
+                - name: string
+                  properties:
+                    additionalProp1: string
+                    additionalProp2: string
+                    additionalProp3: string
+              plan:
+                frequency:
+                  interval: 0
+                  periodicity: string
+                type: string
+                validity:
+                  begin: 2019-07-04T14:40:30.819Z
+                  end: 2019-07-04T14:40:30.819Z
+              purchaseSettings:
+                currencyCode: string
+                paymentMethod:
+                  paymentAccountId: string
+                  paymentSystem: string
+                purchaseDay: string
+                salesChannel: string
+                selectedSla: string
+                seller: string
+              shippingAddress:
+                additionalComponents:
+                  - longName: string
+                    shortName: string
+                    types:
+                      - string
+                addressId: string
+                addressName: string
+                addressType: string
+                city: string
+                complement: string
+                country: string
+                formattedAddress: string
+                geoCoordinate:
+                  - 0
+                neighborhood: string
+                number: string
+                postalCode: string
+                receiverName: string
+                reference: string
+                state: string
+                street: string
+              status: string
+            schema:
+              $ref: "#/components/schemas/UpdateSubscriptionsbySubscriptionIdRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Update Subscriptions by SubscriptionId
+      tags:
+        - Subscriptions
+  "/subscriptions/{subscriptionId}/addresses":
+    post:
+      deprecated: false
+      description: Inserts address's information to complement the Subscription details.
+      operationId: InsertAddressesforSubscription
+      parameters:
+        - description: Subscription ID.
+          in: path
+          name: subscriptionId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              - additionalComponents: null
+                addressId: "1234567890"
+                addressName: xt5353818181nhshs
+                addressType: residential
+                city: Rio de Janeiro
+                complement: null
+                country: BRA
+                formattedAddress: null
+                geoCoordinate: null
+                neighborhood: Barra da Tijuca
+                number: "1"
+                postalCode: 22204-004
+                receiverName: Fulano
+                reference: null
+                state: RJ
+                street: Avenida do Estado
+            schema:
+              description: ""
+              items:
+                $ref: "#/components/schemas/InsertAddressesforSubscriptionRequest"
+              type: array
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Insert Addresses for Subscription
+      tags:
+        - Subscriptions
+  "/subscriptions/{subscriptionId}/cancel":
+    patch:
+      deprecated: false
+      description: Cancels all Subscriptions of a subscription group. This operation does not have a rollback. Once cancelled, it cannot be re-activated
+      operationId: CancelSubscriptionsbySubscriptionId
+      parameters:
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Subscription ID.
+          in: path
+          name: subscriptionId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Cancel Subscriptions by SubscriptionId
+      tags:
+        - Subscriptions
+  "/subscriptions/{subscriptionId}/frequency-options":
+    get:
+      deprecated: false
+      description: Lists frequency options for the Subscription, filtering by `subscriptionId`.
+      operationId: GetfrequencyoptionsbysubscriptionId
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Subscription ID.
+          in: path
+          name: subscriptionId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get frequency options by subscriptionId
+      tags:
+        - Subscriptions
+components:
+  schemas:
+    Additemsubscription-groupIdRequest:
+      example:
+        endpoint: string
+        priceAtSubscriptionDate: 0
+        quantity: 0
+        sellingPrice: 0
+        sku:
+          detailUrl: string
+          id: string
+          imageUrl: string
+          name: string
+          nameComplete: string
+          productName: string
+      properties:
+        endpoint:
+          type: string
+        priceAtSubscriptionDate:
+          format: int32
+          type: integer
+        quantity:
+          format: int32
+          type: integer
+        sellingPrice:
+          format: int32
+          type: integer
+        sku:
+          $ref: "#/components/schemas/Sku"
+      required:
+        - sku
+        - quantity
+        - priceAtSubscriptionDate
+        - sellingPrice
+        - endpoint
+      title: Additemsubscription-groupIdRequest
+      type: object
+    AdditionalComponent:
+      example:
+        longName: string
+        shortName: string
+        types:
+          - string
+      properties:
+        longName:
+          type: string
+        shortName:
+          type: string
+        types:
+          description: ""
+          items:
+            type: string
+          type: array
+      required:
+        - longName
+        - shortName
+        - types
+      title: AdditionalComponent
+      type: object
+    Frequency:
+      example:
+        interval: 0
+        periodicity: string
+      properties:
+        interval:
+          format: int32
+          type: integer
+        periodicity:
+          type: string
+      required:
+        - periodicity
+        - interval
+      title: Frequency
+      type: object
+    InsertAddressesbygroupIdRequest:
+      example:
+        additionalComponents:
+          - longName: string
+            shortName: string
+            types:
+              - string
+        addressId: string
+        addressName: string
+        addressType: string
+        city: string
+        complement: string
+        country: string
+        formattedAddress: string
+        geoCoordinate:
+          - 0
+        neighborhood: string
+        number: string
+        postalCode: string
+        receiverName: string
+        reference: string
+        state: string
+        street: string
+      properties:
+        additionalComponents:
+          description: ""
+          items:
+            $ref: "#/components/schemas/AdditionalComponent"
+          type: array
+        addressId:
+          type: string
+        addressName:
+          type: string
+        addressType:
+          type: string
+        city:
+          type: string
+        complement:
+          type: string
+        country:
+          type: string
+        formattedAddress:
+          type: string
+        geoCoordinate:
+          description: ""
+          items:
+            format: int32
+            type: integer
+          type: array
+        neighborhood:
+          type: string
+        number:
+          type: string
+        postalCode:
+          type: string
+        receiverName:
+          type: string
+        reference:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+      required:
+        - addressId
+        - street
+        - number
+        - complement
+        - neighborhood
+        - city
+        - state
+        - country
+        - postalCode
+        - reference
+        - formattedAddress
+        - additionalComponents
+        - geoCoordinate
+        - receiverName
+        - addressType
+        - addressName
+      title: InsertAddressesbygroupIdRequest
+      type: object
+    InsertAddressesforSubscriptionRequest:
+      example:
+        additionalComponents: null
+        addressId: "1234567890"
+        addressName: xt5353818181nhshs
+        addressType: residential
+        city: Rio de Janeiro
+        complement: null
+        country: BRA
+        formattedAddress: null
+        geoCoordinate: null
+        neighborhood: Barra da Tijuca
+        number: "1"
+        postalCode: 22204-004
+        receiverName: Fulano
+        reference: null
+        state: RJ
+        street: Avenida do Estado
+      properties:
+        additionalComponents:
+          nullable: true
+          type: string
+        addressId:
+          type: string
+        addressName:
+          type: string
+        addressType:
+          type: string
+        city:
+          type: string
+        complement:
+          nullable: true
+          type: string
+        country:
+          type: string
+        formattedAddress:
+          nullable: true
+          type: string
+        geoCoordinate:
+          nullable: true
+          type: string
+        neighborhood:
+          type: string
+        number:
+          type: string
+        postalCode:
+          type: string
+        receiverName:
+          type: string
+        reference:
+          nullable: true
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+      required:
+        - addressId
+        - street
+        - number
+        - complement
+        - neighborhood
+        - city
+        - state
+        - country
+        - postalCode
+        - reference
+        - formattedAddress
+        - additionalComponents
+        - geoCoordinate
+        - receiverName
+        - addressType
+        - addressName
+      title: InsertAddressesforSubscriptionRequest
+      type: object
+    Item:
+      example:
+        endpoint: string
+        priceAtSubscriptionDate: 0
+        quantity: 0
+        sellingPrice: 0
+        sku:
+          detailUrl: string
+          id: string
+          imageUrl: string
+          name: string
+          nameComplete: string
+          productName: string
+      properties:
+        endpoint:
+          type: string
+        priceAtSubscriptionDate:
+          format: int32
+          type: integer
+        quantity:
+          format: int32
+          type: integer
+        sellingPrice:
+          format: int32
+          type: integer
+        sku:
+          $ref: "#/components/schemas/Sku"
+      required:
+        - sku
+        - quantity
+        - priceAtSubscriptionDate
+        - sellingPrice
+        - endpoint
+      title: Item
+      type: object
+    Item1:
+      example:
+        SubscriptionId: string
+        createdAt: 2019-06-20T18:27:41.23Z
+        cycleCount: 0
+        endpoint: string
+        isSkipped: true
+        lastUpdate: 2019-06-20T18:27:41.23Z
+        metadata:
+          - name: string
+            properties:
+              additionalProp1: string
+              additionalProp2: string
+              additionalProp3: string
+        originalItemIndex: 0
+        originalOrderId: string
+        priceAtSubscriptionDate: 0
+        quantity: 0
+        sellingPrice: 0
+        sku:
+          detailUrl: string
+          id: string
+          imageUrl: string
+          name: string
+          nameComplete: string
+          productName: string
+        status: ACTIVE
+      properties:
+        SubscriptionId:
+          type: string
+        createdAt:
+          type: string
+        cycleCount:
+          format: int32
+          type: integer
+        endpoint:
+          type: string
+        isSkipped:
+          type: boolean
+        lastUpdate:
+          type: string
+        metadata:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Metadatum"
+          type: array
+        originalItemIndex:
+          format: int32
+          type: integer
+        originalOrderId:
+          type: string
+        priceAtSubscriptionDate:
+          format: int32
+          type: integer
+        quantity:
+          format: int32
+          type: integer
+        sellingPrice:
+          format: int32
+          type: integer
+        sku:
+          $ref: "#/components/schemas/Sku"
+        status:
+          type: string
+      required:
+        - sku
+        - quantity
+        - endpoint
+        - priceAtSubscriptionDate
+        - sellingPrice
+        - SubscriptionId
+        - cycleCount
+        - status
+        - createdAt
+        - lastUpdate
+        - originalOrderId
+        - originalItemIndex
+        - metadata
+        - isSkipped
+      title: Item1
+      type: object
+    Metadatum:
+      example:
+        name: string
+        properties:
+          additionalProp1: string
+          additionalProp2: string
+          additionalProp3: string
+      properties:
+        name:
+          type: string
+        properties:
+          $ref: "#/components/schemas/Properties"
+      required:
+        - name
+        - properties
+      title: Metadatum
+      type: object
+    PaymentMethod:
+      example:
+        paymentAccountId: string
+        paymentSystem: string
+      properties:
+        paymentAccountId:
+          type: string
+        paymentSystem:
+          type: string
+      required:
+        - paymentSystem
+        - paymentAccountId
+      title: PaymentMethod
+      type: object
+    Plan:
+      example:
+        frequency:
+          interval: 0
+          periodicity: string
+        type: string
+        validity:
+          begin: 2019-07-04T14:40:30.819Z
+          end: 2019-07-04T14:40:30.819Z
+      properties:
+        frequency:
+          $ref: "#/components/schemas/Frequency"
+        type:
+          type: string
+        validity:
+          $ref: "#/components/schemas/Validity"
+      required:
+        - frequency
+        - validity
+        - type
+      title: Plan
+      type: object
+    Properties:
+      example:
+        additionalProp1: string
+        additionalProp2: string
+        additionalProp3: string
+      properties:
+        additionalProp1:
+          type: string
+        additionalProp2:
+          type: string
+        additionalProp3:
+          type: string
+      required:
+        - additionalProp1
+        - additionalProp2
+        - additionalProp3
+      title: Properties
+      type: object
+    PurchaseSettings:
+      example:
+        currencyCode: string
+        paymentMethod:
+          paymentAccountId: string
+          paymentSystem: string
+        purchaseDay: string
+        salesChannel: string
+        selectedSla: string
+        seller: string
+      properties:
+        currencyCode:
+          type: string
+        paymentMethod:
+          $ref: "#/components/schemas/PaymentMethod"
+        purchaseDay:
+          type: string
+        salesChannel:
+          type: string
+        selectedSla:
+          type: string
+        seller:
+          type: string
+      required:
+        - purchaseDay
+        - paymentMethod
+        - seller
+        - salesChannel
+        - selectedSla
+        - currencyCode
+      title: PurchaseSettings
+      type: object
+    ShippingAddress:
+      example:
+        additionalComponents:
+          - longName: string
+            shortName: string
+            types:
+              - string
+        addressId: string
+        addressName: string
+        addressType: string
+        city: string
+        complement: string
+        country: string
+        formattedAddress: string
+        geoCoordinate:
+          - 0
+        neighborhood: string
+        number: string
+        postalCode: string
+        receiverName: string
+        reference: string
+        state: string
+        street: string
+      properties:
+        additionalComponents:
+          description: ""
+          items:
+            $ref: "#/components/schemas/AdditionalComponent"
+          type: array
+        addressId:
+          type: string
+        addressName:
+          type: string
+        addressType:
+          type: string
+        city:
+          type: string
+        complement:
+          type: string
+        country:
+          type: string
+        formattedAddress:
+          type: string
+        geoCoordinate:
+          description: ""
+          items:
+            format: int32
+            type: integer
+          type: array
+        neighborhood:
+          type: string
+        number:
+          type: string
+        postalCode:
+          type: string
+        receiverName:
+          type: string
+        reference:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+      required:
+        - addressId
+        - street
+        - number
+        - complement
+        - neighborhood
+        - city
+        - state
+        - country
+        - postalCode
+        - reference
+        - formattedAddress
+        - additionalComponents
+        - geoCoordinate
+        - receiverName
+        - addressType
+        - addressName
+      title: ShippingAddress
+      type: object
+    Sku:
+      example:
+        detailUrl: string
+        id: string
+        imageUrl: string
+        name: string
+        nameComplete: string
+        productName: string
+      properties:
+        detailUrl:
+          type: string
+        id:
+          type: string
+        imageUrl:
+          type: string
+        name:
+          type: string
+        nameComplete:
+          type: string
+        productName:
+          type: string
+      required:
+        - id
+        - name
+        - productName
+        - imageUrl
+        - detailUrl
+        - nameComplete
+      title: Sku
+      type: object
+    UpdateSubscriptionbygroupIdRequest:
+      example:
+        isSkipped: true
+        item:
+          - SubscriptionId: string
+            createdAt: 2019-06-20T18:27:41.23Z
+            cycleCount: 0
+            endpoint: string
+            isSkipped: true
+            lastUpdate: 2019-06-20T18:27:41.23Z
+            metadata:
+              - name: string
+                properties:
+                  additionalProp1: string
+                  additionalProp2: string
+                  additionalProp3: string
+            originalItemIndex: 0
+            originalOrderId: string
+            priceAtSubscriptionDate: 0
+            quantity: 0
+            sellingPrice: 0
+            sku:
+              detailUrl: string
+              id: string
+              imageUrl: string
+              name: string
+              nameComplete: string
+              productName: string
+            status: ACTIVE
+        metadata:
+          - name: string
+            properties:
+              additionalProp1: string
+              additionalProp2: string
+              additionalProp3: string
+        plan:
+          frequency:
+            interval: 0
+            periodicity: string
+          type: string
+          validity:
+            begin: 2019-06-20T18:27:41.23Z
+            end: 2019-06-20T18:27:41.23Z
+        purchaseSettings:
+          currencyCode: string
+          paymentMethod:
+            paymentAccountId: string
+            paymentSystem: string
+          purchaseDay: string
+          salesChannel: string
+          selectedSla: string
+          seller: string
+        shippingAddress:
+          additionalComponents:
+            - longName: string
+              shortName: string
+              types:
+                - string
+          addressId: string
+          addressName: string
+          addressType: string
+          city: string
+          complement: string
+          country: string
+          formattedAddress: string
+          geoCoordinate:
+            - 0
+          neighborhood: string
+          number: string
+          postalCode: string
+          receiverName: string
+          reference: string
+          state: string
+          street: string
+        status: string
+      properties:
+        isSkipped:
+          type: boolean
+        item:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Item1"
+          type: array
+        metadata:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Metadatum"
+          type: array
+        plan:
+          $ref: "#/components/schemas/Plan"
+        purchaseSettings:
+          $ref: "#/components/schemas/PurchaseSettings"
+        shippingAddress:
+          $ref: "#/components/schemas/ShippingAddress"
+        status:
+          type: string
+      required:
+        - item
+        - plan
+        - purchaseSettings
+        - shippingAddress
+        - status
+        - isSkipped
+        - metadata
+      title: UpdateSubscriptionbygroupIdRequest
+      type: object
+    UpdateSubscriptionsbySubscriptionIdRequest:
+      example:
+        isSkipped: true
+        item:
+          endpoint: string
+          priceAtSubscriptionDate: 0
+          quantity: 0
+          sellingPrice: 0
+          sku:
+            detailUrl: string
+            id: string
+            imageUrl: string
+            name: string
+            nameComplete: string
+            productName: string
+        metadata:
+          - name: string
+            properties:
+              additionalProp1: string
+              additionalProp2: string
+              additionalProp3: string
+        plan:
+          frequency:
+            interval: 0
+            periodicity: string
+          type: string
+          validity:
+            begin: 2019-07-04T14:40:30.819Z
+            end: 2019-07-04T14:40:30.819Z
+        purchaseSettings:
+          currencyCode: string
+          paymentMethod:
+            paymentAccountId: string
+            paymentSystem: string
+          purchaseDay: string
+          salesChannel: string
+          selectedSla: string
+          seller: string
+        shippingAddress:
+          additionalComponents:
+            - longName: string
+              shortName: string
+              types:
+                - string
+          addressId: string
+          addressName: string
+          addressType: string
+          city: string
+          complement: string
+          country: string
+          formattedAddress: string
+          geoCoordinate:
+            - 0
+          neighborhood: string
+          number: string
+          postalCode: string
+          receiverName: string
+          reference: string
+          state: string
+          street: string
+        status: string
+      properties:
+        isSkipped:
+          type: boolean
+        item:
+          $ref: "#/components/schemas/Item"
+        metadata:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Metadatum"
+          type: array
+        plan:
+          $ref: "#/components/schemas/Plan"
+        purchaseSettings:
+          $ref: "#/components/schemas/PurchaseSettings"
+        shippingAddress:
+          $ref: "#/components/schemas/ShippingAddress"
+        status:
+          type: string
+      required:
+        - item
+        - plan
+        - purchaseSettings
+        - shippingAddress
+        - status
+        - isSkipped
+        - metadata
+      title: UpdateSubscriptionsbySubscriptionIdRequest
+      type: object
+    Validity:
+      example:
+        begin: 2019-07-04T14:40:30.819Z
+        end: 2019-07-04T14:40:30.819Z
+      properties:
+        begin:
+          type: string
+        end:
+          type: string
+      required:
+        - begin
+        - end
+      title: Validity
+      type: object
+    settings:
+      description: Subscriptions settings
+      example:
+        defaultSla: null
+        deliveryChannels:
+          - delivery
+        executionHourInUtc: 9
+        isMultipleInstallmentsEnabledOnCreation: false
+        isMultipleInstallmentsEnabledOnUpdate: false
+        isUsingV3: true
+        manualPriceAllowed: false
+        onMigrationProcess: false
+        orderCustomDataAppId: null
+        postponeExpiration: false
+        randomIdGeneration: false
+        slaOption: NONE
+        useItemPriceFromOriginalOrder: false
+        workflowVersion: "1.1"
+      properties:
+        defaultSla:
+          default: null
+          description: Default delivery method.
+          example: null
+          nullable: true
+          title: defaultSla
+          type: string
+        deliveryChannels:
+          default: []
+          description: Array containing delivery channels.
+          example: delivery
+          items:
+            default: ""
+            description: "Type of delivery channel. The values that are possible are: `pickup-in-point` for pickup point and `delivery` for regular delivery."
+            example: delivery
+            title: ""
+            type: string
+          title: deliveryChannels
+          type: array
+        executionHourInUtc:
+          default: 0
+          description: Indicates the time future subscription orders will be generated.
+          example: 9
+          title: executionHourInUtc
+          type: integer
+        isMultipleInstallmentsEnabledOnCreation:
+          default: false
+          description: Defines whether or not multiple installments are enabled when a subscription is created.
+          example: false
+          title: isMultipleInstallmentsEnabledOnCreation
+          type: boolean
+        isMultipleInstallmentsEnabledOnUpdate:
+          default: false
+          description: Defines whether or not multiple installments are enabled when a subscription is updated.
+          example: false
+          title: isMultipleInstallmentsEnabledOnUpdate
+          type: boolean
+        isUsingV3:
+          default: false
+          description: Indicates whether or not Subscriptions V3 is enabled.
+          example: true
+          title: isUsingV3
+          type: boolean
+        manualPriceAllowed:
+          default: false
+          description: When set to `true`, this property enables manual price configuration in subscription items. This is valid for all existing subscriptions, provided that there is a manual price configured and that `isUsingV3` is `true`.
+          example: false
+          title: manualPriceAllowed
+          type: boolean
+        onMigrationProcess:
+          default: false
+          description: Indicates whether or not the account is in the migration process to Subscriptions V3.
+          example: false
+          title: onMigrationProcess
+          type: boolean
+        orderCustomDataAppId:
+          default: null
+          description: When filled, this field passes along the `customData` infomration in the order to the future recurrent subscription orders.
+          example: null
+          title: orderCustomDataAppId
+          type: string
+        postponeExpiration:
+          default: false
+          description: Defines whether or not the expiration of subscriptions can be postponed.
+          example: false
+          title: postponeExpiration
+          type: boolean
+        randomIdGeneration:
+          default: false
+          description: Defines whether or not the subscription order IDs will be randomly generated.
+          example: false
+          title: randomIdGeneration
+          type: boolean
+        slaOption:
+          default: ""
+          description: Delivery method.
+          example: NONE
+          title: slaOption
+          type: string
+        useItemPriceFromOriginalOrder:
+          default: false
+          description: When set to `true`, this property enables using the manual price for each item from the original subscription order. This is only valid for new subscriptions, created from the moment this configuration is enabled. For this to work, it is mandatory that the `manualPriceAllowed` property is set to `true` and that `isUsingV3` is `true`.
+          example: false
+          title: useItemPriceFromOriginalOrder
+          type: boolean
+        workflowVersion:
+          default: ""
+          description: Workflow version.
+          example: "1.1"
+          title: workflowVersion
+          type: string
+      required:
+        - slaOption
+        - defaultSla
+        - isUsingV3
+        - onMigrationProcess
+        - executionHourInUtc
+        - workflowVersion
+        - deliveryChannels
+        - randomIdGeneration
+        - isMultipleInstallmentsEnabledOnCreation
+        - isMultipleInstallmentsEnabledOnUpdate
+        - orderCustomDataAppId
+        - postponeExpiration
+        - manualPriceAllowed
+        - useItemPriceFromOriginalOrder
+      title: ""
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

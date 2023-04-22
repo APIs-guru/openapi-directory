@@ -1,0 +1,1988 @@
+openapi: 3.0.3
+info:
+  description: |
+    ContentDepot hosts a range of API’s that allow clients to manage, discover, and obtain content. The API spans many parts of the ContentDepot functionality including MetaPub (a.k.a. metadata distribution) and content management.
+
+    ## MetaPub
+
+    MetaPub collects, normalizes and distributes publicly available program, episode, and piece metadata through the public radio system. Backed by ContentDepot and its data model, MetaPub allows producers to supply metadata through various methods:
+
+    1. MetaPub Agents that collect producer metadata by "crawling" existing public feeds (e.g. C24, BBC) or the producer's production system (e.g. ATC, ME, TED Radio Hour).
+    2. Manually enter metadata in the ContentDepot Portal on each program and episode.
+    3. Publish/push the metadata to the MetaPub upload API and execute an ingest job.
+
+    MetaPub then distributes this data to stations through an electronic program guide (EPG model) for display on various listener devices such as smart phones, tablets, web streams, HD radios, RDBS enabled FM radios, and more. The EPG format is based on the RadioDNS specifications.
+
+    ### RadioDNS
+
+    The RadioDNS Service and Programme Information Specification ([ETSI TS 102 818 v3.4.1](https://www.etsi.org/deliver/etsi_ts/102800_102899/102818/03.04.01_60/ts_102818v030401p.pdf)) defines three primary documents: Service Information, Program Information, and Group Information. These documents, along with the core RadioDNS Hybrid Lookup for Radio Services Specification ([ETSI TS 103 270 v1.4.1](https://www.etsi.org/deliver/etsi_ts/103200_103299/103270/01.04.01_60/ts_103270v010401p.pdf)), define a system where an end listener device can dynamically discover program metadata and fetch the metadata via Internet Protocol (IP) requests. MetaPub's use of RadioDNS differs slightly in that MetaPub (a.k.a PRSS) acts as the "service provider" while the stations and related middleware act as the end devices. While this is not the primary use case of RadioDNS, the flexibility in the specification, service definitions, and DNS resolution allows this model to be easily represented. MetaPub provides both _National Metadata_ and _Station Metadata_.
+
+    It is strongly recommended that the related [RadioDNS specifications](https://radiodns.org/developers/documentation/) be read for implementation details, definitions, and required XML schemas.
+
+    ## ContentDepot Drive
+
+    ContentDepot Drive (CD Drive) provides a private, per customer file storage solution similar to other cloud storage solutions such as Google Drive, Box, and Dropbox. The CD Drive is used to stage content uploads such as metadata files, images, or segment audio before associating the content with specific programs or episodes.
+
+    CD Drive content can be referenced using a URI by some operations such as synchronizing metadata. There are two possible CD Drive URI formats supported: ID and hierarchical path. The ID reference takes the form ```cddrive:id:{value}``` where value is the integer ID of the file or folder being referenced. The hierarchical path reference takes the form ```cddrive://{path}``` where path is the full, UNIX style path to the file or folder starting with '/'. For example, two CD Drive URIs pointing to the same file may be ```cddrive:id:12345``` and ```cddrive:///show1/episode2/metadata.xml```. More information about URIs can be found at [Wikipedia](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier).
+
+    ## Authentication
+
+    The API currently uses OAuth 2.0.  All operations require ```cd:full``` access where the client access is only limited by the permissions of the ContentDepot user after authentication. Limiting access scope per client is not currently supported.
+  termsOfService: https://www.npr.org/about-npr/179876898/terms-of-use
+  title: ContentDepot
+  version: 2.0.0
+  x-apisguru-categories:
+    - media
+  x-origin:
+    - format: openapi
+      url: https://contentdepot.prss.org/api/swagger-v2.yaml
+      version: "3.0"
+  x-providerName: prss.org
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+tags:
+  - description: Endpoints to access the RadioDNS formatted national program information (SI and PI documents) for stations to use in middleware that is capable of scheduling and extracting the information. Station specific SI and PI documents are provided via a different mechanism.
+    externalDocs:
+      url: https://radiodns.org/developers/documentation/
+    name: RadioDNS
+  - description: ContentDepot Drive functionality for uploading and stating content files for use in other API operations.
+    name: CD Drive
+  - description: Broadcast services can subscribe to content for multiple destinations.
+    name: Broadcast Services
+  - description: Spot insertions define spots to play when a cue is received.
+    name: Spot Insertions
+  - description: Program information including searching for existing programs or fetching a specific program. A program is a collection of episodes that are delivered by ContentDepot as a live stream or pre-recorded files.
+    name: Programs
+  - description: An episode is a specific instance of a program that will air on a specific date and time.
+    name: Episodes
+  - description: Segments include the audio content and related information such as the in-cue and out-cue.
+    name: Segments
+  - description: Pieces define specific story or song level metadata within an episode and segment. For example, an 18 minute audio segment may be composed of multiple 2 or 3 minute pieces.
+    name: Pieces
+  - description: Endpoints to access MetaPub ingest functionality such as synchronizing producer metadata to programs and episodes. These API operations are deprecated. Use the pieces endpoints instead.
+    name: MetaPub
+  - description: A spot is an audio file that is to be inserted into streams using cues.
+    name: Spots
+paths:
+  /api/v2/broadcastservices:
+    get:
+      parameters:
+        - description: The start page of the results to return. The first item is indexed at 0.
+          in: query
+          name: pageStart
+          schema:
+            default: 0
+            format: int32
+            minimum: 0
+            type: integer
+        - description: The number of items to return. Must be between 0 and 500, inclusive.
+          in: query
+          name: pageSize
+          schema:
+            default: 500
+            format: int32
+            maximum: 500
+            minimum: 0
+            type: integer
+        - description: The sort order of the list of broadcast services, based on broadcast service ID. If unspecified, the broadcast services are returned in random order. If using paging to iterate through the results, sort order should be specified.
+          in: query
+          name: orderById
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Episode"
+                type: array
+          description: The matching broadcast services.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The request is missing required data or invalid.
+        "403":
+          description: Authorization failed, username or password not found or incorrect.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Gets broadcast services matching the given criteria.
+      tags:
+        - Broadcast Services
+  "/api/v2/broadcastservices/{id}":
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BroadcastService"
+          description: The matching broadcast service.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view this broadcast service.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The broadcast service cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the broadcast service matching the given ID.
+      tags:
+        - Broadcast Services
+    parameters:
+      - description: The ID of the broadcast service to find.
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /api/v2/cddrive/files/content:
+    post:
+      description: Upload a file to the customer's private CD Drive.
+      parameters:
+        - description: If present, the MD5 will be compared against the file received as a message integrity check.
+          in: header
+          name: Content-MD5
+          schema:
+            format: md5
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: The file content being uploaded.
+                  format: binary
+                  type: string
+                name:
+                  description: The name of the file, including extension.
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[a-zA-Z0-9][a-zA-Z0-9 \._]*[a-zA-Z0-9]$
+                  type: string
+                parent-id:
+                  description: The ID of the parent folder or 0 for the root folder.
+                  format: int64
+                  type: integer
+              type: object
+        description: Form data defining the file to create.
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CDDriveFile"
+          description: The file was created successfully. The response contains the file metadata.
+        "400":
+          description: The provided Content-MD5 header doesn't match the provided content
+        "403":
+          description: Authorization failed, Username or password not found or incorrect.
+        "404":
+          description: A parent id cannot be found.
+        "409":
+          description: A name conflict because the file already exists.
+        "413":
+          description: File is bigger than maximum size of 500 MB.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Upload a file.
+      tags:
+        - CD Drive
+  "/api/v2/cddrive/files/{file-id}":
+    delete:
+      description: Delete a file from the customer's private CD Drive.
+      responses:
+        "204":
+          description: The file was successfully deleted.
+        "404":
+          description: The file cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Delete a file.
+      tags:
+        - CD Drive
+    get:
+      description: Get the information about a file in the customer's private CD Drive.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CDDriveFile"
+          description: The file information.
+        "404":
+          description: The file cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Get file information.
+      tags:
+        - CD Drive
+    parameters:
+      - description: The ID of the file to access.
+        in: path
+        name: file-id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  "/api/v2/cddrive/files/{file-id}/content":
+    get:
+      description: Download a file from the customer's private CD Drive.
+      parameters:
+        - description: Can be used to limit the range of bytes retrieved. Only a single byte range in the format ```bytes={start-range}-{end-range}``` is supported.
+          in: header
+          name: Range
+          schema:
+            format: single byte range
+            type: string
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: The file was found and will be returned in the body of the response.
+        "302":
+          description: The file was found but should be downloaded at the URL presented in the Location header. This return code may be used when the file is available via a CDN or other optimized path.
+          headers:
+            Location:
+              description: The location the file can be downloaded from
+              schema:
+                format: url
+                type: string
+        "404":
+          description: The file cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: UNDER DEVELOPMENT - Download a file.
+      tags:
+        - CD Drive
+    parameters:
+      - description: The ID of the file to download.
+        in: path
+        name: file-id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /api/v2/cddrive/folders:
+    post:
+      description: Create a new folder in the customer's private CD Drive.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                name:
+                  description: the name of the folder
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[a-zA-Z0-9][a-zA-Z0-9 \._]*[a-zA-Z0-9]$
+                  type: string
+                parent-id:
+                  description: The ID of the parent folder or 0 for the root folder.
+                  format: int64
+                  type: integer
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CDDriveFolder"
+          description: The folder information.
+        "403":
+          description: Authorization failed, username or password not found or incorrect.
+        "404":
+          description: A parent id cannot be found.
+        "409":
+          description: The folder already exists.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Create a folder.
+      tags:
+        - CD Drive
+  "/api/v2/cddrive/folders/{folder-id}":
+    delete:
+      description: Delete a file from the customer's private CD Drive.
+      parameters:
+        - description: Flag to indicate if the folder should be deleted if it has items inside of it.
+          in: query
+          name: recursive
+          schema:
+            default: true
+            type: boolean
+      responses:
+        "204":
+          description: The file was successfully deleted.
+        "404":
+          description: The file cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: UNDER DEVELOPMENT - Delete a folder.
+      tags:
+        - CD Drive
+    get:
+      description: Get the information about a folder in the customer's private CD Drive.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CDDriveFolder"
+          description: The folder information.
+        "404":
+          description: The folder cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: UNDER DEVELOPMENT - Get folder information.
+      tags:
+        - CD Drive
+    parameters:
+      - description: The ID of the folder to get.
+        in: path
+        name: folder-id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  "/api/v2/cddrive/folders/{folder-id}/items":
+    get:
+      description: Get the information about a folder in the customer's private CD Drive.
+      parameters:
+        - description: The offset into the items to begin the response.
+          in: query
+          name: offset
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The maximum number of items to return in the response.
+          in: query
+          name: limit
+          schema:
+            default: 20
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  entries:
+                    description: The item instances.
+                    items:
+                      $ref: "#/components/schemas/CDDriveItem"
+                    type: array
+                  limit:
+                    description: The maximum number of items to return.
+                    format: int32
+                    type: integer
+                  offset:
+                    description: The start offset into the items.
+                    format: int32
+                    type: integer
+                  totalCount:
+                    description: The total number of entries available.
+                    format: int32
+                    type: integer
+                type: object
+          description: The folder information.
+        "404":
+          description: The folder cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Get the items in the folder.
+      tags:
+        - CD Drive
+    parameters:
+      - description: The ID of the folder to get. Folder ID 0 represents the uppermost CD drive folder.
+        in: path
+        name: folder-id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /api/v2/episodes:
+    get:
+      parameters:
+        - description: Matches on the ID of the episode.
+          in: query
+          name: id
+          schema:
+            format: int64
+            type: integer
+        - description: Matches on the begin air date of the episode (inclusive).
+          in: query
+          name: beginAirDateAfter
+          schema:
+            format: date-time
+            type: string
+        - description: Matches on the end air date of the episode (inclusive).
+          in: query
+          name: endAirDateBefore
+          schema:
+            format: date-time
+            type: string
+        - description: Matches on the ID of the program that owns the episode.
+          in: query
+          name: programId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: The start page of the results to return. The first item is indexed at 0.
+          in: query
+          name: pageStart
+          schema:
+            default: 0
+            format: int32
+            minimum: 0
+            type: integer
+        - description: The number of items to return. Must be between 0 and 500, inclusive.
+          in: query
+          name: pageSize
+          schema:
+            default: 500
+            format: int32
+            maximum: 500
+            minimum: 0
+            type: integer
+        - description: The sort order of the list of episodes, based on episode ID. If unspecified, the episodes are returned in random order. If using paging to iterate through the results, sort order should be specified.
+          in: query
+          name: orderById
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Episode"
+                type: array
+          description: The matching episode.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The request is missing required data or invalid.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view this program or its episodes.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The program cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Gets episodes matching the given criteria.
+      tags:
+        - Episodes
+  "/api/v2/episodes/{id}":
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Episode"
+          description: The matching episode.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view this episode.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The episode cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the episode matching the given ID.
+      tags:
+        - Episodes
+    parameters:
+      - description: The ID of the episode to operate on.
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /api/v2/metapub/program-information/batch:
+    post:
+      deprecated: true
+      description: |
+        Create a batch to process the metadata of one or more electronic program guide (EPG) programs using metadata that has been uploaded to the customer's CD Drive. If multiple EPG programs are present in the metadata, they will all be updated, however updates across programs are not atomic. Note that an EPG program maps to the ContentDepot concept of an episode which is also known as a "program instance".
+
+        A batch operation must be explicitly created rather than the server attempting to detect new metadata in order to allow for all the content to be uploaded including any supporting content like images. A batch operation is accepted and queued for asynchronous processing at a later time. A client can poll the batch periodically to determine when it completes and the resulting state.
+      externalDocs:
+        description: Find RadioDns to ContentDepot Mapping here
+        url: /api/epg-cd-mapping.html
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: The batch operation definition.
+              properties:
+                format:
+                  description: The format of the metadata file defining the create or update actions to be performed on one or more EPG programs. For more information on how RadioDNS EPG maps to ContentDepot <a href="/api/epg-cd-mapping.html">click here </a>
+                  enum:
+                    - radiodns
+                  type: string
+                name:
+                  description: An optional human readable name for the batch.
+                  type: string
+                program:
+                  description: The program information to associate the ingested metadata with. This is only required if the metadata format doesn't provide the program title and air date information directly.
+                  properties:
+                    airDate:
+                      format: dateTime:yyyy-MM-dd'T'HH:mm:ss'Z'
+                      type: string
+                    title:
+                      type: string
+                  required:
+                    - title
+                    - airDate
+                  type: object
+                uri:
+                  description: The URI to the metadata file. Currently only the ```cddrive``` scheme is supported.
+                  format: uri
+                  type: string
+              required:
+                - uri
+                - format
+              type: object
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProgramInformationBatch"
+          description: The accepted batch information that is queued for processing.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Create a batch operation on EPG information.
+      tags:
+        - MetaPub
+  "/api/v2/metapub/program-information/batch/{batch-id}":
+    get:
+      deprecated: true
+      description: Gets the batch information which can be used to check the status of the operation or retrieve more details if the batch fails.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProgramInformationBatch"
+          description: The batch information.
+        "403":
+          description: Authorization failed, Username or password not found or incorrect.
+        "404":
+          description: The batch is not found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Get an EPG batch operation.
+      tags:
+        - MetaPub
+    parameters:
+      - in: path
+        name: batch-id
+        required: true
+        schema:
+          format: int64
+          minimum: 0
+          type: integer
+  /api/v2/pieces:
+    get:
+      parameters:
+        - description: The ID of the episode that owns the piece.
+          in: query
+          name: episodeId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Piece"
+                type: array
+          description: The pieces matching the query parameters
+        "403":
+          description: Authorization failed, Username or password not found or incorrect.
+        "404":
+          description: Either the pieces or the episode aren't found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the pieces matching the query parameters.
+      tags:
+        - Pieces
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Piece"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Piece"
+          description: The created piece with fields populated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: If the request is missing required data or invalid.
+        "403":
+          description: The user isn't permitted to create the piece.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Create a new piece.
+      tags:
+        - Pieces
+  "/api/v2/pieces/{id}":
+    delete:
+      responses:
+        "200":
+          description: The piece was deleted.
+        "403":
+          description: The user isn't permitted to delete the piece.
+        "404":
+          description: The piece isn't found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Deletes the piece with the given ID.
+      tags:
+        - Pieces
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Piece"
+          description: The piece with the given ID.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed
+        "404":
+          description: The piece isn't found or the user doesn't have permission to get it.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the piece matching the given ID.
+      tags:
+        - Pieces
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /api/v2/programs/search:
+    get:
+      parameters:
+        - description: Free text search that matches against the program title or description.
+          in: query
+          name: keywords
+          schema:
+            type: string
+        - description: The start page of the results to return. The first item is indexed at 0.
+          in: query
+          name: pageStart
+          schema:
+            default: 0
+            format: int32
+            minimum: 0
+            type: integer
+        - description: The number of items to return. Must be between 0 and 500, inclusive.
+          in: query
+          name: pageSize
+          schema:
+            default: 500
+            format: int32
+            maximum: 500
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Program"
+                type: array
+          description: Programs matching the search request sorted by relevance.
+        "403":
+          description: Authorization failed, username or password not found or incorrect.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Optimized free-text search for programs using various filters.
+      tags:
+        - Programs
+  "/api/v2/programs/{id}":
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Program"
+          description: The matching program.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view this program.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The program cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the program matching the given ID.
+      tags:
+        - Programs
+    parameters:
+      - description: The ID of the program to operate on.
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /api/v2/segments:
+    get:
+      parameters:
+        - description: The ID of the episode that owns the segment.
+          in: query
+          name: episodeId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - in: query
+          name: segmentNumber
+          schema:
+            format: int32
+            type: integer
+        - description: The start page of the results to return. The first item is indexed at 0.
+          in: query
+          name: pageStart
+          schema:
+            default: 0
+            format: int32
+            minimum: 0
+            type: integer
+        - description: The number of items to return. Must be between 0 and 500, inclusive.
+          in: query
+          name: pageSize
+          schema:
+            default: 500
+            format: int32
+            maximum: 500
+            minimum: 0
+            type: integer
+        - description: The sort order of the list of segments, based on segment ID. If unspecified, the segments are returned in random order. If using paging to iterate through the results, sort order should be specified.
+          in: query
+          name: orderById
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Segment"
+                type: array
+          description: The segments matching the query parameters
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view this episode or its segments.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The episode cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the segments matching the query parameters.
+      tags:
+        - Segments
+    post:
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                cdDriveUri:
+                  description: The URI to the segment content in CD Drive. Format should be 'cddrive:id:{value}' or 'cddrive://{path}'.
+                  type: string
+                episodeId:
+                  description: The ID of the episode that owns the segment.
+                  format: int64
+                  type: integer
+                inCue:
+                  description: The incue for the segment. Defaults to the program segment incue.
+                  type: string
+                outCue:
+                  description: The outcue for the segment. Defaults to the program segment outcue.
+                  type: string
+                segmentNumber:
+                  description: The segment number of the segment.
+                  format: int32
+                  type: integer
+              required:
+                - episodeId
+                - segmentNumber
+                - cdDriveUri
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Segment"
+          description: The created segment with fields populated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The request is missing required data or invalid.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to create the segment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The information for creating the segment cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Creates a new segment.
+      tags:
+        - Segments
+  "/api/v2/segments/{id}":
+    delete:
+      responses:
+        "200":
+          description: The segment was deleted.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to delete the segment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The segment or the episode that owns the segment cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Deletes the segment with the given ID.
+      tags:
+        - Segments
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Segment"
+          description: The segment with the given ID.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view the segment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The segment information cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the segment matching the given ID.
+      tags:
+        - Segments
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  "/api/v2/segments/{id}/content":
+    get:
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: The audio content of the requested segment.
+        "404":
+          description: The segment isn't found or the user doesn't have permission to get it.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: UNDER DEVELOPMENT - Returns the audio content segment matching the given ID.
+      tags:
+        - Segments
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /api/v2/spotinsertions:
+    get:
+      parameters:
+        - description: The start page of the results to return. The first item is indexed at 0.
+          in: query
+          name: pageStart
+          schema:
+            default: 0
+            format: int32
+            minimum: 0
+            type: integer
+        - description: The number of items to return. Must be between 0 and 500, inclusive.
+          in: query
+          name: pageSize
+          schema:
+            default: 500
+            format: int32
+            maximum: 500
+            minimum: 0
+            type: integer
+        - description: The sort order of the list of spot insertions, based on ID. If unspecified, the spot insertions are returned in random order. If using paging to iterate through the results, sort order should be specified.
+          in: query
+          name: orderById
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SpotInsertion"
+                type: array
+          description: The spot insertions matching the query parameters
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the spot insertions matching the query parameters.
+      tags:
+        - Spot Insertions
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpotInsertion"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpotInsertion"
+          description: The created spot insertion with fields populated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The request is missing required data or invalid.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to create the spot insertion.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Creating the spot insertion failed, even though the request was valid.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Creates a new spot insertion.
+      tags:
+        - Spot Insertions
+  "/api/v2/spotinsertions/{id}":
+    delete:
+      responses:
+        "200":
+          description: The spot insertion was deleted.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to delete the spot insertion.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The spot insertion cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Deletes the spot insertion with the given ID.
+      tags:
+        - Spot Insertions
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpotInsertion"
+          description: The spot insertion with the given ID.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view the spot insertion.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The spot insertion cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the spot insertion matching the given ID.
+      tags:
+        - Spot Insertions
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /api/v2/spots:
+    get:
+      parameters:
+        - description: The start page of the spot to return. The first item is indexed at 0.
+          in: query
+          name: pageStart
+          schema:
+            default: 0
+            format: int32
+            minimum: 0
+            type: integer
+        - description: The number of items to return. Must be between 0 and 500, inclusive.
+          in: query
+          name: pageSize
+          schema:
+            default: 500
+            format: int32
+            maximum: 500
+            minimum: 0
+            type: integer
+        - description: The sort order of the list of spots, based on spot ID. If unspecified, the spots are returned in random order. If using paging to iterate through the results, sort order should be specified.
+          in: query
+          name: orderById
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Spot"
+                type: array
+          description: The spots matching the query parameters
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view these spots.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The spot cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the spots matching the query parameters.
+      tags:
+        - Spots
+    post:
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                cdDriveUri:
+                  description: The URI to the spot content in CD Drive. Format should be 'cddrive:id:{value}' or 'cddrive://{path}'.
+                  type: string
+                name:
+                  description: The name of the spot to create/update.
+                  type: string
+                notes:
+                  description: Notes pertaining to the spot.
+                  type: string
+              required:
+                - cdDriveUri
+                - name
+                - notes
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Spot"
+          description: The created spot with fields populated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The request is missing required data or invalid.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to create the spot.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The information for creating the spot cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Creates a new spot.
+      tags:
+        - Spots
+  "/api/v2/spots/{id}":
+    delete:
+      responses:
+        "200":
+          description: The spot was deleted.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to delete the spot.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The spot cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Deletes the spot with the given ID.
+      tags:
+        - Spots
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Spot"
+          description: The spot with the given ID.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authorization failed, or the user is not permitted to view the spot.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The spot information cannot be found.
+      security:
+        - cd_oauth2:
+            - cd:full
+      summary: Returns the spot matching the given ID.
+      tags:
+        - Spots
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+  /radiodns/spi/3.1/GI.xml:
+    get:
+      description: |
+        The group information (GI) document allows programs to be put into groups such as serials, series, shows, or general themes and provide additional metadata for that group such as a description, links, and a logo. A program in the guide can be linked to its group using the "memberOf" field to allow clients to easily link programs together for a given Content Depot Program/Show in the EPG. GI will be published for all Content Depot programs that have the "publish metadata" option enabled. By using the group information, clients have the ability to access a single list of all metadata supported program titles, links, images, and descriptions. This information can be used to assist a station when setting up a schedule or it can be used in the end user metadata to provide additional information about the content such as displaying "other episodes from this program" or displaying the group, program, and program event images.
+
+        Currently all programs with "publish metadata" enabled will be included in the group information even if they are not active in the program guide. This may change in the future if the number of programs grows.
+
+        Note that while the location of the GI document isn't expected to change in the near future, as per the RadioDNS specification the authoritative link to the document is defined in the SI document with the mime value ```application/xml+gi```.
+
+        The response will use standard HTTP cache-control headers to indicate when the document should be refreshed as well as an ETag to allow for lightweight change detection.
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                format: RadioDNS Group Information (GI) as defined in [ETSI TS 102 818 v3.4.1](https://www.etsi.org/deliver/etsi_ts/102800_102899/102818/03.04.01_60/ts_102818v030401p.pdf) section 8
+                type: string
+          description: The group information document is returned in the body of the response.
+      summary: Get the group information document.
+      tags:
+        - RadioDNS
+  /radiodns/spi/3.1/SI.xml:
+    get:
+      description: |
+        The service information (SI) document holds a definition of services provided by the service provider (e.g. MetaPub), including any relevant metadata and bearer details, such as:
+
+        * Names
+        * Descriptions
+        * Logos
+        * Bearers (broadcast and IP)
+
+        MetaPub provides two SI documents. The _National SI document_ describes the distribution services provided by PRSS including basic service metadata, logos, and bearers. The current design defines two IP based services, although this may change in the future:
+
+        * Streams
+            * Bearer ID: prss:streams
+            * Service ID: streams
+        * Files
+            * Bearer ID: prss:files
+            * Service ID: files
+
+        The _Station SI document_ describes the stations and broadcast services served by PRSS. Only stations and broadcast services that have opted into metadata publishing are listed in this document.
+
+        Based on [ETSI TS 102 818 v3.4.1](https://www.etsi.org/deliver/etsi_ts/102800_102899/102818/03.04.01_60/ts_102818v030401p.pdf) section 10.2.4, the SI document will be placed in a defined location on the service website. Using standard HTTP cache mechanisms, the SI document will only need to be fetched and processed occasionally.
+
+        The response will use standard HTTP cache-control headers to indicate when the document should be refreshed as well as an ETag to allow for lightweight change detection.
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                format: RadioDNS Service Information (SI) as defined in [ETSI TS 102 818 v3.4.1](https://www.etsi.org/deliver/etsi_ts/102800_102899/102818/03.04.01_60/ts_102818v030401p.pdf) section 6
+                type: string
+          description: The service information document is returned in the body of the response.
+      summary: Get the service information document.
+      tags:
+        - RadioDNS
+    servers:
+      - description: National SI document
+        url: /
+      - description: Station SI document
+        url: https://radiodns.prss.org
+      - description: Station SI document
+        url: https://radiodnsstage.prss.org
+      - description: Station SI document
+        url: https://radiodnsdev.mgmt.prss.org
+  "/radiodns/spi/3.1/id/{fqdn}/{sid}/{date}_PI.xml":
+    get:
+      description: |
+        The program information (PI) document holds the linear and the on-demand schedule of programs for a service over a 24 hour period. This information provides an electronic program guide (EPG) to clients that defines the program metadata such as:
+
+        *   Names
+        *   Descriptions
+        *   Logos
+        *   Links
+        *   Genres
+        *   Program Events (a.k.a. pieces)
+
+        MetaPub provides both _National PI documents_ and _Station PI documents_. For both documents, only programs with metadata publishing enabled are listed in the document. As per the RadioDNS specification, the authoritative list of services is defined in the corresponding SI document.
+
+        The National PI documents correspond to the services listed in the National SI document (streams and files). This EPG contains two types of programming, live and on-demand (a.k.a files). A "live with subsequent file (LWSF)" program may appear in both the streams and files services EPG data because it will both a live stream and an on-demand file. File programs with multi-day air windows will appear in the PI file on every day that the air window is open. That is, the EPG data for each day contains the information about programming available that day, even if the programming is also available on other days. The program ID can be used to resolve these duplicates down to a single instance when processing multiple services or multiple days of EPG data.
+
+        The Station PI documents correspond to the services listed in the Station SI document, and list program and schedule metadata for programs which are subscribed to by the given service. Note that stations may opt into "static" metadata publishing (station and broadcast service metadata) but not "dynamic" metadata publishing (program and schedule metadata). If this is the case, a service that is listed in the Station SI document will not have a corresponding PI document, and a 404 status code will be returned.
+
+        Each PI document will contain 24 hours of program guide information. The current day, the previous day, and the next day will contain detailed program event information (a.k.a. Content Depot pieces) while PI files outside of this range will only contain the program (a.k.a Content Depot episode) level information. This may change in the future with the use of an API key as defined by the RadioDNS specification to identify "trusted" clients. If metadata for any program in the guide(s) changes, the PI document will be regenerated. Using standard HTTP cache mechanisms, the PI document for the current day can be fetched frequently (e.g. every 5 minutes) to receive last minute changes while future and past days will only be fetched and processed occasionally (e.g. every two hours).
+
+        By obtaining the full 24 hour guide, clients such as middleware can build a local database/lookup table of program and program event information that allows for more specific program selection based on user configuration, automation events, and other possible inputs. In the event that MetaPub is unreachable for a short period of time, the client has the full guide to prevent any interruption to the on-air broadcast.
+
+        Construction of the URL to the PI document is described in [ETSI TS 102 818 v3.4.1](https://www.etsi.org/deliver/etsi_ts/102800_102899/102818/03.04.01_60/ts_102818v030401p.pdf) section 10.3. Currently, MetaPub only supports PI URLs constructed from SPI SI, as described in [ETSI TS 103 270 v1.4.1](https://www.etsi.org/deliver/etsi_ts/103200_103299/103270/01.04.01_60/ts_103270v010401p.pdf) section 7.
+
+        The response will use standard HTTP cache-control headers to indicate when the document should be refreshed as well as an ETag to allow for lightweight change detection.
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                format: RadioDNS Program Information (PI) as defined in [ETSI TS 102 818 v3.4.1](https://www.etsi.org/deliver/etsi_ts/102800_102899/102818/03.04.01_60/ts_102818v030401p.pdf) section 7
+                type: string
+          description: Program information document for the given 24 hour period.
+        "403":
+          description: Authorization failed, the client Id is incorrect.
+        "404":
+          description: The program information for the requested day or service cannot be found.
+      summary: Get the program information document.
+      tags:
+        - RadioDNS
+    parameters:
+      - description: The fully qualified domain name for the environment where the service is running. The fqdn is defined in the `radiodns` element in the SI document in each Content Depot environment.
+        in: path
+        name: fqdn
+        required: true
+        schema:
+          type: string
+      - description: One of the valid service IDs defined in the SI document. For example, "files" or "streams".
+        in: path
+        name: sid
+        required: true
+        schema:
+          type: string
+      - description: The PI schedule date to retrieve in format yyyymmdd.
+        in: path
+        name: date
+        required: true
+        schema:
+          format: yyyymmdd
+          type: string
+      - description: The API client Id you received. This is required for National PI documents, but not Station PI documents. Contact help desk if you need one.
+        in: header
+        name: x-radiodnsspi-api-key
+        schema:
+          type: string
+    servers:
+      - description: National PI document
+        url: /
+      - description: Station PI document
+        url: https://radiodns.prss.org
+      - description: Station PI document
+        url: https://radiodnsstage.prss.org
+      - description: Station PI document
+        url: https://radiodnsdev.mgmt.prss.org
+components:
+  schemas:
+    BroadcastService:
+      description: A broadcast service that can subscribe to content for multiple destinations.
+      properties:
+        createdDate:
+          description: The date the broadcast service was created.
+          format: date-time
+          type: string
+        description:
+          description: The description of the broadcast service.
+          maxLength: 1200
+          minLength: 0
+          type: string
+        id:
+          description: The ID of the broadcast service.
+          format: int64
+          minimum: 0
+          type: integer
+        lastModifiedDate:
+          description: The date the broadcast service was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the broadcast service.
+          maxLength: 128
+          minLength: 1
+          type: string
+      required:
+        - id
+        - name
+        - createdDate
+        - lastModifiedDate
+      type: object
+    CDDriveFile:
+      description: A file in the CD Drive that contains content.
+      properties:
+        createdDate:
+          description: The date and time the file was created.
+          format: dateTimed
+          type: string
+        id:
+          description: The ID of the file.
+          format: int64
+          minimum: 0
+          type: integer
+        lastModifiedDate:
+          description: The date and time the file was last modified.
+          format: dateTime
+          type: string
+        name:
+          description: The name of the file including the extension.
+          maxLength: 255
+          minLength: 1
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9 \._]*[a-zA-Z0-9]$
+          type: string
+        parentId:
+          description: The ID of the parent folder or 0 for the root folder.
+          format: int64
+          minimum: 0
+          type: integer
+        size:
+          description: The size of the file in bytes.
+          format: int64
+          type: integer
+      required:
+        - name
+        - id
+        - parentId
+        - createdDate
+        - lastModifiedDate
+      type: object
+    CDDriveFolder:
+      description: A folder in the CD Drive that can contain other items such as files or folders.
+      properties:
+        createdDate:
+          description: The date and time the folder was created.
+          format: dateTime
+          type: string
+        id:
+          description: The ID of the folder.
+          format: int64
+          minimum: 0
+          type: integer
+        lastModifiedDate:
+          description: The date and time the folder was last modified. This may only represent a modification to to the folder metadata itself, not to the contents of the folder.
+          format: dateTime
+          type: string
+        name:
+          description: The name of the folder.
+          maxLength: 255
+          minLength: 1
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9 \._]*[a-zA-Z0-9]$
+          type: string
+        parentId:
+          description: The ID of the parent folder or 0 for the root folder.
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - parentId
+        - id
+        - createdDate
+        - lastModifiedDate
+      type: object
+    CDDriveItem:
+      description: A generic reference to an item in the CD Drive such as a file or folder.
+      properties:
+        id:
+          format: int64
+          minimum: 0
+          type: integer
+        name:
+          type: string
+        type:
+          enum:
+            - file
+            - folder
+          type: string
+      required:
+        - name
+        - type
+        - id
+      type: object
+    Episode:
+      description: An episode that defines a specific air date for an instance of a program.
+      properties:
+        beginAirDate:
+          description: The date the air window opens for the episode.
+          format: date-time
+          type: string
+        beginTransmissionDate:
+          description: The date the live stream begins for the episode. Only set for live and LWSF episodes.
+          format: date-time
+          type: string
+        createdDate:
+          description: The date the segment was created. Generated at creation.
+          format: date-time
+          type: string
+        customerId:
+          description: The ID of the customer that owns this programs.
+          format: int64
+          minimum: 0
+          type: integer
+        endAirDate:
+          description: The date the air window closes for the episode.
+          format: date-time
+          type: string
+        endTransmissionDate:
+          description: The date the live stream ends for the episode. Only set for live and LWSF episodes.
+          format: date-time
+          type: string
+        id:
+          description: The unique ID of the episode. Generated at creation.
+          format: int64
+          minimum: 0
+          type: integer
+        lastModifiedDate:
+          description: The date the segment was last modified/updated. Automatically updated on any write operation.
+          format: date-time
+          type: string
+        programId:
+          description: The ID of the program that owns this episode.
+          format: int64
+          minimum: 0
+          type: integer
+        title:
+          description: The title of the program.
+          type: string
+      required:
+        - title
+        - programId
+        - beginAirDate
+        - endAirDate
+      type: object
+    Error:
+      description: Standard error response. See the [Problem Details for HTTP APIs](https://datatracker.ietf.org/doc/html/rfc7807) for more details.
+      properties:
+        detail:
+          description: The occurrence-specific problem description.
+          type: string
+        status:
+          description: The status code of the error.
+          format: int32
+          type: integer
+        title:
+          description: The general problem description.
+          type: string
+      type: object
+    Piece:
+      description: The metadata about a "piece" which may be a story, song, report, etc.
+      properties:
+        contributor:
+          description: The artist or contributor name.
+          maxLength: 26
+          type: string
+        createdDate:
+          description: The date the piece was created. Generated at creation.
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: The short description of the piece.
+          maxLength: 180
+          type: string
+        episodeId:
+          description: The ID of the episode that owns the piece.
+          format: int64
+          minimum: 0
+          type: integer
+        fullDescription:
+          description: The long description of the piece.
+          maxLength: 1200
+          type: string
+        id:
+          description: The unique ID of the piece. Generated at creation.
+          format: int64
+          minimum: 0
+          readOnly: true
+          type: integer
+        imageCdDriveUri:
+          description: The URI to the piece image content in CD Drive. Format should be 'cddrive:id:{value}' or 'cddrive://{path}'. This property is only used on modification and is not returned.
+          type: string
+        imageFileName:
+          description: The name of the piece image file. Generated at creation.
+          type: string
+        imageFileSize:
+          description: The size of the piece image file in bytes. Generated at creation.
+          format: int64
+          type: integer
+        imageOriginalFileName:
+          description: The user's original name of the piece image file.
+          type: string
+        lastModifiedDate:
+          description: The date the piece was last modified/updated. Automatically updated on any write operation.
+          format: date-time
+          readOnly: true
+          type: string
+        relativeEndTime:
+          description: Seconds relative to the start of the episode.
+          format: int32
+          type: integer
+        relativeStartTime:
+          description: Seconds relative to the start of the episode.
+          format: int32
+          type: integer
+        segmentNumber:
+          description: The number of the segment that this piece is in, starting with 1. This is an optional field but it can be used to provide more detail by linking the piece to a specific audio segment.
+          format: int32
+          minimum: 1
+          type: integer
+        title:
+          description: The human readable title of the piece that is normally displayed on an end user's device.
+          maxLength: 37
+          type: string
+      required:
+        - episodeId
+        - title
+        - relativeStartTime
+        - relativeEndTime
+      type: object
+    Program:
+      description: A program that stations can subscribe to to get live or file content.
+      properties:
+        createdDate:
+          description: The date the segment was created. Generated at creation.
+          format: date-time
+          type: string
+        customerId:
+          description: The ID of the customer that owns this program.
+          format: int64
+          minimum: 0
+          type: integer
+        id:
+          description: The unique ID of the program. Generated at creation.
+          format: int64
+          minimum: 0
+          type: integer
+        lastModifiedDate:
+          description: The date the program was last modified/updated. Automatically updated on any write operation.
+          format: date-time
+          type: string
+        title:
+          description: The title of the program.
+          type: string
+      required:
+        - title
+      type: object
+    ProgramInformationBatch:
+      description: An electronic program guide (EPG) batch operation to create or update metadata on one or more guide programs.
+      properties:
+        createdDate:
+          description: The date and time the batch was created.
+          format: dateTime
+          type: string
+        finishedDate:
+          description: The date and time the batch finished (either successful or failed).
+          format: dateTime
+          type: string
+        format:
+          description: The format of the metadata file defining the create or update actions to be performed on one or more EPG programs.
+          enum:
+            - radiodns
+          type: string
+        id:
+          description: The ID of the batch.
+          format: int64
+          minimum: 0
+          type: integer
+        message:
+          description: The human readable success or failure message.
+          type: string
+        name:
+          description: The optional name of the batch for human reference.
+          type: string
+        program:
+          description: The program information to associate the ingested metadata with. This is only required if the metadata format doesn't provide the program title and air date information directly. If this is specified, it will overrite the value specfified in the metadata file. If this is specified, the metadata file should only contain one program.
+          properties:
+            airDate:
+              description: The airDate for the program in ISO 8601 format.
+              format: dateTime
+              type: string
+            title:
+              description: The title of the program.
+              type: string
+          required:
+            - title
+            - airDate
+          type: object
+        status:
+          description: The current processing status.
+          enum:
+            - queued
+            - processing
+            - failed
+            - successful
+          type: string
+        uri:
+          description: The URI to the metadata file defining the batch creates/updates.
+          format: uri
+          type: string
+      required:
+        - id
+        - status
+        - format
+        - createdDate
+      type: object
+    Segment:
+      description: An audio segment in an episode.
+      properties:
+        channels:
+          description: The number of audio channels in the segment. Generated at creation.
+          format: int32
+          type: integer
+        createdDate:
+          description: The date the segment was created. Generated at creation.
+          format: date-time
+          type: string
+        episodeId:
+          description: The ID of the episode that owns the segment.
+          format: int64
+          minimum: 0
+          type: integer
+        fileName:
+          description: The name of the audio content file. Generated at creation.
+          type: string
+        fileSize:
+          description: The size of the audio content file in bytes. Generated at creation.
+          format: int64
+          type: integer
+        id:
+          description: The unique ID of the segment. Generated at creation.
+          format: int64
+          minimum: 0
+          type: integer
+        inCue:
+          description: The in-cue copy that signals the start of the segment to a board operator.
+          type: string
+        lastModifiedDate:
+          description: The date the segment was last modified/updated. Automatically updated on any write operation.
+          format: date-time
+          type: string
+        length:
+          description: The length (duration) of the segment in seconds.
+          format: int32
+          type: integer
+        originalFileName:
+          description: The original name of the audio content file.
+          type: string
+        outCue:
+          description: The out-cue copy that signals the end of the segment to a board operator.
+          type: string
+        segmentNumber:
+          description: The number of the segment in the episode, starting with 1.
+          format: int32
+          minimum: 1
+          type: integer
+      required:
+        - episodeId
+        - segmentNumber
+      type: object
+    Spot:
+      description: An audio spot for insertion.
+      properties:
+        createdDate:
+          description: The date the spot was created. Generated at creation.
+          format: date-time
+          type: string
+        duration:
+          description: The length (duration) of the spot in seconds.
+          format: int32
+          type: integer
+        fileName:
+          description: The name of the audio content file. Generated at creation.
+          type: string
+        fileSize:
+          description: The size of the audio content file in bytes. Generated at creation.
+          format: int64
+          type: integer
+        id:
+          description: The unique ID of the spot. Generated at creation.
+          format: int64
+          minimum: 1
+          type: integer
+        lastModifiedDate:
+          description: The date the spot was last modified/updated. Automatically updated on any write operation.
+          format: date-time
+          type: string
+        lastUploadedDate:
+          description: The date the spot audio file was uploaded. Automatically updated on upload.
+          format: date-time
+          type: string
+        name:
+          description: The unique name of the spot
+          minimum: 1
+          type: string
+        notes:
+          description: Miscellaneous notes about the spot
+          minimum: 1
+          type: string
+        originalFileName:
+          description: The original name of the audio content file.
+          type: string
+      type: object
+    SpotInsertion:
+      description: A spot insertion for playing a series of spots when a cue is received during a program.
+      properties:
+        broadcastServiceId:
+          description: The ID of the broadcast service for the spot insertion.
+          format: int64
+          minimum: 0
+          type: integer
+        createdDate:
+          description: The date and time the spot insertion was created. Generated at creation.
+          format: date-time
+          readOnly: true
+          type: string
+        cue:
+          description: The cue that triggers the spot insertion.
+          example: S:000_SPOT
+          pattern: ^S:[A-F0-9]{3,4}_[A-Za-z0-9_-]*$
+          type: string
+        customerId:
+          description: The ID of the customer who owns the spot insertion. Set to the logged-in customer at creation.
+          format: int64
+          minimum: 0
+          readOnly: true
+          type: integer
+        duration:
+          description: The duration of the spot insertion.
+          format: int32
+          type: integer
+        endDate:
+          description: The date the spot insertion ends. The time will be set to midnight Eastern Time.
+          example: 2020-01-31
+          format: date
+          type: string
+        id:
+          description: The unique ID of the spot insertion. Generated at creation.
+          format: int64
+          minimum: 0
+          readOnly: true
+          type: integer
+        programId:
+          description: The ID of the program for the spot insertion.
+          format: int64
+          minimum: 0
+          type: integer
+        spots:
+          description: The ordered list of spot IDs to play.
+          items:
+            format: int64
+            type: integer
+          type: array
+        startDate:
+          description: The date the spot insertion can start. The time will be set to midnight Eastern Time.
+          example: 2020-01-31
+          format: date
+          type: string
+      required:
+        - programId
+        - broadcastServiceId
+        - cue
+        - duration
+        - spots
+        - startDate
+        - endDate
+      type: object
+  securitySchemes:
+    cd_oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: /api/oauth2/authorize
+          scopes:
+            cd:full: Full access to the ContentDepot account
+          tokenUrl: /api/oauth2/token
+        implicit:
+          authorizationUrl: /api/oauth2/authorize
+          scopes:
+            cd:full: Full access to the ContentDepot account
+      type: oauth2

@@ -1,0 +1,3255 @@
+{
+  "openapi": "3.0.3",
+  "servers": [
+    {
+      "url": "http://apigee.local"
+    },
+    {
+      "url": "https://apigeeregistry.googleapis.com"
+    }
+  ],
+  "info": {
+    "description": "The Registry service allows teams to manage descriptions of APIs.",
+    "title": "Registry API",
+    "version": "0.0.1",
+    "x-apisguru-categories": [
+      "developer_tools"
+    ],
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/apigee/registry/main/openapi.yaml",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "apigee.local",
+    "x-serviceName": "registry",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+    }
+  },
+  "tags": [
+    {
+      "name": "Registry"
+    }
+  ],
+  "paths": {
+    "/v1/projects/{project}/locations/{location}/apis": {
+      "get": {
+        "description": "ListApis returns matching APIs.",
+        "operationId": "Registry_ListApis",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of APIs to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A page token, received from a previous `ListApis` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListApis` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApisResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "post": {
+        "description": "CreateApi creates a specified API.",
+        "operationId": "Registry_CreateApi",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. The ID to use for the api, which will become the final component of the api's resource name. This value should be 4-63 characters, and valid characters are /[a-z][0-9]-/. Following AIP-162, IDs must not have the form of a UUID.",
+            "in": "query",
+            "name": "apiId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Api"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Api"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}": {
+      "delete": {
+        "description": "DeleteApi removes a specified API and all of the resources that it\n owns.",
+        "operationId": "Registry_DeleteApi",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set to true, any child resources will also be deleted. (Otherwise, the request will only work if there are no child resources.)",
+            "in": "query",
+            "name": "force",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {},
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "get": {
+        "description": "GetApi returns a specified API.",
+        "operationId": "Registry_GetApi",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Api"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "patch": {
+        "description": "UpdateApi can be used to modify a specified API.",
+        "operationId": "Registry_UpdateApi",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a \"*\" is specified, all fields are updated, including fields that are unspecified/default in the request.",
+            "in": "query",
+            "name": "updateMask",
+            "schema": {
+              "format": "field-mask",
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set to true, and the api is not found, a new api_versions will be created. In this situation, `update_mask` is ignored.",
+            "in": "query",
+            "name": "allowMissing",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Api"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Api"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/deployments": {
+      "get": {
+        "description": "ListApiDeployments returns matching deployments.",
+        "operationId": "Registry_ListApiDeployments",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of deployments to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A page token, received from a previous `ListApiDeployments` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListApiDeployments` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApiDeploymentsResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "post": {
+        "description": "CreateApiDeployment creates a specified deployment.",
+        "operationId": "Registry_CreateApiDeployment",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. The ID to use for the deployment, which will become the final component of the deployment's resource name. This value should be 4-63 characters, and valid characters are /[a-z][0-9]-/. Following AIP-162, IDs must not have the form of a UUID.",
+            "in": "query",
+            "name": "apiDeploymentId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiDeployment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiDeployment"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/deployments/{deployment}": {
+      "delete": {
+        "description": "DeleteApiDeployment removes a specified deployment, all revisions, and all\n child resources (e.g. artifacts).",
+        "operationId": "Registry_DeleteApiDeployment",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The deployment id.",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set to true, any child resources will also be deleted. (Otherwise, the request will only work if there are no child resources.)",
+            "in": "query",
+            "name": "force",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {},
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "get": {
+        "description": "GetApiDeployment returns a specified deployment.",
+        "operationId": "Registry_GetApiDeployment",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The deployment id.",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiDeployment"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "patch": {
+        "description": "UpdateApiDeployment can be used to modify a specified deployment.",
+        "operationId": "Registry_UpdateApiDeployment",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The deployment id.",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a \"*\" is specified, all fields are updated, including fields that are unspecified/default in the request.",
+            "in": "query",
+            "name": "updateMask",
+            "schema": {
+              "format": "field-mask",
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set to true, and the deployment is not found, a new deployment will be created. In this situation, `update_mask` is ignored.",
+            "in": "query",
+            "name": "allowMissing",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiDeployment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiDeployment"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/deployments/{deployment}:deleteRevision": {
+      "delete": {
+        "description": "DeleteApiDeploymentRevision deletes a revision of a deployment.",
+        "operationId": "Registry_DeleteApiDeploymentRevision",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The deployment id.",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiDeployment"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/deployments/{deployment}:listRevisions": {
+      "get": {
+        "description": "ListApiDeploymentRevisions lists all revisions of a deployment.\n Revisions are returned in descending order of revision creation time.",
+        "operationId": "Registry_ListApiDeploymentRevisions",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The deployment id.",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of revisions to return per page.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The page token, received from a previous ListApiDeploymentRevisions call. Provide this to retrieve the subsequent page.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApiDeploymentRevisionsResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/deployments/{deployment}:rollback": {
+      "post": {
+        "description": "RollbackApiDeployment sets the current revision to a specified prior\n revision. Note that this creates a new revision with a new revision ID.",
+        "operationId": "Registry_RollbackApiDeployment",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The deployment id.",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RollbackApiDeploymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiDeployment"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/deployments/{deployment}:tagRevision": {
+      "post": {
+        "description": "TagApiDeploymentRevision adds a tag to a specified revision of a\n deployment.",
+        "operationId": "Registry_TagApiDeploymentRevision",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The deployment id.",
+            "in": "path",
+            "name": "deployment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagApiDeploymentRevisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiDeployment"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions": {
+      "get": {
+        "description": "ListApiVersions returns matching versions.",
+        "operationId": "Registry_ListApiVersions",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of versions to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A page token, received from a previous `ListApiVersions` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListApiVersions` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApiVersionsResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "post": {
+        "description": "CreateApiVersion creates a specified version.",
+        "operationId": "Registry_CreateApiVersion",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. The ID to use for the version, which will become the final component of the version's resource name. This value should be 4-63 characters, and valid characters are /[a-z][0-9]-/. Following AIP-162, IDs must not have the form of a UUID.",
+            "in": "query",
+            "name": "apiVersionId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiVersion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiVersion"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions/{version}": {
+      "delete": {
+        "description": "DeleteApiVersion removes a specified version and all of the resources that\n it owns.",
+        "operationId": "Registry_DeleteApiVersion",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set to true, any child resources will also be deleted. (Otherwise, the request will only work if there are no child resources.)",
+            "in": "query",
+            "name": "force",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {},
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "get": {
+        "description": "GetApiVersion returns a specified version.",
+        "operationId": "Registry_GetApiVersion",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiVersion"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "patch": {
+        "description": "UpdateApiVersion can be used to modify a specified version.",
+        "operationId": "Registry_UpdateApiVersion",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a \"*\" is specified, all fields are updated, including fields that are unspecified/default in the request.",
+            "in": "query",
+            "name": "updateMask",
+            "schema": {
+              "format": "field-mask",
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set to true, and the version is not found, a new version will be created. In this situation, `update_mask` is ignored.",
+            "in": "query",
+            "name": "allowMissing",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiVersion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiVersion"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs": {
+      "get": {
+        "description": "ListApiSpecs returns matching specs.",
+        "operationId": "Registry_ListApiSpecs",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of specs to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A page token, received from a previous `ListApiSpecs` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListApiSpecs` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields except contents.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApiSpecsResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "post": {
+        "description": "CreateApiSpec creates a specified spec.",
+        "operationId": "Registry_CreateApiSpec",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. The ID to use for the spec, which will become the final component of the spec's resource name. This value should be 4-63 characters, and valid characters are /[a-z][0-9]-/. Following AIP-162, IDs must not have the form of a UUID.",
+            "in": "query",
+            "name": "apiSpecId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiSpec"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSpec"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}": {
+      "delete": {
+        "description": "DeleteApiSpec removes a specified spec, all revisions, and all child\n resources (e.g. artifacts).",
+        "operationId": "Registry_DeleteApiSpec",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The spec id.",
+            "in": "path",
+            "name": "spec",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set to true, any child resources will also be deleted. (Otherwise, the request will only work if there are no child resources.)",
+            "in": "query",
+            "name": "force",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {},
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "get": {
+        "description": "GetApiSpec returns a specified spec.",
+        "operationId": "Registry_GetApiSpec",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The spec id.",
+            "in": "path",
+            "name": "spec",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSpec"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "patch": {
+        "description": "UpdateApiSpec can be used to modify a specified spec.",
+        "operationId": "Registry_UpdateApiSpec",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The spec id.",
+            "in": "path",
+            "name": "spec",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a \"*\" is specified, all fields are updated, including fields that are unspecified/default in the request.",
+            "in": "query",
+            "name": "updateMask",
+            "schema": {
+              "format": "field-mask",
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set to true, and the spec is not found, a new spec will be created. In this situation, `update_mask` is ignored.",
+            "in": "query",
+            "name": "allowMissing",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiSpec"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSpec"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}:deleteRevision": {
+      "delete": {
+        "description": "DeleteApiSpecRevision deletes a revision of a spec.",
+        "operationId": "Registry_DeleteApiSpecRevision",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The spec id.",
+            "in": "path",
+            "name": "spec",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSpec"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}:getContents": {
+      "get": {
+        "description": "GetApiSpecContents returns the contents of a specified spec.\n If specs are stored with GZip compression, the default behavior\n is to return the spec uncompressed (the mime_type response field\n indicates the exact format returned).",
+        "operationId": "Registry_GetApiSpecContents",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The spec id.",
+            "in": "path",
+            "name": "spec",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {}
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}:listRevisions": {
+      "get": {
+        "description": "ListApiSpecRevisions lists all revisions of a spec.\n Revisions are returned in descending order of revision creation time.",
+        "operationId": "Registry_ListApiSpecRevisions",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The spec id.",
+            "in": "path",
+            "name": "spec",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of revisions to return per page.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The page token, received from a previous ListApiSpecRevisions call. Provide this to retrieve the subsequent page.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApiSpecRevisionsResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}:rollback": {
+      "post": {
+        "description": "RollbackApiSpec sets the current revision to a specified prior revision.\n Note that this creates a new revision with a new revision ID.",
+        "operationId": "Registry_RollbackApiSpec",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The spec id.",
+            "in": "path",
+            "name": "spec",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RollbackApiSpecRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSpec"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}:tagRevision": {
+      "post": {
+        "description": "TagApiSpecRevision adds a tag to a specified revision of a spec.",
+        "operationId": "Registry_TagApiSpecRevision",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The api id.",
+            "in": "path",
+            "name": "api",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The version id.",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The spec id.",
+            "in": "path",
+            "name": "spec",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagApiSpecRevisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSpec"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/artifacts": {
+      "get": {
+        "description": "ListArtifacts returns matching artifacts.",
+        "operationId": "Registry_ListArtifacts",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of artifacts to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A page token, received from a previous `ListArtifacts` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListArtifacts` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields except contents.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListArtifactsResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "post": {
+        "description": "CreateArtifact creates a specified artifact.",
+        "operationId": "Registry_CreateArtifact",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. The ID to use for the artifact, which will become the final component of the artifact's resource name. This value should be 4-63 characters, and valid characters are /[a-z][0-9]-/. Following AIP-162, IDs must not have the form of a UUID.",
+            "in": "query",
+            "name": "artifactId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Artifact"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artifact"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/artifacts/{artifact}": {
+      "delete": {
+        "description": "DeleteArtifact removes a specified artifact.",
+        "operationId": "Registry_DeleteArtifact",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The artifact id.",
+            "in": "path",
+            "name": "artifact",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {},
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "get": {
+        "description": "GetArtifact returns a specified artifact.",
+        "operationId": "Registry_GetArtifact",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The artifact id.",
+            "in": "path",
+            "name": "artifact",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artifact"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      },
+      "put": {
+        "description": "ReplaceArtifact can be used to replace a specified artifact.",
+        "operationId": "Registry_ReplaceArtifact",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The artifact id.",
+            "in": "path",
+            "name": "artifact",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Artifact"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artifact"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    },
+    "/v1/projects/{project}/locations/{location}/artifacts/{artifact}:getContents": {
+      "get": {
+        "description": "GetArtifactContents returns the contents of a specified artifact.\n If artifacts are stored with GZip compression, the default behavior\n is to return the artifact uncompressed (the mime_type response field\n indicates the exact format returned).",
+        "operationId": "Registry_GetArtifactContents",
+        "parameters": [
+          {
+            "description": "The project id.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The location id.",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The artifact id.",
+            "in": "path",
+            "name": "artifact",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {}
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Registry"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Api": {
+        "description": "An Api is a top-level description of an API. Apis are produced by producers and are commitments to provide services.",
+        "properties": {
+          "annotations": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.",
+            "type": "object"
+          },
+          "availability": {
+            "description": "A user-definable description of the availability of this service. Format: free-form, but we expect single words that describe availability, e.g. \"NONE\", \"TESTING\", \"PREVIEW\", \"GENERAL\", \"DEPRECATED\", \"SHUTDOWN\".",
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Output only. Creation timestamp.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "description": {
+            "description": "A detailed description.",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "Human-meaningful name.",
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with \"apigeeregistry.googleapis.com/\" and cannot be changed.",
+            "type": "object"
+          },
+          "name": {
+            "description": "Resource name.",
+            "type": "string"
+          },
+          "recommendedDeployment": {
+            "description": "The recommended deployment of the API. Format: apis/{api}/deployments/{deployment}",
+            "type": "string"
+          },
+          "recommendedVersion": {
+            "description": "The recommended version of the API. Format: apis/{api}/versions/{version}",
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Output only. Last update timestamp.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ApiDeployment": {
+        "description": "An ApiDeployment describes a service running at particular address that provides a particular version of an API. ApiDeployments have revisions which correspond to different configurations of a single deployment in time. Revision identifiers should be updated whenever the served API spec or endpoint address changes.",
+        "properties": {
+          "accessGuidance": {
+            "description": "Text briefly describing how to access the endpoint. Changes to this value will not affect the revision.",
+            "type": "string"
+          },
+          "annotations": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.",
+            "type": "object"
+          },
+          "apiSpecRevision": {
+            "description": "The full resource name (including revision id) of the spec of the API being served by the deployment. Changes to this value will update the revision. Format: apis/{api}/deployments/{deployment}",
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Output only. Creation timestamp; when the deployment resource was created.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "description": {
+            "description": "A detailed description.",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "Human-meaningful name.",
+            "type": "string"
+          },
+          "endpointUri": {
+            "description": "The address where the deployment is serving. Changes to this value will update the revision.",
+            "type": "string"
+          },
+          "externalChannelUri": {
+            "description": "The address of the external channel of the API (e.g. the Developer Portal). Changes to this value will not affect the revision.",
+            "type": "string"
+          },
+          "intendedAudience": {
+            "description": "Text briefly identifying the intended audience of the API. Changes to this value will not affect the revision.",
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with \"registry.googleapis.com/\" and cannot be changed.",
+            "type": "object"
+          },
+          "name": {
+            "description": "Resource name.",
+            "type": "string"
+          },
+          "revisionCreateTime": {
+            "description": "Output only. Revision creation timestamp; when the represented revision was created.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "revisionId": {
+            "description": "Output only. Immutable. The revision ID of the deployment. A new revision is committed whenever the deployment contents are changed. The format is an 8-character hexadecimal string.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "revisionUpdateTime": {
+            "description": "Output only. Last update timestamp: when the represented revision was last modified.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ApiSpec": {
+        "description": "An ApiSpec describes a version of an API in a structured way. ApiSpecs provide formal descriptions that consumers can use to use a version. ApiSpec resources are intended to be fully-resolved descriptions of an ApiVersion. When specs consist of multiple files, these should be bundled together (e.g. in a zip archive) and stored as a unit. Multiple specs can exist to provide representations in different API description formats. Synchronization of these representations would be provided by tooling and background services.",
+        "properties": {
+          "annotations": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.",
+            "type": "object"
+          },
+          "contents": {
+            "description": "Input only. The contents of the spec. Provided by API callers when specs are created or updated. To access the contents of a spec, use GetApiSpecContents.",
+            "format": "bytes",
+            "type": "string",
+            "writeOnly": true
+          },
+          "createTime": {
+            "description": "Output only. Creation timestamp; when the spec resource was created.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "description": {
+            "description": "A detailed description.",
+            "type": "string"
+          },
+          "filename": {
+            "description": "A possibly-hierarchical name used to refer to the spec from other specs.",
+            "type": "string"
+          },
+          "hash": {
+            "description": "Output only. A SHA-256 hash of the spec's contents. If the spec is gzipped, this is the hash of the uncompressed spec.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with \"apigeeregistry.googleapis.com/\" and cannot be changed.",
+            "type": "object"
+          },
+          "mimeType": {
+            "description": "A style (format) descriptor for this spec that is specified as a Media Type (https://en.wikipedia.org/wiki/Media_type). Possible values include \"application/vnd.apigee.proto\", \"application/vnd.apigee.openapi\", and \"application/vnd.apigee.graphql\", with possible suffixes representing compression types. These hypothetical names are defined in the vendor tree defined in RFC6838 (https://tools.ietf.org/html/rfc6838) and are not final. Content types can specify compression. Currently only GZip compression is supported (indicated with \"+gzip\").",
+            "type": "string"
+          },
+          "name": {
+            "description": "Resource name.",
+            "type": "string"
+          },
+          "revisionCreateTime": {
+            "description": "Output only. Revision creation timestamp; when the represented revision was created.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "revisionId": {
+            "description": "Output only. Immutable. The revision ID of the spec. A new revision is committed whenever the spec contents are changed. The format is an 8-character hexadecimal string.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "revisionUpdateTime": {
+            "description": "Output only. Last update timestamp: when the represented revision was last modified.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "sizeBytes": {
+            "description": "Output only. The size of the spec file in bytes. If the spec is gzipped, this is the size of the uncompressed spec.",
+            "format": "int32",
+            "readOnly": true,
+            "type": "integer"
+          },
+          "sourceUri": {
+            "description": "The original source URI of the spec (if one exists). This is an external location that can be used for reference purposes but which may not be authoritative since this external resource may change after the spec is retrieved.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ApiVersion": {
+        "description": "An ApiVersion describes a particular version of an API. ApiVersions are what consumers actually use.",
+        "properties": {
+          "annotations": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.",
+            "type": "object"
+          },
+          "createTime": {
+            "description": "Output only. Creation timestamp.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "description": {
+            "description": "A detailed description.",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "Human-meaningful name.",
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with \"apigeeregistry.googleapis.com/\" and cannot be changed.",
+            "type": "object"
+          },
+          "name": {
+            "description": "Resource name.",
+            "type": "string"
+          },
+          "state": {
+            "description": "A user-definable description of the lifecycle phase of this API version. Format: free-form, but we expect single words that describe API maturity, e.g. \"CONCEPT\", \"DESIGN\", \"DEVELOPMENT\", \"STAGING\", \"PRODUCTION\", \"DEPRECATED\", \"RETIRED\".",
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Output only. Last update timestamp.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Artifact": {
+        "description": "Artifacts of resources. Artifacts are unique (single-value) per resource and are used to store metadata that is too large or numerous to be stored directly on the resource. Since artifacts are stored separately from parent resources, they should generally be used for metadata that is needed infrequently, i.e. not for display in primary views of the resource but perhaps displayed or downloaded upon request. The ListArtifacts method allows artifacts to be quickly enumerated and checked for presence without downloading their (potentially-large) contents.",
+        "properties": {
+          "contents": {
+            "description": "Input only. The contents of the artifact. Provided by API callers when artifacts are created or replaced. To access the contents of an artifact, use GetArtifactContents.",
+            "format": "bytes",
+            "type": "string",
+            "writeOnly": true
+          },
+          "createTime": {
+            "description": "Output only. Creation timestamp.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "hash": {
+            "description": "Output only. A SHA-256 hash of the artifact's contents. If the artifact is gzipped, this is the hash of the uncompressed artifact.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "mimeType": {
+            "description": "A content type specifier for the artifact. Content type specifiers are Media Types (https://en.wikipedia.org/wiki/Media_type) with a possible \"schema\" parameter that specifies a schema for the stored information. Content types can specify compression. Currently only GZip compression is supported (indicated with \"+gzip\").",
+            "type": "string"
+          },
+          "name": {
+            "description": "Resource name.",
+            "type": "string"
+          },
+          "sizeBytes": {
+            "description": "Output only. The size of the artifact in bytes. If the artifact is gzipped, this is the size of the uncompressed artifact.",
+            "format": "int32",
+            "readOnly": true,
+            "type": "integer"
+          },
+          "updateTime": {
+            "description": "Output only. Last update timestamp.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "GoogleProtobufAny": {
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.",
+        "properties": {
+          "@type": {
+            "description": "The type of the serialized message.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListApiDeploymentRevisionsResponse": {
+        "description": "Response message for ListApiDeploymentRevisionsResponse.",
+        "properties": {
+          "apiDeployments": {
+            "description": "The revisions of the deployment.",
+            "items": {
+              "$ref": "#/components/schemas/ApiDeployment"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListApiDeploymentsResponse": {
+        "description": "Response message for ListApiDeployments.",
+        "properties": {
+          "apiDeployments": {
+            "description": "The deployments from the specified publisher.",
+            "items": {
+              "$ref": "#/components/schemas/ApiDeployment"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListApiSpecRevisionsResponse": {
+        "description": "Response message for ListApiSpecRevisionsResponse.",
+        "properties": {
+          "apiSpecs": {
+            "description": "The revisions of the spec.",
+            "items": {
+              "$ref": "#/components/schemas/ApiSpec"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListApiSpecsResponse": {
+        "description": "Response message for ListApiSpecs.",
+        "properties": {
+          "apiSpecs": {
+            "description": "The specs from the specified publisher.",
+            "items": {
+              "$ref": "#/components/schemas/ApiSpec"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListApiVersionsResponse": {
+        "description": "Response message for ListApiVersions.",
+        "properties": {
+          "apiVersions": {
+            "description": "The versions from the specified publisher.",
+            "items": {
+              "$ref": "#/components/schemas/ApiVersion"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListApisResponse": {
+        "description": "Response message for ListApis.",
+        "properties": {
+          "apis": {
+            "description": "The APIs from the specified publisher.",
+            "items": {
+              "$ref": "#/components/schemas/Api"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListArtifactsResponse": {
+        "description": "Response message for ListArtifacts.",
+        "properties": {
+          "artifacts": {
+            "description": "The artifacts from the specified publisher.",
+            "items": {
+              "$ref": "#/components/schemas/Artifact"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "RollbackApiDeploymentRequest": {
+        "description": "Request message for RollbackApiDeployment.",
+        "properties": {
+          "name": {
+            "description": "Required. The deployment being rolled back.",
+            "type": "string"
+          },
+          "revisionId": {
+            "description": "Required. The revision ID to roll back to. It must be a revision of the same deployment.   Example: c7cfa2a8",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "revisionId"
+        ],
+        "type": "object"
+      },
+      "RollbackApiSpecRequest": {
+        "description": "Request message for RollbackApiSpec.",
+        "properties": {
+          "name": {
+            "description": "Required. The spec being rolled back.",
+            "type": "string"
+          },
+          "revisionId": {
+            "description": "Required. The revision ID to roll back to. It must be a revision of the same spec.   Example: c7cfa2a8",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "revisionId"
+        ],
+        "type": "object"
+      },
+      "Status": {
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
+        "properties": {
+          "code": {
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+            "format": "int32",
+            "type": "integer"
+          },
+          "details": {
+            "description": "A list of messages that carry the error details.  There is a common set of message types for APIs to use.",
+            "items": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TagApiDeploymentRevisionRequest": {
+        "description": "Request message for TagApiDeploymentRevision.",
+        "properties": {
+          "name": {
+            "description": "Required. The name of the deployment to be tagged, including the revision ID.",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Required. The tag to apply. The tag should be at most 40 characters, and match `[a-z][a-z0-9-]{3,39}`.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "tag"
+        ],
+        "type": "object"
+      },
+      "TagApiSpecRevisionRequest": {
+        "description": "Request message for TagApiSpecRevision.",
+        "properties": {
+          "name": {
+            "description": "Required. The name of the spec to be tagged, including the revision ID.",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Required. The tag to apply. The tag should be at most 40 characters, and match `[a-z][a-z0-9-]{3,39}`.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "tag"
+        ],
+        "type": "object"
+      }
+    }
+  }
+}

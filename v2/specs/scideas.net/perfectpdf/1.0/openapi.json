@@ -1,0 +1,105 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://services.scideas.net"
+    }
+  ],
+  "info": {
+    "contact": {
+      "email": "software@scideas.net",
+      "name": "scideas software",
+      "url": "https://scideas.net"
+    },
+    "description": "The perfectpdf api does one thing, perfectly: it converts html to pdf. The perfectpdf api uses headless Google Chrome to provide a low cost, high quality, simple to use service.",
+    "termsOfService": "https://scideas.net/terms",
+    "title": "perfectpdf api",
+    "version": "1.0",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_scideas.net_media_logos_favicon_apple-touch-icon-57x57.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://services.scideas.net/perfectpdf/resources/openapi3.0.0-perfectpdf-1.0.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "scideas.net",
+    "x-serviceName": "perfectpdf"
+  },
+  "externalDocs": {
+    "url": "https://services.scideas.net/perfectpdf"
+  },
+  "paths": {
+    "/perfectpdf/api": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/perfectpdf_api_body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            },
+            "description": "Either a PDF document or an error message"
+          }
+        },
+        "summary": "Returns PDF document."
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "error": {
+        "description": "an error message",
+        "example": "Error: html empty",
+        "type": "string"
+      },
+      "inline_response_200": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/error"
+          },
+          {
+            "$ref": "#/components/schemas/result"
+          }
+        ]
+      },
+      "perfectpdf_api_body": {
+        "properties": {
+          "api_key": {
+            "description": "api key",
+            "example": "abc123",
+            "type": "string"
+          },
+          "html": {
+            "description": "html/css markup",
+            "example": "<!doctype html><html><head><meta charset=\"UTF-8\"><title>my title</title><script src=\"script.js\"></script></head><body><div>My PDF</div></body></html>",
+            "type": "string"
+          }
+        },
+        "required": [
+          "api_key",
+          "html"
+        ],
+        "type": "object"
+      },
+      "result": {
+        "description": "PDF document",
+        "type": "string"
+      }
+    }
+  }
+}

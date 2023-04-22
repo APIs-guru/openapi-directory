@@ -1,0 +1,407 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://api.ebay.com/buy/marketing/v1_beta"
+    }
+  ],
+  "info": {
+    "contact": {
+      "name": "eBay Inc,",
+      "x-twitter": "ebay"
+    },
+    "description": "The Marketing API retrieves eBay products based on a metric, such as Best Selling, as well as products that were also bought and also viewed.",
+    "license": {
+      "name": "eBay API License Agreement",
+      "url": "https://go.developer.ebay.com/api-license-agreement"
+    },
+    "title": "Buy Marketing API",
+    "version": "v1_beta.2.0",
+    "x-apisguru-categories": [
+      "ecommerce"
+    ],
+    "x-logo": {
+      "backgroundColor": "#FFFFFF",
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://developer.ebay.com/api-docs/master/buy/marketing/openapi/2/buy_marketing_v1_beta_oas2.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "ebay.com",
+    "x-serviceName": "buy-marketing"
+  },
+  "paths": {
+    "/merchandised_product": {
+      "get": {
+        "description": "This method returns an array of products based on the category and metric specified. This includes details of the product, such as the eBay product ID (EPID), title, and user reviews and ratings for the product. You can use the <code>epid</code> returned by this method in the Browse API <b>search</b> method to retrieve items for this product. <h3><b>Restrictions </b></h3> <ul><li>To test <b> getMerchandisedProducts</b> in Sandbox, you must use category ID 9355 and the response will be mock data.  </li>   <li>For a list of supported sites and other restrictions, see <a href=\"/api-docs/buy/marketing/overview.html#API\">API Restrictions</a>.</li>  </ul>",
+        "operationId": "getMerchandisedProducts",
+        "parameters": [
+          {
+            "description": "The aspect name/value pairs used to further refine product results. <br /><br /> For example: <br />&nbsp;&nbsp;&nbsp;<code>/buy/marketing/v1_beta/merchandised_product?category_id=31388&metric_name=BEST_SELLING&aspect_filter=Brand:Canon</code>  <br /><br />You can use the Browse API <b>search</b> method with the <code>fieldgroups=ASPECT_REFINEMENTS</code> field to return the aspects of a product. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/buy/marketing/types/gct:MarketingAspectFilter",
+            "in": "query",
+            "name": "aspect_filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This query parameter limits the products returned to a specific eBay category.  <br /> <br />The list of eBay category IDs is not published and category IDs are not all the same across all the eBay maketplace. You can use the following techniques to find a category by site: <ul> <li>Use the <a href=\"https://pages.ebay.com/sellerinformation/news/categorychanges.html\" target=\"_blank\">Category Changes page</a>.</li> <li>Use the Taxonomy API. For details see <a href=\"/api-docs/buy/buy-categories.html\">Get Categories for Buy APIs</a>. </li>  <li>Use the Browse API and submit the following method to get the <b> dominantCategoryId</b> for an item. <br /><code>/buy/browse/v1/item_summary/search?q=<em>keyword</em>&fieldgroups=ASPECT_REFINEMENTS  </code></li></ul>  <b> Maximum: </b> 1 <br /> <b> Required: </b> 1 ",
+            "in": "query",
+            "name": "category_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This value specifies the maximum number of products to return in a result set. <br /> <br /><span class=\"tablenote\"> <b>Note:</b> Maximum value means the method will return up <em>to</em> that many products per set, but it can be less than this value. If the number of products found is less than this value, the method will return all of the products matching the criteria.</span>  <br /><br /><b> Default:</b> 8<br /><b> Maximum: </b>100",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This value filters the result set by the specified metric. Only products in this metric are returned. Currently, the only metric supported is <code> BEST_SELLING</code>. <br /><br /><b> Default: </b>BEST_SELLING <br /> <b> Maximum: </b> 1 <br /> <b> Required: </b> 1",
+            "in": "query",
+            "name": "metric_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BestSellingProductResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "x-response-codes": {
+              "errors": {
+                "70001": {
+                  "category": "REQUEST",
+                  "description": "A metric_name is required to make the API call.",
+                  "domain": "API_MARKETING"
+                },
+                "70002": {
+                  "category": "REQUEST",
+                  "description": "The metric_name {metric_name} is invalid.",
+                  "domain": "API_MARKETING"
+                },
+                "70003": {
+                  "category": "REQUEST",
+                  "description": "A categoryId is required to make the API call.",
+                  "domain": "API_MARKETING"
+                },
+                "70004": {
+                  "category": "REQUEST",
+                  "description": "The category id {categoryId} is invalid",
+                  "domain": "API_MARKETING"
+                },
+                "70005": {
+                  "category": "REQUEST",
+                  "description": "The 'limit' value should be between 1 and 100 (inclusive).",
+                  "domain": "API_MARKETING"
+                },
+                "70006": {
+                  "category": "REQUEST",
+                  "description": "The 'limit' value must be an integer value.",
+                  "domain": "API_MARKETING"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "x-response-codes": {
+              "errors": {
+                "70007": {
+                  "category": "BUSINESS",
+                  "description": "The marketplace value {marketplace} is not supported. The supported values are: {marketplaces}.",
+                  "domain": "API_MARKETING"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "x-response-codes": {
+              "errors": {
+                "70000": {
+                  "category": "APPLICATION",
+                  "description": "There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.",
+                  "domain": "API_MARKETING"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Client_Credentials": [
+              "https://api.ebay.com/oauth/api_scope/buy.marketing"
+            ]
+          }
+        ],
+        "tags": [
+          "merchandised_product"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Amount": {
+        "description": "This type defines the monetary value of an amount and the currency used.",
+        "properties": {
+          "currency": {
+            "description": "The three-letter <a href=\"https://www.iso.org/iso-4217-currency-codes.html\" target=\"_blank\">ISO 4217</a> code representing the currency of the amount in the <b> value</b> field. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/marketing/types/bas:CurrencyCodeEnum'>eBay API documentation</a>",
+            "type": "string"
+          },
+          "value": {
+            "description": "The monetary amount, in the currency specified by the <b> currency</b> field. ",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "BestSellingProductResponse": {
+        "description": "The type that defines the fields for the best selling product information.",
+        "properties": {
+          "merchandisedProducts": {
+            "description": "An array of containers for the products.",
+            "items": {
+              "$ref": "#/components/schemas/MerchandisedProduct"
+            },
+            "type": "array"
+          },
+          "warnings": {
+            "description": "The container with all the warnings for the input request.",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Error": {
+        "description": "The type that defines the fields that can be returned in an error.",
+        "properties": {
+          "category": {
+            "description": "This string value indicates the error category. There are three categories of errors: request errors, application errors, and system errors. ",
+            "type": "string"
+          },
+          "domain": {
+            "description": "The name of the primary system where the error occurred. This is relevant for application errors.",
+            "type": "string"
+          },
+          "errorId": {
+            "description": "A unique code that identifies the particular error or warning that occurred. Your application can use error codes as identifiers in your customized error-handling algorithms.",
+            "type": "integer"
+          },
+          "inputRefIds": {
+            "description": "An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "longMessage": {
+            "description": "A detailed description of the condition that caused the error or warning, and information on what to do to correct the problem.",
+            "type": "string"
+          },
+          "message": {
+            "description": "A description of the condition that caused the error or warning.",
+            "type": "string"
+          },
+          "outputRefIds": {
+            "description": "An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "parameters": {
+            "description": "An array of warning and error messages that return one or more variables contextual information about the error or warning. This is often the field or value that triggered the error or warning.",
+            "items": {
+              "$ref": "#/components/schemas/ErrorParameter"
+            },
+            "type": "array"
+          },
+          "subdomain": {
+            "description": "The name of the subdomain in which the error or warning occurred.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ErrorParameter": {
+        "description": "An array of name/value pairs that provide details regarding the error.",
+        "properties": {
+          "name": {
+            "description": "This is the name of input field that caused an issue with the call request.",
+            "type": "string"
+          },
+          "value": {
+            "description": "This is the actual value that was passed in for the element specified in the <b> name</b>  field.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Image": {
+        "description": "Type the defines the details of an image, such as size and URL. Currently only <b> imageUrl</b> is getting populated. The <b> height</b> and <b> width</b> were added for future use.",
+        "properties": {
+          "height": {
+            "description": "<b> Reserved for future use. </b> ",
+            "type": "integer"
+          },
+          "imageUrl": {
+            "description": "The URL of the image.",
+            "type": "string"
+          },
+          "width": {
+            "description": "<b> Reserved for future use. </b> ",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "MarketPriceDetail": {
+        "description": "The type that defines the fields for details about the product, such as condition and estimated start price.",
+        "properties": {
+          "conditionGroup": {
+            "description": "The name for the condition of the product. For example: NEW",
+            "type": "string"
+          },
+          "conditionIds": {
+            "description": "An array of condition identifiers for the product.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "estimatedStartPrice": {
+            "$ref": "#/components/schemas/Amount"
+          }
+        },
+        "type": "object"
+      },
+      "MerchandisedProduct": {
+        "description": "The type that defines the fields for product information, including price, condition, ratings, etc.",
+        "properties": {
+          "averageRating": {
+            "description": "The average rating for the product based on eBay user ratings.",
+            "type": "string"
+          },
+          "epid": {
+            "description": "The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API <b>search</b> method to retrieve items for this product.",
+            "type": "string"
+          },
+          "image": {
+            "$ref": "#/components/schemas/Image"
+          },
+          "marketPriceDetails": {
+            "description": "An array of containers for the product market price details, such as condition and market price.",
+            "items": {
+              "$ref": "#/components/schemas/MarketPriceDetail"
+            },
+            "type": "array"
+          },
+          "ratingAspects": {
+            "description": "An array of containers for ratings of the product aspects, such as \"Is it a good value\".",
+            "items": {
+              "$ref": "#/components/schemas/RatingAspect"
+            },
+            "type": "array"
+          },
+          "ratingCount": {
+            "description": "The total number of eBay users that rated the product.",
+            "type": "integer"
+          },
+          "reviewCount": {
+            "description": "The total number of eBay users that wrote a review for the product. ",
+            "type": "integer"
+          },
+          "title": {
+            "description": "The title of the product.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "RatingAspect": {
+        "description": "The type that defines the fields for the product aspect ratings.",
+        "properties": {
+          "count": {
+            "description": "The number of eBay users that rated the product on this aspect.",
+            "type": "integer"
+          },
+          "description": {
+            "description": "The name of the rating aspect. Camping tent examples: Is it lightweight? or Is it easy to set up?",
+            "type": "string"
+          },
+          "name": {
+            "description": "The answer or value of the rating aspect. Camping tent examples: Lightweight or Easy to set up",
+            "type": "string"
+          },
+          "ratingAspectDistributions": {
+            "description": "The container for the details of the aspect rating. The details show the aspect rating value, usually TRUE or FALSE and the user count and percentage.",
+            "items": {
+              "$ref": "#/components/schemas/RatingAspectDistribution"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "RatingAspectDistribution": {
+        "description": "The type that defines the field for the aspect rating details, such as the aspect rating value, usually TRUE or FALSE and the user count and percentage.",
+        "properties": {
+          "count": {
+            "description": "The number of eBay users that choose this rating aspect value.",
+            "type": "integer"
+          },
+          "percentage": {
+            "description": "The percentage of the aspect rating value. <br /><br /> <b> ratingAspectDistributions.percentage</b> =  <b> ratingAspectDistributions.count</b> /  <b>ratingAspects.count</b>",
+            "type": "string"
+          },
+          "value": {
+            "description": "The rating aspect. For example: TRUE or FALSE",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Client_Credentials": {
+        "description": "The security definitions for this API. Please check individual operations for applicable scopes.",
+        "flows": {
+          "clientCredentials": {
+            "scopes": {
+              "https://api.ebay.com/oauth/api_scope/buy.marketing": "Retrieve eBay product and listing data for use in marketing merchandise to buyers"
+            },
+            "tokenUrl": "https://api.ebay.com/identity/v1/oauth2/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  }
+}

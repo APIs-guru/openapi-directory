@@ -1,0 +1,1298 @@
+{
+  "swagger": "2.0",
+  "schemes": [
+    "https"
+  ],
+  "host": "api.thesmsworks.co.uk",
+  "basePath": "/v1",
+  "info": {
+    "contact": {
+      "x-twitter": "thesmsworks"
+    },
+    "description": "The SMS Works provides a low-cost, reliable SMS API for developers. Pay only for delivered texts, all failed messages are refunded.",
+    "title": "The SMS Works API",
+    "version": "1.8.0",
+    "x-apisguru-categories": [
+      "messaging"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_thesmsworks_profile_image.jpeg"
+    },
+    "x-origin": [
+      {
+        "format": "swagger",
+        "url": "https://api.thesmsworks.co.uk/api/swagger/swagger.yaml",
+        "version": "2.0"
+      }
+    ],
+    "x-providerName": "thesmsworks.co.uk"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json;charset=UTF-8"
+  ],
+  "securityDefinitions": {
+    "JWT": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "paths": {
+    "/batch/any": {
+      "post": {
+        "description": "Sends a collection of unique SMS messages. Batches may contain up to 5000 messages at a time.",
+        "parameters": [
+          {
+            "description": "An array of messages",
+            "in": "body",
+            "name": "messages",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MessageArray"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchMessageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "batch messages"
+        ]
+      }
+    },
+    "/batch/schedule": {
+      "post": {
+        "description": "Schedules a batch of SMS messages to be sent at the date time you specify",
+        "parameters": [
+          {
+            "description": "Message properties",
+            "in": "body",
+            "name": "smsMessage",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchMessage"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduledBatchResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "batch messages"
+        ]
+      }
+    },
+    "/batch/send": {
+      "post": {
+        "description": "Send a single SMS message to multiple recipients.  Batches may contain up to 5000 messages at a time.",
+        "parameters": [
+          {
+            "description": "Message properties",
+            "in": "body",
+            "name": "smsMessage",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchMessage"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchMessageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "batch messages"
+        ]
+      }
+    },
+    "/batch/{batchid}": {
+      "get": {
+        "description": "Retrieve all messages in a batch with the given batch ID",
+        "parameters": [
+          {
+            "description": "The ID of the batch you would like returned",
+            "in": "path",
+            "name": "batchid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/MessageResponse"
+              },
+              "type": "array"
+            }
+          },
+          "404": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "batch messages"
+        ]
+      }
+    },
+    "/batches/schedule/{batchid}": {
+      "delete": {
+        "description": "Cancels a scheduled SMS message",
+        "parameters": [
+          {
+            "description": "The ID of the batch you would like returned",
+            "in": "path",
+            "name": "batchid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CancelledMessageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "batch messages"
+        ]
+      }
+    },
+    "/credits/balance": {
+      "get": {
+        "description": "Returns the number of credits currently available on the account",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreditsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "credits"
+        ]
+      }
+    },
+    "/message/flash": {
+      "post": {
+        "description": "Sends an SMS flash message, which appears on the recipients lock screen",
+        "operationId": "sendFlashMessage",
+        "parameters": [
+          {
+            "description": "Message properties",
+            "in": "body",
+            "name": "smsMessage",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SendMessageResponse"
+            }
+          },
+          "402": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      },
+      "x-swagger-router-controller": "flash"
+    },
+    "/message/schedule": {
+      "post": {
+        "description": "Schedules an SMS message to be sent at the date-time you specify",
+        "parameters": [
+          {
+            "description": "Message properties",
+            "in": "body",
+            "name": "smsMessage",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ScheduledMessageResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      },
+      "x-swagger-router-controller": "smpp-client"
+    },
+    "/message/send": {
+      "post": {
+        "description": "Send an SMS Message",
+        "parameters": [
+          {
+            "description": "Message properties",
+            "in": "body",
+            "name": "smsMessage",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SendMessageResponse"
+            }
+          },
+          "402": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/messages": {
+      "post": {
+        "description": "Retrieve up to 1000 messages matching your search criteria",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Query"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/MessageResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/messages/failed": {
+      "post": {
+        "description": "Get failed messages matching your search criteria",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Query"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/MessageResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/messages/inbox": {
+      "post": {
+        "description": "Get unread uncoming messages matching your search criteria",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Query"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/MessageResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/messages/schedule": {
+      "get": {
+        "description": "Returns a list of messages scheduled from your account, comprising any messages scheduled in the last 3 months and any scheduled to send in the future",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduledMessagesResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/messages/schedule/{messageid}": {
+      "delete": {
+        "description": "Cancels a scheduled SMS message",
+        "parameters": [
+          {
+            "description": "The ID of the message you would like returned",
+            "in": "path",
+            "name": "messageid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CancelledMessageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/messages/{messageid}": {
+      "delete": {
+        "description": "Delete the message with the mathcing messageid",
+        "parameters": [
+          {
+            "description": "The ID of the message you would like returned",
+            "in": "path",
+            "name": "messageid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeletedMessageResponse"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a logged message by the message ID",
+        "parameters": [
+          {
+            "description": "The ID of the message you would like returned",
+            "in": "path",
+            "name": "messageid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          },
+          "404": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    },
+    "/utils/errors/{errorcode}": {
+      "get": {
+        "description": "Returns a sample error object for the given error code. Useful for designing code to react to errors when they occur for real.",
+        "parameters": [
+          {
+            "description": "The code of the error you would like returned",
+            "in": "path",
+            "name": "errorcode",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "utils"
+        ]
+      }
+    },
+    "/utils/test": {
+      "get": {
+        "description": "Returns the customer ID to the caller",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TestResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "tags": [
+          "utils"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "BatchMessage": {
+      "description": "SMS Message Batch",
+      "properties": {
+        "content": {
+          "description": "Message to send to the recipient",
+          "example": "My super awesome batch message",
+          "type": "string"
+        },
+        "deliveryreporturl": {
+          "description": "The url to which we should POST delivery reports to for this message. If none is specified, we'll use the global delivery report URL that you've configured on your account page.",
+          "example": "http://your.domain.com/delivery/report/path",
+          "type": "string"
+        },
+        "destinations": {
+          "description": "Telephone numbers of each of the recipients",
+          "example": [
+            "447777777777",
+            "447777777778",
+            "447777777779"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "schedule": {
+          "description": "Date-time at which to send the batch. This is only used by the batch/schedule service.",
+          "example": "Wed Jul 19 2017 20:26:28 GMT+0100 (BST)",
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender of the message. Should be no longer than 11 characters for alphanumeric or 15 characters for numeric sender ID's. No spaces or special characters.",
+          "example": "YourCompany",
+          "type": "string"
+        },
+        "tag": {
+          "description": "An identifying label for the message, which you can use to filter and report on messages you've sent later. Ideal for campaigns. A maximum of 280 characters.",
+          "example": "SummerSpecial",
+          "type": "string"
+        },
+        "ttl": {
+          "description": "The number of minutes before the delivery report is deleted. Optional. Omit to prevent delivery report deletion. Integer.",
+          "example": 10,
+          "type": "number"
+        },
+        "validity": {
+          "description": "The optional number of minutes to attempt delivery before the message is marked as EXPIRED. Optional. The default is 2880 minutes. Integer.",
+          "example": 1440,
+          "maximum": 2880,
+          "minimum": 1,
+          "type": "number"
+        }
+      },
+      "required": [
+        "sender",
+        "destinations",
+        "content"
+      ]
+    },
+    "BatchMessageResponse": {
+      "properties": {
+        "batchid": {
+          "example": 2586749,
+          "type": "string"
+        },
+        "status": {
+          "example": "SCHEDULED",
+          "type": "string"
+        }
+      },
+      "required": [
+        "batchid",
+        "status"
+      ]
+    },
+    "CancelledMessageResponse": {
+      "properties": {
+        "messageid": {
+          "example": 5620320,
+          "type": "string"
+        },
+        "status": {
+          "example": "CANCELLED",
+          "type": "string"
+        }
+      },
+      "required": [
+        "messageid",
+        "status"
+      ]
+    },
+    "CreditsResponse": {
+      "properties": {
+        "credits": {
+          "description": "The number of remaining credits on your SMS Works account. Floating point number.",
+          "example": 180,
+          "type": "number"
+        }
+      },
+      "required": [
+        "credits"
+      ]
+    },
+    "DeletedMessageResponse": {
+      "properties": {
+        "messageid": {
+          "example": 5620320,
+          "type": "string"
+        },
+        "status": {
+          "example": "DELETED",
+          "type": "string"
+        }
+      },
+      "required": [
+        "messageid",
+        "status"
+      ]
+    },
+    "ErrorModel": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "ExtendedErrorModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ErrorModel"
+        },
+        {
+          "properties": {
+            "errorCode": {
+              "description": "Numeric code used to identify the error. Integer.",
+              "type": "number"
+            },
+            "permanent": {
+              "type": "boolean"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "errorCode",
+            "status"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "Message": {
+      "description": "SMS message object",
+      "properties": {
+        "content": {
+          "description": "Message to send to the recipient. Content can be up to 1280 characters in length. Messages of 160 characters or fewer are charged 1 credit. If your message is longer than 160 characters then it will be broken down in to chunks of 153 characters before being sent to the recipient's handset, and you will be charged 1 credit for each 153 characters. Messages sent to numbers registered outside the UK will be typically charged double credits, but for certain countries may be charged fractions of credits (e.g. 2.5). Please contact us for rates for each country.",
+          "example": "Your super awesome message",
+          "type": "string"
+        },
+        "deliveryreporturl": {
+          "description": "The url to which we should POST delivery reports to for this message. If none is specified, we'll use the global delivery report URL that you've configured on your account page.",
+          "example": "http://your.domain.com/delivery/report/path",
+          "type": "string"
+        },
+        "destination": {
+          "description": "Telephone number of the recipient",
+          "example": "447777777777",
+          "type": "string"
+        },
+        "metadata": {
+          "example": [
+            {
+              "key": "myKey1",
+              "value": "myValue1"
+            },
+            {
+              "key": "myKey2",
+              "value": "myValue2"
+            }
+          ],
+          "items": {
+            "type": "object"
+          },
+          "properties": {
+            "schema": {
+              "$ref": "#/definitions/MetaData"
+            }
+          },
+          "type": "array"
+        },
+        "responseemail": {
+          "description": "An optional list of email addresses to forward responses to this specific message to. An SMS Works Reply Number is required to use this feature.",
+          "example": [
+            "my.email@mycompany.co.uk",
+            "my.other.email@mycompany.co.uk"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "schedule": {
+          "description": "Date at which to send the message. This is only used by the message/schedule service and can be left empty for other services.",
+          "example": "Sun Sep 03 2020 15:34:23 GMT+0100 (BST)",
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender of the message. Should be no longer than 11 characters for alphanumeric or 15 characters for numeric sender ID's. No spaces or special characters.",
+          "example": "YourCompany",
+          "type": "string"
+        },
+        "tag": {
+          "description": "An identifying label for the message, which you can use to filter and report on messages you've sent later. Ideal for campaigns. A maximum of 280 characters.",
+          "example": "SummerSpecial",
+          "type": "string"
+        },
+        "ttl": {
+          "description": "The optional number of minutes before the delivery report is deleted. Optional. Omit to prevent delivery report deletion. Integer.",
+          "example": 10,
+          "type": "number"
+        },
+        "validity": {
+          "description": "The optional number of minutes to attempt delivery before the message is marked as EXPIRED. Optional. The default is 2880 minutes. Integer.",
+          "example": 1440,
+          "maximum": 2880,
+          "minimum": 1,
+          "type": "number"
+        }
+      },
+      "required": [
+        "sender",
+        "destination",
+        "content"
+      ],
+      "type": "object"
+    },
+    "MessageArray": {
+      "description": "An array of Messages",
+      "items": {
+        "$ref": "#/definitions/Message"
+      }
+    },
+    "MessageResponse": {
+      "properties": {
+        "batchid": {
+          "example": "2586749",
+          "type": "string"
+        },
+        "content": {
+          "example": "My super awesome message",
+          "type": "string"
+        },
+        "created": {
+          "example": "Wed Jul 19 2017 20:53:46 GMT+0100 (BST)",
+          "type": "string"
+        },
+        "customerid": {
+          "example": "0fca8c3c-6cbc-11e7-8154-a6006ad3dba0",
+          "type": "string"
+        },
+        "deliveryreporturl": {
+          "example": "https://your.domain.com/delivery/report/path",
+          "type": "string"
+        },
+        "destination": {
+          "example": "447777777777",
+          "type": "number"
+        },
+        "failurereason": {
+          "properties": {
+            "code": {
+              "description": "Numeric code that defines the error. Integer.",
+              "example": 34,
+              "type": "number"
+            },
+            "details": {
+              "example": "Handset error",
+              "type": "string"
+            },
+            "permanent": {
+              "example": false,
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "example": 123456789,
+          "type": "string"
+        },
+        "identifier": {
+          "example": 7777777777,
+          "type": "string"
+        },
+        "keyword": {
+          "example": "CALRISSIAN",
+          "type": "string"
+        },
+        "messageid": {
+          "example": 123456789,
+          "type": "string"
+        },
+        "modified": {
+          "example": "Wed Jul 19 2017 20:53:49 GMT+0100 (BST)",
+          "type": "string"
+        },
+        "schedule": {
+          "example": "Wed Jul 19 2017 20:53:45 GMT+0100 (BST)",
+          "type": "string"
+        },
+        "sender": {
+          "example": "YourCompany",
+          "type": "string"
+        },
+        "status": {
+          "example": "DELIVERED",
+          "type": "string"
+        },
+        "tag": {
+          "example": "campaign2",
+          "type": "string"
+        }
+      },
+      "required": [
+        "content",
+        "created",
+        "customerid",
+        "destination",
+        "messageid",
+        "modified",
+        "schedule",
+        "status",
+        "sender",
+        "tag"
+      ]
+    },
+    "MetaData": {
+      "description": "Key/value pair that will be returned to you in the API call response.",
+      "properties": {
+        "key": {
+          "description": "key of the key/value pair",
+          "example": "myKey",
+          "type": "string"
+        },
+        "value": {
+          "description": "value of the key/value pair",
+          "example": "myValue",
+          "type": "string"
+        }
+      }
+    },
+    "Query": {
+      "description": "search parameters for querying the message database",
+      "properties": {
+        "credits": {
+          "description": "The number of credits used on the message. Floating point number.",
+          "example": 2,
+          "type": "number"
+        },
+        "destination": {
+          "description": "The phone number of the recipient. Start UK numbers with 44 and drop the leading 0.",
+          "example": "447777777777",
+          "type": "string"
+        },
+        "from": {
+          "description": "The date-time from which you would like matching messages",
+          "example": "Wed Jul 12 2017 20:26:28 GMT+0100 (BST)",
+          "type": "string"
+        },
+        "keyword": {
+          "description": "The keyword used in the inbound message",
+          "example": "SKYWALKER",
+          "type": "string"
+        },
+        "limit": {
+          "description": "The maximum number of messages that you would like returned in this call. The default is 1000.",
+          "example": 1000,
+          "type": "number"
+        },
+        "metadata": {
+          "description": "An array of objects containing metadata key/value pairs that have been saved on messages.",
+          "example": [
+            {
+              "key": "myKey1",
+              "value": "myValue1"
+            },
+            {
+              "key": "myKey2",
+              "value": "myValue2"
+            }
+          ],
+          "items": {
+            "type": "object"
+          },
+          "properties": {
+            "schema": {
+              "$ref": "#/definitions/MetaData"
+            }
+          },
+          "type": "array"
+        },
+        "sender": {
+          "description": "The sender of the message (this can be the configured sender name for an outbound message or the senders phone number for an inbound message).",
+          "example": "YourCompany",
+          "type": "string"
+        },
+        "skip": {
+          "description": "The number of results you would like to ignore before returning messages. In combination with the 'limit' parameter his can be used to page results, so that you can deal with a limited number in your logic at each time.",
+          "example": 2000,
+          "type": "number"
+        },
+        "status": {
+          "description": "The status of the messages you would like returned (either 'SENT', 'DELIVERED', 'EXPIRED', 'UNDELIVERABLE', 'REJECTED' or 'INCOMING')",
+          "example": "SENT",
+          "type": "string"
+        },
+        "to": {
+          "description": "The date-time to which you would like matching messages",
+          "example": "Wed Jul 19 2017 20:26:28 GMT+0100 (BST)",
+          "type": "string"
+        },
+        "unread": {
+          "description": "In queries for incoming messages ('status' is 'INCOMING'), specify whether you explicitly want unread messages (true) or read messages (false). Omit this parameter in other circumstances.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ScheduledBatchResponse": {
+      "properties": {
+        "batchid": {
+          "example": 3200562,
+          "type": "string"
+        },
+        "status": {
+          "example": "SCHEDULED",
+          "type": "string"
+        }
+      },
+      "required": [
+        "batchid",
+        "status"
+      ]
+    },
+    "ScheduledMessage": {
+      "description": "the scheduled message content",
+      "properties": {
+        "content": {
+          "description": "Message to be sent to the recipient",
+          "example": "My super awesome scheduled message",
+          "type": "string"
+        },
+        "destination": {
+          "description": "For single scheduled messages, the mobile number of the recipient",
+          "example": "447777777777",
+          "type": "string"
+        },
+        "destinations": {
+          "description": "For batch messages, the mobile numbers of each of the recipients",
+          "example": [
+            "447777777777",
+            "447777777778",
+            "447777777779"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "schedule": {
+          "description": "Date-time at which to send the batch. This is only used by the batch/schedule service.",
+          "example": "Wed Jul 19 2017 20:26:28 GMT+0100 (BST)",
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender of the message. Should be no longer than 11 characters for alphanumeric or 15 characters for numeric sender ID's. No spaces or special characters.",
+          "example": "YourCompany",
+          "type": "string"
+        }
+      }
+    },
+    "ScheduledMessageResponse": {
+      "properties": {
+        "messageid": {
+          "example": 123456789,
+          "type": "string"
+        },
+        "status": {
+          "example": "SCHEDULED",
+          "type": "string"
+        }
+      },
+      "required": [
+        "messageid",
+        "status"
+      ]
+    },
+    "ScheduledMessagesResponse": {
+      "description": "details of a message scheduled to be sent at a specified date and time",
+      "properties": {
+        "batch": {
+          "description": "Describes whether the a batch of messages has been scheduled, or just a single message",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "The scheduled message ID",
+          "example": "1910600",
+          "type": "string"
+        },
+        "message": {
+          "example": {
+            "content": "Greetings on schedule!",
+            "destination": "07777777777",
+            "schedule": "2021-10-28T14:10:00+01:00",
+            "sender": "MyCompany"
+          },
+          "properties": {
+            "schema": {
+              "$ref": "#/definitions/ScheduledMessage"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "The status of the scheduled message (either 'SCHEDULED', 'PROCESSED' or 'CANCELLED')",
+          "example": "PROCESSED",
+          "type": "string"
+        }
+      }
+    },
+    "SendMessageResponse": {
+      "properties": {
+        "credits": {
+          "description": "The number of remaining credits on your SMS Works account. Floating point number.",
+          "example": 180,
+          "type": "number"
+        },
+        "creditsUsed": {
+          "description": "The number of credits used to send the message. Floating point number.",
+          "example": 2,
+          "type": "number"
+        },
+        "messageid": {
+          "example": 123456789,
+          "type": "string"
+        },
+        "status": {
+          "example": "SENT",
+          "type": "string"
+        }
+      },
+      "required": [
+        "messageid",
+        "status",
+        "credits",
+        "creditsUsed"
+      ]
+    },
+    "TestResponse": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ]
+    }
+  }
+}

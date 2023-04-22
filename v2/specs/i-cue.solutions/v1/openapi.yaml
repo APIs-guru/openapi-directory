@@ -1,0 +1,2598 @@
+openapi: 3.0.1
+info:
+  title: Growth Services
+  version: v1
+  x-apisguru-categories:
+    - analytics
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_api.i-cue.solutions_icue_icue_logo_2.png
+  x-origin:
+    - format: openapi
+      url: https://api.i-cue.solutions/swagger/v1/swagger.json
+      version: "3.0"
+  x-providerName: i-cue.solutions
+paths:
+  /administration/entity:
+    get:
+      description: This is an iCUE only endpoint or Enterprise feature.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/EntityResponse"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/EntityResponse"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/EntityResponse"
+                type: array
+          description: Success
+      summary: Get all organizations
+      tags:
+        - Administration
+    post:
+      description: This is an iCUE only endpoint or Enterprise feature.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewEntityRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewEntityRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewEntityRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: uuid
+                type: string
+            text/json:
+              schema:
+                format: uuid
+                type: string
+            text/plain:
+              schema:
+                format: uuid
+                type: string
+          description: Success
+      summary: Create organization
+      tags:
+        - Administration
+    put:
+      description: This is an iCUE only endpoint or Enterprise feature.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ToggleRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToggleRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ToggleRequest"
+      responses:
+        "200":
+          description: Success
+      summary: Pause organization
+      tags:
+        - Administration
+  "/administration/entity/{id}":
+    delete:
+      description: This is an iCUE only endpoint or Enterprise feature.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Delete organization
+      tags:
+        - Administration
+  /administration/file-to-json:
+    post:
+      description: Transform data file to JSON format
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              File:
+                style: form
+              Periodicity:
+                style: form
+            schema:
+              properties:
+                File:
+                  format: binary
+                  type: string
+                Periodicity:
+                  format: int32
+                  type: integer
+              required:
+                - File
+                - Periodicity
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonForecastResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/JsonForecastResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/JsonForecastResponse"
+          description: Success
+      summary: Transform data file to JSON format
+      tags:
+        - Administration
+  /administration/model:
+    get:
+      description: Returns models that are common for all Organizations
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+          description: Success
+      summary: Get all common Models
+      tags:
+        - Administration
+    post:
+      description: Register new forecasting model for all organziations
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+          description: Success
+      summary: Register new forecasting model
+      tags:
+        - Administration
+  "/administration/model/{entityId}":
+    get:
+      description: Returns models registered for Organization
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+          description: Success
+      summary: Get Models for Organization
+      tags:
+        - Administration
+    post:
+      description: Register new forecasting model for single organziation
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+          description: Success
+      summary: Register new forecasting model
+      tags:
+        - Administration
+  /administration/planning-level/lock:
+    post:
+      description: Lock planning level against modification. This is an Enterprise feature.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Lock planning level
+      tags:
+        - Administration
+  "/administration/planning-level/{entityId}/{id}":
+    delete:
+      description: Delete planning level. This is an Enterprise feature.
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Delete planning level
+      tags:
+        - Administration
+  /administration/token:
+    post:
+      description: This is an iCUE only endpoint.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewTokenRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewTokenRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewTokenRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: uuid
+                type: string
+            text/json:
+              schema:
+                format: uuid
+                type: string
+            text/plain:
+              schema:
+                format: uuid
+                type: string
+          description: Success
+      summary: Issue a token
+      tags:
+        - Administration
+  /administration/user:
+    post:
+      description: Create new user for entity/organization. This can be done by entity administrator.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewUserRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewUserRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewUserRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: uuid
+                type: string
+            text/json:
+              schema:
+                format: uuid
+                type: string
+            text/plain:
+              schema:
+                format: uuid
+                type: string
+          description: Success
+      summary: Create user
+      tags:
+        - Administration
+    put:
+      description: Update user
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Update user
+      tags:
+        - Administration
+  /administration/user/lock:
+    put:
+      description: After lock user won't be able to use iCUE API endpoints.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ToggleUserRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToggleUserRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ToggleUserRequest"
+      responses:
+        "200":
+          description: Success
+      summary: Lock user
+      tags:
+        - Administration
+  "/administration/user/{entityId}":
+    get:
+      description: Get all users
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Get all users
+      tags:
+        - Administration
+  "/administration/user/{entityId}/{id}":
+    delete:
+      description: Delete user
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Delete user
+      tags:
+        - Administration
+  /forecast:
+    post:
+      description: To support maximum operation and integration speed, this endpoint only returns the calculated forecast.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+          description: Success
+      summary: Forecasts only, for faster results
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/AI:
+    post:
+      description: Forecast AI is utilizing advanced machine learning models. Please be mindful of enhanced execution times (~1-2s per timeseries).
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AiPlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiPlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AiPlanningLevelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+          description: Success
+      summary: Forecast utilizing advanced machine learning models
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/AI/history-and-forecast:
+    post:
+      description: History and forecast utilizing advanced machine learning models. Please be mindful of enhanced execution times (~1-2s per timeseries).
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AiPlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiPlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AiPlanningLevelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+          description: Success
+      summary: History and forecast utilizing advanced machine learning models
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/file-to-forecast:
+    post:
+      description: Forecast from file allows for quick analysis via Microsoft Excel and CSV file format. Please check documentation link for help.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              DiscardData:
+                style: form
+              ErrorType:
+                style: form
+              File:
+                style: form
+              HoldOutPeriod:
+                style: form
+              Method:
+                style: form
+              NoFcst:
+                style: form
+              OutlierDetection:
+                style: form
+              Periodicity:
+                style: form
+            schema:
+              properties:
+                DiscardData:
+                  type: boolean
+                ErrorType:
+                  enum:
+                    - MeanAbsolutePercentageError
+                    - MeanSquaredError
+                    - MeanAbsoluteError
+                    - MedianAbsoluteDeviation
+                    - None
+                  type: string
+                File:
+                  format: binary
+                  type: string
+                HoldOutPeriod:
+                  format: int32
+                  type: integer
+                Method:
+                  enum:
+                    - AutoBestPick
+                    - BoxJenkins
+                    - Croston
+                    - DoubleExponentialSmoothing
+                    - HoltWinters
+                    - SingleExponentialSmoothing
+                    - iCUE1
+                    - SimpleMovingAverage
+                  example: iCUE1
+                  type: string
+                NoFcst:
+                  format: int32
+                  type: integer
+                OutlierDetection:
+                  type: boolean
+                Periodicity:
+                  format: int32
+                  type: integer
+              required:
+                - File
+                - Method
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+          description: Success
+      summary: Forecast from file
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/forecast-bottom-up:
+    post:
+      description: Calculate forecast by timeseries and sum results up to establish forecast for top level timeseries.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForecastBottomUpResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ForecastBottomUpResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ForecastBottomUpResponse"
+          description: Success
+      summary: Bottom up forecasting
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/forecast-top-down:
+    post:
+      description: Calculate forecast based on sum of of lower level timeseries and distribute forecast down based on ratios. Great feature for planning levels with dynamic timeseries.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+      responses:
+        "200":
+          description: Success
+      summary: Top down forecasting
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/full-detail:
+    post:
+      description: Response provides full forecast result details, including error, trend seasonality and outlier. Great for advanced analysis.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FullDetailsForecastResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/FullDetailsForecastResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/FullDetailsForecastResponse"
+          description: Success
+      summary: Full forecast result details, including error, trend seasonality and outlier
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/history-and-forecast:
+    post:
+      description: Reponse provides history and forecast per timeseries. Great for visualizing results.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndForecastResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/HistoryAndForecastResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/HistoryAndForecastResponse"
+          description: Success
+      summary: History and forecast for fast timeseries view
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/optimal-parameter:
+    post:
+      description: Use the optimal parameter sets created by iCUE to set the method parameters of your internal planning system.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OptimalParameterResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OptimalParameterResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/OptimalParameterResponse"
+          description: Success
+      summary: Get optimal parameter per method
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/rerun:
+    post:
+      description: Rerun previously uploaded planning level.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelReRunRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelReRunRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelReRunRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+          description: Success
+      summary: Rerun previously uploaded planning level
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  "/forecast/result/{jobId}":
+    get:
+      description: Get result for forecast job
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Forecast result
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  "/forecast/status/{jobId}":
+    get:
+      description: Get status for forecast job
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Forecast status
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /hyperparameter:
+    get:
+      description: Get entity global hyperparameters.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HyperparameterModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/HyperparameterModel"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/HyperparameterModel"
+          description: Success
+      summary: Get hyperparameters
+      tags:
+        - Hyperparameter Management
+    post:
+      description: Set entity global hyperparameters. Hyperparameters can be overwritten by user and planning level (add to JSON body).
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/HyperparameterModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HyperparameterModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/HyperparameterModel"
+      responses:
+        "200":
+          description: Success
+      summary: Set hyperparameters
+      tags:
+        - Hyperparameter Management
+  /inventory/amazon-ipi:
+    post:
+      description: Calculate Amazon Inventory Performance Index (IPI)
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate Amazon Inventory Performance Index (IPI)
+      tags:
+        - Inventory Management
+  /inventory/caryying-cost:
+    post:
+      description: Carrying Cost
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Carrying Cost
+      tags:
+        - Inventory Management
+  /inventory/eoq:
+    post:
+      description: Calculate economic order quantity
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate economic order quantity
+      tags:
+        - Inventory Management
+  /inventory/fill-rate:
+    post:
+      description: Calculate fill rate
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate fill rate
+      tags:
+        - Inventory Management
+  /inventory/financial-imapct-forecast-accuracy:
+    post:
+      description: Calculate financial impact of forecast accuracy
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate financial impact of forecast accuracy
+      tags:
+        - Inventory Management
+  /inventory/inventory-turnover:
+    post:
+      description: Inventroy Turn-over
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Inventroy Turn-over
+      tags:
+        - Inventory Management
+  /inventory/ltd:
+    post:
+      description: Calculate lead time demand
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate lead time demand
+      tags:
+        - Inventory Management
+  /inventory/moq:
+    post:
+      description: Calculate minimum order quantity
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate minimum order quantity
+      tags:
+        - Inventory Management
+  /inventory/optimal-service-level:
+    post:
+      description: Calculate optimal service level
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate optimal service level
+      tags:
+        - Inventory Management
+  /inventory/reorder-point:
+    post:
+      description: Re-order Point
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Re-order Point
+      tags:
+        - Inventory Management
+  /inventory/safety-stock:
+    post:
+      description: Safety Stock
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Safety Stock
+      tags:
+        - Inventory Management
+  /inventory/service-level:
+    post:
+      description: Calculate service level
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate service level
+      tags:
+        - Inventory Management
+  /inventory/turns:
+    post:
+      description: Calculate inventory turns
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Calculate inventory turns
+      tags:
+        - Inventory Management
+  /lifecycle/many-to-one:
+    post:
+      description: Supports the creation of artificial startup history for new products, based on a flexible mapping of old to new. This is an Enterprise feature.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/LifecycleManyToOneRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LifecycleManyToOneRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/LifecycleManyToOneRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+          description: Success
+      summary: Map from old product to new product to create artifical history
+      tags:
+        - Product Lifecycle Management
+  /lifecycle/one-to-one:
+    post:
+      description: Supports the creation of artificial startup history for new products, based on a flexible mapping of old to new. This is an Enterprise feature.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/LifecycleOneToOneRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LifecycleOneToOneRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/LifecycleOneToOneRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+          description: Success
+      summary: Map from old product to new product to create artifical history
+      tags:
+        - Product Lifecycle Management
+  /outlier:
+    post:
+      description: Identify outliers (single and repetitive spikes, seasonality, masked outliers, trend and level jumps, amongst other topics) and use for cleansing of the history stream prior to forecast claculation. Depending on math model used, this approach often improves results dramatically, as it removes disturbances.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/OutliersRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutliersRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/OutliersRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TimeSeriesOutliersResponse"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TimeSeriesOutliersResponse"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TimeSeriesOutliersResponse"
+                type: array
+          description: Success
+      summary: Get outlier
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /portfolio:
+    post:
+      description: Calculate and retrieve results of ABC (pareto analysis) and xyz (Coefficient of variation) per timeseries and planning level. This analysis is a powerful means to estbalish a proper planning cadence, best accuracy messures and optimal hyperparameters for the organization. It provides a balanced and actionable overview of the entire product portfolio.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
+          description: Success
+      summary: ABCxyz Analysis
+      tags:
+        - Portfolio Performance Management
+  /portfolio/abc:
+    post:
+      description: Calculate and retrieve results of ABC (pareto analysis) per timeseries and planning level.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioAbcModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioAbcModel"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioAbcModel"
+                type: array
+          description: Success
+      summary: ABC Analysis
+      tags:
+        - Portfolio Performance Management
+  /portfolio/file-to-portfolio:
+    post:
+      description: Calculate and retrieve results of ABC (pareto analysis) and xyz (Coefficient of variation) per timeseries and planning level. This analysis is a powerful means to estbalish a proper planning cadence, best accuracy messures and optimal hyperparameters for the organization. It provides a balanced and actionable overview of the entire product portfolio.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              File:
+                style: form
+            schema:
+              properties:
+                File:
+                  format: binary
+                  type: string
+              required:
+                - File
+              type: object
+      responses:
+        "200":
+          description: Success
+      summary: ABCxyz Analysis
+      tags:
+        - Portfolio Performance Management
+  /portfolio/forecast-performance-rewind:
+    post:
+      description: Planning level rewind to calculate and measure performance potential (internal versus iCUE).
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ForecastPerformanceRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForecastPerformanceRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ForecastPerformanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RewindResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RewindResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RewindResponse"
+          description: Success
+      summary: Planning level rewind to calculate and measure performance potential (internal versus iCUE).
+      tags:
+        - Portfolio Performance Management
+  /portfolio/xyz:
+    post:
+      description: Calculate and retrieve results of xyz (Coefficient of variation) per timeseries and planning level.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PortfolioRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioXyzModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioXyzModel"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioXyzModel"
+                type: array
+          description: Success
+      summary: xyz Analysis
+      tags:
+        - Portfolio Performance Management
+  /pricing/bundle-pricing:
+    post:
+      description: Bundle pricing
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Bundle pricing
+      tags:
+        - Pricing
+  /pricing/competitive-pricing:
+    post:
+      description: ""
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: ""
+      tags:
+        - Pricing
+  /pricing/cost-plus-pricing:
+    post:
+      description: ""
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: ""
+      tags:
+        - Pricing
+  /pricing/decoy-pricing:
+    post:
+      description: ""
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: ""
+      tags:
+        - Pricing
+  /pricing/odd-pricing:
+    post:
+      description: ""
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: ""
+      tags:
+        - Pricing
+  /pricing/penetration-pricing:
+    post:
+      description: ""
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: ""
+      tags:
+        - Pricing
+  /pricing/price-elasticity-of-demand:
+    post:
+      description: ""
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: ""
+      tags:
+        - Pricing
+  "/report/performance/sku-rationalization/{planningLevelId}":
+    get:
+      description: SKU rationalization report
+      parameters:
+        - in: path
+          name: planningLevelId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
+          description: Success
+      summary: SKU rationalization report
+      tags:
+        - Reporting and Monitoring
+  "/report/performance/{planningLevelId}":
+    get:
+      description: Month over month performance per planning level
+      parameters:
+        - in: path
+          name: planningLevelId
+          required: true
+          schema:
+            type: string
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Month over month performance per planning level
+      tags:
+        - Reporting and Monitoring
+  /report/planning-level/organization:
+    get:
+      description: Get list of plannign levels by organization
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Get list of plannign levels by organization
+      tags:
+        - Reporting and Monitoring
+  /report/planning-level/user:
+    get:
+      description: Get list of plannign levels by user
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Get list of plannign levels by user
+      tags:
+        - Reporting and Monitoring
+  /report/user:
+    get:
+      description: Get usage statistics per user
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Get usage statistics per user
+      tags:
+        - Reporting and Monitoring
+components:
+  schemas:
+    AiPlanningLevelRequest:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PlanningLevelDataDto"
+          nullable: true
+          type: array
+        method:
+          enum:
+            - icueMLP
+            - icueMLO
+            - icueMLN
+          example: icueMLP | icueMLO
+          type: string
+        params:
+          $ref: "#/components/schemas/PlanningLevelInfoRequest"
+        planningLevelId:
+          type: string
+        startDate:
+          example: 1/16/2016
+          type: string
+      required:
+        - method
+        - planningLevelId
+        - startDate
+      type: object
+    EntityResponse:
+      additionalProperties: false
+      properties:
+        address:
+          nullable: true
+          type: string
+        dbConnection:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+        id:
+          format: int32
+          type: integer
+        isActive:
+          type: boolean
+        name:
+          nullable: true
+          type: string
+        token:
+          format: uuid
+          type: string
+      type: object
+    ForecastBottomUpResponse:
+      additionalProperties: false
+      properties:
+        forecastData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        hyperparameters:
+          $ref: "#/components/schemas/ForecastHyperparameterResponse"
+      type: object
+    ForecastHyperparameterResponse:
+      additionalProperties: false
+      properties:
+        discardData:
+          example: false
+          nullable: true
+          type: boolean
+        errorType:
+          enum:
+            - MeanAbsolutePercentageError
+            - MeanSquaredError
+            - MeanAbsoluteError
+            - MedianAbsoluteDeviation
+            - None
+          example: MeanAbsolutePercentageError
+          type: string
+        holdOutPeriod:
+          example: 4
+          format: int32
+          nullable: true
+          type: integer
+        noFcst:
+          example: 18
+          format: int32
+          nullable: true
+          type: integer
+        periodicity:
+          example: 12
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    ForecastOptimalParametersResponse:
+      additionalProperties: false
+      properties:
+        alpha:
+          format: double
+          nullable: true
+          type: number
+        beta:
+          format: double
+          nullable: true
+          type: number
+        gamma:
+          format: double
+          nullable: true
+          type: number
+      type: object
+    ForecastPerformanceDataRequest:
+      additionalProperties: false
+      properties:
+        forecastValues:
+          items:
+            format: double
+            type: number
+          nullable: true
+          type: array
+        historyValues:
+          items:
+            format: double
+            type: number
+          nullable: true
+          type: array
+        timeSeriesId:
+          nullable: true
+          type: string
+      type: object
+    ForecastPerformanceRequest:
+      additionalProperties: false
+      properties:
+        costOfError:
+          example: 200
+          format: double
+          type: number
+        data:
+          items:
+            $ref: "#/components/schemas/ForecastPerformanceDataRequest"
+          nullable: true
+          type: array
+        method:
+          example: iCUE1
+          type: string
+        params:
+          $ref: "#/components/schemas/PlanningLevelInfoRequest"
+        planningLevelId:
+          type: string
+        rewindTimeFrame:
+          example: 12
+          format: int32
+          type: integer
+        startDate:
+          example: 1/16/2016
+          type: string
+      required:
+        - method
+        - planningLevelId
+        - rewindTimeFrame
+        - startDate
+      type: object
+    ForecastResponse:
+      additionalProperties: false
+      properties:
+        hyperparameters:
+          $ref: "#/components/schemas/ForecastHyperparameterResponse"
+        timeSeries:
+          items:
+            $ref: "#/components/schemas/TimeSeriesForecastResponse"
+          nullable: true
+          type: array
+      type: object
+    FullDetailsForecastResponse:
+      additionalProperties: false
+      properties:
+        hyperparameters:
+          $ref: "#/components/schemas/ForecastHyperparameterResponse"
+        timeSeries:
+          items:
+            $ref: "#/components/schemas/TimeSeriesFullDetailsResponse"
+          nullable: true
+          type: array
+      type: object
+    HistoryAndForecastResponse:
+      additionalProperties: false
+      properties:
+        hyperparameters:
+          $ref: "#/components/schemas/ForecastHyperparameterResponse"
+        timeSeries:
+          items:
+            $ref: "#/components/schemas/TimeSeriesHistoryAndForecastResponse"
+          nullable: true
+          type: array
+      type: object
+    HyperparameterModel:
+      additionalProperties: false
+      properties:
+        abcClassificationThresholdA:
+          example: 0.8
+          format: double
+          nullable: true
+          type: number
+        abcClassificationThresholdB:
+          example: 0.95
+          format: double
+          nullable: true
+          type: number
+        abcClassificationThresholdC:
+          example: 0.95
+          format: double
+          nullable: true
+          type: number
+        discardData:
+          example: false
+          nullable: true
+          type: boolean
+        errorType:
+          enum:
+            - MeanAbsolutePercentageError
+            - MeanSquaredError
+            - MeanAbsoluteError
+            - MedianAbsoluteDeviation
+            - None
+          example: MeanAbsolutePercentageError
+          type: string
+        holdOutPeriod:
+          example: 4
+          format: int32
+          nullable: true
+          type: integer
+        noFcst:
+          example: 18
+          format: int32
+          nullable: true
+          type: integer
+        outlierDetection:
+          example: true
+          nullable: true
+          type: boolean
+        periodicity:
+          example: 12
+          format: int32
+          nullable: true
+          type: integer
+        xyzClassificationThresholdX:
+          example: 0.3
+          format: double
+          nullable: true
+          type: number
+        xyzClassificationThresholdY:
+          example: 0.6
+          format: double
+          nullable: true
+          type: number
+        xyzClassificationThresholdZ:
+          example: 0.6
+          format: double
+          nullable: true
+          type: number
+      type: object
+    JobResponse:
+      additionalProperties: false
+      properties:
+        jobId:
+          format: int32
+          type: integer
+      type: object
+    JsonForecastResponse:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PlanningLevelDataDto"
+          nullable: true
+          type: array
+        planningLevelId:
+          nullable: true
+          type: string
+        startDate:
+          example: 1/16/2016
+          nullable: true
+          type: string
+      type: object
+    LifecycleManyToOneRequest:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PlanningLevelDataDto"
+          nullable: true
+          type: array
+        planningLevelId:
+          type: string
+        ratios:
+          items:
+            format: double
+            type: number
+          nullable: true
+          type: array
+      required:
+        - planningLevelId
+      type: object
+    LifecycleOneToOneRequest:
+      additionalProperties: false
+      properties:
+        data:
+          $ref: "#/components/schemas/PlanningLevelDataDto"
+        planningLevelId:
+          type: string
+        ratio:
+          example: 15
+          format: double
+          type: number
+      required:
+        - planningLevelId
+      type: object
+    MethodDto:
+      additionalProperties: false
+      properties:
+        key:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        queue:
+          nullable: true
+          type: string
+        replyQueue:
+          nullable: true
+          type: string
+      type: object
+    NewEntityRequest:
+      additionalProperties: false
+      properties:
+        address:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+      type: object
+    NewModelRequest:
+      additionalProperties: false
+      properties:
+        key:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+      type: object
+    NewTokenRequest:
+      additionalProperties: false
+      properties:
+        entityToken:
+          format: uuid
+          type: string
+        expirationDate:
+          format: date-time
+          type: string
+        userToken:
+          format: uuid
+          type: string
+      type: object
+    NewUserRequest:
+      additionalProperties: false
+      properties:
+        email:
+          nullable: true
+          type: string
+        entityToken:
+          format: uuid
+          type: string
+        firstname:
+          nullable: true
+          type: string
+        isActive:
+          readOnly: true
+          type: boolean
+        lastname:
+          nullable: true
+          type: string
+        phone:
+          nullable: true
+          type: string
+      type: object
+    OptimalParameterResponse:
+      additionalProperties: false
+      properties:
+        hyperparameters:
+          $ref: "#/components/schemas/ForecastHyperparameterResponse"
+        timeSeries:
+          items:
+            $ref: "#/components/schemas/TimeSeriesOptimalParametersResponse"
+          nullable: true
+          type: array
+      type: object
+    OutlierResponse:
+      additionalProperties: false
+      properties:
+        index:
+          format: int32
+          type: integer
+        type:
+          enum:
+            - Additive
+            - LevelShift
+            - TemporaryChange
+            - Seasonal
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    OutliersRequest:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PlanningLevelDataDto"
+          nullable: true
+          type: array
+        planningLevelId:
+          type: string
+        startDate:
+          example: 1/16/2016
+          type: string
+      required:
+        - planningLevelId
+        - startDate
+      type: object
+    PlanningLevelDataDto:
+      additionalProperties: false
+      properties:
+        historyValues:
+          items:
+            format: double
+            type: number
+          nullable: true
+          type: array
+        timeSeriesId:
+          nullable: true
+          type: string
+      type: object
+    PlanningLevelForecastResultData:
+      additionalProperties: false
+      properties:
+        date:
+          nullable: true
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    PlanningLevelInfoRequest:
+      additionalProperties: false
+      properties:
+        discardData:
+          example: false
+          type: boolean
+        errorType:
+          enum:
+            - MeanAbsolutePercentageError
+            - MeanSquaredError
+            - MeanAbsoluteError
+            - MedianAbsoluteDeviation
+            - None
+          example: MeanAbsolutePercentageError
+          type: string
+        holdOutPeriod:
+          example: 4
+          format: int32
+          type: integer
+        noFcst:
+          example: 18
+          format: int32
+          type: integer
+        outlierDetection:
+          example: true
+          type: boolean
+        periodicity:
+          example: 12
+          format: int32
+          type: integer
+      required:
+        - discardData
+        - errorType
+        - holdOutPeriod
+        - noFcst
+        - outlierDetection
+        - periodicity
+      type: object
+    PlanningLevelReRunRequest:
+      additionalProperties: false
+      properties:
+        method:
+          example: iCUE1
+          type: string
+        params:
+          $ref: "#/components/schemas/PlanningLevelInfoRequest"
+        planningLevelId:
+          format: int32
+          type: integer
+      required:
+        - method
+        - planningLevelId
+      type: object
+    PlanningLevelRequest:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PlanningLevelDataDto"
+          nullable: true
+          type: array
+        method:
+          example: iCUE1
+          type: string
+        override:
+          example: false
+          type: boolean
+        params:
+          $ref: "#/components/schemas/PlanningLevelInfoRequest"
+        planningLevelId:
+          type: string
+        startDate:
+          example: 1/16/2016
+          type: string
+      required:
+        - method
+        - planningLevelId
+        - startDate
+      type: object
+    PortfolioAbcModel:
+      additionalProperties: false
+      properties:
+        abc12:
+          type: string
+        abc12Value:
+          format: double
+          type: number
+        abc6:
+          type: string
+        abc6Value:
+          format: double
+          type: number
+        abc9:
+          type: string
+        abc9Value:
+          format: double
+          type: number
+        id:
+          nullable: true
+          type: string
+        thresholdA:
+          format: double
+          type: number
+        thresholdB:
+          format: double
+          type: number
+        thresholdC:
+          format: double
+          type: number
+      type: object
+    PortfolioModel:
+      additionalProperties: false
+      properties:
+        abc12:
+          type: string
+        abc12Value:
+          format: double
+          type: number
+        abc6:
+          type: string
+        abc6Value:
+          format: double
+          type: number
+        abc9:
+          type: string
+        abc9Value:
+          format: double
+          type: number
+        id:
+          nullable: true
+          type: string
+        thresholdA:
+          format: double
+          type: number
+        thresholdB:
+          format: double
+          type: number
+        thresholdC:
+          format: double
+          type: number
+        thresholdX:
+          format: double
+          type: number
+        thresholdY:
+          format: double
+          type: number
+        thresholdZ:
+          format: double
+          type: number
+        xyz12:
+          type: string
+        xyz12Value:
+          format: double
+          type: number
+        xyz6:
+          type: string
+        xyz6Value:
+          format: double
+          type: number
+        xyz9:
+          type: string
+        xyz9Value:
+          format: double
+          type: number
+      type: object
+    PortfolioRequest:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PlanningLevelDataDto"
+          nullable: true
+          type: array
+        planningLevelId:
+          type: string
+        startDate:
+          example: 1/16/2016
+          type: string
+      required:
+        - planningLevelId
+        - startDate
+      type: object
+    PortfolioXyzModel:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        thresholdX:
+          format: double
+          type: number
+        thresholdY:
+          format: double
+          type: number
+        thresholdZ:
+          format: double
+          type: number
+        xyz12:
+          type: string
+        xyz12Value:
+          format: double
+          type: number
+        xyz6:
+          type: string
+        xyz6Value:
+          format: double
+          type: number
+        xyz9:
+          type: string
+        xyz9Value:
+          format: double
+          type: number
+      type: object
+    RewindHyperparameterResponse:
+      additionalProperties: false
+      properties:
+        costOfError:
+          example: 200
+          format: double
+          nullable: true
+          type: number
+        discardData:
+          example: false
+          nullable: true
+          type: boolean
+        errorType:
+          enum:
+            - MeanAbsolutePercentageError
+            - MeanSquaredError
+            - MeanAbsoluteError
+            - MedianAbsoluteDeviation
+            - None
+          example: MeanAbsolutePercentageError
+          type: string
+        holdOutPeriod:
+          example: 4
+          format: int32
+          nullable: true
+          type: integer
+        noFcst:
+          example: 18
+          format: int32
+          nullable: true
+          type: integer
+        periodicity:
+          example: 12
+          format: int32
+          nullable: true
+          type: integer
+        rewindTimeFrame:
+          example: 12
+          format: int32
+          type: integer
+      type: object
+    RewindResponse:
+      additionalProperties: false
+      properties:
+        hyperparameters:
+          $ref: "#/components/schemas/RewindHyperparameterResponse"
+        timeSeries:
+          items:
+            $ref: "#/components/schemas/RewindTimeSeriesResponse"
+          nullable: true
+          type: array
+        totalCost:
+          format: double
+          type: number
+      type: object
+    RewindTimeSeriesResponse:
+      additionalProperties: false
+      properties:
+        customerError:
+          format: double
+          nullable: true
+          type: number
+        errorDiff:
+          format: double
+          nullable: true
+          type: number
+        icueError:
+          format: double
+          type: number
+        timeSeries:
+          nullable: true
+          type: string
+        totalCost:
+          format: double
+          nullable: true
+          type: number
+        useIcue:
+          nullable: true
+          type: boolean
+      type: object
+    TimeSeriesForecastResponse:
+      additionalProperties: false
+      properties:
+        error:
+          format: double
+          nullable: true
+          type: number
+        forecastData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        method:
+          nullable: true
+          type: string
+        timeSeriesId:
+          nullable: true
+          type: string
+      type: object
+    TimeSeriesFullDetailsResponse:
+      additionalProperties: false
+      properties:
+        error:
+          format: double
+          nullable: true
+          type: number
+        forecastData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        historyData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        method:
+          nullable: true
+          type: string
+        optimalParameters:
+          $ref: "#/components/schemas/ForecastOptimalParametersResponse"
+        outliers:
+          items:
+            $ref: "#/components/schemas/OutlierResponse"
+          nullable: true
+          type: array
+        timeSeriesId:
+          nullable: true
+          type: string
+      type: object
+    TimeSeriesHistoryAndForecastResponse:
+      additionalProperties: false
+      properties:
+        error:
+          format: double
+          nullable: true
+          type: number
+        forecastData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        historyData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        method:
+          nullable: true
+          type: string
+        timeSeriesId:
+          nullable: true
+          type: string
+      type: object
+    TimeSeriesOptimalParametersResponse:
+      additionalProperties: false
+      properties:
+        method:
+          nullable: true
+          type: string
+        optimalParameters:
+          $ref: "#/components/schemas/ForecastOptimalParametersResponse"
+        timeSeriesId:
+          nullable: true
+          type: string
+      type: object
+    TimeSeriesOutliersResponse:
+      additionalProperties: false
+      properties:
+        outliers:
+          items:
+            $ref: "#/components/schemas/OutlierResponse"
+          nullable: true
+          type: array
+        timeSeriesId:
+          nullable: true
+          type: string
+      type: object
+    ToggleRequest:
+      additionalProperties: false
+      properties:
+        id:
+          format: int32
+          type: integer
+        isActive:
+          type: boolean
+      type: object
+    ToggleUserRequest:
+      additionalProperties: false
+      properties:
+        entityId:
+          format: int32
+          type: integer
+        id:
+          format: int32
+          type: integer
+        isActive:
+          type: boolean
+      type: object

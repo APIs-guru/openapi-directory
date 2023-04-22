@@ -1,0 +1,1814 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br/api
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+x-hasEquivalentPaths: true
+info:
+  contact: {}
+  description: ">ℹ️ Check the new [Payments onboarding guide](https://developers.vtex.com/vtex-rest-api/docs/payments-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Payments and is organized by focusing on the developer's journey.\r
+
+    \r
+
+    The Gift Card Hub API allows interactions with all Gift Card providers registered to a store from a single point.\r
+
+    \r
+
+    Gift Card providers are systems capable of providing cards to be used in the buying process.\r
+
+    \r
+
+    The following is the sequence diagram that represents calls in the purchase closing process.\r
+
+    ![](https://cdn.jsdelivr.net/gh/vtexdocs/dev-portal-content@main/images/giftcard-hub-api-overview-0.png)\r
+
+    \r
+
+    **Checkout + Gateway**: Systems responsible for the sale and for processing orders and payments.\r
+
+    \r
+
+    **Gift Card Hub**: System responsible for managing multiple registered Gift Card providers for a store.\r
+
+    \r
+
+    **Gift Card Provider**: System responsible for providing the Gift Cards available to the user not closing a purchase. This system can be implemented by third parties."
+  title: GiftCard Hub API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - GiftCard Hub API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: GiftCard-Hub-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - description: ""
+    name: Provider
+  - description: ""
+    name: Transaction
+paths:
+  /giftcardproviders:
+    get:
+      deprecated: false
+      description: Returns a collection of giftcard providers from a store.
+      operationId: ListAllGiftCardProviders
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Pagination control. This query variable must follow the format _resources={from}-{to}_.
+          in: header
+          name: REST-Range
+          required: false
+          schema:
+            default: resources=0-49
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      security: []
+      summary: List All GiftCard Providers
+      tags:
+        - Provider
+  "/giftcardproviders/{giftCardProviderID}":
+    delete:
+      deprecated: false
+      description: Delete a giftcard provider from a store.
+      operationId: DeleteGiftCardProviderbyID
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+        "404":
+          description: |
+            O provider não existe.
+      summary: Delete GiftCard Provider by ID
+      tags:
+        - Provider
+    put:
+      deprecated: false
+      description: Create or update a giftcard provider from a store.
+      operationId: Create/UpdateGiftCardProviderbyID
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/vnd.vtex.giftcardproviders.v1+json:
+            example:
+              cancelEnabled: true
+              oauthProvider: vtex
+              preAuthEnabled: true
+              serviceUrl: https://api.vtex.com.br/basedevmkp
+            schema:
+              $ref: "#/components/schemas/CreateUpdateGiftCardProviderbyIDRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Create/Update GiftCard Provider by ID
+      tags:
+        - Provider
+  "/giftcardproviders/{giftCardProviderID}/giftcards":
+    post:
+      deprecated: false
+      description: Creates a giftcard in a giftcard provider.
+      operationId: CreateGiftCardinGiftCardProvider
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/vnd.vtex.giftcardproviders.v1+json:
+            example:
+              caption: Loyalty Program
+              emissionDate: 2011-02-04T17:02:19.17
+              expiringDate: 2020-02-04T17:02:19.17
+              multipleCredits: true
+              multipleRedemptions: true
+              profileId: 92de2449-0e02-4ca9-a4aa-a09cc9d8f7ff
+              relationName: loyalty-program
+              restrictedToOwner: true
+            schema:
+              $ref: "#/components/schemas/CreateGiftCardinGiftCardProviderRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Create GiftCard in GiftCard Provider
+      tags:
+        - Transaction
+  "/giftcardproviders/{giftCardProviderID}/giftcards/_search":
+    post:
+      deprecated: false
+      description: Returns all giftcards from a giftcard provider according to the filters.
+      operationId: GetGiftCardfromGiftCardProvider
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Range of documents to show.
+          in: header
+          name: REST-Range
+          required: true
+          schema:
+            default: resources=0-49
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert example here
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/vnd.vtex.giftcardproviders.v1+json:
+            example:
+              cart:
+                discounts: -20
+                grandTotal: 182
+                items:
+                  - id: "2000002"
+                    name: null
+                    price: 200
+                    productId: "2000000"
+                    quantity: 1
+                    refId: MEV41
+                itemsTotal: 200
+                redemptionCode: null
+                relationName: null
+                shipping: 2
+                taxes: 0
+              client:
+                document: "42151783120"
+                email: email@domain.com
+                id: 3b1abc17-988e-4a14-8b7f-31fc6a5b955c
+            schema:
+              $ref: "#/components/schemas/GetGiftCardfromGiftCardProviderRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Get GiftCard from GiftCard Provider
+      tags:
+        - Transaction
+  "/giftcardproviders/{giftCardProviderID}/giftcards/{giftCardID}":
+    get:
+      deprecated: false
+      description: Returns a specific giftcard from a giftcard provider.
+      operationId: GetGiftCardfromGiftCardProviderbyID
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Get GiftCard from GiftCard Provider by ID
+      tags:
+        - Transaction
+  "/giftcardproviders/{giftCardProviderID}/giftcards/{giftCardID}/transactions":
+    get:
+      deprecated: false
+      description: Return all transaction from a giftcard.
+      operationId: ListAllGiftCardTransactions
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: List All GiftCard Transactions
+      tags:
+        - Transaction
+    post:
+      deprecated: false
+      description: Creates a transaction to a giftcard.
+      operationId: CreateGiftCardTransaction
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/vnd.vtex.giftcardproviders.v1+json:
+            example:
+              description: Order v2915869org-01
+              operation: Credit
+              orderInfo:
+                cart:
+                  discounts: 0
+                  grandTotal: 0
+                  items:
+                    - discount: 0
+                      id: "2000330"
+                      name: T-Shirt M
+                      price: 15
+                      priceTags: []
+                      productId: "2000196"
+                      quantity: 1
+                      refId: null
+                      shippingDiscount: 0
+                      value: 15
+                  itemsTotal: 15
+                  shipping: 0
+                  taxes: 0
+                clientProfile:
+                  birthDate: 0001-01-01T00:00:00
+                  document: "10617764093"
+                  documentType: cpf
+                  email: email@domain.com
+                  firstName: John
+                  isCorporate: false
+                  lastName: Smith
+                  phone: "+5521993759875"
+                orderId: v2915869org-01
+                sequence: 2915869
+                shipping:
+                  city: Leblon
+                  complement: address
+                  country: BRA
+                  neighborhood: address
+                  number: "9678"
+                  postalCode: 24417-246
+                  receiverName: John Smith
+                  reference: address
+                  state: RJ
+                  street: Rua Aidea Barreto do Couto
+              redemptionCode: null
+              redemptionToken: null
+              requestId: v2915869org-01
+              value: 28.4
+            schema:
+              $ref: "#/components/schemas/CreateGiftCardTransactionRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Create GiftCard Transaction
+      tags:
+        - Transaction
+  "/giftcardproviders/{giftCardProviderID}/giftcards/{giftCardID}/transactions/{tId}/cancellations":
+    get:
+      deprecated: false
+      description: Returns a collection of cancellation transactions from a giftcard.
+      operationId: ListAllGiftCardCancellationTransactions
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: Transaction ID generated by the provider. It is different from the `transactionID` generated by VTEX.
+          in: path
+          name: tId
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: List All GiftCard Cancellation Transactions
+      tags:
+        - Transaction
+    post:
+      deprecated: false
+      description: Creates a cancellation transaction to a giftcard.
+      operationId: CreateGiftCardCancellationTransaction
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: Transaction ID generated by the provider. It is different from the `transactionID` generated by VTEX.
+          in: path
+          name: tId
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/vnd.vtex.giftcardproviders.v1+json:
+            example:
+              requestId: 12093812masoidj120398
+              value: 12.1
+            schema:
+              $ref: "#/components/schemas/CreateGiftCardCancellationTransactionRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Create GiftCard Cancellation Transaction
+      tags:
+        - Transaction
+  "/giftcardproviders/{giftCardProviderID}/giftcards/{giftCardID}/transactions/{tId}/settlements":
+    get:
+      deprecated: false
+      description: Returns a collection of settlement transactions from a giftcard.
+      operationId: ListAllGiftCardSettlementTransactions
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: Transaction ID generated by the provider. It is different from the `transactionID` generated by VTEX.
+          in: path
+          name: tId
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: List All GiftCard Settlement Transactions
+      tags:
+        - Transaction
+    post:
+      deprecated: false
+      description: Creates a settlement transaction to a giftcard.
+      operationId: CreateGiftCardSettlementTransaction
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: Transaction ID generated by the provider. It is different from the `transactionID` generated by VTEX.
+          in: path
+          name: tId
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            example:
+              cart:
+                discounts: -20
+                grandTotal: 182
+                items:
+                  - id: "2000002"
+                    name: null
+                    price: 200
+                    productId: "2000000"
+                    quantity: 1
+                    refId: MEV41
+                itemsTotal: 200
+                redemptionCode: FASD-ASDS-ASDA-ASDA
+                relationName: loyalty-program
+                shipping: 2
+                taxes: 0
+              client:
+                document: "42151783120"
+                email: convidadovtex@gmail.com
+                id: 3b1abc17-988e-4a14-8b7f-31fc6a5b955c
+            schema:
+              $ref: "#/components/schemas/CreateGiftCardSettlementTransactionRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Create GiftCard Settlement Transaction
+      tags:
+        - Transaction
+  "/giftcardproviders/{giftCardProviderID}/giftcards/{giftCardID}/transactions/{transactionID}":
+    get:
+      deprecated: false
+      description: Returns a specific transaction from a giftcard.
+      operationId: GetGiftCardTransactionbyID
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: Gift Card transaction ID.
+          in: path
+          name: transactionID
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Get GiftCard Transaction by ID
+      tags:
+        - Transaction
+  "/giftcardproviders/{giftCardProviderID}/giftcards/{giftCardID}/transactions/{transactionID}/authorization":
+    get:
+      deprecated: false
+      description: Returns the transaction authorization info.
+      operationId: GetGiftCardAuthorizationTransaction
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderID
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+        - description: Gift Card ID.
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: Gift Card transaction ID.
+          in: path
+          name: transactionID
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+      summary: Get GiftCard Authorization Transaction
+      tags:
+        - Transaction
+  "/giftcardproviders/{giftCardProviderId}":
+    get:
+      deprecated: false
+      description: Returns a giftcard provider from a store.
+      operationId: GetGiftCardProviderbyID
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: VTEX API AppKey
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: VTEX API AppToken
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+        - description: Gift Card provider's ID.
+          in: path
+          name: giftCardProviderId
+          required: true
+          schema:
+            default: insert identifier here
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: object
+          description: ""
+          headers: {}
+        "404":
+          description: |
+            O provider não existe.
+      summary: Get GiftCard Provider by ID
+      tags:
+        - Provider
+components:
+  schemas:
+    Cart:
+      example:
+        discounts: 20
+        grandTotal: 182
+        items:
+          - id: "2000002"
+            name: null
+            price: 200
+            productId: "2000000"
+            quantity: 1
+            refId: MEV41
+        itemsTotal: 200
+        redemptionCode: null
+        relationName: null
+        shipping: 2
+        taxes: 0
+      properties:
+        discounts:
+          format: int32
+          type: integer
+        grandTotal:
+          format: int32
+          type: integer
+        items:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Item"
+          type: array
+        itemsTotal:
+          format: int32
+          type: integer
+        redemptionCode:
+          nullable: true
+          type: string
+        relationName:
+          nullable: true
+          type: string
+        shipping:
+          format: int32
+          type: integer
+        taxes:
+          format: int32
+          type: integer
+      required:
+        - grandTotal
+        - relationName
+        - redemptionCode
+        - discounts
+        - shipping
+        - taxes
+        - items
+        - itemsTotal
+      title: Cart
+      type: object
+    Cart1:
+      example:
+        discounts: 0
+        grandTotal: 0
+        items:
+          - discount: 0
+            id: "2000330"
+            name: T-Shirt M
+            price: 15
+            priceTags: []
+            productId: "2000196"
+            quantity: 1
+            refId: null
+            shippingDiscount: 0
+            value: 15
+        itemsTotal: 15
+        shipping: 0
+        taxes: 0
+      properties:
+        discounts:
+          format: int32
+          type: integer
+        grandTotal:
+          format: int32
+          type: integer
+        items:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Item1"
+          type: array
+        itemsTotal:
+          format: int32
+          type: integer
+        shipping:
+          format: int32
+          type: integer
+        taxes:
+          format: int32
+          type: integer
+      required:
+        - items
+        - grandTotal
+        - discounts
+        - shipping
+        - taxes
+        - itemsTotal
+      title: Cart1
+      type: object
+    Cart2:
+      example:
+        discounts: -20
+        grandTotal: 182
+        items:
+          - id: "2000002"
+            name: null
+            price: 200
+            productId: "2000000"
+            quantity: 1
+            refId: MEV41
+        itemsTotal: 200
+        redemptionCode: FASD-ASDS-ASDA-ASDA
+        relationName: loyalty-program
+        shipping: 2
+        taxes: 0
+      properties:
+        discounts:
+          format: int32
+          type: integer
+        grandTotal:
+          format: int32
+          type: integer
+        items:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Item"
+          type: array
+        itemsTotal:
+          format: int32
+          type: integer
+        redemptionCode:
+          type: string
+        relationName:
+          type: string
+        shipping:
+          format: int32
+          type: integer
+        taxes:
+          format: int32
+          type: integer
+      required:
+        - grandTotal
+        - relationName
+        - redemptionCode
+        - discounts
+        - shipping
+        - taxes
+        - items
+        - itemsTotal
+      title: Cart2
+      type: object
+    Client:
+      default:
+        document: "42151783120"
+        email: email@domain.com
+        id: 3b1ab
+      properties:
+        document:
+          type: string
+        email:
+          type: string
+        id:
+          type: string
+      required:
+        - id
+        - email
+        - document
+      title: Client
+      type: object
+    ClientProfile:
+      example:
+        birthDate: 0001-01-01T00:00:00
+        document: "10617764093"
+        documentType: cpf
+        email: email@domain.com
+        firstName: John
+        isCorporate: false
+        lastName: Smith
+        phone: "+5521993759875"
+      properties:
+        birthDate:
+          type: string
+        document:
+          type: string
+        documentType:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        isCorporate:
+          type: boolean
+        lastName:
+          type: string
+        phone:
+          type: string
+      required:
+        - email
+        - firstName
+        - lastName
+        - document
+        - documentType
+        - phone
+        - birthDate
+        - isCorporate
+      title: ClientProfile
+      type: object
+    CreateGiftCardCancellationTransactionRequest:
+      default:
+        requestId: "1209"
+        value: 12
+      properties:
+        requestId:
+          type: string
+        value:
+          type: number
+      required:
+        - value
+        - requestId
+      title: CreateGiftCardCancellationTransactionRequest
+      type: object
+    CreateGiftCardSettlementTransactionRequest:
+      default:
+        cart:
+          discounts: 20
+          grandTotal: 182
+          items:
+            - id: "2002"
+              name: null
+              price: 200
+              productId: "200"
+              quantity: 1
+              refId: MEV41
+          itemsTotal: 200
+          redemptionCode: FASD
+          relationName: rewards-program
+          shipping: 2
+          taxes: 0
+        client:
+          document: "42151783120"
+          email: convidadovtex@gmail.com
+          id: 3b1abc17-988e-4a14-8b7f-31fc6a5b955c
+      properties:
+        cart:
+          $ref: "#/components/schemas/Cart2"
+        client:
+          $ref: "#/components/schemas/Client"
+      required:
+        - client
+        - cart
+      title: CreateGiftCardSettlementTransactionRequest
+      type: object
+    CreateGiftCardTransactionRequest:
+      default:
+        description: example
+        operation: Credit
+        orderInfo:
+          cart:
+            discounts: 0
+            grandTotal: 0
+            items:
+              - discount: 0
+                id: "2000330"
+                name: n
+                price: 15
+                priceTags: []
+                productId: "2000196"
+                quantity: 1
+                refId: null
+                shippingDiscount: 0
+                value: 15
+            itemsTotal: 15
+            shipping: 0
+            taxes: 0
+          clientProfile:
+            birthDate: 0001-01-01T00:00:00
+            document: "10617764093"
+            documentType: cpf
+            email: email@domain.com
+            firstName: example
+            isCorporate: false
+            lastName: example
+            phone: "+5521999999999"
+          orderId: v2915
+          sequence: 2915869
+          shipping:
+            city: Rio de Janeiro
+            complement: address
+            country: BRA
+            neighborhood: address
+            number: "96"
+            postalCode: 24417-246
+            receiverName: client
+            reference: address
+            state: RJ
+            street: address
+        redemptionCode: null
+        redemptionToken: null
+        requestId: v2915
+        value: 28
+      properties:
+        description:
+          type: string
+        operation:
+          type: string
+        orderInfo:
+          $ref: "#/components/schemas/OrderInfo"
+        redemptionCode:
+          nullable: true
+          type: string
+        redemptionToken:
+          nullable: true
+          type: string
+        requestId:
+          type: string
+        value:
+          type: number
+      required:
+        - operation
+        - value
+        - description
+        - redemptionToken
+        - redemptionCode
+        - requestId
+        - orderInfo
+      title: CreateGiftCardTransactionRequest
+      type: object
+    CreateGiftCardinGiftCardProviderRequest:
+      default:
+        caption: Rewards Program
+        emissionDate: 2011-02-04T17:02:19.17
+        expiringDate: 2020-02-04T17:02:19.17
+        multipleCredits: true
+        multipleRedemptions: true
+        profileId: 92de2
+        relationName: rewards-program
+        restrictedToOwner: true
+      properties:
+        caption:
+          type: string
+        emissionDate:
+          type: string
+        expiringDate:
+          type: string
+        multipleCredits:
+          type: boolean
+        multipleRedemptions:
+          type: boolean
+        profileId:
+          type: string
+        relationName:
+          type: string
+        restrictedToOwner:
+          type: boolean
+      required:
+        - relationName
+        - emissionDate
+        - expiringDate
+        - caption
+        - restrictedToOwner
+        - multipleRedemptions
+        - multipleCredits
+        - profileId
+      title: CreateGiftCardinGiftCardProviderRequest
+      type: object
+    CreateUpdateGiftCardProviderbyIDRequest:
+      default:
+        cancelEnabled: true
+        oauthProvider: vtex
+        preAuthEnabled: true
+        serviceUrl: https://api.vtex.com.br/example
+      properties:
+        appKey:
+          description: Credential provided by the merchant that VTEX will use for identification
+          type: string
+        appToken:
+          description: Credential provided by the merchant that VTEX will use for identification
+          type: string
+        cancelEnabled:
+          description: It says if it is possible to cancel the transaction, generated through the provider
+          type: boolean
+        oauthProvider:
+          description: Provider's authentication
+          type: string
+        preAuthEnabled:
+          description: Related to the pre-authorization that can happen on the transaction generated through the provider
+          type: boolean
+        serviceUrl:
+          description: URL from the provider
+          type: string
+      required:
+        - serviceUrl
+        - oauthProvider
+        - preAuthEnabled
+        - cancelEnabled
+      title: ""
+      type: object
+    GetGiftCardfromGiftCardProviderRequest:
+      default:
+        cart:
+          discounts: 20
+          grandTotal: 182
+          items:
+            - id: "2002"
+              name: null
+              price: 200
+              productId: "2000000"
+              quantity: 1
+              refId: M41
+          itemsTotal: 200
+          redemptionCode: null
+          relationName: null
+          shipping: 2
+          taxes: 0
+        client:
+          document: "42151783120"
+          email: email@domain.com
+          id: 3b1c
+      properties:
+        cart:
+          $ref: "#/components/schemas/Cart"
+        client:
+          $ref: "#/components/schemas/Client"
+      required:
+        - client
+        - cart
+      title: GetGiftCardfromGiftCardProviderRequest
+      type: object
+    Item:
+      default:
+        id: "2000002"
+        name: null
+        price: 200
+        productId: "2000000"
+        quantity: 1
+        refId: MEV41
+      properties:
+        id:
+          type: string
+        name:
+          nullable: true
+          type: string
+        price:
+          format: int32
+          type: integer
+        productId:
+          type: string
+        quantity:
+          format: int32
+          type: integer
+        refId:
+          type: string
+      required:
+        - productId
+        - id
+        - refId
+        - name
+        - price
+        - quantity
+      title: Item
+      type: object
+    Item1:
+      example:
+        discount: 0
+        id: "2000330"
+        name: T-Shirt M
+        price: 15
+        priceTags: []
+        productId: "2000196"
+        quantity: 1
+        refId: null
+        shippingDiscount: 0
+        value: 15
+      properties:
+        discount:
+          format: int32
+          type: integer
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          format: int32
+          type: integer
+        priceTags:
+          description: ""
+          items:
+            type: string
+          type: array
+        productId:
+          type: string
+        quantity:
+          format: int32
+          type: integer
+        refId:
+          nullable: true
+          type: string
+        shippingDiscount:
+          format: int32
+          type: integer
+        value:
+          format: int32
+          type: integer
+      required:
+        - id
+        - productId
+        - refId
+        - name
+        - value
+        - price
+        - quantity
+        - shippingDiscount
+        - discount
+        - priceTags
+      title: Item1
+      type: object
+    OrderInfo:
+      example:
+        cart:
+          discounts: 0
+          grandTotal: 0
+          items:
+            - discount: 0
+              id: "2000330"
+              name: T-Shirt M
+              price: 15
+              priceTags: []
+              productId: "2000196"
+              quantity: 1
+              refId: null
+              shippingDiscount: 0
+              value: 15
+          itemsTotal: 15
+          shipping: 0
+          taxes: 0
+        clientProfile:
+          birthDate: 0001-01-01T00:00:00
+          document: "10617764093"
+          documentType: cpf
+          email: email@domain.com
+          firstName: John
+          isCorporate: false
+          lastName: Smith
+          phone: "+5521993759875"
+        orderId: v2915869org-01
+        sequence: 2915869
+        shipping:
+          city: Leblon
+          complement: ""
+          country: BRA
+          neighborhood: ""
+          number: "9678"
+          postalCode: 24417-246
+          receiverName: John Smith
+          reference: ""
+          state: RJ
+          street: Rua Aidea Barreto do Couto
+      properties:
+        cart:
+          $ref: "#/components/schemas/Cart1"
+        clientProfile:
+          $ref: "#/components/schemas/ClientProfile"
+        orderId:
+          type: string
+        sequence:
+          format: int32
+          type: integer
+        shipping:
+          $ref: "#/components/schemas/Shipping"
+      required:
+        - orderId
+        - sequence
+        - cart
+        - clientProfile
+        - shipping
+      title: OrderInfo
+      type: object
+    Shipping:
+      example:
+        city: Leblon
+        complement: ""
+        country: BRA
+        neighborhood: ""
+        number: "9678"
+        postalCode: 24417-246
+        receiverName: John Smith
+        reference: ""
+        state: RJ
+        street: Rua Aidea Barreto do Couto
+      properties:
+        city:
+          type: string
+        complement:
+          type: string
+        country:
+          type: string
+        neighborhood:
+          type: string
+        number:
+          type: string
+        postalCode:
+          type: string
+        receiverName:
+          type: string
+        reference:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+      required:
+        - receiverName
+        - postalCode
+        - city
+        - state
+        - country
+        - street
+        - number
+        - neighborhood
+        - complement
+        - reference
+      title: Shipping
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

@@ -1,0 +1,3573 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://datastream.googleapis.com/"
+    }
+  ],
+  "info": {
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com",
+      "x-twitter": "youtube"
+    },
+    "description": "",
+    "license": {
+      "name": "Creative Commons Attribution 3.0",
+      "url": "http://creativecommons.org/licenses/by/3.0/"
+    },
+    "termsOfService": "https://developers.google.com/terms/",
+    "title": "Datastream API",
+    "version": "v1",
+    "x-apisguru-categories": [
+      "analytics",
+      "media"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg"
+    },
+    "x-origin": [
+      {
+        "format": "google",
+        "url": "https://datastream.googleapis.com/$discovery/rest?version=v1",
+        "version": "v1"
+      }
+    ],
+    "x-preferred": true,
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "datastream"
+  },
+  "externalDocs": {
+    "url": "https://cloud.google.com/datastream/"
+  },
+  "tags": [
+    {
+      "name": "projects"
+    }
+  ],
+  "paths": {
+    "/v1/{name}": {
+      "delete": {
+        "description": "Use this method to delete a stream.",
+        "operationId": "datastream.projects.locations.streams.delete",
+        "parameters": [
+          {
+            "description": "Required. The name of the stream resource to delete.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "in": "query",
+            "name": "requestId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "description": "Use this method to get details about a stream object.",
+        "operationId": "datastream.projects.locations.streams.objects.get",
+        "parameters": [
+          {
+            "description": "Required. The name of the stream object resource to get.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamObject"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "patch": {
+        "description": "Use this method to update the configuration of a stream.",
+        "operationId": "datastream.projects.locations.streams.patch",
+        "parameters": [
+          {
+            "description": "Output only. The stream's name.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Update the stream without validating it.",
+            "in": "query",
+            "name": "force",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "in": "query",
+            "name": "requestId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Field mask is used to specify the fields to be overwritten in the stream resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.",
+            "in": "query",
+            "name": "updateMask",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Only validate the stream with the changes, without actually updating it. The default is false.",
+            "in": "query",
+            "name": "validateOnly",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stream"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{name}/locations": {
+      "get": {
+        "description": "Lists information about the supported locations for this service.",
+        "operationId": "datastream.projects.locations.list",
+        "parameters": [
+          {
+            "description": "The resource that owns the locations collection, if applicable.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A filter to narrow down results to a preferred subset. The filtering language accepts strings like `\"displayName=tokyo\"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The maximum number of results to return. If not set, the service selects a default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListLocationsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{name}/operations": {
+      "get": {
+        "description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+        "operationId": "datastream.projects.locations.operations.list",
+        "parameters": [
+          {
+            "description": "The name of the operation's parent resource.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The standard list filter.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The standard list page size.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The standard list page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOperationsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{name}:cancel": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+        "operationId": "datastream.projects.locations.operations.cancel",
+        "parameters": [
+          {
+            "description": "The name of the operation resource to be cancelled.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelOperationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{name}:fetchStaticIps": {
+      "get": {
+        "description": "The FetchStaticIps API call exposes the static IP addresses used by Datastream.",
+        "operationId": "datastream.projects.locations.fetchStaticIps",
+        "parameters": [
+          {
+            "description": "Required. The resource name for the location for which static IPs should be returned. Must be in the format `projects/*/locations/*`.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of Ips to return, will likely not be specified.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "A page token, received from a previous `ListStaticIps` call. will likely not be specified.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchStaticIpsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{object}:startBackfillJob": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Use this method to start a backfill job for the specified stream object.",
+        "operationId": "datastream.projects.locations.streams.objects.startBackfillJob",
+        "parameters": [
+          {
+            "description": "Required. The name of the stream object resource to start a backfill job for.",
+            "in": "path",
+            "name": "object",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartBackfillJobRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartBackfillJobResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{object}:stopBackfillJob": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Use this method to stop a backfill job for the specified stream object.",
+        "operationId": "datastream.projects.locations.streams.objects.stopBackfillJob",
+        "parameters": [
+          {
+            "description": "Required. The name of the stream object resource to stop the backfill job for.",
+            "in": "path",
+            "name": "object",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StopBackfillJobRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StopBackfillJobResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{parent}/connectionProfiles": {
+      "get": {
+        "description": "Use this method to list connection profiles created in a project and location.",
+        "operationId": "datastream.projects.locations.connectionProfiles.list",
+        "parameters": [
+          {
+            "description": "Required. The parent that owns the collection of connection profiles.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter request.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Order by fields for the result.",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of connection profiles to return. If unspecified, at most 50 connection profiles will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page token received from a previous `ListConnectionProfiles` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListConnectionProfiles` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListConnectionProfilesResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Use this method to create a connection profile in a project and location.",
+        "operationId": "datastream.projects.locations.connectionProfiles.create",
+        "parameters": [
+          {
+            "description": "Required. The parent that owns the collection of ConnectionProfiles.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. The connection profile identifier.",
+            "in": "query",
+            "name": "connectionProfileId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Create the connection profile without validating it.",
+            "in": "query",
+            "name": "force",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "in": "query",
+            "name": "requestId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Only validate the connection profile, but don't create any resources. The default is false.",
+            "in": "query",
+            "name": "validateOnly",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConnectionProfile"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{parent}/connectionProfiles:discover": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Use this method to discover a connection profile. The discover API call exposes the data objects and metadata belonging to the profile. Typically, a request returns children data objects of a parent data object that's optionally supplied in the request.",
+        "operationId": "datastream.projects.locations.connectionProfiles.discover",
+        "parameters": [
+          {
+            "description": "Required. The parent resource of the connection profile type. Must be in the format `projects/*/locations/*`.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscoverConnectionProfileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoverConnectionProfileResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{parent}/objects": {
+      "get": {
+        "description": "Use this method to list the objects of a specific stream.",
+        "operationId": "datastream.projects.locations.streams.objects.list",
+        "parameters": [
+          {
+            "description": "Required. The parent stream that owns the collection of objects.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of objects to return. Default is 50. The maximum value is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page token received from a previous `ListStreamObjectsRequest` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListStreamObjectsRequest` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListStreamObjectsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{parent}/objects:lookup": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Use this method to look up a stream object by its source object identifier.",
+        "operationId": "datastream.projects.locations.streams.objects.lookup",
+        "parameters": [
+          {
+            "description": "Required. The parent stream that owns the collection of objects.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupStreamObjectRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamObject"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{parent}/privateConnections": {
+      "get": {
+        "description": "Use this method to list private connectivity configurations in a project and location.",
+        "operationId": "datastream.projects.locations.privateConnections.list",
+        "parameters": [
+          {
+            "description": "Required. The parent that owns the collection of private connectivity configurations.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter request.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Order by fields for the result.",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of private connectivity configurations to return. If unspecified, at most 50 private connectivity configurations that will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page token received from a previous `ListPrivateConnections` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListPrivateConnections` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPrivateConnectionsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Use this method to create a private connectivity configuration.",
+        "operationId": "datastream.projects.locations.privateConnections.create",
+        "parameters": [
+          {
+            "description": "Required. The parent that owns the collection of PrivateConnections.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. If set to true, will skip validations.",
+            "in": "query",
+            "name": "force",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Required. The private connectivity identifier.",
+            "in": "query",
+            "name": "privateConnectionId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "in": "query",
+            "name": "requestId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrivateConnection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{parent}/routes": {
+      "get": {
+        "description": "Use this method to list routes created for a private connectivity configuration in a project and location.",
+        "operationId": "datastream.projects.locations.privateConnections.routes.list",
+        "parameters": [
+          {
+            "description": "Required. The parent that owns the collection of Routess.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter request.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Order by fields for the result.",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of Routes to return. The service may return fewer than this value. If unspecified, at most 50 Routes will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page token received from a previous `ListRoutes` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListRoutes` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRoutesResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Use this method to create a route for a private connectivity configuration in a project and location.",
+        "operationId": "datastream.projects.locations.privateConnections.routes.create",
+        "parameters": [
+          {
+            "description": "Required. The parent that owns the collection of Routes.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "in": "query",
+            "name": "requestId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. The Route identifier.",
+            "in": "query",
+            "name": "routeId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Route"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1/{parent}/streams": {
+      "get": {
+        "description": "Use this method to list streams in a project and location.",
+        "operationId": "datastream.projects.locations.streams.list",
+        "parameters": [
+          {
+            "description": "Required. The parent that owns the collection of streams.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter request.",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Order by fields for the result.",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of streams to return. If unspecified, at most 50 streams will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page token received from a previous `ListStreams` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListStreams` must match the call that provided the page token.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListStreamsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ],
+      "post": {
+        "description": "Use this method to create a stream.",
+        "operationId": "datastream.projects.locations.streams.create",
+        "parameters": [
+          {
+            "description": "Required. The parent that owns the collection of streams.",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Create the stream without validating it.",
+            "in": "query",
+            "name": "force",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+            "in": "query",
+            "name": "requestId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Required. The stream identifier.",
+            "in": "query",
+            "name": "streamId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Only validate the stream, but don't create any resources. The default is false.",
+            "in": "query",
+            "name": "validateOnly",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stream"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ],
+            "Oauth2c": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "_.xgafv": {
+        "description": "V1 error format.",
+        "in": "query",
+        "name": "$.xgafv",
+        "schema": {
+          "enum": [
+            "1",
+            "2"
+          ],
+          "type": "string"
+        }
+      },
+      "access_token": {
+        "description": "OAuth access token.",
+        "in": "query",
+        "name": "access_token",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "alt": {
+        "description": "Data format for response.",
+        "in": "query",
+        "name": "alt",
+        "schema": {
+          "enum": [
+            "json",
+            "media",
+            "proto"
+          ],
+          "type": "string"
+        }
+      },
+      "callback": {
+        "description": "JSONP",
+        "in": "query",
+        "name": "callback",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "fields": {
+        "description": "Selector specifying which fields to include in a partial response.",
+        "in": "query",
+        "name": "fields",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "key": {
+        "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+        "in": "query",
+        "name": "key",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "oauth_token": {
+        "description": "OAuth 2.0 token for the current user.",
+        "in": "query",
+        "name": "oauth_token",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "prettyPrint": {
+        "description": "Returns response with indentations and line breaks.",
+        "in": "query",
+        "name": "prettyPrint",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "quotaUser": {
+        "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.",
+        "in": "query",
+        "name": "quotaUser",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "uploadType": {
+        "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
+        "in": "query",
+        "name": "uploadType",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "upload_protocol": {
+        "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
+        "in": "query",
+        "name": "upload_protocol",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "AvroFileFormat": {
+        "description": "AVRO file format configuration.",
+        "properties": {},
+        "type": "object"
+      },
+      "BackfillAllStrategy": {
+        "description": "Backfill strategy to automatically backfill the Stream's objects. Specific objects can be excluded.",
+        "properties": {
+          "mysqlExcludedObjects": {
+            "$ref": "#/components/schemas/MysqlRdbms",
+            "description": "MySQL data source objects to avoid backfilling."
+          },
+          "oracleExcludedObjects": {
+            "$ref": "#/components/schemas/OracleRdbms",
+            "description": "Oracle data source objects to avoid backfilling."
+          },
+          "postgresqlExcludedObjects": {
+            "$ref": "#/components/schemas/PostgresqlRdbms",
+            "description": "PostgreSQL data source objects to avoid backfilling."
+          }
+        },
+        "type": "object"
+      },
+      "BackfillJob": {
+        "description": "Represents a backfill job on a specific stream object.",
+        "properties": {
+          "errors": {
+            "description": "Output only. Errors which caused the backfill job to fail.",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "lastEndTime": {
+            "description": "Output only. Backfill job's end time.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "lastStartTime": {
+            "description": "Output only. Backfill job's start time.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "state": {
+            "description": "Backfill job state.",
+            "enum": [
+              "STATE_UNSPECIFIED",
+              "NOT_STARTED",
+              "PENDING",
+              "ACTIVE",
+              "STOPPED",
+              "FAILED",
+              "COMPLETED",
+              "UNSUPPORTED"
+            ],
+            "type": "string"
+          },
+          "trigger": {
+            "description": "Backfill job's triggering reason.",
+            "enum": [
+              "TRIGGER_UNSPECIFIED",
+              "AUTOMATIC",
+              "MANUAL"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "BackfillNoneStrategy": {
+        "description": "Backfill strategy to disable automatic backfill for the Stream's objects.",
+        "properties": {},
+        "type": "object"
+      },
+      "BigQueryDestinationConfig": {
+        "description": "BigQuery destination configuration",
+        "properties": {
+          "dataFreshness": {
+            "description": "The guaranteed data freshness (in seconds) when querying tables created by the stream. Editing this field will only affect new tables created in the future, but existing tables will not be impacted. Lower values mean that queries will return fresher data, but may result in higher cost.",
+            "format": "google-duration",
+            "type": "string"
+          },
+          "singleTargetDataset": {
+            "$ref": "#/components/schemas/SingleTargetDataset",
+            "description": "Single destination dataset."
+          },
+          "sourceHierarchyDatasets": {
+            "$ref": "#/components/schemas/SourceHierarchyDatasets",
+            "description": "Source hierarchy datasets."
+          }
+        },
+        "type": "object"
+      },
+      "BigQueryProfile": {
+        "description": "BigQuery warehouse profile.",
+        "properties": {},
+        "type": "object"
+      },
+      "CancelOperationRequest": {
+        "description": "The request message for Operations.CancelOperation.",
+        "properties": {},
+        "type": "object"
+      },
+      "ConnectionProfile": {
+        "description": "A set of reusable connection configurations to be used as a source or destination for a stream.",
+        "properties": {
+          "bigqueryProfile": {
+            "$ref": "#/components/schemas/BigQueryProfile",
+            "description": "BigQuery Connection Profile configuration."
+          },
+          "createTime": {
+            "description": "Output only. The create time of the resource.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "displayName": {
+            "description": "Required. Display name.",
+            "type": "string"
+          },
+          "forwardSshConnectivity": {
+            "$ref": "#/components/schemas/ForwardSshTunnelConnectivity",
+            "description": "Forward SSH tunnel connectivity."
+          },
+          "gcsProfile": {
+            "$ref": "#/components/schemas/GcsProfile",
+            "description": "Cloud Storage ConnectionProfile configuration."
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels.",
+            "type": "object"
+          },
+          "mysqlProfile": {
+            "$ref": "#/components/schemas/MysqlProfile",
+            "description": "MySQL ConnectionProfile configuration."
+          },
+          "name": {
+            "description": "Output only. The resource's name.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "oracleProfile": {
+            "$ref": "#/components/schemas/OracleProfile",
+            "description": "Oracle ConnectionProfile configuration."
+          },
+          "postgresqlProfile": {
+            "$ref": "#/components/schemas/PostgresqlProfile",
+            "description": "PostgreSQL Connection Profile configuration."
+          },
+          "privateConnectivity": {
+            "$ref": "#/components/schemas/PrivateConnectivity",
+            "description": "Private connectivity."
+          },
+          "staticServiceIpConnectivity": {
+            "$ref": "#/components/schemas/StaticServiceIpConnectivity",
+            "description": "Static Service IP connectivity."
+          },
+          "updateTime": {
+            "description": "Output only. The update time of the resource.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DatasetTemplate": {
+        "description": "Dataset template used for dynamic dataset creation.",
+        "properties": {
+          "datasetIdPrefix": {
+            "description": "If supplied, every created dataset will have its name prefixed by the provided value. The prefix and name will be separated by an underscore. i.e. _.",
+            "type": "string"
+          },
+          "kmsKeyName": {
+            "description": "Describes the Cloud KMS encryption key that will be used to protect destination BigQuery table. The BigQuery Service Account associated with your project requires access to this encryption key. i.e. projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{cryptoKey}. See https://cloud.google.com/bigquery/docs/customer-managed-encryption for more information.",
+            "type": "string"
+          },
+          "location": {
+            "description": "Required. The geographic location where the dataset should reside. See https://cloud.google.com/bigquery/docs/locations for supported locations.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DestinationConfig": {
+        "description": "The configuration of the stream destination.",
+        "properties": {
+          "bigqueryDestinationConfig": {
+            "$ref": "#/components/schemas/BigQueryDestinationConfig",
+            "description": "BigQuery destination configuration."
+          },
+          "destinationConnectionProfile": {
+            "description": "Required. Destination connection profile resource. Format: `projects/{project}/locations/{location}/connectionProfiles/{name}`",
+            "type": "string"
+          },
+          "gcsDestinationConfig": {
+            "$ref": "#/components/schemas/GcsDestinationConfig",
+            "description": "A configuration for how data should be loaded to Cloud Storage."
+          }
+        },
+        "type": "object"
+      },
+      "DiscoverConnectionProfileRequest": {
+        "description": "Request message for 'discover' ConnectionProfile request.",
+        "properties": {
+          "connectionProfile": {
+            "$ref": "#/components/schemas/ConnectionProfile",
+            "description": "An ad-hoc connection profile configuration."
+          },
+          "connectionProfileName": {
+            "description": "A reference to an existing connection profile.",
+            "type": "string"
+          },
+          "fullHierarchy": {
+            "description": "Whether to retrieve the full hierarchy of data objects (TRUE) or only the current level (FALSE).",
+            "type": "boolean"
+          },
+          "hierarchyDepth": {
+            "description": "The number of hierarchy levels below the current level to be retrieved.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "mysqlRdbms": {
+            "$ref": "#/components/schemas/MysqlRdbms",
+            "description": "MySQL RDBMS to enrich with child data objects and metadata."
+          },
+          "oracleRdbms": {
+            "$ref": "#/components/schemas/OracleRdbms",
+            "description": "Oracle RDBMS to enrich with child data objects and metadata."
+          },
+          "postgresqlRdbms": {
+            "$ref": "#/components/schemas/PostgresqlRdbms",
+            "description": "PostgreSQL RDBMS to enrich with child data objects and metadata."
+          }
+        },
+        "type": "object"
+      },
+      "DiscoverConnectionProfileResponse": {
+        "description": "Response from a discover request.",
+        "properties": {
+          "mysqlRdbms": {
+            "$ref": "#/components/schemas/MysqlRdbms",
+            "description": "Enriched MySQL RDBMS object."
+          },
+          "oracleRdbms": {
+            "$ref": "#/components/schemas/OracleRdbms",
+            "description": "Enriched Oracle RDBMS object."
+          },
+          "postgresqlRdbms": {
+            "$ref": "#/components/schemas/PostgresqlRdbms",
+            "description": "Enriched PostgreSQL RDBMS object."
+          }
+        },
+        "type": "object"
+      },
+      "DropLargeObjects": {
+        "description": "Configuration to drop large object values.",
+        "properties": {},
+        "type": "object"
+      },
+      "Empty": {
+        "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }",
+        "properties": {},
+        "type": "object"
+      },
+      "Error": {
+        "description": "Represent a user-facing Error.",
+        "properties": {
+          "details": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional information about the error.",
+            "type": "object"
+          },
+          "errorTime": {
+            "description": "The time when the error occurred.",
+            "format": "google-datetime",
+            "type": "string"
+          },
+          "errorUuid": {
+            "description": "A unique identifier for this specific error, allowing it to be traced throughout the system in logs and API responses.",
+            "type": "string"
+          },
+          "message": {
+            "description": "A message containing more information about the error that occurred.",
+            "type": "string"
+          },
+          "reason": {
+            "description": "A title that explains the reason for the error.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "FetchStaticIpsResponse": {
+        "description": "Response message for a 'FetchStaticIps' response.",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "staticIps": {
+            "description": "list of static ips by account",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ForwardSshTunnelConnectivity": {
+        "description": "Forward SSH Tunnel connectivity.",
+        "properties": {
+          "hostname": {
+            "description": "Required. Hostname for the SSH tunnel.",
+            "type": "string"
+          },
+          "password": {
+            "description": "Input only. SSH password.",
+            "type": "string"
+          },
+          "port": {
+            "description": "Port for the SSH tunnel, default value is 22.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "privateKey": {
+            "description": "Input only. SSH private key.",
+            "type": "string"
+          },
+          "username": {
+            "description": "Required. Username for the SSH tunnel.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "GcsDestinationConfig": {
+        "description": "Google Cloud Storage destination configuration",
+        "properties": {
+          "avroFileFormat": {
+            "$ref": "#/components/schemas/AvroFileFormat",
+            "description": "AVRO file format configuration."
+          },
+          "fileRotationInterval": {
+            "description": "The maximum duration for which new events are added before a file is closed and a new file is created.",
+            "format": "google-duration",
+            "type": "string"
+          },
+          "fileRotationMb": {
+            "description": "The maximum file size to be saved in the bucket.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "jsonFileFormat": {
+            "$ref": "#/components/schemas/JsonFileFormat",
+            "description": "JSON file format configuration."
+          },
+          "path": {
+            "description": "Path inside the Cloud Storage bucket to write data to.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "GcsProfile": {
+        "description": "Cloud Storage bucket profile.",
+        "properties": {
+          "bucket": {
+            "description": "Required. The Cloud Storage bucket name.",
+            "type": "string"
+          },
+          "rootPath": {
+            "description": "The root path inside the Cloud Storage bucket.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "JsonFileFormat": {
+        "description": "JSON file format configuration.",
+        "properties": {
+          "compression": {
+            "description": "Compression of the loaded JSON file.",
+            "enum": [
+              "JSON_COMPRESSION_UNSPECIFIED",
+              "NO_COMPRESSION",
+              "GZIP"
+            ],
+            "type": "string"
+          },
+          "schemaFileFormat": {
+            "description": "The schema file format along JSON data files.",
+            "enum": [
+              "SCHEMA_FILE_FORMAT_UNSPECIFIED",
+              "NO_SCHEMA_FILE",
+              "AVRO_SCHEMA_FILE"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListConnectionProfilesResponse": {
+        "description": "Response message for listing connection profiles.",
+        "properties": {
+          "connectionProfiles": {
+            "description": "List of connection profiles.",
+            "items": {
+              "$ref": "#/components/schemas/ConnectionProfile"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "unreachable": {
+            "description": "Locations that could not be reached.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListLocationsResponse": {
+        "description": "The response message for Locations.ListLocations.",
+        "properties": {
+          "locations": {
+            "description": "A list of locations that matches the specified filter in the request.",
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "The standard List next-page token.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListOperationsResponse": {
+        "description": "The response message for Operations.ListOperations.",
+        "properties": {
+          "nextPageToken": {
+            "description": "The standard List next-page token.",
+            "type": "string"
+          },
+          "operations": {
+            "description": "A list of operations that matches the specified filter in the request.",
+            "items": {
+              "$ref": "#/components/schemas/Operation"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListPrivateConnectionsResponse": {
+        "description": "Response containing a list of private connection configurations.",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "privateConnections": {
+            "description": "List of private connectivity configurations.",
+            "items": {
+              "$ref": "#/components/schemas/PrivateConnection"
+            },
+            "type": "array"
+          },
+          "unreachable": {
+            "description": "Locations that could not be reached.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListRoutesResponse": {
+        "description": "Route list response.",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "routes": {
+            "description": "List of Routes.",
+            "items": {
+              "$ref": "#/components/schemas/Route"
+            },
+            "type": "array"
+          },
+          "unreachable": {
+            "description": "Locations that could not be reached.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListStreamObjectsResponse": {
+        "description": "Response containing the objects for a stream.",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page.",
+            "type": "string"
+          },
+          "streamObjects": {
+            "description": "List of stream objects.",
+            "items": {
+              "$ref": "#/components/schemas/StreamObject"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListStreamsResponse": {
+        "description": "Response message for listing streams.",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "streams": {
+            "description": "List of streams",
+            "items": {
+              "$ref": "#/components/schemas/Stream"
+            },
+            "type": "array"
+          },
+          "unreachable": {
+            "description": "Locations that could not be reached.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Location": {
+        "description": "A resource that represents Google Cloud Platform location.",
+        "properties": {
+          "displayName": {
+            "description": "The friendly name for this location, typically a nearby city name. For example, \"Tokyo\".",
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Cross-service attributes for the location. For example {\"cloud.googleapis.com/region\": \"us-east1\"}",
+            "type": "object"
+          },
+          "locationId": {
+            "description": "The canonical id for this location. For example: `\"us-east1\"`.",
+            "type": "string"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL."
+            },
+            "description": "Service-specific metadata. For example the available capacity at the given location.",
+            "type": "object"
+          },
+          "name": {
+            "description": "Resource name for the location, which may vary between implementations. For example: `\"projects/example-project/locations/us-east1\"`",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LookupStreamObjectRequest": {
+        "description": "Request for looking up a specific stream object by its source object identifier.",
+        "properties": {
+          "sourceObjectIdentifier": {
+            "$ref": "#/components/schemas/SourceObjectIdentifier",
+            "description": "Required. The source object identifier which maps to the stream object."
+          }
+        },
+        "type": "object"
+      },
+      "MysqlColumn": {
+        "description": "MySQL Column.",
+        "properties": {
+          "collation": {
+            "description": "Column collation.",
+            "type": "string"
+          },
+          "column": {
+            "description": "Column name.",
+            "type": "string"
+          },
+          "dataType": {
+            "description": "The MySQL data type. Full data types list can be found here: https://dev.mysql.com/doc/refman/8.0/en/data-types.html",
+            "type": "string"
+          },
+          "length": {
+            "description": "Column length.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "nullable": {
+            "description": "Whether or not the column can accept a null value.",
+            "type": "boolean"
+          },
+          "ordinalPosition": {
+            "description": "The ordinal position of the column in the table.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "primaryKey": {
+            "description": "Whether or not the column represents a primary key.",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "MysqlDatabase": {
+        "description": "MySQL database.",
+        "properties": {
+          "database": {
+            "description": "Database name.",
+            "type": "string"
+          },
+          "mysqlTables": {
+            "description": "Tables in the database.",
+            "items": {
+              "$ref": "#/components/schemas/MysqlTable"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "MysqlObjectIdentifier": {
+        "description": "Mysql data source object identifier.",
+        "properties": {
+          "database": {
+            "description": "Required. The database name.",
+            "type": "string"
+          },
+          "table": {
+            "description": "Required. The table name.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "MysqlProfile": {
+        "description": "MySQL database profile.",
+        "properties": {
+          "hostname": {
+            "description": "Required. Hostname for the MySQL connection.",
+            "type": "string"
+          },
+          "password": {
+            "description": "Required. Input only. Password for the MySQL connection.",
+            "type": "string"
+          },
+          "port": {
+            "description": "Port for the MySQL connection, default value is 3306.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "sslConfig": {
+            "$ref": "#/components/schemas/MysqlSslConfig",
+            "description": "SSL configuration for the MySQL connection."
+          },
+          "username": {
+            "description": "Required. Username for the MySQL connection.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "MysqlRdbms": {
+        "description": "MySQL database structure",
+        "properties": {
+          "mysqlDatabases": {
+            "description": "Mysql databases on the server",
+            "items": {
+              "$ref": "#/components/schemas/MysqlDatabase"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "MysqlSourceConfig": {
+        "description": "MySQL source configuration",
+        "properties": {
+          "excludeObjects": {
+            "$ref": "#/components/schemas/MysqlRdbms",
+            "description": "MySQL objects to exclude from the stream."
+          },
+          "includeObjects": {
+            "$ref": "#/components/schemas/MysqlRdbms",
+            "description": "MySQL objects to retrieve from the source."
+          },
+          "maxConcurrentBackfillTasks": {
+            "description": "Maximum number of concurrent backfill tasks. The number should be non negative. If not set (or set to 0), the system's default value will be used.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "maxConcurrentCdcTasks": {
+            "description": "Maximum number of concurrent CDC tasks. The number should be non negative. If not set (or set to 0), the system's default value will be used.",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "MysqlSslConfig": {
+        "description": "MySQL SSL configuration information.",
+        "properties": {
+          "caCertificate": {
+            "description": "Input only. PEM-encoded certificate of the CA that signed the source database server's certificate.",
+            "type": "string"
+          },
+          "caCertificateSet": {
+            "description": "Output only. Indicates whether the ca_certificate field is set.",
+            "readOnly": true,
+            "type": "boolean"
+          },
+          "clientCertificate": {
+            "description": "Input only. PEM-encoded certificate that will be used by the replica to authenticate against the source database server. If this field is used then the 'client_key' and the 'ca_certificate' fields are mandatory.",
+            "type": "string"
+          },
+          "clientCertificateSet": {
+            "description": "Output only. Indicates whether the client_certificate field is set.",
+            "readOnly": true,
+            "type": "boolean"
+          },
+          "clientKey": {
+            "description": "Input only. PEM-encoded private key associated with the Client Certificate. If this field is used then the 'client_certificate' and the 'ca_certificate' fields are mandatory.",
+            "type": "string"
+          },
+          "clientKeySet": {
+            "description": "Output only. Indicates whether the client_key field is set.",
+            "readOnly": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "MysqlTable": {
+        "description": "MySQL table.",
+        "properties": {
+          "mysqlColumns": {
+            "description": "MySQL columns in the database. When unspecified as part of include/exclude objects, includes/excludes everything.",
+            "items": {
+              "$ref": "#/components/schemas/MysqlColumn"
+            },
+            "type": "array"
+          },
+          "table": {
+            "description": "Table name.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Operation": {
+        "description": "This resource represents a long-running operation that is the result of a network API call.",
+        "properties": {
+          "done": {
+            "description": "If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.",
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Status",
+            "description": "The error result of the operation in case of failure or cancellation."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL."
+            },
+            "description": "Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.",
+            "type": "object"
+          },
+          "name": {
+            "description": "The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.",
+            "type": "string"
+          },
+          "response": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL."
+            },
+            "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "OperationMetadata": {
+        "description": "Represents the metadata of the long-running operation.",
+        "properties": {
+          "apiVersion": {
+            "description": "Output only. API version used to start the operation.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Output only. The time the operation was created.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "endTime": {
+            "description": "Output only. The time the operation finished running.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "requestedCancellation": {
+            "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+            "readOnly": true,
+            "type": "boolean"
+          },
+          "statusMessage": {
+            "description": "Output only. Human-readable status of the operation, if any.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "target": {
+            "description": "Output only. Server-defined resource path for the target of the operation.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "validationResult": {
+            "$ref": "#/components/schemas/ValidationResult",
+            "description": "Output only. Results of executed validations if there are any.",
+            "readOnly": true
+          },
+          "verb": {
+            "description": "Output only. Name of the verb executed by the operation.",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "OracleColumn": {
+        "description": "Oracle Column.",
+        "properties": {
+          "column": {
+            "description": "Column name.",
+            "type": "string"
+          },
+          "dataType": {
+            "description": "The Oracle data type.",
+            "type": "string"
+          },
+          "encoding": {
+            "description": "Column encoding.",
+            "type": "string"
+          },
+          "length": {
+            "description": "Column length.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "nullable": {
+            "description": "Whether or not the column can accept a null value.",
+            "type": "boolean"
+          },
+          "ordinalPosition": {
+            "description": "The ordinal position of the column in the table.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "precision": {
+            "description": "Column precision.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "primaryKey": {
+            "description": "Whether or not the column represents a primary key.",
+            "type": "boolean"
+          },
+          "scale": {
+            "description": "Column scale.",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "OracleObjectIdentifier": {
+        "description": "Oracle data source object identifier.",
+        "properties": {
+          "schema": {
+            "description": "Required. The schema name.",
+            "type": "string"
+          },
+          "table": {
+            "description": "Required. The table name.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "OracleProfile": {
+        "description": "Oracle database profile.",
+        "properties": {
+          "connectionAttributes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Connection string attributes",
+            "type": "object"
+          },
+          "databaseService": {
+            "description": "Required. Database for the Oracle connection.",
+            "type": "string"
+          },
+          "hostname": {
+            "description": "Required. Hostname for the Oracle connection.",
+            "type": "string"
+          },
+          "password": {
+            "description": "Required. Password for the Oracle connection.",
+            "type": "string"
+          },
+          "port": {
+            "description": "Port for the Oracle connection, default value is 1521.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "username": {
+            "description": "Required. Username for the Oracle connection.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "OracleRdbms": {
+        "description": "Oracle database structure.",
+        "properties": {
+          "oracleSchemas": {
+            "description": "Oracle schemas/databases in the database server.",
+            "items": {
+              "$ref": "#/components/schemas/OracleSchema"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "OracleSchema": {
+        "description": "Oracle schema.",
+        "properties": {
+          "oracleTables": {
+            "description": "Tables in the schema.",
+            "items": {
+              "$ref": "#/components/schemas/OracleTable"
+            },
+            "type": "array"
+          },
+          "schema": {
+            "description": "Schema name.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "OracleSourceConfig": {
+        "description": "Oracle data source configuration",
+        "properties": {
+          "dropLargeObjects": {
+            "$ref": "#/components/schemas/DropLargeObjects",
+            "description": "Drop large object values."
+          },
+          "excludeObjects": {
+            "$ref": "#/components/schemas/OracleRdbms",
+            "description": "Oracle objects to exclude from the stream."
+          },
+          "includeObjects": {
+            "$ref": "#/components/schemas/OracleRdbms",
+            "description": "Oracle objects to include in the stream."
+          },
+          "maxConcurrentBackfillTasks": {
+            "description": "Maximum number of concurrent backfill tasks. The number should be non-negative. If not set (or set to 0), the system's default value is used.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "maxConcurrentCdcTasks": {
+            "description": "Maximum number of concurrent CDC tasks. The number should be non-negative. If not set (or set to 0), the system's default value is used.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "streamLargeObjects": {
+            "$ref": "#/components/schemas/StreamLargeObjects",
+            "description": "Stream large object values. NOTE: This feature is currently experimental."
+          }
+        },
+        "type": "object"
+      },
+      "OracleTable": {
+        "description": "Oracle table.",
+        "properties": {
+          "oracleColumns": {
+            "description": "Oracle columns in the schema. When unspecified as part of include/exclude objects, includes/excludes everything.",
+            "items": {
+              "$ref": "#/components/schemas/OracleColumn"
+            },
+            "type": "array"
+          },
+          "table": {
+            "description": "Table name.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PostgresqlColumn": {
+        "description": "PostgreSQL Column.",
+        "properties": {
+          "column": {
+            "description": "Column name.",
+            "type": "string"
+          },
+          "dataType": {
+            "description": "The PostgreSQL data type.",
+            "type": "string"
+          },
+          "length": {
+            "description": "Column length.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "nullable": {
+            "description": "Whether or not the column can accept a null value.",
+            "type": "boolean"
+          },
+          "ordinalPosition": {
+            "description": "The ordinal position of the column in the table.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "precision": {
+            "description": "Column precision.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "primaryKey": {
+            "description": "Whether or not the column represents a primary key.",
+            "type": "boolean"
+          },
+          "scale": {
+            "description": "Column scale.",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "PostgresqlObjectIdentifier": {
+        "description": "PostgreSQL data source object identifier.",
+        "properties": {
+          "schema": {
+            "description": "Required. The schema name.",
+            "type": "string"
+          },
+          "table": {
+            "description": "Required. The table name.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PostgresqlProfile": {
+        "description": "PostgreSQL database profile.",
+        "properties": {
+          "database": {
+            "description": "Required. Database for the PostgreSQL connection.",
+            "type": "string"
+          },
+          "hostname": {
+            "description": "Required. Hostname for the PostgreSQL connection.",
+            "type": "string"
+          },
+          "password": {
+            "description": "Required. Password for the PostgreSQL connection.",
+            "type": "string"
+          },
+          "port": {
+            "description": "Port for the PostgreSQL connection, default value is 5432.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "username": {
+            "description": "Required. Username for the PostgreSQL connection.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PostgresqlRdbms": {
+        "description": "PostgreSQL database structure.",
+        "properties": {
+          "postgresqlSchemas": {
+            "description": "PostgreSQL schemas in the database server.",
+            "items": {
+              "$ref": "#/components/schemas/PostgresqlSchema"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "PostgresqlSchema": {
+        "description": "PostgreSQL schema.",
+        "properties": {
+          "postgresqlTables": {
+            "description": "Tables in the schema.",
+            "items": {
+              "$ref": "#/components/schemas/PostgresqlTable"
+            },
+            "type": "array"
+          },
+          "schema": {
+            "description": "Schema name.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PostgresqlSourceConfig": {
+        "description": "PostgreSQL data source configuration",
+        "properties": {
+          "excludeObjects": {
+            "$ref": "#/components/schemas/PostgresqlRdbms",
+            "description": "PostgreSQL objects to exclude from the stream."
+          },
+          "includeObjects": {
+            "$ref": "#/components/schemas/PostgresqlRdbms",
+            "description": "PostgreSQL objects to include in the stream."
+          },
+          "maxConcurrentBackfillTasks": {
+            "description": "Maximum number of concurrent backfill tasks. The number should be non negative. If not set (or set to 0), the system's default value will be used.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "publication": {
+            "description": "Required. The name of the publication that includes the set of all tables that are defined in the stream's include_objects.",
+            "type": "string"
+          },
+          "replicationSlot": {
+            "description": "Required. Immutable. The name of the logical replication slot that's configured with the pgoutput plugin.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PostgresqlTable": {
+        "description": "PostgreSQL table.",
+        "properties": {
+          "postgresqlColumns": {
+            "description": "PostgreSQL columns in the schema. When unspecified as part of include/exclude objects, includes/excludes everything.",
+            "items": {
+              "$ref": "#/components/schemas/PostgresqlColumn"
+            },
+            "type": "array"
+          },
+          "table": {
+            "description": "Table name.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PrivateConnection": {
+        "description": "The PrivateConnection resource is used to establish private connectivity between Datastream and a customer's network.",
+        "properties": {
+          "createTime": {
+            "description": "Output only. The create time of the resource.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "displayName": {
+            "description": "Required. Display name.",
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error",
+            "description": "Output only. In case of error, the details of the error in a user-friendly format.",
+            "readOnly": true
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels.",
+            "type": "object"
+          },
+          "name": {
+            "description": "Output only. The resource's name.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "state": {
+            "description": "Output only. The state of the Private Connection.",
+            "enum": [
+              "STATE_UNSPECIFIED",
+              "CREATING",
+              "CREATED",
+              "FAILED",
+              "DELETING",
+              "FAILED_TO_DELETE"
+            ],
+            "readOnly": true,
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Output only. The update time of the resource.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "vpcPeeringConfig": {
+            "$ref": "#/components/schemas/VpcPeeringConfig",
+            "description": "VPC Peering Config."
+          }
+        },
+        "type": "object"
+      },
+      "PrivateConnectivity": {
+        "description": "Private Connectivity",
+        "properties": {
+          "privateConnection": {
+            "description": "Required. A reference to a private connection resource. Format: `projects/{project}/locations/{location}/privateConnections/{name}`",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Route": {
+        "description": "The route resource is the child of the private connection resource, used for defining a route for a private connection.",
+        "properties": {
+          "createTime": {
+            "description": "Output only. The create time of the resource.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "destinationAddress": {
+            "description": "Required. Destination address for connection",
+            "type": "string"
+          },
+          "destinationPort": {
+            "description": "Destination port for connection",
+            "format": "int32",
+            "type": "integer"
+          },
+          "displayName": {
+            "description": "Required. Display name.",
+            "type": "string"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels.",
+            "type": "object"
+          },
+          "name": {
+            "description": "Output only. The resource's name.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Output only. The update time of the resource.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SingleTargetDataset": {
+        "description": "A single target dataset to which all data will be streamed.",
+        "properties": {
+          "datasetId": {
+            "description": "The dataset ID of the target dataset.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SourceConfig": {
+        "description": "The configuration of the stream source.",
+        "properties": {
+          "mysqlSourceConfig": {
+            "$ref": "#/components/schemas/MysqlSourceConfig",
+            "description": "MySQL data source configuration."
+          },
+          "oracleSourceConfig": {
+            "$ref": "#/components/schemas/OracleSourceConfig",
+            "description": "Oracle data source configuration."
+          },
+          "postgresqlSourceConfig": {
+            "$ref": "#/components/schemas/PostgresqlSourceConfig",
+            "description": "PostgreSQL data source configuration."
+          },
+          "sourceConnectionProfile": {
+            "description": "Required. Source connection profile resoource. Format: `projects/{project}/locations/{location}/connectionProfiles/{name}`",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SourceHierarchyDatasets": {
+        "description": "Destination datasets are created so that hierarchy of the destination data objects matches the source hierarchy.",
+        "properties": {
+          "datasetTemplate": {
+            "$ref": "#/components/schemas/DatasetTemplate",
+            "description": "The dataset template to use for dynamic dataset creation."
+          }
+        },
+        "type": "object"
+      },
+      "SourceObjectIdentifier": {
+        "description": "Represents an identifier of an object in the data source.",
+        "properties": {
+          "mysqlIdentifier": {
+            "$ref": "#/components/schemas/MysqlObjectIdentifier",
+            "description": "Mysql data source object identifier."
+          },
+          "oracleIdentifier": {
+            "$ref": "#/components/schemas/OracleObjectIdentifier",
+            "description": "Oracle data source object identifier."
+          },
+          "postgresqlIdentifier": {
+            "$ref": "#/components/schemas/PostgresqlObjectIdentifier",
+            "description": "PostgreSQL data source object identifier."
+          }
+        },
+        "type": "object"
+      },
+      "StartBackfillJobRequest": {
+        "description": "Request for manually initiating a backfill job for a specific stream object.",
+        "properties": {},
+        "type": "object"
+      },
+      "StartBackfillJobResponse": {
+        "description": "Response for manually initiating a backfill job for a specific stream object.",
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/StreamObject",
+            "description": "The stream object resource a backfill job was started for."
+          }
+        },
+        "type": "object"
+      },
+      "StaticServiceIpConnectivity": {
+        "description": "Static IP address connectivity. Used when the source database is configured to allow incoming connections from the Datastream public IP addresses for the region specified in the connection profile.",
+        "properties": {},
+        "type": "object"
+      },
+      "Status": {
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
+        "properties": {
+          "code": {
+            "description": "The status code, which should be an enum value of google.rpc.Code.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "details": {
+            "description": "A list of messages that carry the error details. There is a common set of message types for APIs to use.",
+            "items": {
+              "additionalProperties": {
+                "description": "Properties of the object. Contains field @type with type URL."
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "StopBackfillJobRequest": {
+        "description": "Request for manually stopping a running backfill job for a specific stream object.",
+        "properties": {},
+        "type": "object"
+      },
+      "StopBackfillJobResponse": {
+        "description": "Response for manually stop a backfill job for a specific stream object.",
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/StreamObject",
+            "description": "The stream object resource the backfill job was stopped for."
+          }
+        },
+        "type": "object"
+      },
+      "Stream": {
+        "description": "A resource representing streaming data from a source to a destination.",
+        "properties": {
+          "backfillAll": {
+            "$ref": "#/components/schemas/BackfillAllStrategy",
+            "description": "Automatically backfill objects included in the stream source configuration. Specific objects can be excluded."
+          },
+          "backfillNone": {
+            "$ref": "#/components/schemas/BackfillNoneStrategy",
+            "description": "Do not automatically backfill any objects."
+          },
+          "createTime": {
+            "description": "Output only. The creation time of the stream.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "customerManagedEncryptionKey": {
+            "description": "Immutable. A reference to a KMS encryption key. If provided, it will be used to encrypt the data. If left blank, data will be encrypted using an internal Stream-specific encryption key provisioned through KMS.",
+            "type": "string"
+          },
+          "destinationConfig": {
+            "$ref": "#/components/schemas/DestinationConfig",
+            "description": "Required. Destination connection profile configuration."
+          },
+          "displayName": {
+            "description": "Required. Display name.",
+            "type": "string"
+          },
+          "errors": {
+            "description": "Output only. Errors on the Stream.",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Labels.",
+            "type": "object"
+          },
+          "name": {
+            "description": "Output only. The stream's name.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "sourceConfig": {
+            "$ref": "#/components/schemas/SourceConfig",
+            "description": "Required. Source connection profile configuration."
+          },
+          "state": {
+            "description": "The state of the stream.",
+            "enum": [
+              "STATE_UNSPECIFIED",
+              "NOT_STARTED",
+              "RUNNING",
+              "PAUSED",
+              "MAINTENANCE",
+              "FAILED",
+              "FAILED_PERMANENTLY",
+              "STARTING",
+              "DRAINING"
+            ],
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Output only. The last update time of the stream.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "StreamLargeObjects": {
+        "description": "Configuration to stream large object values.",
+        "properties": {},
+        "type": "object"
+      },
+      "StreamObject": {
+        "description": "A specific stream object (e.g a specific DB table).",
+        "properties": {
+          "backfillJob": {
+            "$ref": "#/components/schemas/BackfillJob",
+            "description": "The latest backfill job that was initiated for the stream object."
+          },
+          "createTime": {
+            "description": "Output only. The creation time of the object.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          },
+          "displayName": {
+            "description": "Required. Display name.",
+            "type": "string"
+          },
+          "errors": {
+            "description": "Output only. Active errors on the object.",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "name": {
+            "description": "Output only. The object resource's name.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "sourceObject": {
+            "$ref": "#/components/schemas/SourceObjectIdentifier",
+            "description": "The object identifier in the data source."
+          },
+          "updateTime": {
+            "description": "Output only. The last update time of the object.",
+            "format": "google-datetime",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Validation": {
+        "description": "A validation to perform on a stream.",
+        "properties": {
+          "code": {
+            "description": "A custom code identifying this validation.",
+            "type": "string"
+          },
+          "description": {
+            "description": "A short description of the validation.",
+            "type": "string"
+          },
+          "message": {
+            "description": "Messages reflecting the validation results.",
+            "items": {
+              "$ref": "#/components/schemas/ValidationMessage"
+            },
+            "type": "array"
+          },
+          "state": {
+            "description": "Validation execution status.",
+            "enum": [
+              "STATE_UNSPECIFIED",
+              "NOT_EXECUTED",
+              "FAILED",
+              "PASSED"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ValidationMessage": {
+        "description": "Represent user-facing validation result message.",
+        "properties": {
+          "code": {
+            "description": "A custom code identifying this specific message.",
+            "type": "string"
+          },
+          "level": {
+            "description": "Message severity level (warning or error).",
+            "enum": [
+              "LEVEL_UNSPECIFIED",
+              "WARNING",
+              "ERROR"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "description": "The result of the validation.",
+            "type": "string"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional metadata related to the result.",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "ValidationResult": {
+        "description": "Contains the current validation results.",
+        "properties": {
+          "validations": {
+            "description": "A list of validations (includes both executed as well as not executed validations).",
+            "items": {
+              "$ref": "#/components/schemas/Validation"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "VpcPeeringConfig": {
+        "description": "The VPC Peering configuration is used to create VPC peering between Datastream and the consumer's VPC.",
+        "properties": {
+          "subnet": {
+            "description": "Required. A free subnet for peering. (CIDR of /29)",
+            "type": "string"
+          },
+          "vpc": {
+            "description": "Required. Fully qualified name of the VPC that Datastream will peer to. Format: `projects/{project}/global/{networks}/{name}`",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Oauth2": {
+        "description": "Oauth 2.0 implicit authentication",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+            "scopes": {
+              "https://www.googleapis.com/auth/cloud-platform": "See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account."
+            }
+          }
+        },
+        "type": "oauth2"
+      },
+      "Oauth2c": {
+        "description": "Oauth 2.0 authorizationCode authentication",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+            "scopes": {
+              "https://www.googleapis.com/auth/cloud-platform": "See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account."
+            },
+            "tokenUrl": "https://accounts.google.com/o/oauth2/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  }
+}

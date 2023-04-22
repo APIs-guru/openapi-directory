@@ -1,0 +1,48 @@
+{
+  "apis": {
+    "api2pdf.com": {
+      "added": "2019-01-04T11:45:13.000Z",
+      "info": {
+        "contact": {
+          "email": "support@api2pdf.com",
+          "name": "Support",
+          "x-twitter": "api2pdf_status"
+        },
+        "description": "\n# Introduction\n[Api2Pdf](https://www.api2pdf.com) is a powerful PDF generation API with no rate limits or file size constraints. Api2Pdf runs on AWS Lambda, a serverless architecture powered by Amazon to scale to millions of requests while being up to 90% cheaper than alternatives. **Supports wkhtmltopdf, Headless Chrome, LibreOffice, and PDF Merge.** You can also generate barcodes with ZXING (Zebra Crossing).\n# SDKs & Client Libraries\nWe've made a number of open source libraries available for the API\n- Python: [https://github.com/api2pdf/api2pdf.python](https://github.com/api2pdf/api2pdf.python)\n- .NET: [https://github.com/api2pdf/api2pdf.dotnet](https://github.com/api2pdf/api2pdf.dotnet)\n- Nodejs: [https://github.com/api2pdf/api2pdf.node](https://github.com/api2pdf/api2pdf.node)\n- PHP: [https://github.com/Api2Pdf/api2pdf.php](https://github.com/Api2Pdf/api2pdf.php)\n- Ruby: (Coming soon)\n# Authorization\nCreate an account at [portal.api2pdf.com](https://portal.api2pdf.com/register) to get an API key.\n\n**Authorize your API calls**\n- GET requests, include apikey=YOUR-API-KEY as a query string parameter\n- POST requests, add **Authorization** to your header.\n``` Authorization: YOUR-API-KEY ```\n\n# Quickstart\nIf you are looking for just a quick call to grab PDFs of a URL, you can do a GET request like:\n``` https://v2018.api2pdf.com/chrome/url?url={UrlToConvert}&apikey={YourApiKey} ```\n\nFor more advanced usage and settings, see the API specification below.\n",
+        "license": {
+          "name": "Creative Commons",
+          "url": "https://creativecommons.org/licenses/by/4.0/legalcode"
+        },
+        "title": "Api2Pdf - PDF Generation, Powered by AWS Lambda",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "developer_tools"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_api2pdf_status_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/lucybot/api-spec-converter",
+              "version": "2.7.18"
+            },
+            "format": "openapi",
+            "url": "https://app.swaggerhub.com/apiproxy/schema/file/api2pdf/api2pdf/1.0.0/swagger.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "api2pdf.com"
+      },
+      "externalDocs": {
+        "description": "Find out more about Api2Pdf",
+        "url": "https://www.api2pdf.com"
+      },
+      "updated": "2019-01-04T11:45:13.000Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/api2pdf.com/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/api2pdf.com/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/api2pdf.com/1.0.0.json"
+    }
+  }
+}

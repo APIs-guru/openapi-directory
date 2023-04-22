@@ -1,0 +1,423 @@
+openapi: 3.0.0
+servers:
+  - url: http://arespass.net/v1.0
+info:
+  description: Analyzes a password and calculates its entropy.
+  title: Arespass
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://arespass.net/assets/arespassv1.0-openapi.yaml
+      version: "3.0"
+  x-providerName: arespass.net
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  /about:
+    get:
+      parameters:
+        - description: |
+            **The format of the returned metadata.**
+
+            Allowed values are *json*, *xml* and *yaml*.
+
+            The default value is *xml*.
+          in: query
+          name: outputFormat
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/about"
+            application/x-yaml:
+              schema:
+                $ref: "#/components/schemas/about"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/about"
+          description: |
+            **The metadata about this API&#58; version number, release date and available languages.**
+        "400":
+          description: |
+            **At least one error was found in the request parameters.**
+        "405":
+          description: |
+            **HTTP method POST is not allowed.**
+        "500":
+          description: |
+            **Unexpected server error.**                
+      summary: |
+        Metadata about this API&#58; version number, release date and available languages.
+
+        Metadata requests are NOT billed.
+  /ec:
+    get:
+      parameters:
+        - description: |
+            **The password to be analyzed.**
+
+            Minimum length is 4 characters; maximum length is 128 characters.
+
+            Beware that certain characters like '&#35;', '&#61;' or '&#63;' must be properly encoded.
+
+            For more information about this issue, please refer to RFC 3986 ("*Uniform Resource Identifier (URI): Generic Syntax*"), sections 2.1, 2.2 and 2.4.
+          in: query
+          name: password
+          required: true
+          schema:
+            type: string
+        - description: |
+            **The format of the returned analysis.**
+
+            Allowed values are *json*, *xml* and *yaml*.
+
+            The default value is *xml*.
+          in: query
+          name: outputFormat
+          required: false
+          schema:
+            type: string
+        - description: |
+            **The penalty applied to each character that is part of a word, number sequence, alphabet sequence, etc.**
+
+            The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+
+            The character used as decimal separator is always '&#46;'. Hence, a parameter value like *0,33* would be illegal.
+
+            The default value is *0.25*.
+          in: query
+          name: penalty
+          required: false
+          schema:
+            type: number
+        - description: |
+            **An identifier for this request.**
+
+            The request identifier is a string that must match the regular expression */(?i)^[a-z0-9]{8,16}$/*.
+
+            This identifier is echoed in the returned response. Its value has no effect on the password analysis.
+
+            If this parameter is unset, a randomly generated identifier will be automatically assigned to this request.
+          in: query
+          name: reqId
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ec"
+            application/x-yaml:
+              schema:
+                $ref: "#/components/schemas/ec"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ec"
+          description: The password analysis, including the calculated entropy.
+        "400":
+          description: |
+            **At least one error was found in the request parameters.**
+        "405":
+          description: |
+            **HTTP method POST is not allowed.**
+        "500":
+          description: |
+            **Unexpected server error.**
+      summary: |
+        The entropy calculator - alias ec -, analyzes a password and calculates its entropy.
+
+        Entropy calculator requests are billed.
+components:
+  schemas:
+    about:
+      description: |
+        **This API version number**.
+      properties:
+        apiReleaseDateIso8601:
+          description: |
+            **The release date of this API, ISO 8601 format.**
+          type: string
+        apiVersion:
+          properties:
+            majorNumber:
+              description: This API version major number.
+              type: integer
+              xml:
+                attribute: true
+            minorNumber:
+              description: This API version minor number.
+              type: integer
+              xml:
+                attribute: true
+          type: object
+        availableLanguagesIso639_1:
+          description: |
+            **The list of available languages.**
+
+            Each language is identified by its ISO 639-1, two-letter code.
+
+            The list elements are comma-separated and sorted in ascending order.
+          type: string
+      type: object
+    ec:
+      properties:
+        alphabetSequence:
+          description: |
+            **The penalty applied to each character that has been found to be part of an alphabet sequence.**
+
+            The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+          items:
+            properties:
+              char:
+                description: The n-th character.
+                type: string
+                xml:
+                  attribute: true
+              l33tchar:
+                description: The n-th character after the l33t transformation.
+                type: string
+                xml:
+                  attribute: true
+              penalty:
+                description: |
+                  The penalty applied to this character if it is part of an alphabet sequence.
+
+                  The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+                type: number
+                xml:
+                  attribute: true
+            type: object
+          type: array
+        apiVersion:
+          description: |
+            **This API version number.**
+          type: string
+        detectedKeyboard:
+          description: |
+            **The detected keyboard, QWERTY or Dvorak.**
+          type: string
+        efficiency:
+          description: |
+            **The ratio entropy / idealEntropy.**
+
+            It is a float number in the range [0, 1].
+          type: number
+        entropy:
+          description: |
+            **The entropy calculated for the input password.**
+
+            It is measured in bits.
+          type: number
+        entropyDistribution:
+          description: |
+            **The distribution of the calculated entropy among the password characters.**
+          items:
+            properties:
+              char:
+                description: The n-th character.
+                type: string
+                xml:
+                  attribute: true
+              l33tchar:
+                description: The n-th character after the l33t transformation.
+                type: string
+                xml:
+                  attribute: true
+              percentage:
+                description: The amount of entropy contributed by this character, expressed as percentage of the total.
+                type: number
+                xml:
+                  attribute: true
+            type: object
+          type: array
+        idealEntropy:
+          description: |
+            **The Shannon entropy.**
+
+            The Shannon entropy is the entropy calculated if no penalizations - words, number sequence, alphabet sequence, etc - were found in the password.
+
+            It is measured in bits.
+          type: number
+        keyboardSequence:
+          description: |
+            **The penalty applied to each character that has been found to be part of a keyboard sequence.**
+
+            The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+          items:
+            properties:
+              char:
+                description: The n-th character.
+                type: string
+                xml:
+                  attribute: true
+              l33tchar:
+                description: The n-th character after the l33t transformation.
+                type: string
+                xml:
+                  attribute: true
+              penalty:
+                description: |
+                  The penalty applied to this character if it is part of a keyboard sequence.
+
+                  The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+                type: number
+                xml:
+                  attribute: true
+            type: object
+          type: array
+        l33tPassword:
+          description: The analyzed password after the l33t substitution.
+          type: string
+        nonUniformEntropyDistributionPenalty:
+          description: |
+            **The penalty applied to the whole password because of irregular entropy distribution.**
+
+            This penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+          type: number
+        numberSequence:
+          description: |
+            **The penalty applied to each character that has been found to be part of a number sequence.**
+
+            The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+          items:
+            properties:
+              char:
+                description: The n-th character.
+                type: string
+                xml:
+                  attribute: true
+              l33tchar:
+                description: The n-th character after the l33t transformation.
+                type: string
+                xml:
+                  attribute: true
+              penalty:
+                description: |
+                  The penalty applied to this character if it is part of a number sequence.
+
+                  The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+                type: number
+                xml:
+                  attribute: true
+            type: object
+          type: array
+        password:
+          description: The analyzed password.
+          type: string
+        passwordLength:
+          description: The number of characters the password has.
+          type: integer
+        penalty:
+          description: |
+            **The penalty applied to each character that has been found to be part of a word, number sequence, alphabet sequence, etc.**
+
+            The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+
+            Its value is equal to the value of the input parameter *penalty*.
+          type: number
+        repeatedChars:
+          description: |
+            **The penalty applied to each character that are repeated**
+
+            The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.          
+          items:
+            properties:
+              char:
+                description: The n-th character.
+                type: string
+                xml:
+                  attribute: true
+              l33tchar:
+                description: The n-th character after the l33t transformation.
+                type: string
+                xml:
+                  attribute: true
+              penalty:
+                description: |
+                  The penalty applied to this character if it is repeated.
+
+                  The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+                type: number
+                xml:
+                  attribute: true
+            type: object
+          type: array
+        requestId:
+          description: |
+            **The identifier of the request that corresponds to this response.**
+          type: string
+        requestTimestamp:
+          description: |
+            **The timestamp for this response.**
+
+            Milliseconds from the epoch of 1970-01-01T00:00:00Z.
+          type: number
+        summary:
+          items:
+            description: |
+              **A human-readable summary of the password analysis.**
+
+              This human readable summary is not intended to be parsed.
+            type: string
+          type: array
+        total:
+          description: |
+            **The total penalty applied to each character.**
+
+            The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+          items:
+            properties:
+              char:
+                description: The n-th character.
+                type: string
+                xml:
+                  attribute: true
+              l33tchar:
+                description: The n-th character after the l33t transformation.
+                type: string
+                xml:
+                  attribute: true
+              penalty:
+                description: |
+                  The total penalty applied to each character.
+
+                  The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.                
+                type: number
+                xml:
+                  attribute: true
+            type: object
+          type: array
+        words:
+          description: |
+            **The penalty applied to each character that has been found to be part of a word.**
+
+            The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.
+          items:
+            properties:
+              char:
+                description: The n-th character.
+                type: string
+                xml:
+                  attribute: true
+              l33tchar:
+                description: The n-th character after the l33t transformation.
+                type: string
+                xml:
+                  attribute: true
+              penalty:
+                description: |
+                  The penalty applied to this character if it is part of a word.
+
+                  The penalty is a float number in the range [0, 1]. Full penalty, 0; no penalty, 1.                
+                type: number
+                xml:
+                  attribute: true
+            type: object
+          type: array
+      type: object

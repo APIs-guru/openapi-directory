@@ -1,0 +1,41 @@
+{
+  "apis": {
+    "truora.com": {
+      "added": "2021-08-16T15:11:22.439Z",
+      "info": {
+        "contact": {
+          "email": "api@truora.com",
+          "name": "Truora API Team",
+          "url": "https://www.truora.com"
+        },
+        "description": "**NOTE:** This is a preview of the API and it is not considered stable since refinements are still being made.\n\n# Introduction\n\nWelcome to the  **Truora Check** [**RESTful API**](https://en.wikipedia.org/wiki/Representational_state_transfer) reference. You may also want to check out our [**Validations API docs**](https://docs.validations.truora.com/) or our [**Signals API docs**](https://docs.signals.truora.com/).\n\nTruora Check API allows performing full background checks on people, vehicles and companies. There are three main types of background checks:\n\n- **Personal background check**: Verifies national IDs in multiple databases of public and legal entities in the LATAM region. For every national ID, returns information on: personal identity, criminal records, international background check, and professional background.\n\n- **Vehicle background check**: Verifies the vehicle documents and the owner identity in multiple databases of public and legal entities in the LATAM region. For every vehicle and owner type, returns information on: personal identity, driving records, criminal records, and vehicle information.  \n\n- **Company background check**: Verifies the tax ID or a company name in multiple databases of public and legal entities in the LATAM region. For every company, returns the associated: business status, legal and criminal records, and media reports.\n\n# API Key V1 is live!\n\nAPI key version 1 is now live. Users with version 0 API keys are not immediately required to upgrade to V1 but should plan to do so at their earliest convenience. The changes for integration with API keys v1 are as follows:\n\n- The field ``user_authorized`` is now required to perform person checks. This field indicates the API user has authorization to perform the check in compliance with data protection law.\n- The field ``homonym_scores`` is no longer included in our person check response as its results are already included in the body of the check and keeping them duplicated is generating unnecessary confusion.\n\n\n# API composition\n\n## Endpoints\n\n- **Check endpoints**: Provide an easy way to create and search for a background check. They also allow inserting groups of checks into reports. Each check contains scores, datasets and databases.\n \n```plain\nhttps://api.truora.com/v1/checks\n```\n\n- **Report endpoints**: Support batch uploads and grouping multiple checks together. Excel and .csv files are supported for batch uploads.\n \n```plain\nhttps://api.truora.com/v1/reports\n```\n\n- **Configuration endpoints**: Allows personalizing data sets and scores for customized background checks.\n\n```plain\nhttps://api.truora.com/v1/config\n```\n\n- **Continuous check endpoints**: Allows creating recurring checks and get notified whenever a change in the check score occurs.\n\n```plain\nhttps://api.truora.com/v1/continuous_checks\n```\n\n- **Behavior endpoints**: Allows sharing anonymous feedback about a person behavior when interacting with the company.\n\n```plain\nhttps://api.truora.com/v1/behaviour\n```\n\n- **Hooks endpoints**: Allows sending notifications via requests to your service or another third-party service whenever certain events occur.\n\n```plain\nhttps://api.truora.com/v1/hooks\n```\n\n## Datasets\n\nCategories that group the resulting information for background checks from databases are called datasets. Datasets are divided in:\n\n- **Personal identity**: Corroborates the existence and validates personal identity documents. \n\n- **Criminal record**: Checks for crimes according to each country penal code or criminal code. Keep in mind that data aged less than 10 years is usually more consistent.\n\n- **Legal background**: Checks for lawsuits filed. Keep in mind that data aged less than 10 years is usually more consistent.\n\n- **International background**: Checks international lists for crimes related to identity theft, money laundering, terrorist financing, and high crimes.\n\n- **Professional background**: Checks professional regulatory entities for relevant information.\n\n- **Affiliations and insurances**: Checks the history and status of social security affiliations.\n\n- **Alert in media**: Checks major media agencies for relevant news related to violent actions.    \n\n- **Vehicle information**: Checks for the physical characteristics of the vehicle, technical status, insurance history, and other relevant information.\n\n- **Traffic fines**: Checks for outstanding traffic fines.\n\n- **Driving licenses**: Shows information relevant to the driver. Such as license status and driver certificates.\n\n- **Business background**: Checks for business status, legal and criminal history, and other relevant information.\n\n- **Taxes and Finances**: Checks for the information related to personal finances, liabilities, and taxes.\n\n## Requests Format\n\nThe POST requests receive a body that must be encoded in `www-x-form-urlencoded`, for instance:\n\n```plain\ntype=person&national_id=123456&country=CO\n```\n\nThe responses are always encoded in `JSON` format.\n\n## Errors\n\nWhenever there is an error, a JSON with the following format is returned:\n\n```json\n{\n    \"code\": <Truora error code>,\n    \"http_code\": <The HTTP status of the response>,\n    \"message\": <The error message>\n}\n```\n\nfor instance:\n\n```json\n{\n    \"code\": 10404,\n    \"http_code\": 404,\n    \"message\": \"The Check was not found\"\n}\n```\n\n## SDKs\n\nIf your favorite language was not on the next list, You can use our [OpenAPI 3 spec](https://docs.truora.com/openapi.json) to generate it using the [Open API Generator](https://openapi-generator.tech/docs/installation).\n\nTo download the SDK click on the desired programming language:\n\n- [C# .Net Core](https://truora-sdk.s3.amazonaws.com/checks/checks_csharp-netcore_latest.zip)\n\n- [Elixir](https://truora-sdk.s3.amazonaws.com/checks/checks_elixir_latest.zip)\n\n- [Go](https://truora-sdk.s3.amazonaws.com/checks/checks_go_latest.zip)\n\n- [Java](https://truora-sdk.s3.amazonaws.com/checks/checks_java_latest.zip)\n\n- [JavaScript](https://truora-sdk.s3.amazonaws.com/checks/checks_javascript_latest.zip)\n\n- [Objc](https://truora-sdk.s3.amazonaws.com/checks/checks_objc_latest.zip)\n\n- [Php](https://truora-sdk.s3.amazonaws.com/checks/checks_php_latest.zip)\n\n- [Python](https://truora-sdk.s3.amazonaws.com/checks/checks_python_latest.zip)\n\n- [Ruby](https://truora-sdk.s3.amazonaws.com/checks/checks_ruby_latest.zip)\n\nYou can see the full list of supported platforms here:\n\nhttps://openapi-generator.tech/docs/generators\n\n\n",
+        "license": {
+          "name": "MIT License",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "http://swagger.io/terms/",
+        "title": "Checks API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "location"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_docs.truora.com_logo.png"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://docs.truora.com/openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "truora.com"
+      },
+      "updated": "2021-08-16T15:11:22.439Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/truora.com/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/truora.com/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.2",
+      "link": "https://api.apis.guru/v2/specs/truora.com/1.0.0.json"
+    }
+  }
+}

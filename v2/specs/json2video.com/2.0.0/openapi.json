@@ -1,0 +1,928 @@
+{
+  "openapi": "3.0.2",
+  "servers": [
+    {
+      "description": "Version 2 endpoint",
+      "url": "https://api.json2video.com/v2"
+    }
+  ],
+  "info": {
+    "description": "Create and edit awesome videos programmatically",
+    "title": "JSON2Video API",
+    "version": "2.0.0",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_json2video.com_images_json2video-logo.svg"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://json2video.com/docs/api/json2video-api.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "json2video.com"
+  },
+  "paths": {
+    "/movies": {
+      "get": {
+        "description": "Get the status any of your movies by passing your project ID in the <code>project</code> query parameter. You can get your project ID from the response of the POST request.",
+        "operationId": "getMovies",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          }
+        },
+        "summary": "Get the status of your movies"
+      },
+      "post": {
+        "description": "Submit a new movie rendering job.",
+        "operationId": "newMovie",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/movie"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Added"
+          }
+        },
+        "summary": "Create a new movie"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AudioElement": {
+        "additionalProperties": false,
+        "properties": {
+          "muted": {
+            "default": false,
+            "description": "Mutes the audio",
+            "type": "boolean"
+          },
+          "volume": {
+            "default": 5,
+            "maximum": 10,
+            "minimum": 0,
+            "type": "number"
+          }
+        },
+        "title": "AudioElement",
+        "type": "object"
+      },
+      "BaseElement": {
+        "additionalProperties": false,
+        "properties": {
+          "cache": {
+            "default": true,
+            "description": "Element's cache policy. When true, the cached version (if exists) is used. When false, the assets is downloaded.",
+            "example": false,
+            "format": "boolean",
+            "type": "boolean"
+          },
+          "comment": {
+            "description": "Used for adding your comments",
+            "type": "string"
+          },
+          "duration": {
+            "default": -1,
+            "description": "Element's duration in seconds. A value of -1 auto calculates the duration based on the asset intrinsic length or the scene duration.",
+            "example": 7.3,
+            "format": "float",
+            "type": "number"
+          },
+          "extra-time": {
+            "default": 0,
+            "description": "Element's time span added after the playback.",
+            "example": 0.5,
+            "format": "float",
+            "type": "number"
+          },
+          "fade-in": {
+            "description": "Adds a fade in effect to the element. Value in seconds.",
+            "format": "float",
+            "minimum": 0,
+            "type": "number"
+          },
+          "fade-out": {
+            "description": "Adds a fade out effect to the element. Value in seconds.",
+            "format": "float",
+            "minimum": 0,
+            "type": "number"
+          },
+          "start": {
+            "default": 0,
+            "description": "Element's starting time in seconds relative to the container scene or the movie if the element is in the Movie's elements array.",
+            "format": "float",
+            "type": "number"
+          },
+          "z-index": {
+            "default": 0,
+            "description": "Element's z-index. Use this property to reorganize the layering of the elements like in HTML",
+            "example": 3,
+            "format": "integer",
+            "type": "number"
+          }
+        },
+        "title": "BaseElement",
+        "type": "object"
+      },
+      "CaptureProperty": {
+        "additionalProperties": false,
+        "properties": {
+          "capture": {
+            "additionalProperties": false,
+            "description": "Browser capture settings",
+            "properties": {
+              "duration": {
+                "default": 0,
+                "description": "Screen recording duration in seconds. Use 0 to take a screenshot",
+                "format": "float",
+                "maximum": 10,
+                "minimum": 0,
+                "type": "number"
+              },
+              "height": {
+                "default": 360,
+                "description": "Viewport height",
+                "maximum": 1080,
+                "minimum": 50,
+                "type": "integer"
+              },
+              "width": {
+                "default": 640,
+                "description": "Viewport width",
+                "maximum": 1920,
+                "minimum": 50,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "width",
+              "height"
+            ],
+            "type": "object"
+          }
+        },
+        "title": "CaptureProperty",
+        "type": "object"
+      },
+      "VisualElement": {
+        "additionalProperties": false,
+        "properties": {
+          "chroma-key": {
+            "description": "Allows to define a color (or a range of colors) that will be converted to transparent",
+            "properties": {
+              "color": {
+                "description": "Set the color for which alpha will be set to 0 (full transparency)",
+                "example": "#00b140",
+                "type": "string"
+              },
+              "tolerance": {
+                "default": 25,
+                "description": "Makes the selection more or less sensitive to changes in color. A value of 1 will select only the provided color. A value of 100 will select all colors, so the full canvas",
+                "maximum": 100,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "color"
+            ],
+            "type": "object"
+          },
+          "crop": {
+            "additionalProperties": false,
+            "description": "Crops the element",
+            "properties": {
+              "height": {
+                "description": "Sets the height of the croping",
+                "type": "integer"
+              },
+              "width": {
+                "description": "Sets the width of the croping",
+                "type": "integer"
+              },
+              "x": {
+                "default": 0,
+                "description": "Sets the left point of croping",
+                "type": "integer"
+              },
+              "y": {
+                "default": 0,
+                "description": "Sets the top point of croping",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "width",
+              "height"
+            ],
+            "type": "object"
+          },
+          "pan": {
+            "description": "Pans the element to the specified direction. If <code>zoom</code> property is not specified, the effect is a non-zooming pan",
+            "enum": [
+              "left",
+              "top",
+              "right",
+              "bottom",
+              "top-left",
+              "top-right",
+              "bottom-left",
+              "bottom-right"
+            ],
+            "type": "string"
+          },
+          "position": {
+            "default": "custom",
+            "description": "Sets the element position in the scene. A value of 'custom' sets a custom position based on the provided 'x' and 'y' properties",
+            "enum": [
+              "top-left",
+              "top-right",
+              "bottom-right",
+              "bottom-left",
+              "center-center",
+              "custom"
+            ],
+            "type": "string"
+          },
+          "rotate": {
+            "additionalProperties": false,
+            "properties": {
+              "angle": {
+                "default": 0,
+                "description": "Sets the angle of rotation",
+                "maximum": 360,
+                "minimum": -360,
+                "type": "number"
+              },
+              "speed": {
+                "default": 0,
+                "description": "Sets the time it takes to rotate the provided angle. A zero value means no movement",
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "angle"
+            ],
+            "type": "object"
+          },
+          "scale": {
+            "additionalProperties": false,
+            "properties": {
+              "height": {
+                "default": -1,
+                "description": "Sets the height for scaling the element",
+                "minimum": -1,
+                "type": "integer"
+              },
+              "width": {
+                "default": -1,
+                "description": "Sets the width for scaling the element",
+                "minimum": -1,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "x": {
+            "default": 0,
+            "description": "Sets the horizontal position of the element in the scene. The value <code>0</code> is on the left side",
+            "format": "integer",
+            "type": "number"
+          },
+          "y": {
+            "default": 0,
+            "description": "Sets the vertical position of the element in the scene. The value <code>0</code> is on the top side",
+            "format": "integer",
+            "type": "number"
+          },
+          "zoom": {
+            "description": "Zooms the element with the specified level percentage. Positive values zoom in, negative values zoom out, zero does not zoom. Zoom can be combined with the <code>pan</code> property to set the focus point of the zooming",
+            "maximum": 100,
+            "minimum": -100,
+            "type": "integer"
+          }
+        },
+        "title": "VisualElement",
+        "type": "object"
+      },
+      "audio": {
+        "allOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "src": {
+                "format": "uri",
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "audio"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/BaseElement"
+          },
+          {
+            "$ref": "#/components/schemas/AudioElement"
+          }
+        ],
+        "title": "Audio"
+      },
+      "component": {
+        "allOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "component": {
+                "description": "ID of the Component element. Check all available components in the <a href='https://json2video.com/docs/resources/basic/'>library</a>",
+                "example": "basic/001",
+                "type": "string"
+              },
+              "height": {
+                "default": -1,
+                "description": "Desired text element height, but can be overriden by the component defaults. A value of <code>-1</code> means inherits scenes or movie height",
+                "maximum": 1080,
+                "minimum": -1,
+                "type": "integer"
+              },
+              "settings": {
+                "description": "Settings to be passed to the component",
+                "type": "object"
+              },
+              "type": {
+                "enum": [
+                  "component"
+                ],
+                "type": "string"
+              },
+              "width": {
+                "default": -1,
+                "description": "Desired text element width, but can be overriden by the component defaults. A value of <code>-1</code> means inherits scenes or movie width",
+                "maximum": 1920,
+                "minimum": -1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "type",
+              "component"
+            ],
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/BaseElement"
+          },
+          {
+            "$ref": "#/components/schemas/VisualElement"
+          }
+        ],
+        "description": "Creates an element based on the specified feature",
+        "title": "Component"
+      },
+      "html": {
+        "allOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "height": {
+                "default": -1,
+                "description": "Desired text element height. A value of <code>-1</code> means inherits scenes or movie height",
+                "maximum": 1080,
+                "minimum": -1,
+                "type": "integer"
+              },
+              "html": {
+                "description": "HTML snippet to render. Compatible with HTML5, CSS3 and Javascript",
+                "example": "&lt;h1&gt;Hello world&lt;/h1&gt;",
+                "type": "string"
+              },
+              "tailwindcss": {
+                "default": false,
+                "description": "Enables usage of TailwindCSS for the HTML snippet",
+                "example": true,
+                "type": "boolean"
+              },
+              "type": {
+                "enum": [
+                  "html"
+                ],
+                "type": "string"
+              },
+              "width": {
+                "default": -1,
+                "description": "Desired text element width. A value of <code>-1</code> means inherits scenes or movie width",
+                "maximum": 1920,
+                "minimum": -1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "type",
+              "html"
+            ],
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/BaseElement"
+          },
+          {
+            "$ref": "#/components/schemas/VisualElement"
+          }
+        ],
+        "description": "Creates a video recording or a screenshot of the provided HTML snippet",
+        "title": "HTML"
+      },
+      "image": {
+        "allOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "src": {
+                "format": "uri",
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "image"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/VisualElement"
+          }
+        ],
+        "title": "Image"
+      },
+      "movie": {
+        "additionalProperties": false,
+        "description": "Object defining the movie to be rendered",
+        "example": {
+          "comment": "MyProject",
+          "resolution": "640x360",
+          "scenes": [
+            {
+              "elements": [
+                {
+                  "src": "https://example.com/path/to/my/video.mp4",
+                  "type": "video"
+                }
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "cache": {
+            "default": true,
+            "type": "boolean"
+          },
+          "comment": {
+            "description": "Used for adding your comments",
+            "type": "string"
+          },
+          "draft": {
+            "default": true,
+            "description": "Draft movies include a watermark. Check your plan how many draft and final movies you have",
+            "enum": [
+              true,
+              false
+            ],
+            "type": "boolean"
+          },
+          "elements": {
+            "items": {
+              "discriminator": {
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/video"
+                },
+                {
+                  "$ref": "#/components/schemas/image"
+                },
+                {
+                  "$ref": "#/components/schemas/text"
+                },
+                {
+                  "$ref": "#/components/schemas/html"
+                },
+                {
+                  "$ref": "#/components/schemas/component"
+                },
+                {
+                  "$ref": "#/components/schemas/template"
+                },
+                {
+                  "$ref": "#/components/schemas/audio"
+                },
+                {
+                  "$ref": "#/components/schemas/voice"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "fps": {
+            "default": 25,
+            "description": "Frames per second",
+            "type": "integer",
+            "x-hidden": true
+          },
+          "height": {
+            "default": 360,
+            "example": 360,
+            "maximum": 1080,
+            "minimum": 50,
+            "type": "integer"
+          },
+          "quality": {
+            "default": "high",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "type": "string"
+          },
+          "resolution": {
+            "enum": [
+              "sd",
+              "hd",
+              "full-hd",
+              "squared",
+              "instagram-story",
+              "instagram-feed",
+              "twitter-landscape",
+              "twitter-portrait"
+            ],
+            "type": "string"
+          },
+          "scenes": {
+            "items": {
+              "$ref": "#/components/schemas/scene"
+            },
+            "type": "array"
+          },
+          "settings": {
+            "default": {},
+            "description": "Movie advanced settings",
+            "type": "object",
+            "x-hidden": true
+          },
+          "width": {
+            "default": 640,
+            "example": 640,
+            "maximum": 1920,
+            "minimum": 50,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "scenes"
+        ],
+        "title": "Movie",
+        "type": "object"
+      },
+      "scene": {
+        "additionalProperties": false,
+        "properties": {
+          "background-color": {
+            "default": "#000000",
+            "description": "A hexadecimal representation of a color or 'transparent'",
+            "example": "#FF0000",
+            "type": "string"
+          },
+          "cache": {
+            "default": true,
+            "type": "boolean"
+          },
+          "comment": {
+            "description": "Used for adding your comments",
+            "type": "string"
+          },
+          "duration": {
+            "default": -1,
+            "format": "float",
+            "type": "number"
+          },
+          "elements": {
+            "items": {
+              "discriminator": {
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/video"
+                },
+                {
+                  "$ref": "#/components/schemas/image"
+                },
+                {
+                  "$ref": "#/components/schemas/text"
+                },
+                {
+                  "$ref": "#/components/schemas/html"
+                },
+                {
+                  "$ref": "#/components/schemas/component"
+                },
+                {
+                  "$ref": "#/components/schemas/audio"
+                },
+                {
+                  "$ref": "#/components/schemas/voice"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "transition": {
+            "additionalProperties": false,
+            "properties": {
+              "duration": {
+                "description": "Duration of the transition in seconds",
+                "example": 1.5,
+                "format": "float",
+                "type": "number"
+              },
+              "style": {
+                "default": "fade",
+                "enum": [
+                  "fade",
+                  "wipeleft",
+                  "wiperight",
+                  "wipeup",
+                  "wipedown",
+                  "slideleft",
+                  "slideright",
+                  "slideup",
+                  "slidedown",
+                  "circlecrop",
+                  "rectcrop",
+                  "distance",
+                  "fadeblack",
+                  "fadewhite",
+                  "radial",
+                  "smoothleft",
+                  "smoothright",
+                  "smoothup",
+                  "smoothdown",
+                  "circleopen",
+                  "circleclose",
+                  "vertopen",
+                  "vertclose",
+                  "horzopen",
+                  "horzclose",
+                  "dissolve",
+                  "pixelize",
+                  "diagtl",
+                  "diagtr",
+                  "diagbl",
+                  "diagbr",
+                  "hlslice",
+                  "hrslice",
+                  "vuslice",
+                  "vdslice",
+                  "hblur",
+                  "fadegrays",
+                  "wipetl",
+                  "wipetr",
+                  "wipebl",
+                  "wipebr",
+                  "squeezeh",
+                  "squeezev",
+                  "zoomin"
+                ],
+                "example": "circleopen",
+                "type": "string"
+              },
+              "type": {
+                "default": "xfade",
+                "enum": [
+                  "xfade"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "title": "Scene",
+        "type": "object"
+      },
+      "template": {
+        "allOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "height": {
+                "default": -1,
+                "description": "Desired text element height, but can be overriden by the component defaults. A value of <code>-1</code> means inherits scenes or movie height",
+                "maximum": 1080,
+                "minimum": -1,
+                "type": "integer"
+              },
+              "settings": {
+                "description": "Settings to be passed to the component",
+                "type": "object"
+              },
+              "template": {
+                "description": "ID of the Component element. Check all available components at <a href='https://json2video.com/docs/resources/basic/'>https://json2video.com/docs/resources/basic/</a>",
+                "example": "basic/001",
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "template"
+                ],
+                "type": "string"
+              },
+              "width": {
+                "default": -1,
+                "description": "Desired text element width, but can be overriden by the component defaults. A value of <code>-1</code> means inherits scenes or movie width",
+                "maximum": 1920,
+                "minimum": -1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "type",
+              "template"
+            ],
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/BaseElement"
+          },
+          {
+            "$ref": "#/components/schemas/VisualElement"
+          }
+        ],
+        "description": "Creates an element based on the specified feature",
+        "title": "Template"
+      },
+      "text": {
+        "allOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "height": {
+                "default": -1,
+                "description": "Desired text element height, but can be overriden by the style defaults. A value of <code>-1</code> means inherits scenes or movie height",
+                "maximum": 1080,
+                "minimum": -1,
+                "type": "integer"
+              },
+              "settings": {
+                "default": {},
+                "description": "Text formatting settings. In general, these are CSS properties such as <code>font-size</code>, <code>colour</code> or <code>font-weight</code>. See the styles to confirm which properties are available.",
+                "example": {
+                  "color": "#FF0000",
+                  "font-size": "60px"
+                },
+                "type": "object"
+              },
+              "style": {
+                "default": "001",
+                "description": "Style of the text element. Check all available text style at <a href='https://json2video.com/docs/resources/text/'>https://json2video.com/resources/text/</a>",
+                "example": "003",
+                "type": "string"
+              },
+              "text": {
+                "description": "Text to be printed. The text string does not accept HTML formatting.",
+                "example": "Lorem ipsum dolor sit amet",
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "text"
+                ],
+                "type": "string"
+              },
+              "width": {
+                "default": -1,
+                "description": "Desired text element width, but can be overriden by the style defaults. A value of <code>-1</code> means inherits scenes or movie width",
+                "maximum": 1920,
+                "minimum": -1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "type",
+              "text"
+            ],
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/BaseElement"
+          },
+          {
+            "$ref": "#/components/schemas/VisualElement"
+          }
+        ],
+        "description": "Creates a text element of a given style",
+        "title": "Text"
+      },
+      "video": {
+        "allOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "src": {
+                "description": "URL to the asset file. Videos can be in MP4, MKV, MOV but MP4 is recommended.",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "video"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/BaseElement"
+          },
+          {
+            "$ref": "#/components/schemas/VisualElement"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "loop": {
+                "description": "Sets the number of loops the video to play. Use -1 for an infinite loop. The default value of 1 plays the video just once.",
+                "example": -1,
+                "minimum": -1,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/AudioElement"
+          }
+        ],
+        "title": "Video"
+      },
+      "voice": {
+        "allOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "text": {
+                "description": "The sentence or sentences to be converted to voice audio",
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "voice"
+                ],
+                "type": "string"
+              },
+              "voice": {
+                "default": "en-GB-LibbyNeural",
+                "description": "The voice name to be used. Check <a href=\"/docs/tutorial/voice-elements/\">available voices</a>.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "text"
+            ],
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/BaseElement"
+          },
+          {
+            "$ref": "#/components/schemas/AudioElement"
+          }
+        ],
+        "description": "Creates a voice audio element from the provided text",
+        "title": "Voice"
+      }
+    }
+  }
+}

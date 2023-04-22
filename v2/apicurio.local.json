@@ -1,0 +1,42 @@
+{
+  "apis": {
+    "apicurio.local:registry": {
+      "added": "2021-02-03T14:16:23.731Z",
+      "info": {
+        "contact": {
+          "email": "apicurio@lists.jboss.org",
+          "name": "Apicurio",
+          "url": "https://github.com/apicurio/apicurio-registry"
+        },
+        "description": "Apicurio Registry is a datastore for standard event schemas and API designs. Apicurio Registry enables developers to manage and share the structure of their data using a REST interface. For example, client applications can dynamically push or pull the latest updates to or from the registry without needing to redeploy. Apicurio Registry also enables developers to create rules that govern how registry content can evolve over time. For example, this includes rules for content validation and version compatibility.\n\nThe Apicurio Registry REST API enables client applications to manage the artifacts in the registry. This API provides create, read, update, and delete operations for schema and API artifacts, rules, versions, and metadata. \n\nThe supported artifact types include:\n- Apache Avro schema\n- AsyncAPI specification\n- Google protocol buffers\n- GraphQL schema\n- JSON Schema\n- Kafka Connect schema\n- OpenAPI specification\n- Web Services Description Language\n- XML Schema Definition\n\n\n**Important**: The Apicurio Registry REST API is available from `https://MY-REGISTRY-URL/apis/registry/v2` by default. Therefore you must prefix all API operation paths with `../apis/registry/v2` in this case. For example: `../apis/registry/v2/ids/globalIds/{globalId}`.\n",
+        "license": {
+          "name": "Apache 2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "title": "Apicurio Registry API [v2]",
+        "version": "2.4.x",
+        "x-apisguru-categories": [
+          "developer_tools"
+        ],
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Apicurio/apicurio-registry/master/app/src/main/resources-unfiltered/META-INF/resources/api-specifications/registry/v2/openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "apicurio.local",
+        "x-serviceName": "registry",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/apicurio.local/registry/2.4.x/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/apicurio.local/registry/2.4.x/openapi.yaml",
+      "openapiVer": "3.0.2",
+      "link": "https://api.apis.guru/v2/specs/apicurio.local:registry/2.4.x.json"
+    }
+  }
+}

@@ -1,0 +1,697 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://versionhistory.googleapis.com/"
+    }
+  ],
+  "info": {
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com",
+      "x-twitter": "youtube"
+    },
+    "description": "Version History API - Prod",
+    "license": {
+      "name": "Creative Commons Attribution 3.0",
+      "url": "http://creativecommons.org/licenses/by/3.0/"
+    },
+    "termsOfService": "https://developers.google.com/terms/",
+    "title": "versionhistory.googleapis.com API",
+    "version": "v1",
+    "x-apisguru-categories": [
+      "analytics",
+      "media"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg"
+    },
+    "x-origin": [
+      {
+        "format": "google",
+        "url": "https://versionhistory.googleapis.com/$discovery/rest?version=v1",
+        "version": "v1"
+      }
+    ],
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "versionhistory"
+  },
+  "externalDocs": {
+    "url": "https://developers.chrome.com/versionhistory"
+  },
+  "tags": [
+    {
+      "name": "platforms"
+    }
+  ],
+  "paths": {
+    "/v1/{parent}/channels": {
+      "get": {
+        "description": "Returns list of channels that are available for a given platform.",
+        "operationId": "versionhistory.platforms.channels.list",
+        "parameters": [
+          {
+            "description": "Required. The platform, which owns this collection of channels. Format: {product}/platforms/{platform}",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Optional limit on the number of channels to include in the response. If unspecified, the server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Optional. A page token, received from a previous `ListChannels` call. Provide this to retrieve the subsequent page.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListChannelsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "tags": [
+          "platforms"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{parent}/platforms": {
+      "get": {
+        "description": "Returns list of platforms that are available for a given product. The resource \"product\" has no resource name in its name.",
+        "operationId": "versionhistory.platforms.list",
+        "parameters": [
+          {
+            "description": "Required. The product, which owns this collection of platforms. Format: {product}",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Optional limit on the number of channels to include in the response. If unspecified, the server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Optional. A page token, received from a previous `ListChannels` call. Provide this to retrieve the subsequent page.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPlatformsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "tags": [
+          "platforms"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{parent}/releases": {
+      "get": {
+        "description": "Returns list of releases of the given version.",
+        "operationId": "versionhistory.platforms.channels.versions.releases.list",
+        "parameters": [
+          {
+            "description": "Required. The version, which owns this collection of releases. Format: {product}/platforms/{platform}/channels/{channel}/versions/{version}",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Filter string. Format is a comma separated list of All comma separated filter clauses are conjoined with a logical \"and\". Valid field_names are \"version\", \"name\", \"platform\", \"channel\", \"fraction\" \"starttime\", and \"endtime\". Valid operators are \"<\", \"<=\", \"=\", \">=\", and \">\". Channel comparison is done by distance from stable. must be a valid channel when filtering by channel. Ex) stable < beta, beta < dev, canary < canary_asan. Version comparison is done numerically. Ex) 1.0.0.8 < 1.0.0.10. If version is not entirely written, the version will be appended with 0 for the missing fields. Ex) version > 80 becoms version > 80.0.0.0 When filtering by starttime or endtime, string must be in RFC 3339 date string format. Name and platform are filtered by string comparison. Ex) \"...?filter=channel<=beta, version >= 80 Ex) \"...?filter=version > 80, version < 81 Ex) \"...?filter=starttime>2020-01-01T00:00:00Z",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Ordering string. Valid order_by strings are \"version\", \"name\", \"starttime\", \"endtime\", \"platform\", \"channel\", and \"fraction\". Optionally, you can append \"desc\" or \"asc\" to specify the sorting order. Multiple order_by strings can be used in a comma separated list. Ordering by channel will sort by distance from the stable channel (not alphabetically). A list of channels sorted in this order is: stable, beta, dev, canary, and canary_asan. Sorting by name may cause unexpected behaviour as it is a naive string sort. For example, 1.0.0.8 will be before 1.0.0.10 in descending order. If order_by is not specified the response will be sorted by starttime in descending order. Ex) \"...?order_by=starttime asc\" Ex) \"...?order_by=platform desc, channel, startime desc\"",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Optional limit on the number of releases to include in the response. If unspecified, the server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Optional. A page token, received from a previous `ListReleases` call. Provide this to retrieve the subsequent page.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListReleasesResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "tags": [
+          "platforms"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    },
+    "/v1/{parent}/versions": {
+      "get": {
+        "description": "Returns list of version for the given platform/channel.",
+        "operationId": "versionhistory.platforms.channels.versions.list",
+        "parameters": [
+          {
+            "description": "Required. The channel, which owns this collection of versions. Format: {product}/platforms/{platform}/channels/{channel}",
+            "in": "path",
+            "name": "parent",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Filter string. Format is a comma separated list of All comma separated filter clauses are conjoined with a logical \"and\". Valid field_names are \"version\", \"name\", \"platform\", and \"channel\". Valid operators are \"<\", \"<=\", \"=\", \">=\", and \">\". Channel comparison is done by distance from stable. Ex) stable < beta, beta < dev, canary < canary_asan. Version comparison is done numerically. If version is not entirely written, the version will be appended with 0 in missing fields. Ex) version > 80 becoms version > 80.0.0.0 Name and platform are filtered by string comparison. Ex) \"...?filter=channel<=beta, version >= 80 Ex) \"...?filter=version > 80, version < 81",
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Ordering string. Valid order_by strings are \"version\", \"name\", \"platform\", and \"channel\". Optionally, you can append \" desc\" or \" asc\" to specify the sorting order. Multiple order_by strings can be used in a comma separated list. Ordering by channel will sort by distance from the stable channel (not alphabetically). A list of channels sorted in this order is: stable, beta, dev, canary, and canary_asan. Sorting by name may cause unexpected behaviour as it is a naive string sort. For example, 1.0.0.8 will be before 1.0.0.10 in descending order. If order_by is not specified the response will be sorted by version in descending order. Ex) \"...?order_by=version asc\" Ex) \"...?order_by=platform desc, channel, version\"",
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional. Optional limit on the number of versions to include in the response. If unspecified, the server will pick an appropriate default.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Optional. A page token, received from a previous `ListVersions` call. Provide this to retrieve the subsequent page.",
+            "in": "query",
+            "name": "pageToken",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListVersionsResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "tags": [
+          "platforms"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/_.xgafv"
+        },
+        {
+          "$ref": "#/components/parameters/access_token"
+        },
+        {
+          "$ref": "#/components/parameters/alt"
+        },
+        {
+          "$ref": "#/components/parameters/callback"
+        },
+        {
+          "$ref": "#/components/parameters/fields"
+        },
+        {
+          "$ref": "#/components/parameters/key"
+        },
+        {
+          "$ref": "#/components/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/components/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/components/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/components/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/components/parameters/uploadType"
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "_.xgafv": {
+        "description": "V1 error format.",
+        "in": "query",
+        "name": "$.xgafv",
+        "schema": {
+          "enum": [
+            "1",
+            "2"
+          ],
+          "type": "string"
+        }
+      },
+      "access_token": {
+        "description": "OAuth access token.",
+        "in": "query",
+        "name": "access_token",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "alt": {
+        "description": "Data format for response.",
+        "in": "query",
+        "name": "alt",
+        "schema": {
+          "enum": [
+            "json",
+            "media",
+            "proto"
+          ],
+          "type": "string"
+        }
+      },
+      "callback": {
+        "description": "JSONP",
+        "in": "query",
+        "name": "callback",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "fields": {
+        "description": "Selector specifying which fields to include in a partial response.",
+        "in": "query",
+        "name": "fields",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "key": {
+        "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+        "in": "query",
+        "name": "key",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "oauth_token": {
+        "description": "OAuth 2.0 token for the current user.",
+        "in": "query",
+        "name": "oauth_token",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "prettyPrint": {
+        "description": "Returns response with indentations and line breaks.",
+        "in": "query",
+        "name": "prettyPrint",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "quotaUser": {
+        "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.",
+        "in": "query",
+        "name": "quotaUser",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "uploadType": {
+        "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
+        "in": "query",
+        "name": "uploadType",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "upload_protocol": {
+        "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
+        "in": "query",
+        "name": "upload_protocol",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "Channel": {
+        "description": "Each Channel is owned by a Platform and owns a collection of versions. Possible Channels are listed in the Channel enum below. Not all Channels are available for every Platform (e.g. CANARY does not exist for LINUX).",
+        "properties": {
+          "channelType": {
+            "description": "Type of channel.",
+            "enum": [
+              "CHANNEL_TYPE_UNSPECIFIED",
+              "STABLE",
+              "BETA",
+              "DEV",
+              "CANARY",
+              "CANARY_ASAN",
+              "ALL",
+              "EXTENDED"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "description": "Channel name. Format is \"{product}/platforms/{platform}/channels/{channel}\"",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Interval": {
+        "description": "Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.",
+        "properties": {
+          "endTime": {
+            "description": "Optional. Exclusive end of the interval. If specified, a Timestamp matching this interval will have to be before the end.",
+            "format": "google-datetime",
+            "type": "string"
+          },
+          "startTime": {
+            "description": "Optional. Inclusive start of the interval. If specified, a Timestamp matching this interval will have to be the same or after the start.",
+            "format": "google-datetime",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListChannelsResponse": {
+        "description": "Response message for ListChannels.",
+        "properties": {
+          "channels": {
+            "description": "The list of channels.",
+            "items": {
+              "$ref": "#/components/schemas/Channel"
+            },
+            "type": "array"
+          },
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListPlatformsResponse": {
+        "description": "Response message for ListPlatforms.",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "platforms": {
+            "description": "The list of platforms.",
+            "items": {
+              "$ref": "#/components/schemas/Platform"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListReleasesResponse": {
+        "description": "Response message for ListReleases.",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "releases": {
+            "description": "The list of releases.",
+            "items": {
+              "$ref": "#/components/schemas/Release"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ListVersionsResponse": {
+        "description": "Response message for ListVersions.",
+        "properties": {
+          "nextPageToken": {
+            "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+            "type": "string"
+          },
+          "versions": {
+            "description": "The list of versions.",
+            "items": {
+              "$ref": "#/components/schemas/Version"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Platform": {
+        "description": "Each Platform is owned by a Product and owns a collection of channels. Available platforms are listed in Platform enum below. Not all Channels are available for every Platform (e.g. CANARY does not exist for LINUX).",
+        "properties": {
+          "name": {
+            "description": "Platform name. Format is \"{product}/platforms/{platform}\"",
+            "type": "string"
+          },
+          "platformType": {
+            "description": "Type of platform.",
+            "enum": [
+              "PLATFORM_TYPE_UNSPECIFIED",
+              "WIN",
+              "WIN64",
+              "MAC",
+              "LINUX",
+              "ANDROID",
+              "WEBVIEW",
+              "IOS",
+              "ALL",
+              "MAC_ARM64",
+              "LACROS",
+              "LACROS_ARM32",
+              "CHROMEOS",
+              "LACROS_ARM64",
+              "FUCHSIA"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Release": {
+        "description": "A Release is owned by a Version. A Release contains information about the release(s) of its parent version. This includes when the release began and ended, as well as what percentage it was released at. If the version is released again, or if the serving percentage changes, it will create another release under the version.",
+        "properties": {
+          "fraction": {
+            "description": "Rollout fraction. This fraction indicates the fraction of people that should receive this version in this release. If the fraction is not specified in ReleaseManager, the API will assume fraction is 1.",
+            "format": "double",
+            "type": "number"
+          },
+          "fractionGroup": {
+            "description": "Rollout fraction group. Only fractions with the same fraction_group are statistically comparable: there may be non-fractional differences between different fraction groups.",
+            "format": "int64",
+            "type": "string"
+          },
+          "name": {
+            "description": "Release name. Format is \"{product}/platforms/{platform}/channels/{channel}/versions/{version}/releases/{release}\"",
+            "type": "string"
+          },
+          "serving": {
+            "$ref": "#/components/schemas/Interval",
+            "description": "Timestamp interval of when the release was live. If end_time is unspecified, the release is currently live."
+          },
+          "version": {
+            "description": "String containing just the version number. e.g. \"84.0.4147.38\"",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Version": {
+        "description": "Each Version is owned by a Channel. A Version only displays the Version number (e.g. 84.0.4147.38). A Version owns a collection of releases.",
+        "properties": {
+          "name": {
+            "description": "Version name. Format is \"{product}/platforms/{platform}/channels/{channel}/versions/{version}\" e.g. \"chrome/platforms/win/channels/beta/versions/84.0.4147.38\"",
+            "type": "string"
+          },
+          "version": {
+            "description": "String containing just the version number. e.g. \"84.0.4147.38\"",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}

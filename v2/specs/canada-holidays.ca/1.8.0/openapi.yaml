@@ -1,0 +1,865 @@
+openapi: 3.0.0
+servers:
+  - url: https://canada-holidays.ca
+info:
+  contact:
+    email: paul@pcraig3.ca
+    name: Paul Craig
+    url: https://canada-holidays.ca/api
+  description: This API lists all 31 public holidays for all 13 provinces and territories in Canada, including federal holidays.
+  license:
+    name: MIT
+    url: https://github.com/pcraig3/hols/blob/main/LICENSE
+  title: Canada Holidays API
+  version: 1.8.0
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    backgroundColor: "#FFFFFF"
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_d_d9_Flag_of_Canada_%28Pantone%29.svg
+  x-origin:
+    - format: openapi
+      url: https://api.swaggerhub.com/apis/pcraig3/canada-holidays/1.8.0
+      version: "3.0"
+  x-providerName: canada-holidays.ca
+tags:
+  - description: Get welcome message and links
+    name: info
+  - description: Get holiday(s) with associated provinces
+    name: holidays
+  - description: Get province(s) with associated holidays
+    name: provinces
+paths:
+  /api/v1:
+    get:
+      description: Returns a welcome message.
+      operationId: Root
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                /:
+                  value:
+                    _links:
+                      holidays:
+                        href: https://canada-holidays.ca/api/v1/holidays
+                      provinces:
+                        href: https://canada-holidays.ca/api/v1/provinces
+                      self:
+                        href: https://canada-holidays.ca/api/v1/
+                      spec:
+                        href: https://canada-holidays.ca/api/v1/spec
+                    message: Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés
+              schema:
+                properties:
+                  _links:
+                    properties:
+                      holidays:
+                        properties:
+                          href:
+                            description: Domain to get all holidays
+                            example: https://canada-holidays.ca/api/v1/holidays
+                            type: string
+                        type: object
+                      provinces:
+                        properties:
+                          href:
+                            description: Domain to get all provinces
+                            example: https://canada-holidays.ca/api/v1/provinces
+                            type: string
+                        type: object
+                      self:
+                        properties:
+                          href:
+                            description: Root domain
+                            example: https://canada-holidays.ca/api/v1/
+                            type: string
+                        type: object
+                      spec:
+                        properties:
+                          href:
+                            example: https://canada-holidays.ca/api/v1/spec
+                            type: string
+                        type: object
+                    type: object
+                  message:
+                    description: A welcome message
+                    example: Hello / Bonjour!
+                    type: string
+                type: object
+          description: OK
+      summary: root
+      tags:
+        - info
+  /api/v1/holidays:
+    get:
+      description: Returns Canadian public holidays. Each holiday lists the regions that observe it.
+      operationId: Holidays
+      parameters:
+        - allowEmptyValue: true
+          description: A calendar year
+          in: query
+          name: year
+          schema:
+            default: 2023
+            maximum: 2029
+            minimum: 2016
+            type: integer
+        - allowEmptyValue: true
+          description: A boolean parameter. If true or 1, will return only federal holidays. If false or 0, will return no federal holidays.
+          in: query
+          name: federal
+          schema:
+            enum:
+              - "1"
+              - "0"
+              - "true"
+              - "false"
+            type: string
+        - allowEmptyValue: true
+          description: A boolean parameter. If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays from Alberta and BC.
+          in: query
+          name: optional
+          schema:
+            default: "false"
+            enum:
+              - "1"
+              - "0"
+              - "true"
+              - "false"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                /holidays:
+                  value:
+                    holidays:
+                      - date: 2023-01-01
+                        federal: 1
+                        id: 1
+                        nameEn: New Year’s Day
+                        nameFr: Jour de l’An
+                        observedDate: 2023-01-02
+                        provinces:
+                          - id: AB
+                            nameEn: Alberta
+                            nameFr: Alberta
+                            sourceEn: General holidays in Alberta
+                            sourceLink: https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1
+                          - id: BC
+                            nameEn: British Columbia
+                            nameFr: Colombie-Britannique
+                            sourceEn: Statutory Holidays in British Columbia
+                            sourceLink: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body
+                          - id: MB
+                            nameEn: Manitoba
+                            nameFr: Manitoba
+                            sourceEn: General holidays in Manitoba
+                            sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+                          - id: NB
+                            nameEn: New Brunswick
+                            nameFr: Nouveau-Brunswick
+                            sourceEn: 10 prescribed days of rest
+                            sourceLink: https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2
+                          - id: NL
+                            nameEn: Newfoundland and Labrador
+                            nameFr: Terre-Neuve-et-Labrador
+                            sourceEn: Public holidays in Newfoundland
+                            sourceLink: https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd
+                          - id: NT
+                            nameEn: Northwest Territories
+                            nameFr: Territoires du Nord-Ouest
+                            sourceEn: Employment Standards, Northwest Territories
+                            sourceLink: https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions#Statutory%20Holidays
+                          - id: NS
+                            nameEn: Nova Scotia
+                            nameFr: Nouvelle-Écosse
+                            sourceEn: Paid holidays in Nova Scotia
+                            sourceLink: https://novascotia.ca/lae/employmentrights/holidaychart.asp
+                          - id: NU
+                            nameEn: Nunavut
+                            nameFr: Nunavut
+                            sourceEn: Nunavut General Holidays
+                            sourceLink: https://nu-lsco.ca/faq-s?tmpl=component&faqid=11
+                          - id: ON
+                            nameEn: Ontario
+                            nameFr: Ontario
+                            sourceEn: Ontario Public holidays
+                            sourceLink: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+                          - id: PE
+                            nameEn: Prince Edward Island
+                            nameFr: Île-du-Prince-Édouard
+                            sourceEn: PEI Paid Holidays
+                            sourceLink: https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays
+                          - id: QC
+                            nameEn: Quebec
+                            nameFr: Québec
+                            sourceEn: Jours fériés, chômés et payés
+                            sourceLink: https://www2.gouv.qc.ca/entreprises/portail/quebec/ressourcesh?lang=fr&g=ressourcesh&sg=personnel&t=o&e=2318829344:3908165687
+                          - id: SK
+                            nameEn: Saskatchewan
+                            nameFr: Saskatchewan
+                            sourceEn: Saskatchewan Public Holidays
+                            sourceLink: https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays
+                          - id: YT
+                            nameEn: Yukon
+                            nameFr: Yukon
+                            sourceEn: Yukon statutory holiday dates
+                            sourceLink: https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday
+                      - date: 2023-02-20
+                        federal: 0
+                        id: 2
+                        nameEn: Louis Riel Day
+                        nameFr: Journée Louis Riel
+                        observedDate: 2023-02-20
+                        provinces:
+                          - id: MB
+                            nameEn: Manitoba
+                            nameFr: Manitoba
+                            sourceEn: General holidays in Manitoba
+                            sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+              schema:
+                properties:
+                  holidays:
+                    items:
+                      $ref: "#/components/schemas/Holiday"
+                    type: array
+                type: object
+          description: OK
+          headers: {}
+      summary: Get all holidays
+      tags:
+        - holidays
+  "/api/v1/holidays/{holidayId}":
+    get:
+      description: Returns one Canadian statutory holiday by integer id. Returns a 404 response for invalid ids.
+      operationId: Holiday
+      parameters:
+        - allowEmptyValue: true
+          description: A calendar year
+          in: query
+          name: year
+          schema:
+            default: 2023
+            maximum: 2029
+            minimum: 2016
+            type: integer
+        - allowEmptyValue: true
+          description: A boolean parameter. If false or 0 (default), will return provinces for which this is a legislated holiday. If true or 1, will return provinces which optionally celebrate this holiday.
+          in: query
+          name: optional
+          schema:
+            default: "false"
+            enum:
+              - "1"
+              - "0"
+              - "true"
+              - "false"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                /holidays/32:
+                  value:
+                    holiday:
+                      date: 2023-12-26
+                      federal: 1
+                      id: 32
+                      nameEn: Boxing Day
+                      nameFr: Lendemain de Noël
+                      observedDate: 2023-12-26
+                      provinces:
+                        - id: NL
+                          nameEn: Newfoundland and Labrador
+                          nameFr: Terre-Neuve-et-Labrador
+                          sourceEn: Public holidays in Newfoundland
+                          sourceLink: https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd
+                        - id: ON
+                          nameEn: Ontario
+                          nameFr: Ontario
+                          sourceEn: Ontario Public holidays
+                          sourceLink: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+                /holidays/32?optional=true:
+                  value:
+                    holiday:
+                      date: 2023-12-26
+                      federal: 1
+                      id: 32
+                      nameEn: Boxing Day
+                      nameFr: Lendemain de Noël
+                      observedDate: 2023-12-26
+                      provinces:
+                        - id: NL
+                          nameEn: Newfoundland and Labrador
+                          nameFr: Terre-Neuve-et-Labrador
+                          sourceEn: Public holidays in Newfoundland
+                          sourceLink: https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd
+                        - id: ON
+                          nameEn: Ontario
+                          nameFr: Ontario
+                          sourceEn: Ontario Public holidays
+                          sourceLink: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+                        - id: AB
+                          nameEn: Alberta
+                          nameFr: Alberta
+                          optional: 1
+                          sourceEn: General holidays in Alberta
+                          sourceLink: https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1
+                        - id: BC
+                          nameEn: British Columbia
+                          nameFr: Colombie-Britannique
+                          optional: 1
+                          sourceEn: Statutory Holidays in British Columbia
+                          sourceLink: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body
+                        - id: MB
+                          nameEn: Manitoba
+                          nameFr: Manitoba
+                          optional: 1
+                          sourceEn: General holidays in Manitoba
+                          sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+              schema:
+                properties:
+                  holiday:
+                    $ref: "#/components/schemas/Holiday"
+                type: object
+          description: OK
+          headers: {}
+        "400":
+          content:
+            application/json:
+              examples:
+                /holidays/100:
+                  value:
+                    error:
+                      message: "Error: request.params.holidayId should be <= 31"
+                      status: 400
+                      timestamp: 2020-04-28T03:59:56.605Z
+              schema:
+                properties:
+                  error:
+                    $ref: "#/components/schemas/Error"
+                type: object
+          description: Bad Request
+      summary: Get a holiday by id
+      tags:
+        - holidays
+    parameters:
+      - description: Primary key for a holiday
+        in: path
+        name: holidayId
+        required: true
+        schema:
+          example: 2
+          maximum: 32
+          minimum: 1
+          type: integer
+  /api/v1/provinces:
+    get:
+      description: Returns provinces and territories in Canada. Each province or territory lists its associated holidays.
+      operationId: Provinces
+      parameters:
+        - allowEmptyValue: true
+          description: A calendar year
+          in: query
+          name: year
+          schema:
+            default: 2023
+            maximum: 2029
+            minimum: 2016
+            type: integer
+        - allowEmptyValue: true
+          description: A boolean parameter. If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays from Alberta and BC.
+          in: query
+          name: optional
+          schema:
+            default: "false"
+            enum:
+              - "1"
+              - "0"
+              - "true"
+              - "false"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                /provinces:
+                  value:
+                    provinces:
+                      - holidays:
+                          - date: 2023-01-01
+                            federal: 1
+                            id: 1
+                            nameEn: New Year’s Day
+                            nameFr: Jour de l’An
+                            observedDate: 2023-01-02
+                          - date: 2023-02-20
+                            federal: 0
+                            id: 4
+                            nameEn: Family Day
+                            nameFr: Fête de la famille
+                            observedDate: 2023-02-20
+                        id: AB
+                        nameEn: Alberta
+                        nameFr: Alberta
+                        nextHoliday:
+                          date: 2023-01-01
+                          federal: 1
+                          id: 1
+                          nameEn: New Year’s Day
+                          nameFr: Jour de l’An
+                          observedDate: 2023-01-02
+                        sourceEn: General holidays in Alberta
+                        sourceLink: https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1
+                      - holidays:
+                          - date: 2023-01-01
+                            federal: 1
+                            id: 1
+                            nameEn: New Year’s Day
+                            nameFr: Jour de l’An
+                            observedDate: 2023-01-02
+                          - date: 2023-02-20
+                            federal: 0
+                            id: 4
+                            nameEn: Family Day
+                            nameFr: Fête de la famille
+                            observedDate: 2023-02-20
+                        id: BC
+                        nameEn: British Columbia
+                        nameFr: Colombie-Britannique
+                        nextHoliday:
+                          date: 2023-01-01
+                          federal: 1
+                          id: 1
+                          nameEn: New Year’s Day
+                          nameFr: Jour de l’An
+                          observedDate: 2023-01-02
+                        sourceEn: Statutory Holidays in British Columbia
+                        sourceLink: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body
+              schema:
+                properties:
+                  provinces:
+                    items:
+                      $ref: "#/components/schemas/Province"
+                    type: array
+                type: object
+          description: OK
+          headers: {}
+      summary: Get all provinces
+      tags:
+        - provinces
+  "/api/v1/provinces/{provinceId}":
+    get:
+      description: Returns a Canadian province or territory with its associated holidays. Returns a 404 response for invalid abbreviations.
+      operationId: Province
+      parameters:
+        - allowEmptyValue: true
+          description: A calendar year
+          in: query
+          name: year
+          schema:
+            default: 2023
+            maximum: 2029
+            minimum: 2016
+            type: integer
+        - allowEmptyValue: true
+          description: A boolean parameter (AB and BC only). If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays from Alberta and BC.
+          in: query
+          name: optional
+          schema:
+            default: "false"
+            enum:
+              - "1"
+              - "0"
+              - "true"
+              - "false"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                /provinces/MB:
+                  value:
+                    province:
+                      holidays:
+                        - date: 2023-01-01
+                          federal: 1
+                          id: 1
+                          nameEn: New Year’s Day
+                          nameFr: Jour de l’An
+                          observedDate: 2023-01-02
+                        - date: 2023-02-20
+                          federal: 0
+                          id: 2
+                          nameEn: Louis Riel Day
+                          nameFr: Journée Louis Riel
+                          observedDate: 2023-02-20
+                        - date: 2023-04-07
+                          federal: 1
+                          id: 7
+                          nameEn: Good Friday
+                          nameFr: Vendredi saint
+                          observedDate: 2023-04-07
+                        - date: 2023-05-22
+                          federal: 1
+                          id: 11
+                          nameEn: Victoria Day
+                          nameFr: Fête de la Reine
+                          observedDate: 2023-05-22
+                        - date: 2023-07-01
+                          federal: 1
+                          id: 15
+                          nameEn: Canada Day
+                          nameFr: Fête du Canada
+                          observedDate: 2023-07-03
+                        - date: 2023-09-04
+                          federal: 1
+                          id: 26
+                          nameEn: Labour Day
+                          nameFr: Fête du travail
+                          observedDate: 2023-09-04
+                        - date: 2023-10-09
+                          federal: 1
+                          id: 29
+                          nameEn: Thanksgiving
+                          nameFr: Action de grâce
+                          observedDate: 2023-10-09
+                        - date: 2023-12-25
+                          federal: 1
+                          id: 31
+                          nameEn: Christmas Day
+                          nameFr: Noël
+                          observedDate: 2023-12-25
+                      id: MB
+                      nameEn: Manitoba
+                      nameFr: Manitoba
+                      nextHoliday:
+                        date: 2023-01-01
+                        federal: 1
+                        id: 1
+                        nameEn: New Year’s Day
+                        nameFr: Jour de l’An
+                        observedDate: 2023-01-02
+                      sourceEn: General holidays in Manitoba
+                      sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+              schema:
+                properties:
+                  province:
+                    $ref: "#/components/schemas/Province"
+                type: object
+          description: OK
+          headers: {}
+        "400":
+          content:
+            application/json:
+              examples:
+                /provinces/100:
+                  value:
+                    error:
+                      message: "Error: request.params.provinceId should be equal to one of the allowed values: AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT"
+                      status: 400
+                      timestamp: 2020-04-28T04:02:38.813Z
+              schema:
+                properties:
+                  error:
+                    $ref: "#/components/schemas/Error"
+                type: object
+          description: Bad Request
+      summary: Get a province or territory by abbreviation
+      tags:
+        - provinces
+    parameters:
+      - description: A Canadian province abbreviation
+        in: path
+        name: provinceId
+        required: true
+        schema:
+          enum:
+            - AB
+            - BC
+            - MB
+            - NB
+            - NL
+            - NS
+            - NT
+            - NU
+            - ON
+            - PE
+            - QC
+            - SK
+            - YT
+          example: MB
+          type: string
+  /api/v1/spec:
+    get:
+      description: Gets the schema for the JSON API as a yaml file.
+      operationId: Spec
+      responses:
+        "200":
+          description: OK
+          headers:
+            content-type:
+              description: text/yaml; charset=UTF-8
+              schema:
+                type: string
+      summary: Get JSON schema
+      tags:
+        - info
+components:
+  schemas:
+    Error:
+      properties:
+        message:
+          description: An error message
+          example: "Error: No holiday with id “100”"
+          type: string
+        status:
+          description: An HTTP status code
+          example: 404
+          maximum: 599
+          minimum: 100
+          type: integer
+        timestamp:
+          description: A UTC ISO timestamp
+          example: 2020-04-27T05:41:10.710Z
+          format: date-time
+          type: string
+      title: Error
+      type: object
+      x-examples:
+        /holidays/100:
+          error:
+            message: "Bad Request: request/params/holidayId must be <= 32"
+            status: 400
+            timestamp: 2022-12-27T05:55:36.552Z
+    Holiday:
+      description: A Canadian holiday. Includes a name, the literal date of the holiday, the observed date of the holiday (ie, accommodating for weekends), and a list of regions that observe this holiday.
+      properties:
+        date:
+          description: "ISO date: the literal date of the holiday"
+          example: 2020-12-26
+          format: date
+          type: string
+        federal:
+          description: Whether this holiday is observed by federally-regulated industries.
+          enum:
+            - 1
+            - 0
+          type: integer
+        id:
+          description: Primary key for a holiday
+          example: 2
+          maximum: 32
+          minimum: 1
+          type: integer
+        nameEn:
+          description: English name
+          example: Louis Riel Day
+          type: string
+        nameFr:
+          description: French name
+          example: Journée Louis Riel
+          type: string
+        observedDate:
+          description: "ISO date: when this holiday is observed"
+          example: 2020-12-28
+          format: date
+          type: string
+        optional:
+          description: Whether this is a province-wide statutory holiday, or one that is optional for employers.
+          enum:
+            - 1
+          type: integer
+        provinces:
+          items:
+            $ref: "#/components/schemas/Province"
+          type: array
+      required:
+        - id
+        - date
+        - nameEn
+        - nameFr
+        - federal
+        - observedDate
+      title: Holiday
+      type: object
+      x-examples:
+        /holidays/32?optional=true:
+          holiday:
+            date: 2023-12-26
+            federal: 1
+            id: 32
+            nameEn: Boxing Day
+            nameFr: Lendemain de Noël
+            observedDate: 2023-12-26
+            provinces:
+              - id: NL
+                nameEn: Newfoundland and Labrador
+                nameFr: Terre-Neuve-et-Labrador
+                sourceEn: Public holidays in Newfoundland
+                sourceLink: https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd
+              - id: ON
+                nameEn: Ontario
+                nameFr: Ontario
+                sourceEn: Ontario Public holidays
+                sourceLink: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+              - id: AB
+                nameEn: Alberta
+                nameFr: Alberta
+                optional: 1
+                sourceEn: General holidays in Alberta
+                sourceLink: https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1
+              - id: BC
+                nameEn: British Columbia
+                nameFr: Colombie-Britannique
+                optional: 1
+                sourceEn: Statutory Holidays in British Columbia
+                sourceLink: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body
+              - id: MB
+                nameEn: Manitoba
+                nameFr: Manitoba
+                optional: 1
+                sourceEn: General holidays in Manitoba
+                sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+    Province:
+      description: "A Canadian province or territory "
+      properties:
+        id:
+          description: Canadian province abbreviations
+          enum:
+            - AB
+            - BC
+            - MB
+            - NB
+            - NL
+            - NS
+            - NT
+            - NU
+            - ON
+            - PE
+            - QC
+            - SK
+            - YT
+          example: MB
+          type: string
+        nameEn:
+          description: English name
+          example: Manitoba
+          type: string
+        nameFr:
+          description: French name
+          example: Manitoba
+          type: string
+        nextHoliday:
+          $ref: "#/components/schemas/Holiday"
+        optional:
+          description: Whether this province optionally observes a given holiday.
+          enum:
+            - 1
+          type: integer
+        provinces:
+          items:
+            $ref: "#/components/schemas/Holiday"
+          type: array
+        sourceEn:
+          description: Name of reference page with public holidays for this region
+          example: What are the general holidays in Manitoba?
+          type: string
+        sourceLink:
+          description: URL to public holidays reference for this region
+          example: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+          format: uri
+          pattern: https+
+          type: string
+      required:
+        - id
+        - nameFr
+        - nameEn
+        - sourceLink
+        - sourceEn
+      title: Province
+      type: object
+      x-examples:
+        /provinces/SK:
+          province:
+            holidays:
+              - date: 2023-01-01
+                federal: 1
+                id: 1
+                nameEn: New Year’s Day
+                nameFr: Jour de l’An
+                observedDate: 2023-01-02
+              - date: 2023-02-20
+                federal: 0
+                id: 4
+                nameEn: Family Day
+                nameFr: Fête de la famille
+                observedDate: 2023-02-20
+              - date: 2023-04-07
+                federal: 1
+                id: 7
+                nameEn: Good Friday
+                nameFr: Vendredi saint
+                observedDate: 2023-04-07
+              - date: 2023-05-22
+                federal: 1
+                id: 11
+                nameEn: Victoria Day
+                nameFr: Fête de la Reine
+                observedDate: 2023-05-22
+              - date: 2023-07-01
+                federal: 1
+                id: 15
+                nameEn: Canada Day
+                nameFr: Fête du Canada
+                observedDate: 2023-07-03
+              - date: 2023-08-07
+                federal: 0
+                id: 21
+                nameEn: Saskatchewan Day
+                nameFr: Jour de Saskatchewan
+                observedDate: 2023-08-07
+              - date: 2023-09-04
+                federal: 1
+                id: 26
+                nameEn: Labour Day
+                nameFr: Fête du travail
+                observedDate: 2023-09-04
+              - date: 2023-10-09
+                federal: 1
+                id: 29
+                nameEn: Thanksgiving
+                nameFr: Action de grâce
+                observedDate: 2023-10-09
+              - date: 2023-11-11
+                federal: 1
+                id: 30
+                nameEn: Remembrance Day
+                nameFr: Jour du Souvenir
+                observedDate: 2023-11-13
+              - date: 2023-12-25
+                federal: 1
+                id: 31
+                nameEn: Christmas Day
+                nameFr: Noël
+                observedDate: 2023-12-25
+            id: SK
+            nameEn: Saskatchewan
+            nameFr: Saskatchewan
+            nextHoliday:
+              date: 2023-01-01
+              federal: 1
+              id: 1
+              nameEn: New Year’s Day
+              nameFr: Jour de l’An
+              observedDate: 2023-01-02
+            sourceEn: Saskatchewan Public Holidays
+            sourceLink: https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays
+  securitySchemes: {}

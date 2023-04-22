@@ -1,0 +1,891 @@
+{
+  "apis": {
+    "vtex.local:Catalog-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\n> Check the new [Catalog onboarding guide](https://developers.vtex.com/docs/guides/catalog-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Catalog and is organized by focusing on the developer's journey.\r\n\r\nMethods for collecting product/SKU catalog data, categories, brands and other information. All content that comes between `{{}}` keys must be replaced with the correct data before performing the request.\r\n\r\n\r\n## Index\r\n\r\n- [Product](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/products/GetProductAndSkuIds) - Here you can consult, create, or update a Product. For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/1wmX3QvQVxbKVmalhIE5Ru).\r\n- [Product Specification](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/products/-productId-/specification) - You can consult, create, or update additional information of a Product.  For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/2NQoBv8m4Yz3oQaLgDRagP#product-specification).\r\n- [SKU](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/sku/stockkeepingunitids) - Here you can consult, create, or update an SKU. For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/3mJbIqMlz6oKDmyZ2bKJoA).\r\n- [SKU Complement](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/stockkeepingunit/-skuId-/complement) - You can consult, create, or update an SKU Complement. An SKU Complement is a new SKU that has a Parent SKU.\r\n- [SKU EAN](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/sku/stockkeepingunitbyean/-ean-) -  Here you can consult, create, or update an SKU unique identification code (barcode).\r\n- [SKU Attachment](https://developers.vtex.com/docs/api-reference/catalog-api#post-/api/catalog/pvt/skuattachment) - You can consult, create, or update an SKU Attachment. An attachment is used to add custom information about the item. For more information, check [this article](https://help.vtex.com/tutorial/what-is-an-attachment--aGICk0RVbqKg6GYmQcWUm?locale=en).\r\n- [SKU File](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/stockkeepingunit/-skuId-/file) - Here you can consult, create, or update an SKU File. An SKU File is an image associated with an SKU.\r\n- [SKU Kit](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/stockkeepingunitkit) - You can consult, create, or update an SKU Kit. A kit is an SKU composed of one or more SKUs. For more information, check [this article](https://help.vtex.com/tutorial/what-is-a-kit--5ov5s3eHM4AqAAgqWwoc28?locale=en).\r\n- [SKU Seller](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/skuseller/-sellerId-/-sellerSkuId-) - Here you can consult and delete an SKU Seller. An SKU Seller is a seller associated with an SKU. For more information, check [this article](https://help.vtex.com/tutorial/what-is-a-seller--5FkLvhZ3Few4CWWIuYOK2w?locale=en).\r\n- [SKU Service](https://developers.vtex.com/docs/api-reference/catalog-api#put-/api/catalog/pvt/skuservice/-skuServiceId-) - You can create, update, or delete an SKU Service. A service is an item that may come with a product, optionally, and with a cost. For more information, check [this article](https://help.vtex.com/tutorial/what-is-a-service--46Ha8CEEQoC6Y40i6akG0y?locale=en).\r\n- [SKU Service Attachment](https://developers.vtex.com/docs/api-reference/catalog-api#post-/api/catalog/pvt/skuservicetypeattachment) - Here you can associate or disassociate an Attachment to an SKU Service.\r\n- [SKU Service Type](https://developers.vtex.com/docs/api-reference/catalog-api#post-/api/catalog/pvt/skuservicetype) - You can create, update, or delete an SKU Service Type. A service type is the behavior configuration of a service.\r\n- [SKU Service Value](https://developers.vtex.com/docs/api-reference/catalog-api#post-/api/catalog/pvt/skuservicevalue) - Here you can create, update, or delete an SKU Service Value. Service value is how much the customer will be charged for the service.\r\n- [SKU Specification](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/stockkeepingunit/-skuId-/specification) - You can consult, create, or delete an SKU Specification. SKU Specification is used to create site browsing filters and to differentiate SKUs within the product page. For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/2NQoBv8m4Yz3oQaLgDRagP?locale=en#sku-specifications).\r\n- [Legacy Subcollection](https://developers.vtex.com/docs/api-reference/catalog-api#post-/api/catalog/pvt/subcollection/-subCollectionId-/stockkeepingunit) - Here you can can consult, create, or delete an SKU, Brand or Category from a Subcollection, as well as create, delete and update subcollections. A subcollection is a group type associated with a collection. For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/3moFonW33dgOYDrU21Z1X0#group-types).\r\n- [Category](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pub/category/tree/-categoryLevels-) - You consult, create, or update a Category. A category is a hierarchical level of product classification. For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/2gkZDjXRqfsq62TlAkj4uf).\r\n- [Similar Category](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/product/-productId-/similarcategory/) - Here you can create and delete a Similar Category to a Product. This way the Product will be shown in both categories (main and similar).\r\n- [Category Specification](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pub/specification/field/listByCategoryId/-categoryId-) - You can consult all Specifications by Category. For more information about Specification, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/2NQoBv8m4Yz3oQaLgDRagP).\r\n- [Brand](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/brand/list) - You can consult, create, update, or delete a Brand. A brand is a product property. For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/7i3sB8fgkqUp5NoH5yJtfh).\r\n- [Attachment](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/attachment/-attachmentid-) - You can consult, create, or update an Attachment. An attachment is used to add custom information about the item. For more information, check [this article](https://help.vtex.com/tutorial/what-is-an-attachment--aGICk0RVbqKg6GYmQcWUm?locale=en).\r\n- [Collection Beta](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/collection/search) - The new [Beta Collections module](https://help.vtex.com/announcements/new-beta-collections-module-easily-create-and-manage-product-collections--6KvFxylC5SNsbVm8L8XZpZ#) launch allowed us to engineer new endpoints that create and manage Collections. For more information, check [this article](https://help.vtex.com/en/tutorial/creating-collections-beta--yJBHqNMViOAnnnq4fyOye?&utm_source=autocomplete#).\r\n- [Legacy Collection](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/collection/-collectionId-) - Here you can consult, create, update, or delete a Collection. A collection is a group of items. For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/4hN41yU8IPeb8HKmmaXoca?locale=en).\r\n- [Specification](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/specification/-specificationId-) - Here you can consult, create, or delete a Specification. A specification is used to create site browsing filters and to differentiate SKUs and Products within the product page. For more information, check [this article](https://help.vtex.com/tracks/catalog-101--5AF0XfnjfWeopIFBgs3LIQ/2NQoBv8m4Yz3oQaLgDRagP?locale=en).\r\n- [Specification Field](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pub/specification/fieldGet/-fieldId-) - You can consult, create, or update a Specification Field. A specification field allows you to present more detailed items. \r\n- [Specification Field Value](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/specification/fieldValue/-fieldValueId-) - Here you can consult, create, or update a Specification Field Value. \r\n- [Specification Value](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/specificationvalue/-specificationValueId-) - You can consult, create, or update a Specification Value.\r\n- [Specification Group](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/specification/groupbycategory/-categoryId-) - Here you can consult, create, or update a Specification Group.\r\n- [Non Structured Specification](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/specification/nonstructured/-Id-) - You can consult or delete a Non Structured Specification.\r\n- [Sales Channel](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/saleschannel/list) - Here you can consult Sales Channel.\r\n- [Seller](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/seller/list) - You can consult, create, or update a Seller. A seller is the _product owner_. For more information, check [this article](https://help.vtex.com/tutorial/what-is-a-seller--5FkLvhZ3Few4CWWIuYOK2w?locale=en).\r\n- [Supplier](https://developers.vtex.com/docs/api-reference/catalog-api#post-/api/catalog/pvt/supplier) - Here you can consult, create, or update a Supplier.\r\n- [Trade Policy](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog/pvt/product/-productId-/salespolicy) - You can create, update, or delete a Trade Policy. Trade policy is required when one of the above factors is different among the sale channel. For more information, check [this article](https://help.vtex.com/tutorial/what-is-a-sales-policy--563tbcL0TYKEKeOY4IAgAE?locale=en).\r\n- [Product Indexing](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/products/GetIndexedInfo/-productId-) - Here you can consult Product Indexed information.\r\n- [Commercial Conditions](https://developers.vtex.com/docs/api-reference/catalog-api#get-/api/catalog_system/pvt/commercialcondition/list) - Here you can consult commercial conditions registered in the store.\r\n\r\n\r\n## Common parameters\r\n\r\n| Parameter name              | Description                                                                             |\r\n|---------------------------|-----------------------------------------------------------------------------------------|\r\n| `{{accountName}}`         | Store account name                                                                      |\r\n| `{{environment}`          | The environment that will be called. Change for vtexcommercestable or vtexcommmercebeta |\r\n| `{{X-VTEX-API-AppKey}}`   | Located in the headers of the requests, user authentication key                         |\r\n| `{{X-VTEX-API-AppToken}}` | Located in the headers of the requests, authentication password                         |",
+        "title": "Catalog API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Catalog API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Catalog-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Catalog-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Catalog-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Catalog-API/1.0.json"
+    },
+    "vtex.local:Catalog-API-Seller-Portal": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\nWith the Catalog API for Seller Portal, you will be able to create, edit and consult products and their variations, brands, and categories.\r\n\r\n> This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests).\r\n\r\n## Index\r\n\r\n### Product\r\n\r\n`GET` [Get Product by ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/products/-productId-)\r\n`PUT` [Update Product](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#put-/api/catalog-seller-portal/products/-productId-)\r\n`GET` [Get Product Description by Product ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/products/-productId-/description)\r\n`PUT` [Update Product Description by Product ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#put-/api/catalog-seller-portal/products/-productId-/description)\r\n`GET` [Get Product by external ID, SKU ID, SKU external ID or slug](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/products/-param-)\r\n`POST` [Create Product](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#post-/api/catalog-seller-portal/products)\r\n\r\n### SKU\r\n\r\n`GET` [Search for SKU](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/skus/_search)\r\n`GET` [Get List of SKUs](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/skus/ids)\r\n\r\n### Brand\r\n\r\n`GET` [Get List of Brands](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/brands)\r\n`POST` [Create a Brand](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#post-/api/catalog-seller-portal/brands)\r\n`GET` [Get Brand by ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/brands/-brandId-)\r\n`PUT` [Update Brand](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#put-/api/catalog-seller-portal/brands/-brandId-)\r\n\r\n### Category\r\n\r\n`GET` [Get Category Tree](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/category-tree)\r\n`PUT` [Update Category Tree](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#put-/api/catalog-seller-portal/category-tree)\r\n`GET` [Get Category by ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/category-tree/categories/-categoryId-)\r\n`POST` [Create a Category](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#post-/api/catalog-seller-portal/category-tree/categories)",
+        "title": "Catalog API - Seller Portal",
+        "version": "1.0.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Catalog API Seller Portal.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Catalog-API-Seller-Portal",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Catalog-API-Seller-Portal/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Catalog-API-Seller-Portal/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Catalog-API-Seller-Portal/1.0.0.json"
+    },
+    "vtex.local:Checkout-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": ">ℹ️ Check the new [Checkout onboarding guide](https://developers.vtex.com/vtex-rest-api/docs/checkout-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about the Checkout and is organized by focusing on the developer's journey.\r\n\r\nThe Checkout API allows you to obtain and configure information about the shopping cart and its attachments, personalization of custom fields, orderForm structure, fulfillment data, order management, and identification of the sellers delivery region.\r\n\r\n>ℹ️ Data modification operations (`POST`, `PATCH`, `PUT` or `DELETE` endpoints) shall not be performed in parallel in the Checkout APIs. They need to be enqueued by the client/requester. Otherwise, old values ​​can be overwritten incorrectly or competition errors may occur.\r\n\r\n>⚠️ All endpoints that consult or edit the orderForm can change the authentication depending on the customer context. If you are handling information from a customer with a complete profile on the store, authentication will be required. You can only access or modify the customer data for these profiles with an authenticated request.\r\n\r\n## Shopping cart\r\n\r\nAllows merchants to simulate, configure and customize shopping cart information.\r\n\r\n- [POST - Cart Simulation](https://developers.vtex.com/vtex-rest-api/reference/cartsimulation)\r\n- [GET - Get current or create a new cart](https://developers.vtex.com/vtex-rest-api/reference/createanewcart)\r\n- [GET - Get cart information by ID](https://developers.vtex.com/vtex-rest-api/reference/getcartinformationbyid)\r\n- [POST - Remove all items](https://developers.vtex.com/vtex-rest-api/reference/removeallitems)\r\n- [GET - Remove all personal data](https://developers.vtex.com/vtex-rest-api/reference/removeallpersonaldata)\r\n- [POST - Update cart items](https://developers.vtex.com/vtex-rest-api/reference/itemsupdate)\r\n- [POST - Add cart items](https://developers.vtex.com/vtex-rest-api/reference/items)\r\n- [PUT - Change price](https://developers.vtex.com/vtex-rest-api/reference/pricechange)\r\n- [PATCH - Ignore profile data](https://developers.vtex.com/vtex-rest-api/reference/ignoreprofiledata)\r\n- [GET - Cart installments](https://developers.vtex.com/vtex-rest-api/reference/getcartinstallments)\r\n- [POST - Add coupons to the cart](https://developers.vtex.com/vtex-rest-api/reference/addcoupons)\r\n\r\n\r\n## Cart attachments\r\n\r\nAllows merchants to obtain client profiles and add information to a given shopping cart.\r\n\r\n- [GET - Get client profile by email](https://developers.vtex.com/vtex-rest-api/reference/getclientprofilebyemail)\r\n- [POST - Add client profile](https://developers.vtex.com/vtex-rest-api/reference/addclientprofile)\r\n- [POST - Add shipping address and select delivery option](https://developers.vtex.com/vtex-rest-api/reference/addshippingaddress)\r\n- [POST - Add client preferences](https://developers.vtex.com/vtex-rest-api/reference/addclientpreferences)\r\n- [POST - Add marketing data](https://developers.vtex.com/vtex-rest-api/reference/addmarketingdata)\r\n- [POST - Add payment data](https://developers.vtex.com/vtex-rest-api/reference/addpaymentdata)\r\n- [POST - Add merchant context data](https://developers.vtex.com/vtex-rest-api/reference/addmerchantcontextdata)\r\n\r\n\r\n## Custom data\r\n\r\nAllows merchants to manage custom fields that were created by an app in their account.\r\n\r\n- [PUT - Set multiple custom field values](https://developers.vtex.com/vtex-rest-api/reference/setmultiplecustomfieldvalues)\r\n- [PUT - Set single custom field value](https://developers.vtex.com/vtex-rest-api/reference/setsinglecustomfieldvalue)\r\n- [DELETE - Remove single custom field value](https://developers.vtex.com/vtex-rest-api/reference/removesinglecustomfieldvalue)\r\n\r\n\r\n## Configuration\r\n\r\nAllows merchants to configure orderForm in the account and seller exchange on a given order.\r\n\r\n- [GET - Get orderForm configuration](https://developers.vtex.com/vtex-rest-api/reference/getorderformconfiguration)\r\n- [POST - Update orderForm configuration](https://developers.vtex.com/vtex-rest-api/reference/updateorderformconfiguration)\r\n- [GET - Get window to change seller](https://developers.vtex.com/vtex-rest-api/reference/getwindowtochangeseller)\r\n- [POST - Update window to change seller](https://developers.vtex.com/vtex-rest-api/reference/updatewindowtochangeseller)\r\n- [POST - Clear orderForm messages](https://developers.vtex.com/vtex-rest-api/reference/clearorderformmessages)\r\n\r\n\r\n## Fulfillment\r\n\r\nAllows merchants to obtain pickup points and address information.\r\n\r\n- [GET - List pickup points by location](https://developers.vtex.com/vtex-rest-api/reference/listpickupppointsbylocation)\r\n- [GET - Get address by postal code](https://developers.vtex.com/vtex-rest-api/reference/getaddressbypostalcode)\r\n\r\n\r\n## Order placement\r\n\r\nAllows merchants to place and process orders by creating a new cart or using an existing cart.\r\n\r\n- [POST - Place order from an existing cart](https://developers.vtex.com/vtex-rest-api/reference/placeorderfromexistingorderform)\r\n- [PUT - Place order](https://developers.vtex.com/vtex-rest-api/reference/placeorder)\r\n- [POST - Process order](https://developers.vtex.com/vtex-rest-api/reference/processorder)\r\n\r\n\r\n## Region\r\n\r\nAllows merchants to obtain a list of sellers serving a specific delivery region.\r\n\r\n- [GET - Get sellers by region or address](https://developers.vtex.com/vtex-rest-api/reference/getsellersbyregion)",
+        "title": "Checkout API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Checkout API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Checkout-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Checkout-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Checkout-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Checkout-API/1.0.json"
+    },
+    "vtex.local:Customer-Credit-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "With Customer Credit your store can enable **credit payments** through the checkout. You can also control **invoices** and the **credit limits** of your clients.\r\n\r\nLearn more about Customer Credit in our [Help Center article](https://help.vtex.com/en/tracks/customer-credit-getting-started--1hCRg21lXYy2seOKgqQ2CC/36grlQ69NK6OCuioeekyCs).\r\n\r\nAll requests need the **authorization header**.\r\n\r\nAdditionally, you can find more information on installment payments for an order in the `customData`  field found in the [Get Order](https://developers.vtex.com/docs/api-reference/orders-api#get-/api/oms/pvt/orders/-orderId-) endpoint of the Orders API. This includes the number of installments, amount and due dates.\r\n\r\nThis API allows two kinds of authorization:\r\n1. Authorization header containing the VTEX ID authentication token.\r\n2. VTEX Appkey and Apptoken headers.",
+        "title": "Customer Credit API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Customer Credit API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Customer-Credit-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Customer-Credit-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Customer-Credit-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Customer-Credit-API/1.0.json"
+    },
+    "vtex.local:GiftCard-Hub-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": ">ℹ️ Check the new [Payments onboarding guide](https://developers.vtex.com/vtex-rest-api/docs/payments-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Payments and is organized by focusing on the developer's journey.\r\n\r\nThe Gift Card Hub API allows interactions with all Gift Card providers registered to a store from a single point.\r\n\r\nGift Card providers are systems capable of providing cards to be used in the buying process.\r\n\r\nThe following is the sequence diagram that represents calls in the purchase closing process.\r\n![](https://cdn.jsdelivr.net/gh/vtexdocs/dev-portal-content@main/images/giftcard-hub-api-overview-0.png)\r\n\r\n**Checkout + Gateway**: Systems responsible for the sale and for processing orders and payments.\r\n\r\n**Gift Card Hub**: System responsible for managing multiple registered Gift Card providers for a store.\r\n\r\n**Gift Card Provider**: System responsible for providing the Gift Cards available to the user not closing a purchase. This system can be implemented by third parties.",
+        "title": "GiftCard Hub API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - GiftCard Hub API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "GiftCard-Hub-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/GiftCard-Hub-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/GiftCard-Hub-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:GiftCard-Hub-API/1.0.json"
+    },
+    "vtex.local:Giftcard-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": ">ℹ️ Onboarding guide\r\n>\r\n> Check the new [Payments onboarding guide](https://developers.vtex.com/docs/guides/payments-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Payments and is organized by focusing on the developer's journey.\r\n\r\nThe Gift Card is a payment method configured as a cash value associated with a client. It is used to grant a discount on the value of the order at the store.\r\n\r\n> ⚠ A Gift Card works as a **payment method**, not a promotion.",
+        "title": "GiftCard API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Giftcard API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Giftcard-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Giftcard-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Giftcard-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Giftcard-API/1.0.json"
+    },
+    "vtex.local:Headless-CMS-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\nThe VTEX Headless CMS is a no-code management system for storefront content. \nThat means you can store your content as structured data in a layer decoupled from the frontend and \nuse the VTEX Headless CMS to access and deliver your content to your storefront project.\n\nNotice that the VTEX Headless CMS typically works with **FastStore** projects only. In this case, you can use this API\nto fetch data using SSR (NextJS and Gatsby v4+) or SSG (NextJS).\n\n**Servers**\n- `https://{account}.myvtex.com/`\n- `https://{workspace}--{account}.myvtex.com/`\n\n**Server variables**\n- `accountName`: Name of your VTEX account.\n- `workspace`: Name of your VTEX workspace.\n",
+        "title": "VTEX Headless CMS",
+        "version": "0.31.2",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Headless CMS API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Headless-CMS-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Headless-CMS-API/0.31.2/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Headless-CMS-API/0.31.2/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Headless-CMS-API/0.31.2.json"
+    },
+    "vtex.local:Intelligent-Search-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "description": ">ℹ️ Onboarding guide\r\n>\r\n> Check the new [Search onboarding guide](https://developers.vtex.com/docs/guides/search-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Search and is organized by focusing on the developer's journey.\r\n\r\nThis API is from the [VTEX Intelligent Search](https://help.vtex.com/en/tracks/vtex-intelligent-search--19wrbB7nEQcmwzDPl1l4Cb/3qgT47zY08biLP3d5os3DG) solution, an alternative to the platform’s native search, as it assists the customer in their purchase journey, and it presents results since the first interaction with the search bar.\r\n\r\n## Index\r\n- [Get list of the 10 most searched terms](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/top_searches)\r\n- [Get list of suggested terms and attributes similar to the search term](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/autocomplete_suggestions)\r\n- [Get attempt of correction of a misspelled term](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/correction_search)\r\n- [Get list of banners registered for query](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/banners/-facets-)\r\n- [Get list of suggested terms similar to the search term](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/search_suggestions)\r\n- [Get list of products for a query](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/product_search/-facets-)\r\n- [Get list of the possible facets for a given query](https://developers.vtex.com/docs/api-reference/intelligent-search-api#get-/facets/-facets-)",
+        "license": {
+          "name": "MIT"
+        },
+        "title": "Intelligent Search API",
+        "version": "0.1.12",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Intelligent Search API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Intelligent-Search-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Intelligent-Search-API/0.1.12/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Intelligent-Search-API/0.1.12/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Intelligent-Search-API/0.1.12.json"
+    },
+    "vtex.local:License-Manager-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "## Welcome!\r\n\r\nThe License Manager API allows you to create users, modify their names and emails, as well as add and remove roles from users.\r\n\r\n### ATTRIBUTES\r\n\r\n|Attribute name | Description |\r\n|:------------|--------------|\r\n|accountName | Account name in VTEX License Manager |\r\n|environment | Environment on which you want to run the query e.g. vtexcommercestable |\r\n|userId      | Unique user identification string |\r\n|roleId      | Integer that represents a role, can be looked up on the License Manager UI |",
+        "title": "License Manager API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - License Manager API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "License-Manager-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/License-Manager-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/License-Manager-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:License-Manager-API/1.0.json"
+    },
+    "vtex.local:Logistics-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\n\r\n>Check the [Fulfillment onboarding guide](https://developers.vtex.com/docs/guides/fulfillment). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about fulfillment and is organized by focusing on the developer's journey.\r\n\r\nLogistics or fulfillment is the module responsible for shipping calculation and inventory management. \r\n\r\nThe variable `{{environment}}` can be filled with `vtexcommercestable` or `vtexcommercebeta`, depending on the environment you want to test.",
+        "title": "Logistics API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Logistics API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Logistics-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Logistics-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Logistics-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Logistics-API/1.0.json"
+    },
+    "vtex.local:Marketplace-APIs": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\nThe **Marketplace API** enables marketplaces and sellers hosted on VTEX to perform their collaborative operations.  \r\n\r\n>⚠️ The marketplace must [create an appKey and appToken](https://developers.vtex.com/docs/guides/getting-started-authentication) for each non-VTEX seller that will use this API.\r\n\r\n## Index\r\n\r\n### Notification\r\n\r\nEndpoints used by sellers to notify marketplaces that the price or inventory language has changed for one of their SKUs.\r\n\r\n`POST` [Notify marketplace of price update](https://developers.vtex.com/docs/api-reference/marketplace-apis#post-/notificator/-sellerId-/changenotification/-skuId-/price)\r\n\r\n`POST` [Notify marketplace of inventory update](https://developers.vtex.com/docs/api-reference/marketplace-apis#post-/notificator/-sellerId-/changenotification/-skuId-/inventory)\r\n\r\n\r\n### Suggestions\r\n\r\n#### Get Suggestions\r\n\r\nSearch and filter all suggestions using specific criteria.\r\n\r\n`GET` [Get all SKU Suggestions](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions)\r\n\r\n`GET` [Get SKU Suggestion by ID](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerSkuId-)\r\n\r\n\r\n#### Manage Suggestions\r\n\r\nSend or delete SKU suggestions from the seller to marketplace.\r\n\r\n`PUT` [Send SKU Suggestion](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/-sellerId-/-sellerSkuId-)\r\n\r\n`DELETE` [Delete SKU Suggestion](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#delete-/suggestions/-sellerId-/-sellerSkuId-)\r\n\r\n\r\n#### Get Versions\r\n\r\nSearch and filter all versions of suggestions, using specific criteria.\r\n\r\n`GET` [Get all versions](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerskuid-/versions)\r\n\r\n`GET` [Get version by ID](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerskuid-/versions/-version-)\r\n\r\n\r\n#### Match Received SKUs\r\n\r\nMatch SKU suggestions received in the marketplace.\r\n\r\n`PUT` [Match Received SKUs individually](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/-sellerId-/-sellerskuid-/versions/-version-/matches/-matchid-)\r\n\r\n`PUT` [Match Multiple Received SKUs](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/matches/action/-actionName-)\r\n\r\n\r\n#### SKU Approval Settings\r\n\r\nAllows marketplaces to configure rules for automatically and manually approving SKUs received from sellers.\r\n\r\n`GET`[Get autoApprove Status in Account Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration/autoapproval/toggle)  \r\n\r\n`PUT`[Activate autoApprove in Marketplace's Account](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/autoapproval/toggle)  \r\n\r\n`GET`[Get Account's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration)\r\n\r\n`PUT`[Save Account's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration)\r\n\r\n`GET`[Get Seller's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration/seller/-sellerId-)\r\n\r\n`PUT`[Save Seller's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/seller/-sellerId-)\r\n\r\n`PUT`[Activate autoApprove Setting for a Seller](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/autoapproval/toggle/seller/-sellerId-)   \r\n\r\n\r\n### Matched Offers\r\n\r\nOffers are seller products and SKUs that were sent to the marketplace, and already have their price and inventory level configured.\r\n\r\n`GET`[Get Matched Offers List](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/offers)\r\n\r\n`GET`[Get Matched Offer's Data by SKU ID](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/product/-productId-/sku/-skuId-)  \r\n\r\n`GET`[Get Matched Offer's Data by Product ID](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/product/-productId-)\r\n",
+        "title": "Marketplace API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Marketplace APIs.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Marketplace-APIs",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Marketplace-APIs/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Marketplace-APIs/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Marketplace-APIs/1.0.json"
+    },
+    "vtex.local:Marketplace-APIs-": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\nThe **Marketplace API** enables marketplaces and sellers hosted on VTEX to perform their collaborative operations.  \r\n\r\n>⚠️ The marketplace must [create an appKey and appToken](https://developers.vtex.com/docs/guides/getting-started-authentication) for each non-VTEX seller that will use this API.\r\n\r\n## Index\r\n\r\n### Notification\r\n\r\nEndpoints used by sellers to notify marketplaces that the price or inventory language has changed for one of their SKUs.\r\n\r\n`POST` [Notify marketplace of price update](https://developers.vtex.com/docs/api-reference/marketplace-apis#post-/notificator/-sellerId-/changenotification/-skuId-/price)\r\n\r\n`POST` [Notify marketplace of inventory update](https://developers.vtex.com/docs/api-reference/marketplace-apis#post-/notificator/-sellerId-/changenotification/-skuId-/inventory)\r\n\r\n\r\n### Suggestions\r\n\r\n#### Get Suggestions\r\n\r\nSearch and filter all suggestions using specific criteria.\r\n\r\n`GET` [Get all SKU Suggestions](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions)\r\n\r\n`GET` [Get SKU Suggestion by ID](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerSkuId-)\r\n\r\n\r\n#### Manage Suggestions\r\n\r\nSend or delete SKU suggestions from the seller to marketplace.\r\n\r\n`PUT` [Send SKU Suggestion](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/-sellerId-/-sellerSkuId-)\r\n\r\n`DELETE` [Delete SKU Suggestion](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#delete-/suggestions/-sellerId-/-sellerSkuId-)\r\n\r\n\r\n#### Get Versions\r\n\r\nSearch and filter all versions of suggestions, using specific criteria.\r\n\r\n`GET` [Get all versions](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerskuid-/versions)\r\n\r\n`GET` [Get version by ID](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerskuid-/versions/-version-)\r\n\r\n\r\n#### Match Received SKUs\r\n\r\nMatch SKU suggestions received in the marketplace.\r\n\r\n`PUT` [Match Received SKUs individually](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/-sellerId-/-sellerskuid-/versions/-version-/matches/-matchid-)\r\n\r\n`PUT` [Match Multiple Received SKUs](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/matches/action/-actionName-)\r\n\r\n\r\n#### SKU Approval Settings\r\n\r\nAllows marketplaces to configure rules for automatically and manually approving SKUs received from sellers.\r\n\r\n`GET`[Get autoApprove Status in Account Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration/autoapproval/toggle)  \r\n\r\n`PUT`[Activate autoApprove in Marketplace's Account](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/autoapproval/toggle)  \r\n\r\n`GET`[Get Account's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration)\r\n\r\n`PUT`[Save Account's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration)\r\n\r\n`GET`[Get Seller's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration/seller/-sellerId-)\r\n\r\n`PUT`[Save Seller's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/seller/-sellerId-)\r\n\r\n`PUT`[Activate autoApprove Setting for a Seller](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/autoapproval/toggle/seller/-sellerId-)   \r\n\r\n\r\n### Matched Offers\r\n\r\nOffers are seller products and SKUs that were sent to the marketplace, and already have their price and inventory level configured.\r\n\r\n`GET`[Get Matched Offers List](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/offers)\r\n\r\n`GET`[Get Matched Offer's Data by SKU ID](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/product/-productId-/sku/-skuId-)  \r\n\r\n`GET`[Get Matched Offer's Data by Product ID](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/product/-productId-)\r\n",
+        "title": "Suggestions",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Marketplace APIs - Suggestions.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Marketplace-APIs-",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Marketplace-APIs-/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Marketplace-APIs-/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Marketplace-APIs-/1.0.json"
+    },
+    "vtex.local:Marketplace-Protocol": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\nThe _Marketplace Protocol_ is a set of API requests and definitions to help you integrate external sellers into a VTEX marketplace as well as external marketplaces into VTEX sellers.\r\n\r\n## External Seller\r\n\r\nHere you will find the endpoints involved in the integration between a VTEX marketplace and an external seller. Note that some of these requests are typically sent by the seller while others are received.\r\n\r\n| **Request** | **From** | **To** |\r\n|-|-|-|\r\n| [Fulfillment simulation](https://developers.vtex.com/vtex-rest-api/reference/fulfillment-simulation) | Marketplace | Seller |\r\n| [Order placement](https://developers.vtex.com/vtex-rest-api/reference/order-placement) | Marketplace | Seller |\r\n| [Authorize fulfillment](https://developers.vtex.com/vtex-rest-api/reference/authorize-fulfillment) | Marketplace | Seller |\r\n| [Marketplace order cancellation](https://developers.vtex.com/vtex-rest-api/reference/marketplace-order-cancellation) | Marketplace | Seller |\r\n| [Send invoice](https://developers.vtex.com/vtex-rest-api/reference/send-invoice) | Seller | Marketplace |\r\n| [Send tracking information](https://developers.vtex.com/vtex-rest-api/reference/send-tracking-information) | Seller      | Marketplace |\r\n| [Update tracking status](https://developers.vtex.com/vtex-rest-api/reference/update-tracking-status) | Seller | Marketplace |\r\n| [Cancel order in marketplace](https://developers.vtex.com/vtex-rest-api/reference/cancel-order-in-marketplace) | Seller | Marketplace |\r\n\r\nFor a detailed explanation of the steps required to develop a custom connector to sell products from an external seller in your storefront, check out our complete [External Seller Integration Guide](https://developers.vtex.com/docs/guides/external-seller-integration-guide).\r\n\r\n\r\n## External Marketplace\r\n\r\nIn this section, you will find the endpoints involved in the VTEX integration between an external marketplace and a VTEX seller.\r\n\r\n\r\n| **Request** | **From** | **To** |\r\n|-|-|-|\r\n| [VTEX Mapper Registration](https://developers.vtex.com/vtex-rest-api/reference/vtex-mapper-registration) | External marketplace | VTEX system |\r\n| [Send Category Mapping to VTEX Mapper](https://developers.vtex.com/vtex-rest-api/reference/send-category-mapping-to-vtex-mapper) |  External marketplace | VTEX system |\r\n| [Authorize fulfillment](https://developers.vtex.com/vtex-rest-api/reference/authorize-fulfillment) | Marketplace | Seller |\r\n| [Place fulfillment order](https://developers.vtex.com/vtex-rest-api/reference/place-fulfillment-order)   | External marketplace | VTEX Seller |\r\n| [Authorize dispatch for fulfillment order](https://developers.vtex.com/vtex-rest-api/reference/authorize-dispatch-for-fulfillment-order) | External marketplace | VTEX Seller |\r\n\r\n\r\nFor a detailed explanation of the steps required to develop a custom connector to become an external marketplace for VTEX sellers, check out our complete [External Marketplace Integration Guide](https://developers.vtex.com/docs/guides/external-marketplace-integration-guide).",
+        "title": "Marketplace Protocol",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Marketplace Protocol.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Marketplace-Protocol",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Marketplace-Protocol/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Marketplace-Protocol/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Marketplace-Protocol/1.0.json"
+    },
+    "vtex.local:Master-Data-API-": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "# ATTENTION: **This version isn't compliant with data entities of old version (e.g. CL and AD). It's possible to use this configuration only to new data entities.**\r\n\r\n\r\n## Welcome!\r\n\r\nVTEX Master Data is an easy-to-use, secure, fast, scalable and extensible repository. On it you can create your own Entities, store data and consult directly from the storefront or use it to store info for some external integration.\r\n\r\nThere are internal VTEX modules that use VTEX Master Data as data repository. We have the VTEX Customer Service, VTEX Profile System and VTEX InStore, for example. It is also used by other internal services.\r\n\r\nThere are two ways to use Master Data:\r\n\r\n1. Directly from the storefront\r\n2. External integration\r\n\r\n### Directly from the storefront\r\n\r\nIf your scenario is to be used inside the storefront, be aware of the following observations:\r\n\r\n1. Use the storefront host to query or store information to avoid **CORS**;\r\n2. Configure which information should be public and which shouldn't, inside the JSON Schema of the Data Entity;\r\n3. Do not create query loops (the storefront may be affected with Throttling and apis may be turned off as a security protection);\r\n4. Never add via JS any type of authentication key (x-vtex-api-appkey or x-vtex-api-apptoken);\r\n\r\n**It's important to avoid CORS using the relative path**\r\n\r\n### External Integration\r\n\r\nIf your scenario is to perform external integration, such as migrating client data from another service, be aware of the following observations:\r\n\r\n1. Use the host ```{{accountName}}.vtexcommercestable.com.br```;\r\n2. Use the authentication keys (x-vtex-api-appkey ou x-vtex-api-apptoken);\r\n\r\n### Most used attributes listed here\r\n\r\n| Name | Description |\r\n| -------- | -------- |\r\n| accountName | Account name in VTEX License Manager |\r\n| name | Data Entity name |\r\n| schema | JSON Schema of a Data Entity |\r\n| id | Identifier of a document |\r\n| x-vtex-api-appKey | User key |\r\n| x-vtex-api-appToken | User token |",
+        "title": "Master Data API - v2",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Master Data API - v2.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Master-Data-API-",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Master-Data-API-/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Master-Data-API-/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Master-Data-API-/1.0.json"
+    },
+    "vtex.local:MasterData-API-": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "",
+        "title": "MasterData API - v1",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - MasterData API - v10.2.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "MasterData-API-",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/MasterData-API-/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/MasterData-API-/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:MasterData-API-/1.0.json"
+    },
+    "vtex.local:Message-Center-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "license": {
+          "name": "MIT"
+        },
+        "title": "Message Center API",
+        "version": "1.0.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Message Center API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Message-Center-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Message-Center-API/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Message-Center-API/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Message-Center-API/1.0.0.json"
+    },
+    "vtex.local:Orders-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\n\r\n>Check the new [Orders onboarding guide](https://developers.vtex.com/docs/guides/orders-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Orders and is organized by focusing on the developer's journey.\r\n\r\nReceive, process, and manage every order in your store through our Order Management API.",
+        "title": "Orders API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Orders API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Orders-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Orders-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Orders-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Orders-API/1.0.json"
+    },
+    "vtex.local:Orders-API-(PII-version)": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "Endpoints that deal with order management. New version of the orders API.",
+        "title": "Orders API (PII version)",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Orders API (PII version).json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Orders-API-(PII-version)",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Orders-API-(PII-version)/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Orders-API-(PII-version)/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Orders-API-(PII-version)/1.0.json"
+    },
+    "vtex.local:Payments-Gateway-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": ">ℹ️ Onboarding guide\r\n>\r\n> Check the new [Payments onboarding guide](https://developers.vtex.com/docs/guides/payments-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Payments and is organized by focusing on the developer's journey.\r\n\r\nThe Payments Gateway API allows you to get payment data and process your store's transactions.",
+        "title": "Payments Gateway API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Payments Gateway API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Payments-Gateway-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Payments-Gateway-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Payments-Gateway-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Payments-Gateway-API/1.0.json"
+    },
+    "vtex.local:Policies-System-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\n This API will create promotion alarms when selling products with undesired prices and promotions. It will create conditions that will check if the prices and the promotions are correct. If not, the system will alarm the store with information about the product sold at unexpected prices.\r\n\r\n ## Index\r\n\r\n `GET` [Get Policy List](https://developers.vtex.com/docs/api-reference/policies-system-api#get-/api/policy-engine/policies)\r\n `POST` [Evaluate Policies](https://developers.vtex.com/docs/api-reference/policies-system-api#post-/api/policy-engine/evaluate)\r\n `GET` [Get Policy by ID](https://developers.vtex.com/docs/api-reference/policies-system-api#get-/api/policy-engine/policies/-id-)\r\n `POST` [Create Policy](https://developers.vtex.com/docs/api-reference/policies-system-api#post-/api/policy-engine/policies/-id-)\r\n `PUT` [Update Policy](https://developers.vtex.com/docs/api-reference/policies-system-api#put-/api/policy-engine/policies/-id-)\r\n `DELETE` [Delete Policy by ID](https://developers.vtex.com/docs/api-reference/policies-system-api#delete-/api/policy-engine/policies/-id-)",
+        "title": "Policies System API",
+        "version": "1.0.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Policies System API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Policies-System-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Policies-System-API/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Policies-System-API/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Policies-System-API/1.0.0.json"
+    },
+    "vtex.local:Price-Simulations": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\n> Check the new [Pricing onboarding guide](https://developers.vtex.com/docs/guides/pricing-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Pricing and is organized by focusing on the developer's journey\r\n\r\nThe Price Simulations API allows you to configure custom price selectors for B2B stores, based on the context set by the [Orders Configuration app](https://developers.vtex.com/docs/guides/vtex-order-configuration).\r\n\r\n## Custom Prices\r\n\r\nIn this section, you can create a specific shopping scenario with the criteria you want. For explaining purpose, we used the `orderType` and `state` as default values, but it can be others too.\r\n\r\n`GET` [Get custom prices schema](https://developers.vtex.com/docs/api-reference/price-simulations#get-/_v/custom-prices/session/schema)\r\n`POST` [Create or Update custom prices schema](https://developers.vtex.com/docs/api-reference/price-simulations#post-/_v/custom-prices/session/schema)\r\n\r\n## Session Management\r\n\r\nEvery time you edit a configuration value set on the Custom Prices session, you must use this endpoint to update the Order Configuration.\r\n\r\n`POST` [Update Order Configuration](https://developers.vtex.com/docs/api-reference/price-simulations#post-/sessions/)\r\n\r\n\r\n## Price Association\r\n\r\nUse these routes to associate a shopping scenario, created at the Custom Price session, to a specific price table.\r\n\r\n`GET` [Get price association by ID](https://developers.vtex.com/docs/api-reference/price-simulations#get-/_v/custom-prices/rules/-priceAssociationId-)\r\n`POST` [Create price association](https://developers.vtex.com/docs/api-reference/price-simulations#post-/_v/custom-prices/rules)\r\n`PUT` [Update price association by ID](https://developers.vtex.com/docs/api-reference/price-simulations#put-/_v/custom-prices/rules/-priceAssociationId-)\r\n`DELETE` [Disassociate price association by ID](https://developers.vtex.com/docs/api-reference/price-simulations#delete-/_v/custom-prices/rules/-priceAssociationId-)",
+        "title": "Price Simulations API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Price Simulations.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Price-Simulations",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Price-Simulations/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Price-Simulations/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Price-Simulations/1.0.json"
+    },
+    "vtex.local:Pricing-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\n> Check the new [Pricing onboarding guide](https://developers.vtex.com/vtex-rest-api/docs/pricing-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Pricing and is organized by focusing on the developer's journey.\r\n\r\nPricing is the VTEX module responsible for the SKU's price list. At this module we have the base price of each SKU, some optional fixed prices by trade policy, and some rules that can be applied to generate dynamically different final prices according to the purchase context and the trade policy. The variables used in this collection are:\r\n\r\n  * **{{accountName}}** = You VTEX account name.\r\n  * **{{tradePolicyId}}** = Current Trade Policy ID.\r\n  * **{{itemId}}** = SKU ID.\r\n  * **{{X-VTEX-API-AppKey}}** and **{{X-VTEX-API-AppToken}}** = Credentials.\r\n\r\nYou can get more information about how to use this module and its business logic at [VTEX Help](http://help.vtex.com).\r\n\r\n## Rate Limits\r\n\r\n### Limits per route\r\n\r\n- `GET`:  routes are not rate limited at the moment\r\n- `PUT or POST`: `40 requests/second/account` in any **price insert/update route** with 1000 *Burst Credits*\r\n- `DELETE`: `16 requests/second/account` in any **price deletion route**, with 300 *Burst Credits*.\r\n\r\n### What are Burst Credits?\r\n\r\nIn case the account exceeds the limit frequency for a  `Rate Limiter` (for instance, when one account makes `41 requests/second` in any `price insert/update route`), we decrease from the *Burst Credit* count the exceeding (in this example, *1 Credit*).\r\n\r\nIn the event of the *Burst Credits* reaching **0 (zero)**, the request is blocked with a `Status 429` response.\r\n\r\nThe credits fill up over time when the route is not being used, in the same rate as the route's `Rate Limiter`. In our example, for each second not sending a **PUT or POST request**, we increase *40 Burst Credits* to this `Rate Limiter`\r\n\r\n### New Response Headers\r\n\r\nIn the response headers of any request to Pricing v2 there are some new headers indicating the current status of the Rate Limiting.\r\nThis information may be useful to evaluate the ideal frequency to send requests to a route, and when to send a new request in the event of reaching a Rate Limit.\r\n\r\n- `Ratelimit-Limit` - Total *Burst Credits* offered to a route\r\n- `Ratelimit-Remaining` - How many *Burst Credits* are still available to use\r\n- `Ratelimit-Reset` - How long (in seconds) it will take to the *Burst Credits* to fill up completely (It will fill up to the `Ratelimit-Limit`)\r\n- `Retry-After` - Indicates how many seconds you will need to wait until the `Rate Limiter` accepts a new request to this route again. If this header response exists, this means your current request has been rate limited and has not been processed.\r\n\r\n### How to integrate with Pricing v2 considering our Rate Limits\r\n\r\nIntegrate considering the limits of **requests/route/account** specified in the [*Limits per route*](#rate-limits) section, avoiding to surpass this frequency.\r\n\r\nIf you happen to be Rate Limited, wait the time in seconds specified in `Retry-After` before making another request to the service, and reduce the rate of requests per second that your integration is making.",
+        "title": "Pricing API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Pricing API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Pricing-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Pricing-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Pricing-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Pricing-API/1.0.json"
+    },
+    "vtex.local:Pricing-Hub": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "> This feature is in closed beta, available only for selected customers. If you have any questions, contact our [Support](https://support.vtex.com/hc/en-us/requests). \r\n\r\n In the B2B scenario, it is common for stores to have personalized prices per customer and complex pricing systems that require external integrations. Pricing Hub is a system developed for the B2B context that works as an intermediary between VTEX and external pricing systems.\r\n\r\n In VTEX, B2B stores have the option to use our internal pricing system or an external one. If the store chooses to operate with an external pricing system, Pricing Hub will query an external price calculation API. The external API should then respond with the price for all items in the shopping cart according to its predefined tax rules.\r\n\r\n![Pricing hub protocal diagram](https://user-images.githubusercontent.com/77292838/211634260-e4f7a516-91df-416e-ab43-d9c79d56bc91.png)\r\n\r\n## Implementation\r\n\r\nTo connect with external pricing systems using Pricing Hub, it is necessary to build a VTEX IO middleware app. We offer two reference implementation templates to simplify this process:\r\n\r\n- [C# template](https://github.com/vtex-apps/external-prices-app)\r\n- [Node template](https://github.com/vtex-apps/external-prices-node)\r\n\r\nRead the documentation on each repository to learn more about the required steps to use and customize the app.\r\n\r\n> The app used by Pricing Hub to connect must be a `major 0`. \r\n\r\n## Specifications\r\n\r\nSee below all the specifications of the request and the response expected when communicating with Pricing Hub.\r\n\r\n### Price calculation request\r\n\r\nThe external prices calculation tool must provide an endpoint that will receive a `POST` [Get Prices](https://developers.vtex.com/docs/api-reference/pricing-hub#post-/api/pricing-hub/prices) request. This route retrieves and applies prices for the items that are passed in the request. Pricing Hub will select the pricing method that will be used for each item and will fetch their respective price from the selected pricing method.\r\n\r\n>⚠️ Responses from Pricing Hub tend to have a greater delay when compared to other VTEX systems. That is expected, however, due to the complexity of its nested requests. The timeout for this request is 900 milliseconds.\r\n\r\nIn this request, Pricing Hub provides a body in a specific format, exemplified below. This means that either the endpoint must be prepared to receive this body format, or the app must contain a parser to adapt it to the correct format.\r\n\r\n#### Request body example\r\n\r\n```json\r\n{\r\n    \"item\": \r\n        {\r\n            \"index\": 0,\r\n            \"skuId\": \"880011\",\r\n            \"quantity\": 1\r\n        },\r\n    \"context\":{\r\n        \"email\": \"john@email.com\"\r\n    }\r\n}\r\n```\r\n\r\nThe request body should have the following properties:\r\n\r\n| **Attribute** | **Type** | **Description**                                                                                                                                                                                          |\r\n|---------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\r\n| `item`        | object   | The item whose price is supposed to be fetched by Pricing Hub.                                                                                                                                           |\r\n| ↪ `index`     | integer  | This is the index of the item at Checkout's cart. It has to be unique in the items array.                                                                                                                |\r\n| ↪ `skuId`     | string   | This is the SKU ID of the item that will be priced.                                                                                                                                                      |\r\n| ↪ `quantity`  | integer  | This is the amount of items that will be priced. It is possible to have a volume discount for many repeated items. Hence, the price may not be the quantity of the item multiplied by the unitary price. |\r\n| `context`     | object   | The object that contains the context to inform the query.                                                                                                                                                |\r\n| ↪ `email`     | string   | The customer's email address. If there is no value, use an empty string.                                                                                                                                 |\r\n\r\n### External prices provider response\r\n\r\nIn response to the request sent by Pricing Hub, we expect an outcome in the following format:\r\n\r\n```json\r\n{\r\n    \"item\": {\r\n        \"price\": 54035,\r\n        \"priceTables\": \"special\",\r\n        \"index\": 0,\r\n        \"skuId\": \"880011\",\r\n        \"listPrice\": 54035,\r\n        \"costPrice\": 50000,\r\n        \"sellingPrice\": 54035,\r\n        \"priceValidUntil\": \"2023-01-27T20:29:57Z\",\r\n        \"tradePolicyId\": \"special\"\r\n    }\r\n}\r\n```\r\n\r\nThe response should have the following properties:\r\n\r\n| **Attribute**       | **Type** | **Description**                                                                                                                                        |\r\n|---------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|\r\n| `item`              | object   | The object that contains the price data.                                                                                                               |\r\n| ↪ `price`           | integer  | The price returned by the pricing API that was used by Pricing-Hub. It is measured in cents, so 5000 means 50,00 in local currency.                    |\r\n| ↪ `priceTables`     | string   | The price table that was used to price the item.                                                                                                       |\r\n| ↪ `index`           | integer  | The same index referring to Checkout's cart that was passed to the API.                                                                                |\r\n| ↪ `skuId`           | string   | The same SKU ID that was passed to the API.                                                                                                            |\r\n| ↪ `listPrice`       | integer  | The list price returned by the pricing API that was used by Pricing Hub. It is measured in cents, so 5000 means 50,00 in local currency.               |\r\n| ↪ `costPrice`       | integer  | The cost price returned by the pricing API that was used by Pricing-Hub. It is measured in cents, so 5000 means 50,00 in local currency.               |\r\n| ↪ `sellingPrice`    | integer  | The computed price before applying coupons, taxes or promotions.                                                                                       |\r\n| ↪ `priceValidUntil` | string   | The moment up until the price is valid. After that moment, it will be necessary to call the pricing API again. The format of the string is in RFC3339. |\r\n| ↪ `tradePolicyId`   | string   | Trade Policy ID.                                                                                                                                       |\r\n\r\n## Index - Pricing Hub API\r\n\r\n`POST` [Get Prices](https://developers.vtex.com/docs/api-reference/pricing-hub#post-/api/pricing-hub/prices)\r\n`PUT` [Configure External Price Source](https://developers.vtex.com/docs/api-reference/pricing-hub#put-/config)\r\n",
+        "title": "Pricing Hub",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Pricing Hub.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Pricing-Hub",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Pricing-Hub/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Pricing-Hub/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Pricing-Hub/1.0.json"
+    },
+    "vtex.local:Profile-System": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "Create shopper profiles and manage their information.",
+        "title": "Profile System",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Profile System.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Profile-System",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Profile-System/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Profile-System/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Profile-System/1.0.json"
+    },
+    "vtex.local:Promotions-": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\n> Check the new [Promotions onboarding guide](https://developers.vtex.com/vtex-rest-api/docs/promotions-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Promotions and is organized by focusing on the developer's journey.\r\n\r\n The Promotions & Taxes API allows you to manage and retrieve all promotions, coupons and tax rules from your VTEX store.\r\n\r\n ## Index\r\n\r\n ### Coupons \r\n`POST` [Create multiple coupons](https://developers.vtex.com/vtex-rest-api/reference/post_api-rnb-pvt-multiple-coupons) \r\n`POST` [Create coupon](https://developers.vtex.com/vtex-rest-api/reference/post_api-rnb-pvt-coupon) \r\n`GET` [Get coupon by coupon code](https://developers.vtex.com/vtex-rest-api/reference/getbycouponcode) \r\n`GET` [Get archived coupon by coupon code](https://developers.vtex.com/vtex-rest-api/reference/getarchivedbycouponcode) \r\n`POST` [Archive coupon by coupon code](https://developers.vtex.com/vtex-rest-api/reference/archivebycouponcode) \r\n`POST` [Update coupon](https://developers.vtex.com/vtex-rest-api/reference/update) \r\n`GET` [Get all coupons](https://developers.vtex.com/vtex-rest-api/reference/getall) \r\n`POST` [Coupon Massive Generation](https://developers.vtex.com/vtex-rest-api/reference/massivegeneration) \r\n`GET` [Get coupon usage](https://developers.vtex.com/vtex-rest-api/reference/getusage) \r\n`POST` [Unarchive coupon by coupon code](https://developers.vtex.com/vtex-rest-api/reference/unarchivebycouponcode) \r\n\r\n### Promotions and Taxes \r\n`GET` [Get All Promotions](https://developers.vtex.com/vtex-rest-api/reference/getallbenefits) \r\n`GET` [Get All Taxes](https://developers.vtex.com/vtex-rest-api/reference/getalltaxes) \r\n`GET` [Get Promotion or Tax By ID](https://developers.vtex.com/vtex-rest-api/reference/getcalculatorconfigurationbyid) \r\n`POST` [Create or Update Promotion or Tax](https://developers.vtex.com/vtex-rest-api/reference/createorupdatecalculatorconfiguration) \r\n`POST` [Create Multiple SKU Promotion](https://developers.vtex.com/vtex-rest-api/reference/post_api-rnb-pvt-import-calculatorconfiguration) \r\n`PUT` [Update Multiple SKU Promotion](https://developers.vtex.com/vtex-rest-api/reference/put_api-rnb-pvt-import-calculatorconfiguration-promotionid) \r\n`POST` [Archive Promotion or Tax](https://developers.vtex.com/vtex-rest-api/reference/archivepromotion-1) \r\n`POST` [Unarchive Promotion or Tax](https://developers.vtex.com/vtex-rest-api/reference/unarchivepromotion-1) \r\n`GET` [List archived Promotions](https://developers.vtex.com/vtex-rest-api/reference/getarchivedpromotions) \r\n`GET` [List archived Taxes](https://developers.vtex.com/vtex-rest-api/reference/getarchivedtaxes) \r\n\r\n\r\n### Campaign Audiences \r\n`GET` [Get campaign audience configuration](https://developers.vtex.com/vtex-rest-api/reference/getcampaignconfiguration) \r\n`POST` [Create campaign audience](https://developers.vtex.com/vtex-rest-api/reference/setcampaignconfiguration)",
+        "title": "Promotions & Taxes API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Promotions & Taxes API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Promotions-",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Promotions-/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Promotions-/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Promotions-/1.0.json"
+    },
+    "vtex.local:Recurrence-(v1-": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "",
+        "title": "Subscription (v1 - deprecated)",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Recurrence (v1 - deprecated).json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Recurrence-(v1-",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Recurrence-(v1-/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Recurrence-(v1-/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Recurrence-(v1-/1.0.json"
+    },
+    "vtex.local:Reviews-and-Ratings-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\nReviews & Ratings is a [VTEX IO native solution](https://developers.vtex.com/vtex-developer-docs/docs/vtex-reviews-and-ratings) that allows shoppers to submit reviews and ratings for products, as well as see them while navigating the store.\r\n\r\n## Rating\r\n\r\n- [Get Product Rating](https://developers.vtex.com/vtex-rest-api/reference/getproductrating)\r\n\r\n## Review\r\n\r\n- [Get Review by Review ID](https://developers.vtex.com/vtex-rest-api/reference/getreviewbyreviewid)\r\n- [Delete Review](https://developers.vtex.com/vtex-rest-api/reference/deletereview)\r\n- [Update a Review](https://developers.vtex.com/vtex-rest-api/reference/editreview)\r\n- [Get a list of Reviews](https://developers.vtex.com/vtex-rest-api/reference/getalistofreviews)\r\n- [Create Multiple Reviews](https://developers.vtex.com/vtex-rest-api/reference/savemultiplereviews)\r\n- [Delete Multiple Reviews](https://developers.vtex.com/vtex-rest-api/reference/deletemultiplereviews)\r\n- [Create a Review](https://developers.vtex.com/vtex-rest-api/reference/savereview)",
+        "title": "Reviews and Ratings API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Reviews and Ratings API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Reviews-and-Ratings-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Reviews-and-Ratings-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Reviews-and-Ratings-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Reviews-and-Ratings-API/1.0.json"
+    },
+    "vtex.local:SKU-Bindings-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "title": "SKU Bindings API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - SKU Bindings API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "SKU-Bindings-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/SKU-Bindings-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/SKU-Bindings-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:SKU-Bindings-API/1.0.json"
+    },
+    "vtex.local:Search-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\n> Check the new [Search onboarding guide](https://developers.vtex.com/vtex-rest-api/docs/search-onboarding). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Search and is organized by focusing on the developer's journey.\r\n\r\nThis API lets you search and sort products in the Catalog using Fulltext, Category and Brand search terms. \r\n\r\nRetrieve product data to create custom searches and product shelves.",
+        "title": "Legacy Search API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Search API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Search-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Search-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Search-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Search-API/1.0.json"
+    },
+    "vtex.local:Session-Manager-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "This documentation goes in detail how to interact with Session Manager's API. For a more top-level approach, check the [design documentation](https://help.vtex.com/tutorial/using-session-manager-to-track-browsing-sessions-in-vtex-stores--1pA0tqsD4BFnJYhQ7ORQBd).",
+        "title": "Session Manager API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Session Manager API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Session-Manager-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Session-Manager-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Session-Manager-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Session-Manager-API/1.0.json"
+    },
+    "vtex.local:Subscriptions-API-(v2)": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "VTEX Subscriptions REST API Documentation\n\nThis documentation describes the available REST APIs for VTEX Subscription System.\n\nWith Subscriptions you can set up regularly scheduled deliveries.\n\nAll requests need authorization (VTEX Id authentication token or VTEX Appkey and Apptoken headers)",
+        "title": "Subscriptions API (v2 - DEPRECATED)",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Subscriptions API (v2).json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Subscriptions-API-(v2)",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Subscriptions-API-(v2)/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Subscriptions-API-(v2)/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Subscriptions-API-(v2)/1.0.json"
+    },
+    "vtex.local:Subscriptions-API-(v3)": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "\r\nA **Subscription** is a list of items (SKUs) tied to certain recurring purchase settings:\r\n\r\n- User profile\r\n- Address\r\n- Payment method\r\n- Frequency\r\n- Cycle\r\n\r\nOnce you have [configured subscriptions](https://help.vtex.com/tutorial/how-to-configure-subscriptions%20--1FA9dfE7vJqxBna9Nft5Sj) in your store, the Subscriptions API allows you to create, manage and monitor your customers' subscriptions.\r\n\r\n![image](https://user-images.githubusercontent.com/77292838/213024675-9407863b-0c55-4282-9442-306352716abe.png)\r\n\r\nTo read more about the Subscriptions feature, check our article [How Subscription works](https://help.vtex.com/tutorial/how-subscriptions-work--frequentlyAskedQuestions_4453).",
+        "title": "Subscriptions API (v3)",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Subscriptions API (v3).json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "Subscriptions-API-(v3)",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Subscriptions-API-(v3)/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Subscriptions-API-(v3)/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:Subscriptions-API-(v3)/1.0.json"
+    },
+    "vtex.local:VTEX-Do-API": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "contact": {},
+        "description": "VTEX DO is a task management system for authorized users to process orders. It is possible to control notes, and create, update, list, and retrieve tasks.",
+        "title": "VTEX Do API",
+        "version": "1.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - VTEX Do API.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "VTEX-Do-API",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/VTEX-Do-API/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/VTEX-Do-API/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:VTEX-Do-API/1.0.json"
+    },
+    "vtex.local:VTEX_TEMPLATE": {
+      "added": "2023-03-03T14:11:52.034Z",
+      "info": {
+        "license": {
+          "name": "MIT"
+        },
+        "title": "Pets Api",
+        "version": "1.0.0",
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX_TEMPLATE.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "vtex.local",
+        "x-serviceName": "VTEX_TEMPLATE",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2023-03-03T14:11:52.034Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/VTEX_TEMPLATE/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/VTEX_TEMPLATE/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/vtex.local:VTEX_TEMPLATE/1.0.0.json"
+    }
+  }
+}

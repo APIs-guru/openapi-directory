@@ -1,0 +1,376 @@
+{
+  "apis": {
+    "gov.bc.ca:bcdc": {
+      "added": "2017-04-20T18:04:18.000Z",
+      "info": {
+        "contact": {
+          "email": "data@gov.bc.ca",
+          "name": "Data BC",
+          "url": "http://data.gov.bc.ca/"
+        },
+        "description": "This API provides live access to the BC Data Catalogue. Further documentation on the API is available from http://docs.ckan.org/en/latest/ Confirm the version of the API available from the catalogue by requesting https://catalogue.data.gov.bc.ca/api/3/action/status_show. \n\nPlease note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers.",
+        "license": {
+          "name": "Open Government License - British Columbia",
+          "url": "https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61"
+        },
+        "termsOfService": "https://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88",
+        "title": "BC Data Catalogue API",
+        "version": "3.0.1",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/bcdc/bcdc.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "bcdc"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/bcdc/3.0.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/bcdc/3.0.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:bcdc/3.0.1.json"
+    },
+    "gov.bc.ca:bcgnws": {
+      "added": "2017-04-20T18:04:18.000Z",
+      "info": {
+        "contact": {
+          "email": "geographical.names@gov.bc.ca",
+          "name": "BC Geographical Names Office",
+          "url": "https://www2.gov.bc.ca/gov/content?id=A3C60F17CE934B1ABFA366F28C66E370"
+        },
+        "description": "This REST API provides searchable access to information about geographical names in the province of British Columbia, including name status and details about the corresponding geographic feature. \n\nPlease note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers.",
+        "license": {
+          "name": "Crown Copyright",
+          "url": "https://www2.gov.bc.ca/gov/content?id=1AAACC9C65754E4D89A118B875E0FBDA"
+        },
+        "title": "BC Geographical Names Web Service - REST API",
+        "version": "3.x.x",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/bcgnws/bcgnws.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "bcgnws"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/bcgnws/3.x.x/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/bcgnws/3.x.x/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:bcgnws/3.x.x.json"
+    },
+    "gov.bc.ca:geocoder": {
+      "added": "2017-04-20T18:04:18.000Z",
+      "info": {
+        "contact": {
+          "name": "Contact DataBC",
+          "url": "https://dpdd.atlassian.net/servicedesk/customer/portal/1/group/7/"
+        },
+        "description": "This API represents address cleaning, correction, completion, geocoding, reverse geocoding, and proximity resources for intersection addresses, physical addresses and their occupants in British Columbia. Please read our [data collection notice](https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice).  \n\nPlease note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers. \n\n[API keys](https://api.gov.bc.ca/devportal/api-directory/273) are unique and can be acquired with a GitHub or IDIR account. \n\n **Notification:** If you have applications or web pages that link to the BC Address Geocoder you must use the following URL. \n\n *https://geocoder.api.gov.bc.ca* \n\n Please note that the following URLs were deprecated in September 2018 [More Details](https://www2.gov.bc.ca/gov/content?id=103ADC5A956842828554238DEF28D6E5). \n\n - http://apps.gov.bc.ca/pub/geocoder \n - https://apps.gov.bc.ca/pub/geocoder\n\\\n\\\n ",
+        "license": {
+          "name": "Open Government License - British Columbia",
+          "url": "https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61"
+        },
+        "termsOfService": "https://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88",
+        "title": "Geocoder REST API",
+        "version": "2.0.0",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/geocoder/geocoder-combined.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "geocoder"
+      },
+      "externalDocs": {
+        "description": "BC Address Geocoder",
+        "url": "https://www2.gov.bc.ca/gov/content?id=118DD57CD9674D57BDBD511C2E78DC0D"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/geocoder/2.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/geocoder/2.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:geocoder/2.0.0.json"
+    },
+    "gov.bc.ca:geomark": {
+      "added": "2018-03-21T14:02:58.000Z",
+      "info": {
+        "contact": {
+          "name": "Contact DataBC",
+          "url": "https://dpdd.atlassian.net/servicedesk/customer/portal/1/group/7/"
+        },
+        "description": "The Geomark Web Service allows you to create and share geographic areas of interest over the web in a variety of formats and coordinate systems. This service is especially helpful when you need to share an area of interest with people who require that the data be in a different format, or they use different mapping software. \n\nPlease note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs/tree/master/geomark) in other API console viewers.",
+        "license": {
+          "name": "Open Government License - British Columbia",
+          "url": "https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61"
+        },
+        "termsOfService": "https://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88",
+        "title": "GeoMark Web Service REST API",
+        "version": "4.1.2",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/geomark/geomark.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "geomark"
+      },
+      "externalDocs": {
+        "description": "Geomark Web Service",
+        "url": "https://www2.gov.bc.ca/gov/content?id=F6BAF45131954020BCFD2EBCC456F084"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/geomark/4.1.2/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/geomark/4.1.2/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:geomark/4.1.2.json"
+    },
+    "gov.bc.ca:gwells": {
+      "added": "2018-03-29T12:59:57.000Z",
+      "info": {
+        "contact": {
+          "email": "groundwater@gov.bc.ca"
+        },
+        "description": "The groundwater wells, aquifers and registry API contains information related to groundwater wells and aquifers as well as a register of qualified well drillers and well pump installers registered to operate in B.C.",
+        "license": {
+          "name": "Open Government License - British Columbia",
+          "url": "https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61"
+        },
+        "termsOfService": "http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88",
+        "title": "Groundwater Wells, Aquifers and Registry API",
+        "version": "v1",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/gwells/gwells.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "gwells"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/gwells/v1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/gwells/v1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:gwells/v1.json"
+    },
+    "gov.bc.ca:jobposting": {
+      "added": "2017-04-20T18:04:18.000Z",
+      "info": {
+        "description": "This API allows you to receive a feed of jobs from WorkBC's Job Board. Please see our <a href=\"https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice\" target=\"_blank\">data collection notice</a>. Please note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers.",
+        "title": "WorkBC Job Posting API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/jobposting/jobposting.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "jobposting"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/jobposting/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/jobposting/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:jobposting/1.0.0.json"
+    },
+    "gov.bc.ca:news": {
+      "added": "2018-03-29T12:59:57.000Z",
+      "info": {
+        "description": "News API",
+        "license": {
+          "name": "Apache 2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "title": "BC Gov News API Service 1.0",
+        "version": "1.0",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "2.6.2"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/news/news-oas3.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "news"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/news/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/news/1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:news/1.0.json"
+    },
+    "gov.bc.ca:open511": {
+      "added": "2017-04-20T18:04:18.000Z",
+      "info": {
+        "contact": {
+          "email": "TRANBMClientRelations@gov.bc.ca",
+          "name": "Drive BC",
+          "url": "http://www.drivebc.ca/"
+        },
+        "description": "This API is DriveBC's implementation of the Open511 specification.  It provides information about known road events (traffic accidents, construction, etc.) in British Columbia, Canada.  Please note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers.",
+        "license": {
+          "name": "Open Government License - British Columbia",
+          "url": "http://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61"
+        },
+        "termsOfService": "http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88",
+        "title": "DriveBC's Open511 API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/open511/open511_OAS3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "open511"
+      },
+      "externalDocs": {
+        "description": "Additional API Documentation",
+        "url": "http://api.open511.gov.bc.ca/help"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/open511/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/open511/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:open511/1.0.0.json"
+    },
+    "gov.bc.ca:router": {
+      "added": "2019-07-22T11:04:56.000Z",
+      "info": {
+        "contact": {
+          "name": "Contact DataBC",
+          "url": "https://dpdd.atlassian.net/servicedesk/customer/portal/1/group/7/"
+        },
+        "description": "Finds shortest/fastest route between a start point and one or more stop points on British Columbia's public road network. The BC Route planner [webpage](https://www2.gov.bc.ca/gov/content?id=9D99E684CCD042CD88FADC51E079B4B5) provides additional information.  Here are some geocoded addresses to play with:<br>18 Douglas St,Victoria -123.36962,48.40892<br>1002 Johnson St, Victoria -123.355745,48.426206<br>543 Johnson St, Victoria, BC -123.36907,48.42770 <br>14 Centennial Sq, Victoria, BC -123.36564,48.42863<br>1105 Royal Ave,New Westminster  -122.92009,49.20063<br>808 Jackson Cres, New Westminster -122.90762,49.22558<br>10810 McDonald Rd, Chilliwack -121.93808,49.19859<br>3950 June Springs Rd, Kelowna -119.40751,49.83960<br>1201 Riondel Rd, Kootenay Bay -116.85402,49.74448<br>1201 Riondel Rd, Kootenay Bay -116.832759,49.730500 (parcelPoint)<br>2499 Walbran Pl, Courtenay -124.97295,49.71518<br>2013 Smoke Bluff Rd, Squamish -123.13946,49.70401<br>235 Kelvin Grove Way, Lions Bay -123.23524,49.45035<br>   Please see our <a href=https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice target=\"_blank\">data collection notice</a>. \n\nPlease note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers. \n\n[API keys](https://api.gov.bc.ca/devportal/api-directory/740) are unique and can be acquired with a GitHub or IDIR account. \n\n",
+        "license": {
+          "name": "Copyright Province of British Columbia - Access only",
+          "url": "https://www2.gov.bc.ca/gov/content?id=1AAACC9C65754E4D89A118B875E0FBDA"
+        },
+        "termsOfService": "http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88",
+        "title": "BC Route Planner REST API",
+        "version": "2.0.0",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_916280.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/router/router.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "gov.bc.ca",
+        "x-serviceName": "router"
+      },
+      "externalDocs": {
+        "description": "Developer Guide",
+        "url": "https://github.com/bcgov/ols-router/blob/gh-pages/router-developer-guide.md"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/router/2.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/gov.bc.ca/router/2.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/gov.bc.ca:router/2.0.0.json"
+    }
+  }
+}

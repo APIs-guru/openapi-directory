@@ -1,0 +1,1412 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.shotstack.io/{version}
+    variables:
+      version:
+        default: v1
+        description: Set the stage to `v1` for production usage without watermarks. Set to `stage` to use the development sandbox.
+        enum:
+          - v1
+          - stage
+  - url: https://api.shotstack.io/serve/{version}
+    variables:
+      version:
+        default: v1
+        description: Set the stage to `v1` for production usage. Set to `stage` to use the development sandbox.
+        enum:
+          - v1
+          - stage
+info:
+  description: |-
+    Shotstack is a video, image and audio editing service that allows for the automated generation of videos, images and audio using JSON and a RESTful API.
+
+    You arrange and configure an edit and POST it to the API which will render your media and provide a file  location when complete.
+
+    For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
+    There are two main API's, one for editing and generating assets (Edit API) and one for managing hosted assets (Serve API).
+
+    The Edit API base URL is: <b>https://api.shotstack.io/{version}</b>
+
+    The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b>
+  title: Shotstack
+  version: v1
+  x-apisguru-categories:
+    - media
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/shotstack/oas-api-definition/main/api.oas3.yaml
+      version: "3.0"
+  x-providerName: shotstack.io
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  "/assets/render/{id}":
+    get:
+      description: |-
+        A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
+
+        **base URL:** https://api.shotstack.io/serve/{version}
+      operationId: getAssetByRenderId
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response:
+                  data:
+                    - attributes:
+                        created: 2021-05-06T03:33:48.600Z
+                        filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                        id: a4482cbf-e321-42a2-ac8b-947d26886840
+                        owner: 5ca6hu7s9k
+                        region: au
+                        renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                        status: ready
+                        updated: 2021-05-06T03:33:49.521Z
+                        url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                      type: asset
+              schema:
+                $ref: "#/components/schemas/AssetRenderResponse"
+          description: Get one or more assets by render id
+      security:
+        - DeveloperKey: []
+      summary: Get Asset by Render ID
+      tags:
+        - Serve
+    parameters:
+      - description: The render id associated with the asset in UUID format
+        in: path
+        name: id
+        required: true
+        schema:
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+  "/assets/{id}":
+    delete:
+      description: |-
+        Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
+
+        **base URL:** https://api.shotstack.io/serve/{version}
+      operationId: deleteAsset
+      responses:
+        "204":
+          description: An empty response signifying the asset has been deleted
+      security:
+        - DeveloperKey: []
+      summary: Delete Asset
+      tags:
+        - Serve
+    get:
+      description: |-
+        The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
+
+        **base URL:** https://api.shotstack.io/serve/{version}
+      operationId: getAsset
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response:
+                  data:
+                    attributes:
+                      created: 2021-05-06T03:33:48.600Z
+                      filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                      id: a4482cbf-e321-42a2-ac8b-947d26886840
+                      owner: 5ca6hu7s9k
+                      region: au
+                      renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                      status: ready
+                      updated: 2021-05-06T03:33:49.521Z
+                      url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                    type: asset
+              schema:
+                $ref: "#/components/schemas/AssetResponse"
+          description: Get asset by asset id
+      security:
+        - DeveloperKey: []
+      summary: Get Asset
+      tags:
+        - Serve
+    parameters:
+      - description: The id of the asset in UUID format
+        in: path
+        name: id
+        required: true
+        schema:
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+  /render:
+    post:
+      description: Queue and render the contents of a timeline as a video, image or audio file.
+      operationId: postRender
+      requestBody:
+        content:
+          application/json:
+            example:
+              output:
+                format: mp4
+                resolution: sd
+              timeline:
+                background: "#000000"
+                soundtrack:
+                  effect: fadeInFadeOut
+                  src: https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
+                tracks:
+                  - clips:
+                      - asset:
+                          style: minimal
+                          text: Hello World
+                          type: title
+                        effect: slideRight
+                        length: 4
+                        start: 0
+                        transition:
+                          in: fade
+                          out: fade
+                      - asset:
+                          src: https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg
+                          type: image
+                        effect: zoomIn
+                        filter: greyscale
+                        length: 4
+                        start: 3
+                  - clips:
+                      - asset:
+                          src: https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4
+                          trim: 10.5
+                          type: video
+                        length: 4.5
+                        start: 7
+                      - asset:
+                          src: https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4
+                          type: video
+                          volume: 0.5
+                        length: 5
+                        start: 11.5
+                        transition:
+                          out: wipeLeft
+            schema:
+              $ref: "#/components/schemas/Edit"
+        description: |-
+          The video, image or audio edit specified using JSON.
+
+          **base URL:** https://api.shotstack.io/{version}
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                message: Created
+                response:
+                  id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                  message: Render Successfully Queued
+                success: true
+              schema:
+                $ref: "#/components/schemas/QueuedResponse"
+          description: The queued render details
+      security:
+        - DeveloperKey: []
+      summary: Render Asset
+      tags:
+        - Edit
+  "/render/{id}":
+    get:
+      description: |-
+        Get the rendering status, temporary asset url and details of a render by ID.
+
+        **base URL:** https://api.shotstack.io/{version}
+      operationId: getRender
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                message: OK
+                response:
+                  created: 2020-10-30T09:42:29.446Z
+                  data:
+                    output:
+                      format: mp4
+                      resolution: sd
+                    timeline:
+                      background: "#000000"
+                      soundtrack:
+                        effect: fadeInFadeOut
+                        src: https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
+                      tracks:
+                        - clips:
+                            - asset:
+                                style: minimal
+                                text: Hello World
+                                type: title
+                              effect: slideRight
+                              length: 4
+                              start: 0
+                              transition:
+                                in: fade
+                                out: fade
+                            - asset:
+                                src: https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-image.jpg
+                                type: image
+                              effect: zoomIn
+                              filter: greyscale
+                              length: 4
+                              start: 3
+                        - clips:
+                            - asset:
+                                src: https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-1.mp4
+                                trim: 10.5
+                                type: video
+                              length: 4.5
+                              start: 7
+                            - asset:
+                                src: https://s3-ap-northeast-1.amazonaws.com/my-bucket/my-clip-2.mp4
+                                type: video
+                                volume: 0.5
+                              length: 5
+                              start: 11.5
+                              transition:
+                                out: wipeLeft
+                  id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                  owner: 5ca6hu7s9k
+                  status: rendering
+                  updated: 2020-10-30T09:42:39.168Z
+                  url: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                success: true
+              schema:
+                $ref: "#/components/schemas/RenderResponse"
+          description: The render status details
+      security:
+        - DeveloperKey: []
+      summary: Get Render Status
+      tags:
+        - Edit
+    parameters:
+      - description: The id of the timeline render task in UUID format
+        in: path
+        name: id
+        required: true
+        schema:
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+components:
+  callbacks: {}
+  examples: {}
+  headers: {}
+  links: {}
+  parameters: {}
+  requestBodies: {}
+  responses: {}
+  schemas:
+    AssetRenderResponse:
+      description: The response returned by the Serve API [get asset by render id](#get-asset-by-render-id) request. The response  is an array of asset resources, including video, image, audio, thumbnail and poster image. The response follows  the [json:api](https://jsonapi.org/) specification.
+      properties:
+        data:
+          description: An array of asset resources grouped by render id.
+          items:
+            $ref: "#/components/schemas/AssetResponseData"
+          type: array
+      type: object
+    AssetResponse:
+      description: The response returned by the Serve API [get asset](#get-asset) request. Includes details of a hosted video, image, audio file, thumbnail or poster image. The response follows the [json:api](https://jsonapi.org/) specification.
+      properties:
+        data:
+          $ref: "#/components/schemas/AssetResponseData"
+          description: An asset resource.
+      type: object
+    AssetResponseAttributes:
+      description: The list of asset attributes and their values.
+      properties:
+        created:
+          description: The time the asset was created.
+          example: 2021-06-30T09:42:29.446Z
+          type: string
+        filename:
+          description: The asset file name.
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+          type: string
+        id:
+          description: The unique id of the hosted asset in UUID format.
+          example: a4482cbf-e321-42a2-ac8b-947d26886840
+          type: string
+        owner:
+          description: The owner id of the render task.
+          example: 5ca6hu7s9k
+          type: string
+        region:
+          description: The region the asset is hosted, currently only `au` (Australia).
+          example: au
+          type: string
+        renderId:
+          description: The original render id that created the asset in UUID format. Multiple assets can share the same render id.
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+          type: string
+        status:
+          description: |-
+            The status of the asset. <ul>
+              <li>`importing` - the asset is being copied to the hosting service</li>
+              <li>`ready` - the asset is ready to be served to users</li>
+              <li>`failed` - the asset failed to copy or delete</li>
+              <li>`deleted` - the asset has been deleted</li>
+            </ul>
+          enum:
+            - importing
+            - ready
+            - failed
+            - deleted
+          example: ready
+          type: string
+        updated:
+          description: The time the asset status was last updated.
+          example: 2021-06-30T09:42:30.168Z
+          type: string
+        url:
+          description: The asset file name.
+          example: https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+          type: string
+      type: object
+    AssetResponseData:
+      description: The type of resource (an asset) and attributes of the asset.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AssetResponseAttributes"
+          description: The asset attributes including render id, url, filename, file size, etc...
+        type:
+          description: The type of resource, in this case it is an assets.
+          example: asset
+          type: string
+      type: object
+    AudioAsset:
+      description: The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.
+      properties:
+        effect:
+          description: |-
+            The effect to apply to the audio asset <ul>
+              <li>`fadeIn` - fade volume in only</li>
+              <li>`fadeOut` - fade volume out only</li>
+              <li>`fadeInFadeOut` - fade volume in and out</li>
+            </ul>
+          enum:
+            - fadeIn
+            - fadeOut
+            - fadeInFadeOut
+          type: string
+        src:
+          description: The audio source URL. The URL must be publicly accessible or include credentials.
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/sound.mp3
+          type: string
+        trim:
+          description: The start trim point of the audio clip, in seconds (defaults to 0). Audio will start from the in trim point. The audio will play until the file ends or the Clip length is reached.
+          type: number
+        type:
+          default: audio
+          description: The type of asset - set to `audio` for audio assets.
+          type: string
+        volume:
+          default: 1
+          description: Set the volume for the audio clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).
+          type: number
+      required:
+        - type
+        - src
+      type: object
+    Clip:
+      description: A clip is a container for a specific type of asset, i.e. a title, image, video, audio or html. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions, filters and effects to apply to it.
+      properties:
+        asset:
+          description: The type of asset to display for the duration of this Clip. Value must be one of <b>TitleAsset</b>, <b>ImageAsset</b>, <b>VideoAsset</b>, <b>HtmlAsset</b>, <b>AudioAsset</b> or <b>LumaAsset</b>
+          oneOf:
+            - $ref: "#/components/schemas/VideoAsset"
+            - $ref: "#/components/schemas/ImageAsset"
+            - $ref: "#/components/schemas/TitleAsset"
+            - $ref: "#/components/schemas/HtmlAsset"
+            - $ref: "#/components/schemas/AudioAsset"
+            - $ref: "#/components/schemas/LumaAsset"
+        effect:
+          description: |-
+            A motion effect to apply to the Clip. <ul>
+              <li>`zoomIn` - slow zoom in</li>
+              <li>`zoomOut` - slow zoom out</li>
+              <li>`slideLeft` - slow slide (pan) left</li>
+              <li>`slideRight` - slow slide (pan) right</li>
+              <li>`slideUp` - slow slide (pan) up</li>
+              <li>`slideDown` - slow slide (pan) down</li>
+            </ul>
+          enum:
+            - zoomIn
+            - zoomOut
+            - slideLeft
+            - slideRight
+            - slideUp
+            - slideDown
+          type: string
+        filter:
+          description: |-
+            A filter effect to apply to the Clip. <ul>
+              <li>`boost` - boost contrast and saturation</li>
+              <li>`contrast` - increase contrast</li>
+              <li>`darken` - darken the scene</li>
+              <li>`greyscale` - remove colour</li>
+              <li>`lighten` - lighten the scene</li>
+              <li>`muted` - reduce saturation and contrast</li>
+              <li>`invert` - invert colors</li>
+            </ul>
+          enum:
+            - boost
+            - contrast
+            - darken
+            - greyscale
+            - lighten
+            - muted
+            - negative
+          example: greyscale
+          type: string
+        fit:
+          default: crop
+          description: |-
+            Set how the asset should be scaled to fit the viewport using one of the following options: 
+              <ul>
+                <li>`cover` - stretch the asset to fill the viewport without maintaining the aspect ratio.</li>
+                <li>`contain` - fit the entire asset within the viewport while maintaining the original aspect ratio.</li>
+                <li>`crop` - scale the asset to fill the viewport while maintaining the aspect ratio. The asset will be cropped if it exceeds the bounds of the viewport.</li>
+                <li>`none` - preserves the original asset dimensions and does not apply any scaling.</li>
+              </ul>
+          enum:
+            - cover
+            - contain
+            - crop
+            - none
+          type: string
+        length:
+          description: The length, in seconds, the Clip should play for.
+          example: 5
+          type: number
+        offset:
+          $ref: "#/components/schemas/Offset"
+          description: Offset the location of the asset relative to its position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.
+        opacity:
+          default: 1
+          description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
+          type: number
+        position:
+          default: center
+          description: |-
+            Place the asset in one of nine predefined positions of the viewport. This is most effective for when the asset is scaled and you want to position the element to a specific position. <ul>
+              <li>`top` - top (center)</li>
+              <li>`topRight` - top right</li>
+              <li>`right` - right (center)</li>
+              <li>`bottomRight` - bottom right</li>
+              <li>`bottom` - bottom (center)</li>
+              <li>`bottomLeft` - bottom left</li>
+              <li>`left` - left (center)</li>
+              <li>`topLeft` - top left</li>
+              <li>`center` - center</li>
+            </ul>
+          enum:
+            - top
+            - topRight
+            - right
+            - bottomRight
+            - bottom
+            - bottomLeft
+            - left
+            - topLeft
+            - center
+          type: string
+        scale:
+          description: Scale the asset to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale asset to half the size of the viewport. This is useful for picture-in-picture video and  scaling images such as logos and watermarks.
+          example: 0
+          type: number
+        start:
+          description: The start position of the Clip on the timeline, in seconds.
+          example: 2
+          type: number
+        transition:
+          $ref: "#/components/schemas/Transition"
+      required:
+        - asset
+        - start
+        - length
+      type: object
+    Crop:
+      description: Crop the sides of an asset by a relative amount. The size of the crop is specified using a scale between 0 and 1, relative to the screen width - i.e a left crop of 0.5 will crop half of the asset from the left, a top crop  of 0.25 will crop the top by quarter of the asset.
+      properties:
+        bottom:
+          description: Crop from the bottom of the asset
+          example: 0.15
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        left:
+          description: Crop from the left of the asset
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        right:
+          description: Crop from the left of the asset
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        top:
+          description: Crop from the top of the asset
+          example: 0.15
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+      type: object
+    Edit:
+      description: An edit defines the arrangement of a video on a timeline, an audio edit or an image design and the output format.
+      properties:
+        callback:
+          description: An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for  more details.
+          example: https://my-server.com/callback.php
+          type: string
+        disk:
+          default: local
+          description: |-
+            The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul>
+              <li>`local` - optimized for high speed rendering with up to 512MB storage</li>
+              <li>`mount` - optimized for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li>
+            </ul>
+          enum:
+            - local
+            - mount
+          type: string
+        output:
+          $ref: "#/components/schemas/Output"
+        timeline:
+          $ref: "#/components/schemas/Timeline"
+      required:
+        - timeline
+        - output
+      type: object
+    Font:
+      description: Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our [custom fonts](https://shotstack.io/learn/html-custom-fonts/) getting started guide for more details.
+      properties:
+        src:
+          description: The URL of the font file. The URL must be publicly accessible or include credentials.
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/open-sans.ttf
+          type: string
+      required:
+        - src
+      type: object
+    HtmlAsset:
+      description: The HtmlAsset clip type lets you create text based layout and formatting using HTML and CSS. You can also set the height and width of a bounding box for the HTML content to sit within. Text and elements will wrap within the bounding box.
+      properties:
+        background:
+          default: transparent
+          description: "Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal  color notation. Transparency is supported by setting the first two characters of the hex string  (opposite to HTML), i.e. #80ffffff will be white with 50% transparency."
+          type: string
+        css:
+          description: The CSS text string to apply styling to the HTML. See list of  [support CSS properties](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
+          example: "p { color: #ffffff; } b { color: #ffff00; }"
+          type: string
+        height:
+          description: Set the width of the HTML asset bounding box in pixels. Text and elements will be masked if they exceed the  height of the bounding box.
+          example: 200
+          type: integer
+        html:
+          description: The HTML text string. See list of [supported HTML tags](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
+          example: <p>Hello <b>World</b></p>
+          type: string
+        position:
+          default: center
+          description: |-
+            Place the HTML in one of nine predefined positions within the HTML area. <ul>
+              <li>`top` - top (center)</li>
+              <li>`topRight` - top right</li>
+              <li>`right` - right (center)</li>
+              <li>`bottomRight` - bottom right</li>
+              <li>`bottom` - bottom (center)</li>
+              <li>`bottomLeft` - bottom left</li>
+              <li>`left` - left (center)</li>
+              <li>`topLeft` - top left</li>
+              <li>`center` - center</li>
+            </ul>
+          enum:
+            - top
+            - topRight
+            - right
+            - bottomRight
+            - bottom
+            - bottomLeft
+            - left
+            - topLeft
+            - center
+          type: string
+        type:
+          default: html
+          description: The type of asset - set to `html` for HTML.
+          type: string
+        width:
+          description: Set the width of the HTML asset bounding box in pixels. Text will wrap to fill the bounding box.
+          example: 400
+          type: integer
+      required:
+        - type
+        - html
+      type: object
+    ImageAsset:
+      description: The ImageAsset is used to create video from images to compose an image. The src must be a publicly accessible URL to an image resource such as a jpg or png file.
+      properties:
+        crop:
+          $ref: "#/components/schemas/Crop"
+        src:
+          description: The image source URL. The URL must be publicly accessible or include credentials.
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/image.jpg
+          type: string
+        type:
+          default: image
+          description: The type of asset - set to `image` for images.
+          type: string
+      required:
+        - type
+        - src
+      type: object
+    LumaAsset:
+      description: The LumaAsset is used to create luma matte masks, transitions and effects between other assets. A luma matte is a grey scale image or animated video where the black areas are transparent and the white areas solid. The luma matte animation should be provided as an mp4 video file. The src must be a publicly accessible URL to the file.
+      properties:
+        src:
+          description: The luma matte source URL. The URL must be publicly accessible or include credentials.
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/mask.mp4
+          type: string
+        trim:
+          description: The start trim point of the luma matte clip, in seconds (defaults to 0). Videos will start from the in trim point. A luma matte video will play until the file ends or the Clip length is reached.
+          type: number
+        type:
+          default: luma
+          description: The type of asset - set to `luma` for luma mattes.
+          type: string
+      required:
+        - type
+        - src
+      type: object
+    Offset:
+      description: Offsets the position of an asset horizontally or vertically by a relative distance.
+      properties:
+        x:
+          default: 0
+          description: Offset an asset on the horizontal axis (left or right), range varies from -1 to 1. Positive numbers move the asset right, negative left. For all assets except titles the distance moved is relative to the width  of the viewport - i.e. an X offset of 0.5 will move the asset half the  screen width to the right.
+          example: 0.1
+          format: float
+          maximum: 1
+          minimum: -1
+          type: number
+        y:
+          default: 0
+          description: Offset an asset on the vertical axis (up or down), range varies from -1 to 1. Positive numbers move the asset up, negative down. For all assets except titles the distance moved is relative to the height  of the viewport - i.e. an Y offset of 0.5 will move the asset up half the  screen height.
+          example: -0.2
+          format: float
+          maximum: 1
+          minimum: -1
+          type: number
+      type: object
+    Output:
+      description: The output format, render range and type of media to generate.
+      properties:
+        aspectRatio:
+          description: |-
+            The aspect ratio (shape) of the video or image. Useful for social media output formats. Options are: <ul>
+              <li>`16:9` - regular landscape/horizontal aspect ratio (default)</li>
+              <li>`9:16` - vertical/portrait aspect ratio</li>
+              <li>`1:1` - square aspect ratio</li>
+              <li>`4:5` - short vertical/portrait aspect ratio</li>
+              <li>`4:3` - legacy TV aspect ratio</li>
+            </ul>
+          enum:
+            - 16:9
+            - 9:16
+            - 1:1
+            - 4:5
+            - 4:3
+          example: 16:9
+          type: string
+        destinations:
+          description: A destination is a location where output files can be sent to for serving or hosting. By default all rendered assets are automatically sent to the Shotstack hosting destination. [DestinationShotstack](/#tocs_shotstackdestination) is currently the only option with plans to add more in the future such as S3, YouTube, Vimeo and Mux. If you do not require hosting you can opt-out using the  `exclude` property.
+          items:
+            anyOf:
+              - $ref: "#/components/schemas/ShotstackDestination"
+          type: array
+        format:
+          description: |-
+            The output format and type of media file to generate. <ul>
+              <li>`mp4` - mp4 video file</li>
+              <li>`gif` - animated gif</li>
+              <li>`jpg` - jpg image file</li>
+              <li>`png` - png image file</li>
+              <li>`bmp` - bmp image file</li>
+              <li>`mp3` - mp3 audio file (audio only)</li>
+            </ul>
+          enum:
+            - mp4
+            - gif
+            - mp3
+            - jpg
+            - png
+            - bmp
+          example: mp4
+          type: string
+        fps:
+          default: 25
+          description: |-
+            Override the default frames per second. Useful for when the source footage is recorded at 30fps, i.e. on  mobile devices. Lower frame rates can be used to add cinematic quality (24fps) or to create smaller file size/faster render times or animated gifs (12 or 15fps). Default is 25fps. <ul>
+              <li>`12` - 12fps</li>
+              <li>`15` - 15fps</li>
+              <li>`24` - 24fps</li>
+              <li>`25` - 25fps</li>
+              <li>`30` - 30fps</li>
+            </ul>
+          enum:
+            - 12
+            - 15
+            - 24
+            - 25
+            - 30
+          example: 25
+          type: integer
+        poster:
+          $ref: "#/components/schemas/Poster"
+          description: Generate a poster image from a specific point on the timeline.
+        quality:
+          default: medium
+          description: |-
+            Adjust the output quality of the video, image or audio. Adjusting quality affects  render speed, download speeds and storage requirements due to file size. The default `medium` provides the most optimized choice for all three  factors. <ul>
+              <li>`low` - slightly reduced quality, smaller file size</li>
+              <li>`medium` - optimized quality, render speeds and file size</li>
+              <li>`high` - slightly increased quality, larger file size</li>
+            </ul>
+          enum:
+            - low
+            - medium
+            - high
+          example: medium
+          type: string
+        range:
+          $ref: "#/components/schemas/Range"
+        resolution:
+          description: |-
+            The output resolution of the video or image. <ul>
+              <li>`preview` - 512px x 288px @ 15fps</li>
+              <li>`mobile` - 640px x 360px @ 25fps</li>
+              <li>`sd` - 1024px x 576px @ 25fps</li>
+              <li>`hd` - 1280px x 720px @ 25fps</li>
+              <li>`1080` - 1920px x 1080px @ 25fps</li>
+            </ul>
+          enum:
+            - preview
+            - mobile
+            - sd
+            - hd
+            - "1080"
+          example: sd
+          type: string
+        scaleTo:
+          description: |-
+            Override the resolution and scale the video or image to render at a different size. When using scaleTo the asset should be edited at the resolution dimensions, i.e. use font sizes that look best at HD, then use scaleTo to output the file at SD and the text will be scaled to the correct size. This is useful if you want to create multiple asset sizes. <ul>
+              <li>`preview` - 512px x 288px @ 15fps</li>
+              <li>`mobile` - 640px x 360px @ 25fps</li>
+              <li>`sd` - 1024px x 576px @25fps</li>
+              <li>`hd` - 1280px x 720px @25fps</li>
+              <li>`1080` - 1920px x 1080px @25fps</li>
+            </ul>
+          enum:
+            - preview
+            - mobile
+            - sd
+            - hd
+            - "1080"
+          type: string
+        size:
+          $ref: "#/components/schemas/Size"
+        thumbnail:
+          $ref: "#/components/schemas/Thumbnail"
+          description: Generate a thumbnail image from a specific point on the timeline.
+      required:
+        - format
+      type: object
+    Poster:
+      description: Generate a poster image for the video at a specific point from the timeline. The poster image size will match the size of the output video.
+      properties:
+        capture:
+          description: The point on the timeline in seconds to capture a single frame to use as the poster image.
+          example: 1
+          type: number
+      required:
+        - capture
+      type: object
+    QueuedResponse:
+      description: The response received after a [render request](#render-asset) is submitted. The render task is queued for rendering and a unique render id is returned.
+      properties:
+        message:
+          description: "`Created`, `Bad Request` or an error message."
+          example: Created
+          type: string
+        response:
+          $ref: "#/components/schemas/QueuedResponseData"
+          description: "`QueuedResponseData` or an error message."
+        success:
+          description: "`true` if successfully queued, else `false`."
+          example: true
+          type: boolean
+      required:
+        - success
+        - message
+        - response
+      type: object
+    QueuedResponseData:
+      description: The response data returned with the [QueuedResponse](#tocs_queuedresponse).
+      properties:
+        id:
+          description: The id of the render task in UUID format.
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+          type: string
+        message:
+          description: Success response message or error details.
+          example: Render Successfully Queued
+          type: string
+      required:
+        - message
+        - id
+      type: object
+    Range:
+      description: Specify a time range to render, i.e. to render only a portion of a video or audio file. Omit this setting to  export the entire video. Range can also be used to render a frame at a specific time point - setting a range and output format as `jpg` will output a single frame image at the range `start` point.
+      properties:
+        length:
+          description: The length of the portion of the video or audio to render - i.e. render 6 seconds of the video.
+          example: 6
+          format: float
+          minimum: 0
+          type: number
+        start:
+          description: The point on the timeline, in seconds, to start the render from - i.e. start at second 3.
+          example: 3
+          format: float
+          minimum: 0
+          type: number
+      type: object
+    RenderResponse:
+      description: The response received after a [render status request](#get-render-status) is submitted. The response includes  details about status of a render and the output URL.
+      properties:
+        message:
+          description: "`OK` or an error message."
+          example: OK
+          type: string
+        response:
+          $ref: "#/components/schemas/RenderResponseData"
+          description: "`RenderResponse` or an error message."
+        success:
+          description: "`true` if status available, else `false`."
+          example: true
+          type: boolean
+      required:
+        - success
+        - message
+        - response
+      type: object
+    RenderResponseData:
+      description: The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
+      properties:
+        created:
+          description: The time the render task was initially queued.
+          example: 2020-10-30T09:42:29.446Z
+          type: string
+        data:
+          $ref: "#/components/schemas/Edit"
+          description: The timeline and output data to be rendered.
+        duration:
+          description: The output video or audio length in seconds.
+          example: 8.5
+          type: number
+        error:
+          description: An error message, only displayed if an error occurred.
+          example: ""
+          type: string
+        id:
+          description: The id of the render task in UUID format.
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+          type: string
+        owner:
+          description: The owner id of the render task.
+          example: 5ca6hu7s9k
+          type: string
+        plan:
+          description: The customer subscription plan.
+          example: basic
+          type: string
+        poster:
+          description: The URL of the poster image if requested. This will only be available if status is done.
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
+          type: string
+        renderTime:
+          description: The time taken to render the asset in milliseconds.
+          example: 9433.44
+          type: number
+        status:
+          description: |-
+            The status of the render task. <ul>
+              <li>`queued` - render is queued waiting to be rendered</li>
+              <li>`fetching` - assets are being fetched</li>
+              <li>`rendering` - the asset is being rendered</li>
+              <li>`saving` - the final asset is being saved to storage</li>
+              <li>`done` - the asset is ready to be downloaded</li>
+              <li>`failed` - there was an error rendering the asset</li>
+            </ul>
+          enum:
+            - queued
+            - fetching
+            - rendering
+            - saving
+            - done
+            - failed
+          example: done
+          type: string
+        thumbnail:
+          description: The URL of the thumbnail image if requested. This will only be available if status is done.
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
+          type: string
+        updated:
+          description: The time the render status was last updated.
+          example: 2020-10-30T09:42:39.168Z
+          type: string
+        url:
+          description: The URL of the final asset. This will only be available if status is done. This is a temporary URL and will be deleted after 24 hours. By default all assets are copied to the Shotstack hosting and CDN destination.
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+          type: string
+      required:
+        - status
+        - id
+        - owner
+        - data
+        - created
+        - updated
+      type: object
+    ShotstackDestination:
+      description: Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
+      properties:
+        exclude:
+          default: false
+          description: Set to `true` to opt-out from the Shotstack hosting and CDN service. All files must be downloaded within 24 hours of rendering.
+          example: false
+          type: boolean
+        provider:
+          default: shotstack
+          description: The destination to send rendered assets to - set to `shotstack` for Shotstack hosting and CDN.
+          example: shotstack
+          type: string
+      required:
+        - provider
+      type: object
+    Size:
+      description: Set a custom size for a video or image. When using a custom size omit the `resolution` and `aspectRatio`. Custom sizes must be divisible by 2 based on the encoder specifications.
+      properties:
+        height:
+          description: Set a custom height for the video or image file. Value must be divisible by 2. Maximum video height is 1920px, maximum image height is 4096px.
+          example: 800
+          maximum: 4096
+          minimum: 0
+          type: integer
+        width:
+          description: Set a custom width for the video or image file. Value must be divisible by 2. Maximum video width is 1920px, maximum image width is 4096px.
+          example: 1200
+          maximum: 4096
+          minimum: 0
+          type: integer
+      type: object
+    Soundtrack:
+      description: A music or audio file in mp3 format that plays for the duration of the rendered video or the length of the audio file, which ever is shortest.
+      properties:
+        effect:
+          description: |-
+            The effect to apply to the audio file <ul>
+              <li>`fadeIn` - fade volume in only</li>
+              <li>`fadeOut` - fade volume out only</li>
+              <li>`fadeInFadeOut` - fade volume in and out</li>
+            </ul>
+          enum:
+            - fadeIn
+            - fadeOut
+            - fadeInFadeOut
+          type: string
+        src:
+          description: The URL of the mp3 audio file. The URL must be publicly accessible or include credentials.
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/music.mp3
+          type: string
+        volume:
+          default: 1
+          description: Set the volume for the soundtrack between 0 and 1 where 0 is muted and 1 is full volume (defaults to 1).
+          type: number
+      required:
+        - src
+      type: object
+    Thumbnail:
+      description: Generate a thumbnail image for the video or image at a specific point from the timeline.
+      properties:
+        capture:
+          description: The point on the timeline in seconds to capture a single frame to use as the thumbnail image.
+          example: 1
+          type: number
+        scale:
+          description: Scale the thumbnail size to a fraction of the viewport size - i.e. setting the scale to 0.5 will scale  the thumbnail to half the size of the viewport.
+          example: 0.3
+          type: number
+      required:
+        - capture
+        - scale
+      type: object
+    Timeline:
+      description: A timeline represents the contents of a video edit over time, an audio edit over time, in seconds, or an image layout. A timeline consists of layers called tracks. Tracks are composed of titles, images, audio, html or video segments referred to as clips which are placed along the track at specific starting point and lasting for a specific amount of time.
+      properties:
+        background:
+          default: "#000000"
+          description: "A hexadecimal value for the timeline background colour. Defaults to #000000 (black)."
+          type: string
+        cache:
+          default: true
+          description: Disable the caching of ingested source footage and assets. See  [caching](https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching) for more details.
+          type: boolean
+        fonts:
+          description: An array of custom fonts to be downloaded for use by the HTML assets.
+          items:
+            $ref: "#/components/schemas/Font"
+          type: array
+        soundtrack:
+          $ref: "#/components/schemas/Soundtrack"
+          description: A music or audio soundtrack file in mp3 format.
+        tracks:
+          description: A timeline consists of an array of tracks, each track containing clips. Tracks are layered on top of each other in the same order they are added to the array with the top most track layered over the top of those below it. Ensure that a track containing titles is the top most track so that it is displayed above videos and images.
+          items:
+            $ref: "#/components/schemas/Track"
+          type: array
+      required:
+        - tracks
+      type: object
+    TitleAsset:
+      description: The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
+      properties:
+        background:
+          description: "Apply a background color behind the text. Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with 50% transparency. Omit to use transparent background."
+          example: "#000000"
+          type: string
+        color:
+          default: "#ffffff"
+          description: "Set the text color using hexadecimal color notation. Transparency is supported by setting the first two characters of the hex string (opposite to HTML),  i.e. #80ffffff will be white with  50% transparency."
+          type: string
+        offset:
+          $ref: "#/components/schemas/Offset"
+          description: Offset the location of the title relative to its position on the screen.
+        position:
+          default: center
+          description: |-
+            Place the title in one of nine predefined positions of the viewport. <ul>
+              <li>`top` - top (center)</li>
+              <li>`topRight` - top right</li>
+              <li>`right` - right (center)</li>
+              <li>`bottomRight` - bottom right</li>
+              <li>`bottom` - bottom (center)</li>
+              <li>`bottomLeft` - bottom left</li>
+              <li>`left` - left (center)</li>
+              <li>`topLeft` - top left</li>
+              <li>`center` - center</li>
+            </ul>
+          enum:
+            - top
+            - topRight
+            - right
+            - bottomRight
+            - bottom
+            - bottomLeft
+            - left
+            - topLeft
+            - center
+          type: string
+        size:
+          default: medium
+          description: |-
+            Set the relative size of the text using predefined sizes from xx-small to xx-large. <ul>
+              <li>`xx-small`</li>
+              <li>`x-small`</li>
+              <li>`small`</li>
+              <li>`medium`</li>
+              <li>`large`</li>
+              <li>`x-large`</li>
+              <li>`xx-large`</li>
+            </ul>
+          enum:
+            - xx-small
+            - x-small
+            - small
+            - medium
+            - large
+            - x-large
+            - xx-large
+          type: string
+        style:
+          description: |-
+            Uses a preset to apply font properties and styling to the title. <ul>
+              <li>`minimal`</li>
+              <li>`blockbuster`</li>
+              <li>`vogue`</li>
+              <li>`sketchy`</li>
+              <li>`skinny`</li>
+              <li>`chunk`</li>
+              <li>`chunkLight`</li>
+              <li>`marker`</li>
+              <li>`future`</li>
+              <li>`subtitle`</li>
+            </ul>
+          enum:
+            - minimal
+            - blockbuster
+            - vogue
+            - sketchy
+            - skinny
+            - chunk
+            - chunkLight
+            - marker
+            - future
+            - subtitle
+          type: string
+        text:
+          description: The title text string - i.e. "My Title".
+          example: Hello World
+          type: string
+        type:
+          default: title
+          description: The type of asset - set to `title` for titles.
+          type: string
+      required:
+        - type
+        - text
+      type: object
+    Track:
+      description: A track contains an array of clips. Tracks are layered on top of each other in the order in the array. The top most track will render on top of those below it.
+      properties:
+        clips:
+          description: An array of Clips comprising of TitleClip, ImageClip or VideoClip.
+          items:
+            $ref: "#/components/schemas/Clip"
+          type: array
+      required:
+        - clips
+      type: object
+    Transition:
+      description: In and out transitions for a clip - i.e. fade in and fade out
+      properties:
+        in:
+          description: |-
+            The transition in. Available transitions are:
+              <ul>
+                <li>`fade` - fade in</li>
+                <li>`reveal` - reveal from left to right</li>
+                <li>`wipeLeft` - fade across screen to the left</li>
+                <li>`wipeRight` - fade across screen to the right</li>
+                <li>`slideLeft` - move slightly left and fade in</li>
+                <li>`slideRight` - move slightly right and fade in</li>
+                <li>`slideUp` - move slightly up and fade in</li>
+                <li>`slideDown` - move slightly down and fade in</li>
+                <li>`carouselLeft` - slide in from right to left</li>
+                <li>`carouselRight` - slide in from left to right</li>
+                <li>`carouselUp` - slide in from bottom to top</li>
+                <li>`carouselDown` - slide in from top to bottom</li>
+                <li>`shuffleTopRight` - rotate in from top right</li>
+                <li>`shuffleRightTop` - rotate in from right top</li>
+                <li>`shuffleRightBottom` - rotate in from right bottom</li>
+                <li>`shuffleBottomRight` - rotate in from bottom right</li>
+                <li>`shuffleBottomLeft` - rotate in from bottom left</li>
+                <li>`shuffleLeftBottom` - rotate in from left bottom</li>
+                <li>`shuffleLeftTop` - rotate in from left top</li>
+                <li>`shuffleTopLeft` - rotate in from top left</li>
+                <li>`zoom` - fast zoom in</li>
+              </ul>
+            The transition speed can also be controlled by appending `Fast` or `Slow` to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.
+          enum:
+            - fade
+            - fadeSlow
+            - fadeFast
+            - reveal
+            - revealSlow
+            - revealFast
+            - wipeLeft
+            - wipeLeftSlow
+            - wipeLeftFast
+            - wipeRight
+            - wipeRightSlow
+            - wipeRightFast
+            - slideLeft
+            - slideLeftSlow
+            - slideLeftFast
+            - slideRight
+            - slideRightSlow
+            - slideRightFast
+            - slideUp
+            - slideUpSlow
+            - slideUpFast
+            - slideDown
+            - slideDownSlow
+            - slideDownFast
+            - carouselLeft
+            - carouselLeftSlow
+            - carouselLeftFast
+            - carouselRight
+            - carouselRightSlow
+            - carouselRightFast
+            - carouselUp
+            - carouselUpSlow
+            - carouselUpFast
+            - carouselDown
+            - carouselDownSlow
+            - carouselDownFast
+            - shuffleTopRight
+            - shuffleTopRightSlow
+            - shuffleTopRightFast
+            - shuffleRightTop
+            - shuffleRightTopSlow
+            - shuffleRightTopFast
+            - shuffleRightBottom
+            - shuffleRightBottomSlow
+            - shuffleRightBottomFast
+            - shuffleBottomRight
+            - shuffleBottomRightSlow
+            - shuffleBottomRightFast
+            - shuffleBottomLeft
+            - shuffleBottomLeftSlow
+            - shuffleBottomLeftFast
+            - shuffleLeftBottom
+            - shuffleLeftBottomSlow
+            - shuffleLeftBottomFast
+            - shuffleLeftTop
+            - shuffleLeftTopSlow
+            - shuffleLeftTopFast
+            - shuffleTopLeft
+            - shuffleTopLeftSlow
+            - shuffleTopLeftFast
+            - zoom
+          type: string
+        out:
+          description: |-
+            The transition out. Available transitions are:
+              <ul>
+                <li>`fade` - fade out</li>
+                <li>`reveal` - reveal from right to left</li>
+                <li>`wipeLeft` - fade across screen to the left</li>
+                <li>`wipeRight` - fade across screen to the right</li>
+                <li>`slideLeft` - move slightly left and fade out</li>
+                <li>`slideRight` - move slightly right and fade out</li>
+                <li>`slideUp` - move slightly up and fade out</li>
+                <li>`slideDown` - move slightly down and fade out</li>
+                <li>`carouselLeft` - slide out from right to left</li>
+                <li>`carouselRight` - slide out from left to right</li>
+                <li>`carouselUp` - slide out from bottom to top</li>
+                <li>`carouselDown` - slide out from top  to bottom</li>
+                <li>`shuffleTopRight` - rotate out from top right</li>
+                <li>`shuffleRightTop` - rotate out from right top</li>
+                <li>`shuffleRightBottom` - rotate out from right bottom</li>
+                <li>`shuffleBottomRight` - rotate out from bottom right</li>
+                <li>`shuffleBottomLeft` - rotate out from bottom left</li>
+                <li>`shuffleLeftBottom` - rotate out from left bottom</li>
+                <li>`shuffleLeftTop` - rotate out from left top</li>
+                <li>`shuffleTopLeft` - rotate out from top left</li>
+                <li>`zoom` - fast zoom out</li>
+              </ul>
+            The transition speed can also be controlled by appending `Fast` or `Slow` to the transition, e.g. `fadeFast` or `CarouselLeftSlow`.
+          enum:
+            - fade
+            - fadeSlow
+            - fadeFast
+            - reveal
+            - revealSlow
+            - revealFast
+            - wipeLeft
+            - wipeLeftSlow
+            - wipeLeftFast
+            - wipeRight
+            - wipeRightSlow
+            - wipeRightFast
+            - slideLeft
+            - slideLeftSlow
+            - slideLeftFast
+            - slideRight
+            - slideRightSlow
+            - slideRightFast
+            - slideUp
+            - slideUpSlow
+            - slideUpFast
+            - slideDown
+            - slideDownSlow
+            - slideDownFast
+            - carouselLeft
+            - carouselLeftSlow
+            - carouselLeftFast
+            - carouselRight
+            - carouselRightSlow
+            - carouselRightFast
+            - carouselUp
+            - carouselUpSlow
+            - carouselUpFast
+            - carouselDown
+            - carouselDownSlow
+            - carouselDownFast
+            - shuffleTopRight
+            - shuffleTopRightSlow
+            - shuffleTopRightFast
+            - shuffleRightTop
+            - shuffleRightTopSlow
+            - shuffleRightTopFast
+            - shuffleRightBottom
+            - shuffleRightBottomSlow
+            - shuffleRightBottomFast
+            - shuffleBottomRight
+            - shuffleBottomRightSlow
+            - shuffleBottomRightFast
+            - shuffleBottomLeft
+            - shuffleBottomLeftSlow
+            - shuffleBottomLeftFast
+            - shuffleLeftBottom
+            - shuffleLeftBottomSlow
+            - shuffleLeftBottomFast
+            - shuffleLeftTop
+            - shuffleLeftTopSlow
+            - shuffleLeftTopFast
+            - shuffleTopLeft
+            - shuffleTopLeftSlow
+            - shuffleTopLeftFast
+            - zoom
+          type: string
+      type: object
+    VideoAsset:
+      description: The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.
+      properties:
+        crop:
+          $ref: "#/components/schemas/Crop"
+        src:
+          description: The video source URL. The URL must be publicly accessible or include credentials.
+          example: https://s3-ap-northeast-1.amazonaws.com/my-bucket/video.mp4
+          type: string
+        trim:
+          description: The start trim point of the video clip, in seconds (defaults to 0). Videos will start from the in trim point. The video will play until the file ends or the Clip length is reached.
+          example: 2
+          type: number
+        type:
+          default: video
+          description: The type of asset - set to `video` for videos.
+          type: string
+        volume:
+          description: Set the volume for the video clip between 0 and 1 where 0 is muted and 1 is full volume (defaults to 0).
+          example: 1
+          type: number
+      required:
+        - type
+        - src
+      type: object
+  securitySchemes:
+    DeveloperKey:
+      description: Set the **x-api-key** header with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
+      in: header
+      name: x-api-key
+      type: apiKey

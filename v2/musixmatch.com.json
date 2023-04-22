@@ -1,0 +1,46 @@
+{
+  "apis": {
+    "musixmatch.com": {
+      "added": "2018-05-30T12:32:23.000Z",
+      "info": {
+        "contact": {
+          "email": "info@musixmatch.com",
+          "name": "Musixmatch",
+          "url": "https://musixmatch.com",
+          "x-twitter": "Musixmatch"
+        },
+        "description": "Musixmatch lyrics API is a robust service that permits you to search and retrieve lyrics in the simplest possible way. It just works.\n\nInclude millions of licensed lyrics on your website or in your application legally.\n\nThe fastest, most powerful and legal way to display lyrics on your website or in your application.\n\n#### Read musixmatch API Terms & Conditions and the Privacy Policy:\nBefore getting started, you must take a look at the [API Terms & Conditions](http://musixmatch.com/apiterms/) and the [Privacy Policy](https://developer.musixmatch.com/privacy). We’ve worked hard to make this service completely legal so that we are all protected from any foreseeable liability. Take the time to read this stuff.\n\n#### Register for an API key:\nAll you need to do is [register](https://developer.musixmatch.com/signup) in order to get your API key, a mandatory parameter for most of our API calls. It’s your personal identifier and should be kept secret:\n\n```\n  https://api.musixmatch.com/ws/v1.1/track.get?apikey=YOUR_API_KEY\n```\n#### Integrate the musixmatch service with your web site or application\nIn the most common scenario you only need to implement two API calls: \nThe first call is to match your catalog to ours using the [track.search](#!/Track/get_track_search) function and the second is to get the lyrics using the [track.lyrics.get](#!/Lyrics/get_track_lyrics_get) api. That’s it!\n\n## API Methods\nWhat does the musiXmatch API do?\n\nThe musiXmatch API allows you to read objects from our huge 100% licensed lyrics database.\n\nTo make your life easier we are providing you with one or more examples to show you how it could work in the wild. You’ll find both the API request and API response in all the available output formats for each API call. Follow the links below for the details.\n\nThe current API version is 1.1, the root URL is located at https://api.musixmatch.com/ws/1.1/\n\nSupported input parameters can be found on the page [Input Parameters](https://developer.musixmatch.com/documentation/input-parameters). Use UTF-8 to encode arguments when calling API methods.\n\nEvery response includes a status_code. A list of all status codes can be consulted at [Status Codes](https://developer.musixmatch.com/documentation/status-codes).\n\n## Music meta data\nThe musiXmatch api is built around lyrics, but there are many other data we provide through the api that can be used to improve every existent music service.\n\n## Track\nInside the track object you can get the following extra information:\n\n### TRACK RATING\n\nThe track rating is a score 0-100 identifying how popular is a song in musixmatch.\n\nYou can use this information to sort search results, like the most popular songs of an artist, of a music genre, of a lyrics language.\n\n### INSTRUMENTAL AND EXPLICIT FLAGS\n\nThe instrumental flag identifies songs with music only, no lyrics.\n\nThe explicit flag identifies songs with explicit lyrics or explicit title. We're able to identify explicit words and set the flag for the most common languages.\n\n### FAVOURITES\n\nHow many users have this song in their list of favourites.\n\nCan be used to sort tracks by num favourite to identify more popular tracks within a set.\n\n### MUSIC GENRE\n\nThe music genere of the song.\n\nCan be used to group songs by genre, as input for similarity alghorithms, artist genre identification, navigate songs by genere, etc.\n\n### SONG TITLES TRANSLATIONS\n\nThe track title, as translated in different lanauages, can be used to display the right writing for a given user, example:\n\nLIES (Bigbang) becomes 在光化門 in chinese\nHALLELUJAH (Bigbang) becomes ハレルヤ in japanese\n\n\n## Artist\nInside the artist object you can get the following nice extra information:\n\n### COMMENTS AND COUNTRY\n\nAn artist comment is a short snippet of text which can be mainly used for disambiguation.\n\nThe artist country is the born country of the artist/group\n\nThere are two perfect search result if you search by artist with the keyword \"U2\". Indeed there are two distinct music groups with this same name, one is the most known irish group of Bono Vox, the other is a less popular (world wide speaking) group from Japan.\n\nHere's how you can made use of the artist comment in your search result page:\n\nU2 (Irish rock band)\nU2 (あきやまうに)\nYou can also show the artist country for even better disambiguation:\n\nU2 (Irish rock band) from Ireland\nU2 (あきやまうに) from Japan\nARTIST TRANSLATIONS\n\nWhen you create a world wide music related service you have to take into consideration to display the artist name in the user's local language. These translation are also used as aliases to improve the search results.\n\nLet's use PSY for this example.\n\nWestern people know him as PSY but korean want to see the original name 싸이.\n\nUsing the name translations provided by our api you can show to every user the writing they expect to see.\n\nFurthermore, when you search for \"psy gangnam style\" or \"싸이 gangnam style\" with our search/match api you will still be able to find the song.\n\n### ARTIST RATING\n\nThe artist rating is a score 0-100 identifying how popular is an artist in musixmatch.\n\nYou can use this information to build charts, for suggestions, to sort search results. In the example above about U2, we use the artist rating to show the irish band before the japanese one in our serp.\n\n### ARTIST MUSIC GENRE\n\nWe provide one or more main artist genre, this information can be used to calculate similar artist, suggestions, or the filter a search by artist genre.\n\n\n\n## Album\nInside the album object you can get the following nice extra information:\n\n### ALBUM RATING\n\nThe album rating is a score 0-100 identifying how popular is an album in musixmatch.\n\nYou can use this information to sort search results, like the most popular albums of an artist.\n\n### ALBUM RATING\n\nThe album rating is a score 0-100 identifying how popular is an album in musixmatch.\n\nYou can use this information to sort search results, like the most popular albums of an artist.\n\n### ALBUM COPYRIGHT AND LABEL\n\nFor most of our albums we can provide extra information like for example:\n\nLabel: Universal-Island Records Ltd.\nCopyright: (P) 2013 Rubyworks, under license to Columbia Records, a Division of Sony Music Entertainment.\nALBUM TYPE AND RELEASE DATE\n\nThe album official release date can be used to sort an artist's albums view starting by the most recent one.\n\nAlbum can also be filtered or grouped by type: Single, Album, Compilation, Remix, Live. This can help to build an artist page with a more organized structure.\n\n### ALBUM MUSIC GENRE\n\nFor most of the albums we provide two groups of music genres. Primary and secondary. This information can be used to help user navigate albums by genre.\n\nAn example could be:\n\nPrimary genere: POP\nSecondary genre: K-POP or Mandopop\n",
+        "license": {
+          "name": "MIT",
+          "url": "http://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "http://musixmatch.com/apiterms/",
+        "title": "Musixmatch API",
+        "version": "1.1.0",
+        "x-apisguru-categories": [
+          "media"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Musixmatch_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/musixmatch/musixmatch-sdk/master/swagger/swagger.yaml",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "musixmatch.com"
+      },
+      "externalDocs": {
+        "description": "Find out more about Musixmatch API",
+        "url": "https://developer.musixmatch.com/"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/musixmatch.com/1.1.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/musixmatch.com/1.1.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/musixmatch.com/1.1.0.json"
+    }
+  }
+}

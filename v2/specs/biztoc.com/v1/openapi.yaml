@@ -1,0 +1,30 @@
+openapi: 3.0.1
+servers:
+  - url: https://ai.biztoc.com
+info:
+  description: Get the latest business news articles.
+  title: BizToc
+  version: v1
+  x-apisguru-categories:
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_biztoc.com_favicon.png
+  x-origin:
+    - format: openapi
+      url: https://ai.biztoc.com/openapi.yaml
+      version: "3.0"
+  x-providerName: biztoc.com
+paths:
+  /ai/news:
+    get:
+      operationId: getNews
+      parameters:
+        - description: Used to query news articles on their title and body. For example, ?query=apple will return news stories that have 'apple' in their title or body.
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+      summary: Retrieves the latest news whose content contains the query string.

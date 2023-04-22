@@ -1,0 +1,593 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: softwareengineering@parliament.uk
+    name: UK Parliament
+    url: https://www.parliament.uk/
+  description: An API exposing details of the treaties laid before Parliament.
+  title: Treaties API
+  version: v1
+  x-apisguru-categories:
+    - open_data
+  x-origin:
+    - format: openapi
+      url: https://treaties-api.parliament.uk/swagger/v1/swagger.json
+      version: "3.0"
+  x-providerName: parliament.uk
+  x-serviceName: treaties
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  "/api/BusinessItem/{id}":
+    get:
+      operationId: GetBusinessItemById
+      parameters:
+        - description: Business item with the ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            description: Business item with the ID specified
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BusinessItemResource"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/BusinessItemResource"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/BusinessItemResource"
+          description: The requested business item
+        "400":
+          description: Bad Request
+        "404":
+          description: If the item doesn't exist
+      summary: Returns business item by ID.
+      tags:
+        - BusinessItem
+  /api/GovernmentOrganisation:
+    get:
+      operationId: GetOrganisations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GovernmentOrganisationResourceCollection"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GovernmentOrganisationResourceCollection"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GovernmentOrganisationResourceCollection"
+          description: Success
+      summary: Returns all government organisations.
+      tags:
+        - GovernmentOrganisation
+  /api/SeriesMembership:
+    get:
+      operationId: GetSeriesMemberships
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SeriesMembershipResourceCollection"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SeriesMembershipResourceCollection"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SeriesMembershipResourceCollection"
+          description: Success
+      summary: Returns all series memberships.
+      tags:
+        - SeriesMembership
+  /api/Treaty:
+    get:
+      operationId: GetTreaties
+      parameters:
+        - description: Treaties which contains the search text specified
+          in: query
+          name: SearchText
+          schema:
+            description: Treaties which contains the search text specified
+            nullable: true
+            type: string
+        - description: Treaties with the government organisation id specified
+          in: query
+          name: GovernmentOrganisationId
+          schema:
+            description: Treaties with the government organisation id specified
+            format: int32
+            maximum: 2147483647
+            minimum: 1
+            nullable: true
+            type: integer
+        - description: Treaties with the series membership type specified
+          in: query
+          name: Series
+          schema:
+            $ref: "#/components/schemas/SeriesMembershipType"
+        - description: Treaties where the parliamentary process is concluded or notconcluded
+          in: query
+          name: ParliamentaryProcess
+          schema:
+            $ref: "#/components/schemas/ParliamentaryProcess"
+        - description: Treaties which contain a scheduled debate
+          in: query
+          name: DebateScheduled
+          schema:
+            description: Treaties which contain a scheduled debate
+            nullable: true
+            type: boolean
+        - description: Treaties which contain a motion to not ratify
+          in: query
+          name: MotionToNotRatify
+          schema:
+            description: Treaties which contain a motion to not ratify
+            nullable: true
+            type: boolean
+        - description: Treaties which are recommended to not ratify
+          in: query
+          name: RecommendedNotRatify
+          schema:
+            description: Treaties which are recommended to not ratify
+            nullable: true
+            type: boolean
+        - description: Treaties which are laid in the specified house
+          in: query
+          name: House
+          schema:
+            $ref: "#/components/schemas/House"
+        - description: The number of records to skip from the first, default is 0
+          in: query
+          name: Skip
+          schema:
+            description: The number of records to skip from the first, default is 0
+            format: int32
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+        - description: The number of records to return, default is 20
+          in: query
+          name: Take
+          schema:
+            description: The number of records to return, default is 20
+            format: int32
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TreatyResourceCollection"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/TreatyResourceCollection"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/TreatyResourceCollection"
+          description: A list of treaties
+        "400":
+          description: Bad Request
+      summary: Returns a list of treaties.
+      tags:
+        - Treaty
+  "/api/Treaty/{id}":
+    get:
+      operationId: GetTreatyById
+      parameters:
+        - description: Treaty with ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            description: Treaty with ID specified
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TreatyResource"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/TreatyResource"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/TreatyResource"
+          description: Details of the requested treaty
+        "400":
+          description: Bad Request
+        "404":
+          description: If the treaty can't be found
+      summary: Returns a treaty by ID.
+      tags:
+        - Treaty
+  "/api/Treaty/{id}/BusinessItems":
+    get:
+      operationId: GetBusinessItemsByTreatyId
+      parameters:
+        - description: Business items belonging to treaty with the ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            description: Business items belonging to treaty with the ID specified
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BusinessItemResourceCollection"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/BusinessItemResourceCollection"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/BusinessItemResourceCollection"
+          description: The business items for the requested treaty
+        "400":
+          description: Bad Request
+        "404":
+          description: If the treaty cannot be found
+      summary: Returns business items belonging to the treaty with ID.
+      tags:
+        - Treaty
+components:
+  schemas:
+    BusinessItem:
+      additionalProperties: false
+      properties:
+        businessItemUri:
+          format: uri
+          nullable: true
+          type: string
+        houseId:
+          nullable: true
+          type: string
+        houseName:
+          nullable: true
+          type: string
+        houseUri:
+          format: uri
+          nullable: true
+          type: string
+        houses:
+          items:
+            $ref: "#/components/schemas/BusinessItemHouse"
+          nullable: true
+          type: array
+        id:
+          nullable: true
+          type: string
+        itemDate:
+          format: date-time
+          type: string
+        link:
+          nullable: true
+          type: string
+        procedureStepId:
+          nullable: true
+          type: string
+        procedureStepUri:
+          format: uri
+          nullable: true
+          type: string
+        sequence:
+          format: int32
+          type: integer
+        stepName:
+          nullable: true
+          type: string
+        treatyId:
+          nullable: true
+          type: string
+        treatyUri:
+          format: uri
+          nullable: true
+          type: string
+        workpackageProcedureUri:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    BusinessItemHouse:
+      additionalProperties: false
+      properties:
+        house:
+          $ref: "#/components/schemas/House"
+        name:
+          nullable: true
+          type: string
+      type: object
+    BusinessItemResource:
+      additionalProperties: false
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          nullable: true
+          type: array
+        value:
+          $ref: "#/components/schemas/BusinessItem"
+      type: object
+    BusinessItemResourceCollection:
+      additionalProperties: false
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/BusinessItemResource"
+          nullable: true
+          type: array
+        itemsPerPage:
+          format: int32
+          type: integer
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          nullable: true
+          type: array
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    Department:
+      additionalProperties: false
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          nullable: true
+          type: string
+      type: object
+    GovernmentOrganisation:
+      additionalProperties: false
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          nullable: true
+          type: string
+      type: object
+    GovernmentOrganisationResource:
+      additionalProperties: false
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          nullable: true
+          type: array
+        value:
+          $ref: "#/components/schemas/GovernmentOrganisation"
+      type: object
+    GovernmentOrganisationResourceCollection:
+      additionalProperties: false
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/GovernmentOrganisationResource"
+          nullable: true
+          type: array
+        itemsPerPage:
+          format: int32
+          type: integer
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          nullable: true
+          type: array
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    House:
+      enum:
+        - Commons
+        - Lords
+      type: string
+    Link:
+      additionalProperties: false
+      properties:
+        href:
+          nullable: true
+          type: string
+        method:
+          nullable: true
+          type: string
+        rel:
+          nullable: true
+          type: string
+      type: object
+    ParliamentaryConclusion:
+      enum:
+        - NotConcluded
+        - CanRatify
+        - CantRatify
+      type: string
+    ParliamentaryProcess:
+      enum:
+        - NotConcluded
+        - Concluded
+      type: string
+    SeriesMembership:
+      additionalProperties: false
+      properties:
+        description:
+          nullable: true
+          type: string
+        id:
+          format: int32
+          type: integer
+      type: object
+    SeriesMembershipResource:
+      additionalProperties: false
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          nullable: true
+          type: array
+        value:
+          $ref: "#/components/schemas/SeriesMembership"
+      type: object
+    SeriesMembershipResourceCollection:
+      additionalProperties: false
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/SeriesMembershipResource"
+          nullable: true
+          type: array
+        itemsPerPage:
+          format: int32
+          type: integer
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          nullable: true
+          type: array
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    SeriesMembershipType:
+      enum:
+        - CountrySeriesMembership
+        - EuropeanUnionSeriesMembership
+        - MiscellaneousSeriesMembership
+      type: string
+    Treaty:
+      additionalProperties: false
+      properties:
+        commandPaperNumber:
+          format: int32
+          nullable: true
+          type: integer
+        commandPaperPrefix:
+          nullable: true
+          type: string
+        commonsLayingDate:
+          format: date-time
+          type: string
+        countrySeriesItemCitation:
+          nullable: true
+          type: string
+        countrySeriesMembership:
+          format: uri
+          nullable: true
+          type: string
+        debateScheduled:
+          nullable: true
+          type: string
+        europeanSeriesItemCitation:
+          nullable: true
+          type: string
+        europeanUnionSeriesMembership:
+          format: uri
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        layingBodyDepartment:
+          $ref: "#/components/schemas/Department"
+        layingBodyDepartmentId:
+          format: int32
+          nullable: true
+          type: integer
+        layingBodyName:
+          nullable: true
+          type: string
+        leadDepartment:
+          $ref: "#/components/schemas/Department"
+        leadGovernmentOrganisationDepartmentId:
+          format: int32
+          nullable: true
+          type: integer
+        leadGovernmentOrganisationGroupName:
+          nullable: true
+          type: string
+        lordsLayingDate:
+          format: date-time
+          type: string
+        miscSeriesItemCitation:
+          nullable: true
+          type: string
+        miscellaneousSeriesMembership:
+          format: uri
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        parliamentaryConclusion:
+          $ref: "#/components/schemas/ParliamentaryConclusion"
+        treatySeriesMembership:
+          $ref: "#/components/schemas/TreatySeriesMembership"
+        uri:
+          format: uri
+          nullable: true
+          type: string
+        webLink:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    TreatyResource:
+      additionalProperties: false
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          nullable: true
+          type: array
+        value:
+          $ref: "#/components/schemas/Treaty"
+      type: object
+    TreatyResourceCollection:
+      additionalProperties: false
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/TreatyResource"
+          nullable: true
+          type: array
+        itemsPerPage:
+          format: int32
+          type: integer
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          nullable: true
+          type: array
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    TreatySeriesMembership:
+      additionalProperties: false
+      properties:
+        citation:
+          nullable: true
+          type: string
+        seriesMembershipType:
+          $ref: "#/components/schemas/SeriesMembershipType"
+        uri:
+          format: uri
+          nullable: true
+          type: string
+      type: object

@@ -1,0 +1,2273 @@
+openapi: 3.0.0
+servers:
+  - url: https://raw.github.com/rtckit/media/master/eqivo/readme-splash.png
+info:
+  description: Eqivo OpenApi Specification
+  title: Eqivo API
+  version: v0.1
+  x-apisguru-categories:
+    - collaboration
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_github_profile_image
+  x-origin:
+    - format: openapi
+      url: https://eqivo.org/openapi.yaml
+      version: "3.0"
+  x-providerName: github.com
+tags:
+  - description: API methods responsible for spawning and manipulating individual calls
+    name: Call
+  - description: API methods responsible for managing conference rooms
+    name: Conference
+paths:
+  /v0.1/BulkCall/:
+    post:
+      description: Initiates multiple concurrent outbound calls
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/BulkCallParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkCallResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/BulkCall/
+      tags:
+        - Call
+  /v0.1/Call/:
+    post:
+      description: Initiates an outbound call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CallParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CallResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/Call/
+      tags:
+        - Call
+  /v0.1/CancelScheduledHangup/:
+    post:
+      description: Cancels a scheduled hangup for a call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CancelScheduledHangupParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelScheduledHangupResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/CancelScheduledHangup/
+      tags:
+        - Call
+  /v0.1/CancelScheduledPlay/:
+    post:
+      description: Cancels a scheduled playback request
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CancelScheduledPlayParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelScheduledPlayResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/CancelScheduledPlay/
+      tags:
+        - Call
+  /v0.1/ConferenceDeaf/:
+    post:
+      description: Blocks audio to one or more conference members
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceDeafParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceDeafResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceDeaf/
+      tags:
+        - Conference
+  /v0.1/ConferenceHangup/:
+    post:
+      description: Kicks one or more conference members, without playing the kick sound
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceHangupParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceHangupResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceHangup/
+      tags:
+        - Conference
+  /v0.1/ConferenceKick/:
+    post:
+      description: Kicks one or more conference members
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceKickParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceKickResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceKick/
+      tags:
+        - Conference
+  /v0.1/ConferenceList/:
+    post:
+      description: Returns a list of all established conferences
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceListParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceListResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceList/
+      tags:
+        - Conference
+  /v0.1/ConferenceListMembers/:
+    post:
+      description: Retrieves the member list for a given conference
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceListMembersParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceListMembersResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceListMembers/
+      tags:
+        - Conference
+  /v0.1/ConferenceMute/:
+    post:
+      description: Blocks audio from one or more conference members
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceMuteParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceMuteResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceMute/
+      tags:
+        - Conference
+  /v0.1/ConferencePlay/:
+    post:
+      description: Plays media to one or more conference members
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferencePlayParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferencePlayResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferencePlay/
+      tags:
+        - Conference
+  /v0.1/ConferenceRecordStart/:
+    post:
+      description: Initiates a conference recording
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceRecordStartParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceRecordStartResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceRecordStart/
+      tags:
+        - Conference
+  /v0.1/ConferenceRecordStop/:
+    post:
+      description: Stops a conference recording
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceRecordStopParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceRecordStopResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceRecordStop/
+      tags:
+        - Conference
+  /v0.1/ConferenceSpeak/:
+    post:
+      description: Plays synthesized speech into a conference
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceSpeakParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceSpeakResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceSpeak/
+      tags:
+        - Conference
+  /v0.1/ConferenceUndeaf/:
+    post:
+      description: Restores audio to one or more conference members
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceUndeafParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceUndeafResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceUndeaf/
+      tags:
+        - Conference
+  /v0.1/ConferenceUnmute/:
+    post:
+      description: Restores audio from one or more conference members
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ConferenceUnmuteParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConferenceUnmuteResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ConferenceUnmute/
+      tags:
+        - Conference
+  /v0.1/GroupCall/:
+    post:
+      description: Initiate multiple racing outbound calls
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/GroupCallParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupCallResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/GroupCall/
+      tags:
+        - Call
+  /v0.1/HangupAllCalls/:
+    post:
+      description: Hangs up all established calls
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HangupAllCallsResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/HangupAllCalls/
+      tags:
+        - Call
+  /v0.1/HangupCall/:
+    post:
+      description: Hangs up a specific call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/HangupCallParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HangupCallResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/HangupCall/
+      tags:
+        - Call
+  /v0.1/Play/:
+    post:
+      description: Plays media into a live call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PlayParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/Play/
+      tags:
+        - Call
+  /v0.1/PlayStop/:
+    post:
+      description: Interrupts media playback on a given call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PlayStopParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayStopResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/PlayStop/
+      tags:
+        - Call
+  /v0.1/RecordStart/:
+    post:
+      description: Initiates recording of a given call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/RecordStartParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordStartResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/RecordStart/
+      tags:
+        - Call
+  /v0.1/RecordStop/:
+    post:
+      description: Stops the recording of a given call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/RecordStopParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordStopResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/RecordStop/
+      tags:
+        - Call
+  /v0.1/ScheduleHangup/:
+    post:
+      description: Schedules a hangup for a specific call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ScheduleHangupParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScheduleHangupResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/ScheduleHangup/
+      tags:
+        - Call
+  /v0.1/SchedulePlay/:
+    post:
+      description: Schedules media playback for a specific call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SchedulePlayParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SchedulePlayResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/SchedulePlay/
+      tags:
+        - Call
+  /v0.1/SendDigits/:
+    post:
+      description: Emits DMTF tones to a call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SendDigitsParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SendDigitsResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/SendDigits/
+      tags:
+        - Call
+  /v0.1/SoundTouch/:
+    post:
+      description: Applies SoundTouch effects to a live call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SoundTouchParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoundTouchResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/SoundTouch/
+      tags:
+        - Call
+  /v0.1/SoundTouchStop/:
+    post:
+      description: Removes SoundTouch effects from a given call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SoundTouchStopParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoundTouchStopResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/SoundTouchStop/
+      tags:
+        - Call
+  /v0.1/TransferCall/:
+    post:
+      description: Replaces the RestXML flow of a live call
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TransferCallParameters"
+        description: POST parameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransferCallResponse"
+          description: Response
+      security:
+        - basicAuth: []
+      summary: /v0.1/TransferCall/
+      tags:
+        - Call
+components:
+  schemas:
+    BulkCallParameters:
+      properties:
+        AnswerUrl:
+          description: Fully qualified URL which will provide the RestXML once the call connects
+          example: https://example.com/answer/
+          type: string
+        CallerName:
+          description: Caller Name to be set for the call
+          example: Bulk Test
+          type: string
+        ConfirmKey:
+          description: DTMF tone the called party must send to accept the call
+          example: "1"
+          type: string
+        ConfirmSound:
+          description: Remote URL to fetch with POST HTTP request which must return a RestXML with Play, Wait and/or Speak Elements only (all others are ignored). This RESTXML is played to the called party when he answered
+          example: https://example.com/confirm_sound/
+          type: string
+        CoreUUID:
+          description: Core UUID of the desired FreeSWITCH instance (an Eqivo extension)
+          example: 2e8e6275-7cfe-4e3c-a8d6-25316b4519c7
+          type: string
+        Delimiter:
+          description: Any character, except `/` and `,`, which will be used as a separator within several parameters
+          example: <
+          type: string
+        ExtraDialString:
+          description: Additional [channel variables](https://freeswitch.org/confluence/display/FREESWITCH/Channel+Variables) to be added to the originate FreeSWITCH API call.
+          example: bridge_early_media=true,hangup_after_bridge=true
+          type: string
+        From:
+          description: Phone number to be used as Caller ID
+          example: "15551234567"
+          type: string
+        GatewayCodecs:
+          description: List of codec(s) to be used for each gateway. Enclose codec groups in single quotes
+          example: "'PCMA,PCMU','G729,PCMU','PCMA,G729'"
+          type: string
+        GatewayRetries:
+          description: List of maximum retry counts for each gateway
+          example: 3,1,2
+          type: string
+        GatewayTimeouts:
+          description: List of maximum timeout amounts (in seconds) for each gateway
+          example: 10,30,20
+          type: string
+        Gateways:
+          description: Comma separated FreeSWITCH gateway strings. When multiple gateways are specified, they will be tried sequentially (failover)
+          example: user/,sofia/gateway/PSTNgateway1/,sofia/gateway/PSTNgateway2/
+          type: string
+        HangupOnRing:
+          description: Schedules the call's hangup at a given time offset (in seconds) after the destination starts ringing
+          example: 90
+          minimum: 1
+          type: integer
+        HangupUrl:
+          description: Fully qualified URL to which the call hangup notification will be POSTed. `HangupCause` is added to the usual call [call notification parameters](#/components/schemas/CallNotificationParameters)
+          example: https://example.com/hangup/
+          type: string
+        RejectCauses:
+          default: NO_ANSWER,ORIGINATOR_CANCEL,ALLOTTED_TIMEOUT,NO_USER_RESPONSE,CALL_REJECTED
+          description: Comma separated reject causes
+          example: USER_BUSY,NO_ANSWER
+          type: string
+        RingUrl:
+          description: Fully qualified URL to which the call ringing notification will be POSTed. `RequestUUID` and `CallUUID` is added to the usual [call notification parameters](#/components/schemas/CallNotificationParameters)
+          example: https://example.com/ring/
+          type: string
+        SendDigits:
+          description: DTMF tones to be sent when the call is answered. Each occurrence of `w` implies a 0.5 seconds delay whereas `W` will apply a whole second delay. To alter the tone duration (by default, 2000ms), append `@` and the length in milliseconds at the end of the string
+          example: 1w2w3W#*@1500
+          type: string
+        SendOnPreanswer:
+          description: When set to `true`, DTMF tones will be sent as early media rather than when the call is answered
+          example: false
+          type: boolean
+        TimeLimit:
+          description: Schedules the call's hangup at a given time offset (in seconds) after the call is answered
+          example: 90
+          minimum: 1
+          type: integer
+        To:
+          description: Phone number to be called
+          example: "15557654321"
+          type: string
+      required:
+        - Delimiter
+        - From
+        - To
+        - Gateways
+        - AnswerUrl
+      type: object
+    BulkCallResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - BulkCalls Request Executed
+            - Mandatory Parameters Missing
+            - This Delimiter is not allowed
+            - BulkCalls should be used for at least 2 numbers
+            - "'To' parameter length does not match 'Gateways' Length"
+            - AnswerUrl is not Valid
+            - HangupUrl is not Valid
+            - RingUrl is not Valid
+            - Unknown Core UUID
+          example: BulkCalls Request Executed
+          type: string
+        RequestUUID:
+          description: Unique identifiers of each Call request (UUIDv4)
+          example:
+            - fc92f3f4-3777-43ed-b269-5b4a0d474b12
+            - 22f94a34-2890-4f18-ab99-5c47e25dd3c3
+            - d1337342-0225-465d-b7bb-1b5d88eb39d2
+          items:
+            type: string
+          type: array
+        RestApiServer:
+          description: API server which handled this request (an Eqivo extension)
+          example: localhost
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - RequestUUID
+        - Success
+        - RestApiServer
+      type: object
+    CallNotificationParameters:
+      properties:
+        ALegRequestUUID:
+          description: A leg call request's unique identifier
+          example: 5a4ef7cf-dc08-4cd3-a9d0-6d1555ba3309
+          type: string
+        ALegUUID:
+          description: A leg call's unique identifier, assigned by FreeSWITCH
+          example: 8dd5a1e0-6621-4a07-98b3-e033b014fba7
+          type: string
+        AnsweredBy:
+          description: Answering actor, when answering machine detection is enabled
+          enum:
+            - machine_start
+            - machine_end_beep
+            - machine_end_other
+            - human
+            - unknown
+          example: human
+          type: string
+        CallStatus:
+          description: Call's current status
+          enum:
+            - ringing
+            - early-media
+            - answer
+            - in-progress
+            - completed
+          example: in-progress
+          type: string
+        CallUUID:
+          description: Call's unique identifier, assigned by FreeSWITCH
+          example: 7ff22856-357e-4b77-812c-22d28cbb8982
+          type: string
+        CallerName:
+          description: Caller name set for the call
+          example: Alice
+          type: string
+        CoreUUID:
+          description: FreeSWITCH's instance unique identifier (Eqivo extension)
+          example: b14e0893-98ef-44b6-8e4b-e4bcf937bfa9
+          type: string
+        Direction:
+          description: Call's direction
+          enum:
+            - inbound
+            - outbound
+          example: outbound
+          type: string
+        ForwardedFrom:
+          description: Original call destination (before diversion)
+          example: "15551239876"
+          type: string
+        From:
+          description: Caller ID set for the call
+          example: "15557654321"
+          type: string
+        MachineDetectionDuration:
+          description: Actual answering machine detection assessment duration (in milliseconds)
+          example: "19"
+          type: integer
+        RestApiServer:
+          description: Eqivo Rest API server which controls the call (Eqivo extension)
+          example: localhost
+          type: string
+        ScheduledHangupId:
+          description: Unique identifier of the scheduled hangup task
+          example: 8f4a3488-3283-408b-bf6f-b957d5d4cf00
+          type: string
+        To:
+          description: Called phone number
+          example: "15551234567"
+          type: string
+      required:
+        - To
+        - Direction
+        - From
+        - CallerName
+        - CallUUID
+        - CallStatus
+        - CoreUUID
+        - RestApiServer
+      type: object
+    CallParameters:
+      properties:
+        AnswerUrl:
+          description: Fully qualified URL which will provide the RestXML once the call connects
+          example: https://example.com/answer/
+          type: string
+        AsyncAMD:
+          default: false
+          description: When set to `true`, the call flow execution is blocked until answering machine detection is complete (an Eqivo extension)
+          example: true
+          type: boolean
+        AsyncAmdStatusCallback:
+          description: Fully qualified URL to which the answering machine detection result will be sent. `AnsweredBy` and `MachineDetectionDuration` are appended to the usual [call notification parameters](#/components/schemas/CallNotificationParameters) (an Eqivo extension)
+          type: string
+        AsyncAmdStatusCallbackMethod:
+          default: POST
+          description: HTTP method to be used when answering machine detection is completed (an Eqivo extension)
+          enum:
+            - POST
+            - GET
+          example: GET
+          type: string
+        CallerName:
+          description: Caller Name to be set for the call
+          example: Test
+          type: string
+        CoreUUID:
+          description: Core UUID of the desired FreeSWITCH instance (an Eqivo extension)
+          example: 45521fc6-a4b3-42b6-96ad-9136256be216
+          type: string
+        ExtraDialString:
+          description: Additional [channel variables](https://freeswitch.org/confluence/display/FREESWITCH/Channel+Variables) to be added to the originate FreeSWITCH API call.
+          example: bridge_early_media=true,hangup_after_bridge=true
+          type: string
+        From:
+          description: Phone number to be used as Caller ID
+          example: "15551234567"
+          type: string
+        GatewayCodecs:
+          description: List of codec(s) to be used for each gateway. Enclose codec groups in single quotes
+          example: "'PCMA,PCMU','G729,PCMU','PCMA,G729'"
+          type: string
+        GatewayRetries:
+          description: List of maximum retry counts for each gateway
+          example: 3,1,2
+          type: string
+        GatewayTimeouts:
+          description: List of maximum timeout amounts (in seconds) for each gateway
+          example: 10,30,20
+          type: string
+        Gateways:
+          description: Comma separated FreeSWITCH gateway strings. When multiple gateways are specified, they will be tried sequentially (failover)
+          example: user/,sofia/gateway/PSTNgateway1/,sofia/gateway/PSTNgateway2/
+          type: string
+        HangupOnRing:
+          description: Schedules the call's hangup at a given time offset (in seconds) after the destination starts ringing
+          example: 90
+          minimum: 1
+          type: integer
+        HangupUrl:
+          description: Fully qualified URL to which the call hangup notification will be POSTed. `HangupCause` is added to the usual call [call notification parameters](#/components/schemas/CallNotificationParameters)
+          example: https://example.com/hangup/
+          type: string
+        MachineDetection:
+          description: Enables answering machine detection; optionally, it waits until the greeting message has been played back (an Eqivo extension)
+          enum:
+            - Enable
+            - DetectMessageEnd
+          example: Enable
+          type: string
+        MachineDetectionSilenceTimeout:
+          default: 5000
+          description: Initial silence threshold (in milliseconds, an Eqivo extension)
+          example: 3000
+          maximum: 10000
+          minimum: 2000
+          type: integer
+        MachineDetectionSpeechEndThreshold:
+          default: 1200
+          description: Silence threshold (in milliseconds, an Eqivo extension)
+          example: 1000
+          maximum: 5000
+          minimum: 500
+          type: integer
+        MachineDetectionSpeechThreshold:
+          default: 2400
+          description: Speech activity/utterance threshold (in milliseconds, an Eqivo extension)
+          example: 2000
+          maximum: 6000
+          minimum: 1000
+          type: integer
+        MachineDetectionTimeout:
+          default: 30
+          description: Amount of time (in seconds) allotted for answering machine detection assessment (an Eqivo extension)
+          example: 5
+          maximum: 59
+          minimum: 3
+          type: integer
+        RingUrl:
+          description: Fully qualified URL to which the call ringing notification will be POSTed. `RequestUUID` and `CallUUID` is added to the usual [call notification parameters](#/components/schemas/CallNotificationParameters)
+          example: https://example.com/ring/
+          type: string
+        SendDigits:
+          description: DTMF tones to be sent when the call is answered. Each occurrence of `w` implies a 0.5 seconds delay whereas `W` will apply a whole second delay. To alter the tone duration (by default, 2000ms), append `@` and the length in milliseconds at the end of the string
+          example: 1w2w3W#*@1500
+          type: string
+        SendOnPreanswer:
+          description: When set to `true`, DTMF tones will be sent as early media rather than when the call is answered
+          example: false
+          type: boolean
+        TimeLimit:
+          description: Schedules the call's hangup at a given time offset (in seconds) after the call is answered
+          example: 90
+          minimum: 1
+          type: integer
+        To:
+          description: Phone number to be called
+          example: "15557654321"
+          type: string
+      required:
+        - From
+        - To
+        - Gateways
+        - AnswerUrl
+      type: object
+    CallResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Call Request Executed
+            - Mandatory Parameters Missing
+            - AnswerUrl is not Valid
+            - HangupUrl is not Valid
+            - RingUrl is not Valid
+            - Unknown Core UUID
+          example: Call Request Executed
+          type: string
+        RequestUUID:
+          description: Unique identifier of the Call request (UUIDv4)
+          example: fc92f3f4-3777-43ed-b269-5b4a0d474b12
+          type: string
+        RestApiServer:
+          description: API server which handled this request (an Eqivo extension)
+          example: localhost
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - RequestUUID
+        - Success
+        - RestApiServer
+      type: object
+    CancelScheduledHangupParameters:
+      properties:
+        SchedHangupId:
+          description: Unique identifier returned when scheduled hangup was originally requested
+          example: ea428fbd-ac9b-498c-8bb2-a36ac49f10fd
+          type: string
+      required:
+        - SchedHangupId
+      type: object
+    CancelScheduledHangupResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Scheduled Hangup Cancelation Executed
+            - SchedHangupId Parameter must be present
+            - Scheduled Hangup Cancelation Failed -- ID not found
+            - Scheduled Hangup Cancelation Failed
+          example: Scheduled Hangup Cancelation Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    CancelScheduledPlayParameters:
+      properties:
+        SchedPlayId:
+          description: Unique identifier returned when scheduled playback was originally requested
+          example: ea428fbd-ac9b-498c-8bb2-a36ac49f10fd
+          type: string
+      required:
+        - SchedPlayId
+      type: object
+    CancelScheduledPlayResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Scheduled Play Cancelation Executed
+            - SchedPlayId Parameter must be present
+            - Scheduled Play Cancelation Failed -- ID not found
+            - Scheduled Play Cancelation Failed
+          example: Scheduled Play Cancelation Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    ConferenceDeafParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        MemberID:
+          description: List of comma separated member IDs to be affected; `all` shorthand is available too.
+          example: 13,42
+          type: string
+      required:
+        - ConferenceName
+        - MemberID
+      type: object
+    ConferenceDeafResponse:
+      properties:
+        Members:
+          description: List of affected members
+          example:
+            - "13"
+            - "42"
+          items:
+            type: string
+          type: array
+        Message:
+          description: Response message
+          enum:
+            - Conference Deaf Executed
+            - ConferenceName Parameter must be present
+            - MemberID Parameter must be present
+            - Conference Deaf Failed -- Conference not found
+          example: Conference Deaf Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    ConferenceHangupParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        MemberID:
+          description: List of comma separated member IDs to be affected; `all` shorthand is available too.
+          example: 13,42
+          type: string
+      required:
+        - ConferenceName
+        - MemberID
+      type: object
+    ConferenceHangupResponse:
+      properties:
+        Members:
+          description: List of affected members
+          example:
+            - "13"
+            - "42"
+          items:
+            type: string
+          type: array
+        Message:
+          description: Response message
+          enum:
+            - Conference Hangup Executed
+            - ConferenceName Parameter must be present
+            - MemberID Parameter must be present
+            - Conference Hangup Failed -- Conference not found
+          example: Conference Hangup Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    ConferenceKickParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        MemberID:
+          description: List of comma separated member IDs to be affected; `all` shorthand is available too.
+          example: 13,42
+          type: string
+      required:
+        - ConferenceName
+        - MemberID
+      type: object
+    ConferenceKickResponse:
+      properties:
+        Members:
+          description: List of affected members
+          example:
+            - "13"
+            - "42"
+          items:
+            type: string
+          type: array
+        Message:
+          description: Response message
+          enum:
+            - Conference Kick Executed
+            - ConferenceName Parameter must be present
+            - MemberID Parameter must be present
+            - Conference Kick Failed -- Conference not found
+          example: Conference Kick Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    ConferenceListMembersParameters:
+      properties:
+        CallUUIDFilter:
+          description: Restricts listed calls to the provided values (comma separated call UUID list)
+          example: 872066e1-fd89-4c57-8733-93c113980bc9,55e4214a-604a-4b56-82e4-97834b0d524e
+          type: string
+        ConferenceName:
+          description: Name of the conference
+          example: Room402
+          type: string
+        DeafFilter:
+          default: "false"
+          description: Restricts listed members to deaf ones
+          example: "true"
+          type: boolean
+        MemberFilter:
+          description: Restricts listed members to the provided values (comma separated member ID list)
+          example: 13,42
+          type: string
+        MutedFilter:
+          default: "false"
+          description: Restricts listed members to muted ones
+          example: "true"
+          type: boolean
+      required:
+        - ConferenceName
+      type: object
+    ConferenceListMembersResponse:
+      properties:
+        List:
+          description: List of established conferences
+          example:
+            Room402:
+              ConferenceMemberCount: "1"
+              ConferenceName: Room402
+              ConferenceRunTime: "79"
+              ConferenceUUID: 5105acbf-6d43-4d67-8536-19999924eba4
+              Members:
+                - CallName: DeskPhone985
+                  CallNumber: "3985"
+                  CallUUID: 8f72b48e-d97e-425a-a6e6-ae5a6a0dc231
+                  Deaf: false
+                  JoinTime: "79"
+                  MemberID: "14"
+                  Muted: false
+          type: object
+        Message:
+          description: Response message
+          enum:
+            - Conference ListMembers Executed
+            - ConferenceName Parameter must be present
+            - Conference ListMembers Failed to parse result
+            - Conference ListMembers Failed -- Conference not found
+          example: Conference ListMembers Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+        - List
+      type: object
+    ConferenceListParameters:
+      properties:
+        CallUUIDFilter:
+          description: Restricts listed calls to the provided values (comma separated call UUID list)
+          example: 872066e1-fd89-4c57-8733-93c113980bc9,55e4214a-604a-4b56-82e4-97834b0d524e
+          type: string
+        DeafFilter:
+          default: "false"
+          description: Restricts listed members to deaf ones
+          example: "true"
+          type: boolean
+        MemberFilter:
+          description: Restricts listed members to the provided values (comma separated member ID list)
+          example: 13,42
+          type: string
+        MutedFilter:
+          default: "false"
+          description: Restricts listed members to muted ones
+          example: "true"
+          type: boolean
+      type: object
+    ConferenceListResponse:
+      properties:
+        List:
+          description: List of established conferences
+          example:
+            Room402:
+              ConferenceMemberCount: "1"
+              ConferenceName: Room402
+              ConferenceRunTime: "79"
+              ConferenceUUID: 5105acbf-6d43-4d67-8536-19999924eba4
+              Members:
+                - CallName: DeskPhone985
+                  CallNumber: "3985"
+                  CallUUID: 8f72b48e-d97e-425a-a6e6-ae5a6a0dc231
+                  Deaf: false
+                  JoinTime: "79"
+                  MemberID: "14"
+                  Muted: false
+            Room555:
+              ConferenceMemberCount: "1"
+              ConferenceName: Room555
+              ConferenceRunTime: "28"
+              ConferenceUUID: 732fab2d-1bff-4b54-8d3e-bd937b8ff662
+              Members:
+                - CallName: GuestCenter2
+                  CallNumber: "2002"
+                  CallUUID: f8a79c36-2567-479d-b4d9-08f4165f8767
+                  Deaf: false
+                  JoinTime: "28"
+                  MemberID: "14"
+                  Muted: false
+          type: object
+        Message:
+          description: Response message
+          enum:
+            - Conference List Executed
+            - Conference List Failed to parse result
+          example: Conference List Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+        - List
+      type: object
+    ConferenceMuteParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        MemberID:
+          description: List of comma separated member IDs to be affected; `all` shorthand is available too.
+          example: 13,42
+          type: string
+      required:
+        - ConferenceName
+        - MemberID
+      type: object
+    ConferenceMuteResponse:
+      properties:
+        Members:
+          description: List of affected members
+          example:
+            - "13"
+            - "42"
+          items:
+            type: string
+          type: array
+        Message:
+          description: Response message
+          enum:
+            - Conference Mute Executed
+            - ConferenceName Parameter must be present
+            - MemberID Parameter must be present
+            - Conference Mute Failed -- Conference not found
+          example: Conference Mute Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    ConferencePlayParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        FilePath:
+          description: Path/URI of the media file to be played
+          example: /var/local/media/sample.wav
+          type: string
+        MemberID:
+          description: List of comma separated member IDs to be affected; `all` shorthand is available too.
+          example: 13,42
+          type: string
+      required:
+        - ConferenceName
+        - FilePath
+        - MemberID
+      type: object
+    ConferencePlayResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Conference Play Executed
+            - ConferenceName Parameter must be present
+            - FilePath Parameter must be present
+            - MemberID Parameter must be present
+            - Conference Play Failed -- Conference not found
+            - Conference Play Failed
+          example: Conference Play Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    ConferenceRecordStartParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        FileFormat:
+          default: mp3
+          description: File format (extension)
+          enum:
+            - wav
+            - mp3
+          example: wav
+          type: string
+        FileName:
+          default: ""
+          description: Recording file name (without extension); if empty, a timestamp based file name will be generated
+          example: Room402Rec
+          type: string
+        FilePath:
+          default: ""
+          description: Directory path/URI where the recording file will be saved
+          example: /tmp/recordings
+          type: string
+      required:
+        - ConferenceName
+      type: object
+    ConferenceRecordStartResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Conference RecordStart Executed
+            - ConferenceName Parameter must be present
+            - FileFormat Parameter must be
+            - Conference RecordStart Failed
+            - Conference RecordStart Failed -- Conference not found
+          example: Conference RecordStart Executed
+          type: string
+        RecordFile:
+          description: Directory path/URI where the recording file will be saved
+          example: /tmp/recordings/sample.mp3
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - RecordFile
+        - Success
+      type: object
+    ConferenceRecordStopParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        RecordFile:
+          description: Full path to recording file, as returned by ConferenceRecordStart; `all` shorthand is also available
+          example: /tmp/recording/sample.wav
+          type: string
+      required:
+        - ConferenceName
+        - RecordFile
+      type: object
+    ConferenceRecordStopResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Conference RecordStop Executed
+            - ConferenceName Parameter must be present
+            - RecordFile Parameter must be present
+            - Conference RecordStop Failed
+            - Conference RecordStop Failed -- Conference not found
+          example: Conference RecordStop Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - RecordFile
+        - Success
+      type: object
+    ConferenceSpeakParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        MemberID:
+          description: List of comma separated member IDs to be affected; `all` shorthand is available too.
+          example: 13,42
+          type: string
+        Text:
+          description: Text to be synthesized
+          example: The quick brown fox jumps over the lazy dog
+          type: string
+      required:
+        - ConferenceName
+        - Text
+        - MemberID
+      type: object
+    ConferenceSpeakResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Conference Speak Executed
+            - ConferenceName Parameter must be present
+            - Text Parameter must be present
+            - MemberID Parameter must be present
+            - Conference Speak Failed -- Conference not found
+            - Conference Speak Failed
+          example: Conference Speak Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - RecordFile
+        - Success
+      type: object
+    ConferenceUndeafParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        MemberID:
+          description: List of comma separated member IDs to be affected; `all` shorthand is available too.
+          example: 13,42
+          type: string
+      required:
+        - ConferenceName
+        - MemberID
+      type: object
+    ConferenceUndeafResponse:
+      properties:
+        Members:
+          description: List of affected members
+          example:
+            - "13"
+            - "42"
+          items:
+            type: string
+          type: array
+        Message:
+          description: Response message
+          enum:
+            - Conference Undeaf Executed
+            - ConferenceName Parameter must be present
+            - MemberID Parameter must be present
+            - Conference Undeaf Failed -- Conference not found
+          example: Conference Undeaf Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    ConferenceUnmuteParameters:
+      properties:
+        ConferenceName:
+          description: Name of the conference in question
+          example: Room402
+          type: string
+        MemberID:
+          description: List of comma separated member IDs to be affected; `all` shorthand is available too.
+          example: 13,42
+          type: string
+      required:
+        - ConferenceName
+        - MemberID
+      type: object
+    ConferenceUnmuteResponse:
+      properties:
+        Members:
+          description: List of affected members
+          example:
+            - "13"
+            - "42"
+          items:
+            type: string
+          type: array
+        Message:
+          description: Response message
+          enum:
+            - Conference Unmute Executed
+            - ConferenceName Parameter must be present
+            - MemberID Parameter must be present
+            - Conference Unmute Failed -- Conference not found
+          example: Conference Unmute Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    GroupCallParameters:
+      properties:
+        AnswerUrl:
+          description: Fully qualified URL which will provide the RestXML once the call connects
+          example: https://example.com/answer/
+          type: string
+        CallerName:
+          description: Caller Name to be set for the call
+          example: Group Test
+          type: string
+        ConfirmKey:
+          description: DTMF tone the called party must send to accept the call
+          example: "1"
+          type: string
+        ConfirmSound:
+          description: Remote URL to fetch with POST HTTP request which must return a RestXML with Play, Wait and/or Speak Elements only (all others are ignored). This RESTXML is played to the called party when he answered
+          example: https://example.com/confirm_sound/
+          type: string
+        CoreUUID:
+          description: Core UUID of the desired FreeSWITCH instance (an Eqivo extension)
+          example: 46ae8cd9-c28e-447d-ba40-a09cba49d474
+          type: string
+        Delimiter:
+          description: Any character, except `/` and `,`, which will be used as a separator within several parameters
+          example: <
+          type: string
+        ExtraDialString:
+          description: Additional [channel variables](https://freeswitch.org/confluence/display/FREESWITCH/Channel+Variables) to be added to the originate FreeSWITCH API call.
+          example: bridge_early_media=true,hangup_after_bridge=true
+          type: string
+        From:
+          description: Phone number to be used as Caller ID
+          example: "15551234567"
+          type: string
+        GatewayCodecs:
+          description: List of codec(s) to be used for each gateway. Enclose codec groups in single quotes
+          example: "'PCMA,PCMU','G729,PCMU','PCMA,G729'"
+          type: string
+        GatewayRetries:
+          description: List of maximum retry counts for each gateway
+          example: 3,1,2
+          type: string
+        GatewayTimeouts:
+          description: List of maximum timeout amounts (in seconds) for each gateway
+          example: 10,30,20
+          type: string
+        Gateways:
+          description: Comma separated FreeSWITCH gateway strings. When multiple gateways are specified, they will be tried sequentially (failover)
+          example: user/,sofia/gateway/PSTNgateway1/,sofia/gateway/PSTNgateway2/
+          type: string
+        HangupOnRing:
+          description: Schedules the call's hangup at a given time offset (in seconds) after the destination starts ringing
+          example: 90
+          minimum: 1
+          type: integer
+        HangupUrl:
+          description: Fully qualified URL to which the call hangup notification will be POSTed. `HangupCause` is added to the usual call [call notification parameters](#/components/schemas/CallNotificationParameters)
+          example: https://example.com/hangup/
+          type: string
+        RejectCauses:
+          default: NO_ANSWER,ORIGINATOR_CANCEL,ALLOTTED_TIMEOUT,NO_USER_RESPONSE,CALL_REJECTED
+          description: Comma separated reject causes
+          example: USER_BUSY,NO_ANSWER
+          type: string
+        RingUrl:
+          description: Fully qualified URL to which the call ringing notification will be POSTed. `RequestUUID` and `CallUUID` is added to the usual [call notification parameters](#/components/schemas/CallNotificationParameters)
+          example: https://example.com/ring/
+          type: string
+        SendDigits:
+          description: DTMF tones to be sent when the call is answered. Each occurrence of `w` implies a 0.5 seconds delay whereas `W` will apply a whole second delay. To alter the tone duration (by default, 2000ms), append `@` and the length in milliseconds at the end of the string
+          example: 1w2w3W#*@1500
+          type: string
+        SendOnPreanswer:
+          description: When set to `true`, DTMF tones will be sent as early media rather than when the call is answered
+          example: false
+          type: boolean
+        TimeLimit:
+          description: Schedules the call's hangup at a given time offset (in seconds) after the call is answered
+          example: 90
+          minimum: 1
+          type: integer
+        To:
+          description: Phone number to be called
+          example: "15557654321"
+          type: string
+      required:
+        - Delimiter
+        - From
+        - To
+        - Gateways
+        - AnswerUrl
+      type: object
+    GroupCallResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - GroupCall Request Executed
+            - Mandatory Parameters Missing
+            - This Delimiter is not allowed
+            - GroupCall should be used for at least 2 numbers
+            - "'To' parameter length does not match 'Gateways' Length"
+            - AnswerUrl is not Valid
+            - HangupUrl is not Valid
+            - RingUrl is not Valid
+            - ConfirmSound is not Valid
+            - Unknown Core UUID
+            - GroupCall Request Failed
+          example: GroupCall Request Executed
+          type: string
+        RequestUUID:
+          description: Unique identifier of the Call request (UUIDv4)
+          example: fc01f3f4-4895-43ed-b269-5b4a0d474b12
+          type: string
+        RestApiServer:
+          description: API server which handled this request (an Eqivo extension)
+          example: localhost
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - RequestUUID
+        - Success
+        - RestApiServer
+      type: object
+    HangupAllCallsParameters: {}
+    HangupAllCallsResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - All Calls Hungup
+            - Hangup Call Failed
+          example: All Calls Hungup
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    HangupCallParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call (when established); this parameter is mutually exclusive with RequestUUID
+          example: b0519011-6987-47c8-9270-a820e0978acd
+          type: string
+        RequestUUID:
+          description: Unique identifier of the API request (when the call is not established yet); this parameter is mutually exclusive with CallUUID
+          example: c059b96b-04d8-414b-920c-7b373bff916e
+          type: string
+      type: object
+    HangupCallResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Hangup Call Executed
+            - CallUUID or RequestUUID Parameter must be present
+            - Both CallUUID and RequestUUID Parameters cannot be present
+            - Hangup Call Failed
+          example: Hangup Call Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    PlayParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call to play media into
+          example: e69b32da-3243-4ba6-a965-5d2f64a57d48
+          type: string
+        Legs:
+          default: aleg
+          description: Call leg(s) for which the media will be played; `aleg` refers to the initial call leg, `bleg` refers to the bridged call leg, if applicable.
+          enum:
+            - aleg
+            - bleg
+            - both
+          example: both
+          type: string
+        Length:
+          default: 3600
+          description: Maximum amount of time (in seconds) to playback the media
+          example: 90
+          minimum: 1
+          type: integer
+        Loop:
+          default: false
+          description: Loops the media file(s) indefinitely
+          example: true
+          type: boolean
+        Mix:
+          default: true
+          description: Whether the media should be mixed with the call's audio stream
+          example: false
+          type: boolean
+        Sounds:
+          description: Comma separated list of file paths/URIs to be played
+          example: /tmp/prompt.wav
+          type: string
+      required:
+        - CallUUID
+        - Sounds
+      type: object
+    PlayResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Play Executed
+            - CallUUID Parameter Missing
+            - Sounds Parameter Missing
+            - Legs Parameter is Invalid
+            - Length Parameter must be a positive integer
+            - Sounds Parameter is Invalid
+            - Play Failed -- Call not found
+            - Play Failed
+          example: Play Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    PlayStopParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call
+          example: 441afb63-85bc-49d4-9ac8-8459f9bf5e6b
+          type: string
+      required:
+        - CallUUID
+      type: object
+    PlayStopResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - PlayStop Executed
+            - CallUUID Parameter Missing
+            - PlayStop Failed -- Call not found
+            - PlayStop Failed
+          example: PlayStop Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    RecordStartParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call to be recorded
+          example: 052d04e4-019a-45ff-a562-f74d4ae99ea2
+          type: string
+        FileFormat:
+          default: mp3
+          description: File format (extension)
+          enum:
+            - wav
+            - mp3
+          example: wav
+          type: string
+        FileName:
+          default: ""
+          description: Recording file name (without extension); if empty, a timestamp based file name will be generated
+          example: sample_recording
+          type: string
+        FilePath:
+          default: ""
+          description: Directory path/URI where the recording file will be saved
+          example: /tmp/recordings
+          type: string
+        TimeLimit:
+          default: 60
+          description: Maximum recording length, in seconds
+          example: 89
+          minimum: 1
+          type: integer
+      required:
+        - ConferenceName
+      type: object
+    RecordStartResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - RecordStart Executed
+            - CallUUID Parameter must be present
+            - FileFormat Parameter must be
+            - "RecordStart Failed: invalid TimeLimit"
+            - RecordStart Failed -- Call not found
+            - RecordStart Failed
+          example: RecordStart Executed
+          type: string
+        RecordFile:
+          description: Directory path/URI where the recording file will be saved
+          example: /tmp/recordings/sample.wav
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - RecordFile
+        - Success
+      type: object
+    RecordStopParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call
+          example: eacfa857-4001-4379-b79a-c7ef6d963bcb
+          type: string
+        RecordFile:
+          description: Full path to recording file, as returned by RecordStart; `all` shorthand is also available
+          example: /tmp/recording/sample.wav
+          type: string
+      required:
+        - CallUUID
+        - RecordFile
+      type: object
+    RecordStopResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - RecordStop Executed
+            - CallUUID Parameter must be present
+            - RecordFile Parameter must be present
+            - RecordStop Failed -- Call not found
+            - RecordStop Failed
+          example: RecordStop Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    ScheduleHangupParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call
+          example: f84fbadc-5df0-4c02-934b-aac0c1efb8ae
+          type: string
+        Time:
+          description: Time (in seconds) after which the call in question will be hung up
+          example: 59
+          minimum: 1
+          type: integer
+      required:
+        - CallUUID
+        - Time
+      type: object
+    ScheduleHangupResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - ScheduleHangup Executed
+            - CallUUID Parameter must be present
+            - Time Parameter must be present
+            - Time Parameter must be > 0!
+            - ScheduleHangup Failed -- Call not found
+            - ScheduleHangup Failed
+          example: ScheduleHangup Executed
+          type: string
+        SchedHangupId:
+          description: Unique identifier of the scheduled hangup request (UUIDv4)
+          example: 21579000-0dca-4a75-bc1f-6eae8215a611
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+        - SchedHangupId
+      type: object
+    SchedulePlayParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call to play media into
+          example: e69b32da-3243-4ba6-a965-5d2f64a57d48
+          type: string
+        Legs:
+          default: aleg
+          description: Call leg(s) for which the media will be played; `aleg` refers to the initial call leg, `bleg` refers to the bridged call leg, if applicable.
+          enum:
+            - aleg
+            - bleg
+            - both
+          example: both
+          type: string
+        Length:
+          default: 3600
+          description: Maximum amount of time (in seconds) to playback the media
+          example: 90
+          minimum: 1
+          type: integer
+        Loop:
+          default: false
+          description: Loops the media file(s) indefinitely
+          example: true
+          type: boolean
+        Mix:
+          default: true
+          description: Whether the media should be mixed with the call's audio stream
+          example: false
+          type: boolean
+        Sounds:
+          description: Comma separated list of file paths/URIs to be played
+          example: /tmp/prompt.wav
+          type: string
+        Time:
+          description: Time (in seconds) after which the media will be playedback
+          example: 29
+          minimum: 1
+          type: integer
+      required:
+        - CallUUID
+        - Sounds
+        - Time
+      type: object
+    SchedulePlayResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Play Executed
+            - CallUUID Parameter Missing
+            - Sounds Parameter Missing
+            - Time Parameter Missing
+            - Time Parameter must be > 0
+            - Legs Parameter is Invalid
+            - Length Parameter must be a positive integer
+            - Sounds Parameter is Invalid
+            - Play Failed -- Call not found
+            - Play Failed
+          example: Play Executed
+          type: string
+        SchedPlayId:
+          description: Unique identifier of the scheduled playback request (UUIDv4)
+          example: b2d1da90-c364-42e4-818a-2eb90a474729
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+        - SchedPlayId
+      type: object
+    SendDigitsParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call to send DTMF to
+          example: d4cd08fe-4245-490a-ae39-5b58c6addbe8
+          type: string
+        Digits:
+          description: DTMF tones to be sent; each occurrence of `w` implies a 0.5 seconds delay whereas `W` will apply a whole second delay. To alter the tone duration (by default, 2000ms), append `@` and the length in milliseconds at the end of the string
+          example: 1w2w3W#*@1500
+          type: string
+        Leg:
+          default: aleg
+          description: Call leg(s) to which DTMFs will be sent; `aleg` refers to the initial call leg, `bleg` refers to the bridged call leg, if applicable.
+          enum:
+            - aleg
+            - bleg
+            - both
+          example: both
+          type: string
+      required:
+        - CallUUID
+        - Digits
+      type: object
+    SendDigitsResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - SendDigits Executed
+            - CallUUID Parameter Missing
+            - Digits Parameter Missing
+            - Invalid Leg Parameter
+            - SendDigits Failed -- Call not found
+            - SendDigits Failed
+          example: SendDigits Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+        - SchedPlayId
+      type: object
+    SoundTouchParameters:
+      properties:
+        AudioDirection:
+          default: out
+          description: Media stream to be altered, incoming or outgoing
+          enum:
+            - in
+            - out
+          example: in
+          type: string
+        CallUUID:
+          description: Unique identifier of the call to send DTMF to
+          example: b7054b68-0620-455a-8ac7-f8f126853b9d
+          type: string
+        Pitch:
+          default: 1
+          description: Adjust the pitch
+          example: 4
+          exclusiveMinimum: true
+          format: float
+          minimum: 0
+          type: number
+        PitchOctaves:
+          description: Adjust the pitch in octaves
+          example: 0.5
+          format: float
+          maximum: 1
+          minimum: -1
+          type: number
+        PitchSemiTones:
+          description: Adjust the pitch in semitones
+          example: 2
+          format: float
+          maximum: 14
+          minimum: -14
+          type: number
+        Rate:
+          default: 1
+          description: Adjust the rate
+          example: 3
+          exclusiveMinimum: true
+          format: float
+          minimum: 0
+          type: number
+        Tempo:
+          default: 1
+          description: Adjust the tempo
+          example: 2
+          exclusiveMinimum: true
+          format: float
+          minimum: 0
+          type: number
+      required:
+        - CallUUID
+      type: object
+    SoundTouchResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - SoundTouch Executed
+            - CallUUID Parameter Missing
+            - AudioDirection Parameter Must be 'in' or 'out'
+            - PitchSemiTones Parameter must be float
+            - PitchSemiTones Parameter must be between -14 and 14
+            - PitchOctaves Parameter must be float
+            - PitchOctaves Parameter must be between -1 and 1
+            - Pitch Parameter must be float
+            - Pitch Parameter must be > 0
+            - Rate Parameter must be float
+            - Rate Parameter must be > 0
+            - Tempo Parameter must be float
+            - Tempo Parameter must be > 0
+            - SoundTouch Failed -- Call not found
+            - SoundTouch Failed
+          example: SoundTouch Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    SoundTouchStopParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call
+          example: fe372011-face-4bc2-bbcc-893d045bf67d
+          type: string
+      required:
+        - CallUUID
+      type: object
+    SoundTouchStopResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - SoundTouchStop Executed
+            - CallUUID Parameter Missing
+            - SoundTouchStop Failed -- Call not found
+            - SoundTouchStop Failed
+          example: SoundTouchStop Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+    TransferCallParameters:
+      properties:
+        CallUUID:
+          description: Unique identifier of the call
+          example: 03694cf6-62b3-4f00-b0fc-6831ddcc2693
+          type: string
+        Url:
+          description: Absolute URL which will return the updated RestXML flow
+          example: https://example.org/restxml/endpoint/
+          type: string
+      required:
+        - CallUUID
+        - Url
+      type: object
+    TransferCallResponse:
+      properties:
+        Message:
+          description: Response message
+          enum:
+            - Transfer Call Executed
+            - CallUUID Parameter must be present
+            - Url Parameter must be present
+            - Url is not Valid
+            - Transfer Call Failed -- Call not found
+            - Transfer Call Failed
+          example: Transfer Call Executed
+          type: string
+        Success:
+          description: Whether the request was successful or not
+          example: true
+          type: boolean
+      required:
+        - Message
+        - Success
+      type: object
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http

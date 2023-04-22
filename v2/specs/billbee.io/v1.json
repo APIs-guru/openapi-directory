@@ -1,0 +1,33 @@
+{
+  "added": "2018-06-08T08:48:29.000Z",
+  "info": {
+    "contact": {
+      "email": "support@billbee.io",
+      "name": "Billbee GmbH",
+      "url": "https://www.billbee.io",
+      "x-twitter": "billbeeio"
+    },
+    "description": "Documentation of the Billbee REST API to connect a Billbee account to external aplications.\n\n## Endpoint\n\nThe Billbee API endpoint base url is https://api.billbee.io/api/v1 \n\n## Activation\n\nYou have to enable the API in the settings of your Billbee account. In addition you need a Billbee API Key identifying the application you develop. To get an API key, send a mail to support@billbee.io and send us a short note about what you are building.\n\n## Authorization & security\n\nBecause you can access private data with the Billbee API, every request has to be sent over https and must\n\n* Contain a valid API Key identifying the application/developer. It has to be sent as the HTTP header X-Billbee-Api-Key\n* Contain a valid user login with billbee username and api password in form of a basic auth HTTP header\n\n## Throttling\n\nEach endpoint has a throttle of max 2 requests per second per combination of API Key and Billbee user.\n\nWhen you exceed these 2 calls, the API will return a HTTP 429 status code\n\n",
+    "title": "Billbee API",
+    "version": "v1",
+    "x-apisguru-categories": [
+      "ecommerce"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_billbeeio_profile_image.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://app.billbee.io/swagger/docs/v1",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "billbee.io"
+  },
+  "updated": "2023-03-06T07:12:59.965Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/billbee.io/v1/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/billbee.io/v1/openapi.yaml",
+  "openapiVer": "2.0",
+  "link": "https://api.apis.guru/v2/specs/billbee.io/v1.json"
+}

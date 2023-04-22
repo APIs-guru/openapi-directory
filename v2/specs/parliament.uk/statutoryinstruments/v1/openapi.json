@@ -1,0 +1,1538 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "contact": {
+      "email": "softwareengineering@parliament.uk",
+      "name": "UK Parliament",
+      "url": "https://www.parliament.uk/"
+    },
+    "description": "An API exposing details of the various types of Statutory Instruments laid before Parliament.",
+    "title": "Statutory Instruments API",
+    "version": "v1",
+    "x-apisguru-categories": [
+      "open_data"
+    ],
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://statutoryinstruments-api.parliament.uk/swagger/v1/swagger.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "parliament.uk",
+    "x-serviceName": "statutoryinstruments",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+    }
+  },
+  "paths": {
+    "/api/v1/BusinessItem/{id}": {
+      "get": {
+        "operationId": "GetBusinessItemById",
+        "parameters": [
+          {
+            "description": "Business item with the ID specified",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Business item by laid paper type",
+            "in": "query",
+            "name": "LaidPaper",
+            "schema": {
+              "$ref": "#/components/schemas/LaidPaperType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResource"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResource"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResource"
+                }
+              }
+            },
+            "description": "The requested business item"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "If the item doesn't exist"
+          }
+        },
+        "summary": "Returns business item by ID.",
+        "tags": [
+          "BusinessItem"
+        ]
+      }
+    },
+    "/api/v1/LayingBody": {
+      "get": {
+        "operationId": "GetLayingBodies",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LayingBodyResourceCollection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LayingBodyResourceCollection"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LayingBodyResourceCollection"
+                }
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "summary": "Returns all laying bodies.",
+        "tags": [
+          "LayingBody"
+        ]
+      }
+    },
+    "/api/v1/Procedure": {
+      "get": {
+        "operationId": "GetProceduresV1",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcedureResourceCollection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcedureResourceCollection"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcedureResourceCollection"
+                }
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "summary": "Returns all procedures.",
+        "tags": [
+          "Procedure"
+        ]
+      }
+    },
+    "/api/v1/Procedure/{id}": {
+      "get": {
+        "operationId": "GetProceduresByIdV1",
+        "parameters": [
+          {
+            "description": "Procedure with the ID specified",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcedureDetailsResource"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcedureDetailsResource"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcedureDetailsResource"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Returns procedure by ID.",
+        "tags": [
+          "Procedure"
+        ]
+      }
+    },
+    "/api/v1/ProposedNegativeStatutoryInstrument": {
+      "get": {
+        "operationId": "GetProposedNegativeStatutoryInstruments",
+        "parameters": [
+          {
+            "description": "Proposed negative statutory instruments with the name provided",
+            "in": "query",
+            "name": "Name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Proposed negative statutory instruments recommended for procedure change",
+            "in": "query",
+            "name": "RecommendedForProcedureChange",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Proposed negative statutory instruments with the department ID specified",
+            "in": "query",
+            "name": "DepartmentId",
+            "schema": {
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Proposed negative statutory instruments with the laying body ID specified",
+            "in": "query",
+            "name": "LayingBodyId",
+            "schema": {
+              "pattern": "^[a-zA-Z0-9]{8}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of records to skip from the first, default is 0",
+            "in": "query",
+            "name": "Skip",
+            "schema": {
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The number of records to return, default is 20",
+            "in": "query",
+            "name": "Take",
+            "schema": {
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposedNegativeStatutoryInstrumentResourceCollection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposedNegativeStatutoryInstrumentResourceCollection"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposedNegativeStatutoryInstrumentResourceCollection"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Returns a list of proposed negative statutory instruments.",
+        "tags": [
+          "ProposedNegativeStatutoryInstrument"
+        ]
+      }
+    },
+    "/api/v1/ProposedNegativeStatutoryInstrument/{id}": {
+      "get": {
+        "operationId": "GetProposedNegativeStatutoryInstrumentById",
+        "parameters": [
+          {
+            "description": "Proposed negative statutory instrument with the ID specified",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposedNegativeStatutoryInstrumentResource"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposedNegativeStatutoryInstrumentResource"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposedNegativeStatutoryInstrumentResource"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Returns proposed negative statutory instrument by ID.",
+        "tags": [
+          "ProposedNegativeStatutoryInstrument"
+        ]
+      }
+    },
+    "/api/v1/ProposedNegativeStatutoryInstrument/{id}/BusinessItems": {
+      "get": {
+        "operationId": "GetBusinessItemsByProposedNegativeStatutoryInstrumentId",
+        "parameters": [
+          {
+            "description": "Business items belonging to proposed negative statutory instrument with the ID specified",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResourceCollection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResourceCollection"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResourceCollection"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Returns business items belonging to a proposed negative statutory instrument.",
+        "tags": [
+          "ProposedNegativeStatutoryInstrument"
+        ]
+      }
+    },
+    "/api/v1/StatutoryInstrument": {
+      "get": {
+        "operationId": "GetStatutoryInstruments",
+        "parameters": [
+          {
+            "description": "Statutory instruments with the name specified",
+            "in": "query",
+            "name": "Name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Statutory instruments where the statutory instrument type is the type provided",
+            "in": "query",
+            "name": "StatutoryInstrumentType",
+            "schema": {
+              "$ref": "#/components/schemas/StatutoryInstrumentType"
+            }
+          },
+          {
+            "description": "Statutory instrument which contains a scheduled debate",
+            "in": "query",
+            "name": "ScheduledDebate",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Statutory instruments which contains a motion to stop",
+            "in": "query",
+            "name": "MotionToStop",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Statutory instruments which contains concerns raised by committee",
+            "in": "query",
+            "name": "ConcernsRaisedByCommittee",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Statutory instruments where the parliamentary process is concluded or notconcluded",
+            "in": "query",
+            "name": "ParliamentaryProcessConcluded",
+            "schema": {
+              "$ref": "#/components/schemas/ParliamentaryProcess"
+            }
+          },
+          {
+            "description": "Statutory instruments with the department ID specified",
+            "in": "query",
+            "name": "DepartmentId",
+            "schema": {
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Statutory instruments with the laying body ID specified",
+            "in": "query",
+            "name": "LayingBodyId",
+            "schema": {
+              "pattern": "^[a-zA-Z0-9]{8}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Statutory instruments laid in the house specified",
+            "in": "query",
+            "name": "House",
+            "schema": {
+              "$ref": "#/components/schemas/House"
+            }
+          },
+          {
+            "description": "The number of records to skip from the first, default is 0",
+            "in": "query",
+            "name": "Skip",
+            "schema": {
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The number of records to return, default is 20",
+            "in": "query",
+            "name": "Take",
+            "schema": {
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutoryInstrumentResourceCollection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutoryInstrumentResourceCollection"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutoryInstrumentResourceCollection"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Returns a list of statutory instruments.",
+        "tags": [
+          "StatutoryInstrument"
+        ]
+      }
+    },
+    "/api/v1/StatutoryInstrument/{id}": {
+      "get": {
+        "operationId": "GetStatutoryInstrumentById",
+        "parameters": [
+          {
+            "description": "Statutory instrument with the ID specified",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutoryInstrumentResource"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutoryInstrumentResource"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutoryInstrumentResource"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Returns a statutory instrument by ID.",
+        "tags": [
+          "StatutoryInstrument"
+        ]
+      }
+    },
+    "/api/v1/StatutoryInstrument/{id}/BusinessItems": {
+      "get": {
+        "operationId": "GetBusinessItemsByStatutoryInstrumentId",
+        "parameters": [
+          {
+            "description": "Business items belonging to statutory instrument with the ID specified",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResourceCollection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResourceCollection"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessItemResourceCollection"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Returns business items belonging to statutory instrument with ID.",
+        "tags": [
+          "StatutoryInstrument"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BusinessItem": {
+        "additionalProperties": false,
+        "properties": {
+          "businessItemUri": {
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          },
+          "houseId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "houseName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "houseUri": {
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          },
+          "houses": {
+            "items": {
+              "$ref": "#/components/schemas/BusinessItemHouse"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "itemDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "laidPaperType": {
+            "$ref": "#/components/schemas/LaidPaperType"
+          },
+          "link": {
+            "nullable": true,
+            "type": "string"
+          },
+          "procedureStepId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "procedureStepUri": {
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          },
+          "sequence": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "statutoryInstrumentId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "statutoryInstrumentUri": {
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          },
+          "stepName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "workpackageProcedureUri": {
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "BusinessItemHouse": {
+        "additionalProperties": false,
+        "properties": {
+          "house": {
+            "$ref": "#/components/schemas/House"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "BusinessItemResource": {
+        "additionalProperties": false,
+        "properties": {
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "value": {
+            "$ref": "#/components/schemas/BusinessItem"
+          }
+        },
+        "type": "object"
+      },
+      "BusinessItemResourceCollection": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/BusinessItemResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Department": {
+        "additionalProperties": false,
+        "properties": {
+          "departmentId": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "House": {
+        "enum": [
+          "Commons",
+          "Lords"
+        ],
+        "type": "string"
+      },
+      "LaidPaperSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LaidPaperType": {
+        "enum": [
+          "StatutoryInstrument",
+          "ProposedNegative"
+        ],
+        "type": "string"
+      },
+      "LayingBody": {
+        "additionalProperties": false,
+        "properties": {
+          "departmentId": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LayingBodyResource": {
+        "additionalProperties": false,
+        "properties": {
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "value": {
+            "$ref": "#/components/schemas/LayingBody"
+          }
+        },
+        "type": "object"
+      },
+      "LayingBodyResourceCollection": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LayingBodyResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Link": {
+        "additionalProperties": false,
+        "properties": {
+          "href": {
+            "nullable": true,
+            "type": "string"
+          },
+          "method": {
+            "nullable": true,
+            "type": "string"
+          },
+          "rel": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ParliamentaryProcess": {
+        "enum": [
+          "NotConcluded",
+          "Concluded"
+        ],
+        "type": "string"
+      },
+      "ProblemDetails": {
+        "additionalProperties": {},
+        "properties": {
+          "detail": {
+            "nullable": true,
+            "type": "string"
+          },
+          "instance": {
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "title": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Procedure": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "uri": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ProcedureDetails": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "uri": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ProcedureDetailsResource": {
+        "additionalProperties": false,
+        "properties": {
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ProcedureDetails"
+          }
+        },
+        "type": "object"
+      },
+      "ProcedureResource": {
+        "additionalProperties": false,
+        "properties": {
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "value": {
+            "$ref": "#/components/schemas/Procedure"
+          }
+        },
+        "type": "object"
+      },
+      "ProcedureResourceCollection": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ProcedureResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ProposedNegativeStatutoryInstrument": {
+        "additionalProperties": false,
+        "properties": {
+          "commonsLayingDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "commonsPublishedDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "departmentId": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "layingBodyDepartment": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "layingBodyId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "layingBodyName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "link": {
+            "nullable": true,
+            "type": "string"
+          },
+          "lordsLayingDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "lordsPublishedDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "procedure": {
+            "$ref": "#/components/schemas/Procedure"
+          },
+          "procedureName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "procedureUri": {
+            "nullable": true,
+            "type": "string"
+          },
+          "statutoryInstrument": {
+            "$ref": "#/components/schemas/LaidPaperSummary"
+          },
+          "statutoryInstrumentPaperId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "statutoryInstrumentPaperName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "uri": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ProposedNegativeStatutoryInstrumentResource": {
+        "additionalProperties": false,
+        "properties": {
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ProposedNegativeStatutoryInstrument"
+          }
+        },
+        "type": "object"
+      },
+      "ProposedNegativeStatutoryInstrumentResourceCollection": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ProposedNegativeStatutoryInstrumentResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "StatutoryInstrument": {
+        "additionalProperties": false,
+        "properties": {
+          "commonsLayingDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "commonsPublishedDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "departmentId": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "layingBodyDepartment": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "layingBodyId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "layingBodyName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "link": {
+            "nullable": true,
+            "type": "string"
+          },
+          "lordsLayingDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "lordsPublishedDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "paperComingIntoForceDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "paperComingIntoForceNote": {
+            "nullable": true,
+            "type": "string"
+          },
+          "paperMadeDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "paperNumber": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "paperPrefix": {
+            "nullable": true,
+            "type": "string"
+          },
+          "paperYear": {
+            "nullable": true,
+            "type": "string"
+          },
+          "procedure": {
+            "$ref": "#/components/schemas/Procedure"
+          },
+          "procedureName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "procedureUri": {
+            "nullable": true,
+            "type": "string"
+          },
+          "proposedNegativeStatutoryInstrument": {
+            "$ref": "#/components/schemas/LaidPaperSummary"
+          },
+          "proposedNegativeStatutoryInstrumentPaperId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "proposedNegativeStatutoryInstrumentPaperName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "uri": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "StatutoryInstrumentResource": {
+        "additionalProperties": false,
+        "properties": {
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "value": {
+            "$ref": "#/components/schemas/StatutoryInstrument"
+          }
+        },
+        "type": "object"
+      },
+      "StatutoryInstrumentResourceCollection": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/StatutoryInstrumentResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "StatutoryInstrumentType": {
+        "enum": [
+          "DraftAffirmative",
+          "DraftNegative",
+          "MadeAffirmative",
+          "MadeNegative"
+        ],
+        "type": "string"
+      }
+    }
+  }
+}

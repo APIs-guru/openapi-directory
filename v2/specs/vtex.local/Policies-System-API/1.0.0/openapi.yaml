@@ -1,0 +1,604 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: "\r
+
+    \ This API will create promotion alarms when selling products with undesired prices and promotions. It will create conditions that will check if the prices and the promotions are correct. If not, the system will alarm the store with information about the product sold at unexpected prices.\r
+
+    \r
+
+    \ ## Index\r
+
+    \r
+
+    \ `GET` [Get Policy List](https://developers.vtex.com/docs/api-reference/policies-system-api#get-/api/policy-engine/policies)\r
+
+    \ `POST` [Evaluate Policies](https://developers.vtex.com/docs/api-reference/policies-system-api#post-/api/policy-engine/evaluate)\r
+
+    \ `GET` [Get Policy by ID](https://developers.vtex.com/docs/api-reference/policies-system-api#get-/api/policy-engine/policies/-id-)\r
+
+    \ `POST` [Create Policy](https://developers.vtex.com/docs/api-reference/policies-system-api#post-/api/policy-engine/policies/-id-)\r
+
+    \ `PUT` [Update Policy](https://developers.vtex.com/docs/api-reference/policies-system-api#put-/api/policy-engine/policies/-id-)\r
+
+    \ `DELETE` [Delete Policy by ID](https://developers.vtex.com/docs/api-reference/policies-system-api#delete-/api/policy-engine/policies/-id-)"
+  title: Policies System API
+  version: 1.0.0
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Policies System API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Policies-System-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+tags:
+  - description: ""
+    name: Policy
+paths:
+  /api/policy-engine/evaluate:
+    post:
+      deprecated: false
+      description: This endpoint consults all policies and checks the ones that satisfy the request body’s conditions.
+      operationId: Policy_Evaluate
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              context:
+                brandId: "2000001"
+                discountPercentage: "91.00"
+              resource: vrn:vtex.promotions-alert:aws-us-east-1:kamila:master:/_v/promotions_alert
+            schema:
+              $ref: "#/components/schemas/EvaluatePolicyRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  - id: SendSlackMessage
+                    metadata:
+                      alertDescription: Avoid selling products from Berenice with a discount greater than 70%.
+                      channel: C01NJFF35R6
+                      relatedUsers:
+                        - URUNDC2NB
+                items:
+                  $ref: "#/components/schemas/PolicyActionGetResponse"
+                type: array
+          description: ""
+          headers: {}
+      summary: Evaluate Policies
+      tags:
+        - Policy
+  /api/policy-engine/policies:
+    get:
+      description: Retrieves a list of all policies in the account and general information of each policy.
+      operationId: Policy_List
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  - description: TesteMarcosPromotionsAlert
+                    id: pa_test_001
+                    name: TestAlarmBerenice
+                    statements:
+                      - actions:
+                          - id: SendSlackMessage
+                            metadata:
+                              alertDescription: Avoid selling products from Berenice with a discount greater than 70%.
+                              channel: C01NJFF35R6
+                              relatedUsers:
+                                - URUNDC2NB
+                        condition:
+                          conditions:
+                            - conditions: []
+                              key: brandId
+                              operation: stringEquals
+                              values:
+                                - "2000001"
+                            - conditions: []
+                              key: discountPercentage
+                              operation: numericGreaterThan
+                              values:
+                                - "70.00"
+                          operation: and
+                        effect: Allow
+                        resource: vrn:vtex.promotions-alert:aws-us-east-1:kamila:master:/_v/promotions_alert
+                items:
+                  $ref: "#/components/schemas/PolicyGetResponse"
+                type: array
+          description: ""
+          headers: {}
+      summary: Get Policy List
+      tags:
+        - Policy
+  "/api/policy-engine/policies/{id}":
+    delete:
+      deprecated: false
+      description: Deletes a specific policy of the account by its ID.
+      operationId: Policy_Delete
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Policy ID
+          in: path
+          name: id
+          required: true
+          schema:
+            default: pa_test_001
+            type: string
+      responses:
+        "200":
+          description: 200 OK
+      summary: Delete Policy by ID
+      tags:
+        - Policy
+    get:
+      description: Retrieves general information of a policy by its ID.
+      operationId: Policy_Get
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Policy ID
+          in: path
+          name: id
+          required: true
+          schema:
+            default: pa_test_001
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  - description: TesteMarcosPromotionsAlert
+                    id: pa_test_001
+                    name: TestAlarmBerenice
+                    statements:
+                      - actions:
+                          - id: SendSlackMessage
+                            metadata:
+                              alertDescription: Avoid selling products from Berenice with a discount greater than 70%.
+                              channel: C01NJFF35R6
+                              relatedUsers:
+                                - URUNDC2NB
+                        condition:
+                          conditions:
+                            - conditions: []
+                              key: brandId
+                              operation: stringEquals
+                              values:
+                                - "2000001"
+                            - conditions: []
+                              key: discountPercentage
+                              operation: numericGreaterThan
+                              values:
+                                - "70.00"
+                          operation: and
+                        effect: Allow
+                        resource: vrn:vtex.promotions-alert:aws-us-east-1:kamila:master:/_v/promotions_alert
+                items:
+                  $ref: "#/components/schemas/PolicyGetResponse"
+                type: array
+          description: ""
+          headers: {}
+      summary: Get Policy by ID
+      tags:
+        - Policy
+    post:
+      description: Creates a new policy from scratch.
+      operationId: Policy_CreateOrUpdate
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Policy ID
+          in: path
+          name: id
+          required: true
+          schema:
+            default: pa_test_001
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              description: TesteMarcosPromotionsAlert
+              name: TestAlarmBerenice
+              statements:
+                - actions:
+                    - id: SendSlackMessage
+                      metadata:
+                        alertDescription: Avoid selling products from Berenice with a discount greater than 40%.
+                        channel: C01NJFF35R6
+                        relatedUsers:
+                          - URUNDC2NB
+                  condition:
+                    conditions:
+                      - conditions: []
+                        key: brandId
+                        operation: stringEquals
+                        values:
+                          - "2000001"
+                      - conditions: []
+                        key: discountPercentage
+                        operation: numericGreaterThan
+                        values:
+                          - "40.00"
+                    operation: and
+                  effect: Allow
+                  resource: vrn:vtex.promotions-alert:aws-us-east-1:kamila:master:/_v/promotions_alert
+            schema:
+              $ref: "#/components/schemas/PolicySaveRequest"
+        description: ""
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                example:
+                  - description: TesteMarcosPromotionsAlert
+                    id: pa_test_001
+                    name: TestAlarmBerenice
+                    statements:
+                      - actions:
+                          - id: SendSlackMessage
+                            metadata:
+                              alertDescription: Avoid selling products from Berenice with a discount greater than 70%.
+                              channel: C01NJFF35R6
+                              relatedUsers:
+                                - URUNDC2NB
+                        condition:
+                          conditions:
+                            - conditions: []
+                              key: brandId
+                              operation: stringEquals
+                              values:
+                                - "2000001"
+                            - conditions: []
+                              key: discountPercentage
+                              operation: numericGreaterThan
+                              values:
+                                - "70.00"
+                          operation: and
+                        resource: vrn:vtex.promotions-alert:aws-us-east-1:kamila:master:/_v/promotions_alert
+                items:
+                  $ref: "#/components/schemas/PolicyGetResponse"
+                type: array
+          description: ""
+          headers: {}
+      summary: Create Policy
+      tags:
+        - Policy
+    put:
+      deprecated: false
+      description: Updates an existing policy at your account.
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Policy ID
+          in: path
+          name: id
+          required: true
+          schema:
+            default: pa_test_001
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PolicySaveRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                example:
+                  - description: TesteMarcosPromotionsAlert
+                    id: pa_test_001
+                    name: TestAlarmBerenice
+                    statements:
+                      - actions:
+                          - id: SendSlackMessage
+                            metadata:
+                              alertDescription: Avoid selling products from Berenice with a discount greater than 40%.
+                              channel: C01NJFF35R6
+                              relatedUsers:
+                                - URUNDC2NB
+                        condition:
+                          conditions:
+                            - conditions: []
+                              key: brandId
+                              operation: stringEquals
+                              values:
+                                - "2000001"
+                            - conditions: []
+                              key: discountPercentage
+                              operation: numericGreaterThan
+                              values:
+                                - "40.00"
+                          operation: and
+                        effect: Allow
+                        resource: vrn:vtex.promotions-alert:aws-us-east-1:kamila:master:/_v/promotions_alert
+                items:
+                  $ref: "#/components/schemas/PolicyGetResponse"
+                type: array
+          description: ""
+          headers: {}
+      summary: Update Policy
+      tags:
+        - Policy
+components:
+  schemas:
+    Account:
+      properties:
+        accountType:
+          $ref: "#/components/schemas/AccountType"
+        id:
+          type: string
+        isActive:
+          type: boolean
+        isOperating:
+          type: boolean
+        mainAccountName:
+          type: string
+        name:
+          type: string
+        operationDate:
+          format: date-time
+          type: string
+      title: Account
+      type: object
+    AccountType:
+      enum:
+        - 0
+        - 1
+      example: 0
+      title: AccountType
+      type: integer
+    EvaluatePolicyRequest:
+      properties:
+        context:
+          additionalProperties: true
+          default:
+            brandId: "2000001"
+            discountPercentage: "91.00"
+          description: Conditions that the Policy needs to satisfy
+          title: context
+          type: object
+        resource:
+          default: vrn:vtex.promotions-alert:aws-us-east-1:kamila:master:/_v/promotions_alert
+          description: Scope on which this policy must be evaluated
+          title: resource
+          type: string
+      required:
+        - resource
+        - context
+      type: object
+    PolicyActionGetResponse:
+      properties:
+        id:
+          description: Action ID
+          title: id
+          type: string
+        metadata:
+          additionalProperties: true
+          description: Metadata object from the current action
+          title: metadata
+          type: object
+      title: PolicyActionGetResponse
+      type: object
+    PolicyGetResponse:
+      properties:
+        description:
+          description: Policy description. This description is only for internal use of identification
+          title: description
+          type: string
+        id:
+          description: Policy ID
+          title: id
+          type: string
+        name:
+          description: Policy Name
+          title: name
+          type: string
+        statements:
+          description: Requirements to the Policy be applied
+          items:
+            $ref: "#/components/schemas/StatementGetResponse"
+          title: statements
+          type: array
+      title: PolicyGetResponse
+      type: object
+    PolicySaveRequest:
+      properties:
+        description:
+          description: Policy description. This description is only for internal use of identification
+          title: description
+          type: string
+        name:
+          description: Policy Name
+          title: name
+          type: string
+        statements:
+          description: Requirements to the Policy be applied
+          items:
+            $ref: "#/components/schemas/StatementGetResponse"
+          title: statements
+          type: array
+      required:
+        - name
+        - description
+        - statements
+      type: object
+    StatementGetResponse:
+      properties:
+        actions:
+          description: Actions that the Policy will execute
+          items: {}
+          properties:
+            id:
+              description: Action ID. The possible values can be `SendSlackMessage`, `SendEmail`, and `DeactivatePromotions`
+              title: id
+              type: string
+            metadata:
+              additionalProperties: true
+              description: Data inside of the actions
+              title: metadata
+              type: object
+          title: actions
+          type: array
+        condition:
+          description: Condition to activate this policy. This object can have a maximum of ten recursive conditions
+          properties:
+            conditions:
+              description: List of conditions that will activate the policy
+              items:
+                properties:
+                  conditions:
+                    description: These are the conditions the actions can have. The possible values are `[]`, `stringEquals`, and `numericGreaterThan`
+                    items:
+                      type: string
+                    title: conditions
+                    type: array
+                  key:
+                    description: The element that will define what the policy will influence. This field has the possible values `skuId`, `brandId`, `discountPercentage`
+                    title: key
+                    type: string
+                  operation:
+                    description: The action of the condition. This operation possible values are `None`, `stringEquals`, `stringEqualsIgnoreCase`, `numericEquals`, `numericLessThan`, `numericLessThanEquals`,   `numericGreaterThan`, `numericGreaterThanEquals`, `bool`, `not`, `or`, `and`, `dateTimeUtcGreaterThan`, `dateTimeUtcLessThan`, and `between`
+                    title: operation
+                    type: string
+                  values:
+                    description: Value of the key
+                    items:
+                      type: string
+                    title: values
+                    type: array
+              type: array
+          title: condition
+          type: object
+        effect:
+          default: Allow
+          description: This field is not functional at the moment. To create a correct request, fill the field with `Allow`
+          title: effect
+          type: string
+        operation:
+          description: This operation will determine if all the conditions need to be valid or at least one of them, if the conditions array is not empty.  The possible values to these fields are `None`, `stringEquals`, `stringEqualsIgnoreCase`, `numericEquals`, `numericLessThan`, `numericLessThanEquals`,   `numericGreaterThan`, `numericGreaterThanEquals`, `bool`, `not`, `or`, `and`, `dateTimeUtcGreaterThan`, `dateTimeUtcLessThan`, and `between`
+          title: operation
+          type: string
+        resource:
+          description: Scope on which this policy must be evaluated
+          title: resource
+          type: string
+      required:
+        - effect
+      type: object

@@ -1,0 +1,219 @@
+openapi: 3.0.0
+servers:
+  - url: https://policyanalyzer.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: ""
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Policy Analyzer API
+  version: v1beta1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://policyanalyzer.googleapis.com/$discovery/rest?version=v1beta1
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: policyanalyzer
+externalDocs:
+  url: https://www.google.com
+tags:
+  - name: projects
+paths:
+  "/v1beta1/{parent}/activities:query":
+    get:
+      description: Queries policy activities on GCP resources.
+      operationId: policyanalyzer.projects.locations.activityTypes.activities.query
+      parameters:
+        - description: "Required. The container resource on which to execute the request. Acceptable formats: `projects/[PROJECT_ID|PROJECT_NUMBER]/locations/[LOCATION]/activityTypes/[ACTIVITY_TYPE]` LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. Optional filter expression to restrict the activities returned. Supported filters are: - service_account_last_authn.full_resource_name {=} - service_account_key_last_authn.full_resource_name {=} "
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of results to return from this request. Max limit is 1000. Non-positive values are ignored. The presence of `nextPageToken` in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. If present, then retrieve the next batch of results from the preceding call to this method. `pageToken` must be the value of `nextPageToken` from the previous response. The values of other method parameters should be identical to those in the previous call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudPolicyanalyzerV1beta1QueryActivityResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    GoogleCloudPolicyanalyzerV1beta1Activity:
+      properties:
+        activity:
+          additionalProperties:
+            description: Properties of the object.
+          description: A struct of custom fields to explain the activity.
+          type: object
+        activityType:
+          description: The type of the activity.
+          type: string
+        fullResourceName:
+          description: The full resource name that identifies the resource. For examples of full resource names for Google Cloud services, see https://cloud.google.com/iam/help/troubleshooter/full-resource-names.
+          type: string
+        observationPeriod:
+          $ref: "#/components/schemas/GoogleCloudPolicyanalyzerV1beta1ObservationPeriod"
+          description: The data observation period to build the activity.
+      type: object
+    GoogleCloudPolicyanalyzerV1beta1ObservationPeriod:
+      description: Represents data observation period.
+      properties:
+        endTime:
+          description: The observation end time.
+          format: google-datetime
+          type: string
+        startTime:
+          description: The observation start time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudPolicyanalyzerV1beta1QueryActivityResponse:
+      description: Response to the `QueryActivity` method.
+      properties:
+        activities:
+          description: The set of activities that match the filter included in the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudPolicyanalyzerV1beta1Activity"
+          type: array
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then `nextPageToken` is included. To get the next set of results, call this method again using the value of `nextPageToken` as `pageToken`.
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

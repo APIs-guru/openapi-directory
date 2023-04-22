@@ -1,0 +1,38 @@
+{
+  "apis": {
+    "mashape.com:geodb": {
+      "added": "2017-10-30T12:32:36.000Z",
+      "info": {
+        "description": "The GeoDB API focuses on getting global city and region data. Easily obtain country, region, and city data for use\nin your apps! \n<ul>\n  <li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li>\n  <li>Sort cities by name, country code, elevation, and population - or any combination of these.</li> \n  <li>Get all country regions.</li> <li>Get all cities in a given region.</li>\n  <li>\n    Display results in multiple languages.</li> <li>RESTful API adheres to industry best-practices, including\n    HATEOAS-style links to facilitate paging results.\n  </li> \n  <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance!</li>\n  <li>Data is periodically refreshed from GeoNames and WikiData.</li>\n</ul>\n<p>Notes:\n<ul>\n  <li>\n    Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities\n    being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude\n    cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set\n    of affected results - and you care about the paged results suddenly changing underneath - specify \n    <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you're really paranoid!).\n  </li>\n</ul>\n<hr/>\n<h3>Useful Resources</h3>\n<ul>\n  <li>\n    SDKs\n    <ul>\n      <li>\n        <a href='https://www.npmjs.com/package/wft-geodb-angular-client'>Angular</a>, \n        <a href='https://github.com/wirefreethought/geodb-sample-angular-app'>Sample App</a>\n      </li>\n      <li><a href='https://github.com/wirefreethought/geodb-java-client'>Java</a></li>\n      <li><a href='https://www.npmjs.com/package/wft-geodb-js-client'>JavaScript</a></li>\n    </ul>\n    <li><a href='swagger.json'>Swagger Docs</a></li>\n    <li><a href='http://creativecommons.org/licenses/by/3.0/'>Usage License</a></li>\n  </li>      \n</ul>\n",
+        "license": {
+          "name": "Creative Commons Attribution 3.0",
+          "url": "http://creativecommons.org/licenses/by/3.0/"
+        },
+        "title": "GeoDB Cities API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "developer_tools",
+          "location"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_wirefreethought.github.io_geodb-cities-api-docs_images_logo.png"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://wirefreethought.github.io/geodb-cities-api-docs/swagger.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "mashape.com",
+        "x-serviceName": "geodb"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/mashape.com/geodb/1.0.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/mashape.com/geodb/1.0.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/mashape.com:geodb/1.0.0.json"
+    }
+  }
+}

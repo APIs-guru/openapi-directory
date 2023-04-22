@@ -1,0 +1,557 @@
+openapi: 3.0.0
+servers:
+  - url: https://keep.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The Google Keep API is used in an enterprise environment to manage Google Keep content and resolve issues identified by cloud security software.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Keep API
+  version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://keep.googleapis.com/$discovery/rest?version=v1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: keep
+externalDocs:
+  url: https://developers.google.com/keep/api
+tags:
+  - name: media
+  - name: notes
+paths:
+  /v1/notes:
+    get:
+      description: Lists notes. Every list call returns a page of results with `page_size` as the upper bound of returned items. A `page_size` of zero allows the server to choose the upper bound. The ListNotesResponse contains at most `page_size` entries. If there are more things left to list, it provides a `next_page_token` value. (Page tokens are opaque values.) To get the next page of results, copy the result's `next_page_token` into the next request's `page_token`. Repeat until the `next_page_token` returned with a page of results is empty. ListNotes return consistent results in the face of concurrent changes, or signals that it cannot with an ABORTED error.
+      operationId: keep.notes.list
+      parameters:
+        - description: "Filter for list results. If no filter is supplied, the `trashed` filter is applied by default. Valid fields to filter by are: `create_time`, `update_time`, `trash_time`, and `trashed`. Filter syntax follows the [Google AIP filtering spec](https://aip.dev/160)."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The previous page's `next_page_token` field.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNotesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/keep
+          Oauth2c:
+            - https://www.googleapis.com/auth/keep
+        - Oauth2:
+            - https://www.googleapis.com/auth/keep.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/keep.readonly
+      tags:
+        - notes
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new note.
+      operationId: keep.notes.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Note"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Note"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/keep
+          Oauth2c:
+            - https://www.googleapis.com/auth/keep
+      tags:
+        - notes
+  "/v1/{name}":
+    delete:
+      description: Deletes a note. Caller must have the `OWNER` role on the note to delete. Deleting a note removes the resource immediately and cannot be undone. Any collaborators will lose access to the note.
+      operationId: keep.notes.delete
+      parameters:
+        - description: Required. Name of the note to delete.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/keep
+          Oauth2c:
+            - https://www.googleapis.com/auth/keep
+      tags:
+        - notes
+    get:
+      description: Gets a note.
+      operationId: keep.notes.get
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The IANA MIME type format requested. The requested MIME type must be one specified in the attachment.mime_type. Required when downloading attachment media and ignored otherwise.
+          in: query
+          name: mimeType
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Note"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/keep
+          Oauth2c:
+            - https://www.googleapis.com/auth/keep
+        - Oauth2:
+            - https://www.googleapis.com/auth/keep.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/keep.readonly
+      tags:
+        - notes
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/permissions:batchCreate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates one or more permissions on the note. Only permissions with the `WRITER` role may be created. If adding any permission fails, then the entire request fails and no changes are made.
+      operationId: keep.notes.permissions.batchCreate
+      parameters:
+        - description: "The parent resource shared by all Permissions being created. Format: `notes/{note}` If this is set, the parent field in the CreatePermission messages must either be empty or match this field."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchCreatePermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchCreatePermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/keep
+          Oauth2c:
+            - https://www.googleapis.com/auth/keep
+      tags:
+        - notes
+  "/v1/{parent}/permissions:batchDelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes one or more permissions on the note. The specified entities will immediately lose access. A permission with the `OWNER` role can't be removed. If removing a permission fails, then the entire request fails and no changes are made. Returns a 400 bad request error if a specified permission does not exist on the note.
+      operationId: keep.notes.permissions.batchDelete
+      parameters:
+        - description: "The parent resource shared by all permissions being deleted. Format: `notes/{note}` If this is set, the parent of all of the permissions specified in the DeletePermissionRequest messages must match this field."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchDeletePermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/keep
+          Oauth2c:
+            - https://www.googleapis.com/auth/keep
+      tags:
+        - notes
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Attachment:
+      description: An attachment to a note.
+      properties:
+        mimeType:
+          description: The MIME types (IANA media types) in which the attachment is available.
+          items:
+            type: string
+          type: array
+        name:
+          description: The resource name;
+          type: string
+      type: object
+    BatchCreatePermissionsRequest:
+      description: The request to add one or more permissions on the note. Currently, only the `WRITER` role may be specified. If adding a permission fails, then the entire request fails and no changes are made.
+      properties:
+        requests:
+          description: The request message specifying the resources to create.
+          items:
+            $ref: "#/components/schemas/CreatePermissionRequest"
+          type: array
+      type: object
+    BatchCreatePermissionsResponse:
+      description: The response for creating permissions on a note.
+      properties:
+        permissions:
+          description: Permissions created.
+          items:
+            $ref: "#/components/schemas/Permission"
+          type: array
+      type: object
+    BatchDeletePermissionsRequest:
+      description: The request to remove one or more permissions from a note. A permission with the `OWNER` role can't be removed. If removing a permission fails, then the entire request fails and no changes are made. Returns a 400 bad request error if a specified permission does not exist on the note.
+      properties:
+        names:
+          description: "Required. The names of the permissions to delete. Format: `notes/{note}/permissions/{permission}`"
+          items:
+            type: string
+          type: array
+      type: object
+    CreatePermissionRequest:
+      description: The request to add a single permission on the note.
+      properties:
+        parent:
+          description: "Required. The parent note where this permission will be created. Format: `notes/{note}`"
+          type: string
+        permission:
+          $ref: "#/components/schemas/Permission"
+          description: Required. The permission to create. One of Permission.email, User.email or Group.email must be supplied.
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    Family:
+      description: Describes a single Google Family.
+      properties: {}
+      type: object
+    Group:
+      description: Describes a single Group.
+      properties:
+        email:
+          description: The group email.
+          type: string
+      type: object
+    ListContent:
+      description: The list of items for a single list note.
+      properties:
+        listItems:
+          description: The items in the list. The number of items must be less than 1,000.
+          items:
+            $ref: "#/components/schemas/ListItem"
+          type: array
+      type: object
+    ListItem:
+      description: A single list item in a note's list.
+      properties:
+        checked:
+          description: Whether this item has been checked off or not.
+          type: boolean
+        childListItems:
+          description: If set, list of list items nested under this list item. Only one level of nesting is allowed.
+          items:
+            $ref: "#/components/schemas/ListItem"
+          type: array
+        text:
+          $ref: "#/components/schemas/TextContent"
+          description: The text of this item. Length must be less than 1,000 characters.
+      type: object
+    ListNotesResponse:
+      description: The response when listing a page of notes.
+      properties:
+        nextPageToken:
+          description: Next page's `page_token` field.
+          type: string
+        notes:
+          description: A page of notes.
+          items:
+            $ref: "#/components/schemas/Note"
+          type: array
+      type: object
+    Note:
+      description: A single note.
+      properties:
+        attachments:
+          description: Output only. The attachments attached to this note.
+          items:
+            $ref: "#/components/schemas/Attachment"
+          readOnly: true
+          type: array
+        body:
+          $ref: "#/components/schemas/Section"
+          description: The body of the note.
+        createTime:
+          description: Output only. When this note was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name of this note. See general note on identifiers in KeepService.
+          readOnly: true
+          type: string
+        permissions:
+          description: Output only. The list of permissions set on the note. Contains at least one entry for the note owner.
+          items:
+            $ref: "#/components/schemas/Permission"
+          readOnly: true
+          type: array
+        title:
+          description: The title of the note. Length must be less than 1,000 characters.
+          type: string
+        trashTime:
+          description: Output only. When this note was trashed. If `trashed`, the note is eventually deleted. If the note is not trashed, this field is not set (and the trashed field is `false`).
+          format: google-datetime
+          readOnly: true
+          type: string
+        trashed:
+          description: Output only. `true` if this note has been trashed. If trashed, the note is eventually deleted.
+          readOnly: true
+          type: boolean
+        updateTime:
+          description: Output only. When this note was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    Permission:
+      description: A single permission on the note. Associates a `member` with a `role`.
+      properties:
+        deleted:
+          description: Output only. Whether this member has been deleted. If the member is recovered, this value is set to false and the recovered member retains the role on the note.
+          readOnly: true
+          type: boolean
+        email:
+          description: The email associated with the member. If set on create, the `email` field in the `User` or `Group` message must either be empty or match this field. On read, may be unset if the member does not have an associated email.
+          type: string
+        family:
+          $ref: "#/components/schemas/Family"
+          description: Output only. The Google Family to which this role applies.
+          readOnly: true
+        group:
+          $ref: "#/components/schemas/Group"
+          description: Output only. The group to which this role applies.
+          readOnly: true
+        name:
+          description: Output only. The resource name.
+          readOnly: true
+          type: string
+        role:
+          description: The role granted by this permission. The role determines the entity’s ability to read, write, and share notes.
+          enum:
+            - ROLE_UNSPECIFIED
+            - OWNER
+            - WRITER
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+          description: Output only. The user to whom this role applies.
+          readOnly: true
+      type: object
+    Section:
+      description: The content of the note.
+      properties:
+        list:
+          $ref: "#/components/schemas/ListContent"
+          description: Used if this section's content is a list.
+        text:
+          $ref: "#/components/schemas/TextContent"
+          description: Used if this section's content is a block of text. The length of the text content must be less than 20,000 characters.
+      type: object
+    TextContent:
+      description: The block of text for a single text section or list item.
+      properties:
+        text:
+          description: The text of the note. The limits on this vary with the specific field using this type.
+          type: string
+      type: object
+    User:
+      description: Describes a single user.
+      properties:
+        email:
+          description: The user's email.
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/keep: See, edit, create and permanently delete all your Google Keep data
+            https://www.googleapis.com/auth/keep.readonly: View all your Google Keep data
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/keep: See, edit, create and permanently delete all your Google Keep data
+            https://www.googleapis.com/auth/keep.readonly: View all your Google Keep data
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

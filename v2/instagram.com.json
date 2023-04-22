@@ -1,0 +1,43 @@
+{
+  "apis": {
+    "instagram.com": {
+      "added": "2015-08-05T18:22:21.000Z",
+      "info": {
+        "contact": {
+          "name": "Instagram",
+          "url": "https://instagram.com/developer/support",
+          "x-twitter": "instagram"
+        },
+        "description": "Description of Instagram RESTful API.\n\nCurrent limitations:\n  * Instagram service does not support [cross origin headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)\n  for security reasons, therefore it is not possible to use Swagger UI and make API calls directly from browser.\n  * Modification API requests (`POST`, `DELETE`) require additional security [scopes](https://instagram.com/developer/authorization/)\n  that are available for Apps [created on or after Nov 17, 2015](http://instagram.com/developer/review/) and\n  started in [Sandbox Mode](http://instagram.com/developer/sandbox/).\n  * Consider the [Instagram limitations](https://instagram.com/developer/limits/) for API calls that depends on App Mode.\n\n**Warning:** For Apps [created on or after Nov 17, 2015](http://instagram.com/developer/changelog/) API responses\ncontaining media objects no longer return the `data` field in `comments` and `likes` nodes.\n\nLast update: 2015-11-28\n",
+        "termsOfService": "https://instagram.com/about/legal/terms/api/",
+        "title": "Instagram API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "social",
+          "media"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_instagram_profile_image.png"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/darklynx/swagger-api-collection/master/api/yaml/instagram.yaml",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "instagram.com",
+        "x-unofficialSpec": true
+      },
+      "externalDocs": {
+        "description": "Instagram Developer Documentation",
+        "url": "https://instagram.com/developer"
+      },
+      "updated": "2021-06-30T09:57:47.461Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/instagram.com/1.0.0.json"
+    }
+  }
+}

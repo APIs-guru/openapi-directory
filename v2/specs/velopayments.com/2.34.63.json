@@ -1,0 +1,31 @@
+{
+  "added": "2020-08-18T13:31:23.974Z",
+  "info": {
+    "description": "## Terms and Definitions\n\nThroughout this document and the Velo platform the following terms are used:\n\n* **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout.\n* **Payee.** The recipient of funds paid out by a payor.\n* **Payment.** A single transfer of funds from a payor to a payee.\n* **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee.\n* **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.\n\n## Overview\n\nThe Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:\n\n* Authenticate with the Velo platform\n* Maintain a collection of payees\n* Query the payor’s current balance of funds within the platform and perform additional funding\n* Issue payments to payees\n* Query the platform for a history of those payments\n\nThis document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.\n\n## API Considerations\n\nThe Velo Payments API is REST based and uses the JSON format for requests and responses.\n\nMost calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.\n\nWhere a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).\n\nWhere curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.\n\n## Authenticating with the Velo Platform\n\nOnce Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.\n\nYou will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:\n\ncreate a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529\n\nbase64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\n\ncreate an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\n\nperform the Velo authentication REST call using the HTTP header created above e.g. via curl:\n\n```\n  curl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\\n  'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials'\n```\n\nIf successful, this call will result in a **200** HTTP status code and a response body such as:\n\n```\n  {\n    \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",\n    \"token_type\":\"bearer\",\n    \"expires_in\":1799,\n    \"scope\":\"...\"\n  }\n```\n## API access following authentication\nFollowing successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.\n\nThis is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:\n\n```\n  -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \"\n```\n\nIf you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response.\n",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "title": "Velo Payments APIs",
+    "version": "2.34.63",
+    "x-apisguru-categories": [
+      "ecommerce"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_avatars1.githubusercontent.com_u_38107746.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/velopaymentsapi/VeloOpenApi/master/spec/openapi.yaml",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "velopayments.com"
+  },
+  "updated": "2023-03-06T07:12:59.965Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/velopayments.com/2.34.63/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/velopayments.com/2.34.63/openapi.yaml",
+  "openapiVer": "3.0.2",
+  "link": "https://api.apis.guru/v2/specs/velopayments.com/2.34.63.json"
+}

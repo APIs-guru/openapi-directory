@@ -1,0 +1,51 @@
+openapi: 3.0.1
+servers:
+  - url: http://datasette.local
+  - url: https://datasette.io
+info:
+  description: Execute SQL queries against a Datasette database and return the results as JSON
+  title: Datasette API
+  version: v1
+  x-apisguru-categories:
+    - developer_tools
+  x-origin:
+    - format: openapi
+      url: https://datasette.io/-/chatgpt-openapi-schema.yml
+      version: "3.0"
+  x-providerName: datasette.local
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  /content.json:
+    get:
+      description: Accepts SQLite SQL query, returns JSON. Does not allow PRAGMA statements.
+      operationId: query
+      parameters:
+        - description: The SQL query to be executed
+          in: query
+          name: sql
+          required: true
+          schema:
+            type: string
+        - description: The shape of the response data. Must be "array"
+          in: query
+          name: _shape
+          required: true
+          schema:
+            enum:
+              - array
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+          description: Successful SQL results
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+      summary: Execute a SQLite SQL query against the content database

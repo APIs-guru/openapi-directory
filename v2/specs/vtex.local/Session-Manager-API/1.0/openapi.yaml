@@ -1,0 +1,246 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br/api
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: This documentation goes in detail how to interact with Session Manager's API. For a more top-level approach, check the [design documentation](https://help.vtex.com/tutorial/using-session-manager-to-track-browsing-sessions-in-vtex-stores--1pA0tqsD4BFnJYhQ7ORQBd).
+  title: Session Manager API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Session Manager API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Session-Manager-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+tags:
+  - description: ""
+    name: Sessions
+  - description: ""
+    name: Segment
+paths:
+  /segments:
+    get:
+      deprecated: false
+      description: "You can add certain public fields in the query string and the system will attempt to fulfill it. Values such as `cultureInfo` and `utm` are overwriteable, just keep in mind such changes will not be reflected in the client's session.
+
+        \r
+
+        \rIf you wish to change the value on the session (and thus be reflected on the segment without special query strings), then use the PATCH request to session."
+      operationId: GetSegment
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Get Segment
+      tags:
+        - Segment
+  /sessions:
+    get:
+      deprecated: false
+      description: "Items are the keys of the values you wish to get. It follows the format `namespace1.key1,namespace2.key2`. So if you wish to recover the data sent on the previous request, it should be `public.country,public.postalCode`.
+
+        \r
+
+        \r> The sessions API uses the `vtex_session` cookie to store the data required to identify the user and the session. This cookie is stored in the user's browser when the session is created and sent automatically in every request to that domain. You will have to reproduce that in order for it to work outside of a browser environment.
+
+        \r
+
+        \r> If you want to retrieve all keys from Session Manager, you can use the wildcard operator (`*`) in your request (i.e. `?items=*`)."
+      operationId: GetSession
+      parameters:
+        - description: Items are the keys of the values you wish to get. It follows the format `namespace1.key1,namespace2.key2`
+          explode: true
+          in: query
+          name: items
+          required: true
+          schema:
+            example: namespace1.key1,namespace2.key2
+            type: string
+          style: form
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Get Session
+      tags:
+        - Sessions
+    patch:
+      deprecated: false
+      description: "This works exactly the same as the POST create session, but when the request is sent with a vtex_session cookie, it retrieves the session first and then applies the changes instead of generating a new one.
+
+        \r
+
+        \rAs with the `POST` method, only keys inside the public namespace on the body are considered, and query parameters are automatically added to the public namespace.
+
+        \r
+
+        \r> The sessions API uses the `vtex_session` cookie to store the data required to identify the user and the session. This cookie is stored in the user's browser when the session is created and sent automatically in every request to that domain. You will have to reproduce that in order for it to work outside of a browser environment."
+      operationId: Editsession
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              public:
+                newValue:
+                  value: patched
+            schema:
+              $ref: "#/components/schemas/EditsessionRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Edit session
+      tags:
+        - Sessions
+    post:
+      deprecated: false
+      description: "The response should contain a session cookie. Further `POST` or `PATCH` requests will edit the existing session rather than creating a new one. All parameters in the body that are not within the public namespace will be ignored. Query string items will automatically be added to the public namespace. Cookies relevant to the session manager execution are also recorded.
+
+        \r
+
+        \r> The sessions API uses the `vtex_session` cookie to store the data required to identify the user and the session. This cookie is stored in the user's browser when the session is created and sent automatically in every request to that domain. You will have to reproduce that in order for it to work outside of a browser environment."
+      operationId: Createnewsession
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              public:
+                country:
+                  value: BR
+                postalCode:
+                  value: "12345"
+            schema:
+              $ref: "#/components/schemas/CreatenewsessionRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Create new session
+      tags:
+        - Sessions
+components:
+  schemas:
+    Country:
+      example:
+        value: BR
+      properties:
+        value:
+          type: string
+      required:
+        - value
+      title: Country
+      type: object
+    CreatenewsessionRequest:
+      example:
+        public:
+          country:
+            value: BR
+          postalCode:
+            value: "12345"
+      properties:
+        public:
+          $ref: "#/components/schemas/Public"
+      required:
+        - public
+      title: CreatenewsessionRequest
+      type: object
+    EditsessionRequest:
+      example:
+        public:
+          newValue:
+            value: patched
+      properties:
+        public:
+          $ref: "#/components/schemas/Public1"
+      required:
+        - public
+      title: EditsessionRequest
+      type: object
+    ModifysessiongettingspecificparametersRequest:
+      example:
+        public:
+          country:
+            value: BR
+          postalCode:
+            value: "12345"
+      properties:
+        public:
+          $ref: "#/components/schemas/Public"
+      required:
+        - public
+      title: ModifysessiongettingspecificparametersRequest
+      type: object
+    NewValue:
+      example:
+        value: patched
+      properties:
+        value:
+          type: string
+      required:
+        - value
+      title: NewValue
+      type: object
+    PostalCode:
+      example:
+        value: "12345"
+      properties:
+        value:
+          type: string
+      required:
+        - value
+      title: PostalCode
+      type: object
+    Public:
+      example:
+        country:
+          value: BR
+        postalCode:
+          value: "12345"
+      properties:
+        country:
+          $ref: "#/components/schemas/Country"
+        postalCode:
+          $ref: "#/components/schemas/PostalCode"
+      required:
+        - country
+        - postalCode
+      title: Public
+      type: object
+    Public1:
+      example:
+        newValue:
+          value: patched
+      properties:
+        newValue:
+          $ref: "#/components/schemas/NewValue"
+      required:
+        - newValue
+      title: Public
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

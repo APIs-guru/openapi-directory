@@ -1,0 +1,36 @@
+{
+  "added": "2020-11-02T14:04:45.860Z",
+  "info": {
+    "contact": {
+      "email": "devrel@vonage.com",
+      "name": "Vonage DevRel",
+      "url": "https://developer.nexmo.com/"
+    },
+    "description": "The [Reports API](/reports/overview) enables you to request a report of activity for your Vonage account.\n\nDepending on your query pattern, you can choose from one of the two versions of the Reports API: asynchronous and synchronous. The asynchronous version is optimized for infrequent and large data queries (from several records to tens of millions). The synchronous version is optimized for frequent and periodic retrievals of small batches of data records (from one record to tens of thousand per query).\n\nOnly synchronous version supports retrival of data records by message/record ID.\n\nVonage recommends that you limit asynchronous queries to a maximum of 20 million records, by setting the start and end dates accordingly. On average, the asynchronous Reports API takes 5 - 10 minutes to generate 1 million records.\n",
+    "license": {
+      "name": "The MIT License (MIT)",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "termsOfService": "https://www.nexmo.com/terms-of-use",
+    "title": "Reports API",
+    "version": "2.2.2",
+    "x-label": "Beta",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/reports.yml",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "nexmo.com",
+    "x-serviceName": "reports"
+  },
+  "updated": "2023-03-24T18:44:13.782Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/nexmo.com/reports/2.2.2/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/nexmo.com/reports/2.2.2/openapi.yaml",
+  "openapiVer": "3.0.0",
+  "link": "https://api.apis.guru/v2/specs/nexmo.com:reports/2.2.2.json"
+}

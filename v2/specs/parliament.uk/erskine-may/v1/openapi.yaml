@@ -1,0 +1,698 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: softwareengineering@parliament.uk
+    name: UK Parliament
+    url: https://www.parliament.uk/
+  description: An API that allows querying of Erskine May data.
+  title: Erskine May API
+  version: v1
+  x-apisguru-categories:
+    - open_data
+  x-origin:
+    - format: openapi
+      url: https://erskinemay-api.parliament.uk/swagger/v1/swagger.json
+      version: "3.0"
+  x-providerName: parliament.uk
+  x-serviceName: erskine-may
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  "/api/Chapter/{chapterNumber}":
+    get:
+      parameters:
+        - description: Chapter overview with the chapter number specified
+          in: path
+          name: chapterNumber
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayChapterOverview"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayChapterOverview"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMayChapterOverview"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a single chapter overview by chapter number.
+      tags:
+        - Chapter
+  /api/IndexTerm/browse:
+    get:
+      parameters:
+        - description: Index terms by start letter
+          in: query
+          name: startLetter
+          schema:
+            type: string
+        - description: The number of records to skip from the first, default is 0.
+          in: query
+          name: skip
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The number of records to return, default is 20, maximum is 20.
+          in: query
+          name: take
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTermSearchResultErskineMaySearch"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTermSearchResultErskineMaySearch"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTermSearchResultErskineMaySearch"
+          description: Success
+      summary: Returns a list of index terms by start letter.
+      tags:
+        - IndexTerm
+  "/api/IndexTerm/{indexTermId}":
+    get:
+      parameters:
+        - description: Index term by if
+          in: path
+          name: indexTermId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTerm"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTerm"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTerm"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns an index term by id.
+      tags:
+        - IndexTerm
+  /api/Part:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ErskineMayPart"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ErskineMayPart"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ErskineMayPart"
+                type: array
+          description: Success
+      summary: Returns a list of all parts.
+      tags:
+        - Part
+  "/api/Part/{partNumber}":
+    get:
+      parameters:
+        - description: Part by part number
+          in: path
+          name: partNumber
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayPart"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayPart"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMayPart"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a part by part number.
+      tags:
+        - Part
+  "/api/Search/IndexTermSearchResults/{searchTerm}":
+    get:
+      parameters:
+        - description: Index terms which contain search term.
+          in: path
+          name: searchTerm
+          required: true
+          schema:
+            type: string
+        - description: The number of records to skip from the first, default is 0.
+          in: query
+          name: skip
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The number of records to return, default is 20, maximum is 20.
+          in: query
+          name: take
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTermSearchResultErskineMaySearch"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTermSearchResultErskineMaySearch"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMayIndexTermSearchResultErskineMaySearch"
+          description: Success
+      summary: Returns a list of index terms which contain the search term.
+      tags:
+        - Search
+  "/api/Search/Paragraph/{reference}":
+    get:
+      parameters:
+        - description: Section overview by reference.
+          in: path
+          name: reference
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionOverview"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionOverview"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionOverview"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a section overview by reference.
+      tags:
+        - Search
+  "/api/Search/ParagraphSearchResults/{searchTerm}":
+    get:
+      parameters:
+        - description: Paragraphs which contain search term in their content.
+          in: path
+          name: searchTerm
+          required: true
+          schema:
+            type: string
+        - description: The number of records to skip from the first, default is 0.
+          in: query
+          name: skip
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The number of records to return, default is 20, maximum is 20.
+          in: query
+          name: take
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayParagraphSearchResultErskineMaySearch"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMayParagraphSearchResultErskineMaySearch"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMayParagraphSearchResultErskineMaySearch"
+          description: Success
+      summary: Returns a list of paragraphs which contain the search term.
+      tags:
+        - Search
+  "/api/Search/SectionSearchResults/{searchTerm}":
+    get:
+      parameters:
+        - description: Sections which contain search term in their title.
+          in: path
+          name: searchTerm
+          required: true
+          schema:
+            type: string
+        - description: The number of records to skip from the first, default is 0.
+          in: query
+          name: skip
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The number of records to return, default is 20, maximum is 20.
+          in: query
+          name: take
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionSearchResultErskineMaySearch"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionSearchResultErskineMaySearch"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionSearchResultErskineMaySearch"
+          description: Success
+      summary: Returns a list of sections which contain the search term.
+      tags:
+        - Search
+  "/api/Section/{sectionId}":
+    get:
+      parameters:
+        - description: Section by id.
+          in: path
+          name: sectionId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionDetail"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionDetail"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionDetail"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a section by section id.
+      tags:
+        - Section
+  "/api/Section/{sectionId},{step}":
+    get:
+      parameters:
+        - description: Section by id.
+          in: path
+          name: sectionId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: Number of sections to step over from given section.
+          in: path
+          name: step
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionOverview"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionOverview"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErskineMaySectionOverview"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a section overview by section id and step.
+      tags:
+        - Section
+components:
+  schemas:
+    ErskineMayChapterOverview:
+      additionalProperties: false
+      properties:
+        description:
+          nullable: true
+          type: string
+        number:
+          format: int32
+          type: integer
+        partNumber:
+          format: int32
+          type: integer
+        sections:
+          items:
+            $ref: "#/components/schemas/ErskineMaySectionOverview"
+          nullable: true
+          type: array
+        title:
+          nullable: true
+          type: string
+      type: object
+    ErskineMayFootnote:
+      additionalProperties: false
+      properties:
+        content:
+          nullable: true
+          type: string
+        number:
+          nullable: true
+          type: string
+      type: object
+    ErskineMayIndexTerm:
+      additionalProperties: false
+      properties:
+        childTerms:
+          items:
+            $ref: "#/components/schemas/ErskineMayIndexTerm"
+          nullable: true
+          type: array
+        displayAs:
+          nullable: true
+          type: string
+        id:
+          format: int32
+          type: integer
+        parentTerm:
+          $ref: "#/components/schemas/ErskineMayIndexTerm"
+        references:
+          items:
+            $ref: "#/components/schemas/ErskineMayParagraphSearchResult"
+          nullable: true
+          type: array
+        seeLinks:
+          items:
+            $ref: "#/components/schemas/ErskineMayIndexTermSeeLink"
+          nullable: true
+          type: array
+        term:
+          nullable: true
+          type: string
+      type: object
+    ErskineMayIndexTermSearchResult:
+      additionalProperties: false
+      properties:
+        displayAs:
+          nullable: true
+          type: string
+        id:
+          format: int32
+          type: integer
+        seeValue:
+          nullable: true
+          type: string
+      type: object
+    ErskineMayIndexTermSearchResultErskineMaySearch:
+      additionalProperties: false
+      properties:
+        searchResults:
+          items:
+            $ref: "#/components/schemas/ErskineMayIndexTermSearchResult"
+          nullable: true
+          type: array
+        searchTerm:
+          nullable: true
+          type: string
+        searchTerms:
+          items:
+            type: string
+          nullable: true
+          type: array
+        skip:
+          format: int32
+          type: integer
+        suggestedSearch:
+          nullable: true
+          type: string
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    ErskineMayIndexTermSeeLink:
+      additionalProperties: false
+      properties:
+        indexTermId:
+          format: int32
+          type: integer
+        seeType:
+          nullable: true
+          type: string
+        seeValue:
+          nullable: true
+          type: string
+      type: object
+    ErskineMayParagraphSearchResult:
+      additionalProperties: false
+      properties:
+        chapterNumber:
+          format: int32
+          type: integer
+        chapterTitle:
+          nullable: true
+          type: string
+        paragraphReference:
+          nullable: true
+          type: string
+        partNumber:
+          format: int32
+          type: integer
+        searchResultText:
+          nullable: true
+          type: string
+        sectionId:
+          format: int32
+          type: integer
+        sectionTitle:
+          nullable: true
+          type: string
+        sectionTitleChain:
+          nullable: true
+          type: string
+      type: object
+    ErskineMayParagraphSearchResultErskineMaySearch:
+      additionalProperties: false
+      properties:
+        searchResults:
+          items:
+            $ref: "#/components/schemas/ErskineMayParagraphSearchResult"
+          nullable: true
+          type: array
+        searchTerm:
+          nullable: true
+          type: string
+        searchTerms:
+          items:
+            type: string
+          nullable: true
+          type: array
+        skip:
+          format: int32
+          type: integer
+        suggestedSearch:
+          nullable: true
+          type: string
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    ErskineMayPart:
+      additionalProperties: false
+      properties:
+        chapters:
+          items:
+            $ref: "#/components/schemas/ErskineMayChapterOverview"
+          nullable: true
+          type: array
+        description:
+          nullable: true
+          type: string
+        number:
+          format: int32
+          type: integer
+        title:
+          nullable: true
+          type: string
+      type: object
+    ErskineMaySectionDetail:
+      additionalProperties: false
+      properties:
+        chapterNumber:
+          format: int32
+          type: integer
+        chapterTitle:
+          nullable: true
+          type: string
+        contentHtml:
+          nullable: true
+          type: string
+        footnotes:
+          items:
+            $ref: "#/components/schemas/ErskineMayFootnote"
+          nullable: true
+          type: array
+        id:
+          format: int32
+          type: integer
+        isUpdated:
+          type: boolean
+        parentSectionId:
+          format: int32
+          nullable: true
+          type: integer
+        parentSectionTitle:
+          nullable: true
+          type: string
+        partNumber:
+          format: int32
+          type: integer
+        partTitle:
+          nullable: true
+          type: string
+        subSections:
+          items:
+            $ref: "#/components/schemas/ErskineMaySectionOverview"
+          nullable: true
+          type: array
+        title:
+          nullable: true
+          type: string
+        titleChain:
+          nullable: true
+          type: string
+        updatedDate:
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    ErskineMaySectionOverview:
+      additionalProperties: false
+      properties:
+        id:
+          format: int32
+          type: integer
+        subSections:
+          items:
+            $ref: "#/components/schemas/ErskineMaySectionOverview"
+          nullable: true
+          type: array
+        title:
+          nullable: true
+          type: string
+        titleChain:
+          nullable: true
+          type: string
+      type: object
+    ErskineMaySectionSearchResult:
+      additionalProperties: false
+      properties:
+        chapterNumber:
+          format: int32
+          type: integer
+        chapterTitle:
+          nullable: true
+          type: string
+        partNumber:
+          format: int32
+          type: integer
+        sectionId:
+          format: int32
+          type: integer
+        sectionTitle:
+          nullable: true
+          type: string
+        sectionTitleChain:
+          nullable: true
+          type: string
+      type: object
+    ErskineMaySectionSearchResultErskineMaySearch:
+      additionalProperties: false
+      properties:
+        searchResults:
+          items:
+            $ref: "#/components/schemas/ErskineMaySectionSearchResult"
+          nullable: true
+          type: array
+        searchTerm:
+          nullable: true
+          type: string
+        searchTerms:
+          items:
+            type: string
+          nullable: true
+          type: array
+        skip:
+          format: int32
+          type: integer
+        suggestedSearch:
+          nullable: true
+          type: string
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object

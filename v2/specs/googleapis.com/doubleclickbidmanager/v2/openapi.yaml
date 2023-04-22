@@ -1,0 +1,762 @@
+openapi: 3.0.0
+servers:
+  - url: https://doubleclickbidmanager.googleapis.com/v2
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: DoubleClick Bid Manager API allows users to manage and create campaigns and reports.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: DoubleClick Bid Manager API
+  version: v2
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_www.google.com_images_branding_googlelogo_2x_googlelogo_color_272x92dp.png
+  x-origin:
+    - format: google
+      url: https://doubleclickbidmanager.googleapis.com/$discovery/rest?version=v2
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: doubleclickbidmanager
+externalDocs:
+  url: https://developers.google.com/bid-manager/
+tags:
+  - name: queries
+paths:
+  /queries:
+    get:
+      description: Lists queries created by the current user.
+      operationId: doubleclickbidmanager.queries.list
+      parameters:
+        - description: 'Name of a field used to order results. The default sorting order is ascending. To specify descending order for a field, append a " desc" suffix. For example "metadata.title desc". Sorting is only supported for the following fields: * `queryId` * `metadata.title`'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Maximum number of results per page. Must be between `1` and `100`. Defaults to `100` if unspecified.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous list call. Provide this to retrieve the subsequent page of queries.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListQueriesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+      tags:
+        - queries
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a query.
+      operationId: doubleclickbidmanager.queries.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Query"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Query"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+      tags:
+        - queries
+  "/queries/{queryId}":
+    delete:
+      description: Deletes a query as well as the associated reports.
+      operationId: doubleclickbidmanager.queries.delete
+      parameters:
+        - description: Required. ID of query to delete.
+          in: path
+          name: queryId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+      tags:
+        - queries
+    get:
+      description: Retrieves a query.
+      operationId: doubleclickbidmanager.queries.get
+      parameters:
+        - description: Required. ID of query to retrieve.
+          in: path
+          name: queryId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Query"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+      tags:
+        - queries
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/queries/{queryId}/reports":
+    get:
+      description: Lists reports associated with a query.
+      operationId: doubleclickbidmanager.queries.reports.list
+      parameters:
+        - description: Required. ID of the query with which the reports are associated.
+          in: path
+          name: queryId
+          required: true
+          schema:
+            type: string
+        - description: 'Name of a field used to order results. The default sorting order is ascending. To specify descending order for a field, append a " desc" suffix. For example "key.reportId desc". Sorting is only supported for the following fields: * `key.reportId`'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Maximum number of results per page. Must be between `1` and `100`. Defaults to `100` if unspecified.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous list call. Provide this to retrieve the subsequent page of reports.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReportsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+      tags:
+        - queries
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/queries/{queryId}/reports/{reportId}":
+    get:
+      description: Retrieves a report.
+      operationId: doubleclickbidmanager.queries.reports.get
+      parameters:
+        - description: Required. ID of the query the report is associated with.
+          in: path
+          name: queryId
+          required: true
+          schema:
+            type: string
+        - description: Required. ID of the report to retrieve.
+          in: path
+          name: reportId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+      tags:
+        - queries
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/queries/{queryId}:run":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Runs a stored query to generate a report.
+      operationId: doubleclickbidmanager.queries.run
+      parameters:
+        - description: Required. ID of query to run.
+          in: path
+          name: queryId
+          required: true
+          schema:
+            type: string
+        - description: Whether the query should be run synchronously. When true, this method will not return until the query has finished running. When false or not specified, this method will return immediately.
+          in: query
+          name: synchronous
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunQueryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+      tags:
+        - queries
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    ChannelGrouping:
+      description: A channel grouping defines a set of rules that can be used to categorize events in a path report.
+      properties:
+        fallbackName:
+          description: The name to apply to an event that does not match any of the rules in the channel grouping.
+          type: string
+        name:
+          description: Channel Grouping name.
+          type: string
+        rules:
+          description: Rules within Channel Grouping. There is a limit of 100 rules that can be set per channel grouping.
+          items:
+            $ref: "#/components/schemas/Rule"
+          type: array
+      type: object
+    DataRange:
+      description: Report data range.
+      properties:
+        customEndDate:
+          $ref: "#/components/schemas/Date"
+          description: The ending date for the data that is shown in the report. Note, `customEndDate` is required if `range` is `CUSTOM_DATES` and ignored otherwise.
+        customStartDate:
+          $ref: "#/components/schemas/Date"
+          description: The starting data for the data that is shown in the report. Note, `customStartDate` is required if `range` is `CUSTOM_DATES` and ignored otherwise.
+        range:
+          description: Report data range used to generate the report.
+          enum:
+            - RANGE_UNSPECIFIED
+            - CUSTOM_DATES
+            - CURRENT_DAY
+            - PREVIOUS_DAY
+            - WEEK_TO_DATE
+            - MONTH_TO_DATE
+            - QUARTER_TO_DATE
+            - YEAR_TO_DATE
+            - PREVIOUS_WEEK
+            - PREVIOUS_MONTH
+            - PREVIOUS_QUARTER
+            - PREVIOUS_YEAR
+            - LAST_7_DAYS
+            - LAST_30_DAYS
+            - LAST_90_DAYS
+            - LAST_365_DAYS
+            - ALL_TIME
+            - LAST_14_DAYS
+            - LAST_60_DAYS
+          type: string
+      type: object
+    Date:
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
+      properties:
+        day:
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          format: int32
+          type: integer
+        year:
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          format: int32
+          type: integer
+      type: object
+    DisjunctiveMatchStatement:
+      description: DisjunctiveMatchStatement that OR's all contained filters.
+      properties:
+        eventFilters:
+          description: Filters. There is a limit of 100 filters that can be set per disjunctive match statement.
+          items:
+            $ref: "#/components/schemas/EventFilter"
+          type: array
+      type: object
+    EventFilter:
+      description: Defines the type of filter to be applied to the path, a DV360 event dimension filter.
+      properties:
+        dimensionFilter:
+          $ref: "#/components/schemas/PathQueryOptionsFilter"
+          description: Filter on a dimension.
+      type: object
+    FilterPair:
+      description: Filter used to match traffic data in your report.
+      properties:
+        type:
+          description: Filter type.
+          type: string
+        value:
+          description: Filter value.
+          type: string
+      type: object
+    ListQueriesResponse:
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as page_token to retrieve the next page of queries. If this field is omitted, there are no subsequent pages.
+          type: string
+        queries:
+          description: The list of queries.
+          items:
+            $ref: "#/components/schemas/Query"
+          type: array
+      type: object
+    ListReportsResponse:
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as page_token to retrieve the next page of reports. If this field is omitted, there are no subsequent pages.
+          type: string
+        reports:
+          description: Retrieved reports.
+          items:
+            $ref: "#/components/schemas/Report"
+          type: array
+      type: object
+    Options:
+      description: Additional query options.
+      properties:
+        includeOnlyTargetedUserLists:
+          description: Set to true and filter your report by `FILTER_INSERTION_ORDER` or `FILTER_LINE_ITEM` to include data for audience lists specifically targeted by those items.
+          type: boolean
+        pathQueryOptions:
+          $ref: "#/components/schemas/PathQueryOptions"
+          description: Options that contain Path Filters and Custom Channel Groupings.
+      type: object
+    Parameters:
+      description: Parameters of a query or report.
+      properties:
+        filters:
+          description: Filters used to match traffic data in your report.
+          items:
+            $ref: "#/components/schemas/FilterPair"
+          type: array
+        groupBys:
+          description: Data is grouped by the filters listed in this field.
+          items:
+            type: string
+          type: array
+        metrics:
+          description: Metrics to include as columns in your report.
+          items:
+            type: string
+          type: array
+        options:
+          $ref: "#/components/schemas/Options"
+          description: Additional query options.
+        type:
+          description: The type of the report. The type of the report will dictate what dimesions, filters, and metrics can be used.
+          enum:
+            - REPORT_TYPE_UNSPECIFIED
+            - STANDARD
+            - INVENTORY_AVAILABILITY
+            - AUDIENCE_COMPOSITION
+            - FLOODLIGHT
+            - YOUTUBE
+            - GRP
+            - YOUTUBE_PROGRAMMATIC_GUARANTEED
+            - REACH
+            - UNIQUE_REACH_AUDIENCE
+            - FULL_PATH
+            - PATH_ATTRIBUTION
+          type: string
+      type: object
+    PathFilter:
+      description: Path filters specify which paths to include in a report. A path is the result of combining DV360 events based on User ID to create a workflow of users' actions. When a path filter is set, the resulting report will only include paths that match the specified event at the specified position. All other paths will be excluded.
+      properties:
+        eventFilters:
+          description: Filter on an event to be applied to some part of the path.
+          items:
+            $ref: "#/components/schemas/EventFilter"
+          type: array
+        pathMatchPosition:
+          description: The position of the path the filter should match to (first, last, or any event in path).
+          enum:
+            - PATH_MATCH_POSITION_UNSPECIFIED
+            - ANY
+            - FIRST
+            - LAST
+          type: string
+      type: object
+    PathQueryOptions:
+      description: Path Query Options for Report Options.
+      properties:
+        channelGrouping:
+          $ref: "#/components/schemas/ChannelGrouping"
+          description: Custom Channel Groupings.
+        pathFilters:
+          description: Path Filters. There is a limit of 100 path filters that can be set per report.
+          items:
+            $ref: "#/components/schemas/PathFilter"
+          type: array
+      type: object
+    PathQueryOptionsFilter:
+      description: Dimension filter on path events.
+      properties:
+        filter:
+          description: Dimension the filter is applied to.
+          type: string
+        match:
+          description: Match logic of the filter.
+          enum:
+            - UNKNOWN
+            - EXACT
+            - PARTIAL
+            - BEGINS_WITH
+            - WILDCARD_EXPRESSION
+          type: string
+        values:
+          description: Values to filter on.
+          items:
+            type: string
+          type: array
+      type: object
+    Query:
+      description: Represents a query.
+      properties:
+        metadata:
+          $ref: "#/components/schemas/QueryMetadata"
+          description: Query metadata.
+        params:
+          $ref: "#/components/schemas/Parameters"
+          description: Query parameters.
+        queryId:
+          description: Output only. Query ID.
+          format: int64
+          readOnly: true
+          type: string
+        schedule:
+          $ref: "#/components/schemas/QuerySchedule"
+          description: Information on how often and when to run a query. If `ONE_TIME` is set to the frequency field, the query will only be run at the time of creation.
+      type: object
+    QueryMetadata:
+      description: Query metadata.
+      properties:
+        dataRange:
+          $ref: "#/components/schemas/DataRange"
+          description: Range of report data. All reports will be based on the same time zone as used by the advertiser.
+        format:
+          description: Format of the generated report.
+          enum:
+            - FORMAT_UNSPECIFIED
+            - CSV
+            - XLSX
+          type: string
+        sendNotification:
+          description: Whether to send an email notification when a report is ready. Defaults to false.
+          type: boolean
+        shareEmailAddress:
+          description: List of email addresses which are sent email notifications when the report is finished. Separate from send_notification.
+          items:
+            type: string
+          type: array
+        title:
+          description: Query title. It is used to name the reports generated from this query.
+          type: string
+      type: object
+    QuerySchedule:
+      description: Information on when and how frequently to run a query.
+      properties:
+        endDate:
+          $ref: "#/components/schemas/Date"
+          description: Date to periodically run the query until. Not applicable to `ONE_TIME` frequency.
+        frequency:
+          description: How often the query is run.
+          enum:
+            - FREQUENCY_UNSPECIFIED
+            - ONE_TIME
+            - DAILY
+            - WEEKLY
+            - SEMI_MONTHLY
+            - MONTHLY
+            - QUARTERLY
+            - YEARLY
+          type: string
+        nextRunTimezoneCode:
+          description: Canonical timezone code for report generation time. Defaults to `America/New_York`.
+          type: string
+        startDate:
+          $ref: "#/components/schemas/Date"
+          description: When to start running the query. Not applicable to `ONE_TIME` frequency.
+      type: object
+    Report:
+      description: Represents a report.
+      properties:
+        key:
+          $ref: "#/components/schemas/ReportKey"
+          description: Key used to identify a report.
+        metadata:
+          $ref: "#/components/schemas/ReportMetadata"
+          description: Report metadata.
+        params:
+          $ref: "#/components/schemas/Parameters"
+          description: Report parameters.
+      type: object
+    ReportKey:
+      description: Key used to identify a report.
+      properties:
+        queryId:
+          description: Output only. Query ID.
+          format: int64
+          readOnly: true
+          type: string
+        reportId:
+          description: Output only. Report ID.
+          format: int64
+          readOnly: true
+          type: string
+      type: object
+    ReportMetadata:
+      description: Report metadata.
+      properties:
+        googleCloudStoragePath:
+          description: Output only. The path to the location in Google Cloud Storage where the report is stored.
+          readOnly: true
+          type: string
+        reportDataEndDate:
+          $ref: "#/components/schemas/Date"
+          description: The ending time for the data that is shown in the report.
+        reportDataStartDate:
+          $ref: "#/components/schemas/Date"
+          description: The starting time for the data that is shown in the report.
+        status:
+          $ref: "#/components/schemas/ReportStatus"
+          description: Report status.
+      type: object
+    ReportStatus:
+      description: Report status.
+      properties:
+        finishTime:
+          description: Output only. The time when this report either completed successfully or failed.
+          format: google-datetime
+          readOnly: true
+          type: string
+        format:
+          description: The file type of the report.
+          enum:
+            - FORMAT_UNSPECIFIED
+            - CSV
+            - XLSX
+          type: string
+        state:
+          description: Output only. The state of the report.
+          enum:
+            - STATE_UNSPECIFIED
+            - QUEUED
+            - RUNNING
+            - DONE
+            - FAILED
+          readOnly: true
+          type: string
+      type: object
+    Rule:
+      description: A Rule defines a name, and a boolean expression in [conjunctive normal form] (http://mathworld.wolfram.com/ConjunctiveNormalForm.html){.external} that can be applied to a path event to determine if that name should be applied.
+      properties:
+        disjunctiveMatchStatements:
+          description: DisjunctiveMatchStatements within a Rule. DisjunctiveMatchStatement OR's all contained filters.
+          items:
+            $ref: "#/components/schemas/DisjunctiveMatchStatement"
+          type: array
+        name:
+          description: Rule name.
+          type: string
+      type: object
+    RunQueryRequest:
+      description: Request to run a stored query to generate a report.
+      properties:
+        dataRange:
+          $ref: "#/components/schemas/DataRange"
+          description: Report data range used to generate the report. If unspecified, the original parent query's data range is used.
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

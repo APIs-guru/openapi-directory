@@ -1,0 +1,67 @@
+openapi: 3.0.1
+servers:
+  - url: https://numbers.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Numbers
+  version: 1.42.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_static1.twilio.com_marketing_bundles_marketing_img_logos_wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_numbers_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_numbers_v1
+paths:
+  /v1/HostedNumber/Eligibility:
+    description: "TODO: Resource-level docs"
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties: []
+      mountName: eligibilities
+      pathType: list
+components:
+  schemas:
+    eligibility_enum_eligibility_status:
+      enum:
+        - ineligible
+        - eligible
+      type: string
+    eligibility_enum_eligibility_sub_status:
+      enum:
+        - country-ineligible
+        - number-format-ineligible
+        - number-type-ineligible
+        - carrier-ineligible
+        - already-in-twilio
+        - internal-processing-error
+        - invalid-phone-number
+        - invalid-hosting-account-sid
+        - eligible
+      type: string
+    numbers.v1.eligibility:
+      properties:
+        results:
+          description: "The result set that contains the eligibility check response for the requested number, each result has at least the following attributes:  phone_number: The requested phone number ,hosting_account_sid: The account sid where the phone number will be hosted, date_last_checked: Datetime (ISO 8601) when the PN was last checked for eligibility, country: Phone number’s country, eligibility_status: Indicates the eligibility status of the PN (Eligible/Ineligible), eligibility_sub_status: Indicates the sub status of the eligibility , ineligibility_reason: Reason for number's ineligibility (if applicable), next_step: Suggested next step in the hosting process based on the eligibility status."
+          items: {}
+          nullable: true
+          type: array
+      type: object
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity: []

@@ -1,0 +1,38 @@
+{
+  "apis": {
+    "configcat.com": {
+      "added": "2020-03-24T07:40:11.000Z",
+      "info": {
+        "contact": {
+          "email": "support@configcat.com",
+          "name": "ConfigCat",
+          "url": "https://configcat.com",
+          "x-twitter": "configcat"
+        },
+        "description": "**Base API URL**: https://api.configcat.com\n\nIf you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\nThe purpose of this API is to access the ConfigCat platform programmatically. \nYou can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat. \n\nThe API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON \nand JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).\n\n\n# OpenAPI Specification\n\nThe complete specification is publicly available here: [swagger.json](v1/swagger.json). \nYou can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or\n[Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.\n\n# Authentication\nThis API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication). \n\n<!-- ReDoc-Inject: <security-definitions> -->\n\n# Throttling and rate limits\nAll the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:\n\n| Header | Description |\n| :- | :- |\n| X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. |\n| X-Rate-Limit-Reset     | The time\twhen the current rate limit period resets.\t\t\t\t\t\t  |\n\nWhen the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header.\n",
+        "termsOfService": "https://configcat.com/termsofserviceagreement",
+        "title": "ConfigCat Public Management API",
+        "version": "v1",
+        "x-apisguru-categories": [
+          "developer_tools"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_api.configcat.com_resources_configcat-logo-horiz.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://api.configcat.com/docs/v1/swagger.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "configcat.com"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/configcat.com/v1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/configcat.com/v1/openapi.yaml",
+      "openapiVer": "3.0.1",
+      "link": "https://api.apis.guru/v2/specs/configcat.com/v1.json"
+    }
+  }
+}

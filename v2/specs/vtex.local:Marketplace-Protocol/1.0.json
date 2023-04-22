@@ -1,0 +1,26 @@
+{
+  "added": "2023-03-03T14:11:52.034Z",
+  "info": {
+    "contact": {},
+    "description": "\r\nThe _Marketplace Protocol_ is a set of API requests and definitions to help you integrate external sellers into a VTEX marketplace as well as external marketplaces into VTEX sellers.\r\n\r\n## External Seller\r\n\r\nHere you will find the endpoints involved in the integration between a VTEX marketplace and an external seller. Note that some of these requests are typically sent by the seller while others are received.\r\n\r\n| **Request** | **From** | **To** |\r\n|-|-|-|\r\n| [Fulfillment simulation](https://developers.vtex.com/vtex-rest-api/reference/fulfillment-simulation) | Marketplace | Seller |\r\n| [Order placement](https://developers.vtex.com/vtex-rest-api/reference/order-placement) | Marketplace | Seller |\r\n| [Authorize fulfillment](https://developers.vtex.com/vtex-rest-api/reference/authorize-fulfillment) | Marketplace | Seller |\r\n| [Marketplace order cancellation](https://developers.vtex.com/vtex-rest-api/reference/marketplace-order-cancellation) | Marketplace | Seller |\r\n| [Send invoice](https://developers.vtex.com/vtex-rest-api/reference/send-invoice) | Seller | Marketplace |\r\n| [Send tracking information](https://developers.vtex.com/vtex-rest-api/reference/send-tracking-information) | Seller      | Marketplace |\r\n| [Update tracking status](https://developers.vtex.com/vtex-rest-api/reference/update-tracking-status) | Seller | Marketplace |\r\n| [Cancel order in marketplace](https://developers.vtex.com/vtex-rest-api/reference/cancel-order-in-marketplace) | Seller | Marketplace |\r\n\r\nFor a detailed explanation of the steps required to develop a custom connector to sell products from an external seller in your storefront, check out our complete [External Seller Integration Guide](https://developers.vtex.com/docs/guides/external-seller-integration-guide).\r\n\r\n\r\n## External Marketplace\r\n\r\nIn this section, you will find the endpoints involved in the VTEX integration between an external marketplace and a VTEX seller.\r\n\r\n\r\n| **Request** | **From** | **To** |\r\n|-|-|-|\r\n| [VTEX Mapper Registration](https://developers.vtex.com/vtex-rest-api/reference/vtex-mapper-registration) | External marketplace | VTEX system |\r\n| [Send Category Mapping to VTEX Mapper](https://developers.vtex.com/vtex-rest-api/reference/send-category-mapping-to-vtex-mapper) |  External marketplace | VTEX system |\r\n| [Authorize fulfillment](https://developers.vtex.com/vtex-rest-api/reference/authorize-fulfillment) | Marketplace | Seller |\r\n| [Place fulfillment order](https://developers.vtex.com/vtex-rest-api/reference/place-fulfillment-order)   | External marketplace | VTEX Seller |\r\n| [Authorize dispatch for fulfillment order](https://developers.vtex.com/vtex-rest-api/reference/authorize-dispatch-for-fulfillment-order) | External marketplace | VTEX Seller |\r\n\r\n\r\nFor a detailed explanation of the steps required to develop a custom connector to become an external marketplace for VTEX sellers, check out our complete [External Marketplace Integration Guide](https://developers.vtex.com/docs/guides/external-marketplace-integration-guide).",
+    "title": "Marketplace Protocol",
+    "version": "1.0",
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Marketplace Protocol.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "vtex.local",
+    "x-serviceName": "Marketplace-Protocol",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+    }
+  },
+  "updated": "2023-03-03T14:11:52.034Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/vtex.local/Marketplace-Protocol/1.0/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/vtex.local/Marketplace-Protocol/1.0/openapi.yaml",
+  "openapiVer": "3.0.0",
+  "link": "https://api.apis.guru/v2/specs/vtex.local:Marketplace-Protocol/1.0.json"
+}

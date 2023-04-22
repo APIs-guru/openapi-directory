@@ -1,0 +1,4291 @@
+swagger: "2.0"
+schemes:
+  - https
+host: api.swaggerhub.com
+info:
+  contact:
+    name: SwaggerHub Support
+    url: https://support.smartbear.com/swaggerhub/message/
+  description: |
+    # Overview
+    Use SwaggerHub Registry API to access, manage, and update the following resources in SwaggerHub, bypassing the web interface:
+      * APIs
+      * Domains
+      * Integrations
+      * Projects
+      * Templates
+
+
+    SwaggerHub also provides the [User Management API](https://app.swaggerhub.com/apis-docs/swagger-hub/user-management-api/) to get information about organizations and manage organization members.
+
+    # Base URL
+    Use the following base URL for SwaggerHub SaaS:
+        
+        http(s)://api.swaggerhub.com
+
+    **Note:** This documentation is for SwaggerHub SaaS. On-Premise customers should use the bundled API definition, which can be found at the URLs provided below.
+
+    Version 1.29.0 or later:
+
+        http(s)://SERVER/v1/openapi.yaml - YAML version
+        http(s)://SERVER/v1/openapi.json - JSON version
+
+    Earlier versions:
+
+        http(s)://SERVER/v1/swagger.yaml - YAML version
+        http(s)://SERVER/v1/swagger.json - JSON version
+
+    # Authentication
+    Operations that update data or access private data require authentication using an API key. You can find your personal API key on the [API Keys](https://app.swaggerhub.com/settings/apiKey) page in your account settings. Send this key in the `Authorization` header when making requests to the Registry API:
+
+        Authorization: YOUR_API_KEY
+
+    To test API calls from this documentation page, click the **Authorize** button below and paste your API key there.
+
+    **Important:** Keep the API key secure and do not store it directly in your code.
+    # Tools
+    In addition to calling the Registry API directly, you can use the following tools to interact with the API from the command line or CI/CD pipeline:
+
+     * [SwaggerHub CLI](https://www.npmjs.com/package/swaggerhub-cli) 
+     * [Maven plugin](https://github.com/swagger-api/swaggerhub-maven-plugin)
+     * [Gradle plugin](https://github.com/swagger-api/swaggerhub-gradle-plugin)
+  termsOfService: https://smartbear.com/terms-of-use/
+  title: SwaggerHub Registry API
+  version: 1.0.66
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_SwaggerHub_profile_image.jpeg
+  x-origin:
+    - format: swagger
+      url: https://api.swaggerhub.com/apis/swagger-hub/registry-api/1.0.66
+      version: "2.0"
+  x-providerName: swaggerhub.com
+produces:
+  - application/json
+securityDefinitions:
+  TokenSecured:
+    description: Specify your SwaggerHub API key found in https://app.swaggerhub.com/settings/apiKey.
+    in: header
+    name: Authorization
+    type: apiKey
+parameters:
+  api:
+    description: API name (case-sensitive)
+    in: path
+    name: api
+    required: true
+    type: string
+  apiName:
+    in: path
+    name: api
+    required: true
+    type: string
+  apiOwner:
+    description: API owner (organization or user, case-sensitive)
+    in: path
+    name: owner
+    required: true
+    type: string
+  comment:
+    description: Comment identifier
+    in: path
+    name: comment
+    required: true
+    type: string
+  commentStatus:
+    description: Comment status
+    enum:
+      - OPEN
+      - RESOLVED
+    in: path
+    name: status
+    required: true
+    type: string
+  commitMessage:
+    description: Commit message for source control integrations
+    in: query
+    name: commitMessage
+    required: false
+    type: string
+  domain:
+    description: Domain name (case-sensitive)
+    in: path
+    name: domain
+    required: true
+    type: string
+  domainOwner:
+    description: Domain owner (organization or user, case-sensitive)
+    in: path
+    name: owner
+    required: true
+    type: string
+  filterViewers:
+    description: Role as a criteria for filter list of notifiable users.
+    in: query
+    name: filterViewers
+    required: false
+    type: boolean
+  flatten:
+    default: false
+    description: If set to `true`, it creates models from inline schemas in OpenAPI definition. AsyncAPI definitions cannot be flattened.
+    in: query
+    name: flatten
+    required: false
+    type: boolean
+  force:
+    description: Force update
+    in: query
+    name: force
+    required: false
+    type: boolean
+  integrationId:
+    description: Integration ID (case-sensitive). To get the available integration IDs, use `GET /apis/{owner}/{api}/{version}/integrations`
+    format: uuid
+    in: path
+    name: integrationId
+    required: true
+    type: string
+  integrationTypeConfiguration:
+    description: |-
+      Can be one of the following objects:
+
+      | `configType` value        | Object |
+      | ------------------------- | ------ |
+      | AMAZON_API_GATEWAY        | AmazonApiGatewayIntegration |
+      | AMAZON_API_GATEWAY_LAMBDA | AmazonApiGatewayLambdaIntegration |
+      | API_AUTO_MOCKING          | AutoMockingIntegration |
+      | APIGEE_EDGE               | ApigeeEdgeIntegration |
+      | AZURE_API_MANAGEMENT      | AzureApiManagementIntegration |
+      | AZURE_DEVOPS_SERVICES     | AzureDevopsServicesIntegration |
+      | BITBUCKET_CLOUD           | BitbucketCloudIntegration |
+      | BITBUCKET_SERVER          | BitbucketServerIntegration |
+      | GITHUB                    | GitHubIntegration |
+      | GITHUB_ENTERPRISE         | GitHubEnterpriseIntegration |
+      | GITLAB                    | GitLabIntegration |
+      | IBM_API_CONNECT           | IBMApiConnectIntegration |
+      | WEBHOOK                   | WebhookIntegration |
+
+      For more examples, see the JSON files in this repository:
+      https://github.com/SmartBear/swaggerhub-cli/tree/master/examples/integrations
+    in: body
+    name: integrationTypeConfiguration
+    required: true
+    schema:
+      example:
+        branch: develop
+        configType: GITHUB
+        enabled: true
+        ignoredPaths: []
+        managedPaths: []
+        name: Java client SDK
+        outputFolder: sdk/java
+        owner: myOrg
+        providedPaths:
+          - "*"
+        repository: petstore
+        syncMethod: Advanced Sync
+        target: java
+        token: abcd12345
+      type: object
+  isPrivate:
+    default: false
+    description: Defines whether the API or template has to be private
+    in: query
+    name: isPrivate
+    required: false
+    type: boolean
+  lifecycleSettingsBody:
+    description: "An object that specifies the new `published` state: `true` means published, `false` - unpublished"
+    in: body
+    name: settings
+    required: true
+    schema:
+      $ref: "#/definitions/LifecycleSettings"
+  limit:
+    default: 10
+    description: Number of results per page (1 .. 100)
+    format: int32
+    in: query
+    maximum: 100
+    name: limit
+    required: false
+    type: integer
+  nameOnly:
+    default: false - DELETE
+    description: Return the project information excluding APIs and domains
+    in: query
+    name: nameOnly
+    required: false
+    type: boolean
+  newName:
+    description: New name
+    in: query
+    maxLength: 60
+    minLength: 3
+    name: newName
+    required: true
+    type: string
+  newVersion:
+    description: An object that contains the new version number and other parameters. The version number must be in the format described in the [documentation](https://support.smartbear.com/swaggerhub/docs/apis/versioning.html#format).
+    in: body
+    name: newVersion
+    required: true
+    schema:
+      $ref: "#/definitions/NewVersion"
+  order:
+    default: ASC
+    description: Sort order
+    enum:
+      - ASC
+      - DESC
+    in: query
+    name: order
+    required: false
+    type: string
+  owner:
+    description: API, domain, or template owner identifier (case-sensitive)
+    in: path
+    name: owner
+    required: true
+    type: string
+  page:
+    default: 0
+    description: Page to return
+    format: int32
+    in: query
+    name: page
+    required: false
+    type: integer
+  projectId:
+    description: Project name (case-sensitive)
+    in: path
+    name: projectId
+    required: true
+    type: string
+  projectMemberList:
+    description: A list of users and teams to add to the project
+    in: body
+    name: projectMemberList
+    required: true
+    schema:
+      $ref: "#/definitions/ProjectMemberList"
+  projectName:
+    description: The project to add the API, domain, or template to
+    in: query
+    name: projectName
+    required: false
+    type: string
+  projectOwner:
+    description: Organization name (case-sensitive)
+    in: path
+    name: owner
+    required: true
+    type: string
+  projectRequest:
+    description: |
+      The project data. Properties that are not provided are set to empty values.
+    in: body
+    name: projectRequest
+    required: true
+    schema:
+      $ref: "#/definitions/Project"
+  projectSort:
+    default: NAME
+    description: |
+      Sort criteria or result set:
+      * NAME
+      * OWNER
+    enum:
+      - NAME
+      - OWNER
+    in: query
+    name: sort
+    required: false
+    type: string
+  query:
+    description: Free text query to match
+    in: query
+    name: query
+    required: false
+    type: string
+  reply:
+    description: Reply identifier
+    in: path
+    name: reply
+    required: true
+    type: string
+  resolved:
+    default: false
+    description: Set to true to get the resolved version of the API definition. The content of all external $refs will be included in the resulting file.
+    in: query
+    name: resolved
+    type: boolean
+  scope:
+    default: USER
+    description: Identifies requester
+    enum:
+      - USER
+      - ALL
+    in: query
+    name: scope
+    required: true
+    type: string
+  sort:
+    default: NAME
+    description: |
+      Sort criteria of result set:
+      * NAME
+      * UPDATED
+      * CREATED
+      * OWNER
+      * BEST_MATCH - by relevance
+      * TITLE - by `info.title`
+    enum:
+      - NAME
+      - UPDATED
+      - CREATED
+      - OWNER
+      - BEST_MATCH
+      - TITLE
+    in: query
+    name: sort
+    required: false
+    type: string
+  specVersion:
+    description: Version of the spec
+    in: query
+    name: version
+    required: false
+    type: string
+  state:
+    default: ALL
+    description: |
+      Matches against published state of the spec:
+      * UNPUBLISHED - spec is a draft, a work in progress
+      * PUBLISHED - spec is a stable version ready for consuming from client applications
+      * ANY - either PUBLISHED or UNPUBLISHED
+    enum:
+      - ALL
+      - PUBLISHED
+      - UNPUBLISHED
+    in: query
+    name: state
+    required: false
+    type: string
+  template:
+    description: Source template ID
+    in: query
+    name: template
+    required: true
+    type: string
+  templateId:
+    description: Template identifier
+    in: path
+    name: templateId
+    required: true
+    type: string
+  version:
+    description: Version identifier
+    in: path
+    name: version
+    required: true
+    type: string
+  versionToClone:
+    description: The version to clone (case-sensitive)
+    in: path
+    name: version
+    required: true
+    type: string
+  visibilitySettingsBody:
+    description: "An object that specifies the new visibility level: `true` means private, `false` - public"
+    in: body
+    name: settings
+    required: true
+    schema:
+      $ref: "#/definitions/VisibilitySettings"
+responses:
+  ApiCommentNotFound:
+    description: The specified API or comment was not found
+  ApiCommentReplyNotFound:
+    description: The specified API, comment, or reply was not found
+  ApiNotFound:
+    description: The specified API was not found
+  BadRequest:
+    description: Request body invalid
+  CommentForbidden:
+    description: The comment feature is not available for the organization's plan, or the authenticating user does not have permission to complete this action
+  DomainCommentNotFound:
+    description: The specified domain or comment was not found
+  DomainCommentReplyNotFound:
+    description: The specified domain, comment, or reply was not found
+  DomainNotFound:
+    description: The specified domain was not found
+  IntegrationForbidden:
+    description: The authenticating user does not have access to integrations in this API
+  TemplateCommentReplyNotFound:
+    description: Template, comment, or reply not found
+  TemplateNotFound:
+    description: Template not found
+  Unauthorized:
+    description: Access token is not set or invalid
+tags:
+  - description: Manage your API definitions
+    name: APIs
+  - description: Manage your API [custom templates](https://support.smartbear.com/swaggerhub/docs/apis/creating-api-custom-template.html)
+    name: Templates
+  - description: Manage your [domains](https://support.smartbear.com/swaggerhub/docs/domains/)
+    name: Domains
+  - description: Manage your organization's [projects](https://support.smartbear.com/swaggerhub/docs/organizations/projects/)
+    name: Projects
+  - description: Create and configure [integrations](https://support.smartbear.com/swaggerhub/docs/integrations/) programmatically
+    name: Integrations
+paths:
+  /apis:
+    get:
+      description: This is a convenience alias for `GET /specs?specType=API`.
+      operationId: searchApis
+      parameters:
+        - $ref: "#/parameters/query"
+        - $ref: "#/parameters/state"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order"
+      responses:
+        "303":
+          description: Redirect to `GET /specs`, with all query parameters preserved
+          headers:
+            Location:
+              type: string
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Search APIs
+      tags:
+        - APIs
+  "/apis/{owner}":
+    get:
+      operationId: getOwnerApis
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order"
+      responses:
+        "200":
+          description: A list of APIs in APIs.json format
+          schema:
+            $ref: "#/definitions/ApisJson"
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get a list of APIs of the specified owner
+      tags:
+        - APIs
+  "/apis/{owner}/{api}":
+    delete:
+      operationId: deleteApi
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+      responses:
+        "200":
+          description: The API was successfully deleted
+        "403":
+          description: Access denied
+        "404":
+          description: The specified API not found
+        "409":
+          description: The API has published versions and cannot be deleted
+      security:
+        - TokenSecured: []
+      summary: Delete an API
+      tags:
+        - APIs
+    get:
+      operationId: getApiVersions
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+      responses:
+        "200":
+          description: A list of API versions in APIs.json format
+          schema:
+            $ref: "#/definitions/ApisJson"
+        "404":
+          description: The specified API was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get a list of API versions
+      tags:
+        - APIs
+    post:
+      consumes:
+        - application/json
+        - application/yaml
+      description: |-
+        Use this operation to create a new API or update an existing API by uploading its OpenAPI definition in YAML or JSON format. The authenticating user must have permissions to create or update APIs in the specified `owner` account.
+
+        The API name and version must follow SwaggerHub naming rules, otherwise the request will be rejected. Refer to:
+         
+         * [API name format](https://support.smartbear.com/swaggerhub/docs/apis/creating-api.html)
+         * [Version format](https://support.smartbear.com/swaggerhub/docs/apis/versioning.html#format)
+
+
+        When a new version of an existing API is created, it does not automatically become the default version. You can use `PUT /apis/{owner}/{api}/settings/default` to set the default version.
+
+        ### cURL example
+        Line breaks are added for readability.
+
+            curl -X POST "https://api.swaggerhub.com/apis/OWNER/API_TO_CREATE_OR_UPDATE"
+                 -H "Authorization: SWAGGERHUB_API_KEY"
+                 -H "Content-Type: application/yaml"
+                 --data-binary @C:\work\swagger.yaml
+
+        **Note:** Use `--data-binary` (not `-d`) when uploading YAML files using cURL, and remember to specify the correct `Content-Type` header.
+      operationId: saveDefinition
+      parameters:
+        - description: API owner name (organization or user name, case-sensitive)
+          in: path
+          name: owner
+          required: true
+          type: string
+        - $ref: "#/parameters/api"
+        - default: false
+          description: Whether to make the API private (`true`) or public (`false`)
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: |-
+            API version to create or update. If omitted, the version is extracted from the `info.version` field of the provided OpenAPI definition.
+
+            Either the `version` parameter or the `info.version` value must be specified, otherwise the request will be rejected. If both are specified, the `version` parameter overrides the `info.version` value.
+
+            If this API version already exists, it will be updated with the new definition (unless that version has been published - in this case the update will be rejected).
+          in: query
+          name: version
+          required: false
+          type: string
+        - description: OpenAPI definition in the YAML or JSON format. The content must be syntactically valid YAML or JSON.
+          in: body
+          name: definition
+          required: true
+          schema:
+            example: |
+              {
+                "swagger": "2.0",
+                "info": {
+                  "title": "Sample API",
+                  "version": "1.0.0"
+                },
+                "paths": {}
+              }
+            type: string
+        - description: Force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: Existing API version was successfully updated
+        "201":
+          description: New API or version was successfully created
+        "205":
+          description: |-
+            This status is returned when updating existing API versions that use [API Auto Mocking](https://support.smartbear.com/swaggerhub/docs/integrations/api-auto-mocking.html) with the "Update host setting" option enabled. Status 205 means the uploaded definition was successfully saved, and its `servers` or `host`+`basePath` values were automatically updated to point to the mock server.
+
+            The client can download the updated definition from SwaggerHub by using `GET /apis/{owner}/{api}`.
+        "400":
+          description: |-
+            Possible reasons:
+
+             * Some parameter values are invalid, or the provided OpenAPI definition is invalid.
+             * The specified `projectName` does not exist in the `owner` organization, or the authenticating user does not have access to this project.
+             * Cannot create a new API because a domain with this name already exists in the `owner` account. Try a different name.
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Maximum number of APIs reached
+        "404":
+          description: The specified owner was not found
+        "409":
+          description: Cannot overwrite a published API version
+        "415":
+          description: Invalid content type
+      security:
+        - TokenSecured: []
+      summary: Create or update an API
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/rename":
+    post:
+      description: The new name must follow the [naming rules](https://support.smartbear.com/swaggerhub/docs/apis/creating-api.html).
+      operationId: renameApi
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/newName"
+      responses:
+        "200":
+          description: The API was successfully renamed
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied (insufficient user permissions)
+        "404":
+          description: The specified owner or API was not found
+        "409":
+          description: An API or domain with the new name already exists, or the new and old names are the same
+      security:
+        - TokenSecured: []
+      summary: Rename an API
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/settings/default":
+    get:
+      description: This operation returns the version identifier, such as `1.0.0`. To get the definition itself, use `GET /apis/{owner}/{api}/{version}`.
+      operationId: getApiDefaultVersion
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: The default version identifier for this API
+          schema:
+            $ref: "#/definitions/DefaultVersion"
+        "404":
+          description: The specified API was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get the default version of an API
+      tags:
+        - APIs
+    put:
+      consumes:
+        - application/json
+      operationId: setApiDefaultVersion
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - description: An object that specifies the default version for this API
+          in: body
+          name: defaultVersion
+          required: true
+          schema:
+            $ref: "#/definitions/DefaultVersion"
+      responses:
+        "200":
+          description: The default version was successfully changed
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied (insufficient user permissions)
+        "404":
+          description: The specified API or version was not found
+      security:
+        - TokenSecured: []
+      summary: Set the default API version
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}":
+    delete:
+      operationId: deleteApiVersion
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: The API version was successfully deleted
+        "403":
+          description: Access denied
+        "404":
+          description: The specified API was not found
+        "409":
+          description: The API version is published and cannot be deleted or it is the only version of this API
+      security:
+        - TokenSecured: []
+      summary: Delete an API version
+      tags:
+        - APIs
+    get:
+      operationId: getDefinition
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/resolved"
+        - $ref: "#/parameters/flatten"
+      produces:
+        - application/json
+        - application/yaml
+      responses:
+        "200":
+          description: OpenAPI definition in the requested format (YAML or JSON)
+          schema:
+            example:
+              info:
+                title: Sample API
+                version: 1.0.0
+              openapi: 3.0.0
+              paths: {}
+            type: object
+        "400":
+          description: Could not generate resolved definition due to syntax errors in the definition
+          examples:
+            application/json:
+              code: 400
+              message: |-
+                Failed to read OAS3 definition.
+                Could not find components/schemas/SchemaName in contents of https://api.swaggerhub.com/domains/MyOrg/MyDomain/1.0.0
+        "404":
+          description: The specified API or version was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get the OpenAPI definition of the specified API version
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/clone":
+    post:
+      description: |-
+        Use this operation to clone an existing API version as a new version. The new version will have the same YAML content but with updated `info.version`.
+
+        **Note:** Comments, integrations, and codegen options are not copied to the new version. The default version also remains unchanged.
+      operationId: cloneApi
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/versionToClone"
+        - $ref: "#/parameters/newVersion"
+      responses:
+        "201":
+          description: New API version was successfully created
+        "400":
+          description: Bad request
+        "403":
+          description: Access denied
+        "404":
+          description: The specified API or version was not found
+        "409":
+          description: The API version you are trying to create already exists
+      security:
+        - TokenSecured: []
+      summary: Create a new API version
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/comments":
+    get:
+      operationId: getApiCommentsV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: Comments for the specified API
+          schema:
+            items:
+              $ref: "#/definitions/ClosableComment"
+            type: array
+        "204":
+          description: No comments were found for the specified API
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiNotFound"
+      security:
+        - TokenSecured: []
+      summary: Get comments for the specified API version
+      tags:
+        - APIs
+    post:
+      operationId: addApiCommentV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/NewComment"
+      responses:
+        "201":
+          description: Newly created comment for the specified API
+          schema:
+            $ref: "#/definitions/ClosableComment"
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiNotFound"
+      security:
+        - TokenSecured: []
+      summary: Add a new comment
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/comments/batch":
+    post:
+      operationId: updateApiCommentsV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CommentsBatch"
+      responses:
+        "200":
+          description: Comments were updated
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiCommentReplyNotFound"
+      security:
+        - TokenSecured: []
+      summary: Bulk update comments
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/comments/{comment}":
+    delete:
+      operationId: deleteApiCommentV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+      responses:
+        "200":
+          description: Comment was deleted
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiCommentNotFound"
+      security:
+        - TokenSecured: []
+      summary: Delete a comment
+      tags:
+        - APIs
+    patch:
+      operationId: updateApiCommentV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/ClosableCommentPatch"
+      responses:
+        "200":
+          description: Comment was updated
+          schema:
+            $ref: "#/definitions/ClosableComment"
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiCommentNotFound"
+      security:
+        - TokenSecured: []
+      summary: Update a comment
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/comments/{comment}/replies":
+    post:
+      operationId: addApiCommentReplyV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/NewReply"
+      responses:
+        "201":
+          description: Newly created reply
+          schema:
+            items:
+              $ref: "#/definitions/Comment"
+            type: array
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiCommentNotFound"
+      security:
+        - TokenSecured: []
+      summary: Reply to a comment
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/comments/{comment}/replies/{reply}":
+    delete:
+      operationId: deleteApiCommentReplyV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - $ref: "#/parameters/reply"
+      responses:
+        "200":
+          description: Сomment reply was deleted
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiCommentReplyNotFound"
+      security:
+        - TokenSecured: []
+      summary: Delete a comment reply
+      tags:
+        - APIs
+    patch:
+      operationId: updateApiCommentReplyV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - $ref: "#/parameters/reply"
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/CommentPatch"
+      responses:
+        "200":
+          description: Сomment reply was updated
+          schema:
+            $ref: "#/definitions/Comment"
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiCommentReplyNotFound"
+      security:
+        - TokenSecured: []
+      summary: Update a comment reply
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/comments/{comment}/status/{status}":
+    put:
+      operationId: setApiCommentStatusV2
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - $ref: "#/parameters/commentStatus"
+      responses:
+        "200":
+          description: Comment status was updated
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/ApiCommentNotFound"
+      security:
+        - TokenSecured: []
+      summary: Resolve or reopen a comment
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/fork":
+    post:
+      description: Creates a [fork](https://support.smartbear.com/swaggerhub/docs/apis/forking-api.html) of the specified API definition and version. The fork can be created as a new API, or as a new version in another existing API.
+      operationId: forkApi
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - description: Fork parameters
+          in: body
+          name: forkVersion
+          required: true
+          schema:
+            $ref: "#/definitions/ForkVersion"
+      responses:
+        "201":
+          description: The API was successfully forked
+        "400":
+          description: Some parameters are missing or invalid
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied
+        "404":
+          description: The specified owner or API was not found
+        "409":
+          description: An API with the name and version you're trying to create already exists
+      security:
+        - TokenSecured: []
+      summary: Fork an API
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/integrations":
+    get:
+      description: |-
+        The returned information includes integration types, names, unique IDs, and enabled/disabled status.
+
+        **Note:** The following integration types are currently not returned: Amazon API Gateway Lambda Sync, Apigee Edge, Azure API Management, IBM API Connect.
+      operationId: getIntegrations
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: An object that contains information about the configured integrations
+          schema:
+            $ref: "#/definitions/IntegrationConfigurations"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/IntegrationForbidden"
+        "404":
+          description: The specified API or version was not found
+      security:
+        - TokenSecured: []
+      summary: Get all integrations configured for the specified API version
+      tags:
+        - Integrations
+    post:
+      consumes:
+        - application/json
+      description: |-
+        Use this operation to configure an integration for a specific API version. The integration type is determined by which object is provided in the request body (specifically, by the `configType` value).
+
+        For a list of fields that need to be provided in the request body, see the descriptions of the following objects in the "Models" section at the bottom of API docs:
+
+         * `AmazonApiGatewayIntegration`
+         * `AmazonApiGatewayLambdaIntegration`
+         * `ApigeeEdgeIntegration`
+         * `AutoMockingIntegration`
+         * `AzureApiManagementIntegration`
+         * `AzureDevopsServicesIntegration`
+         * `BitbucketCloudIntegration`
+         * `BitbucketServerIntegration`
+         * `GitHubIntegration`
+         * `GitHubEnterpriseIntegration`
+         * `GitLabIntegration`
+         * `IBMApiConnectIntegration`
+         * `WebhookIntegration`
+
+        **Notes:**
+          * The integration `name` must be unique among all integrations configured for the given API version.
+          * If `target` is the YAMl/JSON definition, you must specify the `outputFile`.
+          * If `syncMethod`=_Advanced Sync_, you must specify a non-empty list of either `providedPaths` or `managedPaths` (or both). If you are not sure which paths to use, use `providedPaths`=`["*"]`.
+          * The operation does not validate the repository details and access tokens.
+      operationId: createIntegration
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/integrationTypeConfiguration"
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: The integration was successfully created. The response contains the auto-generated ID of the created integration and its confguration (excluding the access tokens and passwords).
+          examples:
+            application/json:
+              branch: develop
+              configType: GITHUB
+              enabled: true
+              id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+              ignoredPaths: []
+              managedPaths: []
+              name: Java client SDK
+              outputFolder: sdk/java
+              owner: myOrg
+              providedPaths:
+                - "*"
+              repository: petstore
+              syncMethod: Advanced Sync
+              target: java
+          schema:
+            $ref: "#/definitions/IntegrationConfiguration"
+        "400":
+          description: The integration configuration was invalid
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: The authenticating user does not have permissions to create integrations in this API
+        "404":
+          description: The specified owner, API, or version was not found
+        "409":
+          description: An integration with this name already exists in this API
+        "415":
+          description: Invalid content type
+      security:
+        - TokenSecured: []
+      summary: Create an integration for the specified API and version
+      tags:
+        - Integrations
+  "/apis/{owner}/{api}/{version}/integrations/{integrationId}":
+    delete:
+      description: Delete an existing integration specified by its ID.
+      operationId: deleteIntegration
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/integrationId"
+      responses:
+        "204":
+          description: The integration was successfully deleted
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: The authenticating user does not have permissions to delete integrations from this API
+        "404":
+          description: The specified owner, API, version, or integration ID was not found
+      security:
+        - TokenSecured: []
+      summary: Delete an integration
+      tags:
+        - Integrations
+    get:
+      consumes:
+        - application/json
+      description: Returns the configuration of the specified integration. Access tokens and passwords are not returned for security reasons.
+      operationId: getIntegrationById
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/integrationId"
+      responses:
+        "200":
+          description: |
+            Can be one of the following objects: `AmazonApiGatewayIntegration`, `AmazonApiGatewayLambdaIntegration`, `ApigeeEdgeIntegration`, `AutoMockingIntegration`, `AzureApiManagementIntegration`, `AzureDevopsServicesIntegration`, `BitbucketCloudIntegration`, `BitbucketServerIntegration`, `GitHubIntegration`, `GitHubEnterpriseIntegration`, `GitLabIntegration`, `IBMApiConnectIntegration`, `WebhookIntegration`
+          examples:
+            application/json:
+              branch: develop
+              configType: GITHUB
+              enabled: true
+              id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+              ignoredPaths: []
+              managedPaths: []
+              name: Java client SDK
+              outputFolder: sdk/java
+              owner: myOrg
+              providedPaths:
+                - "*"
+              repository: petstore
+              syncMethod: Advanced Sync
+              target: java
+          schema:
+            $ref: "#/definitions/IntegrationConfiguration"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/IntegrationForbidden"
+        "404":
+          description: The specified owner, API, version, or integration ID was not found
+      security:
+        - TokenSecured: []
+      summary: Get integration settings
+      tags:
+        - Integrations
+    patch:
+      consumes:
+        - application/json
+      description: |-
+        Use this operation to partially update integration settings for the specified API and integration ID. For example, enable or disable an integration, or specify a new access token.
+
+        Only the fields provided in the request body will be updated; other settings will remain unchanged. For a list of fields that can be updated, see the following objects in the "Models" section at the bottom of API docs:
+
+         * `AmazonApiGatewayIntegration`
+         * `AmazonApiGatewayLambdaIntegration`
+         * `ApigeeEdgeIntegration`
+         * `AutoMockingIntegration`
+         * `AzureApiManagementIntegration`
+         * `AzureDevopsServicesIntegration`
+         * `BitbucketCloudIntegration`
+         * `BitbucketServerIntegration`
+         * `GitHubIntegration`
+         * `GitHubEnterpriseIntegration`
+         * `GitLabIntegration`
+         * `IBMApiConnectIntegration`
+         * `WebhookIntegration`
+
+        **Notes:**
+          * `configType` (integration type) cannot be changed.
+          * If updating the integration `name`, make sure the new name is unique among all integrations configured for the given API version.
+          * If you change `target` to the YAMl/JSON definition, you must also specify the `outputFile`.
+          * If you change `syncMethod` to _Advanced Sync_, you must also specify a non-empty list of either `providedPaths` or `managedPaths` (or both). If you are not sure which paths to use, use `providedPaths`=`["*"]`.
+          * The update operation does not validate the repository details and access tokens.
+      operationId: patchIntegration
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/integrationId"
+        - description: An object that contains the integration parameters you want to update
+          in: body
+          name: integrationTypeConfiguration
+          required: true
+          schema:
+            example:
+              branch: develop
+              enabled: true
+              ignoredPaths: []
+              managedPaths: []
+              name: GitHub integration
+              outputFolder: sdk/java
+              owner: myOrg
+              providedPaths:
+                - "*"
+              repository: petstore
+              syncMethod: Advanced Sync
+              target: java
+              token: abcd12345
+            type: object
+      responses:
+        "200":
+          description: Integration was successfully updated
+        "400":
+          description: The specified integration configuration is invalid
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/IntegrationForbidden"
+        "404":
+          description: The specified owner, API, version, or integration ID was not found
+        "415":
+          description: Invalid content type
+      security:
+        - TokenSecured: []
+      summary: Partially update integration settings
+      tags:
+        - Integrations
+    put:
+      consumes:
+        - application/json
+      description: |-
+        Updates integration settings for the specified API and integration ID. The integration type is determined by which object is passed in the request body.
+
+        The request body must contain a **full representation** of an integration object. If you want to update just a few parameters, use the PATCH operation instead.
+
+        For a list of fields that need to be provided in the request body, see the descriptions of the following objects in the "Models" section at the bottom of API docs:
+
+         * `AmazonApiGatewayIntegration`
+         * `AmazonApiGatewayLambdaIntegration`
+         * `ApigeeEdgeIntegration`
+         * `AutoMockingIntegration`
+         * `AzureApiManagementIntegration`
+         * `AzureDevopsServicesIntegration`
+         * `BitbucketCloudIntegration`
+         * `BitbucketServerIntegration`
+         * `GitHubIntegration`
+         * `GitHubEnterpriseIntegration`
+         * `GitLabIntegration`
+         * `IBMApiConnectIntegration`
+         * `WebhookIntegration`
+
+        **Notes:**
+          * The integration `name` must be unique among all integrations configured for the given API version.
+          * If `target` is the YAMl/JSON definition, you must specify the `outputFile`.
+          * If `syncMethod`=_Advanced Sync_, you must specify a non-empty list of either `providedPaths` or `managedPaths` (or both). If you are not sure which paths to use, use `providedPaths`=`["*"]`.
+          * The operation does not validate the repository details and access tokens.
+      operationId: updateIntegration
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/integrationId"
+        - $ref: "#/parameters/integrationTypeConfiguration"
+      responses:
+        "200":
+          description: Integration was successfully updated
+        "400":
+          description: The specified integration configuration is invalid
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/IntegrationForbidden"
+        "404":
+          description: The specified combination of owner, API, version, integrationId, and configType was not found
+        "415":
+          description: Invalid content type
+      security:
+        - TokenSecured: []
+      summary: Update integration settings
+      tags:
+        - Integrations
+  "/apis/{owner}/{api}/{version}/integrations/{integrationId}/execute":
+    post:
+      description: |-
+        Use this operation to trigger an existing integration.
+
+        Source control integrations push to (not pull from) the configured repository and branch. You can optionally provide a custom commit message.
+
+        **Note:** Webhooks cannot be triggered by this operation, they are only triggered when an API is saved or published. An attempt to trigger a webhook will return status code 400.
+      operationId: executeIntegration
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/integrationId"
+        - $ref: "#/parameters/commitMessage"
+      responses:
+        "200":
+          description: The integration was executed successfully
+        "205":
+          description: The integration was executed successfully and the API has been updated
+        "400":
+          description: The integration encountered an error while executing. Check that the integration settings (such as access tokens) are valid.
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/IntegrationForbidden"
+        "404":
+          description: The specified API or integration ID was not found
+        "409":
+          description: The specified integration is disabled
+      security:
+        - TokenSecured: []
+      summary: Run an integration
+      tags:
+        - Integrations
+  "/apis/{owner}/{api}/{version}/settings/lifecycle":
+    get:
+      operationId: getLifecycleSettings
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: The published status of this API version
+          schema:
+            $ref: "#/definitions/LifecycleSettings"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "404":
+          description: The specified API or version was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+      summary: Get the published status for the specified API and version
+      tags:
+        - APIs
+    put:
+      consumes:
+        - application/json
+      operationId: setLifecycleSettings
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/lifecycleSettingsBody"
+        - default: false
+          description: To publish an API that references _unpublished_ domains, this parameter must be `true`. Otherwise, the request will be rejected with status code 424.
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: Successfully published or unpublished the API
+        "400":
+          description: The API definition contains [standardization](https://support.smartbear.com/swaggerhub/docs/organizations/api-standardization.html) errors which prevent it from being published.
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied (insufficient user permissions)
+        "404":
+          description: The specified API or version was not found
+        "424":
+          description: |-
+            The API version you are trying to publish contains references to _unpublished_ domains. If those domains change, it may affect your API. To publish the API anyway, repeat the request with the `force=true` query parameter.
+
+            The response body contains a list of unpublished domains referenced from this API.
+          examples:
+            application/json:
+              code: 424
+              details:
+                items:
+                  - apiId: Common Models
+                    groupId: acme-org
+                    private: false
+                    published: false
+                    type: DOMAIN
+                    versionId: 1.0.0
+                  - apiId: Common Responses
+                    groupId: acme-org
+                    private: false
+                    published: false
+                    type: DOMAIN
+                    versionId: 1.0.2
+                offset: 0
+                total: 2
+              message: Conflicts detected
+      security:
+        - TokenSecured: []
+      summary: Publish or unpublish an API version
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/settings/private":
+    get:
+      operationId: getPrivateSettings
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: The response body indicates whether this API version is private (`true`) or public (`false`)
+          schema:
+            $ref: "#/definitions/VisibilitySettings"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "404":
+          description: The specified API or version was not found
+      security:
+        - TokenSecured: []
+      summary: Get the visibility (public or private) of API version
+      tags:
+        - APIs
+    put:
+      consumes:
+        - application/json
+      operationId: setPrivateSettings
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/visibilitySettingsBody"
+      responses:
+        "200":
+          description: API visibility was updated
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied (insufficient user permissions)
+        "404":
+          description: The specified API or version was not found
+      security:
+        - TokenSecured: []
+      summary: Set the visibility (public or private) of an API version
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/standardization":
+    get:
+      operationId: getStandardizationErrors
+      responses:
+        "200":
+          description: |
+            Returns a list of standardization errors for the given API definition
+          schema:
+            $ref: "#/definitions/StandardizationResult"
+        "400":
+          $ref: "#/definitions/BadRequest"
+        "404":
+          $ref: "#/definitions/ApiNotFound"
+      security:
+        - TokenSecured: []
+      summary: Retrieve the standardization errors for a given API definition
+      tags:
+        - APIs
+    parameters:
+      - $ref: "#/parameters/apiOwner"
+      - $ref: "#/parameters/apiName"
+      - $ref: "#/parameters/version"
+  "/apis/{owner}/{api}/{version}/swagger.json":
+    get:
+      operationId: getJsonDefinition
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/resolved"
+        - $ref: "#/parameters/flatten"
+      responses:
+        "200":
+          description: OpenAPI definition in JSON format
+          schema:
+            example:
+              info:
+                title: Sample API
+                version: 1.0.0
+              openapi: 3.0.0
+              paths: {}
+            type: object
+        "400":
+          description: Could not generate resolved definition due to syntax errors in the definition
+          examples:
+            application/json:
+              code: 400
+              message: |-
+                Failed to read OAS3 definition.
+                Could not find components/schemas/SchemaName in contents of https://api.swaggerhub.com/domains/MyOrg/MyDomain/1.0.0
+        "404":
+          description: The specified API or version was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get the OpenAPI definition for the specified API version in JSON format
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/swagger.yaml":
+    get:
+      operationId: getYamlDefinition
+      parameters:
+        - $ref: "#/parameters/apiOwner"
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/resolved"
+        - $ref: "#/parameters/flatten"
+      produces:
+        - application/yaml
+      responses:
+        "200":
+          description: OpenAPI definition in YAML format
+          examples:
+            application/yaml: |
+              openapi: 3.0.0
+              info:
+                title: Sample API
+                version: 1.0.0
+              paths: {}
+          schema:
+            type: object
+        "400":
+          description: Could not generate resolved definition due to syntax errors in the definition
+          examples:
+            application/json:
+              code: 400
+              message: |-
+                Failed to read OAS3 definition.
+                Could not find components/schemas/SchemaName in contents of https://api.swaggerhub.com/domains/MyOrg/MyDomain/1.0.0
+        "404":
+          description: The specified API or version was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get the OpenAPI definition for the specified API version in YAML format
+      tags:
+        - APIs
+  "/apis/{owner}/{api}/{version}/validation":
+    get:
+      deprecated: true
+      description: |-
+        **Note:** This endpoint is deprecated. Use the following new endpoint instead:
+        GET /apis/{owner}/{api}/{version}/standardization 
+
+        If your organization has [API standardization](https://support.smartbear.com/swaggerhub/docs/organizations/api-standardization.html) configured, you can use this operation to validate a specific API version and get a list of errors or warnings with line numbers.
+
+        This operation checks for standardization errors only and does not return OpenAPI syntax errors (such as misspelled keywords) or YAML syntax errors.
+      operationId: getValidation
+      parameters:
+        - description: Organization name (case-sensitive)
+          in: path
+          name: owner
+          required: true
+          type: string
+        - $ref: "#/parameters/api"
+        - $ref: "#/parameters/version"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: |-
+            An object that contains a list of standardization errors and warnings found in the specified API version. Error information includes line numbers, severity (error or warning), and error messages.
+            If no standardization errors or warnings are found, an empty validation array is returned.
+          schema:
+            $ref: "#/definitions/ValidationResult"
+        "403":
+          description: Access denied
+        "404":
+          description: The specified API or version was not found, or standardization is not enabled for this organization.
+      security:
+        - TokenSecured: []
+      summary: Deprecated Get API Standardization errors and warnings
+      tags:
+        - APIs
+  /domains:
+    get:
+      description: This is a convenience alias for `GET /specs?specType=DOMAIN`.
+      operationId: searchDomains
+      parameters:
+        - $ref: "#/parameters/query"
+        - $ref: "#/parameters/state"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order"
+      responses:
+        "303":
+          description: Redirect to `GET /specs`, with all query parameters preserved
+          headers:
+            Location:
+              type: string
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Search domains
+      tags:
+        - Domains
+  "/domains/{owner}":
+    get:
+      operationId: getOwnerDomains
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order"
+      responses:
+        "200":
+          description: A list of domains in APIs.json format
+          schema:
+            $ref: "#/definitions/ApisJson"
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get a list of domains of the specified owner
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}":
+    delete:
+      operationId: deleteDomain
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - default: false
+          description: If this domain is referenced from other APIs and domains, this parameter must be `true`. Otherwise, the request will be rejected with status code 424.
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: The domain was successfully deleted
+        "403":
+          description: Access denied
+        "404":
+          description: The specified domain not found
+        "409":
+          description: The domain has published versions and can not be deleted
+        "424":
+          description: |-
+            The domain you are trying to delete is referenced from other APIs and domains. To delete it anyway, repeat the request with the `force=true` query parameter.
+
+            The response body contains a list of APIs and domains that reference this domain.
+          examples:
+            application/json:
+              code: 424
+              details:
+                items:
+                  - apiId: reports
+                    groupId: acme-org
+                    private: false
+                    type: API
+                    versionId: 1.0.0
+                  - apiId: common-responses
+                    groupId: acme-org
+                    private: false
+                    type: DOMAIN
+                    versionId: 1.0.2
+                offset: 0
+                total: 2
+              message: Conflicts detected
+      security:
+        - TokenSecured: []
+      summary: Delete a domain
+      tags:
+        - Domains
+    get:
+      operationId: getDomainVersions
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+      responses:
+        "200":
+          description: A list of domain versions in APIs.json format
+          schema:
+            $ref: "#/definitions/ApisJson"
+        "404":
+          description: The specified domain was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get a list of domain versions
+      tags:
+        - Domains
+    post:
+      consumes:
+        - application/json
+        - application/yaml
+      operationId: saveDomainDefinition
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - default: false
+          description: Specifies whether the domain has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: Domain version. If omitted, will be taken from the `info.version` field in the definition.
+          in: query
+          name: version
+          type: string
+        - description: OpenAPI definition of this domain
+          in: body
+          name: definition
+          required: false
+          schema:
+            type: string
+        - description: Force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: The domain was successfully saved
+        "201":
+          description: New domain was successfully saved
+        "205":
+          description: The domain was successfully saved and should be reloaded
+        "400":
+          description: |-
+            Possible reasons:
+
+             * Some parameter values are invalid, or the provided OpenAPI domain definition is invalid.
+             * The specified `projectName` does not exist in the `owner` organization.
+             * Cannot create a new domain because an API with this name already exists in the `owner` account. Try a different name.
+        "403":
+          description: Maximum number of domains reached
+        "409":
+          description: Cannot overwrite a published domain version
+        "415":
+          description: Invalid content type
+      security:
+        - TokenSecured: []
+      summary: Create or update a domain
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/rename":
+    post:
+      description: The new name must follow the [naming rules](https://support.smartbear.com/swaggerhub/docs/apis/creating-api.html).
+      operationId: renameDomain
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/newName"
+        - default: false
+          description: If this domain is referenced from other APIs and domains, this parameter must be true. Otherwise, the request will be rejected with status code 424.
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: The domain was successfully renamed
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied (insufficient user permissions)
+        "409":
+          description: An API or domain with the new name already exists, or the new and old names are the same
+        "424":
+          description: |-
+            The domain you are trying to rename is referenced from other APIs or domains. Renaming the domain will break the references in those definitions. To rename the domain anyway, repeat the request with the `force=true` query parameter.
+
+            The response body contains a list of APIs and domains that reference this domain.
+          examples:
+            application/json:
+              code: 424
+              details:
+                items:
+                  - apiId: reports
+                    groupId: acme-org
+                    private: false
+                    type: API
+                    versionId: 1.0.0
+                  - apiId: common-responses
+                    groupId: acme-org
+                    private: false
+                    type: DOMAIN
+                    versionId: 1.0.2
+                offset: 0
+                total: 2
+              message: Conflicts detected
+          schema:
+            type: object
+      security:
+        - TokenSecured: []
+      summary: Rename a domain
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/settings/default":
+    get:
+      description: This operation returns the version identifier, such as `1.0.0`. To get the definition itself, use `GET /domains/{owner}/{domain}/{version}`.
+      operationId: getDomainDefaultVersion
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: The default version identifier for this domain
+          schema:
+            $ref: "#/definitions/DefaultVersion"
+        "404":
+          description: The specified API was not found. If it is private, make sure the request is authenticated.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get the default version of a domain
+      tags:
+        - Domains
+    put:
+      consumes:
+        - application/json
+      operationId: setDomainDefaultVersion
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - description: An object that specifies the default version for this domain
+          in: body
+          name: defaultVersion
+          required: true
+          schema:
+            $ref: "#/definitions/DefaultVersion"
+      responses:
+        "200":
+          description: The default version was successfully changed
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied (insufficient user permissions)
+        "404":
+          description: The specified domain or version was not found
+      security:
+        - TokenSecured: []
+      summary: Set the default version for a domain
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}":
+    delete:
+      operationId: deleteDomainVersion
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - default: false
+          description: If this domain version is referenced from other APIs and domains, this parameter must be `true`. Otherwise, the request will be rejected with status code 424.
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: The domain version was successfully deleted
+        "403":
+          description: Access denied
+        "404":
+          description: The specified domain or version was not found
+        "409":
+          description: The domain version is published and can not be deleted or it is the only version of this domain
+        "424":
+          description: |-
+            The domain version you are trying to delete is referenced from other APIs and domains. To delete it anyway, repeat the request with the `force=true` query parameter.
+
+            The response body contains a list of APIs and domains that reference this domain version.
+          examples:
+            application/json:
+              code: 424
+              details:
+                items:
+                  - apiId: reports
+                    groupId: acme-org
+                    private: false
+                    type: API
+                    versionId: 1.0.0
+                  - apiId: common-responses
+                    groupId: acme-org
+                    private: false
+                    type: DOMAIN
+                    versionId: 1.0.2
+                offset: 0
+                total: 2
+              message: Conflicts detected
+      security:
+        - TokenSecured: []
+      summary: Delete a domain version
+      tags:
+        - Domains
+    get:
+      operationId: getDomainDefinition
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+      produces:
+        - application/json
+        - application/yaml
+      responses:
+        "200":
+          description: OpenAPI definition of a domain in the requested format (YAML or JSON)
+          schema:
+            type: object
+        "404":
+          description: The specified domain or version was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get the OpenAPI definition of the specified domain version
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/clone":
+    post:
+      description: |-
+        Use this operation to clone an existing domain version as a new version.
+
+        Note that the new version is not automatically set as the default version.
+      operationId: cloneDomain
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/versionToClone"
+        - $ref: "#/parameters/newVersion"
+      responses:
+        "201":
+          description: New domain version was successfully created
+        "400":
+          description: Bad request
+        "403":
+          description: Access denied
+        "404":
+          description: The specified domain or version was not found
+        "409":
+          description: The domain version you are trying to create already exists
+      security:
+        - TokenSecured: []
+      summary: Create a new domain version
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/comments":
+    get:
+      operationId: getDomainCommentsV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: Comments for the specified domain version
+          schema:
+            items:
+              $ref: "#/definitions/ClosableComment"
+            type: array
+        "204":
+          description: No comments were found for the specified domain version
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainNotFound"
+      security:
+        - TokenSecured: []
+      summary: Get comments for the specified domain version
+      tags:
+        - Domains
+    post:
+      operationId: addDomainCommentV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/NewComment"
+      responses:
+        "200":
+          description: Newly created comment for the specified domain
+          schema:
+            $ref: "#/definitions/ClosableComment"
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainNotFound"
+      security:
+        - TokenSecured: []
+      summary: Add a new comment
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/comments/batch":
+    post:
+      operationId: updateDomainCommentsV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CommentsBatch"
+      responses:
+        "200":
+          description: Comments were updated
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainCommentReplyNotFound"
+      security:
+        - TokenSecured: []
+      summary: Bulk update comments
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/comments/{comment}":
+    delete:
+      operationId: deleteDomainCommentV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+      responses:
+        "200":
+          description: Comment was deleted
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainCommentNotFound"
+      security:
+        - TokenSecured: []
+      summary: Delete a comment
+      tags:
+        - Domains
+    patch:
+      operationId: updateDomainCommentV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/ClosableCommentPatch"
+      responses:
+        "200":
+          description: Comment was updated
+          schema:
+            $ref: "#/definitions/ClosableComment"
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainCommentNotFound"
+      security:
+        - TokenSecured: []
+      summary: Update a comment
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/comments/{comment}/replies":
+    post:
+      operationId: addDomainCommentReplyV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/NewReply"
+      responses:
+        "200":
+          description: Newly created reply
+          schema:
+            items:
+              $ref: "#/definitions/Comment"
+            type: array
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainCommentNotFound"
+      security:
+        - TokenSecured: []
+      summary: Reply to a comment
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/comments/{comment}/replies/{reply}":
+    delete:
+      operationId: deleteDomainCommentReplyV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - $ref: "#/parameters/reply"
+      responses:
+        "200":
+          description: Comment reply was deleted
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainCommentReplyNotFound"
+      security:
+        - TokenSecured: []
+      summary: Delete a comment reply
+      tags:
+        - Domains
+    patch:
+      operationId: updateDomainCommentReplyV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - $ref: "#/parameters/reply"
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/CommentPatch"
+      responses:
+        "200":
+          description: Comment reply was updated
+          schema:
+            $ref: "#/definitions/Comment"
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainCommentReplyNotFound"
+      security:
+        - TokenSecured: []
+      summary: Update a comment reply
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/comments/{comment}/status/{status}":
+    put:
+      operationId: setDomainCommentStatusV2
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/comment"
+        - $ref: "#/parameters/commentStatus"
+      responses:
+        "200":
+          description: Comment status was updated
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/DomainCommentNotFound"
+      security:
+        - TokenSecured: []
+      summary: Resolve or reopen a comment
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/domain.json":
+    get:
+      operationId: getDomainJsonDefinition
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: Domain definition in JSON format
+          schema:
+            type: object
+        "404":
+          description: The specified domain or version was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get the OpenAPI definition for the specified domain version in JSON format
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/domain.yaml":
+    get:
+      operationId: getDomainYamlDefinition
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+      produces:
+        - application/yaml
+      responses:
+        "200":
+          description: Domain definition in YAML format
+          schema:
+            type: object
+        "404":
+          description: The specified domain or version was not found. If it is private, make sure the request is authenticated and the authenticating user has access to this API.
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Get the OpenAPI definition for the specified domain version in YAML format
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/fork":
+    post:
+      description: Creates a [fork](https://support.smartbear.com/swaggerhub/docs/apis/forking-api.html) of the specified domain definition and version. The fork can be created as a new domain, or as a new version in another existing domain.
+      operationId: forkDomain
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - description: Fork parameters
+          in: body
+          name: forkVersion
+          required: true
+          schema:
+            $ref: "#/definitions/ForkVersion"
+      responses:
+        "201":
+          description: The domain was successfully forked
+        "400":
+          description: Some parameters are missing or invalid
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied
+        "404":
+          description: The specified owner or domain was not found
+        "409":
+          description: A domain with the name and version you're trying to create already exists
+      security:
+        - TokenSecured: []
+      summary: Fork a domain
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/settings/lifecycle":
+    get:
+      operationId: getDomainLifecycleSettings
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: The published status of this domain version
+          schema:
+            $ref: "#/definitions/LifecycleSettings"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "404":
+          description: The specified domain or version was not found
+      security:
+        - TokenSecured: []
+      summary: Get the published status for the specified domain and version
+      tags:
+        - Domains
+    put:
+      consumes:
+        - application/json
+      operationId: setDomainLifecycleSettings
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/lifecycleSettingsBody"
+        - default: false
+          description: To publish a domain that references other _unpublished_ domains, this parameter must be `true`. Otherwise, the request will be rejected with status code 424.
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: Successfully published or unpublished the domain
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied (insufficient user permissions)
+        "404":
+          description: The specified domain or version was not found
+        "424":
+          description: |-
+            The domain version you are trying to publish contains references to other _unpublished_ domains. If those domains change, it may affect your domain. To publish the domain anyway, repeat the request with the `force=true` query parameter.
+
+            The response body contains a list of unpublished domains referenced from this domain.
+          examples:
+            application/json:
+              code: 424
+              details:
+                items:
+                  - apiId: Common Models
+                    groupId: acme-org
+                    private: false
+                    published: false
+                    type: DOMAIN
+                    versionId: 1.0.0
+                  - apiId: Common Responses
+                    groupId: acme-org
+                    private: false
+                    published: false
+                    type: DOMAIN
+                    versionId: 1.0.2
+                offset: 0
+                total: 2
+              message: Conflicts detected
+      security:
+        - TokenSecured: []
+      summary: Publish or unpublish a domain version
+      tags:
+        - Domains
+  "/domains/{owner}/{domain}/{version}/settings/private":
+    get:
+      operationId: getDomainPrivateSettings
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: The response body indicates whether this domain version is private (`true`) or public (`false`)
+          schema:
+            $ref: "#/definitions/VisibilitySettings"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "404":
+          description: The specified domain or version was not found
+      security:
+        - TokenSecured: []
+      summary: Get the visibility (public or private) of a domain version
+      tags:
+        - Domains
+    put:
+      consumes:
+        - application/json
+      operationId: setDomainPrivateSettings
+      parameters:
+        - $ref: "#/parameters/domainOwner"
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/visibilitySettingsBody"
+        - default: false
+          description: To change the visibility from _public_ to _private_ in case this domain is referenced from other _public_ definitions, this parameter must be `true`. Otherwise, the request will be rejected with status code 424.
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: Domain visibility was updated
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Access denied (insufficient user permissions)
+        "404":
+          description: The specified domain or version was not found
+        "424":
+          description: |-
+            The domain version you are trying to make _private_ is referenced from other _public_ definitions. Changing domain visibility may affect those definitions. To proceed anyway, repeat the request with the `force=true` query parameter.
+
+            The response body contains a list of APIs and domains that may be affected by this change.
+          examples:
+            application/json:
+              code: 424
+              details:
+                items:
+                  - apiId: reports
+                    groupId: acme-org
+                    private: false
+                    type: API
+                    versionId: 1.0.0
+                  - apiId: common-responses
+                    groupId: acme-org
+                    private: false
+                    type: DOMAIN
+                    versionId: 1.0.2
+                offset: 0
+                total: 2
+              message: Conflicts detected
+      security:
+        - TokenSecured: []
+      summary: Set the visibility (public or private) of a domain version
+      tags:
+        - Domains
+  /projects:
+    get:
+      description: Returns all projects that the authenticating user has access to. Organization owners get a list of all projects in owned organizations. Other members get a list of just the projects they are member of.
+      operationId: getUserProjects
+      parameters:
+        - $ref: "#/parameters/nameOnly"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/projectSort"
+        - $ref: "#/parameters/order"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: All projects accessible to the current user
+          schema:
+            $ref: "#/definitions/ProjectsJson"
+        "401":
+          $ref: "#/responses/Unauthorized"
+      security:
+        - TokenSecured: []
+      summary: Get all projects that a user has access to
+      tags:
+        - Projects
+  "/projects/{owner}":
+    get:
+      operationId: getOrgProjectsV2
+      parameters:
+        - $ref: "#/parameters/nameOnly"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/order"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Project belonging to the specified organization
+          schema:
+            $ref: "#/definitions/ProjectsJson"
+        "403":
+          description: Projects are not available in the organization's plan
+        "404":
+          description: The specified organization was not found
+      security:
+        - TokenSecured: []
+      summary: Get all projects of an organization
+      tags:
+        - Projects
+    parameters:
+      - $ref: "#/parameters/projectOwner"
+    post:
+      operationId: createProject
+      parameters:
+        - $ref: "#/parameters/projectRequest"
+      responses:
+        "201":
+          description: The project has been created successfully
+        "400":
+          description: |
+            Bad request. For example, some of the specified `apis` or `domains` do not exist in the organization.
+          examples:
+            application/json:
+              error: Unable to create project. Some api or domain entries are invalid.
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Projects are not available in the organization's plan
+        "404":
+          description: The specified organization was not found
+        "409":
+          description: A project with this name already exists in the organization
+      security:
+        - TokenSecured: []
+      summary: Create a project in an organization
+      tags:
+        - Projects
+  "/projects/{owner}/{projectId}":
+    delete:
+      operationId: deleteProjectV2
+      responses:
+        "204":
+          description: The project has been deleted successfully
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: Projects are not available in the organization's plan, or you are not a member of the specified project.
+        "404":
+          description: The specified organization or project name was not found
+      security:
+        - TokenSecured: []
+      summary: Delete a project
+      tags:
+        - Projects
+    get:
+      operationId: getProjectV2
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Project information
+          schema:
+            $ref: "#/definitions/Project"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: |
+            Projects are not available in the organization's plan, or you are not a member of the specified project
+        "404":
+          description: The specified organization or project name was not found
+      security:
+        - TokenSecured: []
+      summary: Get project information
+      tags:
+        - Projects
+    parameters:
+      - $ref: "#/parameters/projectOwner"
+      - $ref: "#/parameters/projectId"
+    put:
+      description: |-
+        Use this operation to update an existing project, for example, add or remove APIs, or change the project description.
+
+        When updating a project, the `apis` and `domains` lists _replace_ the existing ones. This means that to add new APIs and domains to a project, you need to send the `apis` and `domains` lists containing both the existing and new APIs and domains.
+
+        To add a single API or domain to a project, you can use `PUT /projects/{owner}/{projectId}/{specType}/{name}` instead.
+      operationId: saveProjectV2
+      parameters:
+        - $ref: "#/parameters/projectRequest"
+      responses:
+        "200":
+          description: The project has been updated successfully
+        "400":
+          description: |
+            Bad request. For example, some of the specified `apis` or `domains` do not exist in the organization to which the project belongs.
+          examples:
+            application/json:
+              error: Unable to save the project. Some API or domain names are invalid.
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: |
+            Projects are not available in the organization's plan, or you are not a member of the specified project
+        "404":
+          description: The specified organization or project name was not found
+      security:
+        - TokenSecured: []
+      summary: Update a project
+      tags:
+        - Projects
+  "/projects/{owner}/{projectId}/members":
+    get:
+      operationId: getProjectMembersV2
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: A list of project members (users and teams)
+          schema:
+            $ref: "#/definitions/ProjectMemberList"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: |
+            Projects are not available in the organization's plan, or you are not a member of the specified project.
+        "404":
+          description: The specified organization or project name was not found
+      security:
+        - TokenSecured: []
+      summary: Get project members
+      tags:
+        - Projects
+    parameters:
+      - $ref: "#/parameters/projectOwner"
+      - $ref: "#/parameters/projectId"
+    put:
+      consumes:
+        - application/json
+      description: |
+        When updating a project, the `members` list _replaces_ the existing one. This means that to add new members to a project, you need to send the `members` list containing both the existing and new members.
+      operationId: updateProjectMembersV2
+      parameters:
+        - $ref: "#/parameters/projectMemberList"
+      responses:
+        "200":
+          description: The project members list has been updated successfully
+        "403":
+          description: |
+            Projects are not available in the organization's plan, or you are not a member of the specified project.
+        "404":
+          description: The specified organization or project name was not found
+      security:
+        - TokenSecured: []
+      summary: Update a project's members list
+      tags:
+        - Projects
+  "/projects/{owner}/{projectId}/{specType}/{name}":
+    put:
+      description: |-
+        Use this operation to add a single API or domain to the specified project.
+
+        To add multiple APIs or domains at once, use `PUT /projects/{owner}/{projectId}`.
+      operationId: addSpecToProjectV2
+      parameters:
+        - $ref: "#/parameters/projectOwner"
+        - $ref: "#/parameters/projectId"
+        - description: Definition type - `apis` or `domains`.
+          enum:
+            - apis
+            - domains
+          in: path
+          name: specType
+          required: true
+          type: string
+        - description: The name of an API or domain that you want to add to the project. Case-sensitive.
+          in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        "200":
+          description: The specified API or domain was successfully added to the project
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          description: |
+            The projects feature is not available for the organization's plan, or the authenticating user does not have permissions to add definitions to this project
+        "404":
+          description: The specified organization or project name was not found
+        "409":
+          description: The project already contains this API or domain
+      security:
+        - TokenSecured: []
+      summary: Add an API or domain to a project
+      tags:
+        - Projects
+  /specs:
+    get:
+      operationId: searchApisAndDomains
+      parameters:
+        - default: ANY
+          description: |
+            Type of definitions to search:
+            * API - APIs only
+            * DOMAIN - domains only
+            * TEMPLATE - templates only
+            * ANY - APIs, domains, and templates
+          enum:
+            - API
+            - DOMAIN
+            - TEMPLATE
+            - ANY
+          in: query
+          name: specType
+          required: false
+          type: string
+        - default: ANY
+          description: |
+            The visibility of a definition in SwaggerHub:
+            * PUBLIC - can be viewed by anyone
+            * PRIVATE - can only be viewed by you or your organization and those that you are collaborating with or have shared it with
+            * ANY - either PUBLIC or PRIVATE
+          enum:
+            - PUBLIC
+            - PRIVATE
+            - ANY
+          in: query
+          name: visibility
+          required: false
+          type: string
+        - $ref: "#/parameters/state"
+        - description: API or domain owner. Can be username or organization name. Case-sensitive.
+          in: query
+          name: owner
+          required: false
+          type: string
+        - $ref: "#/parameters/query"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order"
+      responses:
+        "200":
+          description: A list of APIs, domains, and templates in APIs.json format
+          schema:
+            $ref: "#/definitions/ApisJson"
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Retrieve a list of currently defined APIs, domains, and templates in APIs.json format
+      tags:
+        - APIs
+        - Domains
+        - Templates
+  /templates:
+    get:
+      operationId: getTemplates
+      parameters:
+        - description: Owner name
+          in: query
+          name: owner
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Template wrapper
+          schema:
+            $ref: "#/definitions/TemplateWrapper"
+      security:
+        - TokenSecured: []
+      summary: Retrieve a list of templates for an owner
+      tags:
+        - Templates
+  "/templates/{owner}/{templateId}":
+    delete:
+      operationId: deleteTemplate
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+      responses:
+        "204":
+          description: Template successfully deleted
+        "403":
+          description: Access denied
+        "409":
+          description: Template has published versions, and cannot be deleted
+      security:
+        - TokenSecured: []
+      summary: Delete a template
+      tags:
+        - Templates
+    get:
+      operationId: getTemplateVersions
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+      responses:
+        "200":
+          description: A list of template versions in APIs.json format
+          schema:
+            $ref: "#/definitions/ApisJson"
+        "404":
+          description: Template not found
+      security:
+        - TokenSecured: []
+        - {}
+      summary: Retrieve an APIs.json listing for all template versions for an owner and template
+      tags:
+        - Templates
+    post:
+      consumes:
+        - application/json
+        - application/yaml
+      description: Saves the provided template definition; the owner must match the token owner. The version will be extracted from the template definitions itself.
+      operationId: saveTemplateDefinition
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/isPrivate"
+        - description: Template version to create or update. If omitted, the version will be taken from the `info.version` field in the definition.
+          in: query
+          name: version
+          type: string
+        - $ref: "#/parameters/force"
+        - $ref: "#/parameters/projectName"
+        - description: The template definition
+          in: body
+          name: body
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Template successfully saved
+        "201":
+          description: New template successfully saved
+        "205":
+          description: Template successfully saved, and should be reloaded
+        "400":
+          description: Template definition invalid
+        "403":
+          description: Access denied
+        "409":
+          description: Cannot overwrite a template version
+        "415":
+          description: Invalid content type
+      security:
+        - TokenSecured: []
+      summary: Create or update a template
+      tags:
+        - Templates
+  "/templates/{owner}/{templateId}/rename":
+    post:
+      operationId: renameTemplate
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/newName"
+      responses:
+        "200":
+          description: Template successfully renamed
+        "400":
+          description: Invalid request
+        "403":
+          description: Access denied
+        "409":
+          description: API, domain, and template with the new name already exist
+      security:
+        - TokenSecured: []
+      summary: Rename a template
+      tags:
+        - Templates
+  "/templates/{owner}/{templateId}/{version}":
+    delete:
+      operationId: deleteTemplateVersion
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+      responses:
+        "204":
+          description: Template version successfully deleted
+        "403":
+          description: Access denied
+        "409":
+          description: Selected template version is either published or the only version, and cannot be deleted
+      security:
+        - TokenSecured: []
+      summary: Delete a particular version of a template
+      tags:
+        - Templates
+    get:
+      operationId: getTemplateDefinition
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/flatten"
+      responses:
+        "200":
+          description: The template in requested format (YAML or JSON)
+          schema:
+            type: object
+        "404":
+          description: Template not found
+      security:
+        - TokenSecured: []
+      summary: Retrieve a template definition
+      tags:
+        - Templates
+  "/templates/{owner}/{templateId}/{version}/comments":
+    get:
+      operationId: getTemplateComments
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: Comments for the template
+          schema:
+            items:
+              $ref: "#/definitions/ClosableComment"
+            type: array
+        "204":
+          description: No comments found for the template
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/TemplateNotFound"
+      security:
+        - TokenSecured: []
+      summary: Return the list of comments for a template
+      tags:
+        - Templates
+  "/templates/{owner}/{templateId}/{version}/comments/batch":
+    post:
+      operationId: updateTemplateComments
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CommentsBatch"
+      responses:
+        "200":
+          description: Comments successfully updated
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/CommentForbidden"
+        "404":
+          $ref: "#/responses/TemplateCommentReplyNotFound"
+      security:
+        - TokenSecured: []
+      summary: Update the list of comments for a template
+      tags:
+        - Templates
+  "/templates/{owner}/{templateId}/{version}/fork":
+    post:
+      operationId: forkTemplate
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+        - description: Fork version information
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ForkVersion"
+      responses:
+        "201":
+          description: Template fork successfully created
+        "400":
+          description: Request body invalid
+        "403":
+          description: Access denied
+        "409":
+          description: Conflict with existing template
+      security:
+        - TokenSecured: []
+      summary: Create a fork for a template
+      tags:
+        - Templates
+  "/templates/{owner}/{templateId}/{version}/settings/lifecycle":
+    get:
+      operationId: getTemplateLifecycleSettings
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: Lifecycle settings for the specified template
+          schema:
+            $ref: "#/definitions/LifecycleSettings"
+        "404":
+          description: Template not found
+      security:
+        - TokenSecured: []
+      summary: Retrieve lifecycle settings for a template
+      tags:
+        - Templates
+    put:
+      operationId: setTemplateLifecycleSettings
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+        - $ref: "#/parameters/force"
+        - description: Fork version information
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/LifecycleSettings"
+      responses:
+        "200":
+          description: Lifecycle settings successfully stored
+        "400":
+          description: Request body invalid
+        "403":
+          description: Access denied
+        "404":
+          description: Template not found
+      security:
+        - TokenSecured: []
+      summary: Update lifecycle settings for a template
+      tags:
+        - Templates
+  "/templates/{owner}/{templateId}/{version}/settings/private":
+    get:
+      operationId: getTemplatePrivateSettings
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+      responses:
+        "200":
+          description: Visibility settings for the template
+          schema:
+            $ref: "#/definitions/VisibilitySettings"
+        "404":
+          description: Template not found
+      security:
+        - TokenSecured: []
+      summary: Retrieve visibility settings for a template
+      tags:
+        - Templates
+    put:
+      operationId: setTemplatePrivateSettings
+      parameters:
+        - $ref: "#/parameters/owner"
+        - $ref: "#/parameters/templateId"
+        - $ref: "#/parameters/version"
+        - description: Private settings
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/VisibilitySettings"
+      responses:
+        "200":
+          description: Visibility setting updated
+        "400":
+          description: Request body invalid
+        "403":
+          description: Access denied
+        "404":
+          description: Template not found
+      summary: Update visibility settings for a template
+      tags:
+        - Templates
+definitions:
+  AmazonApiGatewayIntegration:
+    allOf:
+      - $ref: "#/definitions/AmazonIntegration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - AMAZON_API_GATEWAY
+            type: string
+          proxyToAddress:
+            description: The URL of the backend endpoint to which API Gateway will proxy the requests
+            example: https://api.example.com/v2
+            type: string
+        required:
+          - configType
+          - proxyToAddress
+        type: object
+    description: Configuration details for the [Amazon API Gateway](https://support.smartbear.com/swaggerhub/docs/integrations/amazon-api-gateway.html) integration
+  AmazonApiGatewayLambdaIntegration:
+    allOf:
+      - $ref: "#/definitions/AmazonIntegration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - AMAZON_API_GATEWAY_LAMBDA
+            type: string
+          lambdaRole:
+            description: |-
+              The default execution role that will be assigned to newly Lambda functions created by SwaggerHub. Must be in the `arn:aws:iam::{ID}:role/{NAME}` format.
+              Can be omitted if all Lambda functions already exist and you are not going to recreate them.
+            pattern: ^arn:aws
+            type: string
+          runtimeLanguage:
+            default: nodejs12.x
+            description: The target runtime language for the generated Lambda functions
+            enum:
+              - python3.8
+              - python3.7
+              - python3.6
+              - python2.7
+              - nodejs12.x
+              - nodejs10.x
+            type: string
+        required:
+          - configType
+        type: object
+    description: Configuration details for the [Amazon API Gateway Lambda Sync](https://support.smartbear.com/swaggerhub/docs/integrations/amazon-api-gateway-lambda-sync.html) integration
+  AmazonIntegration:
+    allOf:
+      - $ref: "#/definitions/IntegrationConfiguration"
+      - properties:
+          accessKey:
+            description: AWS access key. Write-only property. Required to create and update the integration.
+            format: password
+            type: string
+          apiId:
+            description: AWS ID of the API to update. Empty value will create a new API in AWS.
+            type: string
+          basePathMode:
+            default: ignore
+            description: How to handle the API's `basePath` value. Refer to [AWS documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html) for details.
+            enum:
+              - ignore
+              - prepend
+              - split
+            type: string
+          deploymentMode:
+            default: on save
+            description: Should be "on save". The value "never" means the integration is disabled.
+            enum:
+              - on save
+              - never
+            type: string
+          publishMode:
+            default: merge
+            description: How to update an existing API in AWS
+            enum:
+              - merge
+              - overwrite
+            type: string
+          region:
+            description: AWS region where the API will be published
+            enum:
+              - us-east-1
+              - us-east-2
+              - us-west-1
+              - us-west-2
+              - eu-west-1
+              - eu-west-2
+              - eu-west-3
+              - eu-central-1
+              - eu-north-1
+              - eu-south-1
+              - ap-east-1
+              - ap-south-1
+              - ap-southeast-1
+              - ap-southeast-2
+              - ap-northeast-1
+              - ap-northeast-2
+              - sa-east-1
+              - cn-north-1
+              - cn-northwest-1
+              - ca-central-1
+              - me-south-1
+              - af-south-1
+            type: string
+          secretKey:
+            description: AWS secret key. Write-only property. Required to create and update the integration.
+            format: password
+            type: string
+          updateDefinition:
+            default: false
+            description: Whether to update the API definition with Amazon-specific extensions and compatibility modifications
+            type: boolean
+        required:
+          - region
+        type: object
+    description: Common configuration details for Amazon integrations
+  ApiMetadata:
+    properties:
+      categories:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      defaultVersion:
+        type: string
+      links:
+        items:
+          $ref: "#/definitions/ApiMetadataLink"
+        type: array
+        uniqueItems: true
+      tags:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    required:
+      - categories
+      - tags
+      - links
+    type: object
+  ApiMetadataLink:
+    properties:
+      type:
+        type: string
+      url:
+        type: string
+    required:
+      - type
+      - url
+    type: object
+  ApiNotFound:
+    description: The API definition could not be found
+  ApigeeEdgeIntegration:
+    allOf:
+      - $ref: "#/definitions/IntegrationConfiguration"
+      - properties:
+          apiName:
+            description: Name for the API that is going to be saved in your Apigee account
+            type: string
+          configType:
+            description: Integration type
+            enum:
+              - APIGEE_EDGE
+            type: string
+          email:
+            description: Email address of your Apigee account
+            format: email
+            type: string
+          host:
+            default: https://api.enterprise.apigee.com/v1
+            description: Apigee Edge Management instance URL. Use the default URL `https://api.enterprise.apigee.com/v1` for the cloud version of Apigee Edge. If using an On-Premise deployment, enter the URL to your Edge instance.
+            type: string
+          organization:
+            description: Organization where the API will be saved
+            type: string
+          password:
+            description: Password of your Apigee account. Write-only property. Required to create and update the integration.
+            format: password
+            type: string
+          targetUrl:
+            description: Target endpoint for proxy
+            type: string
+        required:
+          - configType
+          - email
+          - organization
+          - apiName
+          - targetUrl
+        type: object
+    description: Configuration details for the [Apigee Edge](https://support.smartbear.com/swaggerhub/docs/integrations/apigee-edge.html) integration
+  ApisJson:
+    properties:
+      apis:
+        items:
+          $ref: "#/definitions/ApisJsonApi"
+        type: array
+      description:
+        example: Default registry listing
+        type: string
+      name:
+        example: Default listing
+        type: string
+      offset:
+        format: int32
+        type: integer
+      totalCount:
+        example: 1
+        format: int64
+        type: integer
+      url:
+        type: string
+    type: object
+  ApisJsonApi:
+    properties:
+      description:
+        example: This is a sample Petstore server.
+        type: string
+      name:
+        example: petstore
+        type: string
+      properties:
+        example:
+          - type: Swagger
+            url: https://api.swaggerhub.com/apis/username/petstore/1.1
+          - type: X-Version
+            value: "1.1"
+          - type: X-Created
+            value: 2017-01-16T13:39:06Z
+          - type: X-Modified
+            value: 2017-01-25T11:48:13Z
+          - type: X-Published
+            value: "true"
+          - type: X-Versions
+            value: 1.0,*1.1,1.1-oas3
+          - type: X-Private
+            value: "false"
+          - type: X-OASVersion
+            value: 3.0.0
+          - type: X-Notifications
+            value: "true"
+          - type: X-CreatedBy
+            value: username
+        items:
+          $ref: "#/definitions/ApisJsonProperty"
+        type: array
+      tags:
+        description: Reserved for future use
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  ApisJsonProperty:
+    description: An API property. Has a `type` and either `url` or `value`.
+    properties:
+      type:
+        type: string
+      url:
+        type: string
+      value:
+        type: string
+    required:
+      - type
+    type: object
+  AutoMockingIntegration:
+    allOf:
+      - $ref: "#/definitions/IntegrationConfiguration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - API_AUTO_MOCKING
+            type: string
+          defaultResponseType:
+            default: application/json
+            description: Response content type that the mock server will return if no `Accept` header is specified.
+            enum:
+              - application/json
+              - application/xml
+              - application/yaml
+            type: string
+          modify:
+            default: true
+            description: Whether to update the `host`/`servers` in the API definition to point to the mock server. `modify`=`true` can only be used if the API is _unpublished_.
+            type: boolean
+          token:
+            description: (For private APIs only.) An arbitrary bearer token that the users will need to send in requests to the mock server.
+            type: string
+        required:
+          - configType
+        type: object
+    description: Configuration details for the [API Auto Mocking](https://support.smartbear.com/swaggerhub/docs/integrations/api-auto-mocking.html) integration
+  AzureApiManagementIntegration:
+    allOf:
+      - $ref: "#/definitions/IntegrationConfiguration"
+      - properties:
+          apiId:
+            description: |
+              A unique identifier that allows you to connect your definition to an existing API. If left blank, a unique identifier will be added using an extension, `x-azure-api-id`. This value will be ignored if a value exists in the definition.
+            example: sh-12345678-22a9-abcd-8d0f-30dd5197cf45
+            type: string
+          configType:
+            description: Integration type
+            enum:
+              - AZURE_API_MANAGEMENT
+            type: string
+          serviceInstance:
+            description: |
+              The name of the Azure API Management service instance as it appears in the "All resources" list in the Azure portal
+            type: string
+          token:
+            description: |
+              A personal access token for accessing the Azure API Management service. Documentation for generating tokens is here:  https://docs.microsoft.com/en-us/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-authentication Write-only property. Required to create and update the integration.
+            example: SharedAccessSignature integration&202103141856&...
+            format: password
+            type: string
+          urlSuffix:
+            description: This suffix will be appended to the hostname of your API Management service instance to create a public URL for your API
+            type: string
+        required:
+          - configType
+          - serviceInstance
+        type: object
+    description: Configuration details for the [Azure API Management](https://support.smartbear.com/swaggerhub/docs/integrations/azure-api-management.html) integration
+  AzureDevopsServicesIntegration:
+    allOf:
+      - $ref: "#/definitions/SCMIntegrationConfiguration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - AZURE_DEVOPS_SERVICES
+            type: string
+          organization:
+            description: The Azure DevOps organization that contains the target repository
+            example: my-org
+            type: string
+          personalAccessToken:
+            description: |
+              A [personal access token](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page#create-a-pat) for accessing the target repository. The token must have the _Code > Read & write_ scope. Write-only property. Required to create and update the integration.
+            format: password
+            type: string
+          project:
+            description: Team Project which contains the target repository
+            example: Petstore 2.0
+            type: string
+        required:
+          - configType
+          - organization
+          - project
+        type: object
+    description: Configuration details for the Azure DevOps Services integration
+  BadRequest:
+    description: Bad request
+  BitbucketCloudIntegration:
+    allOf:
+      - $ref: "#/definitions/SCMIntegrationConfiguration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - BITBUCKET_CLOUD
+            type: string
+          owner:
+            description: The owner of the Bitbucket repository to synchronize with
+            type: string
+          password:
+            description: |
+              Bitbucket [app password](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords/) to authenticate with. Write-only property. Required to create and update the integration.
+              This app password must correspond to the `username` account and have the following permissions:
+
+               * Account: Email, Read
+               * Repositories: Read, Write
+            format: password
+            type: string
+          username:
+            description: Bitbucket username to authenticate with
+            example: service_user
+            type: string
+        required:
+          - configType
+          - username
+          - owner
+        type: object
+    description: Configuration details for the Bitbucket Cloud integration
+  BitbucketServerIntegration:
+    allOf:
+      - $ref: "#/definitions/SCMIntegrationConfiguration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - BITBUCKET_SERVER
+            type: string
+          host:
+            description: The Bitbucket Server host to connect to. Make sure to include `http://` or `https://` at the beginning.
+            example: https://bitbucket.example.com
+            type: string
+          owner:
+            description: The owner of the repository to synchronize with
+            example: myOrg
+            type: string
+          password:
+            description: |-
+              A [personal access token](https://support.smartbear.com/swaggerhub/docs/integrations/bitbucket-server-sync.html#token) for accessing the target Bitbucket Server repository. This token must have permissions for _Projects: Read_ and _Repositories: Write_.
+              Write-only property. Required to create and update the integration.
+            format: password
+            type: string
+          username:
+            description: Bitbucket username to authenticate with
+            example: service_user
+            type: string
+        required:
+          - configType
+          - host
+          - username
+          - owner
+        type: object
+    description: Configuration details for the Bitbucket Server integration
+  ClosableComment:
+    allOf:
+      - $ref: "#/definitions/Comment"
+      - properties:
+          position:
+            description: |
+              The line number (zero-based) the comment is associated with. For example, if the comment is on line 7 in the editor, `position`=6.
+            format: int32
+            type: integer
+          replies:
+            description: A list of replies to this comment
+            items:
+              $ref: "#/definitions/Comment"
+            type: array
+          status:
+            description: Comment status
+            enum:
+              - OPEN
+              - RESOLVED
+            type: string
+        type: object
+  ClosableCommentPatch:
+    allOf:
+      - $ref: "#/definitions/CommentPatch"
+      - properties:
+          position:
+            format: int32
+            minimum: 0
+            type: integer
+        type: object
+  Collaboration:
+    properties:
+      members:
+        description: A list of users who are existing collaborators on this API
+        items:
+          $ref: "#/definitions/CollaborationMembership"
+        type: array
+      owner:
+        description: Internal ID of the API owner (organization or user)
+        example: df9e0670-b156-4f27-8cd3-92743ae6e76c
+        readOnly: true
+        type: string
+      ownerName:
+        description: The name of the API owner (organization or user)
+        example: myOrg
+        readOnly: true
+        type: string
+      owners:
+        description: |
+          If the API owner is an organization, this list contains the IDs of the organization owners. If the API owner is a user, an empty array is returned.
+        items:
+          $ref: "#/definitions/OrganizationOwner"
+        readOnly: true
+        type: array
+      pendingMembers:
+        description: A list of pending collaborators - users who were invited to collaborate on this API but have not accepted the invitation yet
+        items:
+          $ref: "#/definitions/CollaborationMembership"
+        type: array
+      teams:
+        description: A list of teams that collaborate on this API
+        items:
+          $ref: "#/definitions/CollaborationTeamMembership"
+        type: array
+    type: object
+  CollaborationMember:
+    description: Represents a collaborator (user or team)
+    properties:
+      blocked:
+        example: false
+        readOnly: true
+        type: boolean
+      name:
+        description: The name of a user or team
+        type: string
+      startTime:
+        description: The date and time this user or team was added as a collaborator
+        format: date-time
+        readOnly: true
+        type: string
+      uuid:
+        description: Internal ID of a user or team
+        example: 4b9e5015-61e1-442d-9cdd-ddda6b5b014d
+        readOnly: true
+        type: string
+    required:
+      - name
+    type: object
+  CollaborationMembership:
+    allOf:
+      - $ref: "#/definitions/CollaborationMember"
+      - properties:
+          donotdisturb:
+            readOnly: true
+            type: boolean
+          roles:
+            description: A list of this collaborator's roles
+            items:
+              enum:
+                - EDIT
+                - COMMENT
+                - VIEW
+              type: string
+            type: array
+        required:
+          - roles
+        type: object
+  CollaborationTeamMembership:
+    allOf:
+      - $ref: "#/definitions/CollaborationMembership"
+      - properties:
+          invited:
+            default: []
+            description: Reserved for future use. Currently, this field is always an empty array.
+            items:
+              $ref: "#/definitions/CollaborationMember"
+            readOnly: true
+            type: array
+          members:
+            description: A list of team members
+            items:
+              $ref: "#/definitions/CollaborationMember"
+            readOnly: true
+            type: array
+        type: object
+  Comment:
+    properties:
+      body:
+        description: Markdown contents of the comment
+        type: string
+      created:
+        description: The UTC date and time when the comment was added
+        format: date-time
+        type: string
+      id:
+        description: The unique ID of the comment
+        example: 141b0adb-f26a-438b-be78-906445c91a36
+        type: string
+      modified:
+        description: The UTC date and time the when the comment was last edited
+        format: date-time
+        type: string
+      user:
+        $ref: "#/definitions/User"
+    required:
+      - body
+      - created
+      - id
+      - user
+    type: object
+  CommentPatch:
+    properties:
+      body:
+        type: string
+    type: object
+  CommentsBatch:
+    properties:
+      addComment:
+        items:
+          $ref: "#/definitions/NewComment"
+        type: array
+      addReply:
+        additionalProperties:
+          items:
+            $ref: "#/definitions/NewReply"
+          type: array
+        type: object
+      deleteComment:
+        items:
+          type: string
+        type: array
+      deleteReply:
+        additionalProperties:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        type: object
+      updateComment:
+        additionalProperties:
+          $ref: "#/definitions/ClosableCommentPatch"
+        type: object
+      updateReply:
+        additionalProperties:
+          additionalProperties:
+            $ref: "#/definitions/CommentPatch"
+          type: object
+        type: object
+      updateStatus:
+        additionalProperties:
+          enum:
+            - OPEN
+            - RESOLVED
+          type: string
+        type: object
+    type: object
+  DefaultVersion:
+    properties:
+      version:
+        description: Version identifier (case-insensitive)
+        example: 1.0.0
+        type: string
+    required:
+      - version
+    type: object
+  DraftModel:
+    properties:
+      comments:
+        items:
+          $ref: "#/definitions/ClosableComment"
+        type: array
+      yaml:
+        type: string
+    type: object
+  ForkVersion:
+    properties:
+      name:
+        description: The name for the forked definition. Must follow the [naming rules](https://support.smartbear.com/swaggerhub/docs/apis/creating-api.html). Can be the name of an existing definition, in which case the fork will become a new version in that definition, unless that version already exists.
+        example: api-fork
+        maxLength: 60
+        minLength: 3
+        type: string
+      owner:
+        description: The account to fork into. Can be an organization or user name. Case-sensitive. The authenticated user must have permissions to create definitions in this account.
+        example: acme
+        minLength: 3
+        type: string
+      private:
+        description: Whether the forked version should be public (`false`) or private (`true`). If the value is not set, the original version's setting will be used.
+        type: boolean
+      project:
+        description: If forking into an organization, you can optionally specify an existing project to add the forked definition to.
+        minLength: 1
+        type: string
+      version:
+        description: Version identifier for the forked definition. Must follow the [naming rules](https://support.smartbear.com/swaggerhub/docs/apis/versioning.html#format). If forking into an existing definition, this version must not already exist.
+        example: 1.0.0
+        minLength: 1
+        type: string
+    required:
+      - owner
+      - name
+      - version
+    type: object
+  GitHubEnterpriseIntegration:
+    allOf:
+      - $ref: "#/definitions/SCMIntegrationConfiguration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - GITHUB_ENTERPRISE
+            type: string
+          host:
+            description: The GitHub Enterprise host to connect to. Make sure to include `http://` or `https://` at the beginning.
+            example: https://github.mycompany.com
+            type: string
+          owner:
+            description: The owner of the repository to synchronize with
+            example: myOrg
+            type: string
+          token:
+            description: |
+              A [personal access token](https://docs.github.com/en/enterprise/user/github/authenticating-to-github/creating-a-personal-access-token) for accessing the target repository. Write-only property. Required to create and update the integration.
+              The token must have the _public_repo_ scope if the target repository is public, or the _repo_ scope if it is private.
+            format: password
+            type: string
+        required:
+          - configType
+          - host
+          - owner
+        type: object
+    description: Configuration details for the GitHub Enterprise integration
+  GitHubIntegration:
+    allOf:
+      - $ref: "#/definitions/SCMIntegrationConfiguration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - GITHUB
+            type: string
+          owner:
+            description: The owner of the GitHub repository to synchronize with
+            example: myOrg
+            type: string
+          token:
+            description: |
+              A personal access token for accessing the target GitHub repository. You can generate tokens here: https://github.com/settings/tokens. Write-only property. Required to create and update the integration.
+              The token must have the _public_repo_ scope if the target repository is public, or the _repo_ scope if it is private.
+            format: password
+            type: string
+        required:
+          - configType
+          - owner
+        type: object
+    description: Configuration details for the GitHub.com integration
+  GitLabIntegration:
+    allOf:
+      - $ref: "#/definitions/SCMIntegrationConfiguration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - GITLAB
+            type: string
+          host:
+            default: https://gitlab.com
+            description: The GitLab host to connect to. Make sure to include `https://` or `http://` at the beginning.
+            type: string
+          owner:
+            description: The owner of the repository to synchronize with
+            example: myOrg
+            type: string
+          personalAccessToken:
+            description: |
+              A personal access token for accessing the target repository. The token must have the _api_ scope.
+              Write-only property. Required to create and update the integration.
+            format: password
+            type: string
+        required:
+          - configType
+          - owner
+        type: object
+    description: Configuration details for the GitLab integration
+  IBMApiConnectIntegration:
+    allOf:
+      - $ref: "#/definitions/IntegrationConfiguration"
+      - properties:
+          apiId:
+            description: The name of the API in your IBM Cloud organization to publish to. If left blank, a new API will be created when the integration is triggered. When specified, any existing API definition will be overwritten.
+            type: string
+          apiKey:
+            description: IBM Cloud API Key, obtain a key via https://cloud.ibm.com/iam/apikeys. Write-only property. Required to create and update the integration.
+            format: password
+            type: string
+          configType:
+            description: Integration type
+            enum:
+              - IBM_API_CONNECT
+            type: string
+          orgDisplayName:
+            description: The organization display name under your IBM Cloud account
+            readOnly: true
+            type: string
+          orgId:
+            description: |-
+              The organization under your IBM Cloud account to which you want to deploy your API. Can be specified by ID or name.
+
+              The organization ID is an alphanumeric string like `680ee27a0cf28d61b4e9a462`. The organization name uses the format `<cloudFoundryOrgName>-<spaceName>`, where `<cloudFoundryOrgName>` is your Cloud Foundry organization name changed to lowercase and with non-alphanumeric characters removed.
+
+              The easiest way to find the value for `orgId` is to start configuring the IBM integration in SwaggerHub UI. After you authenticate using an IBM API key, you will see a list of organizations in the format "CFOrgName (SpaceName) (OrgId)". The value in the last parentheses is the `orgId`.
+
+              Alternatively, if you have the [API Connect Developer Toolkit](https://www.npmjs.com/package/apiconnect) installed, you can use the `apic orgs --server apimanager.us-south.apiconnect.cloud.ibm.com` command to get the organization names that can be used as `orgId`.
+            example: 680ee27a0cf28d61b4e9a462
+            type: string
+        required:
+          - configType
+          - orgId
+        type: object
+    description: Configuration details for the [IBM API Connect](https://support.smartbear.com/swaggerhub/docs/integrations/ibm-api-connect.html) integration
+  IntegrationConfiguration:
+    description: Common configuration details for all integrations
+    properties:
+      enabled:
+        default: true
+        description: Whether the integration is enabled or disabled
+        type: boolean
+      id:
+        description: ID of the integration
+        format: uuid
+        readOnly: true
+        type: string
+      name:
+        description: The display name of the integration. Must be unique among all integrations configured for the given API version.
+        example: Java client
+        type: string
+    required:
+      - name
+    type: object
+  IntegrationConfigurationSummary:
+    allOf:
+      - $ref: "#/definitions/IntegrationConfiguration"
+      - properties:
+          configType:
+            description: Integration type
+            enum:
+              - AMAZON_API_GATEWAY
+              - AMAZON_API_GATEWAY_LAMBDA
+              - API_AUTO_MOCKING
+              - APIGEE_EDGE
+              - AZURE_DEVOPS_SERVICES
+              - BITBUCKET_CLOUD
+              - BITBUCKET_SERVER
+              - GITHUB
+              - GITHUB_ENTERPRISE
+              - GITLAB
+              - WEBHOOK
+            type: string
+        required:
+          - configType
+        type: object
+  IntegrationConfigurations:
+    properties:
+      integrations:
+        description: A list of integrations
+        items:
+          $ref: "#/definitions/IntegrationConfigurationSummary"
+        type: array
+    type: object
+  LifecycleSettings:
+    properties:
+      published:
+        description: Whether the definition is published (`true`) or unpublished (`false`)
+        type: boolean
+    type: object
+  NewComment:
+    properties:
+      body:
+        type: string
+      position:
+        format: int32
+        minimum: 0
+        type: integer
+      replies:
+        items:
+          $ref: "#/definitions/NewReply"
+        type: array
+    required:
+      - position
+      - body
+    type: object
+  NewReply:
+    properties:
+      body:
+        type: string
+    required:
+      - body
+    type: object
+  NewVersion:
+    properties:
+      private:
+        description: Whether the new version should be public (`false`) or private (`true`)
+        example: false
+        type: boolean
+      version:
+        description: The version identifier for the new version
+        example: 1.0.1
+        minLength: 1
+        type: string
+    required:
+      - version
+    type: object
+  NotificationPreferences:
+    properties:
+      enabled:
+        items:
+          type: string
+        type: array
+    required:
+      - enabled
+    type: object
+  OrganizationOwner:
+    properties:
+      blocked:
+        default: false
+        readOnly: true
+        type: boolean
+      id:
+        description: Internal ID of an organization owner
+        example: ae59040c-9bf1-4036-ab62-beedfb8e7dbe
+        type: string
+    required:
+      - id
+    type: object
+  Project:
+    properties:
+      apis:
+        default: []
+        description: |
+          A list of APIs included in this project. The APIs must belong to the same owner as the project. API names are case-sensitive.
+        example:
+          - petstore
+        items:
+          description: API name (case-sensitive)
+          type: string
+        type: array
+      description:
+        default: ""
+        description: Project description
+        example: APIs for core functionality
+        type: string
+      domains:
+        default: []
+        description: |
+          A list of domains included in this project. The domains must belong to the same owner as the project. Domain names are case-sensitive.
+        example:
+          - common-models
+        items:
+          description: Domain name (case-sensitive)
+          type: string
+        type: array
+      name:
+        description: Project name
+        example: CoreServices
+        type: string
+    type: object
+  ProjectMember:
+    properties:
+      name:
+        type: string
+      roles:
+        items:
+          enum:
+            - MEMBER
+            - OWNER
+          type: string
+        readOnly: true
+        type: array
+      type:
+        default: USER
+        enum:
+          - USER
+          - TEAM
+        type: string
+    required:
+      - name
+      - type
+    type: object
+  ProjectMemberList:
+    properties:
+      members:
+        example:
+          - name: alex
+            type: USER
+          - name: core-developers
+            type: TEAM
+        items:
+          $ref: "#/definitions/ProjectMember"
+        type: array
+    type: object
+  ProjectsJson:
+    properties:
+      offset:
+        example: 0
+        format: int32
+        type: integer
+      projects:
+        items:
+          $ref: "#/definitions/Project"
+        type: array
+      totalCount:
+        example: 1
+        format: int64
+        type: integer
+    type: object
+  SCMIntegrationConfiguration:
+    allOf:
+      - $ref: "#/definitions/IntegrationConfiguration"
+      - properties:
+          branch:
+            description: |
+              The branch to synchronize to. If it does not exist in the repository, it will be created based on the default branch. Branch name must not contain whitespace characters.
+            example: develop
+            type: string
+          ignoredPaths:
+            description: |
+              Ignored Paths: These files and folders (if exist) will remain as is and will not be changed in any way.
+              Paths are relative to the `outputFolder`. Use forward slashes `/` as folder separators, but do not add `/` at the beginning of the paths.
+            example: []
+            items:
+              type: string
+            type: array
+          managedPaths:
+            description: |
+              Fully Managed Paths: These files and folders will be completely managed by the integration. New files will be added, the existing files will be overwritten, and the files that are no longer used will be deleted. 
+              Paths are relative to the `outputFolder`. Use forward slashes `/` as folder separators, but do not add `/` at the beginning of the paths.
+              `*` means all files in the `outputFolder`.
+            example: []
+            items:
+              type: string
+            type: array
+          outputFile:
+            description: Required if `target` is "YAML (Resolved)", "YAML (Unresolved)", "JSON (Resolved)", or "JSON (Unresolved)". Specifies the file name for the generated definition.
+            example: openapi.yaml
+            type: string
+          outputFolder:
+            description: |
+              The output folder for the generated code or definition, relative to the repository root. If this folder does not exist, it will be created. If the output folder is not specified, SwaggerHub will create files and folders in the repository root.
+              Use forward slashes `/` as path separators, but do not add `/` at the beginning.
+            example: sdk/java
+            type: string
+          providedPaths:
+            description: |
+              Partially Managed Paths: These files and folders will be created only if they do not exist. Existing files will not be modified.
+              Paths are relative to the `outputFolder`. Use forward slashes `/` as folder separators, but do not add `/` at the beginning of the paths.
+              `*` means all files in the `outputFolder`.
+            example:
+              - "*"
+            items:
+              type: string
+            type: array
+          repository:
+            description: The repository to synchronize with
+            example: petstore
+            type: string
+          syncMethod:
+            description: |
+              "Basic Sync" or "Advanced Sync". Basic Sync will manage all files and folders in the branch. Advanced Sync allows you to define which files and folders will be managed by SwaggerHub.
+              Note: If "Advanced Sync" is used, you must specify either `providedPaths` or `managedPaths`.
+            enum:
+              - Basic Sync
+              - Advanced Sync
+            type: string
+          target:
+            description: |
+              The type of code to generate and push to the repository. For the possible values, start creating any source control integration manually and check the "Generated API Code" values. Note that the available codegens for OAS2 and OAS3 vary.
+            example: java
+            type: string
+        required:
+          - branch
+          - target
+          - syncMethod
+          - repository
+          - outputFolder
+        type: object
+    description: Common configuration details for source control integrations
+  StandardizationError:
+    properties:
+      description:
+        description: |
+          The issue's description, human friendly. Pertaining to how the user
+          can fix it.
+        example: API title must be present and non-empty string
+        type: string
+      line:
+        default: 0
+        description: |
+          The line number where the issue occurs. 0-indexed. If for some
+          reason, the broken rule does not include a line number, default to
+          zero.
+        example: 1
+        minimum: 0
+        type: integer
+      severity:
+        $ref: "#/definitions/StandardizationRuleSeverity"
+    required:
+      - line
+      - description
+    type: object
+  StandardizationResult:
+    properties:
+      validation:
+        items:
+          $ref: "#/definitions/StandardizationError"
+        type: array
+    type: object
+  StandardizationRuleSeverity:
+    enum:
+      - Warning
+      - Critical
+    example: Warning
+    type: string
+  TemplateWrapper:
+    description: |
+      A list of Templates. Template names are case-sensitive.
+    properties:
+      builtIn:
+        type: boolean
+      defaultVersion:
+        type: string
+      id:
+        type: string
+      specification:
+        type: string
+      title:
+        type: string
+    type: object
+  User:
+    description: The user who added a comment
+    properties:
+      active:
+        description: |
+          `true` means an existing user, `false` means the user is inactive (for example, deleted)
+        type: boolean
+      id:
+        description: User name
+        example: alex
+        type: string
+    type: object
+  ValidationErrors:
+    description: Represents a [standardization](https://support.smartbear.com/swaggerhub/docs/organizations/api-standardization.html) error or warning
+    properties:
+      description:
+        description: The error message
+        example: OperationId must be present and non-empty string
+        type: string
+      line:
+        default: 0
+        description: The line number (0-based) where the issue occurs. If, for some reason, the broken rule does not include a line number, defaults to 0.
+        example: 5
+        minimum: 0
+        type: integer
+      severity:
+        description: "The issue type: `CRITICAL` (error) or `WARNING`"
+        enum:
+          - CRITICAL
+          - WARNING
+        type: string
+    required:
+      - line
+      - description
+    type: object
+  ValidationResult:
+    properties:
+      validation:
+        description: An array of standardization issues
+        items:
+          $ref: "#/definitions/ValidationErrors"
+        type: array
+    type: object
+  VisibilitySettings:
+    properties:
+      private:
+        description: Whether the definition version is private (`true`) or public (`false`)
+        type: boolean
+    required:
+      - private
+    type: object
+  WebhookIntegration:
+    allOf:
+      - $ref: "#/definitions/IntegrationConfiguration"
+      - properties:
+          additionalHeaders:
+            default: []
+            description: 'Custom HTTP headers to be sent with the webhook. Use the "name: value" format for each header.'
+            items:
+              example: "Authorization: Bearer abcd12345"
+              type: string
+            type: array
+          configType:
+            description: Integration type
+            enum:
+              - WEBHOOK
+            type: string
+          contentType:
+            description: Webhook content type
+            enum:
+              - application/json
+              - application/x-www-form-urlencoded
+            type: string
+          lifeCycleEvents:
+            default: []
+            description: Events that will trigger the webhook
+            items:
+              enum:
+                - API_SAVED
+                - API_PUBLISHED
+              type: string
+            type: array
+          url:
+            description: The URL to send the webhook to
+            example: https://example.com:8443/swaggerhub-webhook
+            format: uri
+            type: string
+        required:
+          - configType
+          - url
+          - contentType
+        type: object
+    description: Configuration details for [webhooks](https://support.smartbear.com/swaggerhub/docs/integrations/webhook.html)

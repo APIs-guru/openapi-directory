@@ -1,0 +1,38 @@
+{
+  "apis": {
+    "core.ac.uk": {
+      "added": "2015-08-25T07:36:07.000Z",
+      "info": {
+        "contact": {
+          "x-twitter": "oacore"
+        },
+        "description": "<p style=\"text-align: justify;\">You can use the CORE API to access the \n    resources harvested and enriched by CORE. If you encounter any problems with the API, please <a href=\"/contact\">report them to us</a>.</p>\n\n<h2>Overview</h2>\n<p style=\"text-align: justify;\">The API is organised by resource type. The resources are <b>articles</b>, \n    <b>journals</b> and <b>repositories</b> and are represented using JSON data format. Furthermore, \n    each resource has a list of methods. The API also provides two global methods for accessing all resources at once.</p>\n\n<h2>Response format</h2>\n<p style=\"text-align: justify;\">Response for each query contains two fields: <b>status</b> and <b>data</b>.\n    In case of an error status, the data field is empty. The data field contains a single object\n    in case the request is for a specific identifier (e.g. CORE ID, CORE repository ID, etc.), or  \n    contains a list of objects, for example for search queries. In case of batch requests, the response\n    is an array of objects, each of which contains its own <b>status</b> and <b>data</b> fields.\n    For search queries the response contains an additional field <b>totalHits</b>, which is the \n    total number of items which match the search criteria.</p>\n\n<h2>Search query syntax</h2>\n\n<p style=\"text-align: justify\">Complex search queries can be used in all of the API search methods.\n    The query can be a simple string or it can be built using terms and operators described in Elasticsearch\n    <a href=\"http://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-query-string-query.html#query-string-syntax\">documentation</a>.\n    The usable field names are <strong>title</strong>, <strong>description</strong>, <strong>fullText</strong>, \n    <strong>authors</strong>, <strong>publisher</strong>, <strong>repositories.id</strong>, <strong>repositories.name</strong>, \n    <strong>doi</strong>, <strong>oai</strong>, <strong>identifiers</strong> (which is a list of article identifiers including OAI, URL, etc.), <strong>language.name</strong> \n    and <strong>year</strong>. Some example queries:\n</p>\n\n<ul style=\"margin-left: 30px;\">\n    <li><p>title:psychology and language.name:English</p></li>\n    <li><p>repositories.id:86 AND year:2014</p></li>\n    <li><p>identifiers:\"oai:aura.abdn.ac.uk:2164/3837\" OR identifiers:\"oai:aura.abdn.ac.uk:2164/3843\"</p></li>\n    <li><p>doi:\"10.1186/1471-2458-6-309\"</p></li>\n</ul>\n\n<h3>Retrieving the latest Articles</h3>\n<p style=\"text-align: justify\">\n    You can retrieve the harvested items since specific dates using the following queries:\n</p>\n\n<ul style=\"margin-left: 30px;\">\n    <li><p>repositoryDocument.metadataUpdated:>2017-02-10</p></li>\n    <li><p>repositoryDocument.metadataUpdated:>2017-03-01 AND repositoryDocument.metadataUpdated:<2017-03-31</p></li>    \n</ul>\n\n<h2>Sort order</h2>\n\n<p style=\"text-align: justify;\">For search queries, the results are ordered by relevance score. For batch \n    requests, the results are retrieved in the order of the requests.</p>\n\n<h2>Parameters</h2>\n<p style=\"text-align: justify;\">The API methods allow different parameters to be passed. Additionally, there is an API key parameter which is common to all API methods. For all API methods \n    the API key can be provided either as a query parameter or in the request header. If the API key \n    is not provided, the API will return HTTP 401 error. You can register for an API key <a href=\"/services#api\">here</a>.</p>\n\n<h2>API methods</h2>",
+        "title": "CORE API v2",
+        "version": "2.0",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_oacore_profile_image.png"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/lucybot/api-spec-converter",
+              "version": "2.7.31"
+            },
+            "format": "swagger",
+            "url": "http://core.ac.uk/api-v2/doc",
+            "version": "1.2"
+          }
+        ],
+        "x-providerName": "core.ac.uk"
+      },
+      "updated": "2019-07-22T11:04:56.000Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/core.ac.uk/2.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/core.ac.uk/2.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/core.ac.uk/2.0.json"
+    }
+  }
+}

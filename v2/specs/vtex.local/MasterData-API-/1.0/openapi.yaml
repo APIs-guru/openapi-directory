@@ -1,0 +1,2565 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: ""
+  title: MasterData API - v1
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - MasterData API - v10.2.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: MasterData-API-
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - description: "The `attachments` API allows you to upload and download files. \r
+
+      \r
+
+      In case of images, the `content-type` header is filled with` image/jpg`."
+    name: Attachments
+  - description: Lets you know if a particular document is in one or more clusters.
+    name: Clusters
+  - description: Set of APIs that returns the structure of the data entities.
+    name: Data Entities
+  - description: "The APIs within this group are used to save documents and query them by id.\r
+
+      \r
+
+      If the document has the id attribute or has fields that have been set to indexes with unique values, VTEX Master Data will attempt to identify the document. If the document is found a change will be made. If it is not found, an inclusion will be made. ** This scenario does not apply to the API with the POST verb**.\r
+
+      \r
+
+      Another important note: The id field will only be considered on the **POST** verb if the ID type entered in the Data Entity is the option:\r
+
+      \r
+
+      ```\r
+
+      A chave primária será informada pelo cliente através do atributo 'id'\r
+
+      ```\r
+
+      \r
+
+      Otherwise, a new document will always be created.\r
+
+      \r
+
+      ### Response status code\r
+
+      \r
+
+      1. Status Code 201: Document created successfully\r
+
+      2. Status Code 200: Document changed successfully\r
+
+      3. Status Code 304: There were no changes to the document\r
+
+      4. Status Code 400: Invalid information in JSON\r
+
+      5. Status Code 403: Unauthorized access\r\n"
+    name: Documents
+  - description: It allows to record and remove points in the` Score2` fields.
+    name: Score
+  - description: The new `` scroll `` API has been developed to meet external integration scenarios. If you need to query the entire VTEX Master Data database, or your collection is over 10.000 documents, use this feature.
+    name: Scroll
+  - description: "The `search` API is intended to query a collection of documents.\t"
+    name: Search
+  - description: Master Data documents are versioned. This means that for each change a new version is generated. The `versions` APIs allows to query the versions and also apply the state of a document to the most current version.
+    name: Versions
+paths:
+  /api/dataentities:
+    get:
+      deprecated: false
+      description: "Retrieves the list of existing data entities in the store.\r
+
+        \r
+
+        ### Response status code\r
+
+        \r
+
+        1. Status Code `403`: Access not allowed\r
+
+        2. Status Code `200`: Retrieves data entity list\r
+
+        \r
+
+        > All headers listed below are required."
+      operationId: Listdataentities
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - acronym: SP
+                  allowGetAll: false
+                  name: Sample
+                  primaryKeyType: GUID
+                - acronym: AD
+                  allowGetAll: false
+                  name: Endereço
+                  primaryKeyType: GUID
+                - acronym: CL
+                  allowGetAll: false
+                  name: Cliente
+                  primaryKeyType: GUID
+              schema:
+                items:
+                  $ref: "#/components/schemas/Listdataentity"
+                type: array
+          description: ""
+          headers: {}
+      summary: List data entities
+      tags:
+        - Data Entities
+  "/api/dataentities/{acronym}":
+    get:
+      deprecated: false
+      description: "Returns the data entity structure with its respective fields and data type.\r
+
+        \r
+
+        ### Response status code\r
+
+        \r
+
+        1. Status Code `403`: Access not allowed\r
+
+        2. Status Code `200`: Retrieves data entity structure\r
+
+        \r
+
+        > All headers listed below are required."
+      operationId: Getdataentitystructure
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Identifies the kind of data
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                acronym: SP
+                allowGetAll: false
+                fields:
+                  - displayName: Atualizado em
+                    isFilter: true
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: false
+                    name: updatedIn
+                    type: Date and Time
+                  - displayName: Atualizado por
+                    isFilter: true
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: false
+                    name: updatedBy
+                    type: User Login
+                  - displayName: Auto increment
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Auto_Increment
+                    type: Auto Increment
+                  - displayName: Boolean
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Boolean
+                    type: Boolean
+                  - displayName: Criado em
+                    isFilter: true
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: false
+                    name: createdIn
+                    type: Date and Time
+                  - displayName: Criado por
+                    isFilter: true
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: false
+                    name: createdBy
+                    type: User Login
+                  - displayName: Currency
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Currency
+                    type: Currency
+                  - displayName: Date
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Date
+                    type: Date
+                  - displayName: Date and Time
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Date_Time
+                    type: Date and Time
+                  - displayName: Decimal
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Decimal
+                    type: Decimal
+                  - displayName: Email
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: true
+                    name: Email
+                    type: Email
+                  - displayName: Entidade de dados
+                    isFilter: false
+                    isInternal: true
+                    isNullable: false
+                    isSearchable: true
+                    name: dataEntityId
+                    type: Varchar 10
+                  - displayName: File
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: File
+                    type: File
+                  - displayName: Filtro automático
+                    isFilter: false
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: false
+                    name: auto_filter
+                    type: Text
+                  - displayName: ID da loja
+                    isFilter: false
+                    isInternal: true
+                    isNullable: false
+                    isSearchable: false
+                    name: accountId
+                    type: Varchar 50
+                  - displayName: Id do documento
+                    isFilter: false
+                    isInternal: true
+                    isNullable: false
+                    isSearchable: true
+                    name: id
+                    type: Varchar 100
+                  - displayName: Integer
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Integer
+                    type: Integer
+                  - displayName: Long
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Long
+                    type: Long
+                  - displayName: Nome da loja
+                    isFilter: false
+                    isInternal: true
+                    isNullable: false
+                    isSearchable: true
+                    name: accountName
+                    type: Varchar 100
+                  - displayName: Percent
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Percent
+                    type: Percent
+                  - displayName: Relationship
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: true
+                    name: Relationship
+                    type: Relationship
+                  - displayName: Score2
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Score2
+                    type: Score2
+                  - displayName: Seguidores
+                    isFilter: false
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: true
+                    name: followers
+                    type: Text
+                  - displayName: Tags
+                    isFilter: false
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: true
+                    name: tags
+                    type: Text
+                  - displayName: Text
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Text
+                    type: Text
+                  - displayName: Time
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: Time
+                    type: Time
+                  - displayName: Ultima interação em
+                    isFilter: true
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: false
+                    name: lastInteractionIn
+                    type: Date and Time
+                  - displayName: Ultima interação por
+                    isFilter: true
+                    isInternal: true
+                    isNullable: true
+                    isSearchable: false
+                    name: lastInteractionBy
+                    type: User Login
+                  - displayName: URL
+                    isFilter: true
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: false
+                    name: URL
+                    type: URL
+                  - displayName: User Login
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: true
+                    name: User_Login
+                    type: User Login
+                  - displayName: Varchar 10
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: true
+                    name: Varchar10
+                    type: Varchar 10
+                  - displayName: Varchar 100
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: true
+                    name: Varchar100
+                    type: Varchar 100
+                  - displayName: Varchar 50
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: true
+                    name: Varchar50
+                    type: Varchar 50
+                  - displayName: Varchar 750
+                    isFilter: false
+                    isInternal: false
+                    isNullable: true
+                    isSearchable: true
+                    name: Varchar750
+                    type: Varchar 750
+                name: Sample
+                primaryKeyType: GUID
+              schema:
+                $ref: "#/components/schemas/Getdataentityfields"
+          description: ""
+          headers: {}
+      summary: Get data entity structure
+      tags:
+        - Data Entities
+  "/api/dataentities/{acronym}/documents":
+    patch:
+      deprecated: false
+      description: ""
+      operationId: Createorupdatepartialdocument
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Identifies the kind of data
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              Boolean: true
+              id: 4e4c55ac-e491-11e6-94f4-0ac138d2d42e
+            schema:
+              type: object
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Create or update partial document
+      tags:
+        - Documents
+    post:
+      deprecated: false
+      description: Creates documents through a JSON object where the key is the name of the field.
+      operationId: Createnewdocument
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Identifies the kind of data
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              Boolean: true
+              Currency: 2.5
+              Date: 1992-11-17
+              Date_Time: 2016-09-14T19:21:01.3163733Z
+              Decimal: 2.5
+              Email: meu@email.com
+              Integer: 1000000
+              Long: 1000000000
+              Percent: 85.42
+              Relationship: 5eb31afb-7ab0-11e6-94b4-0a44686e393f
+              Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+              Time: 23:50
+              URL: http://www.vtex.com
+              Varchar10: Lorem ipsu
+              Varchar100: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+              Varchar50: Lorem ipsum dolor sit amet, consectetur adipiscing
+              Varchar750: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            schema:
+              type: object
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://{{accountName}}.vtexcommercestable.com.br/api/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: CL-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/Createnewdocument"
+          description: ""
+          headers: {}
+      summary: Create new document
+      tags:
+        - Documents
+    put:
+      deprecated: false
+      description: ""
+      operationId: Createorupdateentiredocument
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Identifies the kind of data
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              Boolean: true
+              Currency: 2.5
+              Date: 1992-11-17
+              Date_Time: 2016-09-14T19:21:01.3163733Z
+              Decimal: 2.5
+              Email: meu@email.com
+              Integer: 1000000
+              Long: 1000000000
+              Percent: 85.42
+              Relationship: 5eb31afb-7ab0-11e6-94b4-0a44686e393f
+              Text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.... "
+              Time: 23:50
+              URL: http://www.vtex.com
+              Varchar10: Lorem ipsu
+              Varchar100: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+              Varchar50: Lorem ipsum dolor sit amet, consectetur adipiscing
+              Varchar750: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+              id: 4e4c55ac-e491-11e6-94f4-0ac138d2d42e
+            schema:
+              type: object
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Create or update entire document
+      tags:
+        - Documents
+  "/api/dataentities/{acronym}/documents/{id}":
+    delete:
+      deprecated: false
+      description: It allows to delete a document.
+      operationId: Deletedocument
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Delete document
+      tags:
+        - Documents
+    get:
+      deprecated: false
+      description: "Retrieves a document.\r
+
+        \r
+
+        Assign the `_fields` parameter in the query string to retrieve the desired fields. If you want to return all the fields use `_fields=_all`."
+      operationId: Getdocument
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                campo1: valor1
+                campo2: valor2
+                campo3: 3
+              schema:
+                $ref: "#/components/schemas/Usingfilters"
+          description: ""
+          headers: {}
+      summary: Get document
+      tags:
+        - Documents
+    patch:
+      deprecated: false
+      description: ""
+      operationId: Updatepartialdocument
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              Boolean: false
+            schema:
+              type: object
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Update partial document
+      tags:
+        - Documents
+    put:
+      deprecated: false
+      description: ""
+      operationId: Updateentiredocument
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              Boolean: true
+              Currency: 2.5
+              Date: 1992-11-17
+              Date_Time: 2016-09-14T19:21:01.3163733Z
+              Decimal: 2.5
+              Email: meu@email.com
+              Integer: 1000000
+              Long: 1000000000
+              Percent: 85.42
+              Relationship: 5eb31afb-7ab0-11e6-94b4-0a44686e393f
+              Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+              Time: 23:50
+              URL: http://www.vtex.com
+              Varchar10: Lorem ipsu
+              Varchar100: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+              Varchar50: Lorem ipsum dolor sit amet, consectetur adipiscing
+              Varchar750: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            schema:
+              type: object
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Update entire document
+      tags:
+        - Documents
+  "/api/dataentities/{acronym}/documents/{id}/clusters":
+    post:
+      deprecated: false
+      description: ""
+      operationId: ValidateDocumentbyClusters
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              - name: male
+                rule: gender=male
+              - name: complex
+                rule: ((gender=male AND percent=0.35) AND any is null) AND (name=*go*)
+              - name: complex2
+                rule: ((gender=male AND percent=0.35) AND any is not null) OR (name=*go*)
+              - name: createdIn
+                rule: createdIn between 2015-10-28 AND 2015-10-30
+            schema:
+              items: {}
+              type: array
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Validate Document by Clusters
+      tags:
+        - Clusters
+  "/api/dataentities/{acronym}/documents/{id}/score":
+    put:
+      deprecated: false
+      description: It allows punctuate in more than one field and more than one key.
+      operationId: Putscores
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              - field: carttag
+                key: Payment
+                point: 1
+                until: 10m
+              - field: scoretest
+                key: Point 1
+                point: 1
+                until: 1d
+            schema:
+              description: ""
+              items:
+                $ref: "#/components/schemas/PutscoresRequest"
+              type: array
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Put scores
+      tags:
+        - Score
+  "/api/dataentities/{acronym}/documents/{id}/score/{field-name}":
+    delete:
+      deprecated: false
+      description: Allows you to remove a key from a specific field.
+      operationId: Deletescorebyfield
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+        - description: Name of the field to remove score from
+          in: path
+          name: field-name
+          required: true
+          schema:
+            default: "{{field-name}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              key: first key
+            schema:
+              $ref: "#/components/schemas/DeletescorebyfieldRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Delete score by field
+      tags:
+        - Score
+    put:
+      deprecated: false
+      description: It allows to punctuate in a specific field.
+      operationId: Putscorebyfield
+      parameters:
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+        - description: Name of the field to score
+          in: path
+          name: field-name
+          required: true
+          schema:
+            default: "{{field-name}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              key: first key
+              point: 1
+              until: 10m
+            schema:
+              $ref: "#/components/schemas/PutscorebyfieldRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Put score by field
+      tags:
+        - Score
+  "/api/dataentities/{acronym}/documents/{id}/versions":
+    get:
+      deprecated: false
+      description: Allows to list the versions of a document.
+      operationId: Listversions
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - date: 2016-10-18T16:53:32+00:00
+                  id: _EAR0cJ7XB5k5grnmm0zeKGlVvVM9WCPV_
+                - date: 2016-09-08T20:11:42+00:00
+                  id: _E5SH9WXVvhPBNnbQtYAAGqrIysIeNYhy_
+                - date: 2016-07-14T00:36:36+00:00
+                  id: _cwVfOG7S6XeAiDBhNpLiJM1cwRiJcvdp_
+              schema:
+                items:
+                  $ref: "#/components/schemas/Listversion"
+                type: array
+          description: ""
+          headers: {}
+      summary: List versions
+      tags:
+        - Versions
+  "/api/dataentities/{acronym}/documents/{id}/versions/{versionId}":
+    get:
+      deprecated: false
+      description: Returns the version of a document.
+      operationId: Getversion
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+        - description: Id of the version to get
+          in: path
+          name: versionId
+          required: true
+          schema:
+            default: "{{versionId}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                author: user-id
+                document:
+                  accountId: my-account-id
+                  accountName: my-account
+                  carttag: null
+                  checkouttag: null
+                  dataEntityId: CL
+                  departmentVisitedTag:
+                    DisplayValue: Ar e Ventilação
+                    Scores:
+                      Ar e Ventilação:
+                        - Date: 2016-10-18T16:53:31.0842607Z
+                          Point: 1
+                          Until: 2017-04-16T16:53:31.0842607Z
+                  email: teste@mail.com
+                  followers: []
+                  id: my-id
+                  rclastsession: 163054c0-954f-11e6-891e-4d2b1c3450a4
+                  rclastsessiondate: 2016-10-18T16:53:00
+                id: version-id
+              schema:
+                $ref: "#/components/schemas/Getversion"
+          description: ""
+          headers: {}
+      summary: Get version
+      tags:
+        - Versions
+    put:
+      deprecated: false
+      description: Updates document with version values.
+      operationId: Putversion
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+        - description: Id of the version to update
+          in: path
+          name: versionId
+          required: true
+          schema:
+            default: "{{versionId}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://{{accountName}}.vtexcommercestable.com.br/api/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: CL-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/Putversion"
+          description: ""
+          headers: {}
+      summary: Put version
+      tags:
+        - Versions
+  "/api/dataentities/{acronym}/documents/{id}/{field}/attachments":
+    post:
+      deprecated: false
+      description: "This API allows you to save a file in a field of type `File`.
+
+        \r
+
+        \rWhen using in javascript, you must add the header `content-type` with value `multipart/form-data;`
+
+        \r
+
+        \rYou can upload more than one file. Just add a new field in the `form-data` with type `File`."
+      operationId: Saveattachment
+      parameters:
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+        - description: Field to attach the file to, as described in admin
+          in: path
+          name: field
+          required: true
+          schema:
+            default: "{{field}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              properties:
+                file:
+                  items:
+                    description: File to be uploaded
+                    format: binary
+                    type: string
+                  type: array
+              required:
+                - file
+              type: object
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Save attachment
+      tags:
+        - Attachments
+  "/api/dataentities/{acronym}/documents/{id}/{field}/attachments/{file-name}":
+    get:
+      deprecated: false
+      description: "Use this API to retrieve a file.\r
+
+        \r
+
+        Be sure to include the file extension in the name. Like in this example:\r
+
+        ```\r
+
+        /dataentities/CL/documents/123/file/attachments/image.png\r
+
+        ```"
+      operationId: Retrieveattachment
+      parameters:
+        - description: Two letter word that identifies the data structure
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Id of the document
+          in: path
+          name: id
+          required: true
+          schema:
+            default: "{{id}}"
+            type: string
+          style: simple
+        - description: Field to attach the file to, as described in admin
+          in: path
+          name: field
+          required: true
+          schema:
+            default: "{{field}}"
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: file-name
+          required: true
+          schema:
+            default: "{{file-name}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      summary: Retrieve attachment
+      tags:
+        - Attachments
+  "/api/dataentities/{acronym}/scroll":
+    get:
+      deprecated: false
+      description: "Scrolls through documents according to the query parameter filters.
+
+        \r
+
+        \r> Avoid sending too many requests with wildcards (`*`) in the search parameters or that use the `keyword` parameter. This may lead to this endpoint being temporarily blocked for your account. If this happens you will receive an error with status code `429`.
+
+        \r
+
+        \rUse all the features of `search` API to perform filters.\r
+
+        \r
+
+        In the first request, the `X-VTEX-MD-TOKEN` token will be obtained in the header. This token must be passed to the next request in the query string `_token` parameter. The token has a timeout of 10 minutes, which refreshes after each request.\r
+
+        \r
+
+        **ATTENTION:** To inform the number of documents per request, use the query string parameter `_size`, which has the maximum value of 1000.\r
+
+        \r
+
+        After the token is obtained it is no longer necessary to send the filter or document size per page parameters. You only need to resend the token until the document collection is empty.\r
+
+        \r
+
+        ### First request example:\r
+
+        ```\r
+
+        /dataentities/CL/scroll?isCluster=true&_size=250&_fields=email,firstName\r
+
+        ```\r
+
+        \r
+
+        After the first request, retrieve the token in the header `X-VTEX-MD-TOKEN` and make the next requests.\r
+
+        \r
+
+        ### Example of subsequent requests:\r
+
+        ```\r
+
+        /dataentities/CL/scroll?_token=tokenvalueexample\r
+
+        ```"
+      operationId: Scrolldocuments
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Identifies the kind of data
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: ""
+          headers: {}
+        "429":
+          content:
+            application/json:
+              example: {}
+              schema:
+                description: Wildcard queries temporarily blocked due to excessive usage. Consider adjusting your code to remove them or reduce the rate of search requests with wildcards (*). This temporary block may also be due to excessive use of requests with the parameter `keyword`.
+          description: Too Many Requests
+      summary: Scroll documents
+      tags:
+        - Scroll
+  "/api/dataentities/{acronym}/search":
+    get:
+      deprecated: false
+      description: "Search documents by the query parameters described below.
+
+        \r
+
+        \r> Avoid sending too many requests with wildcards (`*`) in the search parameters or that use the `keyword` parameter. This may lead to this endpoint being temporarily blocked for your account. If this happens you will receive an error with status code `503`."
+      operationId: Searchdocuments
+      parameters:
+        - description: Type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand "
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/vnd.vtex.ds.v10+json
+            type: string
+          style: simple
+        - description: Range of documents to show
+          in: header
+          name: REST-Range
+          required: true
+          schema:
+            default: resources=0-10
+            type: string
+          style: simple
+        - description: Identifies the kind of data
+          in: path
+          name: acronym
+          required: true
+          schema:
+            default: "{{acronym}}"
+            type: string
+          style: simple
+        - description: Fields that will be returned by document
+          in: query
+          name: _fields
+          required: false
+          schema:
+            default: email,firstName,document
+            type: string
+          style: form
+        - description: Specification of filters. As seen below
+          in: query
+          name: _where
+          required: false
+          schema:
+            default: firstName is not null
+            type: string
+          style: form
+        - description: Enter with the name of the schema to filter documents by compatibility of the schema.
+          in: query
+          name: _schema
+          required: false
+          schema:
+            default: "{{schema}}"
+            type: string
+          style: form
+        - description: String to search
+          in: query
+          name: _keyword
+          required: false
+          schema:
+            default: String to search
+            type: string
+          style: form
+        - description: "Use ASC value to sort ascending or DESC value to sort descending. "
+          in: query
+          name: _sort
+          required: false
+          schema:
+            default: firstName ASC
+            type: string
+          style: form
+      responses:
+        "200":
+          description: "Use this endpoint to search Master Data v1 documents with highly customizable filters.\r
+
+            \r
+
+            ## Headers\r
+
+            \r
+
+            | Name |  |\r
+
+            | -------- | -------- |\r
+
+            | Content-Type | application/json |\r
+
+            | Accept | application/vnd.vtex.ds.v10+json |\r
+
+            | x-vtex-api-appKey | App Key |\r
+
+            | x-vtex-api-appToken | App Token |\r
+
+            | REST-Range | Defines the collection of documents to be returned. A range within the collection limited by 100 documents per query. |\r
+
+            \r
+
+            \r
+
+            ## Querystring\r
+
+            \r
+
+            > Learn more about [Master Data v1 search queries](https://developers.vtex.com/vtex-rest-api/docs/how-the-queries-in-master-data-v1-work).\r
+
+            \r
+
+            | Attribute | What it does |\r
+
+            | -------- | -------- |\r
+
+            | _fields | Fields that will be returned by document |\r
+
+            | _where | Specification of filters |\r
+
+            | _keyword | Search in all fields marked as searchable |\r
+
+            | _sort | Sort order |\r
+
+            \r
+
+            ## How to fill the querystring attributes\r
+
+            \r
+
+            1. _fields: Use the field names separated by commas. Ex. `_fields=email,firstName,document`.\r
+
+            2. _where: See the query examples below to learn how to use filters.\r
+
+            3. _keyword: Enter the value you want to query. Use quotes for a partial query. Ex. `_keyword=Maria` or `_keyword=*Maria*`\r
+
+            4. _sort: Use `ASC` value to sort ascending or `DESC` value to sort descending. Ex. `_sort=firstName ASC`.\r
+
+            5. If you want to fetch all fields use the `_all` parameter in the list of response fields. Ex: `_fields=_all`\r
+
+            \r
+
+            \r
+
+            ## Query Examples:\r
+
+            \r
+
+            \r
+
+            ### Simple filter\r
+
+            \r
+
+            ```\r
+
+            /dataentities/CL/search?email=my@email.com\r
+
+            ```\r
+
+            \r
+
+            ### Complex filter\r
+
+            \r
+
+            ```\r
+
+            /dataentities/CL/search?_where=(firstName=Jon OR lastName=Smith) OR (createdIn between 2001-01-01 AND 2016-01-01)\r
+
+            ```\r
+
+            \r
+
+            ### Filter by range\r
+
+            \r
+
+            #### Date Range\r
+
+            \r
+
+            ```\r
+
+            /dataentities/CL/search?_where=createdIn between 2001-01-01 AND 2016-01-01\r
+
+            ```\r
+
+            \r
+
+            #### Range numeric fields\r
+
+            \r
+
+            ```\r
+
+            /dataentities/CL/search?_where=age between 18 AND 25\r
+
+            ```\r
+
+            \r
+
+            ### Partial filter\r
+
+            \r
+
+            ```\r
+
+            /dataentities/CL/search?firstName=*Maria*\r
+
+            ```\r
+
+            \r
+
+            ### Filter for null values\r
+
+            \r
+
+            ```\r
+
+            /dataentities/CL/search?_where=firstName is null\r
+
+            ```\r
+
+            \r
+
+            ### Filter for non-null values\r
+
+            \r
+
+            ```\r
+
+            /dataentities/CL/search?_where=firstName is not null\r
+
+            ```\r
+
+            \r
+
+            ### Filter for difference\r
+
+            ```\r
+
+            /dataentities/CL/search?_where=firstName<>maria\r
+
+            ```\r
+
+            \r
+
+            ### Filter greater than or less than\r
+
+            ```\r
+
+            /dataentities/CL/search?_where=number>5\r
+
+            /dataentities/CL/search?_where=date<2001-01-01\r
+
+            ```"
+          headers: {}
+        "503":
+          content:
+            application/json:
+              example: {}
+              schema:
+                description: Wildcard queries temporarily blocked due to excessive usage. Consider adjusting your code to remove them or reduce the rate of search requests with wildcards (*). This temporary block may also be due to excessive use of requests with the parameter `keyword`.
+          description: Service Unavailable
+      summary: Search documents
+      tags:
+        - Search
+components:
+  schemas:
+    ArEVentilaO:
+      example:
+        Date: 2016-10-18T16:53:31.0842607Z
+        Point: 1
+        Until: 2017-04-16T16:53:31.0842607Z
+      properties:
+        Date:
+          type: string
+        Point:
+          format: int32
+          type: integer
+        Until:
+          type: string
+      required:
+        - Point
+        - Date
+        - Until
+      title: ArEVentilaO
+      type: object
+    Createnewdocument:
+      example:
+        Href: http://{{accountName}}.vtexcommercestable.com.br/api/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+        Id: CL-b818cbda-e489-11e6-94f4-0ac138d2d42e
+      properties:
+        Href:
+          type: string
+        Id:
+          type: string
+      required:
+        - Id
+        - Href
+      title: Createnewdocument
+      type: object
+    CreatenewdocumentRequest:
+      example:
+        Boolean: true
+        Currency: 2.5
+        Date: 1992-11-17
+        Date_Time: 2016-09-14T19:21:01.3163733Z
+        Decimal: 2.5
+        Email: meu@email.com
+        Integer: 1000000
+        Long: 1000000000
+        Percent: 85.42
+        Relationship: 5eb31afb-7ab0-11e6-94b4-0a44686e393f
+        Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+        Time: 23:50
+        URL: http://www.vtex.com
+        Varchar10: Lorem ipsu
+        Varchar100: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+        Varchar50: Lorem ipsum dolor sit amet, consectetur adipiscing
+        Varchar750: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+      properties:
+        Boolean:
+          type: boolean
+        Currency:
+          type: number
+        Date:
+          type: string
+        Date_Time:
+          type: string
+        Decimal:
+          type: number
+        Email:
+          type: string
+        Integer:
+          format: int32
+          type: integer
+        Long:
+          format: int32
+          type: integer
+        Percent:
+          type: number
+        Relationship:
+          type: string
+        Text:
+          type: string
+        Time:
+          type: string
+        URL:
+          type: string
+        Varchar10:
+          type: string
+        Varchar100:
+          type: string
+        Varchar50:
+          type: string
+        Varchar750:
+          type: string
+      required:
+        - Boolean
+        - Currency
+        - Date
+        - Date_Time
+        - Decimal
+        - Email
+        - Integer
+        - Long
+        - Percent
+        - Time
+        - URL
+        - Varchar10
+        - Varchar50
+        - Varchar750
+        - Varchar100
+        - Relationship
+        - Text
+      title: CreatenewdocumentRequest
+      type: object
+    CreateorupdateentiredocumentRequest:
+      example:
+        Boolean: true
+        Currency: 2.5
+        Date: 1992-11-17
+        Date_Time: 2016-09-14T19:21:01.3163733Z
+        Decimal: 2.5
+        Email: meu@email.com
+        Integer: 1000000
+        Long: 1000000000
+        Percent: 85.42
+        Relationship: 5eb31afb-7ab0-11e6-94b4-0a44686e393f
+        Text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.... "
+        Time: 23:50
+        URL: http://www.vtex.com
+        Varchar10: Lorem ipsu
+        Varchar100: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+        Varchar50: Lorem ipsum dolor sit amet, consectetur adipiscing
+        Varchar750: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+        id: 4e4c55ac-e491-11e6-94f4-0ac138d2d42e
+      properties:
+        Boolean:
+          type: boolean
+        Currency:
+          type: number
+        Date:
+          type: string
+        Date_Time:
+          type: string
+        Decimal:
+          type: number
+        Email:
+          type: string
+        Integer:
+          format: int32
+          type: integer
+        Long:
+          format: int32
+          type: integer
+        Percent:
+          type: number
+        Relationship:
+          type: string
+        Text:
+          type: string
+        Time:
+          type: string
+        URL:
+          type: string
+        Varchar10:
+          type: string
+        Varchar100:
+          type: string
+        Varchar50:
+          type: string
+        Varchar750:
+          type: string
+        id:
+          type: string
+      required:
+        - id
+        - Boolean
+        - Currency
+        - Date
+        - Date_Time
+        - Decimal
+        - Email
+        - Integer
+        - Long
+        - Percent
+        - Time
+        - URL
+        - Varchar10
+        - Varchar50
+        - Varchar750
+        - Varchar100
+        - Relationship
+        - Text
+      title: CreateorupdateentiredocumentRequest
+      type: object
+    CreateorupdatepartialdocumentRequest:
+      example:
+        Boolean: true
+        id: 4e4c55ac-e491-11e6-94f4-0ac138d2d42e
+      properties:
+        Boolean:
+          type: boolean
+        id:
+          type: string
+      required:
+        - id
+        - Boolean
+      title: CreateorupdatepartialdocumentRequest
+      type: object
+    DeletescorebyfieldRequest:
+      example:
+        key: first key
+      properties:
+        key:
+          type: string
+      required:
+        - key
+      title: DeletescorebyfieldRequest
+      type: object
+    DepartmentVisitedTag:
+      example:
+        DisplayValue: Ar e Ventilação
+        Scores:
+          Ar e Ventilação:
+            - Date: 2016-10-18T16:53:31.0842607Z
+              Point: 1
+              Until: 2017-04-16T16:53:31.0842607Z
+      properties:
+        DisplayValue:
+          type: string
+        Scores:
+          $ref: "#/components/schemas/Scores"
+      required:
+        - DisplayValue
+        - Scores
+      title: DepartmentVisitedTag
+      type: object
+    Document:
+      example:
+        accountId: my-account-id
+        accountName: my-account
+        carttag: null
+        checkouttag: null
+        dataEntityId: CL
+        departmentVisitedTag:
+          DisplayValue: Ar e Ventilação
+          Scores:
+            Ar e Ventilação:
+              - Date: 2016-10-18T16:53:31.0842607Z
+                Point: 1
+                Until: 2017-04-16T16:53:31.0842607Z
+        email: teste@mail.com
+        followers: []
+        id: my-id
+        rclastsession: 163054c0-954f-11e6-891e-4d2b1c3450a4
+        rclastsessiondate: 2016-10-18T16:53:00
+      properties:
+        accountId:
+          type: string
+        accountName:
+          type: string
+        carttag:
+          nullable: true
+          type: string
+        checkouttag:
+          nullable: true
+          type: string
+        dataEntityId:
+          type: string
+        departmentVisitedTag:
+          $ref: "#/components/schemas/DepartmentVisitedTag"
+        email:
+          type: string
+        followers:
+          description: ""
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        rclastsession:
+          type: string
+        rclastsessiondate:
+          type: string
+      required:
+        - id
+        - dataEntityId
+        - accountId
+        - accountName
+        - followers
+        - email
+        - rclastsession
+        - rclastsessiondate
+        - checkouttag
+        - carttag
+        - departmentVisitedTag
+      title: Document
+      type: object
+    Field:
+      example:
+        displayName: Atualizado em
+        isFilter: true
+        isInternal: true
+        isNullable: true
+        isSearchable: false
+        name: updatedIn
+        type: Date and Time
+      properties:
+        displayName:
+          type: string
+        isFilter:
+          type: boolean
+        isInternal:
+          type: boolean
+        isNullable:
+          type: boolean
+        isSearchable:
+          type: boolean
+        name:
+          type: string
+        type:
+          type: string
+      required:
+        - name
+        - type
+        - displayName
+        - isNullable
+        - isSearchable
+        - isFilter
+        - isInternal
+      title: Field
+      type: object
+    Getdataentityfields:
+      example:
+        acronym: SP
+        allowGetAll: false
+        fields:
+          - displayName: Atualizado em
+            isFilter: true
+            isInternal: true
+            isNullable: true
+            isSearchable: false
+            name: updatedIn
+            type: Date and Time
+          - displayName: Atualizado por
+            isFilter: true
+            isInternal: true
+            isNullable: true
+            isSearchable: false
+            name: updatedBy
+            type: User Login
+          - displayName: Auto increment
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Auto_Increment
+            type: Auto Increment
+          - displayName: Boolean
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Boolean
+            type: Boolean
+          - displayName: Criado em
+            isFilter: true
+            isInternal: true
+            isNullable: true
+            isSearchable: false
+            name: createdIn
+            type: Date and Time
+          - displayName: Criado por
+            isFilter: true
+            isInternal: true
+            isNullable: true
+            isSearchable: false
+            name: createdBy
+            type: User Login
+          - displayName: Currency
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Currency
+            type: Currency
+          - displayName: Date
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Date
+            type: Date
+          - displayName: Date and Time
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Date_Time
+            type: Date and Time
+          - displayName: Decimal
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Decimal
+            type: Decimal
+          - displayName: Email
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: true
+            name: Email
+            type: Email
+          - displayName: Entidade de dados
+            isFilter: false
+            isInternal: true
+            isNullable: false
+            isSearchable: true
+            name: dataEntityId
+            type: Varchar 10
+          - displayName: File
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: File
+            type: File
+          - displayName: Filtro automático
+            isFilter: false
+            isInternal: true
+            isNullable: true
+            isSearchable: false
+            name: auto_filter
+            type: Text
+          - displayName: ID da loja
+            isFilter: false
+            isInternal: true
+            isNullable: false
+            isSearchable: false
+            name: accountId
+            type: Varchar 50
+          - displayName: Id do documento
+            isFilter: false
+            isInternal: true
+            isNullable: false
+            isSearchable: true
+            name: id
+            type: Varchar 100
+          - displayName: Integer
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Integer
+            type: Integer
+          - displayName: Long
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Long
+            type: Long
+          - displayName: Nome da loja
+            isFilter: false
+            isInternal: true
+            isNullable: false
+            isSearchable: true
+            name: accountName
+            type: Varchar 100
+          - displayName: Percent
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Percent
+            type: Percent
+          - displayName: Relationship
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: true
+            name: Relationship
+            type: Relationship
+          - displayName: Score2
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Score2
+            type: Score2
+          - displayName: Seguidores
+            isFilter: false
+            isInternal: true
+            isNullable: true
+            isSearchable: true
+            name: followers
+            type: Text
+          - displayName: Tags
+            isFilter: false
+            isInternal: true
+            isNullable: true
+            isSearchable: true
+            name: tags
+            type: Text
+          - displayName: Text
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Text
+            type: Text
+          - displayName: Time
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: Time
+            type: Time
+          - displayName: Ultima interação em
+            isFilter: true
+            isInternal: true
+            isNullable: true
+            isSearchable: false
+            name: lastInteractionIn
+            type: Date and Time
+          - displayName: Ultima interação por
+            isFilter: true
+            isInternal: true
+            isNullable: true
+            isSearchable: false
+            name: lastInteractionBy
+            type: User Login
+          - displayName: URL
+            isFilter: true
+            isInternal: false
+            isNullable: true
+            isSearchable: false
+            name: URL
+            type: URL
+          - displayName: User Login
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: true
+            name: User_Login
+            type: User Login
+          - displayName: Varchar 10
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: true
+            name: Varchar10
+            type: Varchar 10
+          - displayName: Varchar 100
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: true
+            name: Varchar100
+            type: Varchar 100
+          - displayName: Varchar 50
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: true
+            name: Varchar50
+            type: Varchar 50
+          - displayName: Varchar 750
+            isFilter: false
+            isInternal: false
+            isNullable: true
+            isSearchable: true
+            name: Varchar750
+            type: Varchar 750
+        name: Sample
+        primaryKeyType: GUID
+      properties:
+        acronym:
+          type: string
+        allowGetAll:
+          type: boolean
+        fields:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Field"
+          type: array
+        name:
+          type: string
+        primaryKeyType:
+          type: string
+      required:
+        - acronym
+        - name
+        - primaryKeyType
+        - allowGetAll
+        - fields
+      title: Getdataentityfields
+      type: object
+    Getversion:
+      example:
+        author: user-id
+        document:
+          accountId: my-account-id
+          accountName: my-account
+          carttag: null
+          checkouttag: null
+          dataEntityId: CL
+          departmentVisitedTag:
+            DisplayValue: Ar e Ventilação
+            Scores:
+              Ar e Ventilação:
+                - Date: 2016-10-18T16:53:31.0842607Z
+                  Point: 1
+                  Until: 2017-04-16T16:53:31.0842607Z
+          email: teste@mail.com
+          followers: []
+          id: my-id
+          rclastsession: 163054c0-954f-11e6-891e-4d2b1c3450a4
+          rclastsessiondate: 2016-10-18T16:53:00
+        id: version-id
+      properties:
+        author:
+          type: string
+        document:
+          $ref: "#/components/schemas/Document"
+        id:
+          type: string
+      required:
+        - id
+        - author
+        - document
+      title: Getversion
+      type: object
+    Listdataentity:
+      example:
+        acronym: SP
+        allowGetAll: false
+        name: Sample
+        primaryKeyType: GUID
+      properties:
+        acronym:
+          type: string
+        allowGetAll:
+          type: boolean
+        name:
+          type: string
+        primaryKeyType:
+          type: string
+      required:
+        - acronym
+        - name
+        - primaryKeyType
+        - allowGetAll
+      title: Listdataentity
+      type: object
+    Listversion:
+      example:
+        date: 2016-10-18T16:53:32+00:00
+        id: _EAR0cJ7XB5k5grnmm0zeKGlVvVM9WCPV_
+      properties:
+        date:
+          type: string
+        id:
+          type: string
+      required:
+        - id
+        - date
+      title: Listversion
+      type: object
+    PutscorebyfieldRequest:
+      example:
+        key: first key
+        point: 1
+        until: 10m
+      properties:
+        key:
+          type: string
+        point:
+          format: int32
+          type: integer
+        until:
+          type: string
+      required:
+        - key
+        - point
+        - until
+      title: PutscorebyfieldRequest
+      type: object
+    PutscoresRequest:
+      example:
+        field: carttag
+        key: Payment
+        point: 1
+        until: 10m
+      properties:
+        field:
+          type: string
+        key:
+          type: string
+        point:
+          format: int32
+          type: integer
+        until:
+          type: string
+      required:
+        - field
+        - key
+        - point
+        - until
+      title: PutscoresRequest
+      type: object
+    Putversion:
+      example:
+        Href: http://{{accountName}}.vtexcommercestable.com.br/api/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+        Id: CL-b818cbda-e489-11e6-94f4-0ac138d2d42e
+      properties:
+        Href:
+          type: string
+        Id:
+          type: string
+      required:
+        - Id
+        - Href
+      title: Putversion
+      type: object
+    Scores:
+      example:
+        Ar e Ventilação:
+          - Date: 2016-10-18T16:53:31.0842607Z
+            Point: 1
+            Until: 2017-04-16T16:53:31.0842607Z
+      properties:
+        Ar e Ventilação:
+          description: ""
+          items:
+            $ref: "#/components/schemas/ArEVentilaO"
+          type: array
+      required:
+        - Ar e Ventilação
+      title: Scores
+      type: object
+    UpdateentiredocumentRequest:
+      example:
+        Boolean: true
+        Currency: 2.5
+        Date: 1992-11-17
+        Date_Time: 2016-09-14T19:21:01.3163733Z
+        Decimal: 2.5
+        Email: meu@email.com
+        Integer: 1000000
+        Long: 1000000000
+        Percent: 85.42
+        Relationship: 5eb31afb-7ab0-11e6-94b4-0a44686e393f
+        Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+        Time: 23:50
+        URL: http://www.vtex.com
+        Varchar10: Lorem ipsu
+        Varchar100: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+        Varchar50: Lorem ipsum dolor sit amet, consectetur adipiscing
+        Varchar750: Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+      properties:
+        Boolean:
+          type: boolean
+        Currency:
+          type: number
+        Date:
+          type: string
+        Date_Time:
+          type: string
+        Decimal:
+          type: number
+        Email:
+          type: string
+        Integer:
+          format: int32
+          type: integer
+        Long:
+          format: int32
+          type: integer
+        Percent:
+          type: number
+        Relationship:
+          type: string
+        Text:
+          type: string
+        Time:
+          type: string
+        URL:
+          type: string
+        Varchar10:
+          type: string
+        Varchar100:
+          type: string
+        Varchar50:
+          type: string
+        Varchar750:
+          type: string
+      required:
+        - Boolean
+        - Currency
+        - Date
+        - Date_Time
+        - Decimal
+        - Email
+        - Integer
+        - Long
+        - Percent
+        - Time
+        - URL
+        - Varchar10
+        - Varchar50
+        - Varchar750
+        - Varchar100
+        - Relationship
+        - Text
+      title: UpdateentiredocumentRequest
+      type: object
+    UpdatepartialdocumentRequest:
+      example:
+        Boolean: false
+      properties:
+        Boolean:
+          type: boolean
+      required:
+        - Boolean
+      title: UpdatepartialdocumentRequest
+      type: object
+    Usingfilters:
+      example:
+        campo1: valor1
+        campo2: valor2
+        campo3: 3
+      properties:
+        campo1:
+          type: string
+        campo2:
+          type: string
+        campo3:
+          format: int32
+          type: integer
+      required:
+        - campo1
+        - campo2
+        - campo3
+      title: Usingfilters
+      type: object
+    ValidateDocumentbyClustersRequest:
+      example:
+        name: male
+        rule: gender=male
+      properties:
+        name:
+          type: string
+        rule:
+          type: string
+      required:
+        - name
+        - rule
+      title: ValidateDocumentbyClustersRequest
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

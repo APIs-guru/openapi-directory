@@ -1,0 +1,2313 @@
+openapi: 3.0.0
+info:
+  version: 2019-09-01
+  x-release: v4
+  title: Braket
+  description: <p>The Amazon Braket API Reference provides information about the operations and structures supported in Amazon Braket.</p> <p>Additional Resources:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/braket/latest/developerguide/what-is-braket.html">Amazon Braket Developer Guide</a> </p> </li> </ul>
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_awscloud_profile_image.png
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: braket
+  x-aws-signingName: braket
+  x-origin:
+    - contentType: application/json
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/braket-2019-09-01.normal.json
+      converter:
+        url: https://github.com/mermade/aws2openapi
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/braket/
+servers:
+  - url: http://braket.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Braket multi-region endpoint
+  - url: https://braket.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Braket multi-region endpoint
+  - url: http://braket.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Braket endpoint for China (Beijing) and China (Ningxia)
+  - url: https://braket.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Braket endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  "/job/{jobArn}/cancel":
+    put:
+      operationId: CancelJob
+      description: Cancels an Amazon Braket job.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelJobResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "485":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: jobArn
+          in: path
+          required: true
+          description: The ARN of the Amazon Braket job to cancel.
+          schema:
+            type: string
+            pattern: ^arn:aws[a-z\-]*:braket:[a-z0-9\-]*:[0-9]{12}:job/.*$
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/quantum-task/{quantumTaskArn}/cancel":
+    put:
+      operationId: CancelQuantumTask
+      description: Cancels the specified task.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelQuantumTaskResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "485":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: quantumTaskArn
+          in: path
+          required: true
+          description: The ARN of the task to cancel.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientToken
+              properties:
+                clientToken:
+                  description: The client token associated with the request.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /job:
+    post:
+      operationId: CreateJob
+      description: Creates an Amazon Braket job.
+      responses:
+        "201":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateJobResponse"
+        "480":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: DeviceRetiredException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceRetiredException"
+        "484":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "485":
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceQuotaExceededException"
+        "486":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - algorithmSpecification
+                - clientToken
+                - deviceConfig
+                - instanceConfig
+                - jobName
+                - outputDataConfig
+                - roleArn
+              properties:
+                algorithmSpecification:
+                  description: Defines the Amazon Braket job to be created. Specifies the container image the job uses and the paths to the Python scripts used for entry and training.
+                  type: object
+                  properties:
+                    containerImage:
+                      allOf:
+                        - $ref: "#/components/schemas/ContainerImage"
+                        - description: The container image used to create an Amazon Braket job.
+                    scriptModeConfig:
+                      allOf:
+                        - $ref: "#/components/schemas/ScriptModeConfig"
+                        - description: Configures the paths to the Python scripts used for entry and training.
+                checkpointConfig:
+                  description: Contains information about the output locations for job checkpoint data.
+                  type: object
+                  properties:
+                    localPath:
+                      allOf:
+                        - $ref: "#/components/schemas/String4096"
+                        - description: (Optional) The local directory where checkpoints are written. The default directory is <code>/opt/braket/checkpoints/</code>.
+                    s3Uri:
+                      allOf:
+                        - $ref: "#/components/schemas/S3Path"
+                        - description: Identifies the S3 path where you want Amazon Braket to store checkpoints. For example, <code>s3://bucket-name/key-name-prefix</code>.
+                clientToken:
+                  description: A unique token that guarantees that the call to this API is idempotent.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                deviceConfig:
+                  description: Configures the quantum processing units (QPUs) or simulator used to create and run an Amazon Braket job.
+                  type: object
+                  properties:
+                    device:
+                      allOf:
+                        - $ref: "#/components/schemas/String256"
+                        - description: The primary quantum processing unit (QPU) or simulator used to create and run an Amazon Braket job.
+                hyperParameters:
+                  description: Algorithm-specific parameters used by an Amazon Braket job that influence the quality of the training job. The values are set with a string of JSON key:value pairs, where the key is the name of the hyperparameter and the value is the value of th hyperparameter.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 100
+                  additionalProperties:
+                    $ref: "#/components/schemas/HyperParametersValueString"
+                inputDataConfig:
+                  description: A list of parameters that specify the name and type of input data and where it is located.
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/InputFileConfig"
+                  minItems: 0
+                  maxItems: 20
+                instanceConfig:
+                  description: Configures the resource instances to use while running the Amazon Braket hybrid job on Amazon Braket.
+                  type: object
+                  properties:
+                    instanceCount:
+                      allOf:
+                        - $ref: "#/components/schemas/InstanceConfigInstanceCountInteger"
+                        - description: Configures the number of resource instances to use while running an Amazon Braket job on Amazon Braket. The default value is 1.
+                    instanceType:
+                      allOf:
+                        - $ref: "#/components/schemas/InstanceType"
+                        - description: Configures the type resource instances to use while running an Amazon Braket hybrid job.
+                    volumeSizeInGb:
+                      allOf:
+                        - $ref: "#/components/schemas/InstanceConfigVolumeSizeInGbInteger"
+                        - description: The size of the storage volume, in GB, that user wants to provision.
+                jobName:
+                  description: The name of the Amazon Braket job.
+                  type: string
+                  pattern: ^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,50}$
+                  minLength: 1
+                  maxLength: 50
+                outputDataConfig:
+                  description: Specifies the path to the S3 location where you want to store job artifacts and the encryption key used to store them.
+                  type: object
+                  properties:
+                    kmsKeyId:
+                      allOf:
+                        - $ref: "#/components/schemas/String2048"
+                        - description: The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to encrypt the job training artifacts at rest using Amazon S3 server-side encryption.
+                    s3Path:
+                      allOf:
+                        - $ref: "#/components/schemas/S3Path"
+                        - description: Identifies the S3 path where you want Amazon Braket to store the job training artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>.
+                roleArn:
+                  description: The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to perform tasks on behalf of a user. It can access user resources, run an Amazon Braket job container on behalf of user, and output resources to the users' s3 buckets.
+                  type: string
+                  pattern: ^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$
+                stoppingCondition:
+                  description: "Specifies limits for how long an Amazon Braket job can run. "
+                  type: object
+                  properties:
+                    maxRuntimeInSeconds:
+                      allOf:
+                        - $ref: "#/components/schemas/JobStoppingConditionMaxRuntimeInSecondsInteger"
+                        - description: The maximum length of time, in seconds, that an Amazon Braket job can run.
+                tags:
+                  description: A tag object that consists of a key and an optional value, used to manage metadata for Amazon Braket resources.
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/String"
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /quantum-task:
+    post:
+      operationId: CreateQuantumTask
+      description: Creates a quantum task.
+      responses:
+        "201":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateQuantumTaskResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: DeviceOfflineException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceOfflineException"
+        "483":
+          description: DeviceRetiredException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceRetiredException"
+        "484":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "485":
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceQuotaExceededException"
+        "486":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+                - clientToken
+                - deviceArn
+                - outputS3Bucket
+                - outputS3KeyPrefix
+                - shots
+              properties:
+                action:
+                  description: The action associated with the task.
+                  type: string
+                clientToken:
+                  description: The client token associated with the request.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                deviceArn:
+                  description: The ARN of the device to run the task on.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                deviceParameters:
+                  description: The parameters for the device to run the task on.
+                  type: string
+                  minLength: 1
+                  maxLength: 48000
+                jobToken:
+                  description: The token for an Amazon Braket job that associates it with the quantum task.
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                outputS3Bucket:
+                  description: The S3 bucket to store task result files in.
+                  type: string
+                  minLength: 3
+                  maxLength: 63
+                outputS3KeyPrefix:
+                  description: The key prefix for the location in the S3 bucket to store task results in.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                shots:
+                  description: The number of shots to use for the task.
+                  type: integer
+                  minimum: 0
+                tags:
+                  description: Tags to be added to the quantum task you're creating.
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/String"
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/device/{deviceArn}":
+    get:
+      operationId: GetDevice
+      description: <p>Retrieves the devices available in Amazon Braket.</p> <note> <p>For backwards compatibility with older versions of BraketSchemas, OpenQASM information is omitted from GetDevice API calls. To get this information the user-agent needs to present a recent version of the BraketSchemas (1.8.0 or later). The Braket SDK automatically reports this for you. If you do not see OpenQASM results in the GetDevice response when using a Braket SDK, you may need to set AWS_EXECUTION_ENV environment variable to configure user-agent. See the code examples provided below for how to do this for the AWS CLI, Boto3, and the Go, Java, and JavaScript/TypeScript SDKs.</p> </note>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDeviceResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "484":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: deviceArn
+          in: path
+          required: true
+          description: The ARN of the device to retrieve.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/job/{jobArn}":
+    get:
+      operationId: GetJob
+      description: Retrieves the specified Amazon Braket job.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetJobResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "484":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: jobArn
+          in: path
+          required: true
+          description: The ARN of the job to retrieve.
+          schema:
+            type: string
+            pattern: ^arn:aws[a-z\-]*:braket:[a-z0-9\-]*:[0-9]{12}:job/.*$
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/quantum-task/{quantumTaskArn}":
+    get:
+      operationId: GetQuantumTask
+      description: Retrieves the specified quantum task.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetQuantumTaskResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "484":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: quantumTaskArn
+          in: path
+          required: true
+          description: the ARN of the task to retrieve.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/tags/{resourceArn}":
+    get:
+      operationId: ListTagsForResource
+      description: Shows the tags associated with this resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTagsForResourceResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Specify the <code>resourceArn</code> for the resource whose tags to display.
+          schema:
+            type: string
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    post:
+      operationId: TagResource
+      description: Add a tag to the specified resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TagResourceResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Specify the <code>resourceArn</code> of the resource to which a tag will be added.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: Specify the tags to add to the resource.
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/String"
+  /devices:
+    post:
+      operationId: SearchDevices
+      description: Searches for devices using the specified filters.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchDevicesResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filters
+              properties:
+                filters:
+                  description: The filter values to use to search for a device.
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/SearchDevicesFilter"
+                  minItems: 0
+                  maxItems: 10
+                maxResults:
+                  description: The maximum number of results to return in the response.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+                  type: string
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /jobs:
+    post:
+      operationId: SearchJobs
+      description: Searches for Amazon Braket jobs that match the specified filter values.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchJobsResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filters
+              properties:
+                filters:
+                  description: The filter values to use when searching for a job.
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/SearchJobsFilter"
+                  minItems: 0
+                  maxItems: 10
+                maxResults:
+                  description: The maximum number of results to return in the response.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: A token used for pagination of results returned in the response. Use the token returned from the previous request to continue results where the previous request ended.
+                  type: string
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /quantum-tasks:
+    post:
+      operationId: SearchQuantumTasks
+      description: Searches for tasks that match the specified filter values.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchQuantumTasksResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filters
+              properties:
+                filters:
+                  description: Array of <code>SearchQuantumTasksFilter</code> objects.
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/SearchQuantumTasksFilter"
+                  minItems: 0
+                  maxItems: 10
+                maxResults:
+                  description: Maximum number of results to return in the response.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+                  type: string
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/tags/{resourceArn}#tagKeys":
+    delete:
+      operationId: UntagResource
+      description: Remove tags from a resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UntagResourceResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServiceException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Specify the <code>resourceArn</code> for the resource from which to remove the tags.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: Specify the keys for the tags to remove from the resource.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/String"
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CancelJobResponse:
+      type: object
+      required:
+        - cancellationStatus
+        - jobArn
+      properties:
+        cancellationStatus:
+          allOf:
+            - $ref: "#/components/schemas/CancellationStatus"
+            - description: The status of the job cancellation request.
+        jobArn:
+          allOf:
+            - $ref: "#/components/schemas/JobArn"
+            - description: The ARN of the Amazon Braket job.
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    ConflictException: {}
+    ThrottlingException: {}
+    InternalServiceException: {}
+    ValidationException: {}
+    CancelQuantumTaskResponse:
+      type: object
+      required:
+        - cancellationStatus
+        - quantumTaskArn
+      properties:
+        cancellationStatus:
+          allOf:
+            - $ref: "#/components/schemas/CancellationStatus"
+            - description: The status of the cancellation request.
+        quantumTaskArn:
+          allOf:
+            - $ref: "#/components/schemas/QuantumTaskArn"
+            - description: The ARN of the task.
+    CreateJobResponse:
+      type: object
+      required:
+        - jobArn
+      properties:
+        jobArn:
+          allOf:
+            - $ref: "#/components/schemas/JobArn"
+            - description: The ARN of the Amazon Braket job created.
+    ContainerImage:
+      type: object
+      required:
+        - uri
+      properties:
+        uri:
+          allOf:
+            - $ref: "#/components/schemas/Uri"
+            - description: The URI locating the container image.
+      description: The container image used to create an Amazon Braket job.
+    ScriptModeConfig:
+      type: object
+      required:
+        - entryPoint
+        - s3Uri
+      properties:
+        compressionType:
+          allOf:
+            - $ref: "#/components/schemas/CompressionType"
+            - description: The type of compression used by the Python scripts for an Amazon Braket job.
+        entryPoint:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The path to the Python script that serves as the entry point for an Amazon Braket job.
+        s3Uri:
+          allOf:
+            - $ref: "#/components/schemas/S3Path"
+            - description: The URI that specifies the S3 path to the Python script module that contains the training script used by an Amazon Braket job.
+      description: Contains information about the Python scripts used for entry and by an Amazon Braket job.
+    String4096:
+      type: string
+      minLength: 1
+      maxLength: 4096
+    S3Path:
+      type: string
+      pattern: ^(https|s3)://([^/]+)/?(.*)$
+      minLength: 0
+      maxLength: 1024
+    String256:
+      type: string
+      minLength: 1
+      maxLength: 256
+    HyperParametersValueString:
+      type: string
+      minLength: 1
+      maxLength: 2500
+    InputFileConfig:
+      type: object
+      required:
+        - channelName
+        - dataSource
+      properties:
+        channelName:
+          allOf:
+            - $ref: "#/components/schemas/InputFileConfigChannelNameString"
+            - description: A named input source that an Amazon Braket job can consume.
+        contentType:
+          allOf:
+            - $ref: "#/components/schemas/String256"
+            - description: The MIME type of the data.
+        dataSource:
+          allOf:
+            - $ref: "#/components/schemas/DataSource"
+            - description: The location of the channel data.
+      description: A list of parameters that specify the input channels, type of input data, and where it is located.
+    InstanceConfigInstanceCountInteger:
+      type: integer
+      minimum: 1
+    InstanceType:
+      type: string
+      enum:
+        - ml.m4.xlarge
+        - ml.m4.2xlarge
+        - ml.m4.4xlarge
+        - ml.m4.10xlarge
+        - ml.m4.16xlarge
+        - ml.g4dn.xlarge
+        - ml.g4dn.2xlarge
+        - ml.g4dn.4xlarge
+        - ml.g4dn.8xlarge
+        - ml.g4dn.12xlarge
+        - ml.g4dn.16xlarge
+        - ml.m5.large
+        - ml.m5.xlarge
+        - ml.m5.2xlarge
+        - ml.m5.4xlarge
+        - ml.m5.12xlarge
+        - ml.m5.24xlarge
+        - ml.c4.xlarge
+        - ml.c4.2xlarge
+        - ml.c4.4xlarge
+        - ml.c4.8xlarge
+        - ml.p2.xlarge
+        - ml.p2.8xlarge
+        - ml.p2.16xlarge
+        - ml.p3.2xlarge
+        - ml.p3.8xlarge
+        - ml.p3.16xlarge
+        - ml.p3dn.24xlarge
+        - ml.p4d.24xlarge
+        - ml.c5.xlarge
+        - ml.c5.2xlarge
+        - ml.c5.4xlarge
+        - ml.c5.9xlarge
+        - ml.c5.18xlarge
+        - ml.c5n.xlarge
+        - ml.c5n.2xlarge
+        - ml.c5n.4xlarge
+        - ml.c5n.9xlarge
+        - ml.c5n.18xlarge
+    InstanceConfigVolumeSizeInGbInteger:
+      type: integer
+      minimum: 1
+    String2048:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    JobStoppingConditionMaxRuntimeInSecondsInteger:
+      type: integer
+      minimum: 1
+      maximum: 432000
+    String:
+      type: string
+    DeviceRetiredException: {}
+    ServiceQuotaExceededException: {}
+    CreateQuantumTaskResponse:
+      type: object
+      required:
+        - quantumTaskArn
+      properties:
+        quantumTaskArn:
+          allOf:
+            - $ref: "#/components/schemas/QuantumTaskArn"
+            - description: The ARN of the task created by the request.
+    DeviceOfflineException: {}
+    GetDeviceResponse:
+      type: object
+      required:
+        - deviceArn
+        - deviceCapabilities
+        - deviceName
+        - deviceStatus
+        - deviceType
+        - providerName
+      properties:
+        deviceArn:
+          allOf:
+            - $ref: "#/components/schemas/DeviceArn"
+            - description: The ARN of the device.
+        deviceCapabilities:
+          allOf:
+            - $ref: "#/components/schemas/JsonValue"
+            - description: Details about the capabilities of the device.
+        deviceName:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The name of the device.
+        deviceStatus:
+          allOf:
+            - $ref: "#/components/schemas/DeviceStatus"
+            - description: The status of the device.
+        deviceType:
+          allOf:
+            - $ref: "#/components/schemas/DeviceType"
+            - description: The type of the device.
+        providerName:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The name of the partner company for the device.
+    GetJobResponse:
+      type: object
+      required:
+        - algorithmSpecification
+        - createdAt
+        - instanceConfig
+        - jobArn
+        - jobName
+        - outputDataConfig
+        - roleArn
+        - status
+      properties:
+        algorithmSpecification:
+          allOf:
+            - $ref: "#/components/schemas/AlgorithmSpecification"
+            - description: Definition of the Amazon Braket job created. Specifies the container image the job uses, information about the Python scripts used for entry and training, and the user-defined metrics used to evaluation the job.
+        billableDuration:
+          allOf:
+            - $ref: "#/components/schemas/Integer"
+            - description: The billable time the Amazon Braket job used to complete.
+        checkpointConfig:
+          allOf:
+            - $ref: "#/components/schemas/JobCheckpointConfig"
+            - description: Information about the output locations for job checkpoint data.
+        createdAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The date and time that the Amazon Braket job was created.
+        deviceConfig:
+          allOf:
+            - $ref: "#/components/schemas/DeviceConfig"
+            - description: The quantum processing unit (QPU) or simulator used to run the Amazon Braket job.
+        endedAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The date and time that the Amazon Braket job ended.
+        events:
+          allOf:
+            - $ref: "#/components/schemas/JobEvents"
+            - description: Details about the type and time events occurred related to the Amazon Braket job.
+        failureReason:
+          allOf:
+            - $ref: "#/components/schemas/String1024"
+            - description: A description of the reason why an Amazon Braket job failed, if it failed.
+        hyperParameters:
+          allOf:
+            - $ref: "#/components/schemas/HyperParameters"
+            - description: Algorithm-specific parameters used by an Amazon Braket job that influence the quality of the traiing job. The values are set with a string of JSON key:value pairs, where the key is the name of the hyperparameter and the value is the value of th hyperparameter.
+        inputDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/InputConfigList"
+            - description: A list of parameters that specify the name and type of input data and where it is located.
+        instanceConfig:
+          allOf:
+            - $ref: "#/components/schemas/InstanceConfig"
+            - description: The resource instances to use while running the hybrid job on Amazon Braket.
+        jobArn:
+          allOf:
+            - $ref: "#/components/schemas/JobArn"
+            - description: The ARN of the Amazon Braket job.
+        jobName:
+          allOf:
+            - $ref: "#/components/schemas/GetJobResponseJobNameString"
+            - description: The name of the Amazon Braket job.
+        outputDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/JobOutputDataConfig"
+            - description: The path to the S3 location where job artifacts are stored and the encryption key used to store them there.
+        roleArn:
+          allOf:
+            - $ref: "#/components/schemas/RoleArn"
+            - description: The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to perform tasks on behalf of a user. It can access user resources, run an Amazon Braket job container on behalf of user, and output resources to the s3 buckets of a user.
+        startedAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The date and time that the Amazon Braket job was started.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/JobPrimaryStatus"
+            - description: The status of the Amazon Braket job.
+        stoppingCondition:
+          allOf:
+            - $ref: "#/components/schemas/JobStoppingCondition"
+            - description: The user-defined criteria that specifies when to stop a job running.
+        tags:
+          allOf:
+            - $ref: "#/components/schemas/TagsMap"
+            - description: A tag object that consists of a key and an optional value, used to manage metadata for Amazon Braket resources.
+    GetQuantumTaskResponse:
+      type: object
+      required:
+        - createdAt
+        - deviceArn
+        - deviceParameters
+        - outputS3Bucket
+        - outputS3Directory
+        - quantumTaskArn
+        - shots
+        - status
+      properties:
+        createdAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The time at which the task was created.
+        deviceArn:
+          allOf:
+            - $ref: "#/components/schemas/DeviceArn"
+            - description: The ARN of the device the task was run on.
+        deviceParameters:
+          allOf:
+            - $ref: "#/components/schemas/JsonValue"
+            - description: The parameters for the device on which the task ran.
+        endedAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The time at which the task ended.
+        failureReason:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The reason that a task failed.
+        jobArn:
+          allOf:
+            - $ref: "#/components/schemas/JobArn"
+            - description: The ARN of the Amazon Braket job associated with the quantum task.
+        outputS3Bucket:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The S3 bucket where task results are stored.
+        outputS3Directory:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The folder in the S3 bucket where task results are stored.
+        quantumTaskArn:
+          allOf:
+            - $ref: "#/components/schemas/QuantumTaskArn"
+            - description: The ARN of the task.
+        shots:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: The number of shots used in the task.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/QuantumTaskStatus"
+            - description: The status of the task.
+        tags:
+          allOf:
+            - $ref: "#/components/schemas/TagsMap"
+            - description: The tags that belong to this task.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: "#/components/schemas/TagsMap"
+            - description: Displays the key, value pairs of tags associated with this resource.
+    SearchDevicesResponse:
+      type: object
+      required:
+        - devices
+      properties:
+        devices:
+          allOf:
+            - $ref: "#/components/schemas/DeviceSummaryList"
+            - description: An array of <code>DeviceSummary</code> objects for devices that match the specified filter values.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.
+    SearchDevicesFilter:
+      type: object
+      required:
+        - name
+        - values
+      properties:
+        name:
+          allOf:
+            - $ref: "#/components/schemas/SearchDevicesFilterNameString"
+            - description: The name to use to filter results.
+        values:
+          allOf:
+            - $ref: "#/components/schemas/SearchDevicesFilterValuesList"
+            - description: The values to use to filter results.
+      description: The filter to use for searching devices.
+    SearchJobsResponse:
+      type: object
+      required:
+        - jobs
+      properties:
+        jobs:
+          allOf:
+            - $ref: "#/components/schemas/JobSummaryList"
+            - description: An array of <code>JobSummary</code> objects for devices that match the specified filter values.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: A token used for pagination of results, or <code>null</code> if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.
+    SearchJobsFilter:
+      type: object
+      required:
+        - name
+        - operator
+        - values
+      properties:
+        name:
+          allOf:
+            - $ref: "#/components/schemas/String64"
+            - description: The name to use for the jobs filter.
+        operator:
+          allOf:
+            - $ref: "#/components/schemas/SearchJobsFilterOperator"
+            - description: An operator to use for the jobs filter.
+        values:
+          allOf:
+            - $ref: "#/components/schemas/SearchJobsFilterValuesList"
+            - description: The values to use for the jobs filter.
+      description: A filter used to search for Amazon Braket jobs.
+    SearchQuantumTasksResponse:
+      type: object
+      required:
+        - quantumTasks
+      properties:
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.
+        quantumTasks:
+          allOf:
+            - $ref: "#/components/schemas/QuantumTaskSummaryList"
+            - description: An array of <code>QuantumTaskSummary</code> objects for tasks that match the specified filters.
+    SearchQuantumTasksFilter:
+      type: object
+      required:
+        - name
+        - operator
+        - values
+      properties:
+        name:
+          allOf:
+            - $ref: "#/components/schemas/String64"
+            - description: The name of the device used for the task.
+        operator:
+          allOf:
+            - $ref: "#/components/schemas/SearchQuantumTasksFilterOperator"
+            - description: An operator to use in the filter.
+        values:
+          allOf:
+            - $ref: "#/components/schemas/SearchQuantumTasksFilterValuesList"
+            - description: The values to use for the filter.
+      description: A filter to use to search for tasks.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    AlgorithmSpecification:
+      type: object
+      properties:
+        containerImage:
+          allOf:
+            - $ref: "#/components/schemas/ContainerImage"
+            - description: The container image used to create an Amazon Braket job.
+        scriptModeConfig:
+          allOf:
+            - $ref: "#/components/schemas/ScriptModeConfig"
+            - description: Configures the paths to the Python scripts used for entry and training.
+      description: Defines the Amazon Braket job to be created. Specifies the container image the job uses and the paths to the Python scripts used for entry and training.
+    JobArn:
+      type: string
+      pattern: ^arn:aws[a-z\-]*:braket:[a-z0-9\-]*:[0-9]{12}:job/.*$
+    CancelJobRequest:
+      type: object
+      title: CancelJobRequest
+      properties: {}
+    CancellationStatus:
+      type: string
+      enum:
+        - CANCELLING
+        - CANCELLED
+    String64:
+      type: string
+      minLength: 1
+      maxLength: 64
+    QuantumTaskArn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    CancelQuantumTaskRequest:
+      type: object
+      required:
+        - clientToken
+      title: CancelQuantumTaskRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/String64"
+            - description: The client token associated with the request.
+    CompressionType:
+      type: string
+      enum:
+        - NONE
+        - GZIP
+    Uri:
+      type: string
+      pattern: \d{10,14}\.dkr\.ecr.[a-z0-9-]+\.amazonaws\.com\/.+(@sha256)?:.+
+      minLength: 1
+      maxLength: 255
+    JobCheckpointConfig:
+      type: object
+      required:
+        - s3Uri
+      properties:
+        localPath:
+          allOf:
+            - $ref: "#/components/schemas/String4096"
+            - description: (Optional) The local directory where checkpoints are written. The default directory is <code>/opt/braket/checkpoints/</code>.
+        s3Uri:
+          allOf:
+            - $ref: "#/components/schemas/S3Path"
+            - description: Identifies the S3 path where you want Amazon Braket to store checkpoints. For example, <code>s3://bucket-name/key-name-prefix</code>.
+      description: Contains information about the output locations for job checkpoint data.
+    DeviceConfig:
+      type: object
+      required:
+        - device
+      properties:
+        device:
+          allOf:
+            - $ref: "#/components/schemas/String256"
+            - description: The primary quantum processing unit (QPU) or simulator used to create and run an Amazon Braket job.
+      description: Configures the quantum processing units (QPUs) or simulator used to create and run an Amazon Braket job.
+    HyperParameters:
+      type: object
+      minProperties: 0
+      maxProperties: 100
+      additionalProperties:
+        $ref: "#/components/schemas/HyperParametersValueString"
+    CreateJobRequestInputDataConfigList:
+      type: array
+      items:
+        $ref: "#/components/schemas/InputFileConfig"
+      minItems: 0
+      maxItems: 20
+    InstanceConfig:
+      type: object
+      required:
+        - instanceType
+        - volumeSizeInGb
+      properties:
+        instanceCount:
+          allOf:
+            - $ref: "#/components/schemas/InstanceConfigInstanceCountInteger"
+            - description: Configures the number of resource instances to use while running an Amazon Braket job on Amazon Braket. The default value is 1.
+        instanceType:
+          allOf:
+            - $ref: "#/components/schemas/InstanceType"
+            - description: Configures the type resource instances to use while running an Amazon Braket hybrid job.
+        volumeSizeInGb:
+          allOf:
+            - $ref: "#/components/schemas/InstanceConfigVolumeSizeInGbInteger"
+            - description: The size of the storage volume, in GB, that user wants to provision.
+      description: Configures the resource instances to use while running the Amazon Braket hybrid job on Amazon Braket.
+    CreateJobRequestJobNameString:
+      type: string
+      pattern: ^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,50}$
+      minLength: 1
+      maxLength: 50
+    JobOutputDataConfig:
+      type: object
+      required:
+        - s3Path
+      properties:
+        kmsKeyId:
+          allOf:
+            - $ref: "#/components/schemas/String2048"
+            - description: The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to encrypt the job training artifacts at rest using Amazon S3 server-side encryption.
+        s3Path:
+          allOf:
+            - $ref: "#/components/schemas/S3Path"
+            - description: Identifies the S3 path where you want Amazon Braket to store the job training artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>.
+      description: Specifies the path to the S3 location where you want to store job artifacts and the encryption key used to store them.
+    RoleArn:
+      type: string
+      pattern: ^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$
+    JobStoppingCondition:
+      type: object
+      properties:
+        maxRuntimeInSeconds:
+          allOf:
+            - $ref: "#/components/schemas/JobStoppingConditionMaxRuntimeInSecondsInteger"
+            - description: The maximum length of time, in seconds, that an Amazon Braket job can run.
+      description: "Specifies limits for how long an Amazon Braket job can run. "
+    TagsMap:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/String"
+    CreateJobRequest:
+      type: object
+      required:
+        - algorithmSpecification
+        - clientToken
+        - deviceConfig
+        - instanceConfig
+        - jobName
+        - outputDataConfig
+        - roleArn
+      title: CreateJobRequest
+      properties:
+        algorithmSpecification:
+          allOf:
+            - $ref: "#/components/schemas/AlgorithmSpecification"
+            - description: Definition of the Amazon Braket job to be created. Specifies the container image the job uses and information about the Python scripts used for entry and training.
+        checkpointConfig:
+          allOf:
+            - $ref: "#/components/schemas/JobCheckpointConfig"
+            - description: Information about the output locations for job checkpoint data.
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/String64"
+            - description: A unique token that guarantees that the call to this API is idempotent.
+        deviceConfig:
+          allOf:
+            - $ref: "#/components/schemas/DeviceConfig"
+            - description: The quantum processing unit (QPU) or simulator used to create an Amazon Braket job.
+        hyperParameters:
+          allOf:
+            - $ref: "#/components/schemas/HyperParameters"
+            - description: Algorithm-specific parameters used by an Amazon Braket job that influence the quality of the training job. The values are set with a string of JSON key:value pairs, where the key is the name of the hyperparameter and the value is the value of th hyperparameter.
+        inputDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/CreateJobRequestInputDataConfigList"
+            - description: A list of parameters that specify the name and type of input data and where it is located.
+        instanceConfig:
+          allOf:
+            - $ref: "#/components/schemas/InstanceConfig"
+            - description: Configuration of the resource instances to use while running the hybrid job on Amazon Braket.
+        jobName:
+          allOf:
+            - $ref: "#/components/schemas/CreateJobRequestJobNameString"
+            - description: The name of the Amazon Braket job.
+        outputDataConfig:
+          allOf:
+            - $ref: "#/components/schemas/JobOutputDataConfig"
+            - description: The path to the S3 location where you want to store job artifacts and the encryption key used to store them.
+        roleArn:
+          allOf:
+            - $ref: "#/components/schemas/RoleArn"
+            - description: The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to perform tasks on behalf of a user. It can access user resources, run an Amazon Braket job container on behalf of user, and output resources to the users' s3 buckets.
+        stoppingCondition:
+          allOf:
+            - $ref: "#/components/schemas/JobStoppingCondition"
+            - description: " The user-defined criteria that specifies when a job stops running."
+        tags:
+          allOf:
+            - $ref: "#/components/schemas/TagsMap"
+            - description: A tag object that consists of a key and an optional value, used to manage metadata for Amazon Braket resources.
+    JsonValue:
+      type: string
+    DeviceArn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    CreateQuantumTaskRequestDeviceParametersString:
+      type: string
+      minLength: 1
+      maxLength: 48000
+    JobToken:
+      type: string
+      minLength: 1
+      maxLength: 128
+    CreateQuantumTaskRequestOutputS3BucketString:
+      type: string
+      minLength: 3
+      maxLength: 63
+    CreateQuantumTaskRequestOutputS3KeyPrefixString:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    CreateQuantumTaskRequestShotsLong:
+      type: integer
+      minimum: 0
+    CreateQuantumTaskRequest:
+      type: object
+      required:
+        - action
+        - clientToken
+        - deviceArn
+        - outputS3Bucket
+        - outputS3KeyPrefix
+        - shots
+      title: CreateQuantumTaskRequest
+      properties:
+        action:
+          allOf:
+            - $ref: "#/components/schemas/JsonValue"
+            - description: The action associated with the task.
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/String64"
+            - description: The client token associated with the request.
+        deviceArn:
+          allOf:
+            - $ref: "#/components/schemas/DeviceArn"
+            - description: The ARN of the device to run the task on.
+        deviceParameters:
+          allOf:
+            - $ref: "#/components/schemas/CreateQuantumTaskRequestDeviceParametersString"
+            - description: The parameters for the device to run the task on.
+        jobToken:
+          allOf:
+            - $ref: "#/components/schemas/JobToken"
+            - description: The token for an Amazon Braket job that associates it with the quantum task.
+        outputS3Bucket:
+          allOf:
+            - $ref: "#/components/schemas/CreateQuantumTaskRequestOutputS3BucketString"
+            - description: The S3 bucket to store task result files in.
+        outputS3KeyPrefix:
+          allOf:
+            - $ref: "#/components/schemas/CreateQuantumTaskRequestOutputS3KeyPrefixString"
+            - description: The key prefix for the location in the S3 bucket to store task results in.
+        shots:
+          allOf:
+            - $ref: "#/components/schemas/CreateQuantumTaskRequestShotsLong"
+            - description: The number of shots to use for the task.
+        tags:
+          allOf:
+            - $ref: "#/components/schemas/TagsMap"
+            - description: Tags to be added to the quantum task you're creating.
+    S3DataSource:
+      type: object
+      required:
+        - s3Uri
+      properties:
+        s3Uri:
+          allOf:
+            - $ref: "#/components/schemas/S3Path"
+            - description: Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest that locates the S3 data source.
+      description: Information about the data stored in Amazon S3 used by the Amazon Braket job.
+    DataSource:
+      type: object
+      required:
+        - s3DataSource
+      properties:
+        s3DataSource:
+          allOf:
+            - $ref: "#/components/schemas/S3DataSource"
+            - description: Information about the data stored in Amazon S3 used by the Amazon Braket job.
+      description: Information about the source of the data used by the Amazon Braket job.
+    DeviceStatus:
+      type: string
+      enum:
+        - ONLINE
+        - OFFLINE
+        - RETIRED
+    DeviceType:
+      type: string
+      enum:
+        - QPU
+        - SIMULATOR
+    DeviceSummary:
+      type: object
+      required:
+        - deviceArn
+        - deviceName
+        - deviceStatus
+        - deviceType
+        - providerName
+      properties:
+        deviceArn:
+          allOf:
+            - $ref: "#/components/schemas/DeviceArn"
+            - description: The ARN of the device.
+        deviceName:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The name of the device.
+        deviceStatus:
+          allOf:
+            - $ref: "#/components/schemas/DeviceStatus"
+            - description: The status of the device.
+        deviceType:
+          allOf:
+            - $ref: "#/components/schemas/DeviceType"
+            - description: The type of the device.
+        providerName:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The provider of the device.
+      description: Includes information about the device.
+    DeviceSummaryList:
+      type: array
+      items:
+        $ref: "#/components/schemas/DeviceSummary"
+    GetDeviceRequest:
+      type: object
+      title: GetDeviceRequest
+      properties: {}
+    GetJobRequest:
+      type: object
+      title: GetJobRequest
+      properties: {}
+    Integer:
+      type: integer
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    JobEvents:
+      type: array
+      items:
+        $ref: "#/components/schemas/JobEventDetails"
+      minItems: 0
+      maxItems: 20
+    String1024:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    InputConfigList:
+      type: array
+      items:
+        $ref: "#/components/schemas/InputFileConfig"
+    GetJobResponseJobNameString:
+      type: string
+      pattern: ^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,50}$
+      minLength: 1
+      maxLength: 50
+    JobPrimaryStatus:
+      type: string
+      enum:
+        - QUEUED
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLING
+        - CANCELLED
+    GetQuantumTaskRequest:
+      type: object
+      title: GetQuantumTaskRequest
+      properties: {}
+    Long:
+      type: integer
+    QuantumTaskStatus:
+      type: string
+      enum:
+        - CREATED
+        - QUEUED
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLING
+        - CANCELLED
+    InputFileConfigChannelNameString:
+      type: string
+      pattern: ^[A-Za-z0-9\.\-_]+$
+      minLength: 1
+      maxLength: 64
+    JobEventType:
+      type: string
+      enum:
+        - WAITING_FOR_PRIORITY
+        - QUEUED_FOR_EXECUTION
+        - STARTING_INSTANCE
+        - DOWNLOADING_DATA
+        - RUNNING
+        - DEPRIORITIZED_DUE_TO_INACTIVITY
+        - UPLOADING_RESULTS
+        - COMPLETED
+        - FAILED
+        - MAX_RUNTIME_EXCEEDED
+        - CANCELLED
+    JobEventDetailsMessageString:
+      type: string
+      minLength: 0
+      maxLength: 2500
+    JobEventDetails:
+      type: object
+      properties:
+        eventType:
+          allOf:
+            - $ref: "#/components/schemas/JobEventType"
+            - description: The type of event that occurred related to the Amazon Braket job.
+        message:
+          allOf:
+            - $ref: "#/components/schemas/JobEventDetailsMessageString"
+            - description: A message describing the event that occurred related to the Amazon Braket job.
+        timeOfEvent:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: TThe type of event that occurred related to the Amazon Braket job.
+      description: Details about the type and time events occurred related to the Amazon Braket job.
+    JobSummary:
+      type: object
+      required:
+        - createdAt
+        - device
+        - jobArn
+        - jobName
+        - status
+      properties:
+        createdAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The date and time that the Amazon Braket job was created.
+        device:
+          allOf:
+            - $ref: "#/components/schemas/String256"
+            - description: Provides summary information about the primary device used by an Amazon Braket job.
+        endedAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The date and time that the Amazon Braket job ended.
+        jobArn:
+          allOf:
+            - $ref: "#/components/schemas/JobArn"
+            - description: The ARN of the Amazon Braket job.
+        jobName:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The name of the Amazon Braket job.
+        startedAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The date and time that the Amazon Braket job was started.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/JobPrimaryStatus"
+            - description: The status of the Amazon Braket job.
+        tags:
+          allOf:
+            - $ref: "#/components/schemas/TagsMap"
+            - description: A tag object that consists of a key and an optional value, used to manage metadata for Amazon Braket resources.
+      description: Provides summary information about an Amazon Braket job.
+    JobSummaryList:
+      type: array
+      items:
+        $ref: "#/components/schemas/JobSummary"
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    QuantumTaskSummary:
+      type: object
+      required:
+        - createdAt
+        - deviceArn
+        - outputS3Bucket
+        - outputS3Directory
+        - quantumTaskArn
+        - shots
+        - status
+      properties:
+        createdAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The time at which the task was created.
+        deviceArn:
+          allOf:
+            - $ref: "#/components/schemas/DeviceArn"
+            - description: The ARN of the device the task ran on.
+        endedAt:
+          allOf:
+            - $ref: "#/components/schemas/SyntheticTimestamp_date_time"
+            - description: The time at which the task finished.
+        outputS3Bucket:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The S3 bucket where the task result file is stored..
+        outputS3Directory:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: The folder in the S3 bucket where the task result file is stored.
+        quantumTaskArn:
+          allOf:
+            - $ref: "#/components/schemas/QuantumTaskArn"
+            - description: The ARN of the task.
+        shots:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: The shots used for the task.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/QuantumTaskStatus"
+            - description: The status of the task.
+        tags:
+          allOf:
+            - $ref: "#/components/schemas/TagsMap"
+            - description: Displays the key, value pairs of tags associated with this quantum task.
+      description: Includes information about a quantum task.
+    QuantumTaskSummaryList:
+      type: array
+      items:
+        $ref: "#/components/schemas/QuantumTaskSummary"
+    SearchDevicesFilterNameString:
+      type: string
+      minLength: 1
+      maxLength: 64
+    SearchDevicesFilterValuesList:
+      type: array
+      items:
+        $ref: "#/components/schemas/String256"
+      minItems: 1
+      maxItems: 10
+    SearchDevicesRequestFiltersList:
+      type: array
+      items:
+        $ref: "#/components/schemas/SearchDevicesFilter"
+      minItems: 0
+      maxItems: 10
+    SearchDevicesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SearchDevicesRequest:
+      type: object
+      required:
+        - filters
+      title: SearchDevicesRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: "#/components/schemas/SearchDevicesRequestFiltersList"
+            - description: The filter values to use to search for a device.
+        maxResults:
+          allOf:
+            - $ref: "#/components/schemas/SearchDevicesRequestMaxResultsInteger"
+            - description: The maximum number of results to return in the response.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+    SearchJobsFilterOperator:
+      type: string
+      enum:
+        - LT
+        - LTE
+        - EQUAL
+        - GT
+        - GTE
+        - BETWEEN
+        - CONTAINS
+    SearchJobsFilterValuesList:
+      type: array
+      items:
+        $ref: "#/components/schemas/String256"
+      minItems: 1
+      maxItems: 10
+    SearchJobsRequestFiltersList:
+      type: array
+      items:
+        $ref: "#/components/schemas/SearchJobsFilter"
+      minItems: 0
+      maxItems: 10
+    SearchJobsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SearchJobsRequest:
+      type: object
+      required:
+        - filters
+      title: SearchJobsRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: "#/components/schemas/SearchJobsRequestFiltersList"
+            - description: The filter values to use when searching for a job.
+        maxResults:
+          allOf:
+            - $ref: "#/components/schemas/SearchJobsRequestMaxResultsInteger"
+            - description: The maximum number of results to return in the response.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: A token used for pagination of results returned in the response. Use the token returned from the previous request to continue results where the previous request ended.
+    SearchQuantumTasksFilterOperator:
+      type: string
+      enum:
+        - LT
+        - LTE
+        - EQUAL
+        - GT
+        - GTE
+        - BETWEEN
+    SearchQuantumTasksFilterValuesList:
+      type: array
+      items:
+        $ref: "#/components/schemas/String256"
+      minItems: 1
+      maxItems: 10
+    SearchQuantumTasksRequestFiltersList:
+      type: array
+      items:
+        $ref: "#/components/schemas/SearchQuantumTasksFilter"
+      minItems: 0
+      maxItems: 10
+    SearchQuantumTasksRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SearchQuantumTasksRequest:
+      type: object
+      required:
+        - filters
+      title: SearchQuantumTasksRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: "#/components/schemas/SearchQuantumTasksRequestFiltersList"
+            - description: Array of <code>SearchQuantumTasksFilter</code> objects.
+        maxResults:
+          allOf:
+            - $ref: "#/components/schemas/SearchQuantumTasksRequestMaxResultsInteger"
+            - description: Maximum number of results to return in the response.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+    TagKeys:
+      type: array
+      items:
+        $ref: "#/components/schemas/String"
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: "#/components/schemas/TagsMap"
+            - description: Specify the tags to add to the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+security:
+  - hmac: []

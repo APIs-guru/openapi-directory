@@ -1,0 +1,3660 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: "## Welcome!\r
+
+    \r
+
+    The License Manager API allows you to create users, modify their names and emails, as well as add and remove roles from users.\r
+
+    \r
+
+    ### ATTRIBUTES\r
+
+    \r
+
+    |Attribute name | Description |\r
+
+    |:------------|--------------|\r
+
+    |accountName | Account name in VTEX License Manager |\r
+
+    |environment | Environment on which you want to run the query e.g. vtexcommercestable |\r
+
+    |userId      | Unique user identification string |\r
+
+    |roleId      | Integer that represents a role, can be looked up on the License Manager UI |"
+  title: License Manager API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - License Manager API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: License-Manager-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: User
+  - name: App Keys
+  - name: Roles
+  - name: Store
+  - name: Account
+paths:
+  /api/license-manager/site/pvt/logins/list/paged:
+    get:
+      description: Returns a list of registered users. The response is divided in pages. The query parameter `numItems` defines the number of items in each page, and consequently the amount of pages for the whole list.
+      operationId: GetListUsers
+      parameters:
+        - description: The media type of the body of the request. Default value for license manager protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Number of items in the returned page
+          in: query
+          name: numItems
+          required: false
+          schema:
+            default: 10
+            type: integer
+          style: form
+        - description: Which page from the whole list will be returned
+          in: query
+          name: pageNumber
+          required: false
+          schema:
+            default: 1
+            type: integer
+          style: form
+        - description: Chooses the field that the list will be sorted by
+          in: query
+          name: sort
+          required: false
+          schema:
+            default: name
+            type: string
+          style: form
+        - description: Defines the sorting order. `ASC` is used for ascendant order. `DSC` is used for descendant order
+          in: query
+          name: sortType
+          required: false
+          schema:
+            default: ASC
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                items:
+                  - accountNames: []
+                    email: mynewuser@mydomain.com
+                    id: a404870467d24533a085a6b3c6a5a320
+                    isAdmin: false
+                    isBlocked: false
+                    isReliable: false
+                    name: testuser
+                    roles: []
+                paging:
+                  page: 1
+                  pages: 1
+                  perPage: 1
+                  total: 1
+              schema:
+                $ref: "#/components/schemas/ListUsersResponse"
+          description: Success
+          headers: {}
+      summary: Get List of Users
+      tags:
+        - User
+  /api/license-manager/site/pvt/roles/list/paged:
+    get:
+      description: Returns a list of available roles. The response is divided in pages. The query parameter `numItems` defines the number of items in each page, and consequently the amount of pages for the whole list.
+      operationId: GetListRoles
+      parameters:
+        - description: The media type of the body of the request. Default value for license manager protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Number of items in the returned page
+          in: query
+          name: numItems
+          required: false
+          schema:
+            default: 10
+            type: integer
+          style: form
+        - description: Which page from the whole list will be returned
+          in: query
+          name: pageNumber
+          required: false
+          schema:
+            default: 1
+            type: integer
+          style: form
+        - description: Chooses the field that the list will be sorted by
+          in: query
+          name: sort
+          required: false
+          schema:
+            default: id
+            type: string
+          style: form
+        - description: Defines the sorting order. ASC is used for ascendant order. DSC is used for descendant order
+          in: query
+          name: sortType
+          required: false
+          schema:
+            default: ASC
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                items:
+                  - id: 957
+                    isAdmin: false
+                    logins: null
+                    name: Call center operator
+                    products:
+                      - categoryId: null
+                        categoryName: null
+                        consoleUrlMask: null
+                        description: null
+                        id: null
+                        name: Catalog
+                        productResources: null
+                        url: null
+                        urlConfiguration: null
+                        webApiUrlMask: null
+                      - categoryId: null
+                        categoryName: null
+                        consoleUrlMask: null
+                        description: null
+                        id: null
+                        name: OMS
+                        productResources: null
+                        url: null
+                        urlConfiguration: null
+                        webApiUrlMask: null
+                    resources: null
+                    roleType: 0
+                paging:
+                  page: 1
+                  pages: 1
+                  perPage: 1
+                  total: 1
+              schema:
+                $ref: "#/components/schemas/ListRolesResponse"
+          description: Success
+          headers: {}
+      summary: Get List of Roles
+      tags:
+        - Roles
+  /api/license-manager/users:
+    post:
+      deprecated: false
+      description: Allows you to create a user by providing an email (mandatory) and name (optional). The email must be in a valid format. The success response will contain the generated `userId` for that user.
+      operationId: CreateUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              email: mynewuser@mydomain.com
+              name: My New User Name
+            schema:
+              $ref: "#/components/schemas/CreateUserRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                email: mynewuser@mydomain.com
+                id: a404870467d24533a085a6b3c6a5a320
+                name: testuser
+              schema:
+                properties:
+                  email:
+                    description: Email of user
+                    type: string
+                  id:
+                    description: ID of user
+                    type: string
+                  name:
+                    description: Name of user
+                    type: string
+                type: object
+          description: Success
+          headers: {}
+        "400":
+          content:
+            application/json:
+              example:
+                Message: Invalid email
+              schema:
+                properties:
+                  Message:
+                    type: string
+                type: object
+          description: Bad Request
+          headers: {}
+      summary: Create User
+      tags:
+        - User
+  "/api/license-manager/users/{userId}":
+    get:
+      deprecated: false
+      description: Allows you to get a user from the database, using the `userId` as the identifier.
+      operationId: GetUser
+      parameters:
+        - description: The media type of the body of the request. Default value for license manager protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: ID from queried user.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                email: mynewuser@mydomain.com
+                id: a404870467d24533a085a6b3c6a5a320
+                name: testuser
+              schema:
+                properties:
+                  email:
+                    description: Email of user
+                    type: string
+                  id:
+                    description: ID of user
+                    type: string
+                  name:
+                    description: Name of user
+                    type: string
+                type: object
+          description: Success
+          headers: {}
+        "400":
+          content:
+            application/json:
+              example:
+                Message: Invalid UserId
+              schema:
+                properties:
+                  Message:
+                    description: Error message
+                    type: string
+                type: object
+          description: Bad Request
+          headers: {}
+        "405":
+          description: Method Not Allowed - A null `userId` sends the request to a path that is not allowed.
+          headers: {}
+      summary: Get User
+      tags:
+        - User
+  "/api/license-manager/users/{userId}/roles":
+    get:
+      deprecated: false
+      description: Gets roles of a particular user or application key.
+      operationId: GetRolesbyUser
+      parameters:
+        - description: The media type of the body of the request. Default value for license manager protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: ID corresponding to the user
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - id: 957
+                  name: Call center operator
+                - id: 1
+                  name: Owner (Admin Super)
+              schema:
+                description: Array of role objects
+                items:
+                  properties:
+                    id:
+                      description: ID of role
+                      format: int32
+                      type: integer
+                    name:
+                      description: Name of role
+                      type: string
+                  type: object
+                type: array
+          description: Success
+          headers: {}
+      summary: Get Roles by User/appKey
+      tags:
+        - Roles
+    put:
+      deprecated: false
+      description: Allows you to add roles to a particular user or application key by specifying the list of roles' IDs on the request's body.
+      operationId: PutRolesinUser
+      parameters:
+        - description: ID corresponding to the user
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              - 9000
+              - 9111
+              - 9333
+              - 9444
+            schema:
+              description: Array containing IDs of the roles
+              items:
+                format: int32
+                type: integer
+              type: array
+        description: List of roles' IDs to add to the user or application key.
+        required: true
+      responses:
+        "204":
+          description: Success - A no-content response, but the roles were added successfully.
+          headers: {}
+        "400":
+          content:
+            application/json:
+              example:
+                Message: Roles list contains roles that do not exist in this account
+              schema:
+                properties:
+                  Message:
+                    description: Error message
+                    type: string
+                type: object
+          description: Bad Request - A userId or role list with invalid format. The message on the body of the response will contain further information.
+          headers: {}
+        "500":
+          content:
+            application/json:
+              example:
+                Message: Unexpected error
+              schema:
+                properties:
+                  Message:
+                    type: string
+                type: object
+          description: Unexpected error - One possible reason is that the userId is not present on the database.
+          headers: {}
+      summary: Put Roles in User/appKey
+      tags:
+        - Roles
+  "/api/license-manager/users/{userId}/roles/{roleId}":
+    delete:
+      deprecated: false
+      description: "Allows you to remove a role from a specific user or application key. This method only allows the removal of one role per request. The role's ID must be specified on the request path, not on the request body.
+
+        \r
+
+        \r> Note that a successful response returns a `204` response with an empty body. A deletion on a role or user that does not exist will also return a `204`. Thus, this method should not be used to verify the existence of a specific user or role."
+      operationId: RemoveRolefromUser
+      parameters:
+        - description: The media type of the body of the request. Default value for license manager protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: ID corresponding to the user
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: ID of the role which will be removed from the user
+          in: path
+          name: roleId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        "204":
+          description: Success - A no-content response, but the role deletion was performed successfully.
+          headers: {}
+        "400":
+          content:
+            application/json:
+              example:
+                Message: Invalid UserId
+              schema:
+                properties:
+                  Message:
+                    type: string
+                type: object
+          description: Bad Request - A userId or role list with invalid format. The message on the body of the response will contain further information.
+          headers: {}
+        "405":
+          description: Method Not Allowed
+          headers: {}
+      summary: Remove Role from User/appKey
+      tags:
+        - Roles
+  /api/vlm/account:
+    get:
+      deprecated: false
+      description: "Retrieves information from an account, such as company and sponsor user details, stores, and appTokens.
+
+        \r
+
+        \rThis endpoint only accepts requests from the host list designated for that store. If you want to try this request from this portal, be sure to add it to the list. Learn how to add hosts to the list in [How to manage accounts](https://help.vtex.com/en/tutorial/how-to-manage-accounts--tutorials_6285#)."
+      operationId: GetAccount
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                accountName: apiexamples
+                address: null
+                appKey:
+                  name: null
+                  token: null
+                appKeys:
+                  - appKey: vtexappkey-apiexamples-YSTRGZ
+                    appToken: null
+                    createdIn: 2019-12-11T21:06:33
+                    id: 03ccde55547d43b09bbb2e1e6f7d455e
+                    isActive: true
+                    isBlocked: false
+                    label: apiexamples
+                  - appKey: vtexappkey-apiexamples-LVQVVA
+                    appToken: null
+                    createdIn: 2021-10-21T20:00:21.308679
+                    id: d585d6d94fd5415fb36c574a4c22986f
+                    isActive: true
+                    isBlocked: false
+                    label: tadashi-test
+                city: null
+                cnpj: null
+                companyName: UNISUPER, SOCIEDAD ANONIMA
+                complement: null
+                contact:
+                  email: john.doe@vtex.com.br
+                  name: John Doe
+                  phone: "+219999999"
+                country: null
+                creationDate: 2019-12-11T17:02:34
+                defaultUrl: null
+                district: null
+                hasLogo: false
+                haveParentAccount: false
+                hosts: []
+                id: 71fe5fdabc4940ad81c226d43b754ba8
+                inactivationDate: null
+                isActive: true
+                isOperating: false
+                licenses:
+                  - expiration: null
+                    id: 24
+                    isPurchased: false
+                    name: Carrier
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 9
+                        name: Logistics
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 10
+                    isPurchased: false
+                    name: CRM
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 3
+                        name: Master Data
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 17
+                        name: VTEX DWT
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 18
+                        name: Unikey
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 25
+                        name: Dynamic Storage
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 30
+                        name: Key Store
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 48
+                        name: VTEX Bridge
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 51
+                        name: Vtex My Account
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 67
+                        name: VTable
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 68
+                        name: Zendesk
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 8
+                    isPurchased: false
+                    name: E-Commerce Professional
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 2
+                        name: Catalog
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 3
+                        name: Master Data
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 4
+                        name: Request Capture
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 5
+                        name: Checkout
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 9
+                        name: Logistics
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 13
+                        name: Channels
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 17
+                        name: VTEX DWT
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 18
+                        name: Unikey
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 19
+                        name: OMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 20
+                        name: Conversation Tracker
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 25
+                        name: Dynamic Storage
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 27
+                        name: Portal
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 38
+                        name: CMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 48
+                        name: VTEX Bridge
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 50
+                        name: Suggestion
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 51
+                        name: Vtex My Account
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 53
+                        name: Network
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 57
+                        name: Insights
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 58
+                        name: Credit Control
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 61
+                        name: WebService
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 65
+                        name: Pricing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 67
+                        name: VTable
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 69
+                        name: Conditions Evaluator
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 70
+                        name: GiftCard
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 74
+                        name: Order Authorization
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 76
+                        name: Search
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 81
+                        name: Application Logs Stream
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 83
+                        name: Subscriptions
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 84
+                        name: CDN Service
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 85
+                        name: Dandelion
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 88
+                        name: Tenant Switcher
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 6
+                    isPurchased: false
+                    name: E-Commerce Starter
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 2
+                        name: Catalog
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 3
+                        name: Master Data
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 4
+                        name: Request Capture
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 5
+                        name: Checkout
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 7
+                        name: Buscapé Connect
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 9
+                        name: Logistics
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 13
+                        name: Channels
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 17
+                        name: VTEX DWT
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 18
+                        name: Unikey
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 19
+                        name: OMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 20
+                        name: Conversation Tracker
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 25
+                        name: Dynamic Storage
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 27
+                        name: Portal
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 38
+                        name: CMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 48
+                        name: VTEX Bridge
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 50
+                        name: Suggestion
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 51
+                        name: Vtex My Account
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 53
+                        name: Network
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 57
+                        name: Insights
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 58
+                        name: Credit Control
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 61
+                        name: WebService
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 65
+                        name: Pricing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 67
+                        name: VTable
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 68
+                        name: Zendesk
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 69
+                        name: Conditions Evaluator
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 70
+                        name: GiftCard
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 74
+                        name: Order Authorization
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 76
+                        name: Search
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 81
+                        name: Application Logs Stream
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 83
+                        name: Subscriptions
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 84
+                        name: CDN Service
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 85
+                        name: Dandelion
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 88
+                        name: Tenant Switcher
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 7
+                    isPurchased: true
+                    name: E-Commerce Unlimited
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 2
+                        name: Catalog
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 3
+                        name: Master Data
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 4
+                        name: Request Capture
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 5
+                        name: Checkout
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 7
+                        name: Buscapé Connect
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 8
+                        name: VTEX Events
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 9
+                        name: Logistics
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 10
+                        name: Shipping Notification
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 13
+                        name: Channels
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 15
+                        name: VTEX Fulfilment
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 17
+                        name: VTEX DWT
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 18
+                        name: Unikey
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 19
+                        name: OMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 20
+                        name: Conversation Tracker
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 22
+                        name: VtexID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 25
+                        name: Dynamic Storage
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 27
+                        name: Portal
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 28
+                        name: Dumbo
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 30
+                        name: Key Store
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 31
+                        name: Dashboard
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 37
+                        name: Vtex PAI
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 38
+                        name: CMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 39
+                        name: Availability
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 41
+                        name: Big Data
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 45
+                        name: Healthcheck
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 46
+                        name: VTEX Home
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 48
+                        name: VTEX Bridge
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 50
+                        name: Suggestion
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 51
+                        name: Vtex My Account
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 53
+                        name: Network
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 57
+                        name: Insights
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 58
+                        name: Credit Control
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 60
+                        name: Extension Store
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 61
+                        name: WebService
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 65
+                        name: Pricing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 67
+                        name: VTable
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 68
+                        name: Zendesk
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 69
+                        name: Conditions Evaluator
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 70
+                        name: GiftCard
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 74
+                        name: Order Authorization
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 76
+                        name: Search
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 81
+                        name: Application Logs Stream
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 83
+                        name: Subscriptions
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 84
+                        name: CDN Service
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 85
+                        name: Dandelion
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 88
+                        name: Tenant Switcher
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 28
+                    isPurchased: false
+                    name: E-Commerce Unlimited No Billing
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 2
+                        name: Catalog
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 3
+                        name: Master Data
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 4
+                        name: Request Capture
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 5
+                        name: Checkout
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 7
+                        name: Buscapé Connect
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 8
+                        name: VTEX Events
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 9
+                        name: Logistics
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 10
+                        name: Shipping Notification
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 13
+                        name: Channels
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 15
+                        name: VTEX Fulfilment
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 17
+                        name: VTEX DWT
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 18
+                        name: Unikey
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 19
+                        name: OMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 20
+                        name: Conversation Tracker
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 22
+                        name: VtexID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 25
+                        name: Dynamic Storage
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 27
+                        name: Portal
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 28
+                        name: Dumbo
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 30
+                        name: Key Store
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 31
+                        name: Dashboard
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 37
+                        name: Vtex PAI
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 38
+                        name: CMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 39
+                        name: Availability
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 41
+                        name: Big Data
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 45
+                        name: Healthcheck
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 46
+                        name: VTEX Home
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 48
+                        name: VTEX Bridge
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 50
+                        name: Suggestion
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 51
+                        name: Vtex My Account
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 53
+                        name: Network
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 57
+                        name: Insights
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 58
+                        name: Credit Control
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 60
+                        name: Extension Store
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 61
+                        name: WebService
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 65
+                        name: Pricing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 67
+                        name: VTable
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 68
+                        name: Zendesk
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 69
+                        name: Conditions Evaluator
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 70
+                        name: GiftCard
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 74
+                        name: Order Authorization
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 76
+                        name: Search
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 81
+                        name: Application Logs Stream
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 83
+                        name: Subscriptions
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 84
+                        name: CDN Service
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 88
+                        name: Tenant Switcher
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 11
+                    isPurchased: false
+                    name: Gateway
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 8
+                        name: VTEX Events
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 17
+                        name: VTEX DWT
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 18
+                        name: Unikey
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 22
+                        name: VtexID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 48
+                        name: VTEX Bridge
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 15
+                    isPurchased: false
+                    name: Gateway Seller Nao VTEX
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 8
+                        name: VTEX Events
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 17
+                        name: VTEX DWT
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 18
+                        name: Unikey
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 22
+                        name: VtexID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 48
+                        name: VTEX Bridge
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 29
+                    isPurchased: false
+                    name: Indeva
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 30
+                    isPurchased: false
+                    name: Marketplace Seller
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 2
+                        name: Catalog
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 5
+                        name: Checkout
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 9
+                        name: Logistics
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 13
+                        name: Channels
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 19
+                        name: OMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 20
+                        name: Conversation Tracker
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 46
+                        name: VTEX Home
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 65
+                        name: Pricing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 74
+                        name: Order Authorization
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 86
+                        name: CatalogV2
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 23
+                    isPurchased: false
+                    name: VTEX Backoffice
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 84
+                        name: CDN Service
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 88
+                        name: Tenant Switcher
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 90
+                        name: Payments' Provider Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 26
+                    isPurchased: false
+                    name: VTEX Bank
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 82
+                        name: Banking Service
+                  - expiration: null
+                    id: 22
+                    isPurchased: false
+                    name: VTEX Billing
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                  - expiration: null
+                    id: 27
+                    isPurchased: false
+                    name: VTEX Partner
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 88
+                        name: Tenant Switcher
+                  - expiration: null
+                    id: 25
+                    isPurchased: false
+                    name: VTEX Payment
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 72
+                        name: VTEX Payment
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                  - expiration: null
+                    id: 19
+                    isPurchased: false
+                    name: WhiteLabel
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 2
+                        name: Catalog
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 3
+                        name: Master Data
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 5
+                        name: Checkout
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 9
+                        name: Logistics
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 19
+                        name: OMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 25
+                        name: Dynamic Storage
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 27
+                        name: Portal
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 39
+                        name: Availability
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 57
+                        name: Insights
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 65
+                        name: Pricing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 67
+                        name: VTable
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 68
+                        name: Zendesk
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 74
+                        name: Order Authorization
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 76
+                        name: Search
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 81
+                        name: Application Logs Stream
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 21
+                    isPurchased: false
+                    name: Whitelabel Instore
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 2
+                        name: Catalog
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 14
+                        name: Log
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 73
+                        name: Seller Register
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 75
+                        name: Time Series
+                  - expiration: null
+                    id: 31
+                    isPurchased: false
+                    name: Marketplace Seller Whitelabel
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 2
+                        name: Catalog
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 5
+                        name: Checkout
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 6
+                        name: PCI Gateway
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 9
+                        name: Logistics
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 16
+                        name: Rates and Benefits
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 19
+                        name: OMS
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 20
+                        name: Conversation Tracker
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 23
+                        name: Message Center
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 43
+                        name: Billing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 46
+                        name: VTEX Home
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 65
+                        name: Pricing
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 66
+                        name: VTEX IO
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 74
+                        name: Order Authorization
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 86
+                        name: CatalogV2
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 89
+                        name: Promotions Policy Engine
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                  - expiration: null
+                    id: 33
+                    isPurchased: false
+                    name: Buyer Organization
+                    products:
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 1
+                        name: License Manager
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 55
+                        name: Audit
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 64
+                        name: Vtex ID
+                      - domains: []
+                        endpoints:
+                          consoleUrl: null
+                          webApiUrl: null
+                        id: 91
+                        name: Releases
+                logo: null
+                lv: null
+                name: UNISUPER, SOCIEDAD ANONIMA
+                number: null
+                operationDate: null
+                parentAccountId: null
+                parentAccountName: null
+                postalCode: null
+                sites:
+                  - LV: null
+                    aliases: []
+                    domains: null
+                    hosts: []
+                    id: 23117
+                    logo: null
+                    monetaryUnitId: 1
+                    name: apiexamples
+                    tradingName: UNISUPER, SOCIEDAD ANONIMA
+                sponsor:
+                  email: john.doe@vtex.com.br
+                  name: John Doe
+                  phone: "+219999999"
+                state: null
+                telephone: "+219999999"
+                tradingName: UNISUPER, SOCIEDAD ANONIMA
+              schema:
+                $ref: "#/components/schemas/AccountResponse"
+          description: Success
+          headers: {}
+      summary: Get information about account
+      tags:
+        - Account
+  /api/vlm/account/stores:
+    get:
+      deprecated: false
+      description: Gets the stores and respective hosts of the account
+      operationId: GetByAccount
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - hosts:
+                    - loja.ambientecrm.com.br
+                    - www.ambientecrm.com.br
+                  id: 1213
+                  name: ambientecrm
+                - hosts:
+                    - loja.blackbox.com.br
+                    - www.blackbox.com.br
+                  id: 213
+                  name: ambienteqa
+              schema:
+                description: Array of store objects
+                items:
+                  $ref: "#/components/schemas/StoreItems"
+                type: array
+          description: Success
+          headers: {}
+      summary: Get Stores
+      tags:
+        - Store
+  /api/vlm/appkeys:
+    get:
+      deprecated: false
+      description: Gets all application keys from an account.
+      operationId: Getappkeysfromaccount
+      parameters:
+        - description: The media type of the body of the request. Default value for license manager protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - appKey: vtexappkey-myaccount-ORYNWX
+                  createdIn: 2018-07-04T14:09:08.2718405Z
+                  id: a2555e95-9db8-48be-94f8-2a28577c0b4a
+                  isActive: true
+                  label: my new appkey
+                - appKey: vtexappkey-myaccount-ORKPDC
+                  createdIn: 2018-07-04T14:09:08.2718405Z
+                  id: a2555e95-9db8-48be-94f8-2a28577c0b4a
+                  isActive: true
+                  label: my other appkey
+              schema:
+                description: Array of AppKeys object
+                items:
+                  $ref: "#/components/schemas/Getappkeysfromaccount"
+                type: array
+          description: Success
+          headers: {}
+      summary: Get appKeys from account
+      tags:
+        - App Keys
+    post:
+      deprecated: false
+      description: Creates a new pair of `appKey` and `appToken`.
+      operationId: Createnewappkey
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              label: my new appkey
+            schema:
+              $ref: "#/components/schemas/CreatenewappkeyRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                appKey: vtexappkey-myaccount-ORYNWX
+                appToken: WNVUJKYFKJFLTPXHQGAZDHPBHSDQVJJWSFZUBOGCKPEXAIFHTPANKJTOXUKRIIJAAJSOPCFBAXOODRABMUXFJVLJLKWGEOUCFDXRPRRQKYNNUFLGTIEOKERFXJCFFYXL
+                createdIn: 2018-07-04T14:09:08.2718405Z
+                id: a2555e95-9db8-48be-94f8-2a28577c0b4a
+                isActive: true
+                label: my new appkey
+              schema:
+                $ref: "#/components/schemas/CreatenewappkeyResponse"
+          description: Success
+          headers: {}
+      summary: Create new appkey
+      tags:
+        - App Keys
+  "/api/vlm/appkeys/{id}":
+    put:
+      deprecated: false
+      description: Activates or deactivates an `appKey` by its ID.
+      operationId: Updateappkey
+      parameters:
+        - description: ID from the appKey which will be updated
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              isActive: false
+            schema:
+              $ref: "#/components/schemas/UpdateappkeyRequest"
+        description: Request body for updating AppKeys
+        required: true
+      responses:
+        "200":
+          description: Success
+          headers: {}
+        "400":
+          content:
+            application/json:
+              example:
+                Details: null
+                HttpStatusCode: 400
+                Message: Token not exists for this account
+                VLMErrorCode: 17
+              schema:
+                $ref: "#/components/schemas/VLMError"
+          description: Bad Request
+          headers: {}
+      summary: Update appkey
+      tags:
+        - App Keys
+components:
+  schemas:
+    AccountResponse:
+      description: Successful response for `/api/vlm/account`
+      properties:
+        accountName:
+          description: Account name
+          type: string
+        address:
+          description: Address of contact
+          nullable: true
+          type: string
+        appKey:
+          deprecated: true
+          description: Deprecated. Check appKeys object for all appKeys
+          properties:
+            name:
+              deprecated: true
+              nullable: true
+              type: string
+            token:
+              deprecated: true
+              nullable: true
+              type: string
+          type: object
+        appKeys:
+          description: Array of application keys
+          items:
+            $ref: "#/components/schemas/AppKeyItems"
+          type: array
+        city:
+          description: City of contact
+          nullable: true
+          type: string
+        cnpj:
+          description: CNPJ (Tax ID) of account
+          nullable: true
+          type: string
+        companyName:
+          description: Company name
+          type: string
+        complement:
+          description: Additional address of contact
+          nullable: true
+          type: string
+        contact:
+          properties:
+            email:
+              description: Email of the contact
+              type: string
+            name:
+              description: Name of the contact
+              type: string
+            phone:
+              description: Phone of the contact
+              type: string
+          type: object
+        country:
+          description: Country of contact
+          nullable: true
+          type: string
+        creationDate:
+          description: The date when the account was created
+          format: date-time
+          type: string
+        defaultUrl:
+          deprecated: true
+          nullable: true
+          type: string
+        district:
+          description: Neighborhood of contact
+          nullable: true
+          type: string
+        hasLogo:
+          description: If logo has been setup
+          type: boolean
+        haveParentAccount:
+          description: If it has a parent account
+          type: boolean
+        hosts:
+          description: Hosts of all stores
+          items:
+            type: string
+          type: array
+        id:
+          description: ID of the account
+          type: string
+        inactivationDate:
+          description: The date when the account was deactivated
+          format: date-time
+          nullable: true
+          type: string
+        isActive:
+          description: If account is active or not
+          type: boolean
+        isOperating:
+          description: If it is in production
+          type: boolean
+        licenses:
+          description: Licenses of the account
+          items:
+            $ref: "#/components/schemas/LicenseItems"
+          type: array
+        logo:
+          description: Filename of account logo
+          nullable: true
+          type: string
+        lv:
+          deprecated: true
+          nullable: true
+          type: string
+        name:
+          description: Trading name
+          type: string
+        number:
+          description: Number of the address of contact
+          nullable: true
+          type: string
+        operationDate:
+          description: The date when the account went into production
+          format: date-time
+          nullable: true
+          type: string
+        parentAccountId:
+          description: The ID of the parent account
+          nullable: true
+          type: string
+        parentAccountName:
+          description: The name of the parent account
+          nullable: true
+          type: string
+        postalCode:
+          description: Zip Code of contact
+          nullable: true
+          type: string
+        sites:
+          description: Array of objects representing a store
+          items:
+            $ref: "#/components/schemas/SiteItems"
+          type: array
+        sponsor:
+          description: Object representing the sponsor user
+          properties:
+            email:
+              description: Email of the sponsor user
+              type: string
+            name:
+              description: Name of the sponsor user
+              type: string
+            phone:
+              description: Phone of the sponsor user
+              type: string
+          type: object
+        state:
+          description: State/Province of contact
+          nullable: true
+          type: string
+        telephone:
+          description: Telephone of contact
+          type: string
+        tradingName:
+          description: Trading name
+          type: string
+      type: object
+    AppKeyItems:
+      description: Object representing application keys
+      properties:
+        appKey:
+          description: AppKey (Access Key in the license manager UI)
+          type: string
+        appToken:
+          description: AppToken. For security reasons, should always be null.
+          nullable: true
+          type: string
+        createdIn:
+          description: Creation date of the application key
+          format: date-time
+          type: string
+        id:
+          description: ID of the application key
+          type: string
+        isActive:
+          description: If the application key is active
+          type: boolean
+        isBlocked:
+          description: If the application key is blocked
+          type: boolean
+        label:
+          description: Label of the application key
+          type: string
+      type: object
+    CreateUserRequest:
+      description: Request body for creating users
+      properties:
+        email:
+          description: Email of the user
+          type: string
+        name:
+          description: Name of the user
+          type: string
+      required:
+        - name
+        - email
+      type: object
+    CreatenewappkeyRequest:
+      description: Request body for creating new application key (/api/vlm/appkeys)
+      properties:
+        label:
+          description: Label for application key
+          type: string
+      required:
+        - label
+      type: object
+    CreatenewappkeyResponse:
+      description: Response body of sucessful call to /api/vlm/appkeys
+      properties:
+        appKey:
+          description: AppKey (Access Key in the license manager UI)
+          type: string
+        appToken:
+          description: Secret of application key
+          type: string
+        createdIn:
+          description: Date of creation of application key
+          format: date-time
+          type: string
+        id:
+          description: ID of application key
+          type: string
+        isActive:
+          description: If the application key is active
+          type: boolean
+        label:
+          description: Label for application key
+          type: string
+      required:
+        - id
+        - appKey
+        - appToken
+        - label
+        - createdIn
+        - isActive
+      type: object
+    Getappkeysfromaccount:
+      description: Response body for getting all application keys from the account
+      properties:
+        appKey:
+          description: AppKey (Access Key in the license manager UI)
+          type: string
+        createdIn:
+          description: Date of creation of application key
+          format: date-time
+          type: string
+        id:
+          description: ID of application key
+          type: string
+        isActive:
+          description: If the application key is active
+          type: boolean
+        label:
+          description: Label for application key
+          type: string
+      required:
+        - id
+        - appKey
+        - label
+        - createdIn
+        - isActive
+      type: object
+    LicenseItems:
+      description: Object representing licenses
+      properties:
+        expiration:
+          deprecated: true
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          description: ID of the category of the license
+          type: number
+        isPurchased:
+          description: If the license is purchased
+          type: boolean
+        name:
+          description: Name of the category of the license
+          type: string
+        products:
+          description: Array of products
+          items:
+            description: Object representing products of licenses
+            properties:
+              domains:
+                deprecated: true
+                items:
+                  type: string
+                type: array
+              endpoints:
+                deprecated: true
+                properties:
+                  consoleUrl:
+                    deprecated: true
+                    nullable: true
+                    type: string
+                  webApiUrl:
+                    deprecated: true
+                    nullable: true
+                    type: string
+                type: object
+              id:
+                description: ID of the product
+                type: number
+              name:
+                description: Name of the product
+                type: string
+            type: object
+          type: array
+      type: object
+    ListRolesResponse:
+      description: Response body for listing all roles
+      properties:
+        items:
+          description: Array of role objects
+          items:
+            $ref: "#/components/schemas/RoleItems"
+          type: array
+        paging:
+          $ref: "#/components/schemas/Paging"
+      type: object
+    ListUsersResponse:
+      description: Response body for listing all users
+      properties:
+        items:
+          description: Array of user objects
+          items:
+            $ref: "#/components/schemas/UserItems"
+          type: array
+        paging:
+          $ref: "#/components/schemas/Paging"
+      type: object
+    Paging:
+      description: Paging object
+      properties:
+        page:
+          description: Current page number
+          type: integer
+        pages:
+          description: Total of pages
+          type: integer
+        perPage:
+          description: Items per page
+          type: integer
+        total:
+          description: Total of items
+          type: integer
+      required:
+        - page
+        - perPage
+        - total
+        - pages
+      type: object
+    ProductItems:
+      description: Object representing products
+      properties:
+        categoryId:
+          deprecated: true
+          nullable: true
+          type: string
+        categoryName:
+          deprecated: true
+          nullable: true
+          type: string
+        consoleUrlMask:
+          deprecated: true
+          nullable: true
+          type: string
+        description:
+          deprecated: true
+          nullable: true
+          type: string
+        id:
+          deprecated: true
+          nullable: true
+          type: string
+        name:
+          description: Name of the product
+          type: string
+        productResources:
+          deprecated: true
+          nullable: true
+          type: string
+        url:
+          deprecated: true
+          nullable: true
+          type: string
+        urlConfiguration:
+          deprecated: true
+          nullable: true
+          type: string
+        webApiUrlMask:
+          deprecated: true
+          nullable: true
+          type: string
+      type: object
+    RoleItems:
+      description: Object representing roles
+      properties:
+        id:
+          description: ID of the role
+          type: integer
+        isAdmin:
+          description: If the role is admin
+          type: boolean
+        logins:
+          deprecated: true
+          nullable: true
+          type: string
+        name:
+          description: Name of the role
+          type: string
+        products:
+          description: Array of product objects
+          items:
+            $ref: "#/components/schemas/ProductItems"
+          type: array
+        resources:
+          deprecated: true
+          nullable: true
+          type: string
+        roleType:
+          description: Returns 1 for custom roles, and 0 otherwise
+          type: integer
+      type: object
+    SiteItems:
+      description: Object containing complete information from a store
+      properties:
+        LV:
+          deprecated: true
+          nullable: true
+          type: string
+        aliases:
+          deprecated: true
+          items:
+            type: string
+          type: array
+        domains:
+          deprecated: true
+          items:
+            type: string
+          nullable: true
+          type: array
+        hosts:
+          description: Hosts associated to the store
+          items:
+            type: string
+          type: array
+        id:
+          description: ID of the store
+          type: number
+        logo:
+          deprecated: true
+          nullable: true
+          type: string
+        monetaryUnitId:
+          deprecated: true
+          type: number
+        name:
+          description: Store name
+          type: string
+        tradingName:
+          description: Trading name of the store
+          type: string
+      type: object
+    StoreItems:
+      description: Object containing summarized information from a store
+      properties:
+        hosts:
+          description: Array of hosts corresponding to the store
+          items:
+            type: string
+          type: array
+        id:
+          description: ID of the store
+          type: number
+        name:
+          description: Name of the store
+          type: string
+      type: object
+    UpdateappkeyRequest:
+      description: Request body for activating/deactivating application keys
+      properties:
+        isActive:
+          description: If the application key should be active or inactive
+          type: boolean
+      required:
+        - isActive
+      type: object
+    UserItems:
+      description: Object representing users
+      properties:
+        accountNames:
+          description: Array of account names
+          items:
+            type: string
+          maxItems: 0
+          type: array
+        email:
+          description: Email of the user
+          type: string
+        id:
+          description: ID of the user
+          type: string
+        isAdmin:
+          description: If user is admin
+          type: boolean
+        isBlocked:
+          description: If user is blocked
+          type: boolean
+        isReliable:
+          description: For internal use only
+          type: boolean
+        name:
+          description: Name of the user
+          type: string
+        roles:
+          description: Array of roles
+          items:
+            type: string
+          maxItems: 0
+          type: array
+      type: object
+    VLMError:
+      description: Object representing VLMError
+      properties:
+        Detais:
+          description: Details of error
+          nullable: true
+          type: string
+        HttpStatusCode:
+          description: Status code of HTTP response
+          type: integer
+        Message:
+          description: Error message
+          type: string
+        VLMErrorCode:
+          description: Error code for License Manager
+          type: integer
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

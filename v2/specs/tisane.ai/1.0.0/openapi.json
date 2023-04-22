@@ -1,0 +1,1449 @@
+{
+  "openapi": "3.0.3",
+  "servers": [
+    {
+      "url": "https://api.tisane.ai"
+    }
+  ],
+  "info": {
+    "contact": {
+      "x-twitter": "TisaneLabs"
+    },
+    "description": "Tisane is a natural language processing library, providing:\n\n*   standard NLP functionality\n*   special functions for detection of problematic or abusive content\n*   low-level NLP like morphological analysis and tokenization of no-space languages (Chinese, Japanese, Thai)\n    \n\nTisane has monolithic architecture. All the functions are exposed using the same language models and the same analysis process invoked using the [POST /parse](#561264c5-6dbe-4bde-aba3-7defe837989f) method. Other methods in the API are either wrappers based on the process, helper methods, or allow inspection of the language models.\n\nThe current section of the documentation describes the two structures used in the parsing & transformation methods.\n\n# Getting Started\n\nThis guide describes how to setup your Tisane account. The steps you need to complete are as follows:\n\n*   Step 1 – Create an Account\n*   Step 2 – Save Your API Key\n*   Step 3 – Integrate the API\n    \n\n## Step 1 – Create an Account\n\nNavigate to [Sign up to Tisane API](https://tisane.ai/signup/). The free Community Plan allows up to 50,000 requests but comes with a limitation of 10 requests per minute.\n\n## Step 2 - Save Your API Key\n\nYou will need the API key to make requests. Open your [Developer Profile](https://tisane.ai/developer/) to find your API keys.\n\n## Step 3 - Integrate with the API\n\nIn summary, the POST /parse method has 3 attributes: *content*, *language*, and *settings*. All 3 attributes are mandatory.\n\nFor example:  \n`{\"language\": \"en\", \"content\": \"hello\", \"settings\": {}}`\n\nRead on for more info on the [response](#response-reference) and the [settings](#settings-reference) specs. The method doc pages contain snippets of code for your favorite languages and platforms.\n\n# Response Reference\n\nThe response of the [POST /parse](#561264c5-6dbe-4bde-aba3-7defe837989f) method contains several sections displayed or hidden according to the [settings](#settings-reference) provided.\n\nThe common attributes are:\n\n*   `text` (string) - the original input\n*   `reduced_output` (boolean) - if the input is too big, and verbose information like the lexical chunk was requested, the verbose information will not be generated, and this flag will be set to `true` and returned as part of the response\n*   `sentiment` (floating-point number) - a number in range -1 to 1 indicating the document-level sentiment. Only shown when `document_sentiment` [setting](#settings-reference) is set to `true`.\n*   `signal2noise` (floating-point number) - a signal to noise ranking of the text, in relation to the array of concepts specified in the `relevant` [setting](#settings-reference). Only shown when the `relevant` setting exists.\n    \n\n## Abusive or Problematic Content\n\nThe `abuse` section is an array of detected instances of content that may violate some terms of use. **NOTE**: the terms of use in online communities may vary, and so it is up to the administrators to determine whether the content is indeed abusive. For instance, it makes no sense to restrict sexual advances in a dating community, or censor profanities when it's accepted in the bulk of the community.\n\nThe section exists if instances of abuse are detected and the `abuse` [setting](#settings-reference) is either omitted or set to `true`.\n\nEvery instance contains the following attributes:\n\n*   `offset` (unsigned integer) - zero-based offset where the instance starts\n*   `length` (unsigned integer) - length of the content\n*   `sentence_index` (unsigned integer) - zero-based index of the sentence containing the instance\n*   `text` (string) - fragment of text containing the instance (only included if the `snippets` [setting](#settings-reference) is set to `true`)\n*   `tags` (array of strings) - when exists, provides additional detail about the abuse. For instance, if the fragment is classified as an attempt to sell hard drugs, one of the tags will be *hard_drug*.\n*   `type` (string) - the type of the abuse\n*   `severity` (string) - how severe the abuse is. The levels of severity are `low`, `medium`, `high`, and `extreme`\n*   `explanation` (string) - when available, provides rationale for the annotation; set the `explain` setting to `true` to enable.\n    \n\nThe currently supported types are:\n\n*   `personal_attack` - an insult / attack on the addressee, e.g. an instance of cyberbullying. Please note that an attack on a post or a point, or just negative sentiment is not the same as an insult. The line may be blurred at times. See [our Knowledge Base for more information](http://tisane.ai/knowledgebase/how-do-i-detect-personal-attacks/).\n*   `bigotry` - hate speech aimed at one of the [protected classes](https://en.wikipedia.org/wiki/Protected_group). The hate speech detected is not just racial slurs, but, generally, hostile statements aimed at the group as a whole\n*   `profanity` - profane language, regardless of the intent\n*   `sexual_advances` - welcome or unwelcome attempts to gain some sort of sexual favor or gratification\n*   `criminal_activity` - attempts to sell or procure restricted items, criminal services, issuing death threats, and so on\n*   `external_contact` - attempts to establish contact or payment via external means of communication, e.g. phone, email, instant messaging (may violate the rules in certain communities, e.g. gig economy portals, e-commerce portals)\n*   `adult_only` - activities restricted for minors (e.g. consumption of alcohol)\n*   `mental_issues` - content indicative of suicidal thoughts or depression\n*   `allegation` - claimed knowledge or accusation of a misconduct (not necessarily crime)\n*   `provocation` - content likely to provoke an individual or a group\n*   `disturbing` - graphic descriptions that may disturb readers\n*   `no_meaningful_content` - unparseable gibberish without apparent meaning\n*   `data_leak` - private data like passwords, ID numbers, etc.\n*   `spam` - (RESERVED) spam content\n*   `generic` - undefined\n    \n\n## Sentiment Analysis\n\nThe `sentiment_expressions` section is an array of detected fragments indicating the attitude towards aspects or entities.\n\nThe section exists if sentiment is detected and the `sentiment` [setting](#settings-reference) is either omitted or set to `true`.\n\nEvery instance contains the following attributes:\n\n*   `offset` (unsigned integer) - zero-based offset where the instance starts\n*   `length` (unsigned integer) - length of the content\n*   `sentence_index` (unsigned integer) - zero-based index of the sentence containing the instance\n*   `text` (string) - fragment of text containing the instance (only included if the `snippets` setting is set to `true`)\n*   `polarity` (string) - whether the attitude is `positive`, `negative`, or `mixed`. Additionally, there is a `default` sentiment used for cases when the entire snippet has been pre-classified. For instance, if a review is split into two portions, *What did you like?* and *What did you not like?*, and the reviewer replies briefly, e.g. *The quiet. The service*, the utterance itself has no sentiment value. When the calling application is aware of the intended sentiment, the *default* sentiment simply provides the targets / aspects, which will be then added the sentiment externally.\n*   `targets` (array of strings) - when available, provides set of aspects and/or entities which are the targets of the sentiment. For instance, when the utterance is, *The breakfast was yummy but the staff is unfriendly*, the targets for the two sentiment expressions are `meal` and `staff`. Named entities may also be targets of the sentiment.\n*   `reasons` (array of strings) - when available, provides reasons for the sentiment. In the example utterance above (*The breakfast was yummy but the staff is unfriendly*), the `reasons` array for the `staff` is `[\"unfriendly\"]`, while the `reasons` array for `meal` is `[\"tasty\"]`.\n*   `explanation` (string) - when available, provides rationale for the sentiment; set the `explain` setting to `true` to enable.\n    \n\nExample:\n\n``` json\n\"sentiment_expressions\": [\n        {\n            \"sentence_index\": 0,\n             \"offset\": 0,\n             \"length\": 32,\n             \"polarity\": \"positive\",\n             \"reasons\": [\"close\"],\n             \"targets\": [\"location\"]\n         },\n         {\n            \"sentence_index\": 0,\n             \"offset\": 38,\n             \"length\": 29,\n             \"polarity\": \"negative\",\n             \"reasons\": [\"disrespectful\"],\n             \"targets\": [\"staff\"]\n         }\n     ]\n\n```\n\n## Entities\n\nThe `entities_summary` section is an array of named entity objects detected in the text.\n\nThe section exists if named entities are detected and the `entities` [setting](#settings-reference) is either omitted or set to `true`.\n\nEvery entity contains the following attributes:\n\n*   `name` (string) - the most complete name of the entity in the text of all the mentions\n*   `ref_lemma` (string) - when available, the dictionary form of the entity in the reference language (English) regardless of the input language\n*   `type` (string) - a string or an array of strings specifying the type of the entity, such as `person`, `organization`, `numeric`, `amount_of_money`, `place`. Certain entities, like countries, may have several types (because a country is both a `place` and an `organization`).\n*   `subtype` (string) - a string indicating the subtype of the entity\n*   `mentions` (array of objects) - a set of instances where the entity was mentioned in the text\n    \n\nEvery mention contains the following attributes:\n\n*   `offset` (unsigned integer) - zero-based offset where the instance starts\n*   `length` (unsigned integer) - length of the content\n*   `sentence_index` (unsigned integer) - zero-based index of the sentence containing the instance\n*   `text` (string) - fragment of text containing the instance (only included if the `snippets` setting is set to `true`)\n    \n\nExample:\n\n``` json\n \"entities_summary\": [\n        {\n            \"type\": \"person\",\n             \"name\": \"John Smith\",\n             \"ref_lemma\": \"John Smith\",\n             \"mentions\": [\n                {\n                    \"sentence_index\": 0,\n                     \"offset\": 0,\n                     \"length\": 10 }\n             ]\n         }\n    ,\n         {\n            \"type\": [ \"organization\", \"place\" ]\n        ,\n             \"name\": \"UK\",\n             \"ref_lemma\": \"U.K.\",\n             \"mentions\": [\n                {\n                    \"sentence_index\": 0,\n                     \"offset\": 40,\n                     \"length\": 2 }\n             ]\n         }\n     ]\n\n```\n\n### Entity Types and Subtypes\n\nThe currently supported entity types are:\n\n*   `person`, with optional subtypes: `fictional_character`, `important_person`, `spiritual_being`\n*   `organization` (note that a country is both an organization and a place)\n*   `place`\n*   `time_range`\n*   `date`\n*   `time`\n*   `hashtag`\n*   `email`\n*   `amount_of_money`\n*   `phone` phone number, either domestic or international, in a variety of formats\n*   `role` (a social role, e.g. position in an organization)\n*   `software`\n*   `website` (URL), with an optional subtype: `tor` for Onion links; note that web services may also have the `software` type assigned\n*   `weight`\n*   `bank_account` only IBAN format is supported; subtypes: `iban`\n*   `credit_card`, with optional subtypes: `visa`, `mastercard`, `american_express`, `diners_club`, `discovery`, `jcb`, `unionpay`\n*   `coordinates` (GPS coordinates)\n*   `credential`, with optional subtypes: `md5`, `sha-1`\n*   `crypto`, with optional subtypes: `bitcoin`, `ethereum`, `monero`, `monero_payment_id`, `litecoin`, `dash`\n*   `event`\n*   `file` only Windows pathnames are supported; subtypes: `windows`, `facebook` (for images downloaded from Facebook)\n*   `flight_code`\n*   `identifier`\n*   `ip_address`, subtypes: `v4`, `v6`\n*   `mac_address`\n*   `numeric` (an unclassified numeric entity)\n*   `username`\n    \n\n## Topics\n\nThe `topics` section is an array of topics (subjects, domains, themes in other terms) detected in the text.\n\nThe section exists if topics are detected and the `topics` [setting](#settings-reference) is either omitted or set to `true`.\n\nBy default, a topic is a string. If `topic_stats` [setting](#settings-reference) is set to `true`, then every entry in the array contains:\n\n*   `topic` (string) - the topic itself\n*   `coverage` (floating-point number) - a number between 0 and 1, indicating the ratio between the number of sentences where the topic is detected to the total number of sentences\n    \n\n## Long-Term Memory\n\nThe `memory` section contains optional context to pass to the `settings` in subsequent messages in the same conversation thread. See [Context and Long-Term Memory](#context-and-long-term-memory) for more details.\n\n## Low-Level: Sentences, Phrases, and Words\n\nTisane allows obtaining more in-depth data, specifically:\n\n*   sentences and their corrected form, if a misspelling was detected\n*   lexical chunks and their grammatical and stylistic features\n*   parse trees and phrases\n    \n\nThe `sentence_list` section is generated if the `words` or the `parses` [setting](#settings-reference) is set to `true`.\n\nEvery sentence structure in the list contains:\n\n*   `offset` (unsigned integer) - zero-based offset where the sentence starts\n*   `length` (unsigned integer) - length of the sentence\n*   `text` (string) - the sentence itself\n*   `corrected_text` (string) - if a misspelling was detected and the spellchecking is active, contains the automatically corrected text\n*   `words` (array of structures) - if `words` [setting](#settings-reference) is set to `true`, generates extended information about every lexical chunk. (The term \"word\" is used for the sake of simplicity, however, it may not be linguistically correct to equate lexical chunks with words.)\n*   `parse_tree` (object) - if `parses` [setting](#settings-reference) is set to `true`, generates information about the parse tree and the phrases detected in the sentence.\n*   `nbest_parses` (array of parse objects) if `parses` [setting](#settings-reference) is set to `true` and `deterministic` [setting](#settings-reference) is set to `false`, generates information about the parse trees that were deemed close enough to the best one but not the best.\n    \n\n### Words\n\nEvery lexical chunk (\"word\") structure in the `words` array contains:\n\n*   `type` (string) - the type of the element: `punctuation` for punctuation marks, `numeral` for numerals, or `word` for everything else\n*   `text` (string) - the text\n*   `offset` (unsigned integer) - zero-based offset where the element starts\n*   `length` (unsigned integer) - length of the element\n*   `corrected_text` (string) - if a misspelling is detected, the corrected form\n*   `lettercase` (string) - the original letter case: `upper`, `capitalized`, or `mixed`. If lowercase or no case, the attribute is omitted.\n*   `stopword` (boolean) - determines whether the word is a [stopword](https://en.wikipedia.org/wiki/Stop_words)\n*   `grammar` (array of strings or structures) - generates the list of grammar features associated with the `word`. If the `feature_standard` setting is defined as `native`, then every feature is an object containing a numeral (`index`) and a string (`value`). Otherwise, every feature is a plain string\n    \n\n#### Advanced\n\nFor lexical words only:\n\n*   `role` (string) - semantic role, like `agent` or `patient`. Note that in passive voice, the semantic roles are reverse to the syntactic roles. E.g. in a sentence like *The car was driven by David*, *car* is the patient, and *David* is the agent.\n*   `numeric_value` (floating-point number) - the numeric value, if the chunk has a value associated with it\n*   `family` (integer number) - the ID of the family associated with the disambiguated word-sense of the lexical chunk\n*   `definition` (string) - the definition of the family, if the `fetch_definitions` [setting](#settings-reference) is set to `true`\n*   `lexeme` (integer number) - the ID of the lexeme entry associated with the disambiguated word-sense of the lexical chunk\n*   `nondictionary_pattern` (integer number) - the ID of a non-dictionary pattern that matched, if the word was not in the language model but was classified by the nondictionary heuristics\n*   `style` (array of strings or structures) - generates the list of style features associated with the `word`. Only if the `feature_standard` setting is set to `native` or `description`\n*   `semantics` (array of strings or structures) - generates the list of semantic features associated with the `word`. Only if the `feature_standard` setting is set to `native` or `description`\n*   `segmentation` (structure) - generates info about the selected segmentation, if there are several possibilities to segment the current lexical chunk and the `deterministic` setting is set to `false`. A segmentation is simply an array of `word` structures.\n*   `other_segmentations` (array of structures) - generates info about the segmentations deemed incorrect during the disambiguation process. Every entry has the same structure as the `segmentation` structure.\n*   `nbest_senses` (array of structures) - when the `deterministic` setting is set to `false`, generates a set of hypotheses that were deemed incorrect by the disambiguation process. Every hypothesis contains the following attributes: `grammar`, `style`, and `semantics`, identical in structure to their counterparts above; and `senses`, an array of word-senses associated with every hypothesis. Every sense has a `family`, which is an ID of the associated family; and, if the `fetch_definitions` setting is set to `true`, `definition` and `ref_lemma` of that family.\n    \n\nFor punctuation marks only:\n\n*   `id` (integer number) - the ID of the punctuation mark\n*   `behavior` (string) - the behavior code of the punctuation mark. Values: `sentenceTerminator`, `genericComma`, `bracketStart`, `bracketEnd`, `scopeDelimiter`, `hyphen`, `quoteStart`, `quoteEnd`, `listComma` (for East-Asian enumeration commas like *、*)\n    \n\n### Parse Trees and Phrases\n\nEvery parse tree, or more accurately, parse forest, is a collection of phrases, hierarchically linked to each other.\n\nAt the top level of the parse, there is an array of root phrases under the `phrases` element and the numeric `id` associated with it. Every phrase may have children phrases. Every phrase has the following attributes:\n\n*   `type` (string) - a [Penn treebank phrase tag](http://nliblog.com/wiki/knowledge-base-2/nlp-1-natural-language-processing/penn-treebank/penn-treebank-phrase-level-tags/) denoting the type of the phrase, e.g. *S*, *VP*, *NP*, etc.\n*   `family` (integer number) - an ID of the phrase family\n*   `offset` (unsigned integer) - a zero-based offset where the phrase starts\n*   `length` (unsigned integer) - the span of the phrase\n*   `role` (string) - the semantic role of the phrase, if any, analogous to that of the words\n*   `text` (string) - the phrase text, where the phrase members are delimited by the vertical bar character. Children phrases are enclosed in brackets. E.g., *driven|by|David* or *(The|car)|was|(driven|by|David)*.\n    \n\nExample:\n\n``` json\n\"parse_tree\": {\n\"id\": 4,\n\"phrases\": [\n{\n        \"type\": \"S\",\n        \"family\": 1451,\n        \"offset\": 0,\n        \"length\": 27,\n        \"text\": \"(The|car)|was|(driven|by|David)\",\n        \"children\": [\n                {\n                        \"type\": \"NP\",\n                        \"family\": 1081,\n                        \"offset\": 0,\n                        \"length\": 7,\n                        \"text\": \"The|car\",\n                        \"role\": \"patient\"\n                },\n                {\n                        \"type\": \"VP\",\n                        \"family\": 1172,\n                        \"offset\": 12,\n                        \"length\": 15,\n                        \"text\": \"driven|by|David\",\n                        \"role\": \"verb\"\n                }\n        ]\n}\n\n```\n\n### Context-Aware Spelling Correction\n\nTisane supports automatic, context-aware spelling correction. Whether it's a misspelling or a purported obfuscation, Tisane attempts to deduce the intended meaning, if the language model does not recognize the word.\n\nWhen or if it's found, Tisane adds the `corrected_text` attribute to the word (if the words / lexical chunks are returned) and the sentence (if the sentence text is generated). Sentence-level `corrected_text` is displayed if `words` or `parses` are set to *true*.\n\nNote that as Tisane works with large dictionaries, you may need to exclude more esoteric terms by using the `min_generic_frequency` setting.\n\nNote that **the invocation of spell-checking does not depend on whether the sentences and the words sections are generated in the output**. The spellchecking can be disabled by setting `disable_spellcheck` to `true`. Another option is to enable the spellchecking for lowercase words only, thus excluding potential proper nouns in languages that support capitalization; to avoid spell-checking capitalized and uppercase words, set `lowercase_spellcheck_only` to `true`.\n\n# Settings Reference\n\nThe purpose of the settings structure is to:\n\n*   provide cues about the content being sent to improve the results\n*   customize the output and select sections to be shown\n*   define standards and formats in use\n*   define and calculate the signal to noise ranking\n    \n\nAll settings are optional. To leave all settings to default, simply provide an empty object (`{}`).\n\n## Content Cues and Instructions\n\n`format` (string) - the format of the content. Some policies will be applied depending on the format. Certain logic in the underlying language models may require the content to be of a certain format (e.g. logic applied on the reviews may seek for sentiment more aggressively). The default format is empty / undefined. The format values are:\n\n*   `review` - a review of a product or a service or any other review. Normally, the underlying language models will seek for sentiment expressions more aggressively in reviews.\n*   `dialogue` - a comment or a post which is a part of a dialogue. An example of a logic more specific to a dialogue is name calling. A single word like \"idiot\" would not be a personal attack in any other format, but it is certainly a personal attack when part of a dialogue.\n*   `shortpost` - a microblogging post, e.g. a tweet.\n*   `longform` - a long post or an article.\n*   `proofread` - a post which was proofread. In the proofread posts, the spellchecking is switched off.\n*   `alias` - a nickname in an online community.\n*   `search` - a search query. Search queries may not always be grammatically correct. Certain topics and items, that we may otherwise let pass, are tagged with the `search` format.\n    \n\n`disable_spellcheck` (boolean) - determines whether the automatic spellchecking is to be disabled. Default: `false`.\n\n`lowercase_spellcheck_only` (boolean) - determines whether the automatic spellchecking is only to be applied to words in lowercase. Default: `false`\n\n`min_generic_frequency` (int) - allows excluding more esoteric terms; the valid values are 0 thru 10.\n\n`subscope` (boolean) - enables sub-scope parsing, for scenarios like hashtag, URL parsing, and obfuscated content (e.g. *ihateyou*). Default: `false`.\n\n`lang_detect_segmentation_regex` (string) - allows defining custom language detection fragment boundaries. For example, if multiple languages may be used in different sentences in the same text, you may want to define the regex as: `(([\\r\\n]|[.!?][ ]))` .\n\n`domain_factors` (set of pairs made of strings and numbers) - provides a session-scope cues for the domains of discourse. This is a powerful tool that allows tailoring the result based on the use case. The format is, family ID of the domain as a key and the multiplication factor as a value (e.g. *\"12345\": 5.0*). For example, when processing text looking for criminal activity, we may want to set domains relevant to drugs, firearms, crime, higher: `\"domain_factors\": {\"31058\": 5.0, \"45220\": 5.0, \"14112\": 5.0, \"14509\": 3.0, \"28309\": 5.0, \"43220\": 5.0, \"34581\": 5.0}`. The same device can be used to eliminate noise coming from domains we know are irrelevant by setting the factor to a value lower than 1.\n\n`when` (date string, format YYYY-MM-DD) - indicates when the utterance was uttered. (TO BE IMPLEMENTED) The purpose is to prune word senses that were not available at a particular point in time. For example, the words *troll*, *mail*, and *post* had nothing to do with the Internet 300 years ago because there was no Internet, and so in a text that was written hundreds of years ago, we should ignore the word senses that emerged only recently.\n\n## Output Customization\n\n`abuse` (boolean) - output instances of abusive content (default: `true`)\n\n`sentiment` (boolean) - output sentiment-bearing snippets (default: `true`)\n\n`document_sentiment` (boolean) - output document-level sentiment (default: `false`)\n\n`entities` (boolean) - output entities (default: `true`)\n\n`topics` (boolean) - output topics (default: `true`), with two more relevant settings:\n\n*   `topic_stats` (boolean) - include coverage statistics in the topic output (default: `false`). When set, the topic is an object containing the attributes `topic` (string) and `coverage` (floating-point number). The coverage indicates a share of sentences touching the topic among all the sentences.\n*   `optimize_topics` (boolean) - if `true`, the less specific topics are removed if they are parts of the more specific topics. For example, when the topic is `cryptocurrency`, the optimization removes `finance`.\n    \n\n`words` (boolean) - output the lexical chunks / words for every sentence (default: `false`). In languages without white spaces (Chinese, Japanese, Thai), the tokens are tokenized words. In languages with compounds (e.g. German, Dutch, Norwegian), the compounds are split.\n\n`fetch_definitions` (boolean) - include definitions of the words in the output (default: `false`). Only relevant when the `words` setting is `true`\n\n`parses` (boolean) - output parse forests of phrases\n\n`deterministic` (boolean) - whether the n-best senses and n-best parses are to be output in addition to the detected sense. If `true`, only the detected sense will be output. Default: `true`\n\n`snippets` (boolean) - include the text snippets in the abuse, sentiment, and entities sections (default: `false`)\n\n`explain` (boolean) - if `true`, a reasoning for the abuse and sentiment snippets is provided when possible (see the `explanation` attribute)\n\n## Standards and Formats\n\n`feature_standard` (string) - determines the standard used to output the features (grammar, style, semantics) in the response object. The standards we support are:\n\n*   `ud`: [Universal Dependencies tags](https://universaldependencies.org/u/pos/) (default)\n*   `penn`: [Penn treebank tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)\n*   `native`: Tisane native feature codes\n*   `description`: Tisane native feature descriptions\n    \n\nOnly the native Tisane standards (codes and descriptions) support style and semantic features.\n\n`topic_standard` (string) - determines the standard used to output the topics in the response object. The standards we support are:\n\n*   `iptc_code` - IPTC topic taxonomy code\n*   `iptc_description` - IPTC topic taxonomy description\n*   `iab_code` - IAB topic taxonomy code\n*   `iab_description` - IAB topic taxonomy description\n*   `native` - Tisane domain description, coming from the family description (default)\n    \n\n`sentiment_analysis_type` (string) - the type of the sentiment analysis strategy. The values are:\n\n*   `products_and_services` - most common sentiment analysis of products and services\n*   `entity` - sentiment analysis with entities as targets\n*   `creative_content_review` - reviews of creative content (RESERVED)\n*   `political_essay` - political essays (RESERVED)\n    \n\n## Context and Long-Term Memory\n\nHuman understanding of language is not a simple \"sliding window\" with scope limited to a sentence. Language is accompanied by gestures, visuals, and knowledge of the previous communication. Sometimes, code-words may be used to conceal the words' original meaning.\n\nWhen detecting abuse, a name of an ethnicity or a religious group may be not offensive, but when superimposed over a picture of an ape or a pig, it is meant of offend. When translating from a language without gender distinctions in verbs (like English) to a language with distinctions (like Russian or Hebrew), there is no way to know from an utterance alone if the speaker is female. When a scammer is collecting details piecemeal over a series of utterances, knowledge of previous utterances is needed to take action.\n\nTisane's Memory module allows pre-initializing the analysis, as well as reassigning meanings, and more. The module is made of three simple components that are flexible enough for a variety of tasks:\n\n### Reassignments\n\nReassignments define the attributes to set based on other attributes. This allows to:\n\n*   assign gender to 1st or 2nd person verbs, generating accurate translations\n*   overwrite original meaning of a group of words with all their inflected forms to analyze code-words and secret language\n*   add an additional feature or a hypernym to a family\n    \n\nand more, within a scope of a call.\n\nThe `assign` section is an array of structures defining:\n\n*   `if` - conditions to match:\n    *   `regex` - a regular expression (RE2 syntax)\n    *   `family` - a family ID\n    *   `features` - a list of feature values. A feature is a structure with an `index` and a `value`. For example: `{\"index\":1, \"value\":\"NOUN\"}`.\n    *   `hypernym` - a family ID of a hypernym\n*   `then` - attributes to assign\n    *   `family` - a family ID\n    *   `features` - a list of feature values. A feature is a structure with an `index` and a `value`. For example: `{\"index\":1, \"value\":\"NOUN\"}`.\n    *   `hypernym` - a family ID of a hypernym\n\nExamples:\n\n*   the speaker is female: \\`\"assign\":\\[{\"if\":{\"features\":\\[{\"index\":9,\"value\":\"1\"}\\]},\"then\":{\"features\":\\[{\"index\":5,\"value\":\"F\"}\\]}}\\]\n*   assume that a mention of a container refers to an illegal item: \\`\"assign\":\\[{\"if\":{\"family\":26888},\"then\":{\"hypernym\":123078}}\\]\n    \n\n### Flags\n\nAn array of flag structures that add some context. A flag is a structure with an `index` and a `value`. For example: `{\"index\":36, \"value\":\"WFH\"}`.\n\nAside from the flags returned in the `memory` section of the response, these flags can be set:\n\n*   `{\"index\":36, \"value\":\"PEBD\"}` (agents_of_bad_things) - the context is about a bad player or an agent responsible for bad things\n*   `{\"index\":36, \"value\":\"BADANML\"}` (bad_animal) - the context is an animal that symbolizes bad qualities (e.g. pig, ape, snake, etc.)\n*   `{\"index\":36, \"value\":\"BULKMSG\"}` (bulk_message) - the message was sent in bulk\n*   `{\"index\":36, \"value\":\"DETHR\"}` (death_related) - the context is something related to death\n*   `{\"index\":36, \"value\":\"EARNMUCH\"}` (make_money) - the context is related to making money\n*   `{\"index\":36, \"value\":\"IDEP\"}` (my_departure) - the author of the text mentioned departing\n*   `{\"index\":36, \"value\":\"SECO\"}` (sexually_conservative) - any attempt to exchange photos or anything that may be either sexual or non-sexual is to be deemed sexual\n*   `{\"index\":36, \"value\":\"TRPA\"}` (trusted_party) - the author of the text claims to be a trusted party (e.g. a relative or a spouse)\n*   `{\"index\":36, \"value\":\"WSTE\"}` (waste) - the context is about waste, organic or inorganic\n*   `{\"index\":36, \"value\":\"WOPR\"}` (won_prize) - prize or money winning was mentioned or implied\n*   `{\"index\":36, \"value\":\"WFH\"}` (work_from_home) - work from home was mentioned\n*   `{\"index\":5, \"value\":\"ORG\"}` (organization) - an organization was mentioned\n*   `{\"index\":5, \"value\":\"ROLE\"}` (role) - a role or a position was mentioned\n    \n\n### Antecedents\n\nThe section contains structures to be used in coreference resolution. The attributes are:\n\n*   `family` - the family ID of the antecedent\n*   `features` - the list of features. Every feature is a structure with an `index` and a `value`. For example: `{\"index\":36, \"value\":\"WFH\"}`.\n    \n\n## Signal to Noise Ranking\n\nWhen we're studying a bunch of posts commenting on an issue or an article, we may want to prioritize the ones more relevant to the topic, and containing more reason and logic than emotion. This is what the signal to noise ranking is meant to achieve.\n\nThe signal to noise ranking is made of two parts:\n\n1.  Determine the most relevant concepts. This part may be omitted, depending on the use case scenario (e.g. we want to track posts most relevant to a particular set of issues).\n2.  Rank the actual post in relevance to these concepts.\n    \n\nTo determine the most relevant concepts, we need to analyze the headline or the article itself. The headline is usually enough. We need two additional settings:\n\n*   `keyword_features` (an object of strings with string values) - determines the features to look for in a word. When such a feature is found, the family ID is added to the set of potentially relevant family IDs.\n*   `stop_hypernyms` (an array of integers) - if a potentially relevant family ID has a hypernym listed in this setting, it will not be considered. For example, we extracted a set of nouns from the headline, but we may not be interested in abstractions or feelings. E.g. from a headline like *Fear and Loathing in Las Vegas* we want *Las Vegas* only. Optional.\n    \n\nIf `keyword_features` is provided in the settings, the response will have a special attribute, `relevant`, containing a set of family IDs.\n\nAt the second stage, when ranking the actual posts or comments for relevance, this array is to be supplied among the settings. The ranking is boosted when the domain, the hypernyms, or the families related to those in the `relevant` array are mentioned, when negative and positive sentiment is linked to aspects, and penalized when the negativity is not linked to aspects, or abuse of any kind is found. The latter consideration may be disabled, e.g. when we are looking for specific criminal content. When the `abuse_not_noise` parameter is specified and set to `true`, the abuse is not penalized by the ranking calculations.\n\nTo sum it up, in order to calculate the signal to noise ranking:\n\n1.  Analyze the headline with `keyword_features` and, optionally, `stop_hypernyms` in the settings. Obtain the `relevant` attribute.\n2.  When analyzing the posts or the comments, specify the `relevant` attribute obtained in step 1.",
+    "title": "Tisane API Documentation",
+    "version": "1.0.0",
+    "x-apisguru-categories": [
+      "text"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_TisaneLabs_profile_image.jpeg"
+    },
+    "x-origin": [
+      {
+        "converter": {
+          "url": "https://github.com/mermade/oas-kit",
+          "version": "7.0.4"
+        },
+        "format": "openapi",
+        "url": "https://www.postman.com/collections/15057172-1e147114-3936-4a52-a21e-681e72b90b53-TzeUnUQU",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "tisane.ai"
+  },
+  "tags": [
+    {
+      "description": "These are the methods that actually perform the analysis.",
+      "name": "NLU / NLP Methods"
+    },
+    {
+      "description": "Methods to retrieve and inspect entries from the language models",
+      "name": "Language Model Direct Access"
+    }
+  ],
+  "paths": {
+    "/hypernyms": {
+      "get": {
+        "description": "Lists all hypernyms related to a family. A hypernym is a parent concent. E.g. \"vehicle\" is a hypernym of \"truck\".",
+        "operationId": "listHypernyms",
+        "parameters": [
+          {
+            "description": "(Required) a numeric identifier of the family",
+            "in": "query",
+            "name": "family",
+            "schema": {
+              "example": "{family_id}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "(Required) maximum distance from the family",
+            "in": "query",
+            "name": "maxLevel",
+            "schema": {
+              "example": "{max_number_of_levels}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "{{apiKeyDescription}}",
+            "in": "header",
+            "name": "Ocp-Apim-Subscription-Key",
+            "schema": {
+              "example": "{{apiKey}}",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Hypernyms of Darth Vader": {
+                    "value": [
+                      [
+                        68126,
+                        1,
+                        "the principal bad character in a film or work of fiction"
+                      ],
+                      [
+                        155184,
+                        1,
+                        "a member of the Jedi order in the Star Wars franchise"
+                      ],
+                      [
+                        61305,
+                        2,
+                        "an imaginary person represented in a work of fiction (play or film or story).   \r\n E.g. \"she is the main character in the novel\""
+                      ],
+                      [
+                        62644,
+                        2,
+                        "a person who does harm to others"
+                      ],
+                      [
+                        10275,
+                        3,
+                        "a human being.   \r\n E.g. \"there was too much for one person to do\""
+                      ],
+                      [
+                        60709,
+                        3,
+                        "a creature of the imagination; a person that exists only in legends or myths or fiction"
+                      ],
+                      [
+                        61497,
+                        3,
+                        "a person who for some reason is not wanted or welcome"
+                      ],
+                      [
+                        10268,
+                        4,
+                        "a living thing that has (or can develop) the ability to act or function independently"
+                      ],
+                      [
+                        10267,
+                        5,
+                        "a living (or once living) entity"
+                      ],
+                      [
+                        10278,
+                        6,
+                        "an object occurring naturally; not made by man"
+                      ],
+                      [
+                        10265,
+                        7,
+                        "a thing; a tangible and visible entity; an entity that can cast a shadow.   \r\n E.g. \"it was full of rackets, balls and other objects\""
+                      ],
+                      [
+                        10258,
+                        8,
+                        "an entity that has physical existence"
+                      ]
+                    ]
+                  }
+                },
+                "schema": {
+                  "example": [
+                    [
+                      68126,
+                      1,
+                      "the principal bad character in a film or work of fiction"
+                    ],
+                    [
+                      155184,
+                      1,
+                      "a member of the Jedi order in the Star Wars franchise"
+                    ],
+                    [
+                      61305,
+                      2,
+                      "an imaginary person represented in a work of fiction (play or film or story).   \r\n E.g. \"she is the main character in the novel\""
+                    ],
+                    [
+                      62644,
+                      2,
+                      "a person who does harm to others"
+                    ],
+                    [
+                      10275,
+                      3,
+                      "a human being.   \r\n E.g. \"there was too much for one person to do\""
+                    ],
+                    [
+                      60709,
+                      3,
+                      "a creature of the imagination; a person that exists only in legends or myths or fiction"
+                    ],
+                    [
+                      61497,
+                      3,
+                      "a person who for some reason is not wanted or welcome"
+                    ],
+                    [
+                      10268,
+                      4,
+                      "a living thing that has (or can develop) the ability to act or function independently"
+                    ],
+                    [
+                      10267,
+                      5,
+                      "a living (or once living) entity"
+                    ],
+                    [
+                      10278,
+                      6,
+                      "an object occurring naturally; not made by man"
+                    ],
+                    [
+                      10265,
+                      7,
+                      "a thing; a tangible and visible entity; an entity that can cast a shadow.   \r\n E.g. \"it was full of rackets, balls and other objects\""
+                    ],
+                    [
+                      10258,
+                      8,
+                      "an entity that has physical existence"
+                    ]
+                  ],
+                  "items": {
+                    "example": [
+                      68126,
+                      1,
+                      "the principal bad character in a film or work of fiction"
+                    ],
+                    "items": {
+                      "anyOf": [
+                        {
+                          "example": 68126,
+                          "type": "number"
+                        },
+                        {
+                          "example": "the principal bad character in a film or work of fiction",
+                          "type": "string"
+                        }
+                      ],
+                      "example": 68126
+                    },
+                    "type": "array"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Hypernyms of Darth Vader"
+          }
+        },
+        "summary": "List hypernyms",
+        "tags": [
+          "Language Model Direct Access"
+        ]
+      }
+    },
+    "/hyponyms": {
+      "get": {
+        "description": "Lists all hyponyms related to a family. A hyponym is a child concent. E.g. \"truck\" is a hypernym of \"vehicle\".",
+        "operationId": "listHyponyms",
+        "parameters": [
+          {
+            "description": "(Required) a numeric identifier of the family",
+            "in": "query",
+            "name": "family",
+            "schema": {
+              "example": "{family_id}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "(Required) maximum distance from the family",
+            "in": "query",
+            "name": "maxLevel",
+            "schema": {
+              "example": "{max_number_of_levels}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "{{apiKeyDescription}}",
+            "in": "header",
+            "name": "Ocp-Apim-Subscription-Key",
+            "schema": {
+              "example": "{{apiKey}}",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "examples": {
+                  "response": {
+                    "value": ""
+                  }
+                }
+              }
+            },
+            "description": "response"
+          }
+        },
+        "summary": "List hyponyms",
+        "tags": [
+          "Language Model Direct Access"
+        ]
+      }
+    },
+    "/inflections": {
+      "get": {
+        "description": "List inflected forms",
+        "operationId": "listInflectedForms",
+        "parameters": [
+          {
+            "description": "(Required) The language code",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "example": "{language_code}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "(Required) The lexeme to inspect",
+            "in": "query",
+            "name": "lexeme",
+            "schema": {
+              "example": "{lexeme_id}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "(Required) The family to inspect",
+            "in": "query",
+            "name": "family",
+            "schema": {
+              "example": "{family_id}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "{{apiKeyDescription}}",
+            "in": "header",
+            "name": "Ocp-Apim-Subscription-Key",
+            "schema": {
+              "example": "{{apiKey}}",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Inflected forms of \"United States\" in Russian": {
+                    "value": [
+                      {
+                        "features": [
+                          {
+                            "index": 9,
+                            "value": "3"
+                          },
+                          {
+                            "index": 15,
+                            "value": "NOM"
+                          }
+                        ],
+                        "isLemma": true,
+                        "text": "Соединённые Штаты Америки"
+                      },
+                      {
+                        "features": [
+                          {
+                            "index": 15,
+                            "value": "GEN"
+                          },
+                          {
+                            "index": 9,
+                            "value": "3"
+                          }
+                        ],
+                        "text": "Соединенных Штатов Америки"
+                      },
+                      {
+                        "features": [
+                          {
+                            "index": 15,
+                            "value": "INST"
+                          },
+                          {
+                            "index": 9,
+                            "value": "3"
+                          }
+                        ],
+                        "text": "Соединенными Штатами Америки"
+                      },
+                      {
+                        "features": [
+                          {
+                            "index": 15,
+                            "value": "DAT"
+                          },
+                          {
+                            "index": 9,
+                            "value": "3"
+                          }
+                        ],
+                        "text": "Соединенным Штатам Америки"
+                      },
+                      {
+                        "features": [
+                          {
+                            "index": 15,
+                            "value": "PREP"
+                          },
+                          {
+                            "index": 9,
+                            "value": "3"
+                          }
+                        ],
+                        "text": "Соединенных Штатах Америки"
+                      },
+                      {
+                        "features": [
+                          {
+                            "index": 24,
+                            "value": "THNG"
+                          },
+                          {
+                            "index": 2,
+                            "value": "1"
+                          },
+                          {
+                            "index": 9,
+                            "value": "3"
+                          },
+                          {
+                            "index": 7,
+                            "value": "NA"
+                          },
+                          {
+                            "index": 15,
+                            "value": "ACC"
+                          }
+                        ],
+                        "text": "Соединённые Штаты Америки"
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "example": [
+                    {
+                      "features": [
+                        {
+                          "index": 9,
+                          "value": "3"
+                        },
+                        {
+                          "index": 15,
+                          "value": "NOM"
+                        }
+                      ],
+                      "isLemma": true,
+                      "text": "Соединённые Штаты Америки"
+                    },
+                    {
+                      "features": [
+                        {
+                          "index": 15,
+                          "value": "GEN"
+                        },
+                        {
+                          "index": 9,
+                          "value": "3"
+                        }
+                      ],
+                      "text": "Соединенных Штатов Америки"
+                    },
+                    {
+                      "features": [
+                        {
+                          "index": 15,
+                          "value": "INST"
+                        },
+                        {
+                          "index": 9,
+                          "value": "3"
+                        }
+                      ],
+                      "text": "Соединенными Штатами Америки"
+                    },
+                    {
+                      "features": [
+                        {
+                          "index": 15,
+                          "value": "DAT"
+                        },
+                        {
+                          "index": 9,
+                          "value": "3"
+                        }
+                      ],
+                      "text": "Соединенным Штатам Америки"
+                    },
+                    {
+                      "features": [
+                        {
+                          "index": 15,
+                          "value": "PREP"
+                        },
+                        {
+                          "index": 9,
+                          "value": "3"
+                        }
+                      ],
+                      "text": "Соединенных Штатах Америки"
+                    },
+                    {
+                      "features": [
+                        {
+                          "index": 24,
+                          "value": "THNG"
+                        },
+                        {
+                          "index": 2,
+                          "value": "1"
+                        },
+                        {
+                          "index": 9,
+                          "value": "3"
+                        },
+                        {
+                          "index": 7,
+                          "value": "NA"
+                        },
+                        {
+                          "index": 15,
+                          "value": "ACC"
+                        }
+                      ],
+                      "text": "Соединённые Штаты Америки"
+                    }
+                  ],
+                  "items": {
+                    "properties": {
+                      "features": {
+                        "example": [
+                          {
+                            "index": 9,
+                            "value": "3"
+                          },
+                          {
+                            "index": 15,
+                            "value": "NOM"
+                          }
+                        ],
+                        "items": {
+                          "properties": {
+                            "index": {
+                              "example": 9,
+                              "type": "number"
+                            },
+                            "value": {
+                              "example": "3",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "isLemma": {
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "text": {
+                        "example": "Соединённые Штаты Америки",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Inflected forms of \"United States\" in Russian"
+          }
+        },
+        "summary": "List inflected forms",
+        "tags": [
+          "Language Model Direct Access"
+        ]
+      }
+    },
+    "/lm/family": {
+      "get": {
+        "description": "Fetches and outputs metadata for a family from the Tisane language models.",
+        "operationId": "getFamilyDetails",
+        "parameters": [
+          {
+            "description": "(Required) a numeric identifier of the family",
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "example": "{family_id}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "{{apiKeyDescription}}",
+            "in": "header",
+            "name": "Ocp-Apim-Subscription-Key",
+            "schema": {
+              "example": "{{apiKey}}",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Details of the family for 'plot twist'": {
+                    "value": {
+                      "definition": "a literary technique that introduces a radical change in the direction or expected outcome of the plot in a work of fiction",
+                      "description": "plot twist",
+                      "hypernyms": [
+                        [
+                          49398,
+                          1
+                        ],
+                        [
+                          50078,
+                          1
+                        ],
+                        [
+                          49393,
+                          2
+                        ],
+                        [
+                          50079,
+                          2
+                        ],
+                        [
+                          49327,
+                          3
+                        ],
+                        [
+                          10295,
+                          4
+                        ]
+                      ],
+                      "permId": "",
+                      "requestId": "d67becb4-bf42-4ab8-854d-9442d956e43b",
+                      "wikidata": "Q1321123",
+                      "wordnet30": ""
+                    }
+                  }
+                },
+                "schema": {
+                  "properties": {
+                    "definition": {
+                      "example": "a literary technique that introduces a radical change in the direction or expected outcome of the plot in a work of fiction",
+                      "type": "string"
+                    },
+                    "description": {
+                      "example": "plot twist",
+                      "type": "string"
+                    },
+                    "hypernyms": {
+                      "example": [
+                        [
+                          49398,
+                          1
+                        ],
+                        [
+                          50078,
+                          1
+                        ],
+                        [
+                          49393,
+                          2
+                        ],
+                        [
+                          50079,
+                          2
+                        ],
+                        [
+                          49327,
+                          3
+                        ],
+                        [
+                          10295,
+                          4
+                        ]
+                      ],
+                      "items": {
+                        "example": [
+                          49398,
+                          1
+                        ],
+                        "items": {
+                          "example": 49398,
+                          "type": "number"
+                        },
+                        "type": "array"
+                      },
+                      "type": "array"
+                    },
+                    "permId": {
+                      "example": "",
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "example": "d67becb4-bf42-4ab8-854d-9442d956e43b",
+                      "type": "string"
+                    },
+                    "wikidata": {
+                      "example": "Q1321123",
+                      "type": "string"
+                    },
+                    "wordnet30": {
+                      "example": "",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Details of the family for 'plot twist'"
+          }
+        },
+        "summary": "Get family details",
+        "tags": [
+          "Language Model Direct Access"
+        ]
+      }
+    },
+    "/senses": {
+      "get": {
+        "description": "Fetches and outputs all senses related to a word.",
+        "operationId": "listWordSenses",
+        "parameters": [
+          {
+            "description": "(Required) a standard culture code (ISO-639 language code with an optional country extension)",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "example": "{language_code}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "(Required) the word to inspect",
+            "in": "query",
+            "name": "word",
+            "schema": {
+              "example": "{word}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "{{apiKeyDescription}}",
+            "in": "header",
+            "name": "Ocp-Apim-Subscription-Key",
+            "schema": {
+              "example": "{{apiKey}}",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Interpretations of \"couscous\"": {
+                    "value": [
+                      {
+                        "families": [
+                          {
+                            "Key": 51804,
+                            "Value": {},
+                            "definition": "a pasta made in northern Africa of crushed and steamed semolina"
+                          }
+                        ],
+                        "features": [
+                          {
+                            "index": 16,
+                            "value": "1"
+                          },
+                          {
+                            "index": 22,
+                            "type": "Semantics",
+                            "value": "FOOD"
+                          },
+                          {
+                            "index": 4,
+                            "value": "REG"
+                          },
+                          {
+                            "index": 3,
+                            "value": "YES"
+                          },
+                          {
+                            "index": 26,
+                            "value": "PH"
+                          },
+                          {
+                            "index": 24,
+                            "value": "THNG"
+                          },
+                          {
+                            "index": 23,
+                            "value": "THNG"
+                          },
+                          {
+                            "index": 22,
+                            "value": "NO"
+                          },
+                          {
+                            "index": 1,
+                            "value": "NOUN"
+                          },
+                          {
+                            "index": 2,
+                            "value": "1"
+                          },
+                          {
+                            "index": 4,
+                            "type": "Style",
+                            "value": "LAT"
+                          },
+                          {
+                            "index": 34,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 33,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 32,
+                            "value": "BEF"
+                          },
+                          {
+                            "index": 15,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 14,
+                            "value": "NPA"
+                          },
+                          {
+                            "index": 9,
+                            "value": "3"
+                          },
+                          {
+                            "index": 5,
+                            "value": "ALL"
+                          }
+                        ],
+                        "frequency": 1,
+                        "isLemma": true,
+                        "legacyMapId": 58076,
+                        "lemma": "couscous",
+                        "lexemeId": 28041
+                      },
+                      {
+                        "families": [
+                          {
+                            "Key": 53366,
+                            "Value": {},
+                            "definition": "a spicy dish that originated in northern Africa; consists of pasta steamed with a meat and vegetable stew"
+                          }
+                        ],
+                        "features": [
+                          {
+                            "index": 16,
+                            "value": "1"
+                          },
+                          {
+                            "index": 22,
+                            "type": "Semantics",
+                            "value": "FOOD"
+                          },
+                          {
+                            "index": 4,
+                            "value": "REG"
+                          },
+                          {
+                            "index": 3,
+                            "value": "YES"
+                          },
+                          {
+                            "index": 26,
+                            "value": "PH"
+                          },
+                          {
+                            "index": 24,
+                            "value": "THNG"
+                          },
+                          {
+                            "index": 23,
+                            "value": "THNG"
+                          },
+                          {
+                            "index": 22,
+                            "value": "NO"
+                          },
+                          {
+                            "index": 1,
+                            "value": "NOUN"
+                          },
+                          {
+                            "index": 2,
+                            "value": "1"
+                          },
+                          {
+                            "index": 34,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 33,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 32,
+                            "value": "BEF"
+                          },
+                          {
+                            "index": 15,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 14,
+                            "value": "NPA"
+                          },
+                          {
+                            "index": 9,
+                            "value": "3"
+                          },
+                          {
+                            "index": 5,
+                            "value": "ALL"
+                          }
+                        ],
+                        "frequency": 1,
+                        "isLemma": true,
+                        "legacyMapId": 58076,
+                        "lemma": "couscous",
+                        "lexemeId": 28041
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "example": [
+                    {
+                      "families": [
+                        {
+                          "Key": 51804,
+                          "Value": {},
+                          "definition": "a pasta made in northern Africa of crushed and steamed semolina"
+                        }
+                      ],
+                      "features": [
+                        {
+                          "index": 16,
+                          "value": "1"
+                        },
+                        {
+                          "index": 22,
+                          "type": "Semantics",
+                          "value": "FOOD"
+                        },
+                        {
+                          "index": 4,
+                          "value": "REG"
+                        },
+                        {
+                          "index": 3,
+                          "value": "YES"
+                        },
+                        {
+                          "index": 26,
+                          "value": "PH"
+                        },
+                        {
+                          "index": 24,
+                          "value": "THNG"
+                        },
+                        {
+                          "index": 23,
+                          "value": "THNG"
+                        },
+                        {
+                          "index": 22,
+                          "value": "NO"
+                        },
+                        {
+                          "index": 1,
+                          "value": "NOUN"
+                        },
+                        {
+                          "index": 2,
+                          "value": "1"
+                        },
+                        {
+                          "index": 4,
+                          "type": "Style",
+                          "value": "LAT"
+                        },
+                        {
+                          "index": 34,
+                          "value": "ALL"
+                        },
+                        {
+                          "index": 33,
+                          "value": "ALL"
+                        },
+                        {
+                          "index": 32,
+                          "value": "BEF"
+                        },
+                        {
+                          "index": 15,
+                          "value": "ALL"
+                        },
+                        {
+                          "index": 14,
+                          "value": "NPA"
+                        },
+                        {
+                          "index": 9,
+                          "value": "3"
+                        },
+                        {
+                          "index": 5,
+                          "value": "ALL"
+                        }
+                      ],
+                      "frequency": 1,
+                      "isLemma": true,
+                      "legacyMapId": 58076,
+                      "lemma": "couscous",
+                      "lexemeId": 28041
+                    },
+                    {
+                      "families": [
+                        {
+                          "Key": 53366,
+                          "Value": {},
+                          "definition": "a spicy dish that originated in northern Africa; consists of pasta steamed with a meat and vegetable stew"
+                        }
+                      ],
+                      "features": [
+                        {
+                          "index": 16,
+                          "value": "1"
+                        },
+                        {
+                          "index": 22,
+                          "type": "Semantics",
+                          "value": "FOOD"
+                        },
+                        {
+                          "index": 4,
+                          "value": "REG"
+                        },
+                        {
+                          "index": 3,
+                          "value": "YES"
+                        },
+                        {
+                          "index": 26,
+                          "value": "PH"
+                        },
+                        {
+                          "index": 24,
+                          "value": "THNG"
+                        },
+                        {
+                          "index": 23,
+                          "value": "THNG"
+                        },
+                        {
+                          "index": 22,
+                          "value": "NO"
+                        },
+                        {
+                          "index": 1,
+                          "value": "NOUN"
+                        },
+                        {
+                          "index": 2,
+                          "value": "1"
+                        },
+                        {
+                          "index": 34,
+                          "value": "ALL"
+                        },
+                        {
+                          "index": 33,
+                          "value": "ALL"
+                        },
+                        {
+                          "index": 32,
+                          "value": "BEF"
+                        },
+                        {
+                          "index": 15,
+                          "value": "ALL"
+                        },
+                        {
+                          "index": 14,
+                          "value": "NPA"
+                        },
+                        {
+                          "index": 9,
+                          "value": "3"
+                        },
+                        {
+                          "index": 5,
+                          "value": "ALL"
+                        }
+                      ],
+                      "frequency": 1,
+                      "isLemma": true,
+                      "legacyMapId": 58076,
+                      "lemma": "couscous",
+                      "lexemeId": 28041
+                    }
+                  ],
+                  "items": {
+                    "properties": {
+                      "families": {
+                        "example": [
+                          {
+                            "Key": 51804,
+                            "Value": {},
+                            "definition": "a pasta made in northern Africa of crushed and steamed semolina"
+                          }
+                        ],
+                        "items": {
+                          "properties": {
+                            "Key": {
+                              "example": 51804,
+                              "type": "number"
+                            },
+                            "Value": {
+                              "properties": {},
+                              "type": "object"
+                            },
+                            "definition": {
+                              "example": "a pasta made in northern Africa of crushed and steamed semolina",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "features": {
+                        "example": [
+                          {
+                            "index": 16,
+                            "value": "1"
+                          },
+                          {
+                            "index": 22,
+                            "type": "Semantics",
+                            "value": "FOOD"
+                          },
+                          {
+                            "index": 4,
+                            "value": "REG"
+                          },
+                          {
+                            "index": 3,
+                            "value": "YES"
+                          },
+                          {
+                            "index": 26,
+                            "value": "PH"
+                          },
+                          {
+                            "index": 24,
+                            "value": "THNG"
+                          },
+                          {
+                            "index": 23,
+                            "value": "THNG"
+                          },
+                          {
+                            "index": 22,
+                            "value": "NO"
+                          },
+                          {
+                            "index": 1,
+                            "value": "NOUN"
+                          },
+                          {
+                            "index": 2,
+                            "value": "1"
+                          },
+                          {
+                            "index": 4,
+                            "type": "Style",
+                            "value": "LAT"
+                          },
+                          {
+                            "index": 34,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 33,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 32,
+                            "value": "BEF"
+                          },
+                          {
+                            "index": 15,
+                            "value": "ALL"
+                          },
+                          {
+                            "index": 14,
+                            "value": "NPA"
+                          },
+                          {
+                            "index": 9,
+                            "value": "3"
+                          },
+                          {
+                            "index": 5,
+                            "value": "ALL"
+                          }
+                        ],
+                        "items": {
+                          "properties": {
+                            "index": {
+                              "example": 16,
+                              "type": "number"
+                            },
+                            "type": {
+                              "example": "Semantics",
+                              "type": "string"
+                            },
+                            "value": {
+                              "example": "1",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "frequency": {
+                        "example": 1,
+                        "type": "number"
+                      },
+                      "isLemma": {
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "legacyMapId": {
+                        "example": 58076,
+                        "type": "number"
+                      },
+                      "lemma": {
+                        "example": "couscous",
+                        "type": "string"
+                      },
+                      "lexemeId": {
+                        "example": 28041,
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Interpretations of \"couscous\""
+          }
+        },
+        "summary": "List word senses",
+        "tags": [
+          "Language Model Direct Access"
+        ]
+      }
+    },
+    "/values": {
+      "get": {
+        "description": "Lists feature values for a particular category of features. This allows obtaining all the values such as entity types, subtypes, abuse types and tags, and more.\n\nReturns the values as a JSON array of strings.",
+        "operationId": "listFeatureValues",
+        "parameters": [
+          {
+            "description": "(Required) Language code",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "example": "{language_code}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "(Required) Feature type",
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "example": "{Grammar/Style/Semantics}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "(Required) Feature list name (localized)",
+            "in": "query",
+            "name": "description",
+            "schema": {
+              "example": "{feature_list_name}",
+              "type": "string"
+            }
+          },
+          {
+            "description": "{{apiKeyDescription}}",
+            "in": "header",
+            "name": "Ocp-Apim-Subscription-Key",
+            "schema": {
+              "example": "{{apiKey}}",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "List entity subtypes": {
+                    "value": [
+                      "ada",
+                      "american_express",
+                      "authorities",
+                      "bcg",
+                      "bitcoin",
+                      "dash",
+                      "diners_club",
+                      "darknet",
+                      "discovery",
+                      "ethereum",
+                      "extremist",
+                      "facebook",
+                      "fictional_character",
+                      "hexadecimal",
+                      "http",
+                      "iban",
+                      "important_person",
+                      "instagram",
+                      "intelligence_agency",
+                      "jcb",
+                      "law_enforcement_agency",
+                      "litecoin",
+                      "mastercard",
+                      "md5",
+                      "media",
+                      "monero",
+                      "monero_payment_id",
+                      "maestro",
+                      "ordinal",
+                      "piracy",
+                      "pnr",
+                      "sha-1",
+                      "spiritual_being",
+                      "tor",
+                      "twitter",
+                      "unix",
+                      "unionpay",
+                      "v4",
+                      "v6",
+                      "visa",
+                      "weibo",
+                      "windows",
+                      "zcash"
+                    ]
+                  }
+                },
+                "schema": {
+                  "example": [
+                    "ada",
+                    "american_express",
+                    "authorities",
+                    "bcg",
+                    "bitcoin",
+                    "dash",
+                    "diners_club",
+                    "darknet",
+                    "discovery",
+                    "ethereum",
+                    "extremist",
+                    "facebook",
+                    "fictional_character",
+                    "hexadecimal",
+                    "http",
+                    "iban",
+                    "important_person",
+                    "instagram",
+                    "intelligence_agency",
+                    "jcb",
+                    "law_enforcement_agency",
+                    "litecoin",
+                    "mastercard",
+                    "md5",
+                    "media",
+                    "monero",
+                    "monero_payment_id",
+                    "maestro",
+                    "ordinal",
+                    "piracy",
+                    "pnr",
+                    "sha-1",
+                    "spiritual_being",
+                    "tor",
+                    "twitter",
+                    "unix",
+                    "unionpay",
+                    "v4",
+                    "v6",
+                    "visa",
+                    "weibo",
+                    "windows",
+                    "zcash"
+                  ],
+                  "items": {
+                    "example": "ada",
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "List entity subtypes"
+          }
+        },
+        "summary": "List feature values",
+        "tags": [
+          "Language Model Direct Access"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,2453 @@
+openapi: 3.0.0
+servers:
+  - url: https://hub.docker.com/
+  - url: https://docker.com/{version}
+    variables:
+      version:
+        default: "1.33"
+info:
+  description: |
+    Docker Hub is a service provided by Docker for finding and sharing container
+    images with your team.
+
+    It is the world's largest library and community for container images.
+
+    In addition to the [Docker Hub UI](https://docs.docker.com/docker-hub/) and [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental),
+
+    Docker provides an API that allows you to interact with Docker Hub.
+
+    Browse through the Docker Hub API documentation to explore the supported endpoints.
+  title: Docker HUB API
+  version: beta
+  x-apisguru-categories:
+    - developer_tools
+    - developer_tools
+  x-logo:
+    href: /reference
+    url: https://api.apis.guru/v2/cache/logo/https_docs.docker.com_assets_images_logo-docker-main.png
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/docker/docs/main/docker-hub/api/latest.yaml
+      version: "3.0"
+  x-providerName: docker.com
+  x-serviceName: hub
+tags:
+  - description: |
+      The following resources are available to interact with the documented API:
+
+      - <a href="https://github.com/docker/hub-tool#readme" target="_blank">Docker Hub CLI tool</a> (currently experimental)
+      - <a href="https://www.postman.com/dockerdev/workspace/docker-hub/collection/17990590-9574e087-2a50-4ecf-88b3-55f12a29d99e" target="_blank">Postman Collection</a>
+    name: resources
+    x-displayName: Resources
+  - description: |
+      The Docker Hub API is limited on the amount of requests you can perform per minute against it.
+
+      If you haven't hit the limit, each request to the API will return the
+
+      following headers in the response.
+
+      - `X-RateLimit-Limit` - The limit of requests per minute.
+      - `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.
+      - `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.
+
+      If you have hit the limit, you will receive a response status of `429` and the `X-Retry-After` 
+      header in the response.
+
+      The `X-Retry-After` header is a unix timestamp of when you can call the API again.
+
+      *Note: These rate limits are separate from anti-abuse and Docker Hub
+
+      download, or pull rate limiting. To learn more about Docker Hub pull rate
+
+      limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).*
+    name: rate-limiting
+    x-displayName: Rate Limiting
+  - description: |
+      Most Docker Hub API endpoints require you to authenticate using your
+      Docker credentials before using them.
+
+      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending 
+      on your plan (Free, Pro, or Team) and your account's permissions.
+
+      To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
+    name: authentication
+    x-displayName: Authentication
+  - description: |
+      The Personal Access Token endpoints lets you manage personal access tokens. For more 
+      information, see [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
+
+      You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) 
+      or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer 
+      token.
+
+      ### Scopes
+
+      For each scope grouping (in this case "repo"), you only need to define 1 scope as any lower 
+      scopes are assumed. For example: If you define `repo:write`, the API assumes the scope of both 
+      `repo:read` *and* `repo:public_read` as well. If you were to define both `repo:write` *and* 
+      `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
+
+      ***Treat your personal access token like your password and keep it secret. You cannot retrieve 
+      your token after it is generated.***
+    name: access-tokens
+    x-displayName: Personal Access Tokens
+  - description: |
+      The Advanced Image Management API endpoints allow you to manage Docker
+      images across all repositories.
+
+      For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/).
+    name: images
+    x-displayName: Advanced Image Management
+  - description: |
+      The Audit Logs API endpoints allow you to query audit log events across a
+      namespace.
+
+      For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/)
+    name: audit-logs
+    x-displayName: Audit Logs
+  - description: |
+      The Org Settings API endpoints allow you to manage your organization's
+      settings.
+    name: org-settings
+    x-displayName: Org Settings
+  - description: |
+      The repository endpoints allow you to manage your repository's
+      configuration like description.
+    name: repositories
+    x-displayName: Repositories
+  - description: |
+      SCIM is a provisioning system that lets you manage users within your identity provider (IdP).
+      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/docker-hub/scim/).
+    name: scim
+    x-displayName: SCIM
+paths:
+  /v2/access-tokens:
+    get:
+      description: Returns a paginated list of personal access tokens.
+      parameters:
+        - in: query
+          name: page
+          schema:
+            default: 1
+            type: number
+        - in: query
+          name: page_size
+          schema:
+            default: 10
+            type: number
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAccessTokensResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      summary: Get a list of personal access tokens
+      tags:
+        - access-tokens
+    post:
+      description: Creates and returns a personal access token.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createAccessTokenRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createAccessTokensResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      summary: Create a personal access token
+      tags:
+        - access-tokens
+  "/v2/access-tokens/{uuid}":
+    delete:
+      description: |
+        Deletes a personal access token permanently. This cannot be undone.
+      responses:
+        "204":
+          description: A successful response.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      summary: Delete a personal access token
+      tags:
+        - access-tokens
+    get:
+      description: Returns a personal access token by UUID.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/accessToken"
+                  - properties:
+                      token:
+                        example: ""
+                        type: string
+                    type: object
+          description: OK
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      summary: Get a personal access token
+      tags:
+        - access-tokens
+    parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |
+        Updates a personal access token partially. You can either update the
+        token's label or enable/disable it.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/patchAccessTokenRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/patchAccessTokenResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      summary: Update a personal access token
+      tags:
+        - access-tokens
+  "/v2/auditlogs/{account}":
+    get:
+      description: Get audit log events for a given namespace.
+      operationId: AuditLogs_GetAuditLogs
+      parameters:
+        - description: Namespace to query audit logs for.
+          in: path
+          name: account
+          required: true
+          schema:
+            type: string
+        - description: action name one of ["repo.tag.push", ...]. Optional parameter to filter specific audit log actions.
+          in: query
+          name: action
+          required: false
+          schema:
+            type: string
+        - description: name. Optional parameter to filter audit log events to a specific name. For repository events, this is the name of the repository. For organization events, this is the name of the organization. For team member events, this is the username of the team member.
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: actor name. Optional parameter to filter audit log events to the specific user who triggered the event.
+          in: query
+          name: actor
+          required: false
+          schema:
+            type: string
+        - description: Start of the time window you wish to query audit events for.
+          in: query
+          name: from
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: End of the time window you wish to query audit events for.
+          in: query
+          name: to
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: page - specify page number. Page number to get.
+          in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            format: int32
+            type: integer
+        - description: page_size - specify page size. Number of events to return per page.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            default: 25
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    logs:
+                      - account: docker
+                        action: repo.tag.push
+                        action_description: pushed the tag latest with the digest sha256:c1ae9c435032a to the repository docker/example
+                        actor: docker
+                        data:
+                          digest: sha256:c1ae9c435032a276f80220c7d9b40f76266bbe79243d34f9cda30b76fe114dfa
+                          tag: latest
+                        name: docker/example
+                        timestamp: 2021-02-19T01:34:35Z
+              schema:
+                $ref: "#/components/schemas/GetAuditLogsResponse"
+          description: A successful response.
+        "429":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    detail: Rate limit exceeded
+                    error: false
+              schema: {}
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema: {}
+          description: ""
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/rpcStatus"
+          description: An unexpected error response.
+      summary: Returns list of audit log  events.
+      tags:
+        - audit-logs
+  "/v2/auditlogs/{account}/actions":
+    get:
+      description: Get audit log actions for a namespace to be used as a filter for querying audit events.
+      operationId: AuditLogs_GetAuditActions
+      parameters:
+        - description: Namespace to query audit log actions for.
+          in: path
+          name: account
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    actions:
+                      org:
+                        actions:
+                          - description: contains team create events
+                            label: Team Created
+                            name: team.create
+                          - description: contains team delete events
+                            label: Team Deleted
+                            name: team.delete
+                          - description: contains team member add events
+                            label: Team Member Added
+                            name: team.member.add
+                          - description: contains team member remove events
+                            label: Team Member Removed
+                            name: team.member.remove
+                          - description: contains team member invite events
+                            label: Team Member Invited
+                            name: team.member.invite
+                          - description: contains org member remove events
+                            label: Organization Member Removed
+                            name: member.removed
+                          - description: contains organization create events
+                            label: Organization Created
+                            name: create
+                        label: Organization
+                      repo:
+                        actions:
+                          - description: contains repository create events
+                            label: Repository Created
+                            name: create
+                          - description: contains repository delete events
+                            label: Repository Deleted
+                            name: delete
+                          - description: contains repository privacy change events
+                            label: Privacy Changed
+                            name: change_privacy
+                          - description: contains image tag push events
+                            label: Tag Pushed
+                            name: tag.push
+                          - description: contains image tag delete events
+                            label: Tag Deleted
+                            name: tag.delete
+                        label: Repository
+              schema:
+                $ref: "#/components/schemas/GetAuditActionsResponse"
+          description: A successful response.
+        "429":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    detail: Rate limit exceeded
+                    error: false
+              schema: {}
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema: {}
+          description: ""
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/rpcStatus"
+          description: An unexpected error response.
+      summary: Returns list of audit log actions.
+      tags:
+        - audit-logs
+  "/v2/namespaces/{namespace}/delete-images":
+    post:
+      description: |
+        Deletes one or more images within a namespace. This is currently limited to a single 
+        repository.
+
+        If you attempt to delete images that are marked as active or are currently tagged, the deletion does not happen and it displays the warnings.
+        To continue with the deletion, you must ignore these warnings by putting them in the `ignore_warnings` property.
+
+        Deleting a currently tagged image deletes the tag from the repository.
+
+        You cannot ignore errors. It is not possible to directly delete children of multi-arch images.
+      operationId: PostNamespacesDeleteImages
+      parameters:
+        - description: Namespace of the repository.
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostNamespacesDeleteImagesRequest"
+        description: Delete request.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostNamespacesDeleteImagesResponseSuccess"
+          description: Deletion completed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostNamespacesDeleteImagesResponseError"
+          description: Deletion not possible
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden - this API is only available to users on Pro or Team plans
+      summary: Delete images
+      tags:
+        - images
+  "/v2/namespaces/{namespace}/repositories/{repository}/images":
+    get:
+      description: Gets details on the images in a repository.
+      operationId: GetNamespacesRepositoriesImages
+      parameters:
+        - description: Namespace of the repository.
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+        - description: Name of the repository.
+          in: path
+          name: repository
+          required: true
+          schema:
+            type: string
+        - description: Filters to only show images of this status.
+          in: query
+          name: status
+          required: false
+          schema:
+            enum:
+              - active
+              - inactive
+            type: string
+        - description: |
+            Filters to only show images with:
+            - `true`: at least 1 current tag.
+            - `false`: no current tags.
+          in: query
+          name: currently_tagged
+          required: false
+          schema:
+            type: boolean
+        - description: |
+            Orders the results by this property.
+
+            Prefixing with `-` sorts by descending order.
+          in: query
+          name: ordering
+          required: false
+          schema:
+            enum:
+              - last_activity
+              - -last_activity
+              - digest
+              - -digest
+            type: string
+        - description: |
+            Sets the time from which an image must have been pushed or pulled to
+            be counted as active.
+
+            Defaults to 1 month before the current time.
+          in: query
+          name: active_from
+          required: false
+          schema:
+            type: string
+        - description: Page number to get. Defaults to 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Number of images to get per page. Defaults to 10. Max of 100.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetNamespaceRepositoryImagesResponse"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized - user does not have read access to the namespace.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden - this API is only available to users on Pro or Team plans.
+      summary: Get details of repository's images
+      tags:
+        - images
+  "/v2/namespaces/{namespace}/repositories/{repository}/images-summary":
+    get:
+      description: |
+        Gets the number of images in a repository and the number of images
+        counted as active and inactive.
+      operationId: GetNamespacesRepositoriesImagesSummary
+      parameters:
+        - description: Namespace of the repository.
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+        - description: Name of the repository.
+          in: path
+          name: repository
+          required: true
+          schema:
+            type: string
+        - description: |
+            Sets the time from which an image must have been pushed or pulled to
+            be counted as active.
+
+            Defaults to 1 month before the current time.
+          in: query
+          name: active_from
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetNamespaceRepositoryImagesSummaryResponse"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized - user does not have read access to the namespace
+      summary: Get summary of repository's images
+      tags:
+        - images
+  "/v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags":
+    get:
+      description: Gets current and historical tags for an image.
+      operationId: GetNamespacesRepositoriesImagesTags
+      parameters:
+        - description: Namespace of the repository.
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+        - description: Name of the repository.
+          in: path
+          name: repository
+          required: true
+          schema:
+            type: string
+        - description: Digest of the image.
+          in: path
+          name: digest
+          required: true
+          schema:
+            type: string
+        - description: Page number to get. Defaults to 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Number of images to get per page. Defaults to 10. Max of 100.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetNamespaceRepositoryImagesTagsResponse"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized - user does not have read access to the namespace
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden - this API is only available to users on Pro or Team plans
+      summary: Get image's tags
+      tags:
+        - images
+  "/v2/namespaces/{namespace}/repositories/{repository}/tags":
+    get:
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/page_size"
+      responses:
+        "200":
+          $ref: "#/components/responses/list_tags"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      summary: List repository tags
+      tags:
+        - repositories
+    head:
+      responses:
+        "200":
+          description: Repository contains tags
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      summary: Check repository tags
+      tags:
+        - repositories
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+  "/v2/namespaces/{namespace}/repositories/{repository}/tags/{tag}":
+    get:
+      responses:
+        "200":
+          $ref: "#/components/responses/get_tag"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      summary: Read repository tag
+      tags:
+        - repositories
+    head:
+      responses:
+        "200":
+          description: Repository tag exists
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      summary: Check repository tag
+      tags:
+        - repositories
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+      - $ref: "#/components/parameters/tag"
+  "/v2/orgs/{name}/settings":
+    get:
+      description: |
+        Returns organization settings by name.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/orgSettings"
+          description: OK
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      summary: Get organization settings
+      tags:
+        - org-settings
+    parameters:
+      - description: Name of the organization.
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+    put:
+      description: |
+        Updates an organization's settings. Some settings are only used when the
+        organization is on a business plan.
+
+        ***Only users in the "owners" group of the organization can use this endpoint.***
+
+        The following settings are only used on a business plan:
+        - `restricted_images`
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                restricted_images:
+                  allOf:
+                    - $ref: "#/components/schemas/restricted_images"
+                    - required:
+                        - enabled
+                        - allow_official_images
+                        - allow_verified_publishers
+                      type: object
+              required:
+                - restricted_images
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/orgSettings"
+          description: OK
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      summary: Update organization settings
+      tags:
+        - org-settings
+  /v2/scim/2.0/ResourceTypes:
+    get:
+      description: |
+        Returns all resource types supported for the SCIM configuration.
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_resource_types_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: List resource types
+      tags:
+        - scim
+  "/v2/scim/2.0/ResourceTypes/{name}":
+    get:
+      description: |
+        Returns a resource type by name.
+      parameters:
+        - example: User
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_resource_type_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: Get a resource type
+      tags:
+        - scim
+  /v2/scim/2.0/Schemas:
+    get:
+      description: |
+        Returns all schemas supported for the SCIM configuration.
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_schemas_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: List schemas
+      tags:
+        - scim
+  "/v2/scim/2.0/Schemas/{id}":
+    get:
+      description: |
+        Returns a schema by ID.
+      parameters:
+        - example: urn:ietf:params:scim:schemas:core:2.0:User
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_schema_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: Get a schema
+      tags:
+        - scim
+  /v2/scim/2.0/ServiceProviderConfig:
+    get:
+      description: |
+        Returns a service provider config for Docker's configuration.
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_service_provider_config_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: Get service provider config
+      tags:
+        - scim
+  /v2/scim/2.0/Users:
+    get:
+      description: |
+        List users, returns paginated users for an organization. Use `startIndex`
+        and `count` query parameters to receive paginated results.
+
+        **Sorting:**<br>
+        Sorting lets you to specify the order of returned resources by specifying
+        a combination of `sortBy` and `sortOrder` query parameters.
+
+        The `sortBy` parameter specifies the attribute whose value will be used
+        to order the returned responses. The `sortOrder` parameter defines the
+        order in which the `sortBy` parameter is applied. Allowed values are
+        "ascending" and "descending".
+
+        **Filtering:**<br>
+        You can request a subset of resources by specifying the `filter` query
+        parameter containing a filter expression. Attribute names and attribute
+        operators used in filters are case insensitive. The filter parameter
+        must contain at least one valid expression. Each expression must contain
+        an attribute name followed by an attribute operator and an optional
+        value.
+
+        Supported operators are listed below.
+
+        - `eq` equal
+        - `ne` not equal
+        - `co` contains
+        - `sw` starts with
+        - `and` Logical "and"
+        - `or` Logical "or"
+        - `not` "Not" function
+        - `()` Precedence grouping
+      parameters:
+        - description: ""
+          example: 1
+          in: query
+          name: startIndex
+          schema:
+            minimum: 1
+            type: integer
+        - description: ""
+          example: 10
+          in: query
+          name: count
+          schema:
+            maximum: 200
+            minimum: 1
+            type: integer
+        - description: ""
+          example: userName eq "jon.snow@docker.com"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - $ref: "#/components/parameters/scim_attributes"
+        - in: query
+          name: sortOrder
+          schema:
+            enum:
+              - ascending
+              - descending
+            type: string
+        - description: User attribute to sort by.
+          example: userName
+          in: query
+          name: sortBy
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_users_resp"
+        "400":
+          $ref: "#/components/responses/scim_bad_request"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "403":
+          $ref: "#/components/responses/scim_forbidden"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: List users
+      tags:
+        - scim
+    post:
+      description: |
+        Creates a user. If the user already exists by email, they are assigned
+        to the organization on the "company" team.
+      requestBody:
+        $ref: "#/components/requestBodies/scim_create_user_request"
+      responses:
+        "201":
+          $ref: "#/components/responses/scim_create_user_resp"
+        "400":
+          $ref: "#/components/responses/scim_bad_request"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "403":
+          $ref: "#/components/responses/scim_forbidden"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "409":
+          $ref: "#/components/responses/scim_conflict"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: Create user
+      tags:
+        - scim
+  "/v2/scim/2.0/Users/{id}":
+    get:
+      description: |
+        Returns a user by ID.
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_user_resp"
+        "400":
+          $ref: "#/components/responses/scim_bad_request"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "403":
+          $ref: "#/components/responses/scim_forbidden"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: Get a user
+      tags:
+        - scim
+    parameters:
+      - $ref: "#/components/parameters/scim_user_id"
+    put:
+      description: |
+        Updates a user. Use this route to change the user's name, activate,
+        and deactivate the user.
+      requestBody:
+        $ref: "#/components/requestBodies/scim_update_user_request"
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_update_user_resp"
+        "400":
+          $ref: "#/components/responses/scim_bad_request"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "403":
+          $ref: "#/components/responses/scim_forbidden"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "409":
+          $ref: "#/components/responses/scim_conflict"
+        "500":
+          $ref: "#/components/responses/scim_error"
+      security:
+        - {}
+      summary: Update a user
+      tags:
+        - scim
+  /v2/users/2fa-login:
+    post:
+      description: |
+        When user has 2FA enabled, this is the second call to perform after
+        `/v2/users/login` call.
+
+        Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
+
+        The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
+
+        Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
+      operationId: PostUsers2FALogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users2FALoginRequest"
+        description: Login details.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginSuccessResponse"
+          description: Authentication successful
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsers2FALoginErrorResponse"
+          description: Authentication failed or second factor required
+      summary: Second factor authentication.
+      tags:
+        - authentication
+  /v2/users/login:
+    post:
+      description: |
+        Creates and returns a bearer token in JWT format that you can use to
+        authenticate with Docker Hub APIs.
+
+        The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
+
+        Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
+      operationId: PostUsersLogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersLoginRequest"
+        description: Login details.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginSuccessResponse"
+          description: Authentication successful
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginErrorResponse"
+          description: Authentication failed or second factor required
+      summary: Create an authentication token
+      tags:
+        - authentication
+components:
+  parameters:
+    namespace:
+      in: path
+      name: namespace
+      required: true
+      schema:
+        type: string
+    page:
+      description: Page number to get. Defaults to 1.
+      in: query
+      name: page
+      required: false
+      schema:
+        type: integer
+    page_size:
+      description: Number of items to get per page. Defaults to 10. Max of 100.
+      in: query
+      name: page_size
+      required: false
+      schema:
+        type: integer
+    repository:
+      in: path
+      name: repository
+      required: true
+      schema:
+        type: string
+    scim_attributes:
+      description: Comma delimited list of attributes to limit to in the response.
+      example: userName,displayName
+      in: query
+      name: attributes
+      schema:
+        type: string
+    scim_user_id:
+      description: The user ID.
+      example: d80f7c79-7730-49d8-9a41-7c42fb622d9c
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    tag:
+      in: path
+      name: tag
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    scim_create_user_request:
+      content:
+        application/scim+json:
+          schema:
+            properties:
+              name:
+                $ref: "#/components/schemas/scim_user_name"
+              schemas:
+                $ref: "#/components/schemas/scim_user_schemas"
+              userName:
+                $ref: "#/components/schemas/scim_user_username"
+            required:
+              - schemas
+              - userName
+            type: object
+      required: true
+    scim_update_user_request:
+      content:
+        application/scim+json:
+          schema:
+            properties:
+              enabled:
+                default: false
+                description: If this is omitted from the request, it will default to false resulting in a deactivated user.
+                type: boolean
+              name:
+                allOf:
+                  - $ref: "#/components/schemas/scim_user_name"
+                  - description: If this is omitted from the request, the update will skip the update on it. We will only ever change the name, but not clear it.
+              schemas:
+                $ref: "#/components/schemas/scim_user_schemas"
+            required:
+              - schemas
+            type: object
+      required: true
+  responses:
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ValueError"
+      description: Bad Request
+    Forbidden:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Forbidden
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Not Found
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Unauthorized
+    get_tag:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/tag"
+      description: repository tag
+    list_tags:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/paginated_tags"
+      description: list repository tags
+    scim_bad_request:
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  scimType:
+                    description: Some types of errors will return this per the specification.
+                    type: string
+                  status:
+                    example: "400"
+      description: Bad Request
+    scim_conflict:
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "409"
+      description: Conflict
+    scim_create_user_resp:
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_user"
+      description: ""
+    scim_error:
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "500"
+      description: Internal Error
+    scim_forbidden:
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "403"
+      description: Forbidden
+    scim_get_resource_type_resp:
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_resource_type"
+      description: ""
+    scim_get_resource_types_resp:
+      content:
+        application/scim+json:
+          schema:
+            properties:
+              resources:
+                items:
+                  $ref: "#/components/schemas/scim_resource_type"
+                type: array
+              schemas:
+                example:
+                  - urn:ietf:params:scim:api:messages:2.0:ListResponse
+                items:
+                  type: string
+                type: array
+              totalResults:
+                example: 1
+                type: integer
+            type: object
+      description: ""
+    scim_get_schema_resp:
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_schema"
+      description: ""
+    scim_get_schemas_resp:
+      content:
+        application/scim+json:
+          schema:
+            properties:
+              resources:
+                items:
+                  $ref: "#/components/schemas/scim_schema"
+                type: array
+              schemas:
+                example:
+                  - urn:ietf:params:scim:api:messages:2.0:ListResponse
+                items:
+                  type: string
+                type: array
+              totalResults:
+                example: 1
+                type: integer
+            type: object
+      description: ""
+    scim_get_service_provider_config_resp:
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_service_provider_config"
+      description: ""
+    scim_get_user_resp:
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_user"
+      description: ""
+    scim_get_users_resp:
+      content:
+        application/scim+json:
+          schema:
+            properties:
+              itemsPerPage:
+                example: 10
+                type: integer
+              resources:
+                items:
+                  $ref: "#/components/schemas/scim_user"
+                type: array
+              schemas:
+                example:
+                  - urn:ietf:params:scim:api:messages:2.0:ListResponse
+                items:
+                  type: string
+                type: array
+              startIndex:
+                example: 1
+                type: integer
+              totalResults:
+                example: 1
+                type: integer
+            type: object
+      description: ""
+    scim_not_found:
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "404"
+      description: Not Found
+    scim_unauthorized:
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "401"
+      description: Unauthorized
+    scim_update_user_resp:
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_user"
+      description: ""
+  schemas:
+    AuditLog:
+      description: Audit log event.
+      properties:
+        account:
+          type: string
+        action:
+          type: string
+        action_description:
+          type: string
+        actor:
+          type: string
+        data:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    AuditLogAction:
+      description: Audit Log action
+      properties:
+        description:
+          description: Description of audit log action.
+          type: string
+        label:
+          description: Label for audit log action.
+          type: string
+        name:
+          description: Name of audit log action.
+          type: string
+      type: object
+    AuditLogActions:
+      properties:
+        actions:
+          description: List of audit log actions.
+          items:
+            $ref: "#/components/schemas/AuditLogAction"
+          type: array
+        label:
+          description: Grouping label for a particular set of audit log actions.
+          type: string
+      type: object
+    Error:
+      properties:
+        detail:
+          type: string
+        message:
+          type: string
+      type: object
+    ErrorDetail:
+      description: Error with a detail field.
+      properties:
+        detail:
+          description: The error message.
+          type: string
+      type: object
+    ErrorInfo:
+      description: Context information for an error used for diagnostics.
+      properties:
+        api_call_docker_id:
+          description: ID of docker user.
+          type: string
+        api_call_name:
+          description: Name of the API operation called.
+          type: string
+        api_call_start:
+          description: Date/time of call start.
+          type: string
+        api_call_txnid:
+          description: Unique ID for this call.
+          type: string
+      type: object
+    ErrorResponse:
+      description: Represents an error.
+      properties:
+        errinfo:
+          $ref: "#/components/schemas/ErrorInfo"
+        message:
+          description: The error message.
+          type: string
+        txnid:
+          description: Unique ID for this call.
+          type: string
+      type: object
+    GetAuditActionsResponse:
+      description: GetAuditActions response.
+      properties:
+        actions:
+          additionalProperties:
+            $ref: "#/components/schemas/AuditLogActions"
+          description: Map of audit log actions.
+          type: object
+      type: object
+    GetAuditLogsResponse:
+      description: GetAuditLogs response.
+      properties:
+        logs:
+          description: List of audit log events.
+          items:
+            $ref: "#/components/schemas/AuditLog"
+          type: array
+      type: object
+    GetNamespaceRepositoryImagesResponse:
+      description: Paginated list of images in a repository.
+      properties:
+        count:
+          description: Total count of images in the repository.
+          example: 100
+          type: integer
+        next:
+          description: Link to the next page with the same query parameters if there are more images.
+          example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images?&page=4&page_size=20
+          nullable: true
+          type: string
+        previous:
+          description: Link to the previous page with the same query parameters if not on first page.
+          example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images?&page=2&page_size=20
+          nullable: true
+          type: string
+        results:
+          description: Image details.
+          items:
+            properties:
+              digest:
+                description: The image's digest.
+                example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+                type: string
+              last_pulled:
+                description: Time when this image was last pulled. Note this is updated at most once per hour.
+                example: 2021-02-24T23:16:10.200008Z
+                nullable: true
+                type: string
+              last_pushed:
+                description: Time when this image was last pushed.
+                example: 2021-02-24T22:05:27.526308Z
+                nullable: true
+                type: string
+              namespace:
+                description: The repository namespace.
+                example: mynamespace
+                type: string
+              repository:
+                description: The repository name.
+                example: myrepo
+                type: string
+              status:
+                description: The status of the image based on its last activity against the `active_from` time.
+                enum:
+                  - active
+                  - inactive
+                example: active
+                type: string
+              tags:
+                description: The current and historical tags for this image.
+                items:
+                  properties:
+                    is_current:
+                      description: |
+                        `true` if the tag currently points to this image.
+
+                        `false` if it has been overwritten to point at a different image.
+                      example: true
+                      type: boolean
+                    tag:
+                      description: The tag.
+                      example: latest
+                      type: string
+                  type: object
+                type: array
+            type: object
+          type: array
+      type: object
+    GetNamespaceRepositoryImagesSummaryResponse:
+      description: Summary information for images in a repository.
+      properties:
+        active_from:
+          description: Time from which an image must have been pushed or pulled to be counted as active.
+          example: 2021-01-25T14:25:37.076343059Z
+          type: string
+        statistics:
+          properties:
+            active:
+              description: Number of images counted as active in this repository.
+              example: 2
+              type: integer
+            inactive:
+              description: Number of images counted as inactive in this repository.
+              example: 1
+              type: integer
+            total:
+              description: Number of images in this repository.
+              example: 3
+              type: integer
+          type: object
+      type: object
+    GetNamespaceRepositoryImagesTagsResponse:
+      description: Paginated list of tags for this repository.
+      properties:
+        count:
+          description: Total count of tags for this image.
+          example: 100
+          type: integer
+        next:
+          description: Link to the next page if there are more tags.
+          example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images/sha256:mydigest/tags?&page=4&page_size=20
+          nullable: true
+          type: string
+        previous:
+          description: Link to the previous page if not on first page.
+          example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images/sha256:mydigest/tags?&page=2&page_size=20
+          nullable: true
+          type: string
+        results:
+          description: The current and historical tags for this image.
+          items:
+            properties:
+              is_current:
+                description: |
+                  `true` if the tag currently points to this image.
+
+                  `false` if it has been overwritten to point at a different image.
+                example: true
+                type: boolean
+              tag:
+                description: The tag.
+                example: latest
+                type: string
+            type: object
+          type: array
+      type: object
+    PostNamespacesDeleteImagesRequest:
+      description: Delete images request.
+      properties:
+        active_from:
+          description: |
+            Sets the time from which an image must have been pushed or pulled to
+            be counted as active.
+
+            Defaults to 1 month before the current time.
+          example: 2020-12-01T12:00:00Z
+          type: string
+        dry_run:
+          description: If `true` then will check and return errors and unignored warnings for the deletion request but will not delete any images.
+          example: false
+          type: boolean
+        ignore_warnings:
+          description: |
+            Warnings to ignore. If a warning is not ignored then no deletions will happen and the 
+            warning is returned in the response.
+
+            These warnings include:
+
+            - is_active: warning when attempting to delete an image that is marked as active.
+            - current_tag: warning when attempting to delete an image that has one or more current 
+            tags in the repository.
+
+            Warnings can be copied from the response to the request.
+          items:
+            properties:
+              digest:
+                description: Digest of the image to ignore the warning for.
+                example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+                type: string
+              repository:
+                description: Name of the repository of the image to ignore the warning for.
+                example: myrepo
+                type: string
+              tags:
+                description: Current tags to ignore.
+                items:
+                  example: latest
+                  type: string
+                type: array
+              warning:
+                description: Warning to ignore.
+                enum:
+                  - is_active
+                  - current_tag
+                example: current_tag
+                type: string
+            required:
+              - repository
+              - digest
+              - warning
+            type: object
+          type: array
+        manifests:
+          description: Image manifests to delete.
+          items:
+            properties:
+              digest:
+                description: Digest of the image to delete.
+                example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+                type: string
+              repository:
+                description: Name of the repository to delete the image from.
+                example: myrepo
+                type: string
+            required:
+              - repository
+              - digest
+            type: object
+          type: array
+      type: object
+    PostNamespacesDeleteImagesResponseError:
+      description: Deletion not possible.
+      properties:
+        errinfo:
+          allOf:
+            - $ref: "#/components/schemas/ErrorInfo"
+            - properties:
+                details:
+                  properties:
+                    errors:
+                      description: Errors from validating delete request. These cannot be ignored.
+                      items:
+                        properties:
+                          digest:
+                            description: Digest of the image that caused the error.
+                            example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+                            type: string
+                          error:
+                            description: Error type.
+                            enum:
+                              - not_found
+                              - unauthorized
+                              - child_manifest
+                            example: not_found
+                            type: string
+                          repository:
+                            description: Name of the repository of the image that caused the error.
+                            example: myrepo
+                            type: string
+                        type: object
+                      type: array
+                    warnings:
+                      description: |
+                        Warnings that can be ignored.
+
+                        These warnings include:
+
+                        - is_active: warning when attempting to delete an image that is marked as 
+                        active.
+                        - current_tag: warning when attempting to delete an image that has one or 
+                        more current tags in the repository.
+
+                        Warnings can be copied from the response to the request.
+                      items:
+                        properties:
+                          digest:
+                            description: Digest of the image that caused the warning.
+                            example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+                            type: string
+                          repository:
+                            description: Name of the repository of the image that caused the warning.
+                            example: myrepo
+                            type: string
+                          tags:
+                            description: Current tags if warning is `current_tag`.
+                            items:
+                              example: latest
+                              type: string
+                            type: array
+                          warning:
+                            description: Warning type.
+                            enum:
+                              - is_active
+                              - current_tag
+                            example: current_tag
+                            type: string
+                        type: object
+                      type: array
+                  type: object
+                type:
+                  description: Type of error.
+                  example: validation
+                  type: string
+              type: object
+        message:
+          description: The error message.
+          type: string
+        txnid:
+          description: Unique ID for this call.
+          type: string
+      type: object
+    PostNamespacesDeleteImagesResponseSuccess:
+      description: Successful delete images response.
+      properties:
+        dry_run:
+          description: Whether the request was a dry run or not.
+          example: false
+          type: boolean
+        metrics:
+          properties:
+            manifest_deletes:
+              description: Number of manifests deleted.
+              example: 3
+              type: integer
+            manifest_errors:
+              description: Number of manifests that failed to delete.
+              example: 0
+              type: integer
+            tag_deletes:
+              description: Number of tags deleted.
+              example: 1
+              type: integer
+            tag_errors:
+              description: Number of tags that failed to delete.
+              example: 0
+              type: integer
+          type: object
+      type: object
+    PostUsers2FALoginErrorResponse:
+      description: failed second factor login response.
+      properties:
+        detail:
+          description: Description of the error.
+          example: Incorrect authentication credentials
+          nullable: false
+          type: string
+      type: object
+    PostUsersLoginErrorResponse:
+      description: failed user login response or second factor required
+      properties:
+        detail:
+          description: Description of the error.
+          example: Incorrect authentication credentials
+          nullable: false
+          type: string
+        login_2fa_token:
+          description: Short time lived token to be used on `/v2/users/2fa-login` to complete the authentication. This field is present only if 2FA is enabled.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          nullable: true
+          type: string
+      required:
+        - detail
+      type: object
+    PostUsersLoginSuccessResponse:
+      description: successful user login response
+      properties:
+        token:
+          description: |
+            Created authentication token.
+
+            This token can be used in the HTTP Authorization header as a JWT to authenticate with the Docker Hub APIs.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          nullable: false
+          type: string
+      type: object
+    Users2FALoginRequest:
+      description: Second factor user login details
+      properties:
+        code:
+          description: The Time-based One-Time Password of the Docker Hub account to authenticate with.
+          example: 123456
+          type: string
+        login_2fa_token:
+          description: The intermediate 2FA token returned from `/v2/users/login` API.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          type: string
+      required:
+        - login_2fa_token
+        - code
+      type: object
+    UsersLoginRequest:
+      description: User login details
+      properties:
+        password:
+          description: The password or personal access token (PAT) of the Docker Hub account to authenticate with.
+          example: hunter2
+          type: string
+        username:
+          description: The username of the Docker Hub account to authenticate with.
+          example: myusername
+          type: string
+      required:
+        - username
+        - password
+      type: object
+    ValueError:
+      description: Used to error if input validation fails.
+      properties:
+        fields:
+          items:
+            type: string
+          type: object
+        text:
+          type: string
+      type: object
+    accessToken:
+      properties:
+        client_id:
+          example: HUB
+          type: string
+        created_at:
+          example: 2021-07-20T12:00:00.000000Z
+          type: string
+        creator_ip:
+          example: 127.0.0.1
+          type: string
+        creator_ua:
+          example: some user agent
+          type: string
+        generated_by:
+          example: manual
+          type: string
+        is_active:
+          example: true
+          type: boolean
+        last_used:
+          example: null
+          nullable: true
+          type: string
+        scopes:
+          example:
+            - repo:read
+          items:
+            type: string
+          type: array
+        token:
+          example: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+          type: string
+        token_label:
+          example: My read only token
+          type: string
+        uuid:
+          example: b30bbf97-506c-4ecd-aabc-842f3cb484fb
+          type: string
+      type: object
+    createAccessTokenRequest:
+      properties:
+        scopes:
+          description: |
+            Valid scopes: "repo:admin", "repo:write", "repo:read", "repo:public_read"
+          example:
+            - repo:read
+          items:
+            type: string
+          type: array
+        token_label:
+          description: Friendly name for you to identify the token.
+          example: My read only token
+          type: string
+      required:
+        - token_label
+        - scopes
+      type: object
+    createAccessTokensResponse:
+      $ref: "#/components/schemas/accessToken"
+    getAccessTokensResponse:
+      properties:
+        active_count:
+          example: 1
+          type: number
+        count:
+          example: 1
+          type: number
+        next:
+          example: null
+          type: string
+        previous:
+          example: null
+          type: string
+        results:
+          items:
+            allOf:
+              - $ref: "#/components/schemas/accessToken"
+              - properties:
+                  token:
+                    example: ""
+                    type: string
+                type: object
+          type: array
+      type: object
+    image:
+      properties:
+        architecture:
+          description: CPU architecture
+          type: string
+        digest:
+          description: image digest
+          nullable: true
+          type: string
+        features:
+          description: CPU features
+          type: string
+        last_pulled:
+          description: datetime of last pull
+          example: 2021-01-05T21:06:53.506400Z
+          nullable: true
+          type: string
+        last_pushed:
+          description: datetime of last push
+          example: 2021-01-05T21:06:53.506400Z
+          nullable: true
+          type: string
+        layers:
+          items:
+            $ref: "#/components/schemas/layer"
+          type: array
+        os:
+          description: operating system
+          type: string
+        os_features:
+          description: OS features
+          type: string
+        os_version:
+          description: OS version
+          type: string
+        size:
+          description: size of the image
+          type: integer
+        status:
+          description: Status of the image
+          enum:
+            - active
+            - inactive
+          type: string
+        variant:
+          description: CPU variant
+          type: string
+      type: object
+    layer:
+      properties:
+        digest:
+          description: image layer digest
+          nullable: true
+          type: string
+        instruction:
+          description: Dockerfile instruction
+          type: string
+        size:
+          description: size of the layer
+          type: integer
+      type: object
+    orgSettings:
+      properties:
+        restricted_images:
+          $ref: "#/components/schemas/restricted_images"
+      type: object
+    page:
+      properties:
+        count:
+          description: total number of results available across all pages
+          type: integer
+        next:
+          description: link to next page of results if any
+          nullable: true
+          type: string
+        previous:
+          description: link to previous page of results  if any
+          nullable: true
+          type: string
+      type: object
+    paginated_tags:
+      allOf:
+        - $ref: "#/components/schemas/page"
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/tag"
+              type: array
+          type: object
+    patchAccessTokenRequest:
+      properties:
+        is_active:
+          example: false
+          type: boolean
+        token_label:
+          example: My read only token
+          type: string
+      type: object
+    patchAccessTokenResponse:
+      $ref: "#/components/schemas/accessToken"
+    protobufAny:
+      properties:
+        type_url:
+          type: string
+        value:
+          format: byte
+          type: string
+      type: object
+    restricted_images:
+      properties:
+        allow_official_images:
+          description: Allow usage of official images if "enabled" is `true`.
+          example: true
+          type: boolean
+        allow_verified_publishers:
+          description: Allow usage of verified publisher images if "enabled" is `true`.
+          example: true
+          type: boolean
+        enabled:
+          description: Whether or not to restrict image usage for users in the organization.
+          example: true
+          type: boolean
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: "#/components/schemas/protobufAny"
+          type: array
+        message:
+          type: string
+      type: object
+    scim_email:
+      properties:
+        display:
+          example: jon.snow@docker.com
+          type: string
+        primary:
+          example: true
+          type: boolean
+        value:
+          example: jon.snow@docker.com
+          type: string
+      type: object
+    scim_error:
+      properties:
+        detail:
+          description: Details about why the request failed.
+          type: string
+        schemas:
+          items:
+            default: urn:ietf:params:scim:api:messages:2.0:Error
+            type: string
+          type: array
+        status:
+          description: The status code for the response in string format.
+          type: string
+      type: object
+    scim_group:
+      properties:
+        display:
+          example: nightswatch
+          type: string
+        value:
+          example: nightswatch
+          type: string
+      type: object
+    scim_resource_type:
+      properties:
+        description:
+          example: User
+          type: string
+        endpoint:
+          example: /Users
+          type: string
+        id:
+          example: User
+          type: string
+        name:
+          example: User
+          type: string
+        schema:
+          example: urn:ietf:params:scim:schemas:core:2.0:User
+          type: string
+        schemas:
+          example: urn:ietf:params:scim:schemas:core:2.0:ResourceType
+          items:
+            type: string
+          type: array
+      type: object
+    scim_schema:
+      properties:
+        attributes:
+          example: []
+          items:
+            $ref: "#/components/schemas/scim_schema_parent_attribute"
+          type: array
+        description:
+          example: User Account
+          type: string
+        id:
+          example: urn:ietf:params:scim:schemas:core:2.0:User
+          type: string
+        name:
+          example: User
+          type: string
+        schemas:
+          example:
+            - urn:ietf:params:scim:schemas:core:2.0:Schema
+          items:
+            type: string
+          type: array
+      type: object
+    scim_schema_attribute:
+      properties:
+        caseExact:
+          example: false
+          type: boolean
+        description:
+          example: Unique identifier for the User, typically used by the user to directly authenticate to the service provider. Each User MUST include a non-empty userName value. This identifier MUST be unique across the service provider's entire set of Users.
+          type: string
+        multiValued:
+          example: false
+          type: boolean
+        mutability:
+          example: readWrite
+          type: string
+        name:
+          example: userName
+          type: string
+        required:
+          example: true
+          type: boolean
+        returned:
+          example: default
+          type: string
+        type:
+          enum:
+            - string
+            - boolean
+            - complex
+          example: string
+          type: string
+        uniqueness:
+          example: server
+          type: string
+      type: object
+    scim_schema_parent_attribute:
+      allOf:
+        - $ref: "#/components/schemas/scim_schema_attribute"
+        - properties:
+            subAttributes:
+              items:
+                $ref: "#/components/schemas/scim_schema_attribute"
+              type: array
+          type: object
+    scim_service_provider_config:
+      properties:
+        authenticationSchemes:
+          properties:
+            description:
+              example: The OAuth 2.0 Bearer Token Authentication scheme. OAuth enables clients to access protected resources by obtaining an access token, which is defined in RFC 6750 as "a string representing an access authorization issued to the client", rather than using the resource owner's credentials directly.
+              type: string
+            name:
+              example: OAuth 2.0 Bearer Token
+              type: string
+            specUri:
+              example: http://tools.ietf.org/html/rfc6750
+              type: string
+            type:
+              example: oauthbearertoken
+              type: string
+          type: object
+        bulk:
+          properties:
+            maxOperations:
+              type: integer
+            maxPayloadSize:
+              type: integer
+            supported:
+              example: false
+              type: boolean
+          type: object
+        changePassword:
+          properties:
+            supported:
+              example: false
+              type: boolean
+          type: object
+        documentationUri:
+          example: ""
+          type: string
+        etag:
+          properties:
+            supported:
+              example: false
+              type: boolean
+          type: object
+        filter:
+          properties:
+            maxResults:
+              example: 99999
+              type: integer
+            supported:
+              example: true
+              type: boolean
+          type: object
+        patch:
+          properties:
+            supported:
+              example: false
+              type: boolean
+        schemas:
+          example:
+            - urn:ietf:params:scim:schemas:core:2.0:ServiceProviderConfig
+          items:
+            type: string
+          type: array
+        sort:
+          properties:
+            supported:
+              example: true
+              type: boolean
+          type: object
+      type: object
+    scim_user:
+      properties:
+        active:
+          example: true
+          type: boolean
+        displayName:
+          $ref: "#/components/schemas/scim_user_display_name"
+        emails:
+          items:
+            $ref: "#/components/schemas/scim_email"
+          type: array
+        groups:
+          items:
+            $ref: "#/components/schemas/scim_group"
+          type: array
+        id:
+          $ref: "#/components/schemas/scim_user_id"
+        meta:
+          properties:
+            created:
+              description: The creation date for the user as a RFC3339 formatted string.
+              example: 2022-05-20T00:54:18Z
+              type: string
+            lastModified:
+              description: The date the user was last modified as a RFC3339 formatted string.
+              example: 2022-05-20T00:54:18Z
+              type: string
+            location:
+              example: https://hub.docker.com/v2/scim/2.0/Users/d80f7c79-7730-49d8-9a41-7c42fb622d9c
+              type: string
+            resourceType:
+              example: User
+              type: string
+          type: object
+        name:
+          $ref: "#/components/schemas/scim_user_name"
+        schemas:
+          $ref: "#/components/schemas/scim_user_schemas"
+        userName:
+          $ref: "#/components/schemas/scim_user_username"
+      type: object
+    scim_user_display_name:
+      description: The username in Docker. Also known as the "Docker ID".
+      example: jonsnow
+      type: string
+    scim_user_id:
+      description: The unique identifier for the user. A v4 UUID.
+      example: d80f7c79-7730-49d8-9a41-7c42fb622d9c
+      type: string
+    scim_user_name:
+      properties:
+        familyName:
+          example: Snow
+          type: string
+        givenName:
+          example: Jon
+          type: string
+      type: object
+    scim_user_schemas:
+      items:
+        example: urn:ietf:params:scim:schemas:core:2.0:User
+        minItems: 1
+        type: string
+      type: array
+    scim_user_username:
+      description: The user's email address. This must be reachable via email.
+      example: jon.snow@docker.com
+      type: string
+    tag:
+      properties:
+        creator:
+          description: ID of the user that pushed the tag
+          type: integer
+        full_size:
+          description: compressed size (sum of all layers) of the tagged image
+          type: integer
+        id:
+          description: tag ID
+          type: integer
+        images:
+          $ref: "#/components/schemas/image"
+          type: object
+        last_updated:
+          description: datetime of last update
+          example: 2021-01-05T21:06:53.506400Z
+          nullable: true
+          type: string
+        last_updater:
+          description: ID of the last user that updated the tag
+          type: integer
+        last_updater_username:
+          description: Hub username of the user that updated the tag
+          type: string
+        name:
+          description: name of the tag
+          type: string
+        repository:
+          description: repository ID
+          type: integer
+        status:
+          description: whether a tag has been pushed to or pulled in the past month
+          enum:
+            - active
+            - inactive
+          type: string
+        tag_last_pulled:
+          description: datetime of last pull
+          example: 2021-01-05T21:06:53.506400Z
+          nullable: true
+          type: string
+        tag_last_pushed:
+          description: datetime of last push
+          example: 2021-01-05T21:06:53.506400Z
+          nullable: true
+          type: string
+        v2:
+          description: repository API version
+          type: string
+      type: object
+x-tagGroups:
+  - name: General
+    tags:
+      - resources
+      - rate-limiting
+  - name: API
+    tags:
+      - authentication
+      - access-tokens
+      - images
+      - audit-logs
+      - org-settings
+      - repositories
+      - scim

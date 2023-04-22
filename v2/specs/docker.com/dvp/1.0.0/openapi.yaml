@@ -1,0 +1,525 @@
+openapi: 3.0.0
+servers:
+  - url: https://hub.docker.com/api/publisher/analytics/v1
+  - url: https://docker.com/{version}
+    variables:
+      version:
+        default: "1.33"
+info:
+  description: |
+    The Docker DVP Data API allows [Docker Verified Publishers](https://docs.docker.com/docker-hub/publish/) to view image pull analytics data for their namespaces. Analytics data can be retrieved as raw data, or in a summary format.
+      
+    #### Summary data
+
+    In your summary data CSV, you will have access to the data points listed below. You can request summary data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). 
+
+    There are two levels of summary data:
+
+    - Repository-level, a summary of every namespace and repository
+    - Tag- or digest-level, a summary of every namespace, repository, and reference
+      (tag or digest)
+
+     The summary data formats contain the following data points:
+
+    - Unique IP address count
+    - Pulls by tag count
+    - Pulls by digest count
+    - Version check count
+
+    #### Raw data
+
+    In your raw data CSV you will have access to the data points listed below. You can request raw data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). **Note:** each action is represented as a single row.
+
+    - Type (industry)
+    - Host (cloud provider)
+    - Country (geolocation)
+    - Timestamp
+    - Namespace
+    - Repository
+    - Reference (digest is always included, tag is provided when available)
+    - HTTP request method
+    - Action, one of the following:
+      - Pull by tag
+      - Pull by digest
+      - Version check
+    - User-Agent
+  title: DVP Data API
+  version: 1.0.0
+  x-apisguru-categories:
+    - developer_tools
+    - developer_tools
+  x-logo:
+    href: /reference
+    url: https://api.apis.guru/v2/cache/logo/https_docs.docker.com_assets_images_logo-docker-main.png
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/docker/docs/main/docker-hub/api/dvp.yaml
+      version: "3.0"
+  x-providerName: docker.com
+  x-serviceName: dvp
+security:
+  - HubAuth: []
+tags:
+  - name: authentication
+    x-displayName: Authentication Endpoints
+  - name: namespaces
+    x-displayName: Namespace data
+  - name: discovery
+    x-displayName: Discovery
+  - description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ResponseDataFile" />
+    name: responseDataFile
+    x-displayName: ResponseDataFile
+  - description: |
+      <SchemaDefinition schemaRef="#/components/schemas/YearModel" />
+    name: yearModel
+    x-displayName: Year Data Model
+  - description: |
+      <SchemaDefinition schemaRef="#/components/schemas/MonthModel" />
+    name: monthModel
+    x-displayName: Month Data Model
+  - description: |
+      <SchemaDefinition schemaRef="#/components/schemas/WeekModel" />
+    name: weekModel
+    x-displayName: Week Data Model
+paths:
+  /:
+    get:
+      description: Gets a list of your namespaces and repos which have data available
+      operationId: getNamespaces
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NamespaceData"
+          description: Success
+      summary: Get namespaces and repos
+      tags:
+        - discovery
+  "/namespaces/{namespace}":
+    get:
+      description: Gets metadata associated with specified namespace, including extra repos associated with the namespace
+      operationId: getNamespace
+      parameters:
+        - description: Namespace to fetch data for
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NamespaceMetadata"
+          description: Success
+      summary: Get namespace
+      tags:
+        - discovery
+  "/namespaces/{namespace}/pulls/exports/years":
+    get:
+      description: Gets a list of years that have data for the given namespace
+      operationId: getNamespaceYears
+      parameters:
+        - description: Namespace to fetch data for
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/YearData"
+          description: Success
+      summary: Get years with data
+      tags:
+        - namespaces
+  "/namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}":
+    get:
+      description: Gets a list of timespans of the given type that have data for the given namespace and year
+      operationId: getNamespaceTimespans
+      parameters:
+        - description: Namespace to fetch data for
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+        - description: Year to fetch data for
+          in: path
+          name: year
+          required: true
+          schema:
+            type: integer
+        - description: Type of timespan to fetch data for
+          in: path
+          name: timespantype
+          required: true
+          schema:
+            $ref: "#/components/schemas/TimespanType"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimespanData"
+          description: Success
+      summary: Get timespans with data
+      tags:
+        - namespaces
+  "/namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}":
+    get:
+      description: Gets info about data for the given namespace and timespan
+      operationId: getNamespaceTimespanMetadata
+      parameters:
+        - description: Namespace to fetch data for
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+        - description: Year to fetch data for
+          in: path
+          name: year
+          required: true
+          schema:
+            type: integer
+        - description: Type of timespan to fetch data for
+          in: path
+          name: timespantype
+          required: true
+          schema:
+            $ref: "#/components/schemas/TimespanType"
+        - description: Timespan to fetch data for
+          in: path
+          name: timespan
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimespanModel"
+          description: Success
+        "404":
+          description: Not Found
+      summary: Get namespace metadata for timespan
+      tags:
+        - namespaces
+  "/namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}/{dataview}":
+    get:
+      description: Gets a list of URLs that can be used to download the pull data for the given namespace and timespan
+      operationId: getNamespaceDataByTimespan
+      parameters:
+        - description: Namespace to fetch data for
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+        - description: Year to fetch data for
+          in: path
+          name: year
+          required: true
+          schema:
+            type: integer
+        - description: Type of timespan to fetch data for
+          in: path
+          name: timespantype
+          required: true
+          schema:
+            $ref: "#/components/schemas/TimespanType"
+        - description: Timespan to fetch data for
+          in: path
+          name: timespan
+          required: true
+          schema:
+            type: integer
+        - description: Type of data to fetch
+          in: path
+          name: dataview
+          required: true
+          schema:
+            $ref: "#/components/schemas/DataviewType"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseData"
+          description: Success
+      summary: Get namespace data for timespan
+      tags:
+        - namespaces
+  /v2/users/2fa-login:
+    post:
+      description: |
+        When a user has 2FA enabled, this is the second call to perform after
+        `/v2/users/login` call.
+
+        Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
+
+        The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
+
+        Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
+      operationId: PostUsers2FALogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users2FALoginRequest"
+        description: Login details.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginSuccessResponse"
+          description: Authentication successful
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsers2FALoginErrorResponse"
+          description: Authentication failed or second factor required
+      security: []
+      summary: Second factor authentication.
+      tags:
+        - authentication
+    servers:
+      - url: https://hub.docker.com
+  /v2/users/login:
+    post:
+      description: |
+        Creates and returns a bearer token in JWT format that you can use to
+        authenticate with Docker Hub APIs.
+
+        The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
+
+        Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
+      operationId: PostUsersLogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersLoginRequest"
+        description: Login details.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginSuccessResponse"
+          description: Authentication successful
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginErrorResponse"
+          description: Authentication failed or second factor required
+      security: []
+      summary: Create an authentication token
+      tags:
+        - authentication
+    servers:
+      - url: https://hub.docker.com
+components:
+  schemas:
+    DatasetModel:
+      properties:
+        name:
+          $ref: "#/components/schemas/DatasetType"
+        timespans:
+          items:
+            $ref: "#/components/schemas/TimespanType"
+          type: array
+        views:
+          items:
+            $ref: "#/components/schemas/DataviewType"
+          type: array
+    DatasetType:
+      enum:
+        - pulls
+      type: string
+    DataviewType:
+      enum:
+        - raw
+        - summary
+        - repo-summary
+      type: string
+    MonthData:
+      properties:
+        months:
+          items:
+            $ref: "#/components/schemas/MonthModel"
+          type: array
+    MonthModel:
+      properties:
+        month:
+          type: integer
+    NamespaceData:
+      properties:
+        namespaces:
+          items:
+            type: string
+          type: array
+    NamespaceMetadata:
+      properties:
+        datasets:
+          items:
+            $ref: "#/components/schemas/DatasetModel"
+          type: array
+        extraRepos:
+          items:
+            type: string
+          type: array
+        namespace:
+          type: string
+    PostUsers2FALoginErrorResponse:
+      description: failed second factor login response.
+      properties:
+        detail:
+          description: Description of the error.
+          example: Incorrect authentication credentials
+          nullable: false
+          type: string
+      type: object
+    PostUsersLoginErrorResponse:
+      description: failed user login response or second factor required
+      properties:
+        detail:
+          description: Description of the error.
+          example: Incorrect authentication credentials
+          nullable: false
+          type: string
+        login_2fa_token:
+          description: Short time lived token to be used on `/v2/users/2fa-login` to complete the authentication. This field is present only if 2FA is enabled.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          nullable: true
+          type: string
+      required:
+        - detail
+      type: object
+    PostUsersLoginSuccessResponse:
+      description: successful user login response
+      properties:
+        token:
+          description: |
+            Created authentication token.
+
+            This token can be used in the HTTP Authorization header as a JWT to authenticate with the Docker Hub APIs.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          nullable: false
+          type: string
+      type: object
+    ResponseData:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/ResponseDataFile"
+          type: array
+    ResponseDataFile:
+      properties:
+        size:
+          format: int64
+          type: integer
+        url:
+          type: string
+    TimespanData:
+      oneOf:
+        - $ref: "#/components/schemas/MonthData"
+        - $ref: "#/components/schemas/WeekData"
+    TimespanModel:
+      oneOf:
+        - $ref: "#/components/schemas/MonthModel"
+        - $ref: "#/components/schemas/WeekModel"
+    TimespanType:
+      enum:
+        - months
+        - weeks
+      type: string
+    Users2FALoginRequest:
+      description: Second factor user login details
+      properties:
+        code:
+          description: The Time-based One-Time Password of the Docker Hub account to authenticate with.
+          example: 123456
+          type: string
+        login_2fa_token:
+          description: The intermediate 2FA token returned from `/v2/users/login` API.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          type: string
+      required:
+        - login_2fa_token
+        - code
+      type: object
+    UsersLoginRequest:
+      description: User login details
+      properties:
+        password:
+          description: The password or personal access token (PAT) of the Docker Hub account to authenticate with.
+          example: hunter2
+          type: string
+        username:
+          description: The username of the Docker Hub account to authenticate with.
+          example: myusername
+          type: string
+      required:
+        - username
+        - password
+      type: object
+    WeekData:
+      properties:
+        weeks:
+          items:
+            $ref: "#/components/schemas/WeekModel"
+          type: array
+    WeekModel:
+      properties:
+        week:
+          type: integer
+    YearData:
+      properties:
+        years:
+          items:
+            $ref: "#/components/schemas/YearModel"
+          type: array
+    YearModel:
+      properties:
+        year:
+          type: integer
+  securitySchemes:
+    HubAuth:
+      bearerFormat: JWT
+      description: |
+        JWT Bearer Authentication is required to access the Docker DVP Data API.  
+          
+        Note - PATs are not supported on this API  
+          
+        This authentication documentation is duplicated from the [Hub API Authentication docs](https://docs.docker.com/docker-hub/api/latest/#tag/authentication)
+      scheme: bearer
+      type: http
+      x-displayName: Docker Hub Authentication
+x-features.openapi:
+  schemaDefinitionsTagName: Schemas
+x-tagGroups:
+  - name: API
+    tags:
+      - authentication
+      - discovery
+      - namespaces
+  - name: Models
+    tags:
+      - responseDataFile
+      - yearModel
+      - monthModel
+      - weekModel

@@ -1,0 +1,38 @@
+{
+  "added": "2023-02-17T11:02:20.620Z",
+  "info": {
+    "contact": {
+      "email": "developer-experience@adyen.com",
+      "name": "Adyen Developer Experience team",
+      "url": "https://www.adyen.help/hc/en-us/community/topics",
+      "x-twitter": "Adyen"
+    },
+    "description": "This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.\n\nThe Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a verification check or a payout has been completed.\n\nFor more information, refer to our [documentation](https://docs.adyen.com/marketplaces-and-platforms/classic/notifications).\n## Authentication\nYour Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication. For example:\n\n```\ncurl\n-U \"ws@MarketPlace.YOUR_PLATFORM_ACCOUNT\":\"YOUR_WS_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\nWhen going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nThe Notification Configuration API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://cal-test.adyen.com/cal/services/Notification/v1/createNotificationConfiguration\n```",
+    "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+    "title": "Notification Configuration API",
+    "version": "1",
+    "x-apisguru-categories": [
+      "payment"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/NotificationConfigurationService-v1.json",
+        "version": "3.1"
+      }
+    ],
+    "x-preferred": false,
+    "x-providerName": "adyen.com",
+    "x-publicVersion": true,
+    "x-serviceName": "NotificationConfigurationService",
+    "x-timestamp": "2023-04-11T21:25:35Z"
+  },
+  "updated": "2023-04-12T23:18:28.529Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/NotificationConfigurationService/1/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/NotificationConfigurationService/1/openapi.yaml",
+  "openapiVer": "3.1.0",
+  "link": "https://api.apis.guru/v2/specs/adyen.com:NotificationConfigurationService/1.json"
+}

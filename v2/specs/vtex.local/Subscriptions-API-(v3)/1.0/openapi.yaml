@@ -1,0 +1,2536 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL.
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: "\r
+
+    A **Subscription** is a list of items (SKUs) tied to certain recurring purchase settings:\r
+
+    \r
+
+    - User profile\r
+
+    - Address\r
+
+    - Payment method\r
+
+    - Frequency\r
+
+    - Cycle\r
+
+    \r
+
+    Once you have [configured subscriptions](https://help.vtex.com/tutorial/how-to-configure-subscriptions%20--1FA9dfE7vJqxBna9Nft5Sj) in your store, the Subscriptions API allows you to create, manage and monitor your customers' subscriptions.\r
+
+    \r
+
+    ![image](https://user-images.githubusercontent.com/77292838/213024675-9407863b-0c55-4282-9442-306352716abe.png)\r
+
+    \r
+
+    To read more about the Subscriptions feature, check our article [How Subscription works](https://help.vtex.com/tutorial/how-subscriptions-work--frequentlyAskedQuestions_4453)."
+  title: Subscriptions API (v3)
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Subscriptions API (v3).json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Subscriptions-API-(v3)
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: Cycles
+  - name: Plans
+  - name: Reports
+  - name: Subscriptions
+paths:
+  /api/rns/pub/cycles:
+    get:
+      description: List cycles filtering by some arguments.
+      parameters:
+        - description: Lower limit for the date of creation of the cycle
+          in: query
+          name: beginDate
+          schema:
+            nullable: true
+            type: string
+        - description: Upper limit for the date of creation of the cycle
+          in: query
+          name: endDate
+          schema:
+            nullable: true
+            type: string
+        - description: Id from the subscription that generated the cycle
+          in: query
+          name: subscriptionId
+          schema:
+            nullable: true
+            type: string
+        - description: Customer that owns the subscription. Defaults to the current logged user
+          in: query
+          name: customerEmail
+          schema:
+            nullable: true
+            type: string
+        - description: Current cycle status
+          in: query
+          name: status
+          schema:
+            nullable: true
+            type: string
+        - description: Page used for pagination
+          in: query
+          name: page
+          schema:
+            default: 1
+            format: int32
+            type: integer
+        - description: Page size used for pagination
+          in: query
+          name: size
+          schema:
+            default: 15
+            format: int32
+            type: integer
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionCycleResponse"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionCycleResponse"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionCycleResponse"
+                type: array
+          description: OK
+      summary: List cycles
+      tags:
+        - Cycles
+  "/api/rns/pub/cycles/{cycleId}":
+    get:
+      description: Retrieve a specific cycle by its ID.
+      parameters:
+        - description: ID from the desired cycle.
+          in: path
+          name: cycleId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionCycleResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionCycleResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SubscriptionCycleResponse"
+          description: OK
+      summary: Get cycle details
+      tags:
+        - Cycles
+  "/api/rns/pub/cycles/{cycleId}/retry":
+    post:
+      description: Every subscription order has an execution count called cycle, which determines the position of an order counting from when the shopper subscribed. This endpoint reruns a cycle that is currently in error state.
+      parameters:
+        - description: Id from the cycle that will be retried
+          in: path
+          name: cycleId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Retry cycle
+      tags:
+        - Cycles
+  /api/rns/pub/subscriptions:
+    get:
+      description: List subscriptions filtering by some arguments.
+      parameters:
+        - description: Customer that owns the subscription. Defaults to the current logged user.
+          in: query
+          name: customerEmail
+          schema:
+            nullable: true
+            type: string
+        - description: Current subscription status
+          in: query
+          name: status
+          schema:
+            nullable: true
+            type: string
+        - description: Id from the address used as shipping address
+          in: query
+          name: addressId
+          schema:
+            nullable: true
+            type: string
+        - description: Id from the payment used as payment method
+          in: query
+          name: paymentId
+          schema:
+            nullable: true
+            type: string
+        - description: Id from the plan that the subscription belongs to
+          in: query
+          name: planId
+          schema:
+            nullable: true
+            type: string
+        - description: Date for the next cycle
+          in: query
+          name: nextPurchaseDate
+          schema:
+            nullable: true
+            type: string
+        - description: Id from the order that generated the subscription
+          in: query
+          name: originalOrderId
+          schema:
+            nullable: true
+            type: string
+        - description: Page used for pagination
+          in: query
+          name: page
+          schema:
+            default: 1
+            format: int32
+            type: integer
+        - description: Page size used for pagination
+          in: query
+          name: size
+          schema:
+            default: 15
+            format: int32
+            type: integer
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionGroupResponse"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionGroupResponse"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionGroupResponse"
+                type: array
+          description: Requested subscriptions
+      summary: List subscriptions
+      tags:
+        - Subscriptions
+    post:
+      description: Create a new subscription.
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionGroupRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionGroupRequest"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionGroupRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionGroupRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+          description: Subscription created
+      summary: Create subscription
+      tags:
+        - Subscriptions
+  /api/rns/pub/subscriptions/simulate:
+    post:
+      description: Simulates an order made by subscriptions on checkout and retrieves the current price for items and shipping.
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionGroupRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionGroupRequest"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionGroupRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionGroupRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulateResponseVO"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SimulateResponseVO"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SimulateResponseVO"
+          description: Simulation result
+      summary: Calculate the current prices for the provided subscription template
+      tags:
+        - Subscriptions
+  "/api/rns/pub/subscriptions/{id}":
+    get:
+      description: Retrieve a specific subscription by its ID.
+      parameters:
+        - description: ID from the target subscription.
+          in: path
+          name: id
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+          description: Requested subscription
+      summary: Get subscription details
+      tags:
+        - Subscriptions
+    patch:
+      description: Update a specific subscription.
+      parameters:
+        - description: ID from the given subscription.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "4002961"
+            nullable: false
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionUpdateRequestV3"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionUpdateRequestV3"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionUpdateRequestV3"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionUpdateRequestV3"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+          description: Subscription successfully updated
+      summary: Update subscription
+      tags:
+        - Subscriptions
+  "/api/rns/pub/subscriptions/{id}/items":
+    post:
+      description: Add a new item to a given subscription.
+      parameters:
+        - description: ID from the target subscription
+          in: path
+          name: id
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionThinItemRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionThinItemRequest"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionThinItemRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionThinItemRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+          description: Subscription successfully updated
+      summary: Add item to subscription
+      tags:
+        - Subscriptions
+  "/api/rns/pub/subscriptions/{id}/items/{itemId}":
+    delete:
+      description: Removes a specific item from a given subscription
+      parameters:
+        - description: Id from the target subscription
+          in: path
+          name: id
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Id from the subscription item that will be removed
+          in: path
+          name: itemId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: Success
+      summary: Remove items from a subscription.
+      tags:
+        - Subscriptions
+    patch:
+      description: Edit a given item on a specific subscription
+      parameters:
+        - description: Id from the target subscription
+          in: path
+          name: id
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Id from the target item
+          in: path
+          name: itemId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateItemInput"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateItemInput"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UpdateItemInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateItemInput"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGroupResponse"
+          description: Subscription updated
+      summary: Edit items on a subscription.
+      tags:
+        - Subscriptions
+  "/api/rns/pub/subscriptions/{id}/simulate":
+    post:
+      description: Simulates an order made by the specific subscription on checkout and retrieves the current price for items and shipping.
+      parameters:
+        - description: Id from the target subscription
+          in: path
+          name: id
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulateResponseVO"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SimulateResponseVO"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SimulateResponseVO"
+          description: Simulation result
+      summary: Calculate the current prices for a specific subscription
+      tags:
+        - Subscriptions
+  "/api/rns/pub/subscriptions/{subscriptionId}/conversation-message":
+    get:
+      description: Retrieve all conversation messages sent to a customer regarding a given subscription.
+      parameters:
+        - description: ID of the subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          schema:
+            default: 123456789abc
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - attachmentNames:
+                    - string
+                  body: string
+                  date: 2021-08-31T22:50:53.564Z
+                  firstWords: string
+                  from:
+                    aliasMaskType: string
+                    conversationRelatedTo: string
+                    conversationSubject: string
+                    email: string
+                    emailAlias: string
+                    name: string
+                    role: string
+                  hasAttachment: true
+                  id: string
+                  subject: string
+                  to:
+                    - aliasMaskType: string
+                      conversationRelatedTo: string
+                      conversationSubject: string
+                      email: string
+                      emailAlias: string
+                      name: string
+                      role: string
+              schema:
+                items:
+                  properties:
+                    attachmentNames:
+                      description: Attachment names.
+                      items:
+                        type: string
+                      type: array
+                    body:
+                      description: HTML content of the message's body.
+                      type: string
+                    date:
+                      description: Date of message.
+                      type: string
+                    firstWords:
+                      description: First words of the message text.
+                      type: string
+                    from:
+                      description: Information regarding the message sender.
+                      properties:
+                        aliasMaskType:
+                          description: Alias mask type.
+                          type: string
+                        conversationRelatedTo:
+                          description: ID of the subscription related to the message.
+                          type: string
+                        conversationSubject:
+                          description: Subject of conversation.
+                          type: string
+                        email:
+                          description: Email address.
+                          type: string
+                        emailAlias:
+                          description: Email alias.
+                          type: string
+                        name:
+                          description: Name.
+                          type: string
+                        role:
+                          description: Role.
+                          type: string
+                      type: object
+                    hasAttachment:
+                      description: Indicates whether the message has at least one attachment.
+                      type: boolean
+                    id:
+                      description: Message ID
+                      type: string
+                    subject:
+                      description: Message subject.
+                      type: string
+                    to:
+                      description: Information regarding the message receivers.
+                      items:
+                        properties:
+                          aliasMaskType:
+                            description: Alias mask type.
+                            type: string
+                          conversationRelatedTo:
+                            description: ID of the subscription related to the message.
+                            type: string
+                          conversationSubject:
+                            description: Subject of conversation.
+                            type: string
+                          email:
+                            description: Email address.
+                            type: string
+                          emailAlias:
+                            description: Email alias.
+                            type: string
+                          name:
+                            description: Name.
+                            type: string
+                          role:
+                            description: Role.
+                            type: string
+                        type: object
+                      type: array
+                  type: object
+                type: array
+          description: ""
+      summary: Get conversation messages
+      tags:
+        - Subscriptions
+  /api/rns/pvt/plans:
+    get:
+      description: List plans filtering by some arguments.
+      parameters:
+        - description: Filter plans by available periodicity
+          in: query
+          name: periodicity
+          schema:
+            nullable: true
+            type: string
+        - description: Filter plans by available interval
+          in: query
+          name: interval
+          schema:
+            nullable: true
+            type: string
+        - description: Page used for pagination
+          in: query
+          name: page
+          schema:
+            default: 1
+            format: int32
+            type: integer
+        - description: Page size used for pagination
+          in: query
+          name: size
+          schema:
+            default: 15
+            format: int32
+            type: integer
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/StorePlan"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/StorePlan"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/StorePlan"
+                type: array
+          description: Requested plans
+      summary: List plans
+      tags:
+        - Plans
+  "/api/rns/pvt/plans/{id}":
+    get:
+      description: This endpoint retrieves a specific plan by its ID.
+      parameters:
+        - description: Id from the desired plan
+          in: path
+          name: id
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StorePlan"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StorePlan"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StorePlan"
+          description: Requested plan
+      summary: Get plan details
+      tags:
+        - Plans
+  /api/rns/pvt/reports:
+    get:
+      description: List all report templates available.
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionReport"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionReport"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubscriptionReport"
+                type: array
+          description: Requested report templates
+      summary: List report templates
+      tags:
+        - Reports
+  "/api/rns/pvt/reports/{reportName}/documents":
+    post:
+      description: |-
+        This endpoint creates a new report in the format of a CSV file and sends it via email. You can generate one of the following reports: 
+
+         - subscriptionsWithStatus 
+
+         - subscriptionsScheduledBetweenDate 
+
+         - subscriptionsUpdatedBetweenDate 
+
+         - subscriptionsCreatedBetweenDate 
+
+         - executionsBetweenDate
+      parameters:
+        - description: |-
+            Name of the type of report in wish to generate. The following values are accepted: 
+
+             - `subscriptionsWithStatus` 
+
+             - `subscriptionsScheduledBetweenDate` 
+
+             - `subscriptionsUpdatedBetweenDate` 
+
+             - `subscriptionsCreatedBetweenDate` 
+
+             - `executionsBetweenDate`
+          in: path
+          name: reportName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: The report is sent to the email in this field.
+          in: query
+          name: email
+          schema:
+            default: receiver@email.com
+            nullable: false
+            type: string
+        - description: Start date of the report with the format `yyyy-mm-dd`. This field is required for any type of report.
+          in: query
+          name: beginDate
+          schema:
+            default: 2022-09-01
+            type: string
+        - description: End date of the report with the format `yyyy-mm-dd`. This field is required for any type of report.
+          in: query
+          name: endDate
+          schema:
+            default: 2022-10-01
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ReportResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ReportResponse"
+          description: Requested report
+      summary: Generate report
+      tags:
+        - Reports
+  "/api/rns/pvt/reports/{reportName}/documents/{documentId}":
+    get:
+      description: Retrieve a specific report document by its Id.
+      parameters:
+        - description: Name of the report
+          in: path
+          name: reportName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Id from the desired report document
+          in: path
+          name: documentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ReportResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ReportResponse"
+          description: Requested report document
+      summary: Get report document details
+      tags:
+        - Reports
+  /api/rns/settings:
+    get:
+      deprecated: false
+      description: List the details of the settings of a given subscription.
+      operationId: GetSettings
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/settings"
+          description: OK
+      summary: Get Subscription Settings
+      tags:
+        - Settings
+    post:
+      deprecated: false
+      description: Edits Subscriptions settings in your store.
+      operationId: EditSettings
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/settings"
+        description: Request body
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/settings"
+          description: OK
+      summary: Edit Subscriptions settings
+      tags:
+        - Settings
+components:
+  schemas:
+    Frequency:
+      additionalProperties: false
+      properties:
+        interval:
+          format: int32
+          type: integer
+        periodicity:
+          $ref: "#/components/schemas/Periodicity"
+        periodicityAsString:
+          nullable: true
+          type: string
+      type: object
+    FrequencyRequest:
+      additionalProperties: false
+      description: Information about subscriptions' recurrence.
+      properties:
+        interval:
+          description: Time interval configured between subscription orders, which depends on the periodicity. For a `DAILY` periodicity, the value will be days, for `MONTHLY` it will be months, and so on.
+          example: 3
+          format: int32
+          type: integer
+        periodicity:
+          description: "Defines the subscriptions recurrence period. The possible values are: \r
+
+            - `DAILY` \r
+
+            - `WEEKLY` \r
+
+            - `MONTHLY` \r
+
+            - `YEARLY`"
+          example: MONTHLY
+          nullable: true
+          type: string
+      required:
+        - interval
+        - periodicity
+      type: object
+    FrequencyResponse:
+      additionalProperties: false
+      properties:
+        interval:
+          format: int32
+          type: integer
+        periodicity:
+          nullable: true
+          type: string
+      required:
+        - interval
+        - periodicity
+      title: Frequency
+      type: object
+    ItemAttachment:
+      additionalProperties: false
+      properties:
+        content:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        name:
+          nullable: true
+          type: string
+      type: object
+    ItemSimulationStatus:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      format: int32
+      type: integer
+    LogisticsInfo:
+      additionalProperties: false
+      properties:
+        addressId:
+          nullable: true
+          type: string
+        deliveryWindow:
+          $ref: "#/components/schemas/LogisticsInfoDeliveryWindow"
+        itemIndex:
+          format: int32
+          type: integer
+        lockTtl:
+          nullable: true
+          type: string
+        pickupId:
+          nullable: true
+          type: string
+        price:
+          format: int32
+          type: integer
+        quantity:
+          description: Amount of units in the cart.
+          example: 5
+          format: int32
+          title: quantity
+          type: integer
+        selectedDeliveryChannel:
+          nullable: true
+          type: string
+        selectedSla:
+          nullable: true
+          type: string
+        shippingEstimate:
+          nullable: true
+          type: string
+        slAs:
+          items:
+            $ref: "#/components/schemas/LogisticsInfoSLA"
+          nullable: true
+          type: array
+      type: object
+    LogisticsInfoDeliveryWindow:
+      additionalProperties: false
+      properties:
+        endDateUtc:
+          format: date-time
+          type: string
+        price:
+          format: int64
+          type: integer
+        startDateUtc:
+          format: date-time
+          type: string
+      type: object
+    LogisticsInfoSLA:
+      additionalProperties: false
+      properties:
+        availableDeliveryWindows:
+          items:
+            $ref: "#/components/schemas/LogisticsInfoDeliveryWindow"
+          nullable: true
+          type: array
+        deliveryChannel:
+          nullable: true
+          type: string
+        deliveryWindows:
+          items:
+            $ref: "#/components/schemas/LogisticsInfoDeliveryWindow"
+          nullable: true
+          type: array
+        id:
+          nullable: true
+          type: string
+        lockTtl:
+          nullable: true
+          type: string
+        pickupPointId:
+          nullable: true
+          type: string
+        price:
+          format: int32
+          type: integer
+        shippingEstimate:
+          nullable: true
+          type: string
+      type: object
+    OrderItem:
+      additionalProperties: false
+      properties:
+        attachments:
+          items:
+            $ref: "#/components/schemas/ItemAttachment"
+          nullable: true
+          type: array
+        id:
+          nullable: true
+          type: string
+        isGift:
+          type: boolean
+        name:
+          nullable: true
+          type: string
+        price:
+          format: int64
+          nullable: true
+          type: integer
+        priceTags:
+          items:
+            $ref: "#/components/schemas/PriceTag"
+          nullable: true
+          type: array
+        quantity:
+          description: Amount of units in the cart.
+          example: 5
+          format: int32
+          title: quantity
+          type: integer
+        seller:
+          nullable: true
+          type: string
+        sellingPrice:
+          format: int64
+          nullable: true
+          type: integer
+        unitMultiplier:
+          format: double
+          nullable: true
+          type: number
+      type: object
+    Payment:
+      additionalProperties: false
+      properties:
+        accountId:
+          nullable: true
+          type: string
+        bin:
+          nullable: true
+          type: string
+        cardNumber:
+          nullable: true
+          type: string
+        fields:
+          items:
+            $ref: "#/components/schemas/PaymentField"
+          nullable: true
+          type: array
+        group:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        installments:
+          format: int32
+          type: integer
+        parentAccountId:
+          nullable: true
+          type: string
+        paymentSystem:
+          nullable: true
+          type: string
+        referenceValue:
+          format: int64
+          type: integer
+        url:
+          nullable: true
+          type: string
+        value:
+          format: int64
+          type: integer
+      type: object
+    PaymentData:
+      additionalProperties: false
+      properties:
+        payments:
+          items:
+            $ref: "#/components/schemas/Payment"
+          nullable: true
+          type: array
+        transactions:
+          items:
+            $ref: "#/components/schemas/Transaction"
+          nullable: true
+          type: array
+      type: object
+    PaymentField:
+      additionalProperties: false
+      properties:
+        name:
+          nullable: true
+          type: string
+        value:
+          nullable: true
+          type: string
+      type: object
+    PaymentMethodResponse:
+      additionalProperties: false
+      properties:
+        installments:
+          format: int32
+          nullable: true
+          type: integer
+        paymentAccountId:
+          nullable: true
+          type: string
+        paymentSystem:
+          nullable: true
+          type: string
+      required:
+        - paymentSystem
+      title: PaymentMethod
+      type: object
+    PaymentMethodThinRequest:
+      additionalProperties: false
+      description: Object containing information about the payment method.
+      properties:
+        installments:
+          description: Number of payment installments.
+          example: 3
+          format: int32
+          nullable: true
+          type: integer
+        paymentAccountId:
+          description: Data about shoppers' profiles and documents. For example, their credit card number. To obtain that information, use the endpoint [Get client profile by email](https://developers.vtex.com/docs/api-reference/checkout-api#get-/api/checkout/pub/profiles).
+          example: "340357032569595"
+          nullable: true
+          type: string
+        paymentSystem:
+          description: Payment system's ID.
+          example: "4"
+          nullable: true
+          type: string
+      required:
+        - paymentSystem
+      title: PaymentMethodRequest
+      type: object
+    Periodicity:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      format: int32
+      type: integer
+    PlanResponse:
+      additionalProperties: false
+      properties:
+        frequency:
+          $ref: "#/components/schemas/FrequencyResponse"
+        id:
+          nullable: true
+          type: string
+        purchaseDay:
+          $ref: "#/components/schemas/PurchaseDay"
+        validity:
+          $ref: "#/components/schemas/ValidityResponse"
+      required:
+        - frequency
+        - id
+        - purchaseDay
+        - validity
+      title: Plan
+      type: object
+    PlanThinRequest:
+      additionalProperties: false
+      description: Information about the plan.
+      properties:
+        frequency:
+          $ref: "#/components/schemas/FrequencyRequest"
+        id:
+          description: ID of the plan.
+          example: store.subscription
+          nullable: true
+          type: string
+        purchaseDay:
+          description: Day in which recurrent orders will be created.
+          example: "15"
+          nullable: true
+          type: string
+        validity:
+          $ref: "#/components/schemas/ValidityRequest"
+      required:
+        - frequency
+        - id
+        - purchaseDay
+      title: PlanRequest
+      type: object
+    PriceTag:
+      additionalProperties: false
+      properties:
+        identifier:
+          nullable: true
+          type: string
+        isPercentual:
+          type: boolean
+        name:
+          nullable: true
+          type: string
+        rawValue:
+          format: double
+          type: number
+        valueAsInt:
+          format: int64
+          type: integer
+      type: object
+    PurchaseContextAvailableGiftResponse:
+      additionalProperties: false
+      properties:
+        attachments:
+          items:
+            $ref: "#/components/schemas/ItemAttachment"
+          nullable: true
+          type: array
+        id:
+          nullable: true
+          type: string
+        isGift:
+          type: boolean
+        isSelected:
+          type: boolean
+        name:
+          nullable: true
+          type: string
+        price:
+          format: int64
+          nullable: true
+          type: integer
+        priceTags:
+          items:
+            $ref: "#/components/schemas/PriceTag"
+          nullable: true
+          type: array
+        quantity:
+          description: Amount of units in the cart.
+          example: 5
+          format: int32
+          title: quantity
+          type: integer
+        seller:
+          nullable: true
+          type: string
+        sellingPrice:
+          format: int64
+          nullable: true
+          type: integer
+        unitMultiplier:
+          format: double
+          nullable: true
+          type: number
+      type: object
+    PurchaseContextSelectableGiftsResponse:
+      additionalProperties: false
+      properties:
+        availableGifts:
+          items:
+            $ref: "#/components/schemas/PurchaseContextAvailableGiftResponse"
+          nullable: true
+          type: array
+        availableQuantity:
+          format: int32
+          type: integer
+        id:
+          nullable: true
+          type: string
+      type: object
+    PurchaseDay:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+        - 27
+        - 28
+        - 29
+        - 30
+        - 31
+        - 999
+        - -6
+        - -5
+        - -4
+        - -3
+        - -2
+        - -1
+      format: int32
+      type: integer
+    PurchaseSettingsResponse:
+      additionalProperties: false
+      properties:
+        currencyCode:
+          nullable: true
+          type: string
+        paymentMethod:
+          $ref: "#/components/schemas/PaymentMethodResponse"
+      required:
+        - currencyCode
+        - paymentMethod
+      title: PurchaseSettings
+      type: object
+    PurchaseSettingsThinRequest:
+      additionalProperties: false
+      description: Object containing purchase settings information.
+      properties:
+        paymentMethod:
+          $ref: "#/components/schemas/PaymentMethodThinRequest"
+        salesChannel:
+          default: "1"
+          description: Sales channel (or [trade policy](https://help.vtex.com/en/tutorial/how-trade-policies-work--6Xef8PZiFm40kg2STrMkMV)) applied to the subscription being created. You can associate only one sales channel to each subscription. The default value is the main sales channel, which corresponds to `1`.
+          type: string
+      required:
+        - paymentMethod
+        - salesChannel
+      title: PurchaseSettingsRequest
+      type: object
+    ReportResponse:
+      additionalProperties: false
+      properties:
+        canceled:
+          type: boolean
+        completedDate:
+          format: date-time
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+        enqueueDate:
+          format: date-time
+          nullable: true
+          type: string
+        errorCount:
+          format: int64
+          nullable: true
+          type: integer
+        finished:
+          type: boolean
+        id:
+          nullable: true
+          type: string
+        lastErrorMessage:
+          nullable: true
+          type: string
+        lastUpdateTime:
+          format: date-time
+          nullable: true
+          type: string
+        linkToDownload:
+          nullable: true
+          type: string
+        outputType:
+          nullable: true
+          type: string
+        percentageProcessed:
+          format: int64
+          type: integer
+        recordsProcessed:
+          format: int64
+          readOnly: true
+          type: integer
+        recordsSum:
+          format: int64
+          nullable: true
+          type: integer
+        startDate:
+          format: date-time
+          nullable: true
+          type: string
+        statusMessage:
+          nullable: true
+          readOnly: true
+          type: string
+        zipped:
+          type: boolean
+      type: object
+    ShippingAddressResponse:
+      additionalProperties: false
+      properties:
+        addressId:
+          nullable: true
+          type: string
+        addressType:
+          nullable: true
+          type: string
+      required:
+        - addressId
+        - addressType
+      title: Address
+      type: object
+    ShippingEstimate:
+      additionalProperties: false
+      properties:
+        allItemsMatched:
+          type: boolean
+        estimate:
+          nullable: true
+          type: string
+        estimateDeliveryDate:
+          format: date-time
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        nextPurchaseDate:
+          format: date-time
+          type: string
+      type: object
+    SimulateMessageResponse:
+      additionalProperties: false
+      properties:
+        code:
+          nullable: true
+          type: string
+        status:
+          nullable: true
+          type: string
+        text:
+          nullable: true
+          type: string
+      type: object
+    SimulateResponse:
+      additionalProperties: false
+      properties:
+        country:
+          nullable: true
+          type: string
+        items:
+          items:
+            $ref: "#/components/schemas/OrderItem"
+          nullable: true
+          type: array
+        logisticsInfo:
+          items:
+            $ref: "#/components/schemas/LogisticsInfo"
+          nullable: true
+          type: array
+        messages:
+          items:
+            $ref: "#/components/schemas/SimulateMessageResponse"
+          nullable: true
+          type: array
+        paymentData:
+          $ref: "#/components/schemas/PaymentData"
+        postalCode:
+          nullable: true
+          type: string
+        selectableGiftsResponse:
+          items:
+            $ref: "#/components/schemas/PurchaseContextSelectableGiftsResponse"
+          nullable: true
+          type: array
+        simulationItems:
+          items:
+            $ref: "#/components/schemas/SimulationItemResult"
+          nullable: true
+          type: array
+        totals:
+          items:
+            $ref: "#/components/schemas/TotalizationResponse"
+          nullable: true
+          type: array
+      type: object
+    SimulateResponseVO:
+      additionalProperties: false
+      properties:
+        shippingEstimate:
+          $ref: "#/components/schemas/ShippingEstimate"
+        simulateResponse:
+          $ref: "#/components/schemas/SimulateResponse"
+        simulationItems:
+          items:
+            $ref: "#/components/schemas/SimulationItemResult"
+          nullable: true
+          type: array
+        totals:
+          items:
+            $ref: "#/components/schemas/Totalization"
+          nullable: true
+          type: array
+      type: object
+    SimulationItemResult:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        quantity:
+          description: Amount of units in the cart.
+          example: 5
+          format: int32
+          title: quantity
+          type: integer
+        status:
+          $ref: "#/components/schemas/ItemSimulationStatus"
+        statusName:
+          nullable: true
+          type: string
+        unitPrice:
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    Status:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      format: int32
+      type: integer
+    StorePlan:
+      additionalProperties: false
+      properties:
+        frequencies:
+          items:
+            $ref: "#/components/schemas/Frequency"
+          nullable: true
+          type: array
+        id:
+          nullable: true
+          type: string
+      type: object
+    SubscriptionCycleContext:
+      additionalProperties: false
+      properties:
+        addressId:
+          nullable: true
+          type: string
+        addressType:
+          nullable: true
+          type: string
+        items:
+          items:
+            $ref: "#/components/schemas/SubscriptionCycleItemContext"
+          nullable: true
+          type: array
+        paymentAccountId:
+          nullable: true
+          type: string
+        paymentSystem:
+          nullable: true
+          type: string
+        paymentSystemGroup:
+          nullable: true
+          type: string
+        paymentSystemName:
+          nullable: true
+          type: string
+      type: object
+    SubscriptionCycleItemContext:
+      additionalProperties: false
+      properties:
+        cycleCount:
+          format: int32
+          type: integer
+        isSkipped:
+          type: boolean
+        quantity:
+          description: Amount of units in the cart.
+          example: 5
+          format: int32
+          title: quantity
+          type: integer
+        skuId:
+          description: SKU ID.
+          example: "12"
+          nullable: true
+          title: skuId
+          type: string
+        status:
+          $ref: "#/components/schemas/Status"
+        subscriptionItemId:
+          nullable: true
+          type: string
+      type: object
+    SubscriptionCycleOrderInfo:
+      additionalProperties: false
+      properties:
+        orderGroup:
+          nullable: true
+          type: string
+        orderId:
+          nullable: true
+          type: string
+        paymentURL:
+          nullable: true
+          type: string
+        value:
+          format: int64
+          type: integer
+      type: object
+    SubscriptionCycleResponse:
+      additionalProperties: false
+      properties:
+        context:
+          $ref: "#/components/schemas/SubscriptionCycleContext"
+        customerEmail:
+          nullable: true
+          type: string
+        cycleCount:
+          format: int32
+          type: integer
+        date:
+          format: date-time
+          type: string
+        id:
+          nullable: true
+          type: string
+        isInRetry:
+          type: boolean
+        lastUpdate:
+          format: date-time
+          type: string
+        message:
+          nullable: true
+          type: string
+        orderInfo:
+          $ref: "#/components/schemas/SubscriptionCycleOrderInfo"
+        simulationItems:
+          items:
+            $ref: "#/components/schemas/SimulationItemResult"
+          nullable: true
+          type: array
+        status:
+          nullable: true
+          type: string
+        subscriptionId:
+          nullable: true
+          type: string
+      type: object
+    SubscriptionGroupRequest:
+      additionalProperties: false
+      properties:
+        catalogAttachment:
+          nullable: true
+          type: string
+        customerEmail:
+          nullable: true
+          type: string
+        items:
+          items:
+            $ref: "#/components/schemas/SubscriptionThinItemRequest"
+          nullable: true
+          type: array
+        nextPurchaseDate:
+          format: date-time
+          nullable: true
+          type: string
+        plan:
+          $ref: "#/components/schemas/PlanThinRequest"
+        purchaseSettings:
+          $ref: "#/components/schemas/PurchaseSettingsThinRequest"
+        shippingAddress:
+          $ref: "#/components/schemas/shippingAddress"
+        status:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+      required:
+        - customerEmail
+        - items
+        - plan
+        - purchaseSettings
+        - shippingAddress
+      title: SubscriptionRequest
+      type: object
+    SubscriptionGroupResponse:
+      additionalProperties: false
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        customerEmail:
+          nullable: true
+          type: string
+        customerId:
+          nullable: true
+          type: string
+        cycleCount:
+          format: int32
+          type: integer
+        id:
+          nullable: true
+          type: string
+        isSkipped:
+          type: boolean
+        items:
+          items:
+            $ref: "#/components/schemas/SubscriptionItemResponse"
+          nullable: true
+          type: array
+        lastPurchaseDate:
+          format: date-time
+          nullable: true
+          type: string
+        lastUpdate:
+          format: date-time
+          type: string
+        nextPurchaseDate:
+          format: date-time
+          type: string
+        plan:
+          $ref: "#/components/schemas/PlanResponse"
+        purchaseSettings:
+          $ref: "#/components/schemas/PurchaseSettingsResponse"
+        shippingAddress:
+          $ref: "#/components/schemas/ShippingAddressResponse"
+        status:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+      required:
+        - createdAt
+        - customerEmail
+        - customerId
+        - cycleCount
+        - id
+        - isSkipped
+        - items
+        - lastUpdate
+        - nextPurchaseDate
+        - plan
+        - purchaseSettings
+        - shippingAddress
+        - status
+      title: Subscription
+      type: object
+    SubscriptionItemResponse:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        isSkipped:
+          type: boolean
+        manualPrice:
+          default: null
+          description: Manual price.
+          example: 40
+          format: int32
+          nullable: true
+          title: manualPrice
+          type: integer
+        originalOrderId:
+          nullable: true
+          type: string
+        quantity:
+          description: Amount of units in the cart.
+          example: 5
+          format: int32
+          title: quantity
+          type: integer
+        skuId:
+          description: SKU ID.
+          example: "12"
+          nullable: true
+          title: skuId
+          type: string
+        status:
+          nullable: true
+          type: string
+      required:
+        - id
+        - isSkipped
+        - quantity
+        - skuId
+        - status
+      title: SubscriptionItem
+      type: object
+    SubscriptionReport:
+      additionalProperties: false
+      properties:
+        account:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        entity:
+          nullable: true
+          type: string
+        key:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        params:
+          items:
+            $ref: "#/components/schemas/SubscriptionReportParam"
+          nullable: true
+          type: array
+        query:
+          nullable: true
+          type: string
+        requesterEmail:
+          nullable: true
+          type: string
+        schema:
+          nullable: true
+          type: string
+      type: object
+    SubscriptionReportParam:
+      additionalProperties: false
+      properties:
+        name:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+        value:
+          nullable: true
+      type: object
+    SubscriptionThinItemRequest:
+      additionalProperties: false
+      properties:
+        manualPrice:
+          default: null
+          description: Manual price.
+          example: 40
+          format: int32
+          nullable: true
+          title: manualPrice
+          type: integer
+        quantity:
+          description: Amount of units in the cart.
+          example: 5
+          format: int32
+          title: quantity
+          type: integer
+        skuId:
+          description: SKU ID.
+          example: "12"
+          nullable: true
+          title: skuId
+          type: string
+      type: object
+    SubscriptionUpdateRequestV3:
+      additionalProperties: false
+      properties:
+        isSkipped:
+          description: When set as `true`, it means the shopper asked to skip the next subscription order, and when set as `false`, no subscription order is going to be skipped.
+          example: false
+          nullable: true
+          type: boolean
+        plan:
+          $ref: "#/components/schemas/PlanThinRequest"
+        purchaseSettings:
+          $ref: "#/components/schemas/PurchaseSettingsThinRequest"
+        shippingAddress:
+          $ref: "#/components/schemas/shippingAddress"
+        status:
+          description: "Status to which you wish to update the subscription. The accepted values are: \r
+
+            - `ACTIVE` \r
+
+            - `PAUSED` \r
+
+            - `CANCELLED` \r
+
+            - `EXPIRED` \r
+
+            - `MISSING`"
+          example: ACTIVE
+          nullable: true
+          type: string
+        title:
+          description: Name of the subscription.
+          example: catFood
+          nullable: true
+          type: string
+      title: SubscriptionUpdateRequest
+      type: object
+    Totalization:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    TotalizationResponse:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        valueAsInt:
+          format: int64
+          type: integer
+      type: object
+    Transaction:
+      additionalProperties: false
+      properties:
+        isActive:
+          type: boolean
+        payments:
+          items:
+            $ref: "#/components/schemas/Payment"
+          nullable: true
+          type: array
+      type: object
+    UpdateItemInput:
+      additionalProperties: false
+      properties:
+        isSkipped:
+          nullable: true
+          type: boolean
+        manualPrice:
+          default: null
+          description: Manual price.
+          example: 40
+          format: int32
+          nullable: true
+          title: manualPrice
+          type: integer
+        quantity:
+          description: Amount of units in the cart.
+          example: 5
+          format: int32
+          title: quantity
+          type: integer
+        status:
+          nullable: true
+          type: string
+      type: object
+    ValidityRequest:
+      additionalProperties: false
+      description: Information about the period during which the subscription will be valid.
+      properties:
+        begin:
+          description: Subscription's beginning date with the format `yyyy-mm-ddThh:mm:ss`.
+          example: 2022-06-10T00:00:00
+          nullable: true
+          type: string
+        end:
+          description: Subscription's ending date with the format `yyyy-mm-ddThh:mm:ss`.
+          example: 2023-06-10T00:00:00
+          nullable: true
+          type: string
+      type: object
+    ValidityResponse:
+      additionalProperties: false
+      properties:
+        begin:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          nullable: true
+          type: string
+      required:
+        - begin
+      title: Validity
+      type: object
+    settings:
+      description: Subscriptions settings
+      example:
+        - defaultSla: null
+          deliveryChannels:
+            - delivery
+          executionHourInUtc: 9
+          isMultipleInstallmentsEnabledOnCreation: false
+          isMultipleInstallmentsEnabledOnUpdate: false
+          isUsingV3: true
+          manualPriceAllowed: false
+          onMigrationProcess: false
+          orderCustomDataAppId: null
+          postponeExpiration: false
+          randomIdGeneration: false
+          slaOption: NONE
+          useItemPriceFromOriginalOrder: false
+          workflowVersion: "1.1"
+      properties:
+        defaultSla:
+          default: null
+          description: Default delivery method.
+          example: null
+          nullable: true
+          title: defaultSla
+          type: string
+        deliveryChannels:
+          default: []
+          description: Array containing delivery channels.
+          example: delivery
+          items:
+            description: "Type of delivery channel. The values that are possible are: `pickupInPoint` for pickup point and `delivery` for regular delivery."
+            example: delivery
+            title: ""
+            type: string
+          title: deliveryChannels
+          type: array
+        executionHourInUtc:
+          default: 0
+          description: Indicates the time future subscription orders will be generated.
+          example: 9
+          title: executionHourInUtc
+          type: integer
+        isMultipleInstallmentsEnabledOnCreation:
+          default: false
+          description: Defines whether or not multiple installments are enabled when a subscription is created.
+          example: false
+          title: isMultipleInstallmentsEnabledOnCreation
+          type: boolean
+        isMultipleInstallmentsEnabledOnUpdate:
+          default: false
+          description: Defines whether or not multiple installments are enabled when a subscription is updated.
+          example: false
+          title: isMultipleInstallmentsEnabledOnUpdate
+          type: boolean
+        isUsingV3:
+          default: false
+          description: Indicates whether or not Subscriptions V3 is enabled.
+          example: true
+          title: isUsingV3
+          type: boolean
+        manualPriceAllowed:
+          default: false
+          description: When set to `true`, this property enables manual price configuration in subscription items. This is valid for all existing subscriptions, provided that there is a manual price configured and that `isUsingV3` is `true`.
+          example: false
+          title: manualPriceAllowed
+          type: boolean
+        onMigrationProcess:
+          default: false
+          description: Indicates whether or not the account is in the migration process to Subscriptions V3.
+          example: false
+          title: onMigrationProcess
+          type: boolean
+        orderCustomDataAppId:
+          default: null
+          description: When filled, this field passes along the `customData` infomration in the order to the future recurrent subscription orders.
+          example: null
+          title: orderCustomDataAppId
+          type: string
+        postponeExpiration:
+          default: false
+          description: Defines whether or not the expiration of subscriptions can be postponed.
+          example: false
+          title: postponeExpiration
+          type: boolean
+        randomIdGeneration:
+          default: false
+          description: Defines whether or not the subscription order IDs will be randomly generated.
+          example: false
+          title: randomIdGeneration
+          type: boolean
+        slaOption:
+          default: ""
+          description: Delivery method.
+          example: NONE
+          title: slaOption
+          type: string
+        useItemPriceFromOriginalOrder:
+          default: false
+          description: When set to `true`, this property enables using the manual price for each item from the original subscription order. This is only valid for new subscriptions, created from the moment this configuration is enabled. For this to work, it is mandatory that the `manualPriceAllowed` property is set to `true` and that `isUsingV3` is `true`.
+          example: false
+          title: useItemPriceFromOriginalOrder
+          type: boolean
+        workflowVersion:
+          default: ""
+          description: Workflow version.
+          example: "1.1"
+          title: workflowVersion
+          type: string
+      required:
+        - slaOption
+        - defaultSla
+        - isUsingV3
+        - onMigrationProcess
+        - executionHourInUtc
+        - workflowVersion
+        - deliveryChannels
+        - randomIdGeneration
+        - isMultipleInstallmentsEnabledOnCreation
+        - isMultipleInstallmentsEnabledOnUpdate
+        - orderCustomDataAppId
+        - postponeExpiration
+        - manualPriceAllowed
+        - useItemPriceFromOriginalOrder
+      title: ""
+      type: object
+    shippingAddress:
+      additionalProperties: false
+      properties:
+        addressId:
+          description: Shipping address ID.
+          example: "8109266555005"
+          nullable: true
+          type: string
+        addressType:
+          description: Type of the address. Possible values are `residential` or `pickup`.
+          example: residential
+          nullable: true
+          type: string
+      required:
+        - addressId
+        - addressType
+      title: shippingAddress
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

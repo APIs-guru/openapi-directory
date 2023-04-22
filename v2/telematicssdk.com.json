@@ -1,0 +1,32 @@
+{
+  "apis": {
+    "telematicssdk.com": {
+      "added": "2021-03-31T13:54:41.100Z",
+      "info": {
+        "contact": {},
+        "description": "# Introduction\nWe have prepared a set of APIs for quick start to integrate telematics SDK that powers mobile telematics inside 3rd party mobile applications.\n\n* [CONTACT US](https://telematicssdk.com)\n* [SANDBOX](https://userdatahub.com)\n* [DEV.PORTAL](https://docs.telematicssdk.com)\n* [DEMO APP](https://raxeltelematics.com/telematics-app)\n\n\n# Overview\nDatamotion provides telematics infrastructure for mobile applications. \n\nTelematics SDK turns any smartphone into telematics data gathering device to collect Location, driving and behavior data. API services unlocks power of your mobile application\n\nThere are 3 groups of methods:\n* 1 - user management\n* 2 - statistics for mobile app\n* 3 - statistics for back-end(s)\n\nin certain cases you will need SNS or any other notification services. read more [here](https://docs.telematicssdk.com/platform-features/sns)\n# Possible architecture\n\nThere are three common schemes that are used by our clients. These schemes can be combined\n* Collect, Process, Store (required: 1&2)\n* Collect, Process (required: 1& sns)\n* Collect (required 1&sns)\n\n\n## Collect, Process, Store\n![Collect, Process, Store](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/Architecture+-+Collection%2C+processing%2C+storage)\n\n## Collect, Process\n![Collect, Process](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/Architecture+-+Collection+and+processing)\n\n## Collect\n![Collect](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/Architecture+-+Collection+only)\n\n***\n![Telematic sdk](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Github/transportation_small.png)\n\n# Common use-cases:\n* Safe and efficient driving\n* Usage-based insurance\n* Safe driving assessment\n* Driver assessment\n* Trip log\n* Geo-analysis\n* Accident monitoring\n* Driving engagements\n* Location based services\n* Realtime Tracking\nand beyond\n\n# How to start\n* Register a [SANDBOX ACCOUNT](https://userdatahub.com)\n* Get [CREDENTIALS](https://docs.userdatahub.com/sandbox/credentials) \n* Follow the guide from [DEVELOPER POERTAL](https://docs.telematicssdk.com)\n\n# Authentication\nTo create a user on datamotion platform, you require to use InstanceID and InstanceKEY. You can get it in Datahub -> management -> user-service credentials\n\nOnce you create a user, you will get Device token, JWT token and refresh token. then, you will use it for APIs",
+        "title": "Quick start - Telematics SDK",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "iot"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_www.telematicssdk.com_wp-content_uploads_2021_03_cropped-sdk-180x180.png"
+        },
+        "x-origin": [
+          {
+            "format": "postman",
+            "url": "https://www.getpostman.com/collections/94fc76d14f0398faf807",
+            "version": "2.x"
+          }
+        ],
+        "x-providerName": "telematicssdk.com"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/telematicssdk.com/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/telematicssdk.com/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.3",
+      "link": "https://api.apis.guru/v2/specs/telematicssdk.com/1.0.0.json"
+    }
+  }
+}

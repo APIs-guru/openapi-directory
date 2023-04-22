@@ -1,0 +1,4370 @@
+openapi: 3.0.0
+servers:
+  - url: https://appwrite.io/v1
+info:
+  contact:
+    email: team@appwrite.io
+    name: Appwrite Team
+    url: https://appwrite.io/support
+  description: Appwrite backend as a service cuts up to 70% of the time and costs required for building a modern application. We abstract and simplify common development tasks behind a REST APIs, to help you develop your app in a fast and secure way. For full API documentation and tutorials go to [https://appwrite.io/docs](https://appwrite.io/docs)
+  license:
+    name: BSD-3-Clause
+    url: https://raw.githubusercontent.com/appwrite/appwrite/master/LICENSE
+  termsOfService: https://appwrite.io/policy/terms
+  title: Appwrite
+  version: 0.9.3
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/_images_apple.png
+  x-origin:
+    - format: openapi
+      url: https://appwrite.io/specs/open-api3?platform=client
+      version: "3.0"
+  x-providerName: appwrite.io
+  x-serviceName: client
+externalDocs:
+  description: Full API docs, specs and tutorials
+  url: https://appwrite.io/docs
+tags:
+  - description: The Account service allows you to authenticate and manage a user account.
+    name: account
+  - description: The Avatars service aims to help you complete everyday tasks related to your app image, icons, and avatars.
+    name: avatars
+  - description: The Database service allows you to create structured collections of documents, query and filter lists of documents
+    name: database
+  - description: The Locale service allows you to customize your app based on your users' location.
+    name: locale
+  - description: The Health service allows you to both validate and monitor your Appwrite server's health.
+    name: health
+  - description: The Project service allows you to manage all the projects in your Appwrite server.
+    name: projects
+  - description: The Storage service allows you to manage your project files.
+    name: storage
+  - description: The Teams service allows you to group users of your project and to enable them to share read and write access to your project resources
+    name: teams
+  - description: The Users service allows you to manage your project users.
+    name: users
+  - description: The Functions Service allows you view, create and manage your Cloud Functions.
+    name: functions
+paths:
+  /account:
+    delete:
+      description: Delete a currently logged in user account. Behind the scene, the user record is not deleted but permanently blocked from any access. This is done to avoid deleted accounts being overtaken by new users with the same email address. Any user-related resources like documents or storage files should be deleted separately.
+      operationId: accountDelete
+      responses:
+        "204":
+          description: No content
+      security:
+        - JWT: []
+          Project: []
+      summary: Delete Account
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/delete.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/delete.md
+        method: delete
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 53
+    get:
+      description: Get currently logged in user data as JSON object.
+      operationId: accountGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+          description: User
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Account
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/get.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/get.md
+        method: get
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 44
+    post:
+      description: Use this endpoint to allow a new user to register a new account in your project. After the user registration completes successfully, you can use the [/account/verfication](/docs/client/account#accountCreateVerification) route to start verifying the user email address. To allow the new user to login to their new account, you need to create a new [account session](/docs/client/account#accountCreateSession).
+      operationId: accountCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: User email.
+                  type: string
+                  x-example: null
+                name:
+                  description: "User name. Max length: 128 chars."
+                  type: string
+                  x-example: null
+                password:
+                  description: User password. Must be between 6 to 32 chars.
+                  type: string
+                  x-example: null
+              required:
+                - email
+                - password
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+          description: User
+      security:
+        - Project: []
+      summary: Create Account
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/create.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/create.md
+        method: create
+        packaging: false
+        platforms:
+          - client
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 10
+        rate-time: 3600
+        scope: public
+        type: ""
+        weight: 36
+  /account/email:
+    patch:
+      description: |-
+        Update currently logged in user account email address. After changing user address, user confirmation status is being reset and a new confirmation mail is sent. For security measures, user password is required to complete this request.
+        This endpoint can also be used to convert an anonymous account to a normal one, by passing an email address and a new password.
+      operationId: accountUpdateEmail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: User email.
+                  type: string
+                  x-example: null
+                password:
+                  description: User password. Must be between 6 to 32 chars.
+                  type: string
+                  x-example: null
+              required:
+                - email
+                - password
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+          description: User
+      security:
+        - JWT: []
+          Project: []
+      summary: Update Account Email
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/update-email.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/update-email.md
+        method: updateEmail
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 51
+  /account/jwt:
+    post:
+      description: Use this endpoint to create a JSON Web Token. You can use the resulting JWT to authenticate on behalf of the current user when working with the Appwrite server-side API and SDKs. The JWT secret is valid for 15 minutes from its creation and will be invalid if the user will logout in that time frame.
+      operationId: accountCreateJWT
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/jwt"
+          description: JWT
+      security:
+        - Project: []
+      summary: Create Account JWT
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/create-j-w-t.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/create-jwt.md
+        method: createJWT
+        packaging: false
+        platforms:
+          - client
+        rate-key: url:{url},userId:{userId}
+        rate-limit: 10
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 43
+  /account/logs:
+    get:
+      description: Get currently logged in user list of latest security activity logs. Each log returns user IP address, location and date and time of log.
+      operationId: accountGetLogs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/logList"
+          description: Logs List
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Account Logs
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/get-logs.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/get-logs.md
+        method: getLogs
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 47
+  /account/name:
+    patch:
+      description: Update currently logged in user account name.
+      operationId: accountUpdateName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  description: "User name. Max length: 128 chars."
+                  type: string
+                  x-example: null
+              required:
+                - name
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+          description: User
+      security:
+        - JWT: []
+          Project: []
+      summary: Update Account Name
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/update-name.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/update-name.md
+        method: updateName
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 49
+  /account/password:
+    patch:
+      description: Update currently logged in user password. For validation, user is required to pass in the new password, and the old password. For users created with OAuth and Team Invites, oldPassword is optional.
+      operationId: accountUpdatePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                oldPassword:
+                  description: Old user password. Must be between 6 to 32 chars.
+                  type: string
+                  x-example: null
+                password:
+                  description: New user password. Must be between 6 to 32 chars.
+                  type: string
+                  x-example: null
+              required:
+                - password
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+          description: User
+      security:
+        - JWT: []
+          Project: []
+      summary: Update Account Password
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/update-password.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/update-password.md
+        method: updatePassword
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 50
+  /account/prefs:
+    get:
+      description: Get currently logged in user preferences as a key-value object.
+      operationId: accountGetPrefs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/preferences"
+          description: Preferences
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Account Preferences
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/get-prefs.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/get-prefs.md
+        method: getPrefs
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 45
+    patch:
+      description: Update currently logged in user account preferences. You can pass only the specific settings you wish to update.
+      operationId: accountUpdatePrefs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                prefs:
+                  description: Prefs key-value JSON object.
+                  type: object
+                  x-example: null
+              required:
+                - prefs
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+          description: User
+      security:
+        - JWT: []
+          Project: []
+      summary: Update Account Preferences
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/update-prefs.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/update-prefs.md
+        method: updatePrefs
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 52
+  /account/recovery:
+    post:
+      description: Sends the user an email with a temporary secret key for password reset. When the user clicks the confirmation link he is redirected back to your app password reset URL with the secret key and email address values attached to the URL query string. Use the query string params to submit a request to the [PUT /account/recovery](/docs/client/account#accountUpdateRecovery) endpoint to complete the process. The verification link sent to the user's email address is valid for 1 hour.
+      operationId: accountCreateRecovery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: User email.
+                  type: string
+                  x-example: null
+                url:
+                  description: URL to redirect the user back to your app from the recovery email. Only URLs from hostnames in your project platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
+                  type: string
+                  x-example: null
+              required:
+                - email
+                - url
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/token"
+          description: Token
+      security:
+        - JWT: []
+          Project: []
+      summary: Create Password Recovery
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/create-recovery.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/create-recovery.md
+        method: createRecovery
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},email:{param-email}
+        rate-limit: 10
+        rate-time: 3600
+        scope: public
+        type: ""
+        weight: 56
+    put:
+      description: |-
+        Use this endpoint to complete the user account password reset. Both the **userId** and **secret** arguments will be passed as query parameters to the redirect URL you have provided when sending your request to the [POST /account/recovery](/docs/client/account#accountCreateRecovery) endpoint.
+
+        Please note that in order to avoid a [Redirect Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md) the only valid redirect URLs are the ones from domains you have set when adding your platforms in the console interface.
+      operationId: accountUpdateRecovery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                password:
+                  description: New password. Must be between 6 to 32 chars.
+                  type: string
+                  x-example: null
+                passwordAgain:
+                  description: New password again. Must be between 6 to 32 chars.
+                  type: string
+                  x-example: null
+                secret:
+                  description: Valid reset token.
+                  type: string
+                  x-example: null
+                userId:
+                  description: User account UID address.
+                  type: string
+                  x-example: null
+              required:
+                - userId
+                - secret
+                - password
+                - passwordAgain
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/token"
+          description: Token
+      security:
+        - JWT: []
+          Project: []
+      summary: Complete Password Recovery
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/update-recovery.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/update-recovery.md
+        method: updateRecovery
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},userId:{param-userId}
+        rate-limit: 10
+        rate-time: 3600
+        scope: public
+        type: ""
+        weight: 57
+  /account/sessions:
+    delete:
+      description: Delete all sessions from the user account and remove any sessions cookies from the end client.
+      operationId: accountDeleteSessions
+      responses:
+        "204":
+          description: No content
+      security:
+        - JWT: []
+          Project: []
+      summary: Delete All Account Sessions
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/delete-sessions.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/delete-sessions.md
+        method: deleteSessions
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 100
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 55
+    get:
+      description: Get currently logged in user list of active sessions across different devices.
+      operationId: accountGetSessions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sessionList"
+          description: Sessions List
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Account Sessions
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/get-sessions.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/get-sessions.md
+        method: getSessions
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 46
+    post:
+      description: Allow the user to login into their account by providing a valid email and password combination. This route will create a new session for the user.
+      operationId: accountCreateSession
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: User email.
+                  type: string
+                  x-example: null
+                password:
+                  description: User password. Must be between 6 to 32 chars.
+                  type: string
+                  x-example: null
+              required:
+                - email
+                - password
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/session"
+          description: Session
+      security:
+        - Project: []
+      summary: Create Account Session
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/create-session.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/create-session.md
+        method: createSession
+        packaging: false
+        platforms:
+          - client
+        rate-key: url:{url},email:{param-email}
+        rate-limit: 10
+        rate-time: 3600
+        scope: public
+        type: ""
+        weight: 37
+  /account/sessions/anonymous:
+    post:
+      description: Use this endpoint to allow a new user to register an anonymous account in your project. This route will also create a new session for the user. To allow the new user to convert an anonymous account to a normal account, you need to update its [email and password](/docs/client/account#accountUpdateEmail) or create an [OAuth2 session](/docs/client/account#accountCreateOAuth2Session).
+      operationId: accountCreateAnonymousSession
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/session"
+          description: Session
+      security:
+        - Project: []
+      summary: Create Anonymous Session
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/create-anonymous-session.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/create-session-anonymous.md
+        method: createAnonymousSession
+        packaging: false
+        platforms:
+          - client
+        rate-key: ip:{ip}
+        rate-limit: 50
+        rate-time: 3600
+        scope: public
+        type: ""
+        weight: 42
+  "/account/sessions/oauth2/{provider}":
+    get:
+      description: |
+        Allow the user to login to their account using the OAuth2 provider of their choice. Each OAuth2 provider should be enabled from the Appwrite console first. Use the success and failure arguments to provide a redirect URL's back to your app when login is completed.
+
+        If there is already an active session, the new session will be attached to the logged-in account. If there are no active sessions, the server will attempt to look for a user with the same email address as the email received from the OAuth2 provider and attach the new session to the existing user. If no matching user is found - the server will create a new user..
+      operationId: accountCreateOAuth2Session
+      parameters:
+        - description: "OAuth2 Provider. Currently, supported providers are: amazon, apple, bitbucket, bitly, box, discord, dropbox, facebook, github, gitlab, google, linkedin, microsoft, paypal, paypalSandbox, salesforce, slack, spotify, tradeshift, tradeshiftBox, twitch, vk, yahoo, yandex, wordpress."
+          in: path
+          name: provider
+          required: true
+          schema:
+            type: string
+            x-example: amazon
+        - description: URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
+          in: query
+          name: success
+          required: false
+          schema:
+            default: https://appwrite.io/auth/oauth2/success
+            format: url
+            type: string
+            x-example: https://example.com
+        - description: URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
+          in: query
+          name: failure
+          required: false
+          schema:
+            default: https://appwrite.io/auth/oauth2/failure
+            format: url
+            type: string
+            x-example: https://example.com
+        - description: A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes.
+          in: query
+          name: scopes
+          required: false
+          schema:
+            default: []
+            items:
+              type: string
+            type: array
+      responses:
+        "301":
+          description: File
+      security:
+        - Project: []
+      summary: Create Account Session with OAuth2
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/create-o-auth2session.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/create-session-oauth2.md
+        method: createOAuth2Session
+        packaging: false
+        platforms:
+          - client
+        rate-key: ip:{ip}
+        rate-limit: 50
+        rate-time: 3600
+        scope: public
+        type: webAuth
+        weight: 38
+  "/account/sessions/{sessionId}":
+    delete:
+      description: Use this endpoint to log out the currently logged in user from all their account sessions across all of their different devices. When using the option id argument, only the session unique ID provider will be deleted.
+      operationId: accountDeleteSession
+      parameters:
+        - description: Session unique ID. Use the string 'current' to delete the current device session.
+          in: path
+          name: sessionId
+          required: true
+          schema:
+            type: string
+            x-example: "[SESSION_ID]"
+      responses:
+        "204":
+          description: No content
+      security:
+        - JWT: []
+          Project: []
+      summary: Delete Account Session
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/delete-session.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/delete-session.md
+        method: deleteSession
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 100
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 54
+    get:
+      description: Use this endpoint to get a logged in user's session using a Session ID. Inputting 'current' will return the current session being used.
+      operationId: accountGetSession
+      parameters:
+        - description: Session unique ID. Use the string 'current' to get the current device session.
+          in: path
+          name: sessionId
+          required: true
+          schema:
+            type: string
+            x-example: "[SESSION_ID]"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/session"
+          description: Session
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Session By ID
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/get-session.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/get-session.md
+        method: getSession
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 48
+  /account/verification:
+    post:
+      description: |
+        Use this endpoint to send a verification message to your user email address to confirm they are the valid owners of that address. Both the **userId** and **secret** arguments will be passed as query parameters to the URL you have provided to be attached to the verification email. The provided URL should redirect the user back to your app and allow you to complete the verification process by verifying both the **userId** and **secret** parameters. Learn more about how to [complete the verification process](/docs/client/account#accountUpdateVerification). The verification link sent to the user's email address is valid for 7 days.
+
+        Please note that in order to avoid a [Redirect Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md), the only valid redirect URLs are the ones from domains you have set when adding your platforms in the console interface.
+      operationId: accountCreateVerification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                url:
+                  description: URL to redirect the user back to your app from the verification email. Only URLs from hostnames in your project platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
+                  type: string
+                  x-example: null
+              required:
+                - url
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/token"
+          description: Token
+      security:
+        - JWT: []
+          Project: []
+      summary: Create Email Verification
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/create-verification.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/create-verification.md
+        method: createVerification
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},userId:{userId}
+        rate-limit: 10
+        rate-time: 3600
+        scope: account
+        type: ""
+        weight: 58
+    put:
+      description: Use this endpoint to complete the user email verification process. Use both the **userId** and **secret** parameters that were attached to your app URL to verify the user email ownership. If confirmed this route will return a 200 status code.
+      operationId: accountUpdateVerification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                secret:
+                  description: Valid verification token.
+                  type: string
+                  x-example: null
+                userId:
+                  description: User unique ID.
+                  type: string
+                  x-example: null
+              required:
+                - userId
+                - secret
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/token"
+          description: Token
+      security:
+        - JWT: []
+          Project: []
+      summary: Complete Email Verification
+      tags:
+        - account
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: account/update-verification.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/account/update-verification.md
+        method: updateVerification
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},userId:{param-userId}
+        rate-limit: 10
+        rate-time: 3600
+        scope: public
+        type: ""
+        weight: 59
+  "/avatars/browsers/{code}":
+    get:
+      description: You can use this endpoint to show different browser icons to your users. The code argument receives the browser code as it appears in your user /account/sessions endpoint. Use width, height and quality arguments to change the output settings.
+      operationId: avatarsGetBrowser
+      parameters:
+        - description: Browser Code.
+          in: path
+          name: code
+          required: true
+          schema:
+            type: string
+            x-example: aa
+        - description: Image width. Pass an integer between 0 to 2000. Defaults to 100.
+          in: query
+          name: width
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Image height. Pass an integer between 0 to 2000. Defaults to 100.
+          in: query
+          name: height
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Image quality. Pass an integer between 0 to 100. Defaults to 100.
+          in: query
+          name: quality
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+      responses:
+        "200":
+          description: Image
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Browser Icon
+      tags:
+        - avatars
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: avatars/get-browser.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/avatars/get-browser.md
+        method: getBrowser
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: avatars.read
+        type: location
+        weight: 61
+  "/avatars/credit-cards/{code}":
+    get:
+      description: The credit card endpoint will return you the icon of the credit card provider you need. Use width, height and quality arguments to change the output settings.
+      operationId: avatarsGetCreditCard
+      parameters:
+        - description: "Credit Card Code. Possible values: amex, argencard, cabal, censosud, diners, discover, elo, hipercard, jcb, mastercard, naranja, targeta-shopping, union-china-pay, visa, mir, maestro."
+          in: path
+          name: code
+          required: true
+          schema:
+            type: string
+            x-example: amex
+        - description: Image width. Pass an integer between 0 to 2000. Defaults to 100.
+          in: query
+          name: width
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Image height. Pass an integer between 0 to 2000. Defaults to 100.
+          in: query
+          name: height
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Image quality. Pass an integer between 0 to 100. Defaults to 100.
+          in: query
+          name: quality
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+      responses:
+        "200":
+          description: Image
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Credit Card Icon
+      tags:
+        - avatars
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: avatars/get-credit-card.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/avatars/get-credit-card.md
+        method: getCreditCard
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: avatars.read
+        type: location
+        weight: 60
+  /avatars/favicon:
+    get:
+      description: |
+        Use this endpoint to fetch the favorite icon (AKA favicon) of any remote website URL.
+      operationId: avatarsGetFavicon
+      parameters:
+        - description: Website URL which you want to fetch the favicon from.
+          in: query
+          name: url
+          required: true
+          schema:
+            format: url
+            type: string
+            x-example: https://example.com
+      responses:
+        "200":
+          description: Image
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Favicon
+      tags:
+        - avatars
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: avatars/get-favicon.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/avatars/get-favicon.md
+        method: getFavicon
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: avatars.read
+        type: location
+        weight: 64
+  "/avatars/flags/{code}":
+    get:
+      description: You can use this endpoint to show different country flags icons to your users. The code argument receives the 2 letter country code. Use width, height and quality arguments to change the output settings.
+      operationId: avatarsGetFlag
+      parameters:
+        - description: Country Code. ISO Alpha-2 country code format.
+          in: path
+          name: code
+          required: true
+          schema:
+            type: string
+            x-example: af
+        - description: Image width. Pass an integer between 0 to 2000. Defaults to 100.
+          in: query
+          name: width
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Image height. Pass an integer between 0 to 2000. Defaults to 100.
+          in: query
+          name: height
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Image quality. Pass an integer between 0 to 100. Defaults to 100.
+          in: query
+          name: quality
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+      responses:
+        "200":
+          description: Image
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Country Flag
+      tags:
+        - avatars
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: avatars/get-flag.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/avatars/get-flag.md
+        method: getFlag
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: avatars.read
+        type: location
+        weight: 62
+  /avatars/image:
+    get:
+      description: Use this endpoint to fetch a remote image URL and crop it to any image size you want. This endpoint is very useful if you need to crop and display remote images in your app or in case you want to make sure a 3rd party image is properly served using a TLS protocol.
+      operationId: avatarsGetImage
+      parameters:
+        - description: Image URL which you want to crop.
+          in: query
+          name: url
+          required: true
+          schema:
+            format: url
+            type: string
+            x-example: https://example.com
+        - description: Resize preview image width, Pass an integer between 0 to 2000.
+          in: query
+          name: width
+          required: false
+          schema:
+            default: 400
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Resize preview image height, Pass an integer between 0 to 2000.
+          in: query
+          name: height
+          required: false
+          schema:
+            default: 400
+            format: int32
+            type: integer
+            x-example: 0
+      responses:
+        "200":
+          description: Image
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Image from URL
+      tags:
+        - avatars
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: avatars/get-image.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/avatars/get-image.md
+        method: getImage
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: avatars.read
+        type: location
+        weight: 63
+  /avatars/initials:
+    get:
+      description: |-
+        Use this endpoint to show your user initials avatar icon on your website or app. By default, this route will try to print your logged-in user name or email initials. You can also overwrite the user name if you pass the 'name' parameter. If no name is given and no user is logged, an empty avatar will be returned.
+
+        You can use the color and background params to change the avatar colors. By default, a random theme will be selected. The random theme will persist for the user's initials when reloading the same theme will always return for the same initials.
+      operationId: avatarsGetInitials
+      parameters:
+        - description: "Full Name. When empty, current user name or email will be used. Max length: 128 chars."
+          in: query
+          name: name
+          required: false
+          schema:
+            default: ""
+            type: string
+            x-example: "[NAME]"
+        - description: Image width. Pass an integer between 0 to 2000. Defaults to 100.
+          in: query
+          name: width
+          required: false
+          schema:
+            default: 500
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Image height. Pass an integer between 0 to 2000. Defaults to 100.
+          in: query
+          name: height
+          required: false
+          schema:
+            default: 500
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Changes text color. By default a random color will be picked and stay will persistent to the given name.
+          in: query
+          name: color
+          required: false
+          schema:
+            default: ""
+            type: string
+        - description: Changes background color. By default a random color will be picked and stay will persistent to the given name.
+          in: query
+          name: background
+          required: false
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          description: Image
+      security:
+        - JWT: []
+          Project: []
+      summary: Get User Initials
+      tags:
+        - avatars
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: avatars/get-initials.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/avatars/get-initials.md
+        method: getInitials
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: avatars.read
+        type: location
+        weight: 66
+  /avatars/qr:
+    get:
+      description: Converts a given plain text to a QR code image. You can use the query parameters to change the size and style of the resulting image.
+      operationId: avatarsGetQR
+      parameters:
+        - description: Plain text to be converted to QR code image.
+          in: query
+          name: text
+          required: true
+          schema:
+            type: string
+            x-example: "[TEXT]"
+        - description: QR code size. Pass an integer between 0 to 1000. Defaults to 400.
+          in: query
+          name: size
+          required: false
+          schema:
+            default: 400
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Margin from edge. Pass an integer between 0 to 10. Defaults to 1.
+          in: query
+          name: margin
+          required: false
+          schema:
+            default: 1
+            format: int32
+            type: integer
+            x-example: 0
+        - description: "Return resulting image with 'Content-Disposition: attachment ' headers for the browser to start downloading it. Pass 0 for no header, or 1 for otherwise. Default value is set to 0."
+          in: query
+          name: download
+          required: false
+          schema:
+            default: false
+            type: boolean
+            x-example: false
+      responses:
+        "200":
+          description: Image
+      security:
+        - JWT: []
+          Project: []
+      summary: Get QR Code
+      tags:
+        - avatars
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: avatars/get-q-r.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/avatars/get-qr.md
+        method: getQR
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: avatars.read
+        type: location
+        weight: 65
+  "/database/collections/{collectionId}/documents":
+    get:
+      description: Get a list of all the user documents. You can use the query params to filter your results. On admin mode, this endpoint will return a list of all of the project's documents. [Learn more about different API modes](/docs/admin).
+      operationId: databaseListDocuments
+      parameters:
+        - description: Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+            x-example: "[COLLECTION_ID]"
+        - description: "Array of filter strings. Each filter is constructed from a key name, comparison operator (=, !=, >, <, <=, >=) and a value. You can also use a dot (.) separator in attribute names to filter by child document attributes. Examples: 'name=John Doe' or 'category.$id>=5bed2d152c362'."
+          in: query
+          name: filters
+          required: false
+          schema:
+            default: []
+            items:
+              type: string
+            type: array
+        - description: Maximum number of documents to return in response.  Use this value to manage pagination. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Offset value. The default value is 0. Use this param to manage pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Document field that results will be sorted by.
+          in: query
+          name: orderField
+          required: false
+          schema:
+            default: ""
+            type: string
+            x-example: "[ORDER_FIELD]"
+        - description: Order direction. Possible values are DESC for descending order, or ASC for ascending order.
+          in: query
+          name: orderType
+          required: false
+          schema:
+            default: ASC
+            type: string
+            x-example: DESC
+        - description: Order field type casting. Possible values are int, string, date, time or datetime. The database will attempt to cast the order field to the value you pass here. The default value is a string.
+          in: query
+          name: orderCast
+          required: false
+          schema:
+            default: string
+            type: string
+            x-example: int
+        - description: "Search query. Enter any free text search. The database will try to find a match against all document attributes and children. Max length: 256 chars."
+          in: query
+          name: search
+          required: false
+          schema:
+            default: ""
+            type: string
+            x-example: "[SEARCH]"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/documentList"
+          description: Documents List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Documents
+      tags:
+        - database
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: database/list-documents.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/database/list-documents.md
+        method: listDocuments
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: documents.read
+        type: ""
+        weight: 73
+    post:
+      description: Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](/docs/server/database#databaseCreateCollection) API or directly from your database console.
+      operationId: databaseCreateDocument
+      parameters:
+        - description: Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+            x-example: "[COLLECTION_ID]"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: Document data as JSON object.
+                  type: object
+                  x-example: null
+                parentDocument:
+                  description: Parent document unique ID. Use when you want your new document to be a child of a parent document.
+                  type: string
+                  x-example: null
+                parentProperty:
+                  description: Parent document property name. Use when you want your new document to be a child of a parent document.
+                  type: string
+                  x-example: null
+                parentPropertyType:
+                  description: Parent document property connection type. You can set this value to **assign**, **append** or **prepend**, default value is assign. Use when you want your new document to be a child of a parent document.
+                  type: string
+                  x-example: null
+                read:
+                  description: An array of strings with read permissions. By default only the current user is granted with read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+                write:
+                  description: An array of strings with write permissions. By default only the current user is granted with write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+              required:
+                - data
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/document"
+          description: Document
+      security:
+        - JWT: []
+          Project: []
+      summary: Create Document
+      tags:
+        - database
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: database/create-document.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/database/create-document.md
+        method: createDocument
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: documents.write
+        type: ""
+        weight: 72
+  "/database/collections/{collectionId}/documents/{documentId}":
+    delete:
+      description: Delete a document by its unique ID. This endpoint deletes only the parent documents, its attributes and relations to other documents. Child documents **will not** be deleted.
+      operationId: databaseDeleteDocument
+      parameters:
+        - description: Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+            x-example: "[COLLECTION_ID]"
+        - description: Document unique ID.
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: string
+            x-example: "[DOCUMENT_ID]"
+      responses:
+        "204":
+          description: No content
+      security:
+        - JWT: []
+          Project: []
+      summary: Delete Document
+      tags:
+        - database
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: database/delete-document.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/database/delete-document.md
+        method: deleteDocument
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: documents.write
+        type: ""
+        weight: 76
+    get:
+      description: Get a document by its unique ID. This endpoint response returns a JSON object with the document data.
+      operationId: databaseGetDocument
+      parameters:
+        - description: Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+            x-example: "[COLLECTION_ID]"
+        - description: Document unique ID.
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: string
+            x-example: "[DOCUMENT_ID]"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/document"
+          description: Document
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Document
+      tags:
+        - database
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: database/get-document.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/database/get-document.md
+        method: getDocument
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: documents.read
+        type: ""
+        weight: 74
+    patch:
+      description: Update a document by its unique ID. Using the patch method you can pass only specific fields that will get updated.
+      operationId: databaseUpdateDocument
+      parameters:
+        - description: Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+            x-example: "[COLLECTION_ID]"
+        - description: Document unique ID.
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: string
+            x-example: "[DOCUMENT_ID]"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: Document data as JSON object.
+                  type: object
+                  x-example: null
+                read:
+                  description: An array of strings with read permissions. By default inherits the existing read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+                write:
+                  description: An array of strings with write permissions. By default inherits the existing write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+              required:
+                - data
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/document"
+          description: Document
+      security:
+        - JWT: []
+          Project: []
+      summary: Update Document
+      tags:
+        - database
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: database/update-document.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/database/update-document.md
+        method: updateDocument
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: documents.write
+        type: ""
+        weight: 75
+  "/functions/{functionId}/executions":
+    get:
+      description: Get a list of all the current user function execution logs. You can use the query params to filter your results. On admin mode, this endpoint will return a list of all of the project's executions. [Learn more about different API modes](/docs/admin).
+      operationId: functionsListExecutions
+      parameters:
+        - description: Function unique ID.
+          in: path
+          name: functionId
+          required: true
+          schema:
+            type: string
+            x-example: "[FUNCTION_ID]"
+        - description: "Search term to filter your list results. Max length: 256 chars."
+          in: query
+          name: search
+          required: false
+          schema:
+            default: ""
+            type: string
+            x-example: "[SEARCH]"
+        - description: Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Results offset. The default value is 0. Use this param to manage pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Order result by ASC or DESC order.
+          in: query
+          name: orderType
+          required: false
+          schema:
+            default: ASC
+            type: string
+            x-example: ASC
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/executionList"
+          description: Executions List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Executions
+      tags:
+        - functions
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: functions/list-executions.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/functions/list-executions.md
+        method: listExecutions
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: execution.read
+        type: ""
+        weight: 174
+    post:
+      description: Trigger a function execution. The returned object will return you the current execution status. You can ping the `Get Execution` endpoint to get updates on the current execution status. Once this endpoint is called, your function execution process will start asynchronously.
+      operationId: functionsCreateExecution
+      parameters:
+        - description: Function unique ID.
+          in: path
+          name: functionId
+          required: true
+          schema:
+            type: string
+            x-example: "[FUNCTION_ID]"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: String of custom data to send to function.
+                  type: string
+                  x-example: null
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/execution"
+          description: Execution
+      security:
+        - JWT: []
+          Project: []
+      summary: Create Execution
+      tags:
+        - functions
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: functions/create-execution.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/functions/create-execution.md
+        method: createExecution
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 60
+        rate-time: 60
+        scope: execution.write
+        type: ""
+        weight: 173
+  "/functions/{functionId}/executions/{executionId}":
+    get:
+      description: Get a function execution log by its unique ID.
+      operationId: functionsGetExecution
+      parameters:
+        - description: Function unique ID.
+          in: path
+          name: functionId
+          required: true
+          schema:
+            type: string
+            x-example: "[FUNCTION_ID]"
+        - description: Execution unique ID.
+          in: path
+          name: executionId
+          required: true
+          schema:
+            type: string
+            x-example: "[EXECUTION_ID]"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/execution"
+          description: Execution
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Execution
+      tags:
+        - functions
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: functions/get-execution.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/functions/get-execution.md
+        method: getExecution
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: execution.read
+        type: ""
+        weight: 175
+  /locale:
+    get:
+      description: |-
+        Get the current user location based on IP. Returns an object with user country code, country name, continent name, continent code, ip address and suggested currency. You can use the locale header to get the data in a supported language.
+
+        ([IP Geolocation by DB-IP](https://db-ip.com))
+      operationId: localeGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/locale"
+          description: Locale
+      security:
+        - JWT: []
+          Project: []
+      summary: Get User Locale
+      tags:
+        - locale
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: locale/get.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/locale/get-locale.md
+        method: get
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: locale.read
+        type: ""
+        weight: 77
+  /locale/continents:
+    get:
+      description: List of all continents. You can use the locale header to get the data in a supported language.
+      operationId: localeGetContinents
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/continentList"
+          description: Continents List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Continents
+      tags:
+        - locale
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: locale/get-continents.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/locale/get-continents.md
+        method: getContinents
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: locale.read
+        type: ""
+        weight: 81
+  /locale/countries:
+    get:
+      description: List of all countries. You can use the locale header to get the data in a supported language.
+      operationId: localeGetCountries
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/countryList"
+          description: Countries List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Countries
+      tags:
+        - locale
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: locale/get-countries.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/locale/get-countries.md
+        method: getCountries
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: locale.read
+        type: ""
+        weight: 78
+  /locale/countries/eu:
+    get:
+      description: List of all countries that are currently members of the EU. You can use the locale header to get the data in a supported language.
+      operationId: localeGetCountriesEU
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/countryList"
+          description: Countries List
+      security:
+        - JWT: []
+          Project: []
+      summary: List EU Countries
+      tags:
+        - locale
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: locale/get-countries-e-u.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/locale/get-countries-eu.md
+        method: getCountriesEU
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: locale.read
+        type: ""
+        weight: 79
+  /locale/countries/phones:
+    get:
+      description: List of all countries phone codes. You can use the locale header to get the data in a supported language.
+      operationId: localeGetCountriesPhones
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/phoneList"
+          description: Phones List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Countries Phone Codes
+      tags:
+        - locale
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: locale/get-countries-phones.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/locale/get-countries-phones.md
+        method: getCountriesPhones
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: locale.read
+        type: ""
+        weight: 80
+  /locale/currencies:
+    get:
+      description: List of all currencies, including currency symbol, name, plural, and decimal digits for all major and minor currencies. You can use the locale header to get the data in a supported language.
+      operationId: localeGetCurrencies
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/currencyList"
+          description: Currencies List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Currencies
+      tags:
+        - locale
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: locale/get-currencies.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/locale/get-currencies.md
+        method: getCurrencies
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: locale.read
+        type: ""
+        weight: 82
+  /locale/languages:
+    get:
+      description: List of all languages classified by ISO 639-1 including 2-letter code, name in English, and name in the respective language.
+      operationId: localeGetLanguages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/languageList"
+          description: Languages List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Languages
+      tags:
+        - locale
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: locale/get-languages.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/locale/get-languages.md
+        method: getLanguages
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: locale.read
+        type: ""
+        weight: 83
+  /storage/files:
+    get:
+      description: Get a list of all the user files. You can use the query params to filter your results. On admin mode, this endpoint will return a list of all of the project's files. [Learn more about different API modes](/docs/admin).
+      operationId: storageListFiles
+      parameters:
+        - description: "Search term to filter your list results. Max length: 256 chars."
+          in: query
+          name: search
+          required: false
+          schema:
+            default: ""
+            type: string
+            x-example: "[SEARCH]"
+        - description: Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Results offset. The default value is 0. Use this param to manage pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Order result by ASC or DESC order.
+          in: query
+          name: orderType
+          required: false
+          schema:
+            default: ASC
+            type: string
+            x-example: ASC
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/fileList"
+          description: Files List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Files
+      tags:
+        - storage
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: storage/list-files.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/storage/list-files.md
+        method: listFiles
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: files.read
+        type: ""
+        weight: 133
+    post:
+      description: Create a new file. The user who creates the file will automatically be assigned to read and write access unless he has passed custom values for read and write arguments.
+      operationId: storageCreateFile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: Binary file.
+                  type: string
+                  x-example: null
+                read:
+                  description: An array of strings with read permissions. By default only the current user is granted with read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+                write:
+                  description: An array of strings with write permissions. By default only the current user is granted with write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+              required:
+                - file
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/file"
+          description: File
+      security:
+        - JWT: []
+          Project: []
+      summary: Create File
+      tags:
+        - storage
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: storage/create-file.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/storage/create-file.md
+        method: createFile
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: files.write
+        type: upload
+        weight: 132
+  "/storage/files/{fileId}":
+    delete:
+      description: Delete a file by its unique ID. Only users with write permissions have access to delete this resource.
+      operationId: storageDeleteFile
+      parameters:
+        - description: File unique ID.
+          in: path
+          name: fileId
+          required: true
+          schema:
+            type: string
+            x-example: "[FILE_ID]"
+      responses:
+        "204":
+          description: No content
+      security:
+        - JWT: []
+          Project: []
+      summary: Delete File
+      tags:
+        - storage
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: storage/delete-file.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/storage/delete-file.md
+        method: deleteFile
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: files.write
+        type: ""
+        weight: 139
+    get:
+      description: Get a file by its unique ID. This endpoint response returns a JSON object with the file metadata.
+      operationId: storageGetFile
+      parameters:
+        - description: File unique ID.
+          in: path
+          name: fileId
+          required: true
+          schema:
+            type: string
+            x-example: "[FILE_ID]"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/file"
+          description: File
+      security:
+        - JWT: []
+          Project: []
+      summary: Get File
+      tags:
+        - storage
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: storage/get-file.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/storage/get-file.md
+        method: getFile
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: files.read
+        type: ""
+        weight: 134
+    put:
+      description: Update a file by its unique ID. Only users with write permissions have access to update this resource.
+      operationId: storageUpdateFile
+      parameters:
+        - description: File unique ID.
+          in: path
+          name: fileId
+          required: true
+          schema:
+            type: string
+            x-example: "[FILE_ID]"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                read:
+                  description: An array of strings with read permissions. By default no user is granted with any read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+                write:
+                  description: An array of strings with write permissions. By default no user is granted with any write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+              required:
+                - read
+                - write
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/file"
+          description: File
+      security:
+        - JWT: []
+          Project: []
+      summary: Update File
+      tags:
+        - storage
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: storage/update-file.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/storage/update-file.md
+        method: updateFile
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: files.write
+        type: ""
+        weight: 138
+  "/storage/files/{fileId}/download":
+    get:
+      description: "Get a file content by its unique ID. The endpoint response return with a 'Content-Disposition: attachment' header that tells the browser to start downloading the file to user downloads directory."
+      operationId: storageGetFileDownload
+      parameters:
+        - description: File unique ID.
+          in: path
+          name: fileId
+          required: true
+          schema:
+            type: string
+            x-example: "[FILE_ID]"
+      responses:
+        "200":
+          description: File
+      security:
+        - JWT: []
+          Project: []
+      summary: Get File for Download
+      tags:
+        - storage
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: storage/get-file-download.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/storage/get-file-download.md
+        method: getFileDownload
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: files.read
+        type: location
+        weight: 136
+  "/storage/files/{fileId}/preview":
+    get:
+      description: Get a file preview image. Currently, this method supports preview for image files (jpg, png, and gif), other supported formats, like pdf, docs, slides, and spreadsheets, will return the file icon image. You can also pass query string arguments for cutting and resizing your preview image.
+      operationId: storageGetFilePreview
+      parameters:
+        - description: File unique ID
+          in: path
+          name: fileId
+          required: true
+          schema:
+            type: string
+            x-example: "[FILE_ID]"
+        - description: Resize preview image width, Pass an integer between 0 to 4000.
+          in: query
+          name: width
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Resize preview image height, Pass an integer between 0 to 4000.
+          in: query
+          name: height
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Image crop gravity. Can be one of center,top-left,top,top-right,left,right,bottom-left,bottom,bottom-right
+          in: query
+          name: gravity
+          required: false
+          schema:
+            default: center
+            type: string
+            x-example: center
+        - description: Preview image quality. Pass an integer between 0 to 100. Defaults to 100.
+          in: query
+          name: quality
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Preview image border in pixels. Pass an integer between 0 to 100. Defaults to 0.
+          in: query
+          name: borderWidth
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: "Preview image border color. Use a valid HEX color, no # is needed for prefix."
+          in: query
+          name: borderColor
+          required: false
+          schema:
+            default: ""
+            type: string
+        - description: Preview image border radius in pixels. Pass an integer between 0 to 4000.
+          in: query
+          name: borderRadius
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Preview image opacity. Only works with images having an alpha channel (like png). Pass a number between 0 to 1.
+          in: query
+          name: opacity
+          required: false
+          schema:
+            default: 1
+            format: float
+            type: number
+            x-example: 0
+        - description: Preview image rotation in degrees. Pass an integer between 0 and 360.
+          in: query
+          name: rotation
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: "Preview image background color. Only works with transparent images (png). Use a valid HEX color, no # is needed for prefix."
+          in: query
+          name: background
+          required: false
+          schema:
+            default: ""
+            type: string
+        - description: Output format type (jpeg, jpg, png, gif and webp).
+          in: query
+          name: output
+          required: false
+          schema:
+            default: ""
+            type: string
+            x-example: jpg
+      responses:
+        "200":
+          description: Image
+      security:
+        - JWT: []
+          Project: []
+      summary: Get File Preview
+      tags:
+        - storage
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: storage/get-file-preview.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/storage/get-file-preview.md
+        method: getFilePreview
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: files.read
+        type: location
+        weight: 135
+  "/storage/files/{fileId}/view":
+    get:
+      description: "Get a file content by its unique ID. This endpoint is similar to the download method but returns with no  'Content-Disposition: attachment' header."
+      operationId: storageGetFileView
+      parameters:
+        - description: File unique ID.
+          in: path
+          name: fileId
+          required: true
+          schema:
+            type: string
+            x-example: "[FILE_ID]"
+      responses:
+        "200":
+          description: File
+      security:
+        - JWT: []
+          Project: []
+      summary: Get File for View
+      tags:
+        - storage
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: storage/get-file-view.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/storage/get-file-view.md
+        method: getFileView
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: files.read
+        type: location
+        weight: 137
+  /teams:
+    get:
+      description: Get a list of all the current user teams. You can use the query params to filter your results. On admin mode, this endpoint will return a list of all of the project's teams. [Learn more about different API modes](/docs/admin).
+      operationId: teamsList
+      parameters:
+        - description: "Search term to filter your list results. Max length: 256 chars."
+          in: query
+          name: search
+          required: false
+          schema:
+            default: ""
+            type: string
+            x-example: "[SEARCH]"
+        - description: Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Results offset. The default value is 0. Use this param to manage pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Order result by ASC or DESC order.
+          in: query
+          name: orderType
+          required: false
+          schema:
+            default: ASC
+            type: string
+            x-example: ASC
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/teamList"
+          description: Teams List
+      security:
+        - JWT: []
+          Project: []
+      summary: List Teams
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/list.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/list-teams.md
+        method: list
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: teams.read
+        type: ""
+        weight: 141
+    post:
+      description: Create a new team. The user who creates the team will automatically be assigned as the owner of the team. The team owner can invite new members, who will be able add new owners and update or delete the team from your project.
+      operationId: teamsCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  description: "Team name. Max length: 128 chars."
+                  type: string
+                  x-example: null
+                roles:
+                  description: Array of strings. Use this param to set the roles in the team for the user who created it. The default role is **owner**. A role can be any string. Learn more about [roles and permissions](/docs/permissions). Max length for each role is 32 chars.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+              required:
+                - name
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/team"
+          description: Team
+      security:
+        - JWT: []
+          Project: []
+      summary: Create Team
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/create.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/create-team.md
+        method: create
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: teams.write
+        type: ""
+        weight: 140
+  "/teams/{teamId}":
+    delete:
+      description: Delete a team by its unique ID. Only team owners have write access for this resource.
+      operationId: teamsDelete
+      parameters:
+        - description: Team unique ID.
+          in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            x-example: "[TEAM_ID]"
+      responses:
+        "204":
+          description: No content
+      security:
+        - JWT: []
+          Project: []
+      summary: Delete Team
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/delete.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/delete-team.md
+        method: delete
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: teams.write
+        type: ""
+        weight: 144
+    get:
+      description: Get a team by its unique ID. All team members have read access for this resource.
+      operationId: teamsGet
+      parameters:
+        - description: Team unique ID.
+          in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            x-example: "[TEAM_ID]"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/team"
+          description: Team
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Team
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/get.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/get-team.md
+        method: get
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: teams.read
+        type: ""
+        weight: 142
+    put:
+      description: Update a team by its unique ID. Only team owners have write access for this resource.
+      operationId: teamsUpdate
+      parameters:
+        - description: Team unique ID.
+          in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            x-example: "[TEAM_ID]"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  description: "Team name. Max length: 128 chars."
+                  type: string
+                  x-example: null
+              required:
+                - name
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/team"
+          description: Team
+      security:
+        - JWT: []
+          Project: []
+      summary: Update Team
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/update.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/update-team.md
+        method: update
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: teams.write
+        type: ""
+        weight: 143
+  "/teams/{teamId}/memberships":
+    get:
+      description: Get a team members by the team unique ID. All team members have read access for this list of resources.
+      operationId: teamsGetMemberships
+      parameters:
+        - description: Team unique ID.
+          in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            x-example: "[TEAM_ID]"
+        - description: "Search term to filter your list results. Max length: 256 chars."
+          in: query
+          name: search
+          required: false
+          schema:
+            default: ""
+            type: string
+            x-example: "[SEARCH]"
+        - description: Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Results offset. The default value is 0. Use this param to manage pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+            x-example: 0
+        - description: Order result by ASC or DESC order.
+          in: query
+          name: orderType
+          required: false
+          schema:
+            default: ASC
+            type: string
+            x-example: ASC
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/membershipList"
+          description: Memberships List
+      security:
+        - JWT: []
+          Project: []
+      summary: Get Team Memberships
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/get-memberships.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/get-team-members.md
+        method: getMemberships
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: teams.read
+        type: ""
+        weight: 147
+    post:
+      description: |-
+        Use this endpoint to invite a new member to join your team. If initiated from Client SDK, an email with a link to join the team will be sent to the new member's email address if the member doesn't exist in the project it will be created automatically. If initiated from server side SDKs, new member will automatically be added to the team.
+
+        Use the 'URL' parameter to redirect the user from the invitation email back to your app. When the user is redirected, use the [Update Team Membership Status](/docs/client/teams#teamsUpdateMembershipStatus) endpoint to allow the user to accept the invitation to the team.  While calling from side SDKs the redirect url can be empty string.
+
+        Please note that in order to avoid a [Redirect Attacks](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md) the only valid redirect URL's are the once from domains you have set when added your platforms in the console interface.
+      operationId: teamsCreateMembership
+      parameters:
+        - description: Team unique ID.
+          in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            x-example: "[TEAM_ID]"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  description: New team member email.
+                  type: string
+                  x-example: null
+                name:
+                  description: "New team member name. Max length: 128 chars."
+                  type: string
+                  x-example: null
+                roles:
+                  description: Array of strings. Use this param to set the user roles in the team. A role can be any string. Learn more about [roles and permissions](/docs/permissions). Max length for each role is 32 chars.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+                url:
+                  description: URL to redirect the user back to your app from the invitation email.  Only URLs from hostnames in your project platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
+                  type: string
+                  x-example: null
+              required:
+                - email
+                - roles
+                - url
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/membership"
+          description: Membership
+      security:
+        - JWT: []
+          Project: []
+      summary: Create Team Membership
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/create-membership.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/create-team-membership.md
+        method: createMembership
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 10
+        rate-time: 3600
+        scope: teams.write
+        type: ""
+        weight: 145
+  "/teams/{teamId}/memberships/{membershipId}":
+    delete:
+      description: This endpoint allows a user to leave a team or for a team owner to delete the membership of any other team member. You can also use this endpoint to delete a user membership even if it is not accepted.
+      operationId: teamsDeleteMembership
+      parameters:
+        - description: Team unique ID.
+          in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            x-example: "[TEAM_ID]"
+        - description: Membership ID.
+          in: path
+          name: membershipId
+          required: true
+          schema:
+            type: string
+            x-example: "[MEMBERSHIP_ID]"
+      responses:
+        "204":
+          description: No content
+      security:
+        - JWT: []
+          Project: []
+      summary: Delete Team Membership
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/delete-membership.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/delete-team-membership.md
+        method: deleteMembership
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: teams.write
+        type: ""
+        weight: 149
+    patch:
+      description: ""
+      operationId: teamsUpdateMembershipRoles
+      parameters:
+        - description: Team unique ID.
+          in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            x-example: "[TEAM_ID]"
+        - description: Membership ID.
+          in: path
+          name: membershipId
+          required: true
+          schema:
+            type: string
+            x-example: "[MEMBERSHIP_ID]"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                roles:
+                  description: Array of strings. Use this param to set the user roles in the team. A role can be any string. Learn more about [roles and permissions](/docs/permissions). Max length for each role is 32 chars.
+                  items:
+                    type: string
+                  type: array
+                  x-example: null
+              required:
+                - roles
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/membership"
+          description: Membership
+      security:
+        - JWT: []
+          Project: []
+      summary: Update Membership Roles
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/update-membership-roles.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/update-team-membership-roles.md
+        method: updateMembershipRoles
+        packaging: false
+        platforms:
+          - client
+          - server
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: teams.write
+        type: ""
+        weight: 146
+  "/teams/{teamId}/memberships/{membershipId}/status":
+    patch:
+      description: Use this endpoint to allow a user to accept an invitation to join a team after being redirected back to your app from the invitation email recieved by the user.
+      operationId: teamsUpdateMembershipStatus
+      parameters:
+        - description: Team unique ID.
+          in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            x-example: "[TEAM_ID]"
+        - description: Membership ID.
+          in: path
+          name: membershipId
+          required: true
+          schema:
+            type: string
+            x-example: "[MEMBERSHIP_ID]"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                secret:
+                  description: Secret key.
+                  type: string
+                  x-example: null
+                userId:
+                  description: User unique ID.
+                  type: string
+                  x-example: null
+              required:
+                - userId
+                - secret
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/membership"
+          description: Membership
+      security:
+        - JWT: []
+          Project: []
+      summary: Update Team Membership Status
+      tags:
+        - teams
+      x-appwrite:
+        auth:
+          Project: []
+        cookies: false
+        demo: teams/update-membership-status.md
+        edit: https://github.com/appwrite/appwrite/edit/master/docs/references/teams/update-team-membership-status.md
+        method: updateMembershipStatus
+        packaging: false
+        platforms:
+          - client
+          - server
+        rate-key: url:{url},ip:{ip}
+        rate-limit: 0
+        rate-time: 3600
+        scope: public
+        type: ""
+        weight: 148
+components:
+  schemas:
+    collection:
+      description: Collection
+      properties:
+        $id:
+          description: Collection ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        $permissions:
+          description: Collection permissions.
+          items:
+            $ref: "#/components/schemas/permissions"
+          type: object
+          x-example: {}
+        dateCreated:
+          description: Collection creation date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        dateUpdated:
+          description: Collection creation date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981550
+        name:
+          description: Collection name.
+          type: string
+          x-example: Movies
+        rules:
+          description: Collection rules.
+          items:
+            $ref: "#/components/schemas/rule"
+          type: array
+          x-example: ""
+      required:
+        - $id
+        - $permissions
+        - name
+        - dateCreated
+        - dateUpdated
+        - rules
+      type: object
+    continent:
+      description: Continent
+      properties:
+        code:
+          description: Continent two letter code.
+          type: string
+          x-example: EU
+        name:
+          description: Continent name.
+          type: string
+          x-example: Europe
+      required:
+        - name
+        - code
+      type: object
+    continentList:
+      description: Continents List
+      properties:
+        continents:
+          description: List of continents.
+          items:
+            $ref: "#/components/schemas/continent"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - continents
+      type: object
+    country:
+      description: Country
+      properties:
+        code:
+          description: Country two-character ISO 3166-1 alpha code.
+          type: string
+          x-example: US
+        name:
+          description: Country name.
+          type: string
+          x-example: United States
+      required:
+        - name
+        - code
+      type: object
+    countryList:
+      description: Countries List
+      properties:
+        countries:
+          description: List of countries.
+          items:
+            $ref: "#/components/schemas/country"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - countries
+      type: object
+    currency:
+      description: Currency
+      properties:
+        code:
+          description: Currency code in [ISO 4217-1](http://en.wikipedia.org/wiki/ISO_4217) three-character format.
+          type: string
+          x-example: USD
+        decimalDigits:
+          description: Number of decimal digits.
+          format: int32
+          type: integer
+          x-example: 2
+        name:
+          description: Currency name.
+          type: string
+          x-example: US dollar
+        namePlural:
+          description: Currency plural name
+          type: string
+          x-example: US dollars
+        rounding:
+          description: Currency digit rounding.
+          format: float
+          type: number
+          x-example: 0
+        symbol:
+          description: Currency symbol.
+          type: string
+          x-example: $
+        symbolNative:
+          description: Currency native symbol.
+          type: string
+          x-example: $
+      required:
+        - symbol
+        - name
+        - symbolNative
+        - decimalDigits
+        - rounding
+        - code
+        - namePlural
+      type: object
+    currencyList:
+      description: Currencies List
+      properties:
+        currencies:
+          description: List of currencies.
+          items:
+            $ref: "#/components/schemas/currency"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - currencies
+      type: object
+    document:
+      additionalProperties: true
+      description: Document
+      properties:
+        $collection:
+          description: Collection ID.
+          type: string
+          x-example: 5e5ea5c15117e
+        $id:
+          description: Document ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        $permissions:
+          description: Document permissions.
+          items:
+            $ref: "#/components/schemas/permissions"
+          type: object
+          x-example: {}
+      required:
+        - $id
+        - $collection
+        - $permissions
+      type: object
+    documentList:
+      description: Documents List
+      properties:
+        documents:
+          description: List of documents.
+          items:
+            $ref: "#/components/schemas/document"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - documents
+      type: object
+    error:
+      description: Error
+      properties:
+        code:
+          description: Error code.
+          type: string
+          x-example: "404"
+        message:
+          description: Error message.
+          type: string
+          x-example: Not found
+        version:
+          description: Server version number.
+          type: string
+          x-example: "1.0"
+      required:
+        - message
+        - code
+        - version
+      type: object
+    execution:
+      description: Execution
+      properties:
+        $id:
+          description: Execution ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        dateCreated:
+          description: The execution creation date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        exitCode:
+          description: The script exit code.
+          format: int32
+          type: integer
+          x-example: 0
+        functionId:
+          description: Function ID.
+          type: string
+          x-example: 5e5ea6g16897e
+        status:
+          description: "The status of the function execution. Possible values can be: `waiting`, `processing`, `completed`, or `failed`."
+          type: string
+          x-example: processing
+        stderr:
+          description: The script stderr output string. Logs the last 4,000 characters of the execution stderr output
+          type: string
+          x-example: ""
+        stdout:
+          description: The script stdout output string. Logs the last 4,000 characters of the execution stdout output.
+          type: string
+          x-example: ""
+        time:
+          description: The script execution time in seconds.
+          format: float
+          type: number
+          x-example: 0.4
+        trigger:
+          description: "The trigger that caused the function to execute. Possible values can be: `http`, `schedule`, or `event`."
+          type: string
+          x-example: http
+      required:
+        - $id
+        - functionId
+        - dateCreated
+        - trigger
+        - status
+        - exitCode
+        - stdout
+        - stderr
+        - time
+      type: object
+    executionList:
+      description: Executions List
+      properties:
+        executions:
+          description: List of executions.
+          items:
+            $ref: "#/components/schemas/execution"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - executions
+      type: object
+    file:
+      description: File
+      properties:
+        $id:
+          description: File ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        $permissions:
+          description: File permissions.
+          items:
+            $ref: "#/components/schemas/permissions"
+          type: object
+          x-example: {}
+        dateCreated:
+          description: File creation date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        mimeType:
+          description: File mime type.
+          type: string
+          x-example: image/png
+        name:
+          description: File name.
+          type: string
+          x-example: Pink.png
+        signature:
+          description: File MD5 signature.
+          type: string
+          x-example: 5d529fd02b544198ae075bd57c1762bb
+        sizeOriginal:
+          description: File original size in bytes.
+          format: int32
+          type: integer
+          x-example: 17890
+      required:
+        - $id
+        - $permissions
+        - name
+        - dateCreated
+        - signature
+        - mimeType
+        - sizeOriginal
+      type: object
+    fileList:
+      description: Files List
+      properties:
+        files:
+          description: List of files.
+          items:
+            $ref: "#/components/schemas/file"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - files
+      type: object
+    function:
+      description: Function
+      properties:
+        $id:
+          description: Function ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        $permissions:
+          description: Function permissions.
+          items:
+            $ref: "#/components/schemas/permissions"
+          type: object
+          x-example: {}
+        dateCreated:
+          description: Function creation date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        dateUpdated:
+          description: Function update date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981257
+        events:
+          description: Function trigger events.
+          items:
+            type: string
+          type: array
+          x-example: account.create
+        name:
+          description: Function name.
+          type: string
+          x-example: My Function
+        runtime:
+          description: Function execution runtime.
+          type: string
+          x-example: python-3.8
+        schedule:
+          description: Function execution schedult in CRON format.
+          type: string
+          x-example: 5 4 * * *
+        scheduleNext:
+          description: Function next scheduled execution date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981292
+        schedulePrevious:
+          description: Function next scheduled execution date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981237
+        status:
+          description: "Function status. Possible values: disabled, enabled"
+          type: string
+          x-example: enabled
+        tag:
+          description: Function active tag ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        timeout:
+          description: Function execution timeout in seconds.
+          format: int32
+          type: integer
+          x-example: 1592981237
+        vars:
+          description: Function environment variables.
+          type: string
+          x-example:
+            key: value
+      required:
+        - $id
+        - $permissions
+        - name
+        - dateCreated
+        - dateUpdated
+        - status
+        - runtime
+        - tag
+        - vars
+        - events
+        - schedule
+        - scheduleNext
+        - schedulePrevious
+        - timeout
+      type: object
+    jwt:
+      description: JWT
+      properties:
+        jwt:
+          description: JWT encoded string.
+          type: string
+          x-example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      required:
+        - jwt
+      type: object
+    language:
+      description: Language
+      properties:
+        code:
+          description: Language two-character ISO 639-1 codes.
+          type: string
+          x-example: it
+        name:
+          description: Language name.
+          type: string
+          x-example: Italian
+        nativeName:
+          description: Language native name.
+          type: string
+          x-example: Italiano
+      required:
+        - name
+        - code
+        - nativeName
+      type: object
+    languageList:
+      description: Languages List
+      properties:
+        languages:
+          description: List of languages.
+          items:
+            $ref: "#/components/schemas/language"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - languages
+      type: object
+    locale:
+      description: Locale
+      properties:
+        continent:
+          description: Continent name. This field support localization.
+          type: string
+          x-example: North America
+        continentCode:
+          description: Continent code. A two character continent code "AF" for Africa, "AN" for Antarctica, "AS" for Asia, "EU" for Europe, "NA" for North America, "OC" for Oceania, and "SA" for South America.
+          type: string
+          x-example: NA
+        country:
+          description: Country name. This field support localization.
+          type: string
+          x-example: United States
+        countryCode:
+          description: Country code in [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1) two-character format
+          type: string
+          x-example: US
+        currency:
+          description: Currency code in [ISO 4217-1](http://en.wikipedia.org/wiki/ISO_4217) three-character format
+          type: string
+          x-example: USD
+        eu:
+          description: True if country is part of the Europian Union.
+          type: boolean
+          x-example: false
+        ip:
+          description: User IP address.
+          type: string
+          x-example: 127.0.0.1
+      required:
+        - ip
+        - countryCode
+        - country
+        - continentCode
+        - continent
+        - eu
+        - currency
+      type: object
+    log:
+      description: Log
+      properties:
+        clientCode:
+          description: Client code name. View list of [available options](https://github.com/appwrite/appwrite/blob/master/docs/lists/clients.json).
+          type: string
+          x-example: CM
+        clientEngine:
+          description: Client engine name.
+          type: string
+          x-example: WebKit
+        clientEngineVersion:
+          description: Client engine name.
+          type: string
+          x-example: 605.1.15
+        clientName:
+          description: Client name.
+          type: string
+          x-example: Chrome Mobile iOS
+        clientType:
+          description: Client type.
+          type: string
+          x-example: browser
+        clientVersion:
+          description: Client version.
+          type: string
+          x-example: "84.0"
+        countryCode:
+          description: Country two-character ISO 3166-1 alpha code.
+          type: string
+          x-example: US
+        countryName:
+          description: Country name.
+          type: string
+          x-example: United States
+        deviceBrand:
+          description: Device brand name.
+          type: string
+          x-example: Google
+        deviceModel:
+          description: Device model name.
+          type: string
+          x-example: Nexus 5
+        deviceName:
+          description: Device name.
+          type: string
+          x-example: smartphone
+        event:
+          description: Event name.
+          type: string
+          x-example: account.sessions.create
+        ip:
+          description: IP session in use when the session was created.
+          type: string
+          x-example: 127.0.0.1
+        osCode:
+          description: Operating system code name. View list of [available options](https://github.com/appwrite/appwrite/blob/master/docs/lists/os.json).
+          type: string
+          x-example: Mac
+        osName:
+          description: Operating system name.
+          type: string
+          x-example: Mac
+        osVersion:
+          description: Operating system version.
+          type: string
+          x-example: Mac
+        time:
+          description: Log creation time in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+      required:
+        - event
+        - ip
+        - time
+        - osCode
+        - osName
+        - osVersion
+        - clientType
+        - clientCode
+        - clientName
+        - clientVersion
+        - clientEngine
+        - clientEngineVersion
+        - deviceName
+        - deviceBrand
+        - deviceModel
+        - countryCode
+        - countryName
+      type: object
+    logList:
+      description: Logs List
+      properties:
+        logs:
+          description: List of logs.
+          items:
+            $ref: "#/components/schemas/log"
+          type: array
+          x-example: ""
+      required:
+        - logs
+      type: object
+    membership:
+      description: Membership
+      properties:
+        $id:
+          description: Membership ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        confirm:
+          description: User confirmation status, true if the user has joined the team or false otherwise.
+          type: boolean
+          x-example: false
+        email:
+          description: User email address.
+          type: string
+          x-example: john@appwrite.io
+        invited:
+          description: Date, the user has been invited to join the team in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        joined:
+          description: Date, the user has accepted the invitation to join the team in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        name:
+          description: User name.
+          type: string
+          x-example: VIP
+        roles:
+          description: User list of roles
+          items:
+            type: string
+          type: array
+          x-example: admin
+        teamId:
+          description: Team ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        userId:
+          description: User ID.
+          type: string
+          x-example: 5e5ea5c16897e
+      required:
+        - $id
+        - userId
+        - teamId
+        - name
+        - email
+        - invited
+        - joined
+        - confirm
+        - roles
+      type: object
+    membershipList:
+      description: Memberships List
+      properties:
+        memberships:
+          description: List of memberships.
+          items:
+            $ref: "#/components/schemas/membership"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - memberships
+      type: object
+    permissions:
+      description: Permissions
+      properties:
+        read:
+          description: Read permissions.
+          items:
+            type: string
+          type: array
+          x-example: user:5e5ea5c16897e
+        write:
+          description: Write permissions.
+          items:
+            type: string
+          type: array
+          x-example: user:5e5ea5c16897e
+      required:
+        - read
+        - write
+      type: object
+    phone:
+      description: Phone
+      properties:
+        code:
+          description: Phone code.
+          type: string
+          x-example: "+1"
+        countryCode:
+          description: Country two-character ISO 3166-1 alpha code.
+          type: string
+          x-example: US
+        countryName:
+          description: Country name.
+          type: string
+          x-example: United States
+      required:
+        - code
+        - countryCode
+        - countryName
+      type: object
+    phoneList:
+      description: Phones List
+      properties:
+        phones:
+          description: List of phones.
+          items:
+            $ref: "#/components/schemas/phone"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - phones
+      type: object
+    preferences:
+      additionalProperties: true
+      description: Preferences
+      type: object
+    rule:
+      description: Rule
+      properties:
+        $collection:
+          description: Rule Collection.
+          type: string
+          x-example: 5e5e66c16897e
+        $id:
+          description: Rule ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        array:
+          description: Is array?
+          type: boolean
+          x-example: false
+        default:
+          description: Rule default value.
+          type: string
+          x-example: Movie Name
+        key:
+          description: Rule key.
+          type: string
+          x-example: title
+        label:
+          description: Rule label.
+          type: string
+          x-example: Title
+        list:
+          description: List of allowed values
+          items:
+            type: string
+          type: array
+          x-example: 5e5ea5c168099
+        required:
+          description: Is required?
+          type: boolean
+          x-example: true
+        type:
+          description: "Rule type. Possible values: "
+          type: string
+          x-example: title
+      required:
+        - $id
+        - $collection
+        - type
+        - key
+        - label
+        - default
+        - array
+        - required
+        - list
+      type: object
+    session:
+      description: Session
+      properties:
+        $id:
+          description: Session ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        clientCode:
+          description: Client code name. View list of [available options](https://github.com/appwrite/appwrite/blob/master/docs/lists/clients.json).
+          type: string
+          x-example: CM
+        clientEngine:
+          description: Client engine name.
+          type: string
+          x-example: WebKit
+        clientEngineVersion:
+          description: Client engine name.
+          type: string
+          x-example: 605.1.15
+        clientName:
+          description: Client name.
+          type: string
+          x-example: Chrome Mobile iOS
+        clientType:
+          description: Client type.
+          type: string
+          x-example: browser
+        clientVersion:
+          description: Client version.
+          type: string
+          x-example: "84.0"
+        countryCode:
+          description: Country two-character ISO 3166-1 alpha code.
+          type: string
+          x-example: US
+        countryName:
+          description: Country name.
+          type: string
+          x-example: United States
+        current:
+          description: Returns true if this the current user session.
+          type: boolean
+          x-example: true
+        deviceBrand:
+          description: Device brand name.
+          type: string
+          x-example: Google
+        deviceModel:
+          description: Device model name.
+          type: string
+          x-example: Nexus 5
+        deviceName:
+          description: Device name.
+          type: string
+          x-example: smartphone
+        expire:
+          description: Session expiration date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        ip:
+          description: IP in use when the session was created.
+          type: string
+          x-example: 127.0.0.1
+        osCode:
+          description: Operating system code name. View list of [available options](https://github.com/appwrite/appwrite/blob/master/docs/lists/os.json).
+          type: string
+          x-example: Mac
+        osName:
+          description: Operating system name.
+          type: string
+          x-example: Mac
+        osVersion:
+          description: Operating system version.
+          type: string
+          x-example: Mac
+        provider:
+          description: Session Provider.
+          type: string
+          x-example: email
+        providerToken:
+          description: Session Provider Token.
+          type: string
+          x-example: MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3
+        providerUid:
+          description: Session Provider User ID.
+          type: string
+          x-example: user@example.com
+        userId:
+          description: User ID.
+          type: string
+          x-example: 5e5bb8c16897e
+      required:
+        - $id
+        - userId
+        - expire
+        - provider
+        - providerUid
+        - providerToken
+        - ip
+        - osCode
+        - osName
+        - osVersion
+        - clientType
+        - clientCode
+        - clientName
+        - clientVersion
+        - clientEngine
+        - clientEngineVersion
+        - deviceName
+        - deviceBrand
+        - deviceModel
+        - countryCode
+        - countryName
+        - current
+      type: object
+    sessionList:
+      description: Sessions List
+      properties:
+        sessions:
+          description: List of sessions.
+          items:
+            $ref: "#/components/schemas/session"
+          type: array
+          x-example: ""
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+      required:
+        - sum
+        - sessions
+      type: object
+    tag:
+      description: Tag
+      properties:
+        $id:
+          description: Tag ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        command:
+          description: The entrypoint command in use to execute the tag code.
+          type: string
+          x-example: enabled
+        dateCreated:
+          description: The tag creation date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        functionId:
+          description: Function ID.
+          type: string
+          x-example: 5e5ea6g16897e
+        size:
+          description: The code size in bytes.
+          type: string
+          x-example: python-3.8
+      required:
+        - $id
+        - functionId
+        - dateCreated
+        - command
+        - size
+      type: object
+    team:
+      description: Team
+      properties:
+        $id:
+          description: Team ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        dateCreated:
+          description: Team creation date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        name:
+          description: Team name.
+          type: string
+          x-example: VIP
+        sum:
+          description: Total sum of team members.
+          format: int32
+          type: integer
+          x-example: 7
+      required:
+        - $id
+        - name
+        - dateCreated
+        - sum
+      type: object
+    teamList:
+      description: Teams List
+      properties:
+        sum:
+          description: Total sum of items in the list.
+          format: int32
+          type: integer
+          x-example: 5
+        teams:
+          description: List of teams.
+          items:
+            $ref: "#/components/schemas/team"
+          type: array
+          x-example: ""
+      required:
+        - sum
+        - teams
+      type: object
+    token:
+      description: Token
+      properties:
+        $id:
+          description: Token ID.
+          type: string
+          x-example: bb8ea5c16897e
+        expire:
+          description: Token expiration date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        secret:
+          description: Token secret key. This will return an empty string unless the response is returned using an API key or as part of a webhook payload.
+          type: string
+          x-example: ""
+        userId:
+          description: User ID.
+          type: string
+          x-example: 5e5ea5c168bb8
+      required:
+        - $id
+        - userId
+        - secret
+        - expire
+      type: object
+    user:
+      description: User
+      properties:
+        $id:
+          description: User ID.
+          type: string
+          x-example: 5e5ea5c16897e
+        email:
+          description: User email address.
+          type: string
+          x-example: john@appwrite.io
+        emailVerification:
+          description: Email verification status.
+          type: boolean
+          x-example: true
+        name:
+          description: User name.
+          type: string
+          x-example: John Doe
+        passwordUpdate:
+          description: Unix timestamp of the most recent password update
+          format: int32
+          type: integer
+          x-example: 1592981250
+        prefs:
+          description: User preferences as a key-value object
+          items:
+            $ref: "#/components/schemas/preferences"
+          type: object
+          x-example:
+            theme: pink
+            timezone: UTC
+        registration:
+          description: User registration date in Unix timestamp.
+          format: int32
+          type: integer
+          x-example: 1592981250
+        status:
+          description: User status. 0 for Unactivated, 1 for active and 2 is blocked.
+          format: int32
+          type: integer
+          x-example: 0
+      required:
+        - $id
+        - name
+        - registration
+        - status
+        - passwordUpdate
+        - email
+        - emailVerification
+        - prefs
+      type: object
+  securitySchemes:
+    JWT:
+      description: Your secret JSON Web Token
+      in: header
+      name: X-Appwrite-JWT
+      type: apiKey
+    Locale:
+      description: ""
+      in: header
+      name: X-Appwrite-Locale
+      type: apiKey
+      x-appwrite:
+        demo: en
+    Project:
+      description: Your project ID
+      in: header
+      name: X-Appwrite-Project
+      type: apiKey
+      x-appwrite:
+        demo: 5df5acd0d48c2

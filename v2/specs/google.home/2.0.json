@@ -1,0 +1,123 @@
+{
+  "added": "2020-07-15T12:24:02.433Z",
+  "info": {
+    "contact": {},
+    "description": "# Google Home Local API\nThis is an unofficial documentation of the local API used by the Home app to communicate with GH devices.\n[GitHub Repo](https://github.com/rithvikvibhu/GHLocalApi)\n\n[![GitHub stars](https://img.shields.io/github/stars/rithvikvibhu/GHLocalApi)](https://github.com/rithvikvibhu/GHLocalApi/stargazers) [![GitHub license](https://img.shields.io/github/license/rithvikvibhu/GHLocalApi)](https://github.com/rithvikvibhu/GHLocalApi/blob/master/LICENSE.md)\n\n## Getting Started\n\nRequests must be made over HTTPS, port 8443, so the base URL for these endpoints is: `https://<google-home-ip>:8443/setup/`\n\nGet the IP of Google Home from the Google Home app (Device Settings -> End of the list) or from your router.\n\nGET requests are simple, in the browser kind.  \nPOST requests need to set the header (when there's a body): `content-type: application/json`\n\n## Authentication\n\nSince June 2019, most requests (with exceptions like `/setup/eureka_info`) need a local authorization token.\n\nThere are 3 kinds of tokens involved here:\n\n### Local Authorization Token\nThis token must be sent in all requests in the header `cast-local-authorization-token`. It is short-lived (~1 day) and may change unexpectedly (with a sync, change in homegraph, etc.)\n##### Get this token\n- With access to an android device, [get this token directly by either method](https://gist.github.com/rithvikvibhu/1a0f4937af957ef6a78453e3be482c1f).\n- Without a device, or to integrate it with a script, use an access token to get the homegraph and extract the token. To get an access token, read the next section. Check the example section for more info.\n\n### Access Token\nThis is a standard google oauth2 access token. It is in the form `ya29.***`.\nThis gives access to the Google Home Foyer API. These expire in an hour.\nUse this to get the homegraph (and then the local authorization token above).\n##### Get this token\nTo get this access token, either a Google account username/password or a Google Master Token is needed. More info in the gist.\nUse the script [from this gist](https://gist.github.com/rithvikvibhu/952f83ea656c6782fbd0f1645059055d).\n\n### Master Token\nThis is in the form `aas_et/***` and can be used to request access tokens.\n##### Get this token\nThe same [script in the gist](https://gist.github.com/rithvikvibhu/952f83ea656c6782fbd0f1645059055d) that gets the access token can also get the master token. Needs Google account creds.\n\n## Example\n\nHere's the whole flow from just a pair of username/password to using the local API.\n\nPrerequisites:\n- [grpcurl](https://github.com/fullstorydev/grpcurl)\n- [Proto files](https://drive.google.com/drive/folders/1RvnN3y-G23pd2SWHmfV_7sef8QU5GNF4?usp=sharing) (preserve folder structure)\n\n### 1. Get an access token with the script\n- Download get_tokens.py\n- Fill in username and password\n```sh\npython3 get_tokens.py\n# Note down the access token printed.\n```\n\n### 2. Use the access token and get home graph\n- This prints the json and uses jq to parse and filter out the fields deviceName and localAuthToken\n- This will give a list of all devices and their local auth tokens\n```sh\n./grpcurl -H 'authorization: Bearer ya29.a0Af****' \\\n\t-import-path /path/to/protos \\\n\t-proto /path/to/protos/google/internal/home/foyer/v1.proto \\\n\tgooglehomefoyer-pa.googleapis.com:443 \\\n\tgoogle.internal.home.foyer.v1.StructuresService/GetHomeGraph | jq '.home.devices[] | {deviceName, localAuthToken}'\n# Note down the local auth token for the device you want.\n```\n\n### 3. Make the call to the local device using the local auth token\n```sh\ncurl -H \"cast-local-authorization-token: LOCAL_AUTH_TOKEN\" --verbose --insecure https://192.168.0.18:8443/setup/bluetooth/status\n```",
+    "title": "Google Home",
+    "version": "2.0",
+    "x-codegen-settings": {
+      "AllowSkippingSSLCertVerification": false,
+      "AndroidHttpClient": "ANDROID_OK",
+      "AndroidUseAppManifest": false,
+      "AppendContentHeaders": true,
+      "ApplyCustomizations": [],
+      "ArraySerialization": "Indexed",
+      "BackoffFactor": 0,
+      "BodySerialization": 0,
+      "CSharpHttpClient": "UNIREST",
+      "CollectParameters": false,
+      "DisableDocs": false,
+      "DisableLinting": false,
+      "DoNotSplitWords": [],
+      "EnableAdditionalModelProperties": false,
+      "EnableGlobalUserAgent": true,
+      "EnableHttpCache": false,
+      "EnableImmutableModels": false,
+      "EnableLogging": false,
+      "EnablePHPComposerVersionString": false,
+      "EncodeTemplateParameters": true,
+      "ForceKeywordArgsInRuby": false,
+      "GenerateAdvancedDocs": true,
+      "GenerateAppveyorConfig": false,
+      "GenerateAsyncCode": true,
+      "GenerateCircleConfig": false,
+      "GenerateEnums": true,
+      "GenerateExceptions": true,
+      "GenerateInterfaces": false,
+      "GenerateJenkinsConfig": false,
+      "GenerateModels": true,
+      "GenerateTravisConfig": false,
+      "IgnoreIfNullJson": false,
+      "IsLatestVersion": false,
+      "JavaHttpClient": "JAVA_OK",
+      "JavaUsePropertiesConfig": false,
+      "LiftParameterDescriptionFromCustomType": false,
+      "ModelSerializationScheme": "Json",
+      "NodeHttpClient": "NODE_REQUEST",
+      "Nullify404": false,
+      "ObjCHttpClient": "UNIREST",
+      "PHPHttpClient": "UNIREST",
+      "ParameterArrayFormat": "ParamArrayWithIndex",
+      "PreserveParameterOrder": true,
+      "ResponseMapping": {
+        "Type": "Simple"
+      },
+      "Retries": 0,
+      "RetryInterval": 1,
+      "ReturnCompleteHttpResponse": false,
+      "RunscopeEnabled": false,
+      "SecurityProtocols": [
+        "Ssl3",
+        "Tls"
+      ],
+      "SortResources": false,
+      "StoreTimezoneInformation": false,
+      "SymbolizeHashKeysInRuby": false,
+      "ThrowForHttpErrorStatusCodes": true,
+      "Timeout": 0,
+      "UnderscoreNumbers": true,
+      "UsageExampleEndpoint": {
+        "Description": "",
+        "EndpointGroupName": "",
+        "EndpointName": ""
+      },
+      "UseCommonSDKLibrary": false,
+      "UseConstructorsForConfig": false,
+      "UseControllerPrefix": true,
+      "UseEndpointMethodName": false,
+      "UseEnumPostfix": true,
+      "UseExceptionPrefix": true,
+      "UseMethodPrefix": true,
+      "UseModelPostfix": false,
+      "UseSingletonPattern": true,
+      "UserConfigurableRetries": true,
+      "ValidateRequiredParameters": false,
+      "iOSGenerateCoreData": false,
+      "iOSUseAppInfoPlist": false
+    },
+    "x-image-uri": "",
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/rithvikvibhu/GHLocalApi/master/GoogleHome.openapi3.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "google.home",
+    "x-server-configuration": {
+      "default-environment": "production",
+      "default-server": "Server 1",
+      "environments": [
+        {
+          "name": "production",
+          "servers": [
+            {
+              "name": "Server 1",
+              "url": "http://example.com/setup"
+            }
+          ]
+        }
+      ],
+      "parameters": []
+    },
+    "x-unofficialSpec": true,
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+    }
+  },
+  "updated": "2021-06-21T12:16:53.715Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/google.home/2.0/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/google.home/2.0/openapi.yaml",
+  "openapiVer": "3.0.0",
+  "link": "https://api.apis.guru/v2/specs/google.home/2.0.json"
+}

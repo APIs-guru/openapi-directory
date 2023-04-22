@@ -1,0 +1,1595 @@
+{
+  "openapi": "3.0.2",
+  "servers": [
+    {
+      "url": "https://api.doqs.dev/v1"
+    }
+  ],
+  "info": {
+    "title": "doqs.dev | PDF filling API",
+    "version": "1.0",
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://api.doqs.dev/v1/openapi.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "doqs.dev",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/designer/templates/": {
+      "get": {
+        "operationId": "list_templates_designer_templates__get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "maximum": 1000,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_List_fillr.entities.designer_template.DesignerTemplate__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "List Templates"
+      },
+      "post": {
+        "operationId": "create_template_designer_templates__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_DesignerTemplate_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Create Template"
+      }
+    },
+    "/designer/templates/preview": {
+      "post": {
+        "operationId": "preview_designer_templates_preview_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreviewModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_PreviewResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Preview"
+      }
+    },
+    "/designer/templates/{id}": {
+      "delete": {
+        "operationId": "delete_designer_templates__id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_NoneType_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Delete"
+      },
+      "get": {
+        "operationId": "list_templates_designer_templates__id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_DesignerTemplate_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "List Templates"
+      },
+      "put": {
+        "operationId": "update_template_designer_templates__id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_DesignerTemplate_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Update Template"
+      }
+    },
+    "/designer/templates/{id}/generate": {
+      "post": {
+        "operationId": "generate_pdf_designer_templates__id__generate_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneratePDFPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Generate Pdf"
+      }
+    },
+    "/templates": {
+      "get": {
+        "operationId": "list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "maximum": 1000,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_List_apps.api.routes_templates.Template__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "List ",
+        "tags": [
+          "Templates"
+        ]
+      },
+      "post": {
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_Template_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "Templates"
+        ]
+      }
+    },
+    "/templates/{id}": {
+      "delete": {
+        "operationId": "delete__templates__id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_NoneType_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Delete ",
+        "tags": [
+          "Templates"
+        ]
+      },
+      "get": {
+        "operationId": "get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_Template_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Get Template",
+        "tags": [
+          "Templates"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_Template_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Update",
+        "tags": [
+          "Templates"
+        ]
+      }
+    },
+    "/templates/{id}/file": {
+      "get": {
+        "operationId": "get_file_templates__id__file_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseOk_HttpUrl_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Get File",
+        "tags": [
+          "Templates"
+        ]
+      }
+    },
+    "/templates/{id}/fill": {
+      "post": {
+        "operationId": "fill",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FillTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "summary": "Fill",
+        "tags": [
+          "Templates"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_create": {
+        "properties": {
+          "file": {
+            "format": "binary",
+            "title": "File",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_create",
+        "type": "object"
+      },
+      "BoundingBox": {
+        "properties": {
+          "height": {
+            "minimum": 1,
+            "title": "Height",
+            "type": "number"
+          },
+          "width": {
+            "minimum": 1,
+            "title": "Width",
+            "type": "number"
+          },
+          "x": {
+            "minimum": 0,
+            "title": "X",
+            "type": "number"
+          },
+          "y": {
+            "minimum": 0,
+            "title": "Y",
+            "type": "number"
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "width",
+          "height"
+        ],
+        "title": "BoundingBox",
+        "type": "object"
+      },
+      "CheckBoxField": {
+        "properties": {
+          "bbox": {
+            "$ref": "#/components/schemas/BoundingBox"
+          },
+          "eval": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "minLength": 1,
+                "type": "string"
+              }
+            ],
+            "default": true,
+            "title": "Eval"
+          },
+          "name": {
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "page": {
+            "minimum": 0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "required": {
+            "default": true,
+            "title": "Required",
+            "type": "boolean"
+          },
+          "type": {
+            "enum": [
+              "check"
+            ],
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "bbox",
+          "name",
+          "page",
+          "type"
+        ],
+        "title": "CheckBoxField",
+        "type": "object"
+      },
+      "CreateOrUpdateTemplateRequest": {
+        "properties": {
+          "components": {
+            "items": {
+              "type": "object"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "css": {
+            "title": "Css",
+            "type": "string"
+          },
+          "footer_html": {
+            "title": "Footer Html",
+            "type": "string"
+          },
+          "format": {
+            "$ref": "#/components/schemas/Format"
+          },
+          "header_html": {
+            "title": "Header Html",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "orientation": {
+            "$ref": "#/components/schemas/Orientation"
+          },
+          "preview_payload": {
+            "title": "Preview Payload",
+            "type": "object"
+          },
+          "template_html": {
+            "title": "Template Html",
+            "type": "string"
+          }
+        },
+        "required": [
+          "components",
+          "name",
+          "template_html",
+          "css",
+          "format",
+          "orientation",
+          "preview_payload"
+        ],
+        "title": "CreateOrUpdateTemplateRequest",
+        "type": "object"
+      },
+      "DateField": {
+        "properties": {
+          "bbox": {
+            "$ref": "#/components/schemas/BoundingBox"
+          },
+          "cell_count": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Cell Count",
+            "type": "integer"
+          },
+          "cell_offset": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Cell Offset",
+            "type": "integer"
+          },
+          "cells": {
+            "default": false,
+            "title": "Cells",
+            "type": "boolean"
+          },
+          "color": {
+            "default": "black",
+            "format": "color",
+            "title": "Color",
+            "type": "string"
+          },
+          "font": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Font"
+              }
+            ],
+            "default": "helvetica"
+          },
+          "font_size": {
+            "default": 10,
+            "exclusiveMinimum": true,
+            "minimum": 0,
+            "title": "Font Size",
+            "type": "integer"
+          },
+          "format": {
+            "title": "Format",
+            "type": "string"
+          },
+          "h_align": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HorizontalAlign"
+              }
+            ],
+            "default": "L"
+          },
+          "locale": {
+            "default": "en_US",
+            "maxLength": 5,
+            "minLength": 5,
+            "title": "Locale",
+            "type": "string"
+          },
+          "name": {
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "page": {
+            "minimum": 0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "required": {
+            "default": true,
+            "title": "Required",
+            "type": "boolean"
+          },
+          "type": {
+            "enum": [
+              "date"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "v_align": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VerticalAlign"
+              }
+            ],
+            "default": "B"
+          }
+        },
+        "required": [
+          "bbox",
+          "name",
+          "page",
+          "type",
+          "format"
+        ],
+        "title": "DateField",
+        "type": "object"
+      },
+      "DesignerTemplate": {
+        "properties": {
+          "components": {
+            "items": {
+              "type": "object"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "css": {
+            "title": "Css",
+            "type": "string"
+          },
+          "footer_html": {
+            "title": "Footer Html",
+            "type": "string"
+          },
+          "format": {
+            "$ref": "#/components/schemas/Format"
+          },
+          "header_html": {
+            "title": "Header Html",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "orientation": {
+            "$ref": "#/components/schemas/Orientation"
+          },
+          "preview_payload": {
+            "title": "Preview Payload",
+            "type": "object"
+          },
+          "template_html": {
+            "title": "Template Html",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "template_html",
+          "css",
+          "format",
+          "orientation",
+          "components",
+          "preview_payload"
+        ],
+        "title": "DesignerTemplate",
+        "type": "object"
+      },
+      "FillTemplateRequest": {
+        "properties": {
+          "data": {
+            "default": {},
+            "title": "Data",
+            "type": "object"
+          }
+        },
+        "title": "FillTemplateRequest",
+        "type": "object"
+      },
+      "Font": {
+        "description": "An enumeration.",
+        "enum": [
+          "courier",
+          "helvetica",
+          "times_roman"
+        ],
+        "title": "Font",
+        "type": "string"
+      },
+      "Format": {
+        "description": "An enumeration.",
+        "enum": [
+          "a0",
+          "a1",
+          "a2",
+          "a3",
+          "a4",
+          "a5",
+          "a6"
+        ],
+        "title": "Format",
+        "type": "string"
+      },
+      "GeneratePDFPayload": {
+        "properties": {
+          "data": {
+            "title": "Data",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "GeneratePDFPayload",
+        "type": "object"
+      },
+      "HorizontalAlign": {
+        "description": "An enumeration.",
+        "enum": [
+          "L",
+          "C",
+          "R"
+        ],
+        "title": "HorizontalAlign",
+        "type": "string"
+      },
+      "ImageAnchor": {
+        "description": "An enumeration.",
+        "enum": [
+          "nw",
+          "n",
+          "ne",
+          "w",
+          "c",
+          "e",
+          "sw",
+          "s"
+        ],
+        "title": "ImageAnchor",
+        "type": "string"
+      },
+      "ImageField": {
+        "properties": {
+          "anchor": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageAnchor"
+              }
+            ],
+            "default": "c"
+          },
+          "bbox": {
+            "$ref": "#/components/schemas/BoundingBox"
+          },
+          "name": {
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "page": {
+            "minimum": 0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "required": {
+            "default": true,
+            "title": "Required",
+            "type": "boolean"
+          },
+          "type": {
+            "default": "image",
+            "enum": [
+              "image"
+            ],
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "bbox",
+          "name",
+          "page"
+        ],
+        "title": "ImageField",
+        "type": "object"
+      },
+      "Orientation": {
+        "description": "An enumeration.",
+        "enum": [
+          "landscape",
+          "portrait"
+        ],
+        "title": "Orientation",
+        "type": "string"
+      },
+      "PreviewModel": {
+        "properties": {
+          "css": {
+            "title": "Css",
+            "type": "string"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object"
+          },
+          "footer_html": {
+            "title": "Footer Html",
+            "type": "string"
+          },
+          "header_html": {
+            "title": "Header Html",
+            "type": "string"
+          },
+          "template_html": {
+            "title": "Template Html",
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "template_html",
+          "css"
+        ],
+        "title": "PreviewModel",
+        "type": "object"
+      },
+      "PreviewResponse": {
+        "properties": {
+          "html": {
+            "title": "Html",
+            "type": "string"
+          }
+        },
+        "required": [
+          "html"
+        ],
+        "title": "PreviewResponse",
+        "type": "object"
+      },
+      "ResponseError": {
+        "properties": {
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ResponseError",
+        "type": "object"
+      },
+      "ResponseOk_DesignerTemplate_": {
+        "properties": {
+          "results": {
+            "$ref": "#/components/schemas/DesignerTemplate"
+          }
+        },
+        "required": [
+          "results"
+        ],
+        "title": "ResponseOk[DesignerTemplate]",
+        "type": "object"
+      },
+      "ResponseOk_HttpUrl_": {
+        "properties": {
+          "results": {
+            "format": "uri",
+            "maxLength": 2083,
+            "minLength": 1,
+            "title": "Results",
+            "type": "string"
+          }
+        },
+        "required": [
+          "results"
+        ],
+        "title": "ResponseOk[HttpUrl]",
+        "type": "object"
+      },
+      "ResponseOk_List_apps.api.routes_templates.Template__": {
+        "properties": {
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/Template"
+            },
+            "title": "Results",
+            "type": "array"
+          }
+        },
+        "required": [
+          "results"
+        ],
+        "title": "ResponseOk[List[apps.api.routes_templates.Template]]",
+        "type": "object"
+      },
+      "ResponseOk_List_fillr.entities.designer_template.DesignerTemplate__": {
+        "properties": {
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/DesignerTemplate"
+            },
+            "title": "Results",
+            "type": "array"
+          }
+        },
+        "required": [
+          "results"
+        ],
+        "title": "ResponseOk[List[fillr.entities.designer_template.DesignerTemplate]]",
+        "type": "object"
+      },
+      "ResponseOk_NoneType_": {
+        "properties": {
+          "results": {
+            "nullable": true,
+            "title": "Results"
+          }
+        },
+        "required": [
+          "results"
+        ],
+        "title": "ResponseOk[NoneType]",
+        "type": "object"
+      },
+      "ResponseOk_PreviewResponse_": {
+        "properties": {
+          "results": {
+            "$ref": "#/components/schemas/PreviewResponse"
+          }
+        },
+        "required": [
+          "results"
+        ],
+        "title": "ResponseOk[PreviewResponse]",
+        "type": "object"
+      },
+      "ResponseOk_Template_": {
+        "properties": {
+          "results": {
+            "$ref": "#/components/schemas/Template"
+          }
+        },
+        "required": [
+          "results"
+        ],
+        "title": "ResponseOk[Template]",
+        "type": "object"
+      },
+      "Template": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "fields": {
+            "default": [],
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "check": "#/components/schemas/CheckBoxField",
+                  "date": "#/components/schemas/DateField",
+                  "image": "#/components/schemas/ImageField",
+                  "text": "#/components/schemas/TextField"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/DateField"
+                },
+                {
+                  "$ref": "#/components/schemas/TextField"
+                },
+                {
+                  "$ref": "#/components/schemas/ImageField"
+                },
+                {
+                  "$ref": "#/components/schemas/CheckBoxField"
+                }
+              ]
+            },
+            "title": "Fields",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "pages": {
+            "exclusiveMinimum": true,
+            "minimum": 0,
+            "title": "Pages",
+            "type": "integer"
+          },
+          "size_bytes": {
+            "title": "Size Bytes",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pages"
+        ],
+        "title": "Template",
+        "type": "object"
+      },
+      "TextField": {
+        "properties": {
+          "bbox": {
+            "$ref": "#/components/schemas/BoundingBox"
+          },
+          "cell_count": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Cell Count",
+            "type": "integer"
+          },
+          "cell_offset": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Cell Offset",
+            "type": "integer"
+          },
+          "cells": {
+            "default": false,
+            "title": "Cells",
+            "type": "boolean"
+          },
+          "color": {
+            "default": "black",
+            "format": "color",
+            "title": "Color",
+            "type": "string"
+          },
+          "font": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Font"
+              }
+            ],
+            "default": "helvetica"
+          },
+          "font_size": {
+            "default": 10,
+            "exclusiveMinimum": true,
+            "minimum": 0,
+            "title": "Font Size",
+            "type": "integer"
+          },
+          "h_align": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HorizontalAlign"
+              }
+            ],
+            "default": "L"
+          },
+          "name": {
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "page": {
+            "minimum": 0,
+            "title": "Page",
+            "type": "integer"
+          },
+          "required": {
+            "default": true,
+            "title": "Required",
+            "type": "boolean"
+          },
+          "type": {
+            "enum": [
+              "text"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "v_align": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VerticalAlign"
+              }
+            ],
+            "default": "B"
+          }
+        },
+        "required": [
+          "bbox",
+          "name",
+          "page",
+          "type"
+        ],
+        "title": "TextField",
+        "type": "object"
+      },
+      "UpdateTemplateRequest": {
+        "properties": {
+          "fields": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "check": "#/components/schemas/CheckBoxField",
+                  "date": "#/components/schemas/DateField",
+                  "image": "#/components/schemas/ImageField",
+                  "text": "#/components/schemas/TextField"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/DateField"
+                },
+                {
+                  "$ref": "#/components/schemas/TextField"
+                },
+                {
+                  "$ref": "#/components/schemas/ImageField"
+                },
+                {
+                  "$ref": "#/components/schemas/CheckBoxField"
+                }
+              ]
+            },
+            "title": "Fields",
+            "type": "array"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fields"
+        ],
+        "title": "UpdateTemplateRequest",
+        "type": "object"
+      },
+      "VerticalAlign": {
+        "description": "An enumeration.",
+        "enum": [
+          "T",
+          "C",
+          "B"
+        ],
+        "title": "VerticalAlign",
+        "type": "string"
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "in": "header",
+        "name": "x-api-key",
+        "type": "apiKey"
+      }
+    }
+  }
+}

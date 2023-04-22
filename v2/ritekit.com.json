@@ -1,0 +1,35 @@
+{
+  "apis": {
+    "ritekit.com": {
+      "added": "2020-01-07T11:40:28.000Z",
+      "info": {
+        "description": "RiteKit API is based on REST principles.\n\nAuthentication uses standard OAuth 2.0 process\n\n##Getting started\n\n1. Sign up for [RiteKit](https://ritekit.com/)\n\n1. Go to [developer dashboard](https://ritekit.com/developer/dashboard/)\n\n1. Click \"Create a token\" button to get your **Client ID** and **Client secret**\n\n1. When you reach your free limit of calls per month, [upgrade to paid tiers](https://ritekit.com/developer/)\n\n## Options for authorizing API Calls\n\n#### Using Client ID directly\n\nYou can directly connect to our API using your **client ID** by sending it as a GET query parameter. This option is simple (no need for oAuth) but it should be used only in case the Client ID is not exposed publicly.\n\nGET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a",
+        "title": "RiteKit API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "social"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_pbs.twimg.com_profile_images_781729376161366016_qdUFUsCN_400x400.jpg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "apiBlueprint",
+            "url": "https://raw.githubusercontent.com/RiteKit/api-docs/master/apiary.apib",
+            "version": "1A"
+          }
+        ],
+        "x-providerName": "ritekit.com"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ritekit.com/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ritekit.com/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ritekit.com/1.0.0.json"
+    }
+  }
+}

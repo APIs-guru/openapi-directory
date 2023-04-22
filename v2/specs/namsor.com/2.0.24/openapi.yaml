@@ -1,0 +1,4097 @@
+openapi: 3.0.1
+servers:
+  - description: namsor_v2
+    url: https://v2.namsor.com/NamSorAPIv2
+    variables: {}
+info:
+  contact:
+    email: contact@namsor.com
+    name: Namsor SAS
+    url: http://www.namsor.com/
+    x-twitter: gendreapp
+  description: "NamSor API v2 : enpoints to process personal names (gender, cultural origin or ethnicity) in all alphabets or languages. By default, enpoints use 1 unit per name (ex. Gender), but Ethnicity classification uses 10 to 20 units per name depending on taxonomy. Use GET methods for small tests, but prefer POST methods for higher throughput (batch processing of up to 100 names at a time). Need something you can't find here? We have many more features coming soon. Let us know, we'll do our best to add it! "
+  license:
+    name: NamSorAPI_Lic_v0.0.7
+    url: https://v2.namsor.com/NamSorAPIv2/assets/pdf/201803_NamSor_API_Terms_v007.pdf
+  title: NamSor API v2
+  version: 2.0.24
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_gendreapp_profile_image.png
+  x-origin:
+    - converter:
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
+      format: openapi
+      url: https://v2.namsor.com/NamSorAPIv2/api2/openapi.json
+      version: "3.0"
+  x-providerName: namsor.com
+externalDocs:
+  description: NamSor API client SDKs v2 for Java, Python
+  url: https://github.com/namsor
+security:
+  - api_key: []
+tags:
+  - description: "Personal names (anthroponyms) : gender, country origin/ethnicity, diaspora, US 'race'/ethniciy"
+    name: personal
+  - description: Social media and pseudonyms
+    name: social
+  - description: CHINESE special features
+    name: chinese
+  - description: JAPANESE special features
+    name: japanese
+  - description: INDIAN special features
+    name: indian
+  - description: Administrative, system management.
+    name: admin
+paths:
+  "/api2/json/anonymize/{source}/{anonymized}/{token}":
+    get:
+      operationId: anonymize
+      parameters:
+        - in: path
+          name: source
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: anonymized
+          required: true
+          schema:
+            type: boolean
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyOut"
+          description: Anonymization of a source.
+        "401":
+          description: Missing or incorrect API Key
+      summary: Activate/deactivate anonymization for a source.
+      tags:
+        - admin
+  /api2/json/apiKeyInfo:
+    get:
+      operationId: apiKeyInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyOut"
+          description: Read API Key (uncached, i.e. DB read)
+        "401":
+          description: Missing or incorrect API Key
+      summary: Read API Key info.
+      tags:
+        - admin
+  /api2/json/apiServices:
+    get:
+      operationId: availableServices
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIServicesOut"
+          description: Available services
+        "401":
+          description: Missing or incorrect token
+      summary: List of classification services and usage cost in Units per classification (default is 1=ONE Unit). Some API endpoints (ex. Corridor) combine multiple classifiers.
+      tags:
+        - admin
+  /api2/json/apiStatus:
+    get:
+      operationId: apiStatus
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIClassifiersStatusOut"
+          description: Available classifiers and status
+        "401":
+          description: Missing or incorrect token
+      summary: Prints the current status of the classifiers. A classifier name in apiStatus corresponds to a service name in apiServices.
+      tags:
+        - admin
+  /api2/json/apiUsage:
+    get:
+      operationId: apiUsage
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIPeriodUsageOut"
+          description: Print current API usage.
+        "401":
+          description: Missing or incorrect API Key
+      security:
+        - api_key: []
+      summary: Print current API usage.
+      tags:
+        - admin
+  /api2/json/apiUsageHistory:
+    get:
+      operationId: apiUsageHistory
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIUsageHistoryOut"
+          description: Print historical API usage (NB. new output format form v2.0.15)
+        "401":
+          description: Missing or incorrect API Key
+      security:
+        - api_key: []
+      summary: Print historical API usage.
+      tags:
+        - admin
+  /api2/json/apiUsageHistoryAggregate:
+    get:
+      operationId: apiUsageHistoryAggregate
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIUsageAggregatedOut"
+          description: Print historical API usage.
+        "401":
+          description: Missing or incorrect API Key
+      security:
+        - api_key: []
+      summary: Print historical API usage (in an aggregated view, by service, by day/hour/min).
+      tags:
+        - admin
+  "/api2/json/castegroupIndianFull/{subDivisionIso31662}/{personalNameFull}":
+    get:
+      operationId: castegroupIndianFull
+      parameters:
+        - in: path
+          name: subDivisionIso31662
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: personalNameFull
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameCastegroupOut"
+          description: A castegroup-coded name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely Indian name castegroup of a personal full name."
+      tags:
+        - indian
+  /api2/json/castegroupIndianFullBatch:
+    post:
+      operationId: castegroupIndianFullBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameSubdivisionIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameCastegroupOut"
+          description: A list of castegroup-coded names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely Indian name castegroup of up to 100 personal full names. "
+      tags:
+        - indian
+  "/api2/json/chineseNameCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}":
+    get:
+      operationId: chineseNameCandidates
+      parameters:
+        - in: path
+          name: chineseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: chineseGivenNameLatin
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameMatchCandidatesOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming
+      tags:
+        - chinese
+  /api2/json/chineseNameCandidatesBatch:
+    post:
+      operationId: chineseNameCandidatesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
+      tags:
+        - chinese
+  /api2/json/chineseNameCandidatesGenderBatch:
+    post:
+      operationId: chineseNameCandidatesGenderBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameGenderIn"
+        description: A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang Xiaoming.
+      tags:
+        - chinese
+  "/api2/json/chineseNameGenderCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}/{knownGender}":
+    get:
+      operationId: chineseNameGenderCandidates
+      parameters:
+        - in: path
+          name: chineseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: chineseGivenNameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: knownGender
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameMatchCandidatesOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming - having a known gender ('male' or 'female')
+      tags:
+        - chinese
+  "/api2/json/chineseNameMatch/{chineseSurnameLatin}/{chineseGivenNameLatin}/{chineseName}":
+    get:
+      operationId: chineseNameMatch
+      parameters:
+        - in: path
+          name: chineseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: chineseGivenNameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: chineseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameMatchedOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Return a score for matching Chinese name ex. 王晓明 with a romanized name ex. Wang Xiaoming
+      tags:
+        - chinese
+  /api2/json/chineseNameMatchBatch:
+    post:
+      operationId: chineseNameMatchBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchMatchPersonalFirstLastNameIn"
+        description: A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
+      tags:
+        - chinese
+  "/api2/json/corridor/{countryIso2From}/{firstNameFrom}/{lastNameFrom}/{countryIso2To}/{firstNameTo}/{lastNameTo}":
+    get:
+      operationId: corridor
+      parameters:
+        - in: path
+          name: countryIso2From
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: firstNameFrom
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastNameFrom
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: countryIso2To
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: firstNameTo
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastNameTo
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorridorOut"
+          description: Two classified names.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 20 UNITS PER NAME COUPLE] Infer several classifications for a cross border interaction between names (ex. remit, travel, intl com)"
+      tags:
+        - personal
+  /api2/json/corridorBatch:
+    post:
+      operationId: corridorBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchCorridorIn"
+        description: A list of name pairs, with country code (nameFrom -> nameTo).
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchCorridorOut"
+          description: A list of classified name pairs.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 20 UNITS PER NAME PAIR] Infer several classifications for up to 100 cross border interaction between names (ex. remit, travel, intl com)"
+      tags:
+        - personal
+  "/api2/json/country/{personalNameFull}":
+    get:
+      operationId: country
+      parameters:
+        - in: path
+          name: personalNameFull
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameGeoOut"
+          description: A origined name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of residence of a personal full name, or one surname. Assumes names as they are in the country of residence OR the country of origin."
+      tags:
+        - personal
+  /api2/json/countryBatch:
+    post:
+      operationId: countryBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameGeoOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of residence of up to 100 personal full names, or surnames. Assumes names as they are in the country of residence OR the country of origin."
+      tags:
+        - personal
+  "/api2/json/diaspora/{countryIso2}/{firstName}/{lastName}":
+    get:
+      operationId: diaspora
+      parameters:
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameDiasporaedOut"
+          description: A diaspora / ethnicity for given name and geography.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of a personal name, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)"
+      tags:
+        - personal
+  /api2/json/diasporaBatch:
+    post:
+      operationId: diasporaBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameGeoIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameDiasporaedOut"
+          description: A list of diaspora / ethnicity given a name and residency.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of up to 100 personal names, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)"
+      tags:
+        - personal
+  "/api2/json/gender/{firstName}":
+    get:
+      operationId: gender
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a just a fiven name, assuming default 'US' local context. Please use preferably full names and local geographic context for better accuracy.
+      tags:
+        - personal
+  "/api2/json/gender/{firstName}/{lastName}":
+    get:
+      operationId: gender_1
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a name.
+      tags:
+        - personal
+  /api2/json/genderBatch:
+    post:
+      operationId: genderBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 names, detecting automatically the cultural context.
+      tags:
+        - personal
+  "/api2/json/genderChineseName/{chineseName}":
+    get:
+      operationId: genderChineseName
+      parameters:
+        - in: path
+          name: chineseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a Chinese full name ex. 王晓明
+      tags:
+        - chinese
+  /api2/json/genderChineseNameBatch:
+    post:
+      operationId: genderChineseNameBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names, with a country ISO2 code
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameGenderedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 full names ex. 王晓明
+      tags:
+        - chinese
+  "/api2/json/genderChineseNamePinyin/{chineseSurnameLatin}/{chineseGivenNameLatin}":
+    get:
+      operationId: genderChineseNamePinyin
+      parameters:
+        - in: path
+          name: chineseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: chineseGivenNameLatin
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a Chinese name in LATIN (Pinyin).
+      tags:
+        - chinese
+  /api2/json/genderChineseNamePinyinBatch:
+    post:
+      operationId: genderChineseNamePinyinBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of names, with country code.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 Chinese names in LATIN (Pinyin).
+      tags:
+        - chinese
+  "/api2/json/genderFull/{fullName}":
+    get:
+      operationId: genderFull
+      parameters:
+        - in: path
+          name: fullName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a full name, ex. John H. Smith
+      tags:
+        - personal
+  /api2/json/genderFullBatch:
+    post:
+      operationId: genderFullBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameGenderedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 full names, detecting automatically the cultural context.
+      tags:
+        - personal
+  "/api2/json/genderFullGeo/{fullName}/{countryIso2}":
+    get:
+      operationId: genderFullGeo
+      parameters:
+        - in: path
+          name: fullName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a full name, given a local context (ISO2 country code).
+      tags:
+        - personal
+  /api2/json/genderFullGeoBatch:
+    post:
+      operationId: genderFullGeoBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameGeoIn"
+        description: A list of personal names, with a country ISO2 code
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameGenderedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 full names, with a given cultural context (country ISO2 code).
+      tags:
+        - personal
+  "/api2/json/genderGeo/{firstName}/{lastName}/{countryIso2}":
+    get:
+      operationId: genderGeo
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a name, given a local context (ISO2 country code).
+      tags:
+        - personal
+  /api2/json/genderGeoBatch:
+    post:
+      operationId: genderGeoBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameGeoIn"
+        description: A list of names, with country code.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 names, each given a local context (ISO2 country code).
+      tags:
+        - personal
+  "/api2/json/genderJapaneseName/{japaneseSurname}/{japaneseGivenName}":
+    get:
+      operationId: genderJapaneseNamePinyin
+      parameters:
+        - in: path
+          name: japaneseSurname
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a Japanese name in LATIN (Pinyin).
+      tags:
+        - japanese
+  /api2/json/genderJapaneseNameBatch:
+    post:
+      operationId: genderJapaneseNamePinyinBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of names, with country code.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 Japanese names in LATIN (Pinyin).
+      tags:
+        - japanese
+  "/api2/json/genderJapaneseNameFull/{japaneseName}":
+    get:
+      operationId: genderJapaneseNameFull
+      parameters:
+        - in: path
+          name: japaneseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a Japanese full name ex. 王晓明
+      tags:
+        - japanese
+  /api2/json/genderJapaneseNameFullBatch:
+    post:
+      operationId: genderJapaneseNameFullBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameGenderedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 full names
+      tags:
+        - japanese
+  /api2/json/japaneseNameGenderKanjiCandidatesBatch:
+    post:
+      operationId: japaneseNameGenderKanjiCandidatesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameGenderIn"
+        description: A list of personal japanese names in LATIN, firstName = japaneseGivenName; lastName=japaneseSurname and known gender
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname) with KNOWN gender, ex. Yamamoto Sanae
+      tags:
+        - japanese
+  "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}":
+    get:
+      operationId: japaneseNameKanjiCandidates
+      parameters:
+        - in: path
+          name: japaneseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameLatin
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameMatchCandidatesOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae
+      tags:
+        - japanese
+  "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{knownGender}":
+    get:
+      operationId: japaneseNameKanjiCandidates_1
+      parameters:
+        - in: path
+          name: japaneseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: knownGender
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameMatchCandidatesOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae - and a known gender.
+      tags:
+        - japanese
+  /api2/json/japaneseNameKanjiCandidatesBatch:
+    post:
+      operationId: japaneseNameKanjiCandidatesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal japanese names in LATIN, firstName = japaneseGivenName; lastName=japaneseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto Sanae
+      tags:
+        - japanese
+  "/api2/json/japaneseNameLatinCandidates/{japaneseSurnameKanji}/{japaneseGivenNameKanji}":
+    get:
+      operationId: japaneseNameLatinCandidates
+      parameters:
+        - in: path
+          name: japaneseSurnameKanji
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameKanji
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameMatchCandidatesOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Romanize japanese name, based on the name in Kanji.
+      tags:
+        - japanese
+  /api2/json/japaneseNameLatinCandidatesBatch:
+    post:
+      operationId: japaneseNameLatinCandidatesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal japanese names in KANJI, firstName = japaneseGivenName; lastName=japaneseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Romanize japanese names, based on the name in KANJI
+      tags:
+        - japanese
+  "/api2/json/japaneseNameMatch/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}":
+    get:
+      operationId: japaneseNameMatch
+      parameters:
+        - in: path
+          name: japaneseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameMatchedOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+      tags:
+        - japanese
+  /api2/json/japaneseNameMatchBatch:
+    post:
+      operationId: japaneseNameMatchBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchMatchPersonalFirstLastNameIn"
+        description: A list of personal Japanese names in LATIN, firstName = japaneseGivenName; lastName=japaneseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchedOut"
+          description: A list of matched names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗 with romanized names ex. Yamamoto Sanae
+      tags:
+        - japanese
+  "/api2/json/japaneseNameMatchFeedbackLoop/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}":
+    get:
+      operationId: japaneseNameMatchFeedbackLoop
+      parameters:
+        - in: path
+          name: japaneseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeedbackLoopOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[CREDITS 1 UNIT] Feedback loop to better perform matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae"
+      tags:
+        - japanese
+  "/api2/json/learnable/{source}/{learnable}/{token}":
+    get:
+      operationId: learnable
+      parameters:
+        - description: The API Key to set as learnable/non learnable.
+          in: path
+          name: source
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: learnable
+          required: true
+          schema:
+            type: boolean
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyOut"
+          description: Set learning from source.
+        "401":
+          description: Missing or incorrect API Key
+      summary: Activate/deactivate learning from a source.
+      tags:
+        - admin
+  "/api2/json/nameType/{properNoun}":
+    get:
+      operationId: nameType
+      parameters:
+        - in: path
+          name: properNoun
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProperNounCategorizedOut"
+          description: A typed name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely type of a proper noun (personal name, brand name, place name etc.)
+      tags:
+        - general
+  /api2/json/nameTypeBatch:
+    post:
+      operationId: nameTypeBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchNameIn"
+        description: A list of proper names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchProperNounCategorizedOut"
+          description: A list of commonTypeized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely common type of up to 100 proper nouns (personal name, brand name, place name etc.)
+      tags:
+        - general
+  "/api2/json/nameTypeGeo/{properNoun}/{countryIso2}":
+    get:
+      operationId: nameTypeGeo
+      parameters:
+        - in: path
+          name: properNoun
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProperNounCategorizedOut"
+          description: A typed name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely type of a proper noun (personal name, brand name, place name etc.)
+      tags:
+        - general
+  /api2/json/nameTypeGeoBatch:
+    post:
+      operationId: nameTypeGeoBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchNameGeoIn"
+        description: A list of proper names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchProperNounCategorizedOut"
+          description: A list of commonTypeized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely common type of up to 100 proper nouns (personal name, brand name, place name etc.)
+      tags:
+        - general
+  "/api2/json/origin/{firstName}/{lastName}":
+    get:
+      operationId: origin
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameOriginedOut"
+          description: A origined name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of origin of a personal name. Assumes names as they are in the country of origin. For US, CA, AU, NZ and other melting-pots : use 'diaspora' instead."
+      tags:
+        - personal
+  /api2/json/originBatch:
+    post:
+      operationId: originBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameOriginedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of origin of up to 100 names, detecting automatically the cultural context."
+      tags:
+        - personal
+  "/api2/json/parseChineseName/{chineseName}":
+    get:
+      operationId: parseChineseName
+      parameters:
+        - in: path
+          name: chineseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameParsedOut"
+          description: A origined name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name)
+      tags:
+        - chinese
+  /api2/json/parseChineseNameBatch:
+    post:
+      operationId: parseChineseNameBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
+          description: A list of parsed names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name).
+      tags:
+        - chinese
+  "/api2/json/parseJapaneseName/{japaneseName}":
+    get:
+      operationId: parseJapaneseName
+      parameters:
+        - in: path
+          name: japaneseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameParsedOut"
+          description: A origined name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
+      tags:
+        - japanese
+  /api2/json/parseJapaneseNameBatch:
+    post:
+      operationId: parseJapaneseNameBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
+          description: A list of parsed names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae "
+      tags:
+        - japanese
+  "/api2/json/parseName/{nameFull}":
+    get:
+      operationId: parseName
+      parameters:
+        - in: path
+          name: nameFull
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameParsedOut"
+          description: A origined name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. "
+      tags:
+        - personal
+  "/api2/json/parseName/{nameFull}/{countryIso2}":
+    get:
+      operationId: parseNameGeo
+      parameters:
+        - in: path
+          name: nameFull
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameParsedOut"
+          description: A origined name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. For better accuracy, provide a geographic context.
+      tags:
+        - personal
+  /api2/json/parseNameBatch:
+    post:
+      operationId: parseNameBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
+          description: A list of parsed names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John.
+      tags:
+        - personal
+  /api2/json/parseNameGeoBatch:
+    post:
+      operationId: parseNameGeoBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameGeoIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
+          description: A list of parsed names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. Giving a local context improves precision. "
+      tags:
+        - personal
+  "/api2/json/phoneCode/{firstName}/{lastName}/{phoneNumber}":
+    get:
+      operationId: phoneCode
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: phoneNumber
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNamePhoneCodedOut"
+          description: A name with country and phone code.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, given a personal name and formatted / unformatted phone number."
+      tags:
+        - social
+  /api2/json/phoneCodeBatch:
+    post:
+      operationId: phoneCodeBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNamePhoneNumberIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNamePhoneCodedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of up to 100 personal names, detecting automatically the local context given a name and formatted / unformatted phone number."
+      tags:
+        - social
+  "/api2/json/phoneCodeGeo/{firstName}/{lastName}/{phoneNumber}/{countryIso2}":
+    get:
+      operationId: phoneCodeGeo
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: phoneNumber
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNamePhoneCodedOut"
+          description: A name with country and phone code.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 11 UNITS PER NAME] Infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence)."
+      tags:
+        - social
+  /api2/json/phoneCodeGeoBatch:
+    post:
+      operationId: phoneCodeGeoBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNamePhoneNumberGeoIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNamePhoneCodedOut"
+          description: A list of genderized names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of up to 100 personal names, with a local context (ISO2 country of residence)."
+      tags:
+        - social
+  "/api2/json/phoneCodeGeoFeedbackLoop/{firstName}/{lastName}/{phoneNumber}/{phoneNumberE164}/{countryIso2}":
+    get:
+      operationId: phoneCodeGeoFeedbackLoop
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: phoneNumber
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: phoneNumberE164
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNamePhoneCodedOut"
+          description: A name with country and phone code.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[CREDITS 1 UNIT] Feedback loop to better infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence)."
+      tags:
+        - social
+  "/api2/json/pinyinChineseName/{chineseName}":
+    get:
+      operationId: pinyinChineseName
+      parameters:
+        - in: path
+          name: chineseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameParsedOut"
+          description: A pinyin name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name)
+      tags:
+        - chinese
+  /api2/json/pinyinChineseNameBatch:
+    post:
+      operationId: pinyinChineseNameBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of Chinese names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
+          description: A list of Pinyin names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name).
+      tags:
+        - chinese
+  /api2/json/regions:
+    get:
+      operationId: regions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegionOut"
+          description: List of countries and regions.
+        "401":
+          description: Missing or incorrect API Key
+      summary: Print basic source statistics.
+      tags:
+        - admin
+  "/api2/json/religionFull/{countryIso2}/{subDivisionIso31662}/{personalNameFull}":
+    get:
+      operationId: religionFull
+      parameters:
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: subDivisionIso31662
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: personalNameFull
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameReligionedOut"
+          description: A religion-coded name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely religion of a personal full name. NB: only for INDIA (as of current version)."
+      tags:
+        - personal
+  /api2/json/religionFullBatch:
+    post:
+      operationId: religionFullBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameGeoSubdivisionIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameReligionedOut"
+          description: A list of religion-coded names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely religion of up to 100 personal full names. NB: only for India as of currently."
+      tags:
+        - personal
+  "/api2/json/religionIndianFull/{subDivisionIso31662}/{personalNameFull}":
+    get:
+      operationId: religion
+      parameters:
+        - in: path
+          name: subDivisionIso31662
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: personalNameFull
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameReligionedOut"
+          description: A religion-coded name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely religion of a personal Indian full name, provided the Indian state or Union territory (NB/ this can be inferred using the subclassification endpoint)."
+      tags:
+        - indian
+  /api2/json/religionIndianFullBatch:
+    post:
+      operationId: religionIndianFullBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameSubdivisionIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameReligionedOut"
+          description: A list of religion-coded names.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely religion of up to 100 personal full Indian names, provided the subclassification at State or Union territory level (NB/ can be inferred using the subclassification endpoint)."
+      tags:
+        - indian
+  /api2/json/softwareVersion:
+    get:
+      operationId: softwareVersion
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SoftwareVersionOut"
+          description: The current software version
+        "401":
+          description: Missing or incorrect token
+      summary: Get the current software version
+      tags:
+        - admin
+  "/api2/json/subclassification/{countryIso2}/{firstName}/{lastName}":
+    get:
+      operationId: subclassification
+      parameters:
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGeoSubclassificationOut"
+          description: A classified name at a sub-country level.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely origin of a name at a country subclassification level (state or regeion). Initially, this is only supported for India (ISO2 code 'IN')."
+      tags:
+        - personal
+  /api2/json/subclassificationBatch:
+    post:
+      operationId: subclassificationBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameGeoIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameGeoSubclassificationOut"
+          description: A list of classified names at a sub-country level.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely origin of a list of up to 100 names at a country subclassification level (state or regeion). Initially, this is only supported for India (ISO2 code 'IN')."
+      tags:
+        - personal
+  "/api2/json/subclassificationIndian/{firstName}/{lastName}":
+    get:
+      operationId: subclassificationIndian
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGeoSubclassificationOut"
+          description: A classified name at a sub-country level.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely Indian state of Union territory according to ISO 3166-2:IN based on the name."
+      tags:
+        - indian
+  /api2/json/subclassificationIndianBatch:
+    post:
+      operationId: subclassificationIndianBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameGeoIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameGeoSubclassificationOut"
+          description: A list of classified names at a subcountry level.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely Indian state of Union territory according to ISO 3166-2:IN based on a list of up to 100 names."
+      tags:
+        - indian
+  "/api2/json/taxonomyClasses/{classifierName}":
+    get:
+      operationId: taxonomyClasses
+      parameters:
+        - in: path
+          name: classifierName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIClassifierTaxonomyOut"
+          description: Available plans
+        "401":
+          description: Missing or incorrect token
+      summary: Print the taxonomy classes valid for the given classifier.
+      tags:
+        - admin
+  "/api2/json/usRaceEthnicity/{firstName}/{lastName}":
+    get:
+      operationId: usRaceEthnicity
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
+          description: "a US resident's likely race/ethnicity : W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific Islander*). *optionally"
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity according to US Census taxonomy W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander)."
+      tags:
+        - personal
+  /api2/json/usRaceEthnicityBatch:
+    post:
+      operationId: usRaceEthnicityBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameGeoIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut"
+          description: A list of US resident's likely race/ethnicity. W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific Islander*). *optionally
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely race/ethnicity according to US Census taxonomy. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander)."
+      tags:
+        - personal
+  "/api2/json/usRaceEthnicityZIP5/{firstName}/{lastName}/{zip5Code}":
+    get:
+      operationId: usRaceEthnicityZIP5
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: zip5Code
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
+          description: "a US resident's likely race/ethnicity : W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific Islander*). *optionally"
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity according to US Census taxonomy, using (optional) ZIP5 code info. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander)."
+      tags:
+        - personal
+  /api2/json/usZipRaceEthnicityBatch:
+    post:
+      operationId: usZipRaceEthnicityBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameGeoZippedIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut"
+          description: A list of US resident's likely race/ethnicity. W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific Islander*). *optionally
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely race/ethnicity according to US Census taxonomy, with (optional) ZIP code. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander)."
+      tags:
+        - personal
+components:
+  schemas:
+    APIBillingPeriodUsageOut:
+      description: The current billing period.
+      properties:
+        apiKey:
+          description: User API Key.
+          type: string
+        billingStatus:
+          description: Current period billing status ex OPEN.
+          type: string
+        hardLimit:
+          description: Current period hard limit (reaching the limit sends an email notification and blocks the API Key).
+          format: int64
+          type: integer
+        periodEnded:
+          description: Datetime when the the plan's current period endend.
+          format: int64
+          type: integer
+        periodStarted:
+          description: Datetime when the the plan's current period started.
+          format: int64
+          type: integer
+        softLimit:
+          description: Current period soft limit (reaching the limit sends an email notification).
+          format: int64
+          type: integer
+        stripeCurrentPeriodEnd:
+          description: Datetime when the the plan's current period endend (in Stripe). Internal and Stripe periodicity should ~coincide.
+          format: int64
+          type: integer
+        stripeCurrentPeriodStart:
+          description: Datetime when the the plan's current period started (in Stripe). Internal and Stripe periodicity should ~coincide.
+          format: int64
+          type: integer
+        subscriptionStarted:
+          description: Datetime when the user subscribed to the plan.
+          format: int64
+          type: integer
+        usage:
+          description: Current period usage in units (NB some API endpoints use more than one unit).
+          format: int64
+          type: integer
+      type: object
+      xml:
+        name: APIBillingPeriodUsageOut
+    APIClassifierOut:
+      description: The list of classifiers and versions.
+      properties:
+        classifierName:
+          description: The classifier name
+          type: string
+        learning:
+          description: True if the classifier is learning
+          type: boolean
+        probabilityCalibrated:
+          description: True if the classifier has finished the initial learning and calibrated probabilities (meanwhile, during initial learning, probabilities will be equal to -1)
+          type: boolean
+        serving:
+          description: True if the classifier is serving requests (has reached minimal learning, is not shutting down)
+          type: boolean
+        shuttingDown:
+          description: True if the classifier is shutting down
+          type: boolean
+      type: object
+      xml:
+        name: APIClassifierOut
+    APIClassifierTaxonomyOut:
+      properties:
+        classifierName:
+          description: Name of the classifier as per apiStatus (corresponds also to the name of the service in apiServices)
+          type: string
+        classifyingScripts:
+          description: The scripts / alphabets this classifiers classifies to
+          items:
+            description: The scripts / alphabets this classifiers classifies to
+            type: string
+          type: array
+        taxonomyClasses:
+          description: The taxonomy classes this classifier classifies to
+          items:
+            description: The taxonomy classes this classifier classifies to
+            type: string
+          type: array
+      type: object
+      xml:
+        name: APIClassifierTaxonomyOut
+    APIClassifiersStatusOut:
+      properties:
+        classifiers:
+          description: The list of classifiers and versions.
+          items:
+            $ref: "#/components/schemas/APIClassifierOut"
+          type: array
+        softwareVersion:
+          $ref: "#/components/schemas/SoftwareVersionOut"
+      type: object
+      xml:
+        name: APIClassifiersStatusOut
+    APICounterV2Out:
+      description: Detailed usage as reported by the deduplicating API counter.
+      properties:
+        apiKey:
+          $ref: "#/components/schemas/APIKeyOut"
+        apiService:
+          description: The apiService corresponds to the classifier name.
+          type: string
+        createdDateTime:
+          description: The create datetime of the counter.
+          format: int64
+          type: integer
+        hostAddress:
+          description: The processing hostAddress.
+          type: string
+        lastFlushedDateTime:
+          description: The flush datetime of the counter.
+          format: int64
+          type: integer
+        lastUsedDateTime:
+          description: The last usage datetime of the counter.
+          format: int64
+          type: integer
+        serviceFeaturesUsage:
+          additionalProperties:
+            description: Usage of special features, such as Chinese, Japanese.
+            format: int64
+            type: integer
+          description: Usage of special features, such as Chinese, Japanese.
+          type: object
+        totalUsage:
+          description: The usage of the counter.
+          format: int64
+          type: integer
+      type: object
+      xml:
+        name: APICallStatOut
+    APIKeyOut:
+      properties:
+        admin:
+          description: The API Key has admin role.
+          type: boolean
+        anonymized:
+          description: The API Key is anonymized (using SHA-252 digest for logging). Set learnable=false and anonymized=true for highest privacy (ie. to forget data as it's processed).
+          type: boolean
+        apiKey:
+          description: The user API Key.
+          type: string
+          xml:
+            name: api_key
+        corporate:
+          description: The API Key has role corporate (ex SWIFT payments instead of Stripe payments).
+          type: boolean
+        disabled:
+          description: The API Key is temporarily or permanently disabled.
+          type: boolean
+        learnable:
+          description: The API Key is learnable (without assuming truthfulness) for machine learning. Set learnable=false and anonymized=true for highest privacy (ie. to forget data as it's processed).
+          type: boolean
+        partner:
+          description: The API Key has partner role.
+          type: boolean
+        striped:
+          description: The API Key is associated to a valid Stripe account.
+          type: boolean
+        userId:
+          description: The user identifier.
+          type: string
+        vetted:
+          description: The API Key is vetted (assumed truthful) for machine learning.
+          type: boolean
+      type: object
+      xml:
+        name: APIKeyOut
+    APIPeriodUsageOut:
+      properties:
+        billingPeriod:
+          $ref: "#/components/schemas/APIBillingPeriodUsageOut"
+        overageCurrency:
+          description: Currency of the overage amount.
+          type: string
+        overageExclTax:
+          description: Overage amount including any tax.
+          format: double
+          type: number
+        overageInclTax:
+          description: Overage amount including tax (if applicable).
+          format: double
+          type: number
+        overageQuantity:
+          description: Quantity above monthly quota of the current subscritpion, in units.
+          format: int64
+          type: integer
+        subscription:
+          $ref: "#/components/schemas/APIPlanSubscriptionOut"
+      type: object
+      xml:
+        name: APICurrentUsageOut
+    APIPlanSubscriptionOut:
+      description: The API Plan governing the subscription.
+      properties:
+        apiKey:
+          description: User API Key.
+          type: string
+        currency:
+          description: Current plan Currency for prices.
+          type: string
+        currencyFactor:
+          description: For USD, GBP, EUR - the factor is 1.
+          format: double
+          type: number
+        planBaseFeesKey:
+          description: Current plan key (as in Stripe product).
+          type: string
+        planEnded:
+          description: Datetime when the user ended the plan.
+          format: int64
+          type: integer
+        planName:
+          description: Current plan name.
+          type: string
+        planQuota:
+          description: "Current plan quota in quantity of units (NB: some API use several units per name)."
+          format: int64
+          type: integer
+        planStarted:
+          description: Datetime when the user subscribed to the current plan.
+          format: int64
+          type: integer
+        planStatus:
+          description: Plan status.
+          type: string
+        price:
+          description: Current plan price for overages expressed in Currency (extra price per unit above the free quota).
+          format: double
+          type: number
+        priceOverage:
+          description: Current plan price for overages expressed in Currency (extra price per unit above the free quota).
+          format: double
+          type: number
+        priceOverageUSD:
+          description: Current plan price for overages expressed in USD (extra price per unit above the free quota).
+          format: double
+          type: number
+        priceUSD:
+          description: Current plan monthly price expressed in USD (includes a free quota).
+          format: double
+          type: number
+        priorPlanStarted:
+          description: Datetime when the user subscribed to the prior plan.
+          format: int64
+          type: integer
+        stripeCustomerId:
+          description: Stripe customer identifier.
+          type: string
+        stripeStatus:
+          description: Stripe status ex active.
+          type: string
+        stripeSubscription:
+          description: Stripe subscription identifier.
+          type: string
+        taxRate:
+          description: Applicable tax rate for the plan.
+          format: double
+          type: number
+        userId:
+          description: Internal user identifier.
+          type: string
+      type: object
+      xml:
+        name: APIPlanSubscriptionOut
+    APIServiceOut:
+      description: List of API Services
+      properties:
+        costInUnits:
+          description: Indicates how many units per call this service costs (ex. the number of units per name)
+          format: int32
+          type: integer
+        serviceGroup:
+          description: Groups together classifiers providing a similar service (ex. gender groups personalname_gender and personalfullname_gender)
+          type: string
+        serviceName:
+          description: A service name corresponds to classifier name in apiStatus (ex. personalname_gender or personalfullname_gender)
+          type: string
+      type: object
+      xml:
+        name: APIServiceOut
+    APIServicesOut:
+      properties:
+        apiServices:
+          description: List of API Services
+          items:
+            $ref: "#/components/schemas/APIServiceOut"
+          type: array
+      type: object
+      xml:
+        name: APIServicesOut
+    APIUsageAggregatedOut:
+      properties:
+        colHeaders:
+          description: "apiServices as column headers "
+          items:
+            description: "apiServices as column headers "
+            type: string
+          type: array
+        data:
+          description: "Data points : usage per DAY, WEEK or MONTH and per apiService"
+          items:
+            description: "Data points : usage per DAY, WEEK or MONTH and per apiService"
+            items:
+              description: "Data points : usage per DAY, WEEK or MONTH and per apiService"
+              format: int32
+              type: integer
+            type: array
+          type: array
+        historyTruncated:
+          description: If the history was truncaded due to data limit
+          type: boolean
+        periodEnd:
+          description: End datetime of the reporting period
+          format: int64
+          type: integer
+        periodStart:
+          description: Start datetime of the reporting period
+          format: int64
+          type: integer
+        rowHeaders:
+          description: "dates as row headers "
+          items:
+            description: "dates as row headers "
+            type: string
+          type: array
+        timeUnit:
+          description: Time unit is DAY, WEEK or MONTH depending on prior usage
+          type: string
+        totalUsage:
+          description: Total usage in the current period
+          format: int64
+          type: integer
+      type: object
+      xml:
+        name: APIUsageAggregatedOut
+    APIUsageHistoryOut:
+      properties:
+        detailedUsage:
+          description: Detailed usage as reported by the deduplicating API counter.
+          items:
+            $ref: "#/components/schemas/APICounterV2Out"
+          type: array
+      type: object
+      xml:
+        name: APIUsageHistoryOut
+    BatchCorridorIn:
+      properties:
+        corridorFromTo:
+          items:
+            $ref: "#/components/schemas/CorridorIn"
+          type: array
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+      type: object
+      xml:
+        name: BatchCorridorIn
+    BatchCorridorOut:
+      properties:
+        corridorFromTo:
+          description: Classified corridors
+          items:
+            $ref: "#/components/schemas/CorridorOut"
+          type: array
+      type: object
+      xml:
+        name: BatchCorridorOut
+    BatchFirstLastNameDiasporaedOut:
+      description: Represents the output of inferring the LIKELY ethnicity from a personal name, given an country of residence.
+      properties:
+        personalNames:
+          description: Classified diaspora names
+          items:
+            $ref: "#/components/schemas/FirstLastNameDiasporaedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameDiasporaedOut
+    BatchFirstLastNameGenderIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/FirstLastNameGenderIn"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameGenderIn
+    BatchFirstLastNameGenderedOut:
+      description: Represents the output of inferring the LIKELY gender from a list of personal names.
+      properties:
+        personalNames:
+          description: Classified genderized names
+          items:
+            $ref: "#/components/schemas/FirstLastNameGenderedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameGenderedOut
+    BatchFirstLastNameGeoIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/FirstLastNameGeoIn"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameGeoIn
+    BatchFirstLastNameGeoSubclassificationOut:
+      description: Represents the output of inferring the LIKELY country subclassification (regional names).
+      properties:
+        personalNames:
+          description: Classified names at sub country level (region or state)
+          items:
+            $ref: "#/components/schemas/FirstLastNameGeoSubclassificationOut"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameGeoSubclassificationOut
+    BatchFirstLastNameGeoZippedIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/FirstLastNameGeoZippedIn"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameGeoZippedIn
+    BatchFirstLastNameIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/FirstLastNameIn"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameIn
+    BatchFirstLastNameOriginedOut:
+      description: Represents the output of inferring the LIKELY origin from a list of personal names.
+      properties:
+        personalNames:
+          description: Classified origined names
+          items:
+            $ref: "#/components/schemas/FirstLastNameOriginedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameOriginedOut
+    BatchFirstLastNamePhoneCodedOut:
+      description: Represents the output of inferring the LIKELY country and phone code of personal names+phones.
+      properties:
+        personalNamesWithPhoneNumbers:
+          description: Classified phone-coded names
+          items:
+            $ref: "#/components/schemas/FirstLastNamePhoneCodedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNamePhoneCodedOut
+    BatchFirstLastNamePhoneNumberGeoIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNamesWithPhoneNumbers:
+          items:
+            $ref: "#/components/schemas/FirstLastNamePhoneNumberGeoIn"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNamePhoneNumberGeoIn
+    BatchFirstLastNamePhoneNumberIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNamesWithPhoneNumbers:
+          items:
+            $ref: "#/components/schemas/FirstLastNamePhoneNumberIn"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNamePhoneNumberIn
+    BatchFirstLastNameUSRaceEthnicityOut:
+      description: Represents the output of inferring the LIKELY US 'race/ethnicity' from a personal name, given US country of residence and (optionally) a ZIP5 code.
+      properties:
+        personalNames:
+          description: Classified US 'race'/ethnicized names
+          items:
+            $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
+          type: array
+      type: object
+      xml:
+        name: BatchFirstLastNameUSRaceEthnicityOut
+    BatchMatchPersonalFirstLastNameIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/MatchPersonalFirstLastNameIn"
+          type: array
+      type: object
+      xml:
+        name: BatchMatchPersonalFirstLastNameIn
+    BatchNameGeoIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        properNouns:
+          items:
+            $ref: "#/components/schemas/NameGeoIn"
+          type: array
+      type: object
+      xml:
+        name: BatchNameGeoIn
+    BatchNameIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        properNouns:
+          items:
+            $ref: "#/components/schemas/NameIn"
+          type: array
+      type: object
+      xml:
+        name: BatchNameIn
+    BatchNameMatchCandidatesOut:
+      properties:
+        namesAndMatchCandidates:
+          description: Classified matched names
+          items:
+            $ref: "#/components/schemas/NameMatchCandidatesOut"
+          type: array
+      type: object
+      xml:
+        name: BatchNameMatchCandidatesOut
+    BatchNameMatchedOut:
+      properties:
+        matchedNames:
+          description: Classified matched names
+          items:
+            $ref: "#/components/schemas/NameMatchedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchNameMatchedOut
+    BatchPersonalNameCastegroupOut:
+      properties:
+        personalNames:
+          description: Caste group-coded names
+          items:
+            $ref: "#/components/schemas/PersonalNameCastegroupOut"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameCastegroupOut
+    BatchPersonalNameGenderedOut:
+      properties:
+        personalNames:
+          description: Classified genderized names
+          items:
+            $ref: "#/components/schemas/PersonalNameGenderedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameGenderedOut
+    BatchPersonalNameGeoIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/PersonalNameGeoIn"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameGeoIn
+    BatchPersonalNameGeoOut:
+      properties:
+        personalNames:
+          description: Classified geo names
+          items:
+            $ref: "#/components/schemas/PersonalNameGeoOut"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameGeoOut
+    BatchPersonalNameGeoSubdivisionIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/PersonalNameGeoSubdivisionIn"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameGeoSubdivisionIn
+    BatchPersonalNameIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/PersonalNameIn"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameIn
+    BatchPersonalNameParsedOut:
+      properties:
+        personalNames:
+          description: Classified parsed names
+          items:
+            $ref: "#/components/schemas/PersonalNameParsedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameParsedOut
+    BatchPersonalNameReligionedOut:
+      properties:
+        personalNames:
+          description: religious-coded names
+          items:
+            $ref: "#/components/schemas/PersonalNameReligionedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameReligionedOut
+    BatchPersonalNameSubdivisionIn:
+      properties:
+        facts:
+          items:
+            $ref: "#/components/schemas/FactIn"
+          type: array
+        personalNames:
+          items:
+            $ref: "#/components/schemas/PersonalNameSubdivisionIn"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameSubdivisionIn
+    BatchProperNounCategorizedOut:
+      description: Represents the output of inferring the common type (anthroponym, toponym, brand, etc.) from a list of proper names.
+      properties:
+        properNouns:
+          description: Classified typed proper names
+          items:
+            $ref: "#/components/schemas/ProperNounCategorizedOut"
+          type: array
+      type: object
+      xml:
+        name: BatchProperNounCategorizedOut
+    CorridorIn:
+      description: Represent any transnational interaction between names (ex. remittance, communication, cross-border investment, airline travel
+      properties:
+        firstLastNameGeoFrom:
+          $ref: "#/components/schemas/FirstLastNameGeoIn"
+        firstLastNameGeoTo:
+          $ref: "#/components/schemas/FirstLastNameGeoIn"
+        id:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: CorridorIn
+    CorridorOut:
+      description: Represent multiple classifications for corridor sender and receiver (gender, country, origin, diaspora)
+      properties:
+        FirstLastNameDiasporaedOut:
+          $ref: "#/components/schemas/FirstLastNameDiasporaedOut"
+        FirstLastNameGenderedOut:
+          $ref: "#/components/schemas/FirstLastNameGenderedOut"
+        FirstLastNameOriginedOut:
+          $ref: "#/components/schemas/FirstLastNameOriginedOut"
+        id:
+          type: string
+          xml:
+            attribute: true
+        script:
+          type: string
+      type: object
+      xml:
+        name: CorridorOut
+    FactIn:
+      properties:
+        id:
+          type: string
+          xml:
+            attribute: true
+        name:
+          type: string
+      type: object
+    FeedbackLoopOut:
+      properties:
+        feedbackCredits:
+          description: Number of units recredited as per feedback loop successful classification
+          format: int64
+          type: integer
+      type: object
+      xml:
+        name: FeedbackLoopOut
+    FirstLastNameDiasporaedOut:
+      description: Represents the output of inferring the LIKELY ethnicity from a personal name, given an country of residence.
+      properties:
+        countryIso2:
+          description: From input data, the countryIso2 of geographic context (US,CA etc.)
+          type: string
+          xml:
+            attribute: true
+        ethnicitiesTop:
+          description: List most likely ethnicities (top 10)
+          items:
+            description: List most likely ethnicities (top 10)
+            type: string
+          type: array
+        ethnicity:
+          description: The most likely ethnicity
+          example: Chinese
+          type: string
+          xml:
+            attribute: true
+        ethnicityAlt:
+          description: The second best alternative ethnicity
+          example: Japanese
+          type: string
+          xml:
+            attribute: true
+        firstName:
+          description: The first name (also known as given name)
+          type: string
+        id:
+          type: string
+        lastName:
+          description: The last name (also known as family name, or surname)
+          type: string
+        lifted:
+          description: Indicates if the output ethnicity is based on machine learning only, or further lifted as a known fact by a country-specific rule. Let us know if you believe ethnicity is incorrect on a specific case where lifted is true.
+          type: boolean
+          xml:
+            attribute: true
+        probabilityAltCalibrated:
+          description: "The calibrated probability for ethnicity OR ethnicityAlt to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        probabilityCalibrated:
+          description: "The calibrated probability for ethnicity to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        score:
+          description: "Compatibility to NamSor_v1 Diaspora score value. Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: FirstLastNameDiasporaedOut
+    FirstLastNameGenderIn:
+      properties:
+        firstName:
+          type: string
+          xml:
+            attribute: true
+        gender:
+          description: The known gender of the name
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        lastName:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: FirstLastName
+    FirstLastNameGenderedOut:
+      description: Represents the output of inferring the LIKELY gender from a personal name.
+      properties:
+        firstName:
+          description: The first name (also known as given name)
+          type: string
+        genderScale:
+          description: Compatibility to NamSor_v1 Gender Scale M[-1..U..+1]F value.
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        id:
+          type: string
+        lastName:
+          description: The last name (also known as family name, or surname)
+          type: string
+        likelyGender:
+          description: Most likely gender
+          enum:
+            - male
+            - female
+            - unknown
+          type: string
+        probabilityCalibrated:
+          description: "The calibrated probability for inferred gender to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        score:
+          description: "Compatibility to NamSor_v1 Gender score value. Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: FirstLastNameGenderedOut
+    FirstLastNameGeoIn:
+      properties:
+        countryIso2:
+          type: string
+          xml:
+            attribute: true
+        firstName:
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        lastName:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: FirstLastNameGeoIn
+    FirstLastNameGeoSubclassificationOut:
+      description: Represents the geographic name origin at a country subclassification level (usually regional or state level).
+      properties:
+        countryIso2:
+          description: The input country ISO2 code
+          type: string
+          xml:
+            attribute: true
+        firstName:
+          description: The first name (also known as given name)
+          type: string
+        id:
+          type: string
+        lastName:
+          description: The last name (also known as family name, or surname)
+          type: string
+        probabilityAltCalibrated:
+          description: "The calibrated probability for subclassification OR subclassificationAlt to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        probabilityCalibrated:
+          description: "The calibrated probability for subclassification to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        score:
+          description: "Compatibility to NamSor_v1 Origin score value. Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+        subClassification:
+          description: Most likely subclassification ISO_3166-2 code
+          type: string
+        subClassificationAlt:
+          description: "Second best alternative : subclassification ISO_3166-2 code"
+          type: string
+        subclassificationTop:
+          description: List subclassification ISO_3166-2 codes (top 10)
+          items:
+            description: List subclassification ISO_3166-2 codes (top 10)
+            type: string
+          type: array
+      type: object
+      xml:
+        name: FirstLastNameGeoSubclassificationOut
+    FirstLastNameGeoZippedIn:
+      properties:
+        countryIso2:
+          type: string
+          xml:
+            attribute: true
+        firstName:
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        lastName:
+          type: string
+          xml:
+            attribute: true
+        zipCode:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: FirstLastNameGeoZippedIn
+    FirstLastNameIn:
+      properties:
+        firstName:
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        lastName:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: FirstLastName
+    FirstLastNameOriginedOut:
+      description: Represents the output of inferring the LIKELY country of Origin from a personal name.
+      properties:
+        countriesOriginTop:
+          description: List countries of Origin (top 10)
+          items:
+            description: List countries of Origin (top 10)
+            type: string
+          type: array
+        countryOrigin:
+          description: Most likely country of Origin
+          type: string
+        countryOriginAlt:
+          description: "Second best alternative : country of Origin"
+          type: string
+        firstName:
+          description: The first name (also known as given name)
+          type: string
+        id:
+          type: string
+        lastName:
+          description: The last name (also known as family name, or surname)
+          type: string
+        probabilityAltCalibrated:
+          description: "The calibrated probability for countryOrigin OR countryOriginAlt to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        probabilityCalibrated:
+          description: "The calibrated probability for countryOrigin to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        regionOrigin:
+          description: Most likely region of Origin (based on countryOrigin ISO2 code)
+          type: string
+        score:
+          description: "Compatibility to NamSor_v1 Origin score value. Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+        subRegionOrigin:
+          description: Most likely sub region of Origin (based on countryOrigin ISO2 code)
+          type: string
+        topRegionOrigin:
+          description: Most likely top region of Origin (based on countryOrigin ISO2 code)
+          type: string
+      type: object
+      xml:
+        name: FirstLastNameOriginedOut
+    FirstLastNameOut:
+      description: First / last name structure corresponding to the most likely parsing.
+      properties:
+        firstName:
+          description: The first name (also known as given name)
+          type: string
+        id:
+          type: string
+        lastName:
+          description: The last name (also known as family name, or surname)
+          type: string
+        script:
+          type: string
+      type: object
+      xml:
+        name: FirstLastNameOut
+    FirstLastNamePhoneCodedOut:
+      description: Represents the output of inferring the LIKELY country and phone code from a personal name and phone number.
+      properties:
+        countryIso2:
+          type: string
+        firstName:
+          description: The first name (also known as given name)
+          type: string
+        id:
+          type: string
+        internationalPhoneNumberVerified:
+          description: The normalized phone number, verified using libphonenumber.
+          type: string
+        lastName:
+          description: The last name (also known as family name, or surname)
+          type: string
+        originCountryIso2:
+          description: The likely country of origin of the name.
+          type: string
+        originCountryIso2Alt:
+          description: The best alternative country of origin of the name.
+          type: string
+        phoneCountryCode:
+          description: The phone country code of the phone number, verified using libphonenumber.
+          format: int32
+          type: integer
+        phoneCountryCodeAlt:
+          description: The best alternative phone country code of the phone number.
+          format: int32
+          type: integer
+        phoneCountryIso2:
+          description: The likely country of the phone number.
+          type: string
+        phoneCountryIso2Alt:
+          description: The best alternative country of the phone number.
+          type: string
+        phoneCountryIso2Verified:
+          description: The phone ISO2 country code, verified using libphonenumber.
+          type: string
+        phoneNumber:
+          description: The input phone number.
+          type: string
+        score:
+          description: "Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+        verified:
+          description: Indicates if the phone number could be positively verified using libphonenumber.
+          type: boolean
+      type: object
+      xml:
+        name: FirstLastNamePhoneCodedOut
+    FirstLastNamePhoneNumberGeoIn:
+      properties:
+        countryIso2:
+          type: string
+        countryIso2Alt:
+          type: string
+        firstName:
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        lastName:
+          type: string
+          xml:
+            attribute: true
+        phoneNumber:
+          type: string
+      type: object
+      xml:
+        name: FirstLastNamePhoneNumberGeoIn
+    FirstLastNamePhoneNumberIn:
+      properties:
+        firstName:
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        lastName:
+          type: string
+          xml:
+            attribute: true
+        phoneNumber:
+          type: string
+      type: object
+      xml:
+        name: FirstLastNamePhoneNumberIn
+    FirstLastNameUSRaceEthnicityOut:
+      description: Represents the output of inferring the LIKELY US 'race/ethnicity' from a personal name, given US country of residence and (optionally) a ZIP5 code.
+      properties:
+        firstName:
+          description: The first name (also known as given name)
+          type: string
+        id:
+          type: string
+        lastName:
+          description: The last name (also known as family name, or surname)
+          type: string
+        probabilityAltCalibrated:
+          description: "The calibrated probability for raceEthnicity OR raceEthnicityAlt to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        probabilityCalibrated:
+          description: "The calibrated probability for raceEthnicity to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        raceEthnicitiesTop:
+          description: List 'race'/ethnicities
+          items:
+            description: List 'race'/ethnicities
+            type: string
+          type: array
+        raceEthnicity:
+          description: Most likely US 'race'/ethnicity
+          enum:
+            - W_NL
+            - HL
+            - A
+            - B_NL
+            - AI_AN
+            - PI
+          type: string
+          xml:
+            attribute: true
+        raceEthnicityAlt:
+          description: Second most likely US 'race'/ethnicity
+          enum:
+            - W_NL
+            - HL
+            - A
+            - B_NL
+            - AI_AN
+            - PI
+          type: string
+          xml:
+            attribute: true
+        score:
+          description: "Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: FirstLastNameUSRaceEthnicityOut
+    MatchPersonalFirstLastNameIn:
+      properties:
+        id:
+          type: string
+          xml:
+            attribute: true
+        name1:
+          $ref: "#/components/schemas/FirstLastNameIn"
+        name2:
+          $ref: "#/components/schemas/PersonalNameIn"
+      type: object
+      xml:
+        name: MatchPersonalFirstLastNameIn
+    NameGeoIn:
+      properties:
+        countryIso2:
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        name:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: NameGeoIn
+    NameIn:
+      properties:
+        id:
+          type: string
+          xml:
+            attribute: true
+        name:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: NameIn
+    NameMatchCandidateOut:
+      description: The ordered list of name matching candidates
+      properties:
+        candidateName:
+          description: The name matching candidate name
+          type: string
+        predScoreFamilyName:
+          description: The family name prediction score.
+          format: double
+          type: number
+        predScoreGivenName:
+          description: The given name prediction score.
+          format: double
+          type: number
+        probability:
+          description: The name matching estimated probability.
+          format: double
+          type: number
+      type: object
+      xml:
+        name: NameMatchCandidateOut
+    NameMatchCandidatesOut:
+      description: Classified matched names
+      properties:
+        firstName:
+          description: The first name (also known as given name)
+          type: string
+        id:
+          type: string
+        lastName:
+          description: The last name (also known as family name, or surname)
+          type: string
+        matchCandidates:
+          description: The ordered list of name matching candidates
+          items:
+            $ref: "#/components/schemas/NameMatchCandidateOut"
+          type: array
+        orderOption:
+          description: The option for ordering
+          type: string
+        script:
+          type: string
+      type: object
+      xml:
+        name: NameMatchCandidatesOut
+    NameMatchedOut:
+      description: Classified matched names
+      properties:
+        id:
+          type: string
+        matchStatus:
+          description: The name matching status.
+          enum:
+            - Match
+            - Mismatch
+          type: string
+        score:
+          format: double
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: NameMatchedOut
+    PersonalNameCastegroupOut:
+      description: Caste group-coded names
+      properties:
+        castegroup:
+          description: Most likely caste group
+          type: string
+        castegroupAlt:
+          description: "Second best alternative : caste group "
+          type: string
+        castegroupTop:
+          description: List caste group (top 10)
+          items:
+            description: List caste group (top 10)
+            type: string
+          type: array
+        id:
+          type: string
+        name:
+          description: The input name.
+          type: string
+        probabilityAltCalibrated:
+          description: "The calibrated probability for country OR countryAlt to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        probabilityCalibrated:
+          description: "The calibrated probability for country to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        score:
+          description: "Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: PersonalNameCastegroupOut
+    PersonalNameGenderedOut:
+      description: Classified genderized names
+      properties:
+        genderScale:
+          description: Compatibility to NamSor_v1 Gender Scale M[-1..U..+1]F value.
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        id:
+          type: string
+        likelyGender:
+          description: Most likely gender
+          enum:
+            - male
+            - female
+            - unknown
+          type: string
+        name:
+          description: The input name
+          type: string
+        probabilityCalibrated:
+          description: "The calibrated probability for inferred gender to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        score:
+          description: "Compatibility to NamSor_v1 Gender score value. Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: PersonalNameGenderedOut
+    PersonalNameGeoIn:
+      properties:
+        countryIso2:
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        name:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: PersonalNameGeoIn
+    PersonalNameGeoOut:
+      description: Classified geo names
+      properties:
+        countriesTop:
+          description: List countries (top 10)
+          items:
+            description: List countries (top 10)
+            type: string
+          type: array
+        country:
+          description: "Most likely country "
+          type: string
+        countryAlt:
+          description: "Second best alternative : country "
+          type: string
+        id:
+          type: string
+        name:
+          description: The input name.
+          type: string
+        probabilityAltCalibrated:
+          description: "The calibrated probability for country OR countryAlt to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        probabilityCalibrated:
+          description: "The calibrated probability for country to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        region:
+          description: Most likely region (based on country ISO2 code)
+          type: string
+        score:
+          description: "Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+        subRegion:
+          description: Most likely sub region (based on country ISO2 code)
+          type: string
+        topRegion:
+          description: Most likely top region (based on country ISO2 code)
+          type: string
+      type: object
+      xml:
+        name: PersonalNameGeoOut
+    PersonalNameGeoSubdivisionIn:
+      properties:
+        countryIso2:
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+          xml:
+            attribute: true
+        name:
+          type: string
+          xml:
+            attribute: true
+        subdivisionIso:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: PersonalNameGeoSubdivisionIn
+    PersonalNameIn:
+      properties:
+        id:
+          type: string
+          xml:
+            attribute: true
+        name:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: PersonalNameIn
+    PersonalNameParsedOut:
+      properties:
+        firstLastName:
+          $ref: "#/components/schemas/FirstLastNameOut"
+        id:
+          type: string
+        name:
+          description: The input name
+          type: string
+        nameParserType:
+          description: Name parsing is addressed as a classification problem, for example FN1LN1 means a first then last name order.
+          enum:
+            - FN1LN1
+            - LN1FN1
+            - FN1LN2
+            - LN2FN1
+            - FN1LNx
+            - LNxFN1
+            - FN2LN1
+            - LN1FN2
+            - FN2LN2
+            - LN2FN2
+            - FN2LNx
+            - LNxFN2
+            - FNxLN1
+            - LN1FNx
+            - FNxLN2
+            - LN2FNx
+            - FNxLNx
+            - LNxFNx
+          type: string
+        nameParserTypeAlt:
+          description: Second best alternative parsing. Name parsing is addressed as a classification problem, for example FN1LN1 means a first then last name order.
+          enum:
+            - FN1LN1
+            - LN1FN1
+            - FN1LN2
+            - LN2FN1
+            - FN1LNx
+            - LNxFN1
+            - FN2LN1
+            - LN1FN2
+            - FN2LN2
+            - LN2FN2
+            - FN2LNx
+            - LNxFN2
+            - FNxLN1
+            - LN1FNx
+            - FNxLN2
+            - LN2FNx
+            - FNxLNx
+            - LNxFNx
+          type: string
+        score:
+          description: "Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: PersonalNameParsedOut
+    PersonalNameReligionedOut:
+      description: religious-coded names
+      properties:
+        id:
+          type: string
+        name:
+          description: The input name.
+          type: string
+        probabilityAltCalibrated:
+          description: "The calibrated probability for country OR countryAlt to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        probabilityCalibrated:
+          description: "The calibrated probability for country to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        religion:
+          description: Most likely religion
+          type: string
+        religionAlt:
+          description: "Second best alternative : religion "
+          type: string
+        religionsTop:
+          description: List countries (top 10)
+          items:
+            description: List countries (top 10)
+            type: string
+          type: array
+        score:
+          description: "Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: PersonalNameReligionedOut
+    PersonalNameSubdivisionIn:
+      properties:
+        id:
+          type: string
+          xml:
+            attribute: true
+        name:
+          type: string
+          xml:
+            attribute: true
+        subdivisionIso:
+          type: string
+          xml:
+            attribute: true
+      type: object
+      xml:
+        name: PersonalNameSubdivisionIn
+    ProperNounCategorizedOut:
+      description: Classified typed proper names
+      properties:
+        commonType:
+          description: The most likely common name type
+          type: string
+        commonTypeAlt:
+          description: "Best alternative for : The most likely common name type"
+          type: string
+        id:
+          type: string
+        name:
+          description: The input name
+          type: string
+        score:
+          description: "Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+      type: object
+      xml:
+        name: ProperNounCategorizedOut
+    RegionISO:
+      description: List of countries and regions
+      properties:
+        countryFIPS:
+          type: string
+        countryISO2:
+          type: string
+        countryISO3:
+          type: string
+        countryName:
+          type: string
+        countryNumCode:
+          type: string
+        region:
+          type: string
+        subregion:
+          type: string
+        topregion:
+          type: string
+      type: object
+    RegionOut:
+      properties:
+        countriesAndRegions:
+          description: List of countries and regions
+          items:
+            $ref: "#/components/schemas/RegionISO"
+          type: array
+      type: object
+      xml:
+        name: RegionOut
+    SoftwareVersionOut:
+      description: The software version.
+      properties:
+        softwareNameAndVersion:
+          description: The software version
+          type: string
+        softwareVersion:
+          description: The software version major minor build
+          items:
+            description: The software version major minor build
+            format: int32
+            type: integer
+          type: array
+      type: object
+      xml:
+        name: SoftwareVersionOut
+  securitySchemes:
+    api_key:
+      description: api_key required
+      in: header
+      name: X-API-KEY
+      type: apiKey

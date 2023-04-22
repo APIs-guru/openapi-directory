@@ -1,0 +1,37 @@
+{
+  "added": "2023-02-17T11:02:20.620Z",
+  "info": {
+    "contact": {
+      "email": "developer-experience@adyen.com",
+      "name": "Adyen Developer Experience team",
+      "url": "https://www.adyen.help/hc/en-us/community/topics",
+      "x-twitter": "Adyen"
+    },
+    "description": "Configure and manage your Adyen company and merchant accounts, stores, and payment terminals.\n## Authentication\nEach request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.\n\nTo access the live endpoints, you need to generate a new API key in your live Customer Area.\n## Versioning\n\nManagement API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:\n\n```text\nhttps://management-test.adyen.com/v1/companies/{companyId}/webhooks\n```\n\n## Going live\n\nTo access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:\n\n```text\nhttps://management-live.adyen.com/v1\n```",
+    "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+    "title": "Management API",
+    "version": "1",
+    "x-apisguru-categories": [
+      "payment"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/ManagementService-v1.json",
+        "version": "3.1"
+      }
+    ],
+    "x-providerName": "adyen.com",
+    "x-publicVersion": true,
+    "x-serviceName": "ManagementService",
+    "x-timestamp": "2023-04-03T23:26:06Z"
+  },
+  "updated": "2023-04-04T23:18:43.539Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/ManagementService/1/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/ManagementService/1/openapi.yaml",
+  "openapiVer": "3.1.0",
+  "link": "https://api.apis.guru/v2/specs/adyen.com:ManagementService/1.json"
+}

@@ -1,0 +1,34 @@
+{
+  "apis": {
+    "spinitron.com": {
+      "added": "2018-02-22T19:42:40.000Z",
+      "info": {
+        "contact": {
+          "x-twitter": "Spinitron"
+        },
+        "description": "## Notes\n\n**Tutorial demo** using this API is at [https://spinitron.com/v2-api-demo/](https://spinitron.com/v2-api-demo/). For web integration using iframes and/or JavaScript instead of an API, see [https://spinitron.github.io/v2-web-integration/](https://spinitron.github.io/v2-web-integration/).\n\n**Your API key** is found in the Spinitron web app. Log in to Spinitron and go to *Automation & API* in the *Admin* menu.\n\n**Authenticate** by presenting your API key using either HTTP Bearer Authorization\n(preferred)\n\n    curl -H 'Authorization: Bearer YOURAPIKEY' 'https://spinitron.com/api/spins'\n\nor in the query parameter `access-token` (less secure owing to webserver\nlog files)\n\n    curl 'https://spinitron.com/api/spins?access-token=YOURAPIKEY'\n\n**Limit** per page of results is 20 by default and miximally 200.\n\n**Try it out** below works to\ngenerate example cURL requests but not to get responses from Spinitron. We\ndo not accept queries sent from web browsers. Copy-paste the cURL commands\nand run them from your computer.\n\n**Cache** the data you get from the API if you are using it in web or mobile integration. It's not ok to query the API on *every* page request you serve. The [demo](https://spinitron.com/v2-api-demo/) shows how easy it can be to implement a file cache.\n\nAn extension to this API with access to all stations for partner applications is available. Contact us.\n",
+        "title": "Spinitron v2 API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "media"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Spinitron_profile_image.png"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/spinitron/v2api/master/spinitron.yaml",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "spinitron.com"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/spinitron.com/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/spinitron.com/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/spinitron.com/1.0.0.json"
+    }
+  }
+}

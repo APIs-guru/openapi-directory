@@ -1,0 +1,38 @@
+{
+  "added": "2023-02-17T11:02:20.620Z",
+  "info": {
+    "contact": {
+      "email": "developer-experience@adyen.com",
+      "name": "Adyen Developer Experience team",
+      "url": "https://www.adyen.help/hc/en-us/community/topics",
+      "x-twitter": "Adyen"
+    },
+    "description": "A set of API endpoints that allow you to store payout details, confirm, or decline a payout.\n\nFor more information, refer to [Online payouts](https://docs.adyen.com/online-payments/online-payouts).\n## Authentication\nTo use the Payout API, you need to have [two API credentials](https://docs.adyen.com/online-payments/online-payouts#payouts-to-bank-accounts-and-wallets): one for storing payout details and submitting payouts, and another one for confirming or declining payouts. If you don't have the required API credentials, contact our [Support Team](https://www.adyen.help/hc/en-us/requests/new).\n\nBoth of these API credentials must be authenticated with [basic authentication](https://docs.adyen.com/development-resources/api-credentials#basic-authentication).The following example shows how to authenticate your request when submitting a payout:\n\n```\ncurl\n-U \"storePayout@Company.YOUR_COMPANY_ACCOUNT\":\"YOUR_BASIC_AUTHENTICATION_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\n\n## Versioning\nPayments API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://pal-test.adyen.com/pal/servlet/Payout/v68/payout\n```\n\n## Going live\n\nTo authenticate to the live endpoints, you need [API credentials](https://docs.adyen.com/development-resources/api-credentials) from your live Customer Area.\n\nThe live endpoint URLs contain a prefix which is unique to your company account:\n```\n\nhttps://{PREFIX}-pal-live.adyenpayments.com/pal/servlet/Payout/v68/payout\n```\n\nGet your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.",
+    "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+    "title": "Adyen Payout API",
+    "version": "68",
+    "x-apisguru-categories": [
+      "payment"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/PayoutService-v68.json",
+        "version": "3.1"
+      }
+    ],
+    "x-preferred": true,
+    "x-providerName": "adyen.com",
+    "x-publicVersion": true,
+    "x-serviceName": "PayoutService",
+    "x-timestamp": "2023-04-11T21:25:15Z"
+  },
+  "updated": "2023-04-19T23:18:47.965Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/PayoutService/68/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/PayoutService/68/openapi.yaml",
+  "openapiVer": "3.1.0",
+  "link": "https://api.apis.guru/v2/specs/adyen.com:PayoutService/68.json"
+}

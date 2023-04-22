@@ -1,0 +1,565 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://prchub.{environment}.com.br
+    variables:
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: "> This feature is in closed beta, available only for selected customers. If you have any questions, contact our [Support](https://support.vtex.com/hc/en-us/requests). \r
+
+    \r
+
+    \ In the B2B scenario, it is common for stores to have personalized prices per customer and complex pricing systems that require external integrations. Pricing Hub is a system developed for the B2B context that works as an intermediary between VTEX and external pricing systems.\r
+
+    \r
+
+    \ In VTEX, B2B stores have the option to use our internal pricing system or an external one. If the store chooses to operate with an external pricing system, Pricing Hub will query an external price calculation API. The external API should then respond with the price for all items in the shopping cart according to its predefined tax rules.\r
+
+    \r
+
+    ![Pricing hub protocal diagram](https://user-images.githubusercontent.com/77292838/211634260-e4f7a516-91df-416e-ab43-d9c79d56bc91.png)\r
+
+    \r
+
+    ## Implementation\r
+
+    \r
+
+    To connect with external pricing systems using Pricing Hub, it is necessary to build a VTEX IO middleware app. We offer two reference implementation templates to simplify this process:\r
+
+    \r
+
+    - [C# template](https://github.com/vtex-apps/external-prices-app)\r
+
+    - [Node template](https://github.com/vtex-apps/external-prices-node)\r
+
+    \r
+
+    Read the documentation on each repository to learn more about the required steps to use and customize the app.\r
+
+    \r
+
+    > The app used by Pricing Hub to connect must be a `major 0`. \r
+
+    \r
+
+    ## Specifications\r
+
+    \r
+
+    See below all the specifications of the request and the response expected when communicating with Pricing Hub.\r
+
+    \r
+
+    ### Price calculation request\r
+
+    \r
+
+    The external prices calculation tool must provide an endpoint that will receive a `POST` [Get Prices](https://developers.vtex.com/docs/api-reference/pricing-hub#post-/api/pricing-hub/prices) request. This route retrieves and applies prices for the items that are passed in the request. Pricing Hub will select the pricing method that will be used for each item and will fetch their respective price from the selected pricing method.\r
+
+    \r
+
+    >⚠️ Responses from Pricing Hub tend to have a greater delay when compared to other VTEX systems. That is expected, however, due to the complexity of its nested requests. The timeout for this request is 900 milliseconds.\r
+
+    \r
+
+    In this request, Pricing Hub provides a body in a specific format, exemplified below. This means that either the endpoint must be prepared to receive this body format, or the app must contain a parser to adapt it to the correct format.\r
+
+    \r
+
+    #### Request body example\r
+
+    \r
+
+    ```json\r
+
+    {\r
+
+    \    \"item\": \r
+
+    \        {\r
+
+    \            \"index\": 0,\r
+
+    \            \"skuId\": \"880011\",\r
+
+    \            \"quantity\": 1\r
+
+    \        },\r
+
+    \    \"context\":{\r
+
+    \        \"email\": \"john@email.com\"\r
+
+    \    }\r
+
+    }\r
+
+    ```\r
+
+    \r
+
+    The request body should have the following properties:\r
+
+    \r
+
+    | **Attribute** | **Type** | **Description**                                                                                                                                                                                          |\r
+
+    |---------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\r
+
+    | `item`        | object   | The item whose price is supposed to be fetched by Pricing Hub.                                                                                                                                           |\r
+
+    | ↪ `index`     | integer  | This is the index of the item at Checkout's cart. It has to be unique in the items array.                                                                                                                |\r
+
+    | ↪ `skuId`     | string   | This is the SKU ID of the item that will be priced.                                                                                                                                                      |\r
+
+    | ↪ `quantity`  | integer  | This is the amount of items that will be priced. It is possible to have a volume discount for many repeated items. Hence, the price may not be the quantity of the item multiplied by the unitary price. |\r
+
+    | `context`     | object   | The object that contains the context to inform the query.                                                                                                                                                |\r
+
+    | ↪ `email`     | string   | The customer's email address. If there is no value, use an empty string.                                                                                                                                 |\r
+
+    \r
+
+    ### External prices provider response\r
+
+    \r
+
+    In response to the request sent by Pricing Hub, we expect an outcome in the following format:\r
+
+    \r
+
+    ```json\r
+
+    {\r
+
+    \    \"item\": {\r
+
+    \        \"price\": 54035,\r
+
+    \        \"priceTables\": \"special\",\r
+
+    \        \"index\": 0,\r
+
+    \        \"skuId\": \"880011\",\r
+
+    \        \"listPrice\": 54035,\r
+
+    \        \"costPrice\": 50000,\r
+
+    \        \"sellingPrice\": 54035,\r
+
+    \        \"priceValidUntil\": \"2023-01-27T20:29:57Z\",\r
+
+    \        \"tradePolicyId\": \"special\"\r
+
+    \    }\r
+
+    }\r
+
+    ```\r
+
+    \r
+
+    The response should have the following properties:\r
+
+    \r
+
+    | **Attribute**       | **Type** | **Description**                                                                                                                                        |\r
+
+    |---------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|\r
+
+    | `item`              | object   | The object that contains the price data.                                                                                                               |\r
+
+    | ↪ `price`           | integer  | The price returned by the pricing API that was used by Pricing-Hub. It is measured in cents, so 5000 means 50,00 in local currency.                    |\r
+
+    | ↪ `priceTables`     | string   | The price table that was used to price the item.                                                                                                       |\r
+
+    | ↪ `index`           | integer  | The same index referring to Checkout's cart that was passed to the API.                                                                                |\r
+
+    | ↪ `skuId`           | string   | The same SKU ID that was passed to the API.                                                                                                            |\r
+
+    | ↪ `listPrice`       | integer  | The list price returned by the pricing API that was used by Pricing Hub. It is measured in cents, so 5000 means 50,00 in local currency.               |\r
+
+    | ↪ `costPrice`       | integer  | The cost price returned by the pricing API that was used by Pricing-Hub. It is measured in cents, so 5000 means 50,00 in local currency.               |\r
+
+    | ↪ `sellingPrice`    | integer  | The computed price before applying coupons, taxes or promotions.                                                                                       |\r
+
+    | ↪ `priceValidUntil` | string   | The moment up until the price is valid. After that moment, it will be necessary to call the pricing API again. The format of the string is in RFC3339. |\r
+
+    | ↪ `tradePolicyId`   | string   | Trade Policy ID.                                                                                                                                       |\r
+
+    \r
+
+    ## Index - Pricing Hub API\r
+
+    \r
+
+    `POST` [Get Prices](https://developers.vtex.com/docs/api-reference/pricing-hub#post-/api/pricing-hub/prices)\r
+
+    `PUT` [Configure External Price Source](https://developers.vtex.com/docs/api-reference/pricing-hub#put-/config)\r\n"
+  title: Pricing Hub
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Pricing Hub.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Pricing-Hub
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: Pricing Hub Prices
+paths:
+  /api/pricing-hub/prices:
+    post:
+      deprecated: false
+      description: "This route retrieves and applies prices for the items that are passed in the request. Pricing Hub will select the pricing method that will be used for each item and will fetch their respective price from the selected pricing method. \r
+
+        \r
+
+        >ℹ️ > This feature is in closed beta, available only for selected customers. If you have any questions, contact our [Support](https://support.vtex.com/hc/en-us/requests). "
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The AppKey configured by the merchant
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: The AppToken configured by the merchant
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              UtmCampaign: summer
+              UtmInternalCampaign: sale
+              UtmMedium: social
+              UtmSource: facebook
+              email: customer@email.com
+              items:
+                - brandId: "2000000"
+                  categoriesIds:
+                    - "1"
+                  index: 0
+                  priceTableIds: []
+                  quantity: 1
+                  sellerId: "1"
+                  skuId: "13"
+              salesChannel: "1"
+            schema:
+              $ref: "#/components/schemas/GetPricesRequestObject"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                items:
+                  - costPrice: 750
+                    index: 0
+                    listPrice: 2500
+                    price: 1875
+                    priceTable: "1"
+                    priceValidUntil: 2022-03-24T14:57:19Z
+                    skuId: "14"
+                  - costPrice: 200
+                    index: 0
+                    listPrice: 200
+                    price: 200
+                    priceTable: "1"
+                    priceValidUntil: 2022-03-04T20:00:18Z
+                    skuId: "14"
+              schema:
+                $ref: "#/components/schemas/response2"
+          description: OK
+      summary: Get Prices
+      tags:
+        - Pricing Hub Prices
+  /config:
+    put:
+      description: "This route facilitates setting up an external price source in Pricing Hub. It also allows you to activate or deactivate that source in a given account. \r
+
+        \r
+
+        >ℹ️ This feature is in closed beta, available only for selected customers. If you have any questions, contact our [Support](https://support.vtex.com/hc/en-us/requests). "
+      operationId: ConfigExternalPriceSource
+      parameters:
+        - description: Name of the VTEX account
+          in: query
+          name: an
+          required: false
+          schema:
+            example: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The AppKey configured by the merchant
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: The AppToken configured by the merchant
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              active: true
+              appName: apiexamples_app_name
+            schema:
+              $ref: "#/components/schemas/ConfigExternalPriceSourceRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Configure External Price Source
+      tags:
+        - Pricing Hub Prices
+components:
+  schemas:
+    ConfigExternalPriceSourceRequest:
+      example:
+        active: true
+        appName: apiexamples_app_name
+      properties:
+        active:
+          default: false
+          description: Defines if the external price source is active (`true`) or not (`false`). If not set, the default value will be `false`.
+          type: boolean
+        appName:
+          description: Name of the app that communicates with the external pricing source
+          type: string
+      required:
+        - appName
+      title: ConfigExternalPriceSourceRequest
+      type: object
+    GetPricesRequestObject:
+      example:
+        UtmCampaign: summer
+        UtmInternalCampaign: sale
+        UtmMedium: social
+        UtmSource: facebook
+        email: customer@email.com
+        items:
+          - brandId: "2000000"
+            categoriesIds:
+              - "1"
+            index: 0
+            priceTableIds: []
+            quantity: 1
+            sellerId: "1"
+            skuId: "13"
+        salesChannel: "1"
+      properties:
+        UtmCampaign:
+          default: summer
+          description: Campaign name, represented by the `utm_campaign` value in the URL that led to the order. If there is no value, use `null`
+          type: string
+        UtmInternalCampaign:
+          default: sale
+          description: Internal campaign name, represented by the `utmi_cp` value in the URL that led to the order. If there is no value, use `null`
+          type: string
+        UtmMedium:
+          default: social
+          description: Medium that indicates what type of traffic the customer originated from, represented by the `utm_medium` value in the URL that led to the order. If there is no value, use `null`
+          type: string
+        UtmSource:
+          default: facebook
+          description: Traffic source, indicates where the traffic originated from according to the `utm_source` value in the URL that led to the order. If there is no value, use `null`
+          type: string
+        email:
+          default: customer@email.com
+          description: The customer's email address. If there is no value, use an empty string
+          type: string
+        items:
+          $ref: "#/components/schemas/items"
+        salesChannel:
+          default: "1"
+          description: Represents Checkout's sales channel
+          type: string
+      required:
+        - items
+        - salesChannel
+        - email
+      type: object
+    Item1:
+      properties:
+        costPrice:
+          description: The cost price returned by the pricing API that was used by Pricing Hub. It is measured in cents, so 5000 means 50,00 in local currency.
+          type: number
+        index:
+          description: The same index referring to Checkout's cart that was passed to the API
+          type: integer
+        listPrice:
+          description: The list price returned by the pricing API that was used by Pricing Hub. It is measured in cents, so 5000 means 50,00 in local currency
+          type: number
+        price:
+          description: The price returned by the pricing API that was used by Pricing Hub. It is measured in cents, so 5000 means 50,00 in local currency
+          type: number
+        priceTable:
+          description: The price table that was used to price the item
+          type: string
+        priceValidUntil:
+          description: The moment up until the price is valid. After that moment, it will be necessary to call the pricing API again. The format of the string is in RFC3339
+          type: string
+        skuId:
+          description: The same skuId that was passed to the API
+          type: string
+      required:
+        - index
+        - skuId
+        - price
+        - costPrice
+        - listPrice
+        - priceTable
+        - priceValidUntil
+      title: Item1
+      type: object
+    items:
+      description: The list of items that are to be priced by Pricing Hub
+      items:
+        description: Each item to be priced by Pricing Hub
+        properties:
+          brandId:
+            default: "2000000"
+            description: This is the brand ID for the item
+            title: brandId
+            type: string
+          categoriesIds:
+            default:
+              - "1"
+            description: ID of the categories that will be used to compute the price
+            items:
+              default: "1"
+              description: ID of a category that will be used to compute the price
+              type: string
+            title: categoriesIds
+            type: array
+          index:
+            default: 0
+            description: This is the index of the item at Checkout's cart. It has to be unique in the items array
+            title: index
+            type: integer
+          priceTableIds:
+            default:
+              - "1"
+            description: IDs of the price tables that will be used to compute the price. More than one price table might be passed to the array. The final price rule might be more complex than the lowest or the highest price
+            items:
+              default: "1"
+              description: ID of a price table that will be used to compute the price
+              type: string
+            title: priceTableIds
+            type: array
+          quantity:
+            default: 1
+            description: This is the amount of items that will be priced. It is possible to have a volume discount for many repeated items. Hence, the price may not be the quantity of the item multiplied by the unitary price
+            title: quantity
+            type: integer
+          sellerId:
+            default: "1"
+            description: This is the seller ID for the item
+            title: sellerId
+            type: string
+          skuId:
+            default: "13"
+            description: This is the sku id of the item that will be priced
+            title: skuId
+            type: string
+        required:
+          - index
+          - skuId
+          - quantity
+          - brandId
+          - sellerId
+          - priceTableIds
+          - categoriesIds
+        title: ""
+        type: object
+      required:
+        - itemsObject
+      title: items
+      type: array
+    response2:
+      properties:
+        items:
+          description: List of items and their respective prices applied by Pricing Hub
+          items:
+            $ref: "#/components/schemas/Item1"
+          type: array
+      required:
+        - items
+      title: response2
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

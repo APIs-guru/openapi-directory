@@ -1,0 +1,945 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "contact": {
+      "email": "softwareengineering@parliament.uk",
+      "name": "UK Parliament",
+      "url": "https://www.parliament.uk/"
+    },
+    "description": "An API that allows querying of Lords Votes data.",
+    "title": "Lords Votes API",
+    "version": "v1",
+    "x-apisguru-categories": [
+      "open_data"
+    ],
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://lordsvotes-api.parliament.uk/swagger/v1/swagger.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "parliament.uk",
+    "x-serviceName": "lordsvotes",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+    }
+  },
+  "paths": {
+    "/data/Divisions/groupedbyparty": {
+      "get": {
+        "description": "Get a list of Divisions which contain grouped by party",
+        "parameters": [
+          {
+            "description": "Divisions containing search term within title or number",
+            "in": "query",
+            "name": "SearchTerm",
+            "schema": {
+              "description": "Divisions containing search term within title or number",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Divisions returning Member with Member ID voting records",
+            "in": "query",
+            "name": "MemberId",
+            "schema": {
+              "description": "Divisions returning Member with Member ID voting records",
+              "format": "int32",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Divisions where member was a teller as well as if they actually voted",
+            "in": "query",
+            "name": "IncludeWhenMemberWasTeller",
+            "schema": {
+              "description": "Divisions where member was a teller as well as if they actually voted",
+              "nullable": true,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Divisions where division date in one or after date provided. Date format is yyyy-MM-dd",
+            "in": "query",
+            "name": "StartDate",
+            "schema": {
+              "description": "Divisions where division date in one or after date provided. Date format is yyyy-MM-dd",
+              "format": "date-time",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Divisions where division date in one or before date provided. Date format is yyyy-MM-dd",
+            "in": "query",
+            "name": "EndDate",
+            "schema": {
+              "description": "Divisions where division date in one or before date provided. Date format is yyyy-MM-dd",
+              "format": "date-time",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint",
+            "in": "query",
+            "name": "DivisionNumber",
+            "schema": {
+              "description": "Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint",
+              "format": "int32",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "comparison operator to use",
+            "in": "query",
+            "name": "TotalVotesCast.Comparator",
+            "schema": {
+              "$ref": "#/components/schemas/Comparators"
+            }
+          },
+          {
+            "description": "value to compare to with the operator provided",
+            "in": "query",
+            "name": "TotalVotesCast.ValueToCompare",
+            "schema": {
+              "description": "value to compare to with the operator provided",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "comparison operator to use",
+            "in": "query",
+            "name": "Majority.Comparator",
+            "schema": {
+              "$ref": "#/components/schemas/Comparators"
+            }
+          },
+          {
+            "description": "value to compare to with the operator provided",
+            "in": "query",
+            "name": "Majority.ValueToCompare",
+            "schema": {
+              "description": "value to compare to with the operator provided",
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionGroupByPartyViewModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionGroupByPartyViewModel"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionGroupByPartyViewModel"
+                }
+              }
+            },
+            "description": "List of divisions with votes grouped by party"
+          },
+          "400": {
+            "description": "A parameter was not valid"
+          }
+        },
+        "summary": "Return Divisions results grouped by party",
+        "tags": [
+          "Divisions"
+        ]
+      }
+    },
+    "/data/Divisions/membervoting": {
+      "get": {
+        "description": "Get a list of voting records for a Member.",
+        "parameters": [
+          {
+            "description": "Id number of a Member whose voting records are to be returned",
+            "in": "query",
+            "name": "MemberId",
+            "required": true,
+            "schema": {
+              "description": "Id number of a Member whose voting records are to be returned",
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Divisions containing search term within title or number",
+            "in": "query",
+            "name": "SearchTerm",
+            "schema": {
+              "description": "Divisions containing search term within title or number",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Divisions where member was a teller as well as if they actually voted",
+            "in": "query",
+            "name": "IncludeWhenMemberWasTeller",
+            "schema": {
+              "description": "Divisions where member was a teller as well as if they actually voted",
+              "nullable": true,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Divisions where division date in one or after date provided. Date format is yyyy-MM-dd",
+            "in": "query",
+            "name": "StartDate",
+            "schema": {
+              "description": "Divisions where division date in one or after date provided. Date format is yyyy-MM-dd",
+              "format": "date-time",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Divisions where division date in one or before date provided. Date format is yyyy-MM-dd",
+            "in": "query",
+            "name": "EndDate",
+            "schema": {
+              "description": "Divisions where division date in one or before date provided. Date format is yyyy-MM-dd",
+              "format": "date-time",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint",
+            "in": "query",
+            "name": "DivisionNumber",
+            "schema": {
+              "description": "Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint",
+              "format": "int32",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "comparison operator to use",
+            "in": "query",
+            "name": "TotalVotesCast.Comparator",
+            "schema": {
+              "$ref": "#/components/schemas/Comparators"
+            }
+          },
+          {
+            "description": "value to compare to with the operator provided",
+            "in": "query",
+            "name": "TotalVotesCast.ValueToCompare",
+            "schema": {
+              "description": "value to compare to with the operator provided",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "comparison operator to use",
+            "in": "query",
+            "name": "Majority.Comparator",
+            "schema": {
+              "$ref": "#/components/schemas/Comparators"
+            }
+          },
+          {
+            "description": "value to compare to with the operator provided",
+            "in": "query",
+            "name": "Majority.ValueToCompare",
+            "schema": {
+              "description": "value to compare to with the operator provided",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The number of records to skip. Must be a positive integer. Default is 0",
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "default": 0,
+              "description": "The number of records to skip. Must be a positive integer. Default is 0",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The number of records to return per page. Must be more than 0. Default is 25",
+            "in": "query",
+            "name": "take",
+            "schema": {
+              "default": 25,
+              "description": "The number of records to return per page. Must be more than 0. Default is 25",
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberVotingRecordViewModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberVotingRecordViewModel"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberVotingRecordViewModel"
+                }
+              }
+            },
+            "description": "List of voting records for a member"
+          },
+          "400": {
+            "description": "A parameter was not valid"
+          },
+          "503": {
+            "description": "Temporary error occured when trying to get division"
+          }
+        },
+        "summary": "Return voting records for a Member",
+        "tags": [
+          "Divisions"
+        ]
+      }
+    },
+    "/data/Divisions/search": {
+      "get": {
+        "description": "Get a list of Divisions which meet the specified criteria.",
+        "parameters": [
+          {
+            "description": "Divisions containing search term within title or number",
+            "in": "query",
+            "name": "SearchTerm",
+            "schema": {
+              "description": "Divisions containing search term within title or number",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Divisions returning Member with Member ID voting records",
+            "in": "query",
+            "name": "MemberId",
+            "schema": {
+              "description": "Divisions returning Member with Member ID voting records",
+              "format": "int32",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Divisions where member was a teller as well as if they actually voted",
+            "in": "query",
+            "name": "IncludeWhenMemberWasTeller",
+            "schema": {
+              "description": "Divisions where member was a teller as well as if they actually voted",
+              "nullable": true,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Divisions where division date in one or after date provided. Date format is yyyy-MM-dd",
+            "in": "query",
+            "name": "StartDate",
+            "schema": {
+              "description": "Divisions where division date in one or after date provided. Date format is yyyy-MM-dd",
+              "format": "date-time",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Divisions where division date in one or before date provided. Date format is yyyy-MM-dd",
+            "in": "query",
+            "name": "EndDate",
+            "schema": {
+              "description": "Divisions where division date in one or before date provided. Date format is yyyy-MM-dd",
+              "format": "date-time",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint",
+            "in": "query",
+            "name": "DivisionNumber",
+            "schema": {
+              "description": "Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint",
+              "format": "int32",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "comparison operator to use",
+            "in": "query",
+            "name": "TotalVotesCast.Comparator",
+            "schema": {
+              "$ref": "#/components/schemas/Comparators"
+            }
+          },
+          {
+            "description": "value to compare to with the operator provided",
+            "in": "query",
+            "name": "TotalVotesCast.ValueToCompare",
+            "schema": {
+              "description": "value to compare to with the operator provided",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "comparison operator to use",
+            "in": "query",
+            "name": "Majority.Comparator",
+            "schema": {
+              "$ref": "#/components/schemas/Comparators"
+            }
+          },
+          {
+            "description": "value to compare to with the operator provided",
+            "in": "query",
+            "name": "Majority.ValueToCompare",
+            "schema": {
+              "description": "value to compare to with the operator provided",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The number of records to skip. Must be a positive integer. Default is 0",
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "default": 0,
+              "description": "The number of records to skip. Must be a positive integer. Default is 0",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The number of records to return per page. Must be more than 0. Default is 25",
+            "in": "query",
+            "name": "take",
+            "schema": {
+              "default": 25,
+              "description": "The number of records to return per page. Must be more than 0. Default is 25",
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionViewModel"
+                  },
+                  "type": "array"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionViewModel"
+                  },
+                  "type": "array"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionViewModel"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "List of divisions matching specified parameters"
+          },
+          "400": {
+            "description": "A parameter was not valid"
+          },
+          "503": {
+            "description": "Temporary error occured when trying to get division"
+          }
+        },
+        "summary": "Return a list of Divisions",
+        "tags": [
+          "Divisions"
+        ]
+      }
+    },
+    "/data/Divisions/searchTotalResults": {
+      "get": {
+        "description": "Get total count of Divisions meeting the specified query, useful for paging lists etc...",
+        "parameters": [
+          {
+            "description": "Divisions containing search term within title or number",
+            "in": "query",
+            "name": "SearchTerm",
+            "schema": {
+              "description": "Divisions containing search term within title or number",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Divisions returning Member with Member ID voting records",
+            "in": "query",
+            "name": "MemberId",
+            "schema": {
+              "description": "Divisions returning Member with Member ID voting records",
+              "format": "int32",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Divisions where member was a teller as well as if they actually voted",
+            "in": "query",
+            "name": "IncludeWhenMemberWasTeller",
+            "schema": {
+              "description": "Divisions where member was a teller as well as if they actually voted",
+              "nullable": true,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Divisions where division date in one or after date provided. Date format is yyyy-MM-dd",
+            "in": "query",
+            "name": "StartDate",
+            "schema": {
+              "description": "Divisions where division date in one or after date provided. Date format is yyyy-MM-dd",
+              "format": "date-time",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Divisions where division date in one or before date provided. Date format is yyyy-MM-dd",
+            "in": "query",
+            "name": "EndDate",
+            "schema": {
+              "description": "Divisions where division date in one or before date provided. Date format is yyyy-MM-dd",
+              "format": "date-time",
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint",
+            "in": "query",
+            "name": "DivisionNumber",
+            "schema": {
+              "description": "Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint",
+              "format": "int32",
+              "nullable": true,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "comparison operator to use",
+            "in": "query",
+            "name": "TotalVotesCast.Comparator",
+            "schema": {
+              "$ref": "#/components/schemas/Comparators"
+            }
+          },
+          {
+            "description": "value to compare to with the operator provided",
+            "in": "query",
+            "name": "TotalVotesCast.ValueToCompare",
+            "schema": {
+              "description": "value to compare to with the operator provided",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "comparison operator to use",
+            "in": "query",
+            "name": "Majority.Comparator",
+            "schema": {
+              "$ref": "#/components/schemas/Comparators"
+            }
+          },
+          {
+            "description": "value to compare to with the operator provided",
+            "in": "query",
+            "name": "Majority.ValueToCompare",
+            "schema": {
+              "description": "value to compare to with the operator provided",
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "Division with id matching given divisionId"
+          },
+          "400": {
+            "description": "divisionId was not valid"
+          }
+        },
+        "summary": "Return total results count",
+        "tags": [
+          "Divisions"
+        ]
+      }
+    },
+    "/data/Divisions/{divisionId}": {
+      "get": {
+        "description": "Get a single Division which has the Id specified.",
+        "parameters": [
+          {
+            "description": "Division with ID specified",
+            "in": "path",
+            "name": "divisionId",
+            "required": true,
+            "schema": {
+              "description": "Division with ID specified",
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionViewModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionViewModel"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionViewModel"
+                }
+              }
+            },
+            "description": "Division with id matching given divisionId"
+          },
+          "400": {
+            "description": "divisionId was not valid"
+          },
+          "404": {
+            "description": "Division with given divisionId was not found"
+          },
+          "503": {
+            "description": "Temporary error occured when trying to get division"
+          }
+        },
+        "summary": "Return a Division",
+        "tags": [
+          "Divisions"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Comparators": {
+        "enum": [
+          "LessThan",
+          "LessThanOrEqualTo",
+          "EqualTo",
+          "GreaterThanOrEqualTo",
+          "GreaterThan"
+        ],
+        "type": "string"
+      },
+      "DivisionGroupByPartyViewModel": {
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/PartyVoteResultViewModel"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "contentCount": {
+            "format": "int32",
+            "readOnly": true,
+            "type": "integer"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "divisionId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "notContent": {
+            "items": {
+              "$ref": "#/components/schemas/PartyVoteResultViewModel"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "notContentCount": {
+            "format": "int32",
+            "readOnly": true,
+            "type": "integer"
+          },
+          "number": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "title": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DivisionViewModel": {
+        "additionalProperties": false,
+        "properties": {
+          "amendmentMotionNotes": {
+            "nullable": true,
+            "type": "string"
+          },
+          "authoritativeContentCount": {
+            "description": "Authoritative content count is the official count. This is the teller content count when tellers are present, but member content count when there are no tellers.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "authoritativeNotContentCount": {
+            "description": "Authoritative not content count is the official count. This is the teller not content count when tellers are present, but member not content count when there are no tellers.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "contentTellers": {
+            "items": {
+              "$ref": "#/components/schemas/MemberViewModel"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "contents": {
+            "items": {
+              "$ref": "#/components/schemas/MemberViewModel"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "divisionHadTellers": {
+            "description": "Whether the division had tellers or not",
+            "type": "boolean"
+          },
+          "divisionId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "divisionWasExclusivelyRemote": {
+            "type": "boolean"
+          },
+          "isGovernmentContent": {
+            "type": "boolean"
+          },
+          "isGovernmentWin": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "isHouse": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "isWhipped": {
+            "type": "boolean"
+          },
+          "memberContentCount": {
+            "description": "Member content count is the total tally of all members that voted content",
+            "format": "int32",
+            "type": "integer"
+          },
+          "memberNotContentCount": {
+            "description": "Member not content count is the total tally of all members that voted not content",
+            "format": "int32",
+            "type": "integer"
+          },
+          "notContentTellers": {
+            "items": {
+              "$ref": "#/components/schemas/MemberViewModel"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "notContents": {
+            "items": {
+              "$ref": "#/components/schemas/MemberViewModel"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "notes": {
+            "nullable": true,
+            "type": "string"
+          },
+          "number": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "remoteVotingEnd": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "remoteVotingStart": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "sponsoringMemberId": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "tellerContentCount": {
+            "description": "Content count is count recorded by the tellers",
+            "format": "int32",
+            "type": "integer"
+          },
+          "tellerNotContentCount": {
+            "description": "Not Content count recorded by the tellers",
+            "format": "int32",
+            "type": "integer"
+          },
+          "title": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "MemberViewModel": {
+        "additionalProperties": false,
+        "properties": {
+          "listAs": {
+            "nullable": true,
+            "type": "string"
+          },
+          "memberFrom": {
+            "nullable": true,
+            "type": "string"
+          },
+          "memberId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "party": {
+            "nullable": true,
+            "type": "string"
+          },
+          "partyAbbreviation": {
+            "nullable": true,
+            "type": "string"
+          },
+          "partyColour": {
+            "nullable": true,
+            "type": "string"
+          },
+          "partyIsMainParty": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "MemberVotingRecordViewModel": {
+        "additionalProperties": false,
+        "properties": {
+          "memberId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "memberWasContent": {
+            "type": "boolean"
+          },
+          "memberWasTeller": {
+            "type": "boolean"
+          },
+          "publishedDivision": {
+            "$ref": "#/components/schemas/DivisionViewModel"
+          }
+        },
+        "type": "object"
+      },
+      "PartyVoteResultViewModel": {
+        "additionalProperties": false,
+        "properties": {
+          "partyName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "voteCount": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}

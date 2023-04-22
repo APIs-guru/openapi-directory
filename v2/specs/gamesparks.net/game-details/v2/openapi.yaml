@@ -1,0 +1,3277 @@
+openapi: 3.0.0
+servers:
+  - url: //config2.gamesparks.net
+info:
+  contact:
+    x-twitter: GameSparksltd
+  description: The API to manage the GameSparks game details
+  license:
+    name: " "
+  termsOfService: http://www.gamesparks.com/gamesparks-terms-of-use
+  title: GameSparks Game Details API
+  version: v2
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_GameSparksltd_profile_image.png
+  x-origin:
+    - format: openapi
+      url: https://config2.gamesparks.net/restv2/admin/api/schema
+      version: "3.0"
+  x-providerName: gamesparks.net
+  x-serviceName: game-details
+tags:
+  - description: Scripts Restv 2 Controller
+    name: scripts
+  - description: Experiment Rest Controller
+    name: experiments
+  - description: Billing Details Rest V 2 Controller
+    name: billingDetails
+  - description: Manage Restv 2 Controller
+    name: manage
+  - description: Analytics Restv 2 Controller
+    name: analytics
+  - description: Push Notification Test Controller
+    name: pushNotificationTest
+  - description: Game Credentials Rest V 2 Controller
+    name: credentials
+  - name: snapshots
+  - description: Games Admin Restv 2 Controller
+    name: gamesAdmin
+  - description: Region Restv 2 Controller
+    name: region
+  - description: Test Harness Restv 2 Controller
+    name: testHarness
+  - description: Segment Query Filter Restv 2 Controller
+    name: segmentQueryFilters
+  - description: Log Summary Restv 2 Controller
+    name: notifications
+paths:
+  /restv2/game/regions:
+    get:
+      operationId: getRegionOptionsUsingGET
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/GameRegionOptionsDTO"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getRegionOptions
+      tags:
+        - region
+  "/restv2/game/{apiKey}/admin/analytics":
+    get:
+      operationId: getAnalyticsDataUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: stage
+          in: query
+          name: stage
+          required: true
+          schema:
+            enum:
+              - LIVE
+              - PREVIEW
+            type: string
+        - description: dataType
+          in: query
+          name: dataType
+          required: true
+          schema:
+            enum:
+              - activeDevices
+              - activeLocations
+              - activeUsers
+              - averageBandwidthPerUser
+              - averageDauOverMau
+              - averageJsExecutionTime
+              - averageRequestsPerUser
+              - averageResponseTime
+              - averageResponseTimePerType
+              - scriptLogLevelsCount
+              - sessionAnalytic
+              - storagePerUser
+              - customAnalyticTotal
+              - customAnalyticUser
+              - timedAnalyticTotal
+              - sessionAnalyticTotal
+              - connectedUsers
+            type: string
+        - description: precision
+          in: query
+          name: precision
+          required: true
+          schema:
+            enum:
+              - HOURLY
+              - DAILY
+              - MONTHLY
+            type: string
+        - description: yyyy-MM-dd
+          in: query
+          name: startDate
+          required: true
+          schema:
+            format: date
+            type: string
+        - description: yyyy-MM-dd
+          in: query
+          name: endDate
+          required: true
+          schema:
+            format: date
+            type: string
+        - description: the keys to select. For example "ReturningUsers", "NewUsers", etc
+          in: query
+          name: keys
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AnalyticsDataSwaggerModel"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: Returns the results of executed query defined by the parameters passed in
+      tags:
+        - analytics
+  "/restv2/game/{apiKey}/admin/analytics/count":
+    get:
+      operationId: getDataCountUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: stage
+          in: query
+          name: stage
+          required: true
+          schema:
+            enum:
+              - LIVE
+              - PREVIEW
+            type: string
+        - description: queryName
+          in: query
+          name: queryName
+          required: true
+          schema:
+            enum:
+              - activeUsersNow
+              - dailyActiveUsers
+              - averageDailyActiveUsers
+              - lastMonthlyActiveUsers
+              - monthlyActiveUsers
+              - averageSessionDuration
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataCountSwaggerModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: Returns the count of executed query
+      tags:
+        - analytics
+  "/restv2/game/{apiKey}/admin/analytics/rollingRetention":
+    get:
+      operationId: getRetentionUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: stage
+          in: query
+          name: stage
+          required: true
+          schema:
+            enum:
+              - LIVE
+              - PREVIEW
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataCountSwaggerModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: Returns the percentage of user retention over the last 30 days
+      tags:
+        - analytics
+  "/restv2/game/{apiKey}/admin/billingDetails":
+    get:
+      description: Retrieves the Billing Details.
+      operationId: getBillingDetails
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/BillingDetailsModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: Retrieves the Billing Details
+      tags:
+        - billingDetails
+    put:
+      description: Updates the Billing Details.
+      operationId: putBillingDetails
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillingDetailsModel"
+        description: billingDetails
+        required: true
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/BillingDetailsModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: Updates the Billing Details
+      tags:
+        - billingDetails
+  "/restv2/game/{apiKey}/admin/notifications/summary":
+    get:
+      operationId: getGameSummaryUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: stage
+          in: query
+          name: stage
+          required: true
+          schema:
+            enum:
+              - LIVE
+              - PREVIEW
+            type: string
+        - description: yyyy-MM-dd
+          in: query
+          name: startDate
+          required: true
+          schema:
+            format: date
+            type: string
+        - description: yyyy-MM-dd
+          in: query
+          name: endDate
+          required: true
+          schema:
+            format: date
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/GameSummaryModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getGameSummary
+      tags:
+        - notifications
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/amazon":
+    post:
+      operationId: testPushAmazonNotificationsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/PushNotificationTestModel"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PushNotificationTestSummaryListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: testPushAmazonNotifications
+      tags:
+        - pushNotificationTest
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/apple/development":
+    post:
+      operationId: testPushAppleDevNotificationsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/PushNotificationTestModel"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PushNotificationTestSummaryListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: testPushAppleDevNotifications
+      tags:
+        - pushNotificationTest
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/apple/production":
+    post:
+      operationId: testPushAppleProdNotificationsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/PushNotificationTestModel"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PushNotificationTestSummaryListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: testPushAppleProdNotifications
+      tags:
+        - pushNotificationTest
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/google":
+    post:
+      operationId: testPushGoogleNotificationsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/PushNotificationTestModel"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PushNotificationTestSummaryListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: testPushGoogleNotifications
+      tags:
+        - pushNotificationTest
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/microsoft/windows8":
+    post:
+      operationId: testWindows8NotificationsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/PushNotificationTestModel"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PushNotificationTestSummaryListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: testWindows8Notifications
+      tags:
+        - pushNotificationTest
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/microsoft/windowsPhone8":
+    post:
+      operationId: testWindowsPhone8NotificationsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/PushNotificationTestModel"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PushNotificationTestSummaryListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: testWindowsPhone8Notifications
+      tags:
+        - pushNotificationTest
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/viber/integration":
+    post:
+      operationId: testViberIntegrationNotificationsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/PushNotificationTestModel"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PushNotificationTestSummaryListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: testViberIntegrationNotifications
+      tags:
+        - pushNotificationTest
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/viber/production":
+    post:
+      operationId: testViberProductionNotificationsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/PushNotificationTestModel"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PushNotificationTestSummaryListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: testViberProductionNotifications
+      tags:
+        - pushNotificationTest
+  "/restv2/game/{apiKey}/admin/scripts/differences/{snapshotId1}/{snapshotId2}":
+    get:
+      operationId: getScriptDifferencesUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId1
+          in: path
+          name: snapshotId1
+          required: true
+          schema:
+            type: string
+        - description: snapshotId2
+          in: path
+          name: snapshotId2
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ScriptsDifferenceListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getScriptDifferences
+      tags:
+        - scripts
+  "/restv2/game/{apiKey}/admin/scripts/export":
+    get:
+      operationId: exportZipUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: exportZip
+      tags:
+        - scripts
+  "/restv2/game/{apiKey}/admin/scripts/import/accept":
+    post:
+      operationId: importAcceptUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: body
+          in: query
+          name: body
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/importAcceptUsingPOST"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: importAccept
+      tags:
+        - scripts
+  "/restv2/game/{apiKey}/admin/scripts/import/preview":
+    post:
+      operationId: importZipUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/importAcceptUsingPOST"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ScriptsDifferenceListModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: importZip
+      tags:
+        - scripts
+  "/restv2/game/{apiKey}/admin/scripts/versions":
+    get:
+      operationId: getScriptVersionsUsingGET_1
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: pageSize
+          in: query
+          name: pageSize
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/SnapshotScriptVersionListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getScriptVersions
+      tags:
+        - scripts
+  "/restv2/game/{apiKey}/admin/scripts/versions/{page}":
+    get:
+      operationId: getScriptVersionsUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: page
+          in: path
+          name: page
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: pageSize
+          in: query
+          name: pageSize
+          required: false
+          schema:
+            default: 100
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/SnapshotScriptVersionListModel"
+          description: OK
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getScriptVersions
+      tags:
+        - scripts
+  "/restv2/game/{apiKey}/admin/segmentQueryFilters":
+    get:
+      operationId: getSegmentQueryFiltersUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SegmentQueryFilterListModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getSegmentQueryFilters
+      tags:
+        - segmentQueryFilters
+  "/restv2/game/{apiKey}/admin/segmentQueryFilters/config":
+    get:
+      operationId: getSegmentQueryFiltersConfigUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SegmentQueryFilterConfigModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getSegmentQueryFiltersConfig
+      tags:
+        - segmentQueryFilters
+    put:
+      operationId: updateSegmentQueryFiltersConfigUsingPUT
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SegmentQueryFilterConfigModel"
+        description: segmentQueryConfig
+        required: true
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SegmentQueryFilterConfigModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: updateSegmentQueryFiltersConfig
+      tags:
+        - segmentQueryFilters
+  "/restv2/game/{apiKey}/admin/segmentQueryFilters/standardFilters":
+    get:
+      operationId: getSegmentQueryStandardFiltersUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SegmentQueryFilterListModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getSegmentQueryStandardFilters
+      tags:
+        - segmentQueryFilters
+  "/restv2/game/{apiKey}/admin/snapshots":
+    get:
+      operationId: getSnapshotsUsingGET_1
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: pageSize
+          in: query
+          name: pageSize
+          required: false
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SnapshotModel"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getSnapshots
+      tags:
+        - snapshots
+    post:
+      operationId: createSnapshotsUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnapshotCreationModel"
+        description: description
+        required: true
+      responses:
+        "201":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SnapshotModel"
+          description: Created
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: createSnapshots
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/snapshots/liveSnapshotId":
+    get:
+      operationId: getLiveSnapshotIdUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getLiveSnapshotId
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/snapshots/page/{page}":
+    get:
+      operationId: getSnapshotsUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: page
+          in: path
+          name: page
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: pageSize
+          in: query
+          name: pageSize
+          required: false
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SnapshotModel"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getSnapshots
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/snapshots/revert/to/{snapshotId}":
+    post:
+      operationId: revertToSnapshotUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: revertToSnapshot
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}":
+    delete:
+      operationId: deleteSnapshotUsingDELETE_1
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: deleteSnapshot
+      tags:
+        - snapshots
+    get:
+      operationId: getSnapshotUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SnapshotModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getSnapshot
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/copy":
+    post:
+      operationId: copySnapshotToNewGameUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+        - description: includeGameConfig
+          in: query
+          name: includeGameConfig
+          required: false
+          schema:
+            default: true
+            type: boolean
+        - description: includeMetadata
+          in: query
+          name: includeMetadata
+          required: false
+          schema:
+            default: true
+            type: boolean
+        - description: includeBinaries
+          in: query
+          name: includeBinaries
+          required: false
+          schema:
+            default: true
+            type: boolean
+        - description: includeCollaborators
+          in: query
+          name: includeCollaborators
+          required: false
+          schema:
+            default: true
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SnapshotCreationSuccessModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: copySnapshotToNewGame
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/copy/to/{targetApiKey}":
+    post:
+      operationId: copySnapshotToExistingGameUsingPOST_1
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+        - description: targetApiKey
+          in: path
+          name: targetApiKey
+          required: true
+          schema:
+            type: string
+        - description: includeGameConfig
+          in: query
+          name: includeGameConfig
+          required: false
+          schema:
+            default: true
+            type: boolean
+        - description: includeMetadata
+          in: query
+          name: includeMetadata
+          required: false
+          schema:
+            default: true
+            type: boolean
+        - description: includeBinaries
+          in: query
+          name: includeBinaries
+          required: false
+          schema:
+            default: true
+            type: boolean
+        - description: includeCollaborators
+          in: query
+          name: includeCollaborators
+          required: false
+          schema:
+            default: true
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SnapshotCreationSuccessModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: copySnapshotToExistingGame
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/publish":
+    post:
+      operationId: publishSnapshotUsingPOST_1
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: publishSnapshot
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/unpublish":
+    post:
+      operationId: unpublishSnapshotUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: unpublishSnapshot
+      tags:
+        - snapshots
+  "/restv2/game/{apiKey}/admin/testHarness/scenarios":
+    get:
+      operationId: getTestHarnessScenariosUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TestHarnessScenarioModel"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getTestHarnessScenarios
+      tags:
+        - testHarness
+    post:
+      operationId: createTestHarnessScenarioUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/TestHarnessScenarioModel"
+      responses:
+        "201":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/TestHarnessScenarioModel"
+          description: Created
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: createTestHarnessScenario
+      tags:
+        - testHarness
+  "/restv2/game/{apiKey}/admin/testHarness/scenarios/{scenarioName}":
+    delete:
+      operationId: deleteTestHarnessScenarioUsingDELETE
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: scenarioName
+          in: path
+          name: scenarioName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: deleteTestHarnessScenario
+      tags:
+        - testHarness
+    get:
+      operationId: getTestHarnessScenarioUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: scenarioName
+          in: path
+          name: scenarioName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/TestHarnessScenarioModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getTestHarnessScenario
+      tags:
+        - testHarness
+    put:
+      operationId: updateTestHarnessScenarioUsingPUT
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: scenarioName
+          in: path
+          name: scenarioName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/TestHarnessScenarioModel"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/TestHarnessScenarioModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: updateTestHarnessScenario
+      tags:
+        - testHarness
+  "/restv2/game/{apiKey}/config/~credentials/{credentialName}/resetSecret":
+    post:
+      operationId: updateCredentialSecretUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: credentialName
+          in: path
+          name: credentialName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: Resets the secret of a credential
+      tags:
+        - credentials
+  "/restv2/game/{apiKey}/endpoints":
+    get:
+      operationId: getGamesEndpointsUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/GameEndpointsModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getGamesEndpoints
+      tags:
+        - gamesAdmin
+  "/restv2/game/{apiKey}/manage/experiments":
+    get:
+      operationId: getExperimentsUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ExperimentModel"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getExperiments
+      tags:
+        - experiments
+    post:
+      operationId: createExperimentUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ExperimentModel"
+      responses:
+        "201":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ExperimentModel"
+          description: Created
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: createExperiment
+      tags:
+        - experiments
+  "/restv2/game/{apiKey}/manage/experiments/{id}":
+    delete:
+      operationId: deleteExperimentUsingDELETE
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: id
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: deleteExperiment
+      tags:
+        - experiments
+    get:
+      operationId: getExperimentUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: id
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ExperimentModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getExperiment
+      tags:
+        - experiments
+    put:
+      operationId: updateExperimentUsingPUT
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: id
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        $ref: "#/components/requestBodies/ExperimentModel"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ExperimentModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: updateExperiment
+      tags:
+        - experiments
+  "/restv2/game/{apiKey}/manage/experiments/{id}/{action}":
+    post:
+      operationId: doActionExperimentUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: id
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: action
+          in: path
+          name: action
+          required: true
+          schema:
+            enum:
+              - start
+              - stop
+              - publish
+              - unpublish
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ExperimentModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: doActionExperiment
+      tags:
+        - experiments
+  "/restv2/game/{apiKey}/manage/queries":
+    get:
+      operationId: listQueriesUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ManageItemSummary"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: listQueries
+      tags:
+        - manage
+    post:
+      operationId: createQueryUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ManageQuery"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageQuery"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: createQuery
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/queries/{shortCode}":
+    delete:
+      operationId: deleteQueryUsingDELETE
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageResult"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: deleteQuery
+      tags:
+        - manage
+    get:
+      operationId: getQueryUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageQuery"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getQuery
+      tags:
+        - manage
+    put:
+      operationId: updateQueryUsingPUT
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ManageQuery"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageQuery"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: updateQuery
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/screens":
+    get:
+      operationId: listScreensUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ManageItemSummary"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: listScreens
+      tags:
+        - manage
+    post:
+      operationId: createScreenUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ManageScreen"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageScreen"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: createScreen
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/screens/executable":
+    get:
+      operationId: listExecutableScreensUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ManageItemSummary"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: listExecutableScreens
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/screens/{shortCode}":
+    delete:
+      operationId: deleteScreenUsingDELETE
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageResult"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: deleteScreen
+      tags:
+        - manage
+    get:
+      operationId: getScreenUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageScreen"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getScreen
+      tags:
+        - manage
+    put:
+      operationId: updateScreenUsingPUT
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ManageScreen"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageScreen"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: updateScreen
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/snapshots":
+    get:
+      operationId: listSnapshotsUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ManageSnapshot"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: listSnapshots
+      tags:
+        - manage
+    post:
+      operationId: createSnapshotUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnapshotCreationModel"
+        description: model
+        required: true
+      responses:
+        "201":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageSnapshot"
+          description: Created
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: createSnapshot
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/snapshots/{snapshotId}":
+    delete:
+      operationId: deleteSnapshotUsingDELETE
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success
+        "201":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageResult"
+          description: Created
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: deleteSnapshot
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/copy/to/{targetApiKey}":
+    post:
+      operationId: copySnapshotToExistingGameUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+        - description: targetApiKey
+          in: path
+          name: targetApiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageResult"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: copySnapshotToExistingGame
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/publish":
+    post:
+      operationId: publishSnapshotUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageResult"
+          description: Created
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: publishSnapshot
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/revert":
+    post:
+      operationId: revertSnapshotUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: snapshotId
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageResult"
+          description: Created
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: revertSnapshot
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/snippets":
+    get:
+      operationId: listSnippetsUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ManageItemSummary"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: listSnippets
+      tags:
+        - manage
+    post:
+      operationId: createSnippetUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ManageSnippet"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageSnippet"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: createSnippet
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/manage/snippets/{shortCode}":
+    delete:
+      operationId: deleteSnippetUsingDELETE
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageResult"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: deleteSnippet
+      tags:
+        - manage
+    get:
+      operationId: getSnippetUsingGET
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageSnippet"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getSnippet
+      tags:
+        - manage
+    put:
+      operationId: updateSnippetUsingPUT
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+        - description: shortCode
+          in: path
+          name: shortCode
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/ManageSnippet"
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ManageSnippet"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: updateSnippet
+      tags:
+        - manage
+  "/restv2/game/{apiKey}/restore":
+    post:
+      operationId: restoreDeletedGameUsingPOST
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: restoreDeletedGame
+      tags:
+        - gamesAdmin
+  "/restv2/game/{gameApiKey}/region/{regionCode}":
+    post:
+      operationId: setGameRegionUsingPOST
+      parameters:
+        - description: gameApiKey
+          in: path
+          name: gameApiKey
+          required: true
+          schema:
+            type: string
+        - description: regionCode
+          in: path
+          name: regionCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/RegionResult"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: setGameRegion
+      tags:
+        - region
+  "/restv2/game/{gameApiKey}/regions":
+    get:
+      operationId: getGameRegionOptionsUsingGET
+      parameters:
+        - description: gameApiKey
+          in: path
+          name: gameApiKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/GameRegionOptionsDTO"
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: getGameRegionOptions
+      tags:
+        - region
+  /restv2/games:
+    get:
+      operationId: listUsingGET
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GameModel"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: list
+      tags:
+        - gamesAdmin
+  /restv2/games/deleted:
+    get:
+      operationId: listDeletedUsingGET
+      responses:
+        "200":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DeletedGameModel"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MessageModel"
+          description: json error
+        "403":
+          description: not allowed
+        "404":
+          description: not found
+      summary: listDeleted
+      tags:
+        - gamesAdmin
+components:
+  requestBodies:
+    ExperimentModel:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ExperimentModel"
+      description: input
+      required: true
+    ManageQuery:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManageQuery"
+      description: query
+      required: true
+    ManageScreen:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManageScreen"
+      description: screen
+      required: true
+    ManageSnippet:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManageSnippet"
+      description: snippet
+      required: true
+    PushNotificationTestModel:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PushNotificationTestModel"
+      description: messageDetails
+      required: true
+    TestHarnessScenarioModel:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TestHarnessScenarioModel"
+      description: testHarnessScenarioDTO
+      required: true
+    importAcceptUsingPOST:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              file:
+                description: file
+                format: binary
+                type: string
+            required:
+              - file
+            type: object
+      required: true
+  schemas:
+    AnalyticsDataCountSwaggerModel:
+      properties:
+        result:
+          type: string
+      type: object
+    AnalyticsDataSwaggerModel:
+      properties:
+        _id:
+          type: string
+      type: object
+    BillingDetailsModel:
+      properties:
+        building:
+          type: string
+        city:
+          type: string
+        companyName:
+          type: string
+        country:
+          type: string
+        email1:
+          type: string
+        email2:
+          type: string
+        email3:
+          type: string
+        firstName1:
+          type: string
+        firstName2:
+          type: string
+        firstName3:
+          type: string
+        lastName1:
+          type: string
+        lastName2:
+          type: string
+        lastName3:
+          type: string
+        postcode:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+        taxNumber:
+          type: string
+      required:
+        - building
+        - city
+        - companyName
+        - country
+        - email1
+        - firstName1
+        - lastName1
+        - postcode
+        - street
+      type: object
+    DeletedGameModel:
+      properties:
+        apiKey:
+          type: string
+        name:
+          type: string
+      type: object
+    ExperimentConfigModel:
+      properties:
+        playerMongoQuery:
+          type: string
+        playerQuery:
+          type: string
+        variants:
+          type: string
+      type: object
+    ExperimentModel:
+      properties:
+        active:
+          type: boolean
+        changedFieldsAndInitialValues:
+          type: object
+        complete:
+          type: boolean
+        config:
+          $ref: "#/components/schemas/ExperimentConfigModel"
+        endDate:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        measurements:
+          type: string
+        measurementsEsQuery:
+          type: string
+        name:
+          type: string
+        percentHash:
+          type: string
+        publishedStages:
+          items:
+            type: string
+          type: array
+        startDate:
+          format: date-time
+          type: string
+      type: object
+    GameEndpointsModel:
+      properties:
+        liveElasticSearch:
+          type: string
+        liveNosql:
+          type: string
+        previewElasticSearch:
+          type: string
+        previewNosql:
+          type: string
+      type: object
+    GameModel:
+      properties:
+        "@id":
+          type: string
+        name:
+          type: string
+      type: object
+    GameRegionOptionDTO:
+      properties:
+        regionCode:
+          type: string
+        regionName:
+          type: string
+        selected:
+          type: boolean
+      type: object
+    GameRegionOptionsDTO:
+      properties:
+        locked:
+          type: boolean
+        options:
+          items:
+            $ref: "#/components/schemas/GameRegionOptionDTO"
+          type: array
+      type: object
+    GameSummaryModel:
+      properties:
+        logLevelData:
+          items:
+            type: object
+          type: array
+        logLevelSummary:
+          items:
+            $ref: "#/components/schemas/LogLevelSummaryModel"
+          type: array
+        message:
+          type: string
+      type: object
+    LogLevelSummaryModel:
+      properties:
+        count:
+          format: int64
+          type: integer
+        level:
+          type: string
+      type: object
+    ManageItemSummary:
+      properties:
+        name:
+          type: string
+        shortCode:
+          type: string
+      type: object
+    ManageQuery:
+      properties:
+        esRules:
+          type: string
+        name:
+          type: string
+        qbRules:
+          type: string
+        shortCode:
+          type: string
+      type: object
+    ManageResult:
+      properties:
+        message:
+          type: string
+      type: object
+    ManageScreen:
+      properties:
+        groups:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        shortCode:
+          type: string
+        template:
+          type: string
+      type: object
+    ManageSnapshot:
+      properties:
+        date:
+          format: date-time
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        published:
+          type: boolean
+      type: object
+    ManageSnippet:
+      properties:
+        groups:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        script:
+          type: string
+        scriptData:
+          type: string
+        shortCode:
+          type: string
+        template:
+          type: string
+      type: object
+    MessageModel:
+      properties:
+        message:
+          type: string
+      type: object
+    Number:
+      type: object
+    PushNotificationTestModel:
+      properties:
+        customJson:
+          type: string
+        messageId:
+          type: string
+        pushId:
+          type: string
+        subtitle:
+          type: string
+        summary:
+          type: string
+        title:
+          type: string
+      type: object
+    PushNotificationTestSummaryListModel:
+      properties:
+        summaries:
+          items:
+            $ref: "#/components/schemas/PushNotificationTestSummaryModel"
+          type: array
+      type: object
+    PushNotificationTestSummaryModel:
+      properties:
+        error:
+          type: boolean
+        outgoingMessageParts:
+          additionalProperties:
+            type: string
+          type: object
+        resultParts:
+          additionalProperties:
+            type: string
+          type: object
+        title:
+          type: string
+      type: object
+    RegionResult:
+      properties:
+        message:
+          type: string
+      type: object
+    ScriptsDifferenceListModel:
+      properties:
+        differences:
+          items:
+            $ref: "#/components/schemas/ScriptsDifferenceModel"
+          type: array
+      type: object
+    ScriptsDifferenceModel:
+      properties:
+        bind:
+          type: string
+        changeType:
+          enum:
+            - NOCHANGE
+            - ADDED
+            - CHANGED
+            - DELETED
+            - IGNORED
+            - CHANGED_CODE_INVALID
+            - CHANGED_NAME_INVALID
+          type: string
+        fileName:
+          type: string
+        script1:
+          type: string
+        script2:
+          type: string
+        type:
+          type: string
+      type: object
+    SegmentQueryFilterConfigModel:
+      properties:
+        customFilters:
+          items:
+            $ref: "#/components/schemas/SegmentQueryFilterModel"
+          type: array
+        hiddenFilters:
+          items:
+            type: string
+          type: array
+      type: object
+    SegmentQueryFilterListModel:
+      properties:
+        filters:
+          items:
+            $ref: "#/components/schemas/SegmentQueryFilterModel"
+          type: array
+      type: object
+    SegmentQueryFilterModel:
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        options:
+          items:
+            type: object
+          type: array
+        type:
+          type: string
+      type: object
+    SnapshotCreationModel:
+      properties:
+        description:
+          type: string
+      type: object
+    SnapshotCreationSuccessModel:
+      properties:
+        targetGameApiKey:
+          type: string
+      type: object
+    SnapshotModel:
+      properties:
+        created:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        indexProgress:
+          additionalProperties:
+            format: int64
+            type: integer
+          type: object
+        published:
+          type: boolean
+        status:
+          type: string
+      type: object
+    SnapshotScriptVersionListModel:
+      properties:
+        scriptVersions:
+          items:
+            $ref: "#/components/schemas/SnapshotScriptVersionModel"
+          type: array
+      type: object
+    SnapshotScriptVersionModel:
+      properties:
+        cloudCodeVersion:
+          format: int64
+          type: integer
+        createdDate:
+          format: date-time
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        live:
+          type: boolean
+      type: object
+    TestHarnessScenarioModel:
+      properties:
+        scenarioJson:
+          type: object
+        scenarioName:
+          type: string
+      type: object
+  securitySchemes:
+    accessToken:
+      in: header
+      name: accessToken
+      type: apiKey
+    basic:
+      scheme: basic
+      type: http
+    jwt:
+      in: header
+      name: jwt
+      type: apiKey

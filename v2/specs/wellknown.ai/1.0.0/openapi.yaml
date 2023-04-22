@@ -1,0 +1,40 @@
+openapi: 3.0.0
+servers:
+  - url: https://wellknown.ai/api
+info:
+  contact:
+    email: cfortuner@gmail.com
+    name: Wellknown
+    url: https://wellknown.ai
+  description: A registry of AI Plugins.
+  title: Wellknown
+  version: 1.0.0
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_wellknown.ai_icon.png
+  x-origin:
+    - format: openapi
+      url: https://www.wellknown.ai/api/doc
+      version: "3.0"
+  x-providerName: wellknown.ai
+tags: []
+paths:
+  /api/plugins:
+    get:
+      description: Returns a list of Wellknown ai-plugins json objects from the Wellknown ai-plugins registry.
+      responses:
+        "200":
+          description: A list of Wellknown ai-plugins json objects.
+  /plugins:
+    get:
+      description: List all the Wellknown AI Plugins. Returns ai-plugin.json objects in an array
+      operationId: getProvider
+      parameters: []
+      responses:
+        "200":
+          description: OK
+      summary: List all the Wellknown AI Plugins.
+      tags:
+        - Plugins
+components: {}

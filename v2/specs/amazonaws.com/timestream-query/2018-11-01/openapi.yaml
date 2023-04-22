@@ -1,0 +1,2136 @@
+openapi: 3.0.0
+info:
+  version: 2018-11-01
+  x-release: v4
+  title: Amazon Timestream Query
+  description: <fullname>Amazon Timestream Query </fullname> <p/>
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_awscloud_profile_image.png
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: timestream-query
+  x-aws-signingName: timestream
+  x-origin:
+    - contentType: application/json
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/timestream-query-2018-11-01.normal.json
+      converter:
+        url: https://github.com/mermade/aws2openapi
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/timestream/
+servers:
+  - url: http://query.timestream.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Timestream Query multi-region endpoint
+  - url: https://query.timestream.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Timestream Query multi-region endpoint
+  - url: http://query.timestream.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Timestream Query endpoint for China (Beijing) and China (Ningxia)
+  - url: https://query.timestream.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Timestream Query endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=Timestream_20181101.CancelQuery:
+    post:
+      operationId: CancelQuery
+      description: ' Cancels a query that has been issued. Cancellation is provided only if the query has not completed running before the cancellation request was issued. Because cancellation is an idempotent operation, subsequent cancellation requests will return a <code>CancellationMessage</code>, indicating that the query has already been canceled. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.cancel-query.html">code sample</a> for details. '
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelQueryResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "484":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelQueryRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.CancelQuery
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.CreateScheduledQuery:
+    post:
+      operationId: CreateScheduledQuery
+      description: " Create a scheduled query that will be run on your behalf at the configured schedule. Timestream assumes the execution role provided as part of the <code>ScheduledQueryExecutionRoleArn</code> parameter to run the query. You can use the <code>NotificationConfiguration</code> parameter to configure notification for your scheduled query operations."
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateScheduledQueryResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "483":
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceQuotaExceededException"
+        "484":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "485":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "486":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateScheduledQueryRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.CreateScheduledQuery
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.DeleteScheduledQuery:
+    post:
+      operationId: DeleteScheduledQuery
+      description: "Deletes a given scheduled query. This is an irreversible operation. "
+      responses:
+        "200":
+          description: Success
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "485":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteScheduledQueryRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.DeleteScheduledQuery
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.DescribeEndpoints:
+    post:
+      operationId: DescribeEndpoints
+      description: <p>DescribeEndpoints returns a list of available endpoints to make Timestream API calls against. This API is available through both Write and Query.</p> <p>Because the Timestream SDKs are designed to transparently work with the service’s architecture, including the management and mapping of the service endpoints, <i>it is not recommended that you use this API unless</i>:</p> <ul> <li> <p>You are using <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints">VPC endpoints (Amazon Web Services PrivateLink) with Timestream </a> </p> </li> <li> <p>Your application uses a programming language that does not yet have SDK support</p> </li> <li> <p>You require better control over the client-side implementation</p> </li> </ul> <p>For detailed information on how and when to use and implement DescribeEndpoints, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery">The Endpoint Discovery Pattern</a>.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DescribeEndpointsResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DescribeEndpointsRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.DescribeEndpoints
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.DescribeScheduledQuery:
+    post:
+      operationId: DescribeScheduledQuery
+      description: Provides detailed information about a scheduled query.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DescribeScheduledQueryResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "485":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DescribeScheduledQueryRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.DescribeScheduledQuery
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.ExecuteScheduledQuery:
+    post:
+      operationId: ExecuteScheduledQuery
+      description: " You can use this API to run a scheduled query manually. "
+      responses:
+        "200":
+          description: Success
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "485":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExecuteScheduledQueryRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.ExecuteScheduledQuery
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.ListScheduledQueries:
+    post:
+      operationId: ListScheduledQueries
+      description: "Gets a list of all scheduled queries in the caller's Amazon account and Region. <code>ListScheduledQueries</code> is eventually consistent. "
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListScheduledQueriesResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "484":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListScheduledQueriesRequest"
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.ListScheduledQueries
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: List all tags on a Timestream query resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTagsForResourceResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "483":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListTagsForResourceRequest"
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.ListTagsForResource
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.PrepareQuery:
+    post:
+      operationId: PrepareQuery
+      description: "A synchronous operation that allows you to submit a query with parameters to be stored by Timestream for later running. Timestream only supports using this operation with the <code>PrepareQueryRequest$ValidateOnly</code> set to <code>true</code>. "
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrepareQueryResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "484":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrepareQueryRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.PrepareQuery
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.Query:
+    post:
+      operationId: Query
+      description: '<p> <code>Query</code> is a synchronous operation that enables you to run a query against your Amazon Timestream data. <code>Query</code> will time out after 60 seconds. You must update the default timeout in the SDK to support a timeout of 60 seconds. See the <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html">code sample</a> for details. </p> <p>Your query request will fail in the following cases:</p> <ul> <li> <p> If you submit a <code>Query</code> request with the same client token outside of the 5-minute idempotency window. </p> </li> <li> <p> If you submit a <code>Query</code> request with the same client token, but change other parameters, within the 5-minute idempotency window. </p> </li> <li> <p> If the size of the row (including the query metadata) exceeds 1 MB, then the query will fail with the following error message: </p> <p> <code>Query aborted as max page response size has been exceeded by the output result row</code> </p> </li> <li> <p> If the IAM principal of the query initiator and the result reader are not the same and/or the query initiator and the result reader do not have the same query string in the query requests, the query will fail with an <code>Invalid pagination token</code> error. </p> </li> </ul>'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryResponse"
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "482":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "483":
+          description: QueryExecutionException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryExecutionException"
+        "484":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "485":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "486":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryRequest"
+      parameters:
+        - name: MaxRows
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.Query
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.TagResource:
+    post:
+      operationId: TagResource
+      description: "Associate a set of tags with a Timestream resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. "
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TagResourceResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceQuotaExceededException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "484":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TagResourceRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.TagResource
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.UntagResource:
+    post:
+      operationId: UntagResource
+      description: Removes the association of tags from a Timestream query resource.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UntagResourceResponse"
+        "480":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "483":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UntagResourceRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.UntagResource
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /#X-Amz-Target=Timestream_20181101.UpdateScheduledQuery:
+    post:
+      operationId: UpdateScheduledQuery
+      description: Update a scheduled query.
+      responses:
+        "200":
+          description: Success
+        "480":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "485":
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidEndpointException"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateScheduledQueryRequest"
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.UpdateScheduledQuery
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CancelQueryResponse:
+      type: object
+      properties:
+        CancellationMessage:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: " A <code>CancellationMessage</code> is returned when a <code>CancelQuery</code> request for the query specified by <code>QueryId</code> has already been issued. "
+    CancelQueryRequest:
+      type: object
+      required:
+        - QueryId
+      title: CancelQueryRequest
+      properties:
+        QueryId:
+          allOf:
+            - $ref: "#/components/schemas/QueryId"
+            - description: " The ID of the query that needs to be cancelled. <code>QueryID</code> is returned as part of the query result. "
+    AccessDeniedException: {}
+    InternalServerException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    InvalidEndpointException: {}
+    CreateScheduledQueryResponse:
+      type: object
+      required:
+        - Arn
+      properties:
+        Arn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: ARN for the created scheduled query.
+    CreateScheduledQueryRequest:
+      type: object
+      required:
+        - Name
+        - QueryString
+        - ScheduleConfiguration
+        - NotificationConfiguration
+        - ScheduledQueryExecutionRoleArn
+        - ErrorReportConfiguration
+      title: CreateScheduledQueryRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryName"
+            - description: Name of the scheduled query.
+        QueryString:
+          allOf:
+            - $ref: "#/components/schemas/QueryString"
+            - description: <p>The query string to run. Parameter names can be specified in the query string <code>@</code> character followed by an identifier. The named Parameter <code>@scheduled_runtime</code> is reserved and can be used in the query to get the time at which the query is scheduled to run.</p> <p>The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of <code>@scheduled_runtime</code> paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the <code>@scheduled_runtime</code> parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.</p>
+        ScheduleConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/ScheduleConfiguration"
+            - description: The schedule configuration for the query.
+        NotificationConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/NotificationConfiguration"
+            - description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it. "
+        TargetConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/TargetConfiguration"
+            - description: Configuration used for writing the result of a query.
+        ClientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: <p>Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. </p> <ul> <li> <p> If CreateScheduledQuery is called without a <code>ClientToken</code>, the Query SDK generates a <code>ClientToken</code> on your behalf.</p> </li> <li> <p> After 8 hours, any request with the same <code>ClientToken</code> is treated as a new request. </p> </li> </ul>
+        ScheduledQueryExecutionRoleArn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: "The ARN for the IAM role that Timestream will assume when running the scheduled query. "
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagList"
+            - description: A list of key-value pairs to label the scheduled query.
+        KmsKeyId:
+          allOf:
+            - $ref: "#/components/schemas/StringValue2048"
+            - description: <p>The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with <i>alias/</i> </p> <p>If ErrorReportConfiguration uses <code>SSE_KMS</code> as encryption type, the same KmsKeyId is used to encrypt the error report at rest.</p>
+        ErrorReportConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/ErrorReportConfiguration"
+            - description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results. "
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
+    DeleteScheduledQueryRequest:
+      type: object
+      required:
+        - ScheduledQueryArn
+      title: DeleteScheduledQueryRequest
+      properties:
+        ScheduledQueryArn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: "The ARN of the scheduled query. "
+    ResourceNotFoundException: {}
+    DescribeEndpointsResponse:
+      type: object
+      required:
+        - Endpoints
+      properties:
+        Endpoints:
+          allOf:
+            - $ref: "#/components/schemas/Endpoints"
+            - description: An <code>Endpoints</code> object is returned when a <code>DescribeEndpoints</code> request is made.
+    DescribeEndpointsRequest:
+      type: object
+      title: DescribeEndpointsRequest
+      properties: {}
+    DescribeScheduledQueryResponse:
+      type: object
+      required:
+        - ScheduledQuery
+      properties:
+        ScheduledQuery:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryDescription"
+            - description: The scheduled query.
+    DescribeScheduledQueryRequest:
+      type: object
+      required:
+        - ScheduledQueryArn
+      title: DescribeScheduledQueryRequest
+      properties:
+        ScheduledQueryArn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: The ARN of the scheduled query.
+    ExecuteScheduledQueryRequest:
+      type: object
+      required:
+        - ScheduledQueryArn
+        - InvocationTime
+      title: ExecuteScheduledQueryRequest
+      properties:
+        ScheduledQueryArn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: ARN of the scheduled query.
+        InvocationTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: "The timestamp in UTC. Query will be run as if it was invoked at this timestamp. "
+        ClientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: "Not used. "
+    ListScheduledQueriesResponse:
+      type: object
+      required:
+        - ScheduledQueries
+      properties:
+        ScheduledQueries:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryList"
+            - description: A list of scheduled queries.
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextScheduledQueriesResultsToken"
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+    ListScheduledQueriesRequest:
+      type: object
+      title: ListScheduledQueriesRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: "#/components/schemas/MaxScheduledQueriesResults"
+            - description: The maximum number of items to return in the output. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as the argument to the subsequent call to <code>ListScheduledQueriesRequest</code>.
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextScheduledQueriesResultsToken"
+            - description: " A pagination token to resume pagination."
+    ListTagsForResourceResponse:
+      type: object
+      required:
+        - Tags
+      properties:
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagList"
+            - description: "The tags currently associated with the Timestream resource. "
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextTagsForResourceResultsToken"
+            - description: A pagination token to resume pagination with a subsequent call to <code>ListTagsForResourceResponse</code>.
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: The Timestream resource with tags to be listed. This value is an Amazon Resource Name (ARN).
+        MaxResults:
+          allOf:
+            - $ref: "#/components/schemas/MaxTagsForResourceResult"
+            - description: The maximum number of tags to return.
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextTagsForResourceResultsToken"
+            - description: A pagination token to resume pagination.
+    PrepareQueryResponse:
+      type: object
+      required:
+        - QueryString
+        - Columns
+        - Parameters
+      properties:
+        QueryString:
+          allOf:
+            - $ref: "#/components/schemas/QueryString"
+            - description: The query string that you want prepare.
+        Columns:
+          allOf:
+            - $ref: "#/components/schemas/SelectColumnList"
+            - description: "A list of SELECT clause columns of the submitted query string. "
+        Parameters:
+          allOf:
+            - $ref: "#/components/schemas/ParameterMappingList"
+            - description: "A list of parameters used in the submitted query string. "
+    PrepareQueryRequest:
+      type: object
+      required:
+        - QueryString
+      title: PrepareQueryRequest
+      properties:
+        QueryString:
+          allOf:
+            - $ref: "#/components/schemas/QueryString"
+            - description: "The Timestream query string that you want to use as a prepared statement. Parameter names can be specified in the query string <code>@</code> character followed by an identifier. "
+        ValidateOnly:
+          allOf:
+            - $ref: "#/components/schemas/NullableBoolean"
+            - description: By setting this value to <code>true</code>, Timestream will only validate that the query string is a valid Timestream query, and not store the prepared query for later use.
+    QueryResponse:
+      type: object
+      required:
+        - QueryId
+        - Rows
+        - ColumnInfo
+      properties:
+        QueryId:
+          allOf:
+            - $ref: "#/components/schemas/QueryId"
+            - description: " A unique ID for the given query. "
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: " A pagination token that can be used again on a <code>Query</code> call to get the next set of results. "
+        Rows:
+          allOf:
+            - $ref: "#/components/schemas/RowList"
+            - description: " The result set rows returned by the query. "
+        ColumnInfo:
+          allOf:
+            - $ref: "#/components/schemas/ColumnInfoList"
+            - description: " The column data types of the returned result set. "
+        QueryStatus:
+          allOf:
+            - $ref: "#/components/schemas/QueryStatus"
+            - description: Information about the status of the query, including progress and bytes scanned.
+    QueryRequest:
+      type: object
+      required:
+        - QueryString
+      title: QueryRequest
+      properties:
+        QueryString:
+          allOf:
+            - $ref: "#/components/schemas/QueryString"
+            - description: " The query to be run by Timestream. "
+        ClientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientRequestToken"
+            - description: "<p> Unique, case-sensitive string of up to 64 ASCII characters specified when a <code>Query</code> request is made. Providing a <code>ClientToken</code> makes the call to <code>Query</code> <i>idempotent</i>. This means that running the same query repeatedly will produce the same result. In other words, making multiple identical <code>Query</code> requests has the same effect as making a single request. When using <code>ClientToken</code> in a query, note the following: </p> <ul> <li> <p> If the Query API is instantiated without a <code>ClientToken</code>, the Query SDK generates a <code>ClientToken</code> on your behalf.</p> </li> <li> <p>If the <code>Query</code> invocation only contains the <code>ClientToken</code> but does not include a <code>NextToken</code>, that invocation of <code>Query</code> is assumed to be a new query run.</p> </li> <li> <p>If the invocation contains <code>NextToken</code>, that particular invocation is assumed to be a subsequent invocation of a prior call to the Query API, and a result set is returned.</p> </li> <li> <p> After 4 hours, any request with the same <code>ClientToken</code> is treated as a new request. </p> </li> </ul>"
+        NextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: <p> A pagination token used to return a set of results. When the <code>Query</code> API is invoked using <code>NextToken</code>, that particular invocation is assumed to be a subsequent invocation of a prior call to <code>Query</code>, and a result set is returned. However, if the <code>Query</code> invocation only contains the <code>ClientToken</code>, that invocation of <code>Query</code> is assumed to be a new query run. </p> <p>Note the following when using NextToken in a query:</p> <ul> <li> <p>A pagination token can be used for up to five <code>Query</code> invocations, OR for a duration of up to 1 hour – whichever comes first.</p> </li> <li> <p>Using the same <code>NextToken</code> will return the same set of records. To keep paginating through the result set, you must to use the most recent <code>nextToken</code>.</p> </li> <li> <p>Suppose a <code>Query</code> invocation returns two <code>NextToken</code> values, <code>TokenA</code> and <code>TokenB</code>. If <code>TokenB</code> is used in a subsequent <code>Query</code> invocation, then <code>TokenA</code> is invalidated and cannot be reused.</p> </li> <li> <p>To request a previous result set from a query after pagination has begun, you must re-invoke the Query API.</p> </li> <li> <p>The latest <code>NextToken</code> should be used to paginate until <code>null</code> is returned, at which point a new <code>NextToken</code> should be used.</p> </li> <li> <p> If the IAM principal of the query initiator and the result reader are not the same and/or the query initiator and the result reader do not have the same query string in the query requests, the query will fail with an <code>Invalid pagination token</code> error. </p> </li> </ul>
+        MaxRows:
+          allOf:
+            - $ref: "#/components/schemas/MaxQueryResults"
+            - description: "<p> The total number of rows to be returned in the <code>Query</code> output. The initial run of <code>Query</code> with a <code>MaxRows</code> value specified will return the result set of the query in two cases: </p> <ul> <li> <p>The size of the result is less than <code>1MB</code>.</p> </li> <li> <p>The number of rows in the result set is less than the value of <code>maxRows</code>.</p> </li> </ul> <p>Otherwise, the initial invocation of <code>Query</code> only returns a <code>NextToken</code>, which can then be used in subsequent calls to fetch the result set. To resume pagination, provide the <code>NextToken</code> value in the subsequent command.</p> <p>If the row size is large (e.g. a row has many columns), Timestream may return fewer rows to keep the response size from exceeding the 1 MB limit. If <code>MaxRows</code> is not provided, Timestream will send the necessary number of rows to meet the 1 MB limit.</p>"
+    QueryExecutionException: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: Identifies the Timestream resource to which tags should be added. This value is an Amazon Resource Name (ARN).
+        Tags:
+          allOf:
+            - $ref: "#/components/schemas/TagList"
+            - description: The tags to be assigned to the Timestream resource.
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: "The Timestream resource that the tags will be removed from. This value is an Amazon Resource Name (ARN). "
+        TagKeys:
+          allOf:
+            - $ref: "#/components/schemas/TagKeyList"
+            - description: "A list of tags keys. Existing tags of the resource whose keys are members of this list will be removed from the Timestream resource. "
+    UpdateScheduledQueryRequest:
+      type: object
+      required:
+        - ScheduledQueryArn
+        - State
+      title: UpdateScheduledQueryRequest
+      properties:
+        ScheduledQueryArn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: ARN of the scheuled query.
+        State:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryState"
+            - description: "State of the scheduled query. "
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    QueryId:
+      type: string
+      pattern: "[a-zA-Z0-9]+"
+      minLength: 1
+      maxLength: 64
+    String:
+      type: string
+    ClientRequestToken:
+      type: string
+      minLength: 32
+      maxLength: 128
+      format: password
+    ClientToken:
+      type: string
+      minLength: 32
+      maxLength: 128
+      format: password
+    Type:
+      type: object
+      properties:
+        ScalarType:
+          allOf:
+            - $ref: "#/components/schemas/ScalarType"
+            - description: "Indicates if the column is of type string, integer, Boolean, double, timestamp, date, time. "
+        ArrayColumnInfo:
+          allOf:
+            - $ref: "#/components/schemas/ColumnInfo"
+            - description: Indicates if the column is an array.
+        TimeSeriesMeasureValueColumnInfo:
+          allOf:
+            - $ref: "#/components/schemas/ColumnInfo"
+            - description: Indicates if the column is a timeseries data type.
+        RowColumnInfo:
+          allOf:
+            - $ref: "#/components/schemas/ColumnInfoList"
+            - description: Indicates if the column is a row.
+      description: Contains the data type of a column in a query result set. The data type can be scalar or complex. The supported scalar data types are integers, Boolean, string, double, timestamp, date, time, and intervals. The supported complex data types are arrays, rows, and timeseries.
+    ColumnInfo:
+      type: object
+      required:
+        - Type
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: " The name of the result set column. The name of the result set is available for columns of all data types except for arrays. "
+        Type:
+          allOf:
+            - $ref: "#/components/schemas/Type"
+            - description: "The data type of the result set column. The data type can be a scalar or complex. Scalar data types are integers, strings, doubles, Booleans, and others. Complex data types are types such as arrays, rows, and others. "
+      description: " Contains the metadata for query results such as the column names, data types, and other attributes. "
+    ColumnInfoList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ColumnInfo"
+    ScheduledQueryName:
+      type: string
+      pattern: "[a-zA-Z0-9_.-]+"
+      minLength: 1
+      maxLength: 64
+    QueryString:
+      type: string
+      minLength: 1
+      maxLength: 262144
+      format: password
+    ScheduleConfiguration:
+      type: object
+      required:
+        - ScheduleExpression
+      properties:
+        ScheduleExpression:
+          allOf:
+            - $ref: "#/components/schemas/ScheduleExpression"
+            - description: "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression. "
+      description: Configuration of the schedule of the query.
+    NotificationConfiguration:
+      type: object
+      required:
+        - SnsConfiguration
+      properties:
+        SnsConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/SnsConfiguration"
+            - description: "Details on SNS configuration. "
+      description: "Notification configuration for a scheduled query. A notification is sent by Timestream when a scheduled query is created, its state is updated or when it is deleted. "
+    TargetConfiguration:
+      type: object
+      required:
+        - TimestreamConfiguration
+      properties:
+        TimestreamConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/TimestreamConfiguration"
+            - description: Configuration needed to write data into the Timestream database and table.
+      description: Configuration used for writing the output of a query.
+    TagList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Tag"
+      minItems: 0
+      maxItems: 200
+    StringValue2048:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    ErrorReportConfiguration:
+      type: object
+      required:
+        - S3Configuration
+      properties:
+        S3Configuration:
+          allOf:
+            - $ref: "#/components/schemas/S3Configuration"
+            - description: The S3 configuration for the error reports.
+      description: Configuration required for error reporting.
+    ScalarValue:
+      type: string
+    TimeSeriesDataPointList:
+      type: array
+      items:
+        $ref: "#/components/schemas/TimeSeriesDataPoint"
+    DatumList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Datum"
+    Row:
+      type: object
+      required:
+        - Data
+      properties:
+        Data:
+          allOf:
+            - $ref: "#/components/schemas/DatumList"
+            - description: List of data points in a single row of the result set.
+      description: Represents a single row in the query results.
+    NullableBoolean:
+      type: boolean
+    Datum:
+      type: object
+      properties:
+        ScalarValue:
+          allOf:
+            - $ref: "#/components/schemas/ScalarValue"
+            - description: " Indicates if the data point is a scalar value such as integer, string, double, or Boolean. "
+        TimeSeriesValue:
+          allOf:
+            - $ref: "#/components/schemas/TimeSeriesDataPointList"
+            - description: " Indicates if the data point is a timeseries data type. "
+        ArrayValue:
+          allOf:
+            - $ref: "#/components/schemas/DatumList"
+            - description: " Indicates if the data point is an array. "
+        RowValue:
+          allOf:
+            - $ref: "#/components/schemas/Row"
+            - description: " Indicates if the data point is a row. "
+        NullValue:
+          allOf:
+            - $ref: "#/components/schemas/NullableBoolean"
+            - description: " Indicates if the data point is null. "
+      description: " Datum represents a single data point in a query result. "
+    Endpoints:
+      type: array
+      items:
+        $ref: "#/components/schemas/Endpoint"
+    ScheduledQueryDescription:
+      type: object
+      required:
+        - Arn
+        - Name
+        - QueryString
+        - State
+        - ScheduleConfiguration
+        - NotificationConfiguration
+      properties:
+        Arn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: Scheduled query ARN.
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryName"
+            - description: Name of the scheduled query.
+        QueryString:
+          allOf:
+            - $ref: "#/components/schemas/QueryString"
+            - description: The query to be run.
+        CreationTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: Creation time of the scheduled query.
+        State:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryState"
+            - description: "State of the scheduled query. "
+        PreviousInvocationTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: Last time the query was run.
+        NextInvocationTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: The next time the scheduled query is scheduled to run.
+        ScheduleConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/ScheduleConfiguration"
+            - description: Schedule configuration.
+        NotificationConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/NotificationConfiguration"
+            - description: Notification configuration.
+        TargetConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/TargetConfiguration"
+            - description: Scheduled query target store configuration.
+        ScheduledQueryExecutionRoleArn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: IAM role that Timestream uses to run the schedule query.
+        KmsKeyId:
+          allOf:
+            - $ref: "#/components/schemas/StringValue2048"
+            - description: A customer provided KMS key used to encrypt the scheduled query resource.
+        ErrorReportConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/ErrorReportConfiguration"
+            - description: Error-reporting configuration for the scheduled query.
+        LastRunSummary:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryRunSummary"
+            - description: "Runtime summary for the last scheduled query run. "
+        RecentlyFailedRuns:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryRunSummaryList"
+            - description: Runtime summary for the last five failed scheduled query runs.
+      description: Structure that describes scheduled query.
+    SchemaName:
+      type: string
+    DimensionValueType:
+      type: string
+      enum:
+        - VARCHAR
+    DimensionMapping:
+      type: object
+      required:
+        - Name
+        - DimensionValueType
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: Column name from query result.
+        DimensionValueType:
+          allOf:
+            - $ref: "#/components/schemas/DimensionValueType"
+            - description: "Type for the dimension. "
+      description: This type is used to map column(s) from the query result to a dimension in the destination table.
+    DimensionMappingList:
+      type: array
+      items:
+        $ref: "#/components/schemas/DimensionMapping"
+    Double:
+      type: number
+      format: double
+    Long:
+      type: integer
+    Endpoint:
+      type: object
+      required:
+        - Address
+        - CachePeriodInMinutes
+      properties:
+        Address:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: An endpoint address.
+        CachePeriodInMinutes:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: The TTL for the endpoint, in minutes.
+      description: Represents an available endpoint against which to make API calls against, as well as the TTL for that endpoint.
+    ErrorMessage:
+      type: string
+    S3Configuration:
+      type: object
+      required:
+        - BucketName
+      properties:
+        BucketName:
+          allOf:
+            - $ref: "#/components/schemas/S3BucketName"
+            - description: " Name of the S3 bucket under which error reports will be created."
+        ObjectKeyPrefix:
+          allOf:
+            - $ref: "#/components/schemas/S3ObjectKeyPrefix"
+            - description: " Prefix for the error report key. Timestream by default adds the following prefix to the error report path. "
+        EncryptionOption:
+          allOf:
+            - $ref: "#/components/schemas/S3EncryptionOption"
+            - description: " Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default. "
+      description: "Details on S3 location for error reports that result from running a query. "
+    S3ReportLocation:
+      type: object
+      properties:
+        BucketName:
+          allOf:
+            - $ref: "#/components/schemas/S3BucketName"
+            - description: " S3 bucket name. "
+        ObjectKey:
+          allOf:
+            - $ref: "#/components/schemas/S3ObjectKey"
+            - description: "S3 key. "
+      description: " S3 report location for the scheduled query run."
+    ErrorReportLocation:
+      type: object
+      properties:
+        S3ReportLocation:
+          allOf:
+            - $ref: "#/components/schemas/S3ReportLocation"
+            - description: The S3 location where error reports are written.
+      description: "This contains the location of the error report for a single scheduled query call. "
+    Time:
+      type: string
+      format: date-time
+    ExecutionStats:
+      type: object
+      properties:
+        ExecutionTimeInMillis:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: Total time, measured in milliseconds, that was needed for the scheduled query run to complete.
+        DataWrites:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: Data writes metered for records ingested in a single scheduled query run.
+        BytesMetered:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: Bytes metered for a single scheduled query run.
+        RecordsIngested:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: "The number of records ingested for a single scheduled query run. "
+        QueryResultRows:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: Number of rows present in the output from running a query before ingestion to destination data source.
+      description: Statistics for a single scheduled query run.
+    MaxScheduledQueriesResults:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    NextScheduledQueriesResultsToken:
+      type: string
+    ScheduledQueryList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ScheduledQuery"
+    MaxTagsForResourceResult:
+      type: integer
+      minimum: 1
+      maximum: 200
+    NextTagsForResourceResultsToken:
+      type: string
+    MaxQueryResults:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    MeasureValueType:
+      type: string
+      enum:
+        - BIGINT
+        - BOOLEAN
+        - DOUBLE
+        - VARCHAR
+        - MULTI
+    MultiMeasureAttributeMappingList:
+      type: array
+      items:
+        $ref: "#/components/schemas/MultiMeasureAttributeMapping"
+      minItems: 1
+    MixedMeasureMapping:
+      type: object
+      required:
+        - MeasureValueType
+      properties:
+        MeasureName:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: Refers to the value of measure_name in a result row. This field is required if MeasureNameColumn is provided.
+        SourceColumn:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: This field refers to the source column from which measure-value is to be read for result materialization.
+        TargetMeasureName:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: "Target measure name to be used. If not provided, the target measure name by default would be measure-name if provided, or sourceColumn otherwise. "
+        MeasureValueType:
+          allOf:
+            - $ref: "#/components/schemas/MeasureValueType"
+            - description: Type of the value that is to be read from sourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.
+        MultiMeasureAttributeMappings:
+          allOf:
+            - $ref: "#/components/schemas/MultiMeasureAttributeMappingList"
+            - description: Required when measureValueType is MULTI. Attribute mappings for MULTI value measures.
+      description: MixedMeasureMappings are mappings that can be used to ingest data into a mixture of narrow and multi measures in the derived table.
+    MixedMeasureMappingList:
+      type: array
+      items:
+        $ref: "#/components/schemas/MixedMeasureMapping"
+      minItems: 1
+    ScalarMeasureValueType:
+      type: string
+      enum:
+        - BIGINT
+        - BOOLEAN
+        - DOUBLE
+        - VARCHAR
+        - TIMESTAMP
+    MultiMeasureAttributeMapping:
+      type: object
+      required:
+        - SourceColumn
+        - MeasureValueType
+      properties:
+        SourceColumn:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: Source column from where the attribute value is to be read.
+        TargetMultiMeasureAttributeName:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: Custom name to be used for attribute name in derived table. If not provided, source column name would be used.
+        MeasureValueType:
+          allOf:
+            - $ref: "#/components/schemas/ScalarMeasureValueType"
+            - description: Type of the attribute to be read from the source column.
+      description: Attribute mapping for MULTI value measures.
+    MultiMeasureMappings:
+      type: object
+      required:
+        - MultiMeasureAttributeMappings
+      properties:
+        TargetMultiMeasureName:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: The name of the target multi-measure name in the derived table. This input is required when measureNameColumn is not provided. If MeasureNameColumn is provided, then value from that column will be used as multi-measure name.
+        MultiMeasureAttributeMappings:
+          allOf:
+            - $ref: "#/components/schemas/MultiMeasureAttributeMappingList"
+            - description: Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.
+      description: Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table.
+    SnsConfiguration:
+      type: object
+      required:
+        - TopicArn
+      properties:
+        TopicArn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: SNS topic ARN that the scheduled query status notifications will be sent to.
+      description: Details on SNS that are required to send the notification.
+    PaginationToken:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    ParameterMapping:
+      type: object
+      required:
+        - Name
+        - Type
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: Parameter name.
+        Type:
+          $ref: "#/components/schemas/Type"
+      description: Mapping for named parameters.
+    ParameterMappingList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ParameterMapping"
+    SelectColumnList:
+      type: array
+      items:
+        $ref: "#/components/schemas/SelectColumn"
+    RowList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Row"
+    QueryStatus:
+      type: object
+      properties:
+        ProgressPercentage:
+          allOf:
+            - $ref: "#/components/schemas/Double"
+            - description: The progress of the query, expressed as a percentage.
+        CumulativeBytesScanned:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: "The amount of data scanned by the query in bytes. This is a cumulative sum and represents the total amount of bytes scanned since the query was started. "
+        CumulativeBytesMetered:
+          allOf:
+            - $ref: "#/components/schemas/Long"
+            - description: "The amount of data scanned by the query in bytes that you will be charged for. This is a cumulative sum and represents the total amount of data that you will be charged for since the query was started. The charge is applied only once and is either applied when the query completes running or when the query is cancelled. "
+      description: Information about the status of the query, including progress and bytes scanned.
+    ResourceName:
+      type: string
+    S3BucketName:
+      type: string
+      pattern: "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
+      minLength: 3
+      maxLength: 63
+    S3ObjectKeyPrefix:
+      type: string
+      pattern: "[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+"
+      minLength: 1
+      maxLength: 896
+    S3EncryptionOption:
+      type: string
+      enum:
+        - SSE_S3
+        - SSE_KMS
+    S3ObjectKey:
+      type: string
+    ScalarType:
+      type: string
+      enum:
+        - VARCHAR
+        - BOOLEAN
+        - BIGINT
+        - DOUBLE
+        - TIMESTAMP
+        - DATE
+        - TIME
+        - INTERVAL_DAY_TO_SECOND
+        - INTERVAL_YEAR_TO_MONTH
+        - UNKNOWN
+        - INTEGER
+    ScheduleExpression:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ScheduledQueryState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    TargetDestination:
+      type: object
+      properties:
+        TimestreamDestination:
+          allOf:
+            - $ref: "#/components/schemas/TimestreamDestination"
+            - description: Query result destination details for Timestream data source.
+      description: Destination details to write data for a target data source. Current supported data source is Timestream.
+    ScheduledQueryRunStatus:
+      type: string
+      enum:
+        - AUTO_TRIGGER_SUCCESS
+        - AUTO_TRIGGER_FAILURE
+        - MANUAL_TRIGGER_SUCCESS
+        - MANUAL_TRIGGER_FAILURE
+    ScheduledQuery:
+      type: object
+      required:
+        - Arn
+        - Name
+        - State
+      properties:
+        Arn:
+          allOf:
+            - $ref: "#/components/schemas/AmazonResourceName"
+            - description: The Amazon Resource Name.
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryName"
+            - description: The name of the scheduled query.
+        CreationTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: The creation time of the scheduled query.
+        State:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryState"
+            - description: "State of scheduled query. "
+        PreviousInvocationTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: The last time the scheduled query was run.
+        NextInvocationTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: The next time the scheduled query is to be run.
+        ErrorReportConfiguration:
+          allOf:
+            - $ref: "#/components/schemas/ErrorReportConfiguration"
+            - description: Configuration for scheduled query error reporting.
+        TargetDestination:
+          allOf:
+            - $ref: "#/components/schemas/TargetDestination"
+            - description: Target data source where final scheduled query result will be written.
+        LastRunStatus:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryRunStatus"
+            - description: Status of the last scheduled query run.
+      description: Scheduled Query
+    ScheduledQueryRunSummary:
+      type: object
+      properties:
+        InvocationTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: "InvocationTime for this run. This is the time at which the query is scheduled to run. Parameter <code>@scheduled_runtime</code> can be used in the query to get the value. "
+        TriggerTime:
+          allOf:
+            - $ref: "#/components/schemas/Time"
+            - description: The actual time when the query was run.
+        RunStatus:
+          allOf:
+            - $ref: "#/components/schemas/ScheduledQueryRunStatus"
+            - description: The status of a scheduled query run.
+        ExecutionStats:
+          allOf:
+            - $ref: "#/components/schemas/ExecutionStats"
+            - description: Runtime statistics for a scheduled run.
+        ErrorReportLocation:
+          allOf:
+            - $ref: "#/components/schemas/ErrorReportLocation"
+            - description: S3 location for error report.
+        FailureReason:
+          allOf:
+            - $ref: "#/components/schemas/ErrorMessage"
+            - description: "Error message for the scheduled query in case of failure. You might have to look at the error report to get more detailed error reasons. "
+      description: Run summary for the scheduled query
+    ScheduledQueryRunSummaryList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ScheduledQueryRunSummary"
+    SelectColumn:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: "#/components/schemas/String"
+            - description: Name of the column.
+        Type:
+          $ref: "#/components/schemas/Type"
+        DatabaseName:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: " Database that has this column."
+        TableName:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: "Table within the database that has this column. "
+        Aliased:
+          allOf:
+            - $ref: "#/components/schemas/NullableBoolean"
+            - description: True, if the column name was aliased by the query. False otherwise.
+      description: "Details of the column that is returned by the query. "
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: "#/components/schemas/TagKey"
+            - description: "The key of the tag. Tag keys are case sensitive. "
+        Value:
+          allOf:
+            - $ref: "#/components/schemas/TagValue"
+            - description: "The value of the tag. Tag values are case sensitive and can be null. "
+      description: "A tag is a label that you assign to a Timestream database and/or table. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize databases and/or tables, for example, by purpose, owner, or environment. "
+    TagKeyList:
+      type: array
+      items:
+        $ref: "#/components/schemas/TagKey"
+      minItems: 0
+      maxItems: 200
+    TimestreamConfiguration:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - TimeColumn
+        - DimensionMappings
+      properties:
+        DatabaseName:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: Name of Timestream database to which the query result will be written.
+        TableName:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.
+        TimeColumn:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.
+        DimensionMappings:
+          allOf:
+            - $ref: "#/components/schemas/DimensionMappingList"
+            - description: " This is to allow mapping column(s) from the query result to the dimension in the destination table. "
+        MultiMeasureMappings:
+          allOf:
+            - $ref: "#/components/schemas/MultiMeasureMappings"
+            - description: Multi-measure mappings.
+        MixedMeasureMappings:
+          allOf:
+            - $ref: "#/components/schemas/MixedMeasureMappingList"
+            - description: Specifies how to map measures to multi-measure records.
+        MeasureNameColumn:
+          allOf:
+            - $ref: "#/components/schemas/SchemaName"
+            - description: Name of the measure column.
+      description: " Configuration to write data into Timestream database and table. This configuration allows the user to map the query result select columns into the destination table columns. "
+    TimestreamDestination:
+      type: object
+      properties:
+        DatabaseName:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: "Timestream database name. "
+        TableName:
+          allOf:
+            - $ref: "#/components/schemas/ResourceName"
+            - description: "Timestream table name. "
+      description: Destination for scheduled query.
+    Timestamp:
+      type: string
+    TimeSeriesDataPoint:
+      type: object
+      required:
+        - Time
+        - Value
+      properties:
+        Time:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The timestamp when the measure value was collected.
+        Value:
+          allOf:
+            - $ref: "#/components/schemas/Datum"
+            - description: The measure value for the data point.
+      description: "The timeseries data type represents the values of a measure over time. A time series is an array of rows of timestamps and measure values, with rows sorted in ascending order of time. A TimeSeriesDataPoint is a single data point in the time series. It represents a tuple of (time, measure value) in a time series. "
+security:
+  - hmac: []

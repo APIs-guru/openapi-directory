@@ -1,0 +1,1543 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br/api/
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: ">ℹ️ Onboarding guide\r
+
+    >\r
+
+    > Check the new [Payments onboarding guide](https://developers.vtex.com/docs/guides/payments-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Payments and is organized by focusing on the developer's journey.\r
+
+    \r
+
+    The Gift Card is a payment method configured as a cash value associated with a client. It is used to grant a discount on the value of the order at the store.\r
+
+    \r
+
+    > ⚠ A Gift Card works as a **payment method**, not a promotion."
+  title: GiftCard API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Giftcard API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Giftcard-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - description: ""
+    name: Gift Card
+  - description: ""
+    name: Transactions
+paths:
+  /giftcards:
+    post:
+      deprecated: false
+      description: Creates a GiftCard for a specific user
+      operationId: CreateGiftCard
+      parameters:
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The AppKey configured by the merchant
+          in: header
+          name: X-VTEX-API-AppKey
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppKey}}"
+            type: string
+          style: simple
+        - description: The AppToken configured by the merchant
+          in: header
+          name: X-VTEX-API-AppToken
+          required: true
+          schema:
+            default: "{{X-VTEX-API-AppToken}}"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/vnd.vtex.giftcard.v1+json:
+            schema:
+              $ref: "#/components/schemas/CreateGiftCardRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                balance: 0
+                caption: Programa Vtex Fidelidade
+                emissionDate: 2014-04-24T20:22:58.163
+                expiringDate: 2016-01-01T00:00:00
+                id: "954"
+                redemptionCode: "***********ASDQ"
+                redemptionToken: 32ScL57220Vapb8pc50HJ3mWH1cl1L8x
+                relationName: cardName
+                transactions:
+                  href: cards/954/transactions
+              schema:
+                $ref: "#/components/schemas/response"
+          description: ""
+          headers: {}
+      summary: Create GiftCard
+      tags:
+        - Gift Card
+  /giftcards/_search:
+    post:
+      deprecated: false
+      description: Returns the giftcards based on the cart data.
+      operationId: GetGiftCardusingJSON
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: PaginationB control.B ThisB queryB variableB mustB followB theB formatB _resources={from}-{to}_.
+          in: header
+          name: REST-Range
+          required: false
+          schema:
+            default: giftcard=0-49
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              cart:
+                discounts: 0
+                grandTotal: 123.1
+                items:
+                  - id: "1"
+                    name: Product Name
+                    price: 100
+                    productId: "1"
+                    quantity: 1
+                    refId: "12"
+                itemsTotal: 100
+                redemptionCode: null
+                relationName: null
+                shipping: 0
+                taxes: 12
+              client:
+                document: "21301923110"
+                email: email@damoain.com
+                id: 019a0cc1-409a-4c16-859b-eefdb81f825e
+            schema:
+              $ref: "#/components/schemas/GetGiftCardusingJSONRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                items:
+                  - _self:
+                      href: cards/589
+                    id: "589"
+                  - _self:
+                      href: cards/590
+                    id: "590"
+                  - _self:
+                      href: cards/591
+                    id: "591"
+                  - _self:
+                      href: cards/592
+                    id: "592"
+                paging:
+                  page: 0
+                  pages: 1
+                  perPage: 10
+                  total: 4
+              schema:
+                $ref: "#/components/schemas/response2"
+          description: ""
+          headers: {}
+      summary: Get GiftCard using JSON
+      tags:
+        - Gift Card
+  "/giftcards/{giftCardID}":
+    get:
+      deprecated: false
+      description: Returns associated data for a specified giftcardId.
+      operationId: GetGiftCardbyID
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "2"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                balance: 0
+                caption: Programa Vtex Fidelidade
+                emissionDate: 2014-04-24T20:22:58.163
+                expiringDate: 2016-01-01T00:00:00
+                id: "954"
+                redemptionCode: "***********ASDQ"
+                redemptionToken: 32ScL57220Vapb8pc50HJ3mWH1cl1L8x
+                relationName: cardName
+                transactions:
+                  href: cards/954/transactions
+              schema:
+                $ref: "#/components/schemas/response"
+          description: ""
+          headers: {}
+      summary: Get GiftCard by ID
+      tags:
+        - Gift Card
+  "/giftcards/{giftCardID}/transactions":
+    get:
+      deprecated: false
+      description: Returns all transaction of a giftcard.
+      operationId: GetGiftCardTransactions
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "2"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - _self:
+                    href: cards/890/transactions/268
+                  id: "268"
+                - _self:
+                    href: cards/890/transactions/269
+                  id: "269"
+                - _self:
+                    href: cards/890/transactions/270
+                  id: "270"
+              schema:
+                items:
+                  $ref: "#/components/schemas/response3"
+                type: array
+          description: ""
+          headers: {}
+      summary: Get GiftCard Transactions
+      tags:
+        - Transaction
+    post:
+      deprecated: false
+      description: Register a new giftcard transaction and authorize the item reservation.
+      operationId: CreateGiftCardTransaction
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "7"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              description: GiftCardHub
+              operation: Debit
+              orderInfo:
+                cart:
+                  discounts: -7.5
+                  grandTotal: 0
+                  items:
+                    - discount: -7.5
+                      id: "2001023"
+                      name: Vaporizador Des. ColC4nia Branco
+                      price: 14.99
+                      priceTags:
+                        - name: discount@price-discount_store_183#4911bf6f-22a2-4af1-a365-cce895c3df2c
+                          value: 0
+                      productId: "2000492"
+                      quantity: 1
+                      refId: "35994"
+                      shippingDiscount: 0
+                      value: 14.99
+                  itemsTotal: 14.99
+                  shipping: 7.27
+                  taxes: 0
+                clientProfile:
+                  birthDate: 0001-01-01T00:00:00
+                  document: "02906792063"
+                  email: miguel.scott96@yahoo.com.br
+                  firstName: miguel
+                  isCorporate: false
+                  lastName: scott
+                  phone: "+551111111111"
+                  profileId: 92de2449-0e02-4ca9-a4aa-a09cc9d8f7ff
+                orderId: v5006128str
+                sequence: 5006128
+                shipping:
+                  city: Rio de Janeiro
+                  complement: null
+                  country: BRA
+                  neighborhood: Botafogo
+                  number: "111"
+                  postalCode: "22250040"
+                  receiverName: miguel scott
+                  reference: null
+                  state: RJ
+                  street: Praia de Botafogo
+              redemptionCode: ""
+              redemptionToken: b2dac6f2-f365-48cd-82a9-0b376a55557a
+              requestId: B56CBE231DEE4E1A859183C1030CE926
+              value: 3
+            schema:
+              $ref: "#/components/schemas/CreateGiftCardTransactionRequest"
+        description: ""
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _self:
+                  href: providers/VtexGiftCardProvider/cards/890/transactions/2451
+                id: "2541"
+              schema:
+                $ref: "#/components/schemas/response3"
+          description: ""
+          headers: {}
+      summary: Create GiftCard Transaction
+      tags:
+        - Transaction
+  "/giftcards/{giftCardID}/transactions/{transactionID}":
+    get:
+      deprecated: false
+      description: ""
+      operationId: GetGiftCardTransactionbyID
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: transactionID
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                date: 2016-01-01T00:00:00
+                description: CrC)dito relacionado a compra 10281230-01
+                redemptionMode: redemptionToken
+                value: 123.4
+              schema:
+                $ref: "#/components/schemas/response5"
+          description: ""
+          headers: {}
+      summary: Get GiftCard Transaction by ID
+      tags:
+        - Transaction
+  "/giftcards/{giftCardID}/transactions/{transactionID}/authorization":
+    get:
+      deprecated: false
+      description: Returns the giftcard transaction authorizations.
+      operationId: GetTransactionAuthorizations
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: transactionID
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                date: 2016-01-01T00:00:00
+                oid: 7cf8d7970e1c81d05620e46cceb6819f
+                value: 123.4
+              schema:
+                $ref: "#/components/schemas/response6"
+          description: ""
+          headers: {}
+      summary: Get Transaction Authorizations
+      tags:
+        - Transaction
+  "/giftcards/{giftCardID}/transactions/{transactionID}/cancellations":
+    get:
+      deprecated: false
+      description: Returns the giftcard transaction cancellations.
+      operationId: GetTransactionCancellations
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: transactionID
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - date: 2016-04-06T00:00:00
+                  id: 239d35b430fc75379db966c1d3670c6f
+                  value: 13.4
+                - date: 2016-05-06T00:00:00
+                  id: 49f0bad299687c62334182178bfd75d8
+                  value: 10.4
+              schema:
+                items:
+                  $ref: "#/components/schemas/response7"
+                type: array
+          description: ""
+          headers: {}
+      summary: Get Transaction Cancellations
+      tags:
+        - Transaction
+    post:
+      deprecated: false
+      description: Creates a cancellation in the transaction. Cancel a item reservation or create a refund.
+      operationId: CancelGiftCardTransaction
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: transactionID
+          required: true
+          schema:
+            default: b476900c
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              requestId: 6360f
+              value: 13
+            schema:
+              $ref: "#/components/schemas/CancelGiftCardTransactionRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                date: 2016-04-06T00:00:00
+                oid: 239d35b430fc75379db966c1d3670c6f
+                value: 13.4
+              schema:
+                $ref: "#/components/schemas/response6"
+          description: ""
+          headers: {}
+      summary: Cancel GiftCard Transaction
+      tags:
+        - Transaction
+  "/giftcards/{giftCardID}/transactions/{transactionID}/settlements":
+    get:
+      deprecated: false
+      description: Returns the giftcard transaction settlements.
+      operationId: GetTransactionSettlements
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "7"
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: transactionID
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - date: 2016-04-06T00:00:00
+                  oid: b8e0c606b2fe543e5b0e639575cd9723
+                  value: 17.4
+                - date: 2016-05-06T00:00:00
+                  oid: 6cb6cd63c16e219b1eee61f2
+                  value: 10.4
+              schema:
+                items:
+                  $ref: "#/components/schemas/response6"
+                type: array
+          description: ""
+          headers: {}
+      summary: Get Transaction Settlements
+      tags:
+        - Transaction
+    post:
+      deprecated: false
+      description: Creates a giftcard transaction settlement.
+      operationId: SettleGiftCardTransaction
+      parameters:
+        - description: Media type(s) that is/are acceptable for the response. Default value for payment provider protocol is application/json
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The Media type of the body of the request. Default value for payment provider protocol is application/json
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: giftCardID
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: ""
+          in: path
+          name: transactionID
+          required: true
+          schema:
+            default: b47690
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              requestId: 6360f98eb0cf6fd5afa77e39bba8c20fe5807d8c
+              value: 17.4
+            schema:
+              $ref: "#/components/schemas/SettleGiftCardTransactionRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                date: 2016-04-06T00:00:00
+                oid: b8e0c606b2fe543e5b0e639575cd9723
+                value: 17.4
+              schema:
+                $ref: "#/components/schemas/response6"
+          description: ""
+          headers: {}
+      summary: Settle GiftCard Transaction
+      tags:
+        - Transaction
+components:
+  schemas:
+    CancelGiftCardTransactionRequest:
+      default:
+        requestId: 6360f
+        value: 13
+      properties:
+        requestId:
+          type: string
+        value:
+          type: number
+      required:
+        - value
+        - requestId
+      title: CancelGiftCardTransactionRequest
+      type: object
+    Cart:
+      example:
+        discounts: 0
+        grandTotal: 123.1
+        items:
+          - id: "1"
+            name: Product Name
+            price: 100
+            productId: "1"
+            quantity: 1
+            refId: "12"
+        itemsTotal: 100
+        redemptionCode: null
+        relationName: null
+        shipping: 0
+        taxes: 12
+      properties:
+        discounts:
+          default: 0
+          format: int32
+          type: integer
+        grandTotal:
+          default: 122
+          type: number
+        items:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Item"
+          type: array
+        itemsTotal:
+          default: 100
+          format: int32
+          type: integer
+        redemptionCode:
+          default: example code
+          nullable: true
+          type: string
+        relationName:
+          default: insert name here
+          nullable: true
+          type: string
+        shipping:
+          default: 0
+          format: int32
+          type: integer
+        taxes:
+          default: 12
+          format: int32
+          type: integer
+      required:
+        - grandTotal
+        - relationName
+        - redemptionCode
+        - discounts
+        - shipping
+        - taxes
+        - items
+        - itemsTotal
+      title: Cart
+      type: object
+    Cart1:
+      example:
+        discounts: -7.5
+        grandTotal: 0
+        items:
+          - discount: -7.5
+            id: "2001023"
+            name: Vaporizador Des. ColC4nia Branco
+            price: 14.99
+            priceTags:
+              - name: discount@price-discount_store_183#4911bf6f-22a2-4af1-a365-cce895c3df2c
+                value: 0
+            productId: "2000492"
+            quantity: 1
+            refId: "35994"
+            shippingDiscount: 0
+            value: 14.99
+        itemsTotal: 14.99
+        shipping: 7.27
+        taxes: 0
+      properties:
+        discounts:
+          type: number
+        grandTotal:
+          format: int32
+          type: integer
+        items:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Item2"
+          type: array
+        itemsTotal:
+          type: number
+        shipping:
+          type: number
+        taxes:
+          format: int32
+          type: integer
+      required:
+        - items
+        - grandTotal
+        - discounts
+        - shipping
+        - taxes
+        - itemsTotal
+      title: Cart1
+      type: object
+    Client:
+      example:
+        document: "21301923110"
+        email: email@damoain.com
+        id: 019a0cc1-409a-4c16-859b-eefdb81f825e
+      properties:
+        document:
+          default: "99999999999"
+          type: string
+        email:
+          default: email@email.com.br
+          type: string
+        id:
+          default: 019a0c
+          type: string
+      required:
+        - id
+        - email
+        - document
+      title: Client
+      type: object
+    ClientProfile:
+      example:
+        birthDate: 0001-01-01T00:00:00
+        document: "02906792063"
+        email: miguel.scott96@yahoo.com.br
+        firstName: miguel
+        isCorporate: false
+        lastName: scott
+        phone: "+551111111111"
+      properties:
+        birthDate:
+          type: string
+        document:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        isCorporate:
+          type: boolean
+        lastName:
+          type: string
+        phone:
+          type: string
+      required:
+        - email
+        - firstName
+        - lastName
+        - document
+        - phone
+        - birthDate
+        - isCorporate
+      title: ClientProfile
+      type: object
+    CreateGiftCardRequest:
+      example:
+        caption: Programa Vtex Fidelidade
+        expiringDate: 2016-01-01T00:00:00
+        multipleCredits: true
+        multipleRedemptions: false
+        profileId: 92de2449-0e02-4ca9-a4aa-a09cc9d8f7ff
+        redemptionCode: BAHD-ASDB-ADQW-ASDQ
+        relationName: loyalty-program
+        restrictedToOwner: true
+      properties:
+        caption:
+          description: The caption of the Giftcard.
+          example: rewards program
+          type: string
+        expiringDate:
+          description: It must be in the format `YYYY-MM-DDThh:mm:ss.fff`.
+          example: 2020-09-01T13:15:30Z
+          type: string
+        multipleCredits:
+          description: The Giftcard balance can be changed.
+          example: false
+          type: boolean
+        multipleRedemptions:
+          description: The Giftcard can be used to make new purchases until its value is completely used.
+          example: false
+          type: boolean
+        profileId:
+          description: The client's ID.
+          example: "1234"
+          type: string
+        relationName:
+          description: Represents the relationship between the client and the store.
+          example: insert example here
+          type: string
+        restrictedToOwner:
+          description: The Giftcard can only be used for a specified client's ID.
+          example: false
+          type: boolean
+      required:
+        - relationName
+        - expiringDate
+        - caption
+        - profileId
+      title: CreateGiftCardRequest
+      type: object
+    CreateGiftCardTransactionRequest:
+      example:
+        description: GiftCardHub
+        operation: Debit
+        orderInfo:
+          cart:
+            discounts: -7.5
+            grandTotal: 0
+            items:
+              - discount: -7.5
+                id: "2001023"
+                name: Vaporizador Des. ColC4nia Branco
+                price: 14.99
+                priceTags:
+                  - name: discount@price-discount_store_183#4911bf6f-22a2-4af1-a365-cce895c3df2c
+                    value: 0
+                productId: "2000492"
+                quantity: 1
+                refId: "35994"
+                shippingDiscount: 0
+                value: 14.99
+            itemsTotal: 14.99
+            shipping: 7.27
+            taxes: 0
+          clientProfile:
+            birthDate: 0001-01-01T00:00:00
+            document: "02906792063"
+            email: miguel.scott96@yahoo.com.br
+            firstName: miguel
+            isCorporate: false
+            lastName: scott
+            phone: "+551111111111"
+          orderId: v5006128str
+          sequence: 5006128
+          shipping:
+            city: Rio de Janeiro
+            complement: null
+            country: BRA
+            neighborhood: Botafogo
+            number: "111"
+            postalCode: "22250040"
+            receiverName: miguel scott
+            reference: null
+            state: RJ
+            street: Praia de Botafogo
+        redemptionCode: ""
+        redemptionToken: b2dac6f2-f365-48cd-82a9-0b376a55557a
+        requestId: B56CBE231DEE4E1A859183C1030CE926
+        value: 3
+      properties:
+        description:
+          default: insert test here
+          type: string
+        operation:
+          default: Debit
+          type: string
+        orderInfo:
+          $ref: "#/components/schemas/OrderInfo"
+        redemptionCode:
+          default: example code
+          type: string
+        redemptionToken:
+          default: example code
+          type: string
+        requestId:
+          default: B56CB
+          type: string
+        value:
+          default: 800
+          format: decimal
+          type: number
+      required:
+        - operation
+        - value
+        - description
+        - redemptionToken
+        - redemptionCode
+        - requestId
+      title: CreateGiftCardTransactionRequest
+      type: object
+    GetGiftCardusingJSONRequest:
+      example:
+        cart:
+          discounts: 0
+          grandTotal: 123.1
+          items:
+            - id: "1"
+              name: Product Name
+              price: 100
+              productId: "1"
+              quantity: 1
+              refId: "12"
+          itemsTotal: 100
+          redemptionCode: null
+          relationName: null
+          shipping: 0
+          taxes: 12
+        client:
+          document: "21301923110"
+          email: email@damoain.com
+          id: 019a0cc1-409a-4c16-859b-eefdb81f825e
+      properties:
+        cart:
+          $ref: "#/components/schemas/Cart"
+        client:
+          $ref: "#/components/schemas/Client"
+      required:
+        - cart
+        - client
+      title: GetGiftCardusingJSONRequest
+      type: object
+    Item:
+      example:
+        id: "1"
+        name: Product Name
+        price: 100
+        productId: "1"
+        quantity: 1
+        refId: "12"
+      properties:
+        id:
+          default: "5"
+          type: string
+        name:
+          default: Insert name here
+          type: string
+        price:
+          default: 50
+          format: int32
+          type: integer
+        productId:
+          default: "5"
+          type: string
+        quantity:
+          default: 1
+          format: int32
+          type: integer
+        refId:
+          default: "12"
+          type: string
+      required:
+        - productId
+        - id
+        - refId
+        - name
+        - price
+        - quantity
+      title: Item
+      type: object
+    Item1:
+      example:
+        _self:
+          href: cards/589
+        id: "589"
+      properties:
+        _self:
+          $ref: "#/components/schemas/Self"
+        id:
+          type: string
+      required:
+        - id
+        - _self
+      title: Item1
+      type: object
+    Item2:
+      example:
+        discount: -7.5
+        id: "2001023"
+        name: Vaporizador Des. ColC4nia Branco
+        price: 14.99
+        priceTags:
+          - name: discount@price-discount_store_183#4911bf6f-22a2-4af1-a365-cce895c3df2c
+            value: 0
+        productId: "2000492"
+        quantity: 1
+        refId: "35994"
+        shippingDiscount: 0
+        value: 14.99
+      properties:
+        discount:
+          type: number
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+        priceTags:
+          description: ""
+          items:
+            $ref: "#/components/schemas/PriceTag"
+          type: array
+        productId:
+          type: string
+        quantity:
+          format: int32
+          type: integer
+        refId:
+          type: string
+        shippingDiscount:
+          format: int32
+          type: integer
+        value:
+          type: number
+      required:
+        - id
+        - productId
+        - refId
+        - name
+        - value
+        - price
+        - quantity
+        - shippingDiscount
+        - discount
+        - priceTags
+      title: Item2
+      type: object
+    OrderInfo:
+      default:
+        cart:
+          discounts: 2.5
+          grandTotal: 0
+          items:
+            - discount: 2.5
+              id: "2001023"
+              name: insert name here
+              price: 14.99
+              priceTags:
+                - name: insert name here
+                  value: 0
+              productId: "2000492"
+              quantity: 1
+              refId: "35994"
+              shippingDiscount: 0
+              value: 14.99
+          itemsTotal: 14.99
+          shipping: 7.27
+          taxes: 0
+        clientProfile:
+          birthDate: 0001-01-01T00:00:00
+          document: "02906792063"
+          email: email@email.com.br
+          firstName: example
+          isCorporate: false
+          lastName: example
+          phone: "+551111111111"
+        orderId: v500
+        sequence: 5006128
+        shipping:
+          city: Rio de Janeiro
+          complement: null
+          country: BRA
+          neighborhood: example
+          number: "11"
+          postalCode: "22250040"
+          receiverName: example
+          reference: null
+          state: RJ
+          street: Praia de Botafogo
+      properties:
+        cart:
+          $ref: "#/components/schemas/Cart1"
+        clientProfile:
+          $ref: "#/components/schemas/ClientProfile"
+        orderId:
+          default: v5006
+          type: string
+        sequence:
+          default: 5006128
+          format: int32
+          type: integer
+        shipping:
+          $ref: "#/components/schemas/Shipping"
+      title: OrderInfo
+      type: object
+    Paging:
+      example:
+        page: 0
+        pages: 1
+        perPage: 10
+        total: 4
+      properties:
+        page:
+          format: int32
+          type: integer
+        pages:
+          format: int32
+          type: integer
+        perPage:
+          format: int32
+          type: integer
+        total:
+          format: int32
+          type: integer
+      required:
+        - page
+        - perPage
+        - total
+        - pages
+      title: Paging
+      type: object
+    PriceTag:
+      example:
+        name: discount@price-discount_store_183#4911bf6f-22a2-4af1-a365-cce895c3df2c
+        value: 0
+      properties:
+        name:
+          type: string
+        value:
+          format: int32
+          type: integer
+      required:
+        - name
+        - value
+      title: PriceTag
+      type: object
+    Self:
+      example:
+        href: cards/589
+      properties:
+        href:
+          type: string
+      required:
+        - href
+      title: Self
+      type: object
+    SettleGiftCardTransactionRequest:
+      default:
+        requestId: 6360f
+        value: 17.4
+      properties:
+        requestId:
+          type: string
+        value:
+          type: number
+      required:
+        - value
+        - requestId
+      title: SettleGiftCardTransactionRequest
+      type: object
+    Shipping:
+      example:
+        city: Rio de Janeiro
+        complement: null
+        country: BRA
+        neighborhood: Botafogo
+        number: "111"
+        postalCode: "22250040"
+        receiverName: miguel scott
+        reference: null
+        state: RJ
+        street: Praia de Botafogo
+      properties:
+        city:
+          type: string
+        complement:
+          nullable: true
+          type: string
+        country:
+          type: string
+        neighborhood:
+          type: string
+        number:
+          type: string
+        postalCode:
+          type: string
+        receiverName:
+          type: string
+        reference:
+          nullable: true
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+      required:
+        - receiverName
+        - postalCode
+        - city
+        - state
+        - country
+        - street
+        - number
+        - neighborhood
+        - complement
+        - reference
+      title: Shipping
+      type: object
+    Transactions:
+      example:
+        href: cards/954/transactions
+      properties:
+        href:
+          type: string
+      required:
+        - href
+      title: Transactions
+      type: object
+    response:
+      example:
+        balance: 0
+        caption: Programa Vtex Fidelidade
+        emissionDate: 2014-04-24T20:22:58.163
+        expiringDate: 2016-01-01T00:00:00
+        id: "954"
+        redemptionCode: "***********ASDQ"
+        redemptionToken: 32ScL57220Vapb8pc50HJ3mWH1cl1L8x
+        relationName: cardName
+        transactions:
+          href: cards/954/transactions
+      properties:
+        balance:
+          format: int32
+          type: integer
+        caption:
+          type: string
+        emissionDate:
+          type: string
+        expiringDate:
+          type: string
+        id:
+          default: "2"
+          type: string
+        redemptionCode:
+          type: string
+        redemptionToken:
+          type: string
+        relationName:
+          type: string
+        transactions:
+          $ref: "#/components/schemas/Transactions"
+      required:
+        - id
+        - redemptionToken
+        - redemptionCode
+        - balance
+        - relationName
+        - emissionDate
+        - expiringDate
+        - caption
+        - transactions
+      title: response
+      type: object
+    response2:
+      example:
+        items:
+          - _self:
+              href: cards/589
+            id: "589"
+          - _self:
+              href: cards/590
+            id: "590"
+          - _self:
+              href: cards/591
+            id: "591"
+          - _self:
+              href: cards/592
+            id: "592"
+        paging:
+          page: 0
+          pages: 1
+          perPage: 10
+          total: 4
+      properties:
+        items:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Item1"
+          type: array
+        paging:
+          $ref: "#/components/schemas/Paging"
+      required:
+        - items
+        - paging
+      title: response2
+      type: object
+    response3:
+      example:
+        _self:
+          href: cards/890/transactions/268
+        id: "268"
+      properties:
+        _self:
+          $ref: "#/components/schemas/Self"
+        id:
+          type: string
+      required:
+        - id
+        - _self
+      title: response3
+      type: object
+    response5:
+      example:
+        date: 2016-01-01T00:00:00
+        description: CrC)dito relacionado a compra 10281230-01
+        redemptionMode: redemptionToken
+        value: 123.4
+      properties:
+        date:
+          type: string
+        description:
+          type: string
+        redemptionMode:
+          type: string
+        value:
+          type: number
+      required:
+        - value
+        - description
+        - date
+        - redemptionMode
+      title: response5
+      type: object
+    response6:
+      example:
+        date: 2016-01-01T00:00:00
+        oid: 7cf8d7970e1c81d05620e46cceb6819f
+        value: 123.4
+      properties:
+        date:
+          type: string
+        oid:
+          type: string
+        value:
+          type: number
+      required:
+        - oid
+        - value
+        - date
+      title: response6
+      type: object
+    response7:
+      example:
+        date: 2016-04-06T00:00:00
+        id: 239d35b430fc75379db966c1d3670c6f
+        value: 13.4
+      properties:
+        date:
+          type: string
+        id:
+          type: string
+        value:
+          type: number
+      required:
+        - id
+        - value
+        - date
+      title: response7
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey
+x-explorer-enabled: true
+x-proxy-enabled: true
+x-samples-enabled: true
+x-samples-languages:
+  - curl
+  - node
+  - ruby
+  - javascript
+  - python

@@ -1,0 +1,626 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: "\r
+
+    > Check the new [Pricing onboarding guide](https://developers.vtex.com/docs/guides/pricing-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Pricing and is organized by focusing on the developer's journey\r
+
+    \r
+
+    The Price Simulations API allows you to configure custom price selectors for B2B stores, based on the context set by the [Orders Configuration app](https://developers.vtex.com/docs/guides/vtex-order-configuration).\r
+
+    \r
+
+    ## Custom Prices\r
+
+    \r
+
+    In this section, you can create a specific shopping scenario with the criteria you want. For explaining purpose, we used the `orderType` and `state` as default values, but it can be others too.\r
+
+    \r
+
+    `GET` [Get custom prices schema](https://developers.vtex.com/docs/api-reference/price-simulations#get-/_v/custom-prices/session/schema)\r
+
+    `POST` [Create or Update custom prices schema](https://developers.vtex.com/docs/api-reference/price-simulations#post-/_v/custom-prices/session/schema)\r
+
+    \r
+
+    ## Session Management\r
+
+    \r
+
+    Every time you edit a configuration value set on the Custom Prices session, you must use this endpoint to update the Order Configuration.\r
+
+    \r
+
+    `POST` [Update Order Configuration](https://developers.vtex.com/docs/api-reference/price-simulations#post-/sessions/)\r
+
+    \r
+
+    \r
+
+    ## Price Association\r
+
+    \r
+
+    Use these routes to associate a shopping scenario, created at the Custom Price session, to a specific price table.\r
+
+    \r
+
+    `GET` [Get price association by ID](https://developers.vtex.com/docs/api-reference/price-simulations#get-/_v/custom-prices/rules/-priceAssociationId-)\r
+
+    `POST` [Create price association](https://developers.vtex.com/docs/api-reference/price-simulations#post-/_v/custom-prices/rules)\r
+
+    `PUT` [Update price association by ID](https://developers.vtex.com/docs/api-reference/price-simulations#put-/_v/custom-prices/rules/-priceAssociationId-)\r
+
+    `DELETE` [Disassociate price association by ID](https://developers.vtex.com/docs/api-reference/price-simulations#delete-/_v/custom-prices/rules/-priceAssociationId-)"
+  title: Price Simulations API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Price Simulations.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Price-Simulations
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+tags:
+  - name: Session Management
+  - name: Custom Prices
+  - name: Price Association
+paths:
+  /_v/custom-prices/rules:
+    post:
+      description: Creates a new price association for a shopping scenario
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              default: {}
+              properties:
+                email:
+                  default: ""
+                  description: User's email
+                  title: email
+                orderType:
+                  default: ""
+                  description: Order type
+                  title: orderType
+                  type: string
+                pricetable:
+                  default: ""
+                  description: Name of the Price Table associated with the scenario
+                  title: pricetable
+                  type: string
+                state:
+                  default: ""
+                  description: Delivery location
+                  title: state
+                  type: string
+              required:
+                - pricetable
+              type: object
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                default: {}
+                properties:
+                  email:
+                    default: ""
+                    description: User's email
+                    title: email
+                  id:
+                    default: ""
+                    description: Price association ID
+                    title: id
+                    type: integer
+                  orderType:
+                    default: ""
+                    description: Order type
+                    title: orderType
+                    type: string
+                  pricetable:
+                    default: ""
+                    description: Name of the Price Table associated with the scenario
+                    title: pricetable
+                    type: string
+                  state:
+                    default: ""
+                    description: Delivery location
+                    title: state
+                    type: string
+                required:
+                  - id
+                  - pricetable
+                type: object
+          description: OK
+      summary: Create price association
+      tags:
+        - Price Association
+  "/_v/custom-prices/rules/{priceAssociationId}":
+    delete:
+      description: Disassociates a price association from a shopping scenario by its ID
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Price Association unique identifier
+          in: path
+          name: priceAssociationId
+          required: true
+          schema:
+            default: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                default: "Rule deleted with success: custom_prices-5dc4f3d6-dda6-11ea-835b-12d97a7637bf"
+                type: string
+          description: OK
+      summary: Disassociate price association by ID
+      tags:
+        - Price Association
+    get:
+      description: Retrieves price association for a shopping scenario by its ID
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Price Association unique identifier
+          in: path
+          name: priceAssociationId
+          required: true
+          schema:
+            default: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                default: {}
+                properties:
+                  email:
+                    default: ""
+                    description: User's email
+                    title: email
+                  id:
+                    default: ""
+                    description: Price association ID
+                    title: id
+                    type: integer
+                  orderType:
+                    default: ""
+                    description: Order type
+                    title: orderType
+                    type: string
+                  pricetable:
+                    default: ""
+                    description: Name of the Price Table associated with the scenario
+                    title: pricetable
+                    type: string
+                  state:
+                    default: ""
+                    description: Delivery location
+                    title: state
+                    type: string
+                required:
+                  - id
+                  - pricetable
+                type: object
+          description: OK
+      summary: Get price association by ID
+      tags:
+        - Price Association
+    put:
+      description: Updates a price association for a shopping scenario by its ID
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Price Association unique identifier
+          in: path
+          name: priceAssociationId
+          required: true
+          schema:
+            default: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              default: {}
+              properties:
+                orderType:
+                  default: orderType
+                  description: Order type
+                  title: orderType
+                  type: string
+                pricetable:
+                  default: pricetable1
+                  description: Name of the Price Table associated with the scenario
+                  title: pricetable
+                  type: string
+                state:
+                  default: RR
+                  description: Delivery location
+                  title: state
+                  type: string
+              required:
+                - orderType
+                - state
+                - pricetable
+              title: Request body
+              type: object
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                default: {}
+                properties:
+                  email:
+                    default: ""
+                    description: User's email
+                    title: email
+                  id:
+                    default: ""
+                    description: Price association ID
+                    title: id
+                    type: integer
+                  orderType:
+                    default: ""
+                    description: Order type
+                    title: orderType
+                    type: string
+                  pricetable:
+                    default: ""
+                    description: Name of the Price Table associated with the scenario
+                    title: pricetable
+                    type: string
+                  state:
+                    default: ""
+                    description: Delivery location
+                    title: state
+                    type: string
+                required:
+                  - id
+                  - pricetable
+                type: object
+          description: OK
+      summary: Update price association by ID
+      tags:
+        - Price Association
+  /_v/custom-prices/session/schema:
+    get:
+      description: Retrieves all custom price for all shopping scenarios
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                default:
+                  fields:
+                    - name: orderType
+                      type: string
+                    - name: state
+                      type: string
+                  useEmail: true
+                properties:
+                  fields:
+                    default:
+                      - name: orderType
+                        type: string
+                      - name: state
+                        type: string
+                    description: Order Configuration criteria
+                    items:
+                      default:
+                        name: orderType
+                        type: string
+                      properties:
+                        name:
+                          default: orderType
+                          description: Criteria name
+                          title: name
+                          type: string
+                        type:
+                          default: string
+                          description: Criteria type
+                          title: type
+                          type: string
+                      required:
+                        - name
+                        - type
+                      type: object
+                    title: fields
+                    type: array
+                  useEmail:
+                    default: true
+                    description: If the custom price should use the user's e-mail to validate it
+                    title: useEmail
+                    type: boolean
+                required:
+                  - fields
+                title: Request body
+                type: object
+          description: OK
+      summary: Get custom prices schema
+      tags:
+        - Custom Prices
+    post:
+      description: Creates a new custom price for a shopping scenario or updates an existing one
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              default:
+                fields:
+                  - name: orderType
+                    type: string
+                  - name: state
+                    type: string
+                useEmail: true
+              properties:
+                fields:
+                  default:
+                    - name: orderType
+                      type: string
+                    - name: state
+                      type: string
+                  description: Order Configuration criteria
+                  items:
+                    default:
+                      name: orderType
+                      type: string
+                    properties:
+                      name:
+                        default: orderType
+                        description: Criteria name
+                        title: name
+                        type: string
+                      type:
+                        default: string
+                        description: Criteria type
+                        title: type
+                        type: string
+                    required:
+                      - name
+                      - type
+                    type: object
+                  title: fields
+                  type: array
+                useEmail:
+                  default: true
+                  description: If the custom price should use the user's e-mail to validate it
+                  title: useEmail
+                  type: boolean
+              required:
+                - fields
+              title: Request body
+              type: object
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                default:
+                  fields:
+                    - name: orderType
+                      type: string
+                    - name: state
+                      type: string
+                  useEmail: true
+                properties:
+                  fields:
+                    default:
+                      - name: orderType
+                        type: string
+                      - name: state
+                        type: string
+                    description: Order Configuration criteria
+                    items:
+                      default:
+                        name: orderType
+                        type: string
+                      properties:
+                        name:
+                          default: orderType
+                          description: Criteria name
+                          title: name
+                          type: string
+                        type:
+                          default: string
+                          description: Criteria type
+                          title: type
+                          type: string
+                      required:
+                        - name
+                        - type
+                      type: object
+                    title: fields
+                    type: array
+                  useEmail:
+                    default: true
+                    description: If the custom price should use the user's e-mail to validate it
+                    title: useEmail
+                    type: boolean
+                required:
+                  - fields
+                title: Request body
+                type: object
+          description: OK
+      summary: Create or Update custom prices schema
+      tags:
+        - Custom Prices
+  /sessions/:
+    post:
+      description: Updates the Order Configuration. You should use this route every time you edit a configuration value
+      parameters:
+        - description: Describes the type of the content being sent
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              default: {}
+              description: ""
+              properties:
+                public:
+                  default: {}
+                  description: Object to register session criteria
+                  properties:
+                    customSessionKeys:
+                      default:
+                        value: '{"state":"ES","orderType":"res"}'
+                      description: Contains every schema criteria. This is a serialized JSON object
+                      properties:
+                        value:
+                          default: ""
+                          description: Order Configuration criteria
+                          title: value
+                          type: string
+                      required:
+                        - value
+                      title: customSessionKeys
+                      type: object
+                  required:
+                    - customSessionKeys
+                  title: public
+                  type: object
+              required:
+                - public
+              title: Request Body
+              type: object
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: {}
+          description: OK
+      summary: Update Order Configuration
+      tags:
+        - Session Management

@@ -1,0 +1,35 @@
+{
+  "apis": {
+    "opendatanetwork.com": {
+      "added": "2018-04-24T08:00:10.000Z",
+      "info": {
+        "description": "The Socrata OpenDataNetwork (ODN) REST API exposes public data, often continuosly updated and enhanced, from many thousands of public\ngovernment and non profit agencies.\n\nMuch of this data originating from independent sources is fused together to create new, and often\npowerful, entity level data. The API, in addition to search and autosuggest capabilities for finding datasets,\nenables data based comparisons across geographical regions such as states, counties, metropolitan areas,\ncities and zip codes using highly vetted data providers such as US Census, BEA, HUD and others. Comparison data\nis preformatted for easy and efficient display on a chart, graph or interactive map.\n\nThe API also exposes data organized by narrative style questions a human might ask. The questions can\nbe rapidly found using an autosuggest style index, and then used to directly access all data needed to\nthoroughly and authoritatively answer the question. Retrieved data includes time series (temporally aligned),\ntabular, map heavy (includes spatial boundaries), and auto generated unstructured descriptive text.\n\nThe ODN API does not duplicate API endpoints or services provided by public sector agencies, but rather,\nreturns context relevant pre-populated REST URLs, when appropriate, so the caller can access data\ndirectly from the source.\n\nThe [open source](http://github.com/socrata/odn-backend) API powers [OpenDataNetwork.com](http://OpenDataNetwork.com), an [open source](http://github.com/socrata/opendatanetwork.com)\nsite; the site highlights myriad uses and provides API badges with contextually relevant API example\nREST endpoints and documentation pointers.\n\nFinally, we continuously add new dat sources which appear automatically in the API, so if your favorite data\nsource is not available, check back soon. You can also join us [HERE](http://www.opendatanetwork.com/join-open-data-network)\nand receive updates or let us know which data sources you are most interested in.\n\n## App Tokens\n\nRegistering for and including a [Socrata application token](https://dev.socrata.com/docs/app-tokens.html)\nis _required_ for the ODN API. They can be passed either using the `app_token` parameter\nor the `X-App-Token` HTTP header.",
+        "title": "ODN API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/mermade/oas-kit",
+              "version": "7.0.4"
+            },
+            "format": "apiBlueprint",
+            "url": "https://raw.githubusercontent.com/socrata/odn-backend/master/opendatanetwork-apiary.apib",
+            "version": "1A"
+          }
+        ],
+        "x-providerName": "opendatanetwork.com",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/opendatanetwork.com/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/opendatanetwork.com/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/opendatanetwork.com/1.0.0.json"
+    }
+  }
+}

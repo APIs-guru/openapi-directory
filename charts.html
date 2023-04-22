@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>APIs.guru data visualisations</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+  <style>
+    canvas {
+      width: 50%;
+      height: 50%;
+    }
+  </style>
+</head>
+<body>
+
+<h1>APIs.guru data visualisations</h1>
+
+<h2>APIs by provider</h2>
+<div class="col2"><canvas class="canvas" id="chart1"></canvas></div>
+
+<p>
+<h2>Valid versus invalid API definitions at source</h2>
+<div class="col2"><canvas class="canvas" id="chart2"></canvas></div>
+
+<p>
+<h2>Reachable versus unreachable API definitions at source</h2>
+<div class="col2"><canvas class="canvas" id="chart3"></canvas></div>
+
+<script>
+async function main() {
+  try {
+    const res = await fetch('https://api.apis.guru/v2/metrics.json',{json:true});
+    const data = await res.json();
+    const canvas1 = document.getElementById('chart1');
+    const ctx = canvas1.getContext('2d');
+    const providerData = { labels: Object.keys(data.datasets[0].data), datasets: [ { label: data.datasets[0].title,
+      data: Object.values(data.datasets[0].data),
+     } ] };
+    const chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'pie',
+
+        // The data for our dataset
+        data: providerData,
+        // Configuration options go here
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          plugins: {
+            colorschemes: {
+              scheme: 'brewer.Paired12'
+            }
+          }
+        }
+    });
+    const canvas2 = document.getElementById('chart2');
+    const ctx2 = canvas2.getContext('2d');
+    const invalidData = { labels: ['Valid','Invalid'],
+      datasets: [ { label: 'Valid/Invalid',
+      data: [ data.numSpecs-data.invalid, data.invalid ] } ] };
+    const chart2 = new Chart(ctx2, {
+        // The type of chart we want to create
+        type: 'pie',
+
+        // The data for our dataset
+        data: invalidData,
+        // Configuration options go here
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          plugins: {
+            colorschemes: {
+              scheme: 'brewer.Paired12'
+            }
+          }
+        }
+    });
+    const canvas3 = document.getElementById('chart3');
+    const ctx3 = canvas3.getContext('2d');
+    const reachableData = { labels: ['Reachable','Unreachable'],
+      datasets: [ { label: 'Valid/Invalid',
+      data: [ data.numSpecs-data.unreachable, data.unreachable ] } ] };
+    const chart3 = new Chart(ctx3, {
+        // The type of chart we want to create
+        type: 'pie',
+
+        // The data for our dataset
+        data: reachableData,
+        // Configuration options go here
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          plugins: {
+            colorschemes: {
+              scheme: 'brewer.Paired12'
+            }
+          }
+        }
+    });
+  }
+  catch (ex) {
+    alert(ex.message);
+  }
+}
+
+main();
+
+</script>
+
+</body>
+</html>

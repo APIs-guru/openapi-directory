@@ -1,0 +1,562 @@
+openapi: 3.0.0
+servers:
+  - description: Production server
+    url: https://gregeoip.com
+  - description: Development server
+    url: https://dev.gregeoip.com
+info:
+  contact:
+    email: info@greip.io
+    name: Greip Support
+    url: https://greip.io/contact
+  description: This documentation shows how to use Greip API, By highlighting the API methods, options and some other features that allow you to get the most of this API.
+  termsOfService: https://greip.io/terms
+  title: Greip API
+  version: 1.0.0
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_greip.io_img_xapp-icon-180.png.pagespeed.ic.ZTdYRFWWyQ.png
+  x-origin:
+    - format: openapi
+      url: https://greip.io/OpenAPI.json
+      version: "3.0"
+  x-providerName: greip.io
+externalDocs:
+  description: Find more info here
+  url: https://docs.greip.io
+paths:
+  /BulkLookup:
+    get:
+      description: "BulkLookup endpoint: Returns the geolocation data of multiple IP Addresses."
+      externalDocs:
+        description: Greip API - Bulk Lookup
+        url: https://docs.greip.io/methods/bulk-lookup
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The IP Addresses you want to lookup. It's a CSV (Comma Separated Values)
+          examples:
+            "0":
+              description: Lookup only `1.1.1.1` IP Address.
+              summary: Lookup a single IP Address
+              value: 1.1.1.1
+            "1":
+              description: Use `1.1.1.1` and `2.2.2.2` IP Addresses.
+              summary: Lookup multiple IP Addresses
+              value: 1.1.1.1,2.2.2.2
+          explode: true
+          in: query
+          name: ips
+          required: true
+          schema:
+            example: 1.1.1.1,2.2.2.2
+            externalDocs:
+              description: Greip API - Bulk Lookup
+              url: https://docs.greip.io/methods/bulk-lookup
+            type: string
+          style: form
+        - description: The modules you want to use of the request. It's a CSV (Comma Separated Values)
+          examples:
+            "0":
+              description: Use only `currency` module.
+              summary: Using a single module
+              value: currency
+            "1":
+              description: Use `security`, `timezone`, `currency` and `device` modules.
+              summary: Using multiple modules
+              value: security,timezone,currency,device
+          explode: true
+          in: query
+          name: params
+          required: false
+          schema:
+            example: currency
+            externalDocs:
+              description: Greip API - Custom Modules Response
+              url: https://docs.greip.io/options/custom-modules-response
+            type: string
+          style: form
+        - description: Used to inform the API to retrieve the response in your native language.
+          examples:
+            "0":
+              summary: Arabic Response
+              value: AR
+            "1":
+              summary: Russian Response
+              value: RU
+            "2":
+              summary: Spanish Response
+              value: ES
+            "3":
+              summary: Danish Response
+              value: DE
+            "4":
+              summary: French Response
+              value: FR
+            "5":
+              summary: Japanese Response
+              value: JA
+            "6":
+              summary: Chinese Response
+              value: ZH
+            "7":
+              summary: English Response
+              value: EN
+          in: query
+          name: lang
+          required: false
+          schema:
+            example: AR
+            externalDocs:
+              description: Greip API - Localization
+              url: https://docs.greip.io/options/localization
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: XML
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /Country:
+    get:
+      description: "Country endpoint: Returns the information of a specific country by passing the `countrCode`."
+      externalDocs:
+        description: Greip API - Country Data API
+        url: https://docs.greip.io/methods/country-data-api
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The Country Code of the country you want to fetch it's data.
+          in: query
+          name: CountryCode
+          required: true
+          schema:
+            example: PS
+            type: string
+        - description: The modules you want to use of the request. It's a CSV (Comma Separated Values)
+          examples:
+            "0":
+              description: Use only `language` module.
+              summary: Using a single module
+              value: language
+            "1":
+              description: Use `language`, `flag`, `currency` and `timezone` modules.
+              summary: Using multiple modules
+              value: language,flag,currency,timezone
+          explode: true
+          in: query
+          name: params
+          required: false
+          schema:
+            example: language
+            externalDocs:
+              description: Greip API - Country - Possible Param
+              url: https://docs.greip.io/methods/country-data-api#possible-param
+            type: string
+          style: form
+        - description: Used to inform the API to retrieve the response in your native language.
+          examples:
+            "0":
+              summary: Arabic Response
+              value: AR
+            "1":
+              summary: Russian Response
+              value: RU
+            "2":
+              summary: Spanish Response
+              value: ES
+            "3":
+              summary: Danish Response
+              value: DE
+            "4":
+              summary: French Response
+              value: FR
+            "5":
+              summary: Japanese Response
+              value: JA
+            "6":
+              summary: Chinese Response
+              value: ZH
+            "7":
+              summary: English Response
+              value: EN
+          in: query
+          name: lang
+          required: false
+          schema:
+            example: AR
+            externalDocs:
+              description: Greip API - Localization
+              url: https://docs.greip.io/options/localization
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: XML
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /GeoIP:
+    get:
+      description: "GeoIP endpoint: Returns the geolocation data of the visitor."
+      externalDocs:
+        description: Greip API - Retrieve Visitor Info
+        url: https://docs.greip.io/methods/retrieve-visitor-info
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The modules you want to use of the request. It's a CSV (Comma Separated Values)
+          examples:
+            "0":
+              description: Use only `currency` module.
+              summary: Using a single module
+              value: currency
+            "1":
+              description: Use `security`, `timezone`, `currency` and `device` modules.
+              summary: Using multiple modules
+              value: security,timezone,currency,device
+          explode: true
+          in: query
+          name: params
+          required: false
+          schema:
+            example: currency
+            externalDocs:
+              description: Greip API - Custom Modules Response
+              url: https://docs.greip.io/options/custom-modules-response
+            type: string
+          style: form
+        - description: Used to inform the API to retrieve the response in your native language.
+          examples:
+            "0":
+              summary: Arabic Response
+              value: AR
+            "1":
+              summary: Russian Response
+              value: RU
+            "2":
+              summary: Spanish Response
+              value: ES
+            "3":
+              summary: Danish Response
+              value: DE
+            "4":
+              summary: French Response
+              value: FR
+            "5":
+              summary: Japanese Response
+              value: JA
+            "6":
+              summary: Chinese Response
+              value: ZH
+            "7":
+              summary: English Response
+              value: EN
+          in: query
+          name: lang
+          required: false
+          schema:
+            example: AR
+            externalDocs:
+              description: Greip API - Localization
+              url: https://docs.greip.io/options/localization
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: XML
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /IPLookup:
+    get:
+      description: "IPLookup endpoint: Returns the geolocation data of a specific IP Address."
+      externalDocs:
+        description: Greip API - Lookup IP Address
+        url: https://docs.greip.io/methods/lookup-ip-address
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The IP Address you want to lookup.
+          in: query
+          name: ip
+          required: true
+          schema:
+            example: 1.1.1.1
+            externalDocs:
+              description: Greip API - Lookup IP Address
+              url: https://docs.greip.io/methods/lookup-ip-address
+            type: string
+        - description: The modules you want to use of the request. It's a CSV (Comma Separated Values)
+          examples:
+            "0":
+              description: Use only `currency` module.
+              summary: Using a single module
+              value: currency
+            "1":
+              description: Use `security`, `timezone`, `currency` and `device` modules.
+              summary: Using multiple modules
+              value: security,timezone,currency,device
+          explode: true
+          in: query
+          name: params
+          required: false
+          schema:
+            example: currency
+            externalDocs:
+              description: Greip API - Custom Modules Response
+              url: https://docs.greip.io/options/custom-modules-response
+            type: string
+          style: form
+        - description: Used to inform the API to retrieve the response in your native language.
+          examples:
+            "0":
+              summary: Arabic Response
+              value: AR
+            "1":
+              summary: Russian Response
+              value: RU
+            "2":
+              summary: Spanish Response
+              value: ES
+            "3":
+              summary: Danish Response
+              value: DE
+            "4":
+              summary: French Response
+              value: FR
+            "5":
+              summary: Japanese Response
+              value: JA
+            "6":
+              summary: Chinese Response
+              value: ZH
+            "7":
+              summary: English Response
+              value: EN
+          in: query
+          name: lang
+          required: false
+          schema:
+            example: AR
+            externalDocs:
+              description: Greip API - Localization
+              url: https://docs.greip.io/options/localization
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: XML
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /badWords:
+    get:
+      description: "badWords endpoint: Detects whether user inputs contain profanity or not."
+      externalDocs:
+        description: Greip API - Profanity Detection
+        url: https://docs.greip.io/methods/profanity-detection
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The text you want to check.
+          in: query
+          name: text
+          required: true
+          schema:
+            example: This is a sample text without profanity!
+            type: string
+        - description: Set to `yes` to list the bad-words as an Array.
+          examples:
+            "0":
+              description: Don't return the found bad-words as an Array.
+              summary: NO
+              value: no
+            "1":
+              description: Return the found bad-words as an Array.
+              summary: YES
+              value: yes
+          in: query
+          name: listBadWords
+          required: false
+          schema:
+            example: no
+            type: string
+        - description: Set to `yes` to return only the score of the text and whether it's safe or not.
+          examples:
+            "0":
+              description: Return full information about the text.
+              summary: NO
+              value: no
+            "1":
+              description: Return only the safety score of the text.
+              summary: YES
+              value: yes
+          in: query
+          name: scoreOnly
+          required: false
+          schema:
+            example: no
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: JSON
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error

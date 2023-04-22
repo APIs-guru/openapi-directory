@@ -1,0 +1,1096 @@
+openapi: 3.0.0
+servers:
+  - url: https://assuredworkloads.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: ""
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Assured Workloads API
+  version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: openapi
+      url: https://assuredworkloads.googleapis.com/$discovery/rest?version=v1
+      version: "3.0"
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: assuredworkloads
+externalDocs:
+  url: https://cloud.google.com/learnmoreurl
+tags:
+  - name: organizations
+paths:
+  "/v1/{name}":
+    delete:
+      description: Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error.
+      operationId: assuredworkloads.organizations.locations.workloads.delete
+      parameters:
+        - description: "Required. The `name` field is used to identify the workload. Format: organizations/{org_id}/locations/{location_id}/workloads/{workload_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The etag of the workload. If this is provided, it must match the server's etag.
+          in: query
+          name: etag
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    get:
+      description: Retrieves Assured Workload Violation based on ID.
+      operationId: assuredworkloads.organizations.locations.workloads.violations.get
+      parameters:
+        - description: "Required. The resource name of the Violation to fetch (ie. Violation.name). Format: organizations/{organization}/locations/{location}/workloads/{workload}/violations/{violation}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Violation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates an existing workload. Currently allows updating of workload display_name and labels. For force updates don't set etag field in the Workload. Only one update operation per workload can be in progress.
+      operationId: assuredworkloads.organizations.locations.workloads.patch
+      parameters:
+        - description: "Optional. The resource name of the workload. Format: organizations/{organization}/locations/{location}/workloads/{workload} Read-only."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. The list of fields to be updated.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{name}/operations":
+    get:
+      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
+      operationId: assuredworkloads.organizations.locations.operations.list
+      parameters:
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningListOperationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:acknowledge":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Acknowledges an existing violation. By acknowledging a violation, users acknowledge the existence of a compliance violation in their workload and decide to ignore it due to a valid business justification. Acknowledgement is a permanent operation and it cannot be reverted.
+      operationId: assuredworkloads.organizations.locations.workloads.violations.acknowledge
+      parameters:
+        - description: "Required. The resource name of the Violation to acknowledge. Format: organizations/{organization}/locations/{location}/workloads/{workload}/violations/{violation}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1AcknowledgeViolationResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{name}:mutatePartnerPermissions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update the permissions settings for an existing partner workload. For force updates don't set etag field in the Workload. Only one update operation per workload can be in progress.
+      operationId: assuredworkloads.organizations.locations.workloads.mutatePartnerPermissions
+      parameters:
+        - description: "Required. The `name` field is used to identify the workload. Format: organizations/{org_id}/locations/{location_id}/workloads/{workload_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{name}:restrictAllowedResources":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Restrict the list of resources allowed in the Workload environment. The current list of allowed products can be found at https://cloud.google.com/assured-workloads/docs/supported-products In addition to assuredworkloads.workload.update permission, the user should also have orgpolicy.policy.set permission on the folder resource to use this functionality.
+      operationId: assuredworkloads.organizations.locations.workloads.restrictAllowedResources
+      parameters:
+        - description: Required. The resource name of the Workload. This is the workloads's relative path in the API, formatted as "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}". For example, "organizations/123/locations/us-east1/workloads/assured-workload-1".
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{parent}/violations":
+    get:
+      description: Lists the Violations in the AssuredWorkload Environment. Callers may also choose to read across multiple Workloads as per [AIP-159](https://google.aip.dev/159) by using '-' (the hyphen or dash character) as a wildcard character instead of workload-id in the parent. Format `organizations/{org_id}/locations/{location}/workloads/-`
+      operationId: assuredworkloads.organizations.locations.workloads.violations.list
+      parameters:
+        - description: Required. The Workload name. Format `organizations/{org_id}/locations/{location}/workloads/{workload}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A custom filter for filtering by the Violations properties.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The end of the time window.
+          in: query
+          name: interval.endTime
+          schema:
+            type: string
+        - description: The start of the time window.
+          in: query
+          name: interval.startTime
+          schema:
+            type: string
+        - description: Optional. Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token returned from previous request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ListViolationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/workloads":
+    get:
+      description: Lists Assured Workloads under a CRM Node.
+      operationId: assuredworkloads.organizations.locations.workloads.list
+      parameters:
+        - description: Required. Parent Resource to list workloads from. Must be of the form `organizations/{org_id}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: A custom filter for filtering by properties of a workload. At this time, only filtering by labels is supported.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token returned from previous request. Page token contains context from previous request. Page token needs to be passed in the second and following requests.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ListWorkloadsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates Assured Workload.
+      operationId: assuredworkloads.organizations.locations.workloads.create
+      parameters:
+        - description: Required. The resource name of the new Workload's parent. Must be of the form `organizations/{org_id}/locations/{location_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A identifier associated with the workload and underlying projects which allows for the break down of billing costs for a workload. The value provided for the identifier will add a label to the workload and contained projects with the identifier as the value.
+          in: query
+          name: externalId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest:
+      description: "Request for acknowledging the violation Next Id: 4"
+      properties:
+        comment:
+          description: Required. Business justification explaining the need for violation acknowledgement
+          type: string
+        nonCompliantOrgPolicy:
+          description: "Optional. This field is deprecated and will be removed in future version of the API. Name of the OrgPolicy which was modified with non-compliant change and resulted in this violation. Format: projects/{project_number}/policies/{constraint_name} folders/{folder_id}/policies/{constraint_name} organizations/{organization_id}/policies/{constraint_name}"
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1AcknowledgeViolationResponse:
+      description: Response for violation acknowledgement
+      properties: {}
+      type: object
+    GoogleCloudAssuredworkloadsV1CreateWorkloadOperationMetadata:
+      description: Operation metadata to give request details of CreateWorkload.
+      properties:
+        complianceRegime:
+          description: Optional. Compliance controls that should be applied to the resources managed by the workload.
+          enum:
+            - COMPLIANCE_REGIME_UNSPECIFIED
+            - IL4
+            - CJIS
+            - FEDRAMP_HIGH
+            - FEDRAMP_MODERATE
+            - US_REGIONAL_ACCESS
+            - HIPAA
+            - HITRUST
+            - EU_REGIONS_AND_SUPPORT
+            - CA_REGIONS_AND_SUPPORT
+            - ITAR
+            - AU_REGIONS_AND_US_SUPPORT
+            - ASSURED_WORKLOADS_FOR_PARTNERS
+            - ISR_REGIONS
+            - ISR_REGIONS_AND_SUPPORT
+            - CA_PROTECTED_B
+          type: string
+        createTime:
+          description: Optional. Time when the operation was created.
+          format: google-datetime
+          type: string
+        displayName:
+          description: Optional. The display name of the workload.
+          type: string
+        parent:
+          description: Optional. The parent of the workload.
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1ListViolationsResponse:
+      description: Response of ListViolations endpoint.
+      properties:
+        nextPageToken:
+          description: The next page token. Returns empty if reached the last page.
+          type: string
+        violations:
+          description: List of Violations under a Workload.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Violation"
+          type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1ListWorkloadsResponse:
+      description: Response of ListWorkloads endpoint.
+      properties:
+        nextPageToken:
+          description: The next page token. Return empty if reached the last page.
+          type: string
+        workloads:
+          description: List of Workloads under a given parent.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
+          type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest:
+      description: Request of updating permission settings for a partner workload.
+      properties:
+        etag:
+          description: Optional. The etag of the workload. If this is provided, it must match the server's etag.
+          type: string
+        partnerPermissions:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadPartnerPermissions"
+          description: Required. The partner permissions to be updated.
+        updateMask:
+          description: 'Required. The list of fields to be updated. E.g. update_mask { paths: "partner_permissions.data_logs_viewer"}'
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequest:
+      description: Request for restricting list of available resources in Workload environment.
+      properties:
+        restrictionType:
+          description: Required. The type of restriction for using gcp products in the Workload environment.
+          enum:
+            - RESTRICTION_TYPE_UNSPECIFIED
+            - ALLOW_ALL_GCP_RESOURCES
+            - ALLOW_COMPLIANT_RESOURCES
+            - APPEND_COMPLIANT_RESOURCES
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesResponse:
+      description: Response for restricting the list of allowed resources.
+      properties: {}
+      type: object
+    GoogleCloudAssuredworkloadsV1Violation:
+      description: "Workload monitoring Violation. Next Id: 22"
+      properties:
+        acknowledged:
+          description: A boolean that indicates if the violation is acknowledged
+          type: boolean
+        acknowledgementTime:
+          description: Optional. Timestamp when this violation was acknowledged first. Check exception_contexts to find the last time the violation was acknowledged when there are more than one violations. This field will be absent when acknowledged field is marked as false.
+          format: google-datetime
+          type: string
+        auditLogLink:
+          description: "Output only. Immutable. Audit Log Link for violated resource Format: https://console.cloud.google.com/logs/query;query={logName}{protoPayload.resourceName}{timeRange}{folder}"
+          readOnly: true
+          type: string
+        beginTime:
+          description: Output only. Time of the event which triggered the Violation.
+          format: google-datetime
+          readOnly: true
+          type: string
+        category:
+          description: Output only. Category under which this violation is mapped. e.g. Location, Service Usage, Access, Encryption, etc.
+          readOnly: true
+          type: string
+        description:
+          description: Output only. Description for the Violation. e.g. OrgPolicy gcp.resourceLocations has non compliant value.
+          readOnly: true
+          type: string
+        exceptionAuditLogLink:
+          description: "Output only. Immutable. Audit Log link to find business justification provided for violation exception. Format: https://console.cloud.google.com/logs/query;query={logName}{protoPayload.resourceName}{protoPayload.methodName}{timeRange}{organization}"
+          readOnly: true
+          type: string
+        exceptionContexts:
+          description: Output only. List of all the exception detail added for the violation.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationExceptionContext"
+          readOnly: true
+          type: array
+        name:
+          description: "Output only. Immutable. Name of the Violation. Format: organizations/{organization}/locations/{location}/workloads/{workload_id}/violations/{violations_id}"
+          readOnly: true
+          type: string
+        nonCompliantOrgPolicy:
+          description: "Output only. Immutable. Name of the OrgPolicy which was modified with non-compliant change and resulted this violation. Format: projects/{project_number}/policies/{constraint_name} folders/{folder_id}/policies/{constraint_name} organizations/{organization_id}/policies/{constraint_name}"
+          readOnly: true
+          type: string
+        orgPolicyConstraint:
+          description: Output only. Immutable. The org-policy-constraint that was incorrectly changed, which resulted in this violation.
+          readOnly: true
+          type: string
+        remediation:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediation"
+          description: Output only. Compliance violation remediation
+          readOnly: true
+        resolveTime:
+          description: Output only. Time of the event which fixed the Violation. If the violation is ACTIVE this will be empty.
+          format: google-datetime
+          readOnly: true
+          type: string
+        state:
+          description: Output only. State of the violation
+          enum:
+            - STATE_UNSPECIFIED
+            - RESOLVED
+            - UNRESOLVED
+            - EXCEPTION
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last time when the Violation record was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationExceptionContext:
+      description: "Violation exception detail. Next Id: 5"
+      properties:
+        acknowledgementTime:
+          description: Timestamp when the violation was acknowledged.
+          format: google-datetime
+          type: string
+        comment:
+          description: Business justification provided towards the acknowledgement of the violation.
+          type: string
+        principalEmail:
+          description: Email address of the user (or service account) who acknowledged the violation.
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationRemediation:
+      description: Represents remediation guidance to resolve compliance violation for AssuredWorkload
+      properties:
+        compliantValues:
+          description: "Values that can resolve the violation For example: for list org policy violations, this will either be the list of allowed or denied values"
+          items:
+            type: string
+          type: array
+        instructions:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions"
+          description: Required. Remediation instructions to resolve violations
+        remediationType:
+          description: Output only. Reemediation type based on the type of org policy values violated
+          enum:
+            - REMEDIATION_TYPE_UNSPECIFIED
+            - REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION
+            - REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION
+            - REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION
+            - REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions:
+      description: Instructions to remediate violation
+      properties:
+        consoleInstructions:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole"
+          description: Remediation instructions to resolve violation via cloud console
+        gcloudInstructions:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud"
+          description: Remediation instructions to resolve violation via gcloud cli
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole:
+      description: Remediation instructions to resolve violation via cloud console
+      properties:
+        additionalLinks:
+          description: Additional urls for more information about steps
+          items:
+            type: string
+          type: array
+        consoleUris:
+          description: Link to console page where violations can be resolved
+          items:
+            type: string
+          type: array
+        steps:
+          description: Steps to resolve violation via cloud console
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud:
+      description: Remediation instructions to resolve violation via gcloud cli
+      properties:
+        additionalLinks:
+          description: Additional urls for more information about steps
+          items:
+            type: string
+          type: array
+        gcloudCommands:
+          description: Gcloud command to resolve violation
+          items:
+            type: string
+          type: array
+        steps:
+          description: Steps to resolve violation via gcloud cli
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1Workload:
+      description: A Workload object for managing highly regulated workloads of cloud customers.
+      properties:
+        billingAccount:
+          description: Optional. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
+          type: string
+        complianceRegime:
+          description: Required. Immutable. Compliance Regime associated with this workload.
+          enum:
+            - COMPLIANCE_REGIME_UNSPECIFIED
+            - IL4
+            - CJIS
+            - FEDRAMP_HIGH
+            - FEDRAMP_MODERATE
+            - US_REGIONAL_ACCESS
+            - HIPAA
+            - HITRUST
+            - EU_REGIONS_AND_SUPPORT
+            - CA_REGIONS_AND_SUPPORT
+            - ITAR
+            - AU_REGIONS_AND_US_SUPPORT
+            - ASSURED_WORKLOADS_FOR_PARTNERS
+            - ISR_REGIONS
+            - ISR_REGIONS_AND_SUPPORT
+            - CA_PROTECTED_B
+          type: string
+        complianceStatus:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus"
+          description: Output only. Count of active Violations in the Workload.
+          readOnly: true
+        compliantButDisallowedServices:
+          description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
+          items:
+            type: string
+          readOnly: true
+          type: array
+        createTime:
+          description: Output only. Immutable. The Workload creation timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: "Required. The user-assigned display name of the Workload. When present it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, and spaces. Example: My Workload"
+          type: string
+        ekmProvisioningResponse:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadEkmProvisioningResponse"
+          description: Optional. Represents the Ekm Provisioning State of the given workload.
+        enableSovereignControls:
+          description: Optional. Indicates the sovereignty status of the given workload. Currently meant to be used by Europe/Canada customers.
+          type: boolean
+        etag:
+          description: Optional. ETag of the workload, it is calculated on the basis of the Workload contents. It will be used in Update & Delete operations.
+          type: string
+        kajEnrollmentState:
+          description: Output only. Represents the KAJ enrollment state of the given workload.
+          enum:
+            - KAJ_ENROLLMENT_STATE_UNSPECIFIED
+            - KAJ_ENROLLMENT_STATE_PENDING
+            - KAJ_ENROLLMENT_STATE_COMPLETE
+          readOnly: true
+          type: string
+        kmsSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
+          description: Input only. Settings used to create a CMEK crypto key. When set, a project with a KMS CMEK key is provisioned. This field is deprecated as of Feb 28, 2022. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Labels applied to the workload.
+          type: object
+        name:
+          description: "Optional. The resource name of the workload. Format: organizations/{organization}/locations/{location}/workloads/{workload} Read-only."
+          type: string
+        partner:
+          description: Optional. Partner regime associated with this workload.
+          enum:
+            - PARTNER_UNSPECIFIED
+            - LOCAL_CONTROLS_BY_S3NS
+            - SOVEREIGN_CONTROLS_BY_T_SYSTEMS
+            - SOVEREIGN_CONTROLS_BY_SIA_MINSAIT
+            - SOVEREIGN_CONTROLS_BY_PSN
+          type: string
+        provisionedResourcesParent:
+          description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"
+          type: string
+        resourceSettings:
+          description: Input only. Resource properties that are used to customize workload resources. These properties (such as custom project id) will be used to create workload resources if possible. This field is optional.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadResourceSettings"
+          type: array
+        resources:
+          description: Output only. The resources associated with this workload. These resources will be created when creating the workload. If any of the projects already exist, the workload creation will fail. Always read only.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadResourceInfo"
+          readOnly: true
+          type: array
+        saaEnrollmentResponse:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse"
+          description: Output only. Represents the SAA enrollment response of the given workload. SAA enrollment response is queried during GetWorkload call. In failure cases, user friendly error message is shown in SAA details page.
+          readOnly: true
+        violationNotificationsEnabled:
+          description: Optional. Indicates whether the e-mail notification for a violation is enabled for a workload. This value will be by default True, and if not present will be considered as true. This should only be updated via updateWorkload call. Any Changes to this field during the createWorkload call will not be honored.
+          type: boolean
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus:
+      description: Represents the Compliance Status of this workload
+      properties:
+        acknowledgedViolationCount:
+          description: Count of active Violations which are acknowledged in the Workload.
+          format: int32
+          type: integer
+        activeViolationCount:
+          description: Count of active Violations which haven't been acknowledged.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadEkmProvisioningResponse:
+      description: External key management systems(EKM) Provisioning response
+      properties:
+        ekmProvisioningErrorDomain:
+          description: Indicates Ekm provisioning error if any.
+          enum:
+            - EKM_PROVISIONING_ERROR_DOMAIN_UNSPECIFIED
+            - UNSPECIFIED_ERROR
+            - GOOGLE_SERVER_ERROR
+            - EXTERNAL_USER_ERROR
+            - EXTERNAL_PARTNER_ERROR
+            - TIMEOUT_ERROR
+          type: string
+        ekmProvisioningErrorMapping:
+          description: Detailed error message if Ekm provisioning fails
+          enum:
+            - EKM_PROVISIONING_ERROR_MAPPING_UNSPECIFIED
+            - INVALID_SERVICE_ACCOUNT
+            - MISSING_METRICS_SCOPE_ADMIN_PERMISSION
+            - MISSING_EKM_CONNECTION_ADMIN_PERMISSION
+          type: string
+        ekmProvisioningState:
+          description: Indicates Ekm enrollment Provisioning of a given workload.
+          enum:
+            - EKM_PROVISIONING_STATE_UNSPECIFIED
+            - EKM_PROVISIONING_STATE_PENDING
+            - EKM_PROVISIONING_STATE_FAILED
+            - EKM_PROVISIONING_STATE_COMPLETED
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadKMSSettings:
+      description: Settings specific to the Key Management Service. This message is deprecated. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
+      properties:
+        nextRotationTime:
+          description: Required. Input only. Immutable. The time at which the Key Management Service will automatically create a new version of the crypto key and mark it as the primary.
+          format: google-datetime
+          type: string
+        rotationPeriod:
+          description: Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key Management Service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadPartnerPermissions:
+      description: Permissions granted to the AW Partner SA account for the customer workload
+      properties:
+        dataLogsViewer:
+          description: Allow the partner to view inspectability logs and monitoring violations.
+          type: boolean
+        remediateFolderViolations:
+          description: Allow partner to monitor folder and remediate violations
+          type: boolean
+        serviceAccessApprover:
+          description: Allow partner to approve or reject Service Access requests
+          type: boolean
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadResourceInfo:
+      description: Represent the resources that are children of this Workload.
+      properties:
+        resourceId:
+          description: Resource identifier. For a project this represents project_number.
+          format: int64
+          type: string
+        resourceType:
+          description: Indicates the type of resource.
+          enum:
+            - RESOURCE_TYPE_UNSPECIFIED
+            - CONSUMER_PROJECT
+            - CONSUMER_FOLDER
+            - ENCRYPTION_KEYS_PROJECT
+            - KEYRING
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadResourceSettings:
+      description: Represent the custom settings for the resources to be created.
+      properties:
+        displayName:
+          description: User-assigned resource display name. If not empty it will be used to create a resource with the specified name.
+          type: string
+        resourceId:
+          description: Resource identifier. For a project this represents project_id. If the project is already taken, the workload creation will fail. For KeyRing, this represents the keyring_id. For a folder, don't set this value as folder_id is assigned by Google.
+          type: string
+        resourceType:
+          description: Indicates the type of resource. This field should be specified to correspond the id to the right resource type (CONSUMER_FOLDER or ENCRYPTION_KEYS_PROJECT)
+          enum:
+            - RESOURCE_TYPE_UNSPECIFIED
+            - CONSUMER_PROJECT
+            - CONSUMER_FOLDER
+            - ENCRYPTION_KEYS_PROJECT
+            - KEYRING
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse:
+      description: Signed Access Approvals (SAA) enrollment response.
+      properties:
+        setupErrors:
+          description: Indicates SAA enrollment setup error if any.
+          items:
+            enum:
+              - SETUP_ERROR_UNSPECIFIED
+              - ERROR_INVALID_BASE_SETUP
+              - ERROR_MISSING_EXTERNAL_SIGNING_KEY
+              - ERROR_NOT_ALL_SERVICES_ENROLLED
+              - ERROR_SETUP_CHECK_FAILED
+            type: string
+          type: array
+        setupStatus:
+          description: Indicates SAA enrollment status of a given workload.
+          enum:
+            - SETUP_STATE_UNSPECIFIED
+            - STATUS_PENDING
+            - STATUS_COMPLETE
+          type: string
+      type: object
+    GoogleLongrunningListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/GoogleLongrunningOperation"
+          type: array
+      type: object
+    GoogleLongrunningOperation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
+    GoogleProtobufEmpty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    GoogleRpcStatus:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

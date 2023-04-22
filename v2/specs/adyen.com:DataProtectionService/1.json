@@ -1,0 +1,37 @@
+{
+  "added": "2023-02-17T11:02:20.620Z",
+  "info": {
+    "contact": {
+      "email": "developer-experience@adyen.com",
+      "name": "Adyen Developer Experience team",
+      "url": "https://www.adyen.help/hc/en-us/community/topics",
+      "x-twitter": "Adyen"
+    },
+    "description": "Adyen Data Protection API provides a way for you to process [Subject Erasure Requests](https://gdpr-info.eu/art-17-gdpr/) as mandated in GDPR.\n\nUse our API to submit a request to delete shopper's data, including payment details and other related information (for example, delivery address or shopper email).## Authentication\nEach request to the Data Protection API must be signed with an API key. Get your API Key from your Customer Area, as described in [How to get the API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key). Then set this key to the `X-API-Key` header value, for example:\n\n```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: Your_API_key\" \\\n...\n```\nNote that when going live, you need to generate a new API Key to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nData Protection Service API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://ca-test.adyen.com/ca/services/DataProtectionService/v1/requestSubjectErasure\n```",
+    "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+    "title": "Adyen Data Protection API",
+    "version": "1",
+    "x-apisguru-categories": [
+      "payment"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/DataProtectionService-v1.json",
+        "version": "3.1"
+      }
+    ],
+    "x-providerName": "adyen.com",
+    "x-publicVersion": true,
+    "x-serviceName": "DataProtectionService",
+    "x-timestamp": "2023-02-20T18:24:23Z"
+  },
+  "updated": "2023-03-15T23:18:29.384Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/DataProtectionService/1/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/DataProtectionService/1/openapi.yaml",
+  "openapiVer": "3.1.0",
+  "link": "https://api.apis.guru/v2/specs/adyen.com:DataProtectionService/1.json"
+}

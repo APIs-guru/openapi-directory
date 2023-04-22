@@ -1,0 +1,78 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.ip2location.io
+info:
+  description: IP2Location.io IP Geolocation API provides RESTful API to obtain visitors’ geolocation information such as country, region, city, latitude & longitude, ZIP code, time zone, ASN, ISP, domain, net speed, IDD code, area code, weather station data, MNC, MCC, mobile brand, elevation, usage type, address type, advertisement category and proxy data with an IP address.
+  title: IP2Location.io IP Geolocation API
+  version: "1.0"
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_cdn.ip2location.io_assets_img_icons_android-chrome-512x512.png
+  x-origin:
+    - format: openapi
+      url: https://api.swaggerhub.com/apis/ip2location/ip2location-io-ip-geolocation-api/1.0
+      version: "3.0"
+  x-providerName: ip2location.io
+paths:
+  /:
+    get:
+      description: Geolocate user's location information via IP address
+      parameters:
+        - description: API key.
+          in: query
+          name: key
+          required: true
+          schema:
+            type: string
+        - description: IP address (IPv4 or IPv6) for reverse IP location lookup purposes. If not present, the server IP address will be used for the location lookup.
+          in: query
+          name: ip
+          required: true
+          schema:
+            example: 8.8.8.8
+            type: string
+        - description: Format of the response message.
+          in: query
+          name: format
+          schema:
+            enum:
+              - json
+              - xml
+            type: string
+        - description: Translation information. The translation only applicable for continent, country, region and city name. This parameter is only available for Plus and Security plan only.
+          in: query
+          name: lang
+          schema:
+            enum:
+              - ar
+              - cs
+              - da
+              - de
+              - en
+              - es
+              - et
+              - fi
+              - fr
+              - ga
+              - it
+              - ja
+              - ko
+              - ms
+              - nl
+              - pt
+              - ru
+              - sv
+              - tr
+              - vi
+              - zh-cn
+              - zh-tw
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "0":
+                  value: '{"ip":"8.8.8.8","country_code":"US","country_name":"United States of America","region_name":"California","city_name":"Mountain View","latitude":37.405992,"longitude":-122.078515,"zip_code":"94043","time_zone":"-07:00","asn":"15169","as":"Google LLC","isp":"Google LLC","domain":"google.com","net_speed":"T1","idd_code":"1","area_code":"650","weather_station_code":"USCA0746","weather_station_name":"Mountain View","mcc":"-","mnc":"-","mobile_brand":"-","elevation":32,"usage_type":"DCH","address_type":"Anycast","continent":{"name":"North America","code":"NA","hemisphere":["north","west"],"translation":{"lang":"ko","value":"북아메리카"}},"country":{"name":"United States of America","alpha3_code":"USA","numeric_code":840,"demonym":"Americans","flag":"https://cdn.ip2location.io/assets/img/flags/us.png","capital":"Washington, D.C.","total_area":9826675,"population":331002651,"currency":{"code":"USD","name":"United States Dollar","symbol":"$"},"language":{"code":"EN","name":"English"},"tld":"us","translation":{"lang":"ko","value":"미국"}},"region":{"name":"California","code":"US-CA","translation":{"lang":"ko","value":"캘리포니아주"}},"city":{"name":"Mountain View","translation":{"lang":null,"value":null}},"time_zone_info":{"olson":"America/Los_Angeles","current_time":"2022-05-09T23:37:36-07:00","gmt_offset":-25200,"is_dst":true,"sunrise":"06:03","sunset":"20:06"},"geotargeting":{"metro":"807"},"ads_category":"IAB19","ads_category_name":"Technology & Computing","is_proxy":false,"proxy":{"last_seen":9,"proxy_type":"DCH","threat":"-","provider":"-"}}'
+          description: Get response from IP lookup

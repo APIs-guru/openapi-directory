@@ -1,0 +1,239 @@
+openapi: 3.0.0
+servers:
+  - url: https://readerrevenuesubscriptionlinking.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: readerrevenuesubscriptionlinking.googleapis.com API.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Reader Revenue Subscription Linking API
+  version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://readerrevenuesubscriptionlinking.googleapis.com/$discovery/rest?version=v1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: readerrevenuesubscriptionlinking
+externalDocs:
+  url: https://developers.google.com/news/subscribe/subscription-linking/overview
+tags:
+  - name: publications
+paths:
+  "/v1/{name}":
+    delete:
+      description: Removes a publication reader, effectively severing the association with a Google user. If `force` is set to true, any entitlements for this reader will also be deleted. (Otherwise, the request will only work if the reader has no entitlements.) - If the reader does not exist, return NOT_FOUND. - Return FAILED_PRECONDITION if the force field is false (or unset) and entitlements are present.
+      operationId: readerrevenuesubscriptionlinking.publications.readers.delete
+      parameters:
+        - description: "Required. The resource name of the reader. Format: publications/{publication_id}/readers/{ppid}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: If set to true, any entitlements under the reader will also be purged.
+          in: query
+          name: force
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteReaderResponse"
+          description: Successful response
+      tags:
+        - publications
+    get:
+      description: Gets the reader entitlements for a publication reader. - Returns PERMISSION_DENIED if the caller does not have access. - Returns NOT_FOUND if the reader does not exist.
+      operationId: readerrevenuesubscriptionlinking.publications.readers.getEntitlements
+      parameters:
+        - description: "Required. The name of the reader entitlements to retrieve. Format: publications/{publication_id}/readers/{reader_id}/entitlements"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReaderEntitlements"
+          description: Successful response
+      tags:
+        - publications
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates the reader entitlements for a publication reader. The entire reader entitlements will be overwritten by the new reader entitlements in the payload, like a PUT. - Returns PERMISSION_DENIED if the caller does not have access. - Returns NOT_FOUND if the reader does not exist.
+      operationId: readerrevenuesubscriptionlinking.publications.readers.updateEntitlements
+      parameters:
+        - description: Output only. The resource name of the singleton.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The list of fields to update. Defaults to all fields.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReaderEntitlements"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReaderEntitlements"
+          description: Successful response
+      tags:
+        - publications
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    DeleteReaderResponse:
+      description: Response to deleting a reader of a publication.
+      properties: {}
+      type: object
+    Entitlement:
+      description: A single entitlement for a publication reader
+      properties:
+        detail:
+          description: The detail field can carry a description of the SKU that corresponds to what the user has been granted access to. This description, which is opaque to Google, can be displayed in the Google user subscription console for users who linked the subscription to a Google Account. Max 80 character limit.
+          type: string
+        expireTime:
+          description: Required. Expiration time of the entitlement. Entitlements that have expired over 30 days will be purged. Required. LINT.IfChange(expire_time) The max expire_time is 398 days from now(). LINT.ThenChange(//depot/google3/java/com/google/subscribewithgoogle/accountlinking/subscriptionlink/service/config/protoconf.pi:max_expiry_age)
+          format: google-datetime
+          type: string
+        productId:
+          description: Required. The publication's product ID that the user has access to. This is the same product ID as can be found in Schema.org markup (http://schema.org/productID). E.g. "dailybugle.com:basic"
+          type: string
+        subscriptionToken:
+          description: A source-specific subscription token. This is an opaque string that the publisher provides to Google. This token is opaque and has no meaning to Google.
+          type: string
+      type: object
+    Reader:
+      description: A reader of a publication.
+      properties:
+        createTime:
+          description: Output only. Time the publication reader was created and associated with a Google user.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name of the reader. The last part of ppid in the resource name is the publisher provided id.
+          readOnly: true
+          type: string
+      type: object
+    ReaderEntitlements:
+      description: A singleton containing all of a reader's entitlements for a publication.
+      properties:
+        entitlements:
+          description: All of the entitlements for a publication reader.
+          items:
+            $ref: "#/components/schemas/Entitlement"
+          type: array
+        name:
+          description: Output only. The resource name of the singleton.
+          readOnly: true
+          type: string
+      type: object

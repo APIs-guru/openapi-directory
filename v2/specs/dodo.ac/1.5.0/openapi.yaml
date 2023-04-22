@@ -1,0 +1,4097 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.nookipedia.com/
+info:
+  description: The Nookipedia API provides endpoints for retrieving *Animal Crossing* data pulled from the [Nookipedia wiki](https://nookipedia.com/wiki/Main_Page). A couple of the key benefits of using the Nookipedia API is access to data spanning the entire *Animal Crossing* series, as well as information that is constantly updated and expanding as editors work on the wiki.<br><br>Access to the Nookipedia API requires obtaining a key. This is so we can manage our scale and provide better support for our users. To request access to the API, please fill out [this form](https://forms.gle/wLwtXLerKhfDrRLY8).<br><br>This API is 'version 2' of our [original API](https://nookipedia.com/api/). While the previous API scraped information directly from the wiki, this new edition of the API pulls data from a structured and constrained database, resulting in higher-quality data, better searching, and support for filtering.
+  title: Nookipedia
+  version: 1.5.0
+  x-origin:
+    - format: openapi
+      url: https://api.nookipedia.com/static/doc.yaml
+      version: "3.0"
+  x-providerName: dodo.ac
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  /nh/art:
+    get:
+      description: "Get a list of all artwork and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: When set to `true`, only artwork that has a fake will be returned. When set to `false`, only artwork without fakes will be returned.
+          in: query
+          name: hasfake
+          required: false
+          schema:
+            type: string
+        - description: When set to `true`, only artwork names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL. Note that requesting specific image sizes for long lists may result in a very long response time.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHArtwork"
+                type: array
+          description: A JSON array of artwork.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons artwork
+  "/nh/art/{artwork}":
+    get:
+      description: "Retrieve information about a specific artwork in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the artwork you wish to retrieve information about.
+          in: path
+          name: artwork
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHArtwork"
+          description: A JSON object describing the artwork.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons artwork
+  /nh/bugs:
+    get:
+      description: "Get a list of all bugs and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Retrive only the bug that are available in a specific month. Value may be the month's name (`jan`, `january`), the integer representing the month (`01`, `1`), or `current` for the current month. When `current` is specified, the return body will be an object with two arrays inside, one called `north` and the other `south` containing the bug available in each respective hemisphere. Note that the current month is calculated based off the API server's time, so it may be slightly off for you at the beginning or end of the month.
+          in: query
+          name: month
+          required: false
+          schema:
+            type: string
+        - description: When set to `true`, only bug names are returned. Instead of an array of objects with all details, the return will be an array of strings. This is particularly useful when used with the `month` filter, for users who want just a list of bugs in a given month but not all their respective details.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL. Note that requesting specific image sizes for long lists may result in a very long response time.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHBug"
+                type: array
+          description: A JSON array of bugs.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons bugs
+  "/nh/bugs/{bug}":
+    get:
+      description: "Retrieve information about a specific bug in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the bug you wish to retrieve information about.
+          in: path
+          name: bug
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHBug"
+          description: A JSON object describing the bug.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error404"
+          description: Could not find the specified bug.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons bug
+  /nh/clothing:
+    get:
+      description: "Get a list of all clothing items and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the category of clothing to return.
+          in: query
+          name: category
+          required: false
+          schema:
+            enum:
+              - Tops
+              - Bottoms
+              - Dress-up
+              - Headwear
+              - Accessories
+              - Socks
+              - Shoes
+              - Bags
+              - Umbrellas
+            type: string
+        - description: Return clothing that matches the provided colors (may specify one or two colors). Colors are used for gifting villagers.
+          in: query
+          name: color
+          required: false
+          schema:
+            items:
+              enum:
+                - Aqua
+                - Beige
+                - Black
+                - Blue
+                - Brown
+                - Colorful
+                - Gray
+                - Green
+                - Orange
+                - Pink
+                - Purple
+                - Red
+                - White
+                - Yellow
+              type: string
+            type: array
+        - description: Return clothing that matches the provided styles (may specify one or two styles). Styles are used for gifting villagers.
+          in: query
+          name: style
+          required: false
+          schema:
+            items:
+              enum:
+                - Active
+                - Cool
+                - Cute
+                - Elegant
+                - Gorgeous
+                - Simple
+              type: string
+            type: array
+        - description: Return clothing that have the specified Label theme. This is used for completing the requested outfit theme for [Label](https://nookipedia.com/wiki/Label) when she visits the player's island.
+          in: query
+          name: labeltheme
+          required: false
+          schema:
+            enum:
+              - Comfy
+              - Everyday
+              - Fairy tale
+              - Formal
+              - Goth
+              - Outdoorsy
+              - Party
+              - Sporty
+              - Theatrical
+              - Vacation
+              - Work
+            type: string
+        - description: When set to `true`, only clothing names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHClothing"
+                type: array
+          description: A JSON array of clothing.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons clothing
+  "/nh/clothing/{clothing}":
+    get:
+      description: "Retrieve information about a specific clothing item in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the clothing you wish to retrieve information about.
+          in: path
+          name: clothing
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHClothing"
+          description: A JSON object describing the clothing.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons clothing
+  /nh/events:
+    get:
+      description: "Get a list of events and dates in *Animal Crossing: New Horizons*, filterable to specific years, months, or days. Data is available for the current and next year."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify a specific date (in the current or next year) to retrieve events for. Accepts many date formats, such as `YYYY-MM-DD` or `Month Day, Year`, as well as `today` to retrieve the current day's events (UTC time).
+          in: query
+          name: date
+          required: false
+          schema:
+            type: string
+        - description: Specify the year to retrieve events for. Must be the current or next year.
+          in: query
+          name: year
+          required: false
+          schema:
+            type: string
+        - description: Specify the month to retrieve events for (accepts multiple formats, such as `Oct`, `October`, or `10`). Most likely want to use alongside `year`, otherwise events in both the current and next year are returned.
+          in: query
+          name: month
+          required: false
+          schema:
+            type: string
+        - description: Specify the day of the month to retrieve events for.
+          in: query
+          name: day
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHEvent"
+                type: array
+          description: A JSON array of events.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons events
+  /nh/fish:
+    get:
+      description: Get a list of all fish and their details in *New Horizons*.
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Retrive only the fish that are available in a specific month. Value may be the month's name (`jan`, `january`), the integer representing the month (`01`, `1`), or `current` for the current month. When `current` is specified, the return body will be an object with two arrays inside, one called `north` and the other `south` containing the fish available in each respective hemisphere. Note that the current month is calculated based off the API server's time, so it may be slightly off for you at the beginning or end of the month.
+          in: query
+          name: month
+          required: false
+          schema:
+            type: string
+        - description: When set to `true`, only fish names are returned. Instead of an array of objects with all details, the return will be an array of strings. This is particularly useful when used with the `month` filter, for users who want just a list of fish in a given month but not all their respective details.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL. Note that requesting specific image sizes for long lists may result in a very long response time.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHFish"
+                type: array
+          description: A JSON array of fish.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons fish
+  "/nh/fish/{fish}":
+    get:
+      description: "Retrieve information about a specific fish in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the fish you wish to retrieve information about.
+          in: path
+          name: fish
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHFish"
+          description: A JSON object describing the fish.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error404"
+          description: Could not find the specified fish.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons fish
+  /nh/fossils/all:
+    get:
+      description: "Get a list of all the fossil groups with their respective individual fossils in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHFossilGroupWithIndividualFossilsNoMatched"
+                type: array
+          description: A JSON array of fossil groups.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons fossil groups or individual fossil
+  "/nh/fossils/all/{fossil}":
+    get:
+      description: "Retrieve information about a specific fossil group with their respective individual fossils in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the fossil OR fossil group you wish to retrieve information about. If a fossil is provided, a fossil group that the specified fossil belongs to will be returned.
+          in: path
+          name: fossil
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHFossilGroupWithIndividualFossils"
+          description: A JSON object describing the fossil group.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons fossil group with individual fossils
+  /nh/fossils/groups:
+    get:
+      description: "Get a list of all the fossil groups in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHFossilGroup"
+                type: array
+          description: A JSON array of fossil groups.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons fossil groups
+  "/nh/fossils/groups/{fossil_group}":
+    get:
+      description: "Retrieve information about a specific fossil group in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the fossil group you wish to retrieve information about.
+          in: path
+          name: fossil_group
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHFossilGroup"
+          description: A JSON object describing the fossil group.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons fossil group
+  /nh/fossils/individuals:
+    get:
+      description: "Get a list of all the individual fossils in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHIndividualFossil"
+                type: array
+          description: A JSON array of individual fossils.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons fossils
+  "/nh/fossils/individuals/{fossil}":
+    get:
+      description: "Retrieve information about a specific individual fossil in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the individual fossil you wish to retrieve fossil information about.
+          in: path
+          name: fossil
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHIndividualFossil"
+          description: A JSON object describing the individual fossil.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons fossil
+  /nh/furniture:
+    get:
+      description: "Get a list of all furniture and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the category of furniture to return (houswares, miscellaneous, or wall-mounted).
+          in: query
+          name: category
+          required: false
+          schema:
+            enum:
+              - Housewares
+              - Miscellaneous
+              - Wall-mounted
+            type: string
+        - description: Return furniture that matches the provided colors (may specify one or two colors).
+          in: query
+          name: color
+          required: false
+          schema:
+            items:
+              enum:
+                - Aqua
+                - Beige
+                - Black
+                - Blue
+                - Brown
+                - Colorful
+                - Gray
+                - Green
+                - Orange
+                - Pink
+                - Purple
+                - Red
+                - White
+                - Yellow
+              type: string
+            type: array
+        - description: When set to `true`, only furniture names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHFurniture"
+                type: array
+          description: A JSON array of furniture.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons furniture
+  "/nh/furniture/{furniture}":
+    get:
+      description: "Retrieve information about a specific furniture in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the furniture you wish to retrieve information about.
+          in: path
+          name: furniture
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHFurniture"
+          description: A JSON object describing the furniture.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons furniture
+  /nh/interior:
+    get:
+      description: "Get a list of all interior items (flooring, wallpaper, and rugs) and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Return furniture that matches the provided colors (may specify one or two colors).
+          in: query
+          name: color
+          required: false
+          schema:
+            items:
+              enum:
+                - Aqua
+                - Beige
+                - Black
+                - Blue
+                - Brown
+                - Colorful
+                - Gray
+                - Green
+                - Orange
+                - Pink
+                - Purple
+                - Red
+                - White
+                - Yellow
+              type: string
+            type: array
+        - description: When set to `true`, only interior item names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHInterior"
+                type: array
+          description: A JSON array of interior items.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons interior items
+  "/nh/interior/{item}":
+    get:
+      description: "Retrieve information about a specific interior item in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the interior item you wish to retrieve information about.
+          in: path
+          name: item
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Return furniture that matches the provided colors (may specify one or two colors).
+          in: query
+          name: color
+          required: false
+          schema:
+            items:
+              enum:
+                - Aqua
+                - Beige
+                - Black
+                - Blue
+                - Brown
+                - Colorful
+                - Gray
+                - Green
+                - Orange
+                - Pink
+                - Purple
+                - Red
+                - White
+                - Yellow
+              type: string
+            type: array
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHInterior"
+          description: A JSON object describing the interior item.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons interior item
+  /nh/items:
+    get:
+      description: "Get a list of all miscellaneous items (such as materials, star fragments, fruits, fences, and plants) and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: When set to `true`, only item names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHItem"
+                type: array
+          description: A JSON array of items.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Miscellaneous New Horizons items
+  "/nh/items/{item}":
+    get:
+      description: "Retrieve information about a miscellaneous item (such as materials, star fragments, fruits, fences, and plants) in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the interior item you wish to retrieve information about.
+          in: path
+          name: item
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHItem"
+          description: A JSON object describing the item.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons miscellaneous item
+  /nh/photos:
+    get:
+      description: "Get a list of all character photos+posters and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: When set to `true`, only item names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHPhoto"
+                type: array
+          description: A JSON array of photos and posters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons photos and posters
+  "/nh/photos/{item}":
+    get:
+      description: "Retrieve information about a character photo or poster in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the photo or poster you wish to retrieve information about.
+          in: path
+          name: item
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHPhoto"
+          description: A JSON object describing the photo or poster.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons photo or poster
+  /nh/recipes:
+    get:
+      description: "Get a list of all recipes and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify a material to only get recipes that use that material. You can specify `material` up to six times (no recipe uses more than six materials).
+          in: query
+          name: material
+          required: false
+          schema:
+            type: string
+        - description: When set to `true`, only recipe names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL. Note that requesting specific image sizes for long lists may result in a very long response time.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHRecipe"
+                type: array
+          description: A JSON array of recipes.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons recipes
+  "/nh/recipes/{item}":
+    get:
+      description: "Retrieve information about a specific recipe in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the item you wish to retrieve recipe information about.
+          in: path
+          name: item
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHRecipe"
+          description: A JSON object describing the recipe.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons recipe
+  /nh/sea:
+    get:
+      description: "Get a list of all sea creatures and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Retrive only the sea creature that are available in a specific month. Value may be the month's name (`jan`, `january`), the integer representing the month (`01`, `1`), or `current` for the current month. When `current` is specified, the return body will be an object with two arrays inside, one called `north` and the other `south` containing the sea creature available in each respective hemisphere. Note that the current month is calculated based off the API server's time, so it may be slightly off for you at the beginning or end of the month.
+          in: query
+          name: month
+          required: false
+          schema:
+            type: string
+        - description: When set to `true`, only sea creature names are returned. Instead of an array of objects with all details, the return will be an array of strings. This is particularly useful when used with the `month` filter, for users who want just a list of sea creatures in a given month but not all their respective details.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL. Note that requesting specific image sizes for long lists may result in a very long response time.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHSeaCreature"
+                type: array
+          description: A JSON array of sea creatures.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons sea creatures
+  "/nh/sea/{sea_creature}":
+    get:
+      description: "Retrieve information about a specific sea creature in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the sea creature you wish to retrieve information about.
+          in: path
+          name: sea_creature
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHSeaCreature"
+          description: A JSON object describing the sea creature.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error404"
+          description: Could not find the specified sea creature.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons sea creature
+  /nh/tools:
+    get:
+      description: "Get a list of all tools and their details in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: When set to `true`, only tool names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NHTool"
+                type: array
+          description: A JSON array of interior items.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: All New Horizons tools
+  "/nh/tools/{tool}":
+    get:
+      description: "Retrieve information about a specific tool in *Animal Crossing: New Horizons*."
+      parameters:
+        - description: The name of the interior item you wish to retrieve information about.
+          in: path
+          name: tool
+          required: true
+          schema:
+            type: string
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NHTool"
+          description: A JSON object describing the tool.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Single New Horizons tool
+  /villagers:
+    get:
+      description: This endpoint retrieves villager information from the entire *Animal Crossing* series, with the option to filter by species, personality, game, and/or birthday. Filters use the AND operator (e.g. asking for villagers who have species `frog` and personality `smug` will return all smug frogs). Note that villagers only include the animals that act as residents. Special characters, such as Tom Nook and Isabelle, are not accessed through this endpoint.
+      parameters:
+        - description: Your UUID secret key, granted to you by the Nookipedia team. Required for accessing the API.
+          in: header
+          name: X-API-KEY
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version of the API you are calling, written as `1.0.0`. This is specified as required as good practice, but it is not actually enforced by the API. If you do not specify a version, you will be served the latest version, which may eventually result in breaking changes.
+          in: header
+          name: Accept-Version
+          required: true
+          schema:
+            type: string
+        - description: Villager name. For most names you will get back an array with one object, but note that names are not a unique identifier across the series, as there are 3 names that are shared by multiple villagers (Lulu, Petunia, Carmen). For those 3 names you will get back an array with 2 objects. How you disambiguate between these villagers is up to you.
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: Retrieve villagers of a certain species.
+          in: query
+          name: species
+          required: false
+          schema:
+            enum:
+              - alligator
+              - anteater
+              - bear
+              - bird
+              - bull
+              - cat
+              - cub
+              - chicken
+              - cow
+              - deer
+              - dog
+              - duck
+              - eagle
+              - elephant
+              - frog
+              - goat
+              - gorilla
+              - hamster
+              - hippo
+              - horse
+              - koala
+              - kangaroo
+              - lion
+              - monkey
+              - mouse
+              - octopus
+              - ostrich
+              - penguin
+              - pig
+              - rabbit
+              - rhino
+              - sheep
+              - squirrel
+              - tiger
+              - wolf
+            type: string
+        - description: Retrieve villagers with a certain personality. For 'sisterly', note that the community often also calls it 'uchi' or 'big sister'.
+          in: query
+          name: personality
+          required: false
+          schema:
+            enum:
+              - lazy
+              - jock
+              - cranky
+              - smug
+              - normal
+              - peppy
+              - snooty
+              - sisterly
+            type: string
+        - description: Retrieve villagers that appear in all listed games. For example, if you want only villagers that appear in both *New Horizons* and *Pocket Camp*, you would send in `?game=nh&game=pc`.
+          in: query
+          name: game
+          required: false
+          schema:
+            items:
+              enum:
+                - DNM
+                - AC
+                - E_PLUS
+                - WW
+                - CF
+                - NL
+                - WA
+                - NH
+                - FILM
+                - HHD
+                - PC
+              type: string
+            type: array
+        - description: Retrieve villagers born in a specific month. Value may be the month's name (`jan`, `january`) or the integer representing the month (`01`, `1`).
+          in: query
+          name: birthmonth
+          required: false
+          schema:
+            type: string
+        - description: Use with `birthmonth` to get villager(s) born on a specific day. Value should be an int, 1 through 31.
+          in: query
+          name: birthday
+          required: false
+          schema:
+            type: string
+        - description: When set to `true`, an `nh_details` object will be included that contains *New Horizons* details about the villager. If the villager does not appear in *New Horizons*, the returned `nh_details` field will be set to null.
+          in: query
+          name: nhdetails
+          required: false
+          schema:
+            type: string
+        - description: When set to `true`, only villager names are returned. Instead of an array of objects with all details, the return will be an array of strings.
+          in: query
+          name: excludedetails
+          required: false
+          schema:
+            type: string
+        - description: Specify the desired width of returned image URLs. When unspecified, the linked image(s) returned by the API will be full-resolution. Note that images can only be reduced in size; specifying a width greater than than the maximum size will return the default full-size image URL. Note that requesting specific image sizes for long lists may result in a very long response time.
+          in: query
+          name: thumbsize
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Villager"
+                type: array
+          description: A JSON array of villagers.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error400"
+          description: One of the inputs (usually query parameters) has an invalid value.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error401"
+          description: Failed to authenticate user from `X-API-KEY`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500"
+          description: There was an error fetching the requested data.
+      summary: Villagers
+components:
+  schemas:
+    Error400:
+      description: Bad request (often an invalid input).
+      properties:
+        details:
+          description: A more in-depth description of the issue, including parameters and/or error text when available.
+          example: Provided month filter jonuary was not recognized as a valid month.
+          type: string
+        title:
+          description: A brief title describing the error.
+          example: Failed to identify the provided month filter.
+          type: string
+      type: object
+    Error401:
+      description: Unauthorized.
+      properties:
+        details:
+          description: A more in-depth description of the issue, including parameters and/or error text when available.
+          example: UUID is either missing or invalid; or, unspecified server occured.
+          type: string
+        title:
+          description: A brief title describing the error.
+          example: Failed to validate UUID.
+          type: string
+      type: object
+    Error404:
+      description: Not found.
+      properties:
+        details:
+          description: A more in-depth description of the issue, including parameters and/or error text when available.
+          example: "MediaWiki Cargo request succeeded by nothing was returned for the parameters: {}"
+          type: string
+        title:
+          description: A brief title describing the error.
+          example: No data was found for the given query.
+          type: string
+      type: object
+    Error500:
+      description: Internal server error.
+      properties:
+        details:
+          description: A more in-depth description of the issue, including parameters and/or error text when available.
+          example: Details unknown.
+          type: string
+        title:
+          description: A brief title describing the error.
+          example: API experienced a fatal error.
+          type: string
+      type: object
+    NHArtwork:
+      properties:
+        art_name:
+          description: The name of the real-life analog to the artwork.
+          example: Vitruvian Man
+          type: string
+        art_style:
+          description: The art style of the artwork.
+          example: Pen and ink on paper
+          type: string
+        authenticity:
+          description: The description of the difference between real and fake, if there is one
+          example: If there is a coffee stain in the top right corner, it is fake. If there is no stain, it is genuine. The forgery has a key taped to the back of the canvas.
+          type: string
+        author:
+          description: The author of the real-life analog to the artwork.
+          example: Leonardo da Vinci
+          type: string
+        availability:
+          description: The availability of the artwork.
+          example: Jolly Redd's Treasure Trawler
+          type: string
+        buy:
+          description: The number of Bells the artwork may be purchased for.
+          example: 4980
+          type: integer
+        description:
+          description: The description of the artwork.
+          example: This drawing is based on the &quot;ideal&quot; human-body ratio, as stated in &quot;De architectura.&quot; &quot;De architectura&quot; was a treatise by Vitruvius, an architect from the early 1st century BCE.
+          type: string
+        fake_image_url:
+          description: Image of the fake artwork, if it exists.
+          example: https://dodo.ac/np/images/1/13/Academic_Painting_%28Forgery%29_NH_Icon.png
+          type: string
+        has_fake:
+          description: Whether the artwork has a fake or not.
+          example: true
+          type: boolean
+        image_url:
+          description: Image of the real artwork. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/e/e8/Academic_Painting_NH_Icon.png
+          type: string
+        length:
+          description: The length of the artwork.
+          example: 1
+          format: float
+          type: number
+        name:
+          description: Name of the artwork.
+          example: Academic Painting
+          type: string
+        sell:
+          description: The number of Bells the artwork can be sold to Nook's store for, when it is genuine.
+          example: 1245
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Academic_Painting
+          type: string
+        width:
+          description: The width of the artwork.
+          example: 1
+          format: float
+          type: number
+        year:
+          description: The year that the real-life analog was made.
+          example: circa 1487
+          type: string
+      type: object
+    NHBug:
+      properties:
+        catchphrases:
+          description: An array of possible catchphrases the player says after catching the bug. Most critters have just one, but some can have multiple.
+          example:
+            - I caught a grasshopper! They're a grass act!
+          items:
+            type: string
+          type: array
+        image_url:
+          description: Image of the bug. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/3/37/Grasshopper_NH_Icon.png
+          type: string
+        location:
+          description: Short descriptor of where the bug can be found.
+          example: On the ground
+          type: string
+        name:
+          description: Name of the bug.
+          example: Grasshopper
+          type: string
+        north:
+          description: When you can catch the bug in the Northern hemisphere.
+          properties:
+            availability_array:
+              description: An array of objects, each object holding a months string and the time the critter is availabile during the specified month(s) in the northern hemisphere. Most critters will have just one object. A small number of critters have variable time availability in which case this array will have multiple objects.
+              example:
+                - months: Jul – Sep
+                  time: 8 AM – 5 PM
+              items:
+                properties:
+                  months:
+                    type: string
+                  time:
+                    type: string
+                type: object
+              type: array
+            months:
+              description: The months the bug is available for in the Northern hemisphere. If all year, value will be `"All year"`.
+              example: Jul – Sep
+              type: string
+            months_array:
+              description: An array of integers representing the months the bug is available in the Northern hemisphere.
+              example:
+                - 7
+                - 8
+                - 9
+              items:
+                type: integer
+              type: array
+            times_by_month:
+              description: An object with twelve numerical keys, each representing a month (`"1"` for January, `"2"` for February, etc.). The value is the times the critter is available during that month. If the critter is unavailable in a month, the value will be `"NA"`.
+              example:
+                "1": NA
+                "2": NA
+                "3": NA
+                "4": NA
+                "5": NA
+                "6": NA
+                "7": 8 AM – 5 PM
+                "8": 8 AM – 5 PM
+                "9": 8 AM – 5 PM
+                "10": NA
+                "11": NA
+                "12": NA
+              properties:
+                "1":
+                  type: string
+                "2":
+                  type: string
+                "3":
+                  type: string
+                "4":
+                  type: string
+                "5":
+                  type: string
+                "6":
+                  type: string
+                "7":
+                  type: string
+                "8":
+                  type: string
+                "9":
+                  type: string
+                "10":
+                  type: string
+                "11":
+                  type: string
+                "12":
+                  type: string
+              type: object
+          type: object
+        number:
+          description: In-game bug number, marking position in the Critterpedia.
+          example: 19
+          type: integer
+        rarity:
+          description: How rare the bug is. Note that this field is currently empty for most bugs as we do not yet know how exactly bug rarities are calculated in the game code.
+          example: Uncommon
+          type: string
+        render_url:
+          description: Render of the bug. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/1/1d/Grasshopper_NH.png
+          type: string
+        sell_flick:
+          description: The number of Bells the bug can be sold to Flick for. This value is always 1.5x that of `sell_nook`.
+          example: 240
+          type: integer
+        sell_nook:
+          description: The number of Bells the bug can be sold to Nook's store for.
+          example: 160
+          type: integer
+        south:
+          description: When you can catch the bug in the Southern hemisphere.
+          properties:
+            availability_array:
+              description: An array of objects, each object holding a months string and the time the critter is availabile during the specified month(s) in the southern hemisphere. Most critters will have just one object. A small number of critters have variable time availability in which case this array will have multiple objects.
+              example:
+                - months: Jan – Mar
+                  time: 8 AM – 5 PM
+              items:
+                properties:
+                  months:
+                    type: string
+                  time:
+                    type: string
+                type: object
+              type: array
+            months:
+              description: The months the bug is available for in the Southern hemisphere. If all year, value will be `"All year"`.
+              example: Jan – Mar
+              type: string
+            months_array:
+              description: An array of integers representing the months the bug is available in the Southern hemisphere.
+              example:
+                - 1
+                - 2
+                - 3
+              items:
+                type: integer
+              type: array
+            times_by_month:
+              description: An object with twelve numerical keys, each representing a month (`"1"` for January, `"2"` for February, etc.). The value is the times the critter is available during that month. If the critter is unavailable in a month, the value will be `"NA"`.
+              example:
+                "1": 8 AM – 5 PM
+                "2": 8 AM – 5 PM
+                "3": 8 AM – 5 PM
+                "4": NA
+                "5": NA
+                "6": NA
+                "7": NA
+                "8": NA
+                "9": NA
+                "10": NA
+                "11": NA
+                "12": NA
+              properties:
+                "1":
+                  type: string
+                "2":
+                  type: string
+                "3":
+                  type: string
+                "4":
+                  type: string
+                "5":
+                  type: string
+                "6":
+                  type: string
+                "7":
+                  type: string
+                "8":
+                  type: string
+                "9":
+                  type: string
+                "10":
+                  type: string
+                "11":
+                  type: string
+                "12":
+                  type: string
+              type: object
+          type: object
+        tank_length:
+          description: The length of the tank when the bug is placed as a furniture item.
+          example: 1
+          format: float
+          type: number
+        tank_width:
+          description: The width of the tank when the bug is placed as a furniture item.
+          example: 1
+          format: float
+          type: number
+        total_catch:
+          description: The total number of bug the player has to have caught before this bug will start spawning.
+          example: 0
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Grasshopper
+          type: string
+      type: object
+    NHClothing:
+      properties:
+        availability:
+          description: Where the clothing may be obtained from (could be multiple sources). `from` is a brief description of the source; `note`, when provided, provides additional details.
+          example:
+            - from: Able Sisters
+              note: ""
+          items:
+            properties:
+              from:
+                type: string
+              note:
+                type: string
+            type: object
+          type: array
+        buy:
+          description: An array of prices, for when the item may be purchased with Bells, Nook Miles, etc..
+          example:
+            - currency: Bells
+              price: 490
+          items:
+            properties:
+              currency:
+                type: string
+              price:
+                type: integer
+            type: object
+          type: array
+        category:
+          description: The category of item as shown in the player's inventory.
+          enum:
+            - Tops
+            - Bottoms
+            - Dress-up
+            - Headwear
+            - Accessories
+            - Socks
+            - Shoes
+            - Bags
+            - Umbrellas
+          example: Accessories
+          type: string
+        label_themes:
+          description: The clothing's Label theme(s). This is used for completing the requested outfit theme for [Label](https://nookipedia.com/wiki/Label) when she visits the player's island.
+          example:
+            - Party
+          items:
+            enum:
+              - Comfy
+              - Everyday
+              - Fairy tale
+              - Formal
+              - Goth
+              - Outdoorsy
+              - Party
+              - Sporty
+              - Theatrical
+              - Vacation
+              - Work
+            type: string
+          type: array
+        name:
+          description: The name of the clothing.
+          example: 3D Glasses
+          type: string
+        notes:
+          description: Any additional miscellaneous information about the clothing, such as a name change from a past update.
+          example: ""
+          type: string
+        seasonality:
+          description: The time of the year that the clothing is available.
+          example: All year
+          type: string
+        sell:
+          description: The number of Bells the clothing can be sold to the store for.
+          example: 122
+          type: integer
+        styles:
+          description: The clothing's style(s). Styles are used for gifting villagers.
+          example:
+            - Active
+          items:
+            enum:
+              - Active
+              - Cool
+              - Cute
+              - Elegant
+              - Gorgeous
+              - Simple
+            type: string
+          type: array
+        unlocked:
+          description: Whether the item is available through legitimate gameplay. Some items are added to the game files in an update, but aren't actually made available until a subsequent update unlocks them.
+          example: true
+          type: boolean
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Item:3D_Glasses_(New_Horizons)
+          type: string
+        variation_total:
+          description: The total number of variations the clothing has, between 0 and 8.
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+          example: 2
+          type: integer
+        variations:
+          description: An array of objects, each object representing a variation of the clothing. Clothing that has no variations (only one version) will have a single variation object with the image URL and colors, but the `variation` field will be empty. Clothing with multiple variations will have the `variation` fields defined with the name of each variation.
+          example:
+            - colors:
+                - White
+                - Colorful
+              image_url: https://dodo.ac/np/images/1/15/3D_Glasses_%28White%29_NH_Icon.png
+              variation: White
+            - colors:
+                - Colorful
+                - Black
+              image_url: https://dodo.ac/np/images/2/28/3D_Glasses_%28Black%29_NH_Icon.png
+              variation: Black
+          items:
+            properties:
+              colors:
+                items:
+                  enum:
+                    - Aqua
+                    - Beige
+                    - Black
+                    - Blue
+                    - Brown
+                    - Colorful
+                    - Gray
+                    - Green
+                    - Orange
+                    - Pink
+                    - Purple
+                    - Red
+                    - White
+                    - Yellow
+                  type: string
+                type: array
+              image_url:
+                type: string
+              variation:
+                type: string
+            type: object
+          type: array
+        version_added:
+          description: The version of *New Horizons* that the item was added. Items that were included at the game's launch have version "1.0.0".
+          example: 1.0.0
+          type: string
+        vill_equip:
+          description: Whether villagers may equip this item.
+          example: true
+          type: boolean
+      type: object
+    NHEvent:
+      properties:
+        date:
+          description: The date of the event in YYYY-MM-DD format.
+          example: 2021-05-01
+          type: string
+        event:
+          description: The description of the event.
+          example: May Day event begins
+          type: string
+        type:
+          description: The type of event. "Event" is a festivity the player can take part in. "Nook Shopping" refers to the [seasonal events](https://nookipedia.com/wiki/Nook_Shopping_seasonal_event) in which exclusive item(s) are available via []Nook Shopping](https://nookipedia.com/wiki/Nook_Shopping). "Recipes" refers to the start or end of certain recipes being available. "Birthday" refers to the birthday of a villager or special character.
+          enum:
+            - Event
+            - Nook Shopping
+            - Recipes
+            - Birthday
+          example: Event
+          type: string
+        url:
+          description: Link to the respective Nookipedia article for the event.
+          example: https://nookipedia.com/wiki/May_Day
+          type: string
+      type: object
+    NHFish:
+      properties:
+        catchphrases:
+          description: An array of possible catchphrases the player says after catching the fish. Most critters have just one, but some can have multiple.
+          example:
+            - I caught a cherry salmon! It's the perfect topper for a marlin sundae!
+          items:
+            type: string
+          type: array
+        image_url:
+          description: Image of the fish. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/d/db/Cherry_Salmon_NH_Icon.png
+          type: string
+        location:
+          description: Short descriptor of where the fish can be found.
+          example: River (clifftop)
+          type: string
+        name:
+          description: Name of the fish.
+          example: Cherry Salmon
+          type: string
+        north:
+          description: When you can catch the fish in the Northern hemisphere.
+          properties:
+            availability_array:
+              description: An array of objects, each object holding a months string and the time the critter is availabile during the specified month(s) in the northern hemisphere. Most critters will have just one object. A small number of critters have variable time availability in which case this array will have multiple objects.
+              example:
+                - months: Mar – Jun
+                  time: 4 PM – 9 AM
+                - months: Sep – Nov
+                  time: All day
+              items:
+                properties:
+                  months:
+                    type: string
+                  time:
+                    type: string
+                type: object
+              type: array
+            months:
+              description: The months the fish is available for in the Northern hemisphere. If all year, value will be `"All year"`.
+              example: Mar – Jun; Sep – Nov
+              type: string
+            months_array:
+              description: An array of integers representing the months the fish is available in the Northern hemisphere.
+              example:
+                - 3
+                - 4
+                - 5
+                - 6
+                - 9
+                - 10
+                - 11
+              items:
+                type: integer
+              type: array
+            times_by_month:
+              description: An object with twelve numerical keys, each representing a month (`"1"` for January, `"2"` for February, etc.). The value is the times the critter is available during that month. If the critter is unavailable in a month, the value will be `"NA"`.
+              example:
+                "1": NA
+                "2": NA
+                "3": 4 PM – 9 AM
+                "4": 4 PM – 9 AM
+                "5": 4 PM – 9 AM
+                "6": 4 PM – 9 AM
+                "7": NA
+                "8": NA
+                "9": All day
+                "10": All day
+                "11": All day
+                "12": NA
+              properties:
+                "1":
+                  type: string
+                "2":
+                  type: string
+                "3":
+                  type: string
+                "4":
+                  type: string
+                "5":
+                  type: string
+                "6":
+                  type: string
+                "7":
+                  type: string
+                "8":
+                  type: string
+                "9":
+                  type: string
+                "10":
+                  type: string
+                "11":
+                  type: string
+                "12":
+                  type: string
+              type: object
+          type: object
+        number:
+          description: In-game fish number, marking position in the Critterpedia.
+          example: 27
+          type: integer
+        rarity:
+          description: How rare the fish is. Note that this field is currently empty for most fish as we do not yet know how exactly fish rarities are calculated in the game code.
+          example: Uncommon
+          type: string
+        render_url:
+          description: Render of the fish. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/c/c0/Cherry_Salmon_NH.png
+          type: string
+        sell_cj:
+          description: The number of Bells the fish can be sold to C.J. for. This value is always 1.5x that of `sell_nook`.
+          example: 1500
+          type: integer
+        sell_nook:
+          description: The number of Bells the fish can be sold to Nook's store for.
+          example: 1000
+          type: integer
+        shadow_size:
+          description: The size of the fish's shadow.
+          enum:
+            - X-Small
+            - Small
+            - Medium
+            - Medium w/Fin
+            - Large
+            - Large w/Fin
+            - X-Large
+            - XX-Large
+            - Long
+          example: Small
+          type: string
+        south:
+          description: When you can catch the fish in the Southern hemisphere.
+          properties:
+            availability_array:
+              description: An array of objects, each object holding a months string and the time the critter is availabile during the specified month(s) in the southern hemisphere. Most critters will have just one object. A small number of critters have variable time availability in which case this array will have multiple objects.
+              example:
+                - months: Sep – Dec
+                  time: 4 PM – 9 AM
+                - months: Mar – May
+                  time: All day
+              items:
+                properties:
+                  months:
+                    type: string
+                  time:
+                    type: string
+                type: object
+              type: array
+            months:
+              description: The months the fish is available for in the Southern hemisphere. If all year, value will be `"All year"`.
+              example: Mar – May; Sep – Dec
+              type: string
+            months_array:
+              description: An array of integers representing the months the fish is available in the Southern hemisphere.
+              example:
+                - 3
+                - 4
+                - 5
+                - 9
+                - 10
+                - 11
+                - 12
+              items:
+                type: integer
+              type: array
+            times_by_month:
+              description: An object with twelve numerical keys, each representing a month (`"1"` for January, `"2"` for February, etc.). The value is the times the critter is available during that month. If the critter is unavailable in a month, the value will be `"NA"`.
+              example:
+                "1": NA
+                "2": NA
+                "3": 4 PM – 9 AM
+                "4": 4 PM – 9 AM
+                "5": 4 PM – 9 AM
+                "6": 4 PM – 9 AM
+                "7": NA
+                "8": NA
+                "9": All day
+                "10": All day
+                "11": All day
+                "12": NA
+              properties:
+                "1":
+                  type: string
+                "4":
+                  type: string
+                "5":
+                  type: string
+                "6":
+                  type: string
+                "7":
+                  type: string
+                "8":
+                  type: string
+                "9":
+                  type: string
+                "10":
+                  type: string
+                "11":
+                  type: string
+                "12":
+                  type: string
+                2':
+                  type: string
+                3':
+                  type: string
+              type: object
+          type: object
+        tank_length:
+          description: The length of the tank when the fish is placed as a furniture item.
+          example: 1
+          format: float
+          type: number
+        tank_width:
+          description: The width of the tank when the fish is placed as a furniture item.
+          example: 1
+          format: float
+          type: number
+        total_catch:
+          description: The total number of fish the player has to have caught before this fish will start spawning.
+          example: 100
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Cherry Salmon
+          type: string
+      type: object
+    NHFossilGroup:
+      properties:
+        description:
+          description: A description of the fossil group.
+          example: Ahem. Yes. The Spinosaurus was a very large, carnivorous dinosaur, roughly the size of a T. Rex. Unlike its more famous cousin, however, Spinosaurus seems to have spent a great deal of time in water. Similar to modern crocodiles, this creature lived on a diet of fish AND land-dwelling animals. Personally, I am simply relieved that it did not seek FLYING prey.
+          type: string
+        name:
+          description: The name of the fossil group.
+          example: Spinosaurus
+          type: string
+        room:
+          description: The room where the fossil group can be found in the museum's fossil section.
+          example: 2
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Spinosaurus
+          type: string
+      type: object
+    NHFossilGroupWithIndividualFossils:
+      properties:
+        description:
+          description: A description of the fossil group.
+          example: Ahem. Yes. The Spinosaurus was a very large, carnivorous dinosaur, roughly the size of a T. Rex. Unlike its more famous cousin, however, Spinosaurus seems to have spent a great deal of time in water. Similar to modern crocodiles, this creature lived on a diet of fish AND land-dwelling animals. Personally, I am simply relieved that it did not seek FLYING prey.
+          type: string
+        fossils:
+          description: An array of objects, each object representing a fossil that belongs to the given group.
+          example:
+            - colors:
+                - Brown
+              hha_base: 87
+              image_url: https://dodo.ac/np/images/7/7b/Spino_Skull_NH_Icon.png
+              interactable: true
+              length: 2
+              name: Spino Skull
+              sell: 4000
+              url: https://nookipedia.com/wiki/Spinosaurus
+              width: 2
+            - colors:
+                - Brown
+              hha_base: 87
+              image_url: https://dodo.ac/np/images/4/40/Spino_Tail_NH_Icon.png
+              interactable: true
+              length: 2
+              name: Spino Tail
+              sell: 2500
+              url: https://nookipedia.com/wiki/Spinosaurus
+              width: 2
+            - colors:
+                - Brown
+              hha_base: 87
+              image_url: https://dodo.ac/np/images/9/92/Spino_Torso_NH_Icon.png
+              interactable: true
+              length: 2
+              name: Spino Torso
+              sell: 3000
+              url: https://nookipedia.com/wiki/Spinosaurus
+              width: 2
+          items:
+            properties:
+              colors:
+                items:
+                  enum:
+                    - Aqua
+                    - Beige
+                    - Black
+                    - Blue
+                    - Brown
+                    - Colorful
+                    - Gray
+                    - Green
+                    - Orange
+                    - Pink
+                    - Purple
+                    - Red
+                    - White
+                    - Yellow
+                  type: string
+                type: array
+              fossil_group:
+                type: string
+              hha_base:
+                type: integer
+              image_url:
+                type: string
+              interactable:
+                type: boolean
+              length:
+                type: integer
+              name:
+                example: Spino Skull
+                type: string
+              sell:
+                type: integer
+              url:
+                type: string
+              width:
+                type: integer
+            type: object
+          type: array
+        matched:
+          properties:
+            name:
+              description: The name of the fossil or fossil group that matched the given query.
+              example: Spino Skull
+              type: string
+            type:
+              description: If the query given was a fossil group, `group` would be returned. Otherwise, `individual` is returned.
+              example: individual
+              type: string
+          type: object
+        name:
+          description: The name of the fossil group.
+          example: Spinosaurus
+          type: string
+        room:
+          description: The room where the fossil group can be found in the museum's fossil section.
+          example: 2
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Spinosaurus
+          type: string
+      type: object
+    NHFossilGroupWithIndividualFossilsNoMatched:
+      properties:
+        description:
+          description: A description of the fossil group.
+          example: Ahem. Yes. The Spinosaurus was a very large, carnivorous dinosaur, roughly the size of a T. Rex. Unlike its more famous cousin, however, Spinosaurus seems to have spent a great deal of time in water. Similar to modern crocodiles, this creature lived on a diet of fish AND land-dwelling animals. Personally, I am simply relieved that it did not seek FLYING prey.
+          type: string
+        fossils:
+          description: An array of objects, each object representing a fossil that belongs to the given group.
+          example:
+            - colors:
+                - Brown
+              hha_base: 87
+              image_url: https://dodo.ac/np/images/7/7b/Spino_Skull_NH_Icon.png
+              interactable: true
+              length: 2
+              name: Spino Skull
+              sell: 4000
+              url: https://nookipedia.com/wiki/Spinosaurus
+              width: 2
+            - colors:
+                - Brown
+              hha_base: 87
+              image_url: https://dodo.ac/np/images/4/40/Spino_Tail_NH_Icon.png
+              interactable: true
+              length: 2
+              name: Spino Tail
+              sell: 2500
+              url: https://nookipedia.com/wiki/Spinosaurus
+              width: 2
+            - colors:
+                - Brown
+              hha_base: 87
+              image_url: https://dodo.ac/np/images/9/92/Spino_Torso_NH_Icon.png
+              interactable: true
+              length: 2
+              name: Spino Torso
+              sell: 3000
+              url: https://nookipedia.com/wiki/Spinosaurus
+              width: 2
+          items:
+            properties:
+              colors:
+                items:
+                  enum:
+                    - Aqua
+                    - Beige
+                    - Black
+                    - Blue
+                    - Brown
+                    - Colorful
+                    - Gray
+                    - Green
+                    - Orange
+                    - Pink
+                    - Purple
+                    - Red
+                    - White
+                    - Yellow
+                  type: string
+                type: array
+              fossil_group:
+                type: string
+              hha_base:
+                type: integer
+              image_url:
+                type: string
+              interactable:
+                type: boolean
+              length:
+                type: integer
+              name:
+                example: Spino Skull
+                type: string
+              sell:
+                type: integer
+              url:
+                type: string
+              width:
+                type: integer
+            type: object
+          type: array
+        name:
+          description: The name of the fossil group.
+          example: Spinosaurus
+          type: string
+        room:
+          description: The room where the fossil group can be found in the museum's fossil section.
+          example: 2
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Spinosaurus
+          type: string
+      type: object
+    NHFurniture:
+      properties:
+        availability:
+          description: Where the furniture may be obtained from (could be multiple sources). `from` is a brief description of the source; `note`, when provided, provides additional details.
+          example:
+            - from: Nook's Cranny (Upgraded)
+              note: ""
+          items:
+            properties:
+              from:
+                type: string
+              note:
+                type: string
+            type: object
+          type: array
+        buy:
+          description: An array of prices, for when the item may be purchased with Bells, Nook Miles, etc..
+          example:
+            - currency: Bells
+              price: 31000
+          items:
+            properties:
+              currency:
+                type: string
+              price:
+                type: integer
+            type: object
+          type: array
+        category:
+          description: The category of item as shown in the player's inventory.
+          enum:
+            - Housewares
+            - Miscellaneous
+            - Wall-mounted
+          example: Housewares
+          type: string
+        custom_body_part:
+          description: If the item has variations, this is the name of the furniture part that changes. For example, for many bamboo items, the custom body part is "Bamboo" as the bamboo color is able to be customized.
+          example: ""
+          type: string
+        custom_kit_type:
+          description: The item that needs to be consumed to customize this item. The vast majority are "Customization Kit", but a small selection of items will require a different item, such as items in the Spooky Series requireing pumpkins.
+          example: ""
+          type: string
+        custom_kits:
+          description: The number of `custom_kit_type`s (e.g. Customization Kits) that are needed to customize this item. Value is 0 if the item is not customizable.
+          example: 0
+          type: integer
+        custom_pattern_part:
+          description: If the item's pattern can be customized, this is the name of the furniture part that can have a pattern applied to it. For example, for the Baby Chair, the custom pattern part is "Cushion" as the cushion on the chair may have a pattern applied.
+          example: ""
+          type: string
+        customizable:
+          description: Whether or not the item is customizable via a crafting table.
+          example: false
+          type: boolean
+        door_decor:
+          description: Whether this item may be placed on the exterior door of the player's house.
+          example: false
+          type: boolean
+        functions:
+          description: A list of functionalities (if any) that the item has. For example, furniture that items can be placed on topof will have "Table" as a function..
+          example:
+            - Dresser
+          items:
+            enum:
+              - Trash
+              - Toilet
+              - Table
+              - Storage
+              - Stereo
+              - Seating
+              - Lighting
+              - Instrument
+              - Dresser
+              - Bed
+              - Audio
+            type: string
+          type: array
+        grid_length:
+          description: The number of lengthwise grid spaces this item takes up.
+          example: 1
+          format: float
+          type: number
+        grid_width:
+          description: The number of widthwise grid spaces this item takes up.
+          example: 2
+          format: float
+          type: number
+        height:
+          description: The height of the object. One in-game block is 10 units tall, while the player is 15.1324 units tall.
+          example: 15.98677
+          format: float
+          type: number
+        hha_base:
+          description: The base value that the item provides to a player's Happy Home Academy score when placed in their home.
+          example: 251
+          type: integer
+        hha_category:
+          description: The HHA category the item is a part of, if any. If the item does not have an HHA category, this will be an empty string.
+          example: Dresser
+          type: string
+        item_series:
+          description: The [furniture series](https://nookipedia.com/wiki/Series_(furniture)) the item is a part of, if any. A series is a collection of furniture and interior items, all with the same theme. If the item is not part of a series, this will be an empty string.
+          example: Antique
+          type: string
+        item_set:
+          description: The [furniture set](https://nookipedia.com/wiki/Set) the item is a part of, if any. A set is a smaller collection of related furniture items. If the item is not part of a set, this will be an empty string.
+          example: ""
+          type: string
+        lucky:
+          description: Whether or not the item is lucky. Lucky items give a 777-point HHA bonus. Some items are only counted as lucky in certain seasons, as indicated by the `lucky_season` field.
+          example: false
+          type: boolean
+        lucky_season:
+          description: The season in which the item is lucky (or "All year" if lucky throughout the entire year). Items that are not lucky will have this field as an empty string.
+          enum:
+            - ""
+            - All year
+            - Spring
+            - Summer
+            - Autumn
+            - Winter
+          example: ""
+          type: string
+        name:
+          description: The name of the furniture.
+          example: Antique Vanity
+          type: string
+        notes:
+          description: Any additional miscellaneous information about the item, such as a name change from a past update.
+          example: ""
+          type: string
+        pattern_total:
+          description: The number of default patterns available to customize the item with, between 0 and 8. For items with customizable patterns, the player may also customize with patterns of their own.
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+          example: 0
+          type: integer
+        sell:
+          description: The number of Bells the item can be sold to Nook's store for.
+          example: 7750
+          type: integer
+        tag:
+          description: The tag of an item, if any, which denotes a specific use or relation to an event. Tags are determined by Nintendo. Examples include "Chair", "Musical Instrument", and "Mario". If the item does not have a tag, this will be an empty string.
+          example: Dresser
+          type: string
+        themes:
+          description: A list of [themes](https://nookipedia.com/wiki/Theme_(furniture)) (if any) that the item belongs to.
+          example:
+            - Living Room
+            - Expensive
+          items:
+            type: string
+          type: array
+        unlocked:
+          description: Whether the item is available through legitimate gameplay. Some items are added to the game files in an update, but aren't actually made available until a subsequent update unlocks them.
+          example: true
+          type: boolean
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Item:Antique_Vanity_(New_Horizons)
+          type: string
+        variation_total:
+          description: The number of variations, between 0 and 8.
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+          example: 3
+          type: integer
+        variations:
+          description: An array of objects, each object representing a variation of the furniture. Furniture that has no variations (only one version) will have a single variation object with the image URL and colors, but the `variation` or `pattern` fields will be empty strings. Furniture with multiple variations will have the `variation` and/or `pattern` fields defined depending on whether the furniture varies by body variety, pattern, or both.
+          example:
+            - colors:
+                - Aqua
+                - Brown
+              image_url: https://dodo.ac/np/images/9/9e/Antique_Vanity_%28Brown%29_NH_Icon.png
+              pattern: ""
+              variation: Brown
+            - colors:
+                - Aqua
+                - Beige
+              image_url: https://dodo.ac/np/images/a/ab/Antique_Vanity_%28Natural%29_NH_Icon.png
+              pattern: ""
+              variation: Natural
+            - colors:
+                - Aqua
+                - Black
+              image_url: https://dodo.ac/np/images/5/55/Antique_Vanity_%28Black%29_NH_Icon.png
+              pattern: ""
+              variation: Black
+          items:
+            properties:
+              colors:
+                items:
+                  enum:
+                    - Aqua
+                    - Beige
+                    - Black
+                    - Blue
+                    - Brown
+                    - Colorful
+                    - Gray
+                    - Green
+                    - Orange
+                    - Pink
+                    - Purple
+                    - Red
+                    - White
+                    - Yellow
+                  type: string
+                type: array
+              image_url:
+                type: string
+              pattern:
+                type: string
+              variation:
+                type: string
+            type: object
+          type: array
+        version_added:
+          description: The version of *New Horizons* that the item was added. Items that were included at the game's launch have version "1.0.0".
+          example: 1.0.0
+          type: string
+      type: object
+    NHIndividualFossil:
+      properties:
+        colors:
+          example:
+            - Brown
+          items:
+            enum:
+              - Aqua
+              - Beige
+              - Black
+              - Blue
+              - Brown
+              - Colorful
+              - Gray
+              - Green
+              - Orange
+              - Pink
+              - Purple
+              - Red
+              - White
+              - Yellow
+            type: string
+          type: array
+        fossil_group:
+          description: The name of the group that the fossil belongs to.
+          example: Spinosaurus
+          type: string
+        hha_base:
+          description: The base value that the item provides to a player's Happy Home Academy score when placed in their home.
+          example: 87
+          type: integer
+        image_url:
+          description: Image of the fossil's icon. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/7/7b/Spino_Skull_NH_Icon.png
+          type: string
+        interactable:
+          description: Whether or not the item can be interacted with.
+          example: false
+          type: boolean
+        length:
+          description: The length of the fossil.
+          example: 2
+          type: integer
+        name:
+          description: The name of the fossil.
+          example: Spino Skull
+          type: string
+        sell:
+          description: The number of bells the item can be sold to Nook's store for.
+          example: 4000
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Spinosaurus
+          type: string
+        width:
+          description: The width of the fossil.
+          example: 2
+          type: integer
+      type: object
+    NHInterior:
+      properties:
+        availability:
+          description: Where the clothing may be obtained from (could be multiple sources). `from` is a brief description of the source; `note`, when provided, provides additional details.
+          example:
+            - from: Nook's
+              note: ""
+          items:
+            properties:
+              from:
+                type: string
+              note:
+                type: string
+            type: object
+          type: array
+        buy:
+          description: An array of prices, for when the interior may be purchased with Bells, Nook Miles, etc..
+          example:
+            - currency: Bells
+              price: 1560
+          items:
+            properties:
+              currency:
+                type: string
+              price:
+                type: integer
+            type: object
+          type: array
+        category:
+          description: The category of item as shown in the player's inventory.
+          enum:
+            - Floors
+            - Wallpaper
+            - Rugs
+          example: Wallpaper
+          type: string
+        colors:
+          description: (WIP)
+          enum:
+            - Aqua
+            - Beige
+            - Black
+            - Blue
+            - Brown
+            - Colorful
+            - Gray
+            - Green
+            - Orange
+            - Pink
+            - Purple
+            - Red
+            - White
+            - Yellow
+          example:
+            - White
+            - Colorful
+          type: string
+        grid_length:
+          description: The number of lengthwise grid spaces this item takes up.
+          example: 1
+          format: float
+          type: number
+        grid_width:
+          description: The number of widthwise grid spaces this item takes up.
+          example: 2
+          format: float
+          type: number
+        hha_base:
+          description: The base value that the item provides to a player's Happy Home Academy score when placed in their home.
+          example: 0
+          type: integer
+        hha_category:
+          description: The HHA category the item is a part of, if any. If the item does not have an HHA category, this will be an empty string.
+          example: Dresser
+          type: string
+        image_url:
+          description: Image of the interior. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/2/2d/Abstract_Wall_NH_Icon.png
+          type: string
+        item_series:
+          description: The [furniture series](https://nookipedia.com/wiki/Series_(furniture)) the item is a part of, if any. A series is a collection of furniture and interior items, all with the same theme. If the item is not part of a series, this will be an empty string.
+          example: ""
+          type: string
+        item_set:
+          description: The [furniture set](https://nookipedia.com/wiki/Set) the item is a part of, if any. A set is a smaller collection of related furniture items. If the item is not part of a set, this will be an empty string.
+          example: ""
+          type: string
+        name:
+          description: The name of the interior.
+          example: Abstract Wall
+          type: string
+        notes:
+          description: Any additional miscellaneous information about the item, such as a name change from a past update.
+          example: ""
+          type: string
+        sell:
+          description: The number of Bells the interior can be sold to Nook's store for.
+          example: 200
+          type: integer
+        tag:
+          description: The tag of an item, if any, which denotes a specific use or relation to an event. Tags are determined by Nintendo. Examples include "Chair", "Musical Instrument", and "Mario". If the item does not have a tag, this will be an empty string.
+          example: Dresser
+          type: string
+        themes:
+          description: A list of [themes](https://nookipedia.com/wiki/Theme_(furniture)) (if any) that the item belongs to.
+          example:
+            - Shop
+            - Facility
+          items:
+            type: string
+          type: array
+        unlocked:
+          description: Whether the item is available through legitimate gameplay. Some items are added to the game files in an update, but aren't actually made available until a subsequent update unlocks them.
+          example: true
+          type: boolean
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Item:Abstract_Wall_(New_Horizons)
+          type: string
+        version_added:
+          description: The version of *New Horizons* that the item was added. Items that were included at the game's launch have version "1.0.0".
+          example: 1.0.0
+          type: string
+      type: object
+    NHItem:
+      properties:
+        availability:
+          description: Where the clothing may be obtained from (could be multiple sources). `from` is a brief description of the source; `note`, when provided, provides additional details.
+          example:
+            - from: Nook's
+              note: ""
+          items:
+            properties:
+              from:
+                type: string
+              note:
+                type: string
+            type: object
+          type: array
+        buy:
+          description: An array of prices, for when the interior may be purchased with Bells, Nook Miles, etc..
+          example:
+            - currency: Bells
+              price: 280
+          items:
+            properties:
+              currency:
+                type: string
+              price:
+                type: integer
+            type: object
+          type: array
+        edible:
+          description: Whether the item is edible or not.
+          example: false
+          type: boolean
+        hha_base:
+          description: The base value that the item provides to a player's Happy Home Academy score when placed in their home.
+          example: 0
+          type: integer
+        image_url:
+          description: Image of the interior. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/9/9f/Acorn_NH_Icon.png
+          type: string
+        is_fence:
+          description: Whether or not the item is a fence or not.
+          example: false
+          type: boolean
+        material_name_sort:
+          description: (WIP)
+          example: 0
+          type: integer
+        material_seasonality:
+          description: (WIP)
+          example: Autumn
+          type: string
+        material_seasonality_sort:
+          description: (WIP)
+          example: 3
+          type: integer
+        material_sort:
+          description: (WIP)
+          example: 3
+          type: integer
+        material_type:
+          description: (WIP)
+          enum:
+            - ""
+            - Bamboo
+            - Mushroom
+            - Trash
+            - Wood
+            - Ore
+            - Snowflake
+            - Tree
+            - Ornament
+            - Fruit
+            - Underwater
+            - Other
+            - Leaf
+            - Shell
+            - Flower
+            - Star Fragment
+            - Feather
+            - Egg
+            - Plant
+          example: Tree
+          type: string
+        name:
+          description: The name of the item.
+          example: Acorn
+          type: string
+        notes:
+          description: Any additional miscellaneous information about the item, such as a name change from a past update.
+          example: ""
+          type: string
+        plant_type:
+          description: (WIP)
+          enum:
+            - ""
+            - Pumpkin
+            - Flower
+            - Bush
+            - Tree
+          example: ""
+          type: string
+        sell:
+          description: The number of bells the item can be sold to Nook's store for.
+          example: 200
+          type: integer
+        stack:
+          description: How much the item can stack up to in a single inventory slot.
+          example: 30
+          type: integer
+        unlocked:
+          description: Whether the item is available through legitimate gameplay. Some items are added to the game files in an update, but aren't actually made available until a subsequent update unlocks them.
+          example: true
+          type: boolean
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Item:Acorn_(New_Horizons)
+          type: string
+        version_added:
+          description: The version of *New Horizons* that the item was added. Items that were included at the game's launch have version "1.0.0".
+          example: 1.0.0
+          type: string
+      type: object
+    NHPhoto:
+      properties:
+        availability:
+          description: Where the photo may be obtained from (could be multiple sources). `from` is a brief description of the source; `note`, when provided, provides additional details.
+          example:
+            - from: Friendship
+              note: ""
+          items:
+            properties:
+              from:
+                type: string
+              note:
+                type: string
+            type: object
+          type: array
+        buy:
+          description: An array of prices, for when the item may be purchased with Bells, Nook Miles, etc..
+          example: []
+          items:
+            properties:
+              currency:
+                type: string
+              price:
+                type: integer
+            type: object
+          type: array
+        category:
+          description: The category of item as shown in the player's inventory.
+          enum:
+            - Photos
+            - Posters
+          example: Accessories
+          type: string
+        custom_body_part:
+          description: If the item has variations, this is the name of the furniture part that changes. For example, for many bamboo items, the custom body part is "Bamboo" as the bamboo color is able to be customized.
+          example: Frame
+          type: string
+        custom_kits:
+          description: The number of `custom_kit_type`s (e.g. Customization Kits) that are needed to customize this item. Value is 0 if the item is not customizable.
+          example: 1
+          type: integer
+        customizable:
+          description: Whether or not the item is customizable via a crafting table.
+          example: false
+          type: boolean
+        grid_length:
+          description: The number of lengthwise grid spaces this item takes up.
+          example: 1
+          format: float
+          type: number
+        grid_width:
+          description: The number of widthwise grid spaces this item takes up.
+          example: 2
+          format: float
+          type: number
+        interactable:
+          description: Whether or not the item can be interacted with. This field is true for all photos and false for all posters.
+          example: true
+          type: boolean
+        name:
+          description: The name of the photo.
+          example: Admiral's Photo
+          type: string
+        sell:
+          description: The number of Bells the photo can be sold to the store for.
+          example: 10
+          type: integer
+        unlocked:
+          description: Whether the item is available through legitimate gameplay. Some items are added to the game files in an update, but aren't actually made available until a subsequent update unlocks them.
+          example: true
+          type: boolean
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Item:Admiral's_Photo_(New_Horizons)
+          type: string
+        variations:
+          description: An array of objects, each object representing a variation of the photo or poster. Items that has no variations (only one version) will have a single variation object with the image URL and colors, but the `variation` field will be empty. Items with multiple variations will have the `variation` fields defined with the name of each variation.
+          example:
+            - colors:
+                - Blue
+                - Green
+              image_url: https://dodo.ac/np/images/7/72/Admiral%27s_Photo_%28Natural_Wood%29_NH_Icon.png
+              variation: Natural Wood
+            - colors:
+                - Blue
+                - Green
+              image_url: https://dodo.ac/np/images/e/e5/Admiral%27s_Photo_%28Dark_Wood%29_NH_Icon.png
+              variation: Dark Wood
+            - colors:
+                - Blue
+                - Green
+              image_url: https://dodo.ac/np/images/9/9a/Admiral%27s_Photo_%28Pastel%29_NH_Icon.png
+              variation: Pastel
+            - colors:
+                - Blue
+                - Green
+              image_url: https://dodo.ac/np/images/1/16/Admiral%27s_Photo_%28White%29_NH_Icon.png
+              variation: White
+            - colors:
+                - Blue
+                - Green
+              image_url: https://dodo.ac/np/images/b/be/Admiral%27s_Photo_%28Pop%29_NH_Icon.png
+              variation: Pop
+            - colors:
+                - Blue
+                - Green
+              image_url: https://dodo.ac/np/images/5/51/Admiral%27s_Photo_%28Colorful%29_NH_Icon.png
+              variation: Colorful
+            - colors:
+                - Blue
+                - Green
+              image_url: https://dodo.ac/np/images/e/ed/Admiral%27s_Photo_%28Silver%29_NH_Icon.png
+              variation: Silver
+            - colors:
+                - Blue
+                - Green
+              image_url: https://dodo.ac/np/images/c/cf/Admiral%27s_Photo_%28Gold%29_NH_Icon.png
+              variation: Gold
+          items:
+            properties:
+              colors:
+                items:
+                  enum:
+                    - Aqua
+                    - Beige
+                    - Black
+                    - Blue
+                    - Brown
+                    - Colorful
+                    - Gray
+                    - Green
+                    - Orange
+                    - Pink
+                    - Purple
+                    - Red
+                    - White
+                    - Yellow
+                  type: string
+                type: array
+              image_url:
+                type: string
+              variation:
+                type: string
+            type: object
+          type: array
+        version_added:
+          description: The version of *New Horizons* that the item was added. Items that were included at the game's launch have version "1.0.0".
+          example: 1.0.0
+          type: string
+      type: object
+    NHRecipe:
+      properties:
+        availability:
+          description: Where the recipe may be obtained from. `from` is a brief description of the source; `note`, when provided, provides additional details.
+          example:
+            - from: Tom Nook
+              note: Obtained through Tom Nook's DIY Workshop at the beginning of the game.
+            - from: Nook's Cranny
+              note: ""
+          items:
+            properties:
+              from:
+                type: string
+              note:
+                type: string
+            type: object
+          type: array
+        buy:
+          description: An array of prices, for when the recipe may be purchased with Bells, Nook Miles, etc. The majority of recipes cannot be bought (in which case this array will be empty).
+          example:
+            - currency: Bells
+              price: 280
+          items:
+            properties:
+              currency:
+                type: string
+              price:
+                type: integer
+            type: object
+          type: array
+        image_url:
+          description: Image of the item the recipe crafts. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/a/ac/Flimsy_Axe_NH_DIY_Icon.png
+          type: string
+        materials:
+          description: The list of materials required to craft the item.
+          example:
+            - count: 5
+              name: Tree Branch
+            - count: 1
+              name: Stone
+          items:
+            properties:
+              count:
+                type: integer
+              name:
+                type: string
+            type: object
+          type: array
+        name:
+          description: The name of the recipe.
+          example: Flimsy Axe
+          type: string
+        recipes_to_unlock:
+          description: How many recipes the player has to have learned to unlock this one.
+          example: 0
+          type: integer
+        sell:
+          description: The number of Bells the sea creature can be sold to Nook's store for.
+          example: 200
+          type: integer
+        serial_id:
+          description: The unique in-game ID of the recipe.
+          example: 100
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Item:Flimsy_Axe_(New_Horizons)
+          type: string
+      type: object
+    NHSeaCreature:
+      properties:
+        catchphrases:
+          description: An array of possible catchphrases the player says after catching the sea creature. Most critters have just one, but some can have multiple.
+          example:
+            - I got an octopus! It can give four hugs at once!
+          items:
+            type: string
+          type: array
+        image_url:
+          description: Image of the sea creature. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/5/58/Octopus_NH_Icon.png
+          type: string
+        name:
+          description: Name of the sea creature.
+          example: Octopus
+          type: string
+        north:
+          description: When you can catch the sea creature in the Northern hemisphere.
+          properties:
+            availability_array:
+              description: An array of objects, each object holding a months string and the time the critter is availabile during the specified month(s) in the northern hemisphere. Most critters will have just one object. A small number of critters have variable time availability in which case this array will have multiple objects.
+              example:
+                - months: All year
+                  time: All day
+              items:
+                properties:
+                  months:
+                    type: string
+                  time:
+                    type: string
+                type: object
+              type: array
+            months:
+              description: The months the sea creature is available for in the Northern hemisphere. If all year, value will be `"All year"`.
+              example: Jul – Sep
+              type: string
+            months_array:
+              description: An array of integers representing the months the sea creature is available in the Northern hemisphere.
+              example:
+                - 1
+                - 2
+                - 3
+                - 4
+                - 5
+                - 6
+                - 7
+                - 8
+                - 9
+                - 10
+                - 11
+                - 12
+              items:
+                type: integer
+              type: array
+            times_by_month:
+              description: An object with twelve numerical keys, each representing a month (`"1"` for January, `"2"` for February, etc.). The value is the times the critter is available during that month. If the critter is unavailable in a month, the value will be `"NA"`.
+              example:
+                "1": All day
+                "2": All day
+                "3": All day
+                "4": All day
+                "5": All day
+                "6": All day
+                "7": All day
+                "8": All day
+                "9": All day
+                "10": All day
+                "11": All day
+                "12": All day
+              properties:
+                "1":
+                  type: string
+                "2":
+                  type: string
+                "3":
+                  type: string
+                "4":
+                  type: string
+                "5":
+                  type: string
+                "6":
+                  type: string
+                "7":
+                  type: string
+                "8":
+                  type: string
+                "9":
+                  type: string
+                "10":
+                  type: string
+                "11":
+                  type: string
+                "12":
+                  type: string
+              type: object
+          type: object
+        number:
+          description: In-game sea creature number, marking position in the Critterpedia.
+          example: 20
+          type: integer
+        rarity:
+          description: How rare the sea creature is. Note that this field is currently empty for most sea creatures as we do not yet know how exactly sea creature rarities are calculated in the game code.
+          example: Uncommon
+          type: string
+        render_url:
+          description: Render of the sea creature. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/2/27/Octopus_NH.png
+          type: string
+        sell_nook:
+          description: The number of Bells the sea creature can be sold to Nook's store for.
+          example: 160
+          type: integer
+        shadow_movement:
+          description: Short descriptor of where the sea creature can be found.
+          enum:
+            - Stationary
+            - Very slow
+            - Slow
+            - Medium
+            - Fast
+            - Very fast
+          example: Slow
+          type: string
+        shadow_size:
+          description: Short descriptor of where the sea creature can be found.
+          enum:
+            - X-Small
+            - Small
+            - Medium
+            - Large
+            - X-Large
+          example: Medium
+          type: string
+        south:
+          description: When you can catch the sea creature in the Southern hemisphere.
+          properties:
+            availability_array:
+              description: An array of objects, each object holding a months string and the time the critter is availabile during the specified month(s) in the southern hemisphere. Most critters will have just one object. A small number of critters have variable time availability in which case this array will have multiple objects.
+              example:
+                - months: All year
+                  time: All day
+              items:
+                properties:
+                  months:
+                    type: string
+                  time:
+                    type: string
+                type: object
+              type: array
+            months:
+              description: The months the sea creature is available for in the Southern hemisphere. If all year, value will be `"All year"`.
+              example: Jan – Mar
+              type: string
+            months_array:
+              description: An array of integers representing the months the sea creature is available in the Southern hemisphere.
+              example:
+                - 1
+                - 2
+                - 3
+                - 4
+                - 5
+                - 6
+                - 7
+                - 8
+                - 9
+                - 10
+                - 11
+                - 12
+              items:
+                type: integer
+              type: array
+            times_by_month:
+              description: An object with twelve numerical keys, each representing a month (`"1"` for January, `"2"` for February, etc.). The value is the times the critter is available during that month. If the critter is unavailable in a month, the value will be `"NA"`.
+              example:
+                "1": All day
+                "2": All day
+                "3": All day
+                "4": All day
+                "5": All day
+                "6": All day
+                "7": All day
+                "8": All day
+                "9": All day
+                "10": All day
+                "11": All day
+                "12": All day
+              properties:
+                "1":
+                  type: string
+                "2":
+                  type: string
+                "3":
+                  type: string
+                "4":
+                  type: string
+                "5":
+                  type: string
+                "6":
+                  type: string
+                "7":
+                  type: string
+                "8":
+                  type: string
+                "9":
+                  type: string
+                "10":
+                  type: string
+                "11":
+                  type: string
+                "12":
+                  type: string
+              type: object
+          type: object
+        tank_length:
+          description: The length of the tank when the sea creature is placed as a furniture item.
+          example: 1
+          format: float
+          multipleOf: 0.1
+          type: number
+        tank_width:
+          description: The width of the tank when the sea creature is placed as a furniture item.
+          example: 1
+          format: float
+          multipleOf: 0.1
+          type: number
+        total_catch:
+          description: The total number of sea creatures the player has to have caught before this sea creature will start spawning.
+          example: 0
+          type: integer
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Octopus_(fish)
+          type: string
+      type: object
+    NHTool:
+      properties:
+        availability:
+          description: Where the tool may be obtained from (could be multiple sources). `from` is a brief description of the source; `note`, when provided, provides additional details.
+          example:
+            - from: Nook's Cranny
+              note: ""
+            - from: Crafting
+              note: ""
+          items:
+            properties:
+              from:
+                type: string
+              note:
+                type: string
+            type: object
+          type: array
+        buy:
+          description: An array of prices, for when the item may be purchased with Bells, Nook Miles, etc..
+          example:
+            - price: 2550
+            - currency: Bells
+          items:
+            properties:
+              currency:
+                type: string
+              price:
+                type: integer
+            type: object
+          type: array
+        custom_body_part:
+          description: If the item has variations, this is the name of the furniture part that changes. For example, for many bamboo items, the custom body part is "Bamboo" as the bamboo color is able to be customized.
+          example: ""
+          type: string
+        custom_kits:
+          description: The number of `custom_kit_type`s (e.g. Customization Kits) that are needed to customize this item. Value is 0 if the item is not customizable.
+          example: 0
+          type: integer
+        customizable:
+          description: Whether or not the item is customizable via a crafting table.
+          example: false
+          type: boolean
+        hha_base:
+          description: The base value that the item provides to a player's Happy Home Academy score when placed in their home.
+          example: 0
+          type: integer
+        name:
+          description: The name of the tool.
+          example: Axe
+          type: string
+        notes:
+          description: Any additional miscellaneous information about the item, such as a name change from a past update.
+          example: ""
+          type: string
+        sell:
+          description: The number of bells the tool can be sold to the store for.
+          example: 625
+          type: integer
+        unlocked:
+          description: Whether the item is available through legitimate gameplay. Some items are added to the game files in an update, but aren't actually made available until a subsequent update unlocks them.
+          example: true
+          type: boolean
+        url:
+          description: Link the the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Item:Axe_(New_Horizons)
+          type: string
+        uses:
+          description: How many times the tool can be used before breaking.
+          example: 100
+          type: integer
+        variations:
+          description: An array of objects, each object representing a variation of the tool. Tools that has no variations (only one version) will have a single variation object with the image URL and colors, but the `variation` field will be empty. Tools with multiple variations will have the `variation` fields defined with the name of each variation.
+          example:
+            - image_url: https://dodo.ac/np/images/f/fa/Axe_NH_Icon.png
+              variation: ""
+          items:
+            properties:
+              image_url:
+                type: string
+              variation:
+                type: string
+            type: object
+          type: array
+        version_added:
+          description: The version of *New Horizons* that the item was added. Items that were included at the game's launch have version "1.0.0".
+          example: 1.0.0
+          type: string
+      type: object
+    Villager:
+      properties:
+        alt_name:
+          description: A previous name for the villager. A very small number of villagers changed names between earlier games, such as Sally being known as Hazel in the original game.
+          example: ""
+          type: string
+        appearances:
+          description: List of official media the villager appeared in. `DNM` is *Doubutsu no Mori* for the Nintendo 64 (Japan-exclusive); `AC` is *Animal Crossing* for GameCube; `E_PLUS` is *Doubutsu no Mori e+* for GameCube (expanded port of AC, Japan-exclusive); `WW` is *Wild World* for the DS; `CF` is *City Folk* for Wii; `NL` is *New Leaf* for 3DS; `WA` is *Welcome amiibo*, the *New Leaf* expansion; `NH` is *New Horizons* for Switch; `FILM` is the *Doubutsu no Mori* Japan-exclusive film; `HHD` is *Happy Home Designer* for the Wii; and `PC` is *Pocket Camp* for mobile.
+          example:
+            - DNM
+            - AC
+            - E_PLUS
+            - WW
+            - CF
+            - NL
+            - WA
+            - NH
+            - HHD
+            - PC
+          items:
+            enum:
+              - DNM
+              - AC
+              - E_PLUS
+              - WW
+              - CF
+              - NL
+              - WA
+              - NH
+              - FILM
+              - HHD
+              - PC
+            type: string
+          type: array
+        birthday_day:
+          description: Birthday day of the villager. Note that villager birthdays were not introduced until *Wild World*. For villagers who didn't appear in *Wild World* or any later games, this field will be an empty string.
+          example: "13"
+          type: string
+        birthday_month:
+          description: Birthday month of the villager. Note that villager birthdays were not introduced until *Wild World*. For villagers who didn't appear in *Wild World* or any later games, this field will be an empty string.
+          example: February
+          type: string
+        clothing:
+          description: The villager's default clothing. This will be the clothing from the latest game (i.e. if the villager had varying phrases between *Wild World* and *New Horizons*, this will be the *New Horizons* clothing).
+          example: Simple Parka
+          type: string
+        debut:
+          description: The first *Animal Crossing* game the villager appeared in. `DNM` is *Doubutsu no Mori* for the Nintendo 64 (Japan-exclusive); `AC` is *Animal Crossing* for GameCube; `E_PLUS` is *Doubutsu no Mori e+* for GameCube (expanded port of AC, Japan-exclusive); `WW` is *Wild World* for the DS; `CF` is *City Folk* for Wii; `NL` is *New Leaf* for 3DS; `WA` is *Welcome amiibo*, the *New Leaf* expansion; `NH` is *New Horizons* for Switch; `FILM` is the *Doubutsu no Mori* Japan-exclusive film; `HHD` is *Happy Home Designer* for the Wii; and `PC` is *Pocket Camp* for mobile.
+          enum:
+            - DNM
+            - AC
+            - E_PLUS
+            - WW
+            - CF
+            - NL
+            - WA
+            - NH
+            - FILM
+            - HHD
+            - PC
+          example: DNM
+          type: string
+        gender:
+          description: Gender of the villager. In *Animal Crossing*, only male and female are used.
+          enum:
+            - Male
+            - Female
+          example: Male
+          type: string
+        id:
+          description: The game's internal identifier for the villager. Not all villagers have IDs; villagers who appeared in any game including or after *Wild World* have a consistent ID between games.
+          example: flg01
+          type: string
+        image_url:
+          description: Image of the villager from the latest game the villager appeared in. dodo.ac is Nookipedia's CDN server.
+          example: https://dodo.ac/np/images/9/94/Ribbot_NH.png
+          type: string
+        islander:
+          description: Whether the villager was an island in *Animal Crossing* for GameCube. Only a small number of villagers (36) were islanders.
+          example: false
+          type: boolean
+        name:
+          description: Name of the villager.
+          example: Ribbot
+          type: string
+        nh_details:
+          description: An object that holds villager data specific to *New Horizons*. If the villager does not appear in *New Horizons*, this field will be set to null.
+          properties:
+            catchphrase:
+              description: The default phrase a villager will use when speaking to the player.
+              example: zzrrbbit
+              type: string
+            clothing:
+              description: The default clothing that the villager wears.
+              example: Simple Parka
+              type: string
+            clothing_variation:
+              description: The variation of the clothing (usually a color).
+              example: Light Blue
+              type: string
+            fav_colors:
+              description: The villager's favorite colors (giving the villager a gift with one of their favorite colors increases friendship points).
+              example:
+                - Blue
+                - Aqua
+              items:
+                type: string
+              type: array
+            fav_styles:
+              description: The villager's favorite clothing styles.
+              example:
+                - Simple
+                - Active
+              items:
+                type: string
+              type: array
+            hobby:
+              description: The villager's primary hobby, which determines most of the activities they will do around the island (e.g. education villagers will frequently read books and visit the museum). Learn more at https://nookipedia.com/wiki/Hobbies
+              enum:
+                - Education
+                - Fashion
+                - Fitness
+                - Music
+                - Nature
+                - Play
+              example: Fitness
+              type: string
+            house_exterior_url:
+              description: A rendered model of the villager's house exterior. Note that this is not an official Nintendo asset, but a render based of the in-game model.
+              example: https://dodo.ac/np/images/4/42/House_of_Ribbot_NH_Model.png
+              type: string
+            house_flooring:
+              description: The flooring in the villager's house.
+              example: Future-Tech Flooring
+              type: string
+            house_interior_url:
+              description: A screenshot of the villager's house interior.
+              example: https://dodo.ac/np/images/8/86/House_of_Ribbot_NH.png
+              type: string
+            house_music:
+              description: The music in the villager's house.
+              example: K.K. Technopop
+              type: string
+            house_music_note:
+              description: Any notes about the villager's music. If populated, this is usually "Does not contain a stereo initially", meaning that the villager's house will not play music unless provided with a stereo.
+              example: ""
+              type: string
+            house_wallpaper:
+              description: The wallpaper in the villager's house.
+              example: Circuit-Board Wall
+              type: string
+            icon_url:
+              description: The villager's icon of their head. See https://nookipedia.com/wiki/Category:New_Horizons_character_icons for full list.
+              example: https://dodo.ac/np/images/8/87/Ribbot_NH_Villager_Icon.png
+              type: string
+            image_url:
+              description: Image of the villager from *New Horizons*.
+              example: https://dodo.ac/np/images/9/94/Ribbot_NH.png
+              type: string
+            photo_url:
+              description: The villager's photo, received by the player after attaining a certain friendship level. See https://nookipedia.com/wiki/Category:New_Horizons_pictures for full list.
+              example: https://dodo.ac/np/images/0/03/RibbotPicACNH.png
+              type: string
+            quote:
+              description: The villager's quote, as found on the back of their in-game photo.
+              example: Never rest, never rust.
+              type: string
+            sub-personality:
+              description: Each personality in *New Horizons* has two sub-personalities, currently referred to as just A and B. The effect of a sub-personality is currently unknown.
+              enum:
+                - A
+                - B
+              example: B
+              type: string
+          type: object
+        personality:
+          description: The villager's personality. Note that there are no official in-game personality names; these are names that are commonly used by the community. In the case of 'sisterly', other common names include 'big sis' and 'uchi'.
+          enum:
+            - Cranky
+            - Jock
+            - Lazy
+            - Normal
+            - Peppy
+            - Sisterly
+            - Smug
+            - Snooty
+          example: Jock
+          type: string
+        phrase:
+          description: The villager's default phrase they use throughout conversation. This will be the phrase from the latest game (i.e. if the villager had varying phrases between *Wild World* and *New Horizons*, this will be the *New Horizons* quote).
+          example: zzrrbbit
+          type: string
+        prev_phrases:
+          description: Any phrases used in previous *Animal Crossing* installations. May be empty.
+          example:
+            - toady
+          items:
+            type: string
+          type: array
+        quote:
+          description: The villager's quote as it appears on the back of their in-game portrait item. This will be the quote from the latest game (i.e. if the villager had varying quotes between *Wild World* and *New Horizons*, this will be the *New Horizons* quote). For villagers from older games that do not have a quote, this field will be an empty string.
+          example: Never rest, never rust.
+          type: string
+        sign:
+          description: The villager's astrological star sign.
+          enum:
+            - Aries
+            - Taurus
+            - Gemini
+            - Cancer
+            - Leo
+            - Virgo
+            - Libra
+            - Scorpio
+            - Sagittarius
+            - Capricorn
+            - Aquarius
+            - Pisces
+          example: Aquarius
+          type: string
+        species:
+          description: The villager's species.
+          enum:
+            - Alligator
+            - Anteater
+            - Bear
+            - Bird
+            - Bull
+            - Cat
+            - Cub
+            - Chicken
+            - Cow
+            - Deer
+            - Dog
+            - Duck
+            - Eagle
+            - Elephant
+            - Frog
+            - Goat
+            - Gorilla
+            - Hamster
+            - Hippo
+            - Horse
+            - Koala
+            - Kangaroo
+            - Lion
+            - Monkey
+            - Mouse
+            - Octopus
+            - Ostrich
+            - Penguin
+            - Pig
+            - Rabbit
+            - Rhino
+            - Sheep
+            - Squirrel
+            - Tiger
+            - Wolf
+          example: Frog
+          type: string
+        text_color:
+          description: The HTML color code of the text of the villager's name badge that appears above their dialogue box when spoken to in-game. Note that to date, only *New Horizons* villagers have this field populated.
+          example: 5e5e5e
+          type: string
+        title_color:
+          description: The HTML color code of the background of the villager's name badge that appears above their dialogue box when spoken to in-game. Note that to date, only *New Horizons* villagers have this field populated. This field may be useful for styling, such as the accent color for a Discord embed.
+          example: bfbfbf
+          type: string
+        url:
+          description: Link to the respective Nookipedia article.
+          example: https://nookipedia.com/wiki/Ribbot
+          type: string
+      type: object

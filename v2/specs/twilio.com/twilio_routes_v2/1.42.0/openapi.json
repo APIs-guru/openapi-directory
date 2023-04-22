@@ -1,0 +1,529 @@
+{
+  "openapi": "3.0.1",
+  "servers": [
+    {
+      "url": "https://routes.twilio.com"
+    }
+  ],
+  "info": {
+    "contact": {
+      "email": "support@twilio.com",
+      "name": "Twilio Support",
+      "url": "https://support.twilio.com"
+    },
+    "description": "This is the public Twilio REST API.",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "title": "Twilio - Routes",
+    "version": "1.42.0",
+    "x-apisguru-categories": [
+      "telecom",
+      "messaging"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_static1.twilio.com_marketing_bundles_marketing_img_logos_wordmark-red.svg"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_routes_v2.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "twilio.com",
+    "x-serviceName": "twilio_routes_v2"
+  },
+  "paths": {
+    "/v2/PhoneNumbers/{PhoneNumber}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch the Inbound Processing Region assigned to a phone number.",
+        "operationId": "FetchPhoneNumber",
+        "parameters": [
+          {
+            "description": "The phone number in E.164 format",
+            "in": "path",
+            "name": "PhoneNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/routes.v2.phone_number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "x-maturity": [
+          "GA"
+        ]
+      },
+      "post": {
+        "description": "Assign an Inbound Processing Region to a phone number.",
+        "operationId": "UpdatePhoneNumber",
+        "parameters": [
+          {
+            "description": "The phone number in E.164 format",
+            "in": "path",
+            "name": "PhoneNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "FriendlyName": {
+                    "description": "A human readable description of this resource, up to 64 characters.",
+                    "type": "string"
+                  },
+                  "VoiceRegion": {
+                    "description": "The Inbound Processing Region used for this phone number for voice",
+                    "type": "string"
+                  }
+                },
+                "title": "UpdatePhoneNumberRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/routes.v2.phone_number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "x-maturity": [
+          "GA"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://routes.twilio.com"
+        }
+      ],
+      "x-twilio": {
+        "defaultOutputProperties": [
+          "sid",
+          "friendly_name",
+          "date_created"
+        ],
+        "pathType": "instance"
+      }
+    },
+    "/v2/SipDomains/{SipDomain}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "",
+        "operationId": "FetchSipDomain",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "SipDomain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/routes.v2.sip_domain"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "x-maturity": [
+          "GA"
+        ]
+      },
+      "post": {
+        "description": "",
+        "operationId": "UpdateSipDomain",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "SipDomain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "FriendlyName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "VoiceRegion": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "title": "UpdateSipDomainRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/routes.v2.sip_domain"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "x-maturity": [
+          "GA"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://routes.twilio.com"
+        }
+      ],
+      "x-twilio": {
+        "defaultOutputProperties": [
+          "sid",
+          "friendly_name",
+          "date_created"
+        ],
+        "pathType": "instance"
+      }
+    },
+    "/v2/Trunks/{SipTrunkDomain}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch the Inbound Processing Region assigned to a SIP Trunk.",
+        "operationId": "FetchTrunks",
+        "parameters": [
+          {
+            "description": "The absolute URL of the SIP Trunk",
+            "in": "path",
+            "name": "SipTrunkDomain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/routes.v2.trunks"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "x-maturity": [
+          "GA"
+        ]
+      },
+      "post": {
+        "description": "Assign an Inbound Processing Region to a SIP Trunk",
+        "operationId": "UpdateTrunks",
+        "parameters": [
+          {
+            "description": "The absolute URL of the SIP Trunk",
+            "in": "path",
+            "name": "SipTrunkDomain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "FriendlyName": {
+                    "description": "A human readable description of this resource, up to 64 characters.",
+                    "type": "string"
+                  },
+                  "VoiceRegion": {
+                    "description": "The Inbound Processing Region used for this SIP Trunk for voice",
+                    "type": "string"
+                  }
+                },
+                "title": "UpdateTrunksRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/routes.v2.trunks"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "x-maturity": [
+          "GA"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://routes.twilio.com"
+        }
+      ],
+      "x-twilio": {
+        "defaultOutputProperties": [
+          "sid",
+          "friendly_name",
+          "date_created"
+        ],
+        "pathType": "instance"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "routes.v2.phone_number": {
+        "properties": {
+          "account_sid": {
+            "description": "The unique SID identifier of the Account.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "date_created": {
+            "description": "The date that this phone number was assigned an Inbound Processing Region, given in ISO 8601 format.",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "date_updated": {
+            "description": "The date that the Inbound Processing Region was updated for this phone number, given in ISO 8601 format.",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "friendly_name": {
+            "description": "A human readable description of the Inbound Processing Region assignments for this phone number, up to 64 characters.",
+            "nullable": true,
+            "type": "string"
+          },
+          "phone_number": {
+            "description": "The phone number in E.164 format",
+            "nullable": true,
+            "type": "string"
+          },
+          "sid": {
+            "description": "A 34 character string that uniquely identifies the Inbound Processing Region assignments for this phone number.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^QQ[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "url": {
+            "description": "The absolute URL of the resource.",
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          },
+          "voice_region": {
+            "description": "The Inbound Processing Region used for this phone number for voice.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "routes.v2.sip_domain": {
+        "properties": {
+          "account_sid": {
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "date_created": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "date_updated": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "friendly_name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "sid": {
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^QQ[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "sip_domain": {
+            "nullable": true,
+            "type": "string"
+          },
+          "url": {
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          },
+          "voice_region": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "routes.v2.trunks": {
+        "properties": {
+          "account_sid": {
+            "description": "The unique SID identifier of the Account.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "date_created": {
+            "description": "The date that this SIP Trunk was assigned an Inbound Processing Region, given in ISO 8601 format.",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "date_updated": {
+            "description": "The date that the Inbound Processing Region was updated for this SIP Trunk, given in ISO 8601 format.",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "friendly_name": {
+            "description": "A human readable description of the Inbound Processing Region assignments for this SIP Trunk, up to 64 characters.",
+            "nullable": true,
+            "type": "string"
+          },
+          "sid": {
+            "description": "A 34 character string that uniquely identifies the Inbound Processing Region assignments for this SIP Trunk.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^QQ[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "sip_trunk_domain": {
+            "description": "The absolute URL of the SIP Trunk",
+            "nullable": true,
+            "type": "string"
+          },
+          "url": {
+            "description": "The absolute URL of the resource.",
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          },
+          "voice_region": {
+            "description": "The Inbound Processing Region used for this SIP Trunk for voice.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "accountSid_authToken": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "x-maturity": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "added": "2021-01-26T17:16:08.085Z",
+  "info": {
+    "contact": {
+      "name": "Open Build Service",
+      "url": "https://openbuildservice.org/"
+    },
+    "description": "The _Open Build Service API_ is a XML API.\n\nTo authenticate, use [HTTP basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) by passing the _Authorization_ header in the form of `Authorization: Basic <credentials>`.\n\nThere is no API versioning as there is no need for it right now.\n\nOnly rudimentary rate limiting is implemented, so please be gentle when using the API concurrently, especially with potentially expensive operations.\nIn case of abuse, we will limit/remove your access.\n\nFor command-line users, we recommend using [osc](https://github.com/openSUSE/osc) with its _api_ command to interact with the API.\nIt's as simple as this example: `osc api /about` (_about_ is one of the endpoints documented below)\n",
+    "license": {
+      "name": "GNU General Public License v2.0",
+      "url": "https://github.com/openSUSE/open-build-service/blob/master/COPYING"
+    },
+    "title": "Open Build Service API",
+    "version": "2.10.50",
+    "x-apisguru-categories": [
+      "developer_tools"
+    ],
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://build.opensuse.org/apidocs-new/OBS-v2.10.50.yaml",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "opensuse.org",
+    "x-serviceName": "obs",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+    }
+  },
+  "externalDocs": {
+    "description": "Open Build Service - Documentation",
+    "url": "https://openbuildservice.org/help/"
+  },
+  "updated": "2021-08-02T08:20:08.766Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/opensuse.org/obs/2.10.50/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/opensuse.org/obs/2.10.50/openapi.yaml",
+  "openapiVer": "3.0.0",
+  "link": "https://api.apis.guru/v2/specs/opensuse.org:obs/2.10.50.json"
+}

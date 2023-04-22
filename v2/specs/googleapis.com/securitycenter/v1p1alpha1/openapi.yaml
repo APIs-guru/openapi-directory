@@ -1,0 +1,1706 @@
+openapi: 3.0.0
+servers:
+  - url: https://securitycenter.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: Security Command Center API provides access to temporal views of assets and findings within an organization.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Security Command Center API
+  version: v1p1alpha1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_www.google.com_images_branding_googlelogo_2x_googlelogo_color_272x92dp.png
+  x-origin:
+    - converter:
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
+      format: openapi
+      url: https://securitycenter.googleapis.com/$discovery/rest?version=v1p1alpha1
+      version: "3.0"
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: securitycenter
+externalDocs:
+  url: https://cloud.google.com/security-command-center
+tags:
+  - name: organizations
+paths:
+  "/v1p1alpha1/{name}":
+    delete:
+      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: securitycenter.organizations.operations.delete
+      parameters:
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    get:
+      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
+      operationId: securitycenter.organizations.operations.list
+      parameters:
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOperationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1p1alpha1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: securitycenter.organizations.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Access:
+      description: Represents an access event.
+      properties:
+        callerIp:
+          description: Caller's IP address, such as "1.1.1.1".
+          type: string
+        callerIpGeo:
+          $ref: "#/components/schemas/Geolocation"
+          description: The caller IP's geolocation, which identifies where the call came from.
+        methodName:
+          description: The method that the service account called, e.g. "SetIamPolicy".
+          type: string
+        principalEmail:
+          description: Associated email, such as "foo@google.com". The email address of the authenticated user or a service account acting on behalf of a third party principal making the request. For third party identity callers, the `principal_subject` field is populated instead of this field. For privacy reasons, the principal email address is sometimes redacted. For more information, see [Caller identities in audit logs](https://cloud.google.com/logging/docs/audit#user-id).
+          type: string
+        principalSubject:
+          description: A string that represents the principal_subject that is associated with the identity. Unlike `principal_email`, `principal_subject` supports principals that aren't associated with email addresses, such as third party principals. For most identities, the format is `principal://iam.googleapis.com/{identity pool name}/subject/{subject}`. Some GKE identities, such as GKE_WORKLOAD, FREEFORM, and GKE_HUB_WORKLOAD, still use the legacy format `serviceAccount:{identity pool name}[{subject}]`.
+          type: string
+        serviceAccountDelegationInfo:
+          description: The identity delegation history of an authenticated service account that made the request. The `serviceAccountDelegationInfo[]` object contains information about the real authorities that try to access Google Cloud resources by delegating on a service account. When multiple authorities are present, they are guaranteed to be sorted based on the original ordering of the identity delegation events.
+          items:
+            $ref: "#/components/schemas/ServiceAccountDelegationInfo"
+          type: array
+        serviceAccountKeyName:
+          description: 'The name of the service account key that was used to create or exchange credentials when authenticating the service account that made the request. This is a scheme-less URI full resource name. For example: "//iam.googleapis.com/projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}". '
+          type: string
+        serviceName:
+          description: This is the API service that the service account made a call to, e.g. "iam.googleapis.com"
+          type: string
+        userAgentFamily:
+          description: Type of user agent associated with the finding. For example, an operating system shell or an embedded or standalone application.
+          type: string
+        userName:
+          description: A string that represents a username. The username provided depends on the type of the finding and is likely not an IAM principal. For example, this can be a system username if the finding is related to a virtual machine, or it can be an application login username.
+          type: string
+      type: object
+    AccessReview:
+      description: Conveys information about a Kubernetes access review (e.g. kubectl auth can-i ...) that was involved in a finding.
+      properties:
+        group:
+          description: Group is the API Group of the Resource. "*" means all.
+          type: string
+        name:
+          description: Name is the name of the resource being requested. Empty means all.
+          type: string
+        ns:
+          description: Namespace of the action being requested. Currently, there is no distinction between no namespace and all namespaces. Both are represented by "" (empty).
+          type: string
+        resource:
+          description: Resource is the optional resource type requested. "*" means all.
+          type: string
+        subresource:
+          description: Subresource is the optional subresource type.
+          type: string
+        verb:
+          description: 'Verb is a Kubernetes resource API verb, like: get, list, watch, create, update, delete, proxy. "*" means all.'
+          type: string
+        version:
+          description: Version is the API Version of the Resource. "*" means all.
+          type: string
+      type: object
+    CloudDlpDataProfile:
+      description: The [data profile](https://cloud.google.com/dlp/docs/data-profiles) associated with the finding.
+      properties:
+        dataProfile:
+          description: Name of the data profile, for example, `projects/123/locations/europe/tableProfiles/8383929`.
+          type: string
+      type: object
+    CloudDlpInspection:
+      description: Details about the Cloud Data Loss Prevention (Cloud DLP) [inspection job](https://cloud.google.com/dlp/docs/concepts-job-triggers) that produced the finding.
+      properties:
+        fullScan:
+          description: Whether Cloud DLP scanned the complete resource or a sampled subset.
+          type: boolean
+        infoType:
+          description: The [type of information](https://cloud.google.com/dlp/docs/infotypes-reference) found, for example, `EMAIL_ADDRESS` or `STREET_ADDRESS`.
+          type: string
+        infoTypeCount:
+          description: The number of times Cloud DLP found this infoType within this job and resource.
+          format: int64
+          type: string
+        inspectJob:
+          description: Name of the inspection job, for example, `projects/123/locations/europe/dlpJobs/i-8383929`.
+          type: string
+      type: object
+    Compliance:
+      description: Contains compliance information about a security standard indicating unmet recommendations.
+      properties:
+        ids:
+          description: Policies within the standard/benchmark e.g. A.12.4.1
+          items:
+            type: string
+          type: array
+        standard:
+          description: Refers to industry wide standards or benchmarks e.g. "cis", "pci", "owasp", etc.
+          type: string
+        version:
+          description: Version of the standard/benchmark e.g. 1.1
+          type: string
+      type: object
+    Connection:
+      description: Contains information about the IP connection associated with the finding.
+      properties:
+        destinationIp:
+          description: Destination IP address. Not present for sockets that are listening and not connected.
+          type: string
+        destinationPort:
+          description: Destination port. Not present for sockets that are listening and not connected.
+          format: int32
+          type: integer
+        protocol:
+          description: IANA Internet Protocol Number such as TCP(6) and UDP(17).
+          enum:
+            - PROTOCOL_UNSPECIFIED
+            - ICMP
+            - TCP
+            - UDP
+            - GRE
+            - ESP
+          type: string
+        sourceIp:
+          description: Source IP address.
+          type: string
+        sourcePort:
+          description: Source port.
+          format: int32
+          type: integer
+      type: object
+    Contact:
+      description: The email address of a contact.
+      properties:
+        email:
+          description: An email address. For example, "`person123@company.com`".
+          type: string
+      type: object
+    ContactDetails:
+      description: The details pertaining to specific contacts
+      properties:
+        contacts:
+          description: A list of contacts
+          items:
+            $ref: "#/components/schemas/Contact"
+          type: array
+      type: object
+    Container:
+      description: Container associated with the finding.
+      properties:
+        imageId:
+          description: Optional container image id, when provided by the container runtime. Uniquely identifies the container image launched using a container image digest.
+          type: string
+        labels:
+          description: Container labels, as provided by the container runtime.
+          items:
+            $ref: "#/components/schemas/Label"
+          type: array
+        name:
+          description: Container name.
+          type: string
+        uri:
+          description: Container image URI provided when configuring a pod/container. May identify a container image version using mutable tags.
+          type: string
+      type: object
+    Cve:
+      description: "CVE stands for Common Vulnerabilities and Exposures. More information: https://cve.mitre.org"
+      properties:
+        cvssv3:
+          $ref: "#/components/schemas/Cvssv3"
+          description: Describe Common Vulnerability Scoring System specified at https://www.first.org/cvss/v3.1/specification-document
+        id:
+          description: The unique identifier for the vulnerability. e.g. CVE-2021-34527
+          type: string
+        references:
+          description: Additional information about the CVE. e.g. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34527
+          items:
+            $ref: "#/components/schemas/Reference"
+          type: array
+        upstreamFixAvailable:
+          description: Whether upstream fix is available for the CVE.
+          type: boolean
+      type: object
+    Cvssv3:
+      description: Common Vulnerability Scoring System version 3.
+      properties:
+        attackComplexity:
+          description: This metric describes the conditions beyond the attacker's control that must exist in order to exploit the vulnerability.
+          enum:
+            - ATTACK_COMPLEXITY_UNSPECIFIED
+            - ATTACK_COMPLEXITY_LOW
+            - ATTACK_COMPLEXITY_HIGH
+          type: string
+        attackVector:
+          description: Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments. This metric reflects the context by which vulnerability exploitation is possible.
+          enum:
+            - ATTACK_VECTOR_UNSPECIFIED
+            - ATTACK_VECTOR_NETWORK
+            - ATTACK_VECTOR_ADJACENT
+            - ATTACK_VECTOR_LOCAL
+            - ATTACK_VECTOR_PHYSICAL
+          type: string
+        availabilityImpact:
+          description: This metric measures the impact to the availability of the impacted component resulting from a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        baseScore:
+          description: The base score is a function of the base metric scores.
+          format: double
+          type: number
+        confidentialityImpact:
+          description: This metric measures the impact to the confidentiality of the information resources managed by a software component due to a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        integrityImpact:
+          description: This metric measures the impact to integrity of a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        privilegesRequired:
+          description: This metric describes the level of privileges an attacker must possess before successfully exploiting the vulnerability.
+          enum:
+            - PRIVILEGES_REQUIRED_UNSPECIFIED
+            - PRIVILEGES_REQUIRED_NONE
+            - PRIVILEGES_REQUIRED_LOW
+            - PRIVILEGES_REQUIRED_HIGH
+          type: string
+        scope:
+          description: The Scope metric captures whether a vulnerability in one vulnerable component impacts resources in components beyond its security scope.
+          enum:
+            - SCOPE_UNSPECIFIED
+            - SCOPE_UNCHANGED
+            - SCOPE_CHANGED
+          type: string
+        userInteraction:
+          description: This metric captures the requirement for a human user, other than the attacker, to participate in the successful compromise of the vulnerable component.
+          enum:
+            - USER_INTERACTION_UNSPECIFIED
+            - USER_INTERACTION_NONE
+            - USER_INTERACTION_REQUIRED
+          type: string
+      type: object
+    Database:
+      description: Represents database access information, such as queries. A database may be a sub-resource of an instance (as in the case of CloudSQL instances or Cloud Spanner instances), or the database instance itself. Some database resources may not have the full resource name populated because these resource types are not yet supported by Cloud Asset Inventory (e.g. CloudSQL databases). In these cases only the display name will be provided.
+      properties:
+        displayName:
+          description: The human readable name of the database the user connected to.
+          type: string
+        grantees:
+          description: The target usernames/roles/groups of a SQL privilege grant (not an IAM policy change).
+          items:
+            type: string
+          type: array
+        name:
+          description: The full resource name of the database the user connected to, if it is supported by CAI. (https://google.aip.dev/122#full-resource-names)
+          type: string
+        query:
+          description: The SQL statement associated with the relevant access.
+          type: string
+        userName:
+          description: The username used to connect to the DB. This may not necessarily be an IAM principal, and has no required format.
+          type: string
+      type: object
+    Detection:
+      description: Memory hash detection contributing to the binary family match.
+      properties:
+        binary:
+          description: The name of the binary associated with the memory hash signature detection.
+          type: string
+        percentPagesMatched:
+          description: The percentage of memory page hashes in the signature that were matched.
+          format: double
+          type: number
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    EnvironmentVariable:
+      description: EnvironmentVariable is a name-value pair to store environment variables for Process.
+      properties:
+        name:
+          description: Environment variable name as a JSON encoded string.
+          type: string
+        val:
+          description: Environment variable value as a JSON encoded string.
+          type: string
+      type: object
+    ExfilResource:
+      description: Resource that has been exfiltrated or exfiltrated_to.
+      properties:
+        components:
+          description: Subcomponents of the asset that is exfiltrated - these could be URIs used during exfiltration, table names, databases, filenames, etc. For example, multiple tables may be exfiltrated from the same CloudSQL instance, or multiple files from the same Cloud Storage bucket.
+          items:
+            type: string
+          type: array
+        name:
+          description: Resource's URI (https://google.aip.dev/122#full-resource-names)
+          type: string
+      type: object
+    Exfiltration:
+      description: Exfiltration represents a data exfiltration attempt of one or more sources to one or more targets. Sources represent the source of data that is exfiltrated, and Targets represents the destination the data was copied to.
+      properties:
+        sources:
+          description: If there are multiple sources, then the data is considered "joined" between them. For instance, BigQuery can join multiple tables, and each table would be considered a source.
+          items:
+            $ref: "#/components/schemas/ExfilResource"
+          type: array
+        targets:
+          description: If there are multiple targets, each target would get a complete copy of the "joined" source data.
+          items:
+            $ref: "#/components/schemas/ExfilResource"
+          type: array
+      type: object
+    Expr:
+      description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
+      properties:
+        description:
+          description: Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
+          type: string
+        expression:
+          description: Textual representation of an expression in Common Expression Language syntax.
+          type: string
+        location:
+          description: Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
+          type: string
+        title:
+          description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+    File:
+      description: File information about the related binary/library used by an executable, or the script used by a script interpreter
+      properties:
+        contents:
+          description: Prefix of the file contents as a JSON encoded string. (Currently only populated for Malicious Script Executed findings.)
+          type: string
+        hashedSize:
+          description: The length in bytes of the file prefix that was hashed. If hashed_size == size, any hashes reported represent the entire file.
+          format: int64
+          type: string
+        partiallyHashed:
+          description: True when the hash covers only a prefix of the file.
+          type: boolean
+        path:
+          description: Absolute path of the file as a JSON encoded string.
+          type: string
+        sha256:
+          description: SHA256 hash of the first hashed_size bytes of the file encoded as a hex string. If hashed_size == size, sha256 represents the SHA256 hash of the entire file.
+          type: string
+        size:
+          description: Size of the file in bytes.
+          format: int64
+          type: string
+      type: object
+    Finding:
+      description: Security Command Center finding. A finding is a record of assessment data like security, risk, health, or privacy, that is ingested into Security Command Center for presentation, notification, analysis, policy testing, and enforcement. For example, a cross-site scripting (XSS) vulnerability in an App Engine application is a finding.
+      properties:
+        access:
+          $ref: "#/components/schemas/Access"
+          description: Access details associated with the finding, such as more information on the caller, which method was accessed, and from where.
+        canonicalName:
+          description: The canonical name of the finding. It's either "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}", "folders/{folder_id}/sources/{source_id}/findings/{finding_id}" or "projects/{project_number}/sources/{source_id}/findings/{finding_id}", depending on the closest CRM ancestor of the resource associated with the finding.
+          type: string
+        category:
+          description: 'The additional taxonomy group within findings from a given source. This field is immutable after creation time. Example: "XSS_FLASH_INJECTION"'
+          type: string
+        cloudDlpDataProfile:
+          $ref: "#/components/schemas/CloudDlpDataProfile"
+          description: Cloud DLP data profile that is associated with the finding.
+        cloudDlpInspection:
+          $ref: "#/components/schemas/CloudDlpInspection"
+          description: Cloud Data Loss Prevention (Cloud DLP) inspection results that are associated with the finding.
+        compliances:
+          description: Contains compliance information for security standards associated to the finding.
+          items:
+            $ref: "#/components/schemas/Compliance"
+          type: array
+        connections:
+          description: Contains information about the IP connection associated with the finding.
+          items:
+            $ref: "#/components/schemas/Connection"
+          type: array
+        contacts:
+          additionalProperties:
+            $ref: "#/components/schemas/ContactDetails"
+          description: 'Output only. Map containing the points of contact for the given finding. The key represents the type of contact, while the value contains a list of all the contacts that pertain. Please refer to: https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories { "security": { "contacts": [ { "email": "person1@company.com" }, { "email": "person2@company.com" } ] } }'
+          readOnly: true
+          type: object
+        containers:
+          description: Containers associated with the finding. This field provides information for both Kubernetes and non-Kubernetes containers.
+          items:
+            $ref: "#/components/schemas/Container"
+          type: array
+        createTime:
+          description: The time at which the finding was created in Security Command Center.
+          format: google-datetime
+          type: string
+        database:
+          $ref: "#/components/schemas/Database"
+          description: Database associated with the finding.
+        description:
+          description: Contains more details about the finding.
+          type: string
+        eventTime:
+          description: The time the finding was first detected. If an existing finding is updated, then this is the time the update occurred. For example, if the finding represents an open firewall, this property captures the time the detector believes the firewall became open. The accuracy is determined by the detector. If the finding is later resolved, then this time reflects when the finding was resolved. This must not be set to a value greater than the current timestamp.
+          format: google-datetime
+          type: string
+        exfiltration:
+          $ref: "#/components/schemas/Exfiltration"
+          description: Represents exfiltrations associated with the finding.
+        externalSystems:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1ExternalSystem"
+          description: Output only. Third party SIEM/SOAR fields within SCC, contains external system information and external system finding fields.
+          readOnly: true
+          type: object
+        externalUri:
+          description: The URI that, if available, points to a web page outside of Security Command Center where additional information about the finding can be found. This field is guaranteed to be either empty or a well formed URL.
+          type: string
+        files:
+          description: File associated with the finding.
+          items:
+            $ref: "#/components/schemas/File"
+          type: array
+        findingClass:
+          description: The class of the finding.
+          enum:
+            - FINDING_CLASS_UNSPECIFIED
+            - THREAT
+            - VULNERABILITY
+            - MISCONFIGURATION
+            - OBSERVATION
+            - SCC_ERROR
+          type: string
+        iamBindings:
+          description: Represents IAM bindings associated with the finding.
+          items:
+            $ref: "#/components/schemas/IamBinding"
+          type: array
+        indicator:
+          $ref: "#/components/schemas/Indicator"
+          description: Represents what's commonly known as an *indicator of compromise* (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. For more information, see [Indicator of compromise](https://en.wikipedia.org/wiki/Indicator_of_compromise).
+        kernelRootkit:
+          $ref: "#/components/schemas/KernelRootkit"
+          description: Signature of the kernel rootkit.
+        kubernetes:
+          $ref: "#/components/schemas/Kubernetes"
+          description: Kubernetes resources associated with the finding.
+        mitreAttack:
+          $ref: "#/components/schemas/MitreAttack"
+          description: "MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org"
+        moduleName:
+          description: "Unique identifier of the module which generated the finding. Example: folders/598186756061/securityHealthAnalyticsSettings/customModules/56799441161885"
+          type: string
+        mute:
+          description: Indicates the mute state of a finding (either muted, unmuted or undefined). Unlike other attributes of a finding, a finding provider shouldn't set the value of mute.
+          enum:
+            - MUTE_UNSPECIFIED
+            - MUTED
+            - UNMUTED
+            - UNDEFINED
+          type: string
+        muteInitiator:
+          description: Records additional information about the mute operation, for example, the [mute configuration](/security-command-center/docs/how-to-mute-findings) that muted the finding and the user who muted the finding.
+          type: string
+        muteUpdateTime:
+          description: Output only. The most recent time this finding was muted or unmuted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: 'The [relative resource name](https://cloud.google.com/apis/design/resource_names#relative_resource_name) of the finding. Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}", "folders/{folder_id}/sources/{source_id}/findings/{finding_id}", "projects/{project_id}/sources/{source_id}/findings/{finding_id}".'
+          type: string
+        nextSteps:
+          description: Steps to address the finding.
+          type: string
+        parent:
+          description: 'The relative resource name of the source the finding belongs to. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name This field is immutable after creation time. For example: "organizations/{organization_id}/sources/{source_id}"'
+          type: string
+        parentDisplayName:
+          description: Output only. The human readable display name of the finding source such as "Event Threat Detection" or "Security Health Analytics".
+          readOnly: true
+          type: string
+        processes:
+          description: Represents operating system processes associated with the Finding.
+          items:
+            $ref: "#/components/schemas/Process"
+          type: array
+        resourceName:
+          description: "For findings on Google Cloud resources, the full resource name of the Google Cloud resource this finding is for. See: https://cloud.google.com/apis/design/resource_names#full_resource_name When the finding is for a non-Google Cloud resource, the resourceName can be a customer or partner defined string. This field is immutable after creation time."
+          type: string
+        securityMarks:
+          $ref: "#/components/schemas/SecurityMarks"
+          description: Output only. User specified security marks. These marks are entirely managed by the user and come from the SecurityMarks resource that belongs to the finding.
+          readOnly: true
+        severity:
+          description: The severity of the finding. This field is managed by the source that writes the finding.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - CRITICAL
+            - HIGH
+            - MEDIUM
+            - LOW
+          type: string
+        sourceProperties:
+          additionalProperties: {}
+          description: Source specific properties. These properties are managed by the source that writes the finding. The key names in the source_properties map must be between 1 and 255 characters, and must start with a letter and contain alphanumeric characters or underscores only.
+          type: object
+        state:
+          description: The state of the finding.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - INACTIVE
+          type: string
+        vulnerability:
+          $ref: "#/components/schemas/Vulnerability"
+          description: Represents vulnerability-specific fields like CVE and CVSS scores. CVE stands for Common Vulnerabilities and Exposures (https://cve.mitre.org/about/)
+      type: object
+    Folder:
+      description: Message that contains the resource name and display name of a folder resource.
+      properties:
+        resourceFolder:
+          description: "Full resource name of this folder. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
+          type: string
+        resourceFolderDisplayName:
+          description: The user defined display name for this folder.
+          type: string
+      type: object
+    Geolocation:
+      description: Represents a geographical location for a given access.
+      properties:
+        regionCode:
+          description: A CLDR.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1BigQueryExport:
+      description: Configures how to deliver Findings to BigQuery Instance.
+      properties:
+        createTime:
+          description: Output only. The time at which the BigQuery export was created. This field is set by the server and will be ignored if provided on export on creation.
+          format: google-datetime
+          readOnly: true
+          type: string
+        dataset:
+          description: The dataset to write findings' updates to. Its format is "projects/[project_id]/datasets/[bigquery_dataset_id]". BigQuery Dataset unique ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_).
+          type: string
+        description:
+          description: The description of the export (max of 1024 characters).
+          type: string
+        filter:
+          description: "Expression that defines the filter to apply across create/update events of findings. The expression is a list of zero or more restrictions combined via logical operators `AND` and `OR`. Parentheses are supported, and `OR` has higher precedence than `AND`. Restrictions have the form ` ` and may have a `-` character in front of them to indicate negation. The fields map to those defined in the corresponding resource. The supported operators are: * `=` for all value types. * `>`, `<`, `>=`, `<=` for integer values. * `:`, meaning substring matching, for strings. The supported value types are: * string literals in quotes. * integer literals without quotes. * boolean literals `true` and `false` without quotes."
+          type: string
+        mostRecentEditor:
+          description: Output only. Email address of the user who last edited the BigQuery export. This field is set by the server and will be ignored if provided on export creation or update.
+          readOnly: true
+          type: string
+        name:
+          description: 'The relative resource name of this export. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name. Example format: "organizations/{organization_id}/bigQueryExports/{export_id}" Example format: "folders/{folder_id}/bigQueryExports/{export_id}" Example format: "projects/{project_id}/bigQueryExports/{export_id}" This field is provided in responses, and is ignored when provided in create requests.'
+          type: string
+        principal:
+          description: Output only. The service account that needs permission to create table and upload data to the BigQuery dataset.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The most recent time at which the BigQuery export was updated. This field is set by the server and will be ignored if provided on export creation or update.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1Binding:
+      description: Represents a Kubernetes RoleBinding or ClusterRoleBinding.
+      properties:
+        name:
+          description: Name for binding.
+          type: string
+        ns:
+          description: Namespace for binding.
+          type: string
+        role:
+          $ref: "#/components/schemas/Role"
+          description: The Role or ClusterRole referenced by the binding.
+        subjects:
+          description: Represents one or more subjects that are bound to the role. Not always available for PATCH requests.
+          items:
+            $ref: "#/components/schemas/Subject"
+          type: array
+      type: object
+    GoogleCloudSecuritycenterV1BulkMuteFindingsResponse:
+      description: The response to a BulkMute request. Contains the LRO information.
+      properties: {}
+      type: object
+    GoogleCloudSecuritycenterV1CustomConfig:
+      description: Defines the properties in a custom module configuration for Security Health Analytics. Use the custom module configuration to create custom detectors that generate custom findings for resources that you specify.
+      properties:
+        customOutput:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1CustomOutputSpec"
+          description: Custom output properties.
+        description:
+          description: Text that describes the vulnerability or misconfiguration that the custom module detects. This explanation is returned with each finding instance to help investigators understand the detected issue. The text must be enclosed in quotation marks.
+          type: string
+        predicate:
+          $ref: "#/components/schemas/Expr"
+          description: The CEL expression to evaluate to produce findings. When the expression evaluates to true against a resource, a finding is generated.
+        recommendation:
+          description: An explanation of the recommended steps that security teams can take to resolve the detected issue. This explanation is returned with each finding generated by this module in the `nextSteps` property of the finding JSON.
+          type: string
+        resourceSelector:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1ResourceSelector"
+          description: The resource types that the custom module operates on. Each custom module can specify up to 5 resource types.
+        severity:
+          description: The severity to assign to findings generated by the module.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - CRITICAL
+            - HIGH
+            - MEDIUM
+            - LOW
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1CustomOutputSpec:
+      description: A set of optional name-value pairs that define custom source properties to return with each finding that is generated by the custom module. The custom source properties that are defined here are included in the finding JSON under `sourceProperties`.
+      properties:
+        properties:
+          description: A list of custom output properties to add to the finding.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Property"
+          type: array
+      type: object
+    GoogleCloudSecuritycenterV1EffectiveSecurityHealthAnalyticsCustomModule:
+      description: "An EffectiveSecurityHealthAnalyticsCustomModule is the representation of a Security Health Analytics custom module at a specified level of the resource hierarchy: organization, folder, or project. If a custom module is inherited from a parent organization or folder, the value of the `enablementState` property in EffectiveSecurityHealthAnalyticsCustomModule is set to the value that is effective in the parent, instead of `INHERITED`. For example, if the module is enabled in a parent organization or folder, the effective enablement_state for the module in all child folders or projects is also `enabled`. EffectiveSecurityHealthAnalyticsCustomModule is read-only."
+      properties:
+        customConfig:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1CustomConfig"
+          description: Output only. The user-specified configuration for the module.
+          readOnly: true
+        displayName:
+          description: Output only. The display name for the custom module. The name must be between 1 and 128 characters, start with a lowercase letter, and contain alphanumeric characters or underscores only.
+          readOnly: true
+          type: string
+        enablementState:
+          description: Output only. The effective state of enablement for the module at the given level of the hierarchy.
+          enum:
+            - ENABLEMENT_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name of the custom module. Its format is "organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}", or "folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}", or "projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}"
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1ExternalSystem:
+      description: Representation of third party SIEM/SOAR fields within SCC.
+      properties:
+        assignees:
+          description: References primary/secondary etc assignees in the external system.
+          items:
+            type: string
+          type: array
+        externalSystemUpdateTime:
+          description: The most recent time when the corresponding finding's ticket/tracker was updated in the external system.
+          format: google-datetime
+          type: string
+        externalUid:
+          description: Identifier that's used to track the given finding in the external system.
+          type: string
+        name:
+          description: 'Full resource name of the external system, for example: "organizations/1234/sources/5678/findings/123456/externalSystems/jira", "folders/1234/sources/5678/findings/123456/externalSystems/jira", "projects/1234/sources/5678/findings/123456/externalSystems/jira"'
+          type: string
+        status:
+          description: Most recent status of the corresponding finding's ticket/tracker in the external system.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1MuteConfig:
+      description: A mute config is a Cloud SCC resource that contains the configuration to mute create/update events of findings.
+      properties:
+        createTime:
+          description: Output only. The time at which the mute config was created. This field is set by the server and will be ignored if provided on config creation.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: A description of the mute config.
+          type: string
+        displayName:
+          description: The human readable name to be displayed for the mute config.
+          type: string
+        filter:
+          description: "Required. An expression that defines the filter to apply across create/update events of findings. While creating a filter string, be mindful of the scope in which the mute configuration is being created. E.g., If a filter contains project = X but is created under the project = Y scope, it might not match any findings. The following field and operator combinations are supported: * severity: `=`, `:` * category: `=`, `:` * resource.name: `=`, `:` * resource.project_name: `=`, `:` * resource.project_display_name: `=`, `:` * resource.folders.resource_folder: `=`, `:` * resource.parent_name: `=`, `:` * resource.parent_display_name: `=`, `:` * resource.type: `=`, `:` * finding_class: `=`, `:` * indicator.ip_addresses: `=`, `:` * indicator.domains: `=`, `:`"
+          type: string
+        mostRecentEditor:
+          description: Output only. Email address of the user who last edited the mute config. This field is set by the server and will be ignored if provided on config creation or update.
+          readOnly: true
+          type: string
+        name:
+          description: This field will be ignored if provided on config creation. Format "organizations/{organization}/muteConfigs/{mute_config}" "folders/{folder}/muteConfigs/{mute_config}" "projects/{project}/muteConfigs/{mute_config}"
+          type: string
+        updateTime:
+          description: Output only. The most recent time at which the mute config was updated. This field is set by the server and will be ignored if provided on config creation or update.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1NotificationMessage:
+      description: Cloud SCC's Notification
+      properties:
+        finding:
+          $ref: "#/components/schemas/Finding"
+          description: If it's a Finding based notification config, this field will be populated.
+        notificationConfigName:
+          description: Name of the notification config that generated current notification.
+          type: string
+        resource:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Resource"
+          description: The Cloud resource tied to this notification's Finding.
+      type: object
+    GoogleCloudSecuritycenterV1Property:
+      description: An individual name-value pair that defines a custom source property.
+      properties:
+        name:
+          description: Name of the property for the custom output.
+          type: string
+        valueExpression:
+          $ref: "#/components/schemas/Expr"
+          description: The CEL expression for the custom output. A resource property can be specified to return the value of the property or a text string enclosed in quotation marks.
+      type: object
+    GoogleCloudSecuritycenterV1Resource:
+      description: Information related to the Google Cloud resource.
+      properties:
+        displayName:
+          description: The human readable name of the resource.
+          type: string
+        folders:
+          description: Output only. Contains a Folder message for each folder in the assets ancestry. The first folder is the deepest nested folder, and the last folder is the folder directly under the Organization.
+          items:
+            $ref: "#/components/schemas/Folder"
+          readOnly: true
+          type: array
+        name:
+          description: "The full resource name of the resource. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
+          type: string
+        parent:
+          description: The full resource name of resource's parent.
+          type: string
+        parentDisplayName:
+          description: The human readable name of resource's parent.
+          type: string
+        project:
+          description: The full resource name of project that the resource belongs to.
+          type: string
+        projectDisplayName:
+          description: The project ID that the resource belongs to.
+          type: string
+        type:
+          description: The full resource type of the resource.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1ResourceSelector:
+      description: Resource for selecting resource type.
+      properties:
+        resourceTypes:
+          description: The resource types to run the detector on.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse:
+      description: Response of asset discovery run
+      properties:
+        duration:
+          description: The duration between asset discovery run start and end
+          format: google-duration
+          type: string
+        state:
+          description: The state of an asset discovery run.
+          enum:
+            - STATE_UNSPECIFIED
+            - COMPLETED
+            - SUPERSEDED
+            - TERMINATED
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1SecurityHealthAnalyticsCustomModule:
+      description: Represents an instance of a Security Health Analytics custom module, including its full module name, display name, enablement state, and last updated time. You can create a custom module at the organization, folder, or project level. Custom modules that you create at the organization or folder level are inherited by the child folders and projects.
+      properties:
+        ancestorModule:
+          description: Output only. If empty, indicates that the custom module was created in the organization, folder, or project in which you are viewing the custom module. Otherwise, `ancestor_module` specifies the organization or folder from which the custom module is inherited.
+          readOnly: true
+          type: string
+        customConfig:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1CustomConfig"
+          description: The user specified custom configuration for the module.
+        displayName:
+          description: The display name of the Security Health Analytics custom module. This display name becomes the finding category for all findings that are returned by this custom module. The display name must be between 1 and 128 characters, start with a lowercase letter, and contain alphanumeric characters or underscores only.
+          type: string
+        enablementState:
+          description: The enablement state of the custom module.
+          enum:
+            - ENABLEMENT_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+            - INHERITED
+          type: string
+        lastEditor:
+          description: Output only. The editor that last updated the custom module.
+          readOnly: true
+          type: string
+        name:
+          description: Immutable. The resource name of the custom module. Its format is "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}", or "folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}", or "projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}" The id {customModule} is server-generated and is not user settable. It will be a numeric id containing 1-20 digits.
+          type: string
+        updateTime:
+          description: Output only. The time at which the custom module was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse:
+      description: Response of asset discovery run
+      properties:
+        duration:
+          description: The duration between asset discovery run start and end
+          format: google-duration
+          type: string
+        state:
+          description: The state of an asset discovery run.
+          enum:
+            - STATE_UNSPECIFIED
+            - COMPLETED
+            - SUPERSEDED
+            - TERMINATED
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1Finding:
+      description: Security Command Center finding. A finding is a record of assessment data (security, risk, health or privacy) ingested into Security Command Center for presentation, notification, analysis, policy testing, and enforcement. For example, an XSS vulnerability in an App Engine application is a finding.
+      properties:
+        canonicalName:
+          description: The canonical name of the finding. It's either "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}", "folders/{folder_id}/sources/{source_id}/findings/{finding_id}" or "projects/{project_number}/sources/{source_id}/findings/{finding_id}", depending on the closest CRM ancestor of the resource associated with the finding.
+          type: string
+        category:
+          description: 'The additional taxonomy group within findings from a given source. This field is immutable after creation time. Example: "XSS_FLASH_INJECTION"'
+          type: string
+        createTime:
+          description: The time at which the finding was created in Security Command Center.
+          format: google-datetime
+          type: string
+        eventTime:
+          description: The time at which the event took place, or when an update to the finding occurred. For example, if the finding represents an open firewall it would capture the time the detector believes the firewall became open. The accuracy is determined by the detector. If the finding were to be resolved afterward, this time would reflect when the finding was resolved. Must not be set to a value greater than the current timestamp.
+          format: google-datetime
+          type: string
+        externalUri:
+          description: The URI that, if available, points to a web page outside of Security Command Center where additional information about the finding can be found. This field is guaranteed to be either empty or a well formed URL.
+          type: string
+        name:
+          description: 'The relative resource name of this finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"'
+          type: string
+        parent:
+          description: 'The relative resource name of the source the finding belongs to. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name This field is immutable after creation time. For example: "organizations/{organization_id}/sources/{source_id}"'
+          type: string
+        resourceName:
+          description: "For findings on Google Cloud resources, the full resource name of the Google Cloud resource this finding is for. See: https://cloud.google.com/apis/design/resource_names#full_resource_name When the finding is for a non-Google Cloud resource, the resourceName can be a customer or partner defined string. This field is immutable after creation time."
+          type: string
+        securityMarks:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks"
+          description: Output only. User specified security marks. These marks are entirely managed by the user and come from the SecurityMarks resource that belongs to the finding.
+          readOnly: true
+        severity:
+          description: The severity of the finding. This field is managed by the source that writes the finding.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - CRITICAL
+            - HIGH
+            - MEDIUM
+            - LOW
+          type: string
+        sourceProperties:
+          additionalProperties: {}
+          description: Source specific properties. These properties are managed by the source that writes the finding. The key names in the source_properties map must be between 1 and 255 characters, and must start with a letter and contain alphanumeric characters or underscores only.
+          type: object
+        state:
+          description: The state of the finding.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - INACTIVE
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1Folder:
+      description: Message that contains the resource name and display name of a folder resource.
+      properties:
+        resourceFolder:
+          description: "Full resource name of this folder. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
+          type: string
+        resourceFolderDisplayName:
+          description: The user defined display name for this folder.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1NotificationMessage:
+      description: Security Command Center's Notification
+      properties:
+        finding:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Finding"
+          description: If it's a Finding based notification config, this field will be populated.
+        notificationConfigName:
+          description: Name of the notification config that generated current notification.
+          type: string
+        resource:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Resource"
+          description: The Cloud resource tied to the notification.
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1Resource:
+      description: Information related to the Google Cloud resource.
+      properties:
+        folders:
+          description: Output only. Contains a Folder message for each folder in the assets ancestry. The first folder is the deepest nested folder, and the last folder is the folder directly under the Organization.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Folder"
+          readOnly: true
+          type: array
+        name:
+          description: "The full resource name of the resource. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
+          type: string
+        parent:
+          description: The full resource name of resource's parent.
+          type: string
+        parentDisplayName:
+          description: The human readable name of resource's parent.
+          type: string
+        project:
+          description: The full resource name of project that the resource belongs to.
+          type: string
+        projectDisplayName:
+          description: The project id that the resource belongs to.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse:
+      description: Response of asset discovery run
+      properties:
+        duration:
+          description: The duration between asset discovery run start and end
+          format: google-duration
+          type: string
+        state:
+          description: The state of an asset discovery run.
+          enum:
+            - STATE_UNSPECIFIED
+            - COMPLETED
+            - SUPERSEDED
+            - TERMINATED
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1SecurityMarks:
+      description: User specified security marks that are attached to the parent Security Command Center resource. Security marks are scoped within a Security Command Center organization -- they can be modified and viewed by all users who have proper permissions on the organization.
+      properties:
+        canonicalName:
+          description: 'The canonical name of the marks. Examples: "organizations/{organization_id}/assets/{asset_id}/securityMarks" "folders/{folder_id}/assets/{asset_id}/securityMarks" "projects/{project_number}/assets/{asset_id}/securityMarks" "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks" "folders/{folder_id}/sources/{source_id}/findings/{finding_id}/securityMarks" "projects/{project_number}/sources/{source_id}/findings/{finding_id}/securityMarks"'
+          type: string
+        marks:
+          additionalProperties:
+            type: string
+          description: "Mutable user specified security marks belonging to the parent resource. Constraints are as follows: * Keys and values are treated as case insensitive * Keys must be between 1 - 256 characters (inclusive) * Keys must be letters, numbers, underscores, or dashes * Values have leading and trailing whitespace trimmed, remaining characters must be between 1 - 4096 characters (inclusive)"
+          type: object
+        name:
+          description: 'The relative resource name of the SecurityMarks. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Examples: "organizations/{organization_id}/assets/{asset_id}/securityMarks" "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".'
+          type: string
+      type: object
+    IamBinding:
+      description: Represents a particular IAM binding, which captures a member's role addition, removal, or state.
+      properties:
+        action:
+          description: The action that was performed on a Binding.
+          enum:
+            - ACTION_UNSPECIFIED
+            - ADD
+            - REMOVE
+          type: string
+        member:
+          description: A single identity requesting access for a Cloud Platform resource, e.g. "foo@google.com".
+          type: string
+        role:
+          description: Role that is assigned to "members". For example, "roles/viewer", "roles/editor", or "roles/owner".
+          type: string
+      type: object
+    Indicator:
+      description: Represents what's commonly known as an _indicator of compromise_ (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. For more information, see [Indicator of compromise](https://en.wikipedia.org/wiki/Indicator_of_compromise).
+      properties:
+        domains:
+          description: List of domains associated to the Finding.
+          items:
+            type: string
+          type: array
+        ipAddresses:
+          description: The list of IP addresses that are associated with the finding.
+          items:
+            type: string
+          type: array
+        signatures:
+          description: The list of matched signatures indicating that the given process is present in the environment.
+          items:
+            $ref: "#/components/schemas/ProcessSignature"
+          type: array
+        uris:
+          description: The list of URIs associated to the Findings.
+          items:
+            type: string
+          type: array
+      type: object
+    KernelRootkit:
+      description: Kernel mode rootkit signatures.
+      properties:
+        name:
+          description: Rootkit name when available.
+          type: string
+        unexpectedCodeModification:
+          description: True when unexpected modifications of kernel code memory are present.
+          type: boolean
+        unexpectedFtraceHandler:
+          description: True when `ftrace` points are present with callbacks pointing to regions that are not in the expected kernel or module code range.
+          type: boolean
+        unexpectedInterruptHandler:
+          description: True when interrupt handlers that are are not in the expected kernel or module code regions are present.
+          type: boolean
+        unexpectedKernelCodePages:
+          description: True when kernel code pages that are not in the expected kernel or module code regions are present.
+          type: boolean
+        unexpectedKprobeHandler:
+          description: True when `kprobe` points are present with callbacks pointing to regions that are not in the expected kernel or module code range.
+          type: boolean
+        unexpectedProcessesInRunqueue:
+          description: True when unexpected processes in the scheduler run queue are present. Such processes are in the run queue, but not in the process task list.
+          type: boolean
+        unexpectedReadOnlyDataModification:
+          description: True when unexpected modifications of kernel read-only data memory are present.
+          type: boolean
+        unexpectedSystemCallHandler:
+          description: True when system call handlers that are are not in the expected kernel or module code regions are present.
+          type: boolean
+      type: object
+    Kubernetes:
+      description: Kubernetes-related attributes.
+      properties:
+        accessReviews:
+          description: Provides information on any Kubernetes access reviews (i.e. privilege checks) relevant to the finding.
+          items:
+            $ref: "#/components/schemas/AccessReview"
+          type: array
+        bindings:
+          description: Provides Kubernetes role binding information for findings that involve RoleBindings or ClusterRoleBindings.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Binding"
+          type: array
+        nodePools:
+          description: GKE Node Pools associated with the finding. This field will contain NodePool information for each Node, when it is available.
+          items:
+            $ref: "#/components/schemas/NodePool"
+          type: array
+        nodes:
+          description: Provides Kubernetes Node information.
+          items:
+            $ref: "#/components/schemas/Node"
+          type: array
+        pods:
+          description: Kubernetes Pods associated with the finding. This field will contain Pod records for each container that is owned by a Pod.
+          items:
+            $ref: "#/components/schemas/Pod"
+          type: array
+        roles:
+          description: Provides Kubernetes role information for findings that involve Roles or ClusterRoles.
+          items:
+            $ref: "#/components/schemas/Role"
+          type: array
+      type: object
+    Label:
+      description: Label represents a generic name=value label. Label has separate name and value fields to support filtering with contains().
+      properties:
+        name:
+          description: Label name.
+          type: string
+        value:
+          description: Label value.
+          type: string
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    MemoryHashSignature:
+      description: A signature corresponding to memory page hashes.
+      properties:
+        binaryFamily:
+          description: The binary family.
+          type: string
+        detections:
+          description: The list of memory hash detections contributing to the binary family match.
+          items:
+            $ref: "#/components/schemas/Detection"
+          type: array
+      type: object
+    MitreAttack:
+      description: "MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org"
+      properties:
+        additionalTactics:
+          description: Additional MITRE ATT&CK tactics related to this finding, if any.
+          items:
+            enum:
+              - TACTIC_UNSPECIFIED
+              - RECONNAISSANCE
+              - RESOURCE_DEVELOPMENT
+              - INITIAL_ACCESS
+              - EXECUTION
+              - PERSISTENCE
+              - PRIVILEGE_ESCALATION
+              - DEFENSE_EVASION
+              - CREDENTIAL_ACCESS
+              - DISCOVERY
+              - LATERAL_MOVEMENT
+              - COLLECTION
+              - COMMAND_AND_CONTROL
+              - EXFILTRATION
+              - IMPACT
+            type: string
+          type: array
+        additionalTechniques:
+          description: Additional MITRE ATT&CK techniques related to this finding, if any, along with any of their respective parent techniques.
+          items:
+            enum:
+              - TECHNIQUE_UNSPECIFIED
+              - ACTIVE_SCANNING
+              - SCANNING_IP_BLOCKS
+              - INGRESS_TOOL_TRANSFER
+              - NATIVE_API
+              - SHARED_MODULES
+              - COMMAND_AND_SCRIPTING_INTERPRETER
+              - UNIX_SHELL
+              - RESOURCE_HIJACKING
+              - PROXY
+              - EXTERNAL_PROXY
+              - MULTI_HOP_PROXY
+              - DYNAMIC_RESOLUTION
+              - UNSECURED_CREDENTIALS
+              - VALID_ACCOUNTS
+              - LOCAL_ACCOUNTS
+              - CLOUD_ACCOUNTS
+              - NETWORK_DENIAL_OF_SERVICE
+              - PERMISSION_GROUPS_DISCOVERY
+              - CLOUD_GROUPS
+              - EXFILTRATION_OVER_WEB_SERVICE
+              - EXFILTRATION_TO_CLOUD_STORAGE
+              - ACCOUNT_MANIPULATION
+              - SSH_AUTHORIZED_KEYS
+              - CREATE_OR_MODIFY_SYSTEM_PROCESS
+              - STEAL_WEB_SESSION_COOKIE
+              - MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE
+              - EXPLOIT_PUBLIC_FACING_APPLICATION
+              - MODIFY_AUTHENTICATION_PROCESS
+              - DATA_DESTRUCTION
+              - DOMAIN_POLICY_MODIFICATION
+              - IMPAIR_DEFENSES
+              - NETWORK_SERVICE_DISCOVERY
+              - ACCESS_TOKEN_MANIPULATION
+              - ABUSE_ELEVATION_CONTROL_MECHANISM
+              - DEFAULT_ACCOUNTS
+            type: string
+          type: array
+        primaryTactic:
+          description: The MITRE ATT&CK tactic most closely represented by this finding, if any.
+          enum:
+            - TACTIC_UNSPECIFIED
+            - RECONNAISSANCE
+            - RESOURCE_DEVELOPMENT
+            - INITIAL_ACCESS
+            - EXECUTION
+            - PERSISTENCE
+            - PRIVILEGE_ESCALATION
+            - DEFENSE_EVASION
+            - CREDENTIAL_ACCESS
+            - DISCOVERY
+            - LATERAL_MOVEMENT
+            - COLLECTION
+            - COMMAND_AND_CONTROL
+            - EXFILTRATION
+            - IMPACT
+          type: string
+        primaryTechniques:
+          description: The MITRE ATT&CK technique most closely represented by this finding, if any. primary_techniques is a repeated field because there are multiple levels of MITRE ATT&CK techniques. If the technique most closely represented by this finding is a sub-technique (e.g. `SCANNING_IP_BLOCKS`), both the sub-technique and its parent technique(s) will be listed (e.g. `SCANNING_IP_BLOCKS`, `ACTIVE_SCANNING`).
+          items:
+            enum:
+              - TECHNIQUE_UNSPECIFIED
+              - ACTIVE_SCANNING
+              - SCANNING_IP_BLOCKS
+              - INGRESS_TOOL_TRANSFER
+              - NATIVE_API
+              - SHARED_MODULES
+              - COMMAND_AND_SCRIPTING_INTERPRETER
+              - UNIX_SHELL
+              - RESOURCE_HIJACKING
+              - PROXY
+              - EXTERNAL_PROXY
+              - MULTI_HOP_PROXY
+              - DYNAMIC_RESOLUTION
+              - UNSECURED_CREDENTIALS
+              - VALID_ACCOUNTS
+              - LOCAL_ACCOUNTS
+              - CLOUD_ACCOUNTS
+              - NETWORK_DENIAL_OF_SERVICE
+              - PERMISSION_GROUPS_DISCOVERY
+              - CLOUD_GROUPS
+              - EXFILTRATION_OVER_WEB_SERVICE
+              - EXFILTRATION_TO_CLOUD_STORAGE
+              - ACCOUNT_MANIPULATION
+              - SSH_AUTHORIZED_KEYS
+              - CREATE_OR_MODIFY_SYSTEM_PROCESS
+              - STEAL_WEB_SESSION_COOKIE
+              - MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE
+              - EXPLOIT_PUBLIC_FACING_APPLICATION
+              - MODIFY_AUTHENTICATION_PROCESS
+              - DATA_DESTRUCTION
+              - DOMAIN_POLICY_MODIFICATION
+              - IMPAIR_DEFENSES
+              - NETWORK_SERVICE_DISCOVERY
+              - ACCESS_TOKEN_MANIPULATION
+              - ABUSE_ELEVATION_CONTROL_MECHANISM
+              - DEFAULT_ACCOUNTS
+            type: string
+          type: array
+        version:
+          description: The MITRE ATT&CK version referenced by the above fields. E.g. "8".
+          type: string
+      type: object
+    Node:
+      description: Kubernetes Nodes associated with the finding.
+      properties:
+        name:
+          description: Full Resource name of the Compute Engine VM running the cluster node.
+          type: string
+      type: object
+    NodePool:
+      description: Provides GKE Node Pool information.
+      properties:
+        name:
+          description: Kubernetes Node pool name.
+          type: string
+        nodes:
+          description: Nodes associated with the finding.
+          items:
+            $ref: "#/components/schemas/Node"
+          type: array
+      type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
+    Pod:
+      description: Kubernetes Pod.
+      properties:
+        containers:
+          description: Pod containers associated with this finding, if any.
+          items:
+            $ref: "#/components/schemas/Container"
+          type: array
+        labels:
+          description: Pod labels. For Kubernetes containers, these are applied to the container.
+          items:
+            $ref: "#/components/schemas/Label"
+          type: array
+        name:
+          description: Kubernetes Pod name.
+          type: string
+        ns:
+          description: Kubernetes Pod namespace.
+          type: string
+      type: object
+    Process:
+      description: Represents an operating system process.
+      properties:
+        args:
+          description: Process arguments as JSON encoded strings.
+          items:
+            type: string
+          type: array
+        argumentsTruncated:
+          description: True if `args` is incomplete.
+          type: boolean
+        binary:
+          $ref: "#/components/schemas/File"
+          description: File information for the process executable.
+        envVariables:
+          description: Process environment variables.
+          items:
+            $ref: "#/components/schemas/EnvironmentVariable"
+          type: array
+        envVariablesTruncated:
+          description: True if `env_variables` is incomplete.
+          type: boolean
+        libraries:
+          description: File information for libraries loaded by the process.
+          items:
+            $ref: "#/components/schemas/File"
+          type: array
+        name:
+          description: The process name visible in utilities like `top` and `ps`; it can be accessed via `/proc/[pid]/comm` and changed with `prctl(PR_SET_NAME)`.
+          type: string
+        parentPid:
+          description: The parent process id.
+          format: int64
+          type: string
+        pid:
+          description: The process id.
+          format: int64
+          type: string
+        script:
+          $ref: "#/components/schemas/File"
+          description: When the process represents the invocation of a script, `binary` provides information about the interpreter while `script` provides information about the script file provided to the interpreter.
+      type: object
+    ProcessSignature:
+      description: Indicates what signature matched this process.
+      properties:
+        memoryHashSignature:
+          $ref: "#/components/schemas/MemoryHashSignature"
+          description: Signature indicating that a binary family was matched.
+        yaraRuleSignature:
+          $ref: "#/components/schemas/YaraRuleSignature"
+          description: Signature indicating that a YARA rule was matched.
+      type: object
+    Reference:
+      description: Additional Links
+      properties:
+        source:
+          description: Source of the reference e.g. NVD
+          type: string
+        uri:
+          description: Uri for the mentioned source e.g. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34527.
+          type: string
+      type: object
+    Role:
+      description: Kubernetes Role or ClusterRole.
+      properties:
+        kind:
+          description: Role type.
+          enum:
+            - KIND_UNSPECIFIED
+            - ROLE
+            - CLUSTER_ROLE
+          type: string
+        name:
+          description: Role name.
+          type: string
+        ns:
+          description: Role namespace.
+          type: string
+      type: object
+    SecurityMarks:
+      description: User specified security marks that are attached to the parent Security Command Center resource. Security marks are scoped within a Security Command Center organization -- they can be modified and viewed by all users who have proper permissions on the organization.
+      properties:
+        canonicalName:
+          description: 'The canonical name of the marks. Examples: "organizations/{organization_id}/assets/{asset_id}/securityMarks" "folders/{folder_id}/assets/{asset_id}/securityMarks" "projects/{project_number}/assets/{asset_id}/securityMarks" "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks" "folders/{folder_id}/sources/{source_id}/findings/{finding_id}/securityMarks" "projects/{project_number}/sources/{source_id}/findings/{finding_id}/securityMarks"'
+          type: string
+        marks:
+          additionalProperties:
+            type: string
+          description: "Mutable user specified security marks belonging to the parent resource. Constraints are as follows: * Keys and values are treated as case insensitive * Keys must be between 1 - 256 characters (inclusive) * Keys must be letters, numbers, underscores, or dashes * Values have leading and trailing whitespace trimmed, remaining characters must be between 1 - 4096 characters (inclusive)"
+          type: object
+        name:
+          description: 'The relative resource name of the SecurityMarks. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Examples: "organizations/{organization_id}/assets/{asset_id}/securityMarks" "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".'
+          type: string
+      type: object
+    ServiceAccountDelegationInfo:
+      description: Identity delegation history of an authenticated service account.
+      properties:
+        principalEmail:
+          description: The email address of a Google account.
+          type: string
+        principalSubject:
+          description: A string representing the principal_subject associated with the identity. As compared to `principal_email`, supports principals that aren't associated with email addresses, such as third party principals. For most identities, the format will be `principal://iam.googleapis.com/{identity pool name}/subjects/{subject}` except for some GKE identities (GKE_WORKLOAD, FREEFORM, GKE_HUB_WORKLOAD) that are still in the legacy format `serviceAccount:{identity pool name}[{subject}]`
+          type: string
+      type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    Subject:
+      description: Represents a Kubernetes Subject.
+      properties:
+        kind:
+          description: Authentication type for subject.
+          enum:
+            - AUTH_TYPE_UNSPECIFIED
+            - USER
+            - SERVICEACCOUNT
+            - GROUP
+          type: string
+        name:
+          description: Name for subject.
+          type: string
+        ns:
+          description: Namespace for subject.
+          type: string
+      type: object
+    Vulnerability:
+      description: Refers to common vulnerability fields e.g. cve, cvss, cwe etc.
+      properties:
+        cve:
+          $ref: "#/components/schemas/Cve"
+          description: CVE stands for Common Vulnerabilities and Exposures (https://cve.mitre.org/about/)
+      type: object
+    YaraRuleSignature:
+      description: A signature corresponding to a YARA rule.
+      properties:
+        yaraRule:
+          description: The name of the YARA rule.
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

@@ -1,0 +1,944 @@
+{
+  "apis": {
+    "adyen.com:AccountService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.\n\nThe Account API provides endpoints for managing account-related entities on your platform. These related entities include account holders, accounts, bank accounts, shareholders, and verification-related documents. The management operations include actions such as creation, retrieval, updating, and deletion of them.\n\nFor more information, refer to our [documentation](https://docs.adyen.com/marketplaces-and-platforms/classic).\n## Authentication\nYour Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication. For example:\n\n```\ncurl\n-U \"ws@MarketPlace.YOUR_PLATFORM_ACCOUNT\":\"YOUR_WS_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\nWhen going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nThe Account API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://cal-test.adyen.com/cal/services/Account/v6/createAccountHolder\n```",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Account API",
+        "version": "6",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/AccountService-v6.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "AccountService",
+        "x-timestamp": "2023-04-03T19:29:08Z"
+      },
+      "updated": "2023-04-04T23:18:43.539Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/AccountService/6/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/AccountService/6/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:AccountService/6.json"
+    },
+    "adyen.com:BalanceControlService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "The Balance Control API lets you transfer funds between merchant accounts that belong to the same legal entity and are under the same company account.\n\n## Authentication\nTo connect to the Balance Control API, you must authenticate your requests with an [API key or basic auth username and password](https://docs.adyen.com/development-resources/api-authentication). To learn how you can generate these, see [API credentials](https://docs.adyen.com/development-resources/api-credentials).Here is an example of authenticating a request with an API key:\n\n```\ncurl\n-H \"X-API-Key: Your_API_key\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\nNote that when going live, you need to generate API credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nThe Balance Control API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n\n```\nhttps://pal-test.adyen.com/pal/servlet/BalanceControl/v1/balanceTransfer\n```\n",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen Balance Control API",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BalanceControlService-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "BalanceControlService",
+        "x-timestamp": "2023-02-20T18:23:08Z"
+      },
+      "updated": "2023-02-24T23:24:00.613Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BalanceControlService/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BalanceControlService/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:BalanceControlService/1.json"
+    },
+    "adyen.com:BalancePlatformConfigurationNotification-v1": {
+      "added": "2023-03-23T23:19:15.887Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "Adyen sends notifications through webhooks to inform your system about events that occur in your platform. These events include, for example, when an account holder's capabilities are updated, or when a sweep configuration is created or updated. \nWhen an event occurs, Adyen makes an HTTP POST request to a URL on your server and includes the details of the event in the request body.\n\nYou can use these webhooks to build your implementation. For example, you can use this information to update internal statuses when the status of a capability is changed.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Configuration webhooks",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BalancePlatformConfigurationNotification-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "BalancePlatformConfigurationNotification-v1",
+        "x-timestamp": "2023-04-18T11:25:58Z"
+      },
+      "updated": "2023-04-18T23:18:31.915Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformConfigurationNotification-v1/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformConfigurationNotification-v1/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:BalancePlatformConfigurationNotification-v1/1.json"
+    },
+    "adyen.com:BalancePlatformPaymentNotification-v1": {
+      "added": "2023-03-17T23:18:27.760Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "The payment webhooks are deprecated. Use the [accounting webhooks](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/overview) instead.\n\nAdyen sends notifications through webhooks to inform your system about the creation of payment resources and money movements in your platform.\n\nYou can use these webhooks to build your implementation. For example, you can use this information to update balances in your own dashboards or to keep track of incoming funds.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Payment webhooks (deprecated)",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BalancePlatformPaymentNotification-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "BalancePlatformPaymentNotification-v1",
+        "x-timestamp": "2023-04-17T15:23:17Z"
+      },
+      "updated": "2023-04-21T23:18:02.090Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformPaymentNotification-v1/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformPaymentNotification-v1/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:BalancePlatformPaymentNotification-v1/1.json"
+    },
+    "adyen.com:BalancePlatformReportNotification-v1": {
+      "added": "2023-03-23T23:19:15.887Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "Adyen sends notifications through webhooks to inform your system that reports were generated and are ready to be downloaded.\n\nYou can download reports programmatically by making an HTTP GET request, or manually from your [Balance Platform Customer Area](https://balanceplatform-test.adyen.com/balanceplatform).",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Report webhooks",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BalancePlatformReportNotification-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "BalancePlatformReportNotification-v1",
+        "x-timestamp": "2023-03-30T18:22:06Z"
+      },
+      "updated": "2023-04-05T23:21:49.437Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformReportNotification-v1/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformReportNotification-v1/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:BalancePlatformReportNotification-v1/1.json"
+    },
+    "adyen.com:BalancePlatformService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "The Configuration API enables you to create a platform where you can onboard your users as account holders and create balance accounts, cards, and business accounts.\n\n## Authentication\nYour Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication. For example:\n\n```\ncurl\n-H \"Content-Type: application/json\" \\\n-U \"ws@BalancePlatform.YOUR_BALANCE_PLATFORM\":\"YOUR_WS_PASSWORD\" \\\n...\n```\n## Versioning\nThe Configuration API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://balanceplatform-api-test.adyen.com/bcl/v2/accountHolders\n```\n## Going live\nWhen going live, your Adyen contact will provide your API credential for the live environment. You can then use the API key or the username and password to send requests to `https://balanceplatform-api-live.adyen.com/bcl/v2`.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Configuration API",
+        "version": "2",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_adyen.com_.resources_adyen-website_themes_images_apple-icon-180x180.png"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BalancePlatformService-v2.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "BalancePlatformService",
+        "x-timestamp": "2023-04-17T12:23:49Z"
+      },
+      "updated": "2023-04-18T23:18:31.915Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformService/2/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformService/2/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:BalancePlatformService/2.json"
+    },
+    "adyen.com:BalancePlatformTransferNotification-v3": {
+      "added": "2023-03-17T23:18:27.760Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "Adyen sends notifications through webhooks to inform your system about incoming and outgoing transfers in your platform.\n\nYou can use these webhooks to build your implementation. For example, you can use this information to update balances in your own dashboards or to keep track of incoming funds.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Transfer webhooks",
+        "version": "3",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BalancePlatformTransferNotification-v3.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "BalancePlatformTransferNotification-v3",
+        "x-timestamp": "2023-04-18T17:29:02Z"
+      },
+      "updated": "2023-04-21T23:18:02.090Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformTransferNotification-v3/3/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BalancePlatformTransferNotification-v3/3/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:BalancePlatformTransferNotification-v3/3.json"
+    },
+    "adyen.com:BinLookupService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "The BIN Lookup API provides endpoints for retrieving information, such as cost estimates, and 3D Secure supported version based on a given BIN.\n\n## Authentication\nYou need an [API credential](https://docs.adyen.com/development-resources/api-credentials) to authenticate to the API.\n\nIf using an API key, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication, for example:\n\n```\ncurl\n-U \"ws@Company.YOUR_COMPANY_ACCOUNT\":\"YOUR_BASIC_AUTHENTICATION_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\n\n## Versioning\nThe BinLookup API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://pal-test.adyen.com/pal/servlet/BinLookup/v54/get3dsAvailability\n```## Going live\n\nTo authneticate to the live endpoints, you need an [API credential](https://docs.adyen.com/development-resources/api-credentials) from your live Customer Area.\n\nThe live endpoint URLs contain a prefix which is unique to your company account:\n```\n\nhttps://{PREFIX}-pal-live.adyenpayments.com/pal/servlet/BinLookup/v54/get3dsAvailability\n```\n\nGet your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen BinLookup API",
+        "version": "54",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BinLookupService-v54.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "BinLookupService",
+        "x-timestamp": "2023-04-11T19:23:59Z"
+      },
+      "updated": "2023-04-19T23:18:47.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BinLookupService/54/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BinLookupService/54/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:BinLookupService/54.json"
+    },
+    "adyen.com:CheckoutService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "Adyen Checkout API provides a simple and flexible way to initiate and authorise online payments. You can use the same integration for payments made with cards (including 3D Secure), mobile wallets, and local payment methods (for example, iDEAL and Sofort).\n\nThis API reference provides information on available endpoints and how to interact with them. To learn more about the API, visit [online payments documentation](https://docs.adyen.com/online-payments).\n\n## Authentication\nEach request to Checkout API must be signed with an API key. For this, [get your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) from your Customer Area, and set this key to the `X-API-Key` header value, for example:\n\n```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n## Versioning\nCheckout API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://checkout-test.adyen.com/v70/payments\n```\n\n## Going live\n\nTo access the live endpoints, you need an API key from your live Customer Area.\n\nThe live endpoint URLs contain a prefix which is unique to your company account, for example:\n```\nhttps://{PREFIX}-checkout-live.adyenpayments.com/checkout/v70/payments\n```\n\nGet your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.\n\nWhen preparing to do live transactions with Checkout API, follow the [go-live checklist](https://docs.adyen.com/online-payments/go-live-checklist) to make sure you've got all the required configuration in place.\n\n## Release notes\nHave a look at the [release notes](https://docs.adyen.com/online-payments/release-notes?integration_type=api&version=70) to find out what changed in this version!",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen Checkout API",
+        "version": "70",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_adyen.com_.resources_adyen-website_themes_images_apple-icon-180x180.png"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/CheckoutService-v70.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "CheckoutService",
+        "x-timestamp": "2023-04-18T11:26:12Z"
+      },
+      "updated": "2023-04-19T23:18:47.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/CheckoutService/70/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/CheckoutService/70/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:CheckoutService/70.json"
+    },
+    "adyen.com:CheckoutUtilityService": {
+      "added": "2021-06-18T13:57:32.889Z",
+      "info": {
+        "contact": {
+          "email": "support@adyen.com",
+          "name": "Adyen Support",
+          "url": "https://support.adyen.com/",
+          "x-twitter": "Adyen"
+        },
+        "description": "A web service containing utility functions available for merchants integrating with Checkout APIs.\n## Authentication\nEach request to the Checkout Utility API must be signed with an API key. For this, obtain an API Key from your Customer Area, as described in [How to get the Checkout API key](https://docs.adyen.com/developers/user-management/how-to-get-the-checkout-api-key). Then set this key to the `X-API-Key` header value, for example:\n\n```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: Your_Checkout_API_key\" \\\n...\n```\nNote that when going live, you need to generate a new API Key to access the [live endpoints](https://docs.adyen.com/developers/api-reference/live-endpoints).\n\n## Versioning\nCheckout API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://checkout-test.adyen.com/v1/originKeys\n```",
+        "termsOfService": "https://docs.adyen.com/legal/terms-conditions",
+        "title": "Adyen Checkout Utility Service",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/lucybot/api-spec-converter",
+              "version": "2.7.11"
+            },
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/CheckoutUtilityService-v1.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-serviceName": "CheckoutUtilityService"
+      },
+      "updated": "2021-06-18T13:57:32.889Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/CheckoutUtilityService/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/CheckoutUtilityService/1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:CheckoutUtilityService/1.json"
+    },
+    "adyen.com:DataProtectionService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "Adyen Data Protection API provides a way for you to process [Subject Erasure Requests](https://gdpr-info.eu/art-17-gdpr/) as mandated in GDPR.\n\nUse our API to submit a request to delete shopper's data, including payment details and other related information (for example, delivery address or shopper email).## Authentication\nEach request to the Data Protection API must be signed with an API key. Get your API Key from your Customer Area, as described in [How to get the API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key). Then set this key to the `X-API-Key` header value, for example:\n\n```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: Your_API_key\" \\\n...\n```\nNote that when going live, you need to generate a new API Key to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nData Protection Service API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://ca-test.adyen.com/ca/services/DataProtectionService/v1/requestSubjectErasure\n```",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen Data Protection API",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/DataProtectionService-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "DataProtectionService",
+        "x-timestamp": "2023-02-20T18:24:23Z"
+      },
+      "updated": "2023-03-15T23:18:29.384Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/DataProtectionService/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/DataProtectionService/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:DataProtectionService/1.json"
+    },
+    "adyen.com:FundService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.\n\nThe Fund API provides endpoints for managing the funds in the accounts on your platform. These management operations include, for example, the transfer of funds from one account to another, the payout of funds to an account holder, and the retrieval of balances in an account.\n\nFor more information, refer to our [documentation](https://docs.adyen.com/marketplaces-and-platforms/classic/).\n## Authentication\nYour Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication. For example:\n\n```\ncurl\n-U \"ws@MarketPlace.YOUR_PLATFORM_ACCOUNT\":\"YOUR_WS_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\nWhen going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nThe Fund API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://cal-test.adyen.com/cal/services/Fund/v6/accountHolderBalance\n```",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Fund API",
+        "version": "6",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/FundService-v6.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "FundService",
+        "x-timestamp": "2023-02-20T18:23:38Z"
+      },
+      "updated": "2023-03-22T23:16:51.084Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/FundService/6/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/FundService/6/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:FundService/6.json"
+    },
+    "adyen.com:HopService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.\n\nThe Hosted onboarding API provides endpoints that you can use to generate links to Adyen-hosted pages, such as an [onboarding page](https://docs.adyen.com/marketplaces-and-platforms/classic/hosted-onboarding-page) or a [PCI compliance questionnaire](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners). You can provide these links to your account holders so that they can complete their onboarding.\n\n## Authentication\nYour Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication. For example:\n\n```\ncurl\n-U \"ws@MarketPlace.YOUR_PLATFORM_ACCOUNT\":\"YOUR_WS_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\nWhen going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nThe Hosted onboarding API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://cal-test.adyen.com/cal/services/Hop/v6/getOnboardingUrl\n```",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Hosted onboarding API",
+        "version": "6",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/HopService-v6.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "HopService",
+        "x-timestamp": "2023-03-22T11:13:03Z"
+      },
+      "updated": "2023-03-22T23:16:51.084Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/HopService/6/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/HopService/6/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:HopService/6.json"
+    },
+    "adyen.com:LegalEntityService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "The Legal Entity Management API enables you to manage legal entities that contain information required for verification. \n## Authentication\nTo connect to the Legal Entity Management API, you must use the basic authentication credentials of your web service user. If you don't have one, contact the [Adyen Support Team](https://www.adyen.help/hc/en-us/requests/new). Use the web service user credentials to authenticate your request, for example:\n\n```\ncurl\n-U \"ws_123456@Scope.BalancePlatform_YourBalancePlatform\":\"YourWsPassword\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\nNote that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nThe Legal Entity Management API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://kyc-test.adyen.com/lem/v3/legalEntities\n```\n## Going live\nWhen going live, your Adyen contact will provide your API credential for the live environment. You can then use the username and password to send requests to `https://kyc-live.adyen.com/lem/v3`.\n\n",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Legal Entity Management API",
+        "version": "3",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/LegalEntityService-v3.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "LegalEntityService",
+        "x-timestamp": "2023-04-11T19:23:17Z"
+      },
+      "updated": "2023-04-18T23:18:31.915Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/LegalEntityService/3/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/LegalEntityService/3/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:LegalEntityService/3.json"
+    },
+    "adyen.com:ManagementNotificationService-v1": {
+      "added": "2023-03-22T23:16:51.084Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "Adyen uses webhooks to inform your system about events that happen with your Adyen company and merchant accounts, stores, payment terminals, and payment methods when using [Management API](https://docs.adyen.com/api-explorer/#/ManagementService/latest/overview).\n\nWhen an event occurs, Adyen makes an HTTP POST request to a URL on your server and includes the details of the event in the request body.\n\nSee [Webhooks](https://docs.adyen.com/development-resources/webhooks) for more information.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Management Webhooks",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/ManagementNotificationService-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "ManagementNotificationService-v1",
+        "x-timestamp": "2023-03-30T18:21:57Z"
+      },
+      "updated": "2023-04-04T23:18:43.539Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/ManagementNotificationService-v1/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/ManagementNotificationService-v1/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:ManagementNotificationService-v1/1.json"
+    },
+    "adyen.com:ManagementService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "Configure and manage your Adyen company and merchant accounts, stores, and payment terminals.\n## Authentication\nEach request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.\n\nTo access the live endpoints, you need to generate a new API key in your live Customer Area.\n## Versioning\n\nManagement API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:\n\n```text\nhttps://management-test.adyen.com/v1/companies/{companyId}/webhooks\n```\n\n## Going live\n\nTo access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:\n\n```text\nhttps://management-live.adyen.com/v1\n```",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Management API",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/ManagementService-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "ManagementService",
+        "x-timestamp": "2023-04-03T23:26:06Z"
+      },
+      "updated": "2023-04-04T23:18:43.539Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/ManagementService/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/ManagementService/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:ManagementService/1.json"
+    },
+    "adyen.com:MarketPayNotificationService": {
+      "added": "2021-06-21T10:54:37.877Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.\n\nThe Notification API sends notifications to the endpoints specified in a given subscription. \nSubscriptions are managed through the Notification Configuration API. The API specifications listed here detail the format of each notification.\n\nFor more information, refer to our [documentation](https://docs.adyen.com/marketplaces-and-platforms/classic/notifications).",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Classic Platforms - Notifications",
+        "version": "6",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/MarketPayNotificationService-v6.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "MarketPayNotificationService",
+        "x-timestamp": "2023-04-03T19:29:08Z"
+      },
+      "updated": "2023-04-04T23:18:43.539Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/MarketPayNotificationService/6/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/MarketPayNotificationService/6/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:MarketPayNotificationService/6.json"
+    },
+    "adyen.com:NotificationConfigurationService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.\n\nThe Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a verification check or a payout has been completed.\n\nFor more information, refer to our [documentation](https://docs.adyen.com/marketplaces-and-platforms/classic/notifications).\n## Authentication\nYour Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication. For example:\n\n```\ncurl\n-U \"ws@MarketPlace.YOUR_PLATFORM_ACCOUNT\":\"YOUR_WS_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\nWhen going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nThe Notification Configuration API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://cal-test.adyen.com/cal/services/Notification/v6/createNotificationConfiguration\n```",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Notification Configuration API",
+        "version": "6",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/NotificationConfigurationService-v6.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "NotificationConfigurationService",
+        "x-timestamp": "2023-02-20T18:23:38Z"
+      },
+      "updated": "2023-03-22T23:16:51.084Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/NotificationConfigurationService/6/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/NotificationConfigurationService/6/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:NotificationConfigurationService/6.json"
+    },
+    "adyen.com:PaymentService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "A set of API endpoints that allow you to initiate, settle, and modify payments on the Adyen payments platform. You can use the API to accept card payments (including One-Click and 3D Secure), bank transfers, ewallets, and many other payment methods.\n\nTo learn more about the API, visit [Classic integration](https://docs.adyen.com/classic-integration).\n\n## Authentication\nYou need an [API credential](https://docs.adyen.com/development-resources/api-credentials) to authenticate to the API.\n\nIf using an API key, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication, for example:\n\n```\ncurl\n-U \"ws@Company.YOUR_COMPANY_ACCOUNT\":\"YOUR_BASIC_AUTHENTICATION_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\n\n## Versioning\nPayments API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://pal-test.adyen.com/pal/servlet/Payment/v68/authorise\n```\n\n## Going live\n\nTo authenticate to the live endpoints, you need an [API credential](https://docs.adyen.com/development-resources/api-credentials) from your live Customer Area.\n\nThe live endpoint URLs contain a prefix which is unique to your company account:\n```\n\nhttps://{PREFIX}-pal-live.adyenpayments.com/pal/servlet/Payment/v68/authorise\n```\n\nGet your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen Payment API",
+        "version": "68",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/PaymentService-v68.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "PaymentService",
+        "x-timestamp": "2023-04-17T17:24:20Z"
+      },
+      "updated": "2023-04-19T23:18:47.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/PaymentService/68/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/PaymentService/68/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:PaymentService/68.json"
+    },
+    "adyen.com:PayoutService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "A set of API endpoints that allow you to store payout details, confirm, or decline a payout.\n\nFor more information, refer to [Online payouts](https://docs.adyen.com/online-payments/online-payouts).\n## Authentication\nTo use the Payout API, you need to have [two API credentials](https://docs.adyen.com/online-payments/online-payouts#payouts-to-bank-accounts-and-wallets): one for storing payout details and submitting payouts, and another one for confirming or declining payouts. If you don't have the required API credentials, contact our [Support Team](https://www.adyen.help/hc/en-us/requests/new).\n\nBoth of these API credentials must be authenticated with [basic authentication](https://docs.adyen.com/development-resources/api-credentials#basic-authentication).The following example shows how to authenticate your request when submitting a payout:\n\n```\ncurl\n-U \"storePayout@Company.YOUR_COMPANY_ACCOUNT\":\"YOUR_BASIC_AUTHENTICATION_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\n\n## Versioning\nPayments API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://pal-test.adyen.com/pal/servlet/Payout/v68/payout\n```\n\n## Going live\n\nTo authenticate to the live endpoints, you need [API credentials](https://docs.adyen.com/development-resources/api-credentials) from your live Customer Area.\n\nThe live endpoint URLs contain a prefix which is unique to your company account:\n```\n\nhttps://{PREFIX}-pal-live.adyenpayments.com/pal/servlet/Payout/v68/payout\n```\n\nGet your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen Payout API",
+        "version": "68",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/PayoutService-v68.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "PayoutService",
+        "x-timestamp": "2023-04-11T21:25:15Z"
+      },
+      "updated": "2023-04-19T23:18:47.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/PayoutService/68/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/PayoutService/68/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:PayoutService/68.json"
+    },
+    "adyen.com:RecurringService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "The Recurring APIs allow you to manage and remove your tokens or saved payment details. Tokens should be created with validation during a payment request.\n\nFor more information, refer to our [Tokenization documentation](https://docs.adyen.com/online-payments/tokenization).\n## Authentication\nYou need an [API credential](https://docs.adyen.com/development-resources/api-credentials) to authenticate to the API.\n\nIf using an API key, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication, for example:\n\n```\ncurl\n-U \"ws@Company.YOUR_COMPANY_ACCOUNT\":\"YOUR_BASIC_AUTHENTICATION_PASSWORD\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\n\n## Versioning\nRecurring API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://pal-test.adyen.com/pal/servlet/Recurring/v68/disable\n```\n\n## Going live\n\nTo authenticate to the live endpoints, you need an [API credential](https://docs.adyen.com/development-resources/api-credentials) from your live Customer Area.\n\nThe live endpoint URLs contain a prefix which is unique to your company account:\n```\n\nhttps://{PREFIX}-pal-live.adyenpayments.com/pal/servlet/Recurring/v68/disable\n```\n\nGet your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen Recurring API",
+        "version": "68",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/RecurringService-v68.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "RecurringService",
+        "x-timestamp": "2023-04-11T21:25:15Z"
+      },
+      "updated": "2023-04-12T23:18:28.529Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/RecurringService/68/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/RecurringService/68/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:RecurringService/68.json"
+    },
+    "adyen.com:StoredValueService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "A set of API endpoints to manage stored value products.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen Stored Value API",
+        "version": "46",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/StoredValueService-v46.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "StoredValueService",
+        "x-timestamp": "2023-04-11T19:24:00Z"
+      },
+      "updated": "2023-04-17T23:18:26.999Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/StoredValueService/46/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/StoredValueService/46/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:StoredValueService/46.json"
+    },
+    "adyen.com:TestCardService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "The Test Cards API provides endpoints for generating custom test card numbers. For more information, refer to [Custom test cards](https://docs.adyen.com/development-resources/testing/create-test-cards) documentation.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Adyen Test Cards API",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/TestCardService-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "TestCardService",
+        "x-timestamp": "2022-05-03T09:24:07Z"
+      },
+      "updated": "2023-02-17T11:02:20.620Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/TestCardService/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/TestCardService/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:TestCardService/1.json"
+    },
+    "adyen.com:TfmAPIService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "This API provides endpoints for managing your point-of-sale (POS) payment terminals. You can use the API to obtain information about a specific terminal, retrieve overviews of your terminals and stores, and assign terminals to a merchant account or store.\n\nFor more information, refer to [Assign terminals](https://docs.adyen.com/point-of-sale/automating-terminal-management/assign-terminals-api).\n\n## Authentication\nEach request to the Terminal Management API must be signed with an API key. For this, obtain an API Key from your Customer Area, as described in [How to get the API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key). Then set this key to the `X-API-Key` header value, for example:\n\n```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: Your_API_key\" \\\n...\n```\nNote that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nTerminal Management API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://postfmapi-test.adyen.com/postfmapi/terminal/v1/getTerminalsUnderAccount\n```\nWhen using versioned endpoints, Boolean response values are returned in string format: `\"true\"` or `\"false\"`.\nIf you omit the version from the endpoint URL, Boolean response values are returned like this: `true` or `false`.",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "POS Terminal Management API",
+        "version": "1",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/TfmAPIService-v1.json",
+            "version": "3.1"
+          }
+        ],
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "TfmAPIService",
+        "x-timestamp": "2023-02-20T18:23:12Z"
+      },
+      "updated": "2023-03-07T23:20:48.814Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/TfmAPIService/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/TfmAPIService/1/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:TfmAPIService/1.json"
+    },
+    "adyen.com:TransferService": {
+      "added": "2023-02-17T11:02:20.620Z",
+      "info": {
+        "contact": {
+          "email": "developer-experience@adyen.com",
+          "name": "Adyen Developer Experience team",
+          "url": "https://www.adyen.help/hc/en-us/community/topics",
+          "x-twitter": "Adyen"
+        },
+        "description": "The Transfers API provides endpoints that you can use to get information about all your transactions, move funds within your balance platform or send funds from your balance platform to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments).\n\n## Authentication\nYour Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:\n\n ```\ncurl\n-H \"Content-Type: application/json\" \\\n-H \"X-API-Key: YOUR_API_KEY\" \\\n...\n```\n\nAlternatively, you can use the username and password to connect to the API using basic authentication. For example:\n\n```\ncurl\n-H \"Content-Type: application/json\" \\\n-U \"ws@BalancePlatform.YOUR_BALANCE_PLATFORM\":\"YOUR_WS_PASSWORD\" \\\n...\n```\n## Roles and permissions\nTo use the Transfers API, you need an additional role for your API credential. Transfers must also be enabled for the source balance account. Your Adyen contact will set up the roles and permissions for you.\n## Versioning\nThe Transfers API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n```\nhttps://balanceplatform-api-test.adyen.com/btl/v3/transfers\n```\n## Going live\nWhen going live, your Adyen contact will provide your API credential for the live environment. You can then use the username and password to send requests to `https://balanceplatform-api-live.adyen.com/btl/v3`.\n\n",
+        "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+        "title": "Transfers API",
+        "version": "3",
+        "x-apisguru-categories": [
+          "payment"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/TransferService-v3.json",
+            "version": "3.1"
+          }
+        ],
+        "x-preferred": true,
+        "x-providerName": "adyen.com",
+        "x-publicVersion": true,
+        "x-serviceName": "TransferService",
+        "x-timestamp": "2023-04-18T17:29:01Z"
+      },
+      "updated": "2023-04-21T23:18:02.090Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/TransferService/3/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/TransferService/3/openapi.yaml",
+      "openapiVer": "3.1.0",
+      "link": "https://api.apis.guru/v2/specs/adyen.com:TransferService/3.json"
+    }
+  }
+}

@@ -1,0 +1,497 @@
+openapi: 3.0.0
+servers:
+  - url: https://mybusinessqanda.googleapis.com/
+x-hasEquivalentPaths: true
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The My Business Q&A API allows questions and answers to be posted for specific listings. Note - If you have a quota of 0 after enabling the API, please request for GBP API access.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: My Business Q&A API
+  version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://mybusinessqanda.googleapis.com/$discovery/rest?version=v1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: mybusinessqanda
+externalDocs:
+  url: https://developers.google.com/my-business/
+tags:
+  - name: locations
+paths:
+  "/v1/{name}":
+    delete:
+      description: Deletes a specific question written by the current user.
+      operationId: mybusinessqanda.locations.questions.delete
+      parameters:
+        - description: Required. The name of the question to delete.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      tags:
+        - locations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a specific question written by the current user.
+      operationId: mybusinessqanda.locations.questions.patch
+      parameters:
+        - description: Immutable. The unique name for the question. locations/*/questions/* This field will be ignored if set during question creation.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. The specific fields to update. Only question text can be updated.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Question"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Question"
+          description: Successful response
+      tags:
+        - locations
+  "/v1/{name}/answers:delete":
+    delete:
+      description: Deletes the answer written by the current user to a question.
+      operationId: mybusinessqanda.locations.questions.answers.delete
+      parameters:
+        - description: Required. The name of the question to delete an answer for.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      tags:
+        - locations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}":
+    get:
+      description: Returns the paginated list of questions and some of its answers for a specified location. This operation is only valid if the specified location is verified.
+      operationId: mybusinessqanda.locations.questions.list
+      parameters:
+        - description: Required. The name of the location to fetch questions for.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. How many answers to fetch per question. The default and maximum `answers_per_question` values are 10.
+          in: query
+          name: answersPerQuestion
+          schema:
+            type: integer
+        - description: Optional. A filter constraining the questions to return. The only filter currently supported is "ignore_answered=true"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The order to return the questions. Valid options include 'update_time desc' and 'upvote_count desc', which will return the questions sorted descendingly by the requested field. The default sort order is 'update_time desc'.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. How many questions to fetch per page. The default and maximum `page_size` values are 10.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. If specified, the next page of questions is retrieved.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListQuestionsResponse"
+          description: Successful response
+      tags:
+        - locations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Adds a question for the specified location.
+      operationId: mybusinessqanda.locations.questions.create
+      parameters:
+        - description: Required. The name of the location to write a question for.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Question"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Question"
+          description: Successful response
+      tags:
+        - locations
+  "/v1/{parent}/answers":
+    get:
+      description: Returns the paginated list of answers for a specified question.
+      operationId: mybusinessqanda.locations.questions.answers.list
+      parameters:
+        - description: Required. The name of the question to fetch answers for.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The order to return the answers. Valid options include 'update_time desc' and 'upvote_count desc', which will return the answers sorted descendingly by the requested field. The default sort order is 'update_time desc'.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. How many answers to fetch per page. The default and maximum `page_size` values are 10.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. If specified, the next page of answers is retrieved.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAnswersResponse"
+          description: Successful response
+      tags:
+        - locations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/answers:upsert":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an answer or updates the existing answer written by the user for the specified question. A user can only create one answer per question.
+      operationId: mybusinessqanda.locations.questions.answers.upsert
+      parameters:
+        - description: Required. The name of the question to write an answer for.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertAnswerRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Answer"
+          description: Successful response
+      tags:
+        - locations
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Answer:
+      description: Represents an answer to a question
+      properties:
+        author:
+          $ref: "#/components/schemas/Author"
+          description: Output only. The author of the answer. Will only be set during list operations.
+          readOnly: true
+        createTime:
+          description: Output only. The timestamp for when the answer was written. Only retrieved during ListResponse fetching.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The unique name for the answer locations/*/questions/*/answers/*
+          readOnly: true
+          type: string
+        text:
+          description: Required. The text of the answer. It should contain at least one non-whitespace character. The maximum length is 4096 characters.
+          type: string
+        updateTime:
+          description: Output only. The timestamp for when the answer was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+        upvoteCount:
+          description: Output only. The number of upvotes for the answer.
+          format: int32
+          readOnly: true
+          type: integer
+      type: object
+    Author:
+      description: Represents the author of a question or answer
+      properties:
+        displayName:
+          description: The display name of the user
+          type: string
+        profilePhotoUri:
+          description: The profile photo URI of the user.
+          type: string
+        type:
+          description: The type of user the author is.
+          enum:
+            - AUTHOR_TYPE_UNSPECIFIED
+            - REGULAR_USER
+            - LOCAL_GUIDE
+            - MERCHANT
+          type: string
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    ListAnswersResponse:
+      description: Response message for QuestionsAndAnswers.ListAnswers
+      properties:
+        answers:
+          description: The requested answers.
+          items:
+            $ref: "#/components/schemas/Answer"
+          type: array
+        nextPageToken:
+          description: If the number of answers exceeds the requested max page size, this field is populated with a token to fetch the next page of answers on a subsequent call. If there are no more answers, this field is not present in the response.
+          type: string
+        totalSize:
+          description: The total number of answers posted for this question across all pages.
+          format: int32
+          type: integer
+      type: object
+    ListQuestionsResponse:
+      description: Response message for QuestionsAndAnswers.ListQuestions
+      properties:
+        nextPageToken:
+          description: If the number of questions exceeds the requested max page size, this field is populated with a token to fetch the next page of questions on a subsequent call. If there are no more questions, this field is not present in the response.
+          type: string
+        questions:
+          description: The requested questions,
+          items:
+            $ref: "#/components/schemas/Question"
+          type: array
+        totalSize:
+          description: The total number of questions posted for this location across all pages.
+          format: int32
+          type: integer
+      type: object
+    Question:
+      description: Represents a single question and some of its answers.
+      properties:
+        author:
+          $ref: "#/components/schemas/Author"
+          description: Output only. The author of the question.
+          readOnly: true
+        createTime:
+          description: Output only. The timestamp for when the question was written.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Immutable. The unique name for the question. locations/*/questions/* This field will be ignored if set during question creation.
+          type: string
+        text:
+          description: Required. The text of the question. It should contain at least three words and the total length should be greater than or equal to 10 characters. The maximum length is 4096 characters.
+          type: string
+        topAnswers:
+          description: Output only. A list of answers to the question, sorted by upvotes. This may not be a complete list of answers depending on the request parameters (answers_per_question)
+          items:
+            $ref: "#/components/schemas/Answer"
+          readOnly: true
+          type: array
+        totalAnswerCount:
+          description: Output only. The total number of answers posted for this question.
+          format: int32
+          readOnly: true
+          type: integer
+        updateTime:
+          description: Output only. The timestamp for when the question was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+        upvoteCount:
+          description: Output only. The number of upvotes for the question.
+          format: int32
+          readOnly: true
+          type: integer
+      type: object
+    UpsertAnswerRequest:
+      description: Request message for QuestionsAndAnswers.UpsertAnswer
+      properties:
+        answer:
+          $ref: "#/components/schemas/Answer"
+          description: Required. The new answer.
+      type: object

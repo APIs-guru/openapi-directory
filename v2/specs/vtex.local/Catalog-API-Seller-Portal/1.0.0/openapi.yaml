@@ -1,0 +1,5336 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server URL.
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL.
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+x-hasEquivalentPaths: true
+info:
+  contact: {}
+  description: "\r
+
+    With the Catalog API for Seller Portal, you will be able to create, edit and consult products and their variations, brands, and categories.\r
+
+    \r
+
+    > This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests).\r
+
+    \r
+
+    ## Index\r
+
+    \r
+
+    ### Product\r
+
+    \r
+
+    `GET` [Get Product by ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/products/-productId-)\r
+
+    `PUT` [Update Product](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#put-/api/catalog-seller-portal/products/-productId-)\r
+
+    `GET` [Get Product Description by Product ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/products/-productId-/description)\r
+
+    `PUT` [Update Product Description by Product ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#put-/api/catalog-seller-portal/products/-productId-/description)\r
+
+    `GET` [Get Product by external ID, SKU ID, SKU external ID or slug](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/products/-param-)\r
+
+    `POST` [Create Product](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#post-/api/catalog-seller-portal/products)\r
+
+    \r
+
+    ### SKU\r
+
+    \r
+
+    `GET` [Search for SKU](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/skus/_search)\r
+
+    `GET` [Get List of SKUs](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/skus/ids)\r
+
+    \r
+
+    ### Brand\r
+
+    \r
+
+    `GET` [Get List of Brands](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/brands)\r
+
+    `POST` [Create a Brand](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#post-/api/catalog-seller-portal/brands)\r
+
+    `GET` [Get Brand by ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/brands/-brandId-)\r
+
+    `PUT` [Update Brand](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#put-/api/catalog-seller-portal/brands/-brandId-)\r
+
+    \r
+
+    ### Category\r
+
+    \r
+
+    `GET` [Get Category Tree](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/category-tree)\r
+
+    `PUT` [Update Category Tree](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#put-/api/catalog-seller-portal/category-tree)\r
+
+    `GET` [Get Category by ID](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#get-/api/catalog-seller-portal/category-tree/categories/-categoryId-)\r
+
+    `POST` [Create a Category](https://developers.vtex.com/docs/api-reference/catalog-api-seller-portal#post-/api/catalog-seller-portal/category-tree/categories)"
+  title: Catalog API - Seller Portal
+  version: 1.0.0
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Catalog API Seller Portal.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Catalog-API-Seller-Portal
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: Product
+  - name: SKU
+  - name: Brand
+  - name: Category
+paths:
+  /api/catalog-seller-portal/brands:
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves general information about all brands of the store. It is mandatory to use at least one query parameter. \r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"data\": [\r
+
+        \        {\r
+
+        \            \"id\": \"7\",\r
+
+        \            \"name\": \"All For Paws\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"createdAt\": \"2022-01-17T19:43:14.18678Z\",\r
+
+        \            \"updatedAt\": \"2022-01-17T19:43:14.18678Z\"\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"id\": \"1\",\r
+
+        \            \"name\": \"AOC\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"createdAt\": \"2021-08-16T21:13:40.55189Z\",\r
+
+        \            \"updatedAt\": \"2021-08-16T21:13:40.55189Z\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"_metadata\": {\r
+
+        \        \"total\": 18,\r
+
+        \        \"from\": 1,\r
+
+        \        \"to\": 2,\r
+
+        \        \"orderBy\": \"name,asc\"\r
+
+        \    }\r
+
+        }\r
+
+        ```"
+      operationId: ListBrand
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Search word.
+          explode: true
+          in: query
+          name: q
+          required: false
+          schema:
+            example: tshirt
+            type: string
+          style: form
+        - description: The first page of the interval of the brand list.
+          explode: true
+          in: query
+          name: from
+          required: false
+          schema:
+            example: "1"
+            type: string
+          style: form
+        - description: The last page of the interval of the brand list.
+          explode: true
+          in: query
+          name: to
+          required: false
+          schema:
+            example: "50"
+            type: string
+          style: form
+        - description: The order that the list is displayed. You can select `name`, or `updated_at` to select the order criteria. Then you can add `,` , `asc` or `desc` to define the brands order.
+          explode: true
+          in: query
+          name: orderBy
+          required: false
+          schema:
+            example: status,asc;name,asc
+            type: string
+          style: form
+        - description: Brand name.
+          explode: true
+          in: query
+          name: name
+          required: false
+          schema:
+            example: Zwilling
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 1
+                  orderBy: name,desc
+                  to: 10
+                  total: 1399
+                data:
+                  - createdAt: 2021-01-18T14:41:45.696488+00:00
+                    id: "863"
+                    isActive: false
+                    name: Zwilling
+                    updatedAt: 2021-01-18T14:41:45.696488+00:00
+                  - createdAt: 2021-01-18T14:45:32.900176+00:00
+                    id: "1298"
+                    isActive: false
+                    name: Zooz Pets
+                    updatedAt: 2021-01-18T14:45:32.900176+00:00
+              schema:
+                properties:
+                  _metadata:
+                    description: Information about the organization and exhibition of the brand list.
+                    example:
+                      from: 1
+                      orderBy: name,desc
+                      to: 10
+                      total: 1399
+                    properties:
+                      from:
+                        description: The first page of the interval of the brand list.
+                        example: 1
+                        title: from
+                        type: integer
+                      orderBy:
+                        description: The order that the list is displayed. You can select `name`, or `updated_at` to select the order criteria. Then you can add `,` , `asc` or `desc` to define the brands order.
+                        example: name,desc
+                        title: orderBy
+                        type: string
+                      to:
+                        description: The last page of the interval of the brand list.
+                        example: 10
+                        title: to
+                        type: integer
+                      total:
+                        description: Total of brands on the list.
+                        example: 1399
+                        title: total
+                        type: integer
+                    required:
+                      - total
+                      - from
+                      - to
+                      - orderBy
+                    title: _metadata
+                    type: object
+                  data:
+                    description: List with information about the store's brands.
+                    items:
+                      example:
+                        createdAt: 2021-01-18T14:41:45.696488+00:00
+                        displayOnMenu: false
+                        id: "863"
+                        isActive: false
+                        name: Zwilling
+                        score: 0
+                        updatedAt: 2021-01-18T14:41:45.696488+00:00
+                      properties:
+                        createdAt:
+                          description: Date when the brand was created.
+                          example: 2021-01-18T14:41:45.696488+00:00
+                          title: createdAt
+                          type: string
+                        id:
+                          description: Brand unique identifier number.
+                          example: "863"
+                          title: id
+                          type: string
+                        isActive:
+                          description: The condition defines if the brand is active (`true`) or inactive (`false`).
+                          example: false
+                          title: isActive
+                          type: boolean
+                        name:
+                          description: Brand Name.
+                          example: Zwilling
+                          title: name
+                          type: string
+                        updatedAt:
+                          description: Last date when the brand was updated.
+                          example: 2021-01-18T14:41:45.696488+00:00
+                          title: updatedAt
+                          type: string
+                      required:
+                        - id
+                        - name
+                        - isActive
+                        - createdAt
+                        - updatedAt
+                      title: ""
+                      type: object
+                    title: data
+                    type: array
+                required:
+                  - data
+                  - _metadata
+                title: ""
+                type: object
+          description: OK
+          headers: {}
+      summary: Get List of Brands
+      tags:
+        - Brand
+    post:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Creates a new brand.\r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"name\": \"Zwilling\",\r
+
+        \  \"isActive\": true\r
+
+        }\r
+
+        ```\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"id\": \"20\",\r
+
+        \  \"name\": \"Zwilling\",\r
+
+        \  \"isActive\": true,\r
+
+        \  \"createdAt\": \"2021-05-17T15:20:36.077253+00:00\",\r
+
+        \  \"updatedAt\": \"2021-01-18T14:41:45.696488+00:00\"\r
+
+        }\r
+
+        ```"
+      operationId: PostBrand
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              isActive: true
+              name: Zwilling
+            schema:
+              properties:
+                isActive:
+                  description: The condition defines if the brand is active (`true`) or inactive (`false`).
+                  example: true
+                  title: isActive
+                  type: boolean
+                name:
+                  description: Brand Name.
+                  example: Zwilling
+                  title: name
+                  type: string
+              required:
+                - name
+                - isActive
+              title: ""
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdAt: 2021-05-17T15:20:36.077253+00:00
+                id: "863"
+                isActive: true
+                name: Zwilling
+                updatedAt: 2021-01-18T14:41:45.696488+00:00
+              schema:
+                properties:
+                  createdAt:
+                    description: Date when the brand was created.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: createdAt
+                    type: string
+                  id:
+                    description: Brand unique identifier number.
+                    example: "863"
+                    title: id
+                    type: string
+                  isActive:
+                    description: The condition defines if the brand is active (`true`) or inactive (`false`).
+                    example: true
+                    title: isActive
+                    type: boolean
+                  name:
+                    description: Brand Name.
+                    example: Zwilling
+                    title: name
+                    type: string
+                  updatedAt:
+                    description: Last date when the brand was updated.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: updatedAt
+                    type: string
+                title: ""
+                type: object
+          description: OK
+      summary: Create Brand
+      tags:
+        - Brand
+  "/api/catalog-seller-portal/brands/{brandId}":
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves general information about a brand by its ID.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"id\": \"863\",\r
+
+        \  \"name\": \"Zwilling\",\r
+
+        \  \"isActive\": false,\r
+
+        \  \"createdAt\": \"2021-01-18T14:41:45.696488+00:00\",\r
+
+        \  \"updatedAt\": \"2021-01-18T14:41:45.696488+00:00\"\r
+
+        }\r
+
+        ```"
+      operationId: GetBrand
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Brand unique identifier number.
+          in: path
+          name: brandId
+          required: true
+          schema:
+            example: "863"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdAt: 2021-01-18T14:41:45.696488+00:00
+                id: "863"
+                isActive: false
+                name: Zwilling
+                updatedAt: 2021-01-18T14:41:45.696488+00:00
+              schema:
+                example:
+                  createdAt: 2021-01-18T14:41:45.696488+00:00
+                  id: "863"
+                  isActive: false
+                  name: Zwilling
+                  updatedAt: 2021-01-18T14:41:45.696488+00:00
+                properties:
+                  createdAt:
+                    description: Date when the brand was created.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: createdAt
+                    type: string
+                  id:
+                    description: Brand unique identifier number.
+                    example: "863"
+                    title: id
+                    type: string
+                  isActive:
+                    description: The condition defines if the brand is active (`true`) or inactive (`false`).
+                    example: false
+                    title: isActive
+                    type: boolean
+                  name:
+                    description: Brand Name.
+                    example: Zwilling
+                    title: name
+                    type: string
+                  updatedAt:
+                    description: Last date when the brand was updated.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: updatedAt
+                    type: string
+                title: ""
+                type: object
+          description: OK
+      summary: Get Brand by ID
+      tags:
+        - Brand
+    put:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Updates an existing brand. \r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"id\": \"20\",\r
+
+        \  \"name\": \"Zwilling\",\r
+
+        \  \"isActive\": true\r
+
+        }\r
+
+        ```"
+      operationId: PutBrand
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Brand unique identifier number.
+          in: path
+          name: brandId
+          required: true
+          schema:
+            example: "20"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: "20"
+              isActive: true
+              name: Zwilling
+            schema:
+              properties:
+                id:
+                  description: Brand unique identifier number.
+                  example: "20"
+                  title: id
+                  type: string
+                isActive:
+                  description: The condition defines if the brand is active (`true`) or inactive (`false`).
+                  example: true
+                  title: isActive
+                  type: boolean
+                name:
+                  description: Brand Name.
+                  example: Zwilling
+                  title: name
+                  type: string
+              required:
+                - id
+                - name
+                - isActive
+              title: ""
+              type: object
+      responses:
+        "204":
+          description: No Content
+      summary: Update Brand
+      tags:
+        - Brand
+  /api/catalog-seller-portal/category-tree:
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves general information about the category tree from the store.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"roots\": [\r
+
+        \        {\r
+
+        \            \"value\": {\r
+
+        \                \"id\": \"2\",\r
+
+        \                \"name\": \"Departamento Artesanato\",\r
+
+        \                \"isActive\": true\r
+
+        \            },\r
+
+        \            \"children\": [\r
+
+        \                {\r
+
+        \                    \"value\": {\r
+
+        \                        \"id\": \"3\",\r
+
+        \                        \"name\": \"Artesanato de Barro\",\r
+
+        \                        \"isActive\": false\r
+
+        \                    },\r
+
+        \                    \"children\": [\r
+
+        \                        {\r
+
+        \                            \"value\": {\r
+
+        \                                \"id\": \"4\",\r
+
+        \                                \"name\": \"Artesanato de Barro Vermelho\",\r
+
+        \                                \"isActive\": false\r
+
+        \                            },\r
+
+        \                            \"children\": []\r
+
+        \                        }\r
+
+        \                    ]\r
+
+        \                }\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"value\": {\r
+
+        \                \"id\": \"5\",\r
+
+        \                \"name\": \"Perfumes\",\r
+
+        \                \"isActive\": false\r
+
+        \            },\r
+
+        \            \"children\": [\r
+
+        \                {\r
+
+        \                    \"value\": {\r
+
+        \                        \"id\": \"6\",\r
+
+        \                        \"name\": \"Perfume Feminino\",\r
+
+        \                        \"isActive\": false\r
+
+        \                    },\r
+
+        \                    \"children\": []\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"value\": {\r
+
+        \                        \"id\": \"7\",\r
+
+        \                        \"name\": \"Perfume Masculino\",\r
+
+        \                        \"isActive\": false,\r
+
+        \                        \"displayOnMenu\": false,\r
+
+        \                        \"score\": 0,\r
+
+        \                        \"filterByBrand\": false,\r
+
+        \                        \"isClickable\": false\r
+
+        \                    },\r
+
+        \                    \"children\": []\r
+
+        \                }\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"createdAt\": \"2021-08-16T20:57:13.070813Z\",\r
+
+        \    \"updatedAt\": \"2022-07-07T14:24:56.416337Z\"\r
+
+        }\r
+
+        ```"
+      operationId: GetCategoryTree
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Category tree level.
+          in: query
+          name: depth
+          required: false
+          schema:
+            example: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdAt: 2021-08-16T20:57:13.070813Z
+                roots:
+                  - children:
+                      - children:
+                          - children: []
+                            value:
+                              id: "4"
+                              isActive: false
+                              name: Artesanato de Barro Vermelho
+                        value:
+                          id: "3"
+                          isActive: false
+                          name: Artesanato de Barro
+                    value:
+                      id: "2"
+                      isActive: true
+                      name: Departamento Artesanato
+                  - children:
+                      - children: []
+                        value:
+                          id: "6"
+                          isActive: false
+                          name: Perfume Feminino
+                      - children: []
+                        value:
+                          displayOnMenu: false
+                          filterByBrand: false
+                          id: "7"
+                          isActive: false
+                          isClickable: false
+                          name: Perfume Masculino
+                          score: 0
+                    value:
+                      id: "5"
+                      isActive: false
+                      name: Perfumes
+                updatedAt: 2022-07-07T14:24:56.416337Z
+              schema:
+                properties:
+                  createdAt:
+                    description: Date when the category tree was created.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: createdAt
+                    type: string
+                  roots:
+                    description: List of all categories of the store.
+                    example:
+                      - children:
+                          - value:
+                              id: "2"
+                              isActive: false
+                              name: Perfumes
+                        value:
+                          id: "1"
+                          isActive: false
+                          name: sandboxintegracao
+                    items:
+                      properties:
+                        children:
+                          description: List of all children categories of the parent category.
+                          example:
+                            - value:
+                                id: "2"
+                                isActive: false
+                                name: Perfumes
+                          items:
+                            example:
+                              value:
+                                id: "2"
+                                isActive: false
+                                name: Perfumes
+                            properties:
+                              value:
+                                description: Object with values of a children category.
+                                example:
+                                  id: "2"
+                                  isActive: false
+                                  name: Perfumes
+                                properties:
+                                  id:
+                                    description: Children category unique identifier number.
+                                    title: id
+                                    type: string
+                                  isActive:
+                                    description: The condition defines if the children category is active (`true`) or inactive (`false`).
+                                    example: false
+                                    title: isActive
+                                    type: boolean
+                                  name:
+                                    description: Children category Name.
+                                    example: Perfumes
+                                    title: name
+                                    type: string
+                                required:
+                                  - id
+                                  - name
+                                  - isActive
+                                title: value
+                                type: object
+                            required:
+                              - value
+                            title: ""
+                            type: object
+                          title: children
+                          type: array
+                        value:
+                          description: Object with values of a category.
+                          example:
+                            id: "1"
+                            isActive: false
+                            name: sandboxintegracao
+                          properties:
+                            id:
+                              description: Category unique identifier number.
+                              example: "1"
+                              title: id
+                              type: string
+                            isActive:
+                              description: The condition defines if the category is active (`true`) or inactive (`false`).
+                              example: false
+                              title: isActive
+                              type: boolean
+                            name:
+                              description: Category Name.
+                              example: sandboxintegracao
+                              title: name
+                              type: string
+                          required:
+                            - id
+                            - name
+                            - isActive
+                          title: value
+                          type: object
+                      required:
+                        - value
+                        - children
+                      title: ""
+                      type: object
+                    title: roots
+                    type: array
+                  updatedAt:
+                    description: Last date when the category tree was updated.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: updatedAt
+                    type: string
+                required:
+                  - roots
+                title: ""
+                type: object
+          description: OK
+      summary: Get Category Tree
+      tags:
+        - Category
+    put:
+      deprecated: false
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Updates the existing categories in the category tree.\r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"roots\": [\r
+
+        \    {\r
+
+        \      \"value\": {\r
+
+        \        \"id\": \"2\",\r
+
+        \        \"name\": \"Departamento Artesanato\",\r
+
+        \        \"isActive\": true\r
+
+        \      },\r
+
+        \      \"children\": [\r
+
+        \        {\r
+
+        \          \"value\": {\r
+
+        \            \"id\": \"3\",\r
+
+        \            \"name\": \"Artesanato de Barro\",\r
+
+        \            \"isActive\": false\r
+
+        \          },\r
+
+        \          \"children\": [\r
+
+        \            {\r
+
+        \              \"value\": {\r
+
+        \                \"id\": \"4\",\r
+
+        \                \"name\": \"Artesanato de Barro Vermelho\",\r
+
+        \                \"isActive\": false\r
+
+        \              },\r
+
+        \              \"children\": []\r
+
+        \            }\r
+
+        \          ]\r
+
+        \        }\r
+
+        \      ]\r
+
+        \    },\r
+
+        \    {\r
+
+        \      \"value\": {\r
+
+        \        \"id\": \"5\",\r
+
+        \        \"name\": \"Perfumes\",\r
+
+        \        \"isActive\": false\r
+
+        \      },\r
+
+        \      \"children\": [\r
+
+        \        {\r
+
+        \          \"value\": {\r
+
+        \            \"id\": \"6\",\r
+
+        \            \"name\": \"Perfume Feminino\",\r
+
+        \            \"isActive\": false\r
+
+        \          },\r
+
+        \          \"children\": []\r
+
+        \        },\r
+
+        \        {\r
+
+        \          \"value\": {\r
+
+        \            \"id\": \"7\",\r
+
+        \            \"name\": \"Perfume Masculino\",\r
+
+        \            \"isActive\": false,\r
+
+        \            \"displayOnMenu\": false,\r
+
+        \            \"score\": 0,\r
+
+        \            \"filterByBrand\": false,\r
+
+        \            \"isClickable\": false\r
+
+        \          },\r
+
+        \          \"children\": []\r
+
+        \        }\r
+
+        \      ]\r
+
+        \    }\r
+
+        \  ]\r
+
+        }\r
+
+        ```"
+      operationId: UpdateCategoryTree
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              roots:
+                - children:
+                    - children:
+                        - children: []
+                          value:
+                            id: "4"
+                            isActive: false
+                            name: Artesanato de Barro Vermelho
+                      value:
+                        id: "3"
+                        isActive: false
+                        name: Artesanato de Barro
+                  value:
+                    id: "2"
+                    isActive: true
+                    name: Departamento Artesanato
+                - children:
+                    - children: []
+                      value:
+                        id: "6"
+                        isActive: false
+                        name: Perfume Feminino
+                    - children: []
+                      value:
+                        id: "7"
+                        isActive: false
+                        name: Perfume Masculino
+                  value:
+                    id: "5"
+                    isActive: false
+                    name: Perfumes
+            schema:
+              properties:
+                roots:
+                  description: List of all categories of the store.
+                  example:
+                    - children:
+                        - value:
+                            id: "2"
+                            isActive: false
+                            name: Perfumes
+                      value:
+                        id: "1"
+                        isActive: false
+                        name: sandboxintegracao
+                  items:
+                    properties:
+                      children:
+                        description: List of all children categories of the parent category.
+                        example:
+                          - value:
+                              id: "2"
+                              isActive: false
+                              name: Perfumes
+                        items:
+                          example:
+                            value:
+                              id: "2"
+                              isActive: false
+                              name: Perfumes
+                          properties:
+                            value:
+                              description: Object with values of a children category.
+                              example:
+                                id: "2"
+                                isActive: false
+                                name: Perfumes
+                              properties:
+                                id:
+                                  description: Children category unique identifier number.
+                                  title: id
+                                  type: string
+                                isActive:
+                                  description: The condition defines if the children category is active (`true`) or inactive (`false`).
+                                  example: false
+                                  title: isActive
+                                  type: boolean
+                                name:
+                                  description: Children category Name.
+                                  example: Perfumes
+                                  title: name
+                                  type: string
+                              required:
+                                - id
+                                - name
+                                - isActive
+                              title: value
+                              type: object
+                          required:
+                            - value
+                          title: ""
+                          type: object
+                        title: children
+                        type: array
+                      value:
+                        description: Object with values of a category.
+                        example:
+                          id: "1"
+                          isActive: false
+                          name: sandboxintegracao
+                        properties:
+                          id:
+                            description: Category unique identifier number.
+                            example: "1"
+                            title: id
+                            type: string
+                          isActive:
+                            description: The condition defines if the category is active (`true`) or inactive (`false`).
+                            example: false
+                            title: isActive
+                            type: boolean
+                          name:
+                            description: Category Name.
+                            example: sandboxintegracao
+                            title: name
+                            type: string
+                        required:
+                          - id
+                          - name
+                          - isActive
+                        title: value
+                        type: object
+                    required:
+                      - value
+                      - children
+                    title: ""
+                    type: object
+                  title: roots
+                  type: array
+              required:
+                - roots
+              title: ""
+              type: object
+        description: OK
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Update Category Tree
+      tags:
+        - Category
+  /api/catalog-seller-portal/category-tree/categories:
+    post:
+      deprecated: false
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Creates a new category.\r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"parentId\": \"567\",\r
+
+        \  \"Name\": \"Beauty\"\r
+
+        }\r
+
+        ```\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"value\": {\r
+
+        \    \"id\": \"1\",\r
+
+        \    \"name\": \"Beauty\",\r
+
+        \    \"isActive\": false\r
+
+        \  },\r
+
+        \  \"children\": [\r
+
+        \    {\r
+
+        \      \"value\": {\r
+
+        \        \"id\": \"2\",\r
+
+        \        \"name\": \"Perfumes\",\r
+
+        \        \"isActive\": false\r
+
+        \      }\r
+
+        \    }\r
+
+        \  ]\r
+
+        }\r
+
+        ```"
+      operationId: CreateCategory
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              Name: Beauty
+              parentId: "567"
+            schema:
+              properties:
+                Name:
+                  description: Category name.
+                  example: Beauty
+                  title: Name
+                  type: string
+                parentId:
+                  description: Parent category unique identifier number.
+                  example: "567"
+                  title: parentId
+                  type: string
+              required:
+                - parentId
+                - Name
+              title: ""
+              type: object
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                children:
+                  - value:
+                      id: "2"
+                      isActive: false
+                      name: Perfumes
+                value:
+                  id: "1"
+                  isActive: false
+                  name: Beauty
+              schema:
+                properties:
+                  children:
+                    description: List of all children categories of the parent category.
+                    example:
+                      - value:
+                          id: "2"
+                          isActive: false
+                          name: Perfumes
+                    items:
+                      example:
+                        value:
+                          id: "2"
+                          isActive: false
+                          name: Perfumes
+                      properties:
+                        value:
+                          description: Object with values of a children category.
+                          example:
+                            id: "2"
+                            isActive: false
+                            name: Perfumes
+                          properties:
+                            id:
+                              description: Children category unique identifier number.
+                              title: id
+                              type: string
+                            isActive:
+                              description: The condition defines if the children category is active (`true`) or inactive (`false`).
+                              example: false
+                              title: isActive
+                              type: boolean
+                            name:
+                              description: Children category Name.
+                              example: Perfumes
+                              title: name
+                              type: string
+                          required:
+                            - id
+                            - name
+                            - isActive
+                          title: value
+                          type: object
+                      required:
+                        - value
+                      title: ""
+                      type: object
+                    title: children
+                    type: array
+                  value:
+                    description: Object with values of a category.
+                    example:
+                      id: "1"
+                      isActive: false
+                      name: sandboxintegracao
+                    properties:
+                      id:
+                        description: Category unique identifier number.
+                        example: "1"
+                        title: id
+                        type: string
+                      isActive:
+                        description: The condition defines if the category is active (`true`) or inactive (`false`).
+                        example: false
+                        title: isActive
+                        type: boolean
+                      name:
+                        description: Category Name.
+                        example: sandboxintegracao
+                        title: name
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - isActive
+                    title: value
+                    type: object
+                required:
+                  - value
+                  - children
+                title: ""
+                type: object
+          description: OK
+      summary: Create Category
+      tags:
+        - Category
+  "/api/catalog-seller-portal/category-tree/categories/{categoryId}":
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves general information about a category by its ID. \r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"value\": {\r
+
+        \    \"id\": \"1\",\r
+
+        \    \"name\": \"sandboxintegracao\",\r
+
+        \    \"isActive\": false\r
+
+        \  },\r
+
+        \  \"children\": [\r
+
+        \    {\r
+
+        \      \"value\": {\r
+
+        \        \"id\": \"2\",\r
+
+        \        \"name\": \"Perfumes\",\r
+
+        \        \"isActive\": false\r
+
+        \      }\r
+
+        \    }\r
+
+        \  ]\r
+
+        }\r
+
+        ```"
+      operationId: Getbyid
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Category unique identifier number.
+          in: path
+          name: categoryId
+          required: true
+          schema:
+            example: "1"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                children:
+                  - value:
+                      id: "2"
+                      isActive: false
+                      name: Perfumes
+                value:
+                  id: "1"
+                  isActive: false
+                  name: sandboxintegracao
+              schema:
+                properties:
+                  children:
+                    description: List of all children categories of the parent category.
+                    example:
+                      - value:
+                          id: "2"
+                          isActive: false
+                          name: Perfumes
+                    items:
+                      example:
+                        value:
+                          id: "2"
+                          isActive: false
+                          name: Perfumes
+                      properties:
+                        value:
+                          description: Object with values of a children category.
+                          example:
+                            id: "2"
+                            isActive: false
+                            name: Perfumes
+                          properties:
+                            id:
+                              description: Children category unique identifier number.
+                              example: "234"
+                              title: id
+                              type: string
+                            isActive:
+                              description: The condition defines if the children category is active (`true`) or inactive (`false`).
+                              example: false
+                              title: isActive
+                              type: boolean
+                            name:
+                              description: Children category Name.
+                              example: Perfumes
+                              title: name
+                              type: string
+                          required:
+                            - id
+                            - name
+                            - isActive
+                          title: value
+                          type: object
+                      required:
+                        - value
+                      title: ""
+                      type: object
+                    title: children
+                    type: array
+                  value:
+                    description: Object with values of a category.
+                    example:
+                      id: "1"
+                      isActive: false
+                      name: sandboxintegracao
+                    properties:
+                      id:
+                        description: Category unique identifier number.
+                        example: "1"
+                        title: id
+                        type: string
+                      isActive:
+                        description: The condition defines if the category is active (`true`) or inactive (`false`).
+                        example: false
+                        title: isActive
+                        type: boolean
+                      name:
+                        description: Category Name.
+                        example: sandboxintegracao
+                        title: name
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - isActive
+                    title: value
+                    type: object
+                required:
+                  - value
+                  - children
+                title: ""
+                type: object
+          description: OK
+      summary: Get Category by ID
+      tags:
+        - Category
+  /api/catalog-seller-portal/products:
+    post:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Creates a new product and its SKUs. \r
+
+        \r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"status\": \"active\",\r
+
+        \    \"name\": \"VTEX 10 Shirt\",\r
+
+        \    \"description\": \"Shirt number 10 by VTEX.\",\r
+
+        \    \"brandId\": \"1\",\r
+
+        \    \"categoryIds\": [\r
+
+        \        \"732\"\r
+
+        \    ],\r
+
+        \    \"specs\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Color\",\r
+
+        \            \"values\": [\r
+
+        \                \"Black\",\r
+
+        \                \"White\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Size\",\r
+
+        \            \"values\": [\r
+
+        \                \"S\",\r
+
+        \                \"M\",\r
+
+        \                \"L\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"attributes\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Fabric\",\r
+
+        \            \"value\": \"Cotton\"\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Gender\",\r
+
+        \            \"value\": \"Feminine\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"slug\": \"/vtex-shirt\",\r
+
+        \    \"images\": [\r
+
+        \        {\r
+
+        \            \"id\": \"vtex_logo.jpg\",\r
+
+        \            \"url\": \"https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg\",\r
+
+        \            \"alt\": \"VTEX\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"skus\": [\r
+
+        \        {\r
+
+        \            \"name\": \"VTEX Shirt Black Size S\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234567\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"Black\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"S\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"VTEX Shirt White Size L\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234568\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"White\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"L\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"origin\": \"vtxleo7778\",\r
+
+        \    \"transportModal\": \"110\",\r
+
+        \    \"taxCode\": \"234\"\r
+
+        }\r
+
+        ```\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"id\": \"189371\",\r
+
+        \    \"status\": \"active\",\r
+
+        \    \"name\": \"VTEX 10 Shirt\",\r
+
+        \    \"brandId\": \"1\",\r
+
+        \    \"brandName\": \"AOC\",\r
+
+        \    \"categoryIds\": [\r
+
+        \        \"732\"\r
+
+        \    ],\r
+
+        \    \"categoryNames\": [\r
+
+        \        \"/Men/Acessories/\"\r
+
+        \    ],\r
+
+        \    \"specs\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Color\",\r
+
+        \            \"values\": [\r
+
+        \                \"Black\",\r
+
+        \                \"White\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Size\",\r
+
+        \            \"values\": [\r
+
+        \                \"S\",\r
+
+        \                \"M\",\r
+
+        \                \"L\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"attributes\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Fabric\",\r
+
+        \            \"value\": \"Cotton\"\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Gender\",\r
+
+        \            \"value\": \"Feminine\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"slug\": \"/vtex-shirt\",\r
+
+        \    \"images\": [\r
+
+        \        {\r
+
+        \            \"id\": \"vtex_logo.jpg\",\r
+
+        \            \"url\": \"https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg\",\r
+
+        \            \"alt\": \"VTEX\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"skus\": [\r
+
+        \        {\r
+
+        \            \"id\": \"182907\",\r
+
+        \            \"name\": \"VTEX Shirt Black Size S\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234567\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"Black\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"S\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"id\": \"182908\",\r
+
+        \            \"name\": \"VTEX Shirt White Size L\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234568\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"White\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"L\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"origin\": \"vtxleo7778\",\r
+
+        \    \"transportModal\": \"110\",\r
+
+        \    \"taxCode\": \"234\",\r
+
+        \    \"createdAt\": \"2022-11-01T14:15:54.262702Z\",\r
+
+        \    \"updatedAt\": \"2022-11-01T14:15:54.262702Z\"\r
+
+        }\r
+
+        ```"
+      operationId: PostProduct
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              attributes:
+                - name: Fabric
+                  value: Cotton
+                - name: Gender
+                  value: Feminine
+              brandId: "1"
+              categoryIds:
+                - "732"
+              description: Shirt number 10 by VTEX.
+              images:
+                - alt: VTEX
+                  id: vtex_logo.jpg
+                  url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+              name: VTEX 10 Shirt
+              origin: vtxleo7778
+              skus:
+                - dimensions:
+                    height: 2.1
+                    length: 1.6
+                    width: 1.5
+                  externalId: "1909621862"
+                  images:
+                    - vtex_logo.jpg
+                  isActive: true
+                  manufacturerCode: "1234567"
+                  name: VTEX Shirt Black Size S
+                  specs:
+                    - name: Color
+                      value: Black
+                    - name: Size
+                      value: S
+                  weight: 300
+                - dimensions:
+                    height: 2.1
+                    length: 1.6
+                    width: 1.5
+                  externalId: "1909621862"
+                  images:
+                    - vtex_logo.jpg
+                  isActive: true
+                  manufacturerCode: "1234568"
+                  name: VTEX Shirt White Size L
+                  specs:
+                    - name: Color
+                      value: White
+                    - name: Size
+                      value: L
+                  weight: 300
+              slug: /vtex-shirt
+              specs:
+                - name: Color
+                  values:
+                    - Black
+                    - White
+                - name: Size
+                  values:
+                    - S
+                    - M
+                    - L
+              status: active
+              taxCode: "234"
+              transportModal: "110"
+            schema:
+              properties:
+                attributes:
+                  description: Attributes of the product. Attributes are additional properties used to create site browsing filters.
+                  example:
+                    - name: Fabric
+                      value: Cotton
+                    - name: Gender
+                      value: Feminine
+                  items:
+                    properties:
+                      name:
+                        description: Attribute name.
+                        example: Fabric
+                        title: name
+                        type: string
+                      value:
+                        description: Attribute value.
+                        example: Cotton
+                        title: value
+                        type: string
+                    required:
+                      - name
+                      - value
+                    title: ""
+                  title: attributes
+                  type: array
+                brandId:
+                  description: Product's Brand unique identifier number.
+                  example: "1"
+                  title: brandId
+                  type: string
+                categoryIds:
+                  description: Product's Categories unique identifier numbers. It can have multiples IDs for each Category and Subcategories.
+                  example:
+                    - "732"
+                  items:
+                    title: ""
+                    type: string
+                  title: categoryIds
+                  type: array
+                description:
+                  description: Description of the primary information related to the product. A simple and easy-to-understand summary for the customer.
+                  example: Descrição camiseta VTEX
+                  title: description
+                  type: string
+                externalId:
+                  description: Product reference unique identifier number in the store.
+                  example: sandboxintegracao-310117347
+                  title: externalId
+                  type: string
+                images:
+                  description: Information of the images of the product.
+                  example:
+                    - alt: imagem
+                      id: vtex_logo.jpg
+                      url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                  items:
+                    properties:
+                      alt:
+                        description: Image alternative description.
+                        example: imagem
+                        title: alt
+                        type: string
+                      id:
+                        description: Image ID.
+                        example: vtex_logo.jpg
+                        title: id
+                        type: string
+                      url:
+                        description: "Image URL, which must be in the following format: `https://{accountName}.vtexassets.com/assets/{path}`, saved using the [Catalog Images app](https://developers.vtex.com/vtex-developer-docs/docs/vtex-catalog-images)."
+                        example: https://mystore.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                        title: url
+                        type: string
+                    required:
+                      - id
+                      - url
+                    title: ""
+                    type: object
+                  title: images
+                  type: array
+                name:
+                  description: Product Name. Use simple words and avoid other languages or complex writing. This field is essential for SEO and must respect the 150 character limit.
+                  example: VTEX Shirt
+                  title: name
+                  type: string
+                origin:
+                  description: Origin account of the product. It is not possible to alter products where the origin is `marketplace`.
+                  example: vtxleo7778
+                  title: origin
+                  type: string
+                skus:
+                  description: SKUs of the product.
+                  example:
+                    - dimensions:
+                        height: 2.1
+                        length: 1.6
+                        width: 1.5
+                      ean: 978-1909621862
+                      externalId: "1909621862"
+                      images:
+                        - https://mystore.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                      isActive: true
+                      manufacturerCode: "1234567"
+                      name: VTEX Shirt Black Size S
+                      specs:
+                        - name: Color
+                          value: Black
+                        - name: Size
+                          value: S
+                      weight: 300
+                    - dimensions:
+                        height: 2.1
+                        length: 1.6
+                        width: 1.5
+                      ean: 978-1909621862
+                      externalId: "1909621862"
+                      images:
+                        - vtex_logo.jpg
+                      isActive: true
+                      manufacturerCode: "1234568"
+                      name: VTEX Shirt White Size L
+                      specs:
+                        - name: Color
+                          value: White
+                        - name: Size
+                          value: L
+                      weight: 300
+                  items:
+                    properties:
+                      dimensions:
+                        description: SKU dimensions.
+                        example:
+                          height: 2.1
+                          length: 1.6
+                          width: 1.5
+                        properties:
+                          height:
+                            description: SKU height.
+                            example: 2.1
+                            title: height
+                            type: number
+                          length:
+                            description: SKU length.
+                            example: 1.6
+                            title: length
+                            type: number
+                          width:
+                            description: SKU width.
+                            example: 1.5
+                            title: width
+                            type: number
+                        required:
+                          - width
+                          - height
+                          - length
+                        title: dimensions
+                        type: object
+                      ean:
+                        description: Unique SKU identification code (barcode), composed of up to 13 numeric characters.
+                        example: 978-1909621862
+                        title: ean
+                        type: string
+                      externalId:
+                        description: Unique reference code created to improve the store's organization. This is not a required field.
+                        example: "1909621862"
+                        title: externalId
+                        type: string
+                      images:
+                        description: SKU's images IDs.
+                        example:
+                          - vtex_logo.jpg
+                        items: {}
+                        title: images
+                        type: array
+                      isActive:
+                        description: If the SKU is active (`true`) or inactive (`false`).
+                        example: false
+                        title: isActive
+                        type: boolean
+                      manufacturerCode:
+                        description: SKU reference code in the store.
+                        example: "1234567"
+                        title: code
+                        type: string
+                      name:
+                        description: SKU Name. Use simple words and avoid other languages or complex writing. This field is essential for SEO and must respect the 150 character limit.
+                        example: VTEX Shirt Black Size S
+                        title: name
+                        type: string
+                      specs:
+                        description: SKU specifications. This field is mandatory, but nullable if there is only one SKU.
+                        example:
+                          - name: Color
+                            value: Black
+                          - name: Size
+                            value: S
+                        items:
+                          properties:
+                            name:
+                              description: SKU's specification name.
+                              example: Color
+                              title: name
+                              type: string
+                            value:
+                              description: SKU's specification values.
+                              example: Black
+                              title: value
+                              type: string
+                          required:
+                            - name
+                            - value
+                          title: ""
+                          type: object
+                        nullable: true
+                        title: specs
+                        type: array
+                      weight:
+                        description: SKU weight.
+                        example: 300
+                        title: weight
+                        type: integer
+                    required:
+                      - name
+                      - isActive
+                      - weight
+                      - dimensions
+                      - specs
+                      - images
+                    title: ""
+                    type: object
+                  title: skus
+                  type: array
+                slug:
+                  description: Reference of the product in the URL of the store.
+                  example: /vtex-shirt
+                  title: slug
+                  type: string
+                specs:
+                  description: Specifications that will differentiate the possible product SKUs.
+                  example:
+                    - name: Color
+                      values:
+                        - Black
+                        - White
+                    - name: Size
+                      values:
+                        - S
+                        - M
+                        - L
+                  items:
+                    properties:
+                      name:
+                        description: Specification name.
+                        example: Color
+                        title: name
+                        type: string
+                      values:
+                        description: Specification values.
+                        example:
+                          - Black
+                          - White
+                        items:
+                          title: ""
+                          type: string
+                        title: values
+                        type: array
+                    required:
+                      - name
+                      - values
+                    title: ""
+                    type: object
+                  title: specs
+                  type: array
+                status:
+                  description: Status of the product. Its values can be `active` or `inactive`.
+                  example: active
+                  title: status
+                  type: string
+                taxCode:
+                  description: Product tax code.
+                  example: "123"
+                  nullable: true
+                  title: taxCode
+                  type: string
+                transportModal:
+                  description: Transport modal of the product.
+                  example: "1"
+                  nullable: true
+                  title: transportModal
+                  type: string
+              required:
+                - status
+                - name
+                - brandId
+                - categoryIds
+                - specs
+                - attributes
+                - slug
+                - images
+                - skus
+                - origin
+              title: ""
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                attributes:
+                  - name: Fabric
+                    value: Cotton
+                  - name: Gender
+                    value: Feminine
+                brandId: "1"
+                brandName: AOC
+                categoryIds:
+                  - "732"
+                categoryNames:
+                  - /sandboxintegracao/Acessórios/
+                createdAt: 2021-01-18T14:41:45.696488+00:00
+                id: "189371"
+                images:
+                  - alt: VTEX
+                    id: vtex_logo.jpg
+                    url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                name: VTEX 10 Shirt
+                origin: vtxleo7778
+                skus:
+                  - dimensions:
+                      height: 2.1
+                      length: 1.6
+                      width: 1.5
+                    externalId: "1909621862"
+                    id: "182907"
+                    images:
+                      - vtex_logo.jpg
+                    isActive: true
+                    manufacturerCode: "1234567"
+                    specs:
+                      - name: Color
+                        value: Black
+                      - name: Size
+                        value: S
+                    weight: 300
+                  - dimensions:
+                      height: 2.1
+                      length: 1.6
+                      width: 1.5
+                    externalId: "1909621862"
+                    id: "182908"
+                    images:
+                      - vtex_logo.jpg
+                    isActive: true
+                    manufacturerCode: "1234568"
+                    specs:
+                      - name: Color
+                        value: White
+                      - name: Size
+                        value: L
+                    weight: 300
+                slug: /vtex-shirt
+                specs:
+                  - name: Color
+                    values:
+                      - Black
+                      - White
+                  - name: Size
+                    values:
+                      - S
+                      - M
+                      - L
+                status: active
+                taxCode: null
+                transportModal: null
+                updatedAt: 2021-01-18T14:41:45.696488+00:00
+              schema:
+                properties:
+                  attributes:
+                    description: Attributes of the product. Attributes are additional properties used to create site browsing filters.
+                    example:
+                      - name: Fabric
+                        value: Cotton
+                      - name: Gender
+                        value: Feminine
+                    items:
+                      properties:
+                        name:
+                          description: Attribute name.
+                          example: Fabric
+                          title: name
+                          type: string
+                        value:
+                          description: Attribute value.
+                          example: Cotton
+                          title: value
+                          type: string
+                      required:
+                        - name
+                        - value
+                      title: ""
+                    title: attributes
+                    type: array
+                  brandId:
+                    description: Product's Brand unique identifier number.
+                    example: "1"
+                    title: brandId
+                    type: string
+                  brandName:
+                    description: Name of the Brand associated with the product.
+                    example: AOC
+                    title: brandName
+                    type: string
+                  categoryIds:
+                    description: Product's Categories unique identifier numbers. It can have multiples IDs for each Category and Subcategories.
+                    example:
+                      - "732"
+                    items:
+                      title: ""
+                      type: string
+                    title: categoryIds
+                    type: array
+                  categoryNames:
+                    description: Names of the product's categories, displayed in a path format.
+                    example:
+                      - /Men/Acessories/
+                    items:
+                      title: ""
+                      type: string
+                    title: categoryNames
+                    type: array
+                  createdAt:
+                    description: Date when the product was created.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: createdAt
+                    type: string
+                  externalId:
+                    description: Product reference unique identifier number in the store.
+                    example: sandboxintegracao-310117347
+                    title: externalId
+                    type: string
+                  id:
+                    description: Product's unique identifier number.
+                    example: "189371"
+                    title: id
+                    type: string
+                  images:
+                    description: Information of the images of the product.
+                    example:
+                      - alt: imagem
+                        id: vtex_logo.jpg
+                        url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                    items:
+                      properties:
+                        alt:
+                          description: Image alternative description.
+                          example: imagem
+                          title: alt
+                          type: string
+                        id:
+                          description: Image ID.
+                          example: vtex_logo.jpg
+                          title: id
+                          type: string
+                        url:
+                          description: "Image URL, which must be in the following format: `https://{accountName}.vtexassets.com/assets/{path}`, saved using the [Catalog Images app](https://developers.vtex.com/vtex-developer-docs/docs/vtex-catalog-images)."
+                          example: https://mystore.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                          title: url
+                          type: string
+                      required:
+                        - id
+                        - url
+                      title: ""
+                      type: object
+                    title: images
+                    type: array
+                  name:
+                    description: Product Name. Use simple words and avoid other languages or complex writing. This field is essential for SEO and must respect the 150 character limit.
+                    example: VTEX 10 Shirt
+                    title: name
+                    type: string
+                  origin:
+                    description: Origin account of the product. It is not possible to alter products where the origin is `marketplace`.
+                    example: vtxleo7778
+                    title: origin
+                    type: string
+                  skus:
+                    description: SKUs of the product.
+                    example:
+                      - dimensions:
+                          height: 2.1
+                          length: 1.6
+                          width: 1.5
+                        ean: 978-1909621862
+                        externalId: "1909621862"
+                        id: "182907"
+                        images:
+                          - vtex_logo.jpg
+                        isActive: true
+                        manufacturerCode: "1234567"
+                        name: VTEX Shirt Black Size S
+                        specs:
+                          - name: Color
+                            value: Black
+                          - name: Size
+                            value: S
+                        weight: 300
+                      - dimensions:
+                          height: 2.1
+                          length: 1.6
+                          width: 1.5
+                        ean: 978-1909621862
+                        externalId: "1909621862"
+                        id: "182908"
+                        images:
+                          - vtex_logo.jpg
+                        isActive: true
+                        manufacturerCode: "1234568"
+                        name: VTEX Shirt White Size L
+                        specs:
+                          - name: Color
+                            value: White
+                          - name: Size
+                            value: L
+                        weight: 300
+                    items:
+                      properties:
+                        dimensions:
+                          description: SKU dimensions.
+                          example:
+                            height: 2.1
+                            length: 1.6
+                            width: 1.5
+                          properties:
+                            height:
+                              description: SKU height.
+                              example: 2.1
+                              title: height
+                              type: number
+                            length:
+                              description: SKU length.
+                              example: 1.6
+                              title: length
+                              type: number
+                            width:
+                              description: SKU width.
+                              example: 1.5
+                              title: width
+                              type: number
+                          required:
+                            - width
+                            - height
+                            - length
+                          title: dimensions
+                          type: object
+                        ean:
+                          description: Unique SKU identification code (barcode), composed of up to 13 numeric characters.
+                          example: 978-1909621862
+                          title: ean
+                          type: string
+                        externalId:
+                          description: Unique reference code created to improve the store's organization. This is not a required field.
+                          example: "1909621862"
+                          title: externalId
+                          type: string
+                        id:
+                          description: SKU unique identifier number.
+                          example: "182907"
+                          title: id
+                          type: string
+                        images:
+                          description: SKU's images IDs.
+                          example:
+                            - vtex_logo.jpg
+                          items: {}
+                          title: images
+                          type: array
+                        isActive:
+                          description: If the SKU is active (`true`) or inactive (`false`).
+                          example: false
+                          title: isActive
+                          type: boolean
+                        manufacturerCode:
+                          description: SKU reference code in the store.
+                          example: "1234567"
+                          title: code
+                          type: string
+                        name:
+                          description: SKU Name. Use simple words and avoid other languages or complex writing. This field is essential for SEO and must respect the 150 character limit.
+                          example: VTEX Shirt Black Size S
+                          title: name
+                          type: string
+                        specs:
+                          description: SKU specifications. This field is mandatory, but nullable if there is only one SKU.
+                          example:
+                            - name: Color
+                              value: Black
+                            - name: Size
+                              value: S
+                          items:
+                            properties:
+                              name:
+                                description: SKU's specification name.
+                                example: Color
+                                title: name
+                                type: string
+                              value:
+                                description: SKU's specification values.
+                                example: Black
+                                title: value
+                                type: string
+                            required:
+                              - name
+                              - value
+                            title: ""
+                            type: object
+                          nullable: true
+                          title: specs
+                          type: array
+                        weight:
+                          description: SKU weight.
+                          example: 300
+                          title: weight
+                          type: integer
+                      required:
+                        - id
+                        - isActive
+                        - weight
+                        - dimensions
+                        - specs
+                        - images
+                      title: ""
+                      type: object
+                    title: skus
+                    type: array
+                  slug:
+                    description: Reference of the product in the URL of the store.
+                    example: /vtex-shirt
+                    title: slug
+                    type: string
+                  specs:
+                    description: Specifications that will differentiate the possible product SKUs.
+                    example:
+                      - name: Color
+                        values:
+                          - Black
+                          - White
+                      - name: Size
+                        values:
+                          - S
+                          - M
+                          - L
+                    items:
+                      properties:
+                        name:
+                          description: Specification name.
+                          example: Color
+                          title: name
+                          type: string
+                        values:
+                          description: Specification values.
+                          example:
+                            - Black
+                            - White
+                          items:
+                            title: ""
+                            type: string
+                          title: values
+                          type: array
+                      required:
+                        - name
+                        - values
+                      title: ""
+                      type: object
+                    title: specs
+                    type: array
+                  status:
+                    description: Status of the product. Its values can be `active` or `inactive`.
+                    example: active
+                    title: status
+                    type: string
+                  taxCode:
+                    description: Product tax code.
+                    example: "123"
+                    nullable: true
+                    title: taxCode
+                    type: string
+                  transportModal:
+                    description: Transport modal of the product.
+                    example: "1"
+                    nullable: true
+                    title: transportModal
+                    type: string
+                  updatedAt:
+                    description: Last date when the product was updated.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: updatedAt
+                    type: string
+                required:
+                  - status
+                  - name
+                  - brandId
+                  - brandName
+                  - categoryIds
+                  - categoryNames
+                  - specs
+                  - attributes
+                  - slug
+                  - images
+                  - skus
+                  - origin
+                  - createdAt
+                  - updatedAt
+                title: ""
+                type: object
+          description: OK
+        "204":
+          description: No Content
+      summary: Create Product
+      tags:
+        - Product
+  "/api/catalog-seller-portal/products/{param}":
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves general information about a product by its external ID, SKU ID, SKU external ID or product slug. The response also has information about the product's SKUs. \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"id\": \"189371\",\r
+
+        \    \"status\": \"active\",\r
+
+        \    \"name\": \"VTEX 10 Shirt\",\r
+
+        \    \"brandId\": \"1\",\r
+
+        \    \"brandName\": \"AOC\",\r
+
+        \    \"categoryIds\": [\r
+
+        \        \"732\"\r
+
+        \    ],\r
+
+        \    \"categoryNames\": [\r
+
+        \        \"/sandboxintegracao/Acessórios/\"\r
+
+        \    ],\r
+
+        \    \"specs\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Color\",\r
+
+        \            \"values\": [\r
+
+        \                \"Black\",\r
+
+        \                \"White\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Size\",\r
+
+        \            \"values\": [\r
+
+        \                \"S\",\r
+
+        \                \"M\",\r
+
+        \                \"L\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"attributes\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Fabric\",\r
+
+        \            \"value\": \"Cotton\"\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Gender\",\r
+
+        \            \"value\": \"Feminine\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"slug\": \"/vtex-shirt\",\r
+
+        \    \"images\": [\r
+
+        \        {\r
+
+        \            \"id\": \"vtex_logo.jpg\",\r
+
+        \            \"url\": \"https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg\",\r
+
+        \            \"alt\": \"VTEX\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"skus\": [\r
+
+        \        {\r
+
+        \            \"id\": \"182907\",\r
+
+        \            \"name\": \"VTEX Shirt Black Size S\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234567\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"Black\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"S\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"id\": \"182908\",\r
+
+        \            \"name\": \"VTEX Shirt White Size L\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234568\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"White\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"L\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"transportModal\": \"123\",\r
+
+        \    \"taxCode\": \"100\",\r
+
+        \    \"origin\": \"vtxleo7778\",\r
+
+        \    \"createdAt\": \"2022-10-31T16:28:25.578067Z\",\r
+
+        \    \"updatedAt\": \"2022-10-31T16:28:25.578067Z\"\r
+
+        }\r
+
+        ```"
+      operationId: GetProductQuery
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "This part of the path must follow this format: `{param}={value}`. Replace `{param}` with the name of the parameter used to fetch a product, which can be one of the following: `external-id` (product reference unique identifier number in the store), `sku-id` (SKU unique identifier number), `sku-external-id` (SKU reference unique identifier number in the store) or `slug` (reference of the product in the URL of the store). Replace `{value}` with the value of the selected param. Make sure there is a `=` between them."
+          in: path
+          name: param
+          required: true
+          schema:
+            example: external-id=189371
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                attributes:
+                  - name: Fabric
+                    value: Cotton
+                  - name: Gender
+                    value: Feminine
+                brandId: "1"
+                brandName: AOC
+                categoryIds:
+                  - "732"
+                categoryNames:
+                  - /Men/Acessories/
+                createdAt: 2022-10-31T16:28:25.578067Z
+                id: "189371"
+                images:
+                  - alt: VTEX
+                    id: vtex_logo.jpg
+                    url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                name: VTEX 10 Shirt
+                origin: vtxleo7778
+                skus:
+                  - dimensions:
+                      height: 2.1
+                      length: 1.6
+                      width: 1.5
+                    externalId: "1909621862"
+                    id: "182907"
+                    images:
+                      - vtex_logo.jpg
+                    isActive: true
+                    manufacturerCode: "1234567"
+                    name: VTEX Shirt Black Size S
+                    specs:
+                      - name: Color
+                        value: Black
+                      - name: Size
+                        value: S
+                    weight: 300
+                  - dimensions:
+                      height: 2.1
+                      length: 1.6
+                      width: 1.5
+                    externalId: "1909621862"
+                    id: "182908"
+                    images:
+                      - vtex_logo.jpg
+                    isActive: true
+                    manufacturerCode: "1234568"
+                    name: VTEX Shirt White Size L
+                    specs:
+                      - name: Color
+                        value: White
+                      - name: Size
+                        value: L
+                    weight: 300
+                slug: /vtex-shirt
+                specs:
+                  - name: Color
+                    values:
+                      - Black
+                      - White
+                  - name: Size
+                    values:
+                      - S
+                      - M
+                      - L
+                status: active
+                taxCode: "100"
+                transportModal: "123"
+                updatedAt: 2022-10-31T16:28:25.578067Z
+              schema:
+                properties:
+                  attributes:
+                    description: Attributes of the product. Attributes are additional properties used to create site browsing filters.
+                    example:
+                      - name: Fabric
+                        value: Cotton
+                      - name: Gender
+                        value: Feminine
+                    items:
+                      properties:
+                        name:
+                          description: Attribute name.
+                          example: Fabric
+                          title: name
+                          type: string
+                        value:
+                          description: Attribute value.
+                          example: Cotton
+                          title: value
+                          type: string
+                      required:
+                        - name
+                        - value
+                      title: ""
+                    title: attributes
+                    type: array
+                  brandId:
+                    description: Product's Brand unique identifier number.
+                    example: "1"
+                    title: brandId
+                    type: string
+                  brandName:
+                    description: Name of the Brand associated with the product.
+                    example: AOC
+                    title: brandName
+                    type: string
+                  categoryIds:
+                    description: Product's Categories unique identifier numbers. It can have multiples IDs for each Category and Subcategories.
+                    example:
+                      - "732"
+                    items:
+                      title: ""
+                      type: string
+                    title: categoryIds
+                    type: array
+                  categoryNames:
+                    description: Names of the product's categories, displayed in a path format.
+                    example:
+                      - /Men/Acessories/
+                    items:
+                      title: ""
+                      type: string
+                    title: categoryNames
+                    type: array
+                  createdAt:
+                    description: Date when the product was created.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: createdAt
+                    type: string
+                  externalId:
+                    description: Product reference unique identifier number in the store.
+                    example: sandboxintegracao-310117347
+                    title: externalId
+                    type: string
+                  id:
+                    description: Product's unique identifier number.
+                    example: "189371"
+                    title: id
+                    type: string
+                  images:
+                    description: Information of the images of the product.
+                    example:
+                      - alt: imagem
+                        id: vtex_logo.jpg
+                        url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                    items:
+                      properties:
+                        alt:
+                          description: Image alternative description.
+                          example: imagem
+                          title: alt
+                          type: string
+                        id:
+                          description: Image ID.
+                          example: vtex_logo.jpg
+                          title: id
+                          type: string
+                        url:
+                          description: "Image URL, which must be in the following format: `https://{accountName}.vtexassets.com/assets/{path}`, saved using the [Catalog Images app](https://developers.vtex.com/vtex-developer-docs/docs/vtex-catalog-images)."
+                          example: https://mystore.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                          title: url
+                          type: string
+                      required:
+                        - id
+                        - url
+                      title: ""
+                      type: object
+                    title: images
+                    type: array
+                  name:
+                    description: Product Name. Use simple words and avoid other languages or complex writing. This field is essential for SEO and must respect the 150 character limit.
+                    example: Camiseta VTEX 10
+                    title: name
+                    type: string
+                  origin:
+                    description: Origin account of the product. It is not possible to alter products where the origin is `marketplace`.
+                    example: vtxleo7778
+                    title: origin
+                    type: string
+                  skus:
+                    description: SKUs of the product.
+                    example:
+                      - dimensions:
+                          height: 2.1
+                          length: 1.6
+                          width: 1.5
+                        ean: 978-1909621862
+                        externalId: "1909621862"
+                        id: "182907"
+                        images:
+                          - vtex_logo.jpg
+                        isActive: true
+                        manufacturerCode: "1234567"
+                        specs:
+                          - name: Color
+                            value: Black
+                          - name: Size
+                            value: S
+                        weight: 300
+                      - dimensions:
+                          height: 2.1
+                          length: 1.6
+                          width: 1.5
+                        ean: 978-1909621862
+                        externalId: "1909621862"
+                        id: "182908"
+                        images:
+                          - vtex_logo.jpg
+                        isActive: true
+                        manufacturerCode: "1234568"
+                        specs:
+                          - name: Color
+                            value: White
+                          - name: Size
+                            value: L
+                        weight: 300
+                    items:
+                      properties:
+                        dimensions:
+                          description: SKU dimensions.
+                          example:
+                            height: 2.1
+                            length: 1.6
+                            width: 1.5
+                          properties:
+                            height:
+                              description: SKU height.
+                              example: 2.1
+                              title: height
+                              type: number
+                            length:
+                              description: SKU length.
+                              example: 1.6
+                              title: length
+                              type: number
+                            width:
+                              description: SKU width.
+                              example: 1.5
+                              title: width
+                              type: number
+                          required:
+                            - width
+                            - height
+                            - length
+                          title: dimensions
+                          type: object
+                        ean:
+                          description: Unique SKU identification code (barcode), composed of up to 13 numeric characters.
+                          example: 978-1909621862
+                          title: ean
+                          type: string
+                        externalId:
+                          description: Unique reference code created to improve the store's organization. This is not a required field.
+                          example: "1909621862"
+                          title: externalId
+                          type: string
+                        id:
+                          description: SKU unique identifier number.
+                          example: "182907"
+                          title: id
+                          type: string
+                        images:
+                          description: SKU's images IDs.
+                          example:
+                            - vtex_logo.jpg
+                          items: {}
+                          title: images
+                          type: array
+                        isActive:
+                          description: If the SKU is active (`true`) or inactive (`false`).
+                          example: false
+                          title: isActive
+                          type: boolean
+                        manufacturerCode:
+                          description: SKU reference code in the store.
+                          example: "1234567"
+                          title: code
+                          type: string
+                        specs:
+                          description: SKU specifications. This field is mandatory, but nullable if there is only one SKU.
+                          example:
+                            - name: Color
+                              value: Black
+                            - name: Size
+                              value: S
+                          items:
+                            properties:
+                              name:
+                                description: SKU's specification name.
+                                example: Color
+                                title: name
+                                type: string
+                              value:
+                                description: SKU's specification values.
+                                example: Black
+                                title: value
+                                type: string
+                            required:
+                              - name
+                              - value
+                            title: ""
+                            type: object
+                          nullable: true
+                          title: specs
+                          type: array
+                        weight:
+                          description: SKU weight.
+                          example: 300
+                          title: weight
+                          type: integer
+                      required:
+                        - id
+                        - isActive
+                        - weight
+                        - dimensions
+                        - specs
+                        - images
+                      title: ""
+                      type: object
+                    title: skus
+                    type: array
+                  slug:
+                    description: Reference of the product in the URL of the store.
+                    example: /vtex-shirt
+                    title: slug
+                    type: string
+                  specs:
+                    description: Specifications that will differentiate the possible product SKUs.
+                    example:
+                      - name: Color
+                        values:
+                          - Black
+                          - White
+                      - name: Size
+                        values:
+                          - S
+                          - M
+                          - L
+                    items:
+                      properties:
+                        name:
+                          description: Specification name.
+                          example: Color
+                          title: name
+                          type: string
+                        values:
+                          description: Specification values.
+                          example:
+                            - Black
+                            - White
+                          items:
+                            title: ""
+                            type: string
+                          title: values
+                          type: array
+                      required:
+                        - name
+                        - values
+                      title: ""
+                      type: object
+                    title: specs
+                    type: array
+                  status:
+                    description: Status of the product. Its values can be `active` or `inactive`.
+                    example: active
+                    title: status
+                    type: string
+                  taxCode:
+                    description: Product tax code.
+                    example: "123"
+                    title: taxCode
+                    type: string
+                  transportModal:
+                    description: Transport modal of the product.
+                    example: "1"
+                    title: transportModal
+                    type: string
+                  updatedAt:
+                    description: Last date when the product was updated.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: updatedAt
+                    type: string
+                required:
+                  - status
+                  - name
+                  - brandId
+                  - brandName
+                  - categoryIds
+                  - categoryNames
+                  - specs
+                  - attributes
+                  - slug
+                  - images
+                  - skus
+                  - origin
+                  - createdAt
+                  - updatedAt
+                title: ""
+                type: object
+          description: OK
+      summary: Get Product by external ID,  SKU ID, SKU external ID or slug
+      tags:
+        - Product
+  "/api/catalog-seller-portal/products/{productId}":
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves general information about a product by its ID. The response also has information about the product's SKUs. \r
+
+        \r
+
+        \ ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"id\": \"189371\",\r
+
+        \    \"status\": \"active\",\r
+
+        \    \"name\": \"VTEX 10 Shirt\",\r
+
+        \    \"brandId\": \"1\",\r
+
+        \    \"brandName\": \"AOC\",\r
+
+        \    \"categoryIds\": [\r
+
+        \        \"732\"\r
+
+        \    ],\r
+
+        \    \"categoryNames\": [\r
+
+        \        \"/sandboxintegracao/Acessórios/\"\r
+
+        \    ],\r
+
+        \    \"specs\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Color\",\r
+
+        \            \"values\": [\r
+
+        \                \"Black\",\r
+
+        \                \"White\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Size\",\r
+
+        \            \"values\": [\r
+
+        \                \"S\",\r
+
+        \                \"M\",\r
+
+        \                \"L\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"attributes\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Fabric\",\r
+
+        \            \"value\": \"Cotton\"\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Gender\",\r
+
+        \            \"value\": \"Feminine\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"slug\": \"/vtex-shirt\",\r
+
+        \    \"images\": [\r
+
+        \        {\r
+
+        \            \"id\": \"vtex_logo.jpg\",\r
+
+        \            \"url\": \"https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg\",\r
+
+        \            \"alt\": \"VTEX\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"skus\": [\r
+
+        \        {\r
+
+        \            \"id\": \"182907\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234567\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"Black\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"S\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"id\": \"182908\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234568\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"White\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"L\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"transportModal\": \"123\",\r
+
+        \    \"taxCode\": \"100\",\r
+
+        \    \"origin\": \"vtxleo7778\",\r
+
+        \    \"createdAt\": \"2022-10-31T16:28:25.578067Z\",\r
+
+        \    \"updatedAt\": \"2022-10-31T17:09:12.639088Z\"\r
+
+        }\r
+
+        ```"
+      operationId: GetProduct
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Product unique identifier number.
+          in: path
+          name: productId
+          required: true
+          schema:
+            example: "189371"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                attributes:
+                  - name: Fabric
+                    value: Cotton
+                  - name: Gender
+                    value: Feminine
+                brandId: "1"
+                brandName: AOC
+                categoryIds:
+                  - "732"
+                categoryNames:
+                  - /sandboxintegracao/Acessórios/
+                createdAt: 2022-10-31T16:28:25.578067Z
+                id: "189371"
+                images:
+                  - alt: VTEX
+                    id: vtex_logo.jpg
+                    url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                name: VTEX 10 Shirt
+                origin: vtxleo7778
+                skus:
+                  - dimensions:
+                      height: 2.1
+                      length: 1.6
+                      width: 1.5
+                    externalId: "1909621862"
+                    id: "182907"
+                    images:
+                      - vtex_logo.jpg
+                    isActive: true
+                    manufacturerCode: "1234567"
+                    specs:
+                      - name: Color
+                        value: Black
+                      - name: Size
+                        value: S
+                    weight: 300
+                  - dimensions:
+                      height: 2.1
+                      length: 1.6
+                      width: 1.5
+                    externalId: "1909621862"
+                    id: "182908"
+                    images:
+                      - vtex_logo.jpg
+                    isActive: true
+                    manufacturerCode: "1234568"
+                    specs:
+                      - name: Color
+                        value: White
+                      - name: Size
+                        value: L
+                    weight: 300
+                slug: /vtex-shirt
+                specs:
+                  - name: Color
+                    values:
+                      - Black
+                      - White
+                  - name: Size
+                    values:
+                      - S
+                      - M
+                      - L
+                status: active
+                taxCode: "100"
+                transportModal: "123"
+                updatedAt: 2022-10-31T17:09:12.639088Z
+              schema:
+                properties:
+                  attributes:
+                    description: Attributes of the product. Attributes are additional properties used to create site browsing filters.
+                    example:
+                      - name: Fabric
+                        value: Cotton
+                      - name: Gender
+                        value: Feminine
+                    items:
+                      properties:
+                        name:
+                          description: Attribute name.
+                          example: Fabric
+                          title: name
+                          type: string
+                        value:
+                          description: Attribute value.
+                          example: Cotton
+                          title: value
+                          type: string
+                      required:
+                        - name
+                        - value
+                      title: ""
+                    title: attributes
+                    type: array
+                  brandId:
+                    description: Product's Brand unique identifier number.
+                    example: "1"
+                    title: brandId
+                    type: string
+                  brandName:
+                    description: Name of the Brand associated with the product.
+                    example: AOC
+                    title: brandName
+                    type: string
+                  categoryIds:
+                    description: Product's Categories unique identifier numbers. It can have multiples IDs for each Category and Subcategories.
+                    example:
+                      - "732"
+                    items:
+                      title: ""
+                      type: string
+                    title: categoryIds
+                    type: array
+                  categoryNames:
+                    description: Names of the product's categories, displayed in a path format.
+                    example:
+                      - /Men/Acessories/
+                    items:
+                      title: ""
+                      type: string
+                    title: categoryNames
+                    type: array
+                  createdAt:
+                    description: Date when the product was created.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: createdAt
+                    type: string
+                  externalId:
+                    description: Product reference unique identifier number in the store.
+                    example: sandboxintegracao-310117347
+                    title: externalId
+                    type: string
+                  id:
+                    description: Product's unique identifier number.
+                    example: "189371"
+                    title: id
+                    type: string
+                  images:
+                    description: Information of the images of the product.
+                    example:
+                      - alt: imagem
+                        id: vtex_logo.jpg
+                        url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                    items:
+                      properties:
+                        alt:
+                          description: Image alternative description.
+                          example: imagem
+                          title: alt
+                          type: string
+                        id:
+                          description: Image ID.
+                          example: vtex_logo.jpg
+                          title: id
+                          type: string
+                        url:
+                          description: "Image URL, which must be in the following format: `https://{accountName}.vtexassets.com/assets/{path}`, saved using the [Catalog Images app](https://developers.vtex.com/vtex-developer-docs/docs/vtex-catalog-images)."
+                          example: https://mystore.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                          title: url
+                          type: string
+                      required:
+                        - id
+                        - url
+                      title: ""
+                      type: object
+                    title: images
+                    type: array
+                  name:
+                    description: Product Name. Use simple words and avoid other languages or complex writing. This field is essential for SEO and must respect the 150 character limit.
+                    example: Camiseta VTEX 10
+                    title: name
+                    type: string
+                  origin:
+                    description: Origin account of the product. It is not possible to alter products where the origin is `marketplace`.
+                    example: vtxleo7778
+                    title: origin
+                    type: string
+                  skus:
+                    description: SKUs of the product.
+                    example:
+                      - dimensions:
+                          height: 2.1
+                          length: 1.6
+                          width: 1.5
+                        ean: 978-1909621862
+                        externalId: "1909621862"
+                        id: "182907"
+                        images:
+                          - vtex_logo.jpg
+                        isActive: true
+                        manufacturerCode: "1234567"
+                        specs:
+                          - name: Color
+                            value: Black
+                          - name: Size
+                            value: S
+                        weight: 300
+                      - dimensions:
+                          height: 2.1
+                          length: 1.6
+                          width: 1.5
+                        ean: 978-1909621862
+                        externalId: "1909621862"
+                        id: "182908"
+                        images:
+                          - vtex_logo.jpg
+                        isActive: true
+                        manufacturerCode: "1234568"
+                        specs:
+                          - name: Color
+                            value: White
+                          - name: Size
+                            value: L
+                        weight: 300
+                    items:
+                      properties:
+                        dimensions:
+                          description: SKU dimensions.
+                          example:
+                            height: 2.1
+                            length: 1.6
+                            width: 1.5
+                          properties:
+                            height:
+                              description: SKU height.
+                              example: 2.1
+                              title: height
+                              type: number
+                            length:
+                              description: SKU length.
+                              example: 1.6
+                              title: length
+                              type: number
+                            width:
+                              description: SKU width.
+                              example: 1.5
+                              title: width
+                              type: number
+                          required:
+                            - width
+                            - height
+                            - length
+                          title: dimensions
+                          type: object
+                        ean:
+                          description: Unique SKU identification code (barcode), composed of up to 13 numeric characters.
+                          example: 978-1909621862
+                          title: ean
+                          type: string
+                        externalId:
+                          description: Unique reference code created to improve the store's organization. This is not a required field.
+                          example: "1909621862"
+                          title: externalId
+                          type: string
+                        id:
+                          description: SKU unique identifier number.
+                          example: "182907"
+                          title: id
+                          type: string
+                        images:
+                          description: SKU's images IDs.
+                          example:
+                            - vtex_logo.jpg
+                          items: {}
+                          title: images
+                          type: array
+                        isActive:
+                          description: If the SKU is active (`true`) or inactive (`false`).
+                          example: false
+                          title: isActive
+                          type: boolean
+                        manufacturerCode:
+                          description: SKU reference code in the store.
+                          example: "1234567"
+                          title: code
+                          type: string
+                        specs:
+                          description: SKU specifications. This field is mandatory, but nullable if there is only one SKU.
+                          example:
+                            - name: Color
+                              value: Black
+                            - name: Size
+                              value: S
+                          items:
+                            properties:
+                              name:
+                                description: SKU's specification name.
+                                example: Color
+                                title: name
+                                type: string
+                              value:
+                                description: SKU's specification values.
+                                example: Black
+                                title: value
+                                type: string
+                            required:
+                              - name
+                              - value
+                            title: ""
+                            type: object
+                          nullable: true
+                          title: specs
+                          type: array
+                        weight:
+                          description: SKU weight.
+                          example: 300
+                          title: weight
+                          type: integer
+                      required:
+                        - id
+                        - isActive
+                        - weight
+                        - dimensions
+                        - specs
+                        - images
+                      title: ""
+                      type: object
+                    title: skus
+                    type: array
+                  slug:
+                    description: Reference of the product in the URL of the store.
+                    example: /vtex-shirt
+                    title: slug
+                    type: string
+                  specs:
+                    description: Specifications that will differentiate the possible product SKUs.
+                    example:
+                      - name: Color
+                        values:
+                          - Black
+                          - White
+                      - name: Size
+                        values:
+                          - S
+                          - M
+                          - L
+                    items:
+                      properties:
+                        name:
+                          description: Specification name.
+                          example: Color
+                          title: name
+                          type: string
+                        values:
+                          description: Specification values.
+                          example:
+                            - Black
+                            - White
+                          items:
+                            title: ""
+                            type: string
+                          title: values
+                          type: array
+                      required:
+                        - name
+                        - values
+                      title: ""
+                      type: object
+                    title: specs
+                    type: array
+                  status:
+                    description: Status of the product. Its values can be `active` or `inactive`.
+                    example: active
+                    title: status
+                    type: string
+                  taxCode:
+                    description: Product tax code.
+                    example: "123"
+                    nullable: true
+                    title: taxCode
+                    type: string
+                  transportModal:
+                    description: Transport modal of the product.
+                    example: "1"
+                    nullable: true
+                    title: transportModal
+                    type: string
+                  updatedAt:
+                    description: Last date when the product was updated.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: updatedAt
+                    type: string
+                required:
+                  - status
+                  - name
+                  - brandId
+                  - brandName
+                  - categoryIds
+                  - categoryNames
+                  - specs
+                  - attributes
+                  - slug
+                  - images
+                  - skus
+                  - origin
+                  - createdAt
+                  - updatedAt
+                title: ""
+                type: object
+          description: OK
+      summary: Get Product by ID
+      tags:
+        - Product
+    put:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Updates an existing product and its SKUs. \r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"id\": \"189371\",\r
+
+        \    \"status\": \"active\",\r
+
+        \    \"name\": \"VTEX 10 Shirt\",\r
+
+        \    \"description\": \"Shirt number 10 by VTEX.\",\r
+
+        \    \"brandId\": \"1\",\r
+
+        \    \"categoryIds\": [\r
+
+        \        \"732\"\r
+
+        \    ],\r
+
+        \    \"specs\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Color\",\r
+
+        \            \"values\": [\r
+
+        \                \"Black\",\r
+
+        \                \"White\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Size\",\r
+
+        \            \"values\": [\r
+
+        \                \"S\",\r
+
+        \                \"M\",\r
+
+        \                \"L\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"attributes\": [\r
+
+        \        {\r
+
+        \            \"name\": \"Fabric\",\r
+
+        \            \"value\": \"Cotton\"\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"Gender\",\r
+
+        \            \"value\": \"Feminine\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"slug\": \"/vtex-shirt\",\r
+
+        \    \"transportModal\": null,\r
+
+        \    \"taxCode\": null,\r
+
+        \    \"images\": [\r
+
+        \        {\r
+
+        \            \"id\": \"vtex_logo.jpg\",\r
+
+        \            \"url\": \"https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg\",\r
+
+        \            \"alt\": \"VTEX\"\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"skus\": [\r
+
+        \        {\r
+
+        \            \"name\": \"VTEX Shirt Black Size S\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234567\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"Black\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"S\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"name\": \"VTEX Shirt White Size L\",\r
+
+        \            \"externalId\": \"1909621862\",\r
+
+        \            \"manufacturerCode\": \"1234568\",\r
+
+        \            \"isActive\": true,\r
+
+        \            \"weight\": 300,\r
+
+        \            \"dimensions\": {\r
+
+        \                \"width\": 1.5,\r
+
+        \                \"height\": 2.1,\r
+
+        \                \"length\": 1.6\r
+
+        \            },\r
+
+        \            \"specs\": [\r
+
+        \                {\r
+
+        \                    \"name\": \"Color\",\r
+
+        \                    \"value\": \"White\"\r
+
+        \                },\r
+
+        \                {\r
+
+        \                    \"name\": \"Size\",\r
+
+        \                    \"value\": \"L\"\r
+
+        \                }\r
+
+        \            ],\r
+
+        \            \"images\": [\r
+
+        \                \"vtex_logo.jpg\"\r
+
+        \            ]\r
+
+        \        }\r
+
+        \    ],\r
+
+        \    \"origin\": \"vtxleo7778\"\r
+
+        }\r
+
+        ```"
+      operationId: PutProduct
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Product unique identifier number.
+          in: path
+          name: productId
+          required: true
+          schema:
+            example: "189371"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              attributes:
+                - name: Fabric
+                  value: Cotton
+                - name: Gender
+                  value: Feminine
+              brandId: "1"
+              categoryIds:
+                - "732"
+              id: "189371"
+              images:
+                - alt: VTEX
+                  id: vtex_logo.jpg
+                  url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+              name: VTEX 10 Shirt
+              origin: vtxleo7778
+              skus:
+                - dimensions:
+                    height: 2.1
+                    length: 1.6
+                    width: 1.5
+                  externalId: "1909621862"
+                  id: "182907"
+                  images:
+                    - vtex_logo.jpg
+                  isActive: true
+                  manufacturerCode: "1234567"
+                  name: VTEX Shirt Black Size S
+                  specs:
+                    - name: Color
+                      value: Black
+                    - name: Size
+                      value: S
+                  weight: 300
+                - dimensions:
+                    height: 2.1
+                    length: 1.6
+                    width: 1.5
+                  externalId: "1909621862"
+                  id: "182908"
+                  images:
+                    - vtex_logo.jpg
+                  isActive: true
+                  manufacturerCode: "1234568"
+                  name: VTEX Shirt White Size L
+                  specs:
+                    - name: Color
+                      value: White
+                    - name: Size
+                      value: L
+                  weight: 300
+              slug: /vtex-shirt
+              specs:
+                - name: Color
+                  values:
+                    - Black
+                    - White
+                - name: Size
+                  values:
+                    - S
+                    - M
+                    - L
+              status: active
+              taxCode: null
+              transportModal: null
+            schema:
+              properties:
+                attributes:
+                  description: Attributes of the product. Attributes are additional properties used to create site browsing filters.
+                  example:
+                    - name: Fabric
+                      value: Cotton
+                    - name: Gender
+                      value: Feminine
+                  items:
+                    properties:
+                      name:
+                        description: Attribute name.
+                        example: Fabric
+                        title: name
+                        type: string
+                      value:
+                        description: Attribute value.
+                        example: Cotton
+                        title: value
+                        type: string
+                    required:
+                      - name
+                      - value
+                    title: ""
+                  title: attributes
+                  type: array
+                brandId:
+                  description: Product's Brand unique identifier number.
+                  example: "1"
+                  title: brandId
+                  type: string
+                categoryIds:
+                  description: Product's Categories unique identifier numbers. It can have multiples IDs for each Category and Subcategories.
+                  example:
+                    - "732"
+                  items:
+                    title: ""
+                    type: string
+                  title: categoryIds
+                  type: array
+                externalId:
+                  description: Product reference unique identifier number in the store.
+                  example: sandboxintegracao-310117347
+                  title: externalId
+                  type: string
+                id:
+                  description: Product's unique identifier number.
+                  example: "189371"
+                  title: id
+                  type: string
+                images:
+                  description: Information of the images of the product.
+                  example:
+                    - alt: imagem
+                      id: vtex_logo.jpg
+                      url: https://vtxleo7778.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                  items:
+                    properties:
+                      alt:
+                        description: Image alternative description.
+                        example: imagem
+                        title: alt
+                        type: string
+                      id:
+                        description: Image ID.
+                        example: vtex_logo.jpg
+                        title: id
+                        type: string
+                      url:
+                        description: "Image URL, which must be in the following format: `https://{accountName}.vtexassets.com/assets/{path}`, saved using the [Catalog Images app](https://developers.vtex.com/vtex-developer-docs/docs/vtex-catalog-images)."
+                        example: https://mystore.vtexassets.com/assets/vtex.catalog-images/products/vtex_logo.jpg
+                        title: url
+                        type: string
+                    required:
+                      - id
+                      - url
+                    title: ""
+                    type: object
+                  title: images
+                  type: array
+                name:
+                  description: Product Name. Use simple words and avoid other languages or complex writing. This field is essential for SEO and must respect the 150 character limit.
+                  example: Camiseta VTEX 10
+                  title: name
+                  type: string
+                origin:
+                  description: Origin account of the product. It is not possible to alter products where the origin is `marketplace`.
+                  example: vtxleo7778
+                  title: origin
+                  type: string
+                skus:
+                  description: SKUs of the product.
+                  example:
+                    - dimensions:
+                        height: 2.1
+                        length: 1.6
+                        width: 1.5
+                      ean: 978-1909621862
+                      externalId: "1909621862"
+                      id: "182907"
+                      images:
+                        - vtex_logo.jpg
+                      isActive: true
+                      manufacturerCode: "1234567"
+                      name: VTEX Shirt Black Size S
+                      specs:
+                        - name: Color
+                          value: Black
+                        - name: Size
+                          value: S
+                      weight: 300
+                    - dimensions:
+                        height: 2.1
+                        length: 1.6
+                        width: 1.5
+                      ean: 978-1909621862
+                      externalId: "1909621862"
+                      id: "182908"
+                      images:
+                        - vtex_logo.jpg
+                      isActive: true
+                      manufacturerCode: "1234568"
+                      name: VTEX Shirt White Size L
+                      specs:
+                        - name: Color
+                          value: White
+                        - name: Size
+                          value: L
+                      weight: 300
+                  items:
+                    properties:
+                      dimensions:
+                        description: SKU dimensions.
+                        example:
+                          height: 2.1
+                          length: 1.6
+                          width: 1.5
+                        properties:
+                          height:
+                            description: SKU height.
+                            example: 2.1
+                            title: height
+                            type: number
+                          length:
+                            description: SKU length.
+                            example: 1.6
+                            title: length
+                            type: number
+                          width:
+                            description: SKU width.
+                            example: 1.5
+                            title: width
+                            type: number
+                        required:
+                          - width
+                          - height
+                          - length
+                        title: dimensions
+                        type: object
+                      ean:
+                        description: Unique SKU identification code (barcode), composed of up to 13 numeric characters.
+                        example: 978-1909621862
+                        title: ean
+                        type: string
+                      externalId:
+                        description: Unique reference code created to improve the store's organization. This is not a required field.
+                        example: "1909621862"
+                        title: externalId
+                        type: string
+                      id:
+                        description: SKU unique identifier number. Do not include this field when adding a new SKU, only when editing existing SKUs.
+                        example: "182907"
+                        title: id
+                        type: string
+                      images:
+                        description: SKU's images IDs.
+                        example:
+                          - vtex_logo.jpg
+                        items: {}
+                        title: images
+                        type: array
+                      isActive:
+                        description: Defines if the SKU is active (`true`) or inactive (`false`).
+                        example: false
+                        title: isActive
+                        type: boolean
+                      manufacturerCode:
+                        description: SKU reference code in the store.
+                        example: "1234567"
+                        title: code
+                        type: string
+                      name:
+                        description: SKU Name. Use simple words and avoid other languages or complex writing. This field is essential for SEO and must respect the 150 character limit.
+                        example: VTEX Shirt Black Size S
+                        title: name
+                        type: string
+                      specs:
+                        description: SKU specifications. This field is mandatory, but nullable if there is only one SKU.
+                        example:
+                          - name: Color
+                            value: Black
+                          - name: Size
+                            value: S
+                        items:
+                          properties:
+                            name:
+                              description: SKU's specification name.
+                              example: Color
+                              title: name
+                              type: string
+                            value:
+                              description: SKU's specification values.
+                              example: Black
+                              title: value
+                              type: string
+                          required:
+                            - name
+                            - value
+                          title: ""
+                          type: object
+                        nullable: true
+                        title: specs
+                        type: array
+                      weight:
+                        description: SKU weight.
+                        example: 300
+                        title: weight
+                        type: integer
+                    required:
+                      - isActive
+                      - weight
+                      - dimensions
+                      - specs
+                      - images
+                    title: ""
+                    type: object
+                  title: skus
+                  type: array
+                slug:
+                  description: Reference of the product in the URL of the store.
+                  example: /vtex-shirt
+                  title: slug
+                  type: string
+                specs:
+                  description: Specifications that will differentiate the possible product SKUs.
+                  example:
+                    - name: Color
+                      values:
+                        - Black
+                        - White
+                    - name: Size
+                      values:
+                        - S
+                        - M
+                        - L
+                  items:
+                    properties:
+                      name:
+                        description: Specification name.
+                        example: Color
+                        title: name
+                        type: string
+                      values:
+                        description: Specification values.
+                        example:
+                          - Black
+                          - White
+                        items:
+                          title: ""
+                          type: string
+                        title: values
+                        type: array
+                    required:
+                      - name
+                      - values
+                    title: ""
+                    type: object
+                  title: specs
+                  type: array
+                status:
+                  description: Status of the product. Its values can be `active` or `inactive`.
+                  example: active
+                  title: status
+                  type: string
+                taxCode:
+                  description: Product tax code.
+                  example: "123"
+                  nullable: true
+                  title: taxCode
+                  type: string
+                transportModal:
+                  description: Transport modal of the product.
+                  example: "1"
+                  nullable: true
+                  title: transportModal
+                  type: string
+              required:
+                - status
+                - name
+                - brandId
+                - categoryIds
+                - specs
+                - attributes
+                - slug
+                - images
+                - skus
+                - origin
+              title: ""
+              type: object
+      responses:
+        "204":
+          description: No Content
+      summary: Update Product
+      tags:
+        - Product
+  "/api/catalog-seller-portal/products/{productId}/description":
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves the description of a product given a Product ID.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"productId\": \"61\",\r
+
+        \    \"description\": \"Beautifully handmade laptop case/sleeve made in the Nepal Himalaya. It can be slipped inside your backpack or carried alone with space for all your work bits and pieces!\",\r
+
+        \    \"createdAt\": \"2022-10-10T19:18:45.612317Z\",\r
+
+        \    \"updatedAt\": \"2022-10-11T18:12:58.825544Z\"\r
+
+        }\r
+
+        ```"
+      operationId: GetProductDescription
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Product unique identifier number.
+          in: path
+          name: productId
+          required: true
+          schema:
+            example: "189371"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdAt: 2022-10-10T19:18:45.612317Z
+                description: Beautifully handmade laptop case/sleeve made in the Nepal Himalaya. It can be slipped inside your backpack or carried alone with space for all your work bits and pieces!
+                productId: "61"
+                updatedAt: 2022-10-11T18:12:58.825544Z
+              schema:
+                properties:
+                  createdAt:
+                    description: Date when the brand was created.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: createdAt
+                    type: string
+                  productId:
+                    description: Product's unique identifier number.
+                    example: "61"
+                    title: id
+                    type: string
+                  updatedAt:
+                    description: Last date when the brand was updated.
+                    example: 2021-01-18T14:41:45.696488+00:00
+                    title: updatedAt
+                    type: string
+                required:
+                  - productId
+                  - createdAt
+                  - updatedAt
+                title: ""
+                type: object
+          description: OK
+      summary: Get Product Description by Product ID
+      tags:
+        - Product
+    put:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Updates the description of a product given a Product ID.\r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"productId\": \"71\",\r
+
+        \    \"description\": \"White shirt.\"\r
+
+        }\r
+
+        ```"
+      operationId: PutProductDescription
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Product unique identifier number.
+          in: path
+          name: productId
+          required: true
+          schema:
+            example: "71"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              description: White shirt.
+              productId: "71"
+            schema:
+              properties:
+                description:
+                  description: Product description.
+                  example: White shirt.
+                  title: description
+                  type: string
+                productId:
+                  description: Product's unique identifier number.
+                  example: "71"
+                  title: productId
+                  type: string
+              required:
+                - productId
+                - description
+              title: ""
+              type: object
+      responses:
+        "204":
+          description: No Content
+      summary: Update Product Description by Product ID
+      tags:
+        - Product
+  /api/catalog-seller-portal/skus/_search:
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves general information about an SKU taking into consideration the defined search criteria. It is mandatory to use at least one query parameter. \r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \  \"data\": [\r
+
+        \    {\r
+
+        \      \"id\": \"2\",\r
+
+        \      \"productId\": \"2\",\r
+
+        \      \"externalId\": \"1909621862\"\r
+
+        \    }\r
+
+        \  ],\r
+
+        \  \"_metadata\": {\r
+
+        \    \"total\": 1,\r
+
+        \    \"from\": 1,\r
+
+        \    \"to\": 15\r
+
+        \  }\r
+
+        }\r
+
+        ```"
+      operationId: SearchSKU
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The first page of the interval of the product list.
+          explode: true
+          in: query
+          name: from
+          required: false
+          schema:
+            example: "1"
+            type: string
+          style: form
+        - description: The last page of the interval of the product list.
+          explode: true
+          in: query
+          name: to
+          required: false
+          schema:
+            example: "50"
+            type: string
+          style: form
+        - description: SKU unique idenfier number.
+          explode: true
+          in: query
+          name: id
+          required: false
+          schema:
+            example: 1
+            type: integer
+          style: form
+        - description: SKU reference unique identifier number in the store.
+          explode: true
+          in: query
+          name: externalid
+          required: false
+          schema:
+            example: 123456789
+            type: integer
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 1
+                  to: 15
+                  total: 1
+                data:
+                  - externalId: "1909621862"
+                    id: "2"
+                    productId: "2"
+              schema:
+                properties:
+                  _metadata:
+                    description: Information about the organization and exhibition of the SKU list.
+                    properties:
+                      from:
+                        description: The first page of the interval of the SKU list.
+                        type: integer
+                      to:
+                        description: The last page of the interval of the SKU list.
+                        type: integer
+                      total:
+                        description: Total of SKUs on the list.
+                        type: integer
+                    type: object
+                  data:
+                    description: List with information about the SKU.
+                    items:
+                      properties:
+                        externalId:
+                          description: Unique identifier number of the association of the SKU with a Franchise Account.
+                          type: string
+                        id:
+                          description: SKU unique identifier number.
+                          type: string
+                        productId:
+                          description: Product unique identifier number.
+                          type: string
+                      title: ""
+                      type: object
+                    type: array
+                title: ""
+                type: object
+          description: OK
+          headers: {}
+      summary: Search for SKU
+      tags:
+        - SKU
+  /api/catalog-seller-portal/skus/ids:
+    get:
+      description: " >📘 This API is part of the [Seller Portal Catalog](https://help.vtex.com/en/tutorial/how-the-seller-portal-catalog-works--7pMB6YOt6YQDQQbzFB4Pxp). This functionality is in the Beta stage and can be discontinued at any moment at VTEX's discretion. VTEX will not be responsible for any instabilities caused by its use or discontinuity. If you have any questions, please contact [our Support Center](https://support.vtex.com/hc/en-us/requests). \r
+
+        \r
+
+        \ Retrieves general information about all SKUs.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"data\": [\r
+
+        \        \"1\",\r
+
+        \        \"10\",\r
+
+        \        \"11\",\r
+
+        \        \"12\",\r
+
+        \        \"13\",\r
+
+        \        \"14\",\r
+
+        \        \"15\",\r
+
+        \        \"16\",\r
+
+        \        \"19\",\r
+
+        \        \"2\",\r
+
+        \        \"20\",\r
+
+        \        \"21\",\r
+
+        \        \"22\",\r
+
+        \        \"23\",\r
+
+        \        \"24\"\r
+
+        \    ],\r
+
+        \    \"_metadata\": {\r
+
+        \        \"total\": 65,\r
+
+        \        \"from\": 1,\r
+
+        \        \"to\": 15\r
+
+        \    }\r
+
+        }\r
+
+        ```"
+      operationId: ListSKU
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: The first page of the interval of the product list.
+          explode: true
+          in: query
+          name: from
+          required: false
+          schema:
+            example: "1"
+            type: string
+          style: form
+        - description: The last page of the interval of the product list.
+          explode: true
+          in: query
+          name: to
+          required: false
+          schema:
+            example: "50"
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 1
+                  to: 5
+                  total: 2
+                data:
+                  - "1"
+                  - "2"
+              schema:
+                properties:
+                  _metadata:
+                    description: Information about the organization and exhibition of the SKU list.
+                    properties:
+                      from:
+                        description: The first page of the interval of the SKU list.
+                        type: integer
+                      to:
+                        description: The last page of the interval of the SKU list.
+                        type: integer
+                      total:
+                        description: Total of SKUs on the list.
+                        type: integer
+                    type: object
+                  data:
+                    description: List with information about the SKU.
+                    items:
+                      description: SKU unique identifier number.
+                      type: string
+                    type: array
+                title: ""
+                type: object
+          description: OK
+          headers: {}
+      summary: Get List of SKUs
+      tags:
+        - SKU
+components:
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

@@ -1,0 +1,3001 @@
+openapi: 3.0.1
+servers:
+  - description: Production Server
+    url: https://restapi.kumpeapps.com/{version}
+    variables:
+      version:
+        default: v5
+        enum:
+          - v5
+  - description: Pre-Production Server
+    url: https://restapi.preprod.kumpeapps.com/{version}
+    variables:
+      version:
+        default: v5
+        enum:
+          - v5
+info:
+  contact:
+    email: helpdesk@kumpeapps.com
+  description: KKid API. Due to security concerns all calls to this API requires authentication. If you have access then you may use your KumpeApps username/password to authenticate. To gain access please use the contact developer link below.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://app.termly.io/document/terms-of-use-for-website/27691a60-60fc-4eff-943f-ca52df024bfe
+  title: KumpeApps API
+  version: 5.0.0
+  x-origin:
+    - format: openapi
+      url: https://api.kumpeapps.com/python/swagger/swagger.yaml
+      version: "3.0"
+  x-providerName: kumpeapps.com
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - auth_key: []
+tags:
+  - description: Authenticate KumpeApps users (required to get apiKey)
+    name: authentication
+  - description: KKid API Functions
+    externalDocs:
+      url: https://github.com/kumpeapps/kkid
+    name: KKid
+paths:
+  /appkey:
+    patch:
+      deprecated: true
+      description: Pass an app key to mark it as compromised. This may be submitted by the app owner or a concerned party that has optained the compromised app key.
+      operationId: appkey_patch
+      parameters:
+        - description: compromised app key
+          explode: true
+          in: query
+          name: app_key
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Comments (like how was this compromised)
+          explode: true
+          in: query
+          name: comments
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_202"
+          description: App key deactivated
+      security: []
+      summary: Compromise app key
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    post:
+      deprecated: true
+      description: Request a new app key by passing username and password for app account
+      operationId: appkey_post
+      parameters:
+        - description: Username assigned to your app
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Password assigned to your app
+          explode: true
+          in: query
+          name: password
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: App supports YubiKey OTP
+          explode: true
+          in: query
+          name: supportsYubikey
+          required: true
+          schema:
+            type: boolean
+          style: form
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201"
+          description: app key created
+      security: []
+      summary: Request app key
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    put:
+      deprecated: true
+      description: Pass your app key to deactivate the key
+      operationId: appkey_put
+      parameters:
+        - description: app key to deactivate
+          explode: true
+          in: query
+          name: app_key
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_202"
+          description: App key deactivated
+      security:
+        - app_key: []
+      summary: Deactivate app key
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+  /authentication/appkey:
+    patch:
+      description: Pass an app key to mark it as compromised. This may be submitted by the app owner or a concerned party that has optained the compromised app key.
+      operationId: auth_appkey_patch
+      parameters:
+        - description: compromised app key
+          explode: true
+          in: query
+          name: app_key
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Comments (like how was this compromised)
+          explode: true
+          in: query
+          name: comments
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_202"
+          description: App key deactivated
+      security: []
+      summary: Compromise app key
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    post:
+      description: Request a new app key by passing username and password for app account
+      operationId: auth_appkey_post
+      parameters:
+        - description: Username assigned to your app
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Password assigned to your app
+          explode: true
+          in: query
+          name: password
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: App supports YubiKey OTP
+          explode: true
+          in: query
+          name: supportsYubikey
+          required: true
+          schema:
+            type: boolean
+          style: form
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201"
+          description: app key created
+      security: []
+      summary: Request app key
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    put:
+      description: Pass your app key to deactivate the key
+      operationId: auth_appkey_put
+      parameters:
+        - description: app key to deactivate
+          explode: true
+          in: query
+          name: app_key
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_202"
+          description: App key deactivated
+      security:
+        - app_key: []
+      summary: Deactivate app key
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+  /authentication/authkey:
+    get:
+      description: Obtain auth key for user that has provided their username and password to login to your app. (or to obtain an auth key for a script like IFTTT)
+      operationId: auth_authkey_get
+      parameters:
+        - description: Authenticated username
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Authenticated password
+          explode: true
+          in: query
+          name: password
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: YubiKey OTP (if configured for user)
+          explode: true
+          in: query
+          name: otp
+          required: false
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: User's device name
+          in: query
+          name: deviceName
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: identifierForVendor for User's Device (if app is iOS)
+          in: query
+          name: identifierForVendor
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201_1"
+          description: User Authenticated Sucessfully
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403"
+          description: Access Denied
+        "449":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/449"
+          description: OTP required but not supplied. Please resubmit request with OTP
+      security:
+        - app_key: []
+      summary: Request auth key for user (login user)
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    patch:
+      description: Mark user auth key as compromised
+      operationId: auth_authkey_patch
+      parameters:
+        - description: auth key to mark as compromised
+          explode: true
+          in: query
+          name: auth_key
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: Comments (like how was this compromised)
+          explode: true
+          in: query
+          name: comments
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_202"
+          description: Auth key marked as compromised and locked
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey
+      security: []
+      summary: Compromise auth key
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    post:
+      description: Obtain auth key for user that has provided their username and password to login to your app. (or to obtain an auth key for a script like IFTTT)
+      operationId: auth_authkey_post
+      parameters:
+        - description: Authenticated username
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Authenticated password
+          explode: true
+          in: query
+          name: password
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: YubiKey OTP (if configured for user)
+          explode: true
+          in: query
+          name: otp
+          required: false
+          schema:
+            format: password
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201_1"
+          description: User Authenticated Sucessfully
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403"
+          description: Access Denied
+        "449":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/449"
+          description: OTP required but not supplied. Please resubmit request with OTP
+      security:
+        - app_key: []
+      summary: Request auth key for user (login user)
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    put:
+      description: Deactivate auth key for user logging them out of your application
+      operationId: auth_authkey_put
+      parameters:
+        - description: auth key to logout
+          explode: true
+          in: query
+          name: auth_key
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_202"
+          description: Success
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey
+      security:
+        - app_key: []
+      summary: Deactivate auth key (logout)
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+  /authentication/verifyotp:
+    get:
+      description: Verifies YubiKey OTP for authenticated user
+      operationId: auth_verifyotp_get
+      parameters:
+        - description: YubiKey OTP code
+          in: query
+          name: otp
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          description: User Authenticated Sucessfully
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey/AuthKey
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403"
+          description: Access Denied
+      security:
+        - auth_key: []
+      summary: Verifies YubiKey OTP for authenticated user
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+  /authkey:
+    get:
+      deprecated: true
+      description: Obtain auth key for user that has provided their username and password to login to your app. (or to obtain an auth key for a script like IFTTT)
+      operationId: authkey_get
+      parameters:
+        - description: Authenticated username
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Authenticated password
+          explode: true
+          in: query
+          name: password
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: YubiKey OTP (if configured for user)
+          explode: true
+          in: query
+          name: otp
+          required: false
+          schema:
+            format: password
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201_1"
+          description: User Authenticated Sucessfully
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403"
+          description: Access Denied
+        "449":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/449"
+          description: OTP required but not supplied. Please resubmit request with OTP
+      security:
+        - app_key: []
+      summary: Request auth key for user (login user)
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    patch:
+      deprecated: true
+      description: Mark user auth key as compromised
+      operationId: authkey_patch
+      parameters:
+        - description: auth key to mark as compromised
+          explode: true
+          in: query
+          name: auth_key
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: Comments (like how was this compromised)
+          explode: true
+          in: query
+          name: comments
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_202"
+          description: Auth key marked as compromised and locked
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey
+      security: []
+      summary: Compromise auth key
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    post:
+      deprecated: true
+      description: Obtain auth key for user that has provided their username and password to login to your app. (or to obtain an auth key for a script like IFTTT)
+      operationId: authkey_post
+      parameters:
+        - description: Authenticated username
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Authenticated password
+          explode: true
+          in: query
+          name: password
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: YubiKey OTP (if configured for user)
+          explode: true
+          in: query
+          name: otp
+          required: false
+          schema:
+            format: password
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_201_1"
+          description: User Authenticated Sucessfully
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403"
+          description: Access Denied
+        "449":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/449"
+          description: OTP required but not supplied. Please resubmit request with OTP
+      security:
+        - app_key: []
+      summary: Request auth key for user (login user)
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+    put:
+      deprecated: true
+      description: Deactivate auth key for user logging them out of your application
+      operationId: authkey_put
+      parameters:
+        - description: auth key to logout
+          explode: true
+          in: query
+          name: auth_key
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_202"
+          description: Success
+        "401":
+          description: Invalid/Locked/Blocked/Compromised AppKey
+      security:
+        - app_key: []
+      summary: Deactivate auth key (logout)
+      tags:
+        - authentication
+      x-openapi-router-controller: controllers.authentication_controller
+  /kkid/allowance:
+    get:
+      description: |
+        By passing in the appropriate options, you can view allowance balance and allowance transactions for a given user provided that they are within the masterID account of the authenticated user.
+      operationId: kkid_allowance_get
+      parameters:
+        - description: userID of the kid
+          explode: true
+          in: query
+          name: kidUserId
+          required: true
+          schema:
+            type: integer
+          style: form
+        - description: number of days you wish to search allowance transactions (default is 90 days)
+          explode: true
+          in: query
+          name: transactionDays
+          required: false
+          schema:
+            type: integer
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/allowance"
+          description: search results matching criteria
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "206":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nodata"
+          description: No Data Returned
+        "400":
+          content: {}
+          description: bad input parameter
+        "401":
+          content: {}
+          description: Unauthorized- API credentials not supplied. Ensure you have passed proper Username and Password parameters
+        "403":
+          content: {}
+          description: Forbidden- User access is denied. API user either does not have access or has been banned/locked.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: returns allowance balance and allowance transactions
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    post:
+      description: |
+        By passing in the appropriate options, you can add an allowance transaction to a given user.
+      operationId: kkid_allowance_post
+      parameters:
+        - description: userID of the kid
+          explode: true
+          in: query
+          name: kidUserId
+          required: true
+          schema:
+            type: integer
+          style: form
+        - description: amount you wish to Add/Subtract (subtract value should be a negative value)
+          explode: true
+          in: query
+          name: amount
+          required: true
+          schema:
+            type: number
+          style: form
+        - description: Description (reason) of allowance transaction
+          explode: true
+          in: query
+          name: description
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Transaction Type (Add/Subtract)
+          explode: true
+          in: query
+          name: transactionType
+          required: true
+          schema:
+            description: |
+              Sort order:
+               * `Add` - Add Allowance
+               * `Subtract` - Subtract Allowance
+            enum:
+              - Add
+              - Subtract
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/success"
+          description: search results matching criteria
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "206":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nodata"
+          description: No Data Returned
+        "400":
+          content: {}
+          description: bad input parameter
+        "401":
+          content: {}
+          description: Unauthorized- API credentials not supplied. Ensure you have passed proper Username and Password parameters
+        "403":
+          content: {}
+          description: Forbidden- User access is denied. API user either does not have access or has been banned/locked.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: adds new allowance transaction to kidUserID
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+  /kkid/apns:
+    post:
+      operationId: kkid_apns_post
+      parameters:
+        - description: userID of the kid
+          explode: true
+          in: query
+          name: kidUserId
+          required: true
+          schema:
+            type: integer
+          style: form
+        - description: tool you wish to talk to
+          explode: true
+          in: query
+          name: tool
+          required: true
+          schema:
+            enum:
+              - register
+              - subscribe
+              - unsubscribe
+              - send
+            type: string
+          style: form
+        - description: device APNS token (required for register)
+          explode: true
+          in: query
+          name: token
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Name of device to associate to token (required for register)
+          explode: true
+          in: query
+          name: devicename
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: title of APNS message (required for send)
+          explode: true
+          in: query
+          name: title
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: APNS message body (required for send)
+          explode: true
+          in: query
+          name: message
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Number for badge icon (optional for send)
+          explode: true
+          in: query
+          name: badge
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: Name of sound file to play for send notification (optional for send)
+          explode: true
+          in: query
+          name: sound
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Notification section name (required for send/subscribe/unsubscribe)
+          explode: true
+          in: query
+          name: section
+          required: false
+          schema:
+            enum:
+              - Chores
+              - Chores-New
+              - Chores-Reminders
+              - Allowance
+              - Allowance-New
+              - WishList
+            type: string
+          style: form
+        - description: Notification section name (optional for send, default is active)
+          explode: true
+          in: query
+          name: priority
+          required: false
+          schema:
+            enum:
+              - passive
+              - active
+              - time-sensitive
+              - critical
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/success"
+          description: search results matching criteria
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "206":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nodata"
+          description: No Data Returned
+        "400":
+          content: {}
+          description: bad input parameter
+        "401":
+          content: {}
+          description: Unauthorized- API credentials not supplied. Ensure you have passed proper Username and Password parameters
+        "403":
+          content: {}
+          description: Forbidden- User access is denied. API user either does not have access or has been banned/locked.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: subscribes/unsubscribes/registers for apns push notifications
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+  /kkid/chorelist:
+    delete:
+      description: |
+        By passing in the appropriate options, you can delete a chore for the given chore id under authenticated user's master account
+      operationId: kkid_chorelist_delete
+      parameters:
+        - description: id of the chore you wish to delete
+          explode: true
+          in: query
+          name: idChoreList
+          required: true
+          schema:
+            type: integer
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/success"
+          description: deletion successful
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "206":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nodata"
+          description: No Data Found.
+        "400":
+          content: {}
+          description: bad input parameter
+        "401":
+          content: {}
+          description: Unauthorized- API credentials not supplied. Ensure you have passed proper Username and Password parameters
+        "403":
+          content: {}
+          description: Forbidden- User access is denied. API user either does not have access or has been banned/locked.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "409":
+          content: {}
+          description: Conflict- idChoreList parameter was not supplied or is blank
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: deletes chore for given chore id
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    get:
+      description: |
+        By passing in the appropriate options, you can search for
+        chores assigned to a given user within the authenticated user's master account
+      operationId: kkid_chorelist_get
+      parameters:
+        - description: Username of kid you wish to search
+          explode: true
+          in: query
+          name: kidUsername
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Day of week for chores (Weekly for weekly chores)
+          explode: true
+          in: query
+          name: day
+          required: false
+          schema:
+            enum:
+              - Sunday
+              - Monday
+              - Tuesday
+              - Wednesday
+              - Thursday
+              - Friday
+              - Saturday
+              - Weekly
+            type: string
+          style: form
+        - description: Status of Chore to search
+          explode: true
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Filter results by blockDash parameter
+          explode: true
+          in: query
+          name: blockDash
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Filter results by optional parameter
+          explode: true
+          in: query
+          name: optional
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Filter results by canSteal parameter
+          explode: true
+          in: query
+          name: canSteal
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: include calendar notations (default is false)
+          explode: true
+          in: query
+          name: includeCalendar
+          required: false
+          schema:
+            type: boolean
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/chorelist"
+          description: search results matching criteria
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "206":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nodata"
+          description: No Data Found.
+        "400":
+          content: {}
+          description: bad input parameter
+        "401":
+          content: {}
+          description: Unauthorized- API credentials not supplied. Ensure you have passed proper Username and Password parameters
+        "403":
+          content: {}
+          description: Forbidden- User access is denied. API user either does not have access or has been banned/locked.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: returns list of chores for given user
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    post:
+      description: |
+        By passing in the appropriate options, you can add a chore to given kid username under authenticated user's master account
+      operationId: kkid_chorelist_post
+      parameters:
+        - description: username of kid to assign the chore to.
+          explode: true
+          in: query
+          name: kidUsername
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: day of week (Monday, Tuesday....) for the chore. For weekly chores put Weekly or leave blank
+          explode: true
+          in: query
+          name: day
+          required: false
+          schema:
+            enum:
+              - Sunday
+              - Monday
+              - Tuesday
+              - Wednesday
+              - Thursday
+              - Friday
+              - Saturday
+              - Weekly
+              - Today
+            type: string
+          style: form
+        - description: text field of nfc tag required to check off chore
+          explode: true
+          in: query
+          name: nfcTag
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: status of chore (default is todo)
+          explode: true
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: name of chore
+          explode: true
+          in: query
+          name: choreName
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: optional chore description
+          explode: true
+          in: query
+          name: choreDescription
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: number priority of chore (default is 5)
+          explode: true
+          in: query
+          name: choreNumber
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: block dash option on this chore
+          explode: true
+          in: query
+          name: blockDash
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: mark as one time chore (does not repeat each week)
+          explode: true
+          in: query
+          name: oneTime
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: ammount of allowance added at end of week for completing this chore
+          explode: true
+          in: query
+          name: extraAllowance
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: mark as optional chore
+          explode: true
+          in: query
+          name: optional
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: mark as reassignable (default is true)
+          explode: true
+          in: query
+          name: reassignable
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: mark as sibling can steal chore
+          explode: true
+          in: query
+          name: canSteal
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: date (yyyy-mm-dd) that you wish the chore to start showing up. (default is today)
+          explode: true
+          in: query
+          name: startDate
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: notes added to chore (visable only on reports, kids do not see this note, this is mostly just for the developer)
+          explode: true
+          in: query
+          name: notes
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: require use of camera to detect object detection tag order to check off chore
+          explode: true
+          in: query
+          name: requireObjectDetection
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: tag for object detection to search for (required if requireObjectDetection is true)
+          explode: true
+          in: query
+          name: objectDetectionTag
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: true if chore updated via API from an Automation System
+          explode: true
+          in: query
+          name: updatedByAutomation
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Notes if AI Icons should be used (n for no, y for yes, e for yes- error)
+          explode: true
+          in: query
+          name: aiIcon
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: True if this is a calendar note instead of a chore.
+          explode: true
+          in: query
+          name: isCalendar
+          required: false
+          schema:
+            type: boolean
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/success"
+          description: search results matching criteria
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "206":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nodata"
+          description: No Data Found.
+        "400":
+          content: {}
+          description: bad input parameter
+        "401":
+          content: {}
+          description: Unauthorized- API credentials not supplied. Ensure you have passed proper Username and Password parameters
+        "403":
+          content: {}
+          description: Forbidden- User access is denied. API user either does not have access or has been banned/locked.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "409":
+          content: {}
+          description: Conflict- idChoreList parameter was not supplied or is blank
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: adds chore for given user
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    put:
+      description: |
+        By passing in the appropriate options, you can update the fields of a specific core within the authenticated user's master account
+      operationId: kkid_chorelist_put
+      parameters:
+        - description: id number of chore you wish to update
+          explode: true
+          in: query
+          name: idChoreList
+          required: true
+          schema:
+            type: integer
+          style: form
+        - description: new status of chore
+          explode: true
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: mark chore as stolen by sibling
+          explode: true
+          in: query
+          name: stolen
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: username of sibling that stole the chore (required if stolen is true)
+          explode: true
+          in: query
+          name: stolenBy
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: text field of NFC tag that is required to be scanned to check off this chore (normally null)
+          explode: true
+          in: query
+          name: nfcTag
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: notes field for chore
+          explode: true
+          in: query
+          name: notes
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: GPS latitude of where the chore was marked
+          explode: true
+          in: query
+          name: latitude
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: GPS longitude of where the chore was marked
+          explode: true
+          in: query
+          name: longitude
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: GPS altitude of where the chore was marked
+          explode: true
+          in: query
+          name: altitude
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: true if updated via API by automation system
+          explode: true
+          in: query
+          name: updatedByAutomation
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Where day equals...
+          explode: true
+          in: query
+          name: whereDay
+          required: false
+          schema:
+            enum:
+              - Sunday
+              - Monday
+              - Tuesday
+              - Wednesday
+              - Thursday
+              - Friday
+              - Saturday
+              - Weekly
+              - Today
+            type: string
+          style: form
+        - description: Where status equals...
+          explode: true
+          in: query
+          name: whereStatus
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Where chore name equals...
+          explode: true
+          in: query
+          name: whereName
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/success"
+          description: search results matching criteria
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "206":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nodata"
+          description: No Data Found.
+        "400":
+          content: {}
+          description: bad input parameter
+        "401":
+          content: {}
+          description: Unauthorized- API credentials not supplied. Ensure you have passed proper Username and Password parameters
+        "403":
+          content: {}
+          description: Forbidden- User access is denied. API user either does not have access or has been banned/locked.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: updates chore for given chore id
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+  /kkid/masteruser:
+    post:
+      description: |
+        By passing in the appropriate variables this method creates a new user with master account access. (The use of this method is restricted to Superusers ONLY)
+      operationId: kkid_masteruser_post
+      parameters:
+        - description: username of user to create
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: password of user to create
+          explode: true
+          in: query
+          name: password
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: email address of user to create
+          explode: true
+          in: query
+          name: email
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: First Name of user to create
+          explode: true
+          in: query
+          name: firstName
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Last Name of user to create
+          explode: true
+          in: query
+          name: lastName
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/addUserResponse"
+          description: User Added
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "409":
+          content: {}
+          description: Create user unsuccessful! This is normally because the username or password already exists in the KumpeApps system.
+      security:
+        - app_key: []
+      summary: adds new master user account
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+  /kkid/share:
+    get:
+      description: Create share link
+      operationId: kkid_share_get
+      parameters:
+        - description: User ID that the link should be authenticated to
+          explode: true
+          in: query
+          name: linkUserId
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Link to share
+          explode: true
+          in: query
+          name: link
+          required: true
+          schema:
+            enum:
+              - https://khome.kumpeapps.com/portal/wish-list.php
+              - https://khome.kumpeapps.com/portal/chores-today.php
+            type: string
+          style: form
+        - description: Authentication scope for link
+          explode: true
+          in: query
+          name: scope
+          required: true
+          schema:
+            enum:
+              - WishList
+              - WishListAdmin
+              - Chores
+              - ChoresAdmin
+            type: string
+          style: form
+        - description: Authentication scope for link
+          explode: true
+          in: query
+          name: scope2
+          required: false
+          schema:
+            enum:
+              - WishList
+              - WishListAdmin
+              - Chores
+              - ChoresAdmin
+            type: string
+          style: form
+        - description: Authentication scope for link
+          explode: true
+          in: query
+          name: scope3
+          required: false
+          schema:
+            enum:
+              - WishList
+              - WishListAdmin
+              - Chores
+              - ChoresAdmin
+            type: string
+          style: form
+        - description: Authentication scope for link
+          explode: true
+          in: query
+          name: scope4
+          required: false
+          schema:
+            enum:
+              - WishList
+              - WishListAdmin
+              - Chores
+              - ChoresAdmin
+            type: string
+          style: form
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/201_share"
+          description: authenticated link created
+      security:
+        - auth_key: []
+      summary: Create Share Link
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+  /kkid/user:
+    get:
+      description: Gets user info for authenticated user
+      operationId: kkid_user_get
+      parameters:
+        - description: Use bool values instead of Int 0/1
+          explode: true
+          in: query
+          name: enableBool
+          required: false
+          schema:
+            type: boolean
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userlist"
+          description: search results matching criteria
+      summary: Gets user info
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+  /kkid/userlist:
+    delete:
+      description: |
+        By passing in the appropriate variables this method deletes the specified user. (This function is restricted to Superusers ONLY)
+      operationId: kkid_userlist_delete
+      parameters:
+        - description: userID of the user you wish to delete
+          explode: true
+          in: query
+          name: userID
+          required: true
+          schema:
+            type: integer
+          style: form
+      responses:
+        "200":
+          content: {}
+          description: User Deleted
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "409":
+          content: {}
+          description: Create user unsuccessful! This is normally because the username or password already exists in the KumpeApps system.
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: deletes user
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    get:
+      description: |
+        By passing in the appropriate options, you can search for
+        users within the authenticated user's master account
+      operationId: kkid_userlist_get
+      parameters:
+        - description: Filter Search by isChild flag
+          explode: true
+          in: query
+          name: isChild
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Filter Search by isActive flag
+          explode: true
+          in: query
+          name: isActive
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Filter Search by isAdmin flag
+          explode: true
+          in: query
+          name: isAdmin
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Filter Search by enableAllowance flag
+          explode: true
+          in: query
+          name: enableAllowance
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Filter Search by enableChores flag
+          explode: true
+          in: query
+          name: enableChores
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: userID of user to search
+          explode: true
+          in: query
+          name: userID
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: Username of user to search
+          explode: true
+          in: query
+          name: username
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Email address of user to search
+          explode: true
+          in: query
+          name: email
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userlist"
+          description: search results matching criteria
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nodata"
+          description: No Data Returned
+        "400":
+          content: {}
+          description: bad input parameter
+        "401":
+          content: {}
+          description: Unauthorized- API credentials not supplied. Ensure you have passed proper Username and Password parameters
+        "403":
+          content: {}
+          description: Forbidden- User access is denied. API user either does not have access or has been banned/locked.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      summary: returns list of users
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    post:
+      description: |
+        By passing in the appropriate variables this method creates a new user and assigns it to the master account of the authenticated user. By default this user will have chores and allowance access.
+      operationId: kkid_userlist_post
+      parameters:
+        - description: username of user to create
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: password of user to create
+          explode: true
+          in: query
+          name: password
+          required: true
+          schema:
+            format: password
+            type: string
+          style: form
+        - description: email address of user to create
+          explode: true
+          in: query
+          name: email
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: First Name of user to create
+          explode: true
+          in: query
+          name: firstName
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Last Name of user to create
+          explode: true
+          in: query
+          name: lastName
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/addUserResponse"
+          description: User Added
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "409":
+          content: {}
+          description: Create user unsuccessful! This is normally because the username or password already exists in the KumpeApps system.
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      security:
+        - auth_key: []
+      summary: adds new child user
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    put:
+      description: |
+        By passing in the appropriate variables this method updates the user's profile
+      operationId: kkid_userlist_put
+      parameters:
+        - description: userID of the user you wish to update
+          explode: true
+          in: query
+          name: userID
+          required: true
+          schema:
+            type: integer
+          style: form
+        - description: username of user to create
+          explode: true
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: email address of user to create
+          explode: true
+          in: query
+          name: email
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: First Name of user to create
+          explode: true
+          in: query
+          name: firstName
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Last Name of user to create
+          explode: true
+          in: query
+          name: lastName
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: emoji character for user
+          explode: true
+          in: query
+          name: emoji
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: User's TMdB Session Key
+          explode: true
+          in: query
+          name: tmdbKey
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: set status of Wish List module enabled
+          explode: true
+          in: query
+          name: enableWishList
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: set status of chores module enabled
+          explode: true
+          in: query
+          name: enableChores
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: set status of allowance module enabled
+          explode: true
+          in: query
+          name: enableAllowance
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: set status of isAdmin
+          explode: true
+          in: query
+          name: enableAdmin
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: set status of enableTmdb (movie and tv search)
+          explode: true
+          in: query
+          name: enableTmdb
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: set status of enableObjectDetection
+          explode: true
+          in: query
+          name: enableObjectDetection
+          required: false
+          schema:
+            type: boolean
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/addUserResponse"
+          description: User Updated
+        "202":
+          content: {}
+          description: Accepted- Access Granted but data flow did not complete due to an unknown error.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/405"
+          description: Method Not Allowed- API user does not have access to use this method
+        "409":
+          content: {}
+          description: Update user unsuccessful. This could be due to invalid userID, new username already exists, new email already exists, or an unknown error.
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/412"
+          description: API Access Denied! Your API key is invalid, expired, or not supplied!
+      summary: updates user
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+  /kkid/wishlist:
+    delete:
+      operationId: kkid_wishlist_delete
+      parameters:
+        - description: ID of wishlist item to delete
+          explode: true
+          in: query
+          name: wishId
+          required: true
+          schema:
+            type: integer
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/success"
+          description: search results matching criteria
+      summary: Delete item from wishlist
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    get:
+      operationId: kkid_wishlist_get
+      parameters:
+        - description: userID of the kid
+          explode: true
+          in: query
+          name: kidUserId
+          required: false
+          schema:
+            type: integer
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wishlist"
+          description: search results matching criteria
+      summary: Get list of wishlist items
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    post:
+      operationId: kkid_wishlist_post
+      parameters:
+        - description: userID of the kid
+          explode: true
+          in: query
+          name: kidUserId
+          required: true
+          schema:
+            type: integer
+          style: form
+        - description: Item title
+          explode: true
+          in: query
+          name: title
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: Item Description
+          explode: true
+          in: query
+          name: description
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Item Priority
+          explode: true
+          in: query
+          name: priority
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: URL Link to item
+          explode: true
+          in: query
+          name: link
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/success"
+          description: search results matching criteria
+      summary: Add item to kid's wishlist
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+    put:
+      operationId: kkid_wishlist_put
+      parameters:
+        - description: Wish list item ID to update
+          explode: true
+          in: query
+          name: wishId
+          required: true
+          schema:
+            type: integer
+          style: form
+        - description: Item title
+          explode: true
+          in: query
+          name: title
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Item Description
+          explode: true
+          in: query
+          name: description
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Item Priority
+          explode: true
+          in: query
+          name: priority
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: URL Link to item
+          explode: true
+          in: query
+          name: link
+          required: false
+          schema:
+            type: string
+          style: form
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/success"
+          description: search results matching criteria
+      summary: Update item on kid's wishlist
+      tags:
+        - KKid
+      x-openapi-router-controller: controllers.k_kid_controller
+components:
+  schemas:
+    "403":
+      description: Access Denied
+      properties:
+        error:
+          example: Access Denied
+          type: string
+        success:
+          example: false
+          type: boolean
+      type: object
+    "405":
+      description: API Access Denied
+      properties:
+        error:
+          example: API Access Denied! Your API account does not have access to this Verb Method!
+          type: string
+        success:
+          example: 0
+          type: integer
+      type: object
+    "412":
+      description: API Key invalid
+      properties:
+        error:
+          example: API Access Denied! Your API key is invalid or has expired!
+          type: string
+        success:
+          example: 0
+          type: integer
+      type: object
+    "449":
+      description: OTP Required is configured for this User. Retry login with OTP
+      properties:
+        message:
+          example: OTP Required is configured for this User. Retry login with OTP
+          type: string
+        success:
+          example: false
+          type: boolean
+      type: object
+    201_share:
+      example:
+        auth_link: https://khome.kumpeapps.com/portal/wish-list.php?token=8ou7jyubj878h7iunk
+        success: true
+      properties:
+        auth_link:
+          example: https://khome.kumpeapps.com/portal/wish-list.php?token=8ou7jyubj878h7iunk
+          type: string
+        success:
+          example: true
+          type: boolean
+      type: object
+    addUserResponse:
+      description: add user
+      example:
+        added: {}
+        aff_added: aff_added
+        aff_id: aff_id
+        aff_payout_type: aff_payout_type
+        avatar: avatar
+        city: city
+        comment: Added Via KKids API
+        country: country
+        disable_lock_until: disable_lock_until
+        email: jane@doe.com
+        i_agree: "0"
+        is_affiliate: is_affiliate
+        is_locked: "0"
+        lang: lang
+        last_login: last_login
+        login: janedoe
+        name_f: Jane
+        name_l: Doe
+        pass: pass
+        pass_dattm: {}
+        phone: phone
+        pin: "0"
+        plain_password: plain_password
+        remember_key: remember_key
+        remote_addr: 104.237.5.109
+        require_consent: require_consent
+        reseller_id: reseller_id
+        saved_form_id: saved_form_id
+        state: state
+        status: "0"
+        street: street
+        street2: street2
+        subusers_parent_id: "0"
+        tax_id: tax_id
+        unsubscribed: "0"
+        user_agent: user_agent
+        user_id: 1
+        zip: zip
+      properties:
+        added:
+          example: "{}"
+          type: string
+        aff_added:
+          type: string
+        aff_id:
+          type: string
+        aff_payout_type:
+          type: string
+        avatar:
+          type: string
+        city:
+          type: string
+        comment:
+          example: Added Via KKids API
+          type: string
+        country:
+          type: string
+        disable_lock_until:
+          type: string
+        email:
+          example: jane@doe.com
+          type: string
+        i_agree:
+          example: "0"
+          type: string
+        is_affiliate:
+          type: string
+        is_locked:
+          example: "0"
+          type: string
+        lang:
+          type: string
+        last_login:
+          type: string
+        login:
+          example: janedoe
+          type: string
+        name_f:
+          example: Jane
+          type: string
+        name_l:
+          example: Doe
+          type: string
+        pass:
+          type: string
+        pass_dattm:
+          example: "{}"
+          type: string
+        phone:
+          type: string
+        pin:
+          example: "0"
+          type: string
+        plain_password:
+          type: string
+        remember_key:
+          type: string
+        remote_addr:
+          example: 104.237.5.109
+          type: string
+        require_consent:
+          type: string
+        reseller_id:
+          type: string
+        saved_form_id:
+          type: string
+        state:
+          type: string
+        status:
+          example: "0"
+          type: string
+        street:
+          type: string
+        street2:
+          type: string
+        subusers_parent_id:
+          example: "0"
+          type: string
+        tax_id:
+          type: string
+        unsubscribed:
+          example: "0"
+          type: string
+        user_agent:
+          type: string
+        user_id:
+          example: 1
+          type: integer
+        zip:
+          type: string
+      type: object
+    allowance:
+      description: Allowance
+      example:
+        allowanceTransaction:
+          - amount: 10
+            date: {}
+            transactionDescription: Weekly Allowance for Chores
+            transactionId: 85
+            transactionType: Add
+            userId: 1
+          - amount: 10
+            date: {}
+            transactionDescription: Weekly Allowance for Chores
+            transactionId: 85
+            transactionType: Add
+            userId: 1
+        balance: 0
+        id: 24
+        lastUpdated: "{}"
+        success: 1
+      properties:
+        allowanceTransaction:
+          items:
+            $ref: "#/components/schemas/allowance_allowanceTransaction"
+          type: array
+        balance:
+          type: integer
+        id:
+          example: 24
+          type: integer
+        lastUpdated:
+          example: "{}"
+          type: string
+        success:
+          example: 1
+          type: integer
+      type: object
+    allowance_allowanceTransaction:
+      example:
+        amount: 10
+        date: {}
+        transactionDescription: Weekly Allowance for Chores
+        transactionId: 85
+        transactionType: Add
+        userId: 1
+      properties:
+        amount:
+          example: 10
+          type: integer
+        date:
+          example: "{}"
+          type: string
+        transactionDescription:
+          example: Weekly Allowance for Chores
+          type: string
+        transactionId:
+          example: 85
+          type: integer
+        transactionType:
+          example: Add
+          type: string
+        userId:
+          example: 1
+          type: integer
+      type: object
+    authentication:
+      description: authentication
+      example:
+        apiKey: 67utyuvb7i6ugy9p843erwt3g
+        success: 1
+        user:
+          email: jane@doe.com
+          emoji: 🤗
+          enableAllowance: true
+          enableBehaviorChart: false
+          enableChores: true
+          enableNoAds: false
+          enableObjectDetection: false
+          enableTmdb: true
+          firstName: Jane
+          homeId: 1
+          isActive: true
+          isAdmin: false
+          isBanned: false
+          isChild: true
+          isDisabled: false
+          isLocked: false
+          isMaster: false
+          lastName: Doe
+          masterId: 1
+          pushAllowance: true
+          pushAllowanceNew: true
+          pushChores: true
+          pushChoresNew: true
+          pushChoresReminders: true
+          tmdbKey: 9a87huiufe94r8
+          userId: 10
+          username: janedoe
+          weeklyAllowance: 5
+      properties:
+        apiKey:
+          example: 67utyuvb7i6ugy9p843erwt3g
+          type: string
+        success:
+          example: 1
+          type: integer
+        user:
+          $ref: "#/components/schemas/user"
+      type: object
+    chore:
+      description: chore
+      example:
+        aiIcon: n
+        altitude: 1
+        blockDash: false
+        choreDescription: Wash dishes and clean off counter
+        choreName: Wash Dishes
+        choreNumber: 1
+        day: Monday
+        extraAllowance: 5
+        idChoreList: 1
+        isCalendar: false
+        kid: jane
+        latitude: 0
+        longitude: 6
+        nfcTag: kkids//Chores?washdishestag
+        notes: notes
+        oneTime: false
+        optional: false
+        reassignable: true
+        reassigned: false
+        requireObjectDetection: bed
+        startDate: {}
+        status: todo
+        stolen: false
+        stolenBy: stolenBy
+        updated: {}
+        updatedBy: janedoe
+      properties:
+        aiIcon:
+          example: n
+          type: string
+        altitude:
+          type: integer
+        blockDash:
+          example: false
+          type: boolean
+        choreDescription:
+          example: Wash dishes and clean off counter
+          type: string
+        choreName:
+          example: Wash Dishes
+          type: string
+        choreNumber:
+          example: 1
+          type: integer
+        day:
+          example: Monday
+          type: string
+        extraAllowance:
+          example: 5
+          type: integer
+        idChoreList:
+          example: 1
+          type: integer
+        isCalendar:
+          example: false
+          type: boolean
+        kid:
+          example: jane
+          type: string
+        latitude:
+          type: integer
+        longitude:
+          type: integer
+        nfcTag:
+          example: kkids//Chores?washdishestag
+          type: string
+        notes:
+          type: string
+        oneTime:
+          example: false
+          type: boolean
+        optional:
+          example: false
+          type: boolean
+        reassignable:
+          example: true
+          type: boolean
+        reassigned:
+          example: false
+          type: boolean
+        requireObjectDetection:
+          example: bed
+          type: string
+        startDate:
+          example: "{}"
+          type: string
+        status:
+          example: todo
+          type: string
+        stolen:
+          example: false
+          type: boolean
+        stolenBy:
+          type: string
+        updated:
+          example: "{}"
+          type: string
+        updatedBy:
+          example: janedoe
+          type: string
+      type: object
+    chorelist:
+      description: chorelist
+      example:
+        chore:
+          - aiIcon: n
+            altitude: 1
+            blockDash: false
+            choreDescription: Wash dishes and clean off counter
+            choreName: Wash Dishes
+            choreNumber: 1
+            day: Monday
+            extraAllowance: 5
+            idChoreList: 1
+            isCalendar: false
+            kid: jane
+            latitude: 0
+            longitude: 6
+            nfcTag: kkids//Chores?washdishestag
+            notes: notes
+            oneTime: false
+            optional: false
+            reassignable: true
+            reassigned: false
+            requireObjectDetection: bed
+            startDate: {}
+            status: todo
+            stolen: false
+            stolenBy: stolenBy
+            updated: {}
+            updatedBy: janedoe
+          - aiIcon: n
+            altitude: 1
+            blockDash: false
+            choreDescription: Wash dishes and clean off counter
+            choreName: Wash Dishes
+            choreNumber: 1
+            day: Monday
+            extraAllowance: 5
+            idChoreList: 1
+            isCalendar: false
+            kid: jane
+            latitude: 0
+            longitude: 6
+            nfcTag: kkids//Chores?washdishestag
+            notes: notes
+            oneTime: false
+            optional: false
+            reassignable: true
+            reassigned: false
+            requireObjectDetection: bed
+            startDate: {}
+            status: todo
+            stolen: false
+            stolenBy: stolenBy
+            updated: {}
+            updatedBy: janedoe
+        success: 1
+      properties:
+        chore:
+          items:
+            $ref: "#/components/schemas/chore"
+          type: array
+        success:
+          example: 1
+          type: integer
+      type: object
+    inline_response_201:
+      example:
+        app_key: 8765futybkunj98ho7gi6tybkuhj
+        success: true
+      properties:
+        app_key:
+          example: 8765futybkunj98ho7gi6tybkuhj
+          type: string
+        success:
+          example: true
+          type: boolean
+      required:
+        - app_key
+      type: object
+    inline_response_201_1:
+      example:
+        auth_key: 8ou7jyubj878h7iunk
+        success: true
+      properties:
+        auth_key:
+          example: 8ou7jyubj878h7iunk
+          type: string
+        success:
+          example: true
+          type: boolean
+      type: object
+    inline_response_202:
+      example:
+        success: true
+      properties:
+        success:
+          example: true
+          type: boolean
+      type: object
+    invalidateApiKey:
+      description: invalidate api key
+      example:
+        message: API Key Set to Expire Immediately
+        success: 1
+      properties:
+        message:
+          example: API Key Set to Expire Immediately
+          type: string
+        success:
+          example: 1
+          type: integer
+      type: object
+    nodata:
+      description: nodata
+      properties:
+        error:
+          example: No Data Found
+          type: string
+        status:
+          example: 0
+          type: integer
+      type: object
+    success:
+      description: Success
+      example:
+        message: success
+        success: true
+      properties:
+        message:
+          example: success
+          type: string
+        success:
+          example: true
+          type: boolean
+      type: object
+    user:
+      description: user
+      example:
+        email: jane@doe.com
+        emoji: 🤗
+        enableAllowance: true
+        enableBehaviorChart: false
+        enableChores: true
+        enableNoAds: false
+        enableObjectDetection: false
+        enableTmdb: true
+        firstName: Jane
+        homeId: 1
+        isActive: true
+        isAdmin: false
+        isBanned: false
+        isChild: true
+        isDisabled: false
+        isLocked: false
+        isMaster: false
+        lastName: Doe
+        masterId: 1
+        pushAllowance: true
+        pushAllowanceNew: true
+        pushChores: true
+        pushChoresNew: true
+        pushChoresReminders: true
+        tmdbKey: 9a87huiufe94r8
+        userId: 10
+        username: janedoe
+        weeklyAllowance: 5
+      properties:
+        email:
+          example: jane@doe.com
+          type: string
+        emoji:
+          example: 🤗
+          type: string
+        enableAllowance:
+          example: true
+          type: boolean
+        enableBehaviorChart:
+          example: false
+          type: boolean
+        enableChores:
+          example: true
+          type: boolean
+        enableNoAds:
+          example: false
+          type: boolean
+        enableObjectDetection:
+          example: false
+          type: boolean
+        enableTmdb:
+          example: true
+          type: boolean
+        firstName:
+          example: Jane
+          type: string
+        homeId:
+          example: 1
+          type: integer
+        isActive:
+          example: true
+          type: boolean
+        isAdmin:
+          example: false
+          type: boolean
+        isBanned:
+          example: false
+          type: boolean
+        isChild:
+          example: true
+          type: boolean
+        isDisabled:
+          example: false
+          type: boolean
+        isLocked:
+          example: false
+          type: boolean
+        isMaster:
+          example: false
+          type: boolean
+        lastName:
+          example: Doe
+          type: string
+        masterId:
+          example: 1
+          type: integer
+        pushAllowance:
+          example: true
+          type: boolean
+        pushAllowanceNew:
+          example: true
+          type: boolean
+        pushChores:
+          example: true
+          type: boolean
+        pushChoresNew:
+          example: true
+          type: boolean
+        pushChoresReminders:
+          example: true
+          type: boolean
+        tmdbKey:
+          example: 9a87huiufe94r8
+          type: string
+        userId:
+          example: 10
+          type: integer
+        username:
+          example: janedoe
+          type: string
+        weeklyAllowance:
+          example: 5
+          type: integer
+      type: object
+    userlist:
+      description: userlist
+      example:
+        success: true
+        user:
+          - email: jane@doe.com
+            emoji: 🤗
+            enableAllowance: true
+            enableBehaviorChart: false
+            enableChores: true
+            enableNoAds: false
+            enableObjectDetection: false
+            enableTmdb: true
+            firstName: Jane
+            homeId: 1
+            isActive: true
+            isAdmin: false
+            isBanned: false
+            isChild: true
+            isDisabled: false
+            isLocked: false
+            isMaster: false
+            lastName: Doe
+            masterId: 1
+            pushAllowance: true
+            pushAllowanceNew: true
+            pushChores: true
+            pushChoresNew: true
+            pushChoresReminders: true
+            tmdbKey: 9a87huiufe94r8
+            userId: 10
+            username: janedoe
+            weeklyAllowance: 5
+          - email: jane@doe.com
+            emoji: 🤗
+            enableAllowance: true
+            enableBehaviorChart: false
+            enableChores: true
+            enableNoAds: false
+            enableObjectDetection: false
+            enableTmdb: true
+            firstName: Jane
+            homeId: 1
+            isActive: true
+            isAdmin: false
+            isBanned: false
+            isChild: true
+            isDisabled: false
+            isLocked: false
+            isMaster: false
+            lastName: Doe
+            masterId: 1
+            pushAllowance: true
+            pushAllowanceNew: true
+            pushChores: true
+            pushChoresNew: true
+            pushChoresReminders: true
+            tmdbKey: 9a87huiufe94r8
+            userId: 10
+            username: janedoe
+            weeklyAllowance: 5
+      properties:
+        success:
+          example: true
+          type: boolean
+        user:
+          items:
+            $ref: "#/components/schemas/user"
+          type: array
+      type: object
+    wish:
+      example:
+        description: Pokemon trading cards
+        id: 1
+        link: https://www.google.com
+        master_id: 1
+        priority: 1
+        title: Pokemon Cards
+        user_id: 1
+      properties:
+        description:
+          example: Pokemon trading cards
+          type: string
+        id:
+          example: 1
+          type: integer
+        link:
+          example: https://www.google.com
+          type: string
+        master_id:
+          example: 1
+          type: integer
+        priority:
+          example: 1
+          type: integer
+        title:
+          example: Pokemon Cards
+          type: string
+        user_id:
+          example: 1
+          type: integer
+      type: object
+    wishlist:
+      description: Allowance
+      example:
+        success: true
+        wish:
+          - description: Pokemon trading cards
+            id: 1
+            link: https://www.google.com
+            master_id: 1
+            priority: 1
+            title: Pokemon Cards
+            user_id: 1
+          - description: Pokemon trading cards
+            id: 1
+            link: https://www.google.com
+            master_id: 1
+            priority: 1
+            title: Pokemon Cards
+            user_id: 1
+      properties:
+        success:
+          example: true
+          type: boolean
+        wish:
+          items:
+            $ref: "#/components/schemas/wish"
+          type: array
+      type: object
+  securitySchemes:
+    app_key:
+      in: header
+      name: X-Auth
+      type: apiKey
+      x-apikeyInfoFunc: controllers.authorization_controller.check_app_key
+    auth_key:
+      in: header
+      name: X-Auth
+      type: apiKey
+      x-apikeyInfoFunc: controllers.authorization_controller.check_auth_key

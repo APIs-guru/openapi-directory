@@ -1,0 +1,1150 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.vectara.io
+info:
+  contact:
+    email: support@vectara.com
+    name: Vectara Support
+    url: http://support.vectara.com/
+  description: |-
+    Vectara is a neural search platform, built for developers to get the most out of their data.
+
+    You can sign up for an account at [https://vectara.com](https://vectara.com).
+  termsOfService: https://vectara.com/legal/online-customer-agreement/
+  title: Vectara REST API
+  version: 1.0.0
+  x-dark-logo:
+    altText: Vectara
+    url: https://docs.vectara.com/img/vectara_wordmark_light.png
+  x-logo:
+    altText: Vectara
+    url: https://api.apis.guru/v2/cache/logo/https_docs.vectara.com_img_vectara_wordmark.png
+  x-origin:
+    - format: openapi
+      url: https://docs.vectara.com/vectara-oas.yaml
+      version: "3.0"
+  x-providerName: vectara.io
+security:
+  - oAuth: []
+tags:
+  - description: Administrative services, such as creating or deleting corpora
+    name: AdminService
+  - description: Indexing operations, such as creating and deleting documents
+    name: IndexService
+  - description: Query operations, such as performing a standard search
+    name: QueryService
+paths:
+  /v1/create-corpus:
+    post:
+      description: Create Corpus
+      operationId: CreateCorpus
+      parameters:
+        - $ref: "#/components/parameters/customerIdentifier"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/adminCreateCorpusRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/adminCreateCorpusResponse"
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/googlerpcStatus"
+          description: An unexpected error response.
+      tags:
+        - AdminService
+  /v1/delete-corpus:
+    post:
+      description: Delete Corpus
+      operationId: DeleteCorpus
+      parameters:
+        - $ref: "#/components/parameters/customerIdentifier"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/adminDeleteCorpusRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/adminDeleteCorpusResponse"
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/googlerpcStatus"
+          description: An unexpected error response.
+      tags:
+        - AdminService
+  /v1/delete-doc:
+    post:
+      description: Delete
+      operationId: Delete
+      parameters:
+        - $ref: "#/components/parameters/customerIdentifier"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/vectaraDeleteDocumentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/vectaraDeleteDocumentResponse"
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/googlerpcStatus"
+          description: An unexpected error response.
+      security:
+        - ApiKeyAuth: []
+        - oAuth: []
+      tags:
+        - IndexService
+  /v1/index:
+    post:
+      description: Index
+      operationId: Index
+      parameters:
+        - $ref: "#/components/parameters/customerIdentifier"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/vectaraIndexDocumentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/vectaraIndexDocumentResponse"
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/googlerpcStatus"
+          description: An unexpected error response.
+      security:
+        - ApiKeyAuth: []
+        - oAuth: []
+      tags:
+        - IndexService
+  /v1/list-corpora:
+    post:
+      description: List Corpora
+      operationId: ListCorpora
+      parameters:
+        - $ref: "#/components/parameters/customerIdentifier"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/adminListCorporaRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/adminListCorporaResponse"
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/googlerpcStatus"
+          description: An unexpected error response.
+      tags:
+        - AdminService
+  /v1/query:
+    post:
+      description: Query
+      operationId: Query
+      parameters:
+        - $ref: "#/components/parameters/customerIdentifier"
+      requestBody:
+        $ref: "#/components/requestBodies/servingBatchQueryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/servingBatchQueryResponse"
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/googlerpcStatus"
+          description: An unexpected error response.
+      security:
+        - ApiKeyAuth: []
+        - oAuth: []
+      tags:
+        - QueryService
+  /v1/reset-corpus:
+    post:
+      description: Reset Corpus
+      operationId: ResetCorpus
+      parameters:
+        - $ref: "#/components/parameters/customerIdentifier"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/adminResetCorpusRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/adminResetCorpusResponse"
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/googlerpcStatus"
+          description: An unexpected error response.
+      tags:
+        - AdminService
+  /v1/stream-query:
+    post:
+      description: Stream Query
+      operationId: StreamQuery
+      parameters:
+        - $ref: "#/components/parameters/customerIdentifier"
+      requestBody:
+        $ref: "#/components/requestBodies/servingBatchQueryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  error:
+                    $ref: "#/components/schemas/googlerpcStatus"
+                  result:
+                    $ref: "#/components/schemas/servingResponseSet"
+                title: Stream result of servingResponseSet
+                type: object
+          description: A successful response.(streaming responses)
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/googlerpcStatus"
+          description: An unexpected error response.
+      security:
+        - ApiKeyAuth: []
+        - oAuth: []
+      tags:
+        - QueryService
+  /v1/upload:
+    post:
+      description: File Upload
+      operationId: FileUpload
+      parameters:
+        - description: Customer ID
+          in: query
+          name: c
+          required: true
+          schema:
+            type: integer
+        - description: Corpus ID
+          in: query
+          name: o
+          required: true
+          schema:
+            type: integer
+        - description: If true, the server returns the extracted document that was indexed
+          in: query
+          name: d
+          required: false
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                doc_metadata:
+                  description: A JSON string of any additional metadata you want attached to the file.
+                  type: string
+                file:
+                  description: The file to be indexed into Vectara.
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  response:
+                    properties:
+                      quotaConsumed:
+                        properties:
+                          numChars:
+                            description: The number of characters Vectara indexed from the file uploaded.
+                            type: string
+                          numMetadataChars:
+                            description: The number of metadata characters Vectara indexed from the file uploaded.
+                            type: string
+                        type: object
+                      status:
+                        type: object
+                    type: object
+                type: object
+          description: A successful response
+        "400":
+          content:
+            application/json:
+              schema:
+                properties:
+                  httpCode:
+                    description: Returned HTTP code
+                    type: integer
+                type: object
+          description: An invalid request was sent.  e.g. one or more parameters was missing, or the corpus does not exist.
+        "401":
+          description: The request was not authenticated
+        "403":
+          description: The caller is not authorized to add documents to the corpus
+        "409":
+          description: |-
+            A document already exists in the corpus with the same document ID, yet the contents of the indexed document are different than the file being uploaded.
+            Since the indexer is idempotent, the same document (identified by the document ID) can be uploaded multiple times.
+            The indexer does not support updates yet, so an error is returned when a different document is uploaded for the same document ID
+            Note that when a raw file is uploaded, the file name is used as the document ID.
+        "507":
+          description: There is no more indexing quota left for the corpus or customer to index more documents.  Upgrade your account, add a credit card, or contact sales.
+      security:
+        - ApiKeyAuth: []
+        - oAuth: []
+      tags:
+        - IndexService
+components:
+  parameters:
+    customerIdentifier:
+      description: The Customer ID to use for the request.
+      in: header
+      name: customer-id
+      required: true
+      schema:
+        type: integer
+  requestBodies:
+    servingBatchQueryRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/servingBatchQueryRequest"
+      required: true
+  schemas:
+    CorpusKeySemantics:
+      default: DEFAULT
+      description: |-
+        Semantics controls the interpretation of the query string by the
+        server, and can be used to override the default semantics assigned
+        in the corpus definition.
+
+
+
+
+         - DEFAULT: Use corpus-assigned semantics.  This is the most common setting.
+         - QUERY: Use query semantics.  This is also common.
+         - RESPONSE: Use response semantics.  Usage of this is rare.
+      enum:
+        - DEFAULT
+        - QUERY
+        - RESPONSE
+      type: string
+    QueryRequestRerankingConfig:
+      description: Configuration options to apply to the reranking.
+      properties:
+        rerankerId:
+          format: int64
+          title: |-
+            Which reranking model to use if reranking.  Currently, the only ID
+            available is ID 272725717
+          type: integer
+      type: object
+    adminCorpus:
+      properties:
+        customDimensions:
+          items:
+            $ref: "#/components/schemas/adminDimension"
+          type: array
+        description:
+          description: A description for the corpus.
+          type: string
+        dtProvision:
+          description: The time at which the corpus was provisioned.
+          format: int64
+          type: string
+        enabled:
+          description: Whether the corpus is enabled for use or not.
+          type: boolean
+        encoderId:
+          description: |-
+            This is an advanced setting for changing the underlying model type.  The
+            default value is "1", which is Vectara's high-performing global model.
+            Underlying models may be swapped for some paying customers by contacting
+            our support team.
+          format: uint64
+          type: string
+        encrypted:
+          description: Encryption is on by default and cannot be turned off.
+          type: boolean
+        filterAttributes:
+          items:
+            $ref: "#/components/schemas/adminFilterAttribute"
+          type: array
+        id:
+          description: The Corpus ID.
+          format: int64
+          type: integer
+        metadataMaxBytes:
+          description: An optional maximum size of the metadata that each document can contain.
+          format: int64
+          type: integer
+        name:
+          description: The name of the corpus.
+          type: string
+        swapIenc:
+          description: |-
+            The default query encoder is designed for normal question-answering types
+            of queries when the text contains the answer.  Swapping the index encoder
+            is generally rare, but can be used to help directly match questions to
+            questions.  This can be useful if you have a FAQ dataset and you want to
+            directly match the user question to the question in the FAQ.
+          type: boolean
+        swapQenc:
+          type: boolean
+        textless:
+          description: |-
+            When a corpus is "textless", Vectara does not store the original text.
+            Instead, Vectara converts the text to vectors and only retains metadata.
+          type: boolean
+      type: object
+    adminCreateCorpusRequest:
+      properties:
+        corpus:
+          $ref: "#/components/schemas/adminCorpus"
+      type: object
+    adminCreateCorpusResponse:
+      properties:
+        corpusId:
+          description: The Corpus ID that was created.
+          format: int64
+          type: integer
+        status:
+          $ref: "#/components/schemas/comvectaraStatus"
+      type: object
+    adminDeleteCorpusRequest:
+      properties:
+        corpusId:
+          description: The Corpus ID to be deleted.
+          format: int64
+          type: integer
+        customerId:
+          description: The Customer ID that contains the corpus to be deleted.
+          format: int64
+          type: integer
+      type: object
+    adminDeleteCorpusResponse:
+      properties:
+        status:
+          $ref: "#/components/schemas/comvectaraStatus"
+      type: object
+    adminDimension:
+      description: |-
+        A custom dimension is additional numeric metadata that you want to affect
+        Vectara's scoring.  For example, these could be "number of stars" ratings,
+        or other business metrics like a product's margins that you want to use
+        to boost where a result is in the list.
+      properties:
+        description:
+          description: A description for the custom dimension.
+          type: string
+        indexingDefault:
+          description: The default value to give to documents for this custom dimension.
+          format: double
+          type: number
+        name:
+          description: |-
+            The name of the custom dimension.  The maximum length of the name is
+            8 characters.
+          type: string
+        servingDefault:
+          description: |-
+            The default weight to give this dimension when running queries. A value of
+            0.0, for example, gives it no weight at all.
+          format: double
+          type: number
+      type: object
+    adminFilterAttribute:
+      description: Defines metadata fields that can be used in predicate queries.
+      properties:
+        description:
+          description: An optional description.
+          type: string
+        indexed:
+          description: Whether the field is indexed for maximum query speed.
+          type: boolean
+        level:
+          $ref: "#/components/schemas/adminFilterAttributeLevel"
+        name:
+          description: Name of the field, as seen in metadata.
+          type: string
+        type:
+          $ref: "#/components/schemas/adminFilterAttributeType"
+      type: object
+    adminFilterAttributeLevel:
+      default: FILTER_ATTRIBUTE_LEVEL__UNDEFINED
+      enum:
+        - FILTER_ATTRIBUTE_LEVEL__UNDEFINED
+        - FILTER_ATTRIBUTE_LEVEL__DOCUMENT
+        - FILTER_ATTRIBUTE_LEVEL__DOCUMENT_PART
+      title: |-
+        - FILTER_ATTRIBUTE_LEVEL__DOCUMENT: Document-level attribute
+         - FILTER_ATTRIBUTE_LEVEL__DOCUMENT_PART: Part-level attribute
+      type: string
+    adminFilterAttributeType:
+      default: FILTER_ATTRIBUTE_TYPE__UNDEFINED
+      enum:
+        - FILTER_ATTRIBUTE_TYPE__UNDEFINED
+        - FILTER_ATTRIBUTE_TYPE__INTEGER
+        - FILTER_ATTRIBUTE_TYPE__INTEGER_LIST
+        - FILTER_ATTRIBUTE_TYPE__REAL
+        - FILTER_ATTRIBUTE_TYPE__REAL_LIST
+        - FILTER_ATTRIBUTE_TYPE__TEXT
+        - FILTER_ATTRIBUTE_TYPE__TEXT_LIST
+      type: string
+    adminListCorporaRequest:
+      properties:
+        filter:
+          description: A regex to match corpora against.
+          type: string
+        numResults:
+          description: The maximum results to return.
+          format: int64
+          type: integer
+        pageKey:
+          description: A key that is passed in to retrieve a specific page of results.
+          format: byte
+          type: string
+      type: object
+    adminListCorporaResponse:
+      properties:
+        corpus:
+          items:
+            $ref: "#/components/schemas/adminCorpus"
+          type: array
+        pageKey:
+          description: |-
+            A key that is passed into a subsequent result in order to
+            retrieve the next page of results.
+          format: byte
+          type: string
+        status:
+          $ref: "#/components/schemas/comvectaraStatus"
+      type: object
+    adminResetCorpusRequest:
+      properties:
+        corpusId:
+          description: The Corpus ID to be reset.
+          format: int64
+          type: integer
+        customerId:
+          description: The Customer ID that contains the corpus to be reset.
+          format: int64
+          type: integer
+      type: object
+    adminResetCorpusResponse:
+      properties:
+        status:
+          $ref: "#/components/schemas/comvectaraStatus"
+      type: object
+    comvectaraStatus:
+      properties:
+        code:
+          $ref: "#/components/schemas/vectaraStatusCode"
+        statusDetail:
+          type: string
+      type: object
+    googlerpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: "#/components/schemas/protobufAny"
+          type: array
+        message:
+          type: string
+      type: object
+    indexingSection:
+      description: A section within a structured document.
+      properties:
+        customDims:
+          description: |-
+            A list of custom dimension values that are included in the generated
+            representation of all subsections (i.e. sections contains by this section).
+          items:
+            $ref: "#/components/schemas/vectaraindexingCustomDimension"
+          type: array
+        id:
+          description: |-
+            Optionally, the unique ID of this section. If set, it will be returned as
+            metadata in query results.
+          format: int32
+          type: integer
+        metadataJson:
+          description: |-
+            Metadata about this section. This should be a json string. It is passed
+            through the system, without being used at indexing time. It can be
+            retrieved at query time.
+          type: string
+        section:
+          description: A list of subsections.
+          items:
+            $ref: "#/components/schemas/indexingSection"
+          type: array
+        text:
+          description: The text of the section. This should never be empty.
+          type: string
+        title:
+          description: Optionally, the title of the section. This may be empty.
+          type: string
+      type: object
+    protobufAny:
+      description: |-
+        `Any` contains an arbitrary serialized protocol buffer message along with a
+        URL that describes the type of the serialized message.
+
+        Protobuf library provides support to pack/unpack Any values in the form
+        of utility functions or additional generated methods of the Any type.
+
+        Example 1: Pack and unpack a message in C++.
+
+
+
+
+            Foo foo = ...;
+            Any any;
+            any.PackFrom(foo);
+            ...
+            if (any.UnpackTo(&foo)) {
+              ...
+            }
+
+        Example 2: Pack and unpack a message in Java.
+
+
+
+
+            Foo foo = ...;
+            Any any = Any.pack(foo);
+            ...
+            if (any.is(Foo.class)) {
+              foo = any.unpack(Foo.class);
+            }
+
+        Example 3: Pack and unpack a message in Python.
+
+
+
+
+            foo = Foo(...)
+            any = Any()
+            any.Pack(foo)
+            ...
+            if any.Is(Foo.DESCRIPTOR):
+              any.Unpack(foo)
+              ...
+
+        Example 4: Pack and unpack a message in Go
+
+
+
+
+             foo := &pb.Foo{...}
+             any, err := anypb.New(foo)
+             if err != nil {
+               ...
+             }
+             ...
+             foo := &pb.Foo{}
+             if err := any.UnmarshalTo(foo); err != nil {
+               ...
+             }
+
+        The pack methods provided by protobuf library will by default use
+        'type.googleapis.com/full.type.name' as the type URL and the unpack
+        methods only use the fully qualified type name after the last '/'
+        in the type URL, for example "foo.bar.com/x/y.z" will yield type
+        name "y.z".
+
+
+        JSON
+
+        The JSON representation of an `Any` value uses the regular
+        representation of the deserialized, embedded message, with an
+        additional field `@type` which contains the type URL. Example:
+
+
+
+
+            package google.profile;
+            message Person {
+              string first_name = 1;
+              string last_name = 2;
+            }
+
+            {
+              "@type": "type.googleapis.com/google.profile.Person",
+              "firstName": <string>,
+              "lastName": <string>
+            }
+
+        If the embedded message type is well-known and has a custom JSON
+        representation, that representation will be embedded adding a field
+        `value` which holds the custom JSON in addition to the `@type`
+        field. Example (for message [google.protobuf.Duration][]):
+
+
+
+
+            {
+              "@type": "type.googleapis.com/google.protobuf.Duration",
+              "value": "1.212s"
+            }
+      properties:
+        typeUrl:
+          description: |-
+            A URL/resource name that uniquely identifies the type of the serialized
+            protocol buffer message. This string must contain at least
+            one "/" character. The last segment of the URL's path must represent
+            the fully qualified name of the type (as in
+            `path/google.protobuf.Duration`). The name should be in a canonical form
+            (e.g., leading "." is not accepted).
+
+            In practice, teams usually precompile into the binary all types that they
+            expect it to use in the context of Any. However, for URLs which use the
+            scheme `http`, `https`, or no scheme, one can optionally set up a type
+            server that maps type URLs to message definitions as follows:
+
+            * If no scheme is provided, `https` is assumed.
+            * An HTTP GET on the URL must yield a [google.protobuf.Type][]
+
+
+
+              value in binary format, or produce an error.
+            * Applications are allowed to cache lookup results based on the
+
+
+
+              URL, or have them precompiled into a binary to avoid any
+              lookup. Therefore, binary compatibility needs to be preserved
+              on changes to types. (Use versioned type names to manage
+              breaking changes.)
+
+            Note: this functionality is not currently available in the official
+            protobuf release, and it is not used for type URLs beginning with
+            type.googleapis.com.
+
+            Schemes other than `http`, `https` (or the empty scheme) might be
+            used with implementation specific semantics.
+          type: string
+        value:
+          description: Must be a valid serialized protocol buffer of the above specified type.
+          format: byte
+          type: string
+      type: object
+    servingAttribute:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    servingBatchQueryRequest:
+      properties:
+        query:
+          items:
+            $ref: "#/components/schemas/servingQueryRequest"
+          type: array
+      type: object
+    servingBatchQueryResponse:
+      properties:
+        metrics:
+          $ref: "#/components/schemas/servingPerformanceMetrics"
+        responseSet:
+          items:
+            $ref: "#/components/schemas/servingResponseSet"
+          type: array
+        status:
+          items:
+            $ref: "#/components/schemas/comvectaraStatus"
+          type: array
+      type: object
+    servingCorpusKey:
+      properties:
+        corpusId:
+          description: The Corpus ID.
+          format: int64
+          type: integer
+        customerId:
+          description: The Customer ID.
+          format: int64
+          type: integer
+        dim:
+          description: Weights on custom dimensions for the corpus.
+          items:
+            $ref: "#/components/schemas/vectaraservingCustomDimension"
+          type: array
+        metadataFilter:
+          type: string
+        semantics:
+          $ref: "#/components/schemas/CorpusKeySemantics"
+      type: object
+    servingPerformanceMetrics:
+      description: Basic performance metrics that can be attached to a server response.
+      properties:
+        queryEncodeMs:
+          description: How long it took to encode the query.
+          format: int64
+          type: integer
+        rerankMs:
+          description: How long it took to rerank the results.
+          format: int64
+          type: integer
+        retrievalMs:
+          description: How long it took to retrieve relevant results.
+          format: int64
+          type: integer
+        userdataRetrievalMs:
+          description: How long it took to retrieve user data.
+          format: int64
+          type: integer
+      type: object
+    servingQueryRequest:
+      properties:
+        corpusKey:
+          items:
+            $ref: "#/components/schemas/servingCorpusKey"
+          type: array
+        numResults:
+          description: The number of results to return.
+          format: int64
+          type: integer
+        query:
+          description: The query text to use from the end user.
+          type: string
+        rerankingConfig:
+          $ref: "#/components/schemas/QueryRequestRerankingConfig"
+        start:
+          format: int64
+          title: The start position in the result set
+          type: integer
+      type: object
+    servingResponse:
+      properties:
+        corpusKey:
+          $ref: "#/components/schemas/servingCorpusKey"
+        documentIndex:
+          description: Use this ID to find the document in the ResponseSet.
+          format: int64
+          type: integer
+        metadata:
+          items:
+            $ref: "#/components/schemas/servingAttribute"
+          type: array
+        score:
+          description: The score used for ranking results.  The higher the score, the better the match.
+          format: float
+          type: number
+        text:
+          type: string
+      type: object
+    servingResponseSet:
+      properties:
+        document:
+          items:
+            $ref: "#/components/schemas/servingResponseSetDocument"
+          type: array
+        response:
+          items:
+            $ref: "#/components/schemas/servingResponse"
+          type: array
+        status:
+          description: Potentially multiple warnings.
+          items:
+            $ref: "#/components/schemas/comvectaraStatus"
+          type: array
+      type: object
+    servingResponseSetDocument:
+      properties:
+        id:
+          type: string
+        metadata:
+          items:
+            $ref: "#/components/schemas/servingAttribute"
+          type: array
+      type: object
+    vectaraDeleteDocumentRequest:
+      description: Request to delete a document from an index.
+      properties:
+        corpusId:
+          description: The Corpus ID that contains the document.
+          format: int64
+          type: string
+        customerId:
+          description: The Customer ID to issue the request for.
+          format: int64
+          type: string
+        documentId:
+          description: The Document ID to be deleted.
+          type: string
+      type: object
+    vectaraDeleteDocumentResponse:
+      type: object
+    vectaraIndexDocumentRequest:
+      properties:
+        corpusId:
+          format: int64
+          type: string
+        customerId:
+          format: int64
+          type: string
+        document:
+          $ref: "#/components/schemas/vectaraindexingDocument"
+      type: object
+    vectaraIndexDocumentResponse:
+      properties:
+        quotaConsumed:
+          $ref: "#/components/schemas/vectaraStorageQuota"
+        status:
+          $ref: "#/components/schemas/comvectaraStatus"
+      type: object
+    vectaraStatusCode:
+      default: OK
+      enum:
+        - OK
+        - FAILURE
+        - UNKNOWN
+        - INVALID_ARGUMENT
+        - DEADLINE_EXCEEDED
+        - ALREADY_EXISTS
+        - PERMISSION_DENIED
+        - RESOURCE_EXHAUSTED
+        - FAILED_PRECONDITION
+        - ABORTED
+        - OUT_OF_RANGE
+        - UNIMPLEMENTED
+        - INTERNAL
+        - UNAVAILABLE
+        - DATA_LOSS
+        - UNAUTHENTICATED
+        - BAD_REQUEST
+        - UNAUTHORIZED
+        - FORBIDDEN
+        - NOT_FOUND
+        - METHOD_NOT_ALLOWED
+        - CONFLICT
+        - UNSUPPORTED_MEDIA_TYPE
+        - TOO_MANY_REQUESTS
+        - INTERNAL_SERVER_ERROR
+        - NOT_IMPLEMENTED
+        - SERVICE_UNAVAILABLE
+        - INSUFFICIENT_STORAGE
+        - UNPARSEABLE_RESPONSE
+        - DISABLED_CUSTOMER
+        - INVALID_CUSTOMER_ID
+        - DISABLED_CORPUS
+        - INVALID_CORPUS_ID
+        - DISABLED_API_KEY
+        - EXPIRED_API_KEY
+        - INVALID_API_KEY
+        - CMK_INACCESSIBLE
+        - QRY__DISABLED_CORPUS
+        - QRY__DOCUMENT_DB_FAILURE
+        - QRY__ENCODER_FAILURE
+        - QRY__INTERRUPTED
+        - QRY__INVALID_CORPUS
+        - QRY__INVALID_START
+        - QRY__INVALID_NUM_RESULTS
+        - QRY__INVALID_CONTEXT
+        - QRY__MISSING_QUERY
+        - QRY__MISSING_CORPUS
+        - QRY__TIMEOUT
+        - QRY__TOO_MANY_CORPORA
+        - QRY__TOO_MANY_QUERIES
+        - QRY__VECTOR_INDEX_FAILURE
+        - QRY__INVALID_DIMENSION
+        - QRY__INVALID_CLIENTKEY
+        - QRY__DECRYPTION_FAILURE
+        - QRY__INVALID_RERANKER
+        - QRY__PARTIAL_RERANK
+        - QRY__RERANK_FAILURE
+        - QRY__TOO_MANY_RESULT_ROWS
+        - QRY__PARTIAL_RETRIEVAL
+        - CX_SPECS__INVALID_JSON
+        - CX_SPECS__UNREGISTERED_TYPE
+        - CX_SPECS__MISSING_SPEC
+        - CX_SPECS__MISSING_TYPE
+        - CX_SPECS__UNPARSEABLE_SPEC
+        - ADM__INVALID_CUSTOMER_ID
+        - ADM__INVALID_CORPUS_ID
+        - ADM__INVALID_ENCODER_ID
+        - ADM__INVALID_ROLE_ID
+        - ADM__ROLE_ALREADY_EXISTS
+        - ADM__ONLY_ONE_OWNER_SUPPORTED
+        - ADM__INVALID_PERMISSION
+        - ADM__ROLECREATION_FAILURE
+        - ADM__USER_EMAIL_NOT_AVAIALBLE
+        - ADM__USERNAME_NOT_AVAILABLE
+        - ADM__SIGNUP_MISSING_NAME
+        - ADM__SIGNUP_MISSING_ORG
+        - ADM__SIGNUP_MISSING_EMAIL
+        - ADM__SIGNUP_MISSING_PAYMENT
+        - ADM__SIGNUP_MISSING_PLAN
+        - ADM__SIGNUP_MISSING_PASSWORD
+        - ADM__SIGNUP_INVALID_NAME
+        - ADM__SIGNUP_INVALID_ORG
+        - ADM__SIGNUP_INVALID_EMAIL
+        - ADM__SIGNUP_INVALID_PAYMENT
+        - ADM__SIGNUP_INVALID_PLAN
+        - ADM__SIGNUP_INVALID_PASSWORD
+        - ADM__SIGNUP_INVALID_ACCOUNT_ALIAS
+        - ADM__SIGNUP_INVALID_EMAIL_VALIDATION_CODE
+        - ADM__SIGNUP_MISSING_COUNTRY_CODE
+        - ADM__SIGNUP_ROOT_EMAIL_NOT_AVAILABLE
+        - ADM__CUST_MARK_DELETE_FAILED
+        - ADM__CUST_FAISS_DEALLOC_FAILED
+        - ADM__CORPUS_LIMIT_REACHED
+        - ADM__STRIPE_CARD_DECLINED
+        - ADM__STRIPE_PROCESSING_ERROR
+        - ADM__EMAIL_VALIDATION_REQUEST_NOT_FOUND
+        - ADM__EMAIL_NOT_VALIDATED
+        - ADM__CHANGE_PLAN__NO_CURRENT_PLAN
+        - ADM__CHANGE_PLAN__REQUIRES_MANUAL_CHANGE
+        - ADM__CHANGE_PLAN__INVALID_PLAN_ID
+        - ADM__CHANGE_PLAN__NO_PAYMENT_SOURCE
+        - ADM__CHANGE_PLAN__INVALID_EFFECTIVE_DATE
+        - ADM__CHANGE_PLAN__CONFLICTING_CHANGE
+        - SCM__MISCONFIGURED_CONNECTION
+        - STATS_DB_READ_FAILURE
+        - VDB__TEXT_READ_FAILURE
+        - REBUILD__LOW_RECALL
+        - REBUILD__INDEX_UPLOAD_FAILURE
+        - REBUILD__UPDATE_JOURNAL_FAILURE
+        - REBUILD__UPDATE_FAISSPARAMS_FAILURE
+        - REBUILD__NO_DATA
+        - REBUILD__EVALUATION
+        - IDX__TRANSIENT_PARTIAL_DELETION_FAILURE
+        - IDX__PERMANENT_PARTIAL_DELETION_FAILURE
+      type: string
+    vectaraStorageQuota:
+      properties:
+        numChars:
+          description: The number of chars from the document that consumed the storage quota.
+          format: int64
+          type: string
+        numMetadataChars:
+          description: |-
+            The number of chars in the metadata of the document that consumed the
+            storage quota.
+          format: int64
+          type: string
+      title: |-
+        Encapsulates storage quota consumed by indexed documents.
+        NextId: 3
+      type: object
+    vectaraindexingCustomDimension:
+      description: The value of a custom dimension. A valid list of custom dimensions is defined ahead of time for a corpus.
+      properties:
+        name:
+          description: The name of the dimension.
+          type: string
+        value:
+          description: The value of the dimension.
+          format: double
+          type: number
+      type: object
+    vectaraindexingDocument:
+      description: A document to index.
+      properties:
+        customDims:
+          description: |-
+            A list of custom dimension values that are included in the generated
+            representation of all sections.
+          items:
+            $ref: "#/components/schemas/vectaraindexingCustomDimension"
+          type: array
+        description:
+          description: An optional description for the document.
+          type: string
+        documentId:
+          description: Client assigned document ID to this document.
+          type: string
+        metadataJson:
+          description: |-
+            Metadata about the document. This should be a json string, and it can be
+            retrieved at query time.
+          type: string
+        section:
+          description: |-
+            The actual content of the document, structured as a repeating list
+            of sections.
+          items:
+            $ref: "#/components/schemas/indexingSection"
+          type: array
+        title:
+          description: The title of the document.
+          type: string
+      type: object
+    vectaraservingCustomDimension:
+      description: Defined the weight of a custom dimension at query time.
+      properties:
+        name:
+          type: string
+        weight:
+          format: double
+          type: number
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    oAuth:
+      description: OAuth2 access to Vectara
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://vectara-prod-YOUR_VECTARA_CUSTOMER_ID.auth.us-west-2.amazoncognito.com/oauth2/token
+      type: oauth2

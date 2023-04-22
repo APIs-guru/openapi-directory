@@ -1,0 +1,400 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "contact": {
+      "url": "https://FaceCheck.ID"
+    },
+    "description": "Let your users search the Internet by face! Integrate FaceCheck facial search seamlessly with your app, website or software platform. \r\nFaceCheck's REST API is hassle-free and easy to use. For code examples visit <a href='https://facecheck.id/Face-Search/API'>https://facecheck.id/Face-Search/API</a>",
+    "title": "Facial Recognition Reverse Image Face Search API",
+    "version": "v1.02",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_facecheck.id_img_favicon.svg"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://facecheck.id/Swagger/v1/swagger.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "facecheck.id"
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "paths": {
+    "/api/delete_pic": {
+      "post": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id_search",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "id_pic",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrowserJsonResponse"
+                }
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "summary": "Remove an image from a search request",
+        "tags": [
+          "FaceCheckAPI"
+        ]
+      }
+    },
+    "/api/info": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InfoResponse"
+                }
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "summary": "Returns remaining search credits, search engine online status, and number of indexed faces",
+        "tags": [
+          "FaceCheckAPI"
+        ]
+      }
+    },
+    "/api/search": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchData"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrowserJsonResponse"
+                }
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "summary": "Submit a search request to the search engine and get back search results that contain URLs and all images in base64/webp format",
+        "tags": [
+          "FaceCheckAPI"
+        ]
+      }
+    },
+    "/api/upload_pic": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {
+                "id_search": {
+                  "style": "form"
+                },
+                "images": {
+                  "style": "form"
+                }
+              },
+              "schema": {
+                "properties": {
+                  "id_search": {
+                    "type": "string"
+                  },
+                  "images": {
+                    "items": {
+                      "format": "binary",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrowserJsonResponse"
+                }
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "summary": "Upload 1 to 3 images as multipart/form-data, and get back a search request that contains id_search and 1 to 3 preview thumbnails",
+        "tags": [
+          "FaceCheckAPI"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BrowserJsonResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "error": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id_search": {
+            "nullable": true,
+            "type": "string"
+          },
+          "input": {
+            "items": {
+              "$ref": "#/components/schemas/InputImage"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "message": {
+            "nullable": true,
+            "type": "string"
+          },
+          "output": {
+            "$ref": "#/components/schemas/Search_Results"
+          },
+          "progress": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "InfoResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "faces": {
+            "example": 212417831,
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "has_credits_to_search": {
+            "example": true,
+            "type": "boolean"
+          },
+          "is_online": {
+            "example": true,
+            "type": "boolean"
+          },
+          "remaining_credits": {
+            "example": 12987,
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "InputImage": {
+        "additionalProperties": false,
+        "properties": {
+          "base64": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id_pic": {
+            "nullable": true,
+            "type": "string"
+          },
+          "svg_anim": {
+            "nullable": true,
+            "type": "string"
+          },
+          "url_source": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SearchData": {
+        "additionalProperties": false,
+        "properties": {
+          "demo": {
+            "description": "true = searches only the first 100,000 faces, good for testing/debugging",
+            "example": false,
+            "nullable": true,
+            "type": "boolean"
+          },
+          "id_captcha": {
+            "description": "captcha is not used",
+            "example": null,
+            "nullable": true,
+            "type": "string"
+          },
+          "id_search": {
+            "description": "",
+            "example": "3vdi8t-s_8DAAA7D5E784616",
+            "nullable": true,
+            "type": "string"
+          },
+          "status_only": {
+            "description": "true = don't submit a new search",
+            "example": false,
+            "nullable": true,
+            "type": "boolean"
+          },
+          "with_progress": {
+            "description": "true = return imediately with a progress. False waits until search is finished.",
+            "nullable": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "SearchItem": {
+        "additionalProperties": false,
+        "properties": {
+          "base64": {
+            "nullable": true,
+            "type": "string"
+          },
+          "group": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "guid": {
+            "nullable": true,
+            "type": "string"
+          },
+          "index": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "indexDB": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "score": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "url": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Search_Results": {
+        "additionalProperties": false,
+        "properties": {
+          "demo": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "face_per_sec": {
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "type": "integer"
+          },
+          "freeRam": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "images_in_bundle": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SearchItem"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "max_score": {
+            "format": "int32",
+            "readOnly": true,
+            "type": "integer"
+          },
+          "performance": {
+            "nullable": true,
+            "readOnly": true,
+            "type": "string"
+          },
+          "searchedFaces": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "tookSeconds": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "tookSecondsDownload": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "tookSecondsQueue": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "description": "Put **_ONLY_** your JWT Bearer token on textbox below!",
+        "in": "header",
+        "name": "Authorization",
+        "type": "apiKey"
+      }
+    }
+  }
+}

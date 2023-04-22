@@ -1,0 +1,108 @@
+openapi: 3.0.1
+servers:
+  - url: https://server.shop.app
+info:
+  description: Search for millions of products from the world's greatest brands.
+  title: Shop
+  version: v1
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_cdn.shopify.com_shop-assets_static_uploads_shop-logo-white-bg-purple.png
+  x-origin:
+    - format: openapi
+      url: https://server.shop.app/openai/v1/api.json
+      version: "3.0"
+  x-providerName: shop.app
+paths:
+  /openai/details:
+    get:
+      operationId: details
+      parameters:
+        - description: Comma separated list of product ids
+          in: query
+          name: ids
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/searchResponse"
+          description: OK
+        "503":
+          description: Service Unavailable
+      summary: Return more details about a list of products.
+  /openai/search:
+    get:
+      operationId: search
+      parameters:
+        - description: Query string to search for items.
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: The minimum price to filter by.
+          in: query
+          name: price_min
+          required: false
+          schema:
+            type: number
+        - description: The maximum price to filter by.
+          in: query
+          name: price_max
+          required: false
+          schema:
+            type: number
+        - description: A product id that you want to find similar products for. (Only include one)
+          in: query
+          name: similar_to_id
+          required: false
+          schema:
+            type: string
+        - description: How many results to return. Defaults to 5. It can be a number between 1 and 10.
+          in: query
+          name: num_results
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/searchResponse"
+          description: OK
+        "503":
+          description: Service Unavailable
+      summary: Search for products
+components:
+  schemas:
+    searchResponse:
+      properties:
+        results:
+          items:
+            description: The list of products matching the search
+            properties:
+              currency_code:
+                description: The currency that the price is in
+                type: string
+              description:
+                description: The description of the product
+                type: string
+              price:
+                description: The price of the product
+                format: string
+                type: number
+              title:
+                description: The title of the product
+                type: string
+              url:
+                description: The url of the product page for this product
+                type: string
+            type: object
+          type: array
+      type: object

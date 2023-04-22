@@ -1,0 +1,72 @@
+{
+  "apis": {
+    "opto22.com:groov": {
+      "added": "2018-11-19T23:56:11.000Z",
+      "info": {
+        "contact": {
+          "email": "developer@opto22.com",
+          "name": "Opto 22",
+          "url": "http://developer.opto22.com",
+          "x-twitter": "opto22"
+        },
+        "description": "#### Revised: 2019-11-21\n\n### Overview\ngroov View Public API revision 1.\n",
+        "title": "groov View Public API",
+        "version": "R4.2a",
+        "x-apisguru-categories": [
+          "iot"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_opto22_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "http://developer.opto22.com/static/generated/groov-rest-api/swagger.yaml",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "opto22.com",
+        "x-serviceName": "groov"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/opto22.com/groov/R4.2a/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/opto22.com/groov/R4.2a/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/opto22.com:groov/R4.2a.json"
+    },
+    "opto22.com:pac": {
+      "added": "2019-02-19T10:02:11.000Z",
+      "info": {
+        "contact": {
+          "email": "developer@opto22.com",
+          "name": "Opto 22",
+          "url": "http://developer.opto22.com",
+          "x-twitter": "opto22"
+        },
+        "description": "#### Revised: 6/15/2018\n\n### Overview\nThis API provides secure access to a SNAP-PAC-R or -S series controller's variable and I/O tags. Confidentiality for API transactions is provided by HTTPS. Authentication uses HTTP Basic Authentication with an API key. An API key ID is submitted in the Basic Authentication userid field and API key value in the password field.\n\n**For more information visit:** [developer.opto22.com](http://developer.opto22.com)\n\n### Examples\n\n**Read an array** of all the integer32 variables defined in the PAC's strategy.\nFor example, on your SNAP-PAC-R or -S series controller at IP address 1.2.3.4, you would use the URL: \n\n```\nhttps://1.2.3.4/api/v1/device/strategy/vars/int32s\n```\nand provide appropriate authentication. The GET response will be a JSON array of name-value \npairs such as: \n```json\n[ { \"nMyVeryFavoriteNumber\": 22 },\n  { \"nWidgetsProducedToday\": 22222 },\n  { \"DELAY_LOOP_TIME_IN_MSECS\"  : 200 } ]\n```\n**Read the engineering units** (EU) of an analog input point configured in the PAC's strategy.\nFor an analog input (I/O point) named aiTemperatureInDegreesF, use \n\n`https://1.2.3.4/api/v1/device/strategy/ios/analogInputs/aiTemperatureInDegreesF/eu`\n\nThe GET response will be a single JSON name-value pair such as:\n```json\n{ \"value\": 72.22 }\n```    \n\n### Note on packet sizes:\nWhen doing POSTs or GETs, the JSON payload in the body should not exceed 3k (3072 bytes).\n",
+        "title": "PAC Control REST API",
+        "version": "R1.0a",
+        "x-apisguru-categories": [
+          "iot"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_opto22_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "http://developer.opto22.com/static/generated/pac-rest-api/pac-rest-api.snap-pac.yaml",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "opto22.com",
+        "x-serviceName": "pac"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/opto22.com/pac/R1.0a/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/opto22.com/pac/R1.0a/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/opto22.com:pac/R1.0a.json"
+    }
+  }
+}

@@ -1,0 +1,721 @@
+{
+  "openapi": "3.0.3",
+  "servers": [
+    {
+      "url": "https://api.mineskin.org"
+    }
+  ],
+  "info": {
+    "contact": {
+      "email": "info@mineskin.org",
+      "name": "inventivetalent",
+      "url": "https://discord.gg/nzAdvPc"
+    },
+    "description": "Client implementations: \nJava: https://github.com/InventivetalentDev/MineskinClient\nNodeJS: https://github.com/InventivetalentDev/mineskin-client\n\nExamples: https://github.com/MineSkin/examples\n",
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/MineSkin/api.mineskin.org/blob/master/LICENSE"
+    },
+    "title": "MineSkin API",
+    "version": "1.0.0",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_mineskin.org_img_mineskin-x256.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://api.mineskin.org/openapi.yml",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "mineskin.org"
+  },
+  "tags": [
+    {
+      "name": "generate"
+    },
+    {
+      "name": "get"
+    },
+    {
+      "name": "util"
+    }
+  ],
+  "paths": {
+    "/generate/upload": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/GenerateOptions"
+                  },
+                  {
+                    "properties": {
+                      "file": {
+                        "format": "binary",
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GeneratedSkin"
+          },
+          "400": {
+            "$ref": "#/components/responses/ErrorResponse"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/ErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "apiKey": [],
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "generate"
+        ]
+      }
+    },
+    "/generate/url": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/GenerateOptions"
+                  },
+                  {
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GeneratedSkin"
+          },
+          "400": {
+            "$ref": "#/components/responses/ErrorResponse"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/ErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "apiKey": [],
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "generate"
+        ]
+      }
+    },
+    "/generate/user": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/GenerateOptions"
+                  },
+                  {
+                    "properties": {
+                      "uuid": {
+                        "maxLength": 36,
+                        "minLength": 32,
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GeneratedSkin"
+          },
+          "400": {
+            "$ref": "#/components/responses/ErrorResponse"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/ErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "apiKey": [],
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "generate"
+        ]
+      }
+    },
+    "/get/delay": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DelayInfo"
+          }
+        },
+        "security": [
+          {
+            "apiKey": [],
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "get"
+        ]
+      }
+    },
+    "/get/id/{id}": {
+      "get": {
+        "description": "Deprecated. Use /get/uuid instead.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "integer",
+              "type": "number"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkinInfo"
+                }
+              }
+            },
+            "description": "Skin Info"
+          }
+        },
+        "tags": [
+          "get"
+        ]
+      }
+    },
+    "/get/list/{page}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "For reference pagination, the uuid of the last skin in the previous page. For numeric pagination (deprecated), the page number or 'start'.",
+            "in": "path",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "integer",
+              "type": "number"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "filter": {
+                      "type": "string"
+                    },
+                    "page": {
+                      "properties": {
+                        "amount": {
+                          "type": "integer"
+                        },
+                        "index": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "skins": {
+                      "items": {
+                        "$ref": "#/components/schemas/PartialSkinInfo"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "skins",
+                    "page"
+                  ]
+                }
+              }
+            },
+            "description": "Skin Info List"
+          }
+        },
+        "tags": [
+          "get"
+        ]
+      }
+    },
+    "/get/uuid/{uuid}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uuid",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkinInfo"
+                }
+              }
+            },
+            "description": "Skin Info"
+          }
+        },
+        "tags": [
+          "get"
+        ]
+      }
+    },
+    "/validate/name/{name}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserValidation"
+                }
+              }
+            },
+            "description": "Validation info about the requested user"
+          }
+        },
+        "tags": [
+          "util"
+        ]
+      }
+    },
+    "/validate/uuid/{uuid}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uuid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/userAgent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserValidation"
+                }
+              }
+            },
+            "description": "Validation info about the requested user"
+          }
+        },
+        "tags": [
+          "util"
+        ]
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "userAgent": {
+        "description": "Custom User-Agent for your application, see [user-agent.dev](https://user-agent.dev/) for implementation examples",
+        "example": "ExampleApp/v1.0",
+        "in": "header",
+        "name": "User-Agent",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "DelayInfo": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "delay": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "integer"
+                },
+                "nextRelative": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "description": "Delay info for the requesting client"
+      },
+      "ErrorResponse": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "error": {
+                  "description": "Error message",
+                  "type": "string"
+                },
+                "errorCode": {
+                  "description": "Consistent error code, see [AuthError](https://github.com/MineSkin/api.mineskin.org/blob/793a926cbe4b90887ed8164c9eccfcb542fdeadb/src/generator/Authentication.ts#L580) & [GenError](https://github.com/MineSkin/api.mineskin.org/blob/47a5f51dc664e0f730b0073f70b2fc295e14ca3b/src/generator/Generator.ts#L1093)",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "error"
+              ]
+            }
+          }
+        },
+        "description": "Response if an error occured"
+      },
+      "GeneratedSkin": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/SkinInfo"
+                },
+                {
+                  "properties": {
+                    "duplicate": {
+                      "type": "boolean"
+                    },
+                    "nextRequest": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "description": "Successfully generated skin info"
+      },
+      "RateLimitResponse": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "delay": {
+                  "description": "The API's current delay in seconds",
+                  "type": "integer"
+                },
+                "error": {
+                  "description": "Error message",
+                  "type": "string"
+                },
+                "nextRequest": {
+                  "description": "Unix timestamp when the next request is allowed",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "error"
+              ]
+            }
+          }
+        },
+        "description": "Response if the client sent a request too soon"
+      }
+    },
+    "schemas": {
+      "GenerateOptions": {
+        "properties": {
+          "model": {
+            "default": "steve",
+            "deprecated": true,
+            "enum": [
+              "steve",
+              "slim"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "variant": {
+            "description": "Skin variant - automatically determined based on the image if not specified",
+            "enum": [
+              "classic",
+              "slim"
+            ],
+            "type": "string"
+          },
+          "visibility": {
+            "default": 0,
+            "description": "Visibility of the generated skin. 0 for public, 1 for private",
+            "enum": [
+              0,
+              1
+            ],
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "PartialSkinInfo": {
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "time": {
+            "type": "integer"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "url",
+          "time"
+        ],
+        "type": "object"
+      },
+      "SkinData": {
+        "properties": {
+          "texture": {
+            "$ref": "#/components/schemas/TextureInfo"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SkinInfo": {
+        "properties": {
+          "account": {
+            "type": "integer"
+          },
+          "accountId": {
+            "deprecated": true,
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SkinData"
+          },
+          "duration": {
+            "type": "number"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "idStr": {
+            "type": "string"
+          },
+          "model": {
+            "deprecated": true,
+            "enum": [
+              "slim",
+              "steve",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "private": {
+            "type": "boolean"
+          },
+          "server": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "variant": {
+            "enum": [
+              "classic",
+              "slim"
+            ],
+            "type": "string"
+          },
+          "views": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "model",
+          "data"
+        ],
+        "type": "object"
+      },
+      "Stats": {
+        "properties": {
+          "delay": {
+            "type": "number"
+          },
+          "server": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TextureInfo": {
+        "properties": {
+          "signature": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UserValidation": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "valid": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "valid"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "apiKey": {
+        "description": "Get your key from https://mineskin.org/apikey",
+        "in": "query",
+        "name": "key",
+        "type": "apiKey"
+      },
+      "bearerAuth": {
+        "description": "Get your key from https://mineskin.org/apikey",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  }
+}

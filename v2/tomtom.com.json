@@ -1,0 +1,113 @@
+{
+  "apis": {
+    "tomtom.com:maps": {
+      "added": "2018-11-20T11:01:20.000Z",
+      "info": {
+        "contact": {
+          "x-twitter": "TomTom"
+        },
+        "description": "The Maps API web services suite offers the following APIs:\n  - Raster\n  The Maps Raster API renders map data that is divided into gridded sections called tiles. Tiles are square images (png or jpg format) in various sizes which are available at 19 different zoom levels, ranging from 0 to 20. For zoom level 0, the entire earth is displayed on one single tile, while at zoom level 20, the world is divided into 2<sup>40</sup> tiles.\n  - Vector\n  Similar to Maps Raster API, the Maps Vector API serves data on different zoom level ranging from 0 to 22. For zoom level 0, the entire earth is displayed on one single tile, while at zoom level 22, the world is divided into 2<sup>44</sup> tiles.\n  The Maps Vector Service delivers geographic map data packaged in a vector representation of squared sections called vector tiles. Each tile includes pre-defined collections of map features (points, lines, road shapes, water polygons, building footprints, ect.) delivered in one of the specified vector formats. Format of the tile is formally described using protobuf schema.",
+        "title": "Maps",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "location"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_TomTom_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/lucybot/api-spec-converter",
+              "version": "2.7.31"
+            },
+            "format": "openapi",
+            "url": "https://developer.tomtom.com/system/files/swagger_models/maps_api_0.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "tomtom.com",
+        "x-serviceName": "maps"
+      },
+      "updated": "2019-02-25T11:01:54.000Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/tomtom.com/maps/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/tomtom.com/maps/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/tomtom.com:maps/1.0.0.json"
+    },
+    "tomtom.com:routing": {
+      "added": "2018-11-20T11:01:20.000Z",
+      "info": {
+        "contact": {
+          "name": "Contact Us",
+          "url": "https://developer.tomtom.com/contact-us",
+          "x-twitter": "TomTom"
+        },
+        "description": "Routing consists of the following service:\n<b>Calculate Route</b>\nCalculates a route between an origin and a destination, passing through waypoints (if specified). Additional routing parameters like traffic, avoidance conditions, departure/arrival time etc. can be taken into account.\n<b>Calculate Reachable Range</b>\nCalculates a set of locations that can be reached from the origin point, subject to the available fuel or energy budget that is specified in the request.",
+        "title": "Routing",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "location"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_TomTom_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/lucybot/api-spec-converter",
+              "version": "2.7.31"
+            },
+            "format": "openapi",
+            "url": "https://developer.tomtom.com/system/files/swagger_models/routing_api.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "tomtom.com",
+        "x-serviceName": "routing"
+      },
+      "updated": "2019-02-25T11:01:54.000Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/tomtom.com/routing/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/tomtom.com/routing/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/tomtom.com:routing/1.0.0.json"
+    },
+    "tomtom.com:search": {
+      "added": "2018-11-20T11:01:20.000Z",
+      "info": {
+        "contact": {
+          "name": "Contact Us",
+          "url": "https://developer.tomtom.com/contact-us",
+          "x-twitter": "TomTom"
+        },
+        "description": "Search API is a RESTful API that allows developers to run a single line fuzzy search for addresses and POIs. Search API returns the latitude/longitude of a specific address, cross street, geographic feature, or point of interest (POI).",
+        "title": "Search",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "location"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_TomTom_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "converter": {
+              "url": "https://github.com/lucybot/api-spec-converter",
+              "version": "2.7.31"
+            },
+            "format": "openapi",
+            "url": "https://developer.tomtom.com/system/files/swagger_models/search_api.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "tomtom.com",
+        "x-serviceName": "search"
+      },
+      "updated": "2020-03-22T17:50:07.000Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/tomtom.com/search/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/tomtom.com/search/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/tomtom.com:search/1.0.0.json"
+    }
+  }
+}

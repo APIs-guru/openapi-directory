@@ -1,0 +1,388 @@
+openapi: 3.0.1
+servers:
+  - url: https://oauth.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Oauth
+  version: 1.42.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_static1.twilio.com_marketing_bundles_marketing_img_logos_wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_oauth_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_oauth_v1
+paths:
+  /v1/.well-known/openid-configuration:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch configuration details about the OpenID Connect Authorization Server
+      operationId: FetchOpenidDiscovery
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oauth.v1.openid_discovery"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://oauth.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - issuer
+        - authorization_endpoint
+        - device_authorization_endpoint
+        - token_endpoint
+        - userinfo_endpoint
+        - revocation_endpoint
+        - jwk_uri
+        - response_type_supported
+        - subject_type_supported
+        - id_token_signing_alg_values_supported
+        - scopes_supported
+        - claims_supported
+      mountName: openid_discovery
+      pathType: instance
+  /v1/certs:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetches public JWKs
+      operationId: FetchCerts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oauth.v1.certs"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://oauth.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - keys
+      mountName: oauth
+      pathType: instance
+  /v1/device/code:
+    description: "TODO: Resource-level docs"
+    post:
+      description: Issues a new Access token (optionally identity_token & refresh_token) in exchange of Oauth grant
+      operationId: CreateDeviceCode
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Audiences:
+                  description: An array of intended audiences for token requests
+                  items:
+                    type: string
+                  type: array
+                ClientSid:
+                  description: A 34 character string that uniquely identifies this OAuth App.
+                  type: string
+                Scopes:
+                  description: An Array of scopes for authorization request
+                  items:
+                    type: string
+                  type: array
+              required:
+                - ClientSid
+                - Scopes
+              title: CreateDeviceCodeRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oauth.v1.device_code"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://oauth.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - device_code
+        - user_code
+        - verification_uri
+        - verification_uri_complete
+        - expires_in
+        - interval
+      mountName: device_code
+      pathType: list
+  /v1/token:
+    description: "TODO: Resource-level docs"
+    post:
+      description: Issues a new Access token (optionally identity_token & refresh_token) in exchange of Oauth grant
+      operationId: CreateToken
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ClientSecret:
+                  description: The credential for confidential OAuth App.
+                  type: string
+                ClientSid:
+                  description: A 34 character string that uniquely identifies this OAuth App.
+                  type: string
+                Code:
+                  description: JWT token related to the authorization code grant type.
+                  type: string
+                CodeVerifier:
+                  description: A code which is generation cryptographically.
+                  type: string
+                DeviceCode:
+                  description: JWT token related to the device code grant type.
+                  type: string
+                DeviceId:
+                  description: The Id of the device associated with the token (refresh token).
+                  type: string
+                GrantType:
+                  description: Grant type is a credential representing resource owner's authorization which can be used by client to obtain access token.
+                  type: string
+                RefreshToken:
+                  description: JWT token related to the refresh token grant type.
+                  type: string
+              required:
+                - GrantType
+                - ClientSid
+              title: CreateTokenRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oauth.v1.token"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://oauth.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - access_token
+        - access_token_expires_at
+      pathType: list
+  /v1/userinfo:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieves the consented UserInfo and other claims about the logged-in subject (end-user).
+      operationId: FetchUserInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oauth.v1.user_info"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://oauth.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - user_sid
+      mountName: user_info
+      pathType: instance
+components:
+  schemas:
+    oauth.v1.certs:
+      properties:
+        keys:
+          description: A collection of certificates where are signed Twilio-issued tokens.
+          nullable: true
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    oauth.v1.device_code:
+      properties:
+        device_code:
+          description: The device verification code.
+          nullable: true
+          type: string
+        expires_in:
+          description: The expiration time of the device_code and user_code in seconds.
+          format: int64
+          nullable: true
+          type: integer
+        interval:
+          description: The minimum amount of time in seconds that the client should wait between polling requests to the token endpoint.
+          nullable: true
+          type: integer
+        user_code:
+          description: The verification code which end user uses to verify authorization request.
+          nullable: true
+          type: string
+        verification_uri:
+          description: The URI that the end user visits to verify authorization request.
+          nullable: true
+          type: string
+        verification_uri_complete:
+          description: The URI with user_code that the end-user alternatively visits to verify authorization request.
+          nullable: true
+          type: string
+      type: object
+    oauth.v1.openid_discovery:
+      properties:
+        authorization_endpoint:
+          description: The endpoint that validates all authorization requests.
+          format: uri
+          nullable: true
+          type: string
+        claims_supported:
+          description: A collection of claims supported by authorization server for identity token
+          items:
+            type: string
+          nullable: true
+          type: array
+        device_authorization_endpoint:
+          description: The endpoint that validates all device code related authorization requests.
+          format: uri
+          nullable: true
+          type: string
+        id_token_signing_alg_values_supported:
+          description: A collection of JWS signing algorithms supported by authorization server to sign identity token.
+          items:
+            type: string
+          nullable: true
+          type: array
+        issuer:
+          description: The URL of the party that will create the token and sign it with its private key.
+          format: uri
+          nullable: true
+          type: string
+        jwk_uri:
+          description: The URL of your JSON Web Key Set. This set is a collection of JSON Web Keys, a standard method for representing cryptographic keys in a JSON structure.
+          format: uri
+          nullable: true
+          type: string
+        response_type_supported:
+          description: A collection of response type supported by authorization server.
+          items:
+            type: string
+          nullable: true
+          type: array
+        revocation_endpoint:
+          description: The endpoint used to revoke access or refresh tokens issued by the authorization server.
+          format: uri
+          nullable: true
+          type: string
+        scopes_supported:
+          description: A collection of scopes supported by authorization server for identity token
+          items:
+            type: string
+          nullable: true
+          type: array
+        subject_type_supported:
+          description: A collection of subject by authorization server.
+          items:
+            type: string
+          nullable: true
+          type: array
+        token_endpoint:
+          description: The URL of the token endpoint. After a client has received an authorization code, that code is presented to the token endpoint and exchanged for an identity token, an access token, and a refresh token.
+          format: uri
+          nullable: true
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+        userinfo_endpoint:
+          description: The URL of the user info endpoint, which returns user profile information to a client. Keep in mind that the user info endpoint returns only the information that has been requested.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    oauth.v1.token:
+      properties:
+        access_token:
+          description: Token which carries the necessary information to access a Twilio resource directly.
+          nullable: true
+          type: string
+        access_token_expires_at:
+          description: The date and time in GMT when the refresh token expires in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+          format: date-time
+          nullable: true
+          type: string
+        id_token:
+          nullable: true
+          type: string
+        refresh_token:
+          description: Token which carries the information necessary to get a new access token.
+          nullable: true
+          type: string
+        refresh_token_expires_at:
+          description: The date and time in GMT when the refresh token expires in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    oauth.v1.user_info:
+      properties:
+        email:
+          description: The end-user's preferred email address.
+          nullable: true
+          type: string
+        first_name:
+          description: The first name of the end-user.
+          nullable: true
+          type: string
+        friendly_name:
+          description: The friendly name of the end-user.
+          nullable: true
+          type: string
+        last_name:
+          description: The last name of the end-user.
+          nullable: true
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+        user_sid:
+          description: The URL of the party that will create the token and sign it with its private key.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^US[0-9a-fA-F]{32}$
+          type: string
+      type: object
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: This product is Generally Available.
+    name: GA

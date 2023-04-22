@@ -1,0 +1,319 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: softwareengineering@parliament.uk
+    name: UK Parliament
+    url: https://www.parliament.uk/
+  description: Get data from the annunciator system.
+  title: Annunciator content API
+  version: v1
+  x-apisguru-categories:
+    - open_data
+  x-origin:
+    - format: openapi
+      url: https://now-api.parliament.uk/swagger/v1/swagger.json
+      version: "3.0"
+  x-providerName: parliament.uk
+  x-serviceName: now
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  "/api/Message/message/{annunciator}/current":
+    get:
+      parameters:
+        - description: Current message by annunciator
+          in: path
+          name: annunciator
+          required: true
+          schema:
+            $ref: "#/components/schemas/AnnunciatorMessageType"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageViewModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageViewModel"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageViewModel"
+          description: Success
+        "404":
+          description: Not Found
+      summary: Return the current message by annunciator type
+      tags:
+        - Message
+  "/api/Message/message/{annunciator}/{date}":
+    get:
+      parameters:
+        - description: Message by annunciator type
+          in: path
+          name: annunciator
+          required: true
+          schema:
+            $ref: "#/components/schemas/AnnunciatorMessageType"
+        - description: First message after date time specified
+          in: path
+          name: date
+          required: true
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageViewModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageViewModel"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageViewModel"
+          description: Latest message for given annunciator was issued before specified date
+        "400":
+          description: Date provided wasn't in a valid format
+        "404":
+          description: No message for given annunciator was issued before specified date
+      summary: Return the most recent message by annunciator after date time specified
+      tags:
+        - Message
+components:
+  schemas:
+    AnnunciatorMessageType:
+      enum:
+        - CommonsMain
+        - LordsMain
+      type: string
+    ContentStyle:
+      enum:
+        - DividerSolid
+        - EmptyLine
+        - Member
+        - Footer
+        - AnsweringBody
+        - WestminsterHallInfo
+        - GrandCommitteeInfo
+        - DividerDotted
+        - DividerDashed
+        - Division
+        - Text150
+        - Text140
+        - Text130
+        - Text120
+        - Text110
+        - Text100
+        - Text90
+        - Text80
+        - Text70
+      type: string
+    ContentType:
+      enum:
+        - Generic
+        - Member
+        - OralQuestionTime
+        - AnsweringBody
+        - Bill
+      type: string
+    HorizontalAlignment:
+      enum:
+        - Left
+        - Right
+        - Centre
+      type: string
+    HouseMembershipViewModel:
+      additionalProperties: false
+      properties:
+        membershipFrom:
+          nullable: true
+          type: string
+      type: object
+    LineViewModel:
+      additionalProperties: false
+      properties:
+        content:
+          nullable: true
+          type: string
+        contentAdditionalJson:
+          nullable: true
+          type: string
+        contentType:
+          $ref: "#/components/schemas/ContentType"
+        contentUrl:
+          nullable: true
+          type: string
+        displayOrder:
+          format: int32
+          type: integer
+        forceCapitalisation:
+          type: boolean
+        horizontalAlignment:
+          $ref: "#/components/schemas/HorizontalAlignment"
+        member:
+          $ref: "#/components/schemas/MemberViewModel"
+        style:
+          $ref: "#/components/schemas/ContentStyle"
+        verticalAlignment:
+          $ref: "#/components/schemas/VerticalAlignment"
+      type: object
+    MemberViewModel:
+      additionalProperties: false
+      properties:
+        id:
+          format: int32
+          type: integer
+        latestHouseMembership:
+          $ref: "#/components/schemas/HouseMembershipViewModel"
+        latestParty:
+          $ref: "#/components/schemas/PartyViewModel"
+        nameAddressAs:
+          nullable: true
+          type: string
+        nameDisplayAs:
+          nullable: true
+          type: string
+        nameFullTitle:
+          nullable: true
+          type: string
+        nameListAs:
+          nullable: true
+          type: string
+        thumbnailUrl:
+          nullable: true
+          type: string
+      type: object
+    MessageViewModel:
+      additionalProperties: false
+      properties:
+        annunciatorDisabled:
+          type: boolean
+        annunciatorType:
+          $ref: "#/components/schemas/AnnunciatorMessageType"
+        id:
+          format: int32
+          type: integer
+        isSecurityOverride:
+          type: boolean
+        publishTime:
+          format: date-time
+          type: string
+        scrollingMessages:
+          items:
+            $ref: "#/components/schemas/ScrollingMessageViewModel"
+          nullable: true
+          type: array
+        showCommonsBell:
+          type: boolean
+        showLordsBell:
+          type: boolean
+        slides:
+          items:
+            $ref: "#/components/schemas/SlideViewModel"
+          nullable: true
+          type: array
+      type: object
+    PartyViewModel:
+      additionalProperties: false
+      properties:
+        backgroundColour:
+          nullable: true
+          type: string
+        id:
+          format: int32
+          type: integer
+        name:
+          nullable: true
+          type: string
+      type: object
+    ScrollingMessageAlertType:
+      enum:
+        - Standard
+        - SecondaryChamber
+        - Alert
+        - SecurityNormal
+        - SecurityHigh
+      type: string
+    ScrollingMessageViewModel:
+      additionalProperties: false
+      properties:
+        alertType:
+          $ref: "#/components/schemas/ScrollingMessageAlertType"
+        content:
+          nullable: true
+          type: string
+        displayFrom:
+          format: date-time
+          type: string
+        displayTo:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: int32
+          type: integer
+        verticalAlignment:
+          $ref: "#/components/schemas/VerticalAlignment"
+      type: object
+    SlideType:
+      enum:
+        - Debate
+        - Division
+        - OralQuestionTime
+        - UrgentQuestion
+        - Statement
+        - Prayers
+        - HouseRisen
+        - Generic
+        - NotSitting
+        - PrimeMinistersQuestions
+        - PointsOfOrder
+        - BlankSlide
+      type: string
+    SlideViewModel:
+      additionalProperties: false
+      properties:
+        carouselDisplaySeconds:
+          format: int32
+          nullable: true
+          type: integer
+        carouselOrder:
+          format: int32
+          nullable: true
+          type: integer
+        id:
+          format: int32
+          type: integer
+        lines:
+          items:
+            $ref: "#/components/schemas/LineViewModel"
+          nullable: true
+          type: array
+        slideTime:
+          format: date-time
+          nullable: true
+          type: string
+        soundToPlay:
+          $ref: "#/components/schemas/Sounds"
+        speakerTime:
+          format: date-time
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/SlideType"
+      type: object
+    Sounds:
+      enum:
+        - NewSlide
+        - DivisionBell
+        - Alert
+        - GenericBeep
+      type: string
+    VerticalAlignment:
+      enum:
+        - Top
+        - Middle
+        - Bottom
+      type: string

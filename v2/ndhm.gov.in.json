@@ -1,0 +1,164 @@
+{
+  "apis": {
+    "ndhm.gov.in:ndhm-cm": {
+      "added": "2021-02-07T16:16:03.397Z",
+      "info": {
+        "contact": {
+          "name": "National Health Authority",
+          "url": "https://ndhm.gov.in/"
+        },
+        "description": "Entity which provides health information aggregation services to customers of health care services.\nIt enables customers to fetch their health information from one or more Health Information Providers\n(e.g., Hospitals, Diagnostic Labs, Medical Device Companies), based on their explicit Consent and to share such\naggregated information with Health Information Users i.e. entities in need of such data (e.g., Insurers,\nDoctors, Medical Researchers).\n\n# Specifications\n1. This document maintains only the Health Information Gateway relevant APIs. \n",
+        "title": "Health Data Consent Manager",
+        "version": "0.5",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://apisetu.gov.in/api_specification_v8/ndhm-cm.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ndhm.gov.in",
+        "x-serviceName": "ndhm-cm",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2021-02-07T16:16:03.397Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-cm/0.5/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-cm/0.5/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ndhm.gov.in:ndhm-cm/0.5.json"
+    },
+    "ndhm.gov.in:ndhm-gateway": {
+      "added": "2021-02-07T16:16:11.304Z",
+      "info": {
+        "contact": {
+          "name": "National Health Authority",
+          "url": "https://ndhm.gov.in/"
+        },
+        "description": "Gateway is the hub that routes/orchestrates the interaction between consent managers and API bridges. There are 5 categories of APIs; discovery, link, consent flow, data flow and  monitoring. To reflect the consumers of APIs, the above apis are also categorized under cm facing, hiu facing and hip facing \n",
+        "title": "Gateway",
+        "version": "0.5",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://apisetu.gov.in/api_specification_v8/ndhm-gateway.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ndhm.gov.in",
+        "x-serviceName": "ndhm-gateway",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2021-02-07T16:16:11.304Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-gateway/0.5/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-gateway/0.5/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ndhm.gov.in:ndhm-gateway/0.5.json"
+    },
+    "ndhm.gov.in:ndhm-healthid": {
+      "added": "2021-02-07T16:16:19.262Z",
+      "info": {
+        "contact": {
+          "name": "National Health Authority",
+          "url": "https://ndhm.gov.in/"
+        },
+        "description": "It is important to standardize the process of identification of an individual across healthcare providers, to ensure that the created medical records are issued to the right individual or accessed by a Health Information User through appropriate consent. \nIn order to issue a Health ID to an individual, one only needs basic demographic details like Name, Year of Birth, Gender. In addition, citizens should be able to update contact information easily.",
+        "title": "Health ID Service",
+        "version": "1.0",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://apisetu.gov.in/api_specification_v8/ndhm-healthid.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ndhm.gov.in",
+        "x-serviceName": "ndhm-healthid",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2021-02-07T16:16:19.262Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-healthid/1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-healthid/1.0/openapi.yaml",
+      "openapiVer": "3.0.1",
+      "link": "https://api.apis.guru/v2/specs/ndhm.gov.in:ndhm-healthid/1.0.json"
+    },
+    "ndhm.gov.in:ndhm-hip": {
+      "added": "2021-02-07T16:16:26.658Z",
+      "info": {
+        "contact": {
+          "name": "National Health Authority",
+          "url": "https://ndhm.gov.in/"
+        },
+        "description": "The following are the specifications for the APIs to be implemented at the Health Repository end if an entity is only serving the role of a HIP. The specs are essentially duplicates from the Gateway and Health Repository, but put together so as to make it clear to *HIPs* which set of APIs they should implement to participate in the network. \n",
+        "title": "Health Repository Provider Specifications for HIP",
+        "version": "0.5",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://apisetu.gov.in/api_specification_v8/ndhm-hip.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ndhm.gov.in",
+        "x-serviceName": "ndhm-hip",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2021-02-07T16:16:26.658Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-hip/0.5/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-hip/0.5/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ndhm.gov.in:ndhm-hip/0.5.json"
+    },
+    "ndhm.gov.in:ndhm-hiu": {
+      "added": "2021-02-07T16:16:33.375Z",
+      "info": {
+        "contact": {
+          "name": "National Health Authority",
+          "url": "https://ndhm.gov.in/"
+        },
+        "description": "The following are the specifications for the APIs to be implemented at the Health Repository end if an entity is only serving the role of a HIU. The specs are essentially duplicates from the Gateway and Bridge, but put together so as to make it clear to *HIUs* which set of APIs they should implement to participate in the network. \n\n  1. The APIs are organized by the flows - **identification**, **consent flow**, **data flow** and **monitoring**. They represent the APIs that are expected to be available at the HIU end by the Gateway. \n  2. For majority of the APIs, if Gateway has initiated a call, there are corresponding callback APIs on the Gateway. e.g for **/consents/hiu/notify** API on HIU end, its expected that a corresponding callback API **/consents/hiu/on-notify** on Gateway is called. Such APIs are organized under the **Gateway** label. \n  3. Gateway relevant APIs for HIUs are grouped under **Gateway** label. These include the APIs that HIPs are required to call on the Gateway. For example, to request a CM for consent, HIU would call **/consent-requests/init** API on gateway. \n  4. **NOTE**, in some of the API documentations below, **X-HIP-ID** is mentioned in header (for example in /auth/on-init). These are the cases, when a particular API is applicable for both HIU and HIP (e.g an entity is playing the role of HRP representing both HIU and HIP). If you are only playing the role of HIP, then only X-HIU-ID header will be sent \n",
+        "title": "Health Repository Provider Specifications for HIU",
+        "version": "0.5",
+        "x-apisguru-categories": [
+          "open_data"
+        ],
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://apisetu.gov.in/api_specification_v8/ndhm-hiu.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ndhm.gov.in",
+        "x-serviceName": "ndhm-hiu",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2021-02-07T16:16:33.375Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-hiu/0.5/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ndhm.gov.in/ndhm-hiu/0.5/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ndhm.gov.in:ndhm-hiu/0.5.json"
+    }
+  }
+}

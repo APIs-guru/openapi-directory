@@ -1,0 +1,3687 @@
+openapi: 3.0.1
+servers:
+  - url: https://flex-api.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Flex
+  version: 1.42.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_static1.twilio.com_marketing_bundles_marketing_img_logos_wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_flex_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_flex_v1
+paths:
+  /v1/Channels:
+    description: Flex chat channels
+    get:
+      description: ""
+      operationId: ListChannel
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  flex_chat_channels:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.channel"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListChannelResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: CreateChannel
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChatFriendlyName:
+                  description: The chat channel's friendly name.
+                  type: string
+                ChatUniqueName:
+                  description: The chat channel's unique name.
+                  type: string
+                ChatUserFriendlyName:
+                  description: The chat participant's friendly name.
+                  type: string
+                FlexFlowSid:
+                  description: The SID of the Flex Flow.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^FO[0-9a-fA-F]{32}$
+                  type: string
+                Identity:
+                  description: The `identity` value that uniquely identifies the new resource's chat User.
+                  type: string
+                LongLived:
+                  description: Whether to create the channel as long-lived.
+                  type: boolean
+                PreEngagementData:
+                  description: The pre-engagement data.
+                  type: string
+                Target:
+                  description: The Target Contact Identity, for example the phone number of an SMS.
+                  type: string
+                TaskAttributes:
+                  description: The Task attributes to be added for the TaskRouter Task.
+                  type: string
+                TaskSid:
+                  description: The SID of the TaskRouter Task. Only valid when integration type is `task`. `null` for integration types `studio` & `external`
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WT[0-9a-fA-F]{32}$
+                  type: string
+              required:
+                - FlexFlowSid
+                - Identity
+                - ChatUserFriendlyName
+                - ChatFriendlyName
+              title: CreateChannelRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.channel"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - flex_flow_sid
+        - user_sid
+        - task_sid
+      mountName: channel
+      pathType: list
+  "/v1/Channels/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteChannel
+      parameters:
+        - description: The SID of the Flex chat channel resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: Flex chat channels
+    get:
+      description: ""
+      operationId: FetchChannel
+      parameters:
+        - description: The SID of the Flex chat channel resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.channel"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - flex_flow_sid
+        - user_sid
+        - task_sid
+      mountName: channel
+      pathType: instance
+  /v1/Configuration:
+    description: Configuration for a Flex instance
+    get:
+      description: ""
+      operationId: FetchConfiguration
+      parameters:
+        - description: The Pinned UI version of the Configuration resource to fetch.
+          in: query
+          name: UiVersion
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.configuration"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - status
+        - ui_language
+        - ui_version
+        - service_version
+      pathType: instance
+  /v1/FlexFlows:
+    description: Flex Flow
+    get:
+      description: ""
+      operationId: ListFlexFlow
+      parameters:
+        - description: The `friendly_name` of the Flex Flow resources to read.
+          in: query
+          name: FriendlyName
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  flex_flows:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.flex_flow"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListFlexFlowResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: CreateFlexFlow
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChannelType:
+                  $ref: "#/components/schemas/flex_flow_enum_channel_type"
+                  description: The channel type. One of `web`, `facebook`, `sms`, `whatsapp`, `line` or `custom`. By default, Studio’s Send to Flex widget passes it on to the Task attributes for Tasks created based on this Flex Flow. The Task attributes will be used by the Flex UI to render the respective Task as appropriate (applying channel-specific design and length limits). If `channelType` is `facebook`, `whatsapp` or `line`, the Send to Flex widget should set the Task Channel to Programmable Chat.
+                  type: string
+                ChatServiceSid:
+                  description: The SID of the chat service.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^IS[0-9a-fA-F]{32}$
+                  type: string
+                ContactIdentity:
+                  description: The channel contact's Identity.
+                  type: string
+                Enabled:
+                  description: Whether the new Flex Flow is enabled.
+                  type: boolean
+                FriendlyName:
+                  description: A descriptive string that you create to describe the Flex Flow resource.
+                  type: string
+                Integration.Channel:
+                  description: The Task Channel SID (TCXXXX) or unique name (e.g., `sms`) to use for the Task that will be created. Applicable and required when `integrationType` is `task`. The default value is `default`.
+                  type: string
+                Integration.CreationOnMessage:
+                  description: In the context of outbound messaging, defines whether to create a Task immediately (and therefore reserve the conversation to current agent), or delay Task creation until the customer sends the first response. Set to false to create immediately, true to delay Task creation. This setting is only applicable for outbound messaging.
+                  type: boolean
+                Integration.FlowSid:
+                  description: The SID of the Studio Flow. Required when `integrationType` is `studio`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^FW[0-9a-fA-F]{32}$
+                  type: string
+                Integration.Priority:
+                  description: The Task priority of a new Task. The default priority is 0. Optional when `integrationType` is `task`, not applicable otherwise.
+                  type: integer
+                Integration.RetryCount:
+                  description: The number of times to retry the Studio Flow or webhook in case of failure. Takes integer values from 0 to 3 with the default being 3. Optional when `integrationType` is `studio` or `external`, not applicable otherwise.
+                  type: integer
+                Integration.Timeout:
+                  description: The Task timeout in seconds for a new Task. Default is 86,400 seconds (24 hours). Optional when `integrationType` is `task`, not applicable otherwise.
+                  type: integer
+                Integration.Url:
+                  description: The URL of the external webhook. Required when `integrationType` is `external`.
+                  format: uri
+                  type: string
+                Integration.WorkflowSid:
+                  description: The Workflow SID for a new Task. Required when `integrationType` is `task`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WW[0-9a-fA-F]{32}$
+                  type: string
+                Integration.WorkspaceSid:
+                  description: The Workspace SID for a new Task. Required when `integrationType` is `task`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WS[0-9a-fA-F]{32}$
+                  type: string
+                IntegrationType:
+                  $ref: "#/components/schemas/flex_flow_enum_integration_type"
+                  description: "The software that will handle inbound messages. [Integration Type](https://www.twilio.com/docs/flex/developer/messaging/manage-flows#integration-types) can be: `studio`, `external`, or `task`."
+                  type: string
+                JanitorEnabled:
+                  description: When enabled, the Messaging Channel Janitor will remove active Proxy sessions if the associated Task is deleted outside of the Flex UI. Defaults to `false`.
+                  type: boolean
+                LongLived:
+                  description: When enabled, Flex will keep the chat channel active so that it may be used for subsequent interactions with a contact identity. Defaults to `false`.
+                  type: boolean
+              required:
+                - FriendlyName
+                - ChatServiceSid
+                - ChannelType
+              title: CreateFlexFlowRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.flex_flow"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - channel_type
+        - integration_type
+      mountName: flex_flow
+      pathType: list
+  "/v1/FlexFlows/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteFlexFlow
+      parameters:
+        - description: The SID of the Flex Flow resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^FO[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: Flex Flow
+    get:
+      description: ""
+      operationId: FetchFlexFlow
+      parameters:
+        - description: The SID of the Flex Flow resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^FO[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.flex_flow"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: UpdateFlexFlow
+      parameters:
+        - description: The SID of the Flex Flow resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^FO[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChannelType:
+                  $ref: "#/components/schemas/flex_flow_enum_channel_type"
+                  description: The channel type. One of `web`, `facebook`, `sms`, `whatsapp`, `line` or `custom`. By default, Studio’s Send to Flex widget passes it on to the Task attributes for Tasks created based on this Flex Flow. The Task attributes will be used by the Flex UI to render the respective Task as appropriate (applying channel-specific design and length limits). If `channelType` is `facebook`, `whatsapp` or `line`, the Send to Flex widget should set the Task Channel to Programmable Chat.
+                  type: string
+                ChatServiceSid:
+                  description: The SID of the chat service.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^IS[0-9a-fA-F]{32}$
+                  type: string
+                ContactIdentity:
+                  description: The channel contact's Identity.
+                  type: string
+                Enabled:
+                  description: Whether the new Flex Flow is enabled.
+                  type: boolean
+                FriendlyName:
+                  description: A descriptive string that you create to describe the Flex Flow resource.
+                  type: string
+                Integration.Channel:
+                  description: The Task Channel SID (TCXXXX) or unique name (e.g., `sms`) to use for the Task that will be created. Applicable and required when `integrationType` is `task`. The default value is `default`.
+                  type: string
+                Integration.CreationOnMessage:
+                  description: In the context of outbound messaging, defines whether to create a Task immediately (and therefore reserve the conversation to current agent), or delay Task creation until the customer sends the first response. Set to false to create immediately, true to delay Task creation. This setting is only applicable for outbound messaging.
+                  type: boolean
+                Integration.FlowSid:
+                  description: The SID of the Studio Flow. Required when `integrationType` is `studio`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^FW[0-9a-fA-F]{32}$
+                  type: string
+                Integration.Priority:
+                  description: The Task priority of a new Task. The default priority is 0. Optional when `integrationType` is `task`, not applicable otherwise.
+                  type: integer
+                Integration.RetryCount:
+                  description: The number of times to retry the Studio Flow or webhook in case of failure. Takes integer values from 0 to 3 with the default being 3. Optional when `integrationType` is `studio` or `external`, not applicable otherwise.
+                  type: integer
+                Integration.Timeout:
+                  description: The Task timeout in seconds for a new Task. Default is 86,400 seconds (24 hours). Optional when `integrationType` is `task`, not applicable otherwise.
+                  type: integer
+                Integration.Url:
+                  description: The URL of the external webhook. Required when `integrationType` is `external`.
+                  format: uri
+                  type: string
+                Integration.WorkflowSid:
+                  description: The Workflow SID for a new Task. Required when `integrationType` is `task`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WW[0-9a-fA-F]{32}$
+                  type: string
+                Integration.WorkspaceSid:
+                  description: The Workspace SID for a new Task. Required when `integrationType` is `task`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WS[0-9a-fA-F]{32}$
+                  type: string
+                IntegrationType:
+                  $ref: "#/components/schemas/flex_flow_enum_integration_type"
+                  description: "The software that will handle inbound messages. [Integration Type](https://www.twilio.com/docs/flex/developer/messaging/manage-flows#integration-types) can be: `studio`, `external`, or `task`."
+                  type: string
+                JanitorEnabled:
+                  description: When enabled, the Messaging Channel Janitor will remove active Proxy sessions if the associated Task is deleted outside of the Flex UI. Defaults to `false`.
+                  type: boolean
+                LongLived:
+                  description: When enabled, Flex will keep the chat channel active so that it may be used for subsequent interactions with a contact identity. Defaults to `false`.
+                  type: boolean
+              title: UpdateFlexFlowRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.flex_flow"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - channel_type
+        - integration_type
+      mountName: flex_flow
+      pathType: instance
+  /v1/Insights/Conversations:
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get conversation with segment id
+      operationId: ListInsightsConversations
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+        - description: Unique Id of the segment for which conversation details needs to be fetched
+          in: query
+          name: SegmentId
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  conversations:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.insights_conversations"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListInsightsConversationsResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: insights_conversations
+      defaultOutputProperties:
+        - conversation_id
+        - account_id
+        - segment_count
+        - segments
+      mountName: insights_conversations
+      pathType: list
+  /v1/Insights/QM/Assessments:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Get assessments done for a conversation by logged in user
+      operationId: ListInsightsAssessments
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+        - description: The id of the segment.
+          in: query
+          name: SegmentId
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  assessments:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.insights_assessments"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListInsightsAssessmentsResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    post:
+      description: Add assessments against conversation to dynamo db. Used in assessments screen by user. Users can select the questionnaire and pick up answers for each and every question.
+      operationId: CreateInsightsAssessments
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AgentId:
+                  description: The id of the Agent
+                  type: string
+                AnswerId:
+                  description: The id of the answer selected by user
+                  type: string
+                AnswerText:
+                  description: The answer text selected by user
+                  type: string
+                CategoryId:
+                  description: "The id of the category "
+                  type: string
+                CategoryName:
+                  description: The name of the category
+                  type: string
+                MetricId:
+                  description: The question Id selected for assessment
+                  type: string
+                MetricName:
+                  description: The question name of the assessment
+                  type: string
+                Offset:
+                  description: The offset of the conversation.
+                  type: number
+                QuestionnaireId:
+                  description: Questionnaire Id of the associated question
+                  type: string
+                SegmentId:
+                  description: Segment Id of the conversation
+                  type: string
+                UserEmail:
+                  description: Email of the user assessing conversation
+                  type: string
+                UserName:
+                  description: Name of the user assessing conversation
+                  type: string
+              required:
+                - CategoryId
+                - CategoryName
+                - SegmentId
+                - UserName
+                - UserEmail
+                - AgentId
+                - Offset
+                - MetricId
+                - MetricName
+                - AnswerText
+                - AnswerId
+                - QuestionnaireId
+              title: CreateInsightsAssessmentsRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_assessments"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: assessments
+      defaultOutputProperties:
+        - account_sid
+        - assessment_id
+        - assessment
+      pathType: list
+  /v1/Insights/QM/Assessments/Comments:
+    description: "TODO: Resource-level docs"
+    get:
+      description: To create a comment assessment for a conversation
+      operationId: ListInsightsAssessmentsComment
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+        - description: The id of the segment.
+          in: query
+          name: SegmentId
+          schema:
+            type: string
+        - description: The id of the agent.
+          in: query
+          name: AgentId
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  comments:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.insights_assessments_comment"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListInsightsAssessmentsCommentResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    post:
+      description: To create a comment assessment for a conversation
+      operationId: CreateInsightsAssessmentsComment
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AgentId:
+                  description: The id of the agent.
+                  type: string
+                CategoryId:
+                  description: The ID of the category
+                  type: string
+                CategoryName:
+                  description: The name of the category
+                  type: string
+                Comment:
+                  description: The Assessment comment.
+                  type: string
+                Offset:
+                  description: The offset
+                  type: number
+                SegmentId:
+                  description: The id of the segment.
+                  type: string
+                UserEmail:
+                  description: The email id of the user.
+                  type: string
+                UserName:
+                  description: The name of the user.
+                  type: string
+              required:
+                - CategoryId
+                - CategoryName
+                - Comment
+                - SegmentId
+                - UserName
+                - UserEmail
+                - AgentId
+                - Offset
+              title: CreateInsightsAssessmentsCommentRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_assessments_comment"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - assessment_id
+        - comment
+      mountName: insights_assessments_comment
+      pathType: list
+  "/v1/Insights/QM/Assessments/{AssessmentId}":
+    description: "TODO: Resource-level docs"
+    post:
+      description: Update a specific Assessment assessed earlier
+      operationId: UpdateInsightsAssessments
+      parameters:
+        - description: The id of the assessment to be modified
+          in: path
+          name: AssessmentId
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AnswerId:
+                  description: The id of the answer selected by user
+                  type: string
+                AnswerText:
+                  description: The answer text selected by user
+                  type: string
+                Offset:
+                  description: The offset of the conversation
+                  type: number
+              required:
+                - Offset
+                - AnswerText
+                - AnswerId
+              title: UpdateInsightsAssessmentsRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_assessments"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: assessments
+      defaultOutputProperties:
+        - account_sid
+        - assessment_id
+        - assessment
+      pathType: instance
+  /v1/Insights/QM/Categories:
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get all the categories
+      operationId: ListInsightsQuestionnairesCategory
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  categories:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.insights_questionnaires_category"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListInsightsQuestionnairesCategoryResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    post:
+      description: To create a category for Questions
+      operationId: CreateInsightsQuestionnairesCategory
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Name:
+                  description: The name of this category.
+                  type: string
+              required:
+                - Name
+              title: CreateInsightsQuestionnairesCategoryRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_questionnaires_category"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - category_id
+        - name
+      mountName: insights_questionnaires_category
+      pathType: list
+  "/v1/Insights/QM/Categories/{CategoryId}":
+    delete:
+      description: ""
+      operationId: DeleteInsightsQuestionnairesCategory
+      parameters:
+        - description: The ID of the category to be deleted
+          in: path
+          name: CategoryId
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    description: "TODO: Resource-level docs"
+    post:
+      description: To update the category for Questions
+      operationId: UpdateInsightsQuestionnairesCategory
+      parameters:
+        - description: The ID of the category to be update
+          in: path
+          name: CategoryId
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Name:
+                  description: The name of this category.
+                  type: string
+              required:
+                - Name
+              title: UpdateInsightsQuestionnairesCategoryRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_questionnaires_category"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - category_id
+        - name
+      mountName: insights_questionnaires_category
+      pathType: instance
+  /v1/Insights/QM/Questionnaires:
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get all questionnaires with questions
+      operationId: ListInsightsQuestionnaires
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+        - description: Flag indicating whether to include inactive questionnaires or not
+          in: query
+          name: IncludeInactive
+          schema:
+            type: boolean
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  questionnaires:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.insights_questionnaires"
+                    type: array
+                title: ListInsightsQuestionnairesResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    post:
+      description: To create a Questionnaire
+      operationId: CreateInsightsQuestionnaires
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Active:
+                  description: The flag to enable or disable questionnaire
+                  type: boolean
+                Description:
+                  description: The description of this questionnaire
+                  type: string
+                Name:
+                  description: The name of this questionnaire
+                  type: string
+                QuestionIds:
+                  description: The list of questions ids under a questionnaire
+                  items:
+                    type: string
+                  type: array
+              required:
+                - Name
+              title: CreateInsightsQuestionnairesRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_questionnaires"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: insights_questionnaires
+      defaultOutputProperties:
+        - account_sid
+        - id
+        - name
+      mountName: insights_questionnaires
+      pathType: list
+  "/v1/Insights/QM/Questionnaires/{Id}":
+    delete:
+      description: To delete the questionnaire
+      operationId: DeleteInsightsQuestionnaires
+      parameters:
+        - description: The unique ID of the questionnaire
+          in: path
+          name: Id
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get the Questionnaire Detail
+      operationId: FetchInsightsQuestionnaires
+      parameters:
+        - description: The unique ID of the questionnaire
+          in: path
+          name: Id
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_questionnaires"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    post:
+      description: To update the questionnaire
+      operationId: UpdateInsightsQuestionnaires
+      parameters:
+        - description: The unique ID of the questionnaire
+          in: path
+          name: Id
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Active:
+                  description: The flag to enable or disable questionnaire
+                  type: boolean
+                Description:
+                  description: The description of this questionnaire
+                  type: string
+                Name:
+                  description: The name of this questionnaire
+                  type: string
+                QuestionIds:
+                  description: The list of questions ids under a questionnaire
+                  items:
+                    type: string
+                  type: array
+              required:
+                - Active
+              title: UpdateInsightsQuestionnairesRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_questionnaires"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: insights_questionnaires
+      defaultOutputProperties:
+        - account_sid
+        - id
+        - name
+      mountName: insights_questionnaires
+      pathType: instance
+  /v1/Insights/QM/Questions:
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get all the question for the given categories
+      operationId: ListInsightsQuestionnairesQuestion
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+        - description: The list of category IDs
+          in: query
+          name: CategoryId
+          schema:
+            items:
+              type: string
+            type: array
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  questions:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.insights_questionnaires_question"
+                    type: array
+                title: ListInsightsQuestionnairesQuestionResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    post:
+      description: To create a question for a Category
+      operationId: CreateInsightsQuestionnairesQuestion
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AllowNa:
+                  description: The flag to enable for disable NA for answer.
+                  type: boolean
+                AnswerSetId:
+                  description: The answer_set for the question.
+                  type: string
+                CategoryId:
+                  description: The ID of the category
+                  type: string
+                Description:
+                  description: The description for the question.
+                  type: string
+                Question:
+                  description: The question.
+                  type: string
+              required:
+                - CategoryId
+                - Question
+                - AnswerSetId
+                - AllowNa
+              title: CreateInsightsQuestionnairesQuestionRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_questionnaires_question"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - question_id
+        - question
+      mountName: insights_questionnaires_question
+      pathType: list
+  "/v1/Insights/QM/Questions/{QuestionId}":
+    delete:
+      description: ""
+      operationId: DeleteInsightsQuestionnairesQuestion
+      parameters:
+        - description: The unique ID of the question
+          in: path
+          name: QuestionId
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    description: "TODO: Resource-level docs"
+    post:
+      description: To update the question
+      operationId: UpdateInsightsQuestionnairesQuestion
+      parameters:
+        - description: The unique ID of the question
+          in: path
+          name: QuestionId
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AllowNa:
+                  description: The flag to enable for disable NA for answer.
+                  type: boolean
+                AnswerSetId:
+                  description: The answer_set for the question.
+                  type: string
+                CategoryId:
+                  description: The ID of the category
+                  type: string
+                Description:
+                  description: The description for the question.
+                  type: string
+                Question:
+                  description: The question.
+                  type: string
+              required:
+                - AllowNa
+              title: UpdateInsightsQuestionnairesQuestionRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_questionnaires_question"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - question_id
+        - question
+      mountName: insights_questionnaires_question
+      pathType: instance
+  /v1/Insights/QM/Settings/AnswerSets:
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get the Answer Set Settings for an Account
+      operationId: FetchInsightsSettingsAnswersets
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_settings_answersets"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: insights_settings_answer_sets
+      defaultOutputProperties:
+        - answer_sets
+        - answer_set_categories
+        - not_applicable
+      mountName: insights_settings_answer_sets
+      pathType: list
+  /v1/Insights/QM/Settings/CommentTags:
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get the Comment Settings for an Account
+      operationId: FetchInsightsSettingsComment
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_settings_comment"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - comments
+      mountName: insights_settings_comment
+      pathType: list
+  /v1/Insights/Segments:
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get segments for given reservation Ids
+      operationId: ListInsightsSegments
+      parameters:
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+        - description: The list of reservation Ids
+          in: query
+          name: ReservationId
+          schema:
+            items:
+              maxLength: 34
+              minLength: 34
+              pattern: ^WR[0-9a-fA-F]{32}$
+              type: string
+            type: array
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  segments:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.insights_segments"
+                    type: array
+                title: ListInsightsSegmentsResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: insights_segments
+      defaultOutputProperties:
+        - segment_id
+        - external_id
+        - account_id
+        - agent_id
+        - queue
+      mountName: insights_segments
+      pathType: list
+  "/v1/Insights/Segments/{SegmentId}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: To get the Segments of an Account
+      operationId: FetchInsightsSegments
+      parameters:
+        - description: To unique id of the segment
+          in: path
+          name: SegmentId
+          required: true
+          schema:
+            type: string
+        - description: The Token HTTP request header
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_segments"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: insights_segments
+      defaultOutputProperties:
+        - segment_id
+        - external_id
+        - account_id
+        - agent_id
+        - queue
+      mountName: insights_segments
+      pathType: instance
+  /v1/Insights/Session:
+    description: "TODO: Resource-level docs"
+    post:
+      description: To obtain session details for fetching reports and dashboards
+      operationId: CreateInsightsSession
+      parameters:
+        - description: The Authorization HTTP request header
+          in: header
+          name: Authorization
+          schema:
+            type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_session"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - workspace_id
+        - session_expiry
+        - session_id
+        - base_url
+      mountName: insights_session
+      pathType: instance
+  /v1/Insights/UserRoles:
+    description: "TODO: Resource-level docs"
+    get:
+      description: This is used by Flex UI and Quality Management to fetch the Flex Insights roles for the user
+      operationId: FetchInsightsUserRoles
+      parameters:
+        - description: The Authorization HTTP request header
+          in: header
+          name: Authorization
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.insights_user_roles"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: insights_user_roles
+      defaultOutputProperties:
+        - roles
+      mountName: insights_user_roles
+      pathType: instance
+  /v1/Interactions:
+    description: "TODO: Resource-level docs"
+    post:
+      description: Create a new Interaction.
+      operationId: CreateInteraction
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Channel:
+                  description: The Interaction's channel.
+                Routing:
+                  description: The Interaction's routing logic.
+              required:
+                - Channel
+                - Routing
+              title: CreateInteractionRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.interaction"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+      mountName: interaction
+      pathType: list
+  "/v1/Interactions/{InteractionSid}/Channels":
+    description: "TODO: Resource-level docs"
+    get:
+      description: List all Channels for an Interaction.
+      operationId: ListInteractionChannel
+      parameters:
+        - description: The unique string created by Twilio to identify an Interaction resource, prefixed with KD.
+          in: path
+          name: InteractionSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  channels:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.interaction.interaction_channel"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListInteractionChannelResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: interaction_channel
+      defaultOutputProperties:
+        - sid
+      parent: /Interactions/{Sid}
+      pathType: list
+  "/v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Invites":
+    description: "TODO: Resource-level docs"
+    get:
+      description: List all Invites for a Channel.
+      operationId: ListInteractionChannelInvite
+      parameters:
+        - description: The Interaction SID for this Channel.
+          in: path
+          name: InteractionSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+        - description: The Channel SID for this Participant.
+          in: path
+          name: ChannelSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^UO[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  invites:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.interaction.interaction_channel.interaction_channel_invite"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListInteractionChannelInviteResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Invite an Agent or a TaskQueue to a Channel.
+      operationId: CreateInteractionChannelInvite
+      parameters:
+        - description: The Interaction SID for this Channel.
+          in: path
+          name: InteractionSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+        - description: The Channel SID for this Invite.
+          in: path
+          name: ChannelSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^UO[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Routing:
+                  description: The Interaction's routing logic.
+              required:
+                - Routing
+              title: CreateInteractionChannelInviteRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.interaction.interaction_channel.interaction_channel_invite"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: interaction_channel_invite
+      defaultOutputProperties:
+        - sid
+      parent: /Interactions/{InteractionSid}/Channels/{Sid}
+      pathType: list
+  "/v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Participants":
+    description: "TODO: Resource-level docs"
+    get:
+      description: List all Participants for a Channel.
+      operationId: ListInteractionChannelParticipant
+      parameters:
+        - description: The Interaction Sid for this channel.
+          in: path
+          name: InteractionSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+        - description: The Channel Sid for this Participant.
+          in: path
+          name: ChannelSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^UO[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  participants:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.interaction.interaction_channel.interaction_channel_participant"
+                    type: array
+                title: ListInteractionChannelParticipantResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Add a Participant to a Channel.
+      operationId: CreateInteractionChannelParticipant
+      parameters:
+        - description: The Interaction Sid for the new Channel Participant.
+          in: path
+          name: InteractionSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+        - description: The Channel Sid for the new Channel Participant.
+          in: path
+          name: ChannelSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^UO[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                MediaProperties:
+                  description: JSON representing the Media Properties for the new Participant.
+                Type:
+                  $ref: "#/components/schemas/interaction_channel_participant_enum_type"
+                  description: "Participant type.  Can be: `agent`, `customer`, `supervisor`, `external` or `unknown`."
+                  type: string
+              required:
+                - Type
+                - MediaProperties
+              title: CreateInteractionChannelParticipantRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.interaction.interaction_channel.interaction_channel_participant"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: interaction_channel_participant
+      defaultOutputProperties:
+        - sid
+      parent: /Interactions/{InteractionSid}/Channels/{Sid}
+      pathType: list
+  "/v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Participants/{Sid}":
+    description: "TODO: Resource-level docs"
+    post:
+      description: Update an existing Channel Participant.
+      operationId: UpdateInteractionChannelParticipant
+      parameters:
+        - description: The Interaction Sid for this channel.
+          in: path
+          name: InteractionSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+        - description: The Channel Sid for this Participant.
+          in: path
+          name: ChannelSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^UO[0-9a-fA-F]{32}$
+            type: string
+        - description: The unique string created by Twilio to identify an Interaction Channel resource.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^UO[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Status:
+                  $ref: "#/components/schemas/interaction_channel_participant_enum_status"
+                  description: "The Participant's status. Can be: `closed` or `wrapup`.  Participant must be an agent."
+                  type: string
+              required:
+                - Status
+              title: UpdateInteractionChannelParticipantRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.interaction.interaction_channel.interaction_channel_participant"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: interaction_channel_participant
+      defaultOutputProperties:
+        - sid
+      parent: /Interactions/{InteractionSid}/Channels/{Sid}
+      pathType: instance
+  "/v1/Interactions/{InteractionSid}/Channels/{Sid}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a Channel for an Interaction.
+      operationId: FetchInteractionChannel
+      parameters:
+        - description: The unique string created by Twilio to identify an Interaction resource, prefixed with KD.
+          in: path
+          name: InteractionSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+        - description: The unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^UO[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.interaction.interaction_channel"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Update an existing Interaction Channel.
+      operationId: UpdateInteractionChannel
+      parameters:
+        - description: The unique string created by Twilio to identify an Interaction resource, prefixed with KD.
+          in: path
+          name: InteractionSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+        - description: The unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^UO[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Routing:
+                  description: Optional. The state of associated tasks. If not specified, all tasks will be set to `wrapping`.
+                Status:
+                  $ref: "#/components/schemas/interaction_channel_enum_status"
+                  description: "Required. Indicates the Interaction channel's status. When a channel is set to `closed`, all tasks are put in the `wrapping` state by default unless the Routing status is set to `closed` in which case the tasks will be `completed`. Value: `closed`."
+                  type: string
+              required:
+                - Status
+              title: UpdateInteractionChannelRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.interaction.interaction_channel"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      className: interaction_channel
+      defaultOutputProperties:
+        - sid
+      parent: /Interactions/{Sid}
+      pathType: instance
+  "/v1/Interactions/{Sid}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchInteraction
+      parameters:
+        - description: The SID of the Interaction resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KD[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.interaction"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+      mountName: interaction
+      pathType: instance
+  /v1/WebChannels:
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: ListWebChannel
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  flex_chat_channels:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.web_channel"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListWebChannelResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: CreateWebChannel
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChatFriendlyName:
+                  description: The chat channel's friendly name.
+                  type: string
+                ChatUniqueName:
+                  description: The chat channel's unique name.
+                  type: string
+                CustomerFriendlyName:
+                  description: The chat participant's friendly name.
+                  type: string
+                FlexFlowSid:
+                  description: The SID of the Flex Flow.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^FO[0-9a-fA-F]{32}$
+                  type: string
+                Identity:
+                  description: The chat identity.
+                  type: string
+                PreEngagementData:
+                  description: The pre-engagement data.
+                  type: string
+              required:
+                - FlexFlowSid
+                - Identity
+                - CustomerFriendlyName
+                - ChatFriendlyName
+              title: CreateWebChannelRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.web_channel"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - flex_flow_sid
+      mountName: web_channel
+      pathType: list
+  "/v1/WebChannels/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteWebChannel
+      parameters:
+        - description: The SID of the WebChannel resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchWebChannel
+      parameters:
+        - description: The SID of the WebChannel resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.web_channel"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: UpdateWebChannel
+      parameters:
+        - description: The SID of the WebChannel resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChatStatus:
+                  $ref: "#/components/schemas/web_channel_enum_chat_status"
+                  description: The chat status. Can only be `inactive`.
+                  type: string
+                PostEngagementData:
+                  description: The post-engagement data.
+                  type: string
+              title: UpdateWebChannelRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.web_channel"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - flex_flow_sid
+      mountName: web_channel
+      pathType: instance
+components:
+  schemas:
+    configuration_enum_status:
+      enum:
+        - ok
+        - inprogress
+        - notstarted
+      type: string
+    flex.v1.channel:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Channel resource and owns this Workflow.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: The date and time in GMT when the Flex chat channel was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the Flex chat channel was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        flex_flow_sid:
+          description: The SID of the Flex Flow.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^FO[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          description: The unique string that we created to identify the Channel resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^CH[0-9a-fA-F]{32}$
+          type: string
+        task_sid:
+          description: The SID of the TaskRouter Task. Only valid when integration type is `task`. `null` for integration types `studio` & `external`
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^WT[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The absolute URL of the Flex chat channel resource.
+          format: uri
+          nullable: true
+          type: string
+        user_sid:
+          description: The SID of the chat user.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^US[0-9a-fA-F]{32}$
+          type: string
+      type: object
+    flex.v1.configuration:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Configuration resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        attributes:
+          description: An object that contains application-specific data.
+          nullable: true
+        call_recording_enabled:
+          description: Whether call recording is enabled.
+          nullable: true
+          type: boolean
+        call_recording_webhook_url:
+          description: The call recording webhook URL.
+          format: uri
+          nullable: true
+          type: string
+        channel_configs:
+          description: Settings for different limits for Flex Conversations channels attachments.
+          items: {}
+          nullable: true
+          type: array
+        chat_service_instance_sid:
+          description: The SID of the chat service this user belongs to.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        crm_attributes:
+          description: An object that contains the CRM attributes.
+          nullable: true
+        crm_callback_url:
+          description: The CRM Callback URL.
+          format: uri
+          nullable: true
+          type: string
+        crm_enabled:
+          description: Whether CRM is present for Flex.
+          nullable: true
+          type: boolean
+        crm_fallback_url:
+          description: The CRM Fallback URL.
+          format: uri
+          nullable: true
+          type: string
+        crm_type:
+          description: The CRM type.
+          nullable: true
+          type: string
+        date_created:
+          description: The date and time in GMT when the Configuration resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the Configuration resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        debugger_integration:
+          description: Configurable parameters for Debugger Integration.
+          nullable: true
+        flex_insights_drilldown:
+          description: Setting this to true will redirect Flex UI to the URL set in flex_url
+          nullable: true
+          type: boolean
+        flex_insights_hr:
+          description: Object with enabled/disabled flag with list of workspaces.
+          nullable: true
+        flex_service_instance_sid:
+          description: The SID of the Flex service instance.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        flex_ui_status_report:
+          description: Configurable parameters for Flex UI Status report.
+          nullable: true
+        flex_url:
+          description: URL to redirect to in case drilldown is enabled.
+          format: uri
+          nullable: true
+          type: string
+        integrations:
+          description: A list of objects that contain the configurations for the Integrations supported in this configuration.
+          items: {}
+          nullable: true
+          type: array
+        markdown:
+          description: Configurable parameters for Markdown.
+          nullable: true
+        messaging_service_instance_sid:
+          description: The SID of the Messaging service instance.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        notifications:
+          description: Configurable parameters for Notifications.
+          nullable: true
+        outbound_call_flows:
+          description: The list of outbound call flows.
+          nullable: true
+        plugin_service_attributes:
+          description: The plugin service attributes.
+          nullable: true
+        plugin_service_enabled:
+          description: Whether the plugin service enabled.
+          nullable: true
+          type: boolean
+        public_attributes:
+          description: The list of public attributes, which are visible to unauthenticated clients.
+          nullable: true
+        queue_stats_configuration:
+          description: Configurable parameters for Queues Statistics.
+          nullable: true
+        runtime_domain:
+          description: The URL where the Flex instance is hosted.
+          format: uri
+          nullable: true
+          type: string
+        serverless_service_sids:
+          description: The list of serverless service SIDs.
+          items:
+            maxLength: 34
+            minLength: 34
+            pattern: ^ZS[0-9a-fA-F]{32}$
+            type: string
+          nullable: true
+          type: array
+        service_version:
+          description: The Flex Service version.
+          nullable: true
+          type: string
+        status:
+          $ref: "#/components/schemas/configuration_enum_status"
+          description: "The status of the Flex onboarding. Can be: `ok`, `inprogress`,`notstarted`."
+          nullable: true
+          type: string
+        taskrouter_offline_activity_sid:
+          description: The TaskRouter SID of the offline activity.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^WA[0-9a-fA-F]{32}$
+          type: string
+        taskrouter_skills:
+          description: The Skill description for TaskRouter workers.
+          items: {}
+          nullable: true
+          type: array
+        taskrouter_target_taskqueue_sid:
+          description: The SID of the TaskRouter Target TaskQueue.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^WQ[0-9a-fA-F]{32}$
+          type: string
+        taskrouter_target_workflow_sid:
+          description: The SID of the TaskRouter target Workflow.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^WW[0-9a-fA-F]{32}$
+          type: string
+        taskrouter_taskqueues:
+          description: The list of TaskRouter TaskQueues.
+          items: {}
+          nullable: true
+          type: array
+        taskrouter_worker_attributes:
+          description: The TaskRouter Worker attributes.
+          nullable: true
+        taskrouter_worker_channels:
+          description: The TaskRouter default channel capacities and availability for workers.
+          nullable: true
+        taskrouter_workspace_sid:
+          description: The SID of the TaskRouter Workspace.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^WS[0-9a-fA-F]{32}$
+          type: string
+        ui_attributes:
+          description: The object that describes Flex UI characteristics and settings.
+          nullable: true
+        ui_dependencies:
+          description: The object that defines the NPM packages and versions to be used in Hosted Flex.
+          nullable: true
+        ui_language:
+          description: The primary language of the Flex UI.
+          nullable: true
+          type: string
+        ui_version:
+          description: The Pinned UI version.
+          nullable: true
+          type: string
+        url:
+          description: The absolute URL of the Configuration resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.flex_flow:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Flow resource and owns this Workflow.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        channel_type:
+          $ref: "#/components/schemas/flex_flow_enum_channel_type"
+          description: The channel type. One of `web`, `facebook`, `sms`, `whatsapp`, `line` or `custom`. By default, Studio’s Send to Flex widget passes it on to the Task attributes for Tasks created based on this Flex Flow. The Task attributes will be used by the Flex UI to render the respective Task as appropriate (applying channel-specific design and length limits). If `channelType` is `facebook`, `whatsapp` or `line`, the Send to Flex widget should set the Task Channel to Programmable Chat.
+          nullable: true
+          type: string
+        chat_service_sid:
+          description: The SID of the chat service.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        contact_identity:
+          description: The channel contact's Identity.
+          nullable: true
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        enabled:
+          description: Whether the Flex Flow is enabled.
+          nullable: true
+          type: boolean
+        friendly_name:
+          description: The string that you assigned to describe the resource.
+          nullable: true
+          type: string
+        integration:
+          description: An object that contains specific parameters for the integration.
+          nullable: true
+        integration_type:
+          $ref: "#/components/schemas/flex_flow_enum_integration_type"
+          description: "The software that will handle inbound messages. [Integration Type](https://www.twilio.com/docs/flex/developer/messaging/manage-flows#integration-types) can be: `studio`, `external`,  or `task`."
+          nullable: true
+          type: string
+        janitor_enabled:
+          description: When enabled, the Messaging Channel Janitor will remove active Proxy sessions if the associated Task is deleted outside of the Flex UI. Defaults to `false`.
+          nullable: true
+          type: boolean
+        long_lived:
+          description: When enabled, Flex will keep the chat channel active so that it may be used for subsequent interactions with a contact identity. Defaults to `false`.
+          nullable: true
+          type: boolean
+        sid:
+          description: The unique string that we created to identify the Flex Flow resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^FO[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The absolute URL of the Flex Flow resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.insights_assessments:
+      properties:
+        account_sid:
+          description: The unique SID identifier of the Account.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        agent_id:
+          description: The id of the Agent
+          nullable: true
+          type: string
+        answer_id:
+          description: The id of the answer selected by user
+          nullable: true
+          type: string
+        answer_text:
+          description: The answer text selected by user
+          nullable: true
+          type: string
+        assessment:
+          description: Assessment Details associated with an assessment
+          nullable: true
+        assessment_id:
+          description: The unique id of the assessment
+          nullable: true
+          type: string
+        offset:
+          description: Offset of the conversation
+          nullable: true
+          type: number
+        report:
+          description: "The flag indicating if this assessment is part of report "
+          nullable: true
+          type: boolean
+        segment_id:
+          description: Segment Id of conversation
+          nullable: true
+          type: string
+        timestamp:
+          nullable: true
+          type: number
+        url:
+          format: uri
+          nullable: true
+          type: string
+        user_email:
+          description: The email id of the user.
+          nullable: true
+          type: string
+        user_name:
+          description: The name of the user.
+          nullable: true
+          type: string
+        weight:
+          description: The weightage given to this comment
+          nullable: true
+          type: number
+      type: object
+    flex.v1.insights_assessments_comment:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        agent_id:
+          description: The id of the agent.
+          nullable: true
+          type: string
+        assessment_id:
+          description: The unique ID of the assessment.
+          nullable: true
+          type: string
+        comment:
+          description: The comment added for assessment.
+          nullable: true
+        offset:
+          description: The offset
+          nullable: true
+          type: number
+        report:
+          description: "The flag indicating if this assessment is part of report "
+          nullable: true
+          type: boolean
+        segment_id:
+          description: The id of the segment.
+          nullable: true
+          type: string
+        timestamp:
+          description: The timestamp when the record is inserted
+          nullable: true
+          type: number
+        url:
+          format: uri
+          nullable: true
+          type: string
+        user_email:
+          description: The email id of the user.
+          nullable: true
+          type: string
+        user_name:
+          description: The name of the user.
+          nullable: true
+          type: string
+        weight:
+          description: The weightage given to this comment
+          nullable: true
+          type: number
+      type: object
+    flex.v1.insights_conversations:
+      properties:
+        account_id:
+          description: The id of the account.
+          nullable: true
+          type: string
+        conversation_id:
+          description: The unique id of the conversation
+          nullable: true
+          type: string
+        segment_count:
+          description: The count of segments for a conversation
+          nullable: true
+          type: integer
+        segments:
+          description: The Segments of a conversation
+          items: {}
+          nullable: true
+          type: array
+      type: object
+    flex.v1.insights_questionnaires:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        active:
+          description: The flag to enable or disable questionnaire
+          nullable: true
+          type: boolean
+        description:
+          description: The description of this questionnaire
+          nullable: true
+          type: string
+        id:
+          description: The unique id of this questionnaire
+          nullable: true
+          type: string
+        name:
+          description: The name of this category.
+          nullable: true
+          type: string
+        questions:
+          description: The list of questions with category for a questionnaire
+          items: {}
+          nullable: true
+          type: array
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.insights_questionnaires_category:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        category_id:
+          description: The unique ID for the category
+          nullable: true
+          type: string
+        name:
+          description: The name of this category.
+          nullable: true
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.insights_questionnaires_question:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        allow_na:
+          description: The flag  to enable for disable NA for answer.
+          nullable: true
+          type: boolean
+        answer_set:
+          description: Set of answers for the question
+          nullable: true
+        answer_set_id:
+          description: The answer_set for the question.
+          nullable: true
+          type: string
+        category:
+          description: The Category for the question.
+          nullable: true
+        description:
+          description: The description for the question.
+          nullable: true
+          type: string
+        question:
+          description: The question.
+          nullable: true
+          type: string
+        question_id:
+          description: The unique ID of the question
+          nullable: true
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+        usage:
+          description: Integer value that tells a particular question is used by how many questionnaires
+          nullable: true
+          type: integer
+      type: object
+    flex.v1.insights_segments:
+      properties:
+        account_id:
+          description: The unique id for the account.
+          nullable: true
+          type: string
+        agent_id:
+          description: The unique id for the agent.
+          nullable: true
+          type: string
+        agent_link:
+          description: The link to the agent conversation.
+          nullable: true
+          type: string
+        agent_name:
+          description: The name of the agent.
+          nullable: true
+          type: string
+        agent_phone:
+          description: The phone number of the agent.
+          nullable: true
+          type: string
+        agent_team_name:
+          description: The team name to which agent belongs.
+          nullable: true
+          type: string
+        agent_team_name_in_hierarchy:
+          description: he team name to which agent belongs.
+          nullable: true
+          type: string
+        assessment_percentage:
+          description: The percentage scored on the Assessments.
+          nullable: true
+        assessment_type:
+          description: The type of the assessment.
+          nullable: true
+        customer_link:
+          description: The link to the customer conversation.
+          nullable: true
+          type: string
+        customer_name:
+          description: The name of the customer.
+          nullable: true
+          type: string
+        customer_phone:
+          description: The phone number of the customer.
+          nullable: true
+          type: string
+        date:
+          description: The date of the conversation.
+          nullable: true
+          type: string
+        external_contact:
+          nullable: true
+          type: string
+        external_id:
+          description: The unique id for the conversation.
+          nullable: true
+          type: string
+        external_segment_link:
+          description: The hyperlink to recording of the task event.
+          nullable: true
+          type: string
+        external_segment_link_id:
+          description: The uuid for the external_segment_link.
+          nullable: true
+          type: string
+        media:
+          description: The media identifiers of the conversation.
+          nullable: true
+        queue:
+          nullable: true
+          type: string
+        segment_id:
+          description: To unique id of the segment
+          nullable: true
+          type: string
+        segment_recording_offset:
+          description: The offset value for the recording.
+          nullable: true
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.insights_session:
+      properties:
+        base_url:
+          description: The base URL to fetch reports and dashboards
+          nullable: true
+          type: string
+        session_expiry:
+          description: The session expiry date and time, given in ISO 8601 format.
+          nullable: true
+          type: string
+        session_id:
+          description: The unique ID for the session
+          nullable: true
+          type: string
+        url:
+          description: The URL of this resource.
+          format: uri
+          nullable: true
+          type: string
+        workspace_id:
+          description: Unique ID to identify the user's workspace
+          nullable: true
+          type: string
+      type: object
+    flex.v1.insights_settings_answersets:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        answer_set_categories:
+          description: The list of answer set categories
+          nullable: true
+        answer_sets:
+          description: The lis of answer sets
+          nullable: true
+        not_applicable:
+          description: The details for not applicable answer set
+          nullable: true
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.insights_settings_comment:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        comments:
+          nullable: true
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.insights_user_roles:
+      properties:
+        roles:
+          description: Flex Insights roles for the user
+          items:
+            type: string
+          nullable: true
+          type: array
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.interaction:
+      properties:
+        channel:
+          description: A JSON object that defines the Interaction’s communication channel and includes details about the channel. See the [Outbound SMS](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#agent-initiated-outbound-interactions) and [inbound (API-initiated)](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#api-initiated-contact) Channel object examples.
+          nullable: true
+        links:
+          format: uri-map
+          nullable: true
+          type: object
+        routing:
+          description: |-
+            A JSON Object representing the routing rules for the Interaction Channel. See [Outbound SMS Example](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#agent-initiated-outbound-interactions) for an example Routing object. The Interactions resource uses TaskRouter for all routing functionality. 
+             All attributes in the Routing object on your Interaction request body are added “as is” to the task. For a list of known attributes consumed by the Flex UI and/or Flex Insights, see [Known Task Attributes](https://www.twilio.com/docs/flex/developer/conversations/interactions-api#task-attributes).
+          nullable: true
+        sid:
+          description: The unique string created by Twilio to identify an Interaction resource, prefixed with KD.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^KD[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.interaction.interaction_channel:
+      properties:
+        error_code:
+          description: The Twilio error code for a failed channel.
+          nullable: true
+          type: integer
+        error_message:
+          description: The error message for a failed channel.
+          nullable: true
+          type: string
+        interaction_sid:
+          description: The unique string created by Twilio to identify an Interaction resource, prefixed with KD.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^KD[0-9a-fA-F]{32}$
+          type: string
+        links:
+          format: uri-map
+          nullable: true
+          type: object
+        sid:
+          description: The unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^UO[0-9a-fA-F]{32}$
+          type: string
+        status:
+          $ref: "#/components/schemas/interaction_channel_enum_channel_status"
+          description: The status of this channel.
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/interaction_channel_enum_type"
+          description: |-
+            The Interaction Channel's type. Can be: `sms`, `email`, `chat`, `whatsapp`, `web`. 
+             **Note:** These can be different from the task channel type specified in the Routing attributes. Task channel type corresponds to channel capacity while this channel type is the actual media type
+          nullable: true
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.interaction.interaction_channel.interaction_channel_invite:
+      properties:
+        channel_sid:
+          description: The Channel SID for this Invite.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^UO[0-9a-fA-F]{32}$
+          type: string
+        interaction_sid:
+          description: The Interaction SID for this Channel.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^KD[0-9a-fA-F]{32}$
+          type: string
+        routing:
+          description: |-
+            A JSON object representing the routing rules for the Interaction Channel. See [Outbound SMS Example](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#agent-initiated-outbound-interactions) for an example Routing object. The Interactions resource uses TaskRouter for all routing functionality. 
+             All attributes in the Routing object on your Interaction request body are added “as is” to the task. For a list of known attributes consumed by the Flex UI and/or Flex Insights, see [Known Task Attributes](https://www.twilio.com/docs/flex/developer/conversations/interactions-api#task-attributes).
+          nullable: true
+        sid:
+          description: The unique string created by Twilio to identify an Interaction Channel Invite resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^KG[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.interaction.interaction_channel.interaction_channel_participant:
+      properties:
+        channel_sid:
+          description: The Channel Sid for this Participant.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^UO[0-9a-fA-F]{32}$
+          type: string
+        interaction_sid:
+          description: The Interaction Sid for this channel.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^KD[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          description: The unique string created by Twilio to identify an Interaction Channel Participant resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^UT[0-9a-fA-F]{32}$
+          type: string
+        type:
+          $ref: "#/components/schemas/interaction_channel_participant_enum_type"
+          description: "Participant type. Can be: `agent`, `customer`, `supervisor`, `external`, `unknown`"
+          nullable: true
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex.v1.web_channel:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the WebChannel resource and owns this Workflow.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        flex_flow_sid:
+          description: The SID of the Flex Flow.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^FO[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          description: The unique string that we created to identify the WebChannel resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^CH[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The absolute URL of the WebChannel resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    flex_flow_enum_channel_type:
+      enum:
+        - web
+        - sms
+        - facebook
+        - whatsapp
+        - line
+        - custom
+      type: string
+    flex_flow_enum_integration_type:
+      enum:
+        - studio
+        - external
+        - task
+      type: string
+    interaction_channel_enum_channel_status:
+      enum:
+        - setup
+        - active
+        - failed
+        - closed
+      type: string
+    interaction_channel_enum_status:
+      enum:
+        - closed
+        - wrapup
+      type: string
+    interaction_channel_enum_type:
+      enum:
+        - voice
+        - sms
+        - email
+        - web
+        - whatsapp
+        - chat
+        - messenger
+        - gbm
+      type: string
+    interaction_channel_invite_enum_action:
+      enum:
+        - accept
+        - decline
+      type: string
+    interaction_channel_invite_enum_type:
+      enum:
+        - taskrouter
+      type: string
+    interaction_channel_participant_enum_status:
+      enum:
+        - closed
+        - wrapup
+      type: string
+    interaction_channel_participant_enum_type:
+      enum:
+        - supervisor
+        - customer
+        - external
+        - agent
+        - unknown
+      type: string
+    web_channel_enum_chat_status:
+      enum:
+        - inactive
+      type: string
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: This product is Generally Available.
+    name: GA
+  - description: PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+    name: Preview

@@ -1,0 +1,1364 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.klarna.com
+info:
+  description: |-
+    The payments API is used to create a session to offer Klarna's payment methods as part of your checkout. As soon as the purchase is completed the order should be read and handled using the [`Order Management API`](https://docs.klarna.com/api/ordermanagement).
+
+    Read more on [Klarna payments](https://docs.klarna.com/klarna-payments/).
+  title: Klarna Payments API V1
+  version: 1.0.0
+  x-apisguru-categories:
+    - financial
+  x-document-metadata:
+    copyright: © 2005 - 2023 Klarna Bank AB (publ). All rights reserved.
+    date-created: 2023-03-03T15:53:33+0000
+    trace-id: bd8ca7b-7019217-docs-portal-api-1677858780734
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_www.klarna.com_static_img_social-prod-imagery-blinds-beauty-default.jpg
+  x-origin:
+    - format: openapi
+      url: file:///home/mike/Downloads/swagger.json
+      version: "3.0"
+  x-providerName: klarna.com
+externalDocs:
+  description: Find out more about the Klarna REST APIs
+  url: https://docs.klarna.com/api
+tags:
+  - name: orders
+  - name: sessions
+paths:
+  "/payments/v1/authorizations/{authorizationToken}":
+    delete:
+      description: |-
+        Use this API call to cancel/release an authorization. If the `authorization_token` received during a Klarna Payments won’t be used to place an order immediately you could release the authorization.
+        Read more on **[Cancel an existing authorization](https://docs.klarna.com/klarna-payments/other-actions/cancel-an-authorization/)**.
+      operationId: cancelAuthorization
+      parameters:
+        - in: path
+          name: authorizationToken
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The authorization was cancelled successfully.
+        "403":
+          description: You were not authorized to execute this operation.
+        "404":
+          description: The authorization does not exist.
+      summary: Cancel an existing authorization
+      tags:
+        - orders
+  "/payments/v1/authorizations/{authorizationToken}/customer-token":
+    post:
+      description: |-
+        Use this API call to create a Klarna Customer Token.<br/>After having obtained an `authorization_token` for a successful authorization, this can be used to create a purchase token instead of placing the order. Creating a Klarna Customer Token results in Klarna storing customer and payment method details.
+        Read more on **[Generate a consumer token](https://docs.klarna.com/klarna-payments/in-depth-knowledge/customer-token/)**.
+      operationId: purchaseToken
+      parameters:
+        - in: path
+          name: authorizationToken
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/customer_token_creation_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/customer_token_creation_response"
+          description: Token was successfully created.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorV2"
+          description: We were unable to create a customer token with the provided data. Some field constraint was violated.
+        "403":
+          description: You were not authorized to execute this operation.
+        "404":
+          description: The authorization does not exist.
+        "409":
+          description: The data in the request does not match the session for the authorization.
+      summary: Generate a consumer token
+      tags:
+        - orders
+  "/payments/v1/authorizations/{authorizationToken}/order":
+    post:
+      description: |-
+        Use this API call to create a new order. Placing an order towards Klarna means that the Klarna Payments session will be closed and that an order will be created in Klarna's system.<br/>When you have received the `authorization_token` for a successful authorization you can place the order. Among the other order details in this request, you include a URL to the confirmation page for the customer.<br/>When the Order has been successfully placed at Klarna, you need to handle it either through the Merchant Portal or using [Klarna’s Order Management API](#order-management-api).
+        Read more on **[Create a new order](https://docs.klarna.com/klarna-payments/integrate-with-klarna-payments/step-3-create-an-order/)**.
+      operationId: createOrder
+      parameters:
+        - in: path
+          name: authorizationToken
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/create_order_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/order"
+          description: Order was successfully created.
+        "400":
+          description: We were unable to create an order with the provided data. Some field constraint was violated.
+        "403":
+          description: You were not authorized to execute this operation.
+        "404":
+          description: The authorization does not exist.
+        "409":
+          description: The data in the request does not match the session for the authorization.
+      summary: Create a new order
+      tags:
+        - orders
+  /payments/v1/sessions:
+    post:
+      description: |-
+        Use this API call to create a Klarna Payments session.<br/>When a session is created you will receive the available `payment_method_categories` for the session, a `session_id` and a `client_token`. The `session_id` can be used to read or update the session using the REST API. The `client_token` should be passed to the browser.
+        Read more on **[Create a new payment session](https://docs.klarna.com/klarna-payments/integrate-with-klarna-payments/step-1-initiate-a-payment/)**.
+      operationId: createCreditSession
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/session_create"
+        description: session_request
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/merchant_session"
+          description: successful operation
+        "400":
+          description: We were unable to create a session with the provided data. Some field constraint was violated.
+        "403":
+          description: You were not authorized to execute this operation.
+      summary: Create a new payment session
+      tags:
+        - sessions
+  "/payments/v1/sessions/{session_id}":
+    get:
+      description: |-
+        Use this API call to read a Klarna Payments session. You can read the Klarna Payments session at any time after it has been created, to get information about it. This will return all data that has been collected during the session.
+        Read more on **[Read an existing payment session](https://docs.klarna.com/klarna-payments/other-actions/check-the-details-of-a-payment-session/)**.
+      operationId: readCreditSession
+      parameters:
+        - description: session_id
+          in: path
+          name: session_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/session_read"
+          description: successful operation
+        "403":
+          description: You were not authorized to execute this operation.
+        "404":
+          description: The session does not exist.
+      summary: Read an existing payment session
+      tags:
+        - sessions
+    post:
+      description: |-
+        Use this API call to update a Klarna Payments session with new details, in case something in the order has changed and the checkout has been reloaded. Including if the consumer adds a new item to the cart or if consumer details are updated.
+        Read more on **[Update an existing payment session](https://docs.klarna.com/klarna-payments/other-actions/update-the-cart/)**.
+      operationId: updateCreditSession
+      parameters:
+        - description: session_id
+          in: path
+          name: session_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/session"
+        description: session_request
+        required: true
+      responses:
+        "204":
+          description: The session was updated successfully.
+        "400":
+          description: We were unable to update the session with the provided data. Some field constraint was violated.
+        "403":
+          description: You were not authorized to execute this operation.
+        "404":
+          description: The session does not exist.
+      summary: Update an existing payment session
+      tags:
+        - sessions
+components:
+  schemas:
+    ErrorV2:
+      properties:
+        authorized_payment_method:
+          $ref: "#/components/schemas/authorized_payment_method"
+        correlation_id:
+          type: string
+        error_code:
+          type: string
+        error_messages:
+          items:
+            type: string
+          type: array
+        fraud_status:
+          type: string
+        reason:
+          type: string
+      type: object
+    address:
+      properties:
+        attention:
+          description: ‘Attn.’ (if applicable). Only applicable for B2B customers.
+          example: Attn
+          maxLength: 99
+          minLength: 0
+          type: string
+        city:
+          description: Customer’s city.
+          example: London
+          maxLength: 99
+          minLength: 0
+          type: string
+        country:
+          description: Customer’s country. This value overrides the purchase country if they are different. Should follow the standard of ISO 3166 alpha-2. E.g. GB, US, DE, SE.
+          example: GB
+          pattern: ^[A-Za-z]{2,2}$
+          type: string
+        email:
+          description: Customer’s email address.
+          example: test.sam@test.com
+          maxLength: 99
+          minLength: 0
+          type: string
+        family_name:
+          description: |-
+            Customers family name in UTF-8 encoding.
+            Cannot be only numbers, must be more than 1 character.
+            Allowed special characters: -'’.
+            More information can be found [in this link](https://docs.klarna.com/klarna-payments/in-depth-knowledge/customer-data-requirements/#details-needed-per-market)
+          example: Andersson
+          maxLength: 99
+          minLength: 0
+          type: string
+        given_name:
+          description: |-
+            Customers given name in UTF-8 encoding.
+            Cannot be only numbers, must be more than 1 character.
+            Allowed special characters: -'’.
+            More information can be found [in this link](https://docs.klarna.com/klarna-payments/in-depth-knowledge/customer-data-requirements/#details-needed-per-market)
+          example: Adam
+          maxLength: 99
+          minLength: 0
+          type: string
+        organization_name:
+          description: Organization name (if applicable). Only applicable for B2B customers.
+          maxLength: 99
+          minLength: 0
+          type: string
+        phone:
+          description: Phone number. Preferably a mobile phone number.
+          example: "+44795465131"
+          maxLength: 99
+          minLength: 5
+          type: string
+        postal_code:
+          description: |-
+            Customer’s postal code. Validation according to Universal Postal Union addressing systems.
+            E.g. 12345, W1G OPW.
+          example: W1G 0PW
+          maxLength: 10
+          minLength: 0
+          type: string
+        region:
+          description: Customer’s region or state - Mandatory for US and AU market. Validations according to ISO 3166-2 format, e.g. OH, NJ, etc.
+          example: OH
+          maxLength: 99
+          minLength: 0
+          type: string
+        street_address:
+          description: |-
+            Customer’s street address. Regional formatting is required, as follows:
+            UK/US/FR: 33 Cavendish Square
+            Rest of EU: De Ruijterkade 7
+          example: 33 Cavendish Square
+          maxLength: 99
+          minLength: 0
+          type: string
+        street_address2:
+          description: "Customer’s street address. Second Line. "
+          example: Floor 22 / Flat 2
+          maxLength: 99
+          minLength: 0
+          type: string
+        title:
+          description: |-
+            Customer’s Title. Allowed values per country:
+            UK - "Mr", "Ms"
+            DE - "Herr", "Frau"
+            AT: "Herr, "Frau"
+            CH: de-CH: "Herr, "Frau" it-CH: "Sig.", "Sig.ra" fr-CH: "M", "Mme" 
+            BE: "Dhr.", "Mevr."
+            NL: "Dhr.", "Mevr."
+          example: Mr.
+          maxLength: 20
+          minLength: 0
+          type: string
+      type: object
+    asset_urls:
+      properties:
+        descriptive:
+          description: URL of the descriptive asset. Using this dynamic asset will make sure that any copy update of Klarna will automatically be propagated.
+          example: https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg
+          type: string
+        standard:
+          description: URL of the standard asset. Using this dynamic asset will make sure that any copy update of Klarna will automatically be propagated.
+          example: https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg
+          type: string
+      type: object
+    attachment:
+      properties:
+        body:
+          description: The content of the extra merchant data should be presented as a string inside this property. The body should be an object containing any of the keys and sub-objects described below serialized to JSON. More information on that object can be found [here](https://developers.klarna.com/api/#attachment-schema).
+          example: '{"customer_account_info":[{"unique_account_identifier":"test@gmail.com","account_registration_date":"2017-02-13T10:49:20Z","account_last_modified":"2019-03-13T11:45:27Z"}]}'
+          type: string
+        content_type:
+          description: The content type of the body. It is usually represented as "application/vnd.klarna.internal.emd-v2+json"
+          example: application/vnd.klarna.internal.emd-v2+json
+          type: string
+      required:
+        - body
+        - content_type
+      type: object
+    authorized_payment_method:
+      properties:
+        number_of_days:
+          format: int32
+          type: integer
+        number_of_installments:
+          format: int32
+          type: integer
+        type:
+          enum:
+            - invoice
+            - fixed_amount
+            - base_account
+            - direct_debit
+            - direct_bank_transfer
+            - b2b_invoice
+            - card
+            - slice_it_by_card
+            - pay_later_by_card
+            - pay_by_card
+            - fixed_sum_credit
+          type: string
+      required:
+        - type
+      type: object
+    create_order_request:
+      properties:
+        authorization_token:
+          description: Authorization token.
+          readOnly: true
+          type: string
+        auto_capture:
+          default: false
+          description: Allow merchant to trigger auto capturing.
+          type: boolean
+        billing_address:
+          $ref: "#/components/schemas/address"
+        custom_payment_method_ids:
+          description: "Promo codes - The array could be used to define which of the configured payment options within a payment category (pay_later, pay_over_time, etc.) should be shown for this purchase. Discuss with the delivery manager to know about the promo codes that will be configured for your account. The feature could also be used to provide promotional offers to specific customers (eg: 0% financing). Please be informed that the usage of this feature can have commercial implications. "
+          items:
+            type: string
+          type: array
+        customer:
+          $ref: "#/components/schemas/customer"
+        locale:
+          description: |-
+            Used to define the language and region of the customer. The locale follows the format of (RFC 1766)[https://datatracker.ietf.org/doc/rfc1766/], meaning its value consists of language-country.
+            The following values are applicable:
+
+            AT: "de-AT", "de-DE", "en-DE"
+            BE: "be-BE", "nl-BE", "fr-BE", "en-BE"
+            CH: "it-CH", "de-CH", "fr-CH", "en-CH"
+            DE: "de-DE", "de-AT", "en-DE"
+            DK: "da-DK", "en-DK"
+            ES: "es-ES", "ca-ES", "en-ES"
+            FI: "fi-FI", "sv-FI", "en-FI"
+            GB: "en-GB"
+            IT: "it-IT", "en-IT"
+            NL: "nl-NL", "en-NL"
+            NO: "nb-NO", "en-NO"
+            PL: "pl-PL", "en-PL"
+            SE: "sv-SE", "en-SE"
+            US: "en-US".
+          example: en-GB
+          pattern: ^[A-Za-z]{2,2}(?:-[A-Za-z]{2,2})*$
+          type: string
+        merchant_data:
+          description: Pass through field to send any information about the order to be used later for reference while retrieving the order details (max 6000 characters)
+          example: "{\"order_specific\":[{\"substore\":\"Women's Fashion\",\"product_name\":\"Women Sweatshirt\"}]}"
+          maxLength: 6000
+          minLength: 0
+          type: string
+        merchant_reference1:
+          description: Used for storing merchant's internal order number or other reference.
+          example: ON4711
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_reference2:
+          description: Used for storing merchant's internal order number or other reference. The value is available in the settlement files. (max 255 characters).
+          example: hdt53h-zdgg6-hdaff2
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_urls:
+          $ref: "#/components/schemas/merchant_urls"
+        order_amount:
+          description: "Total amount of the order including tax and any available discounts. The value should be in non-negative minor units. Eg: 25 Euros should be 2500."
+          example: 2500
+          format: int64
+          minimum: 0
+          type: integer
+        order_lines:
+          description: The array containing list of line items that are part of this order. Maximum of 1000 line items could be processed in a single order.
+          items:
+            $ref: "#/components/schemas/order_line"
+          maxItems: 1000
+          minItems: 1
+          type: array
+        order_tax_amount:
+          description: "Total tax amount of the order. The value should be in non-negative minor units. Eg: 25 Euros should be 2500."
+          example: 475
+          format: int64
+          minimum: 0
+          type: integer
+        payment_method_categories:
+          description: Available payment method categories
+          items:
+            $ref: "#/components/schemas/payment_method_category"
+          readOnly: true
+          type: array
+          uniqueItems: true
+        purchase_country:
+          description: The purchase country of the customer. The billing country always overrides purchase country if the values are different. Formatted according to ISO 3166 alpha-2 standard, e.g. GB, SE, DE, US, etc.
+          example: GB
+          pattern: ^[A-Za-z]{2,2}$
+          type: string
+        purchase_currency:
+          description: The purchase currency of the order. Formatted according to ISO 4217 standard, e.g. USD, EUR, SEK, GBP, etc.
+          example: GBP
+          pattern: ^[A-Za-z]{3,3}$
+          type: string
+        shipping_address:
+          $ref: "#/components/schemas/address"
+        status:
+          description: "The current status of the session. Possible values: 'complete', 'incomplete' where 'complete' is set when the order has been placed."
+          enum:
+            - complete
+            - incomplete
+          example: complete
+          readOnly: true
+          type: string
+      required:
+        - order_amount
+        - order_lines
+        - purchase_country
+        - purchase_currency
+      type: object
+    customer:
+      properties:
+        date_of_birth:
+          description: Customer’s date of birth. The format is ‘yyyy-mm-dd’
+          example: 1978-12-31
+          type: string
+        gender:
+          description: Customer’s gender - ‘male’ or ‘female’
+          example: male
+          type: string
+        last_four_ssn:
+          description: Last four digits of the customer's social security number. This value is available for US customers.
+          pattern: ^([0-9]{4}|[0-9]{9})$
+          type: string
+        national_identification_number:
+          description: The customer's national identification number. This value is available for EU customers utilizing national identification numbers.
+          type: string
+        organization_entity_type:
+          description: Organization entity type. Only applicable for B2B customers.
+          enum:
+            - LIMITED_COMPANY
+            - PUBLIC_LIMITED_COMPANY
+            - ENTREPRENEURIAL_COMPANY
+            - LIMITED_PARTNERSHIP_LIMITED_COMPANY
+            - LIMITED_PARTNERSHIP
+            - GENERAL_PARTNERSHIP
+            - REGISTERED_SOLE_TRADER
+            - SOLE_TRADER
+            - CIVIL_LAW_PARTNERSHIP
+            - PUBLIC_INSTITUTION
+            - OTHER
+          type: string
+        organization_registration_id:
+          description: Organization registration id. Only applicable for B2B customers.
+          type: string
+        title:
+          description: |-
+            Customer’s Title. Allowed values per country:
+            UK - "Mr", "Ms"
+            DE - "Herr", "Frau"
+            AT: "Herr, "Frau"
+            CH: de-CH: "Herr, "Frau" it-CH: "Sig.", "Sig.ra" fr-CH: "M", "Mme" 
+            BE: "Dhr.", "Mevr."
+            NL: "Dhr.", "Mevr."
+          example: Mr.
+          type: string
+        type:
+          description: Type of customer in the session. If nothing is added, a B2C session will be the default. If it is a b2b-session, you should enter organization to trigger a B2B session.
+          example: organization
+          pattern: ^(person|organization)$
+          type: string
+        vat_id:
+          description: VAT ID. Only applicable for B2B customers.
+          type: string
+      type: object
+    customer_read:
+      properties:
+        date_of_birth:
+          description: Customer’s date of birth. The format is ‘yyyy-mm-dd’
+          example: 1978-12-31
+          type: string
+        gender:
+          description: Customer’s gender - ‘male’ or ‘female’
+          example: male
+          type: string
+        organization_entity_type:
+          description: Organization entity type. Only applicable for B2B customers.
+          enum:
+            - LIMITED_COMPANY
+            - PUBLIC_LIMITED_COMPANY
+            - ENTREPRENEURIAL_COMPANY
+            - LIMITED_PARTNERSHIP_LIMITED_COMPANY
+            - LIMITED_PARTNERSHIP
+            - GENERAL_PARTNERSHIP
+            - REGISTERED_SOLE_TRADER
+            - SOLE_TRADER
+            - CIVIL_LAW_PARTNERSHIP
+            - PUBLIC_INSTITUTION
+            - OTHER
+          type: string
+        organization_registration_id:
+          description: Organization registration id. Only applicable for B2B customers.
+          type: string
+        title:
+          description: |-
+            Customer’s Title. Allowed values per country:
+            UK - "Mr", "Ms"
+            DE - "Herr", "Frau"
+            AT: "Herr, "Frau"
+            CH: de-CH: "Herr, "Frau" it-CH: "Sig.", "Sig.ra" fr-CH: "M", "Mme" 
+            BE: "Dhr.", "Mevr."
+            NL: "Dhr.", "Mevr."
+          example: Mr.
+          type: string
+        type:
+          description: Type of customer in the session. If nothing is added, a B2C session will be the default. If it is a b2b-session, you should enter organization to trigger a B2B session.
+          example: organization
+          type: string
+        vat_id:
+          description: VAT ID. Only applicable for B2B customers.
+          type: string
+      type: object
+    customer_read_create_token:
+      properties:
+        date_of_birth:
+          description: Customer’s date of birth. The format is ‘yyyy-mm-dd’
+          example: 1978-12-31
+          type: string
+        gender:
+          description: Customer’s gender - ‘male’ or ‘female’
+          example: male
+          type: string
+      type: object
+    customer_token_creation_request:
+      properties:
+        billing_address:
+          $ref: "#/components/schemas/address"
+        customer:
+          $ref: "#/components/schemas/customer"
+        description:
+          description: Description of the purpose of the token.
+          maxLength: 255
+          type: string
+        intended_use:
+          description: Intended use for the token.
+          enum:
+            - SUBSCRIPTION
+          type: string
+        locale:
+          description: RFC 1766 customer's locale.
+          example: en-GB
+          pattern: ^[A-Za-z]{2,2}(?:-[A-Za-z]{2,2})*$
+          type: string
+        purchase_country:
+          description: ISO 3166 alpha-2 purchase country.
+          example: GB
+          pattern: ^[A-Za-z]{2,2}$
+          type: string
+        purchase_currency:
+          description: ISO 4217 purchase currency.
+          example: GBP
+          pattern: ^[A-Za-z]{3,3}$
+          type: string
+      required:
+        - description
+        - intended_use
+        - locale
+        - purchase_country
+        - purchase_currency
+      type: object
+    customer_token_creation_response:
+      properties:
+        billing_address:
+          $ref: "#/components/schemas/address"
+        customer:
+          $ref: "#/components/schemas/customer_read_create_token"
+        payment_method_reference:
+          description: Used to connect customers with payment method when it is present.
+          example: 0b1d9815-165e-42e2-8867-35bc03789e00
+          type: string
+        redirect_url:
+          description: URL to redirect the customer to after placing the order. This is a Klarna URL where Klarna will place a cookie in the customer’s browser (if redirected) and redirect the customer back to the confirmation URL provided by the merchant. This is not a mandatory step but a recommended one to improve the returning customer’s experience.
+          example: https://credit.klarna.com/v1/sessions/0b1d9815-165e-42e2-8867-35bc03789e00/redirect
+          type: string
+        token_id:
+          description: Generated customer token. This token will be used to create a new order for the subscription using the Create a New order using token API.
+          example: 0b1d9815-165e-42e2-8867-35bc03789e00
+          type: string
+      required:
+        - token_id
+      type: object
+    merchant_session:
+      properties:
+        client_token:
+          description: Client token to be passed to the JS client while initializing the JS SDK in the next step.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJzZXNzaW9uX2lkIiA6ICIw
+          maxLength: 4096
+          minLength: 0
+          type: string
+        payment_method_categories:
+          description: Available payment method categories for this particular session
+          items:
+            $ref: "#/components/schemas/payment_method_category"
+          type: array
+          uniqueItems: true
+        session_id:
+          description: ID of the created session. Please use this ID to share with Klarna for identifying any issues during integration.
+          example: 0b1d9815-165e-42e2-8867-35bc03789e00
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+        - client_token
+        - session_id
+      type: object
+    merchant_urls:
+      properties:
+        authorization:
+          description: URL for receiving the authorization token when payment is completed. Used for Authorization Callback.
+          example: https://www.example-url.com/authorization
+          maxLength: 2000
+          minLength: 0
+          type: string
+        confirmation:
+          description: URL of the merchant confirmation page. The consumer will be redirected back to the confirmation page if the consumer is sent to the redirect URL after placing the order. Insert {session.id} and/or {order.id} as placeholder to connect either of those IDs to the URL(max 2000 characters).
+          example: https://www.example-url.com/confirmation
+          maxLength: 2000
+          minLength: 0
+          type: string
+        notification:
+          description: URL for notifications on pending orders. Insert {session.id} and/or {order.id} as placeholder to connect either of those IDs to the URL (max 2000 characters).
+          example: https://www.example-url.com/notification
+          maxLength: 2000
+          minLength: 0
+          type: string
+        push:
+          description: URL that will be requested when an order is completed. Should be different than checkout and confirmation URLs. Insert {session.id} and/or {order.id} as placeholder to connect either of those IDs to the URL (max 2000 characters).
+          example: https://www.example-url.com/push
+          maxLength: 2000
+          minLength: 0
+          type: string
+      type: object
+    options:
+      properties:
+        color_border:
+          description: Color for the border of elements within the iFrame. Value should be a CSS hex color, e.g. "#FF9900"
+          example: "#FF9900"
+          pattern: ^#[A-Fa-f0-9]{6}$
+          type: string
+        color_border_selected:
+          description: Color for the border of elements within the iFrame when selected by the customer. Value should be a CSS hex color, e.g. "#FF9900"
+          example: "#FF9900"
+          pattern: ^#[A-Fa-f0-9]{6}$
+          type: string
+        color_details:
+          description: Color for the bullet points within the iFrame. Value should be a CSS hex color, e.g. "#FF9900"
+          example: "#FF9900"
+          pattern: ^#[A-Fa-f0-9]{6}$
+          type: string
+        color_text:
+          description: Color for the texts within the iFrame. Value should be a CSS hex color, e.g. "#FF9900"
+          example: "#FF9900"
+          pattern: ^#[A-Fa-f0-9]{6}$
+          type: string
+        radius_border:
+          description: Radius for the border of elements within the iFrame.
+          example: 5px
+          type: string
+      type: object
+    order:
+      properties:
+        authorized_payment_method:
+          $ref: "#/components/schemas/authorized_payment_method"
+        fraud_status:
+          description: Fraud status for the order. Either ACCEPTED or PENDING. If ACCEPTED, the order could be captured. If PENDING, please wait till you receive the notification from Klarna in the notification URL that the order has been approved. You can find additional information here.
+          type: string
+        order_id:
+          description: Unique order ID of the transaction. This ID will be used for all order management processes.
+          type: string
+        redirect_url:
+          description: URL to redirect the customer to after placing the order. This is a Klarna URL to which the merchant should redirect the customer to. Klarna will place a cookie in the customer’s browser (if redirected) and redirect the customer back to the confirmation URL provided by the merchant. This is not a mandatory step but a recommended one to improve the returning customer’s experience. It is a spontaneous step and does not harm the customer’s experience.
+          example: https://credit.klarna.com/v1/sessions/0b1d9815-165e-42e2-8867-35bc03789e00/redirect
+          type: string
+      required:
+        - order_id
+      type: object
+    order_line:
+      properties:
+        image_url:
+          description: |-
+            URL to an image that can be later embedded in communications between Klarna and the customer. (max 1024 characters).
+             A minimum of 250x250 px resolution is recommended for the image to look good in the Klarna app, and below 50x50 px won't even show. We recommend using a good sized image (650x650 px or more), however the file size must not exceed 12MB.
+          example: https://www.exampleobjects.com/logo.png
+          maxLength: 1024
+          minLength: 0
+          type: string
+        merchant_data:
+          description: Used for storing merchant's internal order number or other reference. Pass through field. (max 1024 characters)
+          example: '{"customer_account_info":[{"unique_account_identifier":"test@gmail.com","account_registration_date":"2017-02-13T10:49:20Z","account_last_modified":"2019-03-13T11:45:27Z"}]}'
+          maxLength: 1024
+          minLength: 0
+          type: string
+        name:
+          description: Descriptive name of the order line item.
+          example: Running shoe
+          maxLength: 255
+          minLength: 1
+          type: string
+        product_identifiers:
+          $ref: "#/components/schemas/product_identifiers"
+        product_url:
+          description: URL to the product in the merchant’s webshop that can be later used in communications between Klarna and the customer. (max 1024 characters)
+          example: https://.../AD6654412.html
+          maxLength: 1024
+          minLength: 0
+          type: string
+        quantity:
+          description: Quantity of the order line item. Must be a non-negative number.
+          example: 1
+          format: int64
+          minimum: 0
+          type: integer
+        quantity_unit:
+          description: Unit used to describe the quantity, e.g. kg, pcs, etc. If defined the value has to be 1-8 characters.
+          example: pcs
+          maxLength: 8
+          minLength: 1
+          type: string
+        reference:
+          description: Client facing article number, SKU or similar. Max length is 256 characters.
+          example: AD6654412
+          maxLength: 256
+          minLength: 0
+          type: string
+        subscription:
+          $ref: "#/components/schemas/subscription"
+        tax_rate:
+          description: Tax rate of the order line. Non-negative value. The percentage value is represented with two implicit decimals. I.e 1900 = 19%.
+          example: 1900
+          format: int64
+          maximum: 10000
+          minimum: 0
+          type: integer
+        total_amount:
+          description: |-
+            Total amount of the order line. Must be defined as minor units. Includes tax and discount. Eg: 2500=25 euros
+            Value = (quantity x unit_price) - total_discount_amount. 
+            (max value: 100000000)
+          example: 2500
+          format: int64
+          maximum: 100000000
+          type: integer
+        total_discount_amount:
+          description: "Non-negative minor units. Includes tax. Eg: 500=5 euros"
+          example: 500
+          format: int64
+          minimum: 0
+          type: integer
+        total_tax_amount:
+          description: Total tax amount of the order line. Must be within ±1 of total_amount - total_amount 10000 / (10000 + tax_rate). Negative when type is discount.
+          example: 475
+          format: int64
+          type: integer
+        type:
+          description: |-
+            Type of the order line item. The possible values are:
+
+            physical
+            discount
+            shipping_fee
+            sales_tax
+            digital
+            gift_card
+            store_credit
+            surcharge
+          example: physical
+          type: string
+        unit_price:
+          description: "Price for a single unit of the order line. Must be defined as minor units. Includes tax, excludes discount. (max value: 100000000)"
+          example: 2500
+          format: int64
+          maximum: 100000000
+          type: integer
+      required:
+        - name
+        - quantity
+        - total_amount
+        - unit_price
+      type: object
+    payment_method_category:
+      properties:
+        asset_urls:
+          $ref: "#/components/schemas/asset_urls"
+        identifier:
+          description: |-
+            ID of the payment method category to be used while loading the widget later.
+            The possible values are:<ul><li>klarna</li><li>pay_later</li><li>pay_now</li><li>pay_over_time</li><li>direct_bank_transfer</li><li>direct_debit</li></ul>
+          example: klarna
+          type: string
+        name:
+          description: Name of the payment method category. These names are dynamic depending on what payment method is in the category. Using this dynamic asset will make sure that any copy update of Klarna will automatically be propagated, or any updates of included payment methods by you.
+          example: Pay with Klarna
+          type: string
+      type: object
+    product_identifiers:
+      properties:
+        brand:
+          description: The product's brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value.
+          example: shoe-brand
+          maxLength: 70
+          minLength: 0
+          type: string
+        category_path:
+          description: The product's category path as used in the merchant's webshop. Include the full and most detailed category and separate the segments with ' > '
+          example: Shoes > Running
+          maxLength: 750
+          minLength: 0
+          type: string
+        color:
+          description: Color to be shown to the end customer (max 64 characters).
+          example: white
+          maxLength: 64
+          minLength: 0
+          type: string
+        global_trade_item_number:
+          description: The product's Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible
+          example: "4912345678904"
+          maxLength: 50
+          minLength: 0
+          type: string
+        manufacturer_part_number:
+          description: The product's Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible
+          example: AD6654412-334.22
+          maxLength: 70
+          minLength: 0
+          type: string
+        size:
+          description: Size to be shown to the end customer (max 64 characters).
+          example: small
+          maxLength: 64
+          minLength: 0
+          type: string
+      type: object
+    session:
+      properties:
+        acquiring_channel:
+          description: The acquiring channel in which the session takes place. Ecommerce is default unless specified. Any other values should be defined in the agreement.
+          enum:
+            - ECOMMERCE
+            - IN_STORE
+            - TELESALES
+          example: ECOMMERCE
+          type: string
+        attachment:
+          $ref: "#/components/schemas/attachment"
+        authorization_token:
+          description: Authorization token.
+          readOnly: true
+          type: string
+        billing_address:
+          $ref: "#/components/schemas/address"
+        client_token:
+          description: Token to be passed to the JS client
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJzZXNzaW9uX2lkIiA6ICIw
+          maxLength: 4096
+          minLength: 0
+          readOnly: true
+          type: string
+        custom_payment_method_ids:
+          description: "Promo codes - The array could be used to define which of the configured payment options within a payment category (pay_later, pay_over_time, etc.) should be shown for this purchase. Discuss with the delivery manager to know about the promo codes that will be configured for your account. The feature could also be used to provide promotional offers to specific customers (eg: 0% financing). Please be informed that the usage of this feature can have commercial implications. "
+          items:
+            type: string
+          type: array
+        customer:
+          $ref: "#/components/schemas/customer"
+        design:
+          description: Design package to use in the session. This can only by used if a custom design has been implemented for Klarna Payments and agreed upon in the agreement. It might have a financial impact. Delivery manager will provide the value for the parameter.
+          type: string
+        expires_at:
+          description: Session expiration date
+          example: 2038-01-19T03:14:07.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        intent:
+          description: Intent for the session. The field is designed to let partners inform Klarna of the purpose of the customer’s session.
+          enum:
+            - buy
+            - tokenize
+            - buy_and_tokenize
+          example: buy
+          type: string
+        locale:
+          description: |-
+            Used to define the language and region of the customer. The locale follows the format of (RFC 1766)[https://datatracker.ietf.org/doc/rfc1766/], meaning its value consists of language-country.
+            The following values are applicable:
+
+            AT: "de-AT", "de-DE", "en-DE"
+            BE: "be-BE", "nl-BE", "fr-BE", "en-BE"
+            CH: "it-CH", "de-CH", "fr-CH", "en-CH"
+            DE: "de-DE", "de-AT", "en-DE"
+            DK: "da-DK", "en-DK"
+            ES: "es-ES", "ca-ES", "en-ES"
+            FI: "fi-FI", "sv-FI", "en-FI"
+            GB: "en-GB"
+            IT: "it-IT", "en-IT"
+            NL: "nl-NL", "en-NL"
+            NO: "nb-NO", "en-NO"
+            PL: "pl-PL", "en-PL"
+            SE: "sv-SE", "en-SE"
+            US: "en-US".
+          example: en-GB
+          pattern: ^[A-Za-z]{2,2}(?:-[A-Za-z]{2,2})*$
+          type: string
+        merchant_data:
+          description: Pass through field to send any information about the order to be used later for reference while retrieving the order details (max 6000 characters)
+          example: "{\"order_specific\":[{\"substore\":\"Women's Fashion\",\"product_name\":\"Women Sweatshirt\"}]}"
+          maxLength: 6000
+          minLength: 0
+          type: string
+        merchant_reference1:
+          description: Used for storing merchant's internal order number or other reference.
+          example: ON4711
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_reference2:
+          description: Used for storing merchant's internal order number or other reference. The value is available in the settlement files. (max 255 characters).
+          example: hdt53h-zdgg6-hdaff2
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_urls:
+          $ref: "#/components/schemas/merchant_urls"
+        options:
+          $ref: "#/components/schemas/options"
+        order_amount:
+          description: "Total amount of the order including tax and any available discounts. The value should be in non-negative minor units. Eg: 25 Euros should be 2500."
+          example: 2500
+          format: int64
+          minimum: 0
+          type: integer
+        order_lines:
+          description: The array containing list of line items that are part of this order. Maximum of 1000 line items could be processed in a single order.
+          items:
+            $ref: "#/components/schemas/order_line"
+          maxItems: 1000
+          minItems: 1
+          type: array
+        order_tax_amount:
+          description: "Total tax amount of the order. The value should be in non-negative minor units. Eg: 25 Euros should be 2500."
+          example: 475
+          format: int64
+          minimum: 0
+          type: integer
+        payment_method_categories:
+          description: Available payment method categories
+          items:
+            $ref: "#/components/schemas/payment_method_category"
+          readOnly: true
+          type: array
+          uniqueItems: true
+        purchase_country:
+          description: The purchase country of the customer. The billing country always overrides purchase country if the values are different. Formatted according to ISO 3166 alpha-2 standard, e.g. GB, SE, DE, US, etc.
+          example: GB
+          pattern: ^[A-Za-z]{2,2}$
+          type: string
+        purchase_currency:
+          description: The purchase currency of the order. Formatted according to ISO 4217 standard, e.g. USD, EUR, SEK, GBP, etc.
+          example: GBP
+          pattern: ^[A-Za-z]{3,3}$
+          type: string
+        shipping_address:
+          $ref: "#/components/schemas/address"
+        status:
+          description: "The current status of the session. Possible values: 'complete', 'incomplete' where 'complete' is set when the order has been placed."
+          enum:
+            - complete
+            - incomplete
+          example: complete
+          readOnly: true
+          type: string
+      type: object
+    session_create:
+      properties:
+        acquiring_channel:
+          description: The acquiring channel in which the session takes place. Ecommerce is default unless specified. Any other values should be defined in the agreement.
+          enum:
+            - ECOMMERCE
+            - IN_STORE
+            - TELESALES
+          example: ECOMMERCE
+          type: string
+        attachment:
+          $ref: "#/components/schemas/attachment"
+        authorization_token:
+          description: Authorization token.
+          readOnly: true
+          type: string
+        billing_address:
+          $ref: "#/components/schemas/address"
+        client_token:
+          description: Token to be passed to the JS client
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJzZXNzaW9uX2lkIiA6ICIw
+          maxLength: 4096
+          minLength: 0
+          readOnly: true
+          type: string
+        custom_payment_method_ids:
+          description: "Promo codes - The array could be used to define which of the configured payment options within a payment category (pay_later, pay_over_time, etc.) should be shown for this purchase. Discuss with the delivery manager to know about the promo codes that will be configured for your account. The feature could also be used to provide promotional offers to specific customers (eg: 0% financing). Please be informed that the usage of this feature can have commercial implications. "
+          items:
+            type: string
+          type: array
+        customer:
+          $ref: "#/components/schemas/customer"
+        design:
+          description: Design package to use in the session. This can only by used if a custom design has been implemented for Klarna Payments and agreed upon in the agreement. It might have a financial impact. Delivery manager will provide the value for the parameter.
+          type: string
+        expires_at:
+          description: Session expiration date
+          example: 2038-01-19T03:14:07.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        intent:
+          description: Intent for the session. The field is designed to let partners inform Klarna of the purpose of the customer’s session.
+          enum:
+            - buy
+            - tokenize
+            - buy_and_tokenize
+          example: buy
+          type: string
+        locale:
+          description: |-
+            Used to define the language and region of the customer. The locale follows the format of (RFC 1766)[https://datatracker.ietf.org/doc/rfc1766/], meaning its value consists of language-country.
+            The following values are applicable:
+
+            AT: "de-AT", "de-DE", "en-DE"
+            BE: "be-BE", "nl-BE", "fr-BE", "en-BE"
+            CH: "it-CH", "de-CH", "fr-CH", "en-CH"
+            DE: "de-DE", "de-AT", "en-DE"
+            DK: "da-DK", "en-DK"
+            ES: "es-ES", "ca-ES", "en-ES"
+            FI: "fi-FI", "sv-FI", "en-FI"
+            GB: "en-GB"
+            IT: "it-IT", "en-IT"
+            NL: "nl-NL", "en-NL"
+            NO: "nb-NO", "en-NO"
+            PL: "pl-PL", "en-PL"
+            SE: "sv-SE", "en-SE"
+            US: "en-US". Default value is "en-US".
+          example: en-US
+          pattern: ^[A-Za-z]{2,2}(?:-[A-Za-z]{2,2})*$
+          type: string
+        merchant_data:
+          description: Pass through field to send any information about the order to be used later for reference while retrieving the order details (max 6000 characters)
+          example: "{\"order_specific\":[{\"substore\":\"Women's Fashion\",\"product_name\":\"Women Sweatshirt\"}]}"
+          maxLength: 6000
+          minLength: 0
+          type: string
+        merchant_reference1:
+          description: Used for storing merchant's internal order number or other reference.
+          example: ON4711
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_reference2:
+          description: Used for storing merchant's internal order number or other reference. The value is available in the settlement files. (max 255 characters).
+          example: hdt53h-zdgg6-hdaff2
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_urls:
+          $ref: "#/components/schemas/merchant_urls"
+        options:
+          $ref: "#/components/schemas/options"
+        order_amount:
+          description: "Total amount of the order including tax and any available discounts. The value should be in non-negative minor units. Eg: 25 Euros should be 2500."
+          example: 2500
+          format: int64
+          minimum: 0
+          type: integer
+        order_lines:
+          description: The array containing list of line items that are part of this order. Maximum of 1000 line items could be processed in a single order.
+          items:
+            $ref: "#/components/schemas/order_line"
+          maxItems: 1000
+          minItems: 1
+          type: array
+        order_tax_amount:
+          description: "Total tax amount of the order. The value should be in non-negative minor units. Eg: 25 Euros should be 2500."
+          example: 475
+          format: int64
+          minimum: 0
+          type: integer
+        payment_method_categories:
+          description: Available payment method categories
+          items:
+            $ref: "#/components/schemas/payment_method_category"
+          readOnly: true
+          type: array
+          uniqueItems: true
+        purchase_country:
+          description: The purchase country of the customer. The billing country always overrides purchase country if the values are different. Formatted according to ISO 3166 alpha-2 standard, e.g. GB, SE, DE, US, etc.
+          example: GB
+          pattern: ^[A-Za-z]{2,2}$
+          type: string
+        purchase_currency:
+          description: The purchase currency of the order. Formatted according to ISO 4217 standard, e.g. USD, EUR, SEK, GBP, etc.
+          example: GBP
+          pattern: ^[A-Za-z]{3,3}$
+          type: string
+        shipping_address:
+          $ref: "#/components/schemas/address"
+        status:
+          description: "The current status of the session. Possible values: 'complete', 'incomplete' where 'complete' is set when the order has been placed."
+          enum:
+            - complete
+            - incomplete
+          example: complete
+          readOnly: true
+          type: string
+      required:
+        - order_amount
+        - order_lines
+        - purchase_country
+        - purchase_currency
+      type: object
+    session_read:
+      properties:
+        acquiring_channel:
+          description: The acquiring channel in which the session takes place. Ecommerce is default unless specified. Any other values should be defined in the agreement.
+          enum:
+            - ECOMMERCE
+            - IN_STORE
+            - TELESALES
+          example: ECOMMERCE
+          type: string
+        attachment:
+          $ref: "#/components/schemas/attachment"
+        authorization_token:
+          description: Authorization token.
+          readOnly: true
+          type: string
+        billing_address:
+          $ref: "#/components/schemas/address"
+        client_token:
+          description: Token to be passed to the JS client
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJzZXNzaW9uX2lkIiA6ICIw
+          maxLength: 4096
+          minLength: 0
+          readOnly: true
+          type: string
+        custom_payment_method_ids:
+          description: "Promo codes - The array could be used to define which of the configured payment options within a payment category (pay_later, pay_over_time, etc.) should be shown for this purchase. Discuss with the delivery manager to know about the promo codes that will be configured for your account. The feature could also be used to provide promotional offers to specific customers (eg: 0% financing). Please be informed that the usage of this feature can have commercial implications. "
+          items:
+            type: string
+          type: array
+        customer:
+          $ref: "#/components/schemas/customer_read"
+        design:
+          description: Design package to use in the session. This can only by used if a custom design has been implemented for Klarna Payments and agreed upon in the agreement. It might have a financial impact. Delivery manager will provide the value for the parameter.
+          type: string
+        expires_at:
+          description: Session expiration date
+          example: 2038-01-19T03:14:07.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        intent:
+          description: Intent for the session. The field is designed to let partners inform Klarna of the purpose of the customer’s session.
+          enum:
+            - buy
+            - tokenize
+            - buy_and_tokenize
+          example: buy
+          type: string
+        locale:
+          description: |-
+            Used to define the language and region of the customer. The locale follows the format of (RFC 1766)[https://datatracker.ietf.org/doc/rfc1766/], meaning its value consists of language-country.
+            The following values are applicable:
+
+            AT: "de-AT", "de-DE", "en-DE"
+            BE: "be-BE", "nl-BE", "fr-BE", "en-BE"
+            CH: "it-CH", "de-CH", "fr-CH", "en-CH"
+            DE: "de-DE", "de-AT", "en-DE"
+            DK: "da-DK", "en-DK"
+            ES: "es-ES", "ca-ES", "en-ES"
+            FI: "fi-FI", "sv-FI", "en-FI"
+            GB: "en-GB"
+            IT: "it-IT", "en-IT"
+            NL: "nl-NL", "en-NL"
+            NO: "nb-NO", "en-NO"
+            PL: "pl-PL", "en-PL"
+            SE: "sv-SE", "en-SE"
+            US: "en-US".
+          example: en-GB
+          pattern: ^[A-Za-z]{2,2}(?:-[A-Za-z]{2,2})*$
+          type: string
+        merchant_data:
+          description: Pass through field to send any information about the order to be used later for reference while retrieving the order details (max 6000 characters)
+          example: "{\"order_specific\":[{\"substore\":\"Women's Fashion\",\"product_name\":\"Women Sweatshirt\"}]}"
+          maxLength: 6000
+          minLength: 0
+          type: string
+        merchant_reference1:
+          description: Used for storing merchant's internal order number or other reference.
+          example: ON4711
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_reference2:
+          description: Used for storing merchant's internal order number or other reference. The value is available in the settlement files. (max 255 characters).
+          example: hdt53h-zdgg6-hdaff2
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_urls:
+          $ref: "#/components/schemas/merchant_urls"
+        options:
+          $ref: "#/components/schemas/options"
+        order_amount:
+          description: "Total amount of the order including tax and any available discounts. The value should be in non-negative minor units. Eg: 25 Euros should be 2500."
+          example: 2500
+          format: int64
+          minimum: 0
+          type: integer
+        order_lines:
+          description: The array containing list of line items that are part of this order. Maximum of 1000 line items could be processed in a single order.
+          items:
+            $ref: "#/components/schemas/order_line"
+          maxItems: 1000
+          minItems: 1
+          type: array
+        order_tax_amount:
+          description: "Total tax amount of the order. The value should be in non-negative minor units. Eg: 25 Euros should be 2500."
+          example: 475
+          format: int64
+          minimum: 0
+          type: integer
+        payment_method_categories:
+          description: Available payment method categories
+          items:
+            $ref: "#/components/schemas/payment_method_category"
+          readOnly: true
+          type: array
+          uniqueItems: true
+        purchase_country:
+          description: The purchase country of the customer. The billing country always overrides purchase country if the values are different. Formatted according to ISO 3166 alpha-2 standard, e.g. GB, SE, DE, US, etc.
+          example: GB
+          pattern: ^[A-Za-z]{2,2}$
+          type: string
+        purchase_currency:
+          description: The purchase currency of the order. Formatted according to ISO 4217 standard, e.g. USD, EUR, SEK, GBP, etc.
+          example: GBP
+          pattern: ^[A-Za-z]{3,3}$
+          type: string
+        shipping_address:
+          $ref: "#/components/schemas/address"
+        status:
+          description: "The current status of the session. Possible values: 'complete', 'incomplete' where 'complete' is set when the order has been placed."
+          enum:
+            - complete
+            - incomplete
+          example: complete
+          readOnly: true
+          type: string
+      type: object
+    subscription:
+      properties:
+        interval:
+          description: The cadence unit for this.
+          enum:
+            - DAY
+            - WEEK
+            - MONTH
+            - YEAR
+          type: string
+        interval_count:
+          description: The number of intervals
+          minimum: 1
+          type: integer
+        name:
+          description: The name of the subscription product
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+        - name
+        - interval
+        - interval_count
+      type: object

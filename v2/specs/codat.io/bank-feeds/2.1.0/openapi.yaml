@@ -1,0 +1,833 @@
+openapi: 3.1.0
+servers:
+  - description: Production
+    url: https://api.codat.io
+info:
+  contact:
+    email: support@codat.io
+    name: Codat
+  description: |-
+    Bank Feeds API enables your SMB users to set up bank feeds from accounts in your application to supported accounting platforms.
+
+    A bank feed is a connection between a source bank account—in your application—and a target bank account in a supported accounting package.
+
+    [Read more...](https://docs.codat.io/bank-feeds-api/overview)
+
+    [See our OpenAPI spec](https://github.com/codatio/oas) 
+  termsOfService: https://www.codat.io/legals/
+  title: Bank Feeds API
+  version: 2.1.0
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_static.codat.io_public_branding_codat-icon-blue.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Bank-Feeds.json
+      version: "3.1"
+  x-providerName: codat.io
+  x-serviceName: bank-feeds
+security:
+  - auth_header: []
+tags:
+  - description: Bank feed bank accounts
+    name: Bank feed accounts
+  - description: Bank feed bank accounts
+    name: Bank account transactions
+paths:
+  "/companies/{companyId}/connections/{connectionId}/connectionInfo/bankFeedAccounts":
+    get:
+      description: Get BankFeed BankAccounts for a single data source connected to a single company.
+      operationId: get-bank-feeds
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BankFeedAccounts"
+          description: Success
+      summary: List bank feed bank accounts
+      tags:
+        - Bank feed accounts
+    put:
+      description: Put BankFeed BankAccounts for a single data source connected to a single company.
+      operationId: create-bank-feed
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BankFeedAccounts"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BankFeedAccounts"
+          description: Success
+      summary: Create bank feed bank accounts
+      tags:
+        - Bank feed accounts
+  "/companies/{companyId}/connections/{connectionId}/connectionInfo/bankFeedAccounts/{accountId}":
+    patch:
+      description: Update a single BankFeed BankAccount for a single data source connected to a single company.
+      operationId: update-bank-feed
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+        - $ref: "#/components/parameters/accountId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BankFeedAccount"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BankFeedAccount"
+              x-speakeasy-usage-example: true
+          description: Success
+      summary: Update bank feed bank account
+      tags:
+        - Bank feed accounts
+  "/companies/{companyId}/connections/{connectionId}/data/bankAccounts/{accountId}/bankTransactions":
+    get:
+      description: Gets bank transactions for a given bank account ID
+      operationId: list-bank-account-transactions
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+        - $ref: "#/components/parameters/accountId"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/pageSize"
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/orderBy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BankTransactionsResponse"
+          description: Success
+      summary: List bank transactions for bank account
+      tags:
+        - Bank account transactions
+  "/companies/{companyId}/connections/{connectionId}/options/bankAccounts/{accountId}/bankTransactions":
+    get:
+      description: Gets the options of pushing bank account transactions.
+      operationId: get-create-bank-account-model
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+        - $ref: "#/components/parameters/accountId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PushOption"
+          description: Success
+      summary: List push options for bank account bank transactions
+      tags:
+        - Bank account transactions
+      x-extension-1: null
+  "/companies/{companyId}/connections/{connectionId}/push/bankAccounts/{accountId}/bankTransactions":
+    post:
+      description: |-
+        Posts bank transactions to the accounting package for a given company.
+
+        > **Supported Integrations**
+        > 
+        > Check out our [Knowledge UI](https://knowledge.codat.io/supported-features/accounting?view=tab-by-data-type&dataType=bankTransactions) for integrations that support POST methods.
+      operationId: create-bank-transactions
+      parameters:
+        - $ref: "#/components/parameters/companyId"
+        - $ref: "#/components/parameters/connectionId"
+        - $ref: "#/components/parameters/accountId"
+        - in: query
+          name: allowSyncOnPushComplete
+          schema:
+            default: true
+            type: boolean
+          x-stoplight:
+            id: kc8ehjqr6p02q
+        - in: query
+          name: timeoutInMinutes
+          schema:
+            format: int32
+            type: integer
+          x-stoplight:
+            id: irz50qjbs3yef
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BankTransactions"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateBankTransactionsResponse"
+          description: Success
+      summary: Create bank transactions
+      tags:
+        - Bank account transactions
+components:
+  parameters:
+    accountId:
+      description: Unique identifier for an account
+      in: path
+      name: accountId
+      required: true
+      schema:
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        format: uuid
+        type: string
+    companyId:
+      in: path
+      name: companyId
+      required: true
+      schema:
+        description: Unique identifier for your SMB in Codat.
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        format: uuid
+        type: string
+    connectionId:
+      in: path
+      name: connectionId
+      required: true
+      schema:
+        description: Unique identifier for a company's data connection.
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        format: uuid
+        type: string
+    orderBy:
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+      in: query
+      name: orderBy
+      required: false
+      schema:
+        example: -modifiedDate
+        type: string
+      x-stoplight:
+        id: 4je9lwo02netu
+    page:
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+      in: query
+      name: page
+      required: true
+      schema:
+        default: 1
+        example: 1
+        format: int32
+        minimum: 0
+        type: integer
+      x-stoplight:
+        id: 1318joqblpp4e
+    pageSize:
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+      in: query
+      name: pageSize
+      schema:
+        default: 100
+        example: 100
+        format: int32
+        maximum: 5000
+        minimum: 1
+        type: integer
+      x-stoplight:
+        id: s2ika6rltk5y6
+    query:
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+      in: query
+      name: query
+      required: false
+      schema:
+        type: string
+      x-stoplight:
+        id: gupdb9kt30hfq
+  schemas:
+    BankFeedAccount:
+      additionalProperties: false
+      description: The target bank account in a supported accounting package for ingestion into a bank feed.
+      examples:
+        - accountName: account-081
+          accountNumber: "12345670"
+          accountType: Credit
+          balance: 99.99
+          currency: GBP
+          id: acc-002
+          modifiedDate: 2023-01-09T14:14:14.1057478Z
+          sortCode: "123456"
+          status: pending
+        - accountName: account-095
+          accountNumber: "12345671"
+          accountType: Credit
+          balance: 0
+          currency: USD
+          id: acc-003
+          modifiedDate: 2023-01-09T14:14:14.1057478Z
+          sortCode: "123456"
+          status: pending
+      properties:
+        accountName:
+          description: The bank account name
+          nullable: true
+          type: string
+        accountNumber:
+          description: The account number
+          nullable: true
+          type: string
+        accountType:
+          description: The type of bank account e.g. Credit
+          nullable: true
+          type: string
+        balance:
+          description: The latest balance for the bank account
+          nullable: true
+          type: number
+        currency:
+          description: The currency e.g. USD
+          nullable: true
+          type: string
+        feedStartDate:
+          $ref: "#/components/schemas/DateTime"
+          nullable: true
+        id:
+          description: Unique ID for the bank feed account
+          type: string
+        modifiedDate:
+          $ref: "#/components/schemas/DateTime"
+          description: The last date the bank account was modified
+          nullable: true
+        sortCode:
+          description: The sort code
+          nullable: true
+          type: string
+        status:
+          nullable: true
+          type: string
+      required:
+        - id
+      title: Bank Feed Account
+      type: object
+    BankFeedAccounts:
+      items:
+        $ref: "#/components/schemas/BankFeedAccount"
+      type: array
+      x-internal: true
+    BankTransactions:
+      definitions:
+        bankTransactionLine:
+          allOf:
+            - properties:
+                amount:
+                  type: number
+                balance:
+                  type: number
+                clearedOnDate:
+                  $ref: "#/components/schemas/DateTime"
+                counterparty:
+                  nullable: true
+                  type: string
+                description:
+                  nullable: true
+                  type: string
+                id:
+                  type: string
+                reconciled:
+                  type: boolean
+                reference:
+                  nullable: true
+                  type: string
+                transactionType:
+                  $ref: "#/components/schemas/BankTransactions/definitions/bankTransactionType"
+              type: object
+            - allOf:
+                - properties:
+                    modifiedDate:
+                      $ref: "#/components/schemas/DateTime"
+                      description: The date on which this record was last modified in Codat.
+                  title: ModifiedDate
+                  type: object
+                  x-internal: true
+                - properties:
+                    sourceModifiedDate:
+                      $ref: "#/components/schemas/DateTime"
+                      description: The date on which this record was last modified in the originating system
+                  title: Source Modified Date
+                  type: object
+                  x-internal: true
+              x-internal: true
+          required:
+            - amount
+            - balance
+            - date
+            - reconciled
+            - transactionType
+          title: Bank transaction line
+          type: object
+        bankTransactionType:
+          description: Type of transaction for the bank statement line
+          enum:
+            - Unknown
+            - Credit
+            - Debit
+            - Int
+            - Div
+            - Fee
+            - SerChg
+            - Dep
+            - Atm
+            - Pos
+            - Xfer
+            - Check
+            - Payment
+            - Cash
+            - DirectDep
+            - DirectDebit
+            - RepeatPmt
+            - Other
+          title: Bank transaction type
+          type: string
+      description: |-
+        > **Accessing Bank Accounts through Banking API**
+        > 
+        > This datatype was originally used for accessing bank account data both in accounting integrations and open banking aggregators. 
+        >
+        > To view bank account data through the Banking API, please refer to the new datatype [here](https://docs.codat.io/banking-api#/operations/list-all-banking-transactions)
+
+        > View the coverage for bank transactions in the <a className="external" href="https://knowledge.codat.io/supported-features/accounting?view=tab-by-data-type&dataType=bankTransactions" target="_blank">Data coverage explorer</a>.
+
+        ## Overview
+
+        Transactional banking data for a specific company and account.
+
+        Bank transactions include the:
+        * Amount of the transaction.
+        * Current account balance.
+        * Transaction type, for example, credit, debit, or transfer.
+      properties:
+        accountId:
+          nullable: true
+          type: string
+        transactions:
+          items:
+            $ref: "#/components/schemas/BankTransactions/definitions/bankTransactionLine"
+          nullable: true
+          type: array
+      title: Bank account transactions
+      type: object
+    BankTransactionsResponse:
+      allOf:
+        - properties:
+            results:
+              items:
+                $ref: "#/components/schemas/BankTransactions"
+              type: array
+          type: object
+        - examples:
+            - _links:
+                current:
+                  href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+                pageNumber: 1
+                pageSize: 10
+                self:
+                  href: /companies/{id}/data/{dataType}
+                totalResults: 1
+          properties:
+            _links:
+              $ref: "#/components/schemas/Links"
+            pageNumber:
+              type: integer
+            pageSize:
+              type: integer
+            totalResults:
+              type: integer
+          required:
+            - pageNumber
+            - pageSize
+            - totalResults
+            - _links
+          type: object
+          x-internal: true
+      x-internal: true
+    CreateBankTransactionsResponse:
+      allOf:
+        - properties:
+            data:
+              $ref: "#/components/schemas/BankTransactions"
+          type: object
+        - $ref: "#/components/schemas/PushOperation"
+      x-internal: true
+    DataType:
+      description: Available Data types
+      enum:
+        - accountTransactions
+        - balanceSheet
+        - bankAccounts
+        - bankTransactions
+        - billCreditNotes
+        - billPayments
+        - bills
+        - cashFlowStatement
+        - chartOfAccounts
+        - company
+        - creditNotes
+        - customers
+        - directCosts
+        - directIncomes
+        - invoices
+        - items
+        - journalEntries
+        - journals
+        - paymentMethods
+        - payments
+        - profitAndLoss
+        - purchaseOrders
+        - salesOrders
+        - suppliers
+        - taxRates
+        - trackingCategories
+        - transfers
+        - banking-accountBalances
+        - banking-accounts
+        - banking-transactionCategories
+        - banking-transactions
+        - commerce-companyInfo
+        - commerce-customers
+        - commerce-disputes
+        - commerce-locations
+        - commerce-orders
+        - commerce-paymentMethods
+        - commerce-payments
+        - commerce-productCategories
+        - commerce-products
+        - commerce-taxComponents
+        - commerce-transactions
+      example: invoices
+      type: string
+      x-internal: true
+    DateTime:
+      description: |-
+        In Codat's data model, dates and times are represented using the <a class="external" href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:
+
+        ```
+        2020-10-08T22:40:50Z
+        2021-01-01T00:00:00
+        ```
+
+
+
+        When syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:
+
+        - Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`
+        - Unqualified local time: `2021-11-15T01:00:00`
+        - UTC time offsets: `2021-11-15T01:00:00-05:00`
+
+        > Time zones
+        > 
+        > Not all dates from Codat will contain information about time zones.  
+        > Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced.
+      example: 2022-10-23T00:00:00Z
+      title: Date time
+      type: string
+    HRef:
+      properties:
+        href:
+          format: uri-reference
+          type: string
+      title: Hypertext reference
+      type: object
+      x-internal: true
+    Links:
+      examples:
+        - current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+          self:
+            href: /companies/{id}/data/{dataType}
+      properties:
+        current:
+          $ref: "#/components/schemas/HRef"
+        next:
+          $ref: "#/components/schemas/HRef"
+        previous:
+          $ref: "#/components/schemas/HRef"
+        self:
+          $ref: "#/components/schemas/HRef"
+      required:
+        - self
+        - current
+      type: object
+      x-internal: true
+    PushOperation:
+      definitions:
+        pushChangeType:
+          enum:
+            - Unknown
+            - Created
+            - Modified
+            - Deleted
+            - AttachmentUploaded
+          title: Push change type
+          type: string
+        pushOperationChange:
+          properties:
+            attachmentId:
+              nullable: true
+              type: string
+            recordRef:
+              $ref: "#/components/schemas/PushOperation/definitions/pushOperationRef"
+            type:
+              $ref: "#/components/schemas/PushOperation/definitions/pushChangeType"
+          type: object
+        pushOperationRef:
+          additionalProperties: false
+          properties:
+            dataType:
+              $ref: "#/components/schemas/DataType"
+              nullable: true
+            id:
+              type: string
+          title: Push operation reference
+          type: object
+          x-internal: true
+        pushOperationStatus:
+          description: The status of the push operation.
+          enum:
+            - Pending
+            - Failed
+            - Success
+            - TimedOut
+          title: Push operation status
+          type: string
+        validation:
+          description: A human-readable object describing validation decisions Codat has made when pushing data into the platform. If a push has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              items:
+                $ref: "#/components/schemas/PushOperation/definitions/validationItem"
+              nullable: true
+              type: array
+            warnings:
+              items:
+                $ref: "#/components/schemas/PushOperation/definitions/validationItem"
+              nullable: true
+              type: array
+          title: Validation
+          type: object
+        validationItem:
+          additionalProperties: false
+          properties:
+            itemId:
+              nullable: true
+              type: string
+            message:
+              nullable: true
+              type: string
+            validatorName:
+              nullable: true
+              type: string
+          title: Validation item
+          type: object
+      properties:
+        changes:
+          items:
+            $ref: "#/components/schemas/PushOperation/definitions/pushOperationChange"
+          nullable: true
+          type: array
+        companyId:
+          $ref: "#/components/parameters/companyId/schema"
+        completedOnUtc:
+          $ref: "#/components/schemas/DateTime"
+          description: The datetime when the push was completed, null if Pending.
+        dataConnectionKey:
+          $ref: "#/components/parameters/connectionId/schema"
+        dataType:
+          $ref: "#/components/schemas/DataType"
+          description: The type of data being pushed, eg invoices, customers.
+          nullable: true
+        errorMessage:
+          nullable: true
+          type: string
+        pushOperationKey:
+          description: A unique identifier generated by Codat to represent this single push operation. This identifier can be used to track the status of the push, and should be persisted.
+          format: uuid
+          type: string
+        requestedOnUtc:
+          $ref: "#/components/schemas/DateTime"
+          description: The datetime when the push was requested.
+        status:
+          $ref: "#/components/schemas/PushOperation/definitions/pushOperationStatus"
+        statusCode:
+          type: integer
+        timeoutInMinutes:
+          format: int32
+          nullable: true
+          type: integer
+        timeoutInSeconds:
+          deprecated: true
+          format: int32
+          nullable: true
+          type: integer
+        validation:
+          $ref: "#/components/schemas/PushOperation/definitions/validation"
+      required:
+        - companyId
+        - pushOperationKey
+        - dataConnectionKey
+        - requestedOnUtc
+        - status
+        - statusCode
+      type: object
+      x-internal: true
+    PushOption:
+      definitions:
+        pushFieldValidation:
+          additionalProperties: false
+          properties:
+            details:
+              minLength: 1
+              type: string
+            field:
+              type: string
+            ref:
+              format: uri
+              nullable: true
+              type: string
+          required:
+            - details
+          title: Push field validation
+          type: object
+        pushOptionChoice:
+          properties:
+            description:
+              type: string
+            displayName:
+              type: string
+            required:
+              type: boolean
+            type:
+              $ref: "#/components/schemas/PushOption/definitions/pushOptionType"
+            value:
+              description: Allowed value for field.
+              minLength: 1
+              type: string
+          title: Push Option Choice
+          type: object
+        pushOptionProperty:
+          properties:
+            description:
+              minLength: 1
+              type: string
+            displayName:
+              minLength: 1
+              type: string
+            options:
+              items:
+                $ref: "#/components/schemas/PushOption/definitions/pushOptionChoice"
+              nullable: true
+              type: array
+            properties:
+              additionalProperties:
+                $ref: "#/components/schemas/PushOption/definitions/pushOptionProperty"
+              nullable: true
+              type: object
+            required:
+              type: boolean
+            type:
+              $ref: "#/components/schemas/PushOption/definitions/pushOptionType"
+            validation:
+              $ref: "#/components/schemas/PushOption/definitions/pushValidationInfo"
+          required:
+            - description
+            - displayName
+            - required
+            - type
+          title: Push Option Property
+          type: object
+        pushOptionType:
+          enum:
+            - Array
+            - Object
+            - String
+            - Number
+            - Boolean
+            - DateTime
+            - File
+            - MultiPart
+          title: Option Type
+          type: string
+        pushValidationInfo:
+          additionalProperties: false
+          properties:
+            information:
+              items:
+                $ref: "#/components/schemas/PushOption/definitions/pushFieldValidation"
+              nullable: true
+              type: array
+            warnings:
+              items:
+                $ref: "#/components/schemas/PushOption/definitions/pushFieldValidation"
+              nullable: true
+              type: array
+          title: Push validation info
+          type: object
+      properties:
+        description:
+          type: string
+        displayName:
+          minLength: 1
+          type: string
+        options:
+          items:
+            $ref: "#/components/schemas/PushOption/definitions/pushOptionChoice"
+          nullable: true
+          type: array
+        properties:
+          additionalProperties:
+            $ref: "#/components/schemas/PushOption/definitions/pushOptionProperty"
+          nullable: true
+          type: object
+        required:
+          type: boolean
+        type:
+          $ref: "#/components/schemas/PushOption/definitions/pushOptionType"
+        validation:
+          $ref: "#/components/schemas/PushOption/definitions/pushValidationInfo"
+          nullable: true
+      required:
+        - displayName
+        - required
+        - type
+      title: Push Option
+      type: object
+      x-internal: true
+  securitySchemes:
+    auth_header:
+      description: The word "Basic" followed by a space and your API Key, base64 encoded, which can be found [here](https://app.codat.io/developers/api-keys)
+      in: header
+      name: Authorization
+      type: apiKey
+x-speakeasy-retries:
+  backoff:
+    exponent: 1.5
+    initialInterval: 500
+    maxElapsedTime: 3600000
+    maxInterval: 60000
+  retryConnectionErrors: true
+  statusCodes:
+    - 408
+    - 429
+    - 5XX
+  strategy: backoff
+x-stoplight:
+  id: j388fn92qyj2u

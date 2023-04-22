@@ -1,0 +1,2193 @@
+openapi: 3.0.1
+servers:
+  - description: Production URL
+    url: https://marketplace.walmartapis.com
+  - description: Sandbox URL
+    url: https://sandbox.walmartapis.com
+info:
+  contact:
+    x-twitter: Walmart
+  description: Maintaining up-to-date inventory for your items on Walmart.com ensures a great experience for your customers and greater sales opportunities for you.
+  title: Inventory Management
+  version: 1.0.0
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_Walmart_profile_image.jpeg
+  x-origin:
+    - format: openapi
+      url: https://developer.walmart.com/api/detail
+      version: "3.0"
+  x-providerName: walmart.com
+  x-serviceName: inventory
+security:
+  - {}
+paths:
+  /v3/feeds:
+    post:
+      description: |-
+        Updates inventory for items in bulk. 
+        Seller Can either use feed type "inventory" or "MP_INVENTORY" 
+        * Inventory spec 1.4 feed type: inventory 
+        * Inventory spec 1.5 feed type: MP_INVENTORY 
+
+        Please Note: Multi Node Inventory Update Feed (feedType=MP_INVENTORY) only supports JSON Request and Responses. Refer to "MultiNode_Bulk_Inventory_Update_Request.json" for the corresponding request sample 
+         
+        Refer to the <a href="https://developer.walmart.com/doc/us/us-mp/us-mp-inventory/">guide section</a> for more detailed guide around each of the feed types 
+
+         Refer to the throttling limits before uploading the Feed Files.
+      operationId: updateBulkInventory
+      parameters:
+        - description: The feed Type
+          in: query
+          name: feedType
+          required: true
+          schema:
+            enum:
+              - inventory
+              - MP_INVENTORY
+            type: string
+        - description: The shipNode for which the inventory is to be updated. Not required in case of Multi Node Inventory Update Feed (feedType=MP_INVENTORY)
+          in: query
+          name: shipNode
+          required: false
+          schema:
+            type: string
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            examples:
+              MultiNode_Bulk_Inventory_Update_Request:
+                value:
+                  inventory:
+                    - shipNodes:
+                        - quantity:
+                            amount: 100
+                            unit: EACH
+                          shipNode: "10000003527"
+                      sku: "190086893939"
+                    - shipNodes:
+                        - quantity:
+                            amount: 21
+                            unit: EACH
+                          shipNode: "10000003527"
+                      sku: 685387364107_SS4_01
+                    - shipNodes:
+                        - quantity:
+                            amount: 13
+                            unit: EACH
+                          shipNode: "10000003527"
+                        - quantity:
+                            amount: 12
+                            unit: EACH
+                          shipNode: "1000000352"
+                      sku: 5700521553133_toolsnonwfs_2
+                  inventoryHeader:
+                    version: "1.5"
+              json1:
+                value:
+                  Inventory:
+                    - quantity:
+                        amount: 10
+                        unit: EACH
+                      sku: test1
+                    - quantity:
+                        amount: 20
+                        unit: EACH
+                      sku: "894728"
+                  InventoryHeader:
+                    version: "1.4"
+              xml1:
+                value: |
+                  <InventoryFeed xmlns="http://walmart.com/">
+                      <InventoryHeader>
+                          <version>1.5</version>
+                      </InventoryHeader>
+                      <inventory>
+                          <sku>test1</sku>
+                          <quantity>
+                              <unit>EACH</unit>
+                              <amount>10</amount>
+                          </quantity>
+                      </inventory>
+                      <inventory>
+                          <sku>894728</sku>
+                          <quantity>
+                              <unit>EACH</unit>
+                              <amount>20</amount>
+                          </quantity>
+                      </inventory>
+                  </InventoryFeed>
+            schema:
+              properties:
+                file:
+                  description: Feed file to upload
+                  format: binary
+                  type: string
+              required:
+                - file
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                feedId: FFE538D9B25A4000AD2A067ACEDCF4C4@AUoBAQA
+              schema:
+                properties:
+                  additionalAttributes:
+                    nullable: true
+                    type: object
+                  errors:
+                    nullable: true
+                    type: object
+                  feedId:
+                    description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
+                    type: string
+                type: object
+            application/xml:
+              example: |-
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <ns2:FeedAcknowledgement xmlns:ns2="http://walmart.com/">
+                    <ns2:feedId>884C20C71B7E42FAA41FABFA52596A62@AUoBAQA</ns2:feedId>
+                </ns2:FeedAcknowledgement>
+              schema:
+                properties:
+                  additionalAttributes:
+                    nullable: true
+                    type: object
+                  errors:
+                    nullable: true
+                    type: object
+                  feedId:
+                    description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
+                    type: string
+                type: object
+          description: Successful Operation
+      summary: Bulk Item Inventory Update
+      tags:
+        - Inventory
+  /v3/fulfillment/inventory:
+    get:
+      description: You can use this API to get the current Available to Sell inventory quantities for all WFS items in your catalog. You can also query specific SKUs or filter to only items updated after a specific date in order to reduce the response size.
+      operationId: getWFSInventory
+      parameters:
+        - description: "An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item. This will be used by the seller in the XSD file to refer to each item. Special characters in the sku needing encoding are: ':', '/', '?', '#', '[', ']', '@', '!', '$', '&', \"'\", '(', ')', '*', '+', ',', ';', '=', ‘ ’ as well as '%' itself if it's a part of sku. Make sure to encode space with %20. Other characters don't need to be encoded."
+          in: query
+          name: sku
+          required: false
+          schema:
+            type: string
+        - description: last inventory modified date - starting range.
+          in: query
+          name: fromModifiedDate
+          required: false
+          schema:
+            type: string
+        - description: last inventory modified date - starting range.
+          in: query
+          name: toModifiedDate
+          required: false
+          schema:
+            type: string
+        - description: Number of Sku to be returned. Cannot be larger than 300.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: "10"
+            type: string
+        - description: Offset is the number of records you wish to skip before selecting records.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: "0"
+            type: string
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  headers:
+                    properties:
+                      limit:
+                        description: Information about the quantity in inventory
+                        format: int32
+                        type: integer
+                      offset:
+                        description: Offset is the number of records you wish to skip before selecting results.
+                        format: int32
+                        type: integer
+                      totalCount:
+                        description: Total number of results for query.
+                        format: int32
+                        type: integer
+                    type: object
+                  payload:
+                    properties:
+                      inventory:
+                        items:
+                          properties:
+                            shipNodes:
+                              items:
+                                properties:
+                                  availToSellQty:
+                                    description: The available quantity is the quantity of an item that is available to be allocated to orders.
+                                    format: int32
+                                    type: integer
+                                  modifiedDate:
+                                    description: Last changes date for the item.
+                                    type: string
+                                  onHandQty:
+                                    description: The on-hand balance is the quantity of active inventory stored at the warehouse.Active inventory is defined as the usable amount of an item that is in the warehouse.Inventory is active if it is not damaged, expired or being inspected.
+                                    format: int32
+                                    type: integer
+                                  shipNodeType:
+                                    description: Identifies fulfillment aspect of invetory. Walmart, seller or 3PL fulfilled. Possible value is 'WFSFulfilled'. In later phase we will also add seller fulfilled inventory.
+                                    type: string
+                                type: object
+                              type: array
+                            sku:
+                              description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
+                type: object
+          description: Successful Operation
+      summary: WFS Inventory
+      tags:
+        - Inventory
+  /v3/inventories:
+    get:
+      description: This API will retrieve the inventory count for all of a seller's items across all ship nodes by item to ship node mapping. Inventory can be zero or non-zero. Please note that NextCursor value changes and it needs to be passed on from the previous call to next call.
+      operationId: getMultiNodeInventoryForAllSkuAndAllShipNodes
+      parameters:
+        - description: The number of items returned. Cannot be more than 50.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: "10"
+            type: string
+        - description: String returned from initial API call to indicate pagination. Specify nextCursor value to retrieve the next 50 items.
+          in: query
+          name: nextCursor
+          required: false
+          schema:
+            type: string
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                elements:
+                  inventories:
+                    - nodes:
+                        - availToSellQty:
+                            amount: 93
+                            unit: EACH
+                          inputQty:
+                            amount: 93
+                            unit: EACH
+                          reservedQty:
+                            amount: 0
+                            unit: EACH
+                          shipNode: "361451354333223041"
+                        - availToSellQty:
+                            amount: 433
+                            unit: EACH
+                          inputQty:
+                            amount: 436
+                            unit: EACH
+                          reservedQty:
+                            amount: 3
+                            unit: EACH
+                          shipNode: "100009"
+                      sku: AI-IGH4-5509
+                    - nodes:
+                        - availToSellQty:
+                            amount: 0
+                            unit: EACH
+                          inputQty:
+                            amount: 5
+                            unit: EACH
+                          reservedQty:
+                            amount: 5
+                            unit: EACH
+                          shipNode: "100009"
+                      sku: "06397309545443"
+                meta:
+                  nextCursor: NTVmZjIxOWEtZjRkMy00MGIwLThkOGYtYzFkNzI1NGZlYmQxIDEw
+                  totalCount: 123
+              schema:
+                properties:
+                  elements:
+                    properties:
+                      inventories:
+                        items:
+                          properties:
+                            nodes:
+                              items:
+                                properties:
+                                  availToSellQty:
+                                    description: Quantity of an item that is available to be allocated to orders
+                                    properties:
+                                      amount:
+                                        description: Inventory Count
+                                        type: number
+                                      unit:
+                                        description: "The unit of measurement. Example: 'EACH'"
+                                        enum:
+                                          - EACH
+                                        type: string
+                                    required:
+                                      - amount
+                                      - unit
+                                    type: object
+                                  inputQty:
+                                    description: Quantity of an item that is input by the seller
+                                    properties:
+                                      amount:
+                                        description: Inventory Count
+                                        type: number
+                                      unit:
+                                        description: "The unit of measurement. Example: 'EACH'"
+                                        enum:
+                                          - EACH
+                                        type: string
+                                    required:
+                                      - amount
+                                      - unit
+                                    type: object
+                                  reservedQty:
+                                    description: Quantity that has been ordered by the customers but not yet shipped
+                                    properties:
+                                      amount:
+                                        description: Inventory Count
+                                        type: number
+                                      unit:
+                                        description: "The unit of measurement. Example: 'EACH'"
+                                        enum:
+                                          - EACH
+                                        type: string
+                                    required:
+                                      - amount
+                                      - unit
+                                    type: object
+                                  shipNode:
+                                    description: ShipNode Id of the ship node for which the inventory is requested
+                                    type: string
+                                type: object
+                              type: array
+                            sku:
+                              description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
+                  meta:
+                    properties:
+                      nextCursor:
+                        description: Used for pagination to fetch the next set of items.
+                        type: string
+                      totalCount:
+                        description: "Total number of Skus of the Seller. Example: '235'"
+                        type: number
+                    type: object
+                    xml:
+                      name: meta
+                type: object
+          description: Successful Operation
+      summary: Multiple Item Inventory for All Ship Nodes
+      tags:
+        - Inventory
+  "/v3/inventories/{sku}":
+    get:
+      description: This API will retrieve the inventory count for an item across all ship nodes or one specific ship node. You can specify the ship node for which you want to fetch the inventory
+      operationId: getMultiNodeInventoryForSkuAndAllShipnodes
+      parameters:
+        - description: "An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item. This will be used by the seller in the XSD file to refer to each item. Special characters in the sku needing encoding are: ':', '/', '?', '#', '[', ']', '@', '!', '$', '&', \"'\", '(', ')', '*', '+', ',', ';', '=', ‘ ’ as well as '%' itself if it's a part of sku. Make sure to encode space with %20. Other characters don't need to be encoded."
+          in: path
+          name: sku
+          required: true
+          schema:
+            type: string
+        - description: ShipNode Id of the ship node for which the inventory is requested
+          in: query
+          name: shipNode
+          required: false
+          schema:
+            type: string
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                nodes:
+                  - availToSellQty:
+                      amount: 3
+                      unit: EACH
+                    inputQty:
+                      amount: 5
+                      unit: EACH
+                    reservedQty:
+                      amount: 2
+                      unit: EACH
+                    shipNode: "100009"
+                sku: AR-CTIX-0092
+              schema:
+                properties:
+                  nodes:
+                    items:
+                      properties:
+                        availToSellQty:
+                          description: Quantity of an item that is available to be allocated to orders
+                          properties:
+                            amount:
+                              description: Inventory Count
+                              type: number
+                            unit:
+                              description: "The unit of measurement. Example: 'EACH'"
+                              enum:
+                                - EACH
+                              type: string
+                          required:
+                            - amount
+                            - unit
+                          type: object
+                        errors:
+                          items:
+                            properties:
+                              category:
+                                enum:
+                                  - APPLICATION
+                                  - SYSTEM
+                                  - REQUEST
+                                  - DATA
+                                type: string
+                              causes:
+                                items:
+                                  properties:
+                                    code:
+                                      type: string
+                                    description:
+                                      type: string
+                                    field:
+                                      type: string
+                                    type:
+                                      type: string
+                                  type: object
+                                  xml:
+                                    name: Cause
+                                type: array
+                                xml:
+                                  wrapped: true
+                              code:
+                                type: string
+                              description:
+                                type: string
+                              errorIdentifiers:
+                                additionalProperties:
+                                  type: object
+                                type: object
+                              field:
+                                type: string
+                              info:
+                                type: string
+                              severity:
+                                enum:
+                                  - INFO
+                                  - WARN
+                                  - ERROR
+                                type: string
+                            required:
+                              - code
+                            type: object
+                            xml:
+                              name: Error
+                          type: array
+                        inputQty:
+                          description: Quantity of an item that is input by the seller
+                          properties:
+                            amount:
+                              description: Inventory Count
+                              type: number
+                            unit:
+                              description: "The unit of measurement. Example: 'EACH'"
+                              enum:
+                                - EACH
+                              type: string
+                          required:
+                            - amount
+                            - unit
+                          type: object
+                        reservedQty:
+                          description: Quantity that has been ordered by the customers but not yet shipped
+                          properties:
+                            amount:
+                              description: Inventory Count
+                              type: number
+                            unit:
+                              description: "The unit of measurement. Example: 'EACH'"
+                              enum:
+                                - EACH
+                              type: string
+                          required:
+                            - amount
+                            - unit
+                          type: object
+                        shipNode:
+                          description: ShipNode Id of the ship node for which the inventory is requested
+                          type: string
+                      type: object
+                    type: array
+                  sku:
+                    description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+                    type: string
+                type: object
+          description: Successful Operation
+      summary: Single Item Inventory by Ship Node
+      tags:
+        - Inventory
+    put:
+      description: This API will update the inventory for an item across one or more fulfillment centers, known as ship nodes.
+      operationId: updateMultiNodeInventory
+      parameters:
+        - description: "An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item. This will be used by the seller in the XSD file to refer to each item. Special characters in the sku needing encoding are: ':', '/', '?', '#', '[', ']', '@', '!', '$', '&', \"'\", '(', ')', '*', '+', ',', ';', '=', ‘ ’ as well as '%' itself if it's a part of sku. Make sure to encode space with %20. Other characters don't need to be encoded."
+          in: path
+          name: sku
+          required: true
+          schema:
+            type: string
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              inventories:
+                nodes:
+                  - inputQty:
+                      amount: 88
+                      unit: EACH
+                    shipNode: "1000005050"
+                  - inputQty:
+                      amount: 55
+                      unit: EACH
+                    shipNode: "79897837271126017"
+            schema:
+              properties:
+                inventories:
+                  properties:
+                    nodes:
+                      items:
+                        properties:
+                          inputQty:
+                            description: Quantity that has been ordered by the customers but not yet shipped
+                            properties:
+                              amount:
+                                description: Inventory Count
+                                type: number
+                              unit:
+                                description: "The unit of measurement. Example: 'EACH'"
+                                enum:
+                                  - EACH
+                                type: string
+                            required:
+                              - amount
+                              - unit
+                            type: object
+                          shipNode:
+                            description: ShipNode Id of the ship node for which the inventory is requested
+                            type: string
+                        required:
+                          - inputQty
+                          - shipNode
+                        type: object
+                      type: array
+                  required:
+                    - nodes
+                  type: object
+              required:
+                - inventories
+              type: object
+        description: Request fields
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                nodes:
+                  - shipNode: "1000005050"
+                    status: Success
+                  - shipNode: "79897837271126017"
+                    status: Success
+                sku: 00757642886669_test_01
+              schema:
+                properties:
+                  nodes:
+                    items:
+                      properties:
+                        errors:
+                          description: Node Update Error description.
+                          items:
+                            properties:
+                              category:
+                                enum:
+                                  - APPLICATION
+                                  - SYSTEM
+                                  - REQUEST
+                                  - DATA
+                                type: string
+                              causes:
+                                items:
+                                  properties:
+                                    code:
+                                      type: string
+                                    description:
+                                      type: string
+                                    field:
+                                      type: string
+                                    type:
+                                      type: string
+                                  type: object
+                                  xml:
+                                    name: Cause
+                                type: array
+                                xml:
+                                  wrapped: true
+                              code:
+                                type: string
+                              description:
+                                type: string
+                              errorIdentifiers:
+                                additionalProperties:
+                                  type: object
+                                type: object
+                              field:
+                                type: string
+                              info:
+                                type: string
+                              severity:
+                                enum:
+                                  - INFO
+                                  - WARN
+                                  - ERROR
+                                type: string
+                            required:
+                              - code
+                            type: object
+                            xml:
+                              name: Error
+                          type: array
+                        shipNode:
+                          description: ShipNode Id of the ship node for which the inventory is requested
+                          type: string
+                        status:
+                          description: "Node Update status. Example: 'Success'"
+                          type: string
+                      type: object
+                    type: array
+                  sku:
+                    description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+                    type: string
+                type: object
+          description: Successful Operation
+      summary: Update Item Inventory per Ship Node
+      tags:
+        - Inventory
+  /v3/inventory:
+    get:
+      description: You can use this API to get the inventory for a given item.
+      operationId: getInventory
+      parameters:
+        - description: "An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item. This will be used by the seller in the XSD file to refer to each item. Special characters in the sku needing encoding are: ':', '/', '?', '#', '[', ']', '@', '!', '$', '&', \"'\", '(', ')', '*', '+', ',', ';', '=', ‘ ’, '{', '}' as well as '%' itself if it's a part of sku. Make sure to encode space with %20. Other characters don't need to be encoded."
+          in: query
+          name: sku
+          required: true
+          schema:
+            type: string
+        - description: The shipNode for which the inventory is requested
+          in: query
+          name: shipNode
+          required: false
+          schema:
+            type: string
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                quantity:
+                  amount: 10
+                  unit: EACH
+                sku: 97964_KFTest
+              schema:
+                properties:
+                  quantity:
+                    description: Quantity that has been ordered by the customers but not yet shipped
+                    properties:
+                      amount:
+                        description: Inventory Count
+                        type: number
+                      unit:
+                        description: "The unit of measurement. Example: 'EACH'"
+                        enum:
+                          - EACH
+                        type: string
+                    required:
+                      - amount
+                      - unit
+                    type: object
+                  sku:
+                    description: A seller-provided Product ID. Response will have decoded value.
+                    type: string
+                required:
+                  - quantity
+                  - sku
+                type: object
+                xml:
+                  name: inventory
+            application/xml:
+              example: |-
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <inventory xmlns="http://walmart.com/">
+                    <sku>97964_KFTest</sku>
+                    <quantity>
+                        <unit>EACH</unit>
+                        <amount>10</amount>
+                    </quantity>
+                </inventory>
+              schema:
+                properties:
+                  quantity:
+                    description: Quantity that has been ordered by the customers but not yet shipped
+                    properties:
+                      amount:
+                        description: Inventory Count
+                        type: number
+                      unit:
+                        description: "The unit of measurement. Example: 'EACH'"
+                        enum:
+                          - EACH
+                        type: string
+                    required:
+                      - amount
+                      - unit
+                    type: object
+                  sku:
+                    description: A seller-provided Product ID. Response will have decoded value.
+                    type: string
+                required:
+                  - quantity
+                  - sku
+                type: object
+                xml:
+                  name: inventory
+          description: Successful Operation
+      summary: Inventory
+      tags:
+        - Inventory
+    put:
+      description: Updates the inventory for a given item.
+      operationId: updateInventoryForAnItem
+      parameters:
+        - description: "An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item. This will be used by the seller in the XSD file to refer to each item. Special characters in the sku needing encoding are: ':', '/', '?', '#', '[', ']', '@', '!', '$', '&', \"'\", '(', ')', '*', '+', ',', ';', '=', ‘ ’, '{', '}' as well as '%' itself if it's a part of sku. Make sure to encode space with %20. Other characters don't need to be encoded."
+          in: query
+          name: sku
+          required: true
+          schema:
+            type: string
+        - description: The shipNode for which the inventory is to be updated.
+          in: query
+          name: shipNode
+          required: false
+          schema:
+            type: string
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              quantity:
+                amount: 10
+                unit: EACH
+              sku: 97964_KFTest
+            schema:
+              properties:
+                quantity:
+                  description: Quantity that has been ordered by the customers but not yet shipped
+                  properties:
+                    amount:
+                      description: Inventory Count
+                      type: number
+                    unit:
+                      description: "The unit of measurement. Example: 'EACH'"
+                      enum:
+                        - EACH
+                      type: string
+                  required:
+                    - amount
+                    - unit
+                  type: object
+                sku:
+                  description: A seller-provided Product ID. Response will have decoded value.
+                  type: string
+              required:
+                - quantity
+                - sku
+              type: object
+              xml:
+                name: inventory
+          application/xml:
+            example: |-
+              <?xml version="1.0" encoding="UTF-8"?>
+              <inventory xmlns="http://walmart.com/">
+                  <sku>97964_KFTest</sku>
+                  <quantity>
+                      <unit>EACH</unit>
+                      <amount>3</amount>
+                  </quantity>
+              </inventory>
+            schema:
+              properties:
+                quantity:
+                  description: Quantity that has been ordered by the customers but not yet shipped
+                  properties:
+                    amount:
+                      description: Inventory Count
+                      type: number
+                    unit:
+                      description: "The unit of measurement. Example: 'EACH'"
+                      enum:
+                        - EACH
+                      type: string
+                  required:
+                    - amount
+                    - unit
+                  type: object
+                sku:
+                  description: A seller-provided Product ID. Response will have decoded value.
+                  type: string
+              required:
+                - quantity
+                - sku
+              type: object
+              xml:
+                name: inventory
+        description: File fields
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                quantity:
+                  amount: 10
+                  unit: EACH
+                sku: 97964_KFTest
+              schema:
+                properties:
+                  quantity:
+                    description: Quantity that has been ordered by the customers but not yet shipped
+                    properties:
+                      amount:
+                        description: Inventory Count
+                        type: number
+                      unit:
+                        description: "The unit of measurement. Example: 'EACH'"
+                        enum:
+                          - EACH
+                        type: string
+                    required:
+                      - amount
+                      - unit
+                    type: object
+                  sku:
+                    description: A seller-provided Product ID. Response will have decoded value.
+                    type: string
+                required:
+                  - quantity
+                  - sku
+                type: object
+                xml:
+                  name: inventory
+            application/xml:
+              example: |-
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <inventory xmlns="http://walmart.com/">
+                    <sku>97964_KFTest</sku>
+                    <quantity>
+                        <unit>EACH</unit>
+                        <amount>3</amount>
+                    </quantity>
+                </inventory>
+              schema:
+                properties:
+                  quantity:
+                    description: Quantity that has been ordered by the customers but not yet shipped
+                    properties:
+                      amount:
+                        description: Inventory Count
+                        type: number
+                      unit:
+                        description: "The unit of measurement. Example: 'EACH'"
+                        enum:
+                          - EACH
+                        type: string
+                    required:
+                      - amount
+                      - unit
+                    type: object
+                  sku:
+                    description: A seller-provided Product ID. Response will have decoded value.
+                    type: string
+                required:
+                  - quantity
+                  - sku
+                type: object
+                xml:
+                  name: inventory
+          description: Successful Operation
+      summary: Update inventory
+      tags:
+        - Inventory
+components:
+  parameters:
+    accept:
+      description: "Only supported Media Type : application/json"
+      example: application/json
+      in: header
+      name: Accept
+      required: true
+      schema:
+        type: string
+    accessToken:
+      description: The access token retrieved in the Token API call
+      example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+      in: header
+      name: WM_SEC.ACCESS_TOKEN
+      required: true
+      schema:
+        type: string
+    authorization:
+      description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
+      example: Basic YzcyOTFjNmItNzI5MC00....
+      in: header
+      name: Authorization
+      required: true
+      schema:
+        type: string
+    channelType:
+      description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+      in: header
+      name: WM_CONSUMER.CHANNEL.TYPE
+      required: false
+      schema:
+        type: string
+    content-type:
+      description: "Only supported Media Type : application/json"
+      example: application/json
+      in: header
+      name: Content-Type
+      required: true
+      schema:
+        type: string
+    correlationId:
+      description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+      example: b3261d2d-028a-4ef7-8602-633c23200af6
+      in: header
+      name: WM_QOS.CORRELATION_ID
+      required: true
+      schema:
+        type: string
+    svcName:
+      description: Walmart Service Name
+      example: Walmart Service Name
+      in: header
+      name: WM_SVC.NAME
+      required: true
+      schema:
+        type: string
+  schemas:
+    AvailToSellQty:
+      description: Quantity of an item that is available to be allocated to orders
+      properties:
+        amount:
+          description: Inventory Count
+          type: number
+        unit:
+          description: "The unit of measurement. Example: 'EACH'"
+          enum:
+            - EACH
+          type: string
+      required:
+        - amount
+        - unit
+      type: object
+    Cause:
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        field:
+          type: string
+        type:
+          type: string
+      type: object
+      xml:
+        name: Cause
+    Elements:
+      properties:
+        inventories:
+          items:
+            properties:
+              nodes:
+                items:
+                  properties:
+                    availToSellQty:
+                      description: Quantity of an item that is available to be allocated to orders
+                      properties:
+                        amount:
+                          description: Inventory Count
+                          type: number
+                        unit:
+                          description: "The unit of measurement. Example: 'EACH'"
+                          enum:
+                            - EACH
+                          type: string
+                      required:
+                        - amount
+                        - unit
+                      type: object
+                    inputQty:
+                      description: Quantity of an item that is input by the seller
+                      properties:
+                        amount:
+                          description: Inventory Count
+                          type: number
+                        unit:
+                          description: "The unit of measurement. Example: 'EACH'"
+                          enum:
+                            - EACH
+                          type: string
+                      required:
+                        - amount
+                        - unit
+                      type: object
+                    reservedQty:
+                      description: Quantity that has been ordered by the customers but not yet shipped
+                      properties:
+                        amount:
+                          description: Inventory Count
+                          type: number
+                        unit:
+                          description: "The unit of measurement. Example: 'EACH'"
+                          enum:
+                            - EACH
+                          type: string
+                      required:
+                        - amount
+                        - unit
+                      type: object
+                    shipNode:
+                      description: ShipNode Id of the ship node for which the inventory is requested
+                      type: string
+                  type: object
+                type: array
+              sku:
+                description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+                type: string
+            type: object
+          type: array
+      type: object
+    Error:
+      properties:
+        category:
+          enum:
+            - APPLICATION
+            - SYSTEM
+            - REQUEST
+            - DATA
+          type: string
+        causes:
+          items:
+            properties:
+              code:
+                type: string
+              description:
+                type: string
+              field:
+                type: string
+              type:
+                type: string
+            type: object
+            xml:
+              name: Cause
+          type: array
+          xml:
+            wrapped: true
+        code:
+          type: string
+        description:
+          type: string
+        errorIdentifiers:
+          additionalProperties:
+            type: object
+          type: object
+        field:
+          type: string
+        info:
+          type: string
+        severity:
+          enum:
+            - INFO
+            - WARN
+            - ERROR
+          type: string
+      required:
+        - code
+      type: object
+      xml:
+        name: Error
+    FeedId:
+      properties:
+        additionalAttributes:
+          nullable: true
+          type: object
+        errors:
+          nullable: true
+          type: object
+        feedId:
+          description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
+          type: string
+      type: object
+    GetAllInventoriesDTO:
+      properties:
+        nodes:
+          items:
+            properties:
+              availToSellQty:
+                description: Quantity of an item that is available to be allocated to orders
+                properties:
+                  amount:
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              inputQty:
+                description: Quantity of an item that is input by the seller
+                properties:
+                  amount:
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              reservedQty:
+                description: Quantity that has been ordered by the customers but not yet shipped
+                properties:
+                  amount:
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              shipNode:
+                description: ShipNode Id of the ship node for which the inventory is requested
+                type: string
+            type: object
+          type: array
+        sku:
+          description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+          type: string
+      type: object
+    GetAllInventoriesNodeDTO:
+      properties:
+        availToSellQty:
+          description: Quantity of an item that is available to be allocated to orders
+          properties:
+            amount:
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        inputQty:
+          description: Quantity of an item that is input by the seller
+          properties:
+            amount:
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        reservedQty:
+          description: Quantity that has been ordered by the customers but not yet shipped
+          properties:
+            amount:
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        shipNode:
+          description: ShipNode Id of the ship node for which the inventory is requested
+          type: string
+      type: object
+    Headers:
+      properties:
+        limit:
+          description: Information about the quantity in inventory
+          format: int32
+          type: integer
+        offset:
+          description: Offset is the number of records you wish to skip before selecting results.
+          format: int32
+          type: integer
+        totalCount:
+          description: Total number of results for query.
+          format: int32
+          type: integer
+      type: object
+    InputQty:
+      description: Quantity of an item that is input by the seller
+      properties:
+        amount:
+          description: Inventory Count
+          type: number
+        unit:
+          description: "The unit of measurement. Example: 'EACH'"
+          enum:
+            - EACH
+          type: string
+      required:
+        - amount
+        - unit
+      type: object
+    InventoriesDTO:
+      properties:
+        nodes:
+          items:
+            properties:
+              availToSellQty:
+                description: Quantity of an item that is available to be allocated to orders
+                properties:
+                  amount:
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              errors:
+                items:
+                  properties:
+                    category:
+                      enum:
+                        - APPLICATION
+                        - SYSTEM
+                        - REQUEST
+                        - DATA
+                      type: string
+                    causes:
+                      items:
+                        properties:
+                          code:
+                            type: string
+                          description:
+                            type: string
+                          field:
+                            type: string
+                          type:
+                            type: string
+                        type: object
+                        xml:
+                          name: Cause
+                      type: array
+                      xml:
+                        wrapped: true
+                    code:
+                      type: string
+                    description:
+                      type: string
+                    errorIdentifiers:
+                      additionalProperties:
+                        type: object
+                      type: object
+                    field:
+                      type: string
+                    info:
+                      type: string
+                    severity:
+                      enum:
+                        - INFO
+                        - WARN
+                        - ERROR
+                      type: string
+                  required:
+                    - code
+                  type: object
+                  xml:
+                    name: Error
+                type: array
+              inputQty:
+                description: Quantity of an item that is input by the seller
+                properties:
+                  amount:
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              reservedQty:
+                description: Quantity that has been ordered by the customers but not yet shipped
+                properties:
+                  amount:
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              shipNode:
+                description: ShipNode Id of the ship node for which the inventory is requested
+                type: string
+            type: object
+          type: array
+        sku:
+          description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+          type: string
+      type: object
+    Inventory:
+      properties:
+        quantity:
+          description: Quantity that has been ordered by the customers but not yet shipped
+          properties:
+            amount:
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        sku:
+          description: A seller-provided Product ID. Response will have decoded value.
+          type: string
+      required:
+        - quantity
+        - sku
+      type: object
+      xml:
+        name: inventory
+    InventoryWFS:
+      properties:
+        shipNodes:
+          items:
+            properties:
+              availToSellQty:
+                description: The available quantity is the quantity of an item that is available to be allocated to orders.
+                format: int32
+                type: integer
+              modifiedDate:
+                description: Last changes date for the item.
+                type: string
+              onHandQty:
+                description: The on-hand balance is the quantity of active inventory stored at the warehouse.Active inventory is defined as the usable amount of an item that is in the warehouse.Inventory is active if it is not damaged, expired or being inspected.
+                format: int32
+                type: integer
+              shipNodeType:
+                description: Identifies fulfillment aspect of invetory. Walmart, seller or 3PL fulfilled. Possible value is 'WFSFulfilled'. In later phase we will also add seller fulfilled inventory.
+                type: string
+            type: object
+          type: array
+        sku:
+          description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+          type: string
+      type: object
+    Meta:
+      properties:
+        nextCursor:
+          description: Used for pagination to fetch the next set of items.
+          type: string
+        totalCount:
+          description: "Total number of Skus of the Seller. Example: '235'"
+          type: number
+      type: object
+      xml:
+        name: meta
+    MultiNodeInventoryFetchResponseDTO:
+      properties:
+        elements:
+          properties:
+            inventories:
+              items:
+                properties:
+                  nodes:
+                    items:
+                      properties:
+                        availToSellQty:
+                          description: Quantity of an item that is available to be allocated to orders
+                          properties:
+                            amount:
+                              description: Inventory Count
+                              type: number
+                            unit:
+                              description: "The unit of measurement. Example: 'EACH'"
+                              enum:
+                                - EACH
+                              type: string
+                          required:
+                            - amount
+                            - unit
+                          type: object
+                        inputQty:
+                          description: Quantity of an item that is input by the seller
+                          properties:
+                            amount:
+                              description: Inventory Count
+                              type: number
+                            unit:
+                              description: "The unit of measurement. Example: 'EACH'"
+                              enum:
+                                - EACH
+                              type: string
+                          required:
+                            - amount
+                            - unit
+                          type: object
+                        reservedQty:
+                          description: Quantity that has been ordered by the customers but not yet shipped
+                          properties:
+                            amount:
+                              description: Inventory Count
+                              type: number
+                            unit:
+                              description: "The unit of measurement. Example: 'EACH'"
+                              enum:
+                                - EACH
+                              type: string
+                          required:
+                            - amount
+                            - unit
+                          type: object
+                        shipNode:
+                          description: ShipNode Id of the ship node for which the inventory is requested
+                          type: string
+                      type: object
+                    type: array
+                  sku:
+                    description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+                    type: string
+                type: object
+              type: array
+          type: object
+        meta:
+          properties:
+            nextCursor:
+              description: Used for pagination to fetch the next set of items.
+              type: string
+            totalCount:
+              description: "Total number of Skus of the Seller. Example: '235'"
+              type: number
+          type: object
+          xml:
+            name: meta
+      type: object
+    MultiNodeInventoryUpdateRequestDTO:
+      properties:
+        inventories:
+          properties:
+            nodes:
+              items:
+                properties:
+                  inputQty:
+                    description: Quantity that has been ordered by the customers but not yet shipped
+                    properties:
+                      amount:
+                        description: Inventory Count
+                        type: number
+                      unit:
+                        description: "The unit of measurement. Example: 'EACH'"
+                        enum:
+                          - EACH
+                        type: string
+                    required:
+                      - amount
+                      - unit
+                    type: object
+                  shipNode:
+                    description: ShipNode Id of the ship node for which the inventory is requested
+                    type: string
+                required:
+                  - inputQty
+                  - shipNode
+                type: object
+              type: array
+          required:
+            - nodes
+          type: object
+      required:
+        - inventories
+      type: object
+    MultiNodeInventoryUpdateResponseDTO:
+      properties:
+        nodes:
+          items:
+            properties:
+              errors:
+                description: Node Update Error description.
+                items:
+                  properties:
+                    category:
+                      enum:
+                        - APPLICATION
+                        - SYSTEM
+                        - REQUEST
+                        - DATA
+                      type: string
+                    causes:
+                      items:
+                        properties:
+                          code:
+                            type: string
+                          description:
+                            type: string
+                          field:
+                            type: string
+                          type:
+                            type: string
+                        type: object
+                        xml:
+                          name: Cause
+                      type: array
+                      xml:
+                        wrapped: true
+                    code:
+                      type: string
+                    description:
+                      type: string
+                    errorIdentifiers:
+                      additionalProperties:
+                        type: object
+                      type: object
+                    field:
+                      type: string
+                    info:
+                      type: string
+                    severity:
+                      enum:
+                        - INFO
+                        - WARN
+                        - ERROR
+                      type: string
+                  required:
+                    - code
+                  type: object
+                  xml:
+                    name: Error
+                type: array
+              shipNode:
+                description: ShipNode Id of the ship node for which the inventory is requested
+                type: string
+              status:
+                description: "Node Update status. Example: 'Success'"
+                type: string
+            type: object
+          type: array
+        sku:
+          description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+          type: string
+      type: object
+    NodeDTO:
+      properties:
+        availToSellQty:
+          description: Quantity of an item that is available to be allocated to orders
+          properties:
+            amount:
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        errors:
+          items:
+            properties:
+              category:
+                enum:
+                  - APPLICATION
+                  - SYSTEM
+                  - REQUEST
+                  - DATA
+                type: string
+              causes:
+                items:
+                  properties:
+                    code:
+                      type: string
+                    description:
+                      type: string
+                    field:
+                      type: string
+                    type:
+                      type: string
+                  type: object
+                  xml:
+                    name: Cause
+                type: array
+                xml:
+                  wrapped: true
+              code:
+                type: string
+              description:
+                type: string
+              errorIdentifiers:
+                additionalProperties:
+                  type: object
+                type: object
+              field:
+                type: string
+              info:
+                type: string
+              severity:
+                enum:
+                  - INFO
+                  - WARN
+                  - ERROR
+                type: string
+            required:
+              - code
+            type: object
+            xml:
+              name: Error
+          type: array
+        inputQty:
+          description: Quantity of an item that is input by the seller
+          properties:
+            amount:
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        reservedQty:
+          description: Quantity that has been ordered by the customers but not yet shipped
+          properties:
+            amount:
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        shipNode:
+          description: ShipNode Id of the ship node for which the inventory is requested
+          type: string
+      type: object
+    Payload:
+      properties:
+        inventory:
+          items:
+            properties:
+              shipNodes:
+                items:
+                  properties:
+                    availToSellQty:
+                      description: The available quantity is the quantity of an item that is available to be allocated to orders.
+                      format: int32
+                      type: integer
+                    modifiedDate:
+                      description: Last changes date for the item.
+                      type: string
+                    onHandQty:
+                      description: The on-hand balance is the quantity of active inventory stored at the warehouse.Active inventory is defined as the usable amount of an item that is in the warehouse.Inventory is active if it is not damaged, expired or being inspected.
+                      format: int32
+                      type: integer
+                    shipNodeType:
+                      description: Identifies fulfillment aspect of invetory. Walmart, seller or 3PL fulfilled. Possible value is 'WFSFulfilled'. In later phase we will also add seller fulfilled inventory.
+                      type: string
+                  type: object
+                type: array
+              sku:
+                description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+                type: string
+            type: object
+          type: array
+      type: object
+    ReservedQty:
+      description: Quantity that has been ordered by the customers but not yet shipped
+      properties:
+        amount:
+          description: Inventory Count
+          type: number
+        unit:
+          description: "The unit of measurement. Example: 'EACH'"
+          enum:
+            - EACH
+          type: string
+      required:
+        - amount
+        - unit
+      type: object
+    ShipNodes:
+      properties:
+        availToSellQty:
+          description: The available quantity is the quantity of an item that is available to be allocated to orders.
+          format: int32
+          type: integer
+        modifiedDate:
+          description: Last changes date for the item.
+          type: string
+        onHandQty:
+          description: The on-hand balance is the quantity of active inventory stored at the warehouse.Active inventory is defined as the usable amount of an item that is in the warehouse.Inventory is active if it is not damaged, expired or being inspected.
+          format: int32
+          type: integer
+        shipNodeType:
+          description: Identifies fulfillment aspect of invetory. Walmart, seller or 3PL fulfilled. Possible value is 'WFSFulfilled'. In later phase we will also add seller fulfilled inventory.
+          type: string
+      type: object
+    SupplyQuantity:
+      description: Quantity that has been ordered by the customers but not yet shipped
+      properties:
+        amount:
+          description: Inventory Count
+          type: number
+        unit:
+          description: "The unit of measurement. Example: 'EACH'"
+          enum:
+            - EACH
+          type: string
+      required:
+        - amount
+        - unit
+      type: object
+    UpdateInventoriesRequestDTO:
+      properties:
+        nodes:
+          items:
+            properties:
+              inputQty:
+                description: Quantity that has been ordered by the customers but not yet shipped
+                properties:
+                  amount:
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              shipNode:
+                description: ShipNode Id of the ship node for which the inventory is requested
+                type: string
+            required:
+              - inputQty
+              - shipNode
+            type: object
+          type: array
+      required:
+        - nodes
+      type: object
+    UpdateInventoriesRequestNodeDTO:
+      properties:
+        inputQty:
+          description: Quantity that has been ordered by the customers but not yet shipped
+          properties:
+            amount:
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        shipNode:
+          description: ShipNode Id of the ship node for which the inventory is requested
+          type: string
+      required:
+        - inputQty
+        - shipNode
+      type: object
+    UpdateInventoriesResponseNodeDTO:
+      properties:
+        errors:
+          description: Node Update Error description.
+          items:
+            properties:
+              category:
+                enum:
+                  - APPLICATION
+                  - SYSTEM
+                  - REQUEST
+                  - DATA
+                type: string
+              causes:
+                items:
+                  properties:
+                    code:
+                      type: string
+                    description:
+                      type: string
+                    field:
+                      type: string
+                    type:
+                      type: string
+                  type: object
+                  xml:
+                    name: Cause
+                type: array
+                xml:
+                  wrapped: true
+              code:
+                type: string
+              description:
+                type: string
+              errorIdentifiers:
+                additionalProperties:
+                  type: object
+                type: object
+              field:
+                type: string
+              info:
+                type: string
+              severity:
+                enum:
+                  - INFO
+                  - WARN
+                  - ERROR
+                type: string
+            required:
+              - code
+            type: object
+            xml:
+              name: Error
+          type: array
+        shipNode:
+          description: ShipNode Id of the ship node for which the inventory is requested
+          type: string
+        status:
+          description: "Node Update status. Example: 'Success'"
+          type: string
+      type: object
+    WfsInventoryDTO:
+      properties:
+        headers:
+          properties:
+            limit:
+              description: Information about the quantity in inventory
+              format: int32
+              type: integer
+            offset:
+              description: Offset is the number of records you wish to skip before selecting results.
+              format: int32
+              type: integer
+            totalCount:
+              description: Total number of results for query.
+              format: int32
+              type: integer
+          type: object
+        payload:
+          properties:
+            inventory:
+              items:
+                properties:
+                  shipNodes:
+                    items:
+                      properties:
+                        availToSellQty:
+                          description: The available quantity is the quantity of an item that is available to be allocated to orders.
+                          format: int32
+                          type: integer
+                        modifiedDate:
+                          description: Last changes date for the item.
+                          type: string
+                        onHandQty:
+                          description: The on-hand balance is the quantity of active inventory stored at the warehouse.Active inventory is defined as the usable amount of an item that is in the warehouse.Inventory is active if it is not damaged, expired or being inspected.
+                          format: int32
+                          type: integer
+                        shipNodeType:
+                          description: Identifies fulfillment aspect of invetory. Walmart, seller or 3PL fulfilled. Possible value is 'WFSFulfilled'. In later phase we will also add seller fulfilled inventory.
+                          type: string
+                      type: object
+                    type: array
+                  sku:
+                    description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
+                    type: string
+                type: object
+              type: array
+          type: object
+      type: object

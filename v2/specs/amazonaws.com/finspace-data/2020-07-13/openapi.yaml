@@ -1,0 +1,4320 @@
+openapi: 3.0.0
+info:
+  version: 2020-07-13
+  x-release: v4
+  title: FinSpace Public API
+  description: " The FinSpace APIs let you take actions inside the FinSpace."
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_awscloud_profile_image.png
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: finspace-data
+  x-aws-signingName: finspace-api
+  x-origin:
+    - contentType: application/json
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/finspace-data-2020-07-13.normal.json
+      converter:
+        url: https://github.com/mermade/aws2openapi
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/finspace-api/
+servers:
+  - url: http://finspace-api.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The FinSpace Data multi-region endpoint
+  - url: https://finspace-api.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The FinSpace Data multi-region endpoint
+  - url: http://finspace-api.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The FinSpace Data endpoint for China (Beijing) and China (Ningxia)
+  - url: https://finspace-api.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The FinSpace Data endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  "/permission-group/{permissionGroupId}/users/{userId}":
+    post:
+      operationId: AssociateUserToPermissionGroup
+      description: Adds a user account to a permission group to grant permissions for actions a user can perform in FinSpace.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssociateUserToPermissionGroupResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: permissionGroupId
+          in: path
+          required: true
+          description: The unique identifier for the permission group.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier for the user.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    delete:
+      operationId: DisassociateUserFromPermissionGroup
+      description: Removes a user account from a permission group.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisassociateUserFromPermissionGroupResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: permissionGroupId
+          in: path
+          required: true
+          description: The unique identifier for the permission group.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier for the user.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+        - name: clientToken
+          in: query
+          required: false
+          description: A token that ensures idempotency. This token expires in 10 minutes.
+          schema:
+            type: string
+            pattern: .*\S.*
+            description: Idempotence Token for API operations
+            minLength: 1
+            maxLength: 128
+  "/datasets/{datasetId}/changesetsv2":
+    post:
+      operationId: CreateChangeset
+      description: Creates a new Changeset in a FinSpace Dataset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateChangesetResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "485":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "486":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          description: "The unique identifier for the FinSpace Dataset where the Changeset will be created. "
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - changeType
+                - sourceParams
+                - formatParams
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+                changeType:
+                  description: Indicates how the given change will be applied to the dataset.
+                  type: string
+                  enum:
+                    - REPLACE
+                    - APPEND
+                    - MODIFY
+                sourceParams:
+                  description: Source Parameters of a Changeset
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/StringMapValue"
+                formatParams:
+                  description: Format Parameters of a Changeset
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/StringMapValue"
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: ListChangesets
+      description: Lists the FinSpace Changesets for a Dataset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListChangesetsResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier for the FinSpace Dataset to which the Changeset belongs.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: A token that indicates where a results page should begin.
+          schema:
+            type: string
+  "/datasets/{datasetId}/dataviewsv2":
+    post:
+      operationId: CreateDataView
+      description: Creates a Dataview for a Dataset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateDataViewResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "483":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "484":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "485":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique Dataset identifier that is used to create a Dataview.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - destinationTypeParams
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+                autoUpdate:
+                  description: Common Boolean data type
+                  type: boolean
+                sortColumns:
+                  description: DataView Sort Column List
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/StringValueLength1to255"
+                partitionColumns:
+                  description: DataView Partition Column List
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/StringValueLength1to255"
+                asOfTimestamp:
+                  description: Milliseconds since UTC epoch
+                  type: integer
+                destinationTypeParams:
+                  description: Structure for the Dataview destination type parameters.
+                  type: object
+                  properties:
+                    destinationType:
+                      allOf:
+                        - $ref: "#/components/schemas/DataViewDestinationType"
+                        - description: <p>Destination type for a Dataview.</p> <ul> <li> <p> <code>GLUE_TABLE</code> – Glue table destination type.</p> </li> <li> <p> <code>S3</code> – S3 destination type.</p> </li> </ul>
+                    s3DestinationExportFileFormat:
+                      allOf:
+                        - $ref: "#/components/schemas/ExportFileFormat"
+                        - description: <p>Dataview export file format.</p> <ul> <li> <p> <code>PARQUET</code> – Parquet export file format.</p> </li> <li> <p> <code>DELIMITED_TEXT</code> – Delimited text export file format.</p> </li> </ul>
+                    s3DestinationExportFileFormatOptions:
+                      allOf:
+                        - $ref: "#/components/schemas/S3DestinationFormatOptions"
+                        - description: '<p>Format Options for S3 Destination type.</p> <p>Here is an example of how you could specify the <code>s3DestinationExportFileFormatOptions</code> </p> <p> <code> { "header": "true", "delimiter": ",", "compression": "gzip" }</code> </p>'
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: ListDataViews
+      description: Lists all available Dataviews for a Dataset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDataViewsResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "484":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier of the Dataset for which to retrieve Dataviews.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+        - name: nextToken
+          in: query
+          required: false
+          description: A token that indicates where a results page should begin.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+  /datasetsv2:
+    post:
+      operationId: CreateDataset
+      description: Creates a new FinSpace Dataset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateDatasetResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "486":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - datasetTitle
+                - kind
+                - permissionGroupParams
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+                datasetTitle:
+                  description: Title for a given Dataset
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 255
+                kind:
+                  description: Dataset Kind
+                  type: string
+                  enum:
+                    - TABULAR
+                    - NON_TABULAR
+                datasetDescription:
+                  description: Description of a dataset
+                  type: string
+                  pattern: "[\\s\\S]*"
+                  maxLength: 1000
+                ownerInfo:
+                  description: A structure for Dataset owner info.
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: "#/components/schemas/OwnerName"
+                        - description: The name of the Dataset owner.
+                    phoneNumber:
+                      allOf:
+                        - $ref: "#/components/schemas/PhoneNumber"
+                        - description: Phone number for the Dataset owner.
+                    email:
+                      allOf:
+                        - $ref: "#/components/schemas/Email"
+                        - description: Email address for the Dataset owner.
+                permissionGroupParams:
+                  description: '<p>Permission group parameters for Dataset permissions.</p> <p>Here is an example of how you could specify the <code>PermissionGroupParams</code>:</p> <p> <code> { "permissionGroupId": "0r6fCRtSTUk4XPfXQe3M0g", "datasetPermissions": [ {"permission": "ViewDatasetDetails"}, {"permission": "AddDatasetData"}, {"permission": "EditDatasetMetadata"}, {"permission": "DeleteDataset"} ] } </code> </p>'
+                  type: object
+                  properties:
+                    permissionGroupId:
+                      allOf:
+                        - $ref: "#/components/schemas/PermissionGroupId"
+                        - description: The unique identifier for the <code>PermissionGroup</code>.
+                    datasetPermissions:
+                      allOf:
+                        - $ref: "#/components/schemas/ResourcePermissionsList"
+                        - description: List of resource permissions.
+                alias:
+                  description: The unique resource identifier for a Dataset.
+                  type: string
+                  pattern: ^alias\/\S+
+                  minLength: 1
+                  maxLength: 255
+                schemaDefinition:
+                  description: A union of schema types.
+                  type: object
+                  properties:
+                    tabularSchemaConfig:
+                      allOf:
+                        - $ref: "#/components/schemas/SchemaDefinition"
+                        - description: The configuration for a schema on a tabular Dataset.
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: ListDatasets
+      description: Lists all of the active Datasets that a user has access to.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDatasetsResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "483":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: A token that indicates where a results page should begin.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+  /permission-group:
+    post:
+      operationId: CreatePermissionGroup
+      description: Creates a group of permissions for various actions that a user can perform in FinSpace.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreatePermissionGroupResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - applicationPermissions
+              properties:
+                name:
+                  description: The name of the permission group.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 255
+                  format: password
+                description:
+                  description: A brief description for the permission group.
+                  type: string
+                  pattern: "[\\s\\S]*"
+                  minLength: 1
+                  maxLength: 4000
+                  format: password
+                applicationPermissions:
+                  description: <p>The option to indicate FinSpace application permissions that are granted to a specific group.</p> <important> <p>When assigning application permissions, be aware that the permission <code>ManageUsersAndGroups</code> allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.</p> </important> <ul> <li> <p> <code>CreateDataset</code> – Group members can create new datasets.</p> </li> <li> <p> <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p> </li> <li> <p> <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.</p> </li> <li> <p> <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p> </li> <li> <p> <code>ViewAuditData</code> – Group members can view audit data.</p> </li> <li> <p> <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p> </li> <li> <p> <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p> </li> </ul>
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/ApplicationPermission"
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /user:
+    post:
+      operationId: CreateUser
+      description: Creates a new user in FinSpace.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateUserResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - emailAddress
+                - type
+              properties:
+                emailAddress:
+                  description: The email address of the user that you want to register. The email address serves as a uniquer identifier for each user and cannot be changed after it's created.
+                  type: string
+                  pattern: "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+                  minLength: 4
+                  maxLength: 320
+                  format: password
+                type:
+                  description: <p>The option to indicate the type of user. Use one of the following options to specify this parameter:</p> <ul> <li> <p> <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p> </li> <li> <p> <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p> </li> </ul>
+                  type: string
+                  enum:
+                    - SUPER_USER
+                    - APP_USER
+                firstName:
+                  description: The first name of the user that you want to register.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 50
+                  format: password
+                lastName:
+                  description: The last name of the user that you want to register.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 50
+                  format: password
+                ApiAccess:
+                  description: <p>The option to indicate whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p> <ul> <li> <p> <code>ENABLED</code> – The user has permissions to use the APIs.</p> </li> <li> <p> <code>DISABLED</code> – The user does not have permissions to use any APIs.</p> </li> </ul>
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+                apiAccessPrincipalArn:
+                  description: The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+                  type: string
+                  pattern: ^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$
+                  minLength: 20
+                  maxLength: 2048
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/datasetsv2/{datasetId}":
+    delete:
+      operationId: DeleteDataset
+      description: Deletes a FinSpace Dataset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteDatasetResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "486":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: clientToken
+          in: query
+          required: false
+          description: A token that ensures idempotency. This token expires in 10 minutes.
+          schema:
+            type: string
+            pattern: .*\S.*
+            description: Idempotence Token for API operations
+            minLength: 1
+            maxLength: 128
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier of the Dataset to be deleted.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: GetDataset
+      description: Returns information about a Dataset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDatasetResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier for a Dataset.
+          schema:
+            type: string
+            pattern: "[\\s\\S]*\\S[\\s\\S]*"
+            description: 1 - 255 character String
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateDataset
+      description: Updates a FinSpace Dataset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateDatasetResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "485":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier for the Dataset to update.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - datasetTitle
+                - kind
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+                datasetTitle:
+                  description: Title for a given Dataset
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 255
+                kind:
+                  description: Dataset Kind
+                  type: string
+                  enum:
+                    - TABULAR
+                    - NON_TABULAR
+                datasetDescription:
+                  description: Description of a dataset
+                  type: string
+                  pattern: "[\\s\\S]*"
+                  maxLength: 1000
+                alias:
+                  description: The unique resource identifier for a Dataset.
+                  type: string
+                  pattern: ^alias\/\S+
+                  minLength: 1
+                  maxLength: 255
+                schemaDefinition:
+                  description: A union of schema types.
+                  type: object
+                  properties:
+                    tabularSchemaConfig:
+                      allOf:
+                        - $ref: "#/components/schemas/SchemaDefinition"
+                        - description: The configuration for a schema on a tabular Dataset.
+  "/permission-group/{permissionGroupId}":
+    delete:
+      operationId: DeletePermissionGroup
+      description: Deletes a permission group. This action is irreversible.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeletePermissionGroupResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "486":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: permissionGroupId
+          in: path
+          required: true
+          description: The unique identifier for the permission group that you want to delete.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+        - name: clientToken
+          in: query
+          required: false
+          description: A token that ensures idempotency. This token expires in 10 minutes.
+          schema:
+            type: string
+            pattern: .*\S.*
+            description: Idempotence Token for API operations
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: GetPermissionGroup
+      description: Retrieves the details of a specific permission group.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPermissionGroupResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+      parameters:
+        - name: permissionGroupId
+          in: path
+          required: true
+          description: The unique identifier for the permission group.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+    put:
+      operationId: UpdatePermissionGroup
+      description: Modifies the details of a permission group. You cannot modify a <code>permissionGroupID</code>.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdatePermissionGroupResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: permissionGroupId
+          in: path
+          required: true
+          description: The unique identifier for the permission group to update.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The name of the permission group.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 255
+                  format: password
+                description:
+                  description: A brief description for the permission group.
+                  type: string
+                  pattern: "[\\s\\S]*"
+                  minLength: 1
+                  maxLength: 4000
+                  format: password
+                applicationPermissions:
+                  description: <p>The permissions that are granted to a specific group for accessing the FinSpace application.</p> <important> <p>When assigning application permissions, be aware that the permission <code>ManageUsersAndGroups</code> allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.</p> </important> <ul> <li> <p> <code>CreateDataset</code> – Group members can create new datasets.</p> </li> <li> <p> <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p> </li> <li> <p> <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.</p> </li> <li> <p> <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p> </li> <li> <p> <code>ViewAuditData</code> – Group members can view audit data.</p> </li> <li> <p> <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p> </li> <li> <p> <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p> </li> </ul>
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/ApplicationPermission"
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+  "/user/{userId}/disable":
+    post:
+      operationId: DisableUser
+      description: Denies access to the FinSpace web application and API for the specified user.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisableUserResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier for the user account that you want to disable.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/user/{userId}/enable":
+    post:
+      operationId: EnableUser
+      description: " Allows the specified user to access the FinSpace web application and API."
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnableUserResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LimitExceededException"
+        "486":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier for the user account that you want to enable.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/datasets/{datasetId}/changesetsv2/{changesetId}":
+    get:
+      operationId: GetChangeset
+      description: Get information about a Changeset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetChangesetResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier for the FinSpace Dataset where the Changeset is created.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+        - name: changesetId
+          in: path
+          required: true
+          description: The unique identifier of the Changeset for which to get data.
+          schema:
+            type: string
+            description: ID used to identify a Changeset
+            minLength: 1
+            maxLength: 26
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    put:
+      operationId: UpdateChangeset
+      description: Updates a FinSpace Changeset.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateChangesetResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier for the FinSpace Dataset in which the Changeset is created.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+        - name: changesetId
+          in: path
+          required: true
+          description: The unique identifier for the Changeset to update.
+          schema:
+            type: string
+            description: ID used to identify a Changeset
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceParams
+                - formatParams
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+                sourceParams:
+                  description: Source Parameters of a Changeset
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/StringMapValue"
+                formatParams:
+                  description: Format Parameters of a Changeset
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/StringMapValue"
+  "/datasets/{datasetId}/dataviewsv2/{dataviewId}":
+    get:
+      operationId: GetDataView
+      description: Gets information about a Dataview.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDataViewResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "484":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: dataviewId
+          in: path
+          required: true
+          description: The unique identifier for the Dataview.
+          schema:
+            type: string
+            description: DataView ID
+            minLength: 1
+            maxLength: 26
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier for the Dataset used in the Dataview.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/datasets/{datasetId}/dataviewsv2/{dataviewId}/external-access-details":
+    post:
+      operationId: GetExternalDataViewAccessDetails
+      description: <p>Returns the credentials to access the external Dataview from an S3 location. To call this API:</p> <ul> <li> <p>You must retrieve the programmatic credentials.</p> </li> <li> <p>You must be a member of a FinSpace user group, where the dataset that you want to access has <code>Read Dataset Data</code> permissions.</p> </li> </ul>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetExternalDataViewAccessDetailsResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "484":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+      parameters:
+        - name: dataviewId
+          in: path
+          required: true
+          description: The unique identifier for the Dataview that you want to access.
+          schema:
+            type: string
+            description: DataView ID
+            minLength: 1
+            maxLength: 26
+        - name: datasetId
+          in: path
+          required: true
+          description: The unique identifier for the Dataset.
+          schema:
+            type: string
+            description: ID for a given Dataset
+            minLength: 1
+            maxLength: 26
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /credentials/programmatic#environmentId:
+    get:
+      operationId: GetProgrammaticAccessCredentials
+      description: Request programmatic credentials to use with FinSpace SDK.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProgrammaticAccessCredentialsResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+      parameters:
+        - name: durationInMinutes
+          in: query
+          required: false
+          description: "The time duration in which the credentials remain valid. "
+          schema:
+            type: integer
+            minimum: 60
+            maximum: 720
+        - name: environmentId
+          in: query
+          required: true
+          description: The FinSpace environment identifier.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 26
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/user/{userId}":
+    get:
+      operationId: GetUser
+      description: Retrieves details for a specific user.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier of the user to get data for.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    put:
+      operationId: UpdateUser
+      description: Modifies the details of the specified user account. You cannot update the <code>userId</code> for a user.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateUserResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier for the user account to update.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  description: <p>The option to indicate the type of user.</p> <ul> <li> <p> <code>SUPER_USER</code>– A user with permission to all the functionality and data in FinSpace.</p> </li> <li> <p> <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p> </li> </ul>
+                  type: string
+                  enum:
+                    - SUPER_USER
+                    - APP_USER
+                firstName:
+                  description: The first name of the user.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 50
+                  format: password
+                lastName:
+                  description: The last name of the user.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 50
+                  format: password
+                apiAccess:
+                  description: <p>The option to indicate whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p> <ul> <li> <p> <code>ENABLED</code> – The user has permissions to use the APIs.</p> </li> <li> <p> <code>DISABLED</code> – The user does not have permissions to use any APIs.</p> </li> </ul>
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+                apiAccessPrincipalArn:
+                  description: The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+                  type: string
+                  pattern: ^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$
+                  minLength: 20
+                  maxLength: 2048
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+  /workingLocationV1:
+    post:
+      operationId: GetWorkingLocation
+      description: A temporary Amazon S3 location, where you can copy your files from a source location to stage or use as a scratch space in FinSpace notebook.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetWorkingLocationResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locationType:
+                  description: <p>Specify the type of the working location.</p> <ul> <li> <p> <code>SAGEMAKER</code> – Use the Amazon S3 location as a temporary location to store data content when working with FinSpace Notebooks that run on SageMaker studio.</p> </li> <li> <p> <code>INGESTION</code> – Use the Amazon S3 location as a staging location to copy your data content and then use the location with the Changeset creation operation.</p> </li> </ul>
+                  type: string
+                  enum:
+                    - INGESTION
+                    - SAGEMAKER
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /permission-group#maxResults:
+    get:
+      operationId: ListPermissionGroups
+      description: Lists all available permission groups in FinSpace.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPermissionGroupsResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: A token that indicates where a results page should begin.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: true
+          description: The maximum number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/user/{userId}/permission-groups#maxResults":
+    get:
+      operationId: ListPermissionGroupsByUser
+      description: Lists all the permission groups that are associated with a specific user account.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPermissionGroupsByUserResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier for the user.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+        - name: nextToken
+          in: query
+          required: false
+          description: A token that indicates where a results page should begin.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: true
+          description: The maximum number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /user#maxResults:
+    get:
+      operationId: ListUsers
+      description: Lists all available user accounts in FinSpace.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListUsersResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: A token that indicates where a results page should begin.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: true
+          description: The maximum number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/permission-group/{permissionGroupId}/users#maxResults":
+    get:
+      operationId: ListUsersByPermissionGroup
+      description: Lists details of all the users in a specific permission group.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListUsersByPermissionGroupResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+      parameters:
+        - name: permissionGroupId
+          in: path
+          required: true
+          description: The unique identifier for the permission group.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+        - name: nextToken
+          in: query
+          required: false
+          description: A token that indicates where a results page should begin.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: true
+          description: The maximum number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/user/{userId}/password":
+    post:
+      operationId: ResetUserPassword
+      description: Resets the password for a specified user ID and generates a temporary one. Only a superuser can reset password for other users. Resetting the password immediately invalidates the previous password associated with the user.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResetUserPasswordResponse"
+        "480":
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerException"
+        "481":
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDeniedException"
+        "484":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "485":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier of the user that a temporary password is requested for.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 26
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientToken:
+                  description: Idempotence Token for API operations
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    AssociateUserToPermissionGroupResponse:
+      type: object
+      properties:
+        statusCode:
+          allOf:
+            - $ref: "#/components/schemas/StatusCode"
+            - description: The returned status code of the response.
+    InternalServerException: {}
+    ValidationException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    ResourceNotFoundException: {}
+    ConflictException: {}
+    CreateChangesetResponse:
+      type: object
+      properties:
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for the FinSpace Dataset where the Changeset is created.
+        changesetId:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetId"
+            - description: The unique identifier of the Changeset that is created.
+      description: The response from a CreateChangeset operation.
+    StringMapValue:
+      type: string
+      pattern: "[\\s\\S]*\\S[\\s\\S]*"
+      maxLength: 1000
+    LimitExceededException: {}
+    CreateDataViewResponse:
+      type: object
+      properties:
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier of the Dataset used for the Dataview.
+        dataViewId:
+          allOf:
+            - $ref: "#/components/schemas/DataViewId"
+            - description: The unique identifier for the created Dataview.
+      description: Response for creating a data view.
+    StringValueLength1to255:
+      type: string
+      pattern: "[\\s\\S]*\\S[\\s\\S]*"
+      description: 1 - 255 character String
+      minLength: 1
+      maxLength: 255
+    DataViewDestinationType:
+      type: string
+      description: DataView Destination Type
+    ExportFileFormat:
+      type: string
+      enum:
+        - PARQUET
+        - DELIMITED_TEXT
+      description: Data View Export File Format
+    S3DestinationFormatOptions:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/StringMapValue"
+    CreateDatasetResponse:
+      type: object
+      properties:
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for the created Dataset.
+      description: The response from a CreateDataset operation
+    OwnerName:
+      type: string
+      pattern: .*\S.*
+      description: 1 - 250 character String
+      minLength: 1
+      maxLength: 250
+    PhoneNumber:
+      type: string
+      pattern: ^[\+0-9\#\,\(][\+0-9\-\.\/\(\)\,\#\s]+$
+      description: PhoneNumber of Dataset Owner
+      minLength: 10
+      maxLength: 20
+    Email:
+      type: string
+      pattern: "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+      minLength: 4
+      maxLength: 320
+      format: password
+    PermissionGroupId:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 26
+    ResourcePermissionsList:
+      type: array
+      description: List of Resource Permissions
+      items:
+        $ref: "#/components/schemas/ResourcePermission"
+    SchemaDefinition:
+      type: object
+      properties:
+        columns:
+          allOf:
+            - $ref: "#/components/schemas/ColumnList"
+            - description: List of column definitions.
+        primaryKeyColumns:
+          allOf:
+            - $ref: "#/components/schemas/ColumnNameList"
+            - description: List of column names used for primary key.
+      description: Definition for a schema on a tabular Dataset.
+    CreatePermissionGroupResponse:
+      type: object
+      properties:
+        permissionGroupId:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupId"
+            - description: The unique identifier for the permission group.
+    ApplicationPermission:
+      type: string
+      enum:
+        - CreateDataset
+        - ManageClusters
+        - ManageUsersAndGroups
+        - ManageAttributeSets
+        - ViewAuditData
+        - AccessNotebooks
+        - GetTemporaryCredentials
+    CreateUserResponse:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: "#/components/schemas/UserId"
+            - description: The unique identifier for the user.
+    DeleteDatasetResponse:
+      type: object
+      properties:
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for the deleted Dataset.
+      description: The response from an DeleteDataset operation
+    DeletePermissionGroupResponse:
+      type: object
+      properties:
+        permissionGroupId:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupId"
+            - description: The unique identifier for the deleted permission group.
+    DisableUserResponse:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: "#/components/schemas/UserId"
+            - description: The unique identifier for the disabled user account.
+    DisassociateUserFromPermissionGroupResponse:
+      type: object
+      properties:
+        statusCode:
+          allOf:
+            - $ref: "#/components/schemas/StatusCode"
+            - description: The returned status code of the response.
+    EnableUserResponse:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: "#/components/schemas/UserId"
+            - description: The unique identifier for the enabled user account.
+    GetChangesetResponse:
+      type: object
+      properties:
+        changesetId:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetId"
+            - description: The unique identifier for a Changeset.
+        changesetArn:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetArn"
+            - description: The ARN identifier of the Changeset.
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for the FinSpace Dataset where the Changeset is created.
+        changeType:
+          allOf:
+            - $ref: "#/components/schemas/ChangeType"
+            - description: <p>Type that indicates how a Changeset is applied to a Dataset.</p> <ul> <li> <p> <code>REPLACE</code> – Changeset is considered as a replacement to all prior loaded Changesets.</p> </li> <li> <p> <code>APPEND</code> – Changeset is considered as an addition to the end of all prior loaded Changesets.</p> </li> <li> <p> <code>MODIFY</code> – Changeset is considered as a replacement to a specific prior ingested Changeset.</p> </li> </ul>
+        sourceParams:
+          allOf:
+            - $ref: "#/components/schemas/SourceParams"
+            - description: Options that define the location of the data being ingested.
+        formatParams:
+          allOf:
+            - $ref: "#/components/schemas/FormatParams"
+            - description: Structure of the source file(s).
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The timestamp at which the Changeset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/IngestionStatus"
+            - description: The status of Changeset creation operation.
+        errorInfo:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetErrorInfo"
+            - description: The structure with error messages.
+        activeUntilTimestamp:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Time until which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        activeFromTimestamp:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Beginning time from which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        updatesChangesetId:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetId"
+            - description: The unique identifier of the Changeset that is being updated.
+        updatedByChangesetId:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetId"
+            - description: The unique identifier of the updated Changeset.
+      description: The response from a describe changeset operation
+    GetDataViewResponse:
+      type: object
+      properties:
+        autoUpdate:
+          allOf:
+            - $ref: "#/components/schemas/Boolean"
+            - description: Flag to indicate Dataview should be updated automatically.
+        partitionColumns:
+          allOf:
+            - $ref: "#/components/schemas/PartitionColumnList"
+            - description: Ordered set of column names used to partition data.
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for the Dataset used in the Dataview.
+        asOfTimestamp:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Time range to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        errorInfo:
+          allOf:
+            - $ref: "#/components/schemas/DataViewErrorInfo"
+            - description: Information about an error that occurred for the Dataview.
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The last time that a Dataview was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The timestamp at which the Dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        sortColumns:
+          allOf:
+            - $ref: "#/components/schemas/SortColumnList"
+            - description: Columns to be used for sorting the data.
+        dataViewId:
+          allOf:
+            - $ref: "#/components/schemas/DataViewId"
+            - description: The unique identifier for the Dataview.
+        dataViewArn:
+          allOf:
+            - $ref: "#/components/schemas/DataViewArn"
+            - description: The ARN identifier of the Dataview.
+        destinationTypeParams:
+          allOf:
+            - $ref: "#/components/schemas/DataViewDestinationTypeParams"
+            - description: Options that define the destination type for the Dataview.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/DataViewStatus"
+            - description: <p>The status of a Dataview creation.</p> <ul> <li> <p> <code>RUNNING</code> – Dataview creation is running.</p> </li> <li> <p> <code>STARTING</code> – Dataview creation is starting.</p> </li> <li> <p> <code>FAILED</code> – Dataview creation has failed.</p> </li> <li> <p> <code>CANCELLED</code> – Dataview creation has been cancelled.</p> </li> <li> <p> <code>TIMEOUT</code> – Dataview creation has timed out.</p> </li> <li> <p> <code>SUCCESS</code> – Dataview creation has succeeded.</p> </li> <li> <p> <code>PENDING</code> – Dataview creation is pending.</p> </li> <li> <p> <code>FAILED_CLEANUP_FAILED</code> – Dataview creation failed and resource cleanup failed.</p> </li> </ul>
+      description: Response from retrieving a dataview, which includes details on the target database and table name
+    GetDatasetResponse:
+      type: object
+      properties:
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for a Dataset.
+        datasetArn:
+          allOf:
+            - $ref: "#/components/schemas/DatasetArn"
+            - description: The ARN identifier of the Dataset.
+        datasetTitle:
+          allOf:
+            - $ref: "#/components/schemas/DatasetTitle"
+            - description: Display title for a Dataset.
+        kind:
+          allOf:
+            - $ref: "#/components/schemas/DatasetKind"
+            - description: <p>The format in which Dataset data is structured.</p> <ul> <li> <p> <code>TABULAR</code> – Data is structured in a tabular format.</p> </li> <li> <p> <code>NON_TABULAR</code> – Data is structured in a non-tabular format.</p> </li> </ul>
+        datasetDescription:
+          allOf:
+            - $ref: "#/components/schemas/DatasetDescription"
+            - description: A description of the Dataset.
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The timestamp at which the Dataset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The last time that the Dataset was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        schemaDefinition:
+          allOf:
+            - $ref: "#/components/schemas/SchemaUnion"
+            - description: Definition for a schema on a tabular Dataset.
+        alias:
+          allOf:
+            - $ref: "#/components/schemas/AliasString"
+            - description: The unique resource identifier for a Dataset.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/DatasetStatus"
+            - description: <p>Status of the Dataset creation.</p> <ul> <li> <p> <code>PENDING</code> – Dataset is pending creation.</p> </li> <li> <p> <code>FAILED</code> – Dataset creation has failed.</p> </li> <li> <p> <code>SUCCESS</code> – Dataset creation has succeeded.</p> </li> <li> <p> <code>RUNNING</code> – Dataset creation is running.</p> </li> </ul>
+      description: Response for the GetDataset operation
+    GetExternalDataViewAccessDetailsResponse:
+      type: object
+      properties:
+        credentials:
+          allOf:
+            - $ref: "#/components/schemas/AwsCredentials"
+            - description: The credentials required to access the external Dataview from the S3 location.
+        s3Location:
+          allOf:
+            - $ref: "#/components/schemas/S3Location"
+            - description: The location where the external Dataview is stored.
+    GetPermissionGroupResponse:
+      type: object
+      properties:
+        permissionGroup:
+          $ref: "#/components/schemas/PermissionGroup"
+    GetProgrammaticAccessCredentialsResponse:
+      type: object
+      properties:
+        credentials:
+          allOf:
+            - $ref: "#/components/schemas/Credentials"
+            - description: Returns the programmatic credentials.
+        durationInMinutes:
+          allOf:
+            - $ref: "#/components/schemas/SessionDuration"
+            - description: Returns the duration in which the credentials will remain valid.
+      description: Response for GetProgrammaticAccessCredentials operation
+    GetUserResponse:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: "#/components/schemas/UserId"
+            - description: The unique identifier for the user account that is retrieved.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/UserStatus"
+            - description: <p>The current status of the user account. </p> <ul> <li> <p> <code>CREATING</code> – The user account creation is in progress.</p> </li> <li> <p> <code>ENABLED</code> – The user account is created and is currently active.</p> </li> <li> <p> <code>DISABLED</code> – The user account is currently inactive.</p> </li> </ul>
+        firstName:
+          allOf:
+            - $ref: "#/components/schemas/FirstName"
+            - description: The first name of the user.
+        lastName:
+          allOf:
+            - $ref: "#/components/schemas/LastName"
+            - description: The last name of the user.
+        emailAddress:
+          allOf:
+            - $ref: "#/components/schemas/Email"
+            - description: The email address that is associated with the user.
+        type:
+          allOf:
+            - $ref: "#/components/schemas/UserType"
+            - description: <p>Indicates the type of user. </p> <ul> <li> <p> <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p> </li> </ul> <ul> <li> <p> <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p> </li> </ul>
+        apiAccess:
+          allOf:
+            - $ref: "#/components/schemas/ApiAccess"
+            - description: <p>Indicates whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations. </p> <ul> <li> <p> <code>ENABLED</code> – The user has permissions to use the APIs.</p> </li> <li> <p> <code>DISABLED</code> – The user does not have permissions to use any APIs.</p> </li> </ul>
+        apiAccessPrincipalArn:
+          allOf:
+            - $ref: "#/components/schemas/RoleArn"
+            - description: The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: "The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. "
+        lastEnabledTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds.
+        lastDisabledTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Describes the last time the user account was updated. The value is determined as epoch time in milliseconds.
+        lastLoginTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Describes the last time that the user logged into their account. The value is determined as epoch time in milliseconds.
+    GetWorkingLocationResponse:
+      type: object
+      properties:
+        s3Uri:
+          allOf:
+            - $ref: "#/components/schemas/stringValueLength1to1024"
+            - description: Returns the Amazon S3 URI for the working location.
+        s3Path:
+          allOf:
+            - $ref: "#/components/schemas/stringValueLength1to1024"
+            - description: Returns the Amazon S3 Path for the working location.
+        s3Bucket:
+          allOf:
+            - $ref: "#/components/schemas/stringValueLength1to63"
+            - description: Returns the Amazon S3 bucket name for the working location.
+    ListChangesetsResponse:
+      type: object
+      properties:
+        changesets:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetList"
+            - description: List of Changesets found.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: A token that indicates where a results page should begin.
+      description: Response to ListChangesetsResponse. This returns a list of dataset changesets that match the query criteria.
+    ListDataViewsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: A token that indicates where a results page should begin.
+        dataViews:
+          allOf:
+            - $ref: "#/components/schemas/DataViewList"
+            - description: A list of Dataviews.
+    ListDatasetsResponse:
+      type: object
+      properties:
+        datasets:
+          allOf:
+            - $ref: "#/components/schemas/DatasetList"
+            - description: List of Datasets.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: A token that indicates where a results page should begin.
+      description: Response for the ListDatasets operation
+    ListPermissionGroupsResponse:
+      type: object
+      properties:
+        permissionGroups:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupList"
+            - description: A list of all the permission groups.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: A token that indicates where a results page should begin.
+    ListPermissionGroupsByUserResponse:
+      type: object
+      properties:
+        permissionGroups:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupByUserList"
+            - description: A list of returned permission groups.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: A token that indicates where a results page should begin.
+    ListUsersResponse:
+      type: object
+      properties:
+        users:
+          allOf:
+            - $ref: "#/components/schemas/UserList"
+            - description: A list of all the user accounts.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: A token that indicates where a results page should begin.
+    ListUsersByPermissionGroupResponse:
+      type: object
+      properties:
+        users:
+          allOf:
+            - $ref: "#/components/schemas/UserByPermissionGroupList"
+            - description: Lists details of all users in a specific permission group.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/PaginationToken"
+            - description: A token that indicates where a results page should begin.
+    ResetUserPasswordResponse:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: "#/components/schemas/UserId"
+            - description: The unique identifier of the user that a new password is generated for.
+        temporaryPassword:
+          allOf:
+            - $ref: "#/components/schemas/Password"
+            - description: A randomly generated temporary password for the requested user account. This password expires in 7 days.
+    UpdateChangesetResponse:
+      type: object
+      properties:
+        changesetId:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetId"
+            - description: The unique identifier for the Changeset to update.
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for the FinSpace Dataset in which the Changeset is created.
+      description: The response from a update changeset operation.
+    UpdateDatasetResponse:
+      type: object
+      properties:
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for updated Dataset.
+      description: The response from an UpdateDataset operation
+    UpdatePermissionGroupResponse:
+      type: object
+      properties:
+        permissionGroupId:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupId"
+            - description: The unique identifier for the updated permission group.
+    UpdateUserResponse:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: "#/components/schemas/UserId"
+            - description: The unique identifier of the updated user account.
+    AccessKeyId:
+      type: string
+      pattern: "[\\s\\S]*\\S[\\s\\S]*"
+      minLength: 1
+      maxLength: 255
+    AliasString:
+      type: string
+      pattern: ^alias\/\S+
+      minLength: 1
+      maxLength: 255
+    ApiAccess:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    ApplicationPermissionList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ApplicationPermission"
+    UserId:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 26
+    ClientToken:
+      type: string
+      pattern: .*\S.*
+      description: Idempotence Token for API operations
+      minLength: 1
+      maxLength: 128
+    AssociateUserToPermissionGroupRequest:
+      type: object
+      title: AssociateUserToPermissionGroupRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+    StatusCode:
+      type: integer
+    SecretAccessKey:
+      type: string
+      pattern: "[\\s\\S]*\\S[\\s\\S]*"
+      minLength: 1
+      maxLength: 1000
+      format: password
+    SessionToken:
+      type: string
+      pattern: "[\\s\\S]*\\S[\\s\\S]*"
+      minLength: 1
+      maxLength: 1000
+      format: password
+    TimestampEpoch:
+      type: integer
+      description: Milliseconds since UTC epoch
+    AwsCredentials:
+      type: object
+      properties:
+        accessKeyId:
+          allOf:
+            - $ref: "#/components/schemas/AccessKeyId"
+            - description: " The unique identifier for the security credentials."
+        secretAccessKey:
+          allOf:
+            - $ref: "#/components/schemas/SecretAccessKey"
+            - description: " The secret access key that can be used to sign requests."
+        sessionToken:
+          allOf:
+            - $ref: "#/components/schemas/SessionToken"
+            - description: " The token that users must pass to use the credentials."
+        expiration:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: " The Epoch time when the current credentials expire."
+      description: " The credentials required to access the external Dataview from the S3 location."
+    Boolean:
+      type: boolean
+      description: Common Boolean data type
+    ChangeType:
+      type: string
+      enum:
+        - REPLACE
+        - APPEND
+        - MODIFY
+      description: Indicates how the given change will be applied to the dataset.
+    ChangesetArn:
+      type: string
+      description: Arn for a given Changeset
+    ErrorMessage:
+      type: string
+      description: Changeset Error Message
+      maxLength: 1000
+    ErrorCategory:
+      type: string
+      enum:
+        - VALIDATION
+        - SERVICE_QUOTA_EXCEEDED
+        - ACCESS_DENIED
+        - RESOURCE_NOT_FOUND
+        - THROTTLING
+        - INTERNAL_SERVICE_EXCEPTION
+        - CANCELLED
+        - USER_RECOVERABLE
+      description: Changeset Error Category
+    ChangesetErrorInfo:
+      type: object
+      properties:
+        errorMessage:
+          allOf:
+            - $ref: "#/components/schemas/ErrorMessage"
+            - description: The text of the error message.
+        errorCategory:
+          allOf:
+            - $ref: "#/components/schemas/ErrorCategory"
+            - description: <p>The category of the error.</p> <ul> <li> <p> <code>VALIDATION</code> – The inputs to this request are invalid.</p> </li> <li> <p> <code>SERVICE_QUOTA_EXCEEDED</code> – Service quotas have been exceeded. Please contact AWS support to increase quotas.</p> </li> <li> <p> <code>ACCESS_DENIED</code> – Missing required permission to perform this request.</p> </li> <li> <p> <code>RESOURCE_NOT_FOUND</code> – One or more inputs to this request were not found.</p> </li> <li> <p> <code>THROTTLING</code> – The system temporarily lacks sufficient resources to process the request.</p> </li> <li> <p> <code>INTERNAL_SERVICE_EXCEPTION</code> – An internal service error has occurred.</p> </li> <li> <p> <code>CANCELLED</code> – Cancelled.</p> </li> <li> <p> <code>USER_RECOVERABLE</code> – A user recoverable error has occurred.</p> </li> </ul>
+      description: The structure with error messages.
+    ChangesetId:
+      type: string
+      description: ID used to identify a Changeset
+      minLength: 1
+      maxLength: 26
+    ChangesetSummary:
+      type: object
+      properties:
+        changesetId:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetId"
+            - description: The unique identifier for a Changeset.
+        changesetArn:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetArn"
+            - description: The ARN identifier of the Changeset.
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: The unique identifier for the FinSpace Dataset in which the Changeset is created.
+        changeType:
+          allOf:
+            - $ref: "#/components/schemas/ChangeType"
+            - description: <p>Type that indicates how a Changeset is applied to a Dataset.</p> <ul> <li> <p> <code>REPLACE</code> – Changeset is considered as a replacement to all prior loaded Changesets.</p> </li> <li> <p> <code>APPEND</code> – Changeset is considered as an addition to the end of all prior loaded Changesets.</p> </li> <li> <p> <code>MODIFY</code> – Changeset is considered as a replacement to a specific prior ingested Changeset.</p> </li> </ul>
+        sourceParams:
+          allOf:
+            - $ref: "#/components/schemas/SourceParams"
+            - description: Options that define the location of the data being ingested.
+        formatParams:
+          allOf:
+            - $ref: "#/components/schemas/FormatParams"
+            - description: Options that define the structure of the source file(s).
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The timestamp at which the Changeset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/IngestionStatus"
+            - description: <p>Status of the Changeset ingestion.</p> <ul> <li> <p> <code>PENDING</code> – Changeset is pending creation.</p> </li> <li> <p> <code>FAILED</code> – Changeset creation has failed.</p> </li> <li> <p> <code>SUCCESS</code> – Changeset creation has succeeded.</p> </li> <li> <p> <code>RUNNING</code> – Changeset creation is running.</p> </li> <li> <p> <code>STOP_REQUESTED</code> – User requested Changeset creation to stop.</p> </li> </ul>
+        errorInfo:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetErrorInfo"
+            - description: The structure with error messages.
+        activeUntilTimestamp:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Time until which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        activeFromTimestamp:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Beginning time from which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        updatesChangesetId:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetId"
+            - description: The unique identifier of the Changeset that is updated.
+        updatedByChangesetId:
+          allOf:
+            - $ref: "#/components/schemas/ChangesetId"
+            - description: The unique identifier of the updated Changeset.
+      description: A Changeset is unit of data in a Dataset.
+    ChangesetList:
+      type: array
+      description: List of Changeset Summaries
+      items:
+        $ref: "#/components/schemas/ChangesetSummary"
+    DatasetId:
+      type: string
+      description: ID for a given Dataset
+      minLength: 1
+      maxLength: 26
+    SourceParams:
+      type: object
+      description: Source Parameters of a Changeset
+      additionalProperties:
+        $ref: "#/components/schemas/StringMapValue"
+    FormatParams:
+      type: object
+      description: Format Parameters of a Changeset
+      additionalProperties:
+        $ref: "#/components/schemas/StringMapValue"
+    IngestionStatus:
+      type: string
+      enum:
+        - PENDING
+        - FAILED
+        - SUCCESS
+        - RUNNING
+        - STOP_REQUESTED
+      description: Status of the ingestion process returned from scheduler service.
+    ColumnDataType:
+      type: string
+      enum:
+        - STRING
+        - CHAR
+        - INTEGER
+        - TINYINT
+        - SMALLINT
+        - BIGINT
+        - FLOAT
+        - DOUBLE
+        - DATE
+        - DATETIME
+        - BOOLEAN
+        - BINARY
+      description: Data type of a column.
+    ColumnName:
+      type: string
+      pattern: .*\S.*
+      description: Column Name
+      maxLength: 126
+    ColumnDescription:
+      type: string
+      pattern: "[\\s\\S]*"
+      description: Column Description
+      maxLength: 512
+    ColumnDefinition:
+      type: object
+      properties:
+        dataType:
+          allOf:
+            - $ref: "#/components/schemas/ColumnDataType"
+            - description: <p>Data type of a column.</p> <ul> <li> <p> <code>STRING</code> – A String data type.</p> <p> <code>CHAR</code> – A char data type.</p> <p> <code>INTEGER</code> – An integer data type.</p> <p> <code>TINYINT</code> – A tinyint data type.</p> <p> <code>SMALLINT</code> – A smallint data type.</p> <p> <code>BIGINT</code> – A bigint data type.</p> <p> <code>FLOAT</code> – A float data type.</p> <p> <code>DOUBLE</code> – A double data type.</p> <p> <code>DATE</code> – A date data type.</p> <p> <code>DATETIME</code> – A datetime data type.</p> <p> <code>BOOLEAN</code> – A boolean data type.</p> <p> <code>BINARY</code> – A binary data type.</p> </li> </ul>
+        columnName:
+          allOf:
+            - $ref: "#/components/schemas/ColumnName"
+            - description: The name of a column.
+        columnDescription:
+          allOf:
+            - $ref: "#/components/schemas/ColumnDescription"
+            - description: Description for a column.
+      description: The definition of a column in a tabular Dataset.
+    ColumnList:
+      type: array
+      description: List of Column Definitions
+      items:
+        $ref: "#/components/schemas/ColumnDefinition"
+    ColumnNameList:
+      type: array
+      description: List of Column Names
+      items:
+        $ref: "#/components/schemas/ColumnName"
+    CreateChangesetRequest:
+      type: object
+      required:
+        - changeType
+        - sourceParams
+        - formatParams
+      title: CreateChangesetRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+        changeType:
+          allOf:
+            - $ref: "#/components/schemas/ChangeType"
+            - description: <p>The option to indicate how a Changeset will be applied to a Dataset.</p> <ul> <li> <p> <code>REPLACE</code> – Changeset will be considered as a replacement to all prior loaded Changesets.</p> </li> <li> <p> <code>APPEND</code> – Changeset will be considered as an addition to the end of all prior loaded Changesets.</p> </li> <li> <p> <code>MODIFY</code> – Changeset is considered as a replacement to a specific prior ingested Changeset.</p> </li> </ul>
+        sourceParams:
+          allOf:
+            - $ref: "#/components/schemas/SourceParams"
+            - description: '<p>Options that define the location of the data being ingested (<code>s3SourcePath</code>) and the source of the changeset (<code>sourceType</code>).</p> <p>Both <code>s3SourcePath</code> and <code>sourceType</code> are required attributes.</p> <p>Here is an example of how you could specify the <code>sourceParams</code>:</p> <p> <code> "sourceParams": { "s3SourcePath": "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv", "sourceType": "S3" } </code> </p> <p>The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets">Loading data from an Amazon S3 Bucket using the FinSpace API</a> section.</p>'
+        formatParams:
+          allOf:
+            - $ref: "#/components/schemas/FormatParams"
+            - description: '<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>). </p> <p> <code>formatType</code> is a required attribute and can have the following values: </p> <ul> <li> <p> <code>PARQUET</code> – Parquet source file format.</p> </li> <li> <p> <code>CSV</code> – CSV source file format.</p> </li> <li> <p> <code>JSON</code> – JSON source file format.</p> </li> <li> <p> <code>XML</code> – XML source file format.</p> </li> </ul> <p>Here is an example of how you could specify the <code>formatParams</code>:</p> <p> <code> "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" } </code> </p> <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p> <p> <code> { "withHeader": "true", "separator": "," } </code> </p> <p> For more information about supported file formats, see <a href="https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>'
+      description: The request for a CreateChangeset operation.
+    SortColumnList:
+      type: array
+      description: DataView Sort Column List
+      items:
+        $ref: "#/components/schemas/StringValueLength1to255"
+    PartitionColumnList:
+      type: array
+      description: DataView Partition Column List
+      items:
+        $ref: "#/components/schemas/StringValueLength1to255"
+    DataViewDestinationTypeParams:
+      type: object
+      required:
+        - destinationType
+      properties:
+        destinationType:
+          allOf:
+            - $ref: "#/components/schemas/DataViewDestinationType"
+            - description: <p>Destination type for a Dataview.</p> <ul> <li> <p> <code>GLUE_TABLE</code> – Glue table destination type.</p> </li> <li> <p> <code>S3</code> – S3 destination type.</p> </li> </ul>
+        s3DestinationExportFileFormat:
+          allOf:
+            - $ref: "#/components/schemas/ExportFileFormat"
+            - description: <p>Dataview export file format.</p> <ul> <li> <p> <code>PARQUET</code> – Parquet export file format.</p> </li> <li> <p> <code>DELIMITED_TEXT</code> – Delimited text export file format.</p> </li> </ul>
+        s3DestinationExportFileFormatOptions:
+          allOf:
+            - $ref: "#/components/schemas/S3DestinationFormatOptions"
+            - description: '<p>Format Options for S3 Destination type.</p> <p>Here is an example of how you could specify the <code>s3DestinationExportFileFormatOptions</code> </p> <p> <code> { "header": "true", "delimiter": ",", "compression": "gzip" }</code> </p>'
+      description: Structure for the Dataview destination type parameters.
+    CreateDataViewRequest:
+      type: object
+      required:
+        - destinationTypeParams
+      title: CreateDataViewRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+        autoUpdate:
+          allOf:
+            - $ref: "#/components/schemas/Boolean"
+            - description: Flag to indicate Dataview should be updated automatically.
+        sortColumns:
+          allOf:
+            - $ref: "#/components/schemas/SortColumnList"
+            - description: Columns to be used for sorting the data.
+        partitionColumns:
+          allOf:
+            - $ref: "#/components/schemas/PartitionColumnList"
+            - description: Ordered set of column names used to partition data.
+        asOfTimestamp:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Beginning time to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        destinationTypeParams:
+          allOf:
+            - $ref: "#/components/schemas/DataViewDestinationTypeParams"
+            - description: Options that define the destination type for the Dataview.
+      description: Request for creating a data view.
+    DataViewId:
+      type: string
+      description: DataView ID
+      minLength: 1
+      maxLength: 26
+    DatasetTitle:
+      type: string
+      pattern: .*\S.*
+      description: Title for a given Dataset
+      minLength: 1
+      maxLength: 255
+    DatasetKind:
+      type: string
+      enum:
+        - TABULAR
+        - NON_TABULAR
+      description: Dataset Kind
+    DatasetDescription:
+      type: string
+      pattern: "[\\s\\S]*"
+      description: Description of a dataset
+      maxLength: 1000
+    DatasetOwnerInfo:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: "#/components/schemas/OwnerName"
+            - description: The name of the Dataset owner.
+        phoneNumber:
+          allOf:
+            - $ref: "#/components/schemas/PhoneNumber"
+            - description: Phone number for the Dataset owner.
+        email:
+          allOf:
+            - $ref: "#/components/schemas/Email"
+            - description: Email address for the Dataset owner.
+      description: A structure for Dataset owner info.
+    PermissionGroupParams:
+      type: object
+      properties:
+        permissionGroupId:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupId"
+            - description: The unique identifier for the <code>PermissionGroup</code>.
+        datasetPermissions:
+          allOf:
+            - $ref: "#/components/schemas/ResourcePermissionsList"
+            - description: List of resource permissions.
+      description: '<p>Permission group parameters for Dataset permissions.</p> <p>Here is an example of how you could specify the <code>PermissionGroupParams</code>:</p> <p> <code> { "permissionGroupId": "0r6fCRtSTUk4XPfXQe3M0g", "datasetPermissions": [ {"permission": "ViewDatasetDetails"}, {"permission": "AddDatasetData"}, {"permission": "EditDatasetMetadata"}, {"permission": "DeleteDataset"} ] } </code> </p>'
+    SchemaUnion:
+      type: object
+      properties:
+        tabularSchemaConfig:
+          allOf:
+            - $ref: "#/components/schemas/SchemaDefinition"
+            - description: The configuration for a schema on a tabular Dataset.
+      description: A union of schema types.
+    CreateDatasetRequest:
+      type: object
+      required:
+        - datasetTitle
+        - kind
+        - permissionGroupParams
+      title: CreateDatasetRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+        datasetTitle:
+          allOf:
+            - $ref: "#/components/schemas/DatasetTitle"
+            - description: Display title for a FinSpace Dataset.
+        kind:
+          allOf:
+            - $ref: "#/components/schemas/DatasetKind"
+            - description: <p>The format in which Dataset data is structured.</p> <ul> <li> <p> <code>TABULAR</code> – Data is structured in a tabular format.</p> </li> <li> <p> <code>NON_TABULAR</code> – Data is structured in a non-tabular format.</p> </li> </ul>
+        datasetDescription:
+          allOf:
+            - $ref: "#/components/schemas/DatasetDescription"
+            - description: Description of a Dataset.
+        ownerInfo:
+          allOf:
+            - $ref: "#/components/schemas/DatasetOwnerInfo"
+            - description: Contact information for a Dataset owner.
+        permissionGroupParams:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupParams"
+            - description: Permission group parameters for Dataset permissions.
+        alias:
+          allOf:
+            - $ref: "#/components/schemas/AliasString"
+            - description: The unique resource identifier for a Dataset.
+        schemaDefinition:
+          allOf:
+            - $ref: "#/components/schemas/SchemaUnion"
+            - description: Definition for a schema on a tabular Dataset.
+      description: The request for a CreateDataset operation
+    PermissionGroupName:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 255
+      format: password
+    PermissionGroupDescription:
+      type: string
+      pattern: "[\\s\\S]*"
+      minLength: 1
+      maxLength: 4000
+      format: password
+    CreatePermissionGroupRequest:
+      type: object
+      required:
+        - name
+        - applicationPermissions
+      title: CreatePermissionGroupRequest
+      properties:
+        name:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupName"
+            - description: The name of the permission group.
+        description:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupDescription"
+            - description: A brief description for the permission group.
+        applicationPermissions:
+          allOf:
+            - $ref: "#/components/schemas/ApplicationPermissionList"
+            - description: <p>The option to indicate FinSpace application permissions that are granted to a specific group.</p> <important> <p>When assigning application permissions, be aware that the permission <code>ManageUsersAndGroups</code> allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.</p> </important> <ul> <li> <p> <code>CreateDataset</code> – Group members can create new datasets.</p> </li> <li> <p> <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p> </li> <li> <p> <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.</p> </li> <li> <p> <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p> </li> <li> <p> <code>ViewAuditData</code> – Group members can view audit data.</p> </li> <li> <p> <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p> </li> <li> <p> <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p> </li> </ul>
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+    UserType:
+      type: string
+      enum:
+        - SUPER_USER
+        - APP_USER
+    FirstName:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 50
+      format: password
+    LastName:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 50
+      format: password
+    RoleArn:
+      type: string
+      pattern: ^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$
+      minLength: 20
+      maxLength: 2048
+    CreateUserRequest:
+      type: object
+      required:
+        - emailAddress
+        - type
+      title: CreateUserRequest
+      properties:
+        emailAddress:
+          allOf:
+            - $ref: "#/components/schemas/Email"
+            - description: The email address of the user that you want to register. The email address serves as a uniquer identifier for each user and cannot be changed after it's created.
+        type:
+          allOf:
+            - $ref: "#/components/schemas/UserType"
+            - description: <p>The option to indicate the type of user. Use one of the following options to specify this parameter:</p> <ul> <li> <p> <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p> </li> <li> <p> <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p> </li> </ul>
+        firstName:
+          allOf:
+            - $ref: "#/components/schemas/FirstName"
+            - description: The first name of the user that you want to register.
+        lastName:
+          allOf:
+            - $ref: "#/components/schemas/LastName"
+            - description: The last name of the user that you want to register.
+        ApiAccess:
+          allOf:
+            - $ref: "#/components/schemas/ApiAccess"
+            - description: <p>The option to indicate whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p> <ul> <li> <p> <code>ENABLED</code> – The user has permissions to use the APIs.</p> </li> <li> <p> <code>DISABLED</code> – The user does not have permissions to use any APIs.</p> </li> </ul>
+        apiAccessPrincipalArn:
+          allOf:
+            - $ref: "#/components/schemas/RoleArn"
+            - description: The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+    stringValueLength1to255:
+      type: string
+      minLength: 1
+      maxLength: 255
+    stringValueMaxLength1000:
+      type: string
+      maxLength: 1000
+    Credentials:
+      type: object
+      properties:
+        accessKeyId:
+          allOf:
+            - $ref: "#/components/schemas/stringValueLength1to255"
+            - description: The access key identifier.
+        secretAccessKey:
+          allOf:
+            - $ref: "#/components/schemas/stringValueMaxLength1000"
+            - description: The access key.
+        sessionToken:
+          allOf:
+            - $ref: "#/components/schemas/stringValueMaxLength1000"
+            - description: The session token.
+      description: Short term API credentials.
+    DataViewArn:
+      type: string
+      description: Arn of a DataView
+    DataViewErrorInfo:
+      type: object
+      properties:
+        errorMessage:
+          allOf:
+            - $ref: "#/components/schemas/ErrorMessage"
+            - description: The text of the error message.
+        errorCategory:
+          allOf:
+            - $ref: "#/components/schemas/ErrorCategory"
+            - description: <p>The category of the error.</p> <ul> <li> <p> <code>VALIDATION</code> – The inputs to this request are invalid.</p> </li> <li> <p> <code>SERVICE_QUOTA_EXCEEDED</code> – Service quotas have been exceeded. Please contact AWS support to increase quotas.</p> </li> <li> <p> <code>ACCESS_DENIED</code> – Missing required permission to perform this request.</p> </li> <li> <p> <code>RESOURCE_NOT_FOUND</code> – One or more inputs to this request were not found.</p> </li> <li> <p> <code>THROTTLING</code> – The system temporarily lacks sufficient resources to process the request.</p> </li> <li> <p> <code>INTERNAL_SERVICE_EXCEPTION</code> – An internal service error has occurred.</p> </li> <li> <p> <code>CANCELLED</code> – Cancelled.</p> </li> <li> <p> <code>USER_RECOVERABLE</code> – A user recoverable error has occurred.</p> </li> </ul>
+      description: The structure with error messages.
+    DataViewSummary:
+      type: object
+      properties:
+        dataViewId:
+          allOf:
+            - $ref: "#/components/schemas/DataViewId"
+            - description: The unique identifier for the Dataview.
+        dataViewArn:
+          allOf:
+            - $ref: "#/components/schemas/DataViewArn"
+            - description: The ARN identifier of the Dataview.
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: Th unique identifier for the Dataview Dataset.
+        asOfTimestamp:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Time range to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        partitionColumns:
+          allOf:
+            - $ref: "#/components/schemas/PartitionColumnList"
+            - description: Ordered set of column names used to partition data.
+        sortColumns:
+          allOf:
+            - $ref: "#/components/schemas/SortColumnList"
+            - description: Columns to be used for sorting the data.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/DataViewStatus"
+            - description: <p>The status of a Dataview creation.</p> <ul> <li> <p> <code>RUNNING</code> – Dataview creation is running.</p> </li> <li> <p> <code>STARTING</code> – Dataview creation is starting.</p> </li> <li> <p> <code>FAILED</code> – Dataview creation has failed.</p> </li> <li> <p> <code>CANCELLED</code> – Dataview creation has been cancelled.</p> </li> <li> <p> <code>TIMEOUT</code> – Dataview creation has timed out.</p> </li> <li> <p> <code>SUCCESS</code> – Dataview creation has succeeded.</p> </li> <li> <p> <code>PENDING</code> – Dataview creation is pending.</p> </li> <li> <p> <code>FAILED_CLEANUP_FAILED</code> – Dataview creation failed and resource cleanup failed.</p> </li> </ul>
+        errorInfo:
+          allOf:
+            - $ref: "#/components/schemas/DataViewErrorInfo"
+            - description: The structure with error messages.
+        destinationTypeProperties:
+          allOf:
+            - $ref: "#/components/schemas/DataViewDestinationTypeParams"
+            - description: Information about the Dataview destination.
+        autoUpdate:
+          allOf:
+            - $ref: "#/components/schemas/Boolean"
+            - description: The flag to indicate Dataview should be updated automatically.
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The timestamp at which the Dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The last time that a Dataview was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+      description: Structure for the summary of a Dataview.
+    DataViewList:
+      type: array
+      description: List of Data Views
+      items:
+        $ref: "#/components/schemas/DataViewSummary"
+    DataViewStatus:
+      type: string
+      enum:
+        - RUNNING
+        - STARTING
+        - FAILED
+        - CANCELLED
+        - TIMEOUT
+        - SUCCESS
+        - PENDING
+        - FAILED_CLEANUP_FAILED
+      description: Status of a DataView
+    DatasetArn:
+      type: string
+      description: Arn of a Dataset
+    Dataset:
+      type: object
+      properties:
+        datasetId:
+          allOf:
+            - $ref: "#/components/schemas/DatasetId"
+            - description: An identifier for a Dataset.
+        datasetArn:
+          allOf:
+            - $ref: "#/components/schemas/DatasetArn"
+            - description: The ARN identifier of the Dataset.
+        datasetTitle:
+          allOf:
+            - $ref: "#/components/schemas/DatasetTitle"
+            - description: Display title for a Dataset.
+        kind:
+          allOf:
+            - $ref: "#/components/schemas/DatasetKind"
+            - description: <p>The format in which Dataset data is structured.</p> <ul> <li> <p> <code>TABULAR</code> – Data is structured in a tabular format.</p> </li> <li> <p> <code>NON_TABULAR</code> – Data is structured in a non-tabular format.</p> </li> </ul>
+        datasetDescription:
+          allOf:
+            - $ref: "#/components/schemas/DatasetDescription"
+            - description: Description for a Dataset.
+        ownerInfo:
+          allOf:
+            - $ref: "#/components/schemas/DatasetOwnerInfo"
+            - description: Contact information for a Dataset owner.
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The timestamp at which the Dataset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: The last time that the Dataset was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+        schemaDefinition:
+          allOf:
+            - $ref: "#/components/schemas/SchemaUnion"
+            - description: Definition for a schema on a tabular Dataset.
+        alias:
+          allOf:
+            - $ref: "#/components/schemas/AliasString"
+            - description: The unique resource identifier for a Dataset.
+      description: The structure for a Dataset.
+    DatasetList:
+      type: array
+      description: List of Dataset structures
+      items:
+        $ref: "#/components/schemas/Dataset"
+    DatasetStatus:
+      type: string
+      enum:
+        - PENDING
+        - FAILED
+        - SUCCESS
+        - RUNNING
+      description: Status of the dataset process returned from scheduler service.
+    DeleteDatasetRequest:
+      type: object
+      title: DeleteDatasetRequest
+      properties: {}
+      description: The request for a DeleteDataset operation.
+    DeletePermissionGroupRequest:
+      type: object
+      title: DeletePermissionGroupRequest
+      properties: {}
+    DisableUserRequest:
+      type: object
+      title: DisableUserRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+    DisassociateUserFromPermissionGroupRequest:
+      type: object
+      title: DisassociateUserFromPermissionGroupRequest
+      properties: {}
+    EnableUserRequest:
+      type: object
+      title: EnableUserRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+    GetChangesetRequest:
+      type: object
+      title: GetChangesetRequest
+      properties: {}
+      description: Request to describe a changeset.
+    GetDataViewRequest:
+      type: object
+      title: GetDataViewRequest
+      properties: {}
+      description: Request for retrieving a data view detail. Grouped / accessible within a dataset by its dataset id.
+    GetDatasetRequest:
+      type: object
+      title: GetDatasetRequest
+      properties: {}
+      description: Request for the GetDataset operation.
+    GetExternalDataViewAccessDetailsRequest:
+      type: object
+      title: GetExternalDataViewAccessDetailsRequest
+      properties: {}
+    S3Location:
+      type: object
+      required:
+        - bucket
+        - key
+      properties:
+        bucket:
+          allOf:
+            - $ref: "#/components/schemas/S3BucketName"
+            - description: " The name of the S3 bucket."
+        key:
+          allOf:
+            - $ref: "#/components/schemas/S3Key"
+            - description: " The path of the folder, within the S3 bucket that contains the Dataset."
+      description: The location of an external Dataview in an S3 bucket.
+    GetPermissionGroupRequest:
+      type: object
+      title: GetPermissionGroupRequest
+      properties: {}
+    PermissionGroup:
+      type: object
+      properties:
+        permissionGroupId:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupId"
+            - description: " The unique identifier for the permission group."
+        name:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupName"
+            - description: The name of the permission group.
+        description:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupDescription"
+            - description: " A brief description for the permission group."
+        applicationPermissions:
+          allOf:
+            - $ref: "#/components/schemas/ApplicationPermissionList"
+            - description: <p>Indicates the permissions that are granted to a specific group for accessing the FinSpace application.</p> <important> <p>When assigning application permissions, be aware that the permission <code>ManageUsersAndGroups</code> allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.</p> </important> <ul> <li> <p> <code>CreateDataset</code> – Group members can create new datasets.</p> </li> <li> <p> <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p> </li> <li> <p> <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.</p> </li> <li> <p> <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p> </li> <li> <p> <code>ViewAuditData</code> – Group members can view audit data.</p> </li> <li> <p> <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p> </li> <li> <p> <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p> </li> </ul>
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: "The timestamp at which the group was created in FinSpace. The value is determined as epoch time in milliseconds. "
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: "Describes the last time the permission group was updated. The value is determined as epoch time in milliseconds. "
+        membershipStatus:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupMembershipStatus"
+            - description: <p>Indicates the status of the user account within a permission group.</p> <ul> <li> <p> <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p> </li> <li> <p> <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p> </li> <li> <p> <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p> </li> </ul>
+      description: The structure for a permission group.
+    SessionDuration:
+      type: integer
+      minimum: 60
+      maximum: 720
+    IdType:
+      type: string
+      minLength: 1
+      maxLength: 26
+    GetProgrammaticAccessCredentialsRequest:
+      type: object
+      title: GetProgrammaticAccessCredentialsRequest
+      properties: {}
+      description: Request for GetProgrammaticAccessCredentials operation
+    GetUserRequest:
+      type: object
+      title: GetUserRequest
+      properties: {}
+    UserStatus:
+      type: string
+      enum:
+        - CREATING
+        - ENABLED
+        - DISABLED
+    locationType:
+      type: string
+      enum:
+        - INGESTION
+        - SAGEMAKER
+    GetWorkingLocationRequest:
+      type: object
+      title: GetWorkingLocationRequest
+      properties:
+        locationType:
+          allOf:
+            - $ref: "#/components/schemas/locationType"
+            - description: <p>Specify the type of the working location.</p> <ul> <li> <p> <code>SAGEMAKER</code> – Use the Amazon S3 location as a temporary location to store data content when working with FinSpace Notebooks that run on SageMaker studio.</p> </li> <li> <p> <code>INGESTION</code> – Use the Amazon S3 location as a staging location to copy your data content and then use the location with the Changeset creation operation.</p> </li> </ul>
+    stringValueLength1to1024:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 1024
+    stringValueLength1to63:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 63
+    ResultLimit:
+      type: integer
+      minimum: 1
+      maximum: 100
+    PaginationToken:
+      type: string
+    ListChangesetsRequest:
+      type: object
+      title: ListChangesetsRequest
+      properties: {}
+      description: Request to ListChangesetsRequest. It exposes minimal query filters.
+    ListDataViewsRequest:
+      type: object
+      title: ListDataViewsRequest
+      properties: {}
+      description: Request for a list data views.
+    ListDatasetsRequest:
+      type: object
+      title: ListDatasetsRequest
+      properties: {}
+      description: Request for the ListDatasets operation.
+    ListPermissionGroupsByUserRequest:
+      type: object
+      title: ListPermissionGroupsByUserRequest
+      properties: {}
+    PermissionGroupByUserList:
+      type: array
+      items:
+        $ref: "#/components/schemas/PermissionGroupByUser"
+    ListPermissionGroupsRequest:
+      type: object
+      title: ListPermissionGroupsRequest
+      properties: {}
+    PermissionGroupList:
+      type: array
+      items:
+        $ref: "#/components/schemas/PermissionGroup"
+    ListUsersByPermissionGroupRequest:
+      type: object
+      title: ListUsersByPermissionGroupRequest
+      properties: {}
+    UserByPermissionGroupList:
+      type: array
+      items:
+        $ref: "#/components/schemas/UserByPermissionGroup"
+    ListUsersRequest:
+      type: object
+      title: ListUsersRequest
+      properties: {}
+    UserList:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    Password:
+      type: string
+      pattern: .*\S.*
+      minLength: 8
+      maxLength: 20
+      format: password
+    PermissionGroupMembershipStatus:
+      type: string
+      enum:
+        - ADDITION_IN_PROGRESS
+        - ADDITION_SUCCESS
+        - REMOVAL_IN_PROGRESS
+    PermissionGroupByUser:
+      type: object
+      properties:
+        permissionGroupId:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupId"
+            - description: The unique identifier for the permission group.
+        name:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupName"
+            - description: The name of the permission group.
+        membershipStatus:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupMembershipStatus"
+            - description: <p>Indicates the status of the user account within a permission group.</p> <ul> <li> <p> <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p> </li> <li> <p> <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p> </li> <li> <p> <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p> </li> </ul>
+      description: The structure of a permission group associated with a user account.
+    ResetUserPasswordRequest:
+      type: object
+      title: ResetUserPasswordRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+    StringValueLength1to250:
+      type: string
+      pattern: "[\\s\\S]*\\S[\\s\\S]*"
+      description: 1 - 250 character String
+      minLength: 1
+      maxLength: 250
+    ResourcePermission:
+      type: object
+      properties:
+        permission:
+          allOf:
+            - $ref: "#/components/schemas/StringValueLength1to250"
+            - description: Permission for a resource.
+      description: '<p>Resource permission for a dataset. When you create a dataset, all the other members of the same user group inherit access to the dataset. You can only create a dataset if your user group has application permission for Create Datasets.</p> <p>The following is a list of valid dataset permissions that you can apply: </p> <ul> <li> <p> <code>ViewDatasetDetails</code> </p> </li> <li> <p> <code>ReadDatasetDetails</code> </p> </li> <li> <p> <code>AddDatasetData</code> </p> </li> <li> <p> <code>CreateDataView</code> </p> </li> <li> <p> <code>EditDatasetMetadata</code> </p> </li> <li> <p> <code>DeleteDataset</code> </p> </li> </ul> <p>For more information on the dataset permissions, see <a href="https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions">Supported Dataset Permissions</a> in the FinSpace User Guide.</p>'
+    S3BucketName:
+      type: string
+      pattern: ^.*\S.*$
+      minLength: 1
+      maxLength: 63
+    S3Key:
+      type: string
+      pattern: ^.*\S.*$
+      minLength: 1
+      maxLength: 1024
+    StringMapKey:
+      type: string
+      pattern: "[\\s\\S]*\\S[\\s\\S]*"
+      maxLength: 128
+    UpdateChangesetRequest:
+      type: object
+      required:
+        - sourceParams
+        - formatParams
+      title: UpdateChangesetRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+        sourceParams:
+          allOf:
+            - $ref: "#/components/schemas/SourceParams"
+            - description: '<p>Options that define the location of the data being ingested (<code>s3SourcePath</code>) and the source of the changeset (<code>sourceType</code>).</p> <p>Both <code>s3SourcePath</code> and <code>sourceType</code> are required attributes.</p> <p>Here is an example of how you could specify the <code>sourceParams</code>:</p> <p> <code> "sourceParams": { "s3SourcePath": "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv", "sourceType": "S3" } </code> </p> <p>The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets">Loading data from an Amazon S3 Bucket using the FinSpace API</a>section.</p>'
+        formatParams:
+          allOf:
+            - $ref: "#/components/schemas/FormatParams"
+            - description: '<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>). </p> <p> <code>formatType</code> is a required attribute and can have the following values: </p> <ul> <li> <p> <code>PARQUET</code> – Parquet source file format.</p> </li> <li> <p> <code>CSV</code> – CSV source file format.</p> </li> <li> <p> <code>JSON</code> – JSON source file format.</p> </li> <li> <p> <code>XML</code> – XML source file format.</p> </li> </ul> <p>Here is an example of how you could specify the <code>formatParams</code>:</p> <p> <code> "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" } </code> </p> <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p> <p> <code> { "withHeader": "true", "separator": "," } </code> </p> <p> For more information about supported file formats, see <a href="https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>'
+      description: Request to update an existing changeset.
+    UpdateDatasetRequest:
+      type: object
+      required:
+        - datasetTitle
+        - kind
+      title: UpdateDatasetRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+        datasetTitle:
+          allOf:
+            - $ref: "#/components/schemas/DatasetTitle"
+            - description: A display title for the Dataset.
+        kind:
+          allOf:
+            - $ref: "#/components/schemas/DatasetKind"
+            - description: <p>The format in which the Dataset data is structured.</p> <ul> <li> <p> <code>TABULAR</code> – Data is structured in a tabular format.</p> </li> <li> <p> <code>NON_TABULAR</code> – Data is structured in a non-tabular format.</p> </li> </ul>
+        datasetDescription:
+          allOf:
+            - $ref: "#/components/schemas/DatasetDescription"
+            - description: A description for the Dataset.
+        alias:
+          allOf:
+            - $ref: "#/components/schemas/AliasString"
+            - description: The unique resource identifier for a Dataset.
+        schemaDefinition:
+          allOf:
+            - $ref: "#/components/schemas/SchemaUnion"
+            - description: Definition for a schema on a tabular Dataset.
+      description: The request for an UpdateDataset operation
+    UpdatePermissionGroupRequest:
+      type: object
+      title: UpdatePermissionGroupRequest
+      properties:
+        name:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupName"
+            - description: The name of the permission group.
+        description:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupDescription"
+            - description: A brief description for the permission group.
+        applicationPermissions:
+          allOf:
+            - $ref: "#/components/schemas/ApplicationPermissionList"
+            - description: <p>The permissions that are granted to a specific group for accessing the FinSpace application.</p> <important> <p>When assigning application permissions, be aware that the permission <code>ManageUsersAndGroups</code> allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.</p> </important> <ul> <li> <p> <code>CreateDataset</code> – Group members can create new datasets.</p> </li> <li> <p> <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p> </li> <li> <p> <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.</p> </li> <li> <p> <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p> </li> <li> <p> <code>ViewAuditData</code> – Group members can view audit data.</p> </li> <li> <p> <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p> </li> <li> <p> <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p> </li> </ul>
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+    UpdateUserRequest:
+      type: object
+      title: UpdateUserRequest
+      properties:
+        type:
+          allOf:
+            - $ref: "#/components/schemas/UserType"
+            - description: <p>The option to indicate the type of user.</p> <ul> <li> <p> <code>SUPER_USER</code>– A user with permission to all the functionality and data in FinSpace.</p> </li> <li> <p> <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p> </li> </ul>
+        firstName:
+          allOf:
+            - $ref: "#/components/schemas/FirstName"
+            - description: The first name of the user.
+        lastName:
+          allOf:
+            - $ref: "#/components/schemas/LastName"
+            - description: The last name of the user.
+        apiAccess:
+          allOf:
+            - $ref: "#/components/schemas/ApiAccess"
+            - description: <p>The option to indicate whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p> <ul> <li> <p> <code>ENABLED</code> – The user has permissions to use the APIs.</p> </li> <li> <p> <code>DISABLED</code> – The user does not have permissions to use any APIs.</p> </li> </ul>
+        apiAccessPrincipalArn:
+          allOf:
+            - $ref: "#/components/schemas/RoleArn"
+            - description: The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+        clientToken:
+          allOf:
+            - $ref: "#/components/schemas/ClientToken"
+            - description: A token that ensures idempotency. This token expires in 10 minutes.
+    User:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: "#/components/schemas/UserId"
+            - description: The unique identifier for the user.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/UserStatus"
+            - description: <p>The current status of the user account. </p> <ul> <li> <p> <code>CREATING</code> – The user account creation is in progress.</p> </li> <li> <p> <code>ENABLED</code> – The user account is created and is currently active.</p> </li> <li> <p> <code>DISABLED</code> – The user account is currently inactive.</p> </li> </ul>
+        firstName:
+          allOf:
+            - $ref: "#/components/schemas/FirstName"
+            - description: The first name of the user.
+        lastName:
+          allOf:
+            - $ref: "#/components/schemas/LastName"
+            - description: " The last name of the user."
+        emailAddress:
+          allOf:
+            - $ref: "#/components/schemas/Email"
+            - description: The email address of the user. The email address serves as a uniquer identifier for each user and cannot be changed after it's created.
+        type:
+          allOf:
+            - $ref: "#/components/schemas/UserType"
+            - description: <p> Indicates the type of user.</p> <ul> <li> <p> <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p> </li> <li> <p> <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p> </li> </ul>
+        apiAccess:
+          allOf:
+            - $ref: "#/components/schemas/ApiAccess"
+            - description: <p>Indicates whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p> <ul> <li> <p> <code>ENABLED</code> – The user has permissions to use the APIs.</p> </li> <li> <p> <code>DISABLED</code> – The user does not have permissions to use any APIs.</p> </li> </ul>
+        apiAccessPrincipalArn:
+          allOf:
+            - $ref: "#/components/schemas/RoleArn"
+            - description: The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+        createTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: "The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. "
+        lastEnabledTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: " Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds. "
+        lastDisabledTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: "Describes the last time the user account was updated. The value is determined as epoch time in milliseconds. "
+        lastLoginTime:
+          allOf:
+            - $ref: "#/components/schemas/TimestampEpoch"
+            - description: "Describes the last time that the user logged into their account. The value is determined as epoch time in milliseconds. "
+      description: The details of the user account.
+    UserByPermissionGroup:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: "#/components/schemas/UserId"
+            - description: The unique identifier for the user.
+        status:
+          allOf:
+            - $ref: "#/components/schemas/UserStatus"
+            - description: <p>The current status of the user account. </p> <ul> <li> <p> <code>CREATING</code> – The user account creation is in progress.</p> </li> <li> <p> <code>ENABLED</code> – The user account is created and is currently active.</p> </li> <li> <p> <code>DISABLED</code> – The user account is currently inactive.</p> </li> </ul>
+        firstName:
+          allOf:
+            - $ref: "#/components/schemas/FirstName"
+            - description: The first name of the user.
+        lastName:
+          allOf:
+            - $ref: "#/components/schemas/LastName"
+            - description: The last name of the user.
+        emailAddress:
+          allOf:
+            - $ref: "#/components/schemas/Email"
+            - description: The email address of the user. The email address serves as a unique identifier for each user and cannot be changed after it's created.
+        type:
+          allOf:
+            - $ref: "#/components/schemas/UserType"
+            - description: <p> Indicates the type of user.</p> <ul> <li> <p> <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p> </li> <li> <p> <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p> </li> </ul>
+        apiAccess:
+          allOf:
+            - $ref: "#/components/schemas/ApiAccess"
+            - description: <p>Indicates whether the user can access FinSpace API operations.</p> <ul> <li> <p> <code>ENABLED</code> – The user has permissions to use the API operations.</p> </li> <li> <p> <code>DISABLED</code> – The user does not have permissions to use any API operations.</p> </li> </ul>
+        apiAccessPrincipalArn:
+          allOf:
+            - $ref: "#/components/schemas/RoleArn"
+            - description: The IAM ARN identifier that is attached to FinSpace API calls.
+        membershipStatus:
+          allOf:
+            - $ref: "#/components/schemas/PermissionGroupMembershipStatus"
+            - description: <p>Indicates the status of the user account within a permission group.</p> <ul> <li> <p> <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p> </li> <li> <p> <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p> </li> <li> <p> <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p> </li> </ul>
+      description: The structure of a user account associated with a permission group.
+security:
+  - hmac: []

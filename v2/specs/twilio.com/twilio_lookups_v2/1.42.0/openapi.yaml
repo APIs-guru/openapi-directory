@@ -1,0 +1,202 @@
+openapi: 3.0.1
+servers:
+  - url: https://lookups.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Lookups
+  version: 1.42.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_static1.twilio.com_marketing_bundles_marketing_img_logos_wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_lookups_v2.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_lookups_v2
+paths:
+  "/v2/PhoneNumbers/{PhoneNumber}":
+    description: Query information on a phone number so that you can make a trusted interaction with your user
+    get:
+      description: ""
+      operationId: FetchPhoneNumber
+      parameters:
+        - description: The phone number to lookup in E.164 or national format. Default country code is +1 (North America).
+          in: path
+          name: PhoneNumber
+          required: true
+          schema:
+            type: string
+        - description: A comma-separated list of fields to return. Possible values are caller_name, sim_swap, call_forwarding, live_activity, line_type_intelligence, identity_match.
+          in: query
+          name: Fields
+          schema:
+            type: string
+        - description: The [country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) used if the phone number provided is in national format.
+          in: query
+          name: CountryCode
+          schema:
+            type: string
+        - description: User’s first name. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: FirstName
+          schema:
+            type: string
+        - description: User’s last name. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: LastName
+          schema:
+            type: string
+        - description: User’s first address line. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: AddressLine1
+          schema:
+            type: string
+        - description: User’s second address line. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: AddressLine2
+          schema:
+            type: string
+        - description: User’s city. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: City
+          schema:
+            type: string
+        - description: User’s country subdivision, such as state, province, or locality. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: State
+          schema:
+            type: string
+        - description: User’s postal zip code. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: PostalCode
+          schema:
+            type: string
+        - description: User’s country, up to two characters. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: AddressCountryCode
+          schema:
+            format: iso-country-code
+            type: string
+        - description: User’s national ID, such as SSN or Passport ID. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: NationalId
+          schema:
+            type: string
+        - description: User’s date of birth, in YYYYMMDD format. This query parameter is only used (optionally) for identity_match package requests.
+          in: query
+          name: DateOfBirth
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/lookups.v2.phone_number"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://lookups.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - calling_country_code
+        - phone_number
+        - country_code
+        - valid
+        - national_format
+      pathType: instance
+components:
+  schemas:
+    lookups.v2.phone_number:
+      properties:
+        call_forwarding:
+          description: An object that contains information on the unconditional call forwarding status of mobile phone number.
+          nullable: true
+        caller_name:
+          description: An object that contains caller name information based on [CNAM](https://support.twilio.com/hc/en-us/articles/360051670533-Getting-Started-with-CNAM-Caller-ID).
+          nullable: true
+        calling_country_code:
+          description: International dialing prefix of the phone number defined in the E.164 standard.
+          nullable: true
+          type: string
+        country_code:
+          description: The phone number's [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+          nullable: true
+          type: string
+        identity_match:
+          description: An object that contains identity match information. The result of comparing user-provided information including name, address, date of birth, national ID, against authoritative phone-based data sources
+          nullable: true
+        line_type_intelligence:
+          description: An object that contains line type information including the carrier name, mobile country code, and mobile network code.
+          nullable: true
+        live_activity:
+          description: An object that contains live activity information for a mobile phone number.
+          nullable: true
+        national_format:
+          description: The phone number in [national format](https://en.wikipedia.org/wiki/National_conventions_for_writing_telephone_numbers).
+          nullable: true
+          type: string
+        phone_number:
+          description: The phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
+          format: phone-number
+          nullable: true
+          type: string
+        sim_swap:
+          description: An object that contains information on the last date the subscriber identity module (SIM) was changed for a mobile phone number.
+          nullable: true
+        sms_pumping_risk:
+          description: An object that contains information on if a phone number has been currently or previously blocked by Verify Fraud Guard for receiving malicious SMS pumping traffic as well as other signals associated with risky carriers and low conversion rates.
+          nullable: true
+        url:
+          description: The absolute URL of the resource.
+          format: uri
+          nullable: true
+          type: string
+        valid:
+          description: Boolean which indicates if the phone number is in a valid range that can be freely assigned by a carrier to a user.
+          nullable: true
+          type: boolean
+        validation_errors:
+          description: "Contains reasons why a phone number is invalid. Possible values: TOO_SHORT, TOO_LONG, INVALID_BUT_POSSIBLE, INVALID_COUNTRY_CODE, INVALID_LENGTH, NOT_A_NUMBER."
+          items:
+            $ref: "#/components/schemas/phone_number_enum_validation_error"
+            type: string
+          nullable: true
+          type: array
+      type: object
+    phone_number_enum_type:
+      enum:
+        - landline
+        - mobile
+        - voip
+      type: string
+    phone_number_enum_validation_error:
+      enum:
+        - TOO_SHORT
+        - TOO_LONG
+        - INVALID_BUT_POSSIBLE
+        - INVALID_COUNTRY_CODE
+        - INVALID_LENGTH
+        - NOT_A_NUMBER
+      type: string
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
+    name: Beta

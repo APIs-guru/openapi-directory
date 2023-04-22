@@ -1,0 +1,1394 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "2017-07-25",
+    "x-release": "v4",
+    "title": "Amazon S3 on Outposts",
+    "description": "Amazon S3 on Outposts provides access to S3 on Outposts operations.",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_awscloud_profile_image.png",
+      "backgroundColor": "#FFFFFF"
+    },
+    "termsOfService": "https://aws.amazon.com/service-terms/",
+    "contact": {
+      "name": "Mike Ralphson",
+      "email": "mike.ralphson@gmail.com",
+      "url": "https://github.com/mermade/aws2openapi",
+      "x-twitter": "PermittedSoc"
+    },
+    "license": {
+      "name": "Apache 2.0 License",
+      "url": "http://www.apache.org/licenses/"
+    },
+    "x-providerName": "amazonaws.com",
+    "x-serviceName": "s3outposts",
+    "x-aws-signingName": "s3-outposts",
+    "x-origin": [
+      {
+        "contentType": "application/json",
+        "url": "https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/s3outposts-2017-07-25.normal.json",
+        "converter": {
+          "url": "https://github.com/mermade/aws2openapi",
+          "version": "1.0.0"
+        },
+        "x-apisguru-driver": "external"
+      }
+    ],
+    "x-apiClientRegistration": {
+      "url": "https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct"
+    },
+    "x-apisguru-categories": [
+      "cloud"
+    ],
+    "x-preferred": true
+  },
+  "externalDocs": {
+    "description": "Amazon Web Services documentation",
+    "url": "https://docs.aws.amazon.com/s3-outposts/"
+  },
+  "servers": [
+    {
+      "url": "http://s3-outposts.{region}.amazonaws.com",
+      "variables": {
+        "region": {
+          "description": "The AWS region",
+          "enum": [
+            "us-east-1",
+            "us-east-2",
+            "us-west-1",
+            "us-west-2",
+            "us-gov-west-1",
+            "us-gov-east-1",
+            "ca-central-1",
+            "eu-north-1",
+            "eu-west-1",
+            "eu-west-2",
+            "eu-west-3",
+            "eu-central-1",
+            "eu-south-1",
+            "af-south-1",
+            "ap-northeast-1",
+            "ap-northeast-2",
+            "ap-northeast-3",
+            "ap-southeast-1",
+            "ap-southeast-2",
+            "ap-east-1",
+            "ap-south-1",
+            "sa-east-1",
+            "me-south-1"
+          ],
+          "default": "us-east-1"
+        }
+      },
+      "description": "The Amazon S3 Outposts multi-region endpoint"
+    },
+    {
+      "url": "https://s3-outposts.{region}.amazonaws.com",
+      "variables": {
+        "region": {
+          "description": "The AWS region",
+          "enum": [
+            "us-east-1",
+            "us-east-2",
+            "us-west-1",
+            "us-west-2",
+            "us-gov-west-1",
+            "us-gov-east-1",
+            "ca-central-1",
+            "eu-north-1",
+            "eu-west-1",
+            "eu-west-2",
+            "eu-west-3",
+            "eu-central-1",
+            "eu-south-1",
+            "af-south-1",
+            "ap-northeast-1",
+            "ap-northeast-2",
+            "ap-northeast-3",
+            "ap-southeast-1",
+            "ap-southeast-2",
+            "ap-east-1",
+            "ap-south-1",
+            "sa-east-1",
+            "me-south-1"
+          ],
+          "default": "us-east-1"
+        }
+      },
+      "description": "The Amazon S3 Outposts multi-region endpoint"
+    },
+    {
+      "url": "http://s3-outposts.{region}.amazonaws.com.cn",
+      "variables": {
+        "region": {
+          "description": "The AWS region",
+          "enum": [
+            "cn-north-1",
+            "cn-northwest-1"
+          ],
+          "default": "cn-north-1"
+        }
+      },
+      "description": "The Amazon S3 Outposts endpoint for China (Beijing) and China (Ningxia)"
+    },
+    {
+      "url": "https://s3-outposts.{region}.amazonaws.com.cn",
+      "variables": {
+        "region": {
+          "description": "The AWS region",
+          "enum": [
+            "cn-north-1",
+            "cn-northwest-1"
+          ],
+          "default": "cn-north-1"
+        }
+      },
+      "description": "The Amazon S3 Outposts endpoint for China (Beijing) and China (Ningxia)"
+    }
+  ],
+  "paths": {
+    "/S3Outposts/CreateEndpoint": {
+      "post": {
+        "operationId": "CreateEndpoint",
+        "description": "<p>Creates an endpoint and associates it with the specified Outpost.</p> <note> <p>It can take up to 5 minutes for this action to finish.</p> </note> <p/> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html\">DeleteEndpoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html\">ListEndpoints</a> </p> </li> </ul>",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEndpointResult"
+                }
+              }
+            }
+          },
+          "480": {
+            "description": "InternalServerException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerException"
+                }
+              }
+            }
+          },
+          "481": {
+            "description": "ValidationException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationException"
+                }
+              }
+            }
+          },
+          "482": {
+            "description": "AccessDeniedException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessDeniedException"
+                }
+              }
+            }
+          },
+          "483": {
+            "description": "ResourceNotFoundException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFoundException"
+                }
+              }
+            }
+          },
+          "484": {
+            "description": "ConflictException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConflictException"
+                }
+              }
+            }
+          },
+          "485": {
+            "description": "ThrottlingException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThrottlingException"
+                }
+              }
+            }
+          },
+          "486": {
+            "description": "OutpostOfflineException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutpostOfflineException"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "OutpostId",
+                  "SubnetId",
+                  "SecurityGroupId"
+                ],
+                "properties": {
+                  "OutpostId": {
+                    "description": "The ID of the Outposts. ",
+                    "type": "string",
+                    "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$"
+                  },
+                  "SubnetId": {
+                    "description": "The ID of the subnet in the selected VPC. The endpoint subnet must belong to the Outpost that has Amazon S3 on Outposts provisioned.",
+                    "type": "string",
+                    "pattern": "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"
+                  },
+                  "SecurityGroupId": {
+                    "description": "The ID of the security group to use with the endpoint.",
+                    "type": "string",
+                    "pattern": "^sg-([0-9a-f]{8}|[0-9a-f]{17})$"
+                  },
+                  "AccessType": {
+                    "description": "<p>The type of access for the network connectivity for the Amazon S3 on Outposts endpoint. To use the Amazon Web Services VPC, choose <code>Private</code>. To use the endpoint with an on-premises network, choose <code>CustomerOwnedIp</code>. If you choose <code>CustomerOwnedIp</code>, you must also provide the customer-owned IP address pool (CoIP pool).</p> <note> <p> <code>Private</code> is the default access type value.</p> </note>",
+                    "type": "string",
+                    "enum": [
+                      "Private",
+                      "CustomerOwnedIp"
+                    ]
+                  },
+                  "CustomerOwnedIpv4Pool": {
+                    "description": "The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint. IP addresses are allocated from this pool for the endpoint.",
+                    "type": "string",
+                    "pattern": "^ipv4pool-coip-([0-9a-f]{17})$"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/X-Amz-Content-Sha256"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Date"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Algorithm"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Credential"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Security-Token"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Signature"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-SignedHeaders"
+        }
+      ]
+    },
+    "/S3Outposts/DeleteEndpoint#endpointId&outpostId": {
+      "delete": {
+        "operationId": "DeleteEndpoint",
+        "description": "<p>Deletes an endpoint.</p> <note> <p>It can take up to 5 minutes for this action to finish.</p> </note> <p/> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html\">CreateEndpoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html\">ListEndpoints</a> </p> </li> </ul>",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "480": {
+            "description": "InternalServerException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerException"
+                }
+              }
+            }
+          },
+          "481": {
+            "description": "AccessDeniedException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessDeniedException"
+                }
+              }
+            }
+          },
+          "482": {
+            "description": "ResourceNotFoundException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFoundException"
+                }
+              }
+            }
+          },
+          "483": {
+            "description": "ValidationException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationException"
+                }
+              }
+            }
+          },
+          "484": {
+            "description": "ThrottlingException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThrottlingException"
+                }
+              }
+            }
+          },
+          "485": {
+            "description": "OutpostOfflineException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutpostOfflineException"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "endpointId",
+            "in": "query",
+            "required": true,
+            "description": "The ID of the endpoint.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]{19}$"
+            }
+          },
+          {
+            "name": "outpostId",
+            "in": "query",
+            "required": true,
+            "description": "The ID of the Outposts. ",
+            "schema": {
+              "type": "string",
+              "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$"
+            }
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/X-Amz-Content-Sha256"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Date"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Algorithm"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Credential"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Security-Token"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Signature"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-SignedHeaders"
+        }
+      ]
+    },
+    "/S3Outposts/ListEndpoints": {
+      "get": {
+        "operationId": "ListEndpoints",
+        "description": "<p>Lists endpoints associated with the specified Outpost. </p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html\">CreateEndpoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html\">DeleteEndpoint</a> </p> </li> </ul>",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEndpointsResult"
+                }
+              }
+            }
+          },
+          "480": {
+            "description": "InternalServerException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerException"
+                }
+              }
+            }
+          },
+          "481": {
+            "description": "ResourceNotFoundException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFoundException"
+                }
+              }
+            }
+          },
+          "482": {
+            "description": "AccessDeniedException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessDeniedException"
+                }
+              }
+            }
+          },
+          "483": {
+            "description": "ValidationException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationException"
+                }
+              }
+            }
+          },
+          "484": {
+            "description": "ThrottlingException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThrottlingException"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nextToken",
+            "in": "query",
+            "required": false,
+            "description": "If a previous response from this operation included a <code>NextToken</code> value, provide that value here to retrieve the next page of results.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9\\+\\:\\/\\=\\?\\#-_]+$",
+              "minLength": 1,
+              "maxLength": 1024
+            }
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "required": false,
+            "description": "The maximum number of endpoints that will be returned in the response.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "MaxResults",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination limit",
+            "required": false
+          },
+          {
+            "name": "NextToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination token",
+            "required": false
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/X-Amz-Content-Sha256"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Date"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Algorithm"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Credential"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Security-Token"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Signature"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-SignedHeaders"
+        }
+      ]
+    },
+    "/S3Outposts/ListOutpostsWithS3": {
+      "get": {
+        "operationId": "ListOutpostsWithS3",
+        "description": "Lists the Outposts with S3 on Outposts capacity for your Amazon Web Services account. Includes S3 on Outposts that you have access to as the Outposts owner, or as a shared user from Resource Access Manager (RAM). ",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutpostsWithS3Result"
+                }
+              }
+            }
+          },
+          "480": {
+            "description": "InternalServerException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerException"
+                }
+              }
+            }
+          },
+          "481": {
+            "description": "AccessDeniedException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessDeniedException"
+                }
+              }
+            }
+          },
+          "482": {
+            "description": "ValidationException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationException"
+                }
+              }
+            }
+          },
+          "483": {
+            "description": "ThrottlingException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThrottlingException"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nextToken",
+            "in": "query",
+            "required": false,
+            "description": "When you can get additional results from the <code>ListOutpostsWithS3</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional Outposts.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9\\+\\:\\/\\=\\?\\#-_]+$",
+              "minLength": 1,
+              "maxLength": 1024
+            }
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "required": false,
+            "description": "The maximum number of Outposts to return. The limit is 100.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "MaxResults",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination limit",
+            "required": false
+          },
+          {
+            "name": "NextToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination token",
+            "required": false
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/X-Amz-Content-Sha256"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Date"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Algorithm"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Credential"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Security-Token"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Signature"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-SignedHeaders"
+        }
+      ]
+    },
+    "/S3Outposts/ListSharedEndpoints#outpostId": {
+      "get": {
+        "operationId": "ListSharedEndpoints",
+        "description": "<p>Lists all endpoints associated with an Outpost that has been shared by Amazon Web Services Resource Access Manager (RAM).</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html\">CreateEndpoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html\">DeleteEndpoint</a> </p> </li> </ul>",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListSharedEndpointsResult"
+                }
+              }
+            }
+          },
+          "480": {
+            "description": "InternalServerException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerException"
+                }
+              }
+            }
+          },
+          "481": {
+            "description": "ResourceNotFoundException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFoundException"
+                }
+              }
+            }
+          },
+          "482": {
+            "description": "AccessDeniedException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessDeniedException"
+                }
+              }
+            }
+          },
+          "483": {
+            "description": "ValidationException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationException"
+                }
+              }
+            }
+          },
+          "484": {
+            "description": "ThrottlingException",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThrottlingException"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nextToken",
+            "in": "query",
+            "required": false,
+            "description": "If a previous response from this operation included a <code>NextToken</code> value, you can provide that value here to retrieve the next page of results.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9\\+\\:\\/\\=\\?\\#-_]+$",
+              "minLength": 1,
+              "maxLength": 1024
+            }
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "required": false,
+            "description": "The maximum number of endpoints that will be returned in the response.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "outpostId",
+            "in": "query",
+            "required": true,
+            "description": "The ID of the Amazon Web Services Outpost.",
+            "schema": {
+              "type": "string",
+              "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$"
+            }
+          },
+          {
+            "name": "MaxResults",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination limit",
+            "required": false
+          },
+          {
+            "name": "NextToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination token",
+            "required": false
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/X-Amz-Content-Sha256"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Date"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Algorithm"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Credential"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Security-Token"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-Signature"
+        },
+        {
+          "$ref": "#/components/parameters/X-Amz-SignedHeaders"
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "X-Amz-Content-Sha256": {
+        "name": "X-Amz-Content-Sha256",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-Amz-Date": {
+        "name": "X-Amz-Date",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-Amz-Algorithm": {
+        "name": "X-Amz-Algorithm",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-Amz-Credential": {
+        "name": "X-Amz-Credential",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-Amz-Security-Token": {
+        "name": "X-Amz-Security-Token",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-Amz-Signature": {
+        "name": "X-Amz-Signature",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-Amz-SignedHeaders": {
+        "name": "X-Amz-SignedHeaders",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      }
+    },
+    "securitySchemes": {
+      "hmac": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Amazon Signature authorization v4",
+        "x-amazon-apigateway-authtype": "awsSigv4"
+      }
+    },
+    "schemas": {
+      "CreateEndpointResult": {
+        "type": "object",
+        "properties": {
+          "EndpointArn": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EndpointArn"
+              },
+              {
+                "description": "The Amazon Resource Name (ARN) of the endpoint."
+              }
+            ]
+          }
+        }
+      },
+      "InternalServerException": {},
+      "ValidationException": {},
+      "AccessDeniedException": {},
+      "ResourceNotFoundException": {},
+      "ConflictException": {},
+      "ThrottlingException": {},
+      "OutpostOfflineException": {},
+      "ListEndpointsResult": {
+        "type": "object",
+        "properties": {
+          "Endpoints": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Endpoints"
+              },
+              {
+                "description": "The list of endpoints associated with the specified Outpost."
+              }
+            ]
+          },
+          "NextToken": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NextToken"
+              },
+              {
+                "description": "If the number of endpoints associated with the specified Outpost exceeds <code>MaxResults</code>, you can include this value in subsequent calls to this operation to retrieve more results."
+              }
+            ]
+          }
+        }
+      },
+      "ListOutpostsWithS3Result": {
+        "type": "object",
+        "properties": {
+          "Outposts": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Outposts"
+              },
+              {
+                "description": "<p>Returns the list of Outposts that have the following characteristics:</p> <ul> <li> <p>outposts that have S3 provisioned</p> </li> <li> <p>outposts that are <code>Active</code> (not pending any provisioning nor decommissioned)</p> </li> <li> <p>outposts to which the the calling Amazon Web Services account has access</p> </li> </ul>"
+              }
+            ]
+          },
+          "NextToken": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NextToken"
+              },
+              {
+                "description": "Returns a token that you can use to call <code>ListOutpostsWithS3</code> again and receive additional results, if there are any."
+              }
+            ]
+          }
+        }
+      },
+      "ListSharedEndpointsResult": {
+        "type": "object",
+        "properties": {
+          "Endpoints": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Endpoints"
+              },
+              {
+                "description": "The list of endpoints associated with the specified Outpost that have been shared by Amazon Web Services Resource Access Manager (RAM)."
+              }
+            ]
+          },
+          "NextToken": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NextToken"
+              },
+              {
+                "description": "If the number of endpoints associated with the specified Outpost exceeds <code>MaxResults</code>, you can include this value in subsequent calls to this operation to retrieve more results."
+              }
+            ]
+          }
+        }
+      },
+      "AwsAccountId": {
+        "type": "string",
+        "pattern": "^\\d{12}$"
+      },
+      "CapacityInBytes": {
+        "type": "integer"
+      },
+      "CidrBlock": {
+        "type": "string"
+      },
+      "OutpostId": {
+        "type": "string",
+        "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$"
+      },
+      "SubnetId": {
+        "type": "string",
+        "pattern": "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"
+      },
+      "SecurityGroupId": {
+        "type": "string",
+        "pattern": "^sg-([0-9a-f]{8}|[0-9a-f]{17})$"
+      },
+      "EndpointAccessType": {
+        "type": "string",
+        "enum": [
+          "Private",
+          "CustomerOwnedIp"
+        ]
+      },
+      "CustomerOwnedIpv4Pool": {
+        "type": "string",
+        "pattern": "^ipv4pool-coip-([0-9a-f]{17})$"
+      },
+      "CreateEndpointRequest": {
+        "type": "object",
+        "required": [
+          "OutpostId",
+          "SubnetId",
+          "SecurityGroupId"
+        ],
+        "title": "CreateEndpointRequest",
+        "properties": {
+          "OutpostId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OutpostId"
+              },
+              {
+                "description": "The ID of the Outposts. "
+              }
+            ]
+          },
+          "SubnetId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubnetId"
+              },
+              {
+                "description": "The ID of the subnet in the selected VPC. The endpoint subnet must belong to the Outpost that has Amazon S3 on Outposts provisioned."
+              }
+            ]
+          },
+          "SecurityGroupId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecurityGroupId"
+              },
+              {
+                "description": "The ID of the security group to use with the endpoint."
+              }
+            ]
+          },
+          "AccessType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EndpointAccessType"
+              },
+              {
+                "description": "<p>The type of access for the network connectivity for the Amazon S3 on Outposts endpoint. To use the Amazon Web Services VPC, choose <code>Private</code>. To use the endpoint with an on-premises network, choose <code>CustomerOwnedIp</code>. If you choose <code>CustomerOwnedIp</code>, you must also provide the customer-owned IP address pool (CoIP pool).</p> <note> <p> <code>Private</code> is the default access type value.</p> </note>"
+              }
+            ]
+          },
+          "CustomerOwnedIpv4Pool": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomerOwnedIpv4Pool"
+              },
+              {
+                "description": "The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint. IP addresses are allocated from this pool for the endpoint."
+              }
+            ]
+          }
+        }
+      },
+      "EndpointArn": {
+        "type": "string",
+        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3-outposts:[a-z\\-0-9]*:[0-9]{12}:outpost/(op-[a-f0-9]{17}|ec2)/endpoint/[a-zA-Z0-9]{19}$"
+      },
+      "CreationTime": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "EndpointId": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9]{19}$"
+      },
+      "DeleteEndpointRequest": {
+        "type": "object",
+        "title": "DeleteEndpointRequest",
+        "properties": {}
+      },
+      "EndpointStatus": {
+        "type": "string",
+        "enum": [
+          "Pending",
+          "Available",
+          "Deleting",
+          "Create_Failed",
+          "Delete_Failed"
+        ]
+      },
+      "NetworkInterfaces": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/NetworkInterface"
+        }
+      },
+      "VpcId": {
+        "type": "string"
+      },
+      "FailedReason": {
+        "type": "object",
+        "properties": {
+          "ErrorCode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ErrorCode"
+              },
+              {
+                "description": "The failure code, if any, for a create or delete endpoint operation."
+              }
+            ]
+          },
+          "Message": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Message"
+              },
+              {
+                "description": "Additional error details describing the endpoint failure and recommended action."
+              }
+            ]
+          }
+        },
+        "description": "The failure reason, if any, for a create or delete endpoint operation."
+      },
+      "Endpoint": {
+        "type": "object",
+        "properties": {
+          "EndpointArn": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EndpointArn"
+              },
+              {
+                "description": "The Amazon Resource Name (ARN) of the endpoint."
+              }
+            ]
+          },
+          "OutpostsId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OutpostId"
+              },
+              {
+                "description": "The ID of the Outposts."
+              }
+            ]
+          },
+          "CidrBlock": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CidrBlock"
+              },
+              {
+                "description": "The VPC CIDR committed by this endpoint."
+              }
+            ]
+          },
+          "Status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EndpointStatus"
+              },
+              {
+                "description": "The status of the endpoint."
+              }
+            ]
+          },
+          "CreationTime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreationTime"
+              },
+              {
+                "description": "The time the endpoint was created."
+              }
+            ]
+          },
+          "NetworkInterfaces": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NetworkInterfaces"
+              },
+              {
+                "description": "The network interface of the endpoint."
+              }
+            ]
+          },
+          "VpcId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VpcId"
+              },
+              {
+                "description": "The ID of the VPC used for the endpoint."
+              }
+            ]
+          },
+          "SubnetId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubnetId"
+              },
+              {
+                "description": "The ID of the subnet used for the endpoint."
+              }
+            ]
+          },
+          "SecurityGroupId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecurityGroupId"
+              },
+              {
+                "description": "The ID of the security group used for the endpoint."
+              }
+            ]
+          },
+          "AccessType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EndpointAccessType"
+              },
+              {
+                "description": "The type of connectivity used to access the Amazon S3 on Outposts endpoint."
+              }
+            ]
+          },
+          "CustomerOwnedIpv4Pool": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomerOwnedIpv4Pool"
+              },
+              {
+                "description": "The ID of the customer-owned IPv4 address pool used for the endpoint."
+              }
+            ]
+          },
+          "FailedReason": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FailedReason"
+              },
+              {
+                "description": "The failure reason, if any, for a create or delete endpoint operation."
+              }
+            ]
+          }
+        },
+        "description": "Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/WorkingWithS3Outposts.html\"> Accessing S3 on Outposts using VPC-only access points</a> in the <i>Amazon Simple Storage Service User Guide</i>."
+      },
+      "Endpoints": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Endpoint"
+        }
+      },
+      "ErrorCode": {
+        "type": "string"
+      },
+      "Message": {
+        "type": "string"
+      },
+      "NextToken": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9\\+\\:\\/\\=\\?\\#-_]+$",
+        "minLength": 1,
+        "maxLength": 1024
+      },
+      "MaxResults": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "ListEndpointsRequest": {
+        "type": "object",
+        "title": "ListEndpointsRequest",
+        "properties": {}
+      },
+      "ListOutpostsWithS3Request": {
+        "type": "object",
+        "title": "ListOutpostsWithS3Request",
+        "properties": {}
+      },
+      "Outposts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Outpost"
+        }
+      },
+      "ListSharedEndpointsRequest": {
+        "type": "object",
+        "title": "ListSharedEndpointsRequest",
+        "properties": {}
+      },
+      "NetworkInterfaceId": {
+        "type": "string"
+      },
+      "NetworkInterface": {
+        "type": "object",
+        "properties": {
+          "NetworkInterfaceId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NetworkInterfaceId"
+              },
+              {
+                "description": "The ID for the network interface."
+              }
+            ]
+          }
+        },
+        "description": "The container for the network interface."
+      },
+      "OutpostArn": {
+        "type": "string",
+        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):outposts:[a-z\\-0-9]*:[0-9]{12}:outpost/(op-[a-f0-9]{17}|ec2)$"
+      },
+      "Outpost": {
+        "type": "object",
+        "properties": {
+          "OutpostArn": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OutpostArn"
+              },
+              {
+                "description": "Specifies the unique Amazon Resource Name (ARN) for the outpost."
+              }
+            ]
+          },
+          "OutpostId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OutpostId"
+              },
+              {
+                "description": "Specifies the unique identifier for the outpost."
+              }
+            ]
+          },
+          "OwnerId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AwsAccountId"
+              },
+              {
+                "description": "Returns the Amazon Web Services account ID of the outpost owner. Useful for comparing owned versus shared outposts."
+              }
+            ]
+          },
+          "CapacityInBytes": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CapacityInBytes"
+              },
+              {
+                "description": "The Amazon S3 capacity of the outpost in bytes."
+              }
+            ]
+          }
+        },
+        "description": "Contains the details for the Outpost object."
+      }
+    }
+  },
+  "security": [
+    {
+      "hmac": []
+    }
+  ]
+}

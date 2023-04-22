@@ -1,0 +1,31 @@
+{
+  "added": "2021-03-31T13:30:20.111Z",
+  "info": {
+    "contact": {
+      "name": "developer.va.gov"
+    },
+    "description": "## Background\n\nThis RESTful API provides information about physical VA facilities. Information available includes\ngeographic location, address, phone, hours of operation, and available services.\n\nVA operates several different types of facilities, the types represented in this API include:\n- Health Facilities (vha)\n- Benefits Facilities (vba)\n- Cemeteries (nca)\n- Vet Centers (vc)\n\nTo read an FAQ on how wait times are calculated, click the \"For more information\" link on [this page](https://www.accesstocare.va.gov/PWT/SearchWaitTimes).\n\n## Getting Started\n\n### Base URLs\n\nThe base URLs for the VA Facilities API in the various environments are:\n- Sandbox: `https://sandbox-api.va.gov/services/va_facilities/v0`\n- Production: `https://api.va.gov/services/va_facilities/v0`\n\n### Authorization\n\nAPI requests are authorized through a symmetric API token, provided in an HTTP header with name `apikey`.\n\n### Response Formats\n\nClients may request several response formats by setting the `Accept` header.\n- `application/json` - The default JSON response format complies with JSON API. This media type is *not* available for bulk requests using the `/facilities/all` endpoint. It will return `406 Not Acceptable`.\n- `application/geo+json` - GeoJSON-compliant format, representing each facility as a feature with a point geometry.\n- `application/vnd.geo+json` - Deprecated. Prefer application/geo+json.\n- `text/csv` - Available for the bulk download operation only. Some structured fields are omitted from the CSV response.\n\n### Response Elements\n\nSome data elements within the response are only present for facilities of a given type:\n- The patient satisfaction scores contained in the `satisfaction` element are only applicable\n  to VA health facilities.\n- The patient wait time values contained in the `wait_times` element are only applicable to\n  VA health facilities.\n- The list of available services in the `services` element is only applicable to VA health and\n  benefits facilities.\n- The operational hours special instructions contained in the `operational_hours_special_instructions` element is only applicable to VA health and Vet Center facilities.\n\n### Facility ID Formats and Constraints\n\nA facility ID has the format `prefix_stationNumber`. The prefix is one of nca, vc, vba, or vha. Cemeteries may be national (VA) or non-national; non-national cemeteries have the station number prefixed with an `s`. There are no other constraints on the format. Examples:\n- Health: `vha_402GA`\n- Benefits: `vba_539GB`\n- National cemetery: `nca_063`\n- Non-national cemetery: `nca_s1082`\n- Vet center: `vc_0872MVC`\n\n\n### Mobile Facilities\n\nThe mobile health facilities move regularly within a region. If a facility comes back from this API with `\"mobile\": \"true\"`, the latitude/longitude and address could be inaccurate. To get the exact current location, please call the number listed.\n\n## Deprecations\n\n- `active_status` field is deprecated and replaced with `operating_status`.\n- `application/vnd.geo+json` media type is deprecated and replaced by `application/geo+json`\n\n\n## Reference\n\n- [Raw VA Facilities Open API Spec](https://api.va.gov/services/va_facilities/docs/v0/api)\n- [GeoJSON Format](https://tools.ietf.org/html/rfc7946)\n- [JSON API Format](https://jsonapi.org/format/)",
+    "title": "VA Facilities",
+    "version": "0.0.1",
+    "x-apisguru-categories": [
+      "location"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com_img_design_icons_apple-touch-icon.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://api.va.gov/services/va_facilities/docs/v0/api",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "va.gov",
+    "x-serviceName": "facilities"
+  },
+  "updated": "2021-07-05T15:07:17.927Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/va.gov/facilities/0.0.1/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/va.gov/facilities/0.0.1/openapi.yaml",
+  "openapiVer": "3.0.1",
+  "link": "https://api.apis.guru/v2/specs/va.gov:facilities/0.0.1.json"
+}

@@ -1,0 +1,2012 @@
+openapi: 3.0.1
+servers:
+  - description: Production
+    url: https://products.izettle.com
+    variables: {}
+info:
+  description: The Product Library API is used for managing merchant's product information and product images.
+  title: Product Library API
+  version: 1.0.0
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_cdn.izettle.com_favicons_favicon-32x32.png
+  x-origin:
+    - format: openapi
+      url: https://products.izettle.com/openapi.json
+      version: "3.0"
+  x-providerName: izettle.com
+  x-serviceName: products
+paths:
+  "/organizations/{organizationUuid}/categories/v2":
+    get:
+      operationId: getProductTypes
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryResponse"
+          description: List of all categories
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve all categories
+      tags:
+        - categories
+    post:
+      operationId: createCategories
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCategoriesRequest"
+        required: true
+      responses:
+        "201":
+          description: Category created
+        "400":
+          description: Category already exists
+        "404":
+          description: Organization not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Create a new category
+      tags:
+        - categories
+  "/organizations/{organizationUuid}/categories/v2/{categoryUuid}":
+    delete:
+      operationId: deleteCategory
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: categoryUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: Category deleted
+        "404":
+          description: Organization not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Delete a category
+      tags:
+        - categories
+    patch:
+      operationId: renameCategory
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: categoryUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameCategoryRequest"
+        required: true
+      responses:
+        "204":
+          description: Category renamed
+        "400":
+          description: Category already exists
+        "404":
+          description: Organization not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Rename a category
+      tags:
+        - categories
+  "/organizations/{organizationUuid}/discounts":
+    get:
+      operationId: getAllDiscounts
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DiscountResponse"
+                type: array
+          description: List of all discounts
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve all discounts
+      tags:
+        - discounts
+    post:
+      description: Creates a single discount entity. The location of the newly created discount will be available in the successful response as a HttpHeaders.LOCATION header
+      operationId: createDiscount
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiscountRequest"
+      responses:
+        "201":
+          description: Discount created
+          headers:
+            ETag:
+              description: ETag value
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Location of newly created Discount
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request body
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Create a discount
+      tags:
+        - discounts
+  "/organizations/{organizationUuid}/discounts/{discountUuid}":
+    delete:
+      operationId: deleteDiscount
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: discountUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: Discount deleted
+        "404":
+          description: Organization or Discount not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: "Delete a single discount "
+      tags:
+        - discounts
+    get:
+      description: "Get the full discount with the provided UUID. The method supports conditional GET through providing a HttpHeaders.IF_NONE_MATCH header. If the conditional prerequisite is fullfilled, the full discount is returned: otherwise a 304 not modified will be returned with an empty body."
+      operationId: getDiscount
+      parameters:
+        - in: header
+          name: If-None-Match
+          schema:
+            type: string
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: discountUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiscountResponse"
+          description: Discount
+          headers:
+            ETag:
+              description: ETag value
+              schema:
+                type: string
+              style: simple
+        "304":
+          description: Not modified
+        "404":
+          description: Organization or Discount not found
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve a single discount
+      tags:
+        - discounts
+    put:
+      description: "Updates a discount entity using JSON merge patch (https://tools.ietf.org/html/rfc7386). This means that only included fields will be changed: null values removes the field on the target entity, and other values updates the field. Conditional updates are supported through the HttpHeaders.IF_MATCH header. If the conditional prerequisite is fullfilled, the discount is updated: otherwise a 412 precondition failed will be returned with an empty body."
+      operationId: updateDiscount
+      parameters:
+        - in: header
+          name: If-Match
+          schema:
+            type: string
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: discountUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiscountRequest"
+        required: true
+      responses:
+        "204":
+          description: Discount updated
+          headers:
+            ETag:
+              description: ETag value
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Location of updated Discount
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request body
+        "412":
+          description: "Precondition failed: ETag did not match the expected value"
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Update a single discount
+      tags:
+        - discounts
+  "/organizations/{organizationUuid}/images":
+    get:
+      description: Retrieves all library items images used by the organization, sorted by updated date
+      operationId: getAllImageUrls
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LibraryImagesResponse"
+          description: List of all image urls
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve all library item images
+      tags:
+        - images
+  "/organizations/{organizationUuid}/import/status":
+    get:
+      operationId: getLatestImportStatus
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportResponse"
+          description: Import status
+        "404":
+          description: Organization or import not found
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Get status for latest import
+      tags:
+        - import
+  "/organizations/{organizationUuid}/import/status/{importUuid}":
+    get:
+      operationId: getStatusByUuid
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: importUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportResponse"
+          description: Import status
+        "404":
+          description: Organization or import not found
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Get status for an import
+      tags:
+        - import
+  "/organizations/{organizationUuid}/import/v2":
+    post:
+      operationId: importLibraryV2
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkImportRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportResponse"
+          description: Import status
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request body
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Import library items
+      tags:
+        - import
+  "/organizations/{organizationUuid}/library":
+    get:
+      description: |
+        Will return the entire library for the authenticated user. If size of the library exceeds server preferences (normally 500) or the value of the optional limit parameter, the result will be paginated. Paginated responses return a Link header, indicating the next URI to fetch. The resulting header value will look something like:
+
+        <https://products.izettle.com/organizations/self/library?limit=X&offset=Y>; rel="next"
+
+        where limit is number of items in response, and offset is the current position in pagination. The rel-part in the header is the links relation to the data previously recieved. The idea is that as long as this header is present there are still items remaining to be fetched. When either the header is not present or it's value doesn't contain any "next" value, all items have been sent to the client.
+
+        Note: The client should NOT try to extract query parameters from the URI, but rather use it as-is for the next request. Also, clients should be perpared that one Link header might contain multiple other IRIs that are not "next" (there will never be more than one "next" though). See more at:
+
+            IETF: https://tools.ietf.org/html/rfc5988
+            GitHub: https://developer.github.com/guides/traversing-with-pagination/
+
+        If eventLogUuid is provided, the response will only include events affecting the library since that event. Such responses are normally quite small and would be a preferred method for most fat clients after retrieving the initial full library.
+      operationId: getLibrary
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: query
+          name: eventLogUuid
+          schema:
+            format: uuid
+            type: string
+        - in: query
+          name: limit
+          schema:
+            default: 500
+            format: int32
+            maximum: 500
+            minimum: 1
+            type: integer
+        - in: query
+          name: offset
+          schema:
+            type: string
+        - in: query
+          name: all
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LibraryResponse"
+          description: List of library items
+          headers:
+            Link:
+              description: "If the response is paginated this header will contain the URI for the next page. See more at: https://tools.ietf.org/html/rfc5988"
+              schema:
+                type: string
+              style: simple
+        "412":
+          description: |-
+            Invalid event log uuid. If the eventLogUuid query parameter was provided a 412 response indicates that the number of changes in the product exceeds the limit since that particular event (currently 500 changes). 
+            When this happens, the client should remove the eventLogUuid query parameters and try again.
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve the entire library
+      tags:
+        - library
+  "/organizations/{organizationUuid}/products":
+    delete:
+      operationId: deleteProducts
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: List of product UUIDs to be deleted
+          in: query
+          name: uuid
+          required: true
+          schema:
+            items:
+              format: uuid
+              type: string
+            type: array
+      responses:
+        "204":
+          description: Products deleted
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Delete a list of products
+      tags:
+        - products
+    get:
+      operationId: getAllProductsInPos
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProductResponse"
+                type: array
+          description: A list of products
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve all products visible in POS
+      tags:
+        - products
+    post:
+      operationId: createProduct
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: query
+          name: returnEntity
+          schema:
+            default: false
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+          description: Product created. It will include the Product in the response only if 'returnEntity' is true
+          headers:
+            ETag:
+              description: ETag value
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Location of newly created Product
+              schema:
+                type: string
+              style: simple
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Create a new product
+      tags:
+        - products
+  "/organizations/{organizationUuid}/products/online/slug":
+    post:
+      description: Creates a unique slug (identifier) for a product. The slug is used to create a product URL
+      operationId: createProductSlug
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSlugRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SlugResponse"
+          description: Product slug
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Create a product identifier
+      tags:
+        - products/online
+  "/organizations/{organizationUuid}/products/options":
+    get:
+      operationId: getAllOptions
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/VariantOptionsResponse"
+                type: array
+          description: List of Options
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve an aggregate of active Options in the library
+      tags:
+        - products
+  "/organizations/{organizationUuid}/products/v2":
+    get:
+      operationId: getAllProductsV2
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: If true, sorts response by created date
+          in: query
+          name: sort
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProductResponse"
+                type: array
+          description: A list of products
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve all products visible in POS – v2
+      tags:
+        - products
+  "/organizations/{organizationUuid}/products/v2/count":
+    get:
+      operationId: countAllProducts
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProductCountResponse"
+                type: array
+          description: Count of existing products
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve the count of existing products
+      tags:
+        - products
+  "/organizations/{organizationUuid}/products/v2/{productUuid}":
+    put:
+      description: "Updates a product entity using JSON merge patch (https://tools.ietf.org/html/rfc7386). This means that only included fields will be changed: null values removes the field on the target entity, and other values updates the field. Conditional updates are supported through the HttpHeaders.IF_MATCH header. If the conditional prerequisite is fullfilled, the product is updated: otherwise a 412 (precondition failed) will be returned with an empty body."
+      operationId: updateProduct
+      parameters:
+        - in: header
+          name: If-Match
+          schema:
+            type: string
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: productUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FullProductUpdateRequest"
+        required: true
+      responses:
+        "204":
+          description: Product updated
+          headers:
+            ETag:
+              description: ETag value
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Location of updated product
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request body
+        "412":
+          description: "Precondition failed: ETag did not match the expected value"
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Update a single product
+      tags:
+        - products
+  "/organizations/{organizationUuid}/products/{productUuid}":
+    delete:
+      operationId: deleteProduct
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: productUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: Product deleted
+        "404":
+          description: Organization or Product not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Delete a single product
+      tags:
+        - products
+    get:
+      description: Get the full product with the provided UUID. The method supports conditional GET through providing a HttpHeaders.IF_NONE_MATCH header. If the conditional prerequisite is fullfilled, the full product is returned, otherwise a 304 not modified will be returned with an empty body.
+      operationId: getProduct
+      parameters:
+        - in: header
+          name: If-None-Match
+          schema:
+            type: string
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: productUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+          description: Product
+          headers:
+            ETag:
+              description: ETag value
+              schema:
+                type: string
+              style: simple
+        "304":
+          description: Not modified
+        "400":
+          description: Malformed ETag
+        "404":
+          description: Organization or Product not found
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Retrieve a single product
+      tags:
+        - products
+  /v1/taxes:
+    get:
+      operationId: getTaxRates
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TaxRatesResponse"
+                type: array
+          description: List of tax rates
+        "403":
+          description: Not a sales tax user
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Get all available tax rates
+      tags:
+        - taxes
+    post:
+      operationId: createTaxRates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaxRatesCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaxRatesResponse"
+          description: Tax rates created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request body
+        "403":
+          description: Not a sales tax user
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Create new tax rates
+      tags:
+        - taxes
+  /v1/taxes/count:
+    get:
+      operationId: getProductCountForAllTaxes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaxRateProductCountResponse"
+          description: Count of products for each tax rate
+        "403":
+          description: Not a sales tax user
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Get all tax rates and a count of products associated with each
+      tags:
+        - taxes
+  /v1/taxes/settings:
+    get:
+      operationId: getTaxSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaxSettingsResponse"
+          description: Tax settings
+        "403":
+          description: Not a sales tax user
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: "Get the organization tax settings "
+      tags:
+        - taxes
+    put:
+      operationId: setTaxationMode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaxSettingsUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaxSettingsResponse"
+          description: Updated tax settings
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request body
+        "403":
+          description: Not a sales tax user
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Update the organization tax settings
+      tags:
+        - taxes
+  "/v1/taxes/{taxRateUuid}":
+    delete:
+      operationId: deleteTaxRate
+      parameters:
+        - in: path
+          name: taxRateUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: Tax rate deleted
+        "403":
+          description: Not a sales tax user
+        "404":
+          description: Tax rate not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Delete a single tax rate
+      tags:
+        - taxes
+    get:
+      operationId: getTaxRate
+      parameters:
+        - in: path
+          name: taxRateUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaxRate"
+          description: Single tax rate
+        "403":
+          description: Not a sales tax user
+        "404":
+          description: Tax rate not found
+      security:
+        - ZettleOauth:
+            - READ:PRODUCT
+      summary: Get a single tax rate
+      tags:
+        - taxes
+    put:
+      operationId: updateTaxRate
+      parameters:
+        - in: path
+          name: taxRateUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaxRateUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaxRate"
+          description: Updated tax rate
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request body
+        "403":
+          description: Not a sales tax user
+        "404":
+          description: Tax rate not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Update a single tax rate
+      tags:
+        - taxes
+components:
+  schemas:
+    BulkImportRequest:
+      properties:
+        products:
+          items:
+            $ref: "#/components/schemas/FullProductUpdateRequest"
+          type: array
+      required:
+        - products
+      type: object
+    CategoryDTO:
+      properties:
+        name:
+          maxLength: 100
+          minLength: 0
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+        - name
+        - uuid
+      type: object
+    CategoryResponse:
+      properties:
+        categories:
+          items:
+            $ref: "#/components/schemas/CategoryDTO"
+          type: array
+      required:
+        - categories
+      type: object
+    ConstraintViolation:
+      properties:
+        constraintType:
+          enum:
+            - MUST_BE_FALSE
+            - MUST_BE_TRUE
+            - MUST_BE_LESS_THAN
+            - MUST_BE_GREATER_THAN
+            - DIGIT_OUT_OF_BOUNDS
+            - DATE_MUST_BE_IN_THE_FUTURE
+            - MUST_BE_LESS_OR_EQUAL_THAN
+            - MUST_BE_GREATER_OR_EQUAL_TO
+            - MUST_NOT_BE_NULL
+            - MUST_BE_NULL
+            - DATE_MUST_BE_IN_THE_PAST
+            - MUST_MATCH_PATTERN
+            - INVALID_SIZE
+            - INVALID_EMAIL
+            - MUST_NOT_BE_EMPTY
+            - INVALID_RANGE
+            - UNKNOWN
+          type: string
+        developerMessage:
+          type: string
+        expected:
+          type: string
+        propertyName:
+          type: string
+        value:
+          type: string
+      type: object
+    CreateCategoriesRequest:
+      properties:
+        categories:
+          items:
+            $ref: "#/components/schemas/CategoryDTO"
+          type: array
+      required:
+        - categories
+      type: object
+    CreateSlugRequest:
+      properties:
+        productName:
+          maxLength: 256
+          minLength: 1
+          type: string
+      required:
+        - productName
+      type: object
+    DiscountRequest:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Price"
+        description:
+          maxLength: 128
+          minLength: 0
+          type: string
+        externalReference:
+          maxLength: 128
+          minLength: 0
+          type: string
+        imageLookupKeys:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        percentage:
+          maximum: 100
+          minimum: 0
+          type: number
+        uuid:
+          format: uuid
+          type: string
+      required:
+        - uuid
+      type: object
+    DiscountResponse:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Price"
+        created:
+          format: date-time
+          type: string
+        description:
+          type: string
+        etag:
+          type: string
+        externalReference:
+          type: string
+        imageLookupKeys:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        name:
+          type: string
+        percentage:
+          type: number
+        updated:
+          format: date-time
+          type: string
+        updatedBy:
+          format: uuid
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+        - created
+        - etag
+        - name
+        - updated
+        - uuid
+      type: object
+    ErrorResponse:
+      properties:
+        developerMessage:
+          type: string
+        errorType:
+          type: string
+        violations:
+          items:
+            $ref: "#/components/schemas/ConstraintViolation"
+          type: array
+          uniqueItems: true
+      type: object
+    FullProductUpdateRequest:
+      properties:
+        categories:
+          items:
+            type: string
+          maxItems: 1
+          minItems: 0
+          type: array
+          uniqueItems: true
+        category:
+          $ref: "#/components/schemas/CategoryDTO"
+        description:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        externalReference:
+          type: string
+        imageLookupKeys:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        metadata:
+          $ref: "#/components/schemas/MetadataDTO"
+        name:
+          maxLength: 256
+          minLength: 1
+          type: string
+        online:
+          $ref: "#/components/schemas/OnlineProperties"
+        presentation:
+          $ref: "#/components/schemas/PresentationDTO"
+        taxCode:
+          type: string
+        taxExempt:
+          type: boolean
+        taxRates:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+        unitName:
+          type: string
+        uuid:
+          format: uuid
+          type: string
+        variantOptionDefinitions:
+          $ref: "#/components/schemas/VariantOptionDefinitions"
+        variants:
+          items:
+            $ref: "#/components/schemas/VariantDTO"
+          type: array
+        vatPercentage:
+          maximum: 100
+          minimum: 0
+          type: number
+      required:
+        - name
+        - uuid
+      type: object
+    ImportResponse:
+      properties:
+        created:
+          format: date-time
+          type: string
+        errorMessage:
+          type: string
+        finished:
+          format: date-time
+          type: string
+        items:
+          format: int64
+          type: integer
+        state:
+          enum:
+            - IMPORTING
+            - FINISHED_SUCCESS
+            - FINISHED_FAILED
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      type: object
+    LibraryImagesResponse:
+      properties:
+        imageUrls:
+          items:
+            type: string
+          type: array
+      type: object
+    LibraryResponse:
+      properties:
+        deletedDiscounts:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+        deletedProducts:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+        discounts:
+          items:
+            $ref: "#/components/schemas/DiscountResponse"
+          type: array
+          uniqueItems: true
+        fromEventLogUuid:
+          format: uuid
+          type: string
+        products:
+          items:
+            $ref: "#/components/schemas/ProductResponse"
+          type: array
+          uniqueItems: true
+        untilEventLogUuid:
+          format: uuid
+          type: string
+      type: object
+    MetadataDTO:
+      properties:
+        inPos:
+          type: boolean
+        source:
+          $ref: "#/components/schemas/SourceDTO"
+      required:
+        - inPos
+      type: object
+    OnlineProperties:
+      properties:
+        description:
+          maxLength: 3500
+          minLength: 0
+          type: string
+        presentation:
+          $ref: "#/components/schemas/Presentation"
+        seo:
+          $ref: "#/components/schemas/SearchEngineOptimization"
+        shipping:
+          $ref: "#/components/schemas/Shipping"
+        status:
+          enum:
+            - ACTIVE
+            - HIDDEN
+          type: string
+        title:
+          maxLength: 256
+          minLength: 0
+          type: string
+      required:
+        - status
+      type: object
+    Option:
+      properties:
+        name:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    Presentation:
+      properties:
+        additionalImageUrls:
+          items:
+            format: url
+            type: string
+          maxItems: 25
+          minItems: 0
+          type: array
+        displayImageUrl:
+          format: url
+          type: string
+        mediaUrls:
+          items:
+            format: url
+            type: string
+          maxItems: 8
+          minItems: 0
+          type: array
+      type: object
+    PresentationDTO:
+      properties:
+        backgroundColor:
+          type: string
+        imageUrl:
+          type: string
+        textColor:
+          type: string
+      type: object
+    Price:
+      properties:
+        amount:
+          format: int64
+          minimum: 0
+          type: integer
+        currencyId:
+          enum:
+            - AED
+            - AFA
+            - AFN
+            - ALL
+            - AMD
+            - ANG
+            - AOA
+            - ARS
+            - AUD
+            - AWG
+            - AZM
+            - AZN
+            - BAM
+            - BBD
+            - BDT
+            - BGN
+            - BHD
+            - BIF
+            - BMD
+            - BND
+            - BOB
+            - BRL
+            - BSD
+            - BTN
+            - BWP
+            - BYR
+            - BZD
+            - CAD
+            - CDF
+            - CHF
+            - CLP
+            - CNY
+            - COP
+            - CRC
+            - CSD
+            - CUC
+            - CUP
+            - CVE
+            - CYP
+            - CZK
+            - DJF
+            - DKK
+            - DOP
+            - DZD
+            - EEK
+            - EGP
+            - ERN
+            - ETB
+            - EUR
+            - FJD
+            - FKP
+            - GBP
+            - GEL
+            - GGP
+            - GHC
+            - GHS
+            - GIP
+            - GMD
+            - GNF
+            - GTQ
+            - GYD
+            - HKD
+            - HNL
+            - HRK
+            - HTG
+            - HUF
+            - IDR
+            - ILS
+            - IMP
+            - INR
+            - IQD
+            - IRR
+            - ISK
+            - JEP
+            - JMD
+            - JOD
+            - JPY
+            - KES
+            - KGS
+            - KHR
+            - KMF
+            - KPW
+            - KRW
+            - KWD
+            - KYD
+            - KZT
+            - LAK
+            - LBP
+            - LKR
+            - LRD
+            - LSL
+            - LTL
+            - LVL
+            - LYD
+            - MAD
+            - MDL
+            - MGA
+            - MKD
+            - MMK
+            - MNT
+            - MOP
+            - MRO
+            - MTL
+            - MUR
+            - MVR
+            - MWK
+            - MXN
+            - MYR
+            - MZM
+            - MZN
+            - NAD
+            - NGN
+            - NIO
+            - NOK
+            - NPR
+            - NZD
+            - OMR
+            - PAB
+            - PEN
+            - PGK
+            - PHP
+            - PKR
+            - PLN
+            - PYG
+            - QAR
+            - RON
+            - RSD
+            - RUB
+            - RWF
+            - SAR
+            - SBD
+            - SCR
+            - SDD
+            - SDG
+            - SEK
+            - SGD
+            - SHP
+            - SIT
+            - SKK
+            - SLL
+            - SOS
+            - SPL
+            - SRD
+            - SSP
+            - STD
+            - SVC
+            - SYP
+            - SZL
+            - THB
+            - TJS
+            - TMM
+            - TMT
+            - TND
+            - TOP
+            - TRL
+            - TRY
+            - TTD
+            - TVD
+            - TWD
+            - TZS
+            - UAH
+            - UGX
+            - USD
+            - UYU
+            - UZS
+            - VEB
+            - VEF
+            - VND
+            - VUV
+            - WST
+            - XAF
+            - XAG
+            - XAU
+            - XCD
+            - XDR
+            - XOF
+            - XPD
+            - XPF
+            - XPT
+            - YER
+            - ZAR
+            - ZMK
+            - ZMW
+            - ZWD
+            - ZWL
+          type: string
+      required:
+        - amount
+        - currencyId
+      type: object
+    ProductCountResponse:
+      properties:
+        productCount:
+          format: int32
+          type: integer
+      required:
+        - productCount
+      type: object
+    ProductCreateRequest:
+      properties:
+        categories:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        category:
+          $ref: "#/components/schemas/CategoryDTO"
+        createWithDefaultTax:
+          type: boolean
+        description:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        externalReference:
+          maxLength: 128
+          minLength: 0
+          type: string
+        imageLookupKeys:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        metadata:
+          $ref: "#/components/schemas/MetadataDTO"
+        name:
+          maxLength: 256
+          minLength: 1
+          type: string
+        online:
+          $ref: "#/components/schemas/OnlineProperties"
+        presentation:
+          $ref: "#/components/schemas/PresentationDTO"
+        taxCode:
+          type: string
+        taxExempt:
+          type: boolean
+        taxRates:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+        unitName:
+          maxLength: 32
+          minLength: 0
+          type: string
+        uuid:
+          format: uuid
+          type: string
+        variantOptionDefinitions:
+          $ref: "#/components/schemas/VariantOptionDefinitions"
+        variants:
+          items:
+            $ref: "#/components/schemas/VariantDTO"
+          type: array
+        vatPercentage:
+          maximum: 100
+          minimum: 0
+          type: number
+      required:
+        - name
+        - uuid
+      type: object
+    ProductResponse:
+      properties:
+        categories:
+          items:
+            type: string
+          maxItems: 1
+          minItems: 0
+          type: array
+          uniqueItems: true
+        category:
+          $ref: "#/components/schemas/CategoryDTO"
+        created:
+          format: date-time
+          type: string
+        description:
+          type: string
+        etag:
+          type: string
+        externalReference:
+          type: string
+        imageLookupKeys:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        metadata:
+          $ref: "#/components/schemas/MetadataDTO"
+        name:
+          type: string
+        online:
+          $ref: "#/components/schemas/OnlineProperties"
+        presentation:
+          $ref: "#/components/schemas/PresentationDTO"
+        taxCode:
+          type: string
+        taxExempt:
+          type: boolean
+        taxRates:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+        unitName:
+          type: string
+        updated:
+          format: date-time
+          type: string
+        updatedBy:
+          format: uuid
+          type: string
+        uuid:
+          format: uuid
+          type: string
+        variantOptionDefinitions:
+          $ref: "#/components/schemas/VariantOptionDefinitions"
+        variants:
+          items:
+            $ref: "#/components/schemas/VariantDTO"
+          maxItems: 99
+          minItems: 1
+          type: array
+        vatPercentage:
+          type: number
+      required:
+        - created
+        - etag
+        - name
+        - updated
+        - uuid
+        - variants
+      type: object
+    RenameCategoryRequest:
+      properties:
+        name:
+          maxLength: 100
+          minLength: 1
+          pattern: \S|\S.*\S
+          type: string
+      required:
+        - name
+      type: object
+    SearchEngineOptimization:
+      properties:
+        metaDescription:
+          maxLength: 320
+          minLength: 0
+          type: string
+        slug:
+          maxLength: 256
+          minLength: 1
+          type: string
+        title:
+          maxLength: 256
+          minLength: 0
+          type: string
+      type: object
+    Shipping:
+      properties:
+        shippingPricingModel:
+          enum:
+            - FREE
+            - STANDARD
+          type: string
+        weight:
+          $ref: "#/components/schemas/Weight"
+        weightInGrams:
+          format: int64
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      type: object
+    SlugResponse:
+      properties:
+        productName:
+          type: string
+        slug:
+          type: string
+      type: object
+    SourceDTO:
+      properties:
+        external:
+          type: boolean
+        name:
+          type: string
+      type: object
+    TaxRate:
+      properties:
+        default:
+          type: boolean
+        label:
+          maxLength: 512
+          minLength: 0
+          type: string
+        percentage:
+          maximum: 100
+          type: number
+        uuid:
+          format: uuid
+          type: string
+      required:
+        - label
+        - uuid
+      type: object
+    TaxRateProductCount:
+      properties:
+        count:
+          format: int32
+          type: integer
+        taxRateUuid:
+          format: uuid
+          type: string
+      type: object
+    TaxRateProductCountResponse:
+      properties:
+        counts:
+          items:
+            $ref: "#/components/schemas/TaxRateProductCount"
+          type: array
+      type: object
+    TaxRateUpdateRequest:
+      properties:
+        default:
+          type: boolean
+        label:
+          maxLength: 512
+          minLength: 0
+          type: string
+        percentage:
+          maximum: 100
+          type: number
+      type: object
+    TaxRatesCreateRequest:
+      properties:
+        taxRates:
+          items:
+            $ref: "#/components/schemas/TaxRate"
+          maxItems: 15
+          minItems: 0
+          type: array
+      required:
+        - taxRates
+      type: object
+    TaxRatesResponse:
+      properties:
+        taxRates:
+          items:
+            $ref: "#/components/schemas/TaxRate"
+          type: array
+      type: object
+    TaxSettingsResponse:
+      properties:
+        organizationUuid:
+          format: uuid
+          type: string
+        taxationMode:
+          enum:
+            - EXCLUSIVE
+            - INCLUSIVE
+          type: string
+        taxationType:
+          enum:
+            - NONE
+            - SALES_TAX
+            - VAT
+          type: string
+      type: object
+    TaxSettingsUpdateRequest:
+      properties:
+        taxationMode:
+          enum:
+            - EXCLUSIVE
+            - INCLUSIVE
+          type: string
+      required:
+        - taxationMode
+      type: object
+    VariantDTO:
+      properties:
+        barcode:
+          maxLength: 128
+          minLength: 0
+          type: string
+        costPrice:
+          $ref: "#/components/schemas/Price"
+        description:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        name:
+          maxLength: 256
+          minLength: 0
+          type: string
+        options:
+          items:
+            $ref: "#/components/schemas/VariantOption"
+          maxItems: 99
+          minItems: 1
+          type: array
+        presentation:
+          $ref: "#/components/schemas/PresentationDTO"
+        price:
+          $ref: "#/components/schemas/Price"
+        sku:
+          maxLength: 64
+          minLength: 0
+          type: string
+        uuid:
+          format: uuid
+          type: string
+        vatPercentage:
+          deprecated: true
+          maximum: 100
+          minimum: 0
+          type: number
+      required:
+        - uuid
+      type: object
+    VariantOption:
+      properties:
+        name:
+          maxLength: 30
+          minLength: 1
+          type: string
+        value:
+          maxLength: 256
+          minLength: 1
+          type: string
+      required:
+        - name
+        - value
+      type: object
+    VariantOptionDefinition:
+      properties:
+        name:
+          maxLength: 30
+          minLength: 1
+          type: string
+        properties:
+          items:
+            $ref: "#/components/schemas/VariantOptionProperties"
+          maxItems: 99
+          minItems: 1
+          type: array
+      required:
+        - name
+        - properties
+      type: object
+    VariantOptionDefinitions:
+      properties:
+        definitions:
+          items:
+            $ref: "#/components/schemas/VariantOptionDefinition"
+          maxItems: 3
+          minItems: 1
+          type: array
+      required:
+        - definitions
+      type: object
+    VariantOptionProperties:
+      properties:
+        imageUrl:
+          maxLength: 256
+          minLength: 1
+          type: string
+        value:
+          maxLength: 256
+          minLength: 1
+          type: string
+      required:
+        - value
+      type: object
+    VariantOptionsResponse:
+      properties:
+        options:
+          items:
+            $ref: "#/components/schemas/Option"
+          type: array
+      type: object
+    Weight:
+      properties:
+        unit:
+          enum:
+            - kg
+            - g
+            - oz
+            - lb
+          type: string
+        weight:
+          exclusiveMinimum: false
+          minimum: 0
+          type: number
+      required:
+        - unit
+        - weight
+      type: object
+  securitySchemes:
+    ZettleOauth:
+      description: "For more information about authorization API visit: https://developer.zettle.com/docs/api/oauth/overview"
+      flows:
+        authorizationCode:
+          authorizationUrl: https://oauth.zettle.com/authorize
+          scopes:
+            READ:PRODUCT: Access to read product library data
+            WRITE:PRODUCT: Access to write product library data
+          tokenUrl: https://oauth.zettle.com/token
+      type: oauth2

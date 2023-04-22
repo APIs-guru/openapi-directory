@@ -1,0 +1,34 @@
+{
+  "apis": {
+    "waterlinked.com": {
+      "added": "2018-03-10T16:30:06.000Z",
+      "info": {
+        "contact": {
+          "x-twitter": "waterlinkedas"
+        },
+        "description": "API for the Water Linked Underwater GPS. For more details: http://www.waterlinked.com\n\nRecommended approach for connecting to a Underwater GPS via the API is:\n- If \"GET /api/\" times out, the Underwater GPS is not running (on this IP address)\n- If \"GET /api/\" responds with 200 OK check that the api version returrned (eg \"v1\") is supported by the client (eg: also supports \"v1\").\n- If the api version returned does not match what the client supports: give an error to the user and recommend upgrading. (Eg: response is \"v2\" while client only supports \"v1\")\n- If \"GET /api/\" responds with 301 Moved permanently. \"GET /api/v1/version\" to check if the kit has a version earlier than 1.5.\n- \"GET /api/v1/version\" will always respond with 200 OK on Underwater GPS earlier than 1.5 release.\n\nConfiguration API is is not considered stable and will potentially be changed",
+        "title": "The Water Linked Underwater GPS API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "location"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_waterlinkedas_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "http://demo.waterlinked.com/swagger/swagger.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "waterlinked.com"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/waterlinked.com/1.0.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/waterlinked.com/1.0.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/waterlinked.com/1.0.0.json"
+    }
+  }
+}

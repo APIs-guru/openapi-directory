@@ -1,0 +1,530 @@
+{
+  "openapi": "3.0.3",
+  "servers": [
+    {
+      "url": "https://api.color.pizza/v1/"
+    }
+  ],
+  "info": {
+    "contact": {
+      "email": "color-name-api@elastiq.click",
+      "name": "meodai",
+      "url": "https://elastiq.ch/"
+    },
+    "description": "An API that provides names for colors based on their hex value",
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/meodai/color-name-api/blob/main/LICENSE"
+    },
+    "title": "Color Name API",
+    "version": "1.0.0",
+    "x-apisguru-categories": [
+      "developer_tools"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_github.com_meodai_color-name-api_raw_main_logo.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/meodai/color-name-api/main/color-names-v1-OpenAPI.yml",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "color.pizza"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "colors": {
+                      "items": {
+                        "$ref": "#/components/schemas/color"
+                      },
+                      "type": "array"
+                    },
+                    "paletteTitle": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            },
+            "description": "NOT FOUND"
+          }
+        },
+        "summary": "Get all colors of the default color name list"
+      },
+      "parameters": [
+        {
+          "description": "The name of the color name list to use",
+          "explode": false,
+          "in": "query",
+          "name": "list",
+          "schema": {
+            "$ref": "#/components/schemas/possibleLists"
+          },
+          "style": "form"
+        },
+        {
+          "description": "The hex values of the colors to retrieve without '#'",
+          "in": "query",
+          "name": "values",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "Allow duplicate names or not",
+          "in": "query",
+          "name": "noduplicates",
+          "schema": {
+            "type": "boolean"
+          }
+        }
+      ]
+    },
+    "/lists/": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "listDescriptions": {
+                      "properties": {
+                        "basic": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "bestOf": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "chineseTraditional": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "default": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "french": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "html": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "japaneseTraditional": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "leCorbusier": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "nbsIscc": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "ntc": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "osxcrayons": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "ral": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "ridgway": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "risograph": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "sanzoWadaI": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "thesaurus": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "werner": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "wikipedia": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "windows": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "x11": {
+                          "$ref": "#/components/schemas/listDescription"
+                        },
+                        "xkcd": {
+                          "$ref": "#/components/schemas/listDescription"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "localAvailableColorNameLists": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            },
+            "description": "NOT FOUND"
+          }
+        },
+        "summary": "Get all colors of the default color name list"
+      }
+    },
+    "/names/": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "colors": {
+                      "items": {
+                        "$ref": "#/components/schemas/color"
+                      },
+                      "type": "array"
+                    },
+                    "paletteTitle": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            },
+            "description": "NOT FOUND"
+          }
+        },
+        "summary": "Get all colors of the default color name list"
+      },
+      "parameters": [
+        {
+          "description": "The name of the color to retrieve (min 3 characters)",
+          "explode": false,
+          "in": "query",
+          "name": "name",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "style": "form"
+        },
+        {
+          "description": "The name of the color name list to use",
+          "explode": false,
+          "in": "query",
+          "name": "list",
+          "schema": {
+            "$ref": "#/components/schemas/possibleLists"
+          },
+          "style": "form"
+        }
+      ]
+    },
+    "/swatch/": {
+      "get": {
+        "parameters": [
+          {
+            "description": "The hex value of the color to retrieve without '#'",
+            "explode": false,
+            "in": "query",
+            "name": "color",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "description": "The name of the color",
+            "explode": false,
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "image/svg+xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            },
+            "description": "NOT FOUND"
+          }
+        },
+        "summary": "Generate a color swatch for any color"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "color": {
+        "properties": {
+          "distance": {
+            "type": "number"
+          },
+          "hex": {
+            "type": "string"
+          },
+          "hsl": {
+            "properties": {
+              "h": {
+                "type": "number"
+              },
+              "l": {
+                "type": "number"
+              },
+              "s": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "lab": {
+            "properties": {
+              "a": {
+                "type": "number"
+              },
+              "b": {
+                "type": "number"
+              },
+              "l": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "luminance": {
+            "type": "number"
+          },
+          "luminanceWCAG": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "requestedHex": {
+            "type": "string"
+          },
+          "rgb": {
+            "properties": {
+              "b": {
+                "type": "integer"
+              },
+              "g": {
+                "type": "integer"
+              },
+              "r": {
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "svg": {
+            "type": "string"
+          },
+          "svgNamed": {
+            "type": "string"
+          },
+          "swatchImg": {
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "colorBase": {
+        "properties": {
+          "hex": {
+            "type": "string"
+          },
+          "hsl": {
+            "properties": {
+              "h": {
+                "type": "number"
+              },
+              "l": {
+                "type": "number"
+              },
+              "s": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "lab": {
+            "properties": {
+              "a": {
+                "type": "number"
+              },
+              "b": {
+                "type": "number"
+              },
+              "l": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "luminance": {
+            "type": "number"
+          },
+          "luminanceWCAG": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rgb": {
+            "properties": {
+              "b": {
+                "type": "integer"
+              },
+              "g": {
+                "type": "integer"
+              },
+              "r": {
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "swatchImg": {
+            "properties": {
+              "svg": {
+                "type": "string"
+              },
+              "svgNamed": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "error": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "listDescription": {
+        "properties": {
+          "colorCount": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "possibleLists": {
+        "enum": [
+          "default",
+          "bestOf",
+          "wikipedia",
+          "french",
+          "ridgway",
+          "risograph",
+          "basic",
+          "chineseTraditional",
+          "html",
+          "japaneseTraditional",
+          "leCorbusier",
+          "nbsIscc",
+          "ntc",
+          "osxcrayons",
+          "ral",
+          "sanzoWadaI",
+          "thesaurus",
+          "werner",
+          "windows",
+          "x11",
+          "xkcd"
+        ],
+        "type": "string"
+      }
+    }
+  }
+}

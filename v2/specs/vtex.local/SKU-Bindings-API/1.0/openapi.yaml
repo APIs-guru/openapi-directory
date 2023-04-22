@@ -1,0 +1,1139 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server URL.
+    url: https://{accountName}.{environment}.com.br/api
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL.
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  title: SKU Bindings API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - SKU Bindings API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: SKU-Bindings-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: SKU Bindings
+paths:
+  "/catalog/pvt/skusellers/{skuId}":
+    get:
+      deprecated: false
+      description: "Retrieves SKU Bindings details by SKU ID.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \    {\r
+
+        \        \"Id\": 48,\r
+
+        \        \"SellerId\": \"cosmetics1\",\r
+
+        \        \"StockKeepingUnitId\": 1,\r
+
+        \        \"SellerSkuId\": \"42\",\r
+
+        \        \"IsActive\": true,\r
+
+        \        \"LastUpdateDate\": \"2020-10-21T19:13:00.657\",\r
+
+        \        \"SalesPolicy\": 0\r
+
+        \    }\r
+
+        ]\r
+
+        ```"
+      operationId: GetbySkuId
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: SKU's unique identifier in the marketplace.
+          in: path
+          name: skuId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Array containing objects with information about each SKU Binding.
+                items:
+                  description: Object with information about an SKU Binding.
+                  example:
+                    - Id: 48
+                      IsActive: true
+                      LastUpdateDate: 2020-10-21T19:13:00.657
+                      SalesPolicy: 0
+                      SellerId: cosmetics1
+                      SellerSkuId: "42"
+                      StockKeepingUnitId: 1
+                  properties:
+                    Id:
+                      description: SKU Binding ID.
+                      format: int32
+                      type: integer
+                    IsActive:
+                      description: Defines if the SKU binding is active.
+                      type: boolean
+                    LastUpdateDate:
+                      description: Date when the SKU binding was updated for the last time, in UTC format.
+                      type: string
+                    SalesPolicy:
+                      description: Sales policy ID.
+                      format: int32
+                      type: integer
+                    SellerId:
+                      description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+                      type: string
+                    SellerSkuId:
+                      description: SKU seller ID.
+                      type: string
+                    StockKeepingUnitId:
+                      description: SKU ID in the VTEX marketplace.
+                      format: int32
+                      type: integer
+                  type: object
+                type: array
+          description: OK
+      summary: Get SKU Bindings by SKU ID
+      tags:
+        - SKU Bindings
+  "/sku-binding/pvt/skuseller/activate/{sellerId}/{skuSellerId}":
+    post:
+      deprecated: false
+      description: "Changes the status of an SKU Binding to active, setting `isActive` to `true`.\r
+
+        \r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/activate/{sellerId}/{skuSellerId}`."
+      operationId: ActivateSKUBinding
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            example: vtxkfj7352
+            type: string
+          style: simple
+        - description: SKU ID in the seller's store.
+          in: path
+          name: skuSellerId
+          required: true
+          schema:
+            example: "71"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Activate SKU Binding
+      tags:
+        - SKU Bindings
+  /sku-binding/pvt/skuseller/admin:
+    get:
+      deprecated: false
+      description: "Retrieves SKU Bindings administrative information using optional query params `sellerId`, `skuId`, `sellerSkuId` and `IsActive` to filter results and `size` to restrict the amount of results. \r
+
+        \r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/admin`.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \    {\r
+
+        \        \"IsPersisted\": true,\r
+
+        \        \"IsRemoved\": false,\r
+
+        \        \"SkuSellerId\": 1,\r
+
+        \        \"UpdateDate\": \"2019-12-04T01:56:00.673Z\",\r
+
+        \        \"RequestedUpdateDate\": null,\r
+
+        \        \"SellerStockKeepingUnitId\": \"12\",\r
+
+        \        \"SellerId\": \"cosmetics1\",\r
+
+        \        \"StockKeepingUnitId\": 25,\r
+
+        \        \"IsActive\": true\r
+
+        \    }\r
+
+        ]\r
+
+        ```"
+      operationId: Getpagedadmin
+      parameters:
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          explode: true
+          in: query
+          name: sellerId
+          required: false
+          schema:
+            example: vtxkfj7352
+            type: string
+          style: form
+        - description: SKU's unique identifier in the marketplace.
+          explode: true
+          in: query
+          name: skuId
+          required: false
+          schema:
+            example: "1"
+            type: string
+          style: form
+        - description: SKU ID in the seller's store.
+          explode: true
+          in: query
+          name: sellerSkuId
+          required: false
+          schema:
+            example: "71"
+            type: string
+          style: form
+        - description: Defines if the SKU binding is active.
+          explode: true
+          in: query
+          name: isActive
+          required: false
+          schema:
+            example: true
+            type: boolean
+          style: form
+        - description: Amount of results.
+          explode: true
+          in: query
+          name: size
+          required: false
+          schema:
+            example: "1"
+            type: string
+          style: form
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  - IsActive: true
+                    IsPersisted: true
+                    IsRemoved: false
+                    RequestedUpdateDate: null
+                    SellerId: vtxkfj7352
+                    SellerStockKeepingUnitId: "71"
+                    SkuSellerId: 102
+                    StockKeepingUnitId: 1
+                    UpdateDate: 2021-04-12T20:06:59.413Z
+                properties:
+                  IsActive:
+                    description: Defines if the SKU binding is active.
+                    type: boolean
+                  IsPersisted:
+                    description: Defines if the seller is persisted.
+                    type: boolean
+                  IsRemoved:
+                    description: Defines if the seller is removed.
+                    type: boolean
+                  RequestedUpdateDate:
+                    description: Date when an SKU binding update was requested for the last time, in UTC format.
+                    nullable: true
+                    type: string
+                  SellerId:
+                    description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+                    type: string
+                  SellerStockKeepingUnitId:
+                    description: SKU ID in the seller's store.
+                    type: string
+                  SkuSellerId:
+                    description: SKU Binding ID.
+                    format: int32
+                    type: integer
+                  StockKeepingUnitId:
+                    description: SKU ID in the VTEX marketplace.
+                    format: int32
+                    type: integer
+                  UpdateDate:
+                    description: Date when the SKU binding was updated for the last time, in UTC format.
+                    type: string
+                type: object
+          description: OK
+      summary: Get SKU Bindings information
+      tags:
+        - SKU Bindings
+  "/sku-binding/pvt/skuseller/changenotification/{sellerId}/{sellerSkuId}":
+    post:
+      deprecated: false
+      description: "The seller is responsible for suggesting new SKUs to be sold in the VTEX marketplace and also for informing the marketplace about changes in their SKUs that already exist in the marketplace. Both actions start with a catalog notification, which is made by this request.
+
+
+        With this notification, the seller is telling the marketplace that something has changed about a specific SKU, like price or inventory, or that this is a new SKU that the seller would like to offer to the marketplace.
+
+
+        There are two information expected by the marketplace in this request: the `sellerId`, which identifies the seller, and the `sellerSkuId`, which identifies the binding of the seller with the SKU.
+
+
+        Both information are passed through the request URL. The body of the request should be empty.\r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/changenotification/{sellerId}/{sellerSkuId}`.\r
+
+        \r
+
+        ## Example\r
+
+        \r
+
+        Let's say your seller has the ID `123` in the marketplace and you want to inform the marketplace that has been a change in the SKU with ID `700`.\r
+
+        \r
+
+        In this case, you would have to replace the `sellerId` parameter with the value `123` and the `skuId` parameter with the value `700`. The URL of the request would be the following.\r
+
+        \r
+
+        ```\r
+
+        https://{{accountName}}.vtexcommercestable.com.br/api/sku-binding/pvt/skuseller/changenotification/123/700\r
+
+        ```\r
+
+        \r
+
+        ## Response codes\r
+
+        \r
+
+        The following response codes are possible for this request.\r
+
+        * 200: the SKU whose ID was informed in the URL already exists in the marketplace and was found. The marketplace can now proceed with a fulfillment simulation in order to get updated information about this SKU's inventory and price.\r
+
+        * 403: Failure in the authentication.\r
+
+        * 404: the SKU was not found in the marketplace. The body of the response, in this case, should follow this format: \"Seller StockKeepingUnit `{{skuId}}` not found for this seller id `{{sellerId}}`. This means that the seller can now proceed with sending an offer to the marketplace in order to suggest that this SKU is sold there.\r
+
+        * 429: Failure due to too many requests."
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            example: "101"
+            type: string
+          style: simple
+        - description: ID of the binding of the seller with the SKU.
+          in: path
+          name: sellerSkuId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+        "429":
+          description: Too many requests
+      summary: Change Notification with Seller ID and Seller SKU ID
+      tags:
+        - SKU Bindings
+  "/sku-binding/pvt/skuseller/changenotification/{skuId}":
+    post:
+      deprecated: false
+      description: "The seller is responsible for suggesting new SKUs to be sold in the VTEX marketplace and also for informing the marketplace about changes in their SKUs that already exist in the marketplace. Both actions start with a catalog notification, which is made by this request.
+
+
+        With this notification, the seller is telling the marketplace that something has changed about a specific SKU, like price or inventory, or that this is a new SKU that the seller would like to offer to the marketplace.
+
+
+        The body of the request should be empty.\r
+
+        \r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/changenotification/{skuId}`."
+      operationId: ChangeNotification
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the SKU in the marketplace. This is the ID that the marketplace will use to look for the SKU whose change the seller wants to inform. If the marketplace finds this ID, it responds with status code `200`. Otherwise, it responds with status code `404`.
+          in: path
+          name: skuId
+          required: true
+          schema:
+            example: "10"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+        "429":
+          description: Too many requests
+      summary: Change Notification with SKU ID
+      tags:
+        - SKU Bindings
+  "/sku-binding/pvt/skuseller/inactivate/{sellerId}/{skuSellerId}":
+    post:
+      deprecated: false
+      description: "Changes the status of an SKU Binding to inactive, setting `isActive` to `false`.\r
+
+        \r
+
+        \  > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/inactivate/{sellerId}/{skuSellerId}`."
+      operationId: DeactivateSKUBinding
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            example: vtxkfj7352
+            type: string
+          style: simple
+        - description: SKU ID in the seller's store.
+          in: path
+          name: skuSellerId
+          required: true
+          schema:
+            example: "71"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Deactivate SKU Binding
+      tags:
+        - SKU Bindings
+  /sku-binding/pvt/skuseller/insertion:
+    post:
+      deprecated: false
+      description: "Creates an SKU Binding, associating a seller's SKU with a marketplace's SKU.\r
+
+        \r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/insertion`."
+      operationId: InsertSKUBinding
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              IsActive: true
+              SellerId: vtxkfj7352
+              SellerStockKeepingUnitId: "71"
+              StockKeepingUnitId: 1
+            schema:
+              properties:
+                IsActive:
+                  description: Defines if the SKU binding is active.
+                  type: boolean
+                SellerId:
+                  description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+                  type: string
+                SellerStockKeepingUnitId:
+                  description: SKU seller ID.
+                  type: string
+                StockKeepingUnitId:
+                  description: SKU ID in the marketplace.
+                  format: int32
+                  type: integer
+              required:
+                - StockKeepingUnitId
+                - IsActive
+                - SellerId
+                - SellerStockKeepingUnitId
+              type: object
+        description: Request body
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "409":
+          description: Conflict
+      summary: Insert SKU Binding
+      tags:
+        - SKU Bindings
+  "/sku-binding/pvt/skuseller/list/bysellerId/{sellerId}":
+    get:
+      deprecated: false
+      description: "Retrieves a list of SKU Bindings given a specific Seller ID. \r
+
+        \r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/list/bysellerId/{sellerId}`.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \    {\r
+
+        \        \"SellerStockKeepingUnitId\": \"24\",\r
+
+        \        \"FreightCommissionPercentage\": null,\r
+
+        \        \"ProductCommissionPercentage\": null,\r
+
+        \        \"SellerId\": \"vtxkfj7352\",\r
+
+        \        \"StockKeepingUnitId\": 121,\r
+
+        \        \"IsActive\": true\r
+
+        \    }\r
+
+        ]\r
+
+        ```"
+      operationId: GetallbySellerId
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            example: vtxkfj7352
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  example:
+                    FreightCommissionPercentage: null
+                    IsActive: true
+                    ProductCommissionPercentage: null
+                    SellerId: vtxkfj7352
+                    SellerStockKeepingUnitId: "24"
+                    StockKeepingUnitId: 121
+                  properties:
+                    FreightCommissionPercentage:
+                      description: The percentage that must be filled in as agreed between the marketplace and the seller.
+                      nullable: true
+                      type: number
+                    IsActive:
+                      description: Defines if the SKU binding is active.
+                      type: boolean
+                    ProductCommissionPercentage:
+                      description: "The percentage that must be filled in as agreed between the marketplace and the seller. If there is no such commission, please fill in the field with the value: `0.00`."
+                      nullable: true
+                      type: number
+                    SellerId:
+                      description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+                      type: string
+                    SellerStockKeepingUnitId:
+                      description: SKU ID in the seller's store.
+                      type: string
+                    StockKeepingUnitId:
+                      description: SKU ID in the marketplace.
+                      format: int32
+                      type: integer
+                  type: object
+                type: array
+          description: OK
+      summary: Get all SKU Bindings by Seller ID
+      tags:
+        - SKU Bindings
+  "/sku-binding/pvt/skuseller/paged/sellerid/{sellerId}":
+    get:
+      deprecated: false
+      description: "Retrieves a paged list of SKU Bindings given a specific Seller ID. \r
+
+        \r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/paged/sellerid/{sellerId}`.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \    {\r
+
+        \        \"SellerId\": \"vtxkfj7352\",\r
+
+        \        \"StockKeepingUnitId\": 121,\r
+
+        \        \"SellerStockKeepingUnitId\": \"24\",\r
+
+        \        \"IsActive\": true,\r
+
+        \        \"FreightCommissionPercentage\": null,\r
+
+        \        \"ProductCommissionPercentage\": null\r
+
+        \    },\r
+
+        \    {\r
+
+        \        \"SellerId\": \"vtxkfj7352\",\r
+
+        \        \"StockKeepingUnitId\": 14,\r
+
+        \        \"SellerStockKeepingUnitId\": \"60\",\r
+
+        \        \"IsActive\": true,\r
+
+        \        \"FreightCommissionPercentage\": null,\r
+
+        \        \"ProductCommissionPercentage\": null\r
+
+        \    }\r
+
+        ]\r
+
+        ```"
+      operationId: GetpagedbySellerId
+      parameters:
+        - description: Page number.
+          explode: true
+          in: query
+          name: page
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: form
+        - description: Amount of results per page.
+          explode: true
+          in: query
+          name: size
+          required: true
+          schema:
+            example: "2"
+            type: string
+          style: form
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            example: vtxkfj7352
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - FreightCommissionPercentage: null
+                  IsActive: true
+                  ProductCommissionPercentage: null
+                  SellerId: vtxkfj7352
+                  SellerStockKeepingUnitId: "24"
+                  StockKeepingUnitId: 121
+                - FreightCommissionPercentage: null
+                  IsActive: true
+                  ProductCommissionPercentage: null
+                  SellerId: vtxkfj7352
+                  SellerStockKeepingUnitId: "60"
+                  StockKeepingUnitId: 14
+              schema:
+                items:
+                  example:
+                    FreightCommissionPercentage: null
+                    IsActive: true
+                    ProductCommissionPercentage: null
+                    SellerId: vtxkfj7352
+                    SellerStockKeepingUnitId: "24"
+                    StockKeepingUnitId: 121
+                  properties:
+                    FreightCommissionPercentage:
+                      description: The percentage that must be filled in as agreed between the marketplace and the seller.
+                      nullable: true
+                      type: number
+                    IsActive:
+                      description: Defines if the SKU binding is active.
+                      type: boolean
+                    ProductCommissionPercentage:
+                      description: "The percentage that must be filled in as agreed between the marketplace and the seller. If there is no such commission, please fill in the field with the value: `0.00`."
+                      nullable: true
+                      type: number
+                    SellerId:
+                      description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+                      type: string
+                    SellerStockKeepingUnitId:
+                      description: SKU ID in the seller's store.
+                      type: string
+                    StockKeepingUnitId:
+                      description: SKU ID in the marketplace.
+                      format: int32
+                      type: integer
+                  type: object
+                type: array
+          description: OK
+      summary: Get paged SKU Bindings by Seller ID
+      tags:
+        - SKU Bindings
+  "/sku-binding/pvt/skuseller/remove/{sellerId}/{sellerSkuId}":
+    post:
+      deprecated: false
+      description: "Remove a seller's SKU binding, given the Seller ID and the SKU ID in the seller's store.\r
+
+        \r
+
+        \  > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/remove/{sellerId}/{sellerSkuId}`."
+      operationId: DeleteSKUsellerassociation
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            example: vtxkfj7352
+            type: string
+          style: simple
+        - description: SKU ID in the seller's store.
+          in: path
+          name: sellerSkuId
+          required: true
+          schema:
+            example: "71"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Remove a seller's SKU Binding
+      tags:
+        - SKU Bindings
+  "/sku-binding/pvt/skuseller/{sellerId}/{sellerSkuId}":
+    get:
+      deprecated: false
+      description: "Retrieves the details of a seller's SKU given a seller ID and the SKU ID in the seller's store. \r
+
+        \r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/{sellerId}/{sellerSkuId}`.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"IsPersisted\": true,\r
+
+        \    \"IsRemoved\": false,\r
+
+        \    \"SkuSellerId\": 102,\r
+
+        \    \"UpdateDate\": \"2021-04-12T20:06:59.413Z\",\r
+
+        \    \"RequestedUpdateDate\": null,\r
+
+        \    \"SellerStockKeepingUnitId\": \"71\",\r
+
+        \    \"SellerId\": \"vtxkfj7352\",\r
+
+        \    \"StockKeepingUnitId\": 1,\r
+
+        \    \"IsActive\": true\r
+
+        }\r
+
+        ```"
+      operationId: GetSKUseller
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            example: "101"
+            type: string
+          style: simple
+        - description: SKU ID in the seller's store.
+          in: path
+          name: sellerSkuId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  IsActive: true
+                  IsPersisted: true
+                  IsRemoved: false
+                  RequestedUpdateDate: null
+                  SellerId: myseller
+                  SellerStockKeepingUnitId: "502"
+                  SkuSellerId: 799
+                  StockKeepingUnitId: 50
+                  UpdateDate: 2018-10-11T04:52:42.1
+                properties:
+                  IsActive:
+                    description: Defines if the SKU binding is active.
+                    type: boolean
+                  IsPersisted:
+                    description: Defines if the seller is persisted.
+                    type: boolean
+                  IsRemoved:
+                    description: Defines if the seller is removed.
+                    type: boolean
+                  RequestedUpdateDate:
+                    description: Date when an SKU binding update was requested for the last time, in UTC format.
+                    nullable: true
+                    type: string
+                  SellerId:
+                    description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+                    type: string
+                  SellerStockKeepingUnitId:
+                    description: SKU seller ID.
+                    type: string
+                  SkuSellerId:
+                    description: SKU ID in the seller's store.
+                    format: int32
+                    type: integer
+                  StockKeepingUnitId:
+                    description: SKU ID in the VTEX marketplace.
+                    format: int32
+                    type: integer
+                  UpdateDate:
+                    description: Date when the SKU binding was updated for the last time, in UTC format.
+                    type: string
+                required:
+                  - IsPersisted
+                  - IsRemoved
+                  - SkuSellerId
+                  - SellerId
+                  - StockKeepingUnitId
+                  - SellerStockKeepingUnitId
+                  - IsActive
+                  - UpdateDate
+                  - RequestedUpdateDate
+                type: object
+          description: OK
+      summary: Get details of a seller's SKU
+      tags:
+        - SKU Bindings
+    put:
+      deprecated: false
+      description: "Associates a seller's SKU to another marketplace SKU.\r
+
+        \r
+
+        \ > ℹ This path is an updated version of `/api/catalog_system/pvt/skuseller/{sellerId}/{sellerSkuId}`.\r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"StockKeepingUnitId\": 1\r
+
+        }\r
+
+        ```"
+      operationId: Bindtoanothersku
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ID that identifies the seller in the marketplace. It can be the same as the seller name or a unique number. Check the **Sellers management** section in the Admin to get the correct ID.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            example: "101"
+            type: string
+          style: simple
+        - description: SKU ID in the seller's store.
+          in: path
+          name: sellerSkuId
+          required: true
+          schema:
+            example: "1"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                StockKeepingUnitId:
+                  description: SKU ID in the marketplace.
+                  example: 1
+                  format: int32
+                  type: integer
+              required:
+                - StockKeepingUnitId
+              type: object
+        description: Request body
+      responses:
+        "204":
+          description: No Content
+      summary: Bind a seller's SKU to another SKU
+      tags:
+        - SKU Bindings
+components:
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

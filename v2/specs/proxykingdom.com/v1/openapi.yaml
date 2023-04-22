@@ -1,0 +1,335 @@
+openapi: 3.0.1
+servers:
+  - url: https://api.proxykingdom.com/
+info:
+  title: ProxyKingdom-Api
+  version: v1
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_i.imgur.com_9ojm4rP.jpeg
+  x-origin:
+    - format: openapi
+      url: https://api.proxykingdom.com/swagger/v1/swagger.json
+      version: "3.0"
+  x-providerName: proxykingdom.com
+externalDocs:
+  description: ProxyKingdom's Documentation
+  url: https://proxykingdom.com/documentation
+paths:
+  /proxy:
+    get:
+      parameters:
+        - in: query
+          name: Token
+          schema:
+            type: string
+        - in: query
+          name: Address
+          schema:
+            type: string
+        - in: query
+          name: Port
+          schema:
+            type: string
+        - in: query
+          name: Protocol
+          schema:
+            type: string
+        - in: query
+          name: AccessType
+          schema:
+            type: string
+        - in: query
+          name: ResponseTime
+          schema:
+            type: string
+        - in: query
+          name: IsSsl
+          schema:
+            type: string
+        - in: query
+          name: Uptime
+          schema:
+            type: string
+        - in: query
+          name: Country
+          schema:
+            type: string
+        - in: query
+          name: Continent
+          schema:
+            type: string
+        - in: query
+          name: Timezone
+          schema:
+            type: string
+        - in: query
+          name: LastTested
+          schema:
+            type: string
+        - description: Correlation Id header field
+          in: header
+          name: correlation_id
+          required: true
+          schema:
+            default: d85ab6a3-51a9-4359-b9d3-41f5dffb366e
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                accessType: Elite
+                address: 86.125.112.230
+                isSsl: true
+                isp:
+                  id: 10232
+                  name: Comcast
+                lastTested: 2023-03-20T18:36:08Z
+                location:
+                  accuracyRadius: 1
+                  cityName: Timișoara
+                  continent:
+                    code: EU
+                    name: Europe
+                  country:
+                    code: RO
+                    name: Romania
+                  latitude: 45.7537
+                  longitude: 21.7537
+                  postalCode: "300011"
+                  subdivisions:
+                    - code: TM
+                      name: Timis
+                  timezone: Europe/Bucharest
+                port: 30897
+                protocol: Socks4
+                timings:
+                  connectTime: 0.506
+                  firstByteTime: 0.607
+                  responseTime: 1.092
+                uptime: 0.88
+              schema:
+                $ref: "#/components/schemas/Proxy"
+            text/json:
+              example:
+                accessType: Elite
+                address: 86.125.112.230
+                isSsl: true
+                isp:
+                  id: 10232
+                  name: Comcast
+                lastTested: 2023-03-20T18:36:08Z
+                location:
+                  accuracyRadius: 1
+                  cityName: Timișoara
+                  continent:
+                    code: EU
+                    name: Europe
+                  country:
+                    code: RO
+                    name: Romania
+                  latitude: 45.7537
+                  longitude: 21.7537
+                  postalCode: "300011"
+                  subdivisions:
+                    - code: TM
+                      name: Timis
+                  timezone: Europe/Bucharest
+                port: 30897
+                protocol: Socks4
+                timings:
+                  connectTime: 0.506
+                  firstByteTime: 0.607
+                  responseTime: 1.092
+                uptime: 0.88
+              schema:
+                $ref: "#/components/schemas/Proxy"
+            text/plain:
+              example:
+                accessType: Elite
+                address: 86.125.112.230
+                isSsl: true
+                isp:
+                  id: 10232
+                  name: Comcast
+                lastTested: 2023-03-20T18:36:08Z
+                location:
+                  accuracyRadius: 1
+                  cityName: Timișoara
+                  continent:
+                    code: EU
+                    name: Europe
+                  country:
+                    code: RO
+                    name: Romania
+                  latitude: 45.7537
+                  longitude: 21.7537
+                  postalCode: "300011"
+                  subdivisions:
+                    - code: TM
+                      name: Timis
+                  timezone: Europe/Bucharest
+                port: 30897
+                protocol: Socks4
+                timings:
+                  connectTime: 0.506
+                  firstByteTime: 0.607
+                  responseTime: 1.092
+                uptime: 0.88
+              schema:
+                $ref: "#/components/schemas/Proxy"
+          description: Success
+        "400":
+          description: Invalid proxy filter provided.
+        "404":
+          description: No Proxy found for GetProxy by filter.
+        "429":
+          description: Subscription limit reached.
+        "500":
+          description: Technical Error.
+      summary: Gets a random proxy for chosen parameters.
+      tags:
+        - Proxy
+components:
+  schemas:
+    Continent:
+      additionalProperties: false
+      properties:
+        code:
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    Country:
+      additionalProperties: false
+      properties:
+        code:
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    Isp:
+      additionalProperties: false
+      properties:
+        id:
+          format: int32
+          readOnly: true
+          type: integer
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    Location:
+      additionalProperties: false
+      properties:
+        accuracyRadius:
+          format: int32
+          readOnly: true
+          type: integer
+        cityName:
+          nullable: true
+          readOnly: true
+          type: string
+        continent:
+          $ref: "#/components/schemas/Continent"
+        country:
+          $ref: "#/components/schemas/Country"
+        latitude:
+          format: float
+          readOnly: true
+          type: number
+        longitude:
+          format: float
+          readOnly: true
+          type: number
+        postalCode:
+          nullable: true
+          readOnly: true
+          type: string
+        subdivisions:
+          items:
+            $ref: "#/components/schemas/Subdivision"
+          nullable: true
+          readOnly: true
+          type: array
+        timezone:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    Proxy:
+      additionalProperties: false
+      properties:
+        accessType:
+          nullable: true
+          readOnly: true
+          type: string
+        address:
+          nullable: true
+          readOnly: true
+          type: string
+        isSsl:
+          readOnly: true
+          type: boolean
+        isp:
+          $ref: "#/components/schemas/Isp"
+        lastTested:
+          nullable: true
+          readOnly: true
+          type: string
+        location:
+          $ref: "#/components/schemas/Location"
+        port:
+          format: int32
+          readOnly: true
+          type: integer
+        protocol:
+          nullable: true
+          readOnly: true
+          type: string
+        timings:
+          $ref: "#/components/schemas/Timings"
+        uptime:
+          format: float
+          readOnly: true
+          type: number
+      type: object
+    Subdivision:
+      additionalProperties: false
+      properties:
+        code:
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    Timings:
+      additionalProperties: false
+      properties:
+        connectTime:
+          format: float
+          readOnly: true
+          type: number
+        firstByteTime:
+          format: float
+          readOnly: true
+          type: number
+        responseTime:
+          format: float
+          readOnly: true
+          type: number
+      type: object

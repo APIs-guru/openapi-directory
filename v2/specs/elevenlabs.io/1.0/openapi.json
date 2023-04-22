@@ -1,0 +1,1982 @@
+{
+  "openapi": "3.0.2",
+  "servers": [
+    {
+      "url": "https://api.elevenlabs.io/"
+    }
+  ],
+  "info": {
+    "description": "This is the documentation for the ElevenLabs API. You can use this API to use our service programmatically, this is done by using your xi-api-key. <br/> You can view your xi-api-key using the 'Profile' tab on https://beta.elevenlabs.io. Our API is experimental so all endpoints are subject to change.",
+    "title": "ElevenLabs API Documentation",
+    "version": "1.0",
+    "x-apisguru-categories": [
+      "machine_learning"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_elevenlabs.io_assets_icons_apple-touch-icon.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://api.elevenlabs.io/openapi.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "elevenlabs.io"
+  },
+  "tags": [
+    {
+      "description": "Convert text into audio.",
+      "name": "text-to-speech"
+    },
+    {
+      "description": "Access to voices created either by you or us.",
+      "name": "voices"
+    },
+    {
+      "description": "Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.",
+      "name": "samples"
+    },
+    {
+      "description": "Accesses your history. Your history is a list of all your created audio including its metadata.",
+      "name": "history"
+    }
+  ],
+  "paths": {
+    "/v1/history": {
+      "get": {
+        "description": "Returns metadata about all your generated audio.",
+        "operationId": "Get_generated_items_v1_history_get",
+        "parameters": [
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetHistoryResponseModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Generated Items",
+        "tags": [
+          "history"
+        ]
+      }
+    },
+    "/v1/history/delete": {
+      "post": {
+        "deprecated": true,
+        "description": "Delete a number of history items by their IDs.",
+        "operationId": "Delete_history_items_v1_history_delete_post",
+        "parameters": [
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_Delete_history_items_v1_history_delete_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete History Items",
+        "tags": [
+          "history"
+        ]
+      }
+    },
+    "/v1/history/download": {
+      "post": {
+        "description": "Download one or more history items. If one history item ID is provided, we will return a single audio file. If more than one history item IDs are provided, we will provide the history items packed into a .zip file.",
+        "operationId": "Download_history_items_v1_history_download_post",
+        "parameters": [
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_Download_history_items_v1_history_download_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Download History Items",
+        "tags": [
+          "history"
+        ]
+      }
+    },
+    "/v1/history/{history_item_id}": {
+      "delete": {
+        "description": "Delete a history item by its ID",
+        "operationId": "Delete_history_item_v1_history__history_item_id__delete",
+        "parameters": [
+          {
+            "description": "History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.",
+            "example": "VW7YKqPnjY4h39yTbx2L",
+            "in": "path",
+            "name": "history_item_id",
+            "required": true,
+            "schema": {
+              "description": "History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.",
+              "title": "History Item Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete History Item",
+        "tags": [
+          "history"
+        ]
+      }
+    },
+    "/v1/history/{history_item_id}/audio": {
+      "get": {
+        "description": "Returns the audio of an history item.",
+        "operationId": "Get_audio_from_history_item_v1_history__history_item_id__audio_get",
+        "parameters": [
+          {
+            "description": "History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.",
+            "example": "VW7YKqPnjY4h39yTbx2L",
+            "in": "path",
+            "name": "history_item_id",
+            "required": true,
+            "schema": {
+              "description": "History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.",
+              "title": "History Item Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "audio/mpeg": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Audio From History Item",
+        "tags": [
+          "history"
+        ]
+      }
+    },
+    "/v1/text-to-speech/{voice_id}": {
+      "post": {
+        "description": "Converts text into speech using a voice of your choice and returns audio.",
+        "operationId": "Text_to_speech_v1_text_to_speech__voice_id__post",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_Text_to_speech_v1_text_to_speech__voice_id__post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "audio/mpeg": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Text To Speech",
+        "tags": [
+          "text-to-speech"
+        ]
+      }
+    },
+    "/v1/text-to-speech/{voice_id}/stream": {
+      "post": {
+        "description": "Converts text into speech using a voice of your choice and returns audio as an audio stream.",
+        "operationId": "Text_to_speech_v1_text_to_speech__voice_id__stream_post",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_Text_to_speech_v1_text_to_speech__voice_id__stream_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Text To Speech",
+        "tags": [
+          "text-to-speech"
+        ]
+      }
+    },
+    "/v1/user": {
+      "get": {
+        "description": "Gets information about the user",
+        "operationId": "Get_user_info_v1_user_get",
+        "parameters": [
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get User Info",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/v1/user/subscription": {
+      "get": {
+        "description": "Gets extended information about the users subscription",
+        "operationId": "Get_user_subscription_info_v1_user_subscription_get",
+        "parameters": [
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendedSubscriptionResponseModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get User Subscription Info",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/v1/voices": {
+      "get": {
+        "description": "Gets a list of all available voices for a user.",
+        "operationId": "Get_voices_v1_voices_get",
+        "parameters": [
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetVoicesResponseModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Voices",
+        "tags": [
+          "voices"
+        ]
+      }
+    },
+    "/v1/voices/add": {
+      "post": {
+        "description": "Add a new voice to your collection of voices in VoiceLab.",
+        "operationId": "Add_voice_v1_voices_add_post",
+        "parameters": [
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_Add_voice_v1_voices_add_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddVoiceResponseModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add Voice",
+        "tags": [
+          "voices"
+        ]
+      }
+    },
+    "/v1/voices/settings/default": {
+      "get": {
+        "description": "Gets the default settings for voices. \"similarity_boost\" corresponds to\"Clarity + Similarity Enhancement\" in the web app and \"stability\" corresponds to \"Stability\" slider in the web app.",
+        "operationId": "Get_default_voice_settings__v1_voices_settings_default_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceSettingsResponseModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Default Voice Settings.",
+        "tags": [
+          "voices"
+        ]
+      }
+    },
+    "/v1/voices/{voice_id}": {
+      "delete": {
+        "description": "Deletes a voice by its ID.",
+        "operationId": "Delete_voice_v1_voices__voice_id__delete",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete Voice",
+        "tags": [
+          "voices"
+        ]
+      },
+      "get": {
+        "description": "Returns metadata about a specific voice.",
+        "operationId": "Get_voice_v1_voices__voice_id__get",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "If set will return settings information corresponding to the voice, requires authorization.",
+            "in": "query",
+            "name": "with_settings",
+            "required": false,
+            "schema": {
+              "default": false,
+              "description": "If set will return settings information corresponding to the voice, requires authorization.",
+              "title": "With Settings",
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceResponseModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Voice",
+        "tags": [
+          "voices"
+        ]
+      }
+    },
+    "/v1/voices/{voice_id}/edit": {
+      "post": {
+        "description": "Edit a voice created by you.",
+        "operationId": "Edit_voice_v1_voices__voice_id__edit_post",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_Edit_voice_v1_voices__voice_id__edit_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Edit Voice",
+        "tags": [
+          "voices"
+        ]
+      }
+    },
+    "/v1/voices/{voice_id}/samples/{sample_id}": {
+      "delete": {
+        "description": "Removes a sample by its ID.",
+        "operationId": "Delete_sample_v1_voices__voice_id__samples__sample_id__delete",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sample ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id} to list all the available samples for a voice.",
+            "example": "VW7YKqPnjY4h39yTbx2L",
+            "in": "path",
+            "name": "sample_id",
+            "required": true,
+            "schema": {
+              "description": "Sample ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id} to list all the available samples for a voice.",
+              "title": "Sample Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete Sample",
+        "tags": [
+          "samples"
+        ]
+      }
+    },
+    "/v1/voices/{voice_id}/samples/{sample_id}/audio": {
+      "get": {
+        "description": "Returns the audio corresponding to a sample attached to a voice.",
+        "operationId": "Get_audio_from_sample_v1_voices__voice_id__samples__sample_id__audio_get",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sample ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id} to list all the available samples for a voice.",
+            "example": "VW7YKqPnjY4h39yTbx2L",
+            "in": "path",
+            "name": "sample_id",
+            "required": true,
+            "schema": {
+              "description": "Sample ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id} to list all the available samples for a voice.",
+              "title": "Sample Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "audio/*": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Audio From Sample",
+        "tags": [
+          "samples"
+        ]
+      }
+    },
+    "/v1/voices/{voice_id}/settings": {
+      "get": {
+        "description": "Returns the settings for a specific voice. \"similarity_boost\" corresponds to\"Clarity + Similarity Enhancement\" in the web app and \"stability\" corresponds to \"Stability\" slider in the web app.",
+        "operationId": "Get_voice_settings_v1_voices__voice_id__settings_get",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceSettingsResponseModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Voice Settings",
+        "tags": [
+          "voices"
+        ]
+      }
+    },
+    "/v1/voices/{voice_id}/settings/edit": {
+      "post": {
+        "description": "Edit your settings for a specific voice. \"similarity_boost\" corresponds to\"Clarity + Similarity Enhancement\" in the web app and \"stability\" corresponds to \"Stability\" slider in the web app.",
+        "operationId": "Edit_voice_settings_v1_voices__voice_id__settings_edit_post",
+        "parameters": [
+          {
+            "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+            "example": "21m00Tcm4TlvDq8ikWAM",
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "description": "Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+            "in": "header",
+            "name": "xi-api-key",
+            "required": false,
+            "schema": {
+              "description": "Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.",
+              "title": "Xi-Api-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/VoiceSettingsResponseModel"
+                  }
+                ],
+                "description": "The settings for a specific voice.",
+                "title": "Settings"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Edit Voice Settings",
+        "tags": [
+          "voices"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddVoiceResponseModel": {
+        "properties": {
+          "voice_id": {
+            "title": "Voice Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "voice_id"
+        ],
+        "title": "AddVoiceResponseModel",
+        "type": "object"
+      },
+      "Body_Add_voice_v1_voices_add_post": {
+        "properties": {
+          "description": {
+            "description": "How would you describe the voice?",
+            "title": "Description",
+            "type": "string"
+          },
+          "files": {
+            "description": "One or more audio files to clone the voice from",
+            "items": {
+              "format": "binary",
+              "type": "string"
+            },
+            "title": "Files",
+            "type": "array"
+          },
+          "labels": {
+            "description": "Serialized labels dictionary for the voice.",
+            "title": "Labels",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name that identifies this voice. This will be displayed in the dropdown of the website.",
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "files"
+        ],
+        "title": "Body_Add_voice_v1_voices_add_post",
+        "type": "object"
+      },
+      "Body_Delete_history_items_v1_history_delete_post": {
+        "properties": {
+          "history_item_ids": {
+            "description": "A list of history items to remove, you can get IDs of history items and other metadata using the GET https://api.elevenlabs.io/v1/history endpoint.",
+            "items": {
+              "type": "string"
+            },
+            "title": "History Item Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "history_item_ids"
+        ],
+        "title": "Body_Delete_history_items_v1_history_delete_post",
+        "type": "object"
+      },
+      "Body_Download_history_items_v1_history_download_post": {
+        "properties": {
+          "history_item_ids": {
+            "description": "A list of history items to download, you can get IDs of history items and other metadata using the GET https://api.elevenlabs.io/v1/history endpoint.",
+            "items": {
+              "type": "string"
+            },
+            "title": "History Item Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "history_item_ids"
+        ],
+        "title": "Body_Download_history_items_v1_history_download_post",
+        "type": "object"
+      },
+      "Body_Edit_voice_v1_voices__voice_id__edit_post": {
+        "properties": {
+          "description": {
+            "description": "How would you describe the voice?",
+            "title": "Description",
+            "type": "string"
+          },
+          "files": {
+            "description": "Audio files to add to the voice",
+            "items": {
+              "format": "binary",
+              "type": "string"
+            },
+            "title": "Files",
+            "type": "array"
+          },
+          "labels": {
+            "description": "Serialized labels dictionary for the voice.",
+            "title": "Labels",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name that identifies this voice. This will be displayed in the dropdown of the website.",
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "Body_Edit_voice_v1_voices__voice_id__edit_post",
+        "type": "object"
+      },
+      "Body_Text_to_speech_v1_text_to_speech__voice_id__post": {
+        "properties": {
+          "text": {
+            "description": "The text that will get converted into speech. Currently only English text is supported.",
+            "title": "Text",
+            "type": "string"
+          },
+          "voice_settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceSettingsResponseModel"
+              }
+            ],
+            "description": "Voice settings overriding stored setttings for the given voice. They are applied only on the given TTS request.",
+            "title": "Voice Settings"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "Body_Text_to_speech_v1_text_to_speech__voice_id__post",
+        "type": "object"
+      },
+      "Body_Text_to_speech_v1_text_to_speech__voice_id__stream_post": {
+        "properties": {
+          "text": {
+            "description": "The text that will get converted into speech. Currently only English text is supported.",
+            "title": "Text",
+            "type": "string"
+          },
+          "voice_settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceSettingsResponseModel"
+              }
+            ],
+            "description": "Voice settings overriding stored setttings for the given voice. They are applied only on the given TTS request.",
+            "title": "Voice Settings"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "Body_Text_to_speech_v1_text_to_speech__voice_id__stream_post",
+        "type": "object"
+      },
+      "ExtendedSubscriptionResponseModel": {
+        "properties": {
+          "allowed_to_extend_character_limit": {
+            "title": "Allowed To Extend Character Limit",
+            "type": "boolean"
+          },
+          "available_models": {
+            "items": {
+              "$ref": "#/components/schemas/TTSModelResponseModel"
+            },
+            "title": "Available Models",
+            "type": "array"
+          },
+          "can_extend_character_limit": {
+            "title": "Can Extend Character Limit",
+            "type": "boolean"
+          },
+          "can_extend_voice_limit": {
+            "title": "Can Extend Voice Limit",
+            "type": "boolean"
+          },
+          "can_use_delayed_payment_methods": {
+            "title": "Can Use Delayed Payment Methods",
+            "type": "boolean"
+          },
+          "can_use_instant_voice_cloning": {
+            "title": "Can Use Instant Voice Cloning",
+            "type": "boolean"
+          },
+          "can_use_professional_voice_cloning": {
+            "title": "Can Use Professional Voice Cloning",
+            "type": "boolean"
+          },
+          "character_count": {
+            "title": "Character Count",
+            "type": "integer"
+          },
+          "character_limit": {
+            "title": "Character Limit",
+            "type": "integer"
+          },
+          "currency": {
+            "enum": [
+              "usd",
+              "eur"
+            ],
+            "title": "Currency",
+            "type": "string"
+          },
+          "next_character_count_reset_unix": {
+            "title": "Next Character Count Reset Unix",
+            "type": "integer"
+          },
+          "next_invoice": {
+            "$ref": "#/components/schemas/InvoiceResponseModel"
+          },
+          "professional_voice_limit": {
+            "title": "Professional Voice Limit",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "trialing",
+              "active",
+              "incomplete",
+              "incomplete_expired",
+              "past_due",
+              "canceled",
+              "unpaid",
+              "free"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "tier": {
+            "title": "Tier",
+            "type": "string"
+          },
+          "voice_limit": {
+            "title": "Voice Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "tier",
+          "character_count",
+          "character_limit",
+          "can_extend_character_limit",
+          "allowed_to_extend_character_limit",
+          "next_character_count_reset_unix",
+          "voice_limit",
+          "professional_voice_limit",
+          "can_extend_voice_limit",
+          "can_use_instant_voice_cloning",
+          "can_use_professional_voice_cloning",
+          "available_models",
+          "can_use_delayed_payment_methods",
+          "currency",
+          "status",
+          "next_invoice"
+        ],
+        "title": "ExtendedSubscriptionResponseModel",
+        "type": "object"
+      },
+      "FeedbackResponseModel": {
+        "properties": {
+          "audio_quality": {
+            "title": "Audio Quality",
+            "type": "boolean"
+          },
+          "emotions": {
+            "title": "Emotions",
+            "type": "boolean"
+          },
+          "feedback": {
+            "title": "Feedback",
+            "type": "string"
+          },
+          "glitches": {
+            "title": "Glitches",
+            "type": "boolean"
+          },
+          "inaccurate_clone": {
+            "title": "Inaccurate Clone",
+            "type": "boolean"
+          },
+          "other": {
+            "title": "Other",
+            "type": "boolean"
+          },
+          "review_status": {
+            "default": "not_reviewed",
+            "title": "Review Status",
+            "type": "string"
+          },
+          "thumbs_up": {
+            "title": "Thumbs Up",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "thumbs_up",
+          "feedback",
+          "emotions",
+          "inaccurate_clone",
+          "glitches",
+          "audio_quality",
+          "other"
+        ],
+        "title": "FeedbackResponseModel",
+        "type": "object"
+      },
+      "FineTuningResponseModel": {
+        "properties": {
+          "fine_tuning_requested": {
+            "title": "Fine Tuning Requested",
+            "type": "boolean"
+          },
+          "finetuning_state": {
+            "enum": [
+              "not_started",
+              "is_fine_tuning",
+              "fine_tuned"
+            ],
+            "title": "Finetuning State",
+            "type": "string"
+          },
+          "is_allowed_to_fine_tune": {
+            "title": "Is Allowed To Fine Tune",
+            "type": "boolean"
+          },
+          "model_id": {
+            "title": "Model Id",
+            "type": "string"
+          },
+          "slice_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Slice Ids",
+            "type": "array"
+          },
+          "verification_attempts": {
+            "items": {
+              "$ref": "#/components/schemas/VerificationAttemptResponseModel"
+            },
+            "title": "Verification Attempts",
+            "type": "array"
+          },
+          "verification_attempts_count": {
+            "title": "Verification Attempts Count",
+            "type": "integer"
+          },
+          "verification_failures": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Verification Failures",
+            "type": "array"
+          }
+        },
+        "required": [
+          "model_id",
+          "is_allowed_to_fine_tune",
+          "fine_tuning_requested",
+          "finetuning_state",
+          "verification_attempts",
+          "verification_failures",
+          "verification_attempts_count",
+          "slice_ids"
+        ],
+        "title": "FineTuningResponseModel",
+        "type": "object"
+      },
+      "GetHistoryResponseModel": {
+        "properties": {
+          "history": {
+            "items": {
+              "$ref": "#/components/schemas/HistoryItemResponseModel"
+            },
+            "title": "History",
+            "type": "array"
+          }
+        },
+        "required": [
+          "history"
+        ],
+        "title": "GetHistoryResponseModel",
+        "type": "object"
+      },
+      "GetVoicesResponseModel": {
+        "properties": {
+          "voices": {
+            "items": {
+              "$ref": "#/components/schemas/VoiceResponseModel"
+            },
+            "title": "Voices",
+            "type": "array"
+          }
+        },
+        "required": [
+          "voices"
+        ],
+        "title": "GetVoicesResponseModel",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HistoryItemResponseModel": {
+        "properties": {
+          "character_count_change_from": {
+            "title": "Character Count Change From",
+            "type": "integer"
+          },
+          "character_count_change_to": {
+            "title": "Character Count Change To",
+            "type": "integer"
+          },
+          "content_type": {
+            "title": "Content Type",
+            "type": "string"
+          },
+          "date_unix": {
+            "title": "Date Unix",
+            "type": "integer"
+          },
+          "feedback": {
+            "$ref": "#/components/schemas/FeedbackResponseModel"
+          },
+          "history_item_id": {
+            "title": "History Item Id",
+            "type": "string"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "settings": {
+            "title": "Settings",
+            "type": "object"
+          },
+          "state": {
+            "enum": [
+              "created",
+              "deleted",
+              "processing"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "voice_id": {
+            "title": "Voice Id",
+            "type": "string"
+          },
+          "voice_name": {
+            "title": "Voice Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "history_item_id",
+          "request_id",
+          "voice_id",
+          "voice_name",
+          "text",
+          "date_unix",
+          "character_count_change_from",
+          "character_count_change_to",
+          "content_type",
+          "state",
+          "settings",
+          "feedback"
+        ],
+        "title": "HistoryItemResponseModel",
+        "type": "object"
+      },
+      "InvoiceResponseModel": {
+        "properties": {
+          "amount_due_cents": {
+            "title": "Amount Due Cents",
+            "type": "integer"
+          },
+          "next_payment_attempt_unix": {
+            "title": "Next Payment Attempt Unix",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "amount_due_cents",
+          "next_payment_attempt_unix"
+        ],
+        "title": "InvoiceResponseModel",
+        "type": "object"
+      },
+      "LanguageResponseModel": {
+        "properties": {
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "iso_code": {
+            "title": "Iso Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "iso_code",
+          "display_name"
+        ],
+        "title": "LanguageResponseModel",
+        "type": "object"
+      },
+      "RecordingResponseModel": {
+        "properties": {
+          "mime_type": {
+            "title": "Mime Type",
+            "type": "string"
+          },
+          "recording_id": {
+            "title": "Recording Id",
+            "type": "string"
+          },
+          "size_bytes": {
+            "title": "Size Bytes",
+            "type": "integer"
+          },
+          "transcription": {
+            "title": "Transcription",
+            "type": "string"
+          },
+          "upload_date_unix": {
+            "title": "Upload Date Unix",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "recording_id",
+          "mime_type",
+          "size_bytes",
+          "upload_date_unix",
+          "transcription"
+        ],
+        "title": "RecordingResponseModel",
+        "type": "object"
+      },
+      "SampleResponseModel": {
+        "properties": {
+          "file_name": {
+            "title": "File Name",
+            "type": "string"
+          },
+          "hash": {
+            "title": "Hash",
+            "type": "string"
+          },
+          "mime_type": {
+            "title": "Mime Type",
+            "type": "string"
+          },
+          "sample_id": {
+            "title": "Sample Id",
+            "type": "string"
+          },
+          "size_bytes": {
+            "title": "Size Bytes",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "sample_id",
+          "file_name",
+          "mime_type",
+          "size_bytes",
+          "hash"
+        ],
+        "title": "SampleResponseModel",
+        "type": "object"
+      },
+      "SubscriptionResponseModel": {
+        "properties": {
+          "allowed_to_extend_character_limit": {
+            "title": "Allowed To Extend Character Limit",
+            "type": "boolean"
+          },
+          "available_models": {
+            "items": {
+              "$ref": "#/components/schemas/TTSModelResponseModel"
+            },
+            "title": "Available Models",
+            "type": "array"
+          },
+          "can_extend_character_limit": {
+            "title": "Can Extend Character Limit",
+            "type": "boolean"
+          },
+          "can_extend_voice_limit": {
+            "title": "Can Extend Voice Limit",
+            "type": "boolean"
+          },
+          "can_use_delayed_payment_methods": {
+            "title": "Can Use Delayed Payment Methods",
+            "type": "boolean"
+          },
+          "can_use_instant_voice_cloning": {
+            "title": "Can Use Instant Voice Cloning",
+            "type": "boolean"
+          },
+          "can_use_professional_voice_cloning": {
+            "title": "Can Use Professional Voice Cloning",
+            "type": "boolean"
+          },
+          "character_count": {
+            "title": "Character Count",
+            "type": "integer"
+          },
+          "character_limit": {
+            "title": "Character Limit",
+            "type": "integer"
+          },
+          "currency": {
+            "enum": [
+              "usd",
+              "eur"
+            ],
+            "title": "Currency",
+            "type": "string"
+          },
+          "next_character_count_reset_unix": {
+            "title": "Next Character Count Reset Unix",
+            "type": "integer"
+          },
+          "professional_voice_limit": {
+            "title": "Professional Voice Limit",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "trialing",
+              "active",
+              "incomplete",
+              "incomplete_expired",
+              "past_due",
+              "canceled",
+              "unpaid",
+              "free"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "tier": {
+            "title": "Tier",
+            "type": "string"
+          },
+          "voice_limit": {
+            "title": "Voice Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "tier",
+          "character_count",
+          "character_limit",
+          "can_extend_character_limit",
+          "allowed_to_extend_character_limit",
+          "next_character_count_reset_unix",
+          "voice_limit",
+          "professional_voice_limit",
+          "can_extend_voice_limit",
+          "can_use_instant_voice_cloning",
+          "can_use_professional_voice_cloning",
+          "available_models",
+          "can_use_delayed_payment_methods",
+          "currency",
+          "status"
+        ],
+        "title": "SubscriptionResponseModel",
+        "type": "object"
+      },
+      "TTSModelResponseModel": {
+        "properties": {
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "model_id": {
+            "title": "Model Id",
+            "type": "string"
+          },
+          "supported_language": {
+            "items": {
+              "$ref": "#/components/schemas/LanguageResponseModel"
+            },
+            "title": "Supported Language",
+            "type": "array"
+          }
+        },
+        "required": [
+          "model_id",
+          "display_name",
+          "supported_language"
+        ],
+        "title": "TTSModelResponseModel",
+        "type": "object"
+      },
+      "UserResponseModel": {
+        "properties": {
+          "is_new_user": {
+            "title": "Is New User",
+            "type": "boolean"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/SubscriptionResponseModel"
+          },
+          "xi_api_key": {
+            "title": "Xi Api Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "subscription",
+          "is_new_user",
+          "xi_api_key"
+        ],
+        "title": "UserResponseModel",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "VerificationAttemptResponseModel": {
+        "properties": {
+          "accepted": {
+            "title": "Accepted",
+            "type": "boolean"
+          },
+          "date_unix": {
+            "title": "Date Unix",
+            "type": "integer"
+          },
+          "levenshtein_distance": {
+            "title": "Levenshtein Distance",
+            "type": "number"
+          },
+          "recording": {
+            "$ref": "#/components/schemas/RecordingResponseModel"
+          },
+          "similarity": {
+            "title": "Similarity",
+            "type": "number"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "date_unix",
+          "accepted",
+          "similarity",
+          "levenshtein_distance",
+          "recording"
+        ],
+        "title": "VerificationAttemptResponseModel",
+        "type": "object"
+      },
+      "VoiceResponseModel": {
+        "properties": {
+          "available_for_tiers": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Available For Tiers",
+            "type": "array"
+          },
+          "category": {
+            "title": "Category",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "fine_tuning": {
+            "$ref": "#/components/schemas/FineTuningResponseModel"
+          },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Labels",
+            "type": "object"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "preview_url": {
+            "title": "Preview Url",
+            "type": "string"
+          },
+          "samples": {
+            "items": {
+              "$ref": "#/components/schemas/SampleResponseModel"
+            },
+            "title": "Samples",
+            "type": "array"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/VoiceSettingsResponseModel"
+          },
+          "voice_id": {
+            "title": "Voice Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "voice_id",
+          "name",
+          "samples",
+          "category",
+          "fine_tuning",
+          "labels",
+          "description",
+          "preview_url",
+          "available_for_tiers",
+          "settings"
+        ],
+        "title": "VoiceResponseModel",
+        "type": "object"
+      },
+      "VoiceSettingsResponseModel": {
+        "properties": {
+          "similarity_boost": {
+            "title": "Similarity Boost",
+            "type": "number"
+          },
+          "stability": {
+            "title": "Stability",
+            "type": "number"
+          }
+        },
+        "required": [
+          "stability",
+          "similarity_boost"
+        ],
+        "title": "VoiceSettingsResponseModel",
+        "type": "object"
+      }
+    }
+  }
+}

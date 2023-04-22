@@ -1,0 +1,707 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br/api/do
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL.
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: VTEX DO is a task management system for authorized users to process orders. It is possible to control notes, and create, update, list, and retrieve tasks.
+  title: VTEX Do API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - VTEX Do API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: VTEX-Do-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: Note
+  - name: Task
+paths:
+  /notes:
+    get:
+      deprecated: false
+      description: Retrieves notes related to a specific `orderId`.
+      operationId: GetNotesbyorderId
+      parameters:
+        - description: ID of the order.
+          explode: true
+          in: query
+          name: target.id
+          required: true
+          schema:
+            description: ID of the order.
+            example: 1172452900788-01
+            type: string
+          style: form
+        - description: "Number of notes per page. Maximum: 30."
+          explode: true
+          in: query
+          name: perPage
+          required: false
+          schema:
+            description: "Number of notes per page. Maximum: 30."
+            example: 20
+            type: integer
+          style: form
+        - description: Number of the page to be retrieved.
+          explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            description: Number of the page to be retrieved.
+            example: 3
+            type: integer
+          style: form
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - $ref: "#/components/parameters/reason"
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema: {}
+          description: OK
+      summary: Get Notes by orderId
+      tags:
+        - Note
+    post:
+      deprecated: false
+      description: "This endpoint creates a new note in VTEX DO. Be aware of the following limitations:\r
+
+
+        \r- The maximum number of notes for an order is 30.\r
+
+
+        \r- The maximum number of characters in a note's description is 2000."
+      operationId: NewNote
+      parameters:
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                description:
+                  description: "Note description. Maximum number of characters: 2000."
+                  example: Order ID in the marketplace is 786-09.
+                  type: string
+                domain:
+                  description: Note domain.
+                  example: oms
+                  type: string
+                target:
+                  description: Target.
+                  properties:
+                    id:
+                      description: Target ID.
+                      example: v964735bdev-01
+                      type: string
+                    type:
+                      description: Target type.
+                      example: order
+                      type: string
+                    url:
+                      description: Target URL.
+                      example: https://basedevmkp.vtexcommercebeta.com.br/admin/checkout/#/orders/v964741bdev-01
+                      type: string
+                  type: object
+              required:
+                - target
+                - domain
+                - description
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdBy:
+                  email: pedro.costa@vtex.com.br
+                  id: fb542e51-5488-4c34-8d17-ed8fcf597a94
+                  key: null
+                  name: pedro.costa@vtex.com.br
+                creationDate: 2022-01-11T15:49:17.8785392Z
+                description: The order's ID in the marketplace is 786-09
+                domain: oms
+                id: A08CDB2519AC4FA49EB6099CF72C3642
+                lastUpdate: 2022-01-11T15:49:17.8785392Z
+                owner: c97ef6c8491a439f927cf9918644329f
+                target:
+                  id: v964735bdev-01
+                  type: order
+                  url: https://basedevmkp.vtexcommercebeta.com.br/admin/checkout/#/orders/v964741bdev-01
+              schema: {}
+          description: OK
+      summary: Create Note
+      tags:
+        - Note
+  "/notes/{noteId}":
+    get:
+      deprecated: false
+      description: Retrieves a given note in VTEX DO, filtering by `noteId`.
+      operationId: GetNote
+      parameters:
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Note's ID.
+          in: path
+          name: noteId
+          required: true
+          schema:
+            description: Note's ID.
+            example: 654321cba
+            type: string
+          style: simple
+        - $ref: "#/components/parameters/reason"
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema: {}
+          description: OK
+      summary: Retrieve Note
+      tags:
+        - Note
+  /tasks:
+    get:
+      deprecated: false
+      description: "This endpoint allows you to filter tasks. You can choose between the following filtering options: \r
+
+        \r
+
+        - **Assignees:** using `assignee.email` and `status`. Example: `https://{{accountName}}.{{environment}}.com.br/api/do/tasks?assignee.email={{person@email.com}}&status={{open}}`. \r
+
+        \r
+
+        - **Targets:** using `targetId` and `status`. Example: `https://{{accountName}}.{{environment}}.com.br/api/do/tasks?target.id={{name}}&status={{open}}`. \r
+
+        \r
+
+        - **Paged tasks:** using `page`, `perPage` and `status`. Example: `https://{{accountName}}.{{environment}}.com.br/api/do/tasks?page={{1}}&perPage={{10}}&status=;{{-Closed}}`. \r
+
+        \r
+
+        - **Context:** using `context`, `page`, `perPage` and `status`. Example: `https://{{accountName}}.{{environment}}.com.br/api/do/tasks?context={{context}}&page={{1}}&perPage={{10}}&status={{-Closed}}`."
+      operationId: Listtasksbyassignee
+      parameters:
+        - description: If you wish to list tasks by assignee, insert the desired assignee's email and status.
+          explode: true
+          in: query
+          name: assignee.email
+          required: false
+          schema:
+            example: "{{assigneeEmail}}"
+            type: string
+          style: form
+        - description: If you wish to list tasks by target, insert the desired `targetId` and `status`.
+          explode: true
+          in: query
+          name: target.id
+          required: false
+          schema:
+            example: "{{targetId}}"
+            type: string
+          style: form
+        - description: If you wish to list tasks by context, insert the desired context, `page`, `perPage` and `status`.
+          explode: true
+          in: query
+          name: context
+          required: false
+          schema:
+            example: "{{context}}"
+            type: string
+          style: form
+        - description: If you wish to list tasks by context, also insert the desired `page`.
+          explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            example: "{{page}}"
+            type: string
+          style: form
+        - description: If you wish to list tasks by context, also insert the desired `perPage` value.
+          explode: true
+          in: query
+          name: perPage
+          required: false
+          schema:
+            example: "{{desired number per page}}"
+            type: string
+          style: form
+        - description: If you wish to list tasks by context, also insert the desired `status`.
+          explode: true
+          in: query
+          name: status
+          required: false
+          schema:
+            example: open
+            type: string
+          style: form
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema: {}
+          description: OK
+      summary: List tasks
+      tags:
+        - Task
+    post:
+      deprecated: false
+      description: Creates a new task in VTEX DO.
+      operationId: NewTask
+      parameters:
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              assignee:
+                email: frederico.santos@vtex.com.br
+                id: null
+                name: null
+              context: Marketplace
+              description: Ajudar na doc API para lancar no postman
+              domain: oms
+              dueDate: 2016-03-01
+              followers:
+                - email: alan.dantas@vtex.com.br
+                  id: null
+                  name: null
+              name: pricing
+              parentTaskId: null
+              priority: Critical
+              surrogateKey: 505224-0
+              target:
+                - id: 633730670642-01
+                  type: order
+                  url: https://recorrenciaqa.vtexcommercebeta.com.br/admin/checkout/orders/633730670642-01
+            schema:
+              $ref: "#/components/schemas/NewTaskRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema: {}
+          description: OK
+      summary: Create Task
+      tags:
+        - Task
+  "/tasks/{taskId}":
+    get:
+      deprecated: false
+      description: Retrieves a given task, filtering by `taskId`.
+      operationId: GetTask
+      parameters:
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Task ID.
+          in: path
+          name: taskId
+          required: true
+          schema:
+            example: 123456abc
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema: {}
+          description: OK
+      summary: Retrieve Task
+      tags:
+        - Task
+    put:
+      deprecated: false
+      description: Updates a given task's status, for example, filtering by `taskId`.
+      operationId: EditTask
+      parameters:
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Task ID.
+          in: path
+          name: taskId
+          required: true
+          schema:
+            example: 123456abc
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              status: InProgress
+            schema:
+              $ref: "#/components/schemas/EditTaskRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema: {}
+          description: OK
+      summary: Update Task
+      tags:
+        - Task
+  "/tasks/{taskId}/comments":
+    post:
+      deprecated: false
+      description: Adds a comment to a given task, filtering by `taskId`.
+      operationId: AddComment
+      parameters:
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Task ID.
+          in: path
+          name: taskId
+          required: true
+          schema:
+            example: 123456abc
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              text: write your comment here
+            schema:
+              $ref: "#/components/schemas/AddCommentRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example: {}
+              schema: {}
+          description: OK
+      summary: Add Comment on a Task
+      tags:
+        - Task
+components:
+  parameters:
+    reason:
+      description: This parameter is relevant only for PII-compliant accounts. When sending requests to this endpoint, PII-compliant accounts can use this parameter to declare the reason for requesting unmasked data. Otherwise, this endpoint will return masked PII data.
+      in: query
+      name: reason
+      required: false
+      schema:
+        example: data-validation
+        type: string
+      style: form
+  schemas:
+    AddCommentRequest:
+      example:
+        text: escreva seu comentário
+      properties:
+        text:
+          type: string
+      required:
+        - text
+      title: AddCommentRequest
+      type: object
+    Assignee:
+      example:
+        email: frederico.santos@vtex.com.br
+        id: null
+        name: null
+      properties:
+        email:
+          type: string
+        id:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+      required:
+        - id
+        - name
+        - email
+      title: Assignee
+      type: object
+    EditTaskRequest:
+      example:
+        status: InProgress
+      properties:
+        status:
+          type: string
+      required:
+        - status
+      title: EditTaskRequest
+      type: object
+    Follower:
+      example:
+        email: alan.dantas@vtex.com.br
+        id: null
+        name: null
+      properties:
+        email:
+          type: string
+        id:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+      required:
+        - id
+        - name
+        - email
+      title: Follower
+      type: object
+    NewNoteRequest:
+      properties:
+        description:
+          type: string
+        domain:
+          type: string
+        target:
+          description: Target.
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            url:
+              type: string
+          type: object
+      required:
+        - target
+        - domain
+        - description
+      type: object
+    NewTaskRequest:
+      example:
+        assignee:
+          email: frederico.santos@vtex.com.br
+          id: null
+          name: null
+        context: Marketplace
+        description: Ajudar na doc API para lancar no postman
+        domain: oms
+        dueDate: 2016-03-01
+        followers:
+          - email: alan.dantas@vtex.com.br
+            id: null
+            name: null
+        name: pricing
+        parentTaskId: null
+        priority: Critical
+        surrogateKey: 505224-0
+        target:
+          - id: 633730670642-01
+            type: order
+            url: https://recorrenciaqa.vtexcommercebeta.com.br/admin/checkout/orders/633730670642-01
+      properties:
+        assignee:
+          $ref: "#/components/schemas/Assignee"
+        context:
+          type: string
+        description:
+          type: string
+        domain:
+          type: string
+        dueDate:
+          type: string
+        followers:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Follower"
+          type: array
+        name:
+          type: string
+        parentTaskId:
+          nullable: true
+          type: string
+        priority:
+          type: string
+        surrogateKey:
+          type: string
+        target:
+          description: ""
+          items:
+            $ref: "#/components/schemas/Target"
+          type: array
+      required:
+        - target
+        - domain
+        - context
+        - name
+        - priority
+        - surrogateKey
+        - description
+        - dueDate
+        - assignee
+        - followers
+        - parentTaskId
+      title: NewTaskRequest
+      type: object
+    Target:
+      example:
+        id: v964735bdev-01
+        type: order
+        url: https://basedevmkp.vtexcommercebeta.com.br/admin/checkout/#/orders/v964741bdev-01
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+      required:
+        - id
+        - type
+        - url
+      title: Target
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

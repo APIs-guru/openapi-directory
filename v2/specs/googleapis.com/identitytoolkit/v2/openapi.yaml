@@ -1,0 +1,2769 @@
+openapi: 3.0.0
+servers:
+  - url: https://identitytoolkit.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The Google Identity Toolkit API lets you use open standards to verify a user's identity.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Identity Toolkit API
+  version: v2
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_www.google.com_images_branding_googlelogo_2x_googlelogo_color_272x92dp.png
+  x-origin:
+    - format: google
+      url: https://identitytoolkit.googleapis.com/$discovery/rest?version=v2
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: identitytoolkit
+externalDocs:
+  url: https://cloud.google.com/identity-platform
+tags:
+  - name: accounts
+  - name: defaultSupportedIdps
+  - name: projects
+  - name: v2
+paths:
+  /v2/accounts/mfaEnrollment:finalize:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Finishes enrolling a second factor for the user.
+      operationId: identitytoolkit.accounts.mfaEnrollment.finalize
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts/mfaEnrollment:start:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Step one of the MFA enrollment process. In SMS case, this sends an SMS verification code to the user.
+      operationId: identitytoolkit.accounts.mfaEnrollment.start
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaEnrollmentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaEnrollmentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts/mfaEnrollment:withdraw:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Revokes one second factor from the enrolled second factors for an account.
+      operationId: identitytoolkit.accounts.mfaEnrollment.withdraw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2WithdrawMfaRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2WithdrawMfaResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts/mfaSignIn:finalize:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Verifies the MFA challenge and performs sign-in
+      operationId: identitytoolkit.accounts.mfaSignIn.finalize
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaSignInRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaSignInResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts/mfaSignIn:start:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sends the MFA challenge
+      operationId: identitytoolkit.accounts.mfaSignIn.start
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaSignInRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaSignInResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts/passkeyEnrollment:finalize:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Finishes enrolling a passkey credential for the user.
+      operationId: identitytoolkit.accounts.passkeyEnrollment.finalize
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizePasskeyEnrollmentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizePasskeyEnrollmentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts/passkeyEnrollment:start:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Step one of the passkey enrollment process. Returns a challenge and parameters for creation of the passkey credential.
+      operationId: identitytoolkit.accounts.passkeyEnrollment.start
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartPasskeyEnrollmentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartPasskeyEnrollmentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts/passkeySignIn:finalize:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Verifies the passkey assertion and signs the user in.
+      operationId: identitytoolkit.accounts.passkeySignIn.finalize
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizePasskeySignInRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizePasskeySignInResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts/passkeySignIn:start:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates and returns the passkey challenge
+      operationId: identitytoolkit.accounts.passkeySignIn.start
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartPasskeySignInRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartPasskeySignInResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/accounts:revokeToken:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Revokes a user's token from an Identity Provider (IdP). This is done by manually providing an IdP credential, and the token types for revocation. An [API key](https://cloud.google.com/docs/authentication/api-keys) is required in the request in order to identify the Google Cloud project.
+      operationId: identitytoolkit.accounts.revokeToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RevokeTokenRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RevokeTokenResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
+  /v2/defaultSupportedIdps:
+    get:
+      description: List all default supported Idps.
+      operationId: identitytoolkit.defaultSupportedIdps.list
+      parameters:
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ListDefaultSupportedIdpsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - defaultSupportedIdps
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v2/recaptchaConfig:
+    get:
+      description: Gets parameters needed for reCAPTCHA analysis.
+      operationId: identitytoolkit.getRecaptchaConfig
+      parameters:
+        - description: reCAPTCHA Enterprise uses separate site keys for different client types. Specify the client type to get the corresponding key.
+          in: query
+          name: clientType
+          schema:
+            enum:
+              - CLIENT_TYPE_UNSPECIFIED
+              - CLIENT_TYPE_WEB
+              - CLIENT_TYPE_ANDROID
+              - CLIENT_TYPE_IOS
+            type: string
+        - description: The id of a tenant.
+          in: query
+          name: tenantId
+          schema:
+            type: string
+        - description: The reCAPTCHA version.
+          in: query
+          name: version
+          schema:
+            enum:
+              - RECAPTCHA_VERSION_UNSPECIFIED
+              - RECAPTCHA_ENTERPRISE
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RecaptchaConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - v2
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}":
+    delete:
+      description: Delete an Oidc Idp configuration for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.oauthIdpConfigs.delete
+      parameters:
+        - description: "The resource name of the config to be deleted, for example: 'projects/my-awesome-project/oauthIdpConfigs/oauth-config-id'."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    get:
+      description: Retrieve an Oidc Idp configuration for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.oauthIdpConfigs.get
+      parameters:
+        - description: "The resource name of the config, for example: 'projects/my-awesome-project/oauthIdpConfigs/oauth-config-id'."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update an Oidc Idp configuration for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.oauthIdpConfigs.patch
+      parameters:
+        - description: "The name of the OAuthIdpConfig resource, for example: 'projects/my-awesome-project/oauthIdpConfigs/oauth-config-id'. Ignored during create requests."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The update mask applies to the resource. Empty update mask will result in updating nothing. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v2/{parent}/defaultSupportedIdpConfigs":
+    get:
+      description: List all default supported Idp configurations for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.defaultSupportedIdpConfigs.list
+      parameters:
+        - description: The parent resource name, for example, "projects/my-awesome-project".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ListDefaultSupportedIdpConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a default supported Idp configuration for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.defaultSupportedIdpConfigs.create
+      parameters:
+        - description: 'The parent resource name where the config to be created, for example: "projects/my-awesome-project"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The id of the Idp to create a config for. Call ListDefaultSupportedIdps for list of all default supported Idps.
+          in: query
+          name: idpId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v2/{parent}/inboundSamlConfigs":
+    get:
+      description: List all inbound SAML configurations for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.inboundSamlConfigs.list
+      parameters:
+        - description: The parent resource name, for example, "projects/my-awesome-project".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ListInboundSamlConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create an inbound SAML configuration for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.inboundSamlConfigs.create
+      parameters:
+        - description: 'The parent resource name where the config to be created, for example: "projects/my-awesome-project"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The id to use for this config.
+          in: query
+          name: inboundSamlConfigId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v2/{parent}/oauthIdpConfigs":
+    get:
+      description: List all Oidc Idp configurations for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.oauthIdpConfigs.list
+      parameters:
+        - description: The parent resource name, for example, "projects/my-awesome-project".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ListOAuthIdpConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create an Oidc Idp configuration for an Identity Toolkit project.
+      operationId: identitytoolkit.projects.tenants.oauthIdpConfigs.create
+      parameters:
+        - description: 'The parent resource name where the config to be created, for example: "projects/my-awesome-project"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The id to use for this config.
+          in: query
+          name: oauthIdpConfigId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v2/{parent}/tenants":
+    get:
+      description: List tenants under the given agent project. Requires read permission on the Agent project.
+      operationId: identitytoolkit.projects.tenants.list
+      parameters:
+        - description: Required. The parent resource name to list tenants for.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of results to return, capped at 1000. If not specified, the default value is 20.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The pagination token from the response of a previous request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ListTenantsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a tenant. Requires write permission on the Agent project.
+      operationId: identitytoolkit.projects.tenants.create
+      parameters:
+        - description: The parent resource name where the tenant will be created. For example, "projects/project1".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Tenant"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Tenant"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v2/{project}/identityPlatform:initializeAuth":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Initialize Identity Platform for a Cloud project. Identity Platform is an end-to-end authentication system for third-party users to access your apps and services. These could include mobile/web apps, games, APIs and beyond. This is the publicly available variant of EnableIdentityPlatform that is only available to billing-enabled projects.
+      operationId: identitytoolkit.projects.identityPlatform.initializeAuth
+      parameters:
+        - description: The resource name of the target project the developer wants to enable Identity Platform for.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2InitializeIdentityPlatformRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2InitializeIdentityPlatformResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{resource}:getIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Gets the access control policy for a resource. An error is returned if the resource does not exist. An empty policy is returned if the resource exists but does not have a policy set on it. Caller must have the right Google IAM permission on the resource.
+      operationId: identitytoolkit.projects.tenants.getIamPolicy
+      parameters:
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleIamV1GetIamPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleIamV1Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v2/{resource}:setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sets the access control policy for a resource. If the policy exists, it is replaced. Caller must have the right Google IAM permission on the resource.
+      operationId: identitytoolkit.projects.tenants.setIamPolicy
+      parameters:
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleIamV1SetIamPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleIamV1Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v2/{resource}:testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Returns the caller's permissions on a resource. An error is returned if the resource does not exist. A caller is not required to have Google IAM permission to make this request.
+      operationId: identitytoolkit.projects.tenants.testIamPermissions
+      parameters:
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleIamV1TestIamPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleIamV1TestIamPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    GoogleCloudIdentitytoolkitAdminV2AllowByDefault:
+      description: Defines a policy of allowing every region by default and adding disallowed regions to a disallow list.
+      properties:
+        disallowedRegions:
+          description: "Two letter unicode region codes to disallow as defined by https://cldr.unicode.org/ The full list of these region codes is here: https://github.com/unicode-cldr/cldr-localenames-full/blob/master/main/en/territories.json"
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2AllowlistOnly:
+      description: Defines a policy of only allowing regions by explicitly adding them to an allowlist.
+      properties:
+        allowedRegions:
+          description: "Two letter unicode region codes to allow as defined by https://cldr.unicode.org/ The full list of these region codes is here: https://github.com/unicode-cldr/cldr-localenames-full/blob/master/main/en/territories.json"
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2Anonymous:
+      description: Configuration options related to authenticating an anonymous user.
+      properties:
+        enabled:
+          description: Whether anonymous user auth is enabled for the project or not.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig:
+      description: Additional config for SignInWithApple.
+      properties:
+        bundleIds:
+          description: A list of Bundle ID's usable by this project
+          items:
+            type: string
+          type: array
+        codeFlowConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig"
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2BlockingFunctionsConfig:
+      description: Configuration related to Blocking Functions.
+      properties:
+        forwardInboundCredentials:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ForwardInboundCredentials"
+          description: The user credentials to include in the JWT payload that is sent to the registered Blocking Functions.
+        triggers:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Trigger"
+          description: 'Map of Trigger to event type. Key should be one of the supported event types: "beforeCreate", "beforeSignIn"'
+          type: object
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ClientConfig:
+      description: Options related to how clients making requests on behalf of a project should be configured.
+      properties:
+        apiKey:
+          description: Output only. API key that can be used when making requests for this project.
+          readOnly: true
+          type: string
+        firebaseSubdomain:
+          description: Output only. Firebase subdomain.
+          readOnly: true
+          type: string
+        permissions:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Permissions"
+          description: Configuration related to restricting a user's ability to affect their account.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig:
+      description: Options related to how clients making requests on behalf of a tenant should be configured.
+      properties:
+        permissions:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ClientPermissions"
+          description: Configuration related to restricting a user's ability to affect their account.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ClientPermissions:
+      description: Configuration related to restricting a user's ability to affect their account.
+      properties:
+        disabledUserDeletion:
+          description: When true, end users cannot delete their account on the associated project through any of our API methods
+          type: boolean
+        disabledUserSignup:
+          description: When true, end users cannot sign up for a new account on the associated project through any of our API methods
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig:
+      description: Additional config for Apple for code flow.
+      properties:
+        keyId:
+          description: Key ID for the private key.
+          type: string
+        privateKey:
+          description: Private key used for signing the client secret JWT.
+          type: string
+        teamId:
+          description: Apple Developer Team ID.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2Config:
+      description: Represents an Identity Toolkit project.
+      properties:
+        authorizedDomains:
+          description: List of domains authorized for OAuth redirects
+          items:
+            type: string
+          type: array
+        autodeleteAnonymousUsers:
+          description: Whether anonymous users will be auto-deleted after a period of 30 days.
+          type: boolean
+        blockingFunctions:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2BlockingFunctionsConfig"
+          description: Configuration related to blocking functions.
+        client:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ClientConfig"
+          description: Options related to how clients making requests on behalf of a project should be configured.
+        emailPrivacyConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig"
+          description: Configuration for settings related to email privacy and public visibility.
+        mfa:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig"
+          description: Configuration for this project's multi-factor authentication, including whether it is active and what factors can be used for the second factor
+        monitoring:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2MonitoringConfig"
+          description: Configuration related to monitoring project activity.
+        multiTenant:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2MultiTenantConfig"
+          description: Configuration related to multi-tenant functionality.
+        name:
+          description: 'Output only. The name of the Config resource. Example: "projects/my-awesome-project/config"'
+          readOnly: true
+          type: string
+        notification:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2NotificationConfig"
+          description: Configuration related to sending notifications to users.
+        quota:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2QuotaConfig"
+          description: Configuration related to quotas.
+        recaptchaConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaConfig"
+          description: The project-level reCAPTCHA config.
+        signIn:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SignInConfig"
+          description: Configuration related to local sign in methods.
+        smsRegionConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig"
+          description: Configures which regions are enabled for SMS verification code sending.
+        subtype:
+          description: Output only. The subtype of this config.
+          enum:
+            - SUBTYPE_UNSPECIFIED
+            - IDENTITY_PLATFORM
+            - FIREBASE_AUTH
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp:
+      description: Standard Identity Toolkit-trusted IDPs.
+      properties:
+        description:
+          description: Description of the Idp
+          type: string
+        idpId:
+          description: Id the of Idp
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig:
+      description: Configurations options for authenticating with a the standard set of Identity Toolkit-trusted IDPs.
+      properties:
+        appleSignInConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig"
+          description: Additional config for Apple-based projects.
+        clientId:
+          description: OAuth client ID.
+          type: string
+        clientSecret:
+          description: OAuth client secret.
+          type: string
+        enabled:
+          description: True if allows the user to sign in with the provider.
+          type: boolean
+        name:
+          description: 'The name of the DefaultSupportedIdpConfig resource, for example: "projects/my-awesome-project/defaultSupportedIdpConfigs/google.com"'
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2DnsInfo:
+      description: Information of custom domain DNS verification. By default, default_domain will be used. A custom domain can be configured using VerifyCustomDomain.
+      properties:
+        customDomain:
+          description: Output only. The applied verified custom domain.
+          readOnly: true
+          type: string
+        customDomainState:
+          description: Output only. The current verification state of the custom domain. The custom domain will only be used once the domain verification is successful.
+          enum:
+            - VERIFICATION_STATE_UNSPECIFIED
+            - NOT_STARTED
+            - IN_PROGRESS
+            - FAILED
+            - SUCCEEDED
+          readOnly: true
+          type: string
+        domainVerificationRequestTime:
+          description: Output only. The timestamp of initial request for the current domain verification.
+          format: google-datetime
+          readOnly: true
+          type: string
+        pendingCustomDomain:
+          description: Output only. The custom domain that's to be verified.
+          readOnly: true
+          type: string
+        useCustomDomain:
+          description: Whether to use custom domain.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2Email:
+      description: Configuration options related to authenticating a user by their email address.
+      properties:
+        enabled:
+          description: Whether email auth is enabled for the project or not.
+          type: boolean
+        passwordRequired:
+          description: Whether a password is required for email auth or not. If true, both an email and password must be provided to sign in. If false, a user may sign in via either email/password or email link.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig:
+      description: Configuration for settings related to email privacy and public visibility. Settings in this config protect against email enumeration, but may make some trade-offs in user-friendliness.
+      properties:
+        enableImprovedEmailPrivacy:
+          description: Migrates the project to a state of improved email privacy. For example certain error codes are more generic to avoid giving away information on whether the account exists. In addition, this disables certain features that as a side-effect allow user enumeration. Enabling this toggle disables the fetchSignInMethodsForEmail functionality and changing the user's email to an unverified email. It is recommended to remove dependence on this functionality and enable this toggle to improve user privacy.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2EmailTemplate:
+      description: "Email template. The subject and body fields can contain the following placeholders which will be replaced with the appropriate values: %LINK% - The link to use to redeem the send OOB code. %EMAIL% - The email where the email is being sent. %NEW_EMAIL% - The new email being set for the account (when applicable). %APP_NAME% - The GCP project's display name. %DISPLAY_NAME% - The user's display name."
+      properties:
+        body:
+          description: Email body
+          type: string
+        bodyFormat:
+          description: Email body format
+          enum:
+            - BODY_FORMAT_UNSPECIFIED
+            - PLAIN_TEXT
+            - HTML
+          type: string
+        customized:
+          description: Output only. Whether the body or subject of the email is customized.
+          readOnly: true
+          type: boolean
+        replyTo:
+          description: Reply-to address
+          type: string
+        senderDisplayName:
+          description: Sender display name
+          type: string
+        senderLocalPart:
+          description: Local part of From address
+          type: string
+        subject:
+          description: Subject of the email
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ForwardInboundCredentials:
+      description: Indicates which credentials to pass to the registered Blocking Functions.
+      properties:
+        accessToken:
+          description: Whether to pass the user's OAuth identity provider's access token.
+          type: boolean
+        idToken:
+          description: Whether to pass the user's OIDC identity provider's ID token.
+          type: boolean
+        refreshToken:
+          description: Whether to pass the user's OAuth identity provider's refresh token.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2HashConfig:
+      description: History information of the hash algorithm and key. Different accounts' passwords may be generated by different version.
+      properties:
+        algorithm:
+          description: Output only. Different password hash algorithms used in Identity Toolkit.
+          enum:
+            - HASH_ALGORITHM_UNSPECIFIED
+            - HMAC_SHA256
+            - HMAC_SHA1
+            - HMAC_MD5
+            - SCRYPT
+            - PBKDF_SHA1
+            - MD5
+            - HMAC_SHA512
+            - SHA1
+            - BCRYPT
+            - PBKDF2_SHA256
+            - SHA256
+            - SHA512
+            - STANDARD_SCRYPT
+          readOnly: true
+          type: string
+        memoryCost:
+          description: Output only. Memory cost for hash calculation. Used by scrypt and other similar password derivation algorithms. See https://tools.ietf.org/html/rfc7914 for explanation of field.
+          format: int32
+          readOnly: true
+          type: integer
+        rounds:
+          description: Output only. How many rounds for hash calculation. Used by scrypt and other similar password derivation algorithms.
+          format: int32
+          readOnly: true
+          type: integer
+        saltSeparator:
+          description: Output only. Non-printable character to be inserted between the salt and plain text password in base64.
+          readOnly: true
+          type: string
+        signerKey:
+          description: Output only. Signer key in base64.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2IdpCertificate:
+      description: The IDP's certificate data to verify the signature in the SAMLResponse issued by the IDP.
+      properties:
+        x509Certificate:
+          description: The x509 certificate
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2IdpConfig:
+      description: The SAML IdP (Identity Provider) configuration when the project acts as the relying party.
+      properties:
+        idpCertificates:
+          description: IDP's public keys for verifying signature in the assertions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2IdpCertificate"
+          type: array
+        idpEntityId:
+          description: Unique identifier for all SAML entities.
+          type: string
+        signRequest:
+          description: Indicates if outbounding SAMLRequest should be signed.
+          type: boolean
+        ssoUrl:
+          description: URL to send Authentication request to.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig:
+      description: A pair of SAML RP-IDP configurations when the project acts as the relying party.
+      properties:
+        displayName:
+          description: The config's display name set by developers.
+          type: string
+        enabled:
+          description: True if allows the user to sign in with the provider.
+          type: boolean
+        idpConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2IdpConfig"
+          description: The SAML IdP (Identity Provider) configuration when the project acts as the relying party.
+        name:
+          description: "The name of the InboundSamlConfig resource, for example: 'projects/my-awesome-project/inboundSamlConfigs/my-config-id'. Ignored during create requests."
+          type: string
+        spConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SpConfig"
+          description: The SAML SP (Service Provider) configuration when the project acts as the relying party to receive and accept an authentication assertion issued by a SAML identity provider.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2Inheritance:
+      description: Settings that the tenants will inherit from project level.
+      properties:
+        emailSendingConfig:
+          description: Whether to allow the tenant to inherit custom domains, email templates, and custom SMTP settings. If true, email sent from tenant will follow the project level email sending configurations. If false (by default), emails will go with the default settings with no customizations.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2InitializeIdentityPlatformRequest:
+      description: Request for InitializeIdentityPlatform.
+      properties: {}
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2InitializeIdentityPlatformResponse:
+      description: Response for InitializeIdentityPlatform. Empty for now.
+      properties: {}
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ListDefaultSupportedIdpConfigsResponse:
+      description: Response for DefaultSupportedIdpConfigs
+      properties:
+        defaultSupportedIdpConfigs:
+          description: The set of configs.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ListDefaultSupportedIdpsResponse:
+      description: Response for ListDefaultSupportedIdps
+      properties:
+        defaultSupportedIdps:
+          description: The set of configs.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ListInboundSamlConfigsResponse:
+      description: Response for ListInboundSamlConfigs
+      properties:
+        inboundSamlConfigs:
+          description: The set of configs.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ListOAuthIdpConfigsResponse:
+      description: Response for ListOAuthIdpConfigs
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        oauthIdpConfigs:
+          description: The set of configs.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig"
+          type: array
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ListTenantsResponse:
+      description: Response message for ListTenants.
+      properties:
+        nextPageToken:
+          description: The token to get the next page of results.
+          type: string
+        tenants:
+          description: A list of tenants under the given agent project.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Tenant"
+          type: array
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2MonitoringConfig:
+      description: Configuration related to monitoring project activity.
+      properties:
+        requestLogging:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RequestLogging"
+          description: Configuration for logging requests made to this project to Stackdriver Logging
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig:
+      description: Options related to MultiFactor Authentication for the project.
+      properties:
+        enabledProviders:
+          description: A list of usable second factors for this project.
+          items:
+            enum:
+              - PROVIDER_UNSPECIFIED
+              - PHONE_SMS
+            type: string
+          type: array
+        providerConfigs:
+          description: A list of usable second factors for this project along with their configurations. This field does not support phone based MFA, for that use the 'enabled_providers' field.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ProviderConfig"
+          type: array
+        state:
+          description: Whether MultiFactor Authentication has been enabled for this project.
+          enum:
+            - STATE_UNSPECIFIED
+            - DISABLED
+            - ENABLED
+            - MANDATORY
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2MultiTenantConfig:
+      description: Configuration related to multi-tenant functionality.
+      properties:
+        allowTenants:
+          description: Whether this project can have tenants or not.
+          type: boolean
+        defaultTenantLocation:
+          description: The default cloud parent org or folder that the tenant project should be created under. The parent resource name should be in the format of "/", such as "folders/123" or "organizations/456". If the value is not set, the tenant will be created under the same organization or folder as the agent project.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2NotificationConfig:
+      description: Configuration related to sending notifications to users.
+      properties:
+        defaultLocale:
+          description: Default locale used for email and SMS in IETF BCP 47 format.
+          type: string
+        sendEmail:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SendEmail"
+          description: Options for email sending.
+        sendSms:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SendSms"
+          description: Options for SMS sending.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig:
+      description: Configuration options for authenticating with an OAuth IDP.
+      properties:
+        clientId:
+          description: The client id of an OAuth client.
+          type: string
+        clientSecret:
+          description: The client secret of the OAuth client, to enable OIDC code flow.
+          type: string
+        displayName:
+          description: The config's display name set by developers.
+          type: string
+        enabled:
+          description: True if allows the user to sign in with the provider.
+          type: boolean
+        issuer:
+          description: For OIDC Idps, the issuer identifier.
+          type: string
+        name:
+          description: "The name of the OAuthIdpConfig resource, for example: 'projects/my-awesome-project/oauthIdpConfigs/oauth-config-id'. Ignored during create requests."
+          type: string
+        responseType:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2OAuthResponseType"
+          description: "The response type to request for in the OAuth authorization flow. You can set either `id_token` or `code` to true, but not both. Setting both types to be simultaneously true (`{code: true, id_token: true}`) is not yet supported."
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2OAuthResponseType:
+      description: "The response type to request for in the OAuth authorization flow. You can set either `id_token` or `code` to true, but not both. Setting both types to be simultaneously true (`{code: true, id_token: true}`) is not yet supported. See https://openid.net/specs/openid-connect-core-1_0.html#Authentication for a mapping of response type to OAuth 2.0 flow."
+      properties:
+        code:
+          description: If true, authorization code is returned from IdP's authorization endpoint.
+          type: boolean
+        idToken:
+          description: If true, ID token is returned from IdP's authorization endpoint.
+          type: boolean
+        token:
+          description: Do not use. The `token` response type is not supported at the moment.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2Permissions:
+      description: Configuration related to restricting a user's ability to affect their account.
+      properties:
+        disabledUserDeletion:
+          description: When true, end users cannot delete their account on the associated project through any of our API methods
+          type: boolean
+        disabledUserSignup:
+          description: When true, end users cannot sign up for a new account on the associated project through any of our API methods
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2PhoneNumber:
+      description: Configuration options related to authenticated a user by their phone number.
+      properties:
+        enabled:
+          description: Whether phone number auth is enabled for the project or not.
+          type: boolean
+        testPhoneNumbers:
+          additionalProperties:
+            type: string
+          description: A map of that can be used for phone auth testing.
+          type: object
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ProviderConfig:
+      description: ProviderConfig describes the supported MFA providers along with their configurations.
+      properties:
+        state:
+          description: Describes the state of the MultiFactor Authentication type.
+          enum:
+            - MFA_STATE_UNSPECIFIED
+            - DISABLED
+            - ENABLED
+            - MANDATORY
+          type: string
+        totpProviderConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2TotpMfaProviderConfig"
+          description: TOTP MFA provider config for this project.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2QuotaConfig:
+      description: Configuration related to quotas.
+      properties:
+        signUpQuotaConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2TemporaryQuota"
+          description: Quota for the Signup endpoint, if overwritten. Signup quota is measured in sign ups per project per hour per IP.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2RecaptchaConfig:
+      description: The reCAPTCHA Enterprise integration config.
+      properties:
+        emailPasswordEnforcementState:
+          description: The reCAPTCHA config for email/password provider, containing the enforcement status. The email/password provider contains all related user flows protected by reCAPTCHA.
+          enum:
+            - RECAPTCHA_PROVIDER_ENFORCEMENT_STATE_UNSPECIFIED
+            - OFF
+            - AUDIT
+            - ENFORCE
+          type: string
+        managedRules:
+          description: The managed rules for authentication action based on reCAPTCHA scores. The rules are shared across providers for a given tenant project.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaManagedRule"
+          type: array
+        recaptchaKeys:
+          description: Output only. The reCAPTCHA keys.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaKey"
+          readOnly: true
+          type: array
+        useAccountDefender:
+          description: Whether to use the account defender for reCAPTCHA assessment. Defaults to `false`.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2RecaptchaKey:
+      description: The reCAPTCHA key config. reCAPTCHA Enterprise offers different keys for different client platforms.
+      properties:
+        key:
+          description: The reCAPTCHA Enterprise key resource name, e.g. "projects/{project}/keys/{key}"
+          type: string
+        type:
+          description: The client's platform type.
+          enum:
+            - CLIENT_TYPE_UNSPECIFIED
+            - WEB
+            - IOS
+            - ANDROID
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2RecaptchaManagedRule:
+      description: The config for a reCAPTCHA managed rule. Models a single interval [start_score, end_score]. The start_score is implicit. It is either the closest smaller end_score (if one is available) or 0. Intervals in aggregate span [0, 1] without overlapping.
+      properties:
+        action:
+          description: The action taken if the reCAPTCHA score of a request is within the interval [start_score, end_score].
+          enum:
+            - RECAPTCHA_ACTION_UNSPECIFIED
+            - BLOCK
+          type: string
+        endScore:
+          description: The end score (inclusive) of the score range for an action. Must be a value between 0.0 and 1.0, at 11 discrete values; e.g. 0, 0.1, 0.2, 0.3, ... 0.9, 1.0. A score of 0.0 indicates the riskiest request (likely a bot), whereas 1.0 indicates the safest request (likely a human). See https://cloud.google.com/recaptcha-enterprise/docs/interpret-assessment.
+          format: float
+          type: number
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2RequestLogging:
+      description: Configuration for logging requests made to this project to Stackdriver Logging
+      properties:
+        enabled:
+          description: Whether logging is enabled for this project or not.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2SendEmail:
+      description: Options for email sending.
+      properties:
+        callbackUri:
+          description: action url in email template.
+          type: string
+        changeEmailTemplate:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2EmailTemplate"
+          description: Email template for change email
+        dnsInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2DnsInfo"
+          description: Information of custom domain DNS verification.
+        legacyResetPasswordTemplate:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2EmailTemplate"
+          description: Reset password email template for legacy Firebase V1 app.
+        method:
+          description: The method used for sending an email.
+          enum:
+            - METHOD_UNSPECIFIED
+            - DEFAULT
+            - CUSTOM_SMTP
+          type: string
+        resetPasswordTemplate:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2EmailTemplate"
+          description: Email template for reset password
+        revertSecondFactorAdditionTemplate:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2EmailTemplate"
+          description: Email template for reverting second factor addition emails
+        smtp:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Smtp"
+          description: Use a custom SMTP relay
+        verifyEmailTemplate:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2EmailTemplate"
+          description: Email template for verify email
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2SendSms:
+      description: Options for SMS sending.
+      properties:
+        smsTemplate:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SmsTemplate"
+          description: Output only. The template to use when sending an SMS.
+          readOnly: true
+        useDeviceLocale:
+          description: Whether to use the accept_language header for SMS.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2SignInConfig:
+      description: Configuration related to local sign in methods.
+      properties:
+        allowDuplicateEmails:
+          description: Whether to allow more than one account to have the same email.
+          type: boolean
+        anonymous:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Anonymous"
+          description: Configuration options related to authenticating an anonymous user.
+        email:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Email"
+          description: Configuration options related to authenticating a user by their email address.
+        hashConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2HashConfig"
+          description: Output only. Hash config information.
+          readOnly: true
+        phoneNumber:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2PhoneNumber"
+          description: Configuration options related to authenticated a user by their phone number.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig:
+      description: Configures the regions where users are allowed to send verification SMS for the project or tenant. This is based on the calling code of the destination phone number.
+      properties:
+        allowByDefault:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2AllowByDefault"
+          description: A policy of allowing SMS to every region by default and adding disallowed regions to a disallow list.
+        allowlistOnly:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2AllowlistOnly"
+          description: A policy of only allowing regions by explicitly adding them to an allowlist.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2SmsTemplate:
+      description: The template to use when sending an SMS.
+      properties:
+        content:
+          description: "Output only. The SMS's content. Can contain the following placeholders which will be replaced with the appropriate values: %APP_NAME% - For Android or iOS apps, the app's display name. For web apps, the domain hosting the application. %LOGIN_CODE% - The OOB code being sent in the SMS."
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2Smtp:
+      description: Configuration for SMTP relay
+      properties:
+        host:
+          description: SMTP relay host
+          type: string
+        password:
+          description: SMTP relay password
+          type: string
+        port:
+          description: SMTP relay port
+          format: int32
+          type: integer
+        securityMode:
+          description: SMTP security mode.
+          enum:
+            - SECURITY_MODE_UNSPECIFIED
+            - SSL
+            - START_TLS
+          type: string
+        senderEmail:
+          description: Sender email for the SMTP relay
+          type: string
+        username:
+          description: SMTP relay username
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2SpCertificate:
+      description: The SP's certificate data for IDP to verify the SAMLRequest generated by the SP.
+      properties:
+        expiresAt:
+          description: Timestamp of the cert expiration instance.
+          format: google-datetime
+          type: string
+        x509Certificate:
+          description: Self-signed public certificate.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2SpConfig:
+      description: The SAML SP (Service Provider) configuration when the project acts as the relying party to receive and accept an authentication assertion issued by a SAML identity provider.
+      properties:
+        callbackUri:
+          description: Callback URI where responses from IDP are handled.
+          type: string
+        spCertificates:
+          description: Output only. Public certificates generated by the server to verify the signature in SAMLRequest in the SP-initiated flow.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SpCertificate"
+          readOnly: true
+          type: array
+        spEntityId:
+          description: Unique identifier for all SAML entities.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2TemporaryQuota:
+      description: Temporary quota increase / decrease
+      properties:
+        quota:
+          description: Corresponds to the 'refill_token_count' field in QuotaServer config
+          format: int64
+          type: string
+        quotaDuration:
+          description: How long this quota will be active for
+          format: google-duration
+          type: string
+        startTime:
+          description: When this quota will take affect
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2Tenant:
+      description: A Tenant contains configuration for the tenant in a multi-tenant project.
+      properties:
+        allowPasswordSignup:
+          description: Whether to allow email/password user authentication.
+          type: boolean
+        autodeleteAnonymousUsers:
+          description: Whether anonymous users will be auto-deleted after a period of 30 days.
+          type: boolean
+        client:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig"
+          description: Options related to how clients making requests on behalf of a project should be configured.
+        disableAuth:
+          description: Whether authentication is disabled for the tenant. If true, the users under the disabled tenant are not allowed to sign-in. Admins of the disabled tenant are not able to manage its users.
+          type: boolean
+        displayName:
+          description: Display name of the tenant.
+          type: string
+        emailPrivacyConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig"
+          description: Configuration for settings related to email privacy and public visibility.
+        enableAnonymousUser:
+          description: Whether to enable anonymous user authentication.
+          type: boolean
+        enableEmailLinkSignin:
+          description: Whether to enable email link user authentication.
+          type: boolean
+        hashConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2HashConfig"
+          description: Output only. Hash config information of a tenant for display on Pantheon. This can only be displayed on Pantheon to avoid the sensitive information to get accidentally leaked. Only returned in GetTenant response to restrict reading of this information. Requires firebaseauth.configs.getHashConfig permission on the agent project for returning this field.
+          readOnly: true
+        inheritance:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Inheritance"
+          description: Specify the settings that the tenant could inherit.
+        mfaConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig"
+          description: The tenant-level configuration of MFA options.
+        monitoring:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2MonitoringConfig"
+          description: Configuration related to monitoring project activity.
+        name:
+          description: 'Output only. Resource name of a tenant. For example: "projects/{project-id}/tenants/{tenant-id}"'
+          readOnly: true
+          type: string
+        recaptchaConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaConfig"
+          description: The tenant-level reCAPTCHA config.
+        smsRegionConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig"
+          description: Configures which regions are enabled for SMS verification code sending.
+        testPhoneNumbers:
+          additionalProperties:
+            type: string
+          description: A map of pairs that can be used for MFA. The phone number should be in E.164 format (https://www.itu.int/rec/T-REC-E.164/) and a maximum of 10 pairs can be added (error will be thrown once exceeded).
+          type: object
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2TotpMfaProviderConfig:
+      description: TotpMFAProviderConfig represents the TOTP based MFA provider.
+      properties:
+        adjacentIntervals:
+          description: The allowed number of adjacent intervals that will be used for verification to avoid clock skew.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2Trigger:
+      description: Synchronous Cloud Function with HTTP Trigger
+      properties:
+        functionUri:
+          description: HTTP URI trigger for the Cloud Function.
+          type: string
+        updateTime:
+          description: When the trigger was changed.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2AuthenticatorAssertionResponse:
+      description: Authentication response from a FIDO authenticator.
+      properties:
+        authenticatorData:
+          description: The AuthenticatorData from the authenticator.
+          format: byte
+          type: string
+        clientDataJson:
+          description: The CollectedClientData object from the authenticator.
+          format: byte
+          type: string
+        signature:
+          description: The signature from the authenticator.
+          format: byte
+          type: string
+        userHandle:
+          description: The user handle.
+          format: byte
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2AuthenticatorAttestationResponse:
+      description: Attestation response from a FIDO authenticator.
+      properties:
+        attestationObject:
+          description: The attestation object from the authenticator.
+          format: byte
+          type: string
+        clientDataJson:
+          description: The CollectedClientData object from the authenticator.
+          format: byte
+          type: string
+        transports:
+          description: Authenticator transports that are supported by the authenticator.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudIdentitytoolkitV2AuthenticatorAuthenticationResponse:
+      description: Authenticator response to authenticate the user with an existing FIDO key.
+      properties:
+        authenticatorAssertionResponse:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2AuthenticatorAssertionResponse"
+          description: Authentication assertion from the authenticator.
+        credentialId:
+          description: Identifier for the authentication credential.
+          format: byte
+          type: string
+        credentialType:
+          description: The type of public key.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2AuthenticatorRegistrationResponse:
+      description: Authenticator response to register a new FIDO key.
+      properties:
+        authenticatorAttestationResponse:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2AuthenticatorAttestationResponse"
+          description: The attestation response object as described in the spec.
+        credentialId:
+          description: Identifier for the registered credential.
+          format: byte
+          type: string
+        credentialType:
+          description: The type of credential.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2AuthenticatorSelectionCriteria:
+      description: Criteria for the authenticator to create a registered FIDO key.
+      properties:
+        authenticatorAttachment:
+          description: The preferred authenticator attachment modality.
+          type: string
+        requireResidentKey:
+          description: Whether resident key is required.
+          type: boolean
+        userVerification:
+          description: The Relying Party's user verification requirements.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2AutoRetrievalInfo:
+      description: The information required to auto-retrieve an SMS.
+      properties:
+        appSignatureHash:
+          description: The Android app's signature hash for Google Play Service's SMS Retriever API.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest:
+      description: Finishes enrolling a second factor for the user.
+      properties:
+        displayName:
+          description: Display name which is entered by users to distinguish between different second factors with same type or different type.
+          type: string
+        idToken:
+          description: Required. ID token.
+          type: string
+        phoneVerificationInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneRequestInfo"
+          description: Verification info to authorize sending an SMS for phone verification.
+        tenantId:
+          description: The ID of the Identity Platform tenant that the user enrolling MFA belongs to. If not set, the user belongs to the default Identity Platform project.
+          type: string
+        totpVerificationInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaTotpEnrollmentRequestInfo"
+          description: Verification information for TOTP.
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse:
+      description: FinalizeMfaEnrollment response.
+      properties:
+        idToken:
+          description: ID token updated to reflect MFA enrollment.
+          type: string
+        phoneAuthInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo"
+          description: Auxiliary auth info specific to phone auth.
+        refreshToken:
+          description: Refresh token updated to reflect MFA enrollment.
+          type: string
+        totpAuthInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaTotpEnrollmentResponseInfo"
+          description: Auxiliary auth info specific to TOTP auth.
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneRequestInfo:
+      description: Phone Verification info for a FinalizeMfa request.
+      properties:
+        androidVerificationProof:
+          description: Android only. Uses for "instant" phone number verification though GmsCore.
+          type: string
+        code:
+          description: User-entered verification code.
+          type: string
+        phoneNumber:
+          description: Required if Android verification proof is presented.
+          type: string
+        sessionInfo:
+          description: An opaque string that represents the enrollment session.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo:
+      description: Phone Verification info for a FinalizeMfa response.
+      properties:
+        androidVerificationProof:
+          description: Android only. Long-lived replacement for valid code tied to android device.
+          type: string
+        androidVerificationProofExpireTime:
+          description: Android only. Expiration time of verification proof in seconds.
+          format: google-datetime
+          type: string
+        phoneNumber:
+          description: For Android verification proof.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizeMfaSignInRequest:
+      description: Finalizes sign-in by verifying MFA challenge.
+      properties:
+        mfaEnrollmentId:
+          description: The MFA enrollment ID from the user's list of current MFA enrollments.
+          type: string
+        mfaPendingCredential:
+          description: Required. Pending credential from first factor sign-in.
+          type: string
+        phoneVerificationInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneRequestInfo"
+          description: Proof of completion of the SMS based MFA challenge.
+        tenantId:
+          description: The ID of the Identity Platform tenant the user is signing in to. If not set, the user will sign in to the default Identity Platform project.
+          type: string
+        totpVerificationInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2MfaTotpSignInRequestInfo"
+          description: Proof of completion of the TOTP based MFA challenge.
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizeMfaSignInResponse:
+      description: FinalizeMfaSignIn response.
+      properties:
+        idToken:
+          description: ID token for the authenticated user.
+          type: string
+        phoneAuthInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo"
+          description: Extra phone auth info, including android verification proof.
+        refreshToken:
+          description: Refresh token for the authenticated user.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizeMfaTotpEnrollmentRequestInfo:
+      description: Mfa request info specific to TOTP auth for FinalizeMfa.
+      properties:
+        sessionInfo:
+          description: An opaque string that represents the enrollment session.
+          type: string
+        verificationCode:
+          description: User-entered verification code.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizeMfaTotpEnrollmentResponseInfo:
+      description: Mfa response info specific to TOTP auth for FinalizeMfa.
+      properties: {}
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizePasskeyEnrollmentRequest:
+      description: FinalizePasskeyEnrollment request. Registers passkey as a first factor for the user.
+      properties:
+        authenticatorRegistrationResponse:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2AuthenticatorRegistrationResponse"
+          description: Optional. The registration object from the authenticator.
+        idToken:
+          description: Required. The GCIP ID token of the signed-in user
+          type: string
+        tenantId:
+          description: Optional. The ID of the Identity Platform tenant the user is signing in to. If not set, the user will sign in to the default Identity Platform project.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizePasskeyEnrollmentResponse:
+      description: FinalizePasskeyEnrollment response.
+      properties:
+        idToken:
+          description: ID token for the authenticated user.
+          type: string
+        refreshToken:
+          description: Refresh token for the authenticated user.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizePasskeySignInRequest:
+      description: Request to finalize a passkey sign-in.
+      properties:
+        authenticatorAuthenticationResponse:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2AuthenticatorAuthenticationResponse"
+          description: Required. The authentication response object from the authenticator.
+        sessionId:
+          description: Optional. The session ID that was passed into StartPasskeySignIn, if any.
+          format: byte
+          type: string
+        tenantId:
+          description: Optional. The ID of the Identity Platform tenant the user is signing in to. If not set, the user will sign in to the default Identity Platform project.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2FinalizePasskeySignInResponse:
+      description: Response for FinalizePasskeySignIn.
+      properties:
+        idToken:
+          description: ID token for the authenticated user.
+          type: string
+        refreshToken:
+          description: Refresh token for the authenticated user.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2MfaTotpSignInRequestInfo:
+      description: TOTP verification info for FinalizeMfaSignInRequest.
+      properties:
+        verificationCode:
+          description: User-entered verification code.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2PublicKeyCredentialCreationOptions:
+      description: Parameters for creating a FIDO key.
+      properties:
+        authenticatorSelection:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2AuthenticatorSelectionCriteria"
+          description: Criteria for the authenticator to create a credential.
+        challenge:
+          description: The FIDO challenge.
+          format: byte
+          type: string
+        excludeCredentials:
+          description: Credentials already mapped to this user.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2PublicKeyCredentialDescriptor"
+          type: array
+        pubKeyCredParams:
+          description: Lists the supported key types and signature algorithms.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2PublicKeyCredentialParameters"
+          type: array
+        rp:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RpEntity"
+          description: The relying party attributes for creating a new credential.
+        user:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2UserEntity"
+          description: The user attributes for creating a new credential.
+      type: object
+    GoogleCloudIdentitytoolkitV2PublicKeyCredentialDescriptor:
+      description: Descriptor for a public key credential.
+      properties:
+        credentialId:
+          description: The identifier for the credential.
+          format: byte
+          type: string
+        credentialType:
+          description: The type of public key.
+          type: string
+        transports:
+          description: Authenticator transports that are supported by the authenticator.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudIdentitytoolkitV2PublicKeyCredentialParameters:
+      description: Parameters to create a public credential.
+      properties:
+        alg:
+          description: The COSE registry number of the cryptographic signature algorithm.
+          format: int64
+          type: string
+        credentialType:
+          description: The type of public key to be created.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2PublicKeyCredentialRequestOptions:
+      description: Parameters for signing a challenge with a FIDO key.
+      properties:
+        challenge:
+          description: The FIDO challenge.
+          format: byte
+          type: string
+        rpId:
+          description: The relying party identifier.
+          type: string
+        userVerification:
+          description: The requirements regarding user verification.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2RecaptchaConfig:
+      description: Configuration for reCAPTCHA
+      properties:
+        recaptchaEnforcementState:
+          description: The reCAPTCHA enforcement state for the providers that GCIP supports reCAPTCHA protection.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RecaptchaEnforcementState"
+          type: array
+        recaptchaKey:
+          description: The reCAPTCHA Enterprise key resource name, e.g. "projects/{project}/keys/{key}".
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2RecaptchaEnforcementState:
+      description: Enforcement states for reCAPTCHA protection.
+      properties:
+        enforcementState:
+          description: The reCAPTCHA enforcement state for the provider.
+          enum:
+            - ENFORCEMENT_STATE_UNSPECIFIED
+            - OFF
+            - AUDIT
+            - ENFORCE
+          type: string
+        provider:
+          description: The provider that has reCAPTCHA protection.
+          enum:
+            - RECAPTCHA_PROVIDER_UNSPECIFIED
+            - EMAIL_PASSWORD_PROVIDER
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2RevokeTokenRequest:
+      description: Request message for RevokeToken.
+      properties:
+        idToken:
+          description: Required. A valid Identity Platform ID token to link the account. If there was a successful token revocation request on the account and no tokens are generated after the revocation, the duplicate requests will be ignored and returned immediately.
+          type: string
+        providerId:
+          description: Required. The idp provider for the token. Currently only supports Apple Idp. The format should be "apple.com".
+          type: string
+        redirectUri:
+          description: The redirect URI provided in the initial authorization request made by the client to the IDP. The URI must use the HTTPS protocol, include a domain name, and can’t contain an IP address or localhost. Required if token_type is CODE.
+          type: string
+        tenantId:
+          description: The ID of the Identity Platform tenant the user is signing in to. If not set, the user will sign in to the default Identity Platform project.
+          type: string
+        token:
+          description: Required. The token to be revoked. If an authorization_code is passed in, the API will first exchange the code for access token and then revoke the token exchanged.
+          type: string
+        tokenType:
+          description: Required. The type of the token to be revoked.
+          enum:
+            - TOKEN_TYPE_UNSPECIFIED
+            - REFRESH_TOKEN
+            - ACCESS_TOKEN
+            - CODE
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2RevokeTokenResponse:
+      description: Response message for RevokeToken. Empty for now.
+      properties: {}
+      type: object
+    GoogleCloudIdentitytoolkitV2RpEntity:
+      description: The entity object for the Relying Party.
+      properties:
+        id:
+          description: The RP ID of the FIDO Relying Party.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2StartMfaEnrollmentRequest:
+      description: Sends MFA enrollment verification SMS for a user.
+      properties:
+        idToken:
+          description: Required. User's ID token.
+          type: string
+        phoneEnrollmentInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo"
+          description: Verification info to authorize sending an SMS for phone verification.
+        tenantId:
+          description: The ID of the Identity Platform tenant that the user enrolling MFA belongs to. If not set, the user belongs to the default Identity Platform project.
+          type: string
+        totpEnrollmentInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaTotpEnrollmentRequestInfo"
+          description: Sign-in info specific to TOTP auth.
+      type: object
+    GoogleCloudIdentitytoolkitV2StartMfaEnrollmentResponse:
+      description: StartMfaEnrollment response.
+      properties:
+        phoneSessionInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo"
+          description: Verification info to authorize sending an SMS for phone verification.
+        totpSessionInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaTotpEnrollmentResponseInfo"
+          description: Enrollment response info specific to TOTP auth.
+      type: object
+    GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo:
+      description: App Verification info for a StartMfa request.
+      properties:
+        autoRetrievalInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2AutoRetrievalInfo"
+          description: Android only. Used by Google Play Services to identify the app for auto-retrieval.
+        iosReceipt:
+          description: iOS only. Receipt of successful app token validation with APNS.
+          type: string
+        iosSecret:
+          description: iOS only. Secret delivered to iOS app via APNS.
+          type: string
+        phoneNumber:
+          description: Required for enrollment. Phone number to be enrolled as MFA.
+          type: string
+        playIntegrityToken:
+          description: Android only. Used to assert application identity in place of a recaptcha token (or safety net token). A Play Integrity Token can be generated via the [PlayIntegrity API] (https://developer.android.com/google/play/integrity) with applying SHA256 to the `phone_number` field as the nonce.
+          type: string
+        recaptchaToken:
+          description: Web only. Recaptcha solution.
+          type: string
+        safetyNetToken:
+          description: Android only. Used to assert application identity in place of a recaptcha token. A SafetyNet Token can be generated via the [SafetyNet Android Attestation API](https://developer.android.com/training/safetynet/attestation.html), with the Base64 encoding of the `phone_number` field as the nonce.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo:
+      description: Phone Verification info for a StartMfa response.
+      properties:
+        sessionInfo:
+          description: An opaque string that represents the enrollment session.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2StartMfaSignInRequest:
+      description: Starts multi-factor sign-in by sending the multi-factor auth challenge.
+      properties:
+        mfaEnrollmentId:
+          description: Required. MFA enrollment id from the user's list of current MFA enrollments.
+          type: string
+        mfaPendingCredential:
+          description: Required. Pending credential from first factor sign-in.
+          type: string
+        phoneSignInInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo"
+          description: Verification info to authorize sending an SMS for phone verification.
+        tenantId:
+          description: The ID of the Identity Platform tenant the user is signing in to. If not set, the user will sign in to the default Identity Platform project.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2StartMfaSignInResponse:
+      description: StartMfaSignIn response.
+      properties:
+        phoneResponseInfo:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo"
+          description: MultiFactor sign-in session information specific to SMS-type second factors. Along with the one-time code retrieved from the sent SMS, the contents of this session information should be passed to FinalizeMfaSignIn to complete the sign in.
+      type: object
+    GoogleCloudIdentitytoolkitV2StartMfaTotpEnrollmentRequestInfo:
+      description: Mfa request info specific to TOTP auth for StartMfa.
+      properties: {}
+      type: object
+    GoogleCloudIdentitytoolkitV2StartMfaTotpEnrollmentResponseInfo:
+      description: Mfa response info specific to TOTP auth for StartMfa.
+      properties:
+        finalizeEnrollmentTime:
+          description: The time by which the enrollment must finish.
+          format: google-datetime
+          type: string
+        hashingAlgorithm:
+          description: The hashing algorithm used to generate the verification code.
+          type: string
+        periodSec:
+          description: Duration in seconds at which the verification code will change.
+          format: int32
+          type: integer
+        sessionInfo:
+          description: An encoded string that represents the enrollment session.
+          type: string
+        sharedSecretKey:
+          description: A base 32 encoded string that represents the shared TOTP secret. The base 32 encoding is the one specified by [RFC4648#section-6](https://datatracker.ietf.org/doc/html/rfc4648#section-6). (This is the same as the base 32 encoding from [RFC3548#section-5](https://datatracker.ietf.org/doc/html/rfc3548#section-5).)
+          type: string
+        verificationCodeLength:
+          description: The length of the verification code that needs to be generated.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudIdentitytoolkitV2StartPasskeyEnrollmentRequest:
+      description: Starts passkey enrollment for passkey as a first factor by returning the FIDO challenge.
+      properties:
+        idToken:
+          description: Required. The GCIP ID token of the signed-in user
+          type: string
+        tenantId:
+          description: Optional. The ID of the Identity Platform tenant the user is signing in to. If not set, the user will sign in to the default Identity Platform project.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2StartPasskeyEnrollmentResponse:
+      description: StartPasskeyEnrollment response.
+      properties:
+        credentialCreationOptions:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2PublicKeyCredentialCreationOptions"
+          description: Parameters specified for the authenticator to create a public key.
+      type: object
+    GoogleCloudIdentitytoolkitV2StartPasskeySignInRequest:
+      description: Starts passkey sign-in by returning the FIDO challenge.
+      properties:
+        sessionId:
+          description: Optional. The developer can bind their own concept of a user session to this flow.
+          format: byte
+          type: string
+        tenantId:
+          description: Optional. The ID of the Identity Platform tenant the user is signing in to. If not set, the user will sign in to the default Identity Platform project.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2StartPasskeySignInResponse:
+      description: Response for StartPasskeySignIn.
+      properties:
+        credentialRequestOptions:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2PublicKeyCredentialRequestOptions"
+          description: Parameters specified for the authenticator to sign a challenge.
+      type: object
+    GoogleCloudIdentitytoolkitV2UserEntity:
+      description: The entity object for the user.
+      properties:
+        id:
+          description: The user ID.
+          format: byte
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2WithdrawMfaRequest:
+      description: Withdraws MFA.
+      properties:
+        idToken:
+          description: Required. User's ID token.
+          type: string
+        mfaEnrollmentId:
+          description: Required. MFA enrollment id from a current MFA enrollment.
+          type: string
+        tenantId:
+          description: The ID of the Identity Platform tenant that the user unenrolling MFA belongs to. If not set, the user belongs to the default Identity Platform project.
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2WithdrawMfaResponse:
+      description: Withdraws MultiFactorAuth response.
+      properties:
+        idToken:
+          description: ID token updated to reflect removal of the second factor.
+          type: string
+        refreshToken:
+          description: Refresh token updated to reflect removal of the second factor.
+          type: string
+      type: object
+    GoogleIamV1AuditConfig:
+      description: 'Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { "audit_configs": [ { "service": "allServices", "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE" }, { "log_type": "ADMIN_READ" } ] }, { "service": "sampleservice.googleapis.com", "audit_log_configs": [ { "log_type": "DATA_READ" }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:aliya@example.com" ] } ] } ] } For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts `jose@example.com` from DATA_READ logging, and `aliya@example.com` from DATA_WRITE logging.'
+      properties:
+        auditLogConfigs:
+          description: The configuration for logging of each type of permission.
+          items:
+            $ref: "#/components/schemas/GoogleIamV1AuditLogConfig"
+          type: array
+        service:
+          description: Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+          type: string
+      type: object
+    GoogleIamV1AuditLogConfig:
+      description: "Provides the configuration for logging a type of permissions. Example: { \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\", \"exempted_members\": [ \"user:jose@example.com\" ] }, { \"log_type\": \"DATA_WRITE\" } ] } This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting jose@example.com from DATA_READ logging."
+      properties:
+        exemptedMembers:
+          description: Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
+          items:
+            type: string
+          type: array
+        logType:
+          description: The log type that this config enables.
+          enum:
+            - LOG_TYPE_UNSPECIFIED
+            - ADMIN_READ
+            - DATA_WRITE
+            - DATA_READ
+          type: string
+      type: object
+    GoogleIamV1Binding:
+      description: Associates `members`, or principals, with a `role`.
+      properties:
+        condition:
+          $ref: "#/components/schemas/GoogleTypeExpr"
+          description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+        members:
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding."
+          items:
+            type: string
+          type: array
+        role:
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
+      type: object
+    GoogleIamV1GetIamPolicyRequest:
+      description: Request message for `GetIamPolicy` method.
+      properties:
+        options:
+          $ref: "#/components/schemas/GoogleIamV1GetPolicyOptions"
+          description: "OPTIONAL: A `GetPolicyOptions` object for specifying options to `GetIamPolicy`."
+      type: object
+    GoogleIamV1GetPolicyOptions:
+      description: Encapsulates settings provided to GetIamPolicy.
+      properties:
+        requestedPolicyVersion:
+          description: Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+          format: int32
+          type: integer
+      type: object
+    GoogleIamV1Policy:
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      properties:
+        auditConfigs:
+          description: Specifies cloud audit logging configuration for this policy.
+          items:
+            $ref: "#/components/schemas/GoogleIamV1AuditConfig"
+          type: array
+        bindings:
+          description: Associates a list of `members`, or principals, with a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one principal. The `bindings` in a `Policy` can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the `bindings` grant 50 different roles to `user:alice@example.com`, and not to any other principal, then you can add another 1,450 principals to the `bindings` in the `Policy`.
+          items:
+            $ref: "#/components/schemas/GoogleIamV1Binding"
+          type: array
+        etag:
+          description: "`etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy. **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost."
+          format: byte
+          type: string
+        version:
+          description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
+          format: int32
+          type: integer
+      type: object
+    GoogleIamV1SetIamPolicyRequest:
+      description: Request message for `SetIamPolicy` method.
+      properties:
+        policy:
+          $ref: "#/components/schemas/GoogleIamV1Policy"
+          description: "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them."
+        updateMask:
+          description: 'OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: `paths: "bindings, etag"`'
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleIamV1TestIamPermissionsRequest:
+      description: Request message for `TestIamPermissions` method.
+      properties:
+        permissions:
+          description: The set of permissions to check for the `resource`. Permissions with wildcards (such as `*` or `storage.*`) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleIamV1TestIamPermissionsResponse:
+      description: Response message for `TestIamPermissions` method.
+      properties:
+        permissions:
+          description: A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleProtobufEmpty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    GoogleTypeExpr:
+      description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
+      properties:
+        description:
+          description: Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
+          type: string
+        expression:
+          description: Textual representation of an expression in Common Expression Language syntax.
+          type: string
+        location:
+          description: Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
+          type: string
+        title:
+          description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+            https://www.googleapis.com/auth/firebase: View and administer all your Firebase data and settings
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+            https://www.googleapis.com/auth/firebase: View and administer all your Firebase data and settings
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

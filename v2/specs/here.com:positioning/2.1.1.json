@@ -1,0 +1,47 @@
+{
+  "added": "2019-02-26T10:54:30.000Z",
+  "info": {
+    "contact": {
+      "x-twitter": "HERE"
+    },
+    "description": "Positioning API accepts requests with radio network measurements and replies with corresponding location estimate. For more details and examples, see [Developer's Guide](https://developer.here.com/documentation/positioning). Cellular measurements are given in terms defined in 3GPP and 3GGP2 specifications, see the corresponsing documentation at http://www.3gpp.org.\n\nBreaking changes from v1:\n  - JSON fields\n    `altaccuracy`, `baselat`, `baselng`, `cellparams`, `pilotpower`, `pnoffset`, `powrx`, `rxlevel`,\n    have been deprecated and replaced with\n    `altAccuracy`, `baseLat`, `baseLng`, `cellParams`, `pilotPower`, `pnOffset`, `rss`, `rxLevel`\n    respectively.\n  - Dependent parameters combined as a subobject.\n    - CDMA, GSM, WCDMA, TD-SCDMA and LTE local identification parameters for serving cell moved under `localId` property.\n    - GSM neighbor global ID: `lac` and `cid` for neighbor cell moved under `globalIdentity` property.\n",
+    "license": {
+      "name": "HERE Documentation License",
+      "url": "https://legal.here.com/en-gb/terms/documentation-license",
+      "x-copyright": "Copyright (C) 2017-2021 HERE Europe B.V."
+    },
+    "termsOfService": "http://developer.here.com/terms-conditions",
+    "title": "HERE Network Positioning API v2",
+    "version": "2.1.1",
+    "x-apisguru-categories": [
+      "location"
+    ],
+    "x-comment": "This API definition uses custom keywords for specifying rules not defined in OAS 3.0.x. They convey machine-readable information on additional requirements on the request message and are used for request validation by Positioning servers.\nFollowing custom keywords are used:\n  - x-comment - text\n      For comments, to be only visible in the specification, not in documentation.\n  - x-anyRequired - array of property names\n      Requires at least one of listed properties in the object.\n  - x-dependencies - object mapping from dependent properties to their dependencies\n      Same as 'dependencies' keyword in JSON Schema\n\nAlso, custom formats are used:\n  - uuid - UUID, supported by Ajv library\n  - version - requires version in X.Y.Z or X.Y format,\n      where X is [0..255], Y is [0..255] and Z is [0..65535].\n  - eddystoneId - A combination of 10-byte Namespace component and a 6-byte Instance component, as base64 string\n  - iBeaconId - A combination of 16-byte UUID + 2-byte major + 2-byte minor, as base64 string\n",
+    "x-document-meta-data": {
+      "copyright": "© 2021 HERE Europe B.V.",
+      "date-created": "2021-04-01T13:14:37+00:00",
+      "document-id": "0dd4683d-c62d-4da6-915a-942de9c3fb4b"
+    },
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_HERE_profile_image.png"
+    },
+    "x-olp-service": {
+      "name": "positioning",
+      "version": "v2"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://developer.here.com/documentation/positioning-api/swagger/positioning-v2-external-spec.yaml",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "here.com",
+    "x-serviceName": "positioning"
+  },
+  "updated": "2021-06-21T12:16:53.715Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/here.com/positioning/2.1.1/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/here.com/positioning/2.1.1/openapi.yaml",
+  "openapiVer": "3.0.0",
+  "link": "https://api.apis.guru/v2/specs/here.com:positioning/2.1.1.json"
+}

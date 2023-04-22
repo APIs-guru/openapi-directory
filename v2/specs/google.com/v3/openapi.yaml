@@ -1,0 +1,2328 @@
+openapi: 3.0.0
+servers:
+  - url: https://travelpartner.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+  description: The Travel Partner API provides you with a RESTful interface to the Google Hotel Center platform. It enables an app to efficiently retrieve and change Hotel Center data, and is thus suitable for managing large or complex accounts.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Travel Partner API
+  version: v3
+  x-origin:
+    - format: google
+      url: https://travelpartner.googleapis.com/$discovery/rest?version=v3
+      version: v1
+  x-providerName: google.com
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+externalDocs:
+  url: https://developers.google.com/hotels/hotel-prices/api-reference
+tags:
+  - name: accounts
+paths:
+  "/v3/{account}/hotels:setLiveOnGoogle":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Collection-level custom method to update the Live on Google status for multiple properties. Each call can turn on or off multiple hotels. To turn some hotels on and turn some hotels off, you will have to make multiple calls.
+      operationId: travelpartner.accounts.hotels.setLiveOnGoogle
+      parameters:
+        - description: Required. The resource name of the account. The format is accounts/{account_id}.
+          in: path
+          name: account
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetLiveOnGoogleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetLiveOnGoogleResponse"
+          description: Successful response
+      tags:
+        - accounts
+  "/v3/{name}":
+    delete:
+      description: Deletes an account link.
+      operationId: travelpartner.accounts.accountLinks.delete
+      parameters:
+        - description: Required. The resource name of the account link being deleted. The format is `accounts/{account_id}/accountLinks/{account_link_id}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      tags:
+        - accounts
+    get:
+      description: Returns a reconciliation report.
+      operationId: travelpartner.accounts.reconciliationReports.get
+      parameters:
+        - description: The resource name of the reconciliation report to fetch. The format is `accounts/{account_id}/reconciliationReports/{datetime}~{filename}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Set to true if matched prices are to be added into the report.
+          in: query
+          name: includeMatchedPrices
+          schema:
+            type: boolean
+        - description: Set to true if non-account impacting rows are to be added into the report.
+          in: query
+          name: includeNonScoring
+          schema:
+            type: boolean
+        - description: Set to true if pixel signals are to be added into the report.
+          in: query
+          name: includePixels
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReconciliationReport"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a brand.
+      operationId: travelpartner.accounts.brands.patch
+      parameters:
+        - description: Output only. The resource name for the brand in the format `accounts/{account_id}/brands/{brand_id}`. The `brand_id` corresponds to the partner's brand identifier used for landing page matching and the property-level brand identifier. A default brand is applied to properties that do not have a brand. The `brand_id` of the default brand is `NO_BRAND_ID`. It can be fetched and updated like any configured brand.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: When true, and the Brand is not found, a new Brand will be created. In this situation, `update_mask` is ignored.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
+        - description: "Required. The field to update. Only the `display_names` and `icon` fields can be updated. Use the syntax shown in the example URI below and provide the new value in the request body. Example request URI and request body: ``` PATCH https://travelpartner.googleapis.com/v3/accounts/123456789/ brands/my-brand?update_mask=brand.display_names ``` ``` { \"display_names\": [{ \"language\": \"en\" \"text\": \"Gilles' Gites\" }] } ``` The information above is sufficient for forming the URI and request body. The sentence below is auto-generated, supplemental information about the `FieldMask` format in general."
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Brand"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Brand"
+          description: Successful response
+      tags:
+        - accounts
+  "/v3/{name}/freeBookingLinksReportViews:query":
+    get:
+      description: "**DEPRECATED:** Use PropertyPerformanceReportService.QueryPropertyPerformanceReport, which also has impression reporting, instead. Provides the ability to query (get, filter, and segment) a free booking links report for a specific account."
+      operationId: travelpartner.accounts.freeBookingLinksReportViews.query
+      parameters:
+        - description: "The resource name of the account being queried. Format: accounts/{account_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "Specifies how to segment the metrics returned by the query. For example, if `userRegionCode` is specified, the `freeBookingLinksResult` will provide metrics aggregated by user region. The string value is a comma-separated list of fields. Valid fields are: `date`, `userRegionCode`, `deviceType`, `partnerHotelId`, and `partnerHotelDisplayName`. Only fields specified here are included in the FreeBookingLinksResult."
+          in: query
+          name: aggregateBy
+          schema:
+            type: string
+        - description: "The conditions (fields and expressions) used to filter the free booking link metrics for the account being queried. The syntax requires spaces surrounding the `in` operator. Otherwise, spaces can be omitted. Conditions can be joined using the `and` operator. The `date` field is required. All other fields are optional. The `date` field values are inclusive and must be in YYYY-MM-DD format. The earliest acceptable date is 2021-03-09; earlier date values will be coerced to 2021-03-09. Values for `partnerHotelDisplayName` are matched case-insensitively. Examples of valid conditions are as follows: * `date = '2021-12-03'` * `date between '2021-12-03' and '2021-12-08'` * `deviceType = 'TABLET'` * `deviceType in ('MOBILE', 'TABLET')` * `partnerHotelId = 'AAA'` * `partnerHotelId in ('AAA', 'BBB')` * `partnerHotelDisplayName = 'hotel A'` * `partnerHotelDisplayName in ('Hotel A', 'HOTEL b')` * `userRegionCode = 'US'` * `userRegionCode in ('US', 'CA')`"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of participation results to return. The service may return fewer than this value. If unspecified, at most 10,000 results will be returned. The maximum value is 10,000; values above 10,000 will be coerced to 10,000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous QueryParticipationReport request. Provide this to receive the subsequent page. When paginating, all other parameters provided to QueryParticipationReport must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryFreeBookingLinksReportResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{name}/participationReportViews:query":
+    get:
+      description: Provides the ability to query (get, filter, and segment) a participation report for a particular account.
+      operationId: travelpartner.accounts.participationReportViews.query
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "Specifies how to segment the metrics returned by the query. For example, if `userRegionCode` is specified as the `aggregate_by` value, the `participationResult` will provide metrics aggregated by user region. The string value is a comma-separated list of fields. Valid fields are: `date`, `userRegionCode`, `deviceType`, `partnerHotelId`, `hotelRegionCode`, `advanceBookingWindow`, `lengthOfStayDays`, `checkinDate`, and `occupancy`. Fields that are not specified are not included in the ParticipationResult. Using an `aggregateBy` specification that produces a large number of rows will cause an error. This is especially true when aggregating by `partnerHotelId` or more than two fields. To reduce the possibiliy of an error, filter by `partnerHotelId` and `date` to only include a select number of hotels and dates. Accounts with a large number of hotels will need to further reduce data with more filtering."
+          in: query
+          name: aggregateBy
+          schema:
+            type: string
+        - description: "The conditions (fields and expressions) used to filter the participation metrics for the account being queried. The syntax requires spaces surrounding the `in` operator. Otherwise, spaces can be omitted. Conditions can be joined using the `and` operator. The `date` field is required. All other fields are optional. Examples of valid conditions are as follows: * `advanceBookingWindow = 2` * `advanceBookingWindow >= 0` * `advanceBookingWindow <= 5` * `advanceBookingWindow between 1 and 5` * `checkinDate = '2020-10-01'` * `checkinDate >= '2020-10-01'` * `checkinDate <= '2020-10-01'` * `checkinDate between '2020-10-01' and '2020-10-05'` * `date = '2020-02-04'` * `date between '2020-02-04' and '2020-02-09'` * `deviceType = 'TABLET'` * `deviceType in ('MOBILE', 'TABLET')` * `hotelRegionCode = 'US'` * `hotelRegionCode in ('US', 'CA')` * `lengthOfStayDays = 2` * `lengthOfStayDays >= 0` * `lengthOfStayDays <= 5` * `lengthOfStayDays between 1 and 5` * `occupancy = 2` * `occupancy >= 0` * `occupancy <= 5` * `occupancy between 1 and 5` * `partnerHotelId = 'AAA'` * `partnerHotelId in ('AAA', 'BBB')` * `userRegionCode = 'US'` * `userRegionCode in ('US', 'CA')`"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of participation results to return. The service may return fewer than this value. If unspecified, at most 10,000 results will be returned. The maximum value is 10,000; values above 10,000 will be coerced to 10,000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous QueryParticipationReport request. Provide this to receive the subsequent page. When paginating, all other parameters provided to QueryParticipationReport must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryParticipationReportResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{name}/propertyPerformanceReportViews:query":
+    get:
+      description: Provides the ability to query (get, filter, and segment) a property performance links report for a specific account.
+      operationId: travelpartner.accounts.propertyPerformanceReportViews.query
+      parameters:
+        - description: "The resource name of the account being queried. Format: accounts/{account_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "Specifies how to segment the metrics returned by the query. For example, if `userRegionCode` is specified, the `PropertyPerformanceResult` will provide metrics aggregated by user region. The string value is a comma-separated list of fields. Valid fields are: `advanceBookingWindow`, `brand`, `date`, `deviceType`, `highIntentUsers`, `lengthOfStay`, `propertyRegionCode`, `occupancy`, `partnerPropertyId`, `partnerPropertyDisplayName`, and `userRegionCode`. Only fields specified here are included in the PropertyPerformanceResult."
+          in: query
+          name: aggregateBy
+          schema:
+            type: string
+        - description: "The conditions (fields and expressions) used to filter the property performance metrics for the account being queried. The syntax requires spaces surrounding the `in` operator. Otherwise, spaces can be omitted. Conditions can be joined using the `and` operator. The `date` field is required. All other fields are optional. The `date` field values are inclusive and must be in YYYY-MM-DD format. The earliest acceptable date is 2021-03-09; earlier date values will be coerced to 2021-03-09. Values for `partnerPropertyDisplayName` and `brand` are matched case-insensitively. Examples of valid conditions are as follows: * `advanceBookingWindow = 'ADVANCE_BOOKING_WINDOW_SAME_DAY'` * `advanceBookingWindow in ('ADVANCE_BOOKING_WINDOW_SAME_DAY', 'ADVANCE_BOOKING_WINDOW_DAYS_61_TO_90')` * `brand = 'Brand A'` * `brand in ('Brand A', 'brand B')` * `date = '2021-12-03'` * `date between '2021-12-03' and '2021-12-08'` * `deviceType = 'TABLET'` * `deviceType in ('MOBILE', 'TABLET')` * `highIntentUsers = 'TRUE'` * `highIntentUsers = 'FALSE'` * `lengthOfStay = 'LENGTH_OF_STAY_NIGHTS_2'` * `lengthOfStay in ('LENGTH_OF_STAY_NIGHTS_2', 'LENGTH_OF_STAY_NIGHTS_4_TO_7')` * `propertyRegionCode = 'US'` * `propertyRegionCode in ('US', 'CA')` * `occupancy = 'OCCUPANCY_2'` * `occupancy in ('OCCUPANCY_2', 'OCCUPANCY_OVER_4')` * `partnerPropertyId = 'AAA'` * `partnerPropertyId in ('AAA', 'BBB')` * `partnerPropertyDisplayName = 'hotel A'` * `partnerPropertyDisplayName in ('Hotel A', 'HOTEL b')` * `userRegionCode = 'US'` * `userRegionCode in ('US', 'CA')`"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of participation results to return. The service may return fewer than this value. If unspecified, at most 10,000 results will be returned. The maximum value is 10,000; values above 10,000 will be coerced to 10,000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous QueryParticipationReport request. Provide this to receive the subsequent page. When paginating, all other parameters provided to QueryParticipationReport must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryPropertyPerformanceReportResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{parent}/accountLinks":
+    get:
+      description: Returns the account links for a Hotel Center account.
+      operationId: travelpartner.accounts.accountLinks.list
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAccountLinksResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new account link between a Hotel Center account and a Google Ads account.
+      operationId: travelpartner.accounts.accountLinks.create
+      parameters:
+        - description: The resource name of the Hotel Center account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountLink"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountLink"
+          description: Successful response
+      tags:
+        - accounts
+  "/v3/{parent}/brands":
+    get:
+      description: Returns the brands for a partner account.
+      operationId: travelpartner.accounts.brands.list
+      parameters:
+        - description: Required. The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBrandsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new brand. Because Google detects brands from your existing properties, you only need this operation when you want to configure a brand before you send its properties to Google. Note that it might take a couple of days after your listing feed first provides a brand for the brand to appear.
+      operationId: travelpartner.accounts.brands.create
+      parameters:
+        - description: Required. The resource name of the Hotel Center account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The partner-determined brand identifier.
+          in: query
+          name: brandId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Brand"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Brand"
+          description: Successful response
+      tags:
+        - accounts
+  "/v3/{parent}/hotelViews":
+    get:
+      description: Returns the list of hotel views.
+      operationId: travelpartner.accounts.hotelViews.list
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. The conditions (fields and expressions) used to filter HotelViews. The syntax requires spaces surrounding the `in` operator. Otherwise, spaces can be omitted. Conditions cannot be joined. The `hotelId` field can be used to select specific hotels. The `liveOnGoogle` field can select properties that Google shows, or properties that are omitted in google search results. The `matchStatus` field can be used to filter the list of HotelViews returned for the account. Examples of valid conditions and their syntax are as follows: * `hotelId = 'hotel_ABC'` * `hotelId in ('hotel_ABC', 'hotel_XYZ')` * `liveOnGoogle = 'TRUE'` * `liveOnGoogle = 'FALSE'` * `matchStatus = 'NOT_MATCHED'` * `matchStatus in ('NOT_MATCHED', 'MATCHED', 'MAP_OVERLAP')`"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Number of elements to retrieve in a single page.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token of the page to retrieve.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListHotelViewsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{parent}/hotelViews:summarize":
+    get:
+      description: Returns summarized information about hotels.
+      operationId: travelpartner.accounts.hotelViews.summarize
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SummarizeHotelViewsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{parent}/icons":
+    get:
+      description: Returns the `Icon`s for a partner account.
+      operationId: travelpartner.accounts.icons.list
+      parameters:
+        - description: Required. The resource name of the queried partner account. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListIconsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Uploads a new icon and starts its review process. Generates an `icon_id` and includes it in the icon's resource name, which is the format `accounts/{account_id}/icons/{icon_id}` Returns HTTP status 400 and doesn't trigger the review process if the icon has any of these conditions: * Image is not in PNG format, or not convertible to PNG format. * Size less than 72 pixels * Size greater than 1200 pixels * Aspect ratio other than 1:1"
+      operationId: travelpartner.accounts.icons.create
+      parameters:
+        - description: Required. The resource name of the partner account owning the icon. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Icon"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Icon"
+          description: Successful response
+      tags:
+        - accounts
+  "/v3/{parent}/listings:verify":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: returns verified listings with data issues and serving eligibilities
+      operationId: travelpartner.accounts.listings.verify
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyListingsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerifyListingsResponse"
+          description: Successful response
+      tags:
+        - accounts
+  "/v3/{parent}/priceAccuracyViews":
+    get:
+      description: Lists the available price accuracy views.
+      operationId: travelpartner.accounts.priceAccuracyViews.list
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPriceAccuracyViewsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{parent}/priceAccuracyViews:summarize":
+    get:
+      description: Returns the price accuracy summary.
+      operationId: travelpartner.accounts.priceAccuracyViews.summarize
+      parameters:
+        - description: The resource name of the account that is being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SummarizePriceAccuracyResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{parent}/priceCoverageViews":
+    get:
+      description: Returns the entire price coverage history.
+      operationId: travelpartner.accounts.priceCoverageViews.list
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPriceCoverageViewsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{parent}/priceCoverageViews:latest":
+    get:
+      description: Returns the latest price coverage view in full detail.
+      operationId: travelpartner.accounts.priceCoverageViews.getLatest
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceCoverageView"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v3/{parent}/reconciliationReports":
+    get:
+      description: Returns a list of the names of created reconciliation reports.
+      operationId: travelpartner.accounts.reconciliationReports.list
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: End of date range to fetch files for. Format is yyyy-mm-dd[THH[:MM[:SS]]]. If empty, reports until the end of time are fetched.
+          in: query
+          name: endDate
+          schema:
+            type: string
+        - description: Beginning of date range to fetch files for. Format is yyyy-MM-dd[THH[:mm[:SS]]]. If empty, reports from the beginning of time onwards are fetched.
+          in: query
+          name: startDate
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReconciliationReportsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a reconciliation report and uploads it to Google.
+      operationId: travelpartner.accounts.reconciliationReports.create
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReconciliationReport"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateReconciliationReportResponse"
+          description: Successful response
+      tags:
+        - accounts
+  "/v3/{parent}/reconciliationReports:validate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Validates a reconciliation report.
+      operationId: travelpartner.accounts.reconciliationReports.validate
+      parameters:
+        - description: The resource name of the account being queried. The format is `accounts/{account_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReconciliationReport"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateReconciliationReportResponse"
+          description: Successful response
+      tags:
+        - accounts
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    AccountLink:
+      description: An account link. Represents the link between a Google Ads customer and a Hotel Ads (Hotel Center) account. An account link defines the set of hotels under the Hotel Center account that is linked to the Google Ads customer.
+      properties:
+        accountLinkTarget:
+          $ref: "#/components/schemas/AccountLinkTarget"
+          description: Required for CREATE requests. The properties in the Hotel Center account that can be managed using the linked Google Ads account.
+        googleAdsCustomerName:
+          description: "Required for CREATE requests. The value representing the Google Ads customer ID in the format `customers/{google_ads_customer_id}`. For example: `customers/0123456789`. Note that the `googleAdsCustomerName` field is not returned in responses to GET requests."
+          type: string
+        name:
+          description: The resource name for the account link in the format `accounts/{account_id}/accountLinks/{account_link_id}`.
+          type: string
+        status:
+          description: The current status of the account link.
+          enum:
+            - ACCOUNT_LINK_STATUS_UNSPECIFIED
+            - ACCOUNT_LINK_STATUS_UNKNOWN
+            - REQUESTED_FROM_HOTEL_CENTER
+            - REQUESTED_FROM_GOOGLE_ADS
+            - APPROVED
+          type: string
+      type: object
+    AccountLinkTarget:
+      description: Defines whether all properties or a subset of properties in the Hotel Center account can be managed with the linked Google Ads account. If a subset, the specific properties are specified.
+      properties:
+        allHotels:
+          description: True if all properties under the Hotel Center account are made available to the account link. The default is `false`.
+          type: boolean
+        hotelList:
+          $ref: "#/components/schemas/HotelList"
+          description: List of properties that is made available to the account link.
+      type: object
+    Brand:
+      description: Brand-level icon and display name configuration. Once approved, the icon and display name appear in the search results for properties that the partner has assigned to this brand.
+      properties:
+        activeDisplayNames:
+          description: Output only. The brand's active display names in all provided languages, only present if the display name is approved for all provided languages.
+          items:
+            $ref: "#/components/schemas/LocalizedText"
+          readOnly: true
+          type: array
+        activeIcon:
+          description: Output only. The brand's active [accounts.icon](/hotels/hotel-prices/api-reference/rest/v3/accounts.icons#resource:-iconresource). The value refers to the icons's resource name in the format `accounts/{account_id}/icons/{icon_id}`. An active icon is one that has been approved.
+          readOnly: true
+          type: string
+        activeIconUri:
+          description: Output only. URL of the active icon, only present when the icon has been approved.
+          readOnly: true
+          type: string
+        displayNameDisapprovalReason:
+          description: Output only. Display name's disapproval reason. Only applies to display names with the review state 'REJECTED'.
+          items:
+            $ref: "#/components/schemas/DisplayNameDisapprovalReason"
+          readOnly: true
+          type: array
+        displayNameState:
+          description: Output only. The brand's display names review state, which applies to all display name language entries. If there are both submitted and active display names, this refers to the submitted display names.
+          enum:
+            - REVIEW_STATE_UNSPECIFIED
+            - REVIEW_STATE_NEW
+            - APPROVED
+            - REJECTED
+          readOnly: true
+          type: string
+        displayNames:
+          description: Input only. The name Google displays for the brand's properties. Setting the display names is only necessary if you want to override the landing page display name or account-level display name for the brand. Google reviews the display names for appropriate content. When there are multiple languages, Google will only show the display names once Google approves all the languages.
+          items:
+            $ref: "#/components/schemas/LocalizedText"
+          type: array
+        icon:
+          description: Input only. The brand's [accounts.icon](/hotels/hotel-prices/api-reference/rest/v3/accounts.icons#resource:-iconresource) identifying the brand's icon. The value refers to the icons's resource name in the format `accounts/{account_id}/icons/{icon_id}`.
+          type: string
+        iconDisapprovalReasons:
+          description: Output only. The icon's disapproval reason(s). Only applies to submitted icons with `REJECTED` state.
+          items:
+            enum:
+              - IMAGE_DISAPPROVAL_REASON_UNSPECIFIED
+              - NOT_LIKE_SITE
+              - OFFENSIVE
+              - LOW_QUALITY
+              - ANIMATED
+              - BAD_BACKGROUND
+              - TEXT_TOO_SMALL
+            type: string
+          readOnly: true
+          type: array
+        iconState:
+          description: Output only. The brand's icon's review state. If there are both submitted and active icons, this refers to the submitted icon.
+          enum:
+            - REVIEW_STATE_UNSPECIFIED
+            - REVIEW_STATE_NEW
+            - APPROVED
+            - REJECTED
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name for the brand in the format `accounts/{account_id}/brands/{brand_id}`. The `brand_id` corresponds to the partner's brand identifier used for landing page matching and the property-level brand identifier. A default brand is applied to properties that do not have a brand. The `brand_id` of the default brand is `NO_BRAND_ID`. It can be fetched and updated like any configured brand.
+          readOnly: true
+          type: string
+        propertyCount:
+          description: Output only. The number of properties with the corresponding brand ID.
+          format: int64
+          readOnly: true
+          type: string
+        submittedDisplayNames:
+          description: Output only. The brand's submitted display names in all provided languages, only present if the display name is new or rejected for any language.
+          items:
+            $ref: "#/components/schemas/LocalizedText"
+          readOnly: true
+          type: array
+        submittedIcon:
+          description: Output only. The brand's submitted [accounts.icon](/hotels/hotel-prices/api-reference/rest/v3/accounts.icons#resource:-iconresource). The value refers to the icons's resource name in the format `accounts/{account_id}/icons/{icon_id}`. A submitted icon is one that is new or rejected.
+          readOnly: true
+          type: string
+      type: object
+    CreateReconciliationReportResponse:
+      description: Response message for ReconciliationReportService.CreateReconciliationReport.
+      properties:
+        issues:
+          description: Issues that were encountered when validating the file.
+          items:
+            $ref: "#/components/schemas/ReconciliationReportValidationIssue"
+          type: array
+        reconciliationReport:
+          $ref: "#/components/schemas/ReconciliationReport"
+          description: Resource name of the new reconciliation report. The format is `accounts/{account_id}`.
+        successfulRecordCount:
+          description: The number of commission records that were successfully saved.
+          format: int32
+          type: integer
+      type: object
+    DataIssueDetail:
+      description: Details on a data issue in the listing.
+      properties:
+        dataIssueSeverity:
+          description: The severity of the data issue.
+          enum:
+            - DATA_ISSUE_SEVERITY_UNSPECIFIED
+            - ERROR
+            - WARNING
+            - INFO
+          type: string
+        dataIssueType:
+          description: The type of the data issue.
+          enum:
+            - FEED_DATA_ISSUE_UNSPECIFIED
+            - FEED_DATA_ISSUE_UNKNOWN
+            - NO_DATA_ISSUE
+            - DUPLICATE_ADDRESS
+            - MISSING_PHYSICAL_STREET_ADDRESS
+            - MISSING_STREET_NAME
+            - MISSING_STREET_NUMBER
+            - MISSING_ADDRESS
+            - MISSING_COUNTRY
+            - INVALID_POSTAL_CODE
+            - INVALID_POSTAL_CODE_SUFFIX
+            - UNEXPECTED_POSTAL_CODE_SUFFIX
+            - UNEXPECTED_POSTAL_CODE
+            - INVALID_AMENITIES
+            - INVALID_EMAIL_ADDRESS
+            - DUPLICATE_LATLONG
+            - LATLONG_INCONSISTENT_WITH_ADDRESS
+            - MISSING_LATLONG
+            - COULD_NOT_GEOCODE
+            - MISSING_HOTEL_NAME
+            - HOTEL_NAME_EMPTY
+            - INVALID_HOTEL_NAME
+            - HOTEL_NAME_TOO_LONG
+            - PARSE_ERROR_IN_XML
+            - UNEXPECTED_ATTRIBUTE_IN_XML
+            - DUPLICATE_PHONE_NUMBER
+            - MISSING_PHONE_NUMBER
+            - MISSING_VOICE_PHONE_NUMBER
+            - INVALID_PHONE_NUMBER_FORMAT
+            - INVALID_PHONE_NUMBER
+            - INVALID_PHONE_NUMBER_COUNTRY_CODE
+            - PHONE_NUMBER_TOO_LONG
+            - PHONE_NUMBER_TOO_SHORT
+            - INVALID_WEBSITE_URL
+            - ADWORDS_ATTRIBUTE_TOO_LONG
+            - BRAND_NOT_ALLOWED
+            - FLAGGED_DUE_TO_SUSPICIOUS_METADATA
+            - NOT_ENOUGH_IMAGES_PROVIDED
+            - IMAGE_PROCESSING_IN_PROGRESS
+            - CANNOT_FETCH_IMAGES
+            - INCOMPATIBLE_IMAGE_SIZE_OR_LOW_QUALITY
+            - MISSING_LANG_IN_RAW_LISTING
+            - IS_HOTEL
+            - MISSING_REQ_ATTR
+            - MISSING_NAME
+            - MISSING_LANG_IN_NAME
+            - VR_NAME_TOO_LONG
+            - TEST_PROPERTY
+            - NON_VR_ACCOMMODATION_TYPE_BASED_ON_LISTING_NAME
+            - BRAND_NAME_TOO_LONG
+            - MISSING_BRAND_NAME
+            - INVALID_REVIEW_RATING
+            - INVALID_CHECKIN_FORMAT
+            - INVALID_CHECKOUT_FORMAT
+          type: string
+        isSelfResolving:
+          description: Whether or not the issue is self-resolving. If true, the issue is expected to resolve itself. If false or not set, action is needed to resolve the issue. Refer to documentation on the data issue’s type for further information.
+          type: boolean
+      type: object
+    Date:
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
+      properties:
+        day:
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          format: int32
+          type: integer
+        year:
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          format: int32
+          type: integer
+      type: object
+    DisplayNameDisapprovalReason:
+      description: Disapproval reason of the display name in a specific language.
+      properties:
+        disapprovalReason:
+          description: Disapproval reason.
+          enum:
+            - DISAPPROVAL_REASON_UNSPECIFIED
+            - PUNCTUATION
+            - MARKETING_LANGUAGE
+            - LANDING_PAGE_NOT_MATCHED
+          type: string
+        languageCode:
+          description: Language of the disapproved display name.
+          type: string
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    FreeBookingLinksResult:
+      description: "**DEPRECATED:** Use `PropertyPerformanceResult` with `PropertyPerformanceReportService` instead. Represents a result from querying for free booking link stats for an account."
+      properties:
+        clickCount:
+          description: The total number of clicks that were recorded for this result.
+          format: int64
+          type: string
+        date:
+          $ref: "#/components/schemas/Date"
+          description: A date within the requested date range. Only present if `date` is specified in `aggregateBy` in the request.
+        deviceType:
+          description: The user’s device type. Only present if `deviceType` is specified in `aggregateBy` in the request.
+          enum:
+            - DEVICE_UNSPECIFIED
+            - DEVICE_UNKNOWN
+            - DESKTOP
+            - MOBILE
+            - TABLET
+          type: string
+        partnerHotelDisplayName:
+          description: Partner's hotel name. Only present if `partnerHotelDisplayName` is specified in `aggregateBy` in the request.
+          type: string
+        partnerHotelId:
+          description: Partner's hotel ID. Only present if `partnerHotelId` is specified in `aggregateBy` in the request.
+          type: string
+        userRegionCode:
+          description: ISO 3116 region code of the country/region of the user. Only present if `userRegionCode` is specified in `aggregateBy` in the request
+          type: string
+      type: object
+    HotelList:
+      description: The properties in the Hotel Center account that can be managed with the Google Ads account.
+      properties:
+        partnerHotelIds:
+          description: Hotel IDs.
+          items:
+            type: string
+          type: array
+      type: object
+    HotelPricePerItinerary:
+      description: Hotel price for a given itinerary.
+      properties:
+        checkinDate:
+          $ref: "#/components/schemas/Date"
+          description: Check-in date.
+        currencyCode:
+          description: Currency for `price`, `taxes`, and `fees`.
+          type: string
+        fees:
+          description: Fees for this itinerary.
+          format: float
+          type: number
+        lengthOfStayDays:
+          description: Number of nights for the itinerary.
+          format: int32
+          type: integer
+        price:
+          description: Hotel price for this itinerary.
+          format: float
+          type: number
+        taxes:
+          description: Taxes for this itinerary.
+          format: float
+          type: number
+        updateTime:
+          description: Update timestamp for this hotel price.
+          format: google-datetime
+          type: string
+      type: object
+    HotelView:
+      description: A hotel view.
+      properties:
+        dataIssueDetail:
+          description: The type and severity of each data quality issue in the feed. If your feed contains data issues, update the feed and resubmit it. For more information, refer to this article.
+          items:
+            $ref: "#/components/schemas/DataIssueDetail"
+          type: array
+        dataIssues:
+          description: DEPRECATED. Indicates that the hotel has data quality issues. The value of this field indicates the type of error. This has been replaced with the data_issue_detail field. If your feed contains data issues, update the feed and resubmit it. For more information, refer to this article.
+          items:
+            enum:
+              - FEED_DATA_ISSUE_UNSPECIFIED
+              - FEED_DATA_ISSUE_UNKNOWN
+              - NO_DATA_ISSUE
+              - DUPLICATE_ADDRESS
+              - MISSING_PHYSICAL_STREET_ADDRESS
+              - MISSING_STREET_NAME
+              - MISSING_STREET_NUMBER
+              - MISSING_ADDRESS
+              - MISSING_COUNTRY
+              - INVALID_POSTAL_CODE
+              - INVALID_POSTAL_CODE_SUFFIX
+              - UNEXPECTED_POSTAL_CODE_SUFFIX
+              - UNEXPECTED_POSTAL_CODE
+              - INVALID_AMENITIES
+              - INVALID_EMAIL_ADDRESS
+              - DUPLICATE_LATLONG
+              - LATLONG_INCONSISTENT_WITH_ADDRESS
+              - MISSING_LATLONG
+              - COULD_NOT_GEOCODE
+              - MISSING_HOTEL_NAME
+              - HOTEL_NAME_EMPTY
+              - INVALID_HOTEL_NAME
+              - HOTEL_NAME_TOO_LONG
+              - PARSE_ERROR_IN_XML
+              - UNEXPECTED_ATTRIBUTE_IN_XML
+              - DUPLICATE_PHONE_NUMBER
+              - MISSING_PHONE_NUMBER
+              - MISSING_VOICE_PHONE_NUMBER
+              - INVALID_PHONE_NUMBER_FORMAT
+              - INVALID_PHONE_NUMBER
+              - INVALID_PHONE_NUMBER_COUNTRY_CODE
+              - PHONE_NUMBER_TOO_LONG
+              - PHONE_NUMBER_TOO_SHORT
+              - INVALID_WEBSITE_URL
+              - ADWORDS_ATTRIBUTE_TOO_LONG
+              - BRAND_NOT_ALLOWED
+              - FLAGGED_DUE_TO_SUSPICIOUS_METADATA
+              - NOT_ENOUGH_IMAGES_PROVIDED
+              - IMAGE_PROCESSING_IN_PROGRESS
+              - CANNOT_FETCH_IMAGES
+              - INCOMPATIBLE_IMAGE_SIZE_OR_LOW_QUALITY
+              - MISSING_LANG_IN_RAW_LISTING
+              - IS_HOTEL
+              - MISSING_REQ_ATTR
+              - MISSING_NAME
+              - MISSING_LANG_IN_NAME
+              - VR_NAME_TOO_LONG
+              - TEST_PROPERTY
+              - NON_VR_ACCOMMODATION_TYPE_BASED_ON_LISTING_NAME
+              - BRAND_NAME_TOO_LONG
+              - MISSING_BRAND_NAME
+              - INVALID_REVIEW_RATING
+              - INVALID_CHECKIN_FORMAT
+              - INVALID_CHECKOUT_FORMAT
+            type: string
+          type: array
+        googleClusterId:
+          description: The Google Maps identifier for the hotel.
+          format: uint64
+          type: string
+        googleHotelDisplayName:
+          description: Google's hotel name.
+          type: string
+        googleHotelId:
+          description: Google's canonical ID for the hotel.
+          format: uint64
+          type: string
+        liveOnGoogle:
+          description: Optional. Whether the hotel appears in Google's hotel booking links. Declaration & behavior to get detection of presence/absence in JSON conversion.
+          type: boolean
+        matchStatus:
+          description: Current matching status of the hotel.
+          enum:
+            - MATCH_STATUS_UNSPECIFIED
+            - MATCH_STATUS_UNKNOWN
+            - NOT_MATCHED
+            - MATCHED
+            - MAP_OVERLAP
+          type: string
+        overclusteredPartnerHotelIds:
+          description: Other hotels with which the hotel is overclustered. If your feed contains overclustered hotels, update the feed and resubmit it. To do this, you can use the manual match tool.
+          items:
+            type: string
+          type: array
+        partnerHotelDisplayName:
+          description: Partner's hotel name.
+          type: string
+        partnerHotelId:
+          description: The unique ID of the hotel that the partner provides in their Hotel List Feed.
+          type: string
+        primaryOverclusteredPartnerHotelId:
+          description: The primary hotel in the overclustered set.
+          type: string
+        propertyDetails:
+          description: Optional. A URL to the property on Google. Only available for properties that are listed.
+          type: string
+      type: object
+    Icon:
+      description: Information about a partner's icon.
+      properties:
+        disapprovalReasons:
+          description: Output only. The icon's disapproval reason(s). Only applies to icons with `REJECTED` state.
+          items:
+            enum:
+              - IMAGE_DISAPPROVAL_REASON_UNSPECIFIED
+              - NOT_LIKE_SITE
+              - OFFENSIVE
+              - LOW_QUALITY
+              - ANIMATED
+              - BAD_BACKGROUND
+              - TEXT_TOO_SMALL
+            type: string
+          readOnly: true
+          type: array
+        iconUri:
+          description: Output only. The approved icon's Google-hosted URI. Only applies to icons with `APPROVED` state.
+          readOnly: true
+          type: string
+        imageData:
+          description: Required. Input only. The icon contents, which must be in PNG format, or convertible to PNG.
+          format: byte
+          type: string
+        name:
+          description: Required. Output only. The resource name for the icon in the format `accounts/{account_id}/icons/{icon_id}`. Google generates the `icon_id` during the `create` operation. Use the `icon_id` to associate the icon with a brand using the [accounts.brands](/hotels/hotel-prices/api-reference/rest/v3/accounts.brands#resource:-brand) API.
+          readOnly: true
+          type: string
+        reference:
+          description: Optional. Value for tracking the icon. It could be the primary key to your icon in your system, or the icon's filename. Google does not use this value.
+          type: string
+        state:
+          description: Output only. The icon's current state.
+          enum:
+            - STATE_UNSPECIFIED
+            - NEW
+            - APPROVED
+            - REJECTED
+          readOnly: true
+          type: string
+      type: object
+    Image:
+      description: "A single image in a VR Listing. Title and gallery URL are stored per locale. NEXT ID: 4"
+      properties:
+        galleryUri:
+          description: URL that is deeplink to the image in a gallery (or a webpage).
+          items:
+            $ref: "#/components/schemas/LocalizedText"
+          type: array
+        title:
+          description: Title of the image.
+          items:
+            $ref: "#/components/schemas/LocalizedText"
+          type: array
+        uri:
+          description: URL that points to the binary image content directly.
+          type: string
+      type: object
+    Key:
+      description: Key of a result.
+      properties:
+        advanceBookingWindow:
+          description: The number of days in advance the user wants to book the itinerary. If `advanceBookingWindow` is not a value of the `aggregateBy` parameter in the request call, then the `advanceBookingWindow` field is not returned in the `Key`.
+          format: int32
+          type: integer
+        checkinDate:
+          $ref: "#/components/schemas/Date"
+          description: The check-in date of the itinerary. If `checkinDate` is not a value of the `aggregateBy` parameter in the request call, then the `checkinDate` field is not returned in the `Key`.
+        date:
+          $ref: "#/components/schemas/Date"
+          description: The date for which you are requesting metrics. If `date` is not a value of the `aggregateBy` parameter in the request call, then the `date` field is not returned in the `Key`.
+        deviceType:
+          description: The user’s device type. If `deviceType` is not a value of the `aggregateBy` parameter in the request call, then the `deviceType` field is not returned in the `Key`.
+          enum:
+            - DEVICE_UNSPECIFIED
+            - DEVICE_UNKNOWN
+            - DESKTOP
+            - MOBILE
+            - TABLET
+          type: string
+        hotelRegionCode:
+          description: CLDR region code of the country/region of the hotel. If `hotelRegionCode` is not a value of the `aggregateBy` parameter in the request call, then the `hotelRegionCode` field is not returned in the `Key`.
+          type: string
+        lengthOfStayDays:
+          description: The number of nights for the itinerary. If `lengthOfStayDays` is not a value of the `aggregateBy` parameter in the request call, then the `lengthOfStayDays` field is not returned in the `Key`.
+          format: int32
+          type: integer
+        occupancy:
+          description: The total occupancy of the itinerary. If `occupancy` is not a value of the `aggregateBy` parameter in the request call, then the `occupancy` field is not returned in the `Key`.
+          format: int32
+          type: integer
+        partnerHotelId:
+          description: Partner's hotel ID. If `partnerHotelId` is not a value of the `aggregateBy` parameter in the request call, then the `partnerHotelId` field is not returned in the `Key`.
+          type: string
+        userRegionCode:
+          description: ISO 3116 region code of the country/region of the user. If `userRegionCode` is not a value of the `aggregateBy` parameter in the request call, then the `userRegionCode` field is not returned in the `Key`.
+          type: string
+      type: object
+    LatLng:
+      description: An object that represents a latitude/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this object must conform to the WGS84 standard. Values must be within normalized ranges.
+      properties:
+        latitude:
+          description: The latitude in degrees. It must be in the range [-90.0, +90.0].
+          format: double
+          type: number
+        longitude:
+          description: The longitude in degrees. It must be in the range [-180.0, +180.0].
+          format: double
+          type: number
+      type: object
+    ListAccountLinksResponse:
+      description: Response message for AccountLinkService.ListAccountLinks.
+      properties:
+        accountLinks:
+          description: A list of all account links associated with the Hotel Center account being queried.
+          items:
+            $ref: "#/components/schemas/AccountLink"
+          type: array
+      type: object
+    ListBrandsResponse:
+      description: Response message for BrandService.ListBrands.
+      properties:
+        brands:
+          description: A list of all brands associated with the Hotel Center account being queried.
+          items:
+            $ref: "#/components/schemas/Brand"
+          type: array
+      type: object
+    ListHotelViewsResponse:
+      description: Response message for HotelViewService.ListHotelViews.
+      properties:
+        hotelViews:
+          description: The list of rows that match the query.
+          items:
+            $ref: "#/components/schemas/HotelView"
+          type: array
+        nextPageToken:
+          description: Pagination token used to retrieve the next page of results.
+          type: string
+      type: object
+    ListIconsResponse:
+      description: Response message for IconService.ListIcons.
+      properties:
+        icons:
+          description: A list of all icons associated with the queried partner account.
+          items:
+            $ref: "#/components/schemas/Icon"
+          type: array
+      type: object
+    ListPriceAccuracyViewsResponse:
+      description: Response message for PriceAccuracyViewService.ListPriceAccuracyViews.
+      properties:
+        priceAccuracyViews:
+          description: The list of rows that match the query.
+          items:
+            $ref: "#/components/schemas/PriceAccuracyView"
+          type: array
+      type: object
+    ListPriceCoverageViewsResponse:
+      description: Response message for PriceCoverageViewService.ListPriceCoverageViews.
+      properties:
+        priceCoverageViews:
+          description: Hotel price coverage stats.
+          items:
+            $ref: "#/components/schemas/PriceCoverageView"
+          type: array
+      type: object
+    ListReconciliationReportsResponse:
+      description: Response message for ReconciliationReportService.ListReconciliationReports.
+      properties:
+        reconciliationReports:
+          description: The list of names of reconciliation reports. Note that the `contents` and `fileName` fields of each `ReconciliationReport` object are not returned by this call.
+          items:
+            $ref: "#/components/schemas/ReconciliationReport"
+          type: array
+      type: object
+    LocalizedText:
+      description: Localized variant of a text in a particular language.
+      properties:
+        languageCode:
+          description: The text's BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          type: string
+        text:
+          description: Localized string in the language corresponding to `language_code' below.
+          type: string
+      type: object
+    MissedParticipationCountDetails:
+      description: Missed participation count broken down by reason.
+      properties:
+        hotelSuspendedCount:
+          description: The total number of missed participations due to one or more of your hotels being suspended due to price accuracy violations.
+          format: int64
+          type: string
+        noAvailabilityCount:
+          description: The total number of missed participation due to the hotel/itinerary combination being unavailable, or the traveler was ineligible for the rates. To participate in these auctions, you may need to provide more pricing information.
+          format: int64
+          type: string
+        noLandingPageCount:
+          description: No landing page matched the user.
+          format: int64
+          type: string
+        noPriceCount:
+          description: The total number of missed participations due to a price not being offered for the requested itinerary.
+          format: int64
+          type: string
+        noPriceCountDetails:
+          $ref: "#/components/schemas/NoPriceCountDetails"
+          description: The reasons that contributed to the no price count (for example, live pricing not available) and the total count for each reason.
+        noTaxBreakdownCount:
+          description: The total number of missed participation due to one or more of your hotels not specifying taxes and fees separately.
+          format: int64
+          type: string
+        otherReasonCount:
+          description: Hotel did not participate for an unknown reason.
+          format: int64
+          type: string
+        priceMissingCount:
+          description: "The total number of missed participations due to either a price not being present in Google's cache or failing to successfully respond to live pricing. Comprised of the following: * Bandwidth depleted * Cache rate missing * Itinerary blocked * Live pricing not set up * Live pricing timeout * Live pricing error"
+          format: int64
+          type: string
+        priceMissingCountDetails:
+          $ref: "#/components/schemas/PriceMissingCountDetails"
+          description: The reasons that contributed to the price missing count.
+        priceProblemCount:
+          description: "The total number of missed participation due to an issue with the accuracy of the price provided for the itinerary. Comprised of the following: * Hotel suspended * Price unusually high * Price unusually low * Taxes and feeds missing"
+          format: int64
+          type: string
+        priceProblemCountDetails:
+          $ref: "#/components/schemas/PriceProblemCountDetails"
+          description: The reasons that contributed to the price problem count.
+        priceUnavailableCount:
+          description: "The total number of missed participation due to price listed as unavailable (-1) for the requested itinerary. Comprised of the following: * Price unavailable * Participation not likely * Other"
+          format: int64
+          type: string
+        priceUnavailableCountDetails:
+          $ref: "#/components/schemas/PriceUnavailableCountDetails"
+          description: The reasons that contributed to the price unavailable count.
+      type: object
+    NoPriceCountDetails:
+      description: The reasons that contributed to the no price count and the total count for each reason.
+      properties:
+        livePricingConfigIssueCount:
+          description: "The total number of missed participation due to live pricing not being triggered for any of the following reasons: * You didn't have live pricing configured for these searches. * You restricted Google from accessing the hotel itinerary in question."
+          format: int64
+          type: string
+        livePricingNotAvailableCount:
+          description: The total number of missed participation due to live pricing being unavailable. Live pricing will not be triggered for certain default itineraries or UIs. In this scenario, partners will need a cached price to participate.
+          format: int64
+          type: string
+        livePricingNotTriggeredCount:
+          description: "The total number of missed participation due to live pricing not being triggered for any of the following reasons: * You didn't set a bid. * You didn't have a valid landing page. * There weren't enough prices in the cache."
+          format: int64
+          type: string
+        livePricingOtherReasonCount:
+          description: The number of missed participations due to other issues with live pricing.
+          format: int64
+          type: string
+        livePricingTechnicalIssueCount:
+          description: "The total number of missed participation due to technical issues with live pricing for any of the following reasons: * You didn’t respond quickly enough and exceeded the response deadline (around 4000 milliseconds). * You returned an error. * Your response was malformed."
+          format: int64
+          type: string
+      type: object
+    ParsedListing:
+      description: A parsed listing
+      properties:
+        brand:
+          description: If not empty, it indicates that this listing belongs to a brand of the feed.
+          type: string
+        category:
+          description: The partner provided category (accommodation type) of the property.
+          items:
+            $ref: "#/components/schemas/LocalizedText"
+          type: array
+        dataIssueDetail:
+          description: Data issues about this listing
+          items:
+            $ref: "#/components/schemas/DataIssueDetail"
+          type: array
+        description:
+          description: Description of the property.
+          items:
+            $ref: "#/components/schemas/LocalizedText"
+          type: array
+        image:
+          description: Images associated with this listing, localized.
+          items:
+            $ref: "#/components/schemas/Image"
+          type: array
+        imprecisionRadiusMeters:
+          description: Represents the accuracy of the location. The listing can be anywhere within the defined circular area.
+          format: int32
+          type: integer
+        isServed:
+          description: Whether the listing can be served based on non image data alone.
+          type: boolean
+        listingName:
+          description: List of localized names.
+          items:
+            $ref: "#/components/schemas/LocalizedText"
+          type: array
+        location:
+          $ref: "#/components/schemas/LatLng"
+          description: Location of listing in lat/lng (degrees).
+        partnerListId:
+          description: The list id on partner lec feed, provided by partner.
+          type: string
+        regionCode:
+          description: The country code where the listing is located.
+          type: string
+        review:
+          description: Reviews associated with this listing. Each review proto has a single language attached to it.
+          items:
+            $ref: "#/components/schemas/Review"
+          type: array
+        unitAttributes:
+          additionalProperties:
+            type: string
+          description: VR List attribute.
+          type: object
+      type: object
+    ParticipationResult:
+      description: Represents a result from querying for participation stats for an account.
+      properties:
+        key:
+          $ref: "#/components/schemas/Key"
+          description: Key of the result.
+        missedParticipationCount:
+          description: "The total number of opportunities **not** eligible for the Google Ads auction process. Comprised of the following: * Landing page missing * Price missing * Price problem * Price unavailable * Other"
+          format: int64
+          type: string
+        missedParticipationCountDetails:
+          $ref: "#/components/schemas/MissedParticipationCountDetails"
+          description: The reasons that contributed to the missed participation count (for example, no availability) and a total count for each reason.
+        opportunityCount:
+          description: For a specific hotel, the total number of opportunities that were available. Opportunities are the total number of instances when a hotel ad could have been displayed to a user.
+          format: int64
+          type: string
+        participationCount:
+          description: The total number of opportunities for which you were eligible to enter in the Google Ads auction process.
+          format: int64
+          type: string
+        participationPercent:
+          description: The percentage rate of participation where the number of successfully participated opportunities is divided by the total number of opportunities. For example, if a property was eligible to enter the Google Ads auction 90 times out of 100 opportunities, the participation rate is 90%.
+          format: double
+          type: number
+        partnerHotelDisplayName:
+          description: Partner's hotel display name. This field is only populated when the result is aggregated by `partnerHotelId`.
+          type: string
+      type: object
+    PriceAccuracyRow:
+      description: A price accuracy row.
+      properties:
+        adultOccupancy:
+          description: The number of adults in the occupancy details of the validation query.
+          format: int32
+          type: integer
+        affectsScore:
+          description: True if this row affects the placement of a price. This field has been renamed to “Affects placement” in Hotel Center.
+          type: boolean
+        cachedPriceRecord:
+          $ref: "#/components/schemas/PriceRecord"
+          description: Price as advertised.
+        checkinDate:
+          $ref: "#/components/schemas/Date"
+          description: Check-in date.
+        childOccupancy:
+          description: The number of children in the occupancy details of the validation query.
+          format: int32
+          type: integer
+        correctionTime:
+          description: Time at which an incorrect price is updated to a correct price.
+          format: google-datetime
+          type: string
+        deviceType:
+          description: The user's device type.
+          enum:
+            - DEVICE_UNSPECIFIED
+            - DEVICE_UNKNOWN
+            - DESKTOP
+            - MOBILE
+            - TABLET
+          type: string
+        fetchedPriceRecord:
+          $ref: "#/components/schemas/PriceRecord"
+          description: Price as read from the partner website.
+        finalDomain:
+          description: The domain of the final page from which prices are read.
+          type: string
+        hotel:
+          description: Partner-defined hotel ID.
+          type: string
+        hotelCountryCode:
+          description: The country of the hotel (based on address).
+          type: string
+        lengthOfStayDays:
+          description: Length of stay.
+          format: int32
+          type: integer
+        mismatchReason:
+          description: The reason why the fetched price didn't match the cached price.
+          enum:
+            - MISMATCH_REASON_UNSPECIFIED
+            - MISMATCH_REASON_UNKNOWN
+            - TAX_MISMATCH
+            - ROOM_UNAVAILABLE
+            - SITE_ERROR
+            - PRICE_FEED_DELAYED
+            - DISCOUNT_MISSING
+            - INCORRECT_DISCOUNT_VALUE
+            - WRONG_ITINERARY
+          type: string
+        rateRuleId:
+          description: The rate rule of the advertised price for non-public rates.
+          type: string
+        signalSource:
+          description: Source of the price accuracy signal.
+          enum:
+            - SIGNAL_SOURCE_UNSPECIFIED
+            - SIGNAL_SOURCE_UNKNOWN
+            - FETCHED
+            - PIXEL
+          type: string
+        url:
+          description: Initial URL visited on the partner website.
+          type: string
+        userRegionCode:
+          description: The user's region.
+          type: string
+      type: object
+    PriceAccuracyView:
+      description: A price accuracy view. Covers the price accuracy reports functionality in pre-v3.0 API versions. For more information, refer to [Price Accuracy report](https://support.google.com/hotelprices/answer/6318506).
+      properties:
+        name:
+          description: Resource name should be in the format `accounts/{account_id}/priceAccuracyViews/{report_date}`.
+          type: string
+        results:
+          description: The list of rows that match the query.
+          items:
+            $ref: "#/components/schemas/PriceAccuracyRow"
+          type: array
+      type: object
+    PriceCoverageBucket:
+      description: Coverage stats for one combination of advance booking window and length of stay.
+      properties:
+        advanceBookingWindowRange:
+          description: Advance booking window range.
+          enum:
+            - ADVANCE_BOOKING_WINDOW_RANGE_UNSPECIFIED
+            - ADVANCE_BOOKING_WINDOW_RANGE_UNKNOWN
+            - DAYS_0_TO_30
+            - DAYS_31_TO_60
+            - DAYS_61_TO_90
+            - DAYS_91_TO_120
+            - DAYS_121_TO_150
+            - DAYS_151_TO_180
+            - DAYS_181_TO_210
+            - DAYS_211_TO_240
+            - DAYS_241_TO_270
+            - DAYS_271_TO_300
+            - DAYS_301_TO_330
+          type: string
+        availablePriceCount:
+          description: Number of prices for this advance booking window bucket and length of stay bucket.
+          format: int64
+          type: string
+        lengthOfStayRange:
+          description: Length of stay range.
+          enum:
+            - LENGTH_OF_STAY_RANGE_UNSPECIFIED
+            - LENGTH_OF_STAY_RANGE_UNKNOWN
+            - LENGTH_OF_STAY_1_TO_7
+            - LENGTH_OF_STAY_8_TO_14
+            - LENGTH_OF_STAY_15_TO_30
+          type: string
+        priceCoveragePercent:
+          description: The percent of itineraries for which you have coverage for this advance booking window bucket and length of stay bucket.
+          format: double
+          type: number
+      type: object
+    PriceCoverageView:
+      description: A price coverage view. Covers the `price_coverage_stats` Scorecard functionality in pre-v3.0 API versions. For more information, refer to Price Coverage for Push and Hint partners.
+      properties:
+        calculationDate:
+          $ref: "#/components/schemas/Date"
+          description: The date on which the calculations were made.
+        matchedPropertyCount:
+          description: The total number of properties that have prices for the given itineraries.
+          format: int32
+          type: integer
+        priceCoverageBinaryPercent:
+          description: The ratio between the number of hotels which have at least one price for the calculation period and `matched_property_count`.
+          format: double
+          type: number
+        priceCoverageBuckets:
+          description: Price coverage stats for combinations of advance booking window and length of stay ranges.
+          items:
+            $ref: "#/components/schemas/PriceCoverageBucket"
+          type: array
+        priceCoveragePercent:
+          description: The overall price coverage for an account. This value is the ratio between the number of hotel prices for the calculation booking window and length of stay range divided by the number of all possible prices, which is `matched_property_count` times 330 (for advance book window) times 30 (for length of stay).
+          format: double
+          type: number
+      type: object
+    PriceMissingCountDetails:
+      description: The reasons that contributed to the price missing count and the total count for each reason.
+      properties:
+        bandwidthDepletedCount:
+          description: No price was cached for this itinerary, and there was no live query quota remaining.
+          format: int64
+          type: string
+        cacheRateMissingCount:
+          description: No price exists in the cache for this itinerary. A live query was not done due to page constraints.
+          format: int64
+          type: string
+        itineraryBlockedCount:
+          description: The itinerary was outside of your basic parameters, so no price was pulled for the itinerary from either live query or cache fill.
+          format: int64
+          type: string
+        livePricingErrorCount:
+          description: No price was cached for this itinerary. A live query did not time out, but your system returned an error.
+          format: int64
+          type: string
+        livePricingNotSetupCount:
+          description: No price was cached for this itinerary, and live query was not configured for this account.
+          format: int64
+          type: string
+        livePricingTimeoutCount:
+          description: No price was cached for this itinerary, and a live query sent to your system timed out.
+          format: int64
+          type: string
+      type: object
+    PriceProblemCountDetails:
+      description: The reasons that contributed to the price problem count and the total count for each reason.
+      properties:
+        hotelSuspendedCount:
+          description: The hotel was suspended. This may be due to persistent problems in areas such as incorrect taxes and fees.
+          format: int64
+          type: string
+        priceUnusuallyHighCount:
+          description: The price given for this itinerary seemed oddly high compared to regional trends.
+          format: int64
+          type: string
+        priceUnusuallyLowCount:
+          description: The price given for this itinerary seemed oddly low compared to regional trends.
+          format: int64
+          type: string
+        taxesAndFeesMissingCount:
+          description: Taxes and fees were missing from pricing.
+          format: int64
+          type: string
+      type: object
+    PriceRecord:
+      description: A price record.
+      properties:
+        basePrice:
+          description: Base price.
+          format: float
+          type: number
+        currencyCode:
+          description: ISO 4217 currency code.
+          type: string
+        taxesAndFees:
+          description: Taxes and fees.
+          format: float
+          type: number
+        time:
+          description: Timestamp of this price record.
+          format: google-datetime
+          type: string
+      type: object
+    PriceUnavailableCountDetails:
+      description: The reasons that contributed to the price unavailable count and the total count for each reason.
+      properties:
+        participationNotLikelyCount:
+          description: No price was cached for this itinerary, and no live query was done because your server usually tells us the hotel is unavailable or sold out.
+          format: int64
+          type: string
+        priceUnavailableCount:
+          description: Hotel did not participate because it wasn't available for the itinerary dates.
+          format: int64
+          type: string
+      type: object
+    PriceView:
+      description: A price view. Covers the Prices functionality in pre-v3.0 API versions.
+      properties:
+        name:
+          description: Resource name in the format `accounts/{account_id}/priceViews/{partner_hotel_id}`.
+          type: string
+        perItineraryPrices:
+          description: Price for each itinerary.
+          items:
+            $ref: "#/components/schemas/HotelPricePerItinerary"
+          type: array
+      type: object
+    PropertyPerformanceResult:
+      description: Represents a result from querying for the property performance report for an account.
+      properties:
+        adsClickCount:
+          description: The total number of ad clicks that were recorded for this result.
+          format: int64
+          type: string
+        adsClickthroughRate:
+          description: Equal to `ads_click_count` divided by `ads_impression_count`.
+          format: double
+          type: number
+        adsImpressionCount:
+          description: The total number of ad impressions that were recorded for this result.
+          format: int64
+          type: string
+        advanceBookingWindow:
+          description: Difference in days between query date and check-in date in property's local timezone. Only present if `advanceBookingWindow` is specified in `aggregateBy` in the request.
+          enum:
+            - ADVANCE_BOOKING_WINDOW_UNSPECIFIED
+            - ADVANCE_BOOKING_WINDOW_SAME_DAY
+            - ADVANCE_BOOKING_WINDOW_NEXT_DAY
+            - ADVANCE_BOOKING_WINDOW_DAYS_2_TO_7
+            - ADVANCE_BOOKING_WINDOW_DAYS_8_TO_14
+            - ADVANCE_BOOKING_WINDOW_DAYS_15_TO_30
+            - ADVANCE_BOOKING_WINDOW_DAYS_31_TO_60
+            - ADVANCE_BOOKING_WINDOW_DAYS_61_TO_90
+            - ADVANCE_BOOKING_WINDOW_DAYS_91_TO_120
+            - ADVANCE_BOOKING_WINDOW_DAYS_121_TO_150
+            - ADVANCE_BOOKING_WINDOW_DAYS_151_TO_180
+            - ADVANCE_BOOKING_WINDOW_DAYS_OVER_180
+          type: string
+        brand:
+          description: Partner-specified brand for the property. Only present if `brand` is specified in `aggregateBy` in the request.
+          type: string
+        clickCount:
+          description: The total number of free booking link clicks that were recorded for this result.
+          format: int64
+          type: string
+        clickthroughRate:
+          description: Equal to `click_count` divided by `impression_count`.
+          format: double
+          type: number
+        date:
+          $ref: "#/components/schemas/Date"
+          description: A date within the requested date range. Only present if `date` is specified in `aggregateBy` in the request.
+        deviceType:
+          description: The user’s device type. Only present if `deviceType` is specified in `aggregateBy` in the request.
+          enum:
+            - DEVICE_UNSPECIFIED
+            - DEVICE_UNKNOWN
+            - DESKTOP
+            - MOBILE
+            - TABLET
+          type: string
+        highIntentUsers:
+          description: Whether the user’s query indicated a strong interest in booking. Only present if `highIntentUsers` is specified in `aggregateBy` in the request.
+          type: boolean
+        impressionCount:
+          description: The total number of free booking link impressions that were recorded for this result. This value is rounded to preserve user privacy.
+          format: int64
+          type: string
+        lengthOfStay:
+          description: Number of nights between check-in and check-out dates specified by user. Only present if `lengthOfStay` is specified in `aggregateBy` in the request.
+          enum:
+            - LENGTH_OF_STAY_UNSPECIFIED
+            - LENGTH_OF_STAY_NIGHTS_1
+            - LENGTH_OF_STAY_NIGHTS_2
+            - LENGTH_OF_STAY_NIGHTS_3
+            - LENGTH_OF_STAY_NIGHTS_4_TO_7
+            - LENGTH_OF_STAY_NIGHTS_8_TO_14
+            - LENGTH_OF_STAY_NIGHTS_15_TO_21
+            - LENGTH_OF_STAY_NIGHTS_22_TO_30
+            - LENGTH_OF_STAY_NIGHTS_OVER_30
+          type: string
+        occupancy:
+          description: Requested number of people staying at the property. Only present if `partnerPropertyId` is specified in `aggregateBy` in the request.
+          enum:
+            - OCCUPANCY_UNSPECIFIED
+            - OCCUPANCY_1
+            - OCCUPANCY_2
+            - OCCUPANCY_3
+            - OCCUPANCY_4
+            - OCCUPANCY_OVER_4
+          type: string
+        partnerPropertyDisplayName:
+          description: Partner's property name. Only present if `partnerPropertyDisplayName` is specified in `aggregateBy` in the request.
+          type: string
+        partnerPropertyId:
+          description: Partner's property ID. Only present if `partnerPropertyId` is specified in `aggregateBy` in the request.
+          type: string
+        propertyRegionCode:
+          description: ISO 3116 region code of the country/region of the property. Only present if `propertyRegionCode` is specified in `aggregateBy` in the request
+          type: string
+        userRegionCode:
+          description: ISO 3116 region code of the country/region of the user. Only present if `userRegionCode` is specified in `aggregateBy` in the request
+          type: string
+      type: object
+    QueryFreeBookingLinksReportResponse:
+      description: "**DEPRECATED:** Use `QueryPropertyPerformanceReportResponse` with `PropertyPerformanceReportService` instead. Response message for FreeBookingLinksReportService.QueryFreeBookingLinksReport."
+      properties:
+        nextPageToken:
+          description: Pagination token used to retrieve the next page of results. If this field is omitted, there are no subsequent pages.
+          type: string
+        results:
+          description: The list of results that match the query.
+          items:
+            $ref: "#/components/schemas/FreeBookingLinksResult"
+          type: array
+      type: object
+    QueryParticipationReportResponse:
+      description: Response message for ParticipationReportService.QueryParticipationReport.
+      properties:
+        nextPageToken:
+          description: Pagination token used to retrieve the next page of results.
+          type: string
+        results:
+          description: The list of results that matches the query.
+          items:
+            $ref: "#/components/schemas/ParticipationResult"
+          type: array
+      type: object
+    QueryPropertyPerformanceReportResponse:
+      description: Response message for PropertyPerformanceReportService.QueryPropertyPerformanceReport.
+      properties:
+        nextPageToken:
+          description: Pagination token used to retrieve the next page of results. If this field is omitted, there are no subsequent pages.
+          type: string
+        results:
+          description: The list of results that match the query.
+          items:
+            $ref: "#/components/schemas/PropertyPerformanceResult"
+          type: array
+      type: object
+    Rating:
+      description: "A rating within a vacation rentals Listing. NEXT ID: 4"
+      properties:
+        ratingScale:
+          description: Maximum rating possible.
+          format: int32
+          type: integer
+        score:
+          description: The rating score. (e.g. 8.5)
+          format: float
+          type: number
+        type:
+          description: The type of the rating.
+          enum:
+            - TYPE_UNSPECIFIED
+            - OVERALL
+          type: string
+      type: object
+    ReconciliationReport:
+      description: Reconciliation report (Hotel Ads only). Covers the Reconciliation Reports functionality in pre-v3.0 API versions. Lets you see the status, validate, and upload your Commissions reconciliation reports. This only applies if you are in the Google Hotel Ads Commissions Program (GHACP). For more information about working with reconciliation reports in Hotel Center, refer to [Reconciliation reports](//support.google.com/hotelprices/answer/7019060#sending).
+      properties:
+        contents:
+          description: Required. The contents of the commission report. Report contents must conform to the requirements specified in [Reconciliation reports] (//support.google.com/hotelprices/answer/7019060#creating).
+          type: string
+        fileName:
+          description: Required. Desired filename of the reconciliation report.
+          type: string
+        name:
+          description: Resource name in the format `accounts/{account_id}/reconciliationReports/{datetime}~{filename}`. The value for `{datetime}` must be from 0001-01-01T00:00:00 to 9999-12-31T23:59:59 inclusive.
+          type: string
+      type: object
+    ReconciliationReportValidationIssue:
+      description: Represents an issue encountered when validating a reconciliation report.
+      properties:
+        description:
+          description: Text description of the issue, typically including what was seen and why it was invalid.
+          type: string
+        fieldName:
+          description: Name of the invalid field. If no field name is given, this issue applies to the whole line (or file).
+          type: string
+        lineNum:
+          description: The line number on which the issue was detected. If this field is 0, the issue applies to the whole file.
+          format: int32
+          type: integer
+      type: object
+    Review:
+      description: "A single review in a VR Listing. NEXT ID: 10"
+      properties:
+        author:
+          description: The author of the review.
+          type: string
+        body:
+          description: The body of the review.
+          type: string
+        languageCode:
+          description: Language of the review, such as "en", "de", etc.
+          type: string
+        link:
+          description: The url of the review.
+          type: string
+        rating:
+          description: Any ratings associated with this review. This is repeated because reviews can include ratings on different aspects of a listing, e.g. location, cleanliness, etc.
+          items:
+            $ref: "#/components/schemas/Rating"
+          type: array
+        reviewTime:
+          description: Unix timestamp (in seconds) of the review, in UTC+0.
+          format: google-datetime
+          type: string
+        title:
+          description: "The title of the review, for example: Great three bedrooms."
+          type: string
+        type:
+          description: The type of the review.
+          enum:
+            - UNKNOWN
+            - EDITORIAL
+            - USER
+          type: string
+        visitTime:
+          description: Unix timestamp (in seconds) of when the stay was, in UTC+0.
+          format: google-datetime
+          type: string
+      type: object
+    SetLiveOnGoogleRequest:
+      description: Request message for HotelService.SetLiveOnGoogle.
+      properties:
+        liveOnGoogle:
+          description: Required. Whether the property will show on Google. When true, Google will show the properties if their integration is complete and the property is available. When false, Google will never show the properties.
+          type: boolean
+        partnerHotelIds:
+          description: Required. Identifies the properties to update with the liveOnGoogle setting.
+          items:
+            type: string
+          type: array
+      type: object
+    SetLiveOnGoogleResponse:
+      description: Response message for HotelService.SetLiveOnGoogle.
+      properties:
+        failedHotelIds:
+          description: Identifies properties that Google could not update.
+          items:
+            type: string
+          type: array
+        updatedHotelIds:
+          description: Identifies the updated properties.
+          items:
+            type: string
+          type: array
+      type: object
+    SummarizeHotelViewsResponse:
+      description: Response message for HotelViewService.SummarizeHotelViews.
+      properties:
+        lastFeedSubmissionTime:
+          description: Timestamp of the last hotel feed submission.
+          format: google-datetime
+          type: string
+        lastManifestUpdateTime:
+          description: Timestamp of the last hotel manifest update.
+          format: google-datetime
+          type: string
+        liveOnGooglePropertyCount:
+          description: The number of properties that are Live on Google.
+          format: int64
+          type: string
+        matchedPropertyCount:
+          description: The number of properties that match Google's manifest.
+          format: int64
+          type: string
+        overclusteredPropertyCount:
+          description: The number of hotels that are considered overclustered.
+          format: int64
+          type: string
+        overclusteredPropertyWithErrorsCount:
+          description: The number of overclustered properties that have data-related errors.
+          format: int64
+          type: string
+        unmatchedPropertyCount:
+          description: The number of properties that are considered unmatched.
+          format: int64
+          type: string
+        unmatchedPropertyWithErrorsCount:
+          description: The number of unmatched properties that have data-related errors.
+          format: int64
+          type: string
+      type: object
+    SummarizePriceAccuracyResponse:
+      description: Response message for PriceAccuracyViewService.SummarizePriceAccuracy.
+      properties:
+        currentBookOnGoogleScore:
+          description: The current Book on Google price accuracy score.
+          enum:
+            - PRICE_ACCURACY_STATE_UNSPECIFIED
+            - PRICE_ACCURACY_STATE_UNKNOWN
+            - EXCELLENT
+            - GOOD
+            - POOR
+            - AT_RISK
+            - FAILED
+          type: string
+        currentOverallScore:
+          description: The current price accuracy score combining both website and Book on Google scores.
+          enum:
+            - PRICE_ACCURACY_STATE_UNSPECIFIED
+            - PRICE_ACCURACY_STATE_UNKNOWN
+            - EXCELLENT
+            - GOOD
+            - POOR
+            - AT_RISK
+            - FAILED
+          type: string
+        currentScore:
+          description: The current price accuracy score. Contains the same value as `current_website_score`. For clarity, use either `current_website_score` or 'current_overall_score` depending upon which is needed.
+          enum:
+            - PRICE_ACCURACY_STATE_UNSPECIFIED
+            - PRICE_ACCURACY_STATE_UNKNOWN
+            - EXCELLENT
+            - GOOD
+            - POOR
+            - AT_RISK
+            - FAILED
+          type: string
+        currentWebsiteScore:
+          description: The current website price accuracy score.
+          enum:
+            - PRICE_ACCURACY_STATE_UNSPECIFIED
+            - PRICE_ACCURACY_STATE_UNKNOWN
+            - EXCELLENT
+            - GOOD
+            - POOR
+            - AT_RISK
+            - FAILED
+          type: string
+        predictedBookOnGoogleScore:
+          description: The predicted Book on Google price accuracy score.
+          enum:
+            - PRICE_ACCURACY_STATE_UNSPECIFIED
+            - PRICE_ACCURACY_STATE_UNKNOWN
+            - EXCELLENT
+            - GOOD
+            - POOR
+            - AT_RISK
+            - FAILED
+          type: string
+        predictedOverallScore:
+          description: The predicted price accuracy score combining both website and Book on Google scores.
+          enum:
+            - PRICE_ACCURACY_STATE_UNSPECIFIED
+            - PRICE_ACCURACY_STATE_UNKNOWN
+            - EXCELLENT
+            - GOOD
+            - POOR
+            - AT_RISK
+            - FAILED
+          type: string
+        predictedScore:
+          description: The predicted price accuracy score. Contains the same value as `predicted_website_score`. For clarity, use either `predicted_website_score` or 'predicted_overall_score` depending upon which is needed.
+          enum:
+            - PRICE_ACCURACY_STATE_UNSPECIFIED
+            - PRICE_ACCURACY_STATE_UNKNOWN
+            - EXCELLENT
+            - GOOD
+            - POOR
+            - AT_RISK
+            - FAILED
+          type: string
+        predictedWebsiteScore:
+          description: The predicted website price accuracy score.
+          enum:
+            - PRICE_ACCURACY_STATE_UNSPECIFIED
+            - PRICE_ACCURACY_STATE_UNKNOWN
+            - EXCELLENT
+            - GOOD
+            - POOR
+            - AT_RISK
+            - FAILED
+          type: string
+        updateTime:
+          description: The update timestamp for the current score.
+          format: google-datetime
+          type: string
+      type: object
+    ValidateReconciliationReportResponse:
+      description: Response message for ReconciliationReportService.ValidateReconciliationReport.
+      properties:
+        issues:
+          description: Issues that were encountered when validating the file.
+          items:
+            $ref: "#/components/schemas/ReconciliationReportValidationIssue"
+          type: array
+        successfulRecordCount:
+          description: The number of commission records that were successfully validated.
+          format: int32
+          type: integer
+      type: object
+    VerifyListingsRequest:
+      description: Request message for VRPartnerListingVerificationService.VerifyPartnerListings.
+      properties:
+        xmlListing:
+          description: A listing that follows the XML format specified in https://developers.google.com/hotels/hotel-prices/xml-reference/hotel-list-feed.
+          type: string
+      type: object
+    VerifyListingsResponse:
+      description: Response message for VRPartnerListingVerificationService.VerifyPartnerListings.
+      properties:
+        parsedListing:
+          $ref: "#/components/schemas/ParsedListing"
+          description: The parsed listing output.
+      type: object

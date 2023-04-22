@@ -1,0 +1,1420 @@
+swagger: "2.0"
+basePath: /api/v1
+info:
+  description: Import your orders, retrieve your orders and generate labels.
+  title: ChannelShipper & Royal Mail Public API
+  version: 1.0.0
+  x-apisguru-categories:
+    - ecommerce
+  x-origin:
+    - format: swagger
+      url: https://api.parcel.royalmail.com/doc/v1/click-and-drop-api-v1.yaml
+      version: "2.0"
+  x-providerName: royalmail.com
+  x-serviceName: click-and-drop
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Bearer:
+    description: "Authorization header using the Bearer scheme.\r
+
+      \r
+
+      Enter 'Bearer' [space] and then your token in the text input below.\r
+
+      \r
+
+      Example: 'Bearer 12345abcdef'"
+    in: header
+    name: Authorization
+    type: apiKey
+parameters:
+  continuationToken:
+    description: The token for retrieving the next page of items
+    in: query
+    name: continuationToken
+    required: false
+    type: string
+  documentType:
+    description: Document generation mode. When documentType is set to "postageLabel" the additional parameters below must be used. These additional parameters will be ignored when documentType is not set to "postageLabel"
+    enum:
+      - postageLabel
+      - despatchNote
+      - CN22
+      - CN23
+    in: query
+    name: documentType
+    required: true
+    type: string
+  endDateTime:
+    description: Date and time upper bound for items filtering
+    format: date-time
+    in: query
+    name: endDateTime
+    required: false
+    type: string
+  includeCN:
+    description: Include CN22/CN23 with label. Optional parameter. If this parameter is used the setting will override the default account behaviour specified in the "Label format" setting "Generate customs declarations with orders"
+    in: query
+    name: includeCN
+    required: false
+    type: boolean
+  includeReturnsLabel:
+    description: Include returns label. Required when documentType is set to 'postageLabel'
+    in: query
+    name: includeReturnsLabel
+    required: false
+    type: boolean
+  manifestGuid:
+    description: GUID of manifest
+    format: uuid
+    in: path
+    name: manifestGuid
+    required: true
+    type: string
+  orderIdentifiers:
+    description: One or several Order Identifiers or Order References separated by semicolon. Order Identifiers are integer numbers. Order References are strings - each must be percent-encoded and surrounded by double quotation marks.
+    example: /orders/"ref";1001;"Reference%3BWith%3BSpecial%3BSymbols!";2345/
+    in: path
+    name: orderIdentifiers
+    required: true
+    type: string
+  page:
+    default: 1
+    description: The number of page to return
+    in: query
+    maximum: 100
+    minimum: 1
+    name: page
+    required: false
+    type: integer
+  pageSize:
+    default: 25
+    description: The number of items to return
+    in: query
+    maximum: 100
+    minimum: 1
+    name: pageSize
+    required: false
+    type: integer
+  startDateTime:
+    description: Date and time lower bound for items filtering
+    format: date-time
+    in: query
+    name: startDateTime
+    required: false
+    type: string
+tags:
+  - description: <p>Exceeding the following rate limits will result in a 429 error:</p><table class='security-details'><tbody><tr><td>Click &amp; Drop customers</td><td>1 call per second</td></tr><tr><td>ChannelShipper* customers</td><td>5 calls per second</td></tr></tbody></table><p><b>* Please visit <a href='https://channelshipper.com/' target='_self'>ChannelShipper.com</a> for more information</b></p>
+    name: Rate Limits
+  - name: Version
+  - name: Orders
+  - name: Labels
+paths:
+  /manifests:
+    post:
+      description: |
+        For more information on how to manifest orders using the API, including examples of different use-cases please 
+        visit either the <a href="https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-How-to-import-orders-with-the-Click-Drop-API">Click & Drop API Help Page</a> 
+        or <a href="https://support.channelshipper.com/hc/en-gb/articles/360014653117-How-to-import-orders-with-the-ChannelShipper-API">ChannelShipper Help Page</a>.
+      operationId: CreateManifestsAsync
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: "#/definitions/CreateManifestsRequest"
+      responses:
+        "200":
+          description: Request is valid but no orders eligible for manifesting were found
+          schema:
+            $ref: "#/definitions/CreateManifestsResponse"
+        "202":
+          description: Request Accepted and manifests are being processed
+          schema:
+            $ref: "#/definitions/CreateManifestsResponse"
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            $ref: "#/definitions/CreateManifestsErrorResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (Feature available for OBA accounts only)
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Manifest orders
+      tags:
+        - Manifests
+  "/manifests/{manifestGuid}":
+    get:
+      operationId: GetManifestAsync
+      parameters:
+        - $ref: "#/parameters/manifestGuid"
+      responses:
+        "200":
+          description: Provides information about manifest
+          schema:
+            $ref: "#/definitions/GetManifestResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (Feature available for OBA accounts only)
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Retrieve manifest status and documentation
+      tags:
+        - Manifests
+  "/manifests/{manifestGuid}/retry":
+    post:
+      description: Request will result in a 400 response if called within 30 mins of a previously failed manifest or retry attempt.
+      operationId: RetryManifestAsync
+      parameters:
+        - $ref: "#/parameters/manifestGuid"
+      responses:
+        "202":
+          description: Request Accepted and manifest is being processed
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (Feature available for OBA accounts only)
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Retry failed manifest
+      tags:
+        - Manifests
+  /orders:
+    get:
+      operationId: GetOrdersAsync
+      parameters:
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/startDateTime"
+        - $ref: "#/parameters/endDateTime"
+        - $ref: "#/parameters/continuationToken"
+      responses:
+        "200":
+          description: Return pageable list of orders
+          schema:
+            $ref: "#/definitions/GetOrdersResponse"
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Retrieve pageable list of orders
+      tags:
+        - Orders
+    post:
+      operationId: CreateOrdersAsync
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: "#/definitions/CreateOrdersRequest"
+      responses:
+        "200":
+          description: Request Processed Successfully
+          schema:
+            $ref: "#/definitions/CreateOrdersResponse"
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Create orders
+      tags:
+        - Orders
+  /orders/full:
+    get:
+      description: <b>Reserved for ChannelShipper customers only - please visit <a href="https://channelshipper.com/" target="_self">ChannelShipper.com</a> for more information</b>
+      operationId: GetOrdersWithDetailsAsync
+      parameters:
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/startDateTime"
+        - $ref: "#/parameters/endDateTime"
+        - $ref: "#/parameters/continuationToken"
+      responses:
+        "200":
+          description: Return a pageable list of orders with details
+          schema:
+            $ref: "#/definitions/GetOrdersDetailsResponse"
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (Feature not available)
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Retrieve pageable list of orders with details
+      tags:
+        - Orders
+  /orders/status:
+    put:
+      operationId: UpdateOrdersStatusAsync
+      parameters:
+        - description: |
+            At least one of 'orderIdentifier' and 'orderReference' is required. Providing both is disallowed to avoid ambiguity.
+
+            When the status is set to 'despatchedByOtherCourier', if the optional parameter 'trackingNumber' is provided 
+            then the parameters 'despatchDate', 'shippingCarrier' and 'shippingService' are also required.
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateOrdersStatusRequest"
+      responses:
+        "200":
+          description: Provides a list of orders
+          schema:
+            $ref: "#/definitions/UpdateOrderStatusResponse"
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            items:
+              $ref: "#/definitions/OrderUpdateError"
+            type: array
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Set order status
+      tags:
+        - Orders
+  "/orders/{orderIdentifiers}":
+    delete:
+      description: |
+        <b>Reserved for ChannelShipper customers only - please visit 
+        <a href="https://channelshipper.com/" target="_self">ChannelShipper.com</a> for more information</b>
+
+        Please be aware labels generated on orders which are deleted are no longer valid and must be destroyed.
+
+        Cancelled label information is automatically shared with Royal Mail Revenue Protection, and should 
+        a cancelled label be identified on an item in the Royal Mail Network, you will be charged on your account 
+        and an additional handling fee applied.
+      operationId: DeleteOrdersAsync
+      parameters:
+        - $ref: "#/parameters/orderIdentifiers"
+      responses:
+        "200":
+          description: Provides a list of deleted orders references and ids and errors for orders that failed to delete
+          schema:
+            $ref: "#/definitions/DeleteOrdersResource"
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            items:
+              $ref: "#/definitions/OrderErrorInfo"
+            type: array
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (Feature not available)
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Delete orders
+      tags:
+        - Orders
+    get:
+      operationId: GetSpecificOrdersAsync
+      parameters:
+        - $ref: "#/parameters/orderIdentifiers"
+      responses:
+        "200":
+          description: Return list of specific orders
+          schema:
+            items:
+              $ref: "#/definitions/GetOrderInfoResource"
+            type: array
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            items:
+              $ref: "#/definitions/OrderErrorResponse"
+            type: array
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Retrieve specific orders
+      tags:
+        - Orders
+  "/orders/{orderIdentifiers}/full":
+    get:
+      description: <b>Reserved for ChannelShipper customers only - please visit <a href="https://channelshipper.com/" target="_self">ChannelShipper.com</a> for more information</b>
+      operationId: GetSpecificOrdersWithDetailsAsync
+      parameters:
+        - $ref: "#/parameters/orderIdentifiers"
+      responses:
+        "200":
+          description: Return detailed information about the orders
+          schema:
+            items:
+              $ref: "#/definitions/GetOrderDetailsResource"
+            type: array
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            items:
+              $ref: "#/definitions/OrderErrorResponse"
+            type: array
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (Feature not available)
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Retrieve details of the specific orders
+      tags:
+        - Orders
+  "/orders/{orderIdentifiers}/label":
+    get:
+      description: |
+        <b>Reserved for OBA customers only</b>
+
+        The account "Label format" settings page will control the page format settings used to print the postage label 
+        and associated documents. Certain combinations of these settings may prevent associated documents from being 
+        printed together with the postage label within a single document. If this occurs the documentType option can be 
+        used in a separate call to print missing documents.
+      operationId: GetOrdersLabelAsync
+      parameters:
+        - $ref: "#/parameters/orderIdentifiers"
+        - $ref: "#/parameters/documentType"
+        - $ref: "#/parameters/includeReturnsLabel"
+        - $ref: "#/parameters/includeCN"
+      produces:
+        - application/pdf
+        - application/json
+      responses:
+        "200":
+          description: Return the PDF file with labels
+          schema:
+            type: file
+        "400":
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            items:
+              $ref: "#/definitions/OrderErrorResponse"
+            type: array
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (Feature available for OBA accounts only)
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - Bearer: []
+      summary: Return a single PDF file with generated label and/or associated document(s)
+      tags:
+        - Labels
+  /version:
+    get:
+      operationId: GetVersionAsync
+      responses:
+        "200":
+          description: Returns details about the API version
+          schema:
+            $ref: "#/definitions/GetVersionResource"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      summary: Get API version details.
+      tags:
+        - Version
+definitions:
+  AddressRequest:
+    properties:
+      addressLine1:
+        maxLength: 100
+        type: string
+      addressLine2:
+        maxLength: 100
+        type: string
+      addressLine3:
+        maxLength: 100
+        type: string
+      city:
+        maxLength: 100
+        type: string
+      companyName:
+        maxLength: 100
+        type: string
+      countryCode:
+        maxLength: 3
+        type: string
+      county:
+        maxLength: 100
+        type: string
+      fullName:
+        maxLength: 210
+        type: string
+      postcode:
+        maxLength: 20
+        type: string
+    required:
+      - addressLine1
+      - city
+      - countryCode
+    type: object
+  BillingDetailsRequest:
+    description: <b>Billing</b> along with <b>billing.address</b> objects are required in specific case when 'Use shipping address for billing address' setting is set to 'false' and 'Recipient.AddressBookReference' is provided.
+    properties:
+      address:
+        $ref: "#/definitions/AddressRequest"
+      emailAddress:
+        maxLength: 254
+        type: string
+      phoneNumber:
+        maxLength: 25
+        type: string
+    type: object
+  CreateManifestsError:
+    properties:
+      accountBatchNumber:
+        pattern: ^B\d{1,10}$
+        type: string
+      code:
+        type: string
+      message:
+        type: string
+      orderIdentifier:
+        type: integer
+      orderReference:
+        type: string
+    type: object
+  CreateManifestsErrorResponse:
+    properties:
+      errors:
+        items:
+          $ref: "#/definitions/CreateManifestsError"
+        type: array
+    type: object
+  CreateManifestsRequest:
+    example:
+      allOrders: false
+      endDateTime: 2019-08-25T14:15:22Z
+      orderIdentifiers:
+        - 1122
+        - 1212
+      orderReferences:
+        - ref123
+        - xyz
+      startDateTime: 2019-08-24T14:15:22Z
+    properties:
+      accountBatchNumbers:
+        description: Cannot be mixed with other parameter types.
+        example:
+          - B1111
+          - B12345
+        items:
+          pattern: ^B\d{1,10}$
+          type: string
+        type: array
+      allOrders:
+        description: |
+          Set to <code>true</code> and leave all the other parameters empty to manifest all orders in an eligible state 
+          up to and including the current day (orders with a future despatch date will not be included).
+          Do not specify this parameter or alternatively set to <code>false</code> if specifying any other parameter options.
+        example: false
+        type: boolean
+      endDateTime:
+        description: |
+          Date and time in UTC.
+          Used together with <b>startDateTime</b> to manifest all orders in an eligible state in a date/time range. 
+          If a <b>startDateTime</b> is specified without this parameter the end of the date/time range will be the latest 
+          possible order. Cannot be mixed with other parameter types.
+        format: date-time
+        type: string
+      orderIdentifiers:
+        description: |
+          Can be specified together with <b>orderReferences</b>  in the same call, but cannot be mixed with other parameter types
+        items:
+          type: integer
+        type: array
+      orderReferences:
+        description: |
+          Can be specified together with <b>orderIdentifiers</b> in the same call, but cannot be mixed with other parameter types
+        items:
+          type: string
+        type: array
+      startDateTime:
+        description: |
+          Date and time in UTC.
+          Used together with <b>endDateTime</b> to manifest all orders in an eligible state in a date/time range. 
+          If an <b>endDateTime</b> is specified without this parameter the start of the date/time range will be the earliest 
+          possible order. Cannot be mixed with other parameter types.
+        format: date-time
+        type: string
+    type: object
+  CreateManifestsResponse:
+    properties:
+      manifests:
+        items:
+          format: uuid
+          type: string
+        type: array
+    type: object
+  CreateOrderErrorResponse:
+    properties:
+      errorCode:
+        type: integer
+      errorMessage:
+        type: string
+      fields:
+        items:
+          $ref: "#/definitions/OrderFieldResponse"
+        type: array
+    type: object
+  CreateOrderLabelErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  CreateOrderRequest:
+    properties:
+      billing:
+        $ref: "#/definitions/BillingDetailsRequest"
+      currencyCode:
+        maxLength: 3
+        type: string
+      customsDutyCosts:
+        description: Customs Duty Costs is only supported in DDP (Delivery Duty Paid) services
+        format: decimal
+        maximum: 99999.99
+        minimum: 0
+        multipleOf: 0.01
+        type: number
+      label:
+        $ref: "#/definitions/LabelGenerationRequest"
+      orderDate:
+        format: date-time
+        type: string
+      orderReference:
+        maxLength: 40
+        type: string
+      otherCosts:
+        format: decimal
+        maximum: 999999
+        minimum: 0
+        multipleOf: 0.01
+        type: number
+      packages:
+        items:
+          $ref: "#/definitions/ShipmentPackageRequest"
+        minLength: 0
+        type: array
+        uniqueItems: false
+      plannedDespatchDate:
+        format: date-time
+        type: string
+      postageDetails:
+        $ref: "#/definitions/PostageDetailsRequest"
+      recipient:
+        $ref: "#/definitions/RecipientDetailsRequest"
+      sender:
+        $ref: "#/definitions/SenderDetailsRequest"
+      shippingCostCharged:
+        format: decimal
+        maximum: 999999
+        minimum: 0
+        multipleOf: 0.01
+        type: number
+      specialInstructions:
+        maxLength: 500
+        type: string
+      subtotal:
+        format: decimal
+        maximum: 999999
+        minimum: 0
+        multipleOf: 0.01
+        type: number
+      tags:
+        items:
+          $ref: "#/definitions/TagRequest"
+        type: array
+      total:
+        format: decimal
+        maximum: 999999
+        minimum: 0
+        multipleOf: 0.01
+        type: number
+    required:
+      - recipient
+      - orderDate
+      - subtotal
+      - shippingCostCharged
+      - total
+    type: object
+  CreateOrderResponse:
+    properties:
+      createdOn:
+        format: date-time
+        type: string
+      label:
+        description: label in format base64 string
+        type: string
+      labelErrors:
+        items:
+          $ref: "#/definitions/CreateOrderLabelErrorResponse"
+        type: array
+      manifestedOn:
+        format: date-time
+        type: string
+      orderDate:
+        format: date-time
+        type: string
+      orderIdentifier:
+        type: integer
+      orderReference:
+        type: string
+      printedOn:
+        format: date-time
+        type: string
+      shippedOn:
+        format: date-time
+        type: string
+      trackingNumber:
+        type: string
+    required:
+      - orderIdentifier
+      - createdOn
+    type: object
+  CreateOrdersRequest:
+    properties:
+      items:
+        items:
+          $ref: "#/definitions/CreateOrderRequest"
+        minLength: 1
+        type: array
+    required:
+      - items
+    type: object
+  CreateOrdersResponse:
+    properties:
+      createdOrders:
+        items:
+          $ref: "#/definitions/CreateOrderResponse"
+        type: array
+      errorsCount:
+        type: integer
+      failedOrders:
+        items:
+          $ref: "#/definitions/FailedOrderResponse"
+        type: array
+      successCount:
+        type: integer
+    type: object
+  DeleteOrdersResource:
+    properties:
+      deletedOrders:
+        items:
+          $ref: "#/definitions/DeletedOrderInfo"
+        type: array
+      errors:
+        items:
+          $ref: "#/definitions/OrderErrorInfo"
+        type: array
+    type: object
+  DeletedOrderInfo:
+    properties:
+      orderIdentifier:
+        type: integer
+      orderInfo:
+        type: string
+      orderReference:
+        type: string
+    type: object
+  DimensionsRequest:
+    description: It is not mandatory to include the dimensions field. If the dimensions field is included then the inner fields heightInMms, widthInMms and depthInMms must be specified with non-zero values.
+    properties:
+      depthInMms:
+        format: int32
+        type: integer
+      heightInMms:
+        format: int32
+        type: integer
+      widthInMms:
+        format: int32
+        type: integer
+    required:
+      - heightInMms
+      - widthInMms
+      - depthInMms
+    type: object
+  ErrorResponse:
+    properties:
+      code:
+        type: string
+      details:
+        type: string
+      message:
+        type: string
+    required:
+      - message
+    type: object
+  FailedOrderResponse:
+    properties:
+      errors:
+        items:
+          $ref: "#/definitions/CreateOrderErrorResponse"
+        type: array
+      order:
+        $ref: "#/definitions/CreateOrderRequest"
+    type: object
+  GetManifestOrder:
+    properties:
+      orderIdentifier:
+        type: integer
+      orderReference:
+        type: string
+    type: object
+  GetManifestResponse:
+    properties:
+      documentStatus:
+        description: |
+          * <b>InProgress</b>: Manifest documentation generation is currently in progress
+          * <b>Completed</b>: Manifest documentation generation has been completed
+        enum:
+          - InProgress
+          - Completed
+        type: string
+      errorReference:
+        format: uuid
+        type: string
+      manifestStatus:
+        description: |
+          * <b>InProgress</b>: Manifest operation is currently in progress
+          * <b>Completed</b>: Manifest operation has been completed
+          * <b>Failed</b>: Manifest operation has failed
+        enum:
+          - InProgress
+          - Completed
+          - Failed
+        type: string
+      orders:
+        items:
+          $ref: "#/definitions/GetManifestOrder"
+        type: array
+      pdf:
+        description: pdf file encoded as base64 format string
+        type: string
+    type: object
+  GetOrderDetailsResource:
+    properties:
+      AIRNumber:
+        type: string
+      accountBatchNumber:
+        type: string
+      billingInfo:
+        $ref: "#/definitions/GetPostalDetailsResult"
+      channel:
+        type: string
+      channelShippingMethod:
+        type: string
+      commercialInvoiceDate:
+        format: date-time
+        type: string
+      commercialInvoiceNumber:
+        type: string
+      createdOn:
+        format: date-time
+        type: string
+      currencyCode:
+        maxLength: 3
+        type: string
+      department:
+        type: string
+      despatchedByOtherCourierOn:
+        format: date-time
+        type: string
+      manifestedOn:
+        format: date-time
+        type: string
+      marketplaceTypeName:
+        type: string
+      orderDate:
+        format: date-time
+        type: string
+      orderDiscount:
+        type: number
+      orderIdentifier:
+        type: integer
+      orderLines:
+        items:
+          $ref: "#/definitions/GetOrderLineResult"
+        type: array
+      orderReference:
+        type: string
+      orderStatus:
+        type: string
+      packageSize:
+        type: string
+      pickerSpecialInstructions:
+        type: string
+      postageAppliedOn:
+        format: date-time
+        type: string
+      printedOn:
+        format: date-time
+        type: string
+      requiresExportLicense:
+        type: boolean
+      shippedOn:
+        format: date-time
+        type: string
+      shippingCostCharged:
+        type: number
+      shippingDetails:
+        $ref: "#/definitions/GetShippingDetailsResult"
+      shippingInfo:
+        $ref: "#/definitions/GetPostalDetailsResult"
+      specialInstructions:
+        type: string
+      subtotal:
+        type: number
+      tags:
+        items:
+          $ref: "#/definitions/GetTagDetailsResult"
+        type: array
+      total:
+        type: number
+      tradingName:
+        type: string
+      weightInGrams:
+        type: integer
+    required:
+      - subtotal
+      - shippingCostCharged
+      - orderDiscount
+      - total
+      - weightInGrams
+      - shippingDetails
+      - shippingInfo
+      - billingInfo
+      - orderLines
+    type: object
+  GetOrderInfoResource:
+    properties:
+      createdOn:
+        format: date-time
+        type: string
+      manifestedOn:
+        format: date-time
+        type: string
+      orderDate:
+        format: date-time
+        type: string
+      orderIdentifier:
+        type: integer
+      orderReference:
+        type: string
+      printedOn:
+        format: date-time
+        type: string
+      shippedOn:
+        format: date-time
+        type: string
+      trackingNumber:
+        type: string
+    required:
+      - orderIdentifier
+      - createdOn
+    type: object
+  GetOrderLineResult:
+    properties:
+      SKU:
+        type: string
+      customsCode:
+        type: string
+      lineTotal:
+        type: number
+      name:
+        type: string
+      quantity:
+        type: integer
+      unitValue:
+        type: number
+    required:
+      - quantity
+    type: object
+  GetOrdersDetailsResponse:
+    properties:
+      continuationToken:
+        type: string
+      orders:
+        items:
+          $ref: "#/definitions/GetOrderDetailsResource"
+        type: array
+    type: object
+  GetOrdersResponse:
+    properties:
+      continuationToken:
+        type: string
+      orders:
+        items:
+          $ref: "#/definitions/GetOrderInfoResource"
+        type: array
+    type: object
+  GetPostalDetailsResult:
+    properties:
+      addressLine1:
+        type: string
+      addressLine2:
+        type: string
+      addressLine3:
+        type: string
+      city:
+        type: string
+      companyName:
+        type: string
+      countryCode:
+        maxLength: 3
+        type: string
+      county:
+        type: string
+      emailAddress:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+      postcode:
+        type: string
+      title:
+        type: string
+    type: object
+  GetShippingDetailsResult:
+    properties:
+      guaranteedSaturdayDelivery:
+        type: boolean
+      isLocalCollect:
+        type: boolean
+      receiveEmailNotification:
+        type: boolean
+      receiveSmsNotification:
+        type: boolean
+      requestSignatureUponDelivery:
+        type: boolean
+      serviceCode:
+        type: string
+      shippingCarrier:
+        type: string
+      shippingCost:
+        type: number
+      shippingService:
+        type: string
+      shippingTrackingStatus:
+        type: string
+      trackingNumber:
+        type: string
+    required:
+      - shippingCost
+    type: object
+  GetTagDetailsResult:
+    properties:
+      key:
+        maxLength: 100
+        type: string
+      value:
+        maxLength: 100
+        type: string
+    type: object
+  GetVersionResource:
+    properties:
+      build:
+        type: string
+      commit:
+        type: string
+      release:
+        type: string
+      releaseDate:
+        format: date-time
+        type: string
+    required:
+      - releaseDate
+    type: object
+  LabelGenerationRequest:
+    description: <b>Reserved for OBA customers only</b>
+    properties:
+      includeCN:
+        type: boolean
+      includeLabelInResponse:
+        type: boolean
+      includeReturnsLabel:
+        type: boolean
+    required:
+      - includeLabelInResponse
+    type: object
+  OrderErrorInfo:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      orderIdentifier:
+        type: integer
+      orderReference:
+        type: string
+    type: object
+  OrderErrorResponse:
+    properties:
+      accountOrderNumber:
+        type: integer
+      channelOrderReference:
+        type: string
+      code:
+        type: string
+      message:
+        type: string
+    type: object
+  OrderFieldResponse:
+    properties:
+      fieldName:
+        type: string
+      value:
+        type: string
+    type: object
+  OrderUpdateError:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      orderIdentifier:
+        type: integer
+      orderReference:
+        type: string
+      status:
+        description: Current status of the order
+        type: string
+    type: object
+  PostageDetailsRequest:
+    example:
+      AIRNumber: string
+      IOSSNumber: string
+      commercialInvoiceDate: 2019-08-24T14:15:22Z
+      commercialInvoiceNumber: string
+      consequentialLoss: 0
+      department: string
+      guaranteedSaturdayDelivery: false
+      isLocalCollect: true
+      receiveEmailNotification: true
+      receiveSmsNotification: true
+      requestSignatureUponDelivery: true
+      requiresExportLicense: true
+      safePlace: string
+      sendNotificationsTo: sender
+      serviceCode: string
+      serviceRegisterCode: st
+    properties:
+      AIRNumber:
+        maxLength: 50
+        type: string
+      IOSSNumber:
+        maxLength: 50
+        type: string
+      carrierName:
+        maxLength: 50
+        type: string
+      commercialInvoiceDate:
+        format: date-time
+        type: string
+      commercialInvoiceNumber:
+        maxLength: 35
+        type: string
+      consequentialLoss:
+        format: int32
+        maximum: 10000
+        minimum: 0
+        type: integer
+      department:
+        maxLength: 150
+        type: string
+      guaranteedSaturdayDelivery:
+        description: This field has been deprecated
+        type: boolean
+      isLocalCollect:
+        type: boolean
+      receiveEmailNotification:
+        type: boolean
+      receiveSmsNotification:
+        type: boolean
+      requestSignatureUponDelivery:
+        type: boolean
+      requiresExportLicense:
+        type: boolean
+      safePlace:
+        maxLength: 90
+        type: string
+      sendNotificationsTo:
+        enum:
+          - sender
+          - recipient
+          - billing
+        type: string
+      serviceCode:
+        maxLength: 10
+        type: string
+      serviceRegisterCode:
+        maxLength: 2
+        type: string
+    type: object
+  ProductItemRequest:
+    properties:
+      SKU:
+        description: The presence or not of field <b>SKU</b> and other fields in the request body will determine which of the following behaviours occur:- <br>1) A minimum of <b>SKU</b>, <b>unitValue</b>, <b>unitWeightInGrams</b> and <b>quantity</b> provided - In addition to the provided product fields being used for the order creation, an existing account Product with matching SKU will be overwritten with all provided product parameters. If no existing account Product with matching SKU can be found then a new product will be created with the provided SKU and product parameters.<br>2) <b>SKU</b>, <b>quantity</b> provided and <b>no other fields</b> provided - An account Product with the provided SKU will be used for the order if it exists.<br>3) <b>SKU not provided</b> and a minimum of <b>unitValue</b>, <b>unitWeightInGrams</b> and <b>quantity</b> provided - All provided product fields will be used for the order creation.<br>4) All other scenarios will result in a validation error.
+        maxLength: 100
+        type: string
+      customsCode:
+        maxLength: 10
+        type: string
+      customsDeclarationCategory:
+        enum:
+          - none
+          - gift
+          - commercialSample
+          - documents
+          - other
+          - returnedGoods
+          - saleOfGoods
+          - mixedContent
+        type: string
+      customsDescription:
+        maxLength: 50
+        type: string
+      extendedCustomsDescription:
+        maxLength: 300
+        type: string
+      name:
+        maxLength: 800
+        type: string
+      originCountryCode:
+        maxLength: 3
+        type: string
+      quantity:
+        format: int32
+        maximum: 999999
+        minimum: 1
+        type: integer
+      requiresExportLicence:
+        type: boolean
+      unitValue:
+        format: decimal
+        maximum: 999999
+        minimum: 0
+        multipleOf: 0.01
+        type: number
+      unitWeightInGrams:
+        maximum: 999999
+        minimum: 0
+        type: integer
+    required:
+      - quantity
+    type: object
+  RecipientDetailsRequest:
+    properties:
+      address:
+        $ref: "#/definitions/AddressRequest"
+      addressBookReference:
+        description: The presence or not of <b>addressBookReference</b> and a valid <b>recipient address object</b> in the request body will determine which of the following behaviours occur:-</br></br>1) addressBookReference <b>provided</b> and a valid recipient address object <b>provided</b> - In addition to the provided recipient address fields being used for the order creation, an existing account Address Book Reference with matching addressBookReference will be overwritten with all provided recipient address fields, including phone and email. If no existing account Address Book Reference with matching addressBookReference can be found then a new one will be created with the provided addressBookReference and address fields, including phone and email.</br>2) addressBookReference <b>provided</b> and a valid recipient address object <b>not provided</b> - An account Address Book Reference with the provided addressBookReference will be used for the order if it exists.</br>3) addressBookReference <b>not provided</b> and a valid recipient address object <b>provided</b> - All provided recipient address fields, including phone and email, will be used for the order creation.</br>4) All other scenarios will result in a validation error.
+        maxLength: 100
+        type: string
+      emailAddress:
+        maxLength: 254
+        type: string
+      phoneNumber:
+        maxLength: 25
+        type: string
+    type: object
+  SenderDetailsRequest:
+    properties:
+      emailAddress:
+        maxLength: 254
+        type: string
+      phoneNumber:
+        maxLength: 25
+        type: string
+      tradingName:
+        maxLength: 250
+        type: string
+    type: object
+  ShipmentPackageRequest:
+    properties:
+      contents:
+        items:
+          $ref: "#/definitions/ProductItemRequest"
+        minLength: 0
+        type: array
+        uniqueItems: false
+      customPackageFormatIdentifier:
+        description: This field will be deprecated in the future. Please use 'packageFormatIdentifier' for custom package formats from ChannelShipper.
+        type: string
+      dimensions:
+        $ref: "#/definitions/DimensionsRequest"
+      packageFormatIdentifier:
+        description: "<b>If you have a ChannelShipper account, you can also pass the name of any of your custom package formats instead of the values below.</b><br> Enum: 'undefined', 'letter', 'largeLetter', 'smallParcel', 'mediumParcel', 'parcel', 'documents'"
+        type: string
+      weightInGrams:
+        format: int32
+        maximum: 30000
+        minimum: 1
+        type: integer
+    required:
+      - weightInGrams
+      - packageFormatIdentifier
+    type: object
+  TagRequest:
+    properties:
+      key:
+        maxLength: 100
+        type: string
+      value:
+        maxLength: 100
+        type: string
+    type: object
+  UpdateOrderStatusRequest:
+    properties:
+      despatchDate:
+        format: date-time
+        type: string
+      orderIdentifier:
+        format: int32
+        type: integer
+      orderReference:
+        type: string
+      shippingCarrier:
+        type: string
+      shippingService:
+        type: string
+      status:
+        description: |
+          <br/>
+          "<i>despatchedByOtherCourier</i> ": <b>Reserved for ChannelShipper customers only - please visit 
+          <a href="https://channelshipper.com/" target="_self">ChannelShipper.com</a> for more information</b>
+
+          "<i>new</i> ": This will remove the order from its batch. Order information will not be lost during this process.
+
+          Please be aware labels generated on orders which are then set to "new" (reset) are no longer valid 
+          and must be destroyed. If the order is required to be despatched after setting to "new" status, a new 
+          label must be generated to attach to the item.
+
+          Cancelled label information is automatically shared with Royal Mail Revenue Protection, and should a 
+          cancelled label be identified on an item in the Royal Mail Network, you will be charged on your account 
+          and an additional handling fee applied.
+        enum:
+          - new
+          - despatchedByOtherCourier
+          - despatched
+        type: string
+      trackingNumber:
+        type: string
+    type: object
+  UpdateOrderStatusResponse:
+    properties:
+      errors:
+        items:
+          $ref: "#/definitions/OrderUpdateError"
+        type: array
+      updatedOrders:
+        items:
+          $ref: "#/definitions/UpdatedOrderInfo"
+        type: array
+    type: object
+  UpdateOrdersStatusRequest:
+    properties:
+      items:
+        items:
+          $ref: "#/definitions/UpdateOrderStatusRequest"
+        minLength: 1
+        type: array
+    type: object
+  UpdatedOrderInfo:
+    properties:
+      orderIdentifier:
+        type: integer
+      orderReference:
+        type: string
+      status:
+        description: Current status of the order
+        type: string
+    type: object

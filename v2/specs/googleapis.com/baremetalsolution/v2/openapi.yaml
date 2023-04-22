@@ -1,0 +1,2746 @@
+openapi: 3.0.0
+servers:
+  - url: https://baremetalsolution.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: Provides ways to manage Bare Metal Solution hardware installed in a regional extension located near a Google Cloud data center.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Bare Metal Solution API
+  version: v2
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://baremetalsolution.googleapis.com/$discovery/rest?version=v2
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: baremetalsolution
+externalDocs:
+  url: https://cloud.google.com/bare-metal
+tags:
+  - name: projects
+paths:
+  "/v2/{instance}:detachLun":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Detach LUN from Instance.
+      operationId: baremetalsolution.projects.locations.instances.detachLun
+      parameters:
+        - description: Required. Name of the instance.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetachLunRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{location}/instanceProvisioningSettings:fetch":
+    get:
+      description: Get instance provisioning settings for a given project. This is hidden method used by UI only.
+      operationId: baremetalsolution.projects.locations.instanceProvisioningSettings.fetch
+      parameters:
+        - description: Required. The parent project and location containing the ProvisioningSettings.
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FetchInstanceProvisioningSettingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{location}/networks:listNetworkUsage":
+    get:
+      description: List all Networks (and used IPs for each Network) in the vendor account associated with the specified project.
+      operationId: baremetalsolution.projects.locations.networks.listNetworkUsage
+      parameters:
+        - description: Required. Parent value (project and location).
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNetworkUsageResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}":
+    delete:
+      description: Deletes a volume snapshot. Returns INVALID_ARGUMENT if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.delete
+      parameters:
+        - description: Required. The name of the snapshot to delete.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Returns the specified snapshot resource. Returns INVALID_ARGUMENT if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.get
+      parameters:
+        - description: Required. The name of the snapshot.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update details of a single storage volume.
+      operationId: baremetalsolution.projects.locations.volumes.patch
+      parameters:
+        - description: "Output only. The resource name of this `Volume`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/volumes/{volume}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "The list of fields to update. The only currently supported fields are: 'labels'"
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Volume"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}/locations":
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: baremetalsolution.projects.locations.list
+      parameters:
+        - description: The resource that owns the locations collection, if applicable.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like `"displayName=tokyo"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. If not set, the service selects a default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}:disableInteractiveSerialConsole":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Disable the interactive serial console feature on an instance.
+      operationId: baremetalsolution.projects.locations.instances.disableInteractiveSerialConsole
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisableInteractiveSerialConsoleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:enableInteractiveSerialConsole":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enable the interactive serial console feature on an instance.
+      operationId: baremetalsolution.projects.locations.instances.enableInteractiveSerialConsole
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnableInteractiveSerialConsoleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:evict":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Skips lun's cooloff and deletes it now. Lun must be in cooloff state.
+      operationId: baremetalsolution.projects.locations.volumes.luns.evict
+      parameters:
+        - description: Required. The name of the lun.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvictLunRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:rename":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: RenameVolume sets a new name for a volume. Use with caution, previous names become immediately invalidated.
+      operationId: baremetalsolution.projects.locations.volumes.rename
+      parameters:
+        - description: "Required. The `name` field is used to identify the volume. Format: projects/{project}/locations/{location}/volumes/{volume}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameVolumeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volume"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:reset":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform an ungraceful, hard reset on a server. Equivalent to shutting the power off and then turning it back on.
+      operationId: baremetalsolution.projects.locations.instances.reset
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:start":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts a server that was shutdown.
+      operationId: baremetalsolution.projects.locations.instances.start
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:stop":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Stop a running server.
+      operationId: baremetalsolution.projects.locations.instances.stop
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StopInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/instances":
+    get:
+      description: List servers in a given project and location.
+      operationId: baremetalsolution.projects.locations.instances.list
+      parameters:
+        - description: Required. Parent value for ListInstancesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListInstancesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create an Instance.
+      operationId: baremetalsolution.projects.locations.instances.create
+      parameters:
+        - description: Required. The parent project and location.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Instance"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/luns":
+    get:
+      description: List storage volume luns for given storage volume.
+      operationId: baremetalsolution.projects.locations.volumes.luns.list
+      parameters:
+        - description: Required. Parent value for ListLunsRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLunsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/networks":
+    get:
+      description: List network in a given project and location.
+      operationId: baremetalsolution.projects.locations.networks.list
+      parameters:
+        - description: Required. Parent value for ListNetworksRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNetworksResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/nfsShares":
+    get:
+      description: List NFS shares.
+      operationId: baremetalsolution.projects.locations.nfsShares.list
+      parameters:
+        - description: Required. Parent value for ListNfsSharesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNfsSharesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create an NFS share.
+      operationId: baremetalsolution.projects.locations.nfsShares.create
+      parameters:
+        - description: Required. The parent project and location.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NfsShare"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/provisioningConfigs":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create new ProvisioningConfig.
+      operationId: baremetalsolution.projects.locations.provisioningConfigs.create
+      parameters:
+        - description: Required. The parent project and location containing the ProvisioningConfig.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Email provided to send a confirmation with provisioning config to.
+          in: query
+          name: email
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProvisioningConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/provisioningConfigs:submit":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Submit a provisiong configuration for a given project.
+      operationId: baremetalsolution.projects.locations.provisioningConfigs.submit
+      parameters:
+        - description: Required. The parent project and location containing the ProvisioningConfig.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitProvisioningConfigRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmitProvisioningConfigResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/provisioningQuotas":
+    get:
+      description: List the budget details to provision resources on a given project.
+      operationId: baremetalsolution.projects.locations.provisioningQuotas.list
+      parameters:
+        - description: Required. Parent value for ListProvisioningQuotasRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default. Notice that page_size field is not supported and won't be respected in the API request for now, will be updated when pagination is supported.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListProvisioningQuotasResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/snapshots":
+    get:
+      description: Retrieves the list of snapshots for the specified volume. Returns a response with an empty list of snapshots if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.list
+      parameters:
+        - description: Required. Parent value for ListVolumesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVolumeSnapshotsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Takes a snapshot of a boot volume. Returns INVALID_ARGUMENT if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.create
+      parameters:
+        - description: Required. The volume to snapshot.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VolumeSnapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/sshKeys":
+    get:
+      description: Lists the public SSH keys registered for the specified project. These SSH keys are used only for the interactive serial console feature.
+      operationId: baremetalsolution.projects.locations.sshKeys.list
+      parameters:
+        - description: Required. The parent containing the SSH keys. Currently, the only valid value for the location is "global".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSSHKeysResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Register a public SSH key in the specified project for use with the interactive serial console feature.
+      operationId: baremetalsolution.projects.locations.sshKeys.create
+      parameters:
+        - description: Required. The parent containing the SSH keys.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. The ID to use for the key, which will become the final component of the key's resource name. This value must match the regex: [a-zA-Z0-9@.\\-_]{1,64}"
+          in: query
+          name: sshKeyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SSHKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SSHKey"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/volumes":
+    get:
+      description: List storage volumes in a given project and location.
+      operationId: baremetalsolution.projects.locations.volumes.list
+      parameters:
+        - description: Required. Parent value for ListVolumesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVolumesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{volumeSnapshot}:restoreVolumeSnapshot":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Uses the specified snapshot to restore its parent volume. Returns INVALID_ARGUMENT if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.restoreVolumeSnapshot
+      parameters:
+        - description: Required. Name of the snapshot which will be used to restore its parent volume.
+          in: path
+          name: volumeSnapshot
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestoreVolumeSnapshotRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{volume}:resize":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Emergency Volume resize.
+      operationId: baremetalsolution.projects.locations.volumes.resize
+      parameters:
+        - description: Required. Volume to resize.
+          in: path
+          name: volume
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResizeVolumeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    AllowedClient:
+      description: Represents an 'access point' for the share.
+      properties:
+        allowDev:
+          description: Allow dev flag. Which controls whether to allow creation of devices.
+          type: boolean
+        allowSuid:
+          description: Allow the setuid flag.
+          type: boolean
+        allowedClientsCidr:
+          description: The subnet of IP addresses permitted to access the share.
+          type: string
+        mountPermissions:
+          description: Mount permissions.
+          enum:
+            - MOUNT_PERMISSIONS_UNSPECIFIED
+            - READ
+            - READ_WRITE
+          type: string
+        network:
+          description: The network the access point sits on.
+          type: string
+        nfsPath:
+          description: Output only. The path to access NFS, in format shareIP:/InstanceID InstanceID is the generated ID instead of customer provided name. example like "10.0.0.0:/g123456789-nfs001"
+          readOnly: true
+          type: string
+        noRootSquash:
+          description: Disable root squashing, which is a feature of NFS. Root squash is a special mapping of the remote superuser (root) identity when using identity authentication.
+          type: boolean
+        shareIp:
+          description: Output only. The IP address of the share on this network. Assigned automatically during provisioning based on the network's services_cidr.
+          readOnly: true
+          type: string
+      type: object
+    DetachLunRequest:
+      description: Message for detach specific LUN from an Instance.
+      properties:
+        lun:
+          description: Required. Name of the Lun to detach.
+          type: string
+        skipReboot:
+          description: If true, performs lun unmapping without instance reboot.
+          type: boolean
+      type: object
+    DisableInteractiveSerialConsoleRequest:
+      description: Message for disabling the interactive serial console on an instance.
+      properties: {}
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    EnableInteractiveSerialConsoleRequest:
+      description: Message for enabling the interactive serial console on an instance.
+      properties: {}
+      type: object
+    EvictLunRequest:
+      description: Request for skip lun cooloff and delete it.
+      properties: {}
+      type: object
+    EvictVolumeRequest:
+      description: Request for skip volume cooloff and delete it.
+      properties: {}
+      type: object
+    FetchInstanceProvisioningSettingsResponse:
+      description: Response with all provisioning settings.
+      properties:
+        images:
+          description: The OS images available.
+          items:
+            $ref: "#/components/schemas/OSImage"
+          type: array
+      type: object
+    GoogleCloudBaremetalsolutionV2LogicalInterface:
+      description: Each logical interface represents a logical abstraction of the underlying physical interface (for eg. bond, nic) of the instance. Each logical interface can effectively map to multiple network-IP pairs and still be mapped to one underlying physical interface.
+      properties:
+        interfaceIndex:
+          description: The index of the logical interface mapping to the index of the hardware bond or nic on the chosen network template. This field is deprecated.
+          format: int32
+          type: integer
+        logicalNetworkInterfaces:
+          description: List of logical network interfaces within a logical interface.
+          items:
+            $ref: "#/components/schemas/LogicalNetworkInterface"
+          type: array
+        name:
+          description: Interface name. This is of syntax or and forms part of the network template name.
+          type: string
+      type: object
+    GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface:
+      description: Logical interface.
+      properties:
+        name:
+          description: Interface name. This is not a globally unique identifier. Name is unique only inside the ServerNetworkTemplate. This is of syntax or and forms part of the network template name.
+          type: string
+        required:
+          description: If true, interface must have network connected.
+          type: boolean
+        type:
+          description: Interface type.
+          enum:
+            - INTERFACE_TYPE_UNSPECIFIED
+            - BOND
+            - NIC
+          type: string
+      type: object
+    Instance:
+      description: A server.
+      properties:
+        createTime:
+          description: Output only. Create a time stamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        firmwareVersion:
+          description: Output only. The firmware version for the instance.
+          readOnly: true
+          type: string
+        hyperthreadingEnabled:
+          description: True if you enable hyperthreading for the server, otherwise false. The default value is false.
+          type: boolean
+        id:
+          description: Output only. An identifier for the `Instance`, generated by the backend.
+          readOnly: true
+          type: string
+        interactiveSerialConsoleEnabled:
+          description: Output only. True if the interactive serial console feature is enabled for the instance, false otherwise. The default value is false.
+          readOnly: true
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs.
+          type: object
+        logicalInterfaces:
+          description: List of logical interfaces for the instance. The number of logical interfaces will be the same as number of hardware bond/nic on the chosen network template. For the non-multivlan configurations (for eg, existing servers) that use existing default network template (bondaa-bondaa), both the Instance.networks field and the Instance.logical_interfaces fields will be filled to ensure backward compatibility. For the others, only Instance.logical_interfaces will be filled.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBaremetalsolutionV2LogicalInterface"
+          type: array
+        loginInfo:
+          description: Output only. Text field about info for logging in.
+          readOnly: true
+          type: string
+        luns:
+          description: Immutable. List of LUNs associated with this server.
+          items:
+            $ref: "#/components/schemas/Lun"
+          type: array
+        machineType:
+          description: Immutable. The server type. [Available server types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
+          type: string
+        name:
+          description: "Immutable. The resource name of this `Instance`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/instances/{instance}`"
+          type: string
+        networkTemplate:
+          description: Instance network template name. For eg, bondaa-bondaa, bondab-nic, etc. Generally, the template name follows the syntax of "bond" or "nic".
+          type: string
+        networks:
+          description: Output only. List of networks associated with this server.
+          items:
+            $ref: "#/components/schemas/Network"
+          readOnly: true
+          type: array
+        osImage:
+          description: The OS image currently installed on the server.
+          type: string
+        pod:
+          description: Immutable. Pod name. Pod is an independent part of infrastructure. Instance can be connected to the assets (networks, volumes) allocated in the same pod only.
+          type: string
+        state:
+          description: Output only. The state of the server.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - RUNNING
+            - DELETED
+            - UPDATING
+            - STARTING
+            - STOPPING
+            - SHUTDOWN
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Update a time stamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        volumes:
+          description: Input only. List of Volumes to attach to this Instance on creation. This field won't be populated in Get/List responses.
+          items:
+            $ref: "#/components/schemas/Volume"
+          type: array
+        workloadProfile:
+          description: The workload profile for the instance.
+          enum:
+            - WORKLOAD_PROFILE_UNSPECIFIED
+            - WORKLOAD_PROFILE_GENERIC
+            - WORKLOAD_PROFILE_HANA
+          type: string
+      type: object
+    InstanceConfig:
+      description: Configuration parameters for a new instance.
+      properties:
+        accountNetworksEnabled:
+          description: If true networks can be from different projects of the same vendor account.
+          type: boolean
+        clientNetwork:
+          $ref: "#/components/schemas/NetworkAddress"
+          description: Client network address. Filled if InstanceConfig.multivlan_config is false.
+        hyperthreading:
+          description: Whether the instance should be provisioned with Hyperthreading enabled.
+          type: boolean
+        id:
+          description: A transient unique identifier to idenfity an instance within an ProvisioningConfig request.
+          type: string
+        instanceType:
+          description: Instance type. [Available types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
+          type: string
+        logicalInterfaces:
+          description: List of logical interfaces for the instance. The number of logical interfaces will be the same as number of hardware bond/nic on the chosen network template. Filled if InstanceConfig.multivlan_config is true.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBaremetalsolutionV2LogicalInterface"
+          type: array
+        name:
+          description: Output only. The name of the instance config.
+          readOnly: true
+          type: string
+        networkConfig:
+          description: The type of network configuration on the instance.
+          enum:
+            - NETWORKCONFIG_UNSPECIFIED
+            - SINGLE_VLAN
+            - MULTI_VLAN
+          type: string
+        networkTemplate:
+          description: Server network template name. Filled if InstanceConfig.multivlan_config is true.
+          type: string
+        osImage:
+          description: OS image to initialize the instance. [Available images](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
+          type: string
+        privateNetwork:
+          $ref: "#/components/schemas/NetworkAddress"
+          description: Private network address, if any. Filled if InstanceConfig.multivlan_config is false.
+        userNote:
+          description: User note field, it can be used by customers to add additional information for the BMS Ops team .
+          type: string
+      type: object
+    InstanceQuota:
+      description: A resource budget.
+      properties:
+        availableMachineCount:
+          description: Number of machines than can be created for the given location and instance_type.
+          format: int32
+          type: integer
+        gcpService:
+          description: The gcp service of the provisioning quota.
+          type: string
+        instanceType:
+          description: "Instance type. Deprecated: use gcp_service."
+          type: string
+        location:
+          description: Location where the quota applies.
+          type: string
+        name:
+          description: Output only. The name of the instance quota.
+          readOnly: true
+          type: string
+      type: object
+    IntakeVlanAttachment:
+      description: A GCP vlan attachment.
+      properties:
+        id:
+          description: Identifier of the VLAN attachment.
+          type: string
+        pairingKey:
+          description: Attachment pairing key.
+          type: string
+      type: object
+    ListInstancesResponse:
+      description: Response message for the list of servers.
+      properties:
+        instances:
+          description: The list of servers.
+          items:
+            $ref: "#/components/schemas/Instance"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListLocationsResponse:
+      description: The response message for Locations.ListLocations.
+      properties:
+        locations:
+          description: A list of locations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Location"
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
+    ListLunsResponse:
+      description: Response message containing the list of storage volume luns.
+      properties:
+        luns:
+          description: The list of luns.
+          items:
+            $ref: "#/components/schemas/Lun"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListNetworkUsageResponse:
+      description: Response with Networks with IPs
+      properties:
+        networks:
+          description: Networks with IPs.
+          items:
+            $ref: "#/components/schemas/NetworkUsage"
+          type: array
+      type: object
+    ListNetworksResponse:
+      description: Response message containing the list of networks.
+      properties:
+        networks:
+          description: The list of networks.
+          items:
+            $ref: "#/components/schemas/Network"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListNfsSharesResponse:
+      description: Response message containing the list of NFS shares.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        nfsShares:
+          description: The list of NFS shares.
+          items:
+            $ref: "#/components/schemas/NfsShare"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListProvisioningQuotasResponse:
+      description: Response message for the list of provisioning quotas.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        provisioningQuotas:
+          description: The provisioning quotas registered in this project.
+          items:
+            $ref: "#/components/schemas/ProvisioningQuota"
+          type: array
+      type: object
+    ListSSHKeysResponse:
+      description: Message for response of ListSSHKeys.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        sshKeys:
+          description: The SSH keys registered in the project.
+          items:
+            $ref: "#/components/schemas/SSHKey"
+          type: array
+      type: object
+    ListVolumeSnapshotsResponse:
+      description: Response message containing the list of volume snapshots.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        volumeSnapshots:
+          description: The list of snapshots.
+          items:
+            $ref: "#/components/schemas/VolumeSnapshot"
+          type: array
+      type: object
+    ListVolumesResponse:
+      description: Response message containing the list of storage volumes.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        volumes:
+          description: The list of storage volumes.
+          items:
+            $ref: "#/components/schemas/Volume"
+          type: array
+      type: object
+    Location:
+      description: A resource that represents Google Cloud Platform location.
+      properties:
+        displayName:
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+          type: object
+        locationId:
+          description: 'The canonical id for this location. For example: `"us-east1"`.'
+          type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata. For example the available capacity at the given location.
+          type: object
+        name:
+          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
+      type: object
+    LogicalNetworkInterface:
+      description: Each logical network interface is effectively a network and IP pair.
+      properties:
+        defaultGateway:
+          description: Whether this interface is the default gateway for the instance. Only one interface can be the default gateway for the instance.
+          type: boolean
+        id:
+          description: An identifier for the `Network`, generated by the backend.
+          type: string
+        ipAddress:
+          description: IP address in the network
+          type: string
+        network:
+          description: Name of the network
+          type: string
+        networkType:
+          description: Type of network.
+          enum:
+            - TYPE_UNSPECIFIED
+            - CLIENT
+            - PRIVATE
+          type: string
+      type: object
+    Lun:
+      description: A storage volume logical unit number (LUN).
+      properties:
+        bootLun:
+          description: Display if this LUN is a boot LUN.
+          type: boolean
+        expireTime:
+          description: Output only. Time after which LUN will be fully deleted. It is filled only for LUNs in COOL_OFF state.
+          format: google-datetime
+          readOnly: true
+          type: string
+        id:
+          description: An identifier for the LUN, generated by the backend.
+          type: string
+        instances:
+          description: Output only. Instances this Lun is attached to.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        multiprotocolType:
+          description: The LUN multiprotocol type ensures the characteristics of the LUN are optimized for each operating system.
+          enum:
+            - MULTIPROTOCOL_TYPE_UNSPECIFIED
+            - LINUX
+          type: string
+        name:
+          description: Output only. The name of the LUN.
+          readOnly: true
+          type: string
+        shareable:
+          description: Display if this LUN can be shared between multiple physical servers.
+          type: boolean
+        sizeGb:
+          description: The size of this LUN, in gigabytes.
+          format: int64
+          type: string
+        state:
+          description: The state of this storage volume.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - UPDATING
+            - READY
+            - DELETING
+            - COOL_OFF
+          type: string
+        storageType:
+          description: The storage type for this LUN.
+          enum:
+            - STORAGE_TYPE_UNSPECIFIED
+            - SSD
+            - HDD
+          type: string
+        storageVolume:
+          description: Display the storage volume for this LUN.
+          type: string
+        wwid:
+          description: The WWID for this LUN.
+          type: string
+      type: object
+    LunRange:
+      description: A LUN(Logical Unit Number) range.
+      properties:
+        quantity:
+          description: Number of LUNs to create.
+          format: int32
+          type: integer
+        sizeGb:
+          description: The requested size of each LUN, in GB.
+          format: int32
+          type: integer
+      type: object
+    Network:
+      description: A Network.
+      properties:
+        cidr:
+          description: The cidr of the Network.
+          type: string
+        gatewayIp:
+          description: Output only. Gateway ip address.
+          readOnly: true
+          type: string
+        id:
+          description: An identifier for the `Network`, generated by the backend.
+          type: string
+        ipAddress:
+          description: IP address configured.
+          type: string
+        jumboFramesEnabled:
+          description: Whether network uses standard frames or jumbo ones.
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs.
+          type: object
+        macAddress:
+          description: List of physical interfaces.
+          items:
+            type: string
+          type: array
+        mountPoints:
+          description: Input only. List of mount points to attach the network to.
+          items:
+            $ref: "#/components/schemas/NetworkMountPoint"
+          type: array
+        name:
+          description: "Output only. The resource name of this `Network`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/networks/{network}`"
+          readOnly: true
+          type: string
+        pod:
+          description: Output only. Pod name.
+          readOnly: true
+          type: string
+        reservations:
+          description: List of IP address reservations in this network. When updating this field, an error will be generated if a reservation conflicts with an IP address already allocated to a physical server.
+          items:
+            $ref: "#/components/schemas/NetworkAddressReservation"
+          type: array
+        servicesCidr:
+          description: IP range for reserved for services (e.g. NFS).
+          type: string
+        state:
+          description: The Network state.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - PROVISIONED
+            - DEPROVISIONING
+            - UPDATING
+          type: string
+        type:
+          description: The type of this network.
+          enum:
+            - TYPE_UNSPECIFIED
+            - CLIENT
+            - PRIVATE
+          type: string
+        vlanId:
+          description: The vlan id of the Network.
+          type: string
+        vrf:
+          $ref: "#/components/schemas/VRF"
+          description: The vrf for the Network.
+      type: object
+    NetworkAddress:
+      description: A network.
+      properties:
+        address:
+          description: IPv4 address to be assigned to the server.
+          type: string
+        existingNetworkId:
+          description: Name of the existing network to use.
+          type: string
+        networkId:
+          description: Id of the network to use, within the same ProvisioningConfig request.
+          type: string
+      type: object
+    NetworkAddressReservation:
+      description: A reservation of one or more addresses in a network.
+      properties:
+        endAddress:
+          description: The last address of this reservation block, inclusive. I.e., for cases when reservations are only single addresses, end_address and start_address will be the same. Must be specified as a single IPv4 address, e.g. 10.1.2.2.
+          type: string
+        note:
+          description: A note about this reservation, intended for human consumption.
+          type: string
+        startAddress:
+          description: The first address of this reservation block. Must be specified as a single IPv4 address, e.g. 10.1.2.2.
+          type: string
+      type: object
+    NetworkConfig:
+      description: Configuration parameters for a new network.
+      properties:
+        bandwidth:
+          description: Interconnect bandwidth. Set only when type is CLIENT.
+          enum:
+            - BANDWIDTH_UNSPECIFIED
+            - BW_1_GBPS
+            - BW_2_GBPS
+            - BW_5_GBPS
+            - BW_10_GBPS
+          type: string
+        cidr:
+          description: CIDR range of the network.
+          type: string
+        gcpService:
+          description: The GCP service of the network. Available gcp_service are in https://cloud.google.com/bare-metal/docs/bms-planning.
+          type: string
+        id:
+          description: A transient unique identifier to identify a volume within an ProvisioningConfig request.
+          type: string
+        jumboFramesEnabled:
+          description: The JumboFramesEnabled option for customer to set.
+          type: boolean
+        name:
+          description: Output only. The name of the network config.
+          readOnly: true
+          type: string
+        serviceCidr:
+          description: Service CIDR, if any.
+          enum:
+            - SERVICE_CIDR_UNSPECIFIED
+            - DISABLED
+            - HIGH_26
+            - HIGH_27
+            - HIGH_28
+          type: string
+        type:
+          description: The type of this network, either Client or Private.
+          enum:
+            - TYPE_UNSPECIFIED
+            - CLIENT
+            - PRIVATE
+          type: string
+        userNote:
+          description: User note field, it can be used by customers to add additional information for the BMS Ops team .
+          type: string
+        vlanAttachments:
+          description: List of VLAN attachments. As of now there are always 2 attachments, but it is going to change in the future (multi vlan).
+          items:
+            $ref: "#/components/schemas/IntakeVlanAttachment"
+          type: array
+        vlanSameProject:
+          description: Whether the VLAN attachment pair is located in the same project.
+          type: boolean
+      type: object
+    NetworkMountPoint:
+      description: Mount point for a network.
+      properties:
+        defaultGateway:
+          description: Network should be a default gateway.
+          type: boolean
+        instance:
+          description: Instance to attach network to.
+          type: string
+        ipAddress:
+          description: Ip address of the server.
+          type: string
+        logicalInterface:
+          description: Logical interface to detach from.
+          type: string
+      type: object
+    NetworkUsage:
+      description: Network with all used IP addresses.
+      properties:
+        network:
+          $ref: "#/components/schemas/Network"
+          description: Network.
+        usedIps:
+          description: All used IP addresses in this network.
+          items:
+            type: string
+          type: array
+      type: object
+    NfsExport:
+      description: A NFS export entry.
+      properties:
+        allowDev:
+          description: Allow dev flag in NfsShare AllowedClientsRequest.
+          type: boolean
+        allowSuid:
+          description: Allow the setuid flag.
+          type: boolean
+        cidr:
+          description: A CIDR range.
+          type: string
+        machineId:
+          description: Either a single machine, identified by an ID, or a comma-separated list of machine IDs.
+          type: string
+        networkId:
+          description: Network to use to publish the export.
+          type: string
+        noRootSquash:
+          description: Disable root squashing, which is a feature of NFS. Root squash is a special mapping of the remote superuser (root) identity when using identity authentication.
+          type: boolean
+        permissions:
+          description: Export permissions.
+          enum:
+            - PERMISSIONS_UNSPECIFIED
+            - READ_ONLY
+            - READ_WRITE
+          type: string
+      type: object
+    NfsShare:
+      description: An NFS share.
+      properties:
+        allowedClients:
+          description: List of allowed access points.
+          items:
+            $ref: "#/components/schemas/AllowedClient"
+          type: array
+        id:
+          description: Output only. An identifier for the NFS share, generated by the backend. This is the same value as nfs_share_id and will replace it in the future.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs.
+          type: object
+        name:
+          description: Immutable. The name of the NFS share.
+          type: string
+        nfsShareId:
+          description: Output only. An identifier for the NFS share, generated by the backend. This field will be deprecated in the future, use `id` instead.
+          readOnly: true
+          type: string
+        requestedSizeGib:
+          description: The requested size, in GiB.
+          format: int64
+          type: string
+        state:
+          description: Output only. The state of the NFS share.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONED
+            - CREATING
+            - UPDATING
+            - DELETING
+          readOnly: true
+          type: string
+        storageType:
+          description: Immutable. The storage type of the underlying volume.
+          enum:
+            - STORAGE_TYPE_UNSPECIFIED
+            - SSD
+            - HDD
+          type: string
+        volume:
+          description: Output only. The underlying volume of the share. Created automatically during provisioning.
+          readOnly: true
+          type: string
+      type: object
+    OSImage:
+      description: Operation System image.
+      properties:
+        applicableInstanceTypes:
+          description: Instance types this image is applicable to. [Available types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
+          items:
+            type: string
+          type: array
+        code:
+          description: OS Image code.
+          type: string
+        description:
+          description: OS Image description.
+          type: string
+        name:
+          description: Output only. OS Image's unique name.
+          readOnly: true
+          type: string
+        supportedNetworkTemplates:
+          description: Network templates that can be used with this OS Image.
+          items:
+            $ref: "#/components/schemas/ServerNetworkTemplate"
+          type: array
+      type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
+    ProvisioningConfig:
+      description: A provisioning configuration.
+      properties:
+        cloudConsoleUri:
+          description: Output only. URI to Cloud Console UI view of this provisioning config.
+          readOnly: true
+          type: string
+        customId:
+          description: Optional. The user-defined identifier of the provisioning config.
+          type: string
+        email:
+          description: Email provided to send a confirmation with provisioning config to. Deprecated in favour of email field in request messages.
+          type: string
+        handoverServiceAccount:
+          description: A service account to enable customers to access instance credentials upon handover.
+          type: string
+        instances:
+          description: Instances to be created.
+          items:
+            $ref: "#/components/schemas/InstanceConfig"
+          type: array
+        location:
+          description: Optional. Location name of this ProvisioningConfig. It is optional only for Intake UI transition period.
+          type: string
+        name:
+          description: Output only. The system-generated name of the provisioning config. This follows the UUID format.
+          readOnly: true
+          type: string
+        networks:
+          description: Networks to be created.
+          items:
+            $ref: "#/components/schemas/NetworkConfig"
+          type: array
+        state:
+          description: Output only. State of ProvisioningConfig.
+          enum:
+            - STATE_UNSPECIFIED
+            - DRAFT
+            - SUBMITTED
+            - PROVISIONING
+            - PROVISIONED
+            - VALIDATED
+            - CANCELLED
+            - FAILED
+          readOnly: true
+          type: string
+        statusMessage:
+          description: Optional status messages associated with the FAILED state.
+          type: string
+        ticketId:
+          description: A generated ticket id to track provisioning request.
+          type: string
+        updateTime:
+          description: Output only. Last update timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        volumes:
+          description: Volumes to be created.
+          items:
+            $ref: "#/components/schemas/VolumeConfig"
+          type: array
+        vpcScEnabled:
+          description: If true, VPC SC is enabled for the cluster.
+          type: boolean
+      type: object
+    ProvisioningQuota:
+      description: A provisioning quota for a given project.
+      properties:
+        assetType:
+          description: The asset type of this provisioning quota.
+          enum:
+            - ASSET_TYPE_UNSPECIFIED
+            - ASSET_TYPE_SERVER
+            - ASSET_TYPE_STORAGE
+            - ASSET_TYPE_NETWORK
+          type: string
+        availableCount:
+          description: The available count of the provisioning quota.
+          format: int32
+          type: integer
+        gcpService:
+          description: The gcp service of the provisioning quota.
+          type: string
+        instanceQuota:
+          $ref: "#/components/schemas/InstanceQuota"
+          description: Instance quota.
+        location:
+          description: The specific location of the provisioining quota.
+          type: string
+        name:
+          description: Output only. The name of the provisioning quota.
+          readOnly: true
+          type: string
+        networkBandwidth:
+          description: Network bandwidth, Gbps
+          format: int64
+          type: string
+        serverCount:
+          description: Server count.
+          format: int64
+          type: string
+        storageGib:
+          description: Storage size (GB).
+          format: int64
+          type: string
+      type: object
+    QosPolicy:
+      description: QOS policy parameters.
+      properties:
+        bandwidthGbps:
+          description: The bandwidth permitted by the QOS policy, in gbps.
+          format: double
+          type: number
+      type: object
+    RenameInstanceRequest:
+      description: Message requesting rename of a server.
+      properties:
+        newInstanceId:
+          description: Required. The new `id` of the instance.
+          type: string
+      type: object
+    RenameNetworkRequest:
+      description: Message requesting rename of a server.
+      properties:
+        newNetworkId:
+          description: Required. The new `id` of the network.
+          type: string
+      type: object
+    RenameNfsShareRequest:
+      description: Message requesting rename of a server.
+      properties:
+        newNfsshareId:
+          description: Required. The new `id` of the nfsshare.
+          type: string
+      type: object
+    RenameVolumeRequest:
+      description: Message requesting rename of a server.
+      properties:
+        newVolumeId:
+          description: Required. The new `id` of the volume.
+          type: string
+      type: object
+    ResetInstanceRequest:
+      description: Message requesting to reset a server.
+      properties: {}
+      type: object
+    ResizeVolumeRequest:
+      description: Request for emergency resize Volume.
+      properties:
+        sizeGib:
+          description: New Volume size, in GiB.
+          format: int64
+          type: string
+      type: object
+    RestoreVolumeSnapshotRequest:
+      description: Message for restoring a volume snapshot.
+      properties: {}
+      type: object
+    SSHKey:
+      description: An SSH key, used for authorizing with the interactive serial console feature.
+      properties:
+        name:
+          description: Output only. The name of this SSH key. Currently, the only valid value for the location is "global".
+          readOnly: true
+          type: string
+        publicKey:
+          description: The public SSH key. This must be in OpenSSH .authorized_keys format.
+          type: string
+      type: object
+    ServerNetworkTemplate:
+      description: Network template.
+      properties:
+        applicableInstanceTypes:
+          description: Instance types this template is applicable to.
+          items:
+            type: string
+          type: array
+        logicalInterfaces:
+          description: Logical interfaces.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface"
+          type: array
+        name:
+          description: "Output only. Template's unique name. The full resource name follows the pattern: `projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}` Generally, the {server_network_template} follows the syntax of \"bond\" or \"nic\"."
+          readOnly: true
+          type: string
+      type: object
+    SnapshotReservationDetail:
+      description: Details about snapshot space reservation and usage on the storage volume.
+      properties:
+        reservedSpaceGib:
+          description: The space on this storage volume reserved for snapshots, shown in GiB.
+          format: int64
+          type: string
+        reservedSpacePercent:
+          description: Percent of the total Volume size reserved for snapshot copies. Enabling snapshots requires reserving 20% or more of the storage volume space for snapshots. Maximum reserved space for snapshots is 40%. Setting this field will effectively set snapshot_enabled to true.
+          format: int32
+          type: integer
+        reservedSpaceRemainingGib:
+          description: The amount, in GiB, of available space in this storage volume's reserved snapshot space.
+          format: int64
+          type: string
+        reservedSpaceUsedPercent:
+          description: The percent of snapshot space on this storage volume actually being used by the snapshot copies. This value might be higher than 100% if the snapshot copies have overflowed into the data portion of the storage volume.
+          format: int32
+          type: integer
+      type: object
+    StartInstanceRequest:
+      description: Message requesting to start a server.
+      properties: {}
+      type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    StopInstanceRequest:
+      description: Message requesting to stop a server.
+      properties: {}
+      type: object
+    SubmitProvisioningConfigRequest:
+      description: Request for SubmitProvisioningConfig.
+      properties:
+        email:
+          description: Optional. Email provided to send a confirmation with provisioning config to.
+          type: string
+        provisioningConfig:
+          $ref: "#/components/schemas/ProvisioningConfig"
+          description: Required. The ProvisioningConfig to create.
+      type: object
+    SubmitProvisioningConfigResponse:
+      description: Response for SubmitProvisioningConfig.
+      properties:
+        provisioningConfig:
+          $ref: "#/components/schemas/ProvisioningConfig"
+          description: The submitted provisioning config.
+      type: object
+    VRF:
+      description: A network VRF.
+      properties:
+        name:
+          description: The name of the VRF.
+          type: string
+        qosPolicy:
+          $ref: "#/components/schemas/QosPolicy"
+          description: The QOS policy applied to this VRF. The value is only meaningful when all the vlan attachments have the same QoS. This field should not be used for new integrations, use vlan attachment level qos instead. The field is left for backward-compatibility.
+        state:
+          description: The possible state of VRF.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - PROVISIONED
+          type: string
+        vlanAttachments:
+          description: The list of VLAN attachments for the VRF.
+          items:
+            $ref: "#/components/schemas/VlanAttachment"
+          type: array
+      type: object
+    VlanAttachment:
+      description: VLAN attachment details.
+      properties:
+        id:
+          description: Immutable. The identifier of the attachment within vrf.
+          type: string
+        pairingKey:
+          description: Input only. Pairing key.
+          type: string
+        peerIp:
+          description: The peer IP of the attachment.
+          type: string
+        peerVlanId:
+          description: The peer vlan ID of the attachment.
+          format: int64
+          type: string
+        qosPolicy:
+          $ref: "#/components/schemas/QosPolicy"
+          description: The QOS policy applied to this VLAN attachment. This value should be preferred to using qos at vrf level.
+        routerIp:
+          description: The router IP of the attachment.
+          type: string
+      type: object
+    Volume:
+      description: A storage volume.
+      properties:
+        attached:
+          description: Output only. Is the Volume attached at at least one instance. This field is a lightweight counterpart of `instances` field. It is filled in List responses as well.
+          readOnly: true
+          type: boolean
+        autoGrownSizeGib:
+          description: The size, in GiB, that this storage volume has expanded as a result of an auto grow policy. In the absence of auto-grow, the value is 0.
+          format: int64
+          type: string
+        bootVolume:
+          description: Output only. Whether this volume is a boot volume. A boot volume is one which contains a boot LUN.
+          readOnly: true
+          type: boolean
+        currentSizeGib:
+          description: The current size of this storage volume, in GiB, including space reserved for snapshots. This size might be different than the requested size if the storage volume has been configured with auto grow or auto shrink.
+          format: int64
+          type: string
+        emergencySizeGib:
+          description: Additional emergency size that was requested for this Volume, in GiB. current_size_gib includes this value.
+          format: int64
+          type: string
+        expireTime:
+          description: Output only. Time after which volume will be fully deleted. It is filled only for volumes in COOLOFF state.
+          format: google-datetime
+          readOnly: true
+          type: string
+        id:
+          description: An identifier for the `Volume`, generated by the backend.
+          type: string
+        instances:
+          description: Output only. Instances this Volume is attached to. This field is set only in Get requests.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs.
+          type: object
+        maxSizeGib:
+          description: Maximum size volume can be expanded to in case of evergency, in GiB.
+          format: int64
+          type: string
+        name:
+          description: "Output only. The resource name of this `Volume`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/volumes/{volume}`"
+          readOnly: true
+          type: string
+        notes:
+          description: Input only. User-specified notes for new Volume. Used to provision Volumes that require manual intervention.
+          type: string
+        originallyRequestedSizeGib:
+          description: Originally requested size, in GiB.
+          format: int64
+          type: string
+        performanceTier:
+          description: Immutable. Performance tier of the Volume. Default is SHARED.
+          enum:
+            - VOLUME_PERFORMANCE_TIER_UNSPECIFIED
+            - VOLUME_PERFORMANCE_TIER_SHARED
+            - VOLUME_PERFORMANCE_TIER_ASSIGNED
+            - VOLUME_PERFORMANCE_TIER_HT
+          type: string
+        pod:
+          description: Immutable. Pod name.
+          type: string
+        protocol:
+          description: Output only. Storage protocol for the Volume.
+          enum:
+            - PROTOCOL_UNSPECIFIED
+            - FIBRE_CHANNEL
+            - NFS
+          readOnly: true
+          type: string
+        remainingSpaceGib:
+          description: The space remaining in the storage volume for new LUNs, in GiB, excluding space reserved for snapshots.
+          format: int64
+          type: string
+        requestedSizeGib:
+          description: The requested size of this storage volume, in GiB.
+          format: int64
+          type: string
+        snapshotAutoDeleteBehavior:
+          description: The behavior to use when snapshot reserved space is full.
+          enum:
+            - SNAPSHOT_AUTO_DELETE_BEHAVIOR_UNSPECIFIED
+            - DISABLED
+            - OLDEST_FIRST
+            - NEWEST_FIRST
+          type: string
+        snapshotEnabled:
+          description: Whether snapshots are enabled.
+          type: boolean
+        snapshotReservationDetail:
+          $ref: "#/components/schemas/SnapshotReservationDetail"
+          description: Details about snapshot space reservation and usage on the storage volume.
+        snapshotSchedulePolicy:
+          description: The name of the snapshot schedule policy in use for this volume, if any.
+          type: string
+        state:
+          description: The state of this storage volume.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - READY
+            - DELETING
+            - UPDATING
+            - COOL_OFF
+          type: string
+        storageAggregatePool:
+          description: Input only. Name of the storage aggregate pool to allocate the volume in. Can be used only for VOLUME_PERFORMANCE_TIER_ASSIGNED volumes.
+          type: string
+        storageType:
+          description: The storage type for this volume.
+          enum:
+            - STORAGE_TYPE_UNSPECIFIED
+            - SSD
+            - HDD
+          type: string
+        workloadProfile:
+          description: The workload profile for the volume.
+          enum:
+            - WORKLOAD_PROFILE_UNSPECIFIED
+            - GENERIC
+            - HANA
+          type: string
+      type: object
+    VolumeConfig:
+      description: Configuration parameters for a new volume.
+      properties:
+        gcpService:
+          description: The GCP service of the storage volume. Available gcp_service are in https://cloud.google.com/bare-metal/docs/bms-planning.
+          type: string
+        id:
+          description: A transient unique identifier to identify a volume within an ProvisioningConfig request.
+          type: string
+        lunRanges:
+          description: LUN ranges to be configured. Set only when protocol is PROTOCOL_FC.
+          items:
+            $ref: "#/components/schemas/LunRange"
+          type: array
+        machineIds:
+          description: Machine ids connected to this volume. Set only when protocol is PROTOCOL_FC.
+          items:
+            type: string
+          type: array
+        name:
+          description: Output only. The name of the volume config.
+          readOnly: true
+          type: string
+        nfsExports:
+          description: NFS exports. Set only when protocol is PROTOCOL_NFS.
+          items:
+            $ref: "#/components/schemas/NfsExport"
+          type: array
+        performanceTier:
+          description: Performance tier of the Volume. Default is SHARED.
+          enum:
+            - VOLUME_PERFORMANCE_TIER_UNSPECIFIED
+            - VOLUME_PERFORMANCE_TIER_SHARED
+            - VOLUME_PERFORMANCE_TIER_ASSIGNED
+            - VOLUME_PERFORMANCE_TIER_HT
+          type: string
+        protocol:
+          description: Volume protocol.
+          enum:
+            - PROTOCOL_UNSPECIFIED
+            - PROTOCOL_FC
+            - PROTOCOL_NFS
+          type: string
+        sizeGb:
+          description: The requested size of this volume, in GB.
+          format: int32
+          type: integer
+        snapshotsEnabled:
+          description: Whether snapshots should be enabled.
+          type: boolean
+        storageAggregatePool:
+          description: Input only. Name of the storage aggregate pool to allocate the volume in. Can be used only for VOLUME_PERFORMANCE_TIER_ASSIGNED volumes.
+          type: string
+        type:
+          description: The type of this Volume.
+          enum:
+            - TYPE_UNSPECIFIED
+            - FLASH
+            - DISK
+          type: string
+        userNote:
+          description: User note field, it can be used by customers to add additional information for the BMS Ops team .
+          type: string
+      type: object
+    VolumeSnapshot:
+      description: A snapshot of a volume. Only boot volumes can have snapshots.
+      properties:
+        createTime:
+          description: Output only. The creation time of the snapshot.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: The description of the snapshot.
+          type: string
+        id:
+          description: Output only. An identifier for the snapshot, generated by the backend.
+          readOnly: true
+          type: string
+        name:
+          description: The name of the snapshot.
+          type: string
+        storageVolume:
+          description: Output only. The name of the volume which this snapshot belongs to.
+          readOnly: true
+          type: string
+        type:
+          description: Output only. The type of the snapshot which indicates whether it was scheduled or manual/ad-hoc.
+          enum:
+            - SNAPSHOT_TYPE_UNSPECIFIED
+            - AD_HOC
+            - SCHEDULED
+          readOnly: true
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

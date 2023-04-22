@@ -1,0 +1,923 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://vtex.local"
+    },
+    {
+      "description": "VTEX server url",
+      "url": "https://{accountName}.{environment}.com.br/api",
+      "variables": {
+        "accountName": {
+          "default": "{accountName}",
+          "description": "Name of the VTEX account. Used as part of the URL"
+        },
+        "environment": {
+          "default": "{environment}",
+          "description": "Environment to use. Used as part of the URL."
+        }
+      }
+    }
+  ],
+  "info": {
+    "contact": {},
+    "description": "",
+    "title": "Subscription (v1 - deprecated)",
+    "version": "1.0",
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Recurrence (v1 - deprecated).json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "vtex.local",
+    "x-serviceName": "Recurrence-(v1-",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+    }
+  },
+  "security": [
+    {
+      "appKey": [],
+      "appToken": []
+    }
+  ],
+  "tags": [
+    {
+      "description": "",
+      "name": "Miscellaneous"
+    }
+  ],
+  "paths": {
+    "/subscriptions": {
+      "get": {
+        "deprecated": false,
+        "description": "Retrieves a given Subscription (formerly recurrence). There are three options of filtering your Subscruptions v1. It's possible to get a list of all Subscriptions v1, by not adding any query params to your request, and simply executing a call to the url. It is also possible to list the Subscriptions by email, filtering by the email query param. And finnally, it is possible to list recurrences with failures on the last execution cycle, filtering by the cycleStatus query param.",
+        "operationId": "GetRecurrencebyemail",
+        "parameters": [
+          {
+            "description": "If you wish to list tasks by email, insert the desired user's email.",
+            "explode": true,
+            "in": "query",
+            "name": "email",
+            "required": false,
+            "schema": {
+              "example": "{{email}}",
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "description": "If you wish to list tasks by Subscriptions with failures on the last execution cycle, insert the desired cycleStatus.",
+            "explode": true,
+            "in": "query",
+            "name": "cycleStatus",
+            "required": false,
+            "schema": {
+              "example": "{{cycleStatus}}",
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Get Subscriptions",
+        "tags": [
+          "Miscellaneous"
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Updates details of a given Subscription (formerly recurrence).",
+        "operationId": "Updaterecurrence",
+        "parameters": [
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "deliveryDay": 26,
+                "deliveryWeekday": "Friday",
+                "email": "user@vtex.com.br",
+                "items": [
+                  {
+                    "frequency": {
+                      "interval": 1,
+                      "periodicity": "weekly"
+                    },
+                    "quantity": 2,
+                    "seller": "1",
+                    "shippingAddressId": "-1461618656161",
+                    "sku": "18"
+                  }
+                ],
+                "paymentAccountId": "87FE21B06C0D42908D31A5B11E6FC043"
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpdaterecurrenceRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Update Subscription",
+        "tags": [
+          "Miscellaneous"
+        ]
+      }
+    },
+    "/subscriptions/me": {
+      "get": {
+        "deprecated": false,
+        "description": "Lists details of your self Subscription (formerly Recurrence).",
+        "operationId": "Getselfrecurrence",
+        "parameters": [
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Get self Subscription",
+        "tags": [
+          "Miscellaneous"
+        ]
+      }
+    },
+    "/subscriptions/settings": {
+      "get": {
+        "deprecated": false,
+        "description": "Retrieves your store's Subscriptions' (formerly recurrence) settings.",
+        "operationId": "Getrecurrencesettings",
+        "parameters": [
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Get Subscription settings",
+        "tags": [
+          "Miscellaneous"
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Updates the Subscriptions' (formerly Recurrence) settings of your store by salesChannel and defaultSLA.",
+        "operationId": "Updaterecurrencesettings",
+        "parameters": [
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "defaultSLA": "Normal",
+                "salesChannel": "1"
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpdaterecurrencesettingsRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Update Subscription settings",
+        "tags": [
+          "Miscellaneous"
+        ]
+      }
+    },
+    "/subscriptions/{recurrenceId}": {
+      "get": {
+        "deprecated": false,
+        "description": "Retrieves a given Subscription (formerly recurrence) by recurrenceId.",
+        "operationId": "GetRecurrencebyrecurrenceId",
+        "parameters": [
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "recurrenceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Get Subscription by recurrenceId",
+        "tags": [
+          "Miscellaneous"
+        ]
+      },
+      "patch": {
+        "deprecated": false,
+        "description": "Updates partial information of a given subscription (formerly Recurrence).",
+        "operationId": "Updatepartialrecurrence",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "recurrenceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "deliveryDay": 18,
+                "deliveryWeekday": "Monday",
+                "status": "inactive"
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpdatepartialrecurrenceRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Update partial Subscription",
+        "tags": [
+          "Miscellaneous"
+        ]
+      }
+    },
+    "/subscriptions/{recurrenceId}/addresses": {
+      "get": {
+        "deprecated": false,
+        "description": "Retrieves the addresses attached to a given subscription (formerly recurrence) by recurrenceId.",
+        "operationId": "Getrecurrenceaddresses",
+        "parameters": [
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "recurrenceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Get Subscription addresses",
+        "tags": [
+          "Miscellaneous"
+        ]
+      }
+    },
+    "/subscriptions/{recurrenceId}/items": {
+      "post": {
+        "deprecated": false,
+        "description": "Adds an item to a Subscription (formerly Recurrence).",
+        "operationId": "Addrecurrenceitem",
+        "parameters": [
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "recurrenceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": [
+                {
+                  "frequency": {
+                    "interval": 1,
+                    "periodicity": "monthly"
+                  },
+                  "quantity": 2,
+                  "seller": "1",
+                  "shippingAddressId": "-1461618656161",
+                  "sku": "20"
+                }
+              ],
+              "schema": {
+                "description": "",
+                "items": {
+                  "$ref": "#/components/schemas/AddrecurrenceitemRequest"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Add Subscription item",
+        "tags": [
+          "Miscellaneous"
+        ]
+      }
+    },
+    "/subscriptions/{recurrenceId}/reindex": {
+      "patch": {
+        "deprecated": false,
+        "description": "Alters the frequency of a given Subscription (formerly Recurrence) by changing period and interval.",
+        "operationId": "Reindexrecurrence",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "recurrenceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": [
+                {
+                  "frequency": {
+                    "interval": 1,
+                    "periodicity": "yearly"
+                  }
+                }
+              ],
+              "schema": {
+                "description": "",
+                "items": {
+                  "$ref": "#/components/schemas/ReindexrecurrenceRequest"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Reindex Subscription",
+        "tags": [
+          "Miscellaneous"
+        ]
+      }
+    },
+    "/subscriptions/{recurrenceid}/accounts": {
+      "get": {
+        "deprecated": false,
+        "description": "Lists payment accounts of a given Subscription (formerly Recurrence) by recurrenceId.",
+        "operationId": "Getpaymentaccounts",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "recurrenceid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "Type of the content being sent",
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "schema": {
+              "example": "application/json",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "summary": "Get payment accounts",
+        "tags": [
+          "Miscellaneous"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddrecurrenceitemRequest": {
+        "example": {
+          "frequency": {
+            "interval": 1,
+            "periodicity": "monthly"
+          },
+          "quantity": 2,
+          "seller": "1",
+          "shippingAddressId": "-1461618656161",
+          "sku": "20"
+        },
+        "properties": {
+          "frequency": {
+            "$ref": "#/components/schemas/Frequency"
+          },
+          "quantity": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "seller": {
+            "type": "string"
+          },
+          "shippingAddressId": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sku",
+          "seller",
+          "quantity",
+          "frequency",
+          "shippingAddressId"
+        ],
+        "title": "AddrecurrenceitemRequest",
+        "type": "object"
+      },
+      "Frequency": {
+        "example": {
+          "interval": 1,
+          "periodicity": "monthly"
+        },
+        "properties": {
+          "interval": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "periodicity": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "periodicity",
+          "interval"
+        ],
+        "title": "Frequency",
+        "type": "object"
+      },
+      "Item": {
+        "example": {
+          "frequency": {
+            "interval": 1,
+            "periodicity": "weekly"
+          },
+          "quantity": 2,
+          "seller": "1",
+          "shippingAddressId": "-1461618656161",
+          "sku": "18"
+        },
+        "properties": {
+          "frequency": {
+            "$ref": "#/components/schemas/Frequency"
+          },
+          "quantity": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "seller": {
+            "type": "string"
+          },
+          "shippingAddressId": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sku",
+          "seller",
+          "quantity",
+          "frequency",
+          "shippingAddressId"
+        ],
+        "title": "Item",
+        "type": "object"
+      },
+      "ReindexrecurrenceRequest": {
+        "example": {
+          "frequency": {
+            "interval": 1,
+            "periodicity": "yearly"
+          }
+        },
+        "properties": {
+          "frequency": {
+            "$ref": "#/components/schemas/Frequency"
+          }
+        },
+        "required": [
+          "frequency"
+        ],
+        "title": "ReindexrecurrenceRequest",
+        "type": "object"
+      },
+      "UpdatepartialrecurrenceRequest": {
+        "example": {
+          "deliveryDay": 18,
+          "deliveryWeekday": "Monday",
+          "status": "inactive"
+        },
+        "properties": {
+          "deliveryDay": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "deliveryWeekday": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deliveryDay",
+          "deliveryWeekday",
+          "status"
+        ],
+        "title": "UpdatepartialrecurrenceRequest",
+        "type": "object"
+      },
+      "UpdaterecurrenceRequest": {
+        "example": {
+          "deliveryDay": 26,
+          "deliveryWeekday": "Friday",
+          "email": "user@vtex.com.br",
+          "items": [
+            {
+              "frequency": {
+                "interval": 1,
+                "periodicity": "weekly"
+              },
+              "quantity": 2,
+              "seller": "1",
+              "shippingAddressId": "-1461618656161",
+              "sku": "18"
+            }
+          ],
+          "paymentAccountId": "87FE21B06C0D42908D31A5B11E6FC043"
+        },
+        "properties": {
+          "deliveryDay": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "deliveryWeekday": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "items": {
+            "description": "",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "type": "array"
+          },
+          "paymentAccountId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "deliveryDay",
+          "deliveryWeekday",
+          "items",
+          "paymentAccountId"
+        ],
+        "title": "UpdaterecurrenceRequest",
+        "type": "object"
+      },
+      "UpdaterecurrencesettingsRequest": {
+        "example": {
+          "defaultSLA": "Normal",
+          "salesChannel": "1"
+        },
+        "properties": {
+          "defaultSLA": {
+            "type": "string"
+          },
+          "salesChannel": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "salesChannel",
+          "defaultSLA"
+        ],
+        "title": "UpdaterecurrencesettingsRequest",
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "appKey": {
+        "in": "header",
+        "name": "X-VTEX-API-AppKey",
+        "type": "apiKey"
+      },
+      "appToken": {
+        "in": "header",
+        "name": "X-VTEX-API-AppToken",
+        "type": "apiKey"
+      }
+    }
+  }
+}

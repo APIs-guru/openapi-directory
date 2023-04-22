@@ -1,0 +1,37 @@
+{
+  "added": "2023-02-17T11:02:20.620Z",
+  "info": {
+    "contact": {
+      "email": "developer-experience@adyen.com",
+      "name": "Adyen Developer Experience team",
+      "url": "https://www.adyen.help/hc/en-us/community/topics",
+      "x-twitter": "Adyen"
+    },
+    "description": "The Balance Control API lets you transfer funds between merchant accounts that belong to the same legal entity and are under the same company account.\n\n## Authentication\nTo connect to the Balance Control API, you must authenticate your requests with an [API key or basic auth username and password](https://docs.adyen.com/development-resources/api-authentication). To learn how you can generate these, see [API credentials](https://docs.adyen.com/development-resources/api-credentials).Here is an example of authenticating a request with an API key:\n\n```\ncurl\n-H \"X-API-Key: Your_API_key\" \\\n-H \"Content-Type: application/json\" \\\n...\n```\nNote that when going live, you need to generate API credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).\n\n## Versioning\nThe Balance Control API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.\n\nFor example:\n\n```\nhttps://pal-test.adyen.com/pal/servlet/BalanceControl/v1/balanceTransfer\n```\n",
+    "termsOfService": "https://www.adyen.com/legal/terms-and-conditions",
+    "title": "Adyen Balance Control API",
+    "version": "1",
+    "x-apisguru-categories": [
+      "payment"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_Adyen_profile_image"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/BalanceControlService-v1.json",
+        "version": "3.1"
+      }
+    ],
+    "x-providerName": "adyen.com",
+    "x-publicVersion": true,
+    "x-serviceName": "BalanceControlService",
+    "x-timestamp": "2023-02-20T18:23:08Z"
+  },
+  "updated": "2023-02-24T23:24:00.613Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/adyen.com/BalanceControlService/1/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/adyen.com/BalanceControlService/1/openapi.yaml",
+  "openapiVer": "3.1.0",
+  "link": "https://api.apis.guru/v2/specs/adyen.com:BalanceControlService/1.json"
+}

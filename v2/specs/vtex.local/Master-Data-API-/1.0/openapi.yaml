@@ -1,0 +1,1960 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://{accountName}.{environment}.com.br
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: "# ATTENTION: **This version isn't compliant with data entities of old version (e.g. CL and AD). It's possible to use this configuration only to new data entities.**\r
+
+    \r
+
+    \r
+
+    ## Welcome!\r
+
+    \r
+
+    VTEX Master Data is an easy-to-use, secure, fast, scalable and extensible repository. On it you can create your own Entities, store data and consult directly from the storefront or use it to store info for some external integration.\r
+
+    \r
+
+    There are internal VTEX modules that use VTEX Master Data as data repository. We have the VTEX Customer Service, VTEX Profile System and VTEX InStore, for example. It is also used by other internal services.\r
+
+    \r
+
+    There are two ways to use Master Data:\r
+
+    \r
+
+    1. Directly from the storefront\r
+
+    2. External integration\r
+
+    \r
+
+    ### Directly from the storefront\r
+
+    \r
+
+    If your scenario is to be used inside the storefront, be aware of the following observations:\r
+
+    \r
+
+    1. Use the storefront host to query or store information to avoid **CORS**;\r
+
+    2. Configure which information should be public and which shouldn't, inside the JSON Schema of the Data Entity;\r
+
+    3. Do not create query loops (the storefront may be affected with Throttling and apis may be turned off as a security protection);\r
+
+    4. Never add via JS any type of authentication key (x-vtex-api-appkey or x-vtex-api-apptoken);\r
+
+    \r
+
+    **It's important to avoid CORS using the relative path**\r
+
+    \r
+
+    ### External Integration\r
+
+    \r
+
+    If your scenario is to perform external integration, such as migrating client data from another service, be aware of the following observations:\r
+
+    \r
+
+    1. Use the host ```{{accountName}}.vtexcommercestable.com.br```;\r
+
+    2. Use the authentication keys (x-vtex-api-appkey ou x-vtex-api-apptoken);\r
+
+    \r
+
+    ### Most used attributes listed here\r
+
+    \r
+
+    | Name | Description |\r
+
+    | -------- | -------- |\r
+
+    | accountName | Account name in VTEX License Manager |\r
+
+    | name | Data Entity name |\r
+
+    | schema | JSON Schema of a Data Entity |\r
+
+    | id | Identifier of a document |\r
+
+    | x-vtex-api-appKey | User key |\r
+
+    | x-vtex-api-appToken | User token |"
+  title: Master Data API - v2
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Master Data API - v2.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Master-Data-API-
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - description: "The APIs within this group are used to save documents and query them by id.\r
+
+      \r
+
+      If the document has the id attribute or has fields that have been set to indexes with unique values, VTEX Master Data will attempt to identify the document. If the document is found a change will be made. If it is not found, an inclusion will be made. ** This scenario does not apply to the API with the POST verb**.\r
+
+      \r
+
+      Otherwise, a new document will always be created.\r
+
+      \r
+
+      You can use the query string `_where` to apply an update only if the document is compliant with the clause.\r
+
+      \r
+
+      In addition with this feature you can use the schema parameter `_schema` as a query string to apply the update only if the document is compliant with the schema. If the document is not compliant, the body of the response will have an array with each error, where the field ```Message``` indicates the type of the error.\r
+
+      \r
+
+      ### Response status code\r
+
+      \r
+
+      1. Status Code 201: Document created successfully\r
+
+      2. Status Code 200: Document changed successfully\r
+
+      3. Status Code 304: There were no changes to the document\r
+
+      4. Status Code 400: Invalid information in JSON\r
+
+      5. Status Code 403: Unauthorized access\r\n"
+    name: Documents
+  - description: "The ```search``` API is intended to query a collection of documents.  "
+    name: Search
+  - description: The new `` scroll `` API has been developed to meet external integration scenarios. If you need to query the entire VTEX Master Data database, or your collection is over 10.000 documents, use this feature.
+    name: Scroll
+  - name: Schemas
+  - description: Create alternative keys for data entities.
+    name: Indices
+  - description: Lets you know if a particular document is in one or more clusters.
+    name: Clusters
+  - description: Master Data documents are versioned. This means that for each change a new version is generated. The `versions` APIs allows to query the versions and also apply the state of a document to the most current version.
+    name: Versions
+  - name: Customer profiles
+  - name: Addresses
+paths:
+  /api/dataentities/Address/documents:
+    post:
+      deprecated: false
+      description: "Creates new customer address. \r
+
+        \r
+
+        > You can use this request to create customer addresses according to any `AD` schema. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for the schemas you are using. Learn more about how to use [Master Data v2 schemas](https://developers.vtex.com/vtex-rest-api/docs/master-data-schema-lifecycle)."
+      operationId: CreateNewCustomerAddress
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/_schema"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUpdateAddressRequests"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Address/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: AD-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Create new customer address
+      tags:
+        - Addresses
+  "/api/dataentities/Address/documents/{id}":
+    delete:
+      deprecated: false
+      description: Deletes a customer address.
+      operationId: DeleteCustomerAddress
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Address/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: AD-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Delete customer address
+      tags:
+        - Addresses
+    patch:
+      deprecated: false
+      description: "Partially updates a customer address.\r
+
+        \r
+
+        > You can use this request to update customer addresses according to any `AD` schema. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for the schemas you are using. Learn more about how to use [Master Data v2 schemas](https://developers.vtex.com/vtex-rest-api/docs/master-data-schema-lifecycle)."
+      operationId: UpdateCustomerAddress
+      parameters:
+        - $ref: "#/components/parameters/_schema"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUpdateAddressRequests"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Address/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: AD-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Update customer address
+      tags:
+        - Addresses
+  /api/dataentities/Client/documents:
+    post:
+      deprecated: false
+      description: "Creates new customer profile.\r
+
+        \r
+
+        > You can use this request to create customer profiles according to any `CL` schema. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for the schemas you are using. Learn more about how to use [Master Data v2 schemas](https://developers.vtex.com/vtex-rest-api/docs/master-data-schema-lifecycle)."
+      operationId: CreateNewCustomerProfilev2
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/_schema"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUpdateProfileRequests"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Client/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Create new customer profile
+      tags:
+        - Customer profiles
+  "/api/dataentities/Client/documents/{id}":
+    delete:
+      deprecated: false
+      description: Deletes a customer profile.
+      operationId: DeleteCustomerProfile
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Client/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Delete customer profile
+      tags:
+        - Customer profiles
+    patch:
+      deprecated: false
+      description: "Partially updates a customer profile.\r
+
+        \r
+
+        > You can use this request to update customer profiles according to any `CL` schema. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for the schemas you are using. Learn more about how to use [Master Data v2 schemas](https://developers.vtex.com/vtex-rest-api/docs/master-data-schema-lifecycle)."
+      operationId: UpdateCustomerProfile
+      parameters:
+        - $ref: "#/components/parameters/_schema"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUpdateProfileRequests"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Client/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Update customer profile
+      tags:
+        - Customer profiles
+  "/api/dataentities/{dataEntityName}/documents":
+    patch:
+      deprecated: false
+      description: "This request allows you to partially update a document corresponding to a given data entity.\r
+
+        \r
+
+        > You can use this request to create documents for any given data entity. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for each document you wish to update.\r
+
+        \r
+
+        ## Example use cases\r
+
+        \r
+
+        ### Client profile\r
+
+        \r
+
+        In order to create a customer profile's `phone` and `isNewsletterOptIn` fields, choose the `CL` data entity and send a request similar to this:\r
+
+        \r
+
+        PATCH\r
+
+        ```\r
+
+        https://examplestore.vtexcommercestable.com.br/api/dataentities/Client/documents\r
+
+        ```\r
+
+        \r
+
+        Request body\r
+
+        ```json\r
+
+        {\r
+
+        \    \"phone\": \"+12025550195\",\r
+
+        \    \"isNewsletterOptIn\": false\r
+
+        \ }\r
+
+        ```\r
+
+        \r
+
+        ### Client address\r
+
+        \r
+
+        In order to update the `receiverName` of an existing address, the data entity is `AD` and the request would look like this:\r
+
+        \r
+
+        PATCH\r
+
+        ```\r
+
+        https://examplestore.vtexcommercestable.com.br/api/dataentities/Address/documents\r
+
+        ```\r
+
+        \r
+
+        Request body\r
+
+        ```json\r
+
+        {\r
+
+        \    \"receiverName\": \"Lois Lane\"\r
+
+        }\r
+
+        ```"
+      operationId: Createorupdatepartialdocument
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/_schema"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentRequest"
+        description: JSON with the fields to be updated.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Client/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Create partial document
+      tags:
+        - Documents
+    post:
+      deprecated: false
+      description: "This request allows you to create a new document corresponding to a given data entity. For example, you can create a new customer profile or address.\r
+
+        \r
+
+        > You can use this request to create documents for any given data entity. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for each document you wish to create.\r
+
+        \r
+
+        ## Example use cases\r
+
+        \r
+
+        ### Client profile\r
+
+        \r
+
+        In order to create a new customer profile, choose the `CL` data entity and send a request similar to this:\r
+
+        \r
+
+        POST\r
+
+        ```\r
+
+        https://examplestore.vtexcommercestable.com.br/api/dataentities/Client/documents\r
+
+        ```\r
+
+        \r
+
+        Request body\r
+
+        ```json\r
+
+        {\r
+
+        \    \"email\": \"clark.kent@examplemail.com\",\r
+
+        \    \"firstName\": \"Clark\",\r
+
+        \    \"lastName\": \"Kent\",\r
+
+        \    \"phone\": \"+12025550195\",\r
+
+        \    \"documentType\": \"CPF\",\r
+
+        \    \"document\": \"12345678900\"\r
+
+        \    \"isCorporate\": false,\r
+
+        \    \"isNewsletterOptIn\": false,\r
+
+        \    \"localeDefault\": \"en-US\"\r
+
+        \ }\r
+
+        ```\r
+
+        \r
+
+        ### Client address\r
+
+        \r
+
+        For a new address, the data entity is `AD` and the request would look like this:\r
+
+        \r
+
+        POST\r
+
+        ```\r
+
+        https://examplestore.vtexcommercestable.com.br/api/dataentities/Address/documents\r
+
+        ```\r
+
+        \r
+
+        Request body\r
+
+        ```json\r
+
+        {\r
+
+        \    \"addressName\": \"My House\",\r
+
+        \    \"addressType\": \"residential\",\r
+
+        \    \"city\": \"Metropolis\",\r
+
+        \    \"complement\": \"\",\r
+
+        \    \"country\": \"USA\",\r
+
+        \    \"postalCode\": \"11375\",\r
+
+        \    \"receiverName\": \"Clark Kent\",\r
+
+        \    \"reference\": null,\r
+
+        \    \"state\": \"MP\",\r
+
+        \    \"street\": \"Baker Street\",\r
+
+        \    \"neighborhood\": \"Upper east side\",\r
+
+        \    \"number\": \"21\",\r
+
+        \    \"userId\": \"7e03m794-a33a-11e9-84rt6-0adfa64s5a8e\"\r
+
+        }\r
+
+        ```"
+      operationId: Createnewdocument
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/_schema"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Client/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Create new document
+      tags:
+        - Documents
+  "/api/dataentities/{dataEntityName}/documents/{id}":
+    delete:
+      deprecated: false
+      description: It allows to delete a document.
+      operationId: Deletedocument
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Delete document
+      tags:
+        - Documents
+    get:
+      deprecated: false
+      description: "Gets document by ID.
+
+        \r
+
+        \r> Assign the `_fields` parameter in the query string to retrieve the desired fields. If you want to return all the fields use `_fields=_all`."
+      operationId: Getdocument
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                accountId: 14af940d-9300-4279-9355-61d44c2ff879
+                accountName: my-store-name
+                dataEntityId: Client
+                id: b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/Using_fields_all"
+          description: Sucessful response
+          headers: {}
+      summary: Get document
+      tags:
+        - Documents
+    patch:
+      deprecated: false
+      description: "This request allows you to partially update a document corresponding to a given data entity. For example, you can update some fields of a customer profile or address.\r
+
+        \r
+
+        > You can use this request to update documents for any given data entity. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for each document you wish to update.\r
+
+        \r
+
+        ## Example use cases\r
+
+        \r
+
+        ### Client profile\r
+
+        \r
+
+        In order to update a customer profile's `phone` and `isNewsletterOptIn` fields, choose the `CL` data entity and send a request similar to this:\r
+
+        \r
+
+        PATCH\r
+
+        ```\r
+
+        https://examplestore.vtexcommercestable.com.br/api/dataentities/Client/documents/123456789abc\r
+
+        ```\r
+
+        \r
+
+        Request body\r
+
+        ```json\r
+
+        {\r
+
+        \    \"phone\": \"+12025550195\",\r
+
+        \    \"isNewsletterOptIn\": false\r
+
+        \ }\r
+
+        ```\r
+
+        \r
+
+        ### Client address\r
+
+        \r
+
+        In order to update the `receiverName` of an existing address, the data entity is `AD` and the request would look like this:\r
+
+        \r
+
+        PATCH\r
+
+        ```\r
+
+        https://examplestore.vtexcommercestable.com.br/api/dataentities/Address/documents/123456789abc\r
+
+        ```\r
+
+        \r
+
+        Request body\r
+
+        ```json\r
+
+        {\r
+
+        \    \"receiverName\": \"Lois Lane\"\r
+
+        }\r
+
+        ```"
+      operationId: Updatepartialdocument
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/_where"
+        - $ref: "#/components/parameters/_schema"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Client/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Update partial document
+      tags:
+        - Documents
+    put:
+      deprecated: false
+      description: "Update an existing document corresponding to a given data entity. For example, you can update a customer profile or address.\r
+
+        \r
+
+        > You can use this request to update documents in any given data entity. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for each document you wish to update.\r
+
+        \r
+
+        ## Example use cases\r
+
+        \r
+
+        ### Client profile\r
+
+        \r
+
+        In order to update an existing customer profile, choose the `CL` data entity and send a request similar to this:\r
+
+        \r
+
+        PUT\r
+
+        ```\r
+
+        https://examplestore.vtexcommercestable.com.br/api/dataentities/Client/documents/123456789abc\r
+
+        ```\r
+
+        \r
+
+        Request body\r
+
+        ```json\r
+
+        {\r
+
+        \    \"email\": \"clark.kent@examplemail.com\",\r
+
+        \    \"firstName\": \"Clark\",\r
+
+        \    \"lastName\": \"Kent\",\r
+
+        \    \"phone\": \"+12025550195\",\r
+
+        \    \"documentType\": \"CPF\",\r
+
+        \    \"document\": \"12345678900\"\r
+
+        \    \"isCorporate\": false,\r
+
+        \    \"isNewsletterOptIn\": false,\r
+
+        \    \"localeDefault\": \"en-US\"\r
+
+        \ }\r
+
+        ```\r
+
+        \r
+
+        ### Client address\r
+
+        \r
+
+        To update an address, the data entity is `AD` and the request would look like this:\r
+
+        \r
+
+        PUT\r
+
+        ```\r
+
+        https://examplestore.vtexcommercestable.com.br/api/dataentities/Address/documents/123456789abc\r
+
+        ```\r
+
+        \r
+
+        Request body\r
+
+        ```json\r
+
+        {\r
+
+        \    \"addressName\": \"My House\",\r
+
+        \    \"addressType\": \"residential\",\r
+
+        \    \"city\": \"Metropolis\",\r
+
+        \    \"complement\": \"\",\r
+
+        \    \"country\": \"USA\",\r
+
+        \    \"postalCode\": \"11375\",\r
+
+        \    \"receiverName\": \"Clark Kent\",\r
+
+        \    \"reference\": null,\r
+
+        \    \"state\": \"MP\",\r
+
+        \    \"street\": \"Baker Street\",\r
+
+        \    \"neighborhood\": \"Upper east side\",\r
+
+        \    \"number\": \"21\",\r
+
+        \    \"userId\": \"7e03m794-a33a-11e9-84rt6-0adfa64s5a8e\"\r
+
+        }\r
+
+        ```"
+      operationId: Updateentiredocument
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/_where"
+        - $ref: "#/components/parameters/_schema"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Client/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Update entire document
+      tags:
+        - Documents
+  "/api/dataentities/{dataEntityName}/documents/{id}/clusters":
+    post:
+      deprecated: false
+      description: "Check if a document is present in one or more clusters (specific set of field values).\r
+
+        \r
+
+        > There is a limit of five rules per request."
+      operationId: Validatedocumentbyclusters
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/json:
+            example: |-
+              [
+                  {
+                      "name": "male",        
+                      "rule": "gender=male"
+                  },
+                  {
+                      "name": "complex",
+                      "rule": "((gender=male AND percent=0.35) AND any is null) AND (name=*go*)"
+                  },    
+                  {
+                      "name": "complex2",
+                      "rule": "((gender=male AND percent=0.35) AND any is not null) OR (name=*go*)"
+                  },
+                  {
+                      "name": "createdIn",
+                      "rule": "createdIn between 2015-10-28 AND 2015-10-30"
+                  }
+              ]
+            schema:
+              default: |-
+                [
+                    {
+                        "name": "male",        
+                        "rule": "gender=male"
+                    },
+                    {
+                        "name": "complex",
+                        "rule": "((gender=male AND percent=0.35) AND any is null) AND (name=*go*)"
+                    },    
+                    {
+                        "name": "complex2",
+                        "rule": "((gender=male AND percent=0.35) AND any is not null) OR (name=*go*)"
+                    },
+                    {
+                        "name": "createdIn",
+                        "rule": "createdIn between 2015-10-28 AND 2015-10-30"
+                    }
+                ]
+              format: json
+              type: string
+        description: Request body for validating a document by clusters
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Validate document by clusters
+      tags:
+        - Clusters
+  "/api/dataentities/{dataEntityName}/documents/{id}/versions":
+    get:
+      deprecated: false
+      description: Allows to list the versions of a document.
+      operationId: Listversions
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+        - description: If true, return all the fields in each version of the document
+          in: query
+          name: load
+          required: false
+          schema:
+            default: true
+            type: boolean
+        - description: If `load` is true, the response will return only these specific fields
+          in: query
+          name: fields
+          required: false
+          schema:
+            default: id,dataEntityId,isNewsletterOptIn,createdBy
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - date: 2016-10-18T16:53:32+00:00
+                  document:
+                    createdBy: 81fc8b10-25b7-48de-b425-7b93554002cc
+                    dataEntityId: Client
+                    id: 72e7f8dd-1168-23ec-82ac-0e2b61663eb4
+                    isNewsletterOptIn: true
+                  id: _EAR0cJ7XB5k5grnmm0zeKGlVvVM9WCPy_
+                - date: 2016-09-08T20:11:42+00:00
+                  document:
+                    createdBy: 81fc8b10-25b7-48de-b425-7b93554002cc
+                    dataEntityId: Client
+                    id: 72e7f8dd-1168-23ec-82ac-0e2b61663eb4
+                    isNewsletterOptIn: true
+                  id: _E5SH9WXVvhPBNnbQtYAAGqrIysIeNYhV_
+              schema:
+                items:
+                  $ref: "#/components/schemas/Listversion"
+                type: array
+          description: OK
+          headers: {}
+      summary: List versions
+      tags:
+        - Versions
+  "/api/dataentities/{dataEntityName}/documents/{id}/versions/{versionId}":
+    get:
+      deprecated: false
+      description: Returns the version of a document.
+      operationId: Getversion
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/versionId"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                author: user-id
+                document:
+                  accountId: my-account-id
+                  accountName: my-account
+                  carttag: null
+                  checkouttag: null
+                  dataEntityId: Client
+                  departmentVisitedTag:
+                    DisplayValue: Ar e Ventilação
+                    Scores:
+                      Ar e Ventilação:
+                        - Date: 2016-10-18T16:53:31.0842607Z
+                          Point: 1
+                          Until: 2017-04-16T16:53:31.0842607Z
+                  email: teste@mail.com
+                  followers: []
+                  id: my-id
+                  rclastsession: 163054c0-954f-11e6-891e-4d2b1c3450a4
+                  rclastsessiondate: 2016-10-18T16:53:00
+                id: version-id
+              schema:
+                $ref: "#/components/schemas/Getversion"
+          description: OK
+          headers: {}
+      summary: Get version
+      tags:
+        - Versions
+    put:
+      deprecated: false
+      description: Updates document with version values.
+      operationId: Putversion
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/id"
+        - description: ID of the version to update
+          in: path
+          name: versionId
+          required: true
+          schema:
+            default: "{{versionId}}"
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Href: http://api.vtex.com/my-store-name/dataentities/Client/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e
+                Id: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+              schema:
+                $ref: "#/components/schemas/documentResponse"
+          description: OK
+      summary: Put version
+      tags:
+        - Versions
+  "/api/dataentities/{dataEntityName}/indices":
+    get:
+      deprecated: false
+      description: Returns the list of indices by data entity.
+      operationId: Getindices
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get indices
+      tags:
+        - Indices
+    put:
+      deprecated: false
+      description: Create an index.
+      operationId: Putindices
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+      requestBody:
+        content:
+          application/json:
+            example:
+              fields: fieldName
+              multiple: false
+              name: indexName
+            schema:
+              $ref: "#/components/schemas/PutindicesRequest"
+        description: Request body for creating an index
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Put indices
+      tags:
+        - Indices
+  "/api/dataentities/{dataEntityName}/indices/{index_name}":
+    delete:
+      deprecated: false
+      description: Delete an index.
+      operationId: Deleteindexbyname
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/index_name"
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Delete index by name
+      tags:
+        - Indices
+    get:
+      deprecated: false
+      description: Returns an index.
+      operationId: Getindexbyname
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/index_name"
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get index by name
+      tags:
+        - Indices
+  "/api/dataentities/{dataEntityName}/schemas":
+    get:
+      deprecated: false
+      description: Return the schemas saved.
+      operationId: Getschemas
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get schemas
+      tags:
+        - Schemas
+  "/api/dataentities/{dataEntityName}/schemas/{schemaName}":
+    delete:
+      deprecated: false
+      description: Deletes an existing schema for a given data entity.
+      operationId: Deleteschemabyname
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/schemaName"
+      responses:
+        "204":
+          description: No Content
+      summary: Delete schema by name
+      tags:
+        - Schemas
+    get:
+      deprecated: false
+      description: Returns an existing schema for a given data entity.
+      operationId: Getschemabyname
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/schemaName"
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get schema by name
+      tags:
+        - Schemas
+    put:
+      deprecated: false
+      description: "Creates or edits a data entity schema. Learn more about [Master Data schemas](https://developers.vtex.com/vtex-rest-api/docs/master-data-schema-lifecycle)\r
+
+        \r
+
+        > Note that if you send a `schemaName` that does not exist for that data entity, this request will create it.\r
+
+        \r
+
+        This request can also be used to [create or edit Master Data v2 triggers](https://developers.vtex.com/vtex-rest-api/docs/setting-up-triggers-in-master-data-v2)."
+      operationId: Saveschemabyname
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/schemaName"
+      requestBody:
+        content:
+          application/json:
+            example:
+              properties:
+                name:
+                  type: string
+            schema:
+              $ref: "#/components/schemas/SaveschemabynameRequest"
+        description: Request body for saving schema
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Save schema by name
+      tags:
+        - Schemas
+  "/api/dataentities/{dataEntityName}/scroll":
+    get:
+      deprecated: false
+      description: "In the first request, the `X-VTEX-MD-TOKEN` token will be returned in the header. This token must be passed to the next request in the query string `_token` parameter. The token has a timeout of 10 minutes, which refreshes after each request.\r
+
+        \r
+
+        After the token is obtained it is no longer necessary to send the filter or document size per page parameters. You only need to resend the token until the document collection is empty.
+
+        \r
+
+        \r> Avoid sending too many requests with wildcards (`*`) in the search parameters or that use the `keyword` parameter. This may lead to this endpoint being temporarily blocked for your account. If this happens you will receive an error with status code `429`.\r
+
+        \r
+
+        ## Request examples\r
+
+        \r
+
+        First request:\r
+
+        ```\r
+
+        /dataentities/Client/scroll?isCluster=true&_size=250&_fields=email,firstName\r
+
+        ```\r
+
+        \r
+
+        Retrieve the token in the header `X-VTEX-MD-TOKEN` from the first request's response and use it to make the next requests.\r
+
+        \r
+
+        Subsequent requests:\r
+
+        ```\r
+
+        /dataentities/Client/scroll?_token={tokenValueExample}\r
+
+        ```"
+      operationId: Scrolldocuments
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/_token"
+        - $ref: "#/components/parameters/REST-Range"
+        - $ref: "#/components/parameters/_fields"
+        - $ref: "#/components/parameters/_where"
+        - $ref: "#/components/parameters/_schema"
+        - $ref: "#/components/parameters/_keyword"
+        - $ref: "#/components/parameters/_sort"
+      responses:
+        "200":
+          description: OK
+          headers: {}
+        "429":
+          content:
+            application/json:
+              example: {}
+              schema:
+                description: Wildcard queries temporarily blocked due to excessive usage. Consider adjusting your code to remove them or reduce the rate of search requests with wildcards (*). This temporary block may also be due to excessive use of requests with the parameter `keyword`.
+          description: Too Many Requests
+      summary: Scroll documents
+      tags:
+        - Scroll
+  "/api/dataentities/{dataEntityName}/search":
+    get:
+      deprecated: false
+      description: "Retrieves documents' information, while choosing which fields will be returned and filtering documents by specific fields.\r
+
+        \r
+
+        > The response header `REST-Content-Range` indicates the total amount of results for that specific search. For example, it may return `resources 0-100/136108`, which indicates it has returned results from 0 to 100 of a total 136108.\r
+
+        \r
+
+        Below you can see some query examples and learn more about each query parameter.
+
+        \r
+
+        \r> Avoid sending too many requests with wildcards (`*`) in the search parameters or that use the `keyword` parameter. This may lead to this endpoint being temporarily blocked for your account. If this happens you will receive an error with status code `503`.\r
+
+        \r
+
+        ## Query examples\r
+
+        \r
+
+        ### Simple filter\r
+
+        \r
+
+        ```\r
+
+        /dataentities/Client/search?email=my@email.com\r
+
+        ```\r
+
+        \r
+
+        ### Complex filter\r
+
+        \r
+
+        ```\r
+
+        /dataentities/Client/search?_where=(firstName=Jon OR lastName=Smith) OR (createdIn between 2001-01-01 AND 2016-01-01)\r
+
+        ```\r
+
+        \r
+
+        ### Date Range\r
+
+        \r
+
+        ```\r
+
+        /dataentities/Client/search?_where=createdIn between 2001-01-01 AND 2016-01-01\r
+
+        ```\r
+
+        \r
+
+        ### Range numeric fields\r
+
+        \r
+
+        ```\r
+
+        /dataentities/Client/search?_where=age between 18 AND 25\r
+
+        ```\r
+
+        \r
+
+        ### Partial filter\r
+
+        \r
+
+        ```\r
+
+        /dataentities/Client/search?firstName=*Maria*\r
+
+        ```\r
+
+        \r
+
+        ### Filter for null values\r
+
+        \r
+
+        ```\r
+
+        /dataentities/Client/search?_where=firstName is null\r
+
+        ```\r
+
+        \r
+
+        ### Filter for non-null values\r
+
+        \r
+
+        ```\r
+
+        /dataentities/Client/search?_where=firstName is not null\r
+
+        ```\r
+
+        \r
+
+        ### Filter for difference\r
+
+        ```\r
+
+        /dataentities/Client/search?_where=firstName<>maria\r
+
+        ```\r
+
+        \r
+
+        ### Filter greater than or less than\r
+
+        ```\r
+
+        /dataentities/Client/search?_where=number>5\r
+
+        /dataentities/Client/search?_where=date<2001-01-01\r
+
+        ```"
+      operationId: Searchdocuments
+      parameters:
+        - $ref: "#/components/parameters/dataEntityName"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/REST-Range"
+        - $ref: "#/components/parameters/_fields"
+        - $ref: "#/components/parameters/_where"
+        - $ref: "#/components/parameters/_schema"
+        - $ref: "#/components/parameters/_keyword"
+        - $ref: "#/components/parameters/_sort"
+      responses:
+        "200":
+          description: OK
+        "503":
+          content:
+            application/json:
+              example: {}
+              schema:
+                description: Wildcard queries temporarily blocked due to excessive usage. Consider adjusting your code to remove them or reduce the rate of search requests with wildcards (*). This temporary block may also be due to excessive use of requests with the parameter `keyword`.
+          description: Service Unavailable
+      summary: Search documents
+      tags:
+        - Search
+components:
+  parameters:
+    Accept:
+      description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+      in: header
+      name: Accept
+      required: true
+      schema:
+        example: application/json
+        type: string
+      style: simple
+    Content-Type:
+      description: Type of the content being sent.
+      in: header
+      name: Content-Type
+      required: true
+      schema:
+        example: application/json
+        type: string
+      style: simple
+    REST-Range:
+      description: Defines the collection of documents to be returned. A range within the collection limited by 100 documents per query.
+      in: header
+      name: REST-Range
+      required: true
+      schema:
+        example: resources=0-10
+        type: string
+      style: simple
+    _fields:
+      description: Fields that should be returned by document. Separate fields' names with commas. For example `_fields=email,firstName,document`. You can also use `_all` to fetch all fields.
+      in: query
+      name: _fields
+      required: false
+      schema:
+        default: email,firstName,document
+        type: string
+      style: form
+    _keyword:
+      description: String to search. Use quotes for a partial query. For example, `_keyword=Maria` or `_keyword="Maria"`.
+      in: query
+      name: _keyword
+      required: false
+      schema:
+        example: String to search
+        type: string
+      style: form
+    _schema:
+      description: Name of the schema the document to be created needs to be compliant with.
+      in: query
+      name: _schema
+      required: false
+      schema:
+        example: schema
+        type: string
+      style: form
+    _size:
+      description: Inform the number of documents per request. Maximum value of `1000`.
+      in: query
+      name: _size
+      required: false
+      schema:
+        default: 100
+        type: integer
+      style: form
+    _sort:
+      description: Sets sorting mode in two parts. The first part is the name of the field you want to sort by. In the second part, use `ASC` for ascending or `DESC` for descending.
+      in: query
+      name: _sort
+      required: false
+      schema:
+        default: firstName ASC
+        type: string
+      style: form
+    _token:
+      description: Value of the header `X-VTEX-MD-TOKEN` returned in your first request. Send its value in this query string in the subsequent requests. The token has a timeout of 10 minutes, which refreshes after each new request.
+      in: query
+      name: _token
+      required: false
+      schema:
+        default: "{tokenValueExample}"
+        type: string
+      style: form
+    _where:
+      description: Filter specification.
+      in: query
+      name: _where
+      required: false
+      schema:
+        example: firstName is not null.
+        type: string
+      style: form
+    dataEntityName:
+      description: Name of the data entity. Defined by the api. Examples of native data entities you can use are `CL` for client profiles and `AD` for client addresses.
+      in: path
+      name: dataEntityName
+      required: true
+      schema:
+        example: Client
+        type: string
+    id:
+      description: ID of the Document.
+      in: path
+      name: id
+      required: true
+      schema:
+        example: Client-b818cbda-e489-11e6-94f4-0ac138d2d42e
+        type: string
+      style: simple
+    index_name:
+      description: Name of the index.
+      in: path
+      name: index_name
+      required: true
+      schema:
+        example: "{{index_name}}"
+        type: string
+      style: simple
+    schemaName:
+      description: Name of the schema.
+      in: path
+      name: schemaName
+      required: true
+      schema:
+        example: "{{schema}}"
+        type: string
+      style: simple
+    versionId:
+      description: ID of the version to update.
+      in: path
+      name: versionId
+      required: true
+      schema:
+        default: 123456789abc
+        type: string
+      style: simple
+  schemas:
+    ArEVentilaO:
+      example:
+        Date: 2016-10-18T16:53:31.0842607Z
+        Point: 1
+        Until: 2017-04-16T16:53:31.0842607Z
+      properties:
+        Date:
+          type: string
+        Point:
+          format: int32
+          type: integer
+        Until:
+          type: string
+      required:
+        - Point
+        - Date
+        - Until
+      title: ArEVentilaO
+      type: object
+    DEPRECATED_DocumentRequest:
+      description: This can be any pure JSON document.
+      properties:
+        field:
+          description: This can be any JSON document field.
+          type: string
+      type: object
+    DepartmentVisitedTag:
+      example:
+        DisplayValue: Ar e Ventilação
+        Scores:
+          Ar e Ventilação:
+            - Date: 2016-10-18T16:53:31.0842607Z
+              Point: 1
+              Until: 2017-04-16T16:53:31.0842607Z
+      properties:
+        DisplayValue:
+          type: string
+        Scores:
+          $ref: "#/components/schemas/Scores"
+      required:
+        - DisplayValue
+        - Scores
+      title: DepartmentVisitedTag
+      type: object
+    Document:
+      example:
+        accountId: my-account-id
+        accountName: my-account
+        carttag: null
+        checkouttag: null
+        dataEntityId: Client
+        departmentVisitedTag:
+          DisplayValue: Ar e Ventilação
+          Scores:
+            Ar e Ventilação:
+              - Date: 2016-10-18T16:53:31.0842607Z
+                Point: 1
+                Until: 2017-04-16T16:53:31.0842607Z
+        email: teste@mail.com
+        followers: []
+        id: my-id
+        rclastsession: 163054c0-954f-11e6-891e-4d2b1c3450a4
+        rclastsessiondate: 2016-10-18T16:53:00
+      properties:
+        accountId:
+          type: string
+        accountName:
+          type: string
+        carttag:
+          nullable: true
+          type: string
+        checkouttag:
+          nullable: true
+          type: string
+        dataEntityId:
+          type: string
+        departmentVisitedTag:
+          $ref: "#/components/schemas/DepartmentVisitedTag"
+        email:
+          type: string
+        followers:
+          description: ""
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        rclastsession:
+          type: string
+        rclastsessiondate:
+          type: string
+      required:
+        - id
+        - dataEntityId
+        - accountId
+        - accountName
+        - followers
+        - email
+        - rclastsession
+        - rclastsessiondate
+        - checkouttag
+        - carttag
+        - departmentVisitedTag
+      title: Document
+      type: object
+    DocumentRequest:
+      additionalProperties:
+        description: JSON document fields.
+        type: string
+      description: This can be any pure JSON document. Add new _Key-Value_ pairs to test.
+      title: DocumentRequest
+      type: object
+    Getversion:
+      example:
+        author: user-id
+        document:
+          accountId: my-account-id
+          accountName: my-account
+          carttag: null
+          checkouttag: null
+          dataEntityId: Client
+          departmentVisitedTag:
+            DisplayValue: Ar e Ventilação
+            Scores:
+              Ar e Ventilação:
+                - Date: 2016-10-18T16:53:31.0842607Z
+                  Point: 1
+                  Until: 2017-04-16T16:53:31.0842607Z
+          email: teste@mail.com
+          followers: []
+          id: my-id
+          rclastsession: 163054c0-954f-11e6-891e-4d2b1c3450a4
+          rclastsessiondate: 2016-10-18T16:53:00
+        id: version-id
+      properties:
+        author:
+          type: string
+        document:
+          $ref: "#/components/schemas/Document"
+        id:
+          type: string
+      required:
+        - id
+        - author
+        - document
+      title: Getversion
+      type: object
+    Listversion:
+      properties:
+        date:
+          type: string
+        document:
+          type: object
+        id:
+          type: string
+      required:
+        - id
+        - date
+      title: Listversion
+      type: object
+    Name:
+      example:
+        type: string
+      properties:
+        type:
+          type: string
+      required:
+        - type
+      title: Name
+      type: object
+    Properties:
+      example:
+        name:
+          type: string
+      properties:
+        name:
+          $ref: "#/components/schemas/Name"
+      required:
+        - name
+      title: Properties
+      type: object
+    PutindicesRequest:
+      example:
+        fields: fieldName
+        multiple: false
+        name: indexName
+      properties:
+        fields:
+          description: Comma-separted fields of the index
+          type: string
+        multiple:
+          description: Determines whether the values need to be unique. If false, values must be unique.
+          type: boolean
+        name:
+          description: Name to identify the index
+          type: string
+      required:
+        - name
+        - multiple
+        - fields
+      title: PutindicesRequest
+      type: object
+    SaveschemabynameRequest:
+      example:
+        properties:
+          name:
+            type: string
+      properties:
+        properties:
+          $ref: "#/components/schemas/Properties"
+      required:
+        - properties
+      title: SaveschemabynameRequest
+      type: object
+    Scores:
+      example:
+        Ar e Ventilação:
+          - Date: 2016-10-18T16:53:31.0842607Z
+            Point: 1
+            Until: 2017-04-16T16:53:31.0842607Z
+      properties:
+        Ar e Ventilação:
+          description: ""
+          items:
+            $ref: "#/components/schemas/ArEVentilaO"
+          type: array
+      required:
+        - Ar e Ventilação
+      title: Scores
+      type: object
+    Using_fields_all:
+      example:
+        accountId: 14af940d-9300-4279-9355-61d44c2ff879
+        accountName: my-store-name
+        dataEntityId: Client
+        id: b818cbda-e489-11e6-94f4-0ac138d2d42e
+      properties:
+        accountId:
+          type: string
+        accountName:
+          type: string
+        dataEntityId:
+          type: string
+        id:
+          type: string
+      required:
+        - id
+        - accountId
+        - accountName
+        - dataEntityId
+      title: Using_fields=_all
+      type: object
+    ValidatedocumentbyclustersRequest:
+      example:
+        name: male
+        rule: gender=male
+      properties:
+        name:
+          type: string
+        rule:
+          type: string
+      required:
+        - name
+        - rule
+      title: ValidatedocumentbyclustersRequest
+      type: object
+    createUpdateAddressRequests:
+      properties:
+        addressName:
+          description: Address name.
+          example: My house
+          nullable: true
+          type: string
+        addressType:
+          description: Type of address. For example, `Residential` or `Pickup`, among others.
+          example: residential
+          nullable: true
+          type: string
+        city:
+          description: City of the shipping address.
+          example: Rio de Janeiro
+          nullable: true
+          type: string
+        complement:
+          description: Complement to the shipping address in case it applies.
+          example: 3rd floor
+          nullable: true
+          type: string
+        country:
+          description: Three letter ISO code of the country of the shipping address.
+          example: BRA
+          nullable: true
+          type: string
+        neighborhood:
+          description: Neighborhood of the address.
+          example: Botafogo
+          nullable: true
+          type: string
+        number:
+          description: Number of the building, house or apartment in the shipping address.
+          example: "300"
+          nullable: true
+          type: string
+        postalCode:
+          description: Postal Code.
+          example: 12345-000
+          nullable: true
+          type: string
+        receiverName:
+          description: Name of the person who is going to receive the order.
+          example: Clark Kent.
+          nullable: true
+          type: string
+        reference:
+          description: Complement that might help locate the shipping address more precisely in case of delivery.
+          example: Grey building
+          nullable: true
+          type: string
+        state:
+          description: State of the shipping address.
+          example: Rio de Janeiro
+          nullable: true
+          type: string
+        street:
+          description: Street of the address.
+          example: Praia de Botafogo
+          nullable: true
+          type: string
+        userId:
+          description: ID of the customer to whom the address belongs.
+          example: 7e03m794-a33a-11e9-84rt6-0adfa64s5a8e
+          nullable: true
+          type: string
+      type: object
+    createUpdateProfileRequests:
+      properties:
+        document:
+          description: Client document.
+          example: "12345678900"
+          nullable: true
+          type: string
+        documentType:
+          description: Client document type.
+          example: CPF
+          nullable: true
+          type: string
+        email:
+          description: Client email address.
+          example: clark.kent@examplemail.com
+          nullable: true
+          type: string
+        firstName:
+          description: Client first name.
+          example: Clark
+          nullable: true
+          type: string
+        isCorporate:
+          description: Indicates whether client is corporate.
+          example: false
+          nullable: true
+          type: boolean
+        isNewsletterOptIn:
+          description: Indicates whether client otped to receive the store newsletter.
+          example: false
+          nullable: true
+          type: boolean
+        lastName:
+          description: Client last name.
+          example: Kent
+          nullable: true
+          type: string
+        localeDefault:
+          description: Default locale, used to set store language and currency, for example.
+          example: en-US
+          nullable: true
+          type: string
+        phone:
+          description: Client telephone number.
+          example: "+12025550195"
+          nullable: true
+          type: string
+      type: object
+    documentResponse:
+      properties:
+        Href:
+          description: Document reference URL.
+          type: string
+        Id:
+          description: ID of the document that was created or updated.
+          type: string
+      required:
+        - Id
+        - Href
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

@@ -1,0 +1,50 @@
+openapi: 3.0.3
+servers:
+  - url: https://spellcheckpro.p.rapidapi.com
+info:
+  contact:
+    x-twitter: Rapid_API
+  title: SpellCheckPro
+  version: 1.0.0
+  x-apisguru-categories:
+    - text
+    - text
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_Rapid_API_profile_image
+  x-origin:
+    - format: postman
+      url: https://raw.githubusercontent.com/VipulBachani/SpellCheckerPro/44da96c5bfa723362f5a3d3d6af441a4e818b93a/SpellCheckPro.postman_collection.json
+      version: 2.x
+  x-providerName: rapidapi.com
+  x-serviceName: spellcheckpro
+tags: []
+paths:
+  /check_spelling:
+    post:
+      description: Check Spelling (Russian)
+      operationId: checkSpellingRussian
+      parameters:
+        - in: header
+          name: X-RapidAPI-Key
+          schema:
+            example: ""
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              lang_code: ru
+              text: Добрый вее!
+            schema:
+              properties:
+                lang_code:
+                  example: ru
+                  type: string
+                text:
+                  example: Добрый вее!
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Check Spelling (Russian)

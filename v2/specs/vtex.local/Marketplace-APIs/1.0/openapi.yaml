@@ -1,0 +1,2884 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX Server URL.
+    url: https://{accountName}.{environment}.com.br/api
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL.
+      environment:
+        default: "{environment}"
+        description: Environment to use. Used as part of the URL.
+info:
+  contact: {}
+  description: "\r
+
+    The **Marketplace API** enables marketplaces and sellers hosted on VTEX to perform their collaborative operations.  \r
+
+    \r
+
+    >⚠️ The marketplace must [create an appKey and appToken](https://developers.vtex.com/docs/guides/getting-started-authentication) for each non-VTEX seller that will use this API.\r
+
+    \r
+
+    ## Index\r
+
+    \r
+
+    ### Notification\r
+
+    \r
+
+    Endpoints used by sellers to notify marketplaces that the price or inventory language has changed for one of their SKUs.\r
+
+    \r
+
+    `POST` [Notify marketplace of price update](https://developers.vtex.com/docs/api-reference/marketplace-apis#post-/notificator/-sellerId-/changenotification/-skuId-/price)\r
+
+    \r
+
+    `POST` [Notify marketplace of inventory update](https://developers.vtex.com/docs/api-reference/marketplace-apis#post-/notificator/-sellerId-/changenotification/-skuId-/inventory)\r
+
+    \r
+
+    \r
+
+    ### Suggestions\r
+
+    \r
+
+    #### Get Suggestions\r
+
+    \r
+
+    Search and filter all suggestions using specific criteria.\r
+
+    \r
+
+    `GET` [Get all SKU Suggestions](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions)\r
+
+    \r
+
+    `GET` [Get SKU Suggestion by ID](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerSkuId-)\r
+
+    \r
+
+    \r
+
+    #### Manage Suggestions\r
+
+    \r
+
+    Send or delete SKU suggestions from the seller to marketplace.\r
+
+    \r
+
+    `PUT` [Send SKU Suggestion](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/-sellerId-/-sellerSkuId-)\r
+
+    \r
+
+    `DELETE` [Delete SKU Suggestion](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#delete-/suggestions/-sellerId-/-sellerSkuId-)\r
+
+    \r
+
+    \r
+
+    #### Get Versions\r
+
+    \r
+
+    Search and filter all versions of suggestions, using specific criteria.\r
+
+    \r
+
+    `GET` [Get all versions](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerskuid-/versions)\r
+
+    \r
+
+    `GET` [Get version by ID](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerskuid-/versions/-version-)\r
+
+    \r
+
+    \r
+
+    #### Match Received SKUs\r
+
+    \r
+
+    Match SKU suggestions received in the marketplace.\r
+
+    \r
+
+    `PUT` [Match Received SKUs individually](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/-sellerId-/-sellerskuid-/versions/-version-/matches/-matchid-)\r
+
+    \r
+
+    `PUT` [Match Multiple Received SKUs](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/matches/action/-actionName-)\r
+
+    \r
+
+    \r
+
+    #### SKU Approval Settings\r
+
+    \r
+
+    Allows marketplaces to configure rules for automatically and manually approving SKUs received from sellers.\r
+
+    \r
+
+    `GET`[Get autoApprove Status in Account Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration/autoapproval/toggle)  \r
+
+    \r
+
+    `PUT`[Activate autoApprove in Marketplace's Account](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/autoapproval/toggle)  \r
+
+    \r
+
+    `GET`[Get Account's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration)\r
+
+    \r
+
+    `PUT`[Save Account's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration)\r
+
+    \r
+
+    `GET`[Get Seller's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration/seller/-sellerId-)\r
+
+    \r
+
+    `PUT`[Save Seller's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/seller/-sellerId-)\r
+
+    \r
+
+    `PUT`[Activate autoApprove Setting for a Seller](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/autoapproval/toggle/seller/-sellerId-)   \r
+
+    \r
+
+    \r
+
+    ### Matched Offers\r
+
+    \r
+
+    Offers are seller products and SKUs that were sent to the marketplace, and already have their price and inventory level configured.\r
+
+    \r
+
+    `GET`[Get Matched Offers List](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/offers)\r
+
+    \r
+
+    `GET`[Get Matched Offer's Data by SKU ID](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/product/-productId-/sku/-skuId-)  \r
+
+    \r
+
+    `GET`[Get Matched Offer's Data by Product ID](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/product/-productId-)\r\n"
+  title: Marketplace API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Marketplace APIs.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Marketplace-APIs
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - description: Get sellers' data
+    name: Sellers
+  - description: Used to invite sellers and configure their accounts
+    name: Seller Invite
+  - description: Get sellers' data
+    name: Seller Commissions
+  - name: Notification
+  - description: ""
+    name: Matched Offers
+  - description: Mapping between a marketplace's sales channel and a seller's affiliate.
+    name: Sales Channel Mapping
+paths:
+  "/notificator/{sellerId}/changenotification/{skuId}/inventory":
+    post:
+      deprecated: false
+      description: |-
+        This endpoint is used by *sellers* to notify marketplaces that the inventory level has changed for one of their SKUs. 
+
+        There is no request body in this call, indicating the new inventory level, for instance. It only notifies a specific marketplace (`accountName`) that a seller (`sellerId`) has changed the inventory level of an SKU (`skuId`). 
+
+        *Marketplaces* will then call the [fulfillment endpoint](https://developers.vtex.com/vtex-rest-api/reference/fulfillment-simulation) provided in the seller registration form to get the updated inventory  information.
+      operationId: InventoryNotification
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. The notification will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: A string that identifies the SKU in the seller, that suffered the change. This is the ID that the marketplace will use for all  references to this SKU, such as price and inventory notifications.
+          in: path
+          name: skuId
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+      responses:
+        "202":
+          description: Accepted
+          headers: {}
+      summary: Notify marketplace of inventory update
+      tags:
+        - Notification
+  "/notificator/{sellerId}/changenotification/{skuId}/price":
+    post:
+      deprecated: false
+      description: |-
+        This endpoint is used by *sellers* to notify marketplaces that the price has changed for one of their SKUs. 
+
+        There is no request body in this call, indicating the new price value, for instance. It only notifies a specific marketplace (`accountName`) that a seller (`sellerId`) has changed the price of an SKU (`skuId`). 
+
+        *Marketplaces* will then call the [fulfillment endpoint](https://developers.vtex.com/vtex-rest-api/reference/fulfillment-simulation) provided in the seller registration form to get the updated price information.
+      operationId: PriceNotification
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. The notification will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: A string that identifies the seller's SKU that suffered the change. This is the ID that the marketplace will use for all  references to this SKU, such as price and inventory notifications.
+          in: path
+          name: skuId
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+      responses:
+        "202":
+          description: Accepted
+          headers: {}
+      summary: Notify marketplace of price update
+      tags:
+        - Notification
+  /offer-manager/pvt/offers:
+    get:
+      deprecated: false
+      description: |-
+        Offers are seller's products and SKUs that were sent to the marketplace, and already have their price and inventory level configured. 
+
+         This endpoint retrieves the available offers in a marketplace. It differs from the Get Suggestions endpoints, since it retrieves products that were already matched by the marketplace, and are currently in its catalog. 
+
+        It is possible to filter the search through the following parameters: 
+
+        - rows 
+        - sort 
+
+        - start 
+
+        - fq
+      operationId: Getofferslist
+      parameters:
+        - description: |-
+            Criteria used to sort the list of offers. For sorting values in ascending order, use `asc`, while for descending order, use `desc`. To fill in the field, insert the sorting criteria, followed by 'asc', or 'desc', separated by a comma. You can sort by the following criteria: 
+
+            - **price:** sorts offers by price. *Ascending* goes from lowest to highest price, while *Descending* goes from highest to lowest price. 
+
+            - **name:** sorts offers by *productName*, in alphabetical order. *Ascending* goes from *A* to *Z*, while *Descending* goes from *Z* to *A*. 
+
+            - **availability:** availability in the sales channel (sc). The default value is 1. 
+
+            Ex. sort=availability,desc 
+
+            Ex. sort=name,asc 
+
+            Ex. price,desc
+          explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            example: availability,desc
+            type: string
+          style: form
+        - description: Number of rows included in the response. Each row corresponds to a single offer. The default amount of rows in the response is 1, and the maximum amount is 50. To have more than one offer listed in the response, please add the `rows` parameter with a number greater than 1.
+          explode: true
+          in: query
+          name: rows
+          required: false
+          schema:
+            default: 20
+            type: integer
+          style: form
+        - description: Number corresponding to the row from which the offer list will begin, used for pagination. Filters the list of offers by retrieving the offers starting from the row defined. The default value is 0, if the param is not included in the call.
+          explode: true
+          in: query
+          name: start
+          required: false
+          schema:
+            default: 21
+            type: integer
+          style: form
+        - description: |-
+            This filter query can be used to filter offers by the criteria described below. It should be filled in by following the format: `fq={{criteriaName}}:{{criteriaValue}}`. 
+
+            - **productId:** integer of the product ID 
+
+            - **productName:** string of the product's name 
+
+            - **skuId:** integer of the SKU ID 
+
+            - **eanId:** string of the EAN ID 
+
+            - **refId:** string of the Ref ID 
+
+            - **categoryId:** integer of the category ID 
+
+            - **brandId:** integer of the brand ID 
+
+            - **sellerId:** string of the seller ID 
+
+            - **sc:** integer of the sales channel's ID (trade policy in VTEX) 
+
+            Ex: skuId:172 
+
+            Ex: categoryId:13 
+
+            Ex. productName:Product example-123
+          explode: true
+          in: query
+          name: fq
+          required: false
+          schema:
+            example: skuId:172
+            type: string
+          style: form
+        - description: Name of the VTEX account. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - BrandId: 2004291
+                  CategoryId: 1563
+                  LastModified: 2021-05-06T21:37:24.262529
+                  ProductId: "941947"
+                  ProductName: Produto Teste 04 - Preto - 40
+                  Skus:
+                    - EanId: null
+                      IsActive: true
+                      MainImage:
+                        ImageId: "53878805"
+                        ImageLabel: null
+                        ImagePath: ~/arquivos/ids/53878805-#width#-#height#/image-8b4364782e664d76a6ebc8702008e478.jpg
+                        ImageTag: <img src="~/arquivos/ids/53878805-#width#-#height#/image-8b4364782e664d76a6ebc8702008e478.jpg" width="#width#" height="#height#" alt="image-8b4364782e664d76a6ebc8702008e478" id="" />
+                        ImageText: image-8b4364782e664d76a6ebc8702008e478
+                        IsMain: true
+                        IsZoomSize: true
+                        LastModified: 2021-04-06T03:01:30.747
+                      Name: Cor:Preto
+                      NameComplete: Produto Teste 04 - Preto - 40 Cor:Preto
+                      Offers:
+                        - AvailableSalesChannels: null
+                          OffersPerSalesChannel:
+                            - AvailableQuantity: 0
+                              ListPrice: 0
+                              Price: 0
+                              PriceWithoutDiscount: 0
+                              SaleChannel: 1
+                          SellerId: "1"
+                          SellerSkuId: "1070268"
+                        - AvailableSalesChannels: null
+                          OffersPerSalesChannel:
+                            - AvailableQuantity: 10000000
+                              ListPrice: 1200
+                              Price: 1200
+                              PriceWithoutDiscount: 1200
+                              SaleChannel: 0
+                          SellerId: madesacms
+                          SellerSkuId: "3298"
+                      RefId: null
+                      SkuId: "1070268"
+              schema:
+                items:
+                  properties:
+                    BrandId:
+                      default: 2004291
+                      description: Offer's brand ID that the product belongs to, configured in the Catalog. It should be the marketplace's brand chosen for the offer to be matched with.
+                      format: int32
+                      type: integer
+                    CategoryId:
+                      default: 1563
+                      description: Offer's Category ID that the product belongs to, configured in the Catalog. It should be the marketplace's category chosen for the offer to be matched with.
+                      format: int32
+                      type: integer
+                    LastModified:
+                      default: 2021-05-06T21:37:24.262529
+                      description: Last date the offer was modified.
+                      type: string
+                    ProductId:
+                      default: "941947"
+                      description: A string that identifies the seller's product. This is the ID that the marketplace will use for all references to this product.
+                      type: string
+                    ProductName:
+                      default: Name of the Product - 123
+                      description: Name of the offer's product.
+                      type: string
+                    Skus:
+                      description: Array of SKUs in the offer.
+                      items:
+                        $ref: "#/components/schemas/Sku2"
+                      type: array
+                  required:
+                    - LastModified
+                    - ProductId
+                    - CategoryId
+                    - BrandId
+                    - ProductName
+                    - Skus
+                  title: getMatchedOffersResponse
+                  type: object
+                type: array
+          description: OK
+      summary: Get Matched Offers List
+      tags:
+        - Matched Offers
+  "/offer-manager/pvt/product/{productId}":
+    get:
+      deprecated: false
+      description: |-
+        Offers are seller products and SKUs that were sent to the marketplace, and already have their price and inventory level configured. 
+
+        This endpoint retrieves the available offers for a speciic Product ID in the marketplace's catalog. It differs from the Get Suggestions endpoints, since it retrieves products that were already matched by the marketplace operator, and are currently active in its catalog. 
+
+        The call returns a list of offers for that ID, that contain the following data: 
+
+        - Seller that sells the SKU 
+
+        - Correspondent SKU ID 
+
+        - SKU's price value 
+
+        - Inventory level 
+
+        - Sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) that it is available at.
+      operationId: GetProductoffers
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller's product. This is the ID that the marketplace will use for all references to this product, such as price and inventory notifications.
+          in: path
+          name: productId
+          required: true
+          schema:
+            default: "123456"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Matched Offer's Data by Product ID
+      tags:
+        - Matched Offers
+  "/offer-manager/pvt/product/{productId}/sku/{skuId}":
+    get:
+      deprecated: false
+      description: |-
+        Offers are seller products and SKUs that were sent to the marketplace, and already have their price and inventory level configured. 
+
+        This endpoint retrieves the available offers for a speciic SKU ID in the marketplace's catalog. It differs from the Get Suggestions endpoints, since it retrieves products that were already matched by the marketplace operator, and are currently active in its catalog. 
+
+        The call returns a list of offers for that ID, that contain the following data: 
+
+        - Seller that sells the SKU 
+
+        - Correspondent SKU ID 
+
+        - SKU's price value 
+
+        - Inventory level 
+
+        - Sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) that it is available at.
+      operationId: GetSKUoffers
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller's product. This is the ID that the marketplace will use for all references to this product, such as price and inventory notifications.
+          in: path
+          name: productId
+          required: true
+          schema:
+            default: "123456"
+            type: string
+          style: simple
+        - description: A string that identifies the seller's SKU. This is the ID that the marketplace will use for all references to this SKU, such as price and inventory notifications.
+          in: path
+          name: skuId
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Matched Offer's Data by SKU ID
+      tags:
+        - Matched Offers
+  /seller-register/pvt/seller-leads:
+    get:
+      deprecated: false
+      description: |-
+        This call's response includes a list of all sellers invited by the marketplace operator to join them. Retrieved results can be filtered by adding optional query fields to the request. Each seller listed includes the following information: 
+
+        - `id` 
+
+        - `createdAt` 
+
+        - `status` 
+
+        - `isConnected` 
+
+        - `sellerEmail` 
+
+        - `sellerName` 
+
+        - `salesChannel` 
+
+        - `email`
+      operationId: ListSellerLeads
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: This field determines the limit used to retrieve the list of sellers. The response includes objects starting `from` the value inputted here.
+          explode: true
+          in: query
+          name: offset
+          required: true
+          schema:
+            default: 0
+            format: int32
+            type: integer
+          style: form
+        - description: "This field determines the limit used to retrieve the list of sellers. The response includes objects until the value inputted here.            "
+          explode: true
+          in: query
+          name: limit
+          required: true
+          schema:
+            default: 15
+            format: int32
+            type: integer
+          style: form
+        - description: Query param that enables results to be filter by whether the seller lead is already connected to the marketplace or not.
+          explode: true
+          in: query
+          name: isConnected
+          required: true
+          schema:
+            default: ""
+            type: string
+          style: form
+        - description: Custom search field, that filters sellers invited by specific marketplace operator's  email.
+          explode: true
+          in: query
+          name: search
+          required: true
+          schema:
+            default: user email
+            type: string
+          style: form
+        - description: Seller Lead's status. Includes `accepted`, `connected` or `invited`.
+          explode: true
+          in: query
+          name: status
+          required: true
+          schema:
+            default: invited
+            type: string
+          style: form
+        - description: |-
+            Query param determining how data will be ordered in the response, ordering by name or ID in descending our ascending order. Includes the following values: 
+
+            `namesort` = desc/asc 
+
+            `idsort` = desc/asc
+          explode: true
+          in: query
+          name: orderBy
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: List Seller Leads
+      tags:
+        - Seller Invite
+    post:
+      deprecated: false
+      description: |-
+        This API is used by marketplace operators to invite sellers to join their marketplace. The request sends an email to the seller, inviting sellers to activate their store. The invitation's link in the email is unique per user, and available for only seven days for the seller to click and begin activating their store. 
+
+        The email template is completely customizable. All email templates that VTEX sends to seller leads can be found and edited in the marketplace's VTEX Admin, on the Message Center section.
+      operationId: CreateSellerLead
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexample
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              accountId: 5fb38ace-d95e-45ad-970d-ee97cce9fbcd
+              accountable:
+                email: email@email.com
+                name: Jane Smith
+                phone: "1234567890"
+              address:
+                city: Rio de Janeiro
+                complement: Appartment 1234
+                neighborhood: VTEX quarter
+                number: "25"
+                postalcode: "12345678"
+                state: RJ
+                street: VTEX street
+              document: "12345671000"
+              email: email@email.com
+              hasAcceptedLegalTerms: true
+              salesChannel: "1"
+              sellerAccountName: seller123
+              sellerEmail: selleremail@email.com
+              sellerName: Seller Name
+              sellerType: 1
+            schema:
+              $ref: "#/components/schemas/CreateSellerLeadRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Invite Seller Lead
+      tags:
+        - Seller Invite
+  "/seller-register/pvt/seller-leads/{sellerLeadId}":
+    delete:
+      deprecated: false
+      description: This endpoint permanently deletes a seller previously invited to the marketplace, if the seller has not already accepted the invitation.
+      operationId: RemoveSellerLead
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: ID of the Seller Lead invited to the marketplace.
+          in: path
+          name: sellerLeadId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Delete Seller Lead
+      tags:
+        - Seller Invite
+    get:
+      deprecated: false
+      description: |-
+        Marketplace operators may call this endpoint to retrieve information about a specific seller invited to the Seller Portal, by searching through their `Seller Lead Id`. To know the chosen seller's `sellerLeadId`, marketplace operators can count on the *List Sellers* endpoint's response as well. Each seller listed includes the following information: 
+
+        - `id` 
+
+        - `createdAt` 
+
+        - `status` 
+
+        - `isConnected` 
+
+        - `sellerEmail` 
+
+        - `sellerName` 
+
+        - `salesChannel` 
+
+        - `email`
+      operationId: RetrieveSellerLead
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: ID of the Seller Lead invited to the marketplace.
+          in: path
+          name: sellerLeadId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Seller Lead's Data by Id
+      tags:
+        - Seller Invite
+    put:
+      deprecated: false
+      description: |-
+        This endpoint is triggered by the seller onboarding wizard, once the seller confirms their invitation. It can be used by marketplace operators to manually accept seller leads, and carry on with their onboarding process. 
+
+        Note that there's no specific API call that allows status changes. The operations only allow the seller lead to move forward: 
+
+         From `invite` > to `Accept` > closing on `Create Seller`.  
+
+        If you want to change the status, you can start the process again, by deleting that lead through the *Delete Seller Lead* endpoint, and resending the invite through the *Resend Seller Lead's Invite* endpoint.
+      operationId: AcceptSellerLead
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: ID of the Seller Lead invited to the marketplace.
+          in: path
+          name: sellerLeadId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              accountId: 5fb38ace-d95e-45ad-970d-ee97cce9fbcd
+              accountable:
+                email: email@email.com
+                name: Jane Smith
+                phone: "1234567890"
+              address:
+                city: Rio de Janeiro
+                complement: Appartment 1234
+                neighborhood: VTEX quarter
+                number: "25"
+                postalcode: "12345678"
+                state: RJ
+                street: VTEX street
+              document: "12345671000"
+              email: seller@email.com
+              hasAcceptedLegalTerms: true
+              salesChannel: "1"
+              sellerAccountName: seller123
+              sellerEmail: selleremail@email.com
+              sellerName: Seller Name
+              sellerType: 1
+            schema:
+              $ref: "#/components/schemas/AcceptSellerLeadRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Accept Seller Lead
+      tags:
+        - Seller Invite
+  "/seller-register/pvt/seller-leads/{sellerLeadId}/seller":
+    put:
+      deprecated: false
+      description: |-
+        This endpoint is used by marketplace operators to create seller accounts. The request will only accept Seller Leads whose status is `accepted`. If they are already `connected` or `invited`, the call will not be fulfilled. 
+
+        The creation of the account at VTEX is done by an internal Billing service. There is no seller account and marketplace affiliation if you do not go through this step. 
+
+        Note that there's no specific API call that allows status changes. The operations only allow the seller lead to move forward: 
+
+         From `invite` > to `Accept` > closing on `Create Seller`.  
+
+        If you want to change the status, you can start the process again, by deleting that lead through the *Delete Seller Lead* endpoint, and resending the invite through the *Resend Seller Lead's Invite* endpoint.
+      operationId: CreateSellerFromSellerLead
+      parameters:
+        - description: Marketplace's account name, the same one inputted on the endpoint's path.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: Whether the Seller Lead is `active` or not in Seller Portal. This request only supports the value `false` in this field. If that´s not the case, the request will respond with an internal error.
+          explode: true
+          in: query
+          name: isActive
+          required: true
+          schema:
+            default: false
+            type: boolean
+          style: form
+        - description: ID of the Seller Lead invited to the marketplace.
+          in: path
+          name: sellerLeadId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Create Seller From Lead
+      tags:
+        - Seller Invite
+  "/seller-register/pvt/seller-leads/{sellerLeadId}/status":
+    put:
+      deprecated: false
+      description: This endpoint allows marketplace operators to resend an invitation to a seller lead, previously invited to join their marketplace. The request will only accept Seller Leads whose status is `invited`. If they are already `connected` or `accepted`, the call will not be fulfilled.
+      operationId: ResendSellerLeadRequest
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: ID of the Seller Lead invited to the marketplace.
+          in: path
+          name: sellerLeadId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              status: accepted
+            schema:
+              $ref: "#/components/schemas/ResendSellerLeadRequestRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Resend Seller Lead Invite
+      tags:
+        - Seller Invite
+  /seller-register/pvt/sellers:
+    get:
+      deprecated: false
+      description: This endpoint lists all Sellers. This call's results can be filtered by [trade policies](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data) through the `sc` query param.
+      operationId: GetListSellers
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: The start number of pagination, being `0` the default value.
+          in: query
+          name: from
+          required: false
+          schema:
+            default: 0
+            type: number
+        - description: The end number of pagination, being `100` the default value.
+          in: query
+          name: to
+          required: false
+          schema:
+            default: 100
+            type: number
+        - description: Search sellers by a keyword in `sellerId` or `sellerName`.
+          in: query
+          name: keyword
+          required: false
+          schema:
+            default: keyword
+            type: string
+        - description: "Filters sellers by the name of who made the integration, if VTEX or an external hub. The possible values for VTEX integrations are: `vtex-sellerportal`, `vtex-seller` and `vtex-franchise`."
+          in: query
+          name: integration
+          required: false
+          schema:
+            default: vtex-seller
+            type: string
+        - description: Groups are defined by keywords that group sellers into categories defined by the marketplace.
+          in: query
+          name: "group "
+          required: false
+          schema:
+            default: Group
+            type: string
+        - description: Enables to filter sellers that are active (`true`) or unactive (`false`) in the marketplace.
+          in: query
+          name: isActive
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: The flag `isBetterScope` is used by the VTEX Checkout to simulate shopping carts, products, and shipping only in sellers with the field set as `true`, avoiding performance issues. When used as a query param, `isBetterScope` filters sellers that have the flag set as `true` or `false`.
+          in: query
+          name: isBetterScope
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: When set as `true`, the list returned will be of sellers who have a VTEX store configured. When set as `false`, the list will be of sellers who do not have a VTEX store configured.
+          in: query
+          name: isVtex
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: Filters sellers available for the marketplace's sales channel (or [trade policy](https://help.vtex.com/en/tutorial/how-trade-policies-work--6Xef8PZiFm40kg2STrMkMV)) indicated in this field.
+          in: query
+          name: sc
+          required: false
+          schema:
+            default: "1"
+            type: string
+        - description: Filters sellers by their type, which can be regular seller (`1`) or whitelabel seller (`2`).
+          in: query
+          name: sellerType
+          required: false
+          schema:
+            default: 1
+            type: integer
+        - description: "Narrow the search filtering by the fields: `id`, `name` or `pendingoffers`. The list retrieved can be organized in an ascending (`asc`) or descending (`desc`) order. The standardized format is `{field}:{order}`, and the default value is `id:asc`."
+          in: query
+          name: sort
+          required: false
+          schema:
+            default: id:asc
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: List Sellers
+      tags:
+        - Sellers
+    post:
+      deprecated: false
+      description: |-
+        This endpoint is used by marketplace operators to configure the accounts of sellers that have already accepted the invitation to join their marketplaces. 
+
+        For marketplaces to [add sellers](https://help.vtex.com/en/tutorial/adding-a-seller--tutorials_392) without the [Seller Invite](https://help.vtex.com/en/tutorial/marketplace-invited-sellers--6rb2FkcslmDueJ689Ulb9A) feature, call this endpoint directly. 
+
+        This call includes all the information a seller needs to activate their account.
+      operationId: UpsertSellerRequest
+      parameters:
+        - description: Marketplace's account name, the same one inputted on the endpoint's path.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              CSCIdentification: cscidentification 123
+              account: partner01
+              allowHybridPayments: false
+              availableSalesChannels:
+                - id: 1
+                  isSelected: true
+                  name: Loja Principal
+                - id: 2
+                  isSelected: true
+                  name: Terceira
+                - id: 3
+                  isSelected: true
+                  name: Marketplaces
+              catalogSystemEndpoint: https://pedrostore.vtexcommercestable.com.br/api/catalog_system/
+              channel: marketplaceA
+              deliveryPolicy: Describe delivery policy
+              description: Seller A, from the B industry.
+              email: seller@email.com
+              exchangeReturnPolicy: Describe exchange and returns policy
+              fulfillmentEndpoint: http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=parceiro01
+              fulfillmentSellerId: seller1
+              groups:
+                - groups:
+                    - id: 8d845239bf1448dc8bc3ed3121837511
+                      name: long tail
+                    - id: b9bcd348ab9c4cec8285ff9485c27a72
+                      name: franchise accounts
+              id: testeMARCUS123
+              isActive: true
+              isBetterScope: false
+              isVtex: true
+              name: qamarketplace
+              password: null
+              salesChannel: "1"
+              score: 0
+              securityPrivacyPolicy: null
+              sellerCommissionConfiguration:
+                categoriesCommissionConfiguration: []
+                freightCommissionPercentage: 4
+                productCommissionPercentage: 3
+              sellerType: 1
+              taxCode: "34444"
+              trustPolicy: Default
+              user: null
+            schema:
+              $ref: "#/components/schemas/UpsertSellerRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Configure Seller Account
+      tags:
+        - Sellers
+  "/seller-register/pvt/sellers/{sellerId}":
+    get:
+      deprecated: false
+      description: Marketplace operator may call this endpoint to retrieve information about a specific seller by filtering by ID. It is also possible to filter results by sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) through the `sc` query param.
+      operationId: GetRetrieveSeller
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: Sales channel (or [trade policy](https://help.vtex.com/en/tutorial/how-trade-policies-work--6Xef8PZiFm40kg2STrMkMV)) associated to the seller account created.
+          explode: true
+          in: query
+          name: sc
+          required: false
+          schema:
+            default: "1"
+            type: string
+          style: form
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Seller data by ID
+      tags:
+        - Sellers
+    patch:
+      deprecated: false
+      description: This endpoint allows marketplace operators to update the information of sellers connected to their account. You can replace a path's value with another value in order to update that single information. There is no need to fill all the body params available, only the one you wish to update.
+      operationId: UpdateSeller
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: array of objects
+              items:
+                properties:
+                  operation:
+                    default: replace
+                    description: The action being performed, which is always going to be `replace`.
+                    type: string
+                  path:
+                    default: /field
+                    description: The path in which the value is being updated. It follows the standardized format `/{field}`, where `{field}` is the path's name.
+                    type: string
+                  value:
+                    default: false
+                    description: The value that is being updated. Notice that the type will depend on the path that is being updated.
+                    type: boolean
+                required:
+                  - operation
+                  - path
+                  - value
+                type: object
+              title: Request body
+              type: array
+        description: array of objects
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Update Seller by Seller ID
+      tags:
+        - Sellers
+  "/seller-register/pvt/sellers/{sellerId}/commissions":
+    get:
+      deprecated: false
+      description: This endpoint retrieves all comissions configured for a specific seller.
+      operationId: ListSellerCommissions
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: List Seller Commissions by seller ID
+      tags:
+        - Seller Commissions
+  "/seller-register/pvt/sellers/{sellerId}/commissions/categories":
+    put:
+      deprecated: false
+      description: This endpoint is used by marketplace operators to define comissions for multiple categories.
+      operationId: BulkUpsertSellerCommissions
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              - categoryFullPath: null
+                categoryId: "6"
+                freightCommissionPercentage: 2.43
+                productCommissionPercentage: 9.85
+            schema:
+              description: ""
+              example:
+                - categoryFullPath: null
+                  categoryId: "6"
+                  freightCommissionPercentage: 2.43
+                  productCommissionPercentage: 9.85
+              items:
+                $ref: "#/components/schemas/BulkUpsertSellerCommissionsRequest"
+              type: array
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Upsert Seller Commissions in Bulk
+      tags:
+        - Seller Commissions
+  "/seller-register/pvt/sellers/{sellerId}/commissions/{categoryId}":
+    delete:
+      deprecated: false
+      description: This endpoint removes a seller comission on the selected category.
+      operationId: RemoveSellerCommissions
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: ID of the category in which the comission was applied
+          in: path
+          name: categoryId
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Remove Seller Commissions by Category ID
+      tags:
+        - Seller Commissions
+    get:
+      deprecated: false
+      description: This endpoint retrieves seller comissions applied to the selected category.
+      operationId: RetrieveSellerCommissions
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: ID of the category in which the comission was applied
+          in: path
+          name: categoryId
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Seller Commissions by Category ID
+      tags:
+        - Seller Commissions
+    put:
+      deprecated: false
+      description: This endpoint is used by marketplace operators to define comissions for a single category, by ID.
+      operationId: UpsertSellerCommissions
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: ID of the category in which the comission will be applied.
+          in: path
+          name: categoryId
+          required: true
+          schema:
+            default: "6"
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              categoryFullPath: null
+              categoryId: "6"
+              freightCommissionPercentage: 2.43
+              productCommissionPercentage: 9.85
+            schema:
+              $ref: "#/components/schemas/UpsertSellerCommissionsRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Upsert Seller Commissions by Category ID
+      tags:
+        - Seller Commissions
+  "/seller-register/pvt/sellers/{sellerId}/sales-channel/mapping":
+    get:
+      deprecated: false
+      description: Retrieves information about the mapping between marketplace's sales channels and a specific seller.
+      operationId: RetrieveMapping
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Name of the VTEX account that belongs to the marketplace. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: Marketplace's account name, the same one inputted on the endpoint's path.
+          in: query
+          name: an
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+          style: form
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  - marketplaceSalesChannel: "1"
+                    sellerChannel: GCC
+                items:
+                  properties:
+                    marketplaceSalesChannel:
+                      default: "1"
+                      description: Marketplace's sales channel that will be associated to the seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187).
+                      type: string
+                    sellerChannel:
+                      default: GCB
+                      description: Seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187) that will be associated with the marketplace's sales channel. Through the affiliate, the seller determines which of his sales channel will be used for the mapping.
+                      type: string
+                  type: object
+                properties:
+                  marketplaceSalesChannel:
+                    default: 1
+                    description: Marketplace's sales channel that will be associated to the seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187).
+                    type: integer
+                  sellerChannel:
+                    default: GCB
+                    description: Seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187) that will be associated with the marketplace's sales channel. Through the affiliate, the seller determines which of his sales channel will be used for the mapping.
+                    type: string
+                title: UpsertMapping
+                type: array
+          description: OK
+          headers: {}
+      summary: Get Sales Channel Mapping Data
+      tags:
+        - Sales Channel Mapping
+    put:
+      deprecated: false
+      description: This endpoint allows the marketplace to map its sales channels with a seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187). The seller can have multiple sales channels associated with the same marketplace, by creating different affiliates. The mapping enables the seller to segment catalog, prices, inventory, logistics, and payments in the marketplace.
+      operationId: UpsertMapping
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Name of the VTEX account that belongs to the marketplace. Used as part of the URL.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Environment to use. Used as part of the URL.
+          in: query
+          name: environment
+          required: true
+          schema:
+            default: vtexcommercestable
+            type: string
+        - description: Marketplace's account name, the same one inputted on the endpoint's path.
+          explode: true
+          in: query
+          name: an
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+          style: form
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              - marketplaceSalesChannel: 1
+                sellerChannel: GCB
+              - marketplaceSalesChannel: 2
+                sellerChannel: GCB
+            schema:
+              example:
+                - marketplaceSalesChannel: 1
+                  sellerChannel: GCB
+                - marketplaceSalesChannel: 2
+                  sellerChannel: GCB
+              items:
+                $ref: "#/components/schemas/UpsertMappingRequest"
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  - marketplaceSalesChannel: "1"
+                    sellerChannel: GCC
+                items:
+                  properties:
+                    marketplaceSalesChannel:
+                      default: "1"
+                      description: Marketplace's sales channel that will be associated to the seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187).
+                      type: string
+                    sellerChannel:
+                      default: GCB
+                      description: Seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187) that will be associated with the marketplace's sales channel. Through the affiliate, the seller determines which of his sales channel will be used for the mapping.
+                      type: string
+                  type: object
+                properties:
+                  marketplaceSalesChannel:
+                    default: 1
+                    description: Marketplace's sales channel that will be associated to the seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187).
+                    type: integer
+                  sellerChannel:
+                    default: GCB
+                    description: Seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187) that will be associated with the marketplace's sales channel. Through the affiliate, the seller determines which of his sales channel will be used for the mapping.
+                    type: string
+                title: UpsertMapping
+                type: array
+          description: OK
+          headers: {}
+      summary: Upsert Sales Channel Mapping
+      tags:
+        - Sales Channel Mapping
+components:
+  schemas:
+    AcceptSellerLeadRequest:
+      example:
+        accountId: 5fb38ace-d95e-45ad-970d-ee97cce9fbcd
+        accountable:
+          email: email@email.com
+          name: Jane Smith
+          phone: "1234567890"
+        address:
+          city: Rio de Janeiro
+          complement: Appartment 1234
+          neighborhood: VTEX quarter
+          number: "25"
+          postalcode: "12345678"
+          state: RJ
+          street: VTEX street
+        affiliateId: MKP
+        document: "12345671000"
+        email: seller@email.com
+        hasAcceptedLegalTerms: true
+        salesChannel: "1"
+        sellerAccountName: seller123
+        sellerEmail: selleremail@email.com
+        sellerName: Seller Name
+        sellerType: 1
+      properties:
+        accountId:
+          default: 5fb38ace-d95e-45ad-970d-ee97cce9fbcd
+          description: Marketplace's account ID
+          type: string
+        accountable:
+          $ref: "#/components/schemas/accountable"
+        address:
+          $ref: "#/components/schemas/address"
+        document:
+          default: "12345671000"
+          description: Company's legal document code.
+          type: string
+        email:
+          default: seller@email.com
+          description: email of the admin responsible for the seller.
+          type: string
+        hasAcceptedLegalTerms:
+          default: true
+          description: Indicates if the seller has accepted the platform's legal terms and conditions.
+          type: boolean
+        salesChannel:
+          default: "1"
+          description: Sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) associated to the seller account created.
+          type: string
+        sellerAccountName:
+          default: seller123
+          description: Name of the seller's account, part of the url of their VTEX Admin.
+          type: string
+        sellerEmail:
+          default: selleremail@email.com
+          description: Seller's contact email.
+          type: string
+        sellerName:
+          default: Seller Name
+          description: Seller's store's name.
+          type: string
+        sellerType:
+          default: 1
+          description: |-
+            Type of seller, including: 
+
+            `1`: regular seller 
+
+            `2`: whitelabel seller
+          format: int32
+          type: integer
+      required:
+        - sellerEmail
+        - sellerName
+        - sellerAccountName
+        - salesChannel
+        - email
+        - sellerType
+        - accountId
+        - document
+        - hasAcceptedLegalTerms
+        - address
+        - accountable
+      title: ""
+      type: object
+    AvailableSalesChannel:
+      example:
+        id: 1
+        isSelected: true
+        name: Loja Principal
+      properties:
+        id:
+          default: 1
+          description: Sales Channel's ID.
+          format: int32
+          type: integer
+        isSelected:
+          default: true
+          description: Flag defining if the sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) is selected or not.
+          type: boolean
+        name:
+          default: Main Store
+          description: Name of the Sales Channel.
+          type: string
+      required:
+        - isSelected
+        - id
+        - name
+      title: Available Sales Channel
+      type: object
+    BulkUpsertSellerCommissionsRequest:
+      example:
+        categoryFullPath: null
+        categoryId: "6"
+        freightCommissionPercentage: 2.43
+        productCommissionPercentage: 9.85
+      properties:
+        categoryFullPath:
+          default: Appliances/Oven
+          description: "Full path to the SKU's category. It should be written as {department}/{category}. For example: if the department is **Appliances** and the category is **Oven**, the full path should be 'Appliances/Oven'."
+          nullable: true
+          type: string
+        categoryId:
+          default: "6"
+          description: Marketplace's Category ID that the product belongs to, configured in the Catalog.
+          type: string
+        freightCommissionPercentage:
+          default: 2.43
+          description: Percentage of the comission applied to the freight in decimals.
+          type: number
+        productCommissionPercentage:
+          default: 9.85
+          description: Percentage of the comission applied to the product in decimals.
+          type: number
+      required:
+        - categoryId
+        - categoryFullPath
+        - productCommissionPercentage
+        - freightCommissionPercentage
+      title: ""
+      type: object
+    CreateSellerLeadRequest:
+      properties:
+        accountId:
+          default: 5fb38ace-d95e-45ad-970d-ee97cce9fbcd
+          description: Marketplace's account ID
+          type: string
+        accountable:
+          $ref: "#/components/schemas/accountable"
+        address:
+          $ref: "#/components/schemas/address"
+        document:
+          default: "12345671000"
+          description: Company's legal document code.
+          type: string
+        email:
+          default: email@email.com
+          type: string
+        hasAcceptedLegalTerms:
+          default: true
+          description: Indicates if the seller has accepted the platform's legal terms and conditions.
+          type: boolean
+        salesChannel:
+          default: "1"
+          description: Sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) associated to the seller account created.
+          type: string
+        sellerAccountName:
+          default: seller123
+          description: Name of the seller's account, part of the url of their VTEX Admin.
+          type: string
+        sellerEmail:
+          default: selleremail@email.com
+          description: Seller's contact email;
+          type: string
+        sellerName:
+          default: Seller Name
+          description: Seller's store's name.
+          type: string
+        sellerType:
+          default: 1
+          description: |-
+            Type of seller, including: 
+
+            `1`: regular seller 
+
+            `2`: whitelabel seller
+          format: int32
+          type: integer
+      required:
+        - sellerEmail
+        - sellerName
+        - sellerAccountName
+        - salesChannel
+        - email
+        - sellerType
+        - accountId
+        - accountable
+        - hasAcceptedLegalTerms
+        - address
+        - document
+      title: ""
+      type: object
+    Groups:
+      description: Array of groups attached to the seller. Groups are defined by key-words that group sellers into categories defined by the marketplace when adding a new seller through the [Configure Seller Account](https://developers.vtex.com/vtex-rest-api/reference/sellers#putupsertseller) endpoint. It is possible to filter sellers by group in the Seller Management page in your VTEX Admin. Know more about groups through our [Seller Management](https://help.vtex.com/en/tutorial/gerenciamento-de-sellers-beta--6eEiOISwxuAWJ8w6MtK7iv#groups) documentation.
+      example:
+        groups:
+          - id: 8d845239bf1448dc8bc3ed3121837511
+            name: long tail
+          - id: b9bcd348ab9c4cec8285ff9485c27a72
+            name: franchise accounts
+      properties:
+        id:
+          default: 8d845239bf1448dc8bc3ed3121837511
+          description: Group's unique identifier code.
+          type: string
+        name:
+          default: franchise Accounts
+          description: Name of the tag chosen to identify the group.
+          type: string
+      required:
+        - groups
+      title: groups
+      type: object
+    MainImage:
+      example:
+        ImageId: "53878805"
+        ImageLabel: null
+        ImagePath: ~/arquivos/ids/53878805-#width#-#height#/image-8b4364782e664d76a6ebc8702008e478.jpg
+        ImageTag: <img src="~/arquivos/ids/53878805-#width#-#height#/image-8b4364782e664d76a6ebc8702008e478.jpg" width="#width#" height="#height#" alt="image-8b4364782e664d76a6ebc8702008e478" id="" />
+        ImageText: image-8b4364782e664d76a6ebc8702008e478
+        IsMain: true
+        IsZoomSize: true
+        LastModified: 2021-04-06T03:01:30.747
+      properties:
+        ImageId:
+          default: "53878805"
+          description: Code identifying the image's file.
+          type: string
+        ImageLabel:
+          default: Image 1
+          description: Image's label.
+          nullable: true
+          type: string
+        ImagePath:
+          default: ~/archives/ids/155411-#width#-#height#/Webp.net-resizeimage.jpg
+          description: Path for the image's file.
+          type: string
+        ImageTag:
+          default: <img src="~/archives/ids/155411-#width#-#height#/Webp.net-resizeimage.jpg" width="#width#" height="#height#" alt="Image name and description" id="" />
+          description: HTML tag for the selected image.
+          type: string
+        ImageText:
+          default: Image name and description
+          description: Alt text for the image.
+          type: string
+        IsMain:
+          default: true
+          description: Whether the image is the main one or not.
+          type: boolean
+        IsZoomSize:
+          default: true
+          description: If zoom can be applied to the image.
+          type: boolean
+        LastModified:
+          default: 2021-05-06T21:37:24.262529
+          description: Date of the last changed made to the offer.
+          type: string
+      required:
+        - ImageId
+        - ImageLabel
+        - ImageTag
+        - ImagePath
+        - IsMain
+        - IsZoomSize
+        - ImageText
+        - LastModified
+      title: MainImage
+      type: object
+    Offer:
+      example:
+        AvailableSalesChannels: null
+        OffersPerSalesChannel:
+          - AvailableQuantity: 0
+            ListPrice: 0
+            Price: 0
+            PriceWithoutDiscount: 0
+            SaleChannel: 1
+        SellerId: "1"
+        SellerSkuId: "1070268"
+      properties:
+        AvailableSalesChannels:
+          default: "1"
+          description: The sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) ID in which the SKU is available.
+          nullable: true
+          type: string
+        OffersPerSalesChannel:
+          description: ""
+          items:
+            $ref: "#/components/schemas/OffersPerSalesChannel"
+          type: array
+        SellerId:
+          default: "1"
+          description: ID of the seller in the marketplace. This ID must be created by the marketplace.
+          type: string
+        SellerSkuId:
+          default: "1070268"
+          description: A string that identifies the SKU in the seller. This is the ID that the marketplace will use for future references to this SKU, such as price and inventory notifications.
+          type: string
+      required:
+        - SellerId
+        - SellerSkuId
+        - OffersPerSalesChannel
+        - AvailableSalesChannels
+      title: Offer
+      type: object
+    OffersPerSalesChannel:
+      example:
+        AvailableQuantity: 0
+        ListPrice: 0
+        Price: 0
+        PriceWithoutDiscount: 0
+        SaleChannel: 1
+      properties:
+        AvailableQuantity:
+          default: 30
+          description: Available SKU stock quantity
+          format: int32
+          type: integer
+        ListPrice:
+          default: 1200
+          description: SKU's suggested selling price
+          format: int32
+          type: integer
+        Price:
+          default: 1300
+          description: SKU's price.
+          format: int32
+          type: integer
+        PriceWithoutDiscount:
+          default: 1400
+          description: SKU's price without discount applied.
+          format: int32
+          type: integer
+        SaleChannel:
+          default: 1
+          description: The sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) of the SKU.
+          format: int32
+          type: integer
+      required:
+        - SaleChannel
+        - Price
+        - ListPrice
+        - PriceWithoutDiscount
+        - AvailableQuantity
+      title: OffersPerSalesChannel
+      type: object
+    ResendSellerLeadRequestRequest:
+      example:
+        status: accepted
+      properties:
+        status:
+          default: accepted
+          description: Seller Lead's status. Includes `accepted`, `connected` or `invited`.
+          type: string
+      required:
+        - status
+      title: ""
+      type: object
+    SellerCommissionConfiguration:
+      example:
+        categoriesCommissionConfiguration: []
+        freightCommissionPercentage: 4
+        productCommissionPercentage: 3
+      properties:
+        categoriesCommissionConfiguration:
+          default: []
+          description: Array with percentage of the comission applied to categories in decimals.
+          items:
+            type: string
+          type: array
+        freightCommissionPercentage:
+          default: 2.43
+          description: Percentage of the comission applied to the freight in decimals.
+          type: number
+        productCommissionPercentage:
+          default: 9.85
+          description: Percentage of the comission applied to the product in decimals.
+          type: number
+      required:
+        - productCommissionPercentage
+        - freightCommissionPercentage
+        - categoriesCommissionConfiguration
+      title: Seller Commission Configuration
+      type: object
+    Sku2:
+      example:
+        EanId: null
+        IsActive: true
+        MainImage:
+          ImageId: "53878805"
+          ImageLabel: null
+          ImagePath: ~/arquivos/ids/53878805-#width#-#height#/image-8b4364782e664d76a6ebc8702008e478.jpg
+          ImageTag: <img src="~/arquivos/ids/53878805-#width#-#height#/image-8b4364782e664d76a6ebc8702008e478.jpg" width="#width#" height="#height#" alt="image-8b4364782e664d76a6ebc8702008e478" id="" />
+          ImageText: image-8b4364782e664d76a6ebc8702008e478
+          IsMain: true
+          IsZoomSize: true
+          LastModified: 2021-04-06T03:01:30.747
+        Name: Cor:Preto
+        NameComplete: Produto Teste 04 - Preto - 40 Cor:Preto
+        Offers:
+          - AvailableSalesChannels: null
+            OffersPerSalesChannel:
+              - AvailableQuantity: 0
+                ListPrice: 0
+                Price: 0
+                PriceWithoutDiscount: 0
+                SaleChannel: 1
+            SellerId: "1"
+            SellerSkuId: "1070268"
+          - AvailableSalesChannels: null
+            OffersPerSalesChannel:
+              - AvailableQuantity: 10000000
+                ListPrice: 1200
+                Price: 1200
+                PriceWithoutDiscount: 1200
+                SaleChannel: 0
+            SellerId: madesacms
+            SellerSkuId: "3298"
+        RefId: null
+        SkuId: "1070268"
+      properties:
+        EanId:
+          default: "768655"
+          description: EAN's unique identifier number
+          nullable: true
+          type: string
+        IsActive:
+          default: true
+          description: Whether the SKU is active in the sales channel (true), or not (false).
+          type: boolean
+        MainImage:
+          description: Main image's information.
+          items:
+            $ref: "#/components/schemas/MainImage"
+          type: object
+        Name:
+          default: "Color: Black"
+          description: Summarized name of the SKU
+          type: string
+        NameComplete:
+          default: "Name of the Product - 123 Color: Black"
+          description: Complete name of the SKU
+          type: string
+        Offers:
+          description: Array with offers
+          items:
+            $ref: "#/components/schemas/Offer"
+          type: array
+        RefId:
+          default: "1234"
+          description: SKU's Reference ID
+          nullable: true
+          type: string
+        SkuId:
+          default: "1070268"
+          description: SKU's unique identifier number
+          type: string
+      required:
+        - SkuId
+        - EanId
+        - RefId
+        - NameComplete
+        - Name
+        - IsActive
+        - MainImage
+        - Offers
+      title: Sku
+      type: object
+    UpsertMappingRequest:
+      example:
+        marketplaceSalesChannel: 1
+        sellerChannel: GCB
+      properties:
+        marketplaceSalesChannel:
+          default: 1
+          description: Marketplace's sales channel that will be associated to the seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187).
+          format: int32
+          type: integer
+        sellerChannel:
+          default: GCB
+          description: Seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187) that will be associated with the marketplace's sales channel. Through the affiliate, the seller determines which of his sales channel will be used for the mapping.
+          type: string
+      required:
+        - marketplaceSalesChannel
+        - sellerChannel
+      title: UpsertMappingRequest
+      type: object
+    UpsertSellerCommissionsRequest:
+      example:
+        categoryFullPath: null
+        categoryId: "6"
+        freightCommissionPercentage: 2.43
+        productCommissionPercentage: 9.85
+      properties:
+        categoryFullPath:
+          default: Appliances/Oven
+          description: "Full path to the SKU's category. It should be written as {department}/{category}. For example: if the department is **Appliances** and the category is **Oven**, the full path should be 'Appliances/Oven'."
+          nullable: true
+          type: string
+        categoryId:
+          default: "6"
+          description: Marketplace's Category ID that the product belongs to, configured in the Catalog.
+          type: string
+        freightCommissionPercentage:
+          default: 2.43
+          description: Percentage of the comission applied to the freight in decimals.
+          type: number
+        productCommissionPercentage:
+          default: 9.85
+          description: Percentage of the comission applied to the product in decimals.
+          type: number
+      required:
+        - categoryId
+        - categoryFullPath
+        - productCommissionPercentage
+        - freightCommissionPercentage
+      title: ""
+      type: object
+    UpsertSellerRequest:
+      example:
+        CSCIdentification: ""
+        account: parceiro01
+        allowHybridPayments: false
+        availableSalesChannels:
+          - id: 1
+            isSelected: true
+            name: Loja Principal
+          - id: 2
+            isSelected: true
+            name: Terceira
+          - id: 3
+            isSelected: true
+            name: Marketplaces
+        catalogSystemEndpoint: https://pedrostore.vtexcommercestable.com.br/api/catalog_system/
+        channel: ""
+        deliveryPolicy: ""
+        description: ""
+        email: vtexqa1@vtex.com.br
+        exchangeReturnPolicy: ""
+        fulfillmentEndpoint: http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=parceiro01
+        fulfillmentSellerId: ""
+        groups:
+          - groups:
+              - id: 8d845239bf1448dc8bc3ed3121837511
+                name: long tail
+              - id: b9bcd348ab9c4cec8285ff9485c27a72
+                name: franchise accounts
+        id: testeMARCUS123
+        isActive: true
+        isBetterScope: false
+        isVtex: true
+        name: qamarketplace
+        password: integrationHubPassword
+        salesChannel: ""
+        score: 0
+        securityPrivacyPolicy: null
+        sellerCommissionConfiguration:
+          categoriesCommissionConfiguration: []
+          freightCommissionPercentage: 4
+          productCommissionPercentage: 3
+        sellerType: 1
+        taxCode: "34444"
+        trustPolicy: AllowEmailSharing
+        user: integrationHubUserName
+      properties:
+        CSCIdentification:
+          default: cscidentification 123
+          description: SKU Seller Identification
+          type: string
+        account:
+          default: partner01
+          description: Seller's account name
+          type: string
+        allowHybridPayments:
+          default: false
+          description: Flag that allows customers to use gift cards from the seller to buy their products on the marketplace. It identifies purchases made with a gift card so that only the final price (with discounts applied) is paid to the seller.
+          type: boolean
+        availableSalesChannels:
+          default: []
+          description: Sales channel (or [trade policy](https://help.vtex.com/en/tutorial/como-funciona-uma-politica-comercial--6Xef8PZiFm40kg2STrMkMV#master-data)) available.
+          items:
+            $ref: "#/components/schemas/AvailableSalesChannel"
+          type: array
+        catalogSystemEndpoint:
+          default: https://pedrostore.vtexcommercestable.com.br/api/catalog_system/
+          description: "URL of the endpoint of the seller's catalog. This field will only be displayed if the seller type is VTEX Store. The field format will be as follows: `https://{sellerName}.vtexcommercestable.com.br/api/catalog_system/.`"
+          title: Catalog System Endpoint schema
+          type: string
+        channel:
+          default: channel name
+          description: Channel's name.
+          type: string
+        deliveryPolicy:
+          default: Describe delivery policy
+          description: Text describing the delivery policy previously agreed between the marketplace and the seller.
+          type: string
+        description:
+          default: Seller A, from the B industry.
+          description: String describing the seller
+          type: string
+        email:
+          default: seller@email.com
+          description: email of the admin responsible for the seller.
+          type: string
+        exchangeReturnPolicy:
+          default: Describe exchange and returns policy
+          description: Text describing the exchange and return policy previously agreed between the marketplace and the seller.
+          type: string
+        fulfillmentEndpoint:
+          default: http://{SellerName}.vtexcommercestable.com.br/api/fulfillment?&sc={TradePolicyID}
+          description: |-
+            URL of the endpoint for fulfillment of seller's orders, which the marketplace will use to communicate with the seller. 
+
+            For **external sellers**, please include the URL of the seller's endpoint. External sellers have different endpoint standards. The seller must inform this endpoint to the marketplace so that the marketplace can complete the configuration process. 
+
+            For **VTEX Stores**, the field format will be as follows: `https://{SellerName}.vtexcommercestable.com.br/api/fulfillment?&sc={TradePolicyID}`. 
+
+            The value `SellerName` corresponds to the store name if the seller is a VTEX store. 
+
+            The value `TradePolicyID` corresponds to the [trade policy](https://help.vtex.com/en/tutorial/how-trade-policies-work--6Xef8PZiFm40kg2STrMkMV#master-data) created by the seller in their own VTEX environment. The seller must inform this ID to the marketplace so that the marketplace can complete the configuration process. 
+
+            The value `AffiliateID` corresponds to the 3-digit affiliate identification code created by the seller. The seller must inform this ID to the marketplace so that the marketplace can complete the configuration process. 
+
+            To configure the [Multilevel Omnichannel Inventory](https://developers.vtex.com/vtex-rest-api/docs/multilevel-omnichannel-inventory) feature, fill in this field with the checkout endpoint following this example: `https://{{sellerAccount}}.vtexcommercestable.com.br/api/checkout?affiliateid={{affiliateId}}&sc={{salesChannel`
+          type: string
+        fulfillmentSellerId:
+          default: seller1
+          description: " Identification code of the seller responsible for fulfilling the order. This is an optional field used when a seller sells SKUs from another seller. If the seller sells their own SKUs, it must be nulled."
+          type: string
+        groups:
+          description: Array of groups attached to the seller. Groups are defined by key-words that group sellers into categories defined by the marketplace when adding a new seller through the [Configure Seller Account](https://developers.vtex.com/vtex-rest-api/reference/sellers#putupsertseller) endpoint. It is possible to filter sellers by group in the Seller Management page in your VTEX Admin. Know more about groups through our [Seller Management](https://help.vtex.com/en/tutorial/gerenciamento-de-sellers-beta--6eEiOISwxuAWJ8w6MtK7iv#groups) documentation.
+          items:
+            $ref: "#/components/schemas/Groups"
+          type: array
+        id:
+          default: seller123
+          description: Seller ID assigned by the marketplace. We recommend filling it in with the seller's account name.
+          type: string
+        isActive:
+          default: true
+          description: Whether the seller is active on the marketplace or not.
+          type: boolean
+        isBetterScope:
+          default: true
+          description: Flag used by the VTEX Checkout to simmulate shopping carts, products and shipping only in sellers with the boolean set as `true`, avoiding performance issues.
+          type: boolean
+        isVtex:
+          default: true
+          description: Flag determining whether the seller configured is a VTEX store or not.
+          type: boolean
+        name:
+          default: Seller Name
+          description: Name of the seller's store, configured in the seller's environment.
+          type: string
+        password:
+          default: integrationHubPassword
+          description: User password, if you are using a hub to integrate with the external seller.
+          nullable: true
+          title: password
+          type: string
+        salesChannel:
+          default: "1"
+          description: Sales channel (or [trade policy](https://help.vtex.com/en/tutorial/how-trade-policies-work--6Xef8PZiFm40kg2STrMkMV)) associated to the seller account created. If no value is specified, the system will automatically use the sales channel configured in the seller's [affiliate](https://help.vtex.com/en/tutorial/configuring-affiliates--tutorials_187) ID.
+          type: string
+        score:
+          default: 0
+          description: Score attributed to this seller.
+          title: Score
+          type: number
+        securityPrivacyPolicy:
+          default: Describe privacy and security policy
+          description: " Text describing the security policy previously agreed between the marketplace and the seller."
+          nullable: true
+          type: string
+        sellerCommissionConfiguration:
+          items:
+            $ref: "#/components/schemas/SellerCommissionConfiguration"
+          type: object
+        sellerType:
+          default: 1
+          description: |-
+            Type of seller, including: 
+
+            `1`: regular seller 
+
+            `2`: whitelabel seller
+          format: int32
+          type: integer
+        taxCode:
+          default: "34444"
+          description: This code is the Identity Number for the legal entity and is linked to information in its base country.
+          type: string
+        trustPolicy:
+          default: AllowEmailSharing
+          description: " the marketplace must first allow VTEX to share clients’ email addresses with the seller. To do so, it is necessary to set 'AllowEmailSharing' as the value for the TrustPolicy field"
+          title: Trust Policy
+          type: string
+        user:
+          default: integrationHubUserName
+          description: Username, if you are using a hub to integrate with the external seller.
+          nullable: true
+          title: user
+          type: string
+      required:
+        - id
+        - name
+        - isActive
+        - fulfillmentEndpoint
+        - allowHybridPayments
+        - taxCode
+        - email
+        - description
+        - sellerCommissionConfiguration
+        - isBetterScope
+        - sellerType
+        - availableSalesChannels
+        - CSCIdentification
+        - account
+        - channel
+        - salesChannel
+        - isVtex
+        - score
+        - exchangeReturnPolicy
+        - deliveryPolicy
+        - securityPrivacyPolicy
+        - fulfillmentSellerId
+        - user
+        - password
+        - catalogSystemEndpoint
+        - trustPolicy
+      title: Configure Seller Account
+      type: object
+    accountable:
+      properties:
+        email:
+          default: email@email.com
+          description: Email address of the person responsible for the seller.
+          title: email
+          type: string
+        name:
+          default: Jane Smith
+          description: Name of the person responsible for the seller.
+          title: name
+          type: string
+        phone:
+          default: "1234567890"
+          description: Phone number of the person responsible for the seller.
+          title: phone
+          type: string
+      required:
+        - name
+        - email
+        - phone
+      title: accountable
+      type: object
+    address:
+      properties:
+        city:
+          default: Rio de Janeiro
+          description: City name, from the seller's address.
+          title: city
+          type: string
+        complement:
+          default: Appartment 1234
+          description: Seller's address complement.
+          title: complement
+          type: string
+        neighborhood:
+          default: VTEX quarter
+          description: Seller's address neighborhood.
+          title: The neighborhood schema
+          type: string
+        number:
+          default: "25"
+          description: Street's number, from the seller's address.
+          title: number
+          type: string
+        postalcode:
+          default: "12345678"
+          description: Postal code from the seller's address.
+          title: postalCode
+          type: string
+        state:
+          default: RJ
+          description: State, from the seller's address.
+          title: state
+          type: string
+        street:
+          default: VTEX street
+          description: Street information, from the seller's address.
+          title: street
+          type: string
+      required:
+        - postalcode
+        - complement
+        - street
+        - number
+        - neighborhood
+        - state
+        - city
+      title: address
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

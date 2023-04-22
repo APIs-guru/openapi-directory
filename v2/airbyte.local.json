@@ -1,0 +1,43 @@
+{
+  "apis": {
+    "airbyte.local:config": {
+      "added": "2021-02-18T18:44:25.146Z",
+      "info": {
+        "contact": {
+          "email": "contact@airbyte.io"
+        },
+        "description": "Airbyte Configuration API\n[https://airbyte.io](https://airbyte.io).\n\nThis API is a collection of HTTP RPC-style methods. While it is not a REST API, those familiar with REST should find the conventions of this API recognizable.\n\nHere are some conventions that this API follows:\n* All endpoints are http POST methods.\n* All endpoints accept data via `application/json` request bodies. The API does not accept any data via query params.\n* The naming convention for endpoints is: localhost:8000/{VERSION}/{METHOD_FAMILY}/{METHOD_NAME} e.g. `localhost:8000/v1/connections/create`.\n* For all `update` methods, the whole object must be passed in, even the fields that did not change.\n\nAuthentication (OSS):\n* When authenticating to the Configuration API, you must use Basic Authentication by setting the Authentication Header to Basic and base64 encoding the username and password (which are `airbyte` and `password` by default - so base64 encoding `airbyte:password` results in `YWlyYnl0ZTpwYXNzd29yZA==`). So the full header reads `'Authorization': \"Basic YWlyYnl0ZTpwYXNzd29yZA==\"`\n",
+        "license": {
+          "name": "MIT",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "title": "Airbyte Configuration API",
+        "version": "1.0.0",
+        "x-apisguru-categories": [
+          "developer_tools"
+        ],
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/airbytehq/airbyte/master/airbyte-api/src/main/openapi/config.yaml",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "airbyte.local",
+        "x-serviceName": "config",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "externalDocs": {
+        "description": "Find out more about Airbyte",
+        "url": "https://airbyte.io"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/airbyte.local/config/1.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/airbyte.local/config/1.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/airbyte.local:config/1.0.0.json"
+    }
+  }
+}

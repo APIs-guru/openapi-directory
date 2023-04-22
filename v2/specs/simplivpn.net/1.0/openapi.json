@@ -1,0 +1,253 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "SimpliVPNAPI",
+    "version": "1.0",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_simplivpn.net_wp-content_uploads_2022_12_favi.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://api.simplivpn.net/swagger/v1/swagger.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "simplivpn.net"
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "paths": {
+    "/disable-user": {
+      "post": {
+        "description": "This route allows you to disable a user's vpn access.",
+        "operationId": "DisableUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisableUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "DisableUser",
+        "tags": [
+          "SimpliVPNAPI"
+        ]
+      }
+    },
+    "/enable-user": {
+      "post": {
+        "description": "This route allows you to enable a user's vpn access. This route can only be called using your user's Bearer Auth token.",
+        "operationId": "EnableUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnableUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "EnableUser",
+        "tags": [
+          "SimpliVPNAPI"
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "This route allows you to login a user. The response will give you a Bearer auth token to use with all rquests pertaining to the user. This token expires in 7 days, so for every request you should check if you get an unauthorized responsve and re-validate the login if needed.",
+        "operationId": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "Login",
+        "tags": [
+          "SimpliVPNAPI"
+        ]
+      }
+    },
+    "/register": {
+      "post": {
+        "description": "This route allows VPN Admin user's with an api key to register a vpn user account. This route can only be called using your api key supplied to you from SimpliVPN. Before calling this you should use your api key to call the /UsernameAvailable route to make sure the username you want is available first. All subsequent user requests following can be done using the user's api token, their token's expire every 7 days, so you should occasionally check them and if you get unauthorized, refresh their token by calling /login route. This route will also auto-enable a new user.",
+        "operationId": "Register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "Register",
+        "tags": [
+          "SimpliVPNAPI"
+        ]
+      }
+    },
+    "/server-summaries": {
+      "get": {
+        "operationId": "GetServerSummaries",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "SimpliVPNAPI"
+        ]
+      }
+    },
+    "/servers": {
+      "get": {
+        "operationId": "GetServers",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "SimpliVPNAPI"
+        ]
+      }
+    },
+    "/username-available": {
+      "post": {
+        "description": "This route allows VPN Admin user's to check if a specific username is available before registering an account username. This route can only be called using your api key supplied to you from SimpliVPN.",
+        "operationId": "UsernameAvailable",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnableUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "UsernameAvailable",
+        "tags": [
+          "SimpliVPNAPI"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DisableUser": {
+        "additionalProperties": false,
+        "properties": {
+          "username": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "type": "object"
+      },
+      "EnableUser": {
+        "additionalProperties": false,
+        "properties": {
+          "username": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "type": "object"
+      },
+      "Register": {
+        "additionalProperties": false,
+        "properties": {
+          "await": {
+            "type": "boolean"
+          },
+          "password": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "username": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "password",
+          "username"
+        ],
+        "type": "object"
+      },
+      "UserLogin": {
+        "additionalProperties": false,
+        "properties": {
+          "password": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "username": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "password",
+          "username"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "description": "JWT Authorization header using the bearer scheme",
+        "in": "header",
+        "name": "Authorization",
+        "type": "apiKey"
+      }
+    }
+  }
+}

@@ -1,0 +1,2783 @@
+openapi: 3.0.0
+servers:
+  - url: https://dataform.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: ""
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Dataform API
+  version: v1beta1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://dataform.googleapis.com/$discovery/rest?version=v1beta1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: dataform
+externalDocs:
+  url: https://cloud.google.com/dataform/docs
+tags:
+  - name: projects
+paths:
+  "/v1beta1/{name}":
+    delete:
+      description: Deletes a single Workspace.
+      operationId: dataform.projects.locations.repositories.workspaces.delete
+      parameters:
+        - description: Required. The workspace resource's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: If set to true, any child resources of this repository will also be deleted. (Otherwise, the request will only succeed if the repository has no child resources.)
+          in: query
+          name: force
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Fetches a single Workspace.
+      operationId: dataform.projects.locations.repositories.workspaces.get
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a single WorkflowConfig.
+      operationId: dataform.projects.locations.repositories.workflowConfigs.patch
+      parameters:
+        - description: Output only. The workflow config's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. Specifies the fields to be updated in the workflow config. If left unset, all fields will be updated.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkflowConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}/locations":
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: dataform.projects.locations.list
+      parameters:
+        - description: The resource that owns the locations collection, if applicable.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like `"displayName=tokyo"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. If not set, the service selects a default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Requests cancellation of a running WorkflowInvocation.
+      operationId: dataform.projects.locations.repositories.workflowInvocations.cancel
+      parameters:
+        - description: Required. The workflow invocation resource's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelWorkflowInvocationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}:commit":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Applies a Git commit for uncommitted files in a Workspace.
+      operationId: dataform.projects.locations.repositories.workspaces.commit
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommitWorkspaceChangesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}:fetchFileGitStatuses":
+    get:
+      description: Fetches Git statuses for the files in a Workspace.
+      operationId: dataform.projects.locations.repositories.workspaces.fetchFileGitStatuses
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FetchFileGitStatusesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:fetchGitAheadBehind":
+    get:
+      description: Fetches Git ahead/behind against a remote branch.
+      operationId: dataform.projects.locations.repositories.workspaces.fetchGitAheadBehind
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The name of the branch in the Git remote against which this workspace should be compared. If left unset, the repository's default branch name will be used.
+          in: query
+          name: remoteBranch
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FetchGitAheadBehindResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:fetchRemoteBranches":
+    get:
+      description: Fetches a Repository's remote branches.
+      operationId: dataform.projects.locations.repositories.fetchRemoteBranches
+      parameters:
+        - description: Required. The repository's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FetchRemoteBranchesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:pull":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Pulls Git commits from the Repository's remote into a Workspace.
+      operationId: dataform.projects.locations.repositories.workspaces.pull
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PullGitCommitsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}:push":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Pushes Git commits from a Workspace to the Repository's remote.
+      operationId: dataform.projects.locations.repositories.workspaces.push
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PushGitCommitsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}:query":
+    get:
+      description: Returns WorkflowInvocationActions in a given WorkflowInvocation.
+      operationId: dataform.projects.locations.repositories.workflowInvocations.query
+      parameters:
+        - description: Required. The workflow invocation's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of workflow invocations to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `QueryWorkflowInvocationActions` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `QueryWorkflowInvocationActions` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryWorkflowInvocationActionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:reset":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Performs a Git reset for uncommitted files in a Workspace.
+      operationId: dataform.projects.locations.repositories.workspaces.reset
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetWorkspaceChangesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/compilationResults":
+    get:
+      description: Lists CompilationResults in a given Repository.
+      operationId: dataform.projects.locations.repositories.compilationResults.list
+      parameters:
+        - description: Required. The repository in which to list compilation results. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of compilation results to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `ListCompilationResults` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListCompilationResults` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCompilationResultsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new CompilationResult in a given project and location.
+      operationId: dataform.projects.locations.repositories.compilationResults.create
+      parameters:
+        - description: Required. The repository in which to create the compilation result. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompilationResult"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompilationResult"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/releaseConfigs":
+    get:
+      description: Lists ReleaseConfigs in a given Repository.
+      operationId: dataform.projects.locations.repositories.releaseConfigs.list
+      parameters:
+        - description: Required. The repository in which to list release configs. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of release configs to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `ListReleaseConfigs` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListReleaseConfigs` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReleaseConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new ReleaseConfig in a given Repository.
+      operationId: dataform.projects.locations.repositories.releaseConfigs.create
+      parameters:
+        - description: Required. The repository in which to create the release config. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the release config, which will become the final component of the release config's resource name.
+          in: query
+          name: releaseConfigId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReleaseConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReleaseConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/repositories":
+    get:
+      description: Lists Repositories in a given project and location.
+      operationId: dataform.projects.locations.repositories.list
+      parameters:
+        - description: Required. The location in which to list repositories. Must be in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter for the returned list.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. This field only supports ordering by `name`. If unspecified, the server will choose the ordering. If specified, the default order is ascending for the `name` field.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Maximum number of repositories to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `ListRepositories` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListRepositories` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRepositoriesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Repository in a given project and location.
+      operationId: dataform.projects.locations.repositories.create
+      parameters:
+        - description: Required. The location in which to create the repository. Must be in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the repository, which will become the final component of the repository's resource name.
+          in: query
+          name: repositoryId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Repository"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Repository"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/workflowConfigs":
+    get:
+      description: Lists WorkflowConfigs in a given Repository.
+      operationId: dataform.projects.locations.repositories.workflowConfigs.list
+      parameters:
+        - description: Required. The repository in which to list workflow configs. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of workflow configs to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `ListWorkflowConfigs` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListWorkflowConfigs` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWorkflowConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new WorkflowConfig in a given Repository.
+      operationId: dataform.projects.locations.repositories.workflowConfigs.create
+      parameters:
+        - description: Required. The repository in which to create the workflow config. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the workflow config, which will become the final component of the workflow config's resource name.
+          in: query
+          name: workflowConfigId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkflowConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/workflowInvocations":
+    get:
+      description: Lists WorkflowInvocations in a given Repository.
+      operationId: dataform.projects.locations.repositories.workflowInvocations.list
+      parameters:
+        - description: Required. The parent resource of the WorkflowInvocation type. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter for the returned list.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. This field only supports ordering by `name`. If unspecified, the server will choose the ordering. If specified, the default order is ascending for the `name` field.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Maximum number of workflow invocations to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `ListWorkflowInvocations` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListWorkflowInvocations` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWorkflowInvocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new WorkflowInvocation in a given Repository.
+      operationId: dataform.projects.locations.repositories.workflowInvocations.create
+      parameters:
+        - description: Required. The repository in which to create the workflow invocation. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkflowInvocation"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowInvocation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/workspaces":
+    get:
+      description: Lists Workspaces in a given Repository.
+      operationId: dataform.projects.locations.repositories.workspaces.list
+      parameters:
+        - description: Required. The repository in which to list workspaces. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter for the returned list.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. This field only supports ordering by `name`. If unspecified, the server will choose the ordering. If specified, the default order is ascending for the `name` field.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Maximum number of workspaces to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `ListWorkspaces` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListWorkspaces` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWorkspacesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Workspace in a given Repository.
+      operationId: dataform.projects.locations.repositories.workspaces.create
+      parameters:
+        - description: Required. The repository in which to create the workspace. Must be in the format `projects/*/locations/*/repositories/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the workspace, which will become the final component of the workspace's resource name.
+          in: query
+          name: workspaceId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Workspace"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{resource}:getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
+      operationId: dataform.projects.locations.repositories.workspaces.getIamPolicy
+      parameters:
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+          in: query
+          name: options.requestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{resource}:setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+      operationId: dataform.projects.locations.repositories.workspaces.setIamPolicy
+      parameters:
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetIamPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{resource}:testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
+      operationId: dataform.projects.locations.repositories.workspaces.testIamPermissions
+      parameters:
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{workspace}:fetchFileDiff":
+    get:
+      description: Fetches Git diff for an uncommitted file in a Workspace.
+      operationId: dataform.projects.locations.repositories.workspaces.fetchFileDiff
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - description: Required. The file's full path including filename, relative to the workspace root.
+          in: query
+          name: path
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FetchFileDiffResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{workspace}:installNpmPackages":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Installs dependency NPM packages (inside a Workspace).
+      operationId: dataform.projects.locations.repositories.workspaces.installNpmPackages
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstallNpmPackagesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstallNpmPackagesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{workspace}:makeDirectory":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a directory inside a Workspace.
+      operationId: dataform.projects.locations.repositories.workspaces.makeDirectory
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MakeDirectoryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MakeDirectoryResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{workspace}:moveDirectory":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Moves a directory (inside a Workspace), and all of its contents, to a new location.
+      operationId: dataform.projects.locations.repositories.workspaces.moveDirectory
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MoveDirectoryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MoveDirectoryResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{workspace}:moveFile":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Moves a file (inside a Workspace) to a new location.
+      operationId: dataform.projects.locations.repositories.workspaces.moveFile
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MoveFileRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MoveFileResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{workspace}:queryDirectoryContents":
+    get:
+      description: Returns the contents of a given Workspace directory.
+      operationId: dataform.projects.locations.repositories.workspaces.queryDirectoryContents
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of paths to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `QueryDirectoryContents` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `QueryDirectoryContents` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Optional. The directory's full path including directory name, relative to the workspace root. If left unset, the workspace root is used.
+          in: query
+          name: path
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryDirectoryContentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{workspace}:readFile":
+    get:
+      description: Returns the contents of a file (inside a Workspace).
+      operationId: dataform.projects.locations.repositories.workspaces.readFile
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - description: Required. The file's full path including filename, relative to the workspace root.
+          in: query
+          name: path
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadFileResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{workspace}:removeDirectory":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes a directory (inside a Workspace) and all of its contents.
+      operationId: dataform.projects.locations.repositories.workspaces.removeDirectory
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveDirectoryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{workspace}:removeFile":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes a file (inside a Workspace).
+      operationId: dataform.projects.locations.repositories.workspaces.removeFile
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveFileRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{workspace}:writeFile":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Writes to a file (inside a Workspace).
+      operationId: dataform.projects.locations.repositories.workspaces.writeFile
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WriteFileRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WriteFileResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Assertion:
+      description: Represents an assertion upon a SQL query which is required return zero rows.
+      properties:
+        dependencyTargets:
+          description: A list of actions that this action depends on.
+          items:
+            $ref: "#/components/schemas/Target"
+          type: array
+        disabled:
+          description: Whether this action is disabled (i.e. should not be run).
+          type: boolean
+        parentAction:
+          $ref: "#/components/schemas/Target"
+          description: The parent action of this assertion. Only set if this assertion was automatically generated.
+        relationDescriptor:
+          $ref: "#/components/schemas/RelationDescriptor"
+          description: Descriptor for the assertion's automatically-generated view and its columns.
+        selectQuery:
+          description: The SELECT query which must return zero rows in order for this assertion to succeed.
+          type: string
+        tags:
+          description: Arbitrary, user-defined tags on this action.
+          items:
+            type: string
+          type: array
+      type: object
+    BigQueryAction:
+      description: Represents a workflow action that will run against BigQuery.
+      properties:
+        sqlScript:
+          description: Output only. The generated BigQuery SQL script that will be executed.
+          readOnly: true
+          type: string
+      type: object
+    Binding:
+      description: Associates `members`, or principals, with a `role`.
+      properties:
+        condition:
+          $ref: "#/components/schemas/Expr"
+          description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+        members:
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding."
+          items:
+            type: string
+          type: array
+        role:
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
+      type: object
+    CancelWorkflowInvocationRequest:
+      description: "`CancelWorkflowInvocation` request message."
+      properties: {}
+      type: object
+    CodeCompilationConfig:
+      description: Configures various aspects of Dataform code compilation.
+      properties:
+        assertionSchema:
+          description: Optional. The default schema (BigQuery dataset ID) for assertions.
+          type: string
+        databaseSuffix:
+          description: Optional. The suffix that should be appended to all database (Google Cloud project ID) names.
+          type: string
+        defaultDatabase:
+          description: Optional. The default database (Google Cloud project ID).
+          type: string
+        defaultLocation:
+          description: 'Optional. The default BigQuery location to use. Defaults to "US". See the BigQuery docs for a full list of locations: https://cloud.google.com/bigquery/docs/locations.'
+          type: string
+        defaultSchema:
+          description: Optional. The default schema (BigQuery dataset ID).
+          type: string
+        schemaSuffix:
+          description: Optional. The suffix that should be appended to all schema (BigQuery dataset ID) names.
+          type: string
+        tablePrefix:
+          description: Optional. The prefix that should be prepended to all table names.
+          type: string
+        vars:
+          additionalProperties:
+            type: string
+          description: Optional. User-defined variables that are made available to project code during compilation.
+          type: object
+      type: object
+    ColumnDescriptor:
+      description: Describes a column.
+      properties:
+        bigqueryPolicyTags:
+          description: A list of BigQuery policy tags that will be applied to the column.
+          items:
+            type: string
+          type: array
+        description:
+          description: A textual description of the column.
+          type: string
+        path:
+          description: The identifier for the column. Each entry in `path` represents one level of nesting.
+          items:
+            type: string
+          type: array
+      type: object
+    CommitAuthor:
+      description: Represents the author of a Git commit.
+      properties:
+        emailAddress:
+          description: Required. The commit author's email address.
+          type: string
+        name:
+          description: Required. The commit author's name.
+          type: string
+      type: object
+    CommitWorkspaceChangesRequest:
+      description: "`CommitWorkspaceChanges` request message."
+      properties:
+        author:
+          $ref: "#/components/schemas/CommitAuthor"
+          description: Required. The commit's author.
+        commitMessage:
+          description: Optional. The commit's message.
+          type: string
+        paths:
+          description: Optional. Full file paths to commit including filename, rooted at workspace root. If left empty, all files will be committed.
+          items:
+            type: string
+          type: array
+      type: object
+    CompilationError:
+      description: An error encountered when attempting to compile a Dataform project.
+      properties:
+        actionTarget:
+          $ref: "#/components/schemas/Target"
+          description: Output only. The identifier of the action where this error occurred, if available.
+          readOnly: true
+        message:
+          description: Output only. The error's top level message.
+          readOnly: true
+          type: string
+        path:
+          description: Output only. The path of the file where this error occurred, if available, relative to the project root.
+          readOnly: true
+          type: string
+        stack:
+          description: Output only. The error's full stack trace.
+          readOnly: true
+          type: string
+      type: object
+    CompilationResult:
+      description: Represents the result of compiling a Dataform project.
+      properties:
+        codeCompilationConfig:
+          $ref: "#/components/schemas/CodeCompilationConfig"
+          description: Immutable. If set, fields of `code_compilation_config` override the default compilation settings that are specified in dataform.json.
+        compilationErrors:
+          description: Output only. Errors encountered during project compilation.
+          items:
+            $ref: "#/components/schemas/CompilationError"
+          readOnly: true
+          type: array
+        dataformCoreVersion:
+          description: Output only. The version of `@dataform/core` that was used for compilation.
+          readOnly: true
+          type: string
+        gitCommitish:
+          description: "Immutable. Git commit/tag/branch name at which the repository should be compiled. Must exist in the remote repository. Examples: - a commit SHA: `12ade345` - a tag: `tag1` - a branch name: `branch1`"
+          type: string
+        name:
+          description: Output only. The compilation result's name.
+          readOnly: true
+          type: string
+        releaseConfig:
+          description: Immutable. The name of the release config to compile. The release config's 'current_compilation_result' field will be updated to this compilation result. Must be in the format `projects/*/locations/*/repositories/*/releaseConfigs/*`.
+          type: string
+        resolvedGitCommitSha:
+          description: Output only. The fully resolved Git commit SHA of the code that was compiled. Not set for compilation results whose source is a workspace.
+          readOnly: true
+          type: string
+        workspace:
+          description: Immutable. The name of the workspace to compile. Must be in the format `projects/*/locations/*/repositories/*/workspaces/*`.
+          type: string
+      type: object
+    CompilationResultAction:
+      description: Represents a single Dataform action in a compilation result.
+      properties:
+        assertion:
+          $ref: "#/components/schemas/Assertion"
+          description: The assertion executed by this action.
+        canonicalTarget:
+          $ref: "#/components/schemas/Target"
+          description: The action's identifier if the project had been compiled without any overrides configured. Unique within the compilation result.
+        declaration:
+          $ref: "#/components/schemas/Declaration"
+          description: The declaration declared by this action.
+        filePath:
+          description: The full path including filename in which this action is located, relative to the workspace root.
+          type: string
+        operations:
+          $ref: "#/components/schemas/Operations"
+          description: The database operations executed by this action.
+        relation:
+          $ref: "#/components/schemas/Relation"
+          description: The database relation created/updated by this action.
+        target:
+          $ref: "#/components/schemas/Target"
+          description: This action's identifier. Unique within the compilation result.
+      type: object
+    Declaration:
+      description: Represents a relation which is not managed by Dataform but which may be referenced by Dataform actions.
+      properties:
+        relationDescriptor:
+          $ref: "#/components/schemas/RelationDescriptor"
+          description: Descriptor for the relation and its columns. Used as documentation only, i.e. values here will result in no changes to the relation's metadata.
+      type: object
+    DirectoryEntry:
+      description: Represents a single entry in a directory.
+      properties:
+        directory:
+          description: A child directory in the directory.
+          type: string
+        file:
+          description: A file in the directory.
+          type: string
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    Expr:
+      description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
+      properties:
+        description:
+          description: Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
+          type: string
+        expression:
+          description: Textual representation of an expression in Common Expression Language syntax.
+          type: string
+        location:
+          description: Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
+          type: string
+        title:
+          description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+    FetchFileDiffResponse:
+      description: "`FetchFileDiff` response message."
+      properties:
+        formattedDiff:
+          description: The raw formatted Git diff for the file.
+          type: string
+      type: object
+    FetchFileGitStatusesResponse:
+      description: "`FetchFileGitStatuses` response message."
+      properties:
+        uncommittedFileChanges:
+          description: A list of all files which have uncommitted Git changes. There will only be a single entry for any given file.
+          items:
+            $ref: "#/components/schemas/UncommittedFileChange"
+          type: array
+      type: object
+    FetchGitAheadBehindResponse:
+      description: "`FetchGitAheadBehind` response message."
+      properties:
+        commitsAhead:
+          description: The number of commits in the remote branch that are not in the workspace.
+          format: int32
+          type: integer
+        commitsBehind:
+          description: The number of commits in the workspace that are not in the remote branch.
+          format: int32
+          type: integer
+      type: object
+    FetchRemoteBranchesResponse:
+      description: "`FetchRemoteBranches` response message."
+      properties:
+        branches:
+          description: The remote repository's branch names.
+          items:
+            type: string
+          type: array
+      type: object
+    GitRemoteSettings:
+      description: Controls Git remote configuration for a repository.
+      properties:
+        authenticationTokenSecretVersion:
+          description: Required. The name of the Secret Manager secret version to use as an authentication token for Git operations. Must be in the format `projects/*/secrets/*/versions/*`.
+          type: string
+        defaultBranch:
+          description: Required. The Git remote's default branch name.
+          type: string
+        tokenStatus:
+          description: Output only. Indicates the status of the Git access token.
+          enum:
+            - TOKEN_STATUS_UNSPECIFIED
+            - NOT_FOUND
+            - INVALID
+            - VALID
+          readOnly: true
+          type: string
+        url:
+          description: Required. The Git remote's URL.
+          type: string
+      type: object
+    IncrementalTableConfig:
+      description: Contains settings for relations of type `INCREMENTAL_TABLE`.
+      properties:
+        incrementalPostOperations:
+          description: SQL statements to be executed after inserting new rows into the relation.
+          items:
+            type: string
+          type: array
+        incrementalPreOperations:
+          description: SQL statements to be executed before inserting new rows into the relation.
+          items:
+            type: string
+          type: array
+        incrementalSelectQuery:
+          description: The SELECT query which returns rows which should be inserted into the relation if it already exists and is not being refreshed.
+          type: string
+        refreshDisabled:
+          description: Whether this table should be protected from being refreshed.
+          type: boolean
+        uniqueKeyParts:
+          description: A set of columns or SQL expressions used to define row uniqueness. If any duplicates are discovered (as defined by `unique_key_parts`), only the newly selected rows (as defined by `incremental_select_query`) will be included in the relation.
+          items:
+            type: string
+          type: array
+        updatePartitionFilter:
+          description: A SQL expression conditional used to limit the set of existing rows considered for a merge operation (see `unique_key_parts` for more information).
+          type: string
+      type: object
+    InstallNpmPackagesRequest:
+      description: "`InstallNpmPackages` request message."
+      properties: {}
+      type: object
+    InstallNpmPackagesResponse:
+      description: "`InstallNpmPackages` response message."
+      properties: {}
+      type: object
+    Interval:
+      description: Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
+      properties:
+        endTime:
+          description: Optional. Exclusive end of the interval. If specified, a Timestamp matching this interval will have to be before the end.
+          format: google-datetime
+          type: string
+        startTime:
+          description: Optional. Inclusive start of the interval. If specified, a Timestamp matching this interval will have to be the same or after the start.
+          format: google-datetime
+          type: string
+      type: object
+    InvocationConfig:
+      description: Includes various configuration options for a workflow invocation. If both `included_targets` and `included_tags` are unset, all actions will be included.
+      properties:
+        fullyRefreshIncrementalTablesEnabled:
+          description: Optional. When set to true, any incremental tables will be fully refreshed.
+          type: boolean
+        includedTags:
+          description: Optional. The set of tags to include.
+          items:
+            type: string
+          type: array
+        includedTargets:
+          description: Optional. The set of action identifiers to include.
+          items:
+            $ref: "#/components/schemas/Target"
+          type: array
+        transitiveDependenciesIncluded:
+          description: Optional. When set to true, transitive dependencies of included actions will be executed.
+          type: boolean
+        transitiveDependentsIncluded:
+          description: Optional. When set to true, transitive dependents of included actions will be executed.
+          type: boolean
+      type: object
+    ListCompilationResultsResponse:
+      description: "`ListCompilationResults` response message."
+      properties:
+        compilationResults:
+          description: List of compilation results.
+          items:
+            $ref: "#/components/schemas/CompilationResult"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations which could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListLocationsResponse:
+      description: The response message for Locations.ListLocations.
+      properties:
+        locations:
+          description: A list of locations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Location"
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
+    ListReleaseConfigsResponse:
+      description: "`ListReleaseConfigs` response message."
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        releaseConfigs:
+          description: List of release configs.
+          items:
+            $ref: "#/components/schemas/ReleaseConfig"
+          type: array
+        unreachable:
+          description: Locations which could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListRepositoriesResponse:
+      description: "`ListRepositories` response message."
+      properties:
+        nextPageToken:
+          description: A token which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        repositories:
+          description: List of repositories.
+          items:
+            $ref: "#/components/schemas/Repository"
+          type: array
+        unreachable:
+          description: Locations which could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListWorkflowConfigsResponse:
+      description: "`ListWorkflowConfigs` response message."
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations which could not be reached.
+          items:
+            type: string
+          type: array
+        workflowConfigs:
+          description: List of workflow configs.
+          items:
+            $ref: "#/components/schemas/WorkflowConfig"
+          type: array
+      type: object
+    ListWorkflowInvocationsResponse:
+      description: "`ListWorkflowInvocations` response message."
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations which could not be reached.
+          items:
+            type: string
+          type: array
+        workflowInvocations:
+          description: List of workflow invocations.
+          items:
+            $ref: "#/components/schemas/WorkflowInvocation"
+          type: array
+      type: object
+    ListWorkspacesResponse:
+      description: "`ListWorkspaces` response message."
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations which could not be reached.
+          items:
+            type: string
+          type: array
+        workspaces:
+          description: List of workspaces.
+          items:
+            $ref: "#/components/schemas/Workspace"
+          type: array
+      type: object
+    Location:
+      description: A resource that represents Google Cloud Platform location.
+      properties:
+        displayName:
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+          type: object
+        locationId:
+          description: 'The canonical id for this location. For example: `"us-east1"`.'
+          type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata. For example the available capacity at the given location.
+          type: object
+        name:
+          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
+      type: object
+    MakeDirectoryRequest:
+      description: "`MakeDirectory` request message."
+      properties:
+        path:
+          description: Required. The directory's full path including directory name, relative to the workspace root.
+          type: string
+      type: object
+    MakeDirectoryResponse:
+      description: "`MakeDirectory` response message."
+      properties: {}
+      type: object
+    MoveDirectoryRequest:
+      description: "`MoveDirectory` request message."
+      properties:
+        newPath:
+          description: Required. The new path for the directory including directory name, rooted at workspace root.
+          type: string
+        path:
+          description: Required. The directory's full path including directory name, relative to the workspace root.
+          type: string
+      type: object
+    MoveDirectoryResponse:
+      description: "`MoveDirectory` response message."
+      properties: {}
+      type: object
+    MoveFileRequest:
+      description: "`MoveFile` request message."
+      properties:
+        newPath:
+          description: Required. The file's new path including filename, relative to the workspace root.
+          type: string
+        path:
+          description: Required. The file's full path including filename, relative to the workspace root.
+          type: string
+      type: object
+    MoveFileResponse:
+      description: "`MoveFile` response message."
+      properties: {}
+      type: object
+    OperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        cancelRequested:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        statusDetail:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    Operations:
+      description: Represents a list of arbitrary database operations.
+      properties:
+        dependencyTargets:
+          description: A list of actions that this action depends on.
+          items:
+            $ref: "#/components/schemas/Target"
+          type: array
+        disabled:
+          description: Whether this action is disabled (i.e. should not be run).
+          type: boolean
+        hasOutput:
+          description: Whether these operations produce an output relation.
+          type: boolean
+        queries:
+          description: A list of arbitrary SQL statements that will be executed without alteration.
+          items:
+            type: string
+          type: array
+        relationDescriptor:
+          $ref: "#/components/schemas/RelationDescriptor"
+          description: Descriptor for any output relation and its columns. Only set if `has_output` is true.
+        tags:
+          description: Arbitrary, user-defined tags on this action.
+          items:
+            type: string
+          type: array
+      type: object
+    Policy:
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      properties:
+        bindings:
+          description: Associates a list of `members`, or principals, with a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one principal. The `bindings` in a `Policy` can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the `bindings` grant 50 different roles to `user:alice@example.com`, and not to any other principal, then you can add another 1,450 principals to the `bindings` in the `Policy`.
+          items:
+            $ref: "#/components/schemas/Binding"
+          type: array
+        etag:
+          description: "`etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy. **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost."
+          format: byte
+          type: string
+        version:
+          description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
+          format: int32
+          type: integer
+      type: object
+    PullGitCommitsRequest:
+      description: "`PullGitCommits` request message."
+      properties:
+        author:
+          $ref: "#/components/schemas/CommitAuthor"
+          description: Required. The author of any merge commit which may be created as a result of merging fetched Git commits into this workspace.
+        remoteBranch:
+          description: Optional. The name of the branch in the Git remote from which to pull commits. If left unset, the repository's default branch name will be used.
+          type: string
+      type: object
+    PushGitCommitsRequest:
+      description: "`PushGitCommits` request message."
+      properties:
+        remoteBranch:
+          description: Optional. The name of the branch in the Git remote to which commits should be pushed. If left unset, the repository's default branch name will be used.
+          type: string
+      type: object
+    QueryCompilationResultActionsResponse:
+      description: "`QueryCompilationResultActions` response message."
+      properties:
+        compilationResultActions:
+          description: List of compilation result actions.
+          items:
+            $ref: "#/components/schemas/CompilationResultAction"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    QueryDirectoryContentsResponse:
+      description: "`QueryDirectoryContents` response message."
+      properties:
+        directoryEntries:
+          description: List of entries in the directory.
+          items:
+            $ref: "#/components/schemas/DirectoryEntry"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    QueryWorkflowInvocationActionsResponse:
+      description: "`QueryWorkflowInvocationActions` response message."
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        workflowInvocationActions:
+          description: List of workflow invocation actions.
+          items:
+            $ref: "#/components/schemas/WorkflowInvocationAction"
+          type: array
+      type: object
+    ReadFileResponse:
+      description: "`ReadFile` response message."
+      properties:
+        fileContents:
+          description: The file's contents.
+          format: byte
+          type: string
+      type: object
+    Relation:
+      description: Represents a database relation.
+      properties:
+        additionalOptions:
+          additionalProperties:
+            type: string
+          description: Additional options that will be provided as key/value pairs into the options clause of a create table/view statement. See https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language for more information on which options are supported.
+          type: object
+        clusterExpressions:
+          description: A list of columns or SQL expressions used to cluster the table.
+          items:
+            type: string
+          type: array
+        dependencyTargets:
+          description: A list of actions that this action depends on.
+          items:
+            $ref: "#/components/schemas/Target"
+          type: array
+        disabled:
+          description: Whether this action is disabled (i.e. should not be run).
+          type: boolean
+        incrementalTableConfig:
+          $ref: "#/components/schemas/IncrementalTableConfig"
+          description: Configures `INCREMENTAL_TABLE` settings for this relation. Only set if `relation_type` is `INCREMENTAL_TABLE`.
+        partitionExpirationDays:
+          description: Sets the partition expiration in days.
+          format: int32
+          type: integer
+        partitionExpression:
+          description: The SQL expression used to partition the relation.
+          type: string
+        postOperations:
+          description: SQL statements to be executed after creating the relation.
+          items:
+            type: string
+          type: array
+        preOperations:
+          description: SQL statements to be executed before creating the relation.
+          items:
+            type: string
+          type: array
+        relationDescriptor:
+          $ref: "#/components/schemas/RelationDescriptor"
+          description: Descriptor for the relation and its columns.
+        relationType:
+          description: The type of this relation.
+          enum:
+            - RELATION_TYPE_UNSPECIFIED
+            - TABLE
+            - VIEW
+            - INCREMENTAL_TABLE
+            - MATERIALIZED_VIEW
+          type: string
+        requirePartitionFilter:
+          description: Specifies whether queries on this table must include a predicate filter that filters on the partitioning column.
+          type: boolean
+        selectQuery:
+          description: The SELECT query which returns rows which this relation should contain.
+          type: string
+        tags:
+          description: Arbitrary, user-defined tags on this action.
+          items:
+            type: string
+          type: array
+      type: object
+    RelationDescriptor:
+      description: Describes a relation and its columns.
+      properties:
+        bigqueryLabels:
+          additionalProperties:
+            type: string
+          description: A set of BigQuery labels that should be applied to the relation.
+          type: object
+        columns:
+          description: A list of descriptions of columns within the relation.
+          items:
+            $ref: "#/components/schemas/ColumnDescriptor"
+          type: array
+        description:
+          description: A text description of the relation.
+          type: string
+      type: object
+    ReleaseConfig:
+      description: Represents a Dataform release configuration.
+      properties:
+        codeCompilationConfig:
+          $ref: "#/components/schemas/CodeCompilationConfig"
+          description: Optional. If set, fields of `code_compilation_config` override the default compilation settings that are specified in dataform.json.
+        cronSchedule:
+          description: Optional. Optional schedule (in cron format) for automatic creation of compilation results.
+          type: string
+        gitCommitish:
+          description: "Required. Git commit/tag/branch name at which the repository should be compiled. Must exist in the remote repository. Examples: - a commit SHA: `12ade345` - a tag: `tag1` - a branch name: `branch1`"
+          type: string
+        name:
+          description: Output only. The release config's name.
+          readOnly: true
+          type: string
+        recentScheduledReleaseRecords:
+          description: Output only. Records of the 10 most recent scheduled release attempts, ordered in in descending order of `release_time`. Updated whenever automatic creation of a compilation result is triggered by cron_schedule.
+          items:
+            $ref: "#/components/schemas/ScheduledReleaseRecord"
+          readOnly: true
+          type: array
+        releaseCompilationResult:
+          description: Optional. The name of the currently released compilation result for this release config. This value is updated when a compilation result is created from this release config, or when this resource is updated by API call (perhaps to roll back to an earlier release). The compilation result must have been created using this release config. Must be in the format `projects/*/locations/*/repositories/*/compilationResults/*`.
+          type: string
+        timeZone:
+          description: Optional. Specifies the time zone to be used when interpreting cron_schedule. Must be a time zone name from the time zone database (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If left unspecified, the default is UTC.
+          type: string
+      type: object
+    RemoveDirectoryRequest:
+      description: "`RemoveDirectory` request message."
+      properties:
+        path:
+          description: Required. The directory's full path including directory name, relative to the workspace root.
+          type: string
+      type: object
+    RemoveFileRequest:
+      description: "`RemoveFile` request message."
+      properties:
+        path:
+          description: Required. The file's full path including filename, relative to the workspace root.
+          type: string
+      type: object
+    Repository:
+      description: Represents a Dataform Git repository.
+      properties:
+        gitRemoteSettings:
+          $ref: "#/components/schemas/GitRemoteSettings"
+          description: Optional. If set, configures this repository to be linked to a Git remote.
+        name:
+          description: Output only. The repository's name.
+          readOnly: true
+          type: string
+        npmrcEnvironmentVariablesSecretVersion:
+          description: Optional. The name of the Secret Manager secret version to be used to interpolate variables into the .npmrc file for package installation operations. Must be in the format `projects/*/secrets/*/versions/*`. The file itself must be in a JSON format.
+          type: string
+        workspaceCompilationOverrides:
+          $ref: "#/components/schemas/WorkspaceCompilationOverrides"
+          description: Optional. If set, fields of `workspace_compilation_overrides` override the default compilation settings that are specified in dataform.json when creating workspace-scoped compilation results. See documentation for `WorkspaceCompilationOverrides` for more information.
+      type: object
+    ResetWorkspaceChangesRequest:
+      description: "`ResetWorkspaceChanges` request message."
+      properties:
+        clean:
+          description: Optional. If set to true, untracked files will be deleted.
+          type: boolean
+        paths:
+          description: Optional. Full file paths to reset back to their committed state including filename, rooted at workspace root. If left empty, all files will be reset.
+          items:
+            type: string
+          type: array
+      type: object
+    ScheduledExecutionRecord:
+      description: A record of an attempt to create a workflow invocation for this workflow config.
+      properties:
+        errorStatus:
+          $ref: "#/components/schemas/Status"
+          description: The error status encountered upon this attempt to create the workflow invocation, if the attempt was unsuccessful.
+        executionTime:
+          description: The timestamp of this execution attempt.
+          format: google-datetime
+          type: string
+        workflowInvocation:
+          description: The name of the created workflow invocation, if one was successfully created. Must be in the format `projects/*/locations/*/repositories/*/workflowInvocations/*`.
+          type: string
+      type: object
+    ScheduledReleaseRecord:
+      description: A record of an attempt to create a compilation result for this release config.
+      properties:
+        compilationResult:
+          description: The name of the created compilation result, if one was successfully created. Must be in the format `projects/*/locations/*/repositories/*/compilationResults/*`.
+          type: string
+        errorStatus:
+          $ref: "#/components/schemas/Status"
+          description: The error status encountered upon this attempt to create the compilation result, if the attempt was unsuccessful.
+        releaseTime:
+          description: The timestamp of this release attempt.
+          format: google-datetime
+          type: string
+      type: object
+    SetIamPolicyRequest:
+      description: Request message for `SetIamPolicy` method.
+      properties:
+        policy:
+          $ref: "#/components/schemas/Policy"
+          description: "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them."
+      type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    Target:
+      description: Represents an action identifier. If the action writes output, the output will be written to the referenced database object.
+      properties:
+        database:
+          description: The action's database (Google Cloud project ID) .
+          type: string
+        name:
+          description: The action's name, within `database` and `schema`.
+          type: string
+        schema:
+          description: The action's schema (BigQuery dataset ID), within `database`.
+          type: string
+      type: object
+    TestIamPermissionsRequest:
+      description: Request message for `TestIamPermissions` method.
+      properties:
+        permissions:
+          description: The set of permissions to check for the `resource`. Permissions with wildcards (such as `*` or `storage.*`) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+          items:
+            type: string
+          type: array
+      type: object
+    TestIamPermissionsResponse:
+      description: Response message for `TestIamPermissions` method.
+      properties:
+        permissions:
+          description: A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
+          items:
+            type: string
+          type: array
+      type: object
+    UncommittedFileChange:
+      description: Represents the Git state of a file with uncommitted changes.
+      properties:
+        path:
+          description: The file's full path including filename, relative to the workspace root.
+          type: string
+        state:
+          description: Indicates the status of the file.
+          enum:
+            - STATE_UNSPECIFIED
+            - ADDED
+            - DELETED
+            - MODIFIED
+            - HAS_CONFLICTS
+          type: string
+      type: object
+    WorkflowConfig:
+      description: Represents a Dataform workflow configuration.
+      properties:
+        cronSchedule:
+          description: Optional. Optional schedule (in cron format) for automatic execution of this workflow config.
+          type: string
+        invocationConfig:
+          $ref: "#/components/schemas/InvocationConfig"
+          description: Optional. If left unset, a default InvocationConfig will be used.
+        name:
+          description: Output only. The workflow config's name.
+          readOnly: true
+          type: string
+        recentScheduledExecutionRecords:
+          description: Output only. Records of the 10 most recent scheduled execution attempts, ordered in in descending order of `execution_time`. Updated whenever automatic creation of a workflow invocation is triggered by cron_schedule.
+          items:
+            $ref: "#/components/schemas/ScheduledExecutionRecord"
+          readOnly: true
+          type: array
+        releaseConfig:
+          description: Required. The name of the release config whose release_compilation_result should be executed. Must be in the format `projects/*/locations/*/repositories/*/releaseConfigs/*`.
+          type: string
+        timeZone:
+          description: Optional. Specifies the time zone to be used when interpreting cron_schedule. Must be a time zone name from the time zone database (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If left unspecified, the default is UTC.
+          type: string
+      type: object
+    WorkflowInvocation:
+      description: Represents a single invocation of a compilation result.
+      properties:
+        compilationResult:
+          description: Immutable. The name of the compilation result to compile. Must be in the format `projects/*/locations/*/repositories/*/compilationResults/*`.
+          type: string
+        invocationConfig:
+          $ref: "#/components/schemas/InvocationConfig"
+          description: Immutable. If left unset, a default InvocationConfig will be used.
+        invocationTiming:
+          $ref: "#/components/schemas/Interval"
+          description: Output only. This workflow invocation's timing details.
+          readOnly: true
+        name:
+          description: Output only. The workflow invocation's name.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. This workflow invocation's current state.
+          enum:
+            - STATE_UNSPECIFIED
+            - RUNNING
+            - SUCCEEDED
+            - CANCELLED
+            - FAILED
+            - CANCELING
+          readOnly: true
+          type: string
+        workflowConfig:
+          description: Immutable. The name of the workflow config to invoke. Must be in the format `projects/*/locations/*/repositories/*/workflowConfigs/*`.
+          type: string
+      type: object
+    WorkflowInvocationAction:
+      description: Represents a single action in a workflow invocation.
+      properties:
+        bigqueryAction:
+          $ref: "#/components/schemas/BigQueryAction"
+          description: Output only. The workflow action's bigquery action details.
+          readOnly: true
+        canonicalTarget:
+          $ref: "#/components/schemas/Target"
+          description: Output only. The action's identifier if the project had been compiled without any overrides configured. Unique within the compilation result.
+          readOnly: true
+        failureReason:
+          description: Output only. If and only if action's state is FAILED a failure reason is set.
+          readOnly: true
+          type: string
+        invocationTiming:
+          $ref: "#/components/schemas/Interval"
+          description: Output only. This action's timing details. `start_time` will be set if the action is in [RUNNING, SUCCEEDED, CANCELLED, FAILED] state. `end_time` will be set if the action is in [SUCCEEDED, CANCELLED, FAILED] state.
+          readOnly: true
+        state:
+          description: Output only. This action's current state.
+          enum:
+            - PENDING
+            - RUNNING
+            - SKIPPED
+            - DISABLED
+            - SUCCEEDED
+            - CANCELLED
+            - FAILED
+          readOnly: true
+          type: string
+        target:
+          $ref: "#/components/schemas/Target"
+          description: Output only. This action's identifier. Unique within the workflow invocation.
+          readOnly: true
+      type: object
+    Workspace:
+      description: Represents a Dataform Git workspace.
+      properties:
+        name:
+          description: Output only. The workspace's name.
+          readOnly: true
+          type: string
+      type: object
+    WorkspaceCompilationOverrides:
+      description: Configures workspace compilation overrides for a repository. Primarily used by the UI (`console.cloud.google.com`). `schema_suffix` and `table_prefix` can have a special expression - `${workspaceName}`, which refers to the workspace name from which the compilation results will be created. API callers are expected to resolve the expression in these overrides and provide them explicitly in `code_compilation_config` (https://cloud.google.com/dataform/reference/rest/v1beta1/projects.locations.repositories.compilationResults#codecompilationconfig) when creating workspace-scoped compilation results.
+      properties:
+        defaultDatabase:
+          description: Optional. The default database (Google Cloud project ID).
+          type: string
+        schemaSuffix:
+          description: Optional. The suffix that should be appended to all schema (BigQuery dataset ID) names.
+          type: string
+        tablePrefix:
+          description: Optional. The prefix that should be prepended to all table names.
+          type: string
+      type: object
+    WriteFileRequest:
+      description: "`WriteFile` request message."
+      properties:
+        contents:
+          description: Required. The file's contents.
+          format: byte
+          type: string
+        path:
+          description: Required. The file.
+          type: string
+      type: object
+    WriteFileResponse:
+      description: "`WriteFile` response message."
+      properties: {}
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

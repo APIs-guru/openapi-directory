@@ -1,0 +1,744 @@
+{
+  "apis": {
+    "ebay.com:buy-browse": {
+      "added": "2017-07-31T09:48:45.000Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The Browse API has the following resources: item_summary: Lets shoppers search for specific items by keyword, GTIN, category, charity, product, or item aspects and refine the results by using filters, such as aspects, compatibility, and fields values. &nbsp;(Experimental) search_by_image: Lets shoppers search for specific items by image. You can refine the results by using URI parameters and filters. item: Lets you retrieve the details of a specific item or all the items in an item group, which is an item with variations such as color and size and check if a product is compatible with the specified item, such as if a specific car is compatible with a specific part. Provides a bridge between the eBay legacy APIs, such as Finding, and the RESTful APIs, which use different formats for the item IDs. &nbsp;(Experimental) shopping_cart: Provides the ability for eBay members to see the contents of their eBay cart, and add, remove, and change the quantity of items in their eBay cart.&nbsp;&nbsp; Note: This resource is not available in the eBay API Explorer. The item_summary, search_by_image, and item resource calls require an Application access token. The shopping_cart resource calls require a User access token.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Browse API",
+        "version": "v1.1.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://developer.ebay.com/api-docs/master/buy/browse/openapi/2/buy_browse_v1_beta_oas2.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "buy-browse"
+      },
+      "updated": "2020-11-02T10:00:44.960Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/buy-browse/v1.1.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/buy-browse/v1.1.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:buy-browse/v1.1.0.json"
+    },
+    "ebay.com:buy-deal": {
+      "added": "2020-07-16T10:14:21.168Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "<span class=\"tablenote\"><b>Note:</b> This is a <a href=\"https://developer.ebay.com/api-docs/static/versioning.html#limited\" target=\"_blank\"> <img src=\"/cms/img/docs/partners-api.svg\" class=\"legend-icon partners-icon\" title=\"Limited Release\"  alt=\"Limited Release\" />(Limited Release)</a> API available only to select developers approved by business units.</span><br /><br />This API allows third-party developers to search for and retrieve details about eBay deals and events, as well as the items associated with those deals and events.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Deal API",
+        "version": "v1.3.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/buy/deal/openapi/3/buy_deal_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "buy-deal"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/buy-deal/v1.3.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/buy-deal/v1.3.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:buy-deal/v1.3.0.json"
+    },
+    "ebay.com:buy-feed": {
+      "added": "2017-11-27T09:31:58.000Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "<span class=\"tablenote\"><b>Note:</b> This is a <a href=\"https://developer.ebay.com/api-docs/static/versioning.html#limited \" target=\"_blank\"> <img src=\"/cms/img/docs/partners-api.svg\" class=\"legend-icon partners-icon\" title=\"Limited Release\"  alt=\"Limited Release\" />(Limited Release)</a> API available only to select developers approved by business units. For information on how to obtain access to this API in production, see the <a href=\"api-docs/buy/static/buy-requirements.html\" target=\"_blank\">Buy APIs Requirements</a>.</span><br><br>The Feed API provides the ability to download TSV_GZIP feed files containing eBay items and an hourly snapshot file of the items that have changed within an hour for a specific category, date and marketplace. <p>In addition to the API, there is an open source <a href=\"https://github.com/eBay/FeedSDK \" target=\"_blank\">Feed SDK</a> written in Java that downloads, combines files into a single file when needed, and unzips the entire feed file. It also lets you specify field filters to curate the items in the file.</p>",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Item Feed Service",
+        "version": "v1_beta.34.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/buy/feed/openapi/2/buy_feed_v1_beta_oas2.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "buy-feed"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/buy-feed/v1_beta.34.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/buy-feed/v1_beta.34.0/openapi.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:buy-feed/v1_beta.34.0.json"
+    },
+    "ebay.com:buy-marketing": {
+      "added": "2017-07-31T09:48:45.000Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The Marketing API retrieves eBay products based on a metric, such as Best Selling, as well as products that were also bought and also viewed.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Buy Marketing API",
+        "version": "v1_beta.2.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/buy/marketing/openapi/2/buy_marketing_v1_beta_oas2.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "buy-marketing"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/buy-marketing/v1_beta.2.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/buy-marketing/v1_beta.2.0/openapi.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:buy-marketing/v1_beta.2.0.json"
+    },
+    "ebay.com:commerce-catalog": {
+      "added": "2020-07-16T10:19:48.078Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The Catalog API allows users to search for and locate an eBay catalog product that is a direct match for the product that they wish to sell. Listing against an eBay catalog product helps insure that all listings (based off of that catalog product) have complete and accurate information. In addition to helping to create high-quality listings, another benefit to the seller of using catalog information to create listings is that much of the details of the listing will be prefilled, including the listing title, the listing description, the item specifics, and a stock image for the product (if available). Sellers will not have to enter item specifics themselves, and the overall listing process is a lot faster and easier.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Catalog API",
+        "version": "v1_beta.5.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/commerce/catalog/openapi/3/commerce_catalog_v1_beta_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "commerce-catalog"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/commerce-catalog/v1_beta.5.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/commerce-catalog/v1_beta.5.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:commerce-catalog/v1_beta.5.0.json"
+    },
+    "ebay.com:commerce-charity": {
+      "added": "2020-07-16T10:20:33.126Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The Charity API allows third-party developers to search for and access details on supported charitable organizations.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Charity API",
+        "version": "v1.2.1",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/commerce/charity/openapi/3/commerce_charity_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "commerce-charity"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/commerce-charity/v1.2.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/commerce-charity/v1.2.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:commerce-charity/v1.2.1.json"
+    },
+    "ebay.com:commerce-taxonomy": {
+      "added": "2017-07-31T09:48:45.000Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "Use the Taxonomy API to discover the most appropriate eBay categories under which sellers can offer inventory items for sale, and the most likely categories under which buyers can browse or search for items to purchase. In addition, the Taxonomy API provides metadata about the required and recommended category aspects to include in listings, and also has two operations to retrieve parts compatibility information.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Taxonomy API",
+        "version": "v1.0.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://developer.ebay.com/api-docs/master/commerce/taxonomy/openapi/2/commerce_taxonomy_v1_beta_oas2.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "commerce-taxonomy"
+      },
+      "updated": "2020-11-23T17:04:42.171Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/commerce-taxonomy/v1.0.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/commerce-taxonomy/v1.0.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:commerce-taxonomy/v1.0.0.json"
+    },
+    "ebay.com:commerce-translation": {
+      "added": "2020-07-16T10:21:40.038Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "This API allows 3rd party developers to translate item title, description, search query.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Translation API",
+        "version": "1",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/commerce/translation/openapi/3/commerce_translation_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "commerce-translation"
+      },
+      "updated": "2020-07-22T15:39:06.186Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/commerce-translation/1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/commerce-translation/1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:commerce-translation/1.json"
+    },
+    "ebay.com:developer-analytics": {
+      "added": "2020-07-16T10:22:46.868Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc.",
+          "x-twitter": "ebay"
+        },
+        "description": "The <b>Analytics API</b> retrieves call-limit data and the quotas that are set for the RESTful APIs and the legacy Trading API.  <br><br>Responses from calls made to <b>getRateLimits</b> and <b>getUerRateLimits</b> include a list of the applicable resources and the \"call limit\", or quota, that is set for each resource. In addition to quota information, the response also includes the number of remaining calls available before the limit is reached, the time remaining before the quota resets, and the length of the \"time window\" to which the quota applies.  <br><br>The <b>getRateLimits</b> and <b>getUserRateLimits</b> methods retrieve call-limit information for either an application or user, respectively, and each method must be called with an appropriate OAuth token. That is, <b>getRateLimites</b> requires an access token generated with a client credentials grant and <b>getUserRateLimites</b> requires an access token generated with an authorization code grant. For more information, see <a href=\"/api-docs/static/oauth-tokens.html\">OAuth tokens</a>.  <br><br>Users can analyze the response data to see whether or not a limit might be reached, and from that determine if any action needs to be taken (such as programmatically throttling their request rate). For more on call limits, see <a href=\"https://developer.ebay.com/support/app-check \" target=\"_blank\">Compatible Application Check</a>.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Analytics API",
+        "version": "v1_beta.0.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/developer/analytics/openapi/3/developer_analytics_v1_beta_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "developer-analytics"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/developer-analytics/v1_beta.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/developer-analytics/v1_beta.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:developer-analytics/v1_beta.0.0.json"
+    },
+    "ebay.com:sell-account": {
+      "added": "2020-07-16T10:00:03.181Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The <b>Account API</b> gives sellers the ability to configure their eBay seller accounts, including the seller's policies (eBay business policies and seller-defined custom policies), opt in and out of eBay seller programs, configure sales tax tables, and get account information.  <br/><br/>For details on the availability of the methods in this API, see <a href=\"/api-docs/sell/account/overview.html#requirements\">Account API requirements and restrictions</a>.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Account API",
+        "version": "v1.9.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/account/openapi/3/sell_account_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-account"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-account/v1.9.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-account/v1.9.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-account/v1.9.0.json"
+    },
+    "ebay.com:sell-analytics": {
+      "added": "2020-07-16T10:00:38.690Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The <i>Analytics API</i> provides data and information about a seller and their eBay business.  <br><br>The resources and methods in this API let sellers review information on their listing performance, metrics on their customer service performance, and details on their eBay seller performance rating.  <br><br>The three resources in the Analytics API provide the following data and information: <ul><li><b>Customer Service Metric</b> &ndash; Returns data on a seller's customer service performance as compared to other seller's in the same peer group.</li> <li><b>Traffic Report</b> &ndash; Returns data that shows how buyers are engaging with a seller's listings.</li> <li><b>Seller Standards Profile</b> &ndash; Returns data pertaining to a seller's performance rating.</li></ul> Sellers can use the data and information returned by the various Analytics API methods to determine where they can make improvements to increase sales and how they might improve their seller status as viewed by eBay buyers.  <br><br>For details on using this API, see <a href=\"/api-docs/sell/static/performance/analyzing-performance.html\" title=\"Selling Integration Guide\">Analyzing seller performance</a>.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": " Seller Service Metrics API ",
+        "version": "1.2.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/analytics/openapi/3/sell_analytics_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-analytics"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-analytics/1.2.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-analytics/1.2.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-analytics/1.2.0.json"
+    },
+    "ebay.com:sell-compliance": {
+      "added": "2020-07-16T10:01:24.603Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "Service for providing information to sellers about their listings being non-compliant, or at risk for becoming non-compliant, against eBay listing policies.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Compliance API",
+        "version": "1.4.1",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/compliance/openapi/3/sell_compliance_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-compliance"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-compliance/1.4.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-compliance/1.4.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-compliance/1.4.1.json"
+    },
+    "ebay.com:sell-feed": {
+      "added": "2020-07-16T10:06:57.775Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "<p>The <strong>Feed API</strong> lets sellers upload input files, download reports and files including their status, filter reports using URI parameters, and retrieve customer service metrics task details.</p>",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Feed API",
+        "version": "v1.3.1",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/feed/openapi/3/sell_feed_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-feed"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-feed/v1.3.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-feed/v1.3.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-feed/v1.3.1.json"
+    },
+    "ebay.com:sell-fulfillment": {
+      "added": "2017-11-27T09:31:58.000Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc.",
+          "x-twitter": "ebay"
+        },
+        "description": "Use the Fulfillment API to complete the process of packaging, addressing, handling, and shipping each order on behalf of the seller, in accordance with the payment method and timing specified at checkout.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Fulfillment API",
+        "version": "v1.19.19",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/fulfillment/openapi/3/sell_fulfillment_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-fulfillment"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-fulfillment/v1.19.19/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-fulfillment/v1.19.19/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-fulfillment/v1.19.19.json"
+    },
+    "ebay.com:sell-listing": {
+      "added": "2020-07-16T10:09:23.672Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "<span class=\"tablenote\"><b>Note:</b> This is a <a href=\"https://developer.ebay.com/api-docs/static/versioning.html#limited\" target=\"_blank\"> <img src=\"/cms/img/docs/partners-api.svg\" class=\"legend-icon partners-icon\" title=\"Limited Release\"  alt=\"Limited Release\" />(Limited Release)</a> API available only to select developers approved by business units.</span><br /><br />Enables a seller adding an ad or item on a Partner's site to automatically create an eBay listing draft using the item details from the Partner's site.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Listing API",
+        "version": "v1_beta.3.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/listing/openapi/3/sell_listing_v1_beta_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-listing"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-listing/v1_beta.3.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-listing/v1_beta.3.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-listing/v1_beta.3.0.json"
+    },
+    "ebay.com:sell-logistics": {
+      "added": "2020-07-16T10:10:08.265Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "<span class=\"tablenote\"><b>Note:</b> This is a <a href=\"https://developer.ebay.com/api-docs/static/versioning.html#limited\" target=\"_blank\"> <img src=\"/cms/img/docs/partners-api.svg\" class=\"legend-icon partners-icon\" title=\"Limited Release\"  alt=\"Limited Release\" />(Limited Release)</a> API available only to select developers approved by business units.</span><br /><br />The <b>Logistics API</b> resources offer the following capabilities: <ul><li><b>shipping_quote</b> &ndash; Consolidates into a list a set of live shipping rates, or quotes, from which you can select a rate to ship a package.</li> <li><b>shipment</b> &ndash; Creates a \"shipment\" for the selected shipping rate.</li></ul> Call <b>createShippingQuote</b> to get a list of live shipping rates. The rates returned are all valid for a specific time window and all quoted prices are at eBay-negotiated rates. <br><br>Select one of the live rates and using its associated <b>rateId</b>, create a \"shipment\" for the package by calling <b>createFromShippingQuote</b>. Creating a shipment completes an agreement, and the cost of the base service and any added shipping options are summed into the returned <b>totalShippingCost</b> value. This action also generates a shipping label that you can use to ship the package.  The total cost of the shipment is incurred when the package is shipped using the supplied shipping label.  <p class=\"tablenote\"><b>Important!</b> Sellers must set up a payment method via their eBay account before they can use the methods in this API to create a shipment and the associated shipping label.</p>",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Logistics API",
+        "version": "v1_beta.0.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/logistics/openapi/3/sell_logistics_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-logistics"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-logistics/v1_beta.0.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-logistics/v1_beta.0.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-logistics/v1_beta.0.0.json"
+    },
+    "ebay.com:sell-marketing": {
+      "added": "2020-07-16T10:10:51.549Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "<p>The <i>Marketing API </i> offers two platforms that sellers can use to promote and advertise their products:</p> <ul><li><b>Promoted Listings</b> is an eBay ad service that lets sellers set up <i>ad campaigns </i> for the products they want to promote. eBay displays the ads in search results and in other marketing modules as <b>SPONSORED</b> listings. If an item in a Promoted Listings campaign sells, the seller is assessed a Promoted Listings fee, which is a seller-specified percentage applied to the sales price. For complete details, refer to the <a href=\"/api-docs/sell/static/marketing/pl-landing.html\">Promoted Listings playbook</a>.</li><li><b>Promotions Manager</b> gives sellers a way to offer discounts on specific items as a way to attract buyers to their inventory. Sellers can set up discounts (such as \"20% off\" and other types of offers) on specific items or on an entire customer order. To further attract buyers, eBay prominently displays promotion <i>teasers</i> throughout buyer flows. For complete details, see <a href=\"/api-docs/sell/static/marketing/promotions-manager.html\">Promotions Manager</a>.</li></ul>  <p><b>Marketing reports</b>, on both the Promoted Listings and Promotions Manager platforms, give sellers information that shows the effectiveness of their marketing strategies. The data gives sellers the ability to review and fine tune their marketing efforts.</p> <p class=\"tablenote\"><b>Important!</b> Sellers must have an active eBay Store subscription, and they must accept the <b>Terms and Conditions</b> before they can make requests to these APIs in the Production environment. There are also site-specific listings requirements and restrictions associated with these marketing tools, as listed in the \"requirements and restrictions\" sections for <a href=\"/api-docs/sell/marketing/static/overview.html#PL-requirements\">Promoted Listings</a> and <a href=\"/api-docs/sell/marketing/static/overview.html#PM-requirements\">Promotions Manager</a>.</p> <p>The table below lists all the Marketing API calls grouped by resource.</p>",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Marketing API",
+        "version": "v1.14.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/marketing/openapi/3/sell_marketing_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-marketing"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-marketing/v1.14.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-marketing/v1.14.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-marketing/v1.14.0.json"
+    },
+    "ebay.com:sell-metadata": {
+      "added": "2020-07-16T10:11:43.195Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The Metadata API has operations that retrieve configuration details pertaining to the different eBay marketplaces. In addition to marketplace information, the API also has operations that get information that helps sellers list items on eBay.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Metadata API",
+        "version": "v1.6.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/metadata/openapi/3/sell_metadata_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-metadata"
+      },
+      "updated": "2023-03-05T17:10:25.537Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-metadata/v1.6.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-metadata/v1.6.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-metadata/v1.6.0.json"
+    },
+    "ebay.com:sell-negotiation": {
+      "added": "2020-07-16T10:12:17.299Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The <b>Negotiations API</b> gives sellers the ability to proactively send discount offers to buyers who have shown an \"interest\" in their listings.  <br><br>By sending buyers discount offers on listings where they have shown an interest, sellers can increase the velocity of their sales.  <br><br>There are various ways for a buyer to show <i>interest </i> in a listing. For example, if a buyer adds the listing to their <b>Watch</b> list, or if they add the listing to their shopping cart and later abandon the cart, they are deemed to have shown an interest in the listing.  <br><br>In the offers that sellers send, they can discount their listings by either a percentage off the listing price, or they can set a new discounted price that is lower than the original listing price.  <br><br>For details about how seller offers work, see <a href=\"/api-docs/sell/static/marketing/offers-to-buyers.html\" title=\"Selling Integration Guide\">Sending offers to buyers</a>.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Negotiation API",
+        "version": "v1.1.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/negotiation/openapi/3/sell_negotiation_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-negotiation"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-negotiation/v1.1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-negotiation/v1.1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-negotiation/v1.1.0.json"
+    },
+    "ebay.com:sell-recommendation": {
+      "added": "2020-07-16T10:12:51.471Z",
+      "info": {
+        "contact": {
+          "name": "eBay Inc,",
+          "x-twitter": "ebay"
+        },
+        "description": "The <b>Recommendation API</b> returns information that sellers can use to optimize the configuration of their listings on eBay. <br><br>Currently, the API contains a single method, <b>findListingRecommendations</b>. This method provides information that sellers can use to configure Promoted Listings ad campaigns to maximize the visibility of their items in the eBay marketplace.",
+        "license": {
+          "name": "eBay API License Agreement",
+          "url": "https://go.developer.ebay.com/api-license-agreement"
+        },
+        "title": "Recommendation API",
+        "version": "1.1.0",
+        "x-apisguru-categories": [
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_ebay_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://developer.ebay.com/api-docs/master/sell/recommendation/openapi/3/sell_recommendation_v1_oas3.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "ebay.com",
+        "x-serviceName": "sell-recommendation"
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-recommendation/1.1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/ebay.com/sell-recommendation/1.1.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/ebay.com:sell-recommendation/1.1.0.json"
+    }
+  }
+}

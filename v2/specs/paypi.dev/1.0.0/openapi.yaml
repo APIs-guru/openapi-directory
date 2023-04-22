@@ -1,0 +1,171 @@
+openapi: 3.0.0
+servers:
+  - url: https://ev.apis.paypi.dev
+info:
+  contact:
+    email: hello@paypi.dev
+    name: PayPI
+    url: https://paypi.dev
+    x-logo: https://paypi-default-images.s3.eu-west-1.amazonaws.com/EV-Img.png
+    x-twitter: paypi_uk
+  description: |
+    OTP email verification API by PayPI. <br/><br/>
+    EmailVerify provides a simple way to verify email addresses. We send emails ourselves taking the burden of setting up email systems and tracking codes. <br/><br/>
+    To learn more about this API, check out [EmailVerify documentation](https://emailverify.paypi.dev/) <br/><br/>
+
+    ## Authentication
+    All requests to the EmailVerify API must be authenticated with an API Key. To get an API key, subscribe to the EmailVerify [here](https://app.paypi.dev/subscribe/c2VydmljZTo1OGQxZDNmMy05OWQ5LTQ3ZjYtOWJkNi02OWNkMTY1OGFmOWU=).  \
+    Set your `Authorization` header to `Bearer YOUR-API-KEY`. 
+    ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer YOUR-API-KEY" \
+    ...
+    ```
+  title: EmailVerify
+  version: 1.0.0
+  x-apisguru-categories:
+    - email
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_paypi-default-images.s3.eu-west-1.amazonaws.com_EV-Img.png
+  x-origin:
+    - format: openapi
+      url: https://paypi-default-images.s3.eu-west-1.amazonaws.com/openapi.yaml
+      version: "3.0"
+  x-providerName: paypi.dev
+security:
+  - bearerAuth: []
+paths:
+  /checkCode:
+    post:
+      description: |
+        Checks the user's emailed code is valid. 
+        If this returns success=true, you can safely assume the user you are interacting with is the owner of that email address.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                code:
+                  default: 123456
+                  type: string
+                email:
+                  default: test@test.com
+                  type: string
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Invalid Code:
+                  value:
+                    message: Given code is not valid
+                    success: false
+                Success:
+                  value:
+                    message: email successfully verified
+                    success: true
+              schema:
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                type: object
+          description: |
+            If success is true, the user has given the correct code. If not the code is incorrect. \
+            Check the message for more information
+        "401":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    default: Authorization header value invalid
+                    type: string
+                  success:
+                    default: false
+                    type: boolean
+                type: object
+          description: |
+            #### Invalid API key
+        "403":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    default: Number of tries exceeded, please request a new code
+                    type: string
+                  success:
+                    default: false
+                    type: boolean
+                type: object
+          description: |
+            #### Tries for this email exceeded. 
+            To prevent abuse and brute forcing, we limit the number of checkCode requests for each email address to 20. \
+            This means if more than 20 requests are made you will have to send another code to your user, this will reset the limit.
+      summary: Check verification code
+  /sendCode:
+    post:
+      description: This request send's a code to the given email address, which should be returned to check it is correct.
+      requestBody:
+        content:
+          application/json:
+            example:
+              email: test@test.com
+            schema:
+              properties:
+                email:
+                  type: string
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    default: Verification email sent
+                    type: boolean
+                  success:
+                    default: true
+                    type: boolean
+                type: object
+          description: Success - Email sent
+        "400":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    default: Unable to send email - please check the email address and try again
+                    type: boolean
+                  success:
+                    default: false
+                    type: boolean
+                type: object
+          description: Invalid or incorrectly formatted email given
+        "401":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    default: Authorization header value invalid
+                    type: string
+                  success:
+                    default: false
+                    type: boolean
+                type: object
+          description: Invalid API key
+      summary: Send verification code
+components:
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: Token
+      scheme: bearer
+      type: http

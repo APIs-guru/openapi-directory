@@ -1,0 +1,2079 @@
+openapi: 3.0.2
+servers:
+  - url: http://microcks.local
+  - description: ""
+    url: http://microcks.example.com/api
+info:
+  contact:
+    email: laurent@microcks.io
+    name: Laurent Broudoux
+    url: https://github.com/microcks
+  description: API offered by Microcks, the Kuebrnetes native tools for API and microservices mocking and testing (microcks.io)
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Microcks API v1.7
+  version: 1.7.0
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    backgroundColor: "#ffffff"
+    url: https://api.apis.guru/v2/cache/logo/https_microcks.io_images_microcks-logo-blue.png
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/microcks/microcks/master/api/microcks-openapi-v1.7.yaml
+      version: "3.0"
+  x-providerName: microcks.local
+security:
+  - jwt-bearer: []
+tags:
+  - description: Operations related to API and Services mocks
+    name: mock
+  - description: Operations related to API and Services tests
+    name: test
+  - description: Operations related to Jobs for discovering mocks and tests
+    name: job
+  - description: Operations related to configuration
+    name: config
+  - description: Operations related to metrics
+    name: metrics
+paths:
+  /artifact/upload:
+    post:
+      description: Uploads an artifact to be imported by Microcks.
+      operationId: uploadArtifact
+      parameters:
+        - description: Flag telling if this should be considered as primary or secondary artifact. Default to 'true'
+          in: query
+          name: mainArtifact
+          required: true
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          multipart/form-data:
+            examples:
+              Artifact upload:
+                value: |
+                  POST /api/artifact/upload HTTP/1.1
+                  Host: microcks
+                  User-Agent: curl/7.54.0
+                  Accept: */*
+                  Authorization: Bearer <REDACTED>
+                  Content-Length: 2743
+                  Expect: 100-continue
+                  Content-Type: multipart/form-data; boundary=------------------------8af8cbb56dd4bde0
+
+                  --------------------------8af8cbb56dd4bde0
+                  Content-Disposition: form-data; name="file"; filename="github.json"
+                  Content-Type: application/octet-stream
+
+                  THE ARTIFACT HERE
+
+                  --------------------------8af8cbb56dd4bde0--
+            schema:
+              $ref: "#/components/schemas/ArtifactUpload"
+        required: true
+      responses:
+        "201":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Artifact was imported and Service found
+        "204":
+          description: No file attribute found in uploaded data
+        "400":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Artifact content is invalid and not understood
+      security:
+        - jwt-bearer:
+            - user
+      summary: Upload an artifact
+      tags:
+        - job
+    summary: Deals with artifacts to be imported by Microcks.
+  /export:
+    get:
+      description: Export a repostiory snapshot with requested services
+      operationId: exportSnapshot
+      parameters:
+        - description: List of service identifiers to export
+          in: query
+          name: serviceIds
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: binary
+                type: string
+          description: Snapshot file representing the export of requested services
+          headers:
+            Content-Disposition:
+              examples:
+                filename:
+                  value: attachment; filename=microcks-repository.json
+              schema:
+                type: string
+      security:
+        - jwt-bearer:
+            - admin
+      summary: Export a snapshot
+      tags:
+        - mock
+    summary: Deals with repository snapshot to import from Microcks
+  /features/config:
+    get:
+      operationId: GetFeaturesConfiguration
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Get features configuration
+      summary: Get features configuration
+      tags:
+        - config
+    summary: Optional features configuration
+  /import:
+    post:
+      description: Import a repository snapshot previsouly exported into Microcks
+      operationId: importSnapshot
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/SnapshotUpload"
+        required: true
+      responses:
+        "201":
+          description: Snasphot has been correctly imported
+      security:
+        - jwt-bearer:
+            - admin
+      summary: Import a snapshot
+      tags:
+        - mock
+    summary: Deals with repository snapshot to import in Microcks
+  /jobs:
+    get:
+      description: Retrieve a list of ImportJobs
+      operationId: GetImportJobs
+      parameters:
+        - description: Page of ImportJobs to retrieve (starts at and defaults to 0)
+          in: query
+          name: page
+          schema:
+            type: integer
+        - description: Size of a page. Maximum number of ImportJobs to include in a response (defaults to 20)
+          in: query
+          name: size
+          schema:
+            type: integer
+        - description: Name like criterion for query
+          in: query
+          name: name
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ImportJob"
+                type: array
+          description: List of found ImportJobs
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get ImportJobs
+      tags:
+        - job
+    post:
+      description: Create a new ImportJob
+      operationId: CreateImportJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportJob"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportJob"
+          description: Created ImportJob
+      security:
+        - jwt-bearer:
+            - user
+      summary: Create ImportJob
+      tags:
+        - job
+    summary: This path operations deal with ImportJobs
+  /jobs/count:
+    get:
+      operationId: GetImportJobCounter
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Counter"
+          description: Number of ImportJobs in datastore
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get the ImportJobs counter
+      tags:
+        - job
+    summary: Count ImportJobs
+  "/jobs/{id}":
+    delete:
+      description: Delete an ImportJob
+      operationId: DeleteImportJob
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: ImportJob deleted
+      security:
+        - jwt-bearer:
+            - admin
+      summary: Delete ImportJob
+      tags:
+        - job
+    get:
+      description: Retrieve an ImportJob using its identifier
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportJob"
+          description: Found ImportJob
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get ImportJob
+      tags:
+        - job
+    parameters:
+      - description: Unique identifier of ImportJob to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    post:
+      description: Update an ImportJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportJob"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportJob"
+          description: Updated ImportJob
+      summary: Update ImportJob
+      tags:
+        - job
+    summary: This path or subpaths operations deal with specific ImportJob having given id
+  "/jobs/{id}/activate":
+    parameters:
+      - description: Unique identifier of ImportJob to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    put:
+      description: Make an ImportJob active, so that it is executed
+      operationId: ActivateImportJob
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportJob"
+          description: ImportJob is activated
+      security:
+        - jwt-bearer:
+            - user
+      summary: Activate an ImportJob
+      tags:
+        - job
+  "/jobs/{id}/start":
+    parameters:
+      - description: Unique identifier of ImportJob to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    put:
+      description: Starting an ImportJob forces it to immediatly import mock definitions
+      operationId: StartImportJob
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportJob"
+          description: Started ImportJob
+      security:
+        - jwt-bearer:
+            - user
+      summary: Start an ImportJob
+      tags:
+        - job
+  "/jobs/{id}/stop":
+    parameters:
+      - description: Unique identifier of ImportJob to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    put:
+      description: Stopping an ImportJob desactivate it, so that it won't execute at next schedule
+      operationId: StopImportJob
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportJob"
+          description: Stopped ImportJob
+      security:
+        - jwt-bearer:
+            - user
+      summary: Stop an ImportJob
+      tags:
+        - job
+  /keycloak/config:
+    get:
+      operationId: GetKeycloakConfig
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeycloakConfig"
+          description: Get current configuration
+      summary: Get authentification configuration
+      tags:
+        - config
+    summary: Keycloak Authentification configuration
+  /metrics/conformance/aggregate:
+    get:
+      operationId: GetConformanceMetricsAggregation
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WeightedMetricValue"
+                type: array
+          description: Get aggregated coverage metric value
+      summary: Get aggregation of conformance metrics
+      tags:
+        - metrics
+    summary: Aggregation of Test conformance metrics
+  "/metrics/conformance/service/{serviceId}":
+    get:
+      operationId: GetServiceTestConformanceMetric
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestConformanceMetric"
+          description: Test coverage metric for Service
+      summary: Get conformance metrics for a Service
+      tags:
+        - metrics
+    parameters:
+      - description: Unique Services identifier this metrics are related to
+        in: path
+        name: serviceId
+        required: true
+        schema:
+          type: string
+    summary: Test Conformance metrics on API and Services
+  /metrics/invocations/global:
+    get:
+      operationId: GetAggregatedInvocationsStats
+      parameters:
+        - description: The day to get statistics for (formatted with yyyyMMdd pattern). Default to today if not provided.
+          in: query
+          name: day
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyInvocationStatistic"
+          description: Aggregated invocation statistics for specified day
+      summary: Get aggregated invocation statistics for a day
+      tags:
+        - metrics
+    summary: Invocation Statistics across Services and APIs
+  /metrics/invocations/global/latest:
+    get:
+      operationId: GetLatestAggregatedInvocationsStats
+      parameters:
+        - description: Number of days to get back in time. Default is 20.
+          in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CounterMap"
+          description: A map where keys are day (formatted using yyyyMMdd pattern) and values are counter of invocations on this day
+      summary: Get aggregated invocations statistics for latest days
+      tags:
+        - metrics
+    summary: Latest Invocation Statistics across Services and APIs
+  /metrics/invocations/top:
+    get:
+      operationId: GetTopIvnocationsStatsByDay
+      parameters:
+        - description: The day to get statistics for (formatted with yyyyMMdd pattern). Default to today if not provided.
+          in: query
+          name: day
+          schema:
+            type: string
+        - description: The number of top invoked mocks to return
+          in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DailyInvocationStatistic"
+                type: array
+          description: Top invocations for a defined day
+      summary: Get top invocation statistics for a day
+      tags:
+        - metrics
+    summary: Top Invocation Statistics across Services and APIs
+  "/metrics/invocations/{serviceName}/{serviceVersion}":
+    get:
+      operationId: GetInvocationStatsByService
+      parameters:
+        - description: The day to get statistics for (formatted with yyyyMMdd pattern). Default to today if not provided.
+          in: query
+          name: day
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyInvocationStatistic"
+          description: Invocation statistics for service for specified day
+      summary: Get invocation statistics for Service
+      tags:
+        - metrics
+    parameters:
+      - description: Name of service to get statistics for
+        in: path
+        name: serviceName
+        required: true
+        schema:
+          type: string
+      - description: Version of service to get statistics for
+        in: path
+        name: serviceVersion
+        required: true
+        schema:
+          type: string
+    summary: Invocation Statistics for API and Services
+  /metrics/tests/latest:
+    get:
+      operationId: GetLatestTestResults
+      parameters:
+        - description: Number of days to consider for test results to return. Default is 7 (one week)
+          in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TestResultSummary"
+                type: array
+          description: Test results summary for specified <limit> last days.
+      summary: Get latest tests results
+      tags:
+        - metrics
+    summary: Lastest Test results across Services and APIs
+  "/resources/service/{serviceId}":
+    get:
+      operationId: GetResourcesByService
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Resource"
+                type: array
+          description: List the resources attached to a Service or API
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get Resources by Service
+    parameters:
+      - description: Unique identifier of the Service or API the resources are attached to
+        in: path
+        name: serviceId
+        required: true
+        schema:
+          type: string
+  "/resources/{name}":
+    get:
+      operationId: GetResource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resource"
+          description: Retrieve the resource having this name
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get Resource
+    parameters:
+      - description: Unique name/business identifier of the Service or API resource
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+  /secrets:
+    get:
+      operationId: GetSecrets
+      parameters:
+        - description: Page of Secrets to retrieve (starts at and defaults to 0)
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Size of a page. Maximum number of Secrets to include in a response (defaults to 20)
+          in: query
+          name: size
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Secret"
+                type: array
+          description: List of found Secrets
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get Secrets
+      tags:
+        - config
+    post:
+      operationId: CreateSecret
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Secret"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Secret"
+          description: Created Secret
+      security:
+        - jwt-bearer:
+            - admin
+      summary: Create a new Secret
+      tags:
+        - config
+    summary: This path operations deal with Secrets
+  /secrets/count:
+    get:
+      operationId: GetSecretsCounter
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Counter"
+          description: Number of Secrets in datastore
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get the Secrets counter
+      tags:
+        - config
+  "/secrets/{id}":
+    delete:
+      description: Delete a Secret
+      operationId: DeleteSecret
+      responses:
+        "200":
+          description: Secret has been deleted
+      security:
+        - jwt-bearer:
+            - admin
+      summary: Delete Secret
+      tags:
+        - config
+    get:
+      description: Retrieve a Secret
+      operationId: GetSecret
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Secret"
+          description: Found Secret
+      security:
+        - jwt-bearer:
+            - admin
+      summary: Get Secret
+      tags:
+        - config
+    parameters:
+      - description: Unique identifier of Secret to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    put:
+      description: Update a Secret
+      operationId: UpdateSecret
+      responses:
+        "200":
+          description: Updated Secret
+      security:
+        - jwt-bearer:
+            - admin
+      summary: Update Secret
+      tags:
+        - config
+  /services:
+    get:
+      operationId: GetServices
+      parameters:
+        - description: Page of Services to retrieve (starts at and defaults to 0)
+          in: query
+          name: page
+          schema:
+            type: integer
+        - description: Size of a page. Maximum number of Services to include in a response (defaults to 20)
+          in: query
+          name: size
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+          description: List of found Services
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get Services and APIs
+      tags:
+        - mock
+    summary: This path operations deal with Services
+  /services/count:
+    get:
+      operationId: GetServicesCounter
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Counter"
+          description: Number of Services in datastore
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get the Services counter
+      tags:
+        - mock
+  /services/labels:
+    get:
+      operationId: GetServicesLabels
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabelsMap"
+          description: "Already used labels: keys are label Keys, values are array of label Values"
+      security:
+        - jwt-bearer:
+            - admin
+      summary: Get the already used labels for Services
+      tags:
+        - mock
+  /services/search:
+    get:
+      operationId: SearchServices
+      parameters:
+        - description: Map of criterion. Key can be simply 'name' with value as the searched string. You can also search by label using keys like 'labels.x' where 'x' is the label and value the label value
+          in: query
+          name: queryMap
+          required: true
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Service"
+                type: array
+          description: List of found Services (filtered according search criteria)
+      security:
+        - jwt-bearer:
+            - user
+      summary: Search for Services and APIs
+      tags:
+        - mock
+  "/services/{id}":
+    delete:
+      description: Delete a Service
+      operationId: DeleteService
+      responses:
+        "200":
+          description: Service has been deleted
+      security:
+        - jwt-bearer:
+            - admin
+            - manager
+      summary: Delete Service
+      tags:
+        - mock
+    get:
+      operationId: GetService
+      parameters:
+        - description: Whether to include details on services messages into result. Default is false
+          in: query
+          name: messages
+          schema:
+            type: boolean
+      responses:
+        "200":
+          $ref: "#/components/responses/ServiceResponse"
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get Service
+      tags:
+        - mock
+    parameters:
+      - description: Unique identifier of Service to managed
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/services/{id}/metadata":
+    parameters:
+      - description: Unique identifier of Service to managed
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: UpdateServiceMetadata
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Metadata"
+        required: true
+      responses:
+        "200":
+          description: Service metadata has been updated
+        "500":
+          description: Update of metadata failed
+      security:
+        - jwt-bearer:
+            - admin
+            - manager
+      summary: Update Service Metadata
+      tags:
+        - mock
+  "/services/{id}/operation":
+    parameters:
+      - description: Unique identifier of Service to managed
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: OverrideServiceOperation
+      parameters:
+        - description: Name of operation to update
+          in: query
+          name: operationName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OperationOverrideDTO"
+        required: true
+      responses:
+        "200":
+          description: Operation has been updated
+        "500":
+          description: Operation cannot be updated
+      security:
+        - jwt-bearer:
+            - admin
+            - manager
+      summary: Override Service Operation
+      tags:
+        - mock
+  /tests:
+    post:
+      operationId: CreateTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestResult"
+          description: Created TestResult (empty shell cause tests are executed asynchronously)
+      security:
+        - jwt-bearer:
+            - user
+      summary: Create a new Test
+      tags:
+        - test
+  "/tests/service/{serviceId}":
+    get:
+      operationId: GetTestResultsByService
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TestResult"
+                type: array
+          description: List of TestResults for the Service having the requested id
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get TestResults by Service
+      tags:
+        - test
+    parameters:
+      - description: Unique identifier of Service to manage TestResults for
+        in: path
+        name: serviceId
+        required: true
+        schema:
+          type: string
+  "/tests/service/{serviceId}/count":
+    get:
+      operationId: GetTestResultsByServiceCounter
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Counter"
+          description: Number of TestResults for this Service in datastore
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get the TestResults for Service counter
+      tags:
+        - test
+    parameters:
+      - description: Unique identifier of Service to manage TestResults for
+        in: path
+        name: serviceId
+        required: true
+        schema:
+          type: string
+  "/tests/{id}":
+    get:
+      description: ""
+      operationId: GetTestResult
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestResult"
+          description: Requested TestResult
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get TestResult
+      tags:
+        - test
+    parameters:
+      - description: Unique identifier of TestResult to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/tests/{id}/events/{testCaseId}":
+    get:
+      operationId: GetEventsByTestCase
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/UnidirectionalEvent"
+                type: array
+          description: List of event messages for this TestCase
+      summary: Get events for TestCase
+      tags:
+        - test
+    parameters:
+      - description: Unique identifier of TestResult to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier of TetsCaseResult to manage
+        in: path
+        name: testCaseId
+        required: true
+        schema:
+          type: string
+  "/tests/{id}/messages/{testCaseId}":
+    get:
+      operationId: GetMessagesByTestCase
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/RequestResponsePair"
+                type: array
+          description: List of request and response messages for this TestCase
+      security:
+        - jwt-bearer:
+            - user
+      summary: Get messages for TestCase
+      tags:
+        - test
+    parameters:
+      - description: Unique identifier of TestResult to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier of TetsCaseResult to manage
+        in: path
+        name: testCaseId
+        required: true
+        schema:
+          type: string
+  "/tests/{id}/testCaseResult":
+    parameters:
+      - description: Unique identifier of TestResult to manage
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    post:
+      description: Report a TestCaseResult (typically used by a Test runner)
+      operationId: ReportTestCaseResult
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestCaseReturnDTO"
+        description: TestCase return wrapper object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestCaseResult"
+          description: TestCaseResult is reported
+      summary: Report and create a new TestCaseResult
+      tags:
+        - test
+components:
+  responses:
+    ServiceResponse:
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: "#/components/schemas/Service"
+              - $ref: "#/components/schemas/ServiceView"
+      description: ""
+  schemas:
+    AbstractExchange:
+      description: Abstract bean representing a Service or API Exchange.
+      properties:
+        type:
+          description: Discriminant type for identifying kind of exchange
+          enum:
+            - reqRespPair
+            - unidirEvent
+          type: string
+      required:
+        - type
+      type: object
+    ArtifactUpload:
+      description: |-
+        Artifact to be imported by Microcks.
+        This structure represents a mime-multipart file upload (as specified here: https://swagger.io/docs/specification/describing-request-body/file-upload/)
+      properties:
+        file:
+          description: The artifact to upload
+          format: binary
+          type: string
+      required:
+        - file
+      type: object
+    Binding:
+      description: Protocol binding details for asynchronous operations
+      properties:
+        destinationName:
+          description: Name of destination for asynchronous messages of this operation
+          type: string
+        destinationType:
+          description: Type of destination for asynchronous messages of this operation
+          type: string
+        keyType:
+          description: Type of key for Kafka messages
+          type: string
+        method:
+          description: HTTP method for WebSocket binding
+          type: string
+        persistent:
+          description: Persistent attribute for MQTT binding
+          type: boolean
+        qoS:
+          description: Quality of Service attribute for MQTT binding
+          type: string
+        type:
+          description: Protocol binding identifier
+          enum:
+            - KAFKA
+            - MQTT
+            - WS
+            - AMQP
+            - NATS
+            - GOOGLEPUBSUB
+          type: string
+      required:
+        - type
+        - destinationName
+      type: object
+    Counter:
+      description: A simple Counter type.
+      example: |-
+        {
+            "counter": 12
+        }
+      properties:
+        counter:
+          description: Number of items in a resource collection
+          format: int32
+          type: integer
+      type: object
+    CounterMap:
+      additionalProperties:
+        format: integer
+        type: number
+      description: A generic map of counter
+      type: object
+    DailyInvocationStatistic:
+      description: The daily statistic of a service mock invocations
+      properties:
+        dailyCount:
+          description: The number of service mock invocations on this day
+          type: number
+        day:
+          description: The day (formatted as yyyyMMdd string) represented by this statistic
+          type: string
+        hourlyCount:
+          additionalProperties: true
+          description: The number of service mock invocations per hour of the day (keys range from 0 to 23)
+          type: object
+        id:
+          description: Unique identifier of this statistic object
+          type: string
+        minuteCount:
+          additionalProperties: true
+          description: The number of service mock invocations per minute of the day (keys range from 0 to 1439)
+          type: object
+        serviceName:
+          description: The name of the service this statistic is related to
+          type: string
+        serviceVersion:
+          description: The version of the service this statistic is related to
+          type: string
+      required:
+        - id
+        - day
+        - serviceName
+        - serviceVersion
+        - dailyCount
+      type: object
+    EventMessage:
+      description: ""
+      properties:
+        content:
+          description: Body content for this message
+          type: string
+        headers:
+          description: Headers for this message
+          items:
+            $ref: "#/components/schemas/Header"
+          type: array
+        id:
+          description: Unique identifier of this message
+          type: string
+        mediaType:
+          description: Content type of message
+          type: string
+        name:
+          description: Unique distinct name of this message
+          type: string
+        operationId:
+          description: Identifier of Operation this message is associated to
+          type: string
+        testCaseId:
+          description: Unique identifier of TestCase this message is attached (in case of a test)
+          type: string
+      required:
+        - id
+        - mediaType
+      type: object
+    Exchange:
+      description: Abstract representation of a Service or API exchange type (request/response, event based, ...)
+      discriminator:
+        mapping:
+          reqRespPair: "#/components/schemas/RequestResponsePair"
+          unidirEvent: "#/components/schemas/UnidirectionalEvent"
+        propertyName: type
+      oneOf:
+        - $ref: "#/components/schemas/RequestResponsePair"
+        - $ref: "#/components/schemas/UnidirectionalEvent"
+    FeaturesConfig:
+      additionalProperties: true
+      description: Representation of optional features configuration used by Microcks server
+      example:
+        async-api:
+          default-binding: KAFKA
+          enabled: "false"
+          endpoint-KAFKA: my-cluster-kafka-bootstrap.apps.try.microcks.io
+          endpoint-MQTT: my-mqtt-broker.apps.try.microcks.io
+          endpoint-WS: localhost:8081
+          frequencies: 3,10,30
+        microcks-hub:
+          allowed-roles: admin,manager,manager-any
+          enabled: "true"
+          endpoint: https://hub.microcks.io/api
+        repository-filter:
+          enabled: "true"
+          label-key: domain
+          label-label: Domain
+          label-list: domain,status
+        repository-tenancy:
+          artifact-import-allowed-roles: admin,manager,manager-any
+          enabled: "false"
+      properties:
+        async-api:
+          description: Asynchronous feature properties
+          properties:
+            default-binding:
+              type: string
+            enabled:
+              type: string
+            endpoint-AMQP:
+              type: string
+            endpoint-GOOGLEPUBSUB:
+              type: string
+            endpoint-KAFKA:
+              type: string
+            endpoint-MQTT:
+              type: string
+            endpoint-NATS:
+              type: string
+            endpoint-WS:
+              type: string
+            frequencies:
+              type: string
+          type: object
+        microcks-hub:
+          description: Microcks Hub feature properties
+          properties:
+            allowed-roles:
+              type: string
+            enabled:
+              type: string
+            endpoint:
+              type: string
+          type: object
+        repository-filter:
+          description: Repository filtering feature properties
+          properties:
+            enabled:
+              type: string
+            label-key:
+              type: string
+            label-label:
+              type: string
+            label-list:
+              type: string
+          type: object
+        repository-tenancy:
+          description: Repository tenancy feature properties
+          properties:
+            artifact-import-allowed-roles:
+              type: string
+            enabled:
+              type: string
+          type: object
+      title: Root Type for FeaturesConfig
+      type: object
+    Header:
+      description: Transport headers for both Requests and Responses
+      properties:
+        name:
+          description: Unique distinct name of this Header
+          type: string
+        values:
+          description: Values for this Header
+          items:
+            type: string
+          type: array
+      required:
+        - name
+        - values
+      type: object
+    HeaderDTO:
+      description: Data Transfert Object for headers of both Requests and Responses
+      properties:
+        name:
+          description: Unique distinct name of this Header
+          type: string
+        values:
+          description: Values for this header (comma separated strings)
+          type: string
+      required:
+        - name
+        - values
+      type: object
+    ImportJob:
+      description: An ImportJob allow defining a repository artifact to poll for discovering Services and APIs mocks and tests
+      properties:
+        active:
+          description: Whether this ImportJob is active (ie. scheduled for execution)
+          type: boolean
+        createdDate:
+          description: Creation date for this ImportJob
+          format: date-time
+          type: string
+        etag:
+          description: Etag of repository URL during previous import. Is used for not re-importing if no recent changes
+          type: string
+        frequency:
+          description: Reserved for future usage
+          type: string
+        id:
+          description: Unique identifier of ImportJob
+          type: string
+        lastImportDate:
+          description: Date last import was done
+          format: date-time
+          type: string
+        lastImportError:
+          description: Error message of last import (if any)
+          type: string
+        mainArtifact:
+          description: Flag telling if considered as primary or secondary artifact. Default to `true`
+          type: boolean
+        metadata:
+          $ref: "#/components/schemas/Metadata"
+          description: Metadata of ImportJob
+        name:
+          description: Unique distinct name of this ImportJob
+          type: string
+        repositoryDisableSSLValidation:
+          description: Whether to disable SSL certificate verification when checking repository
+          type: boolean
+        repositoryUrl:
+          description: URL of mocks and tests repository artifact
+          type: string
+        secretRef:
+          $ref: "#/components/schemas/SecretRef"
+          description: Reference of a Secret to used when checking repository
+        serviceRefs:
+          description: References of Services discovered when checking repository
+          items:
+            $ref: "#/components/schemas/ServiceRef"
+          type: array
+      required:
+        - name
+        - repositoryUrl
+    KeycloakConfig:
+      description: Representation of Keycloak / SSO configuration used by Microcks server
+      properties:
+        auth-server-url:
+          description: SSO Server authentication url
+          type: string
+        enabled:
+          description: Whether Keycloak authentification and usage is enabled
+          type: boolean
+        public-client:
+          description: Name of public-client that can be used for requesting OAuth token
+          type: string
+        realm:
+          description: Authentication realm name
+          type: string
+        resource:
+          description: Name of Keycloak resource/application used on client side
+          type: string
+        ssl-required:
+          description: SSL certificates requirements
+          enum:
+            - none
+            - external
+      required:
+        - realm
+        - auth-server-url
+        - public-client
+        - ssl-required
+        - resource
+        - enabled
+      type: object
+    LabelsMap:
+      additionalProperties:
+        $ref: "#/components/schemas/StringArray"
+        type: object
+      description: A map which keys are already used labels keys and values are already used values for this key
+      type: object
+    MessageArray:
+      description: Array of Message for Service operations
+      items:
+        $ref: "#/components/schemas/Exchange"
+      type: array
+    Metadata:
+      description: Commodity object for holding metadata on any entity. This object is inspired by Kubernetes metadata.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: Annotations of attached object
+          type: object
+        createdOn:
+          description: Creation date of attached object
+          type: integer
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels put on attached object
+          type: object
+        lastUpdate:
+          description: Last update of attached object
+          type: integer
+      required:
+        - createdOn
+        - lastUpdate
+      type: object
+    Operation:
+      description: An Operation of a Service or API
+      properties:
+        bindings:
+          additionalProperties:
+            $ref: "#/components/schemas/Binding"
+          description: Map of protocol binding details for this operation
+          type: object
+        defaultDelay:
+          description: Default response time delay for mocks
+          type: number
+        dispatcher:
+          description: Dispatcher strategy used for mocks
+          type: string
+        dispatcherRules:
+          description: DispatcherRules used for mocks
+          type: string
+        inputName:
+          description: Name of input parameters in case of Xml based Service
+          type: string
+        method:
+          description: Represents transport method
+          type: string
+        name:
+          description: Unique name of this Operation within Service scope
+          type: string
+        outputName:
+          description: Name of output parameters in case of Xml based Service
+          type: string
+        parameterContraints:
+          description: Contraints that may apply to mock invocatino on this operation
+          items:
+            $ref: "#/components/schemas/ParameterConstraint"
+          type: array
+        resourcePaths:
+          description: Paths the mocks endpoints are mapped on
+          items:
+            type: string
+          type: array
+      required:
+        - name
+        - method
+      type: object
+    OperationHeaders:
+      additionalProperties:
+        items:
+          $ref: "#/components/schemas/HeaderDTO"
+        type: array
+      description: Specification of additional headers for a Service/API operations. Keys are operation name or "globals" (if header applies to all), values are Header objects DTO.
+      type: object
+    OperationOverrideDTO:
+      description: Data Transfer object for grouping the mutable properties of an Operation
+      properties:
+        defaultDelay:
+          description: Default delay in milliseconds to apply to mock responses on this operation
+          type: integer
+        dispatcher:
+          description: Type of dispatcher to apply for this operation
+          type: string
+        dispatcherRules:
+          description: Rules of dispatcher for this operation
+          type: string
+        parameterConstraints:
+          description: Constraints that may apply to incoming parameters on this operation
+          items:
+            $ref: "#/components/schemas/ParameterConstraint"
+          type: array
+      type: object
+    ParameterConstraint:
+      description: Companion object for Operation that may be used to express constraints on request parameters
+      properties:
+        in:
+          description: Parameter location
+          enum:
+            - path
+            - query
+            - header
+          type: string
+        mustMatchRegexp:
+          description: Whether it's a regular expression matching constraint
+          type: string
+        name:
+          description: Parameter name
+          type: string
+        recopy:
+          description: Whether it's a recopy constraint
+          type: boolean
+        required:
+          description: Whether it's a required constraint
+          type: boolean
+      required:
+        - name
+      type: object
+    Request:
+      description: A mock invocation or test request
+      properties:
+        content:
+          description: Body content for this request
+          type: string
+        headers:
+          description: Headers for this Request
+          items:
+            $ref: "#/components/schemas/Header"
+          type: array
+        id:
+          description: Unique identifier of Request
+          type: string
+        name:
+          description: Unique distinct name of this Request
+          type: string
+        operationId:
+          description: Identifier of Operation this Request is associated to
+          type: string
+        testCaseId:
+          description: Unique identifier of TestCase this Request is attached (in case of a test)
+          type: string
+      required:
+        - name
+        - operationId
+    RequestResponsePair:
+      allOf:
+        - properties:
+            request:
+              $ref: "#/components/schemas/Request"
+              description: The request part of the pair
+            response:
+              $ref: "#/components/schemas/Response"
+              description: The Response part of the pair
+          required:
+            - request
+            - response
+          type: object
+        - $ref: "#/components/schemas/AbstractExchange"
+      description: Request associated with corresponding Response
+      type: object
+    Resource:
+      description: Resource represents a Service or API artifacts such as specification, contract
+      properties:
+        content:
+          description: String content of this resource
+          type: string
+        id:
+          description: Uniquer identifier of this Service or API Resource
+          type: string
+        name:
+          description: Unique name/business identifier for this Service or API resource
+          type: string
+        path:
+          description: Relatvie path of this resource regarding main resource
+          type: string
+        serviceId:
+          description: Unique identifier of the Servoce or API this resource is attached to
+          type: string
+        sourceArtifact:
+          description: Short name of the artifact this resource was extracted from
+          type: string
+        type:
+          $ref: "#/components/schemas/ResourceType"
+          description: Type of this Service or API resource
+      required:
+        - id
+        - name
+        - content
+        - type
+        - serviceId
+      type: object
+    ResourceType:
+      description: Types of managed resources for Services or APIs
+      enum:
+        - WSDL
+        - XSD
+        - JSON_SCHEMA
+        - OPEN_API_SPEC
+        - OPEN_API_SCHEMA
+        - ASYNC_API_SPEC
+        - ASYNC_API_SCHEMA
+        - AVRO_SCHEMA
+        - PROTOBUF_SCHEMA
+        - PROTOBUF_DESCRIPTION
+        - GRAPHQL_SCHEMA
+      type: string
+    Response:
+      description: A mock invocation or test response
+      properties:
+        content:
+          description: Body content of this Response
+          type: string
+        headers:
+          description: Headers for this Response
+          items:
+            $ref: "#/components/schemas/Header"
+          type: array
+        id:
+          description: Unique identifier of Response
+          type: string
+        name:
+          description: Unique distinct name of this Response
+          type: string
+        operationId:
+          description: Identifier of Operation this Response is associated to
+          type: string
+        testCaseId:
+          description: Unique identifier of TestCase this Response is attached (in case of a test)
+          type: string
+      required:
+        - operationId
+        - name
+    Secret:
+      description: A Secret allows grouping informations on how to access a restricted resource such as a repsoitory URL. Secrets are typically used by ImpoortJobs.
+      example: |-
+        {
+            "id": "5be58fb51ed744d1b87481bd",
+            "name": "Gogs internal",
+            "description": "Gogs internal corporate repository",
+            "username": "team",
+            "password": "team",
+            "caCertPem": "-----BEGIN CERTIFICATE-----\nMIIC6jCCAdKgAwIBAgIBATANBgkqhkiG9w0BAQsFADAmMSQwIgYDVQQDDBtvcGVu\nc2hpZnQtc2lnbmVyQDE1MzE5MTA5MDIwHhcNMTgwNzE4MTA0ODIyWhcNMjMwNzE3\nMTA0ODIzWjAmMSQwIgYDVQQDDBtvcGVuc2hpZnQtc2lnbmVyQDE1MzE5MTA5MDIw\nggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyaP1jlpnm8WpfCSnUa8Qt\nhdUynOLLgElUtpWoW25wB9tO2ZmEj+fVsTyzEsW8+nfXXfRsBEzPm2ze9uEMTPTB\nAY0k7DbLZfjmF1lCckUvvh1rR/8hoPuXETjXUuOdtm7gRHTOxLQyH2Qi/q0DYJAn\nprKyRCLa35pRnykL6v4bHkqFnqDEho63i29XHhm2703moh4YCl1iYa2Rh6D44cjn\n8lBCq6o7zoZSmc/aBamRkQrfZYcolR8OUtDS4oEB0zMftmea2ycashsLEMB+Cq4r\n64NI2QM7qOxdTuXsDivHfLl7RTuWEOozGaJXoiPaGU/3d/KnY0gKJ2TC1KXt6Xjn\nAgMBAAGjIzAhMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MA0GCSqG\nSIb3DQEBCwUAA4IBAQCeUmxfUzw0VAFG6HvVYIsfvumiIvsSWmclGIZqNJyfMHFD\nMy6xzPRNNfWe5aumGTJsuIzuXfDRcdO7KmH1d2/5brkvWpxp6svVrYPvcoXjl4VN\nQR2mv5Di4KHfiiwvP3eeewjUZj+uREGqX2fcbJPHTPy32Kpb0H8Uy09BklhjC7QP\ngRAGexPhU1oBL/CoOwbHKcQ6dxs/y1SxzI8gXEtec4z62CroI13iT7U0UjSqFBE4\nKfrJombfz0d68781Z40ll+8my251ZNfbLBhQ3UHW0JnkBEQkE1aBorUoj2iakYvx\nA2qZh+8q2b8MwMb2YsQ0dlxKd6c4tN3lmMnO4bnd\n-----END CERTIFICATE-----"
+        }
+      properties:
+        caCertPem:
+          type: string
+        description:
+          description: Description of this Secret
+          type: string
+        id:
+          description: Unique identifier of Secret
+          type: string
+        name:
+          description: Unique distinct name of Secret
+          type: string
+        password:
+          type: string
+        token:
+          type: string
+        tokenHeader:
+          type: string
+        username:
+          type: string
+      required:
+        - name
+        - description
+    SecretRef:
+      description: Lightweight reference for an existing Secret
+      example: |-
+        {
+            "secretId": "5be58fb51ed744d1b87481bd",
+            "name": "Gogs internal"
+        }
+      properties:
+        name:
+          description: Distinct name of the referenced Secret
+          type: string
+        secretId:
+          description: Unique identifier or referenced Secret
+          type: string
+      required:
+        - secretId
+        - name
+    Service:
+      description: Represents a Service or API definition as registred into Microcks repository
+      properties:
+        id:
+          description: Unique identifier for this Service or API
+          type: string
+        metadata:
+          $ref: "#/components/schemas/Metadata"
+          description: Metadata of Service
+        name:
+          description: Distinct name for this Service or API (maybe shared among many versions)
+          type: string
+        operations:
+          description: Set of Operations for Service or API
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+        type:
+          description: Service or API Type
+          enum:
+            - REST
+            - SOAP_HTTP
+            - GENERIC_REST
+            - GENERIC_EVENT
+            - EVENT
+            - GRPC
+            - GRAPHQL
+          type: string
+        version:
+          description: Distinct version for a named Service or API
+          type: string
+        xmlNS:
+          description: Associated Xml Namespace in case of Xml based Service
+          type: string
+      required:
+        - name
+        - version
+        - type
+    ServiceRef:
+      description: Lightweight reference of an existing Service
+      properties:
+        name:
+          description: The Service name
+          type: string
+        serviceId:
+          description: Unique reference of a Service
+          type: string
+        version:
+          description: The Service version
+          type: string
+      required:
+        - serviceId
+        - name
+        - version
+    ServiceView:
+      description: Aggregate bean for grouping a Service an its messages pairs
+      properties:
+        messagesMap:
+          additionalProperties:
+            $ref: "#/components/schemas/MessageArray"
+          description: Map of messages for this Service. Keys are operation name, values are array of messages for this operation
+          type: object
+        service:
+          $ref: "#/components/schemas/Service"
+          description: Wrapped service description
+      required:
+        - service
+        - messagesMap
+      type: object
+    SnapshotUpload:
+      description: Upload of a repository snapshot file
+      properties:
+        file:
+          description: The repository snapshot file
+          format: binary
+          type: string
+      required:
+        - file
+      type: object
+    StringArray:
+      description: A simple array of String
+      items:
+        type: string
+      type: array
+    TestCaseResult:
+      description: Companion objects for TestResult. Each TestCaseResult correspond to a particuliar service operation / action reference by the operationName field. TestCaseResults owns a collection of TestStepResults (one for every request associated to service operation / action).
+      properties:
+        elapsedTime:
+          description: Elapsed time in milliseconds since the test case beginning
+          type: number
+        operationName:
+          description: Name of operation this test case is bound to
+          type: string
+        success:
+          description: Flag telling if test case is a success
+          type: boolean
+        testStepResults:
+          description: Test steps associated to this test case
+          items:
+            $ref: "#/components/schemas/TestStepResult"
+          type: array
+      required:
+        - success
+        - elapsedTime
+        - operationName
+    TestCaseReturnDTO:
+      properties:
+        operationName:
+          description: Name of related operation for this TestCase
+          type: string
+      required:
+        - operationName
+    TestConformanceMetric:
+      description: Represents the test conformance metrics (current score, history and evolution trend) of a Service
+      properties:
+        aggregationLabelValue:
+          description: Value of the label used for metrics aggregation (if any)
+          type: string
+        currentScore:
+          description: Current test conformance score for the related Service
+          format: double
+          type: number
+        id:
+          description: Unique identifier of coverage metric
+          type: string
+        lastUpdateDay:
+          description: The day of latest score update (in yyyyMMdd format)
+          type: string
+        latestScores:
+          additionalProperties:
+            type: number
+          description: History of latest scores (key is date with format yyyyMMdd, value is score as double)
+          type: object
+        latestTrend:
+          $ref: "#/components/schemas/Trend"
+          description: Evolution trend of currentScore
+        maxPossibleScore:
+          description: Maximum conformance score that can be reached (depends on samples expresiveness)
+          format: double
+          type: number
+        serviceId:
+          description: Unique identifier of the Service this metric is related to
+          type: string
+      required:
+        - id
+        - serviceId
+        - currentScore
+        - maxPossibleScore
+      type: object
+    TestRequest:
+      description: Test request is a minimalist wrapper for requesting the launch of a new test
+      properties:
+        filteredOperations:
+          description: A restriction on service operations to test
+          items:
+            type: string
+          type: array
+        operationHeaders:
+          $ref: "#/components/schemas/OperationHeaders"
+          description: This test operations headers override
+        runnerType:
+          $ref: "#/components/schemas/TestRunnerType"
+          description: Runner used for this test
+        secretName:
+          description: The name of Secret to use for connecting the test endpoint
+          type: string
+        serviceId:
+          description: Unique identifier of service to test
+          type: string
+        testEndpoint:
+          description: Endpoint to test for this service
+          type: string
+        timeout:
+          description: The maximum time (in milliseconds) to wait for this test ends
+          type: integer
+      required:
+        - serviceId
+        - testEndpoint
+        - runnerType
+        - timeout
+    TestResult:
+      description: Represents the result of a Service or API test run by Microcks. Tests are related to a service and made of multiple test cases corresponding to each operations / actions composing service. Tests are run against a specific endpoint named testedEndpoint. It holds global markers telling if test still ran, is a success, how many times is has taken and so on ...
+      properties:
+        elapsedTime:
+          description: Elapsed time in milliseconds since test beginning
+          type: number
+        id:
+          description: Unique identifier of TestResult
+          type: string
+        inProgress:
+          description: Flag telling is test is still in progress
+          type: boolean
+        operationHeaders:
+          $ref: "#/components/schemas/OperationHeaders"
+          description: This test operations headers override
+        runnerType:
+          $ref: "#/components/schemas/TestRunnerType"
+          description: Runner used for this test
+        secretRef:
+          $ref: "#/components/schemas/SecretRef"
+          description: The referrence of the Secret used for connecting to test endpoint
+        serviceId:
+          description: Unique identifier of service tested
+          type: string
+        success:
+          description: Flag telling if test is a success
+          type: boolean
+        testCaseResults:
+          description: TestCase results associated to this test
+          items:
+            $ref: "#/components/schemas/TestCaseResult"
+          type: array
+        testDate:
+          description: Timestamp of creation date of this service
+          format: int64
+          type: integer
+        testNumber:
+          description: Incremental number for tracking number of tests of a service
+          type: number
+        testedEndpoint:
+          description: Endpoint used during test
+          type: string
+        timeout:
+          description: The maximum time (in milliseconds) to wait for this test ends
+          type: integer
+        version:
+          description: Revision number of this test
+          type: number
+      required:
+        - id
+        - version
+        - testNumber
+        - testDate
+        - testedEndpoint
+        - serviceId
+        - success
+        - inProgress
+        - runnerType
+    TestResultSummary:
+      description: "Represents the summary result of a Service or API test run by Microcks. "
+      properties:
+        id:
+          description: Unique identifier of TestResult
+          type: string
+        serviceId:
+          description: Unique identifier of service tested
+          type: string
+        success:
+          description: Flag telling if test is a success
+          type: boolean
+        testDate:
+          description: Timestamp of creation date of this service
+          format: int64
+          type: integer
+      required:
+        - id
+        - testDate
+        - serviceId
+        - success
+    TestReturn:
+      description: TestReturn is used for wrapping the return code of a test step execution
+      properties:
+        code:
+          description: Return code for test (0 means Success, 1 means Failure)
+          type: integer
+        elapsedTime:
+          description: Elapsed time in milliseconds
+          format: int64
+          type: integer
+        eventMessage:
+          $ref: "#/components/schemas/EventMessage"
+          description: Event Message received for this test
+        message:
+          description: Error message if any
+          type: string
+        request:
+          $ref: "#/components/schemas/Request"
+          description: Request sent for this test
+        response:
+          $ref: "#/components/schemas/Response"
+          description: Response returned for this test
+      required:
+        - code
+        - elapsedTime
+    TestRunnerType:
+      description: Type of test strategy (different strategies are implemented by different runners)
+      enum:
+        - HTTP
+        - SOAP_HTTP
+        - SOAP_UI
+        - POSTMAN
+        - OPEN_API_SCHEMA
+        - ASYNC_API_SCHEMA
+        - GRPC_PROTOBUF
+        - GRAPHQL_SCHEMA
+      type: string
+    TestStepResult:
+      description: TestStepResult is an entity embedded within TestCaseResult. They are created for each request associated with an operation / action of a microservice.
+      properties:
+        elapsedTime:
+          description: Elapsed time in milliseconds since the test step beginning
+          type: number
+        eventMessageName:
+          description: Name of event this test step is bound to
+          type: string
+        message:
+          description: Error message that may be associated to this test step
+          type: string
+        requestName:
+          description: Name of request this test step is bound to
+          type: string
+        success:
+          description: Flag telling if test case is a success
+          type: boolean
+      required:
+        - success
+        - elapsedTome
+    Trend:
+      description: Evolution trend qualifier
+      enum:
+        - DOWN
+        - LOW_DOWN
+        - STABLE
+        - LOW_UP
+        - UP
+      type: string
+    UnidirectionalEvent:
+      allOf:
+        - properties:
+            eventMessage:
+              $ref: "#/components/schemas/EventMessage"
+              description: Asynchronous message for this unidirectional event
+          required:
+            - eventMessage
+          type: object
+        - $ref: "#/components/schemas/AbstractExchange"
+      description: Representation of an unidirectional exchange as an event message
+      type: object
+    WeightedMetricValue:
+      description: Value of a metric with an associated weight
+      properties:
+        name:
+          description: Metric name or serie name
+          type: string
+        value:
+          description: The value of this metric
+          type: integer
+        weight:
+          description: Weight of this metric value (typically a percentage)
+          type: integer
+      required:
+        - name
+        - weight
+        - value
+      type: object
+  securitySchemes:
+    jwt-bearer:
+      description: JWT Bearer acquired using OAuth 2 Authentication flow or Direct Access Grant
+      flows:
+        clientCredentials:
+          refreshUrl: https://keycloak.example.com/realms/microcks/protocol/openid-connect/token
+          scopes:
+            admin: Administrator of the Microcks instance
+            manager: Services & APIs content manager
+            user: Simple authenticated user
+          tokenUrl: https://keycloak.example.com/realms/microcks/protocol/openid-connect/token
+      type: oauth2

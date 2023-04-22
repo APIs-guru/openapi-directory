@@ -1,0 +1,172 @@
+{
+  "apis": {
+    "amentum.space:atmosphere": {
+      "added": "2019-08-01T15:56:31.000Z",
+      "info": {
+        "contact": {
+          "x-twitter": "amentumspace"
+        },
+        "description": "Instantly access empirical models of atmospheric density and  composition that are recommended by the Committee on Space Research (COSPAR) for  satellite drag calculations. <br><br>\nAPI requests must contain a key \"API-Key\" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> \nHelp us improve the quality of our web APIs by completing our 2 minute survey <a href=\"https://www.surveymonkey.com/r/CTDTRBN\">here</a>.<br><br>\nAmentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>\nCopyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.\n",
+        "title": "Atmosphere API",
+        "version": "1.1.1",
+        "x-apisguru-categories": [
+          "location"
+        ],
+        "x-logo": {
+          "altText": "Amentum Aerospace",
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_amentumspace_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://atmosphere.amentum.space/openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amentum.space",
+        "x-serviceName": "atmosphere"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amentum.space/atmosphere/1.1.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amentum.space/atmosphere/1.1.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amentum.space:atmosphere/1.1.1.json"
+    },
+    "amentum.space:aviation_radiation": {
+      "added": "2021-01-04T14:57:07.303Z",
+      "info": {
+        "contact": {
+          "x-twitter": "amentumspace"
+        },
+        "description": "Our atmosphere protects us from a hostile space radiation environment comprising high energy particles of solar and intergalactic origin. Solar radiation is significant during unpredictable and short lived solar flares and coronal mass ejections (CMEs); however, galactic cosmic radiation (GCR) is omnipresent. The GCR intensity varies with latitude, longitude, and time due to effects of solar activity on the interplanetary magnetic field, as well as the Earth's magnetic field. Space radiation collides with gases in the atmosphere, leading to a complex shower of high energy radiation, the intensity and composition of which varies spatially and temporally. Excessive exposure to radiation can damage DNA and lead to long-term health effects such as an increased risk of cancer.  <br><br> Resulting radiation levels at commercial aircraft altitudes are greater than at sea level. Aircrew are classified as radiation workers in some countries; however, planning to limit their exposure, and monitoring, is generally lacking. Both real-time measurements and predictive models of radiation in the atmosphere are important to mitigate the radiation risk to crew. <br><br>\nWe host a RESTful API to models of cosmic ray induced ionising radiation in the atmosphere. \nThe CARI7 and PARMA endpoints use models developed by the US Federal Aviation Administration and the Japan Atomic Energy Agency to  calculate cosmic radiation doses at a point. \nThe Route Dose API calculates the same quantities along a great circle route between two airports using CARI7. <br><br>\nAPI requests must contain a key \"API-Key\" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> \nHelp us improve the quality of our web APIs by completing our 2 minute survey <a href=\"https://www.surveymonkey.com/r/CTDTRBN\">here</a>.<br><br>\nAmentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>\nCopyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2022.\n",
+        "title": "Aviation Radiation API",
+        "version": "1.5.0",
+        "x-apisguru-categories": [
+          "location",
+          "open_data"
+        ],
+        "x-logo": {
+          "altText": "Amentum Aerospace",
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_amentumspace_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://cosmicrays.amentum.space//openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amentum.space",
+        "x-serviceName": "aviation_radiation"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amentum.space/aviation_radiation/1.5.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amentum.space/aviation_radiation/1.5.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amentum.space:aviation_radiation/1.5.0.json"
+    },
+    "amentum.space:global-magnet": {
+      "added": "2019-07-15T12:58:08.000Z",
+      "info": {
+        "contact": {
+          "x-twitter": "amentumspace"
+        },
+        "description": "\nThe World Magnetic Model calculates the intensity and direction of the Earth's magnetic field on a specific date-time, geodetic altitude, latitude, and longitude. It is relied upon throughout the world for navigation, mineral exploration, atmospheric and space science, and is installed on billions of devices.  <br><br>\nA comprehensive description of the World Magnetic Model, including its  limitations, can be found <a href='https://www.ngdc.noaa.gov/geomag/WMM/'>here</a>.  <br><br>\nWe provide a RESTful API to access the out-of-cycle  World Magnetic Model (WMM2015v2) valid for years 2015.0 - 2020.0 and WMM2020 valid for years 2020.0 - 2025.0<br><br>\nAPI requests must contain a key \"API-Key\" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> \nAmentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>\nHelp us improve the quality of our web APIs by completing our 2 minute survey <a href=\"https://www.surveymonkey.com/r/CTDTRBN\">here</a>.<br><br>\nCopyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.\n",
+        "title": "Geomag API",
+        "version": "1.3.0",
+        "x-apisguru-categories": [
+          "location"
+        ],
+        "x-logo": {
+          "altText": "Amentum Aerospace",
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_amentumspace_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://globalmagnet.amentum.space/wmm/openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amentum.space",
+        "x-serviceName": "global-magnet"
+      },
+      "updated": "2021-08-23T09:34:59.789Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amentum.space/global-magnet/1.3.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amentum.space/global-magnet/1.3.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amentum.space:global-magnet/1.3.0.json"
+    },
+    "amentum.space:gravity": {
+      "added": "2021-01-04T14:52:32.799Z",
+      "info": {
+        "contact": {
+          "x-twitter": "amentumspace"
+        },
+        "description": "The gravitational field of the earth is non-uniform.  The <a href='https://en.wikipedia.org/wiki/Geoid'>geoid</a> is the shape the\n ocean surface would take if only gravity and the rotation of the Earth\n  were considered. The geoid is the surface that defines zero elevation.<br><br>\n\nThe geoid height is the difference between an ideal reference ellipsoid  and the geoid.<br><br>\nThe gravity anomaly is the difference between the acceleration due to gravity on the Earth's surface and the value calculated assuming the reference ellipsoid.<br><br>\nThe official Earth Gravitational Model <a href=https://en.wikipedia.org/wiki/Earth_Gravitational_Model#EGM2008/>EGM2008</a> was developed and  released to the public by the National Geospatial-Intelligence Agency (NGA).<br><br>\nOur EGM2008 API provides on-demand access to the EGM2008 model, as implemented by the open-source GeographicLib  <a href=https://geographiclib.sourceforge.io/html/gravity.html>Gravity</a> library.<br><br>\nAPI requests must contain a key \"API-Key\" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> \nAmentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>\nCopyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.\n",
+        "title": "Gravity API",
+        "version": "1.1.1",
+        "x-apisguru-categories": [
+          "location",
+          "open_data"
+        ],
+        "x-logo": {
+          "altText": "Amentum Aerospace",
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_amentumspace_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://gravity.amentum.space//openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amentum.space",
+        "x-serviceName": "gravity"
+      },
+      "updated": "2021-07-05T15:07:17.927Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amentum.space/gravity/1.1.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amentum.space/gravity/1.1.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amentum.space:gravity/1.1.1.json"
+    },
+    "amentum.space:space_radiation": {
+      "added": "2021-01-04T14:54:09.334Z",
+      "info": {
+        "contact": {
+          "x-twitter": "amentumspace"
+        },
+        "description": "Space has a hostile radiation environment that increases the risk of cancers in humans and malfunctions in spacecraft electronics. The types of space  radiation of primary concern are:\n  <ul>\n    <li>\n        Galactic Cosmic Rays from outside our solar system generated by \n        supernovae and other phenomena;\n    </li>\n    <li>\n        Solar Energetic Particles produced by the Sun during intense and\n        sporadic bursts of activity; and\n    </li>\n    <li>\n        Trapped Radiation: energetic particles confined by Earth's magnetic\n        field, usually comprising an inner belt of mostly high energy protons \n        and an outer belt dominated by lower energy electrons and plasma.\n    </li>\n  </ul> \n\nUnderstanding the space radiation environment for a particular mission profile is becoming increasingly important. Commercial off-the-shelf electronic components  that aren't resilient to space radiation are now prevalent. Longer duration  missions to cislunar space, Mars, and beyond are placing astronauts at greater  risk of radiation exposure. <br><br>\nAPI requests must contain a key \"API-Key\" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> \nHelp us improve the quality of our web APIs by completing our 2 minute survey <a href=\"https://www.surveymonkey.com/r/CTDTRBN\">here</a>.<br><br>\nAmentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>\nCopyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2022.\n",
+        "title": "Space Radiation API",
+        "version": "1.1.2",
+        "x-apisguru-categories": [
+          "location",
+          "open_data"
+        ],
+        "x-logo": {
+          "altText": "Amentum Aerospace",
+          "backgroundColor": "#FFFFFF",
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_amentumspace_profile_image"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://spaceradiation.amentum.space/openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amentum.space",
+        "x-serviceName": "space_radiation"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amentum.space/space_radiation/1.1.2/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amentum.space/space_radiation/1.1.2/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amentum.space:space_radiation/1.1.2.json"
+    }
+  }
+}

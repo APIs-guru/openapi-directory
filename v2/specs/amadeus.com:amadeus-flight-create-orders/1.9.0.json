@@ -1,0 +1,68 @@
+{
+  "added": "2023-03-05T12:21:40.303Z",
+  "info": {
+    "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, if you are not returning any results try with big cities/airports like LON (London) or NYC (New-York).",
+    "title": "Flight Create Orders",
+    "version": "1.9.0",
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+    },
+    "x-origin": [
+      {
+        "format": "swagger",
+        "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightCreateOrders_v1_swagger_specification.json",
+        "version": "2.0"
+      }
+    ],
+    "x-providerName": "amadeus.com",
+    "x-release-note": {
+      "1.0.0": [
+        "Initial version"
+      ],
+      "1.1.0": [
+        "Add Co2Emissions information into Create flight-order reply",
+        "Add language in Contact for the APN feature"
+      ],
+      "1.2.0": [
+        "Add new sources \"LTC\" and \"EAC\" - **only available in Enterprise**"
+      ],
+      "1.3.0": [
+        "Add new airlineRemark subtype \"ADVANCED_TICKET_TIME_LIMIT\""
+      ],
+      "1.4.0": [
+        "Add new Gender enum \"UNSPECIFIED\" and \"UNDISCLOSED\"",
+        "Add EasyPay credit card brand - **only available in Enterprise**"
+      ],
+      "1.5.0": [
+        "Add new General Remark enum \"TOUR_CODE\""
+      ],
+      "1.6.0": [
+        "Add Margins and Discounts content from Margin Manager product - **only available in Enterprise**"
+      ],
+      "1.7.0": [
+        "Add new PaymentBrand enum \"PYTON\" - **only available in Enterprise**",
+        "Add new OtherPaymentMethod enum \"PYTON\" - **only available in Enterprise**",
+        "Add FM Commission - **only available in Enterprise**"
+      ],
+      "1.8.0": [
+        "Add new source \"NDC\" - **only available in Enterprise**"
+      ],
+      "1.9.0": [
+        "Add FormIdentification into the flight-order"
+      ]
+    },
+    "x-serviceName": "amadeus-flight-create-orders",
+    "x-status": "validated",
+    "x-tags": [
+      "#travel-booking",
+      "#quick-connect",
+      "#mobile-services",
+      "#ama-for-dev"
+    ]
+  },
+  "updated": "2023-03-24T18:30:03.102Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-create-orders/1.9.0/swagger.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-create-orders/1.9.0/swagger.yaml",
+  "openapiVer": "2.0",
+  "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-create-orders/1.9.0.json"
+}

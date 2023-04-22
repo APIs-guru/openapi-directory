@@ -1,0 +1,2030 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: Suggestions Server URL.
+    url: https://api.vtex.com/{accountName}
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL.
+info:
+  contact: {}
+  description: "\r
+
+    The **Marketplace API** enables marketplaces and sellers hosted on VTEX to perform their collaborative operations.  \r
+
+    \r
+
+    >⚠️ The marketplace must [create an appKey and appToken](https://developers.vtex.com/docs/guides/getting-started-authentication) for each non-VTEX seller that will use this API.\r
+
+    \r
+
+    ## Index\r
+
+    \r
+
+    ### Notification\r
+
+    \r
+
+    Endpoints used by sellers to notify marketplaces that the price or inventory language has changed for one of their SKUs.\r
+
+    \r
+
+    `POST` [Notify marketplace of price update](https://developers.vtex.com/docs/api-reference/marketplace-apis#post-/notificator/-sellerId-/changenotification/-skuId-/price)\r
+
+    \r
+
+    `POST` [Notify marketplace of inventory update](https://developers.vtex.com/docs/api-reference/marketplace-apis#post-/notificator/-sellerId-/changenotification/-skuId-/inventory)\r
+
+    \r
+
+    \r
+
+    ### Suggestions\r
+
+    \r
+
+    #### Get Suggestions\r
+
+    \r
+
+    Search and filter all suggestions using specific criteria.\r
+
+    \r
+
+    `GET` [Get all SKU Suggestions](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions)\r
+
+    \r
+
+    `GET` [Get SKU Suggestion by ID](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerSkuId-)\r
+
+    \r
+
+    \r
+
+    #### Manage Suggestions\r
+
+    \r
+
+    Send or delete SKU suggestions from the seller to marketplace.\r
+
+    \r
+
+    `PUT` [Send SKU Suggestion](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/-sellerId-/-sellerSkuId-)\r
+
+    \r
+
+    `DELETE` [Delete SKU Suggestion](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#delete-/suggestions/-sellerId-/-sellerSkuId-)\r
+
+    \r
+
+    \r
+
+    #### Get Versions\r
+
+    \r
+
+    Search and filter all versions of suggestions, using specific criteria.\r
+
+    \r
+
+    `GET` [Get all versions](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerskuid-/versions)\r
+
+    \r
+
+    `GET` [Get version by ID](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/-sellerId-/-sellerskuid-/versions/-version-)\r
+
+    \r
+
+    \r
+
+    #### Match Received SKUs\r
+
+    \r
+
+    Match SKU suggestions received in the marketplace.\r
+
+    \r
+
+    `PUT` [Match Received SKUs individually](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/-sellerId-/-sellerskuid-/versions/-version-/matches/-matchid-)\r
+
+    \r
+
+    `PUT` [Match Multiple Received SKUs](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/matches/action/-actionName-)\r
+
+    \r
+
+    \r
+
+    #### SKU Approval Settings\r
+
+    \r
+
+    Allows marketplaces to configure rules for automatically and manually approving SKUs received from sellers.\r
+
+    \r
+
+    `GET`[Get autoApprove Status in Account Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration/autoapproval/toggle)  \r
+
+    \r
+
+    `PUT`[Activate autoApprove in Marketplace's Account](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/autoapproval/toggle)  \r
+
+    \r
+
+    `GET`[Get Account's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration)\r
+
+    \r
+
+    `PUT`[Save Account's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration)\r
+
+    \r
+
+    `GET`[Get Seller's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#get-/suggestions/configuration/seller/-sellerId-)\r
+
+    \r
+
+    `PUT`[Save Seller's Approval Settings](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/seller/-sellerId-)\r
+
+    \r
+
+    `PUT`[Activate autoApprove Setting for a Seller](https://developers.vtex.com/docs/api-reference/marketplace-apis-suggestions#put-/suggestions/configuration/autoapproval/toggle/seller/-sellerId-)   \r
+
+    \r
+
+    \r
+
+    ### Matched Offers\r
+
+    \r
+
+    Offers are seller products and SKUs that were sent to the marketplace, and already have their price and inventory level configured.\r
+
+    \r
+
+    `GET`[Get Matched Offers List](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/offers)\r
+
+    \r
+
+    `GET`[Get Matched Offer's Data by SKU ID](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/product/-productId-/sku/-skuId-)  \r
+
+    \r
+
+    `GET`[Get Matched Offer's Data by Product ID](https://developers.vtex.com/docs/api-reference/marketplace-apis#get-/offer-manager/pvt/product/-productId-)\r\n"
+  title: Suggestions
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Marketplace APIs - Suggestions.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Marketplace-APIs-
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - description: Search and filter all suggestions using specific criteria
+    name: Get Suggestions
+  - description: Send or delete SKU suggestions from the seller to marketplace
+    name: Manage Suggestions
+  - description: Search and filter all versions of suggestions, using specific criteria
+    name: Get Versions
+  - name: SKU Approval Settings
+  - description: Match SKU suggestions received in the marketplace
+    name: Match Received SKUs
+paths:
+  /suggestions:
+    get:
+      deprecated: false
+      description: |-
+        This endpoint retrieves a list of all SKUs sent by the seller for the Marketplace's approval. Marketplace operators should use this endpoint whenever they want to check the full list of received SKUs and their  information. 
+
+        Note that all the information sent by the seller will be in the [content] object. All remaining information in this endpoint's response is given by the Matcher. 
+
+        Matcher rates received SKUs by correlating the data sent by sellers, to existing fields in the marketplace. The calculation of these scores determines whether the product has been: 
+
+        `Approved`: score equal to or greater than 80 points. 
+
+        `Pending`: from 31 to 79 points.
+
+        `Denied`: from 0 to 30 points. 
+
+        Note that  if the autoApprove setting is enabled, the SKUs will be approved, regardless of the Score.
+      operationId: Getsuggestions
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: This field allows you to customize your search. You can fill in this query param if you want to narrow down your search using the available filters on Received SKU modules.
+          explode: true
+          in: query
+          name: q
+          required: false
+          schema:
+            example: ""
+            type: string
+          style: form
+        - description: This field allows users to filter SKU suggestions, by searching only the new suggestions that were just sent, and suggestions that have already been sent, but were updated. Possible values for this field include `new` and `update`.
+          explode: true
+          in: query
+          name: type
+          required: false
+          schema:
+            example: new
+            type: string
+          style: form
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller so it can call this endpoint.
+          explode: true
+          in: query
+          name: seller
+          required: false
+          schema:
+            example: ""
+            type: string
+          style: form
+        - description: "Narrow down you search, filtering by status. Values allowed on this field include: `accepted`, `pending` and `denied.`"
+          explode: true
+          in: query
+          name: status
+          required: false
+          schema:
+            example: accepted
+            type: string
+          style: form
+        - description: This field allows you to filter SKUs that have mapping or not. Insert `true` to filter SKUs that have mapping, or `false` to retrieve SKUs that aren't mapped.
+          explode: true
+          in: query
+          name: hasmapping
+          required: false
+          schema:
+            example: "true"
+            type: string
+          style: form
+        - description: Identifies the matching entity. It can be either VTEX's matcher, or an external matcher developed by partners, for example. The `matcherId`'s value can be obtained through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion) endpoint.
+          explode: true
+          in: query
+          name: matcherid
+          required: false
+          schema:
+            default: vtex-matcher
+            type: string
+          style: form
+        - description: Define your pagination range, by adding the pagination starting value. Values should be bigger than 0, with a maximum of 50 records per page.
+          explode: true
+          in: query
+          name: _from
+          required: false
+          schema:
+            default: 1
+            format: int32
+            minimum: 1
+            type: integer
+          style: form
+        - description: Define your pagination range, by adding the pagination ending value. Values should be bigger than 0, with a maximum of 50 records per page.
+          explode: true
+          in: query
+          name: _to
+          required: false
+          schema:
+            default: 50
+            format: int32
+            minimum: 1
+            type: integer
+          style: form
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get all SKU suggestions
+      tags:
+        - Get Suggestions
+  /suggestions/configuration:
+    get:
+      deprecated: false
+      description: |-
+        This endpoint retrieves the current approval settings of a marketplace's Received SKUs module. Its response includes: 
+
+        - `Score`: Matcher scores for approving and rejecting SKUs received from sellers. 
+
+        - `Matchers`: All Matchers configured on the marketplace, and their respective details. 
+
+        - `SpecificationsMapping`: Mapping of product and SKU specifications, per seller. 
+
+        - `MatchFlux`: This field determines the type of approval configuration applied to SKUs received from a seller. 
+
+        The possible values include: 
+
+        -`default`, where the Matcher reviews the SKU, and approves it based on its score. 
+
+        -`manual`, for manual approvals through the Received SKU UI, or Match API. 
+
+        -`autoApprove`, for every SKU received from a given seller to be approved automatically, regardless of their Matcher Score.
+      operationId: Getaccountconfig
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                MatchFlux: Default
+                Matchers:
+                  - Description: null
+                    IsActive: true
+                    MatcherId: vtex-matcher
+                    UpdatesNotificationEndpoint: null
+                    hook-base-address: http://portal.vtexinternal.com/api/ssm/hooks
+                Rules:
+                  Item: []
+                  Product: []
+                Score:
+                  Approve: 80
+                  Reject: 30
+                SpecificationsMapping: []
+              schema:
+                properties:
+                  MatchFlux:
+                    description: This field determines the type of approval configuration applied to SKUs received from a seller.
+                    type: string
+                  Matchers:
+                    description: All Matchers configured on the marketplace, and their respective details.
+                    items: {}
+                    type: array
+                  Rules:
+                    description: Items and products.
+                    type: object
+                  Score:
+                    description: Matcher scores for approving and rejecting SKUs received from sellers.
+                    type: object
+                  SpecificationsMapping:
+                    description: Mapping of product and SKU specifications, per seller.
+                    items: {}
+                    type: array
+                type: object
+          description: OK
+          headers: {}
+      summary: Get Account's Approval Settings
+      tags:
+        - SKU Approval Settings
+    put:
+      deprecated: false
+      description: |-
+        Marketplaces use this endpoint to create or update approval settings on their Received SKUs module. 
+
+        The request includes all the details necessary to implement the chosen approval settings.
+      operationId: Saveaccountconfig
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveaccountconfigRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  MatchFlux: AutoApprove
+                  Matchers:
+                    - Description: Note
+                      IsActive: true
+                      MatcherId: vtex-matcher
+                      UpdatesNotificationEndpoint: notification.endpoint
+                      hook-base-address: http://simple-suggestion-matcher.vtex.com.br
+                  Rules:
+                    Item:
+                      - 1
+                    Product:
+                      - Shirt
+                  Score:
+                    Approve: 80
+                    Reject: 30
+                  SpecificationsMapping:
+                    - Mapping:
+                        Yellow: Light yellow
+                      SellerId: Store1
+                properties:
+                  MatchFlux:
+                    description: |-
+                      Type of approval configuration that apply to received SKUs sent by sellers. The possible values are: 
+
+                      `default`: the matcher approves the SKU. 
+
+                      `manual`: manual SKU's approvals. 
+
+                      `AutoApprove`: automatic SKU's approvals.
+                    type: string
+                  Matchers:
+                    description: "[Matchers](https://help.vtex.com/en/tutorial/understanding-vtex-matcher-scoring) configurations for approving and rejecting [received SKUs](https://help.vtex.com/en/tutorial/cataloging-received-skus--tutorials_396) sent by sellers."
+                    items: {}
+                    properties:
+                      Description:
+                        description: The note inserted on the request body.
+                        type: string
+                      IsActive:
+                        description: Whether the matcher is active in the account (`true`), or not (`false`).
+                        type: boolean
+                      MatcherId:
+                        description: Identifies the matching entity. It can be either [VTEX's matcher](https://help.vtex.com/en/tutorial/understanding-vtex-matcher-scoring), or an external matcher.
+                        type: string
+                      UpdatesNotificationEndpoint:
+                        description: The [received SKUs](https://help.vtex.com/en/tutorial/cataloging-received-skus--tutorials_396) module calls this endpoint for matcher's suggestions updates.
+                        type: string
+                      hook-base-address:
+                        description: The given Matcher's URL.
+                        type: string
+                    type: array
+                  Rules:
+                    description: Items and products that belong to sellers.
+                    properties:
+                      Item:
+                        description: SKUs' ID.
+                        items:
+                          description: SKU ID.
+                          type: integer
+                        type: array
+                      Product:
+                        description: Product's name.
+                        items:
+                          description: Product name.
+                          type: string
+                        type: array
+                    type: object
+                  Score:
+                    description: "[Matcher's rates](https://help.vtex.com/en/tutorial/understanding-vtex-matcher-scoring) to approve or reject [received SKUs](https://help.vtex.com/en/tutorial/cataloging-received-skus--tutorials_396) sent by sellers."
+                    example:
+                      Approve: 80
+                      Reject: 30
+                    properties:
+                      Approve:
+                        description: Score to approve SKUs sent by sellers.
+                        type: integer
+                      Reject:
+                        description: Score to reject SKUs sent by sellers.
+                        type: integer
+                    type: object
+                  SpecificationsMapping:
+                    description: This attribute maps product and SKU's specifications between the marketplace and the seller.
+                    items: {}
+                    properties:
+                      Mapping:
+                        description: The attributes and values mapped between the marketplace and the seller.
+                        type: object
+                      SellerId:
+                        description: The Seller ID.
+                        type: string
+                    type: array
+                type: object
+          description: OK
+          headers: {}
+      summary: Save Account's Approval Settings
+      tags:
+        - SKU Approval Settings
+  /suggestions/configuration/autoapproval/toggle:
+    get:
+      deprecated: false
+      description: |-
+        This endpoint can be used to check whether the autoapprove setting is active or not, for a specific seller. 
+
+        If the response is `true`, the autoapprove setting is active. If the response is `false`, it is inactive.
+      operationId: GetautoApprovevaluefromconfig
+      parameters:
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: query
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: form
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Enabled: false
+              schema:
+                properties:
+                  Enabled:
+                    description: If the auto-approve setting is active for a given seller (`true`) or not (`false`).
+                    type: boolean
+                type: object
+          description: OK
+      summary: Get autoApprove Status in Account Settings
+      tags:
+        - SKU Approval Settings
+    put:
+      deprecated: false
+      description: |-
+        This endpoint enables the autoapprove rule to a marketplace's whole Received SKUs module. Once enabling the rule, received SKUs will be automatically approved on your store, regardless of the seller. 
+
+         For the autoapprove rule to work as expected, the approval [Matcher score](https://help.vtex.com/en/tutorial/entendendo-a-pontuacao-do-vtex-matcher--tutorials_424) should be set up as 80 (default value), but you can configure a different number through the field `Score` in [Save Account's Approval Settings](https://developers.vtex.com/vtex-rest-api/reference/saveaccountconfig).
+      operationId: Saveautoapproveforaccount
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              Enabled: true
+            schema:
+              $ref: "#/components/schemas/SaveautoapproveforaccountRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                Enabled: false
+              schema:
+                properties:
+                  Enabled:
+                    description: If the auto-approve setting is active (`true`) or not (`false`).
+                    type: boolean
+                type: object
+          description: OK
+          headers: {}
+      summary: Activate autoApprove in Marketplace's Account
+      tags:
+        - SKU Approval Settings
+  "/suggestions/configuration/autoapproval/toggle/seller/{sellerId}":
+    put:
+      deprecated: false
+      description: This endpoint enables the auto approve setting to received SKUs from a specific seller. Be aware that once enabling the rule through this request, all received SKUs from that seller will be automatically approved on your store, regardless of the Matcher Score.
+      operationId: Saveautoapproveforaccountseller
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              Enabled: true
+            schema:
+              $ref: "#/components/schemas/SaveautoapproveforaccountsellerRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Activate autoApprove Setting for a Seller
+      tags:
+        - SKU Approval Settings
+  "/suggestions/configuration/seller/{sellerId}":
+    get:
+      deprecated: false
+      description: |-
+        This endpoint retrieves the current Received SKUs approval settings applied to a specific seller. Its response includes: 
+
+        - `sellerId`: A string that identifies the seller in the marketplace. 
+
+        - `accountId`: Marketplace’s account ID. 
+
+        - `accountName`: Marketplace’s account name. 
+
+        - `mapping`: Mapping of SKU and product Specifications. 
+
+        - `matchFlux`: This field determines the type of approval configuration applied to SKUs received  from a seller. 
+
+        The possible values include:  
+
+        -`default`, where the Matcher reviews the SKU, and approves it based on its score. 
+
+        -`manual`, for manual approvals through the Received SKU UI and Match API. 
+
+        -`autoApprove`, for every SKU received from a given seller to be approved automatically, regardless of the Matcher Score.
+      operationId: Getselleraccountconfig
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Seller's Approval Settings
+      tags:
+        - SKU Approval Settings
+    put:
+      deprecated: false
+      description: |-
+        Marketplaces use this endpoint to create or update approval settings to a specific seller, on the Received SKUs module. 
+
+        The request includes all the details necessary to implement the chosen approval settings.
+      operationId: Putselleraccountconfig
+      parameters:
+        - description: Name of the VTEX account that belongs to the marketplace. All data extracted, and changes added will be posted into this account.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              mapping: null
+              matchFlux: Default
+              sellerId: 1a
+            schema:
+              $ref: "#/components/schemas/PutselleraccountconfigRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Save Seller's Approval Settings
+      tags:
+        - SKU Approval Settings
+  "/suggestions/matches/action/{actionName}":
+    put:
+      deprecated: false
+      description: |-
+        This endpoint allows the user to bulk approve, deny, or associate received SKUs. In a single request, you can match up to 25 received SKUs from your sellers.
+
+        Through the `actionName` attribute you can select the operation you want to apply to the received SKU. 
+
+        Actions include: 
+
+        1. `newproduct`: match the SKU as a new product. 
+
+        2. `skuassociation`: associate the received SKU to an existing SKU. 
+
+        3. `productassociation`: associate the received SKU to an existing product. 
+
+        4. `deny`: deny the received SKU.
+      operationId: MatchMultiple
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: "This field refers to the operation you choose to apply to received SKUs. Values include: newproduct, skuassociation, productassociation or deny."
+          in: path
+          name: actionName
+          required: true
+          schema:
+            default: newprodcut
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/MatchMultiple"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Match Multiple Received SKUs
+      tags:
+        - Match Received SKUs
+  "/suggestions/{sellerId}/{sellerSkuId}":
+    delete:
+      deprecated: false
+      description: This endpoint deletes a chosen SKU suggestion. Only one SKU should be deleted per request. This request cannot be undone. A workaround to revert its action, is to send the suggestion again, through the Send Suggestion API.
+      operationId: DeleteSuggestion
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: A string that identifies the SKU in the marketplace. This is the ID that the marketplace will use for future references to this SKU, such as price and inventory notifications.
+          in: path
+          name: sellerSkuId
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Delete SKU Suggestion
+      tags:
+        - Manage Suggestions
+    get:
+      deprecated: false
+      description: |-
+        This endpoint retrieves the data of a specific SKU sent by the seller, to the marketplace. Marketplaces or external matchers can call this endpoint when they want to check the information about a single SKU. 
+
+        Note that all the information sent by the seller will be in the [content] object. All remaining information in this endpoint's response is given by the Matcher. 
+
+        Matcher rates received SKUs by correlating the data sent by sellers, to existing fields in the marketplace. The calculation of these scores determines whether the product has been: 
+
+        `Approved`: score equal to or greater than 80 points. 
+
+        `Pending`: from 31 to 79 points.
+
+        `Denied`: from 0 to 30 points. 
+
+        Note that  if the autoApprove setting is enabled, the SKUs will be approved, regardless of the Score.
+      operationId: GetSuggestion
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: A string that identifies the SKU in the marketplace. This is the ID that the marketplace will use for future references to this SKU, such as price and inventory notifications.
+          in: path
+          name: sellerSkuId
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get SKU Suggestion by ID
+      tags:
+        - Get Suggestions
+    put:
+      deprecated: false
+      description: |-
+        This request is used by the seller when it wants to suggest that one of their SKUs is sold in the marketplace.
+
+        Before using this request, the seller should always use the [Change Notification](https://developers.vtex.com/vtex-rest-api/reference/catalog-api-get-seller-sku-notification) request in order to check if the SKU already exists in the marketplace. If it doesn't, then this is the next call in the SKU integration flow.
+
+        In the Send Suggestion request, the seller must send information about the SKU, such as the product and SKU name, the seller ID, and the image URL. All parameters are explained below. 
+      operationId: SaveSuggestion
+      parameters:
+        - description: Name of the VTEX account to which the seller wants to suggest a new SKU. It is used as part of the request URL.
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            example: application/vnd.vtex.suggestion.v0+json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: A string that identifies the SKU in the seller. This is the ID that the marketplace will use for future references to this SKU, such as price and inventory notifications.
+          in: path
+          name: sellerSkuId
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              AvailableQuantity: 111
+              BrandName: Brand 1
+              CategoryFullPath: Category 1
+              EAN: EAN123
+              Height: 1
+              Images:
+                - imageName: Principal
+                  imageUrl: https://i.pinimg.com/originals/2d/96/4a/2d964a6bf37d9224d0615dc85fccdd62.jpg
+              Length: 1
+              MeasurementUnit: un
+              NameComplete: Complete product name
+              Pricing:
+                Currency: BRL
+                CurrencySymbol: R$
+                SalePrice: 399
+              ProductDescription: sample
+              ProductId: "321"
+              ProductName: Product sample
+              ProductSpecifications:
+                - fieldName: Fabric
+                  fieldValues:
+                    - Cotton
+                    - Velvet
+              RefId: REFID123
+              SellerId: string
+              SellerStockKeepingUnitId: 567
+              SkuName: Sku sample
+              SkuSpecifications:
+                - fieldName: Color
+                  fieldValues:
+                    - Red
+                    - Blue
+              UnitMultiplier: 1
+              Updated: null
+              Weight: 1
+              Width: 1
+            schema:
+              $ref: "#/components/schemas/SaveSuggestionRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Send SKU Suggestion
+      tags:
+        - Manage Suggestions
+  "/suggestions/{sellerId}/{sellerskuid}/versions":
+    get:
+      deprecated: false
+      description: |-
+        Whenever an SKU Suggestion is updated or changed, a new version of the original one is created. All versions are logged, so you can search for previous our current states of SKU suggestions. 
+
+        This endpoint retrieves the data of *all* previous and latest versions of a specific SKU suggestion, sent by the seller. Whenever an SKU is updated, it is important to map previous versions, to compare and identify changes. 
+
+        The response's object [latestversion] provides the information of the most recent version of that SKU suggestion.
+      operationId: GetVersions
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: A string that identifies the SKU in the marketplace. This is the ID that the marketplace will use for future references to this SKU, such as price and inventory notifications.
+          in: path
+          name: sellerskuid
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get all Versions
+      tags:
+        - Get Versions
+  "/suggestions/{sellerId}/{sellerskuid}/versions/{version}":
+    get:
+      deprecated: false
+      description: |-
+        Whenever an SKU Suggestion is updated or changed, a new version of the original one is created. All versions are logged, so you can search for previous our current states of SKU suggestions. 
+
+        This endpoint retrieves a specific *version* of a chosen SKU sent by the seller. Add the Seller's ID, Seller's SKU ID, and version ID in the path to detail your search.
+      operationId: GetSuggestionbyversion
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: A string that identifies the SKU in the marketplace. This is the ID that the marketplace will use for future references to this SKU, such as price and inventory notifications.
+          in: path
+          name: sellerskuid
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+        - description: Whenever an SKU Suggestion is updated or changed, a new version of the original one is created. All versions are logged, so you can search for previous our current states of SKU suggestions. This field is the `versionId` associated to the version you choose to search for. You can get this field's value through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion). through the `latestVersionId` field.
+          in: path
+          name: version
+          required: true
+          schema:
+            default: "09072021142808277"
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Get Version by ID
+      tags:
+        - Get Versions
+  "/suggestions/{sellerId}/{sellerskuid}/versions/{version}/matches/{matchid}":
+    put:
+      deprecated: false
+      description: |-
+        All SKUs sent from a seller to a marketplace must be reviewed and matched. Actions in the matching process are added in the request body through the [matchType] object. Match type actions include: 
+
+        1. `newproduct`: match the SKU as a new product. 
+
+        2. `itemMatch`: associate the received SKU to an existing SKU. 
+
+        3. `productMatch`: associate the received SKU to an existing product. 
+
+        4. `deny`: deny the received SKU. 
+
+        5. `pending`: the received SKU requires attention. 
+
+        6. `incomplete`: the received SKU is lacking information to be matched. 
+
+        7. `insufficientScore`: the score given by the Matcher to this received SKU doesn't qualify it to be matched. 
+
+        Note that  if the autoApprove setting is enabled, the SKUs will be approved, regardless of the Score.
+      operationId: Match
+      parameters:
+        - description: Name of the VTEX account. Used as part of the URL
+          in: query
+          name: accountName
+          required: true
+          schema:
+            default: apiexamples
+            type: string
+        - description: HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          in: path
+          name: sellerId
+          required: true
+          schema:
+            default: seller123
+            type: string
+          style: simple
+        - description: A string that identifies the SKU in the marketplace. This is the ID that the marketplace will use for future references to this SKU, such as price and inventory notifications.
+          in: path
+          name: sellerskuid
+          required: true
+          schema:
+            default: "1234"
+            type: string
+          style: simple
+        - description: Whenever an SKU Suggestion is updated or changed, a new version of the original one is created. All versions are logged, so you can search for previous our current states of SKU suggestions. This field is the versionId associated to the version you choose to search for. You can get this field's value through the[Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion). through the `latestVersionId` field.
+          in: path
+          name: version
+          required: true
+          schema:
+            default: "09072021142808277"
+            type: string
+          style: simple
+        - description: Whenever an SKU suggestion is matched, it is associated to a unique ID. Fill in this field with the matchId you wish to filter by. The `matchId`'s value can be obtained through the *[Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion) endpoint.
+          in: path
+          name: matchid
+          required: true
+          schema:
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              matchType: itemMatch
+              matcherId: "{{matcherid}}"
+              product:
+                brandId: 1234567
+                categoryId: 12
+                description: Book description
+                matchType: itemMatch
+                name: Book A
+                specifications: null
+              productRef: "{{productRef}}(should be specified when match is a product match)"
+              score: "{{score}} (must be decimal)"
+              sku:
+                eans:
+                  - "12345678901213"
+                height: 1
+                images:
+                  - imagem1.jpg:
+                      imagem1.jpg: https://imageurl.example
+                length: 1
+                measurementUnit: un
+                name: Sku exemplo
+                refId: null
+                specifications:
+                  Embalagem: 3 k   g
+                unitMultiplier: 1
+                weight: 1
+                width: 1
+              skuRef: "{{skuid}}(should be specifed when match is a sku match)"
+            schema:
+              $ref: "#/components/schemas/MatchRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Match Received SKUs individually
+      tags:
+        - Match Received SKUs
+components:
+  schemas:
+    Image:
+      example:
+        imageName: Principal
+        imageUrl: https://i.pinimg.com/originals/2d/96/4a/2d964a6bf37d9224d0615dc85fccdd62.jpg
+      properties:
+        imageName:
+          description: Name of the SKU image.
+          type: string
+        imageUrl:
+          default: https://imageurl.example
+          description: URL of the SKU image. The image must be sent through `https` protocol, otherwise it will not be rendered in VTEX Admin.
+          type: string
+      required:
+        - imageName
+        - imageUrl
+      title: Image
+      type: object
+    Images:
+      example:
+        - imagem1.jpg: imageurl.example
+      items: {}
+      properties:
+        imagem1.jpg:
+          default: https://imageurl.example
+          description: Array containing the URLs of the SKU's images.  The image must be sent through `https` protocol, otherwise it will not be rendered in VTEX Admin.
+          type: string
+      required:
+        - imagem1.jpg
+      title: Images
+      type: array
+    MatchMultiple:
+      items: {}
+      properties:
+        object:
+          properties:
+            brandId:
+              default: 1234567
+              description: Marketplace's Brand ID that the product belongs to, configured in the Catalog. It should be the brand chosen for the received SKU to be matched with. The `brandId` is already mapped through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion). This field is nulled when the inserted value is 0, and is mandatory for the 'newproduct' action.
+              format: int32
+              nullable: true
+              type: integer
+            categoryId:
+              default: 12
+              description: Marketplace's Category ID that the product belongs to, configured in the Catalog. It should be the category chosen for the received SKU to be matched with. The `categoryId` is already mapped through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion). You can choose to keep the same suggested `categoryID`, or overwrite it with another value in this request. This field is nulled when the inserted value is 0.
+              format: int32
+              nullable: true
+              type: integer
+            itemId:
+              default: "1234567"
+              description: This field can be used to link any string that identifies that SKU. Its most common use is the seller's SKU ID.
+              type: string
+            matchId:
+              default: vtex-matcher
+              description: Whenever an SKU suggestion is matched, it is associated to a unique ID. Fill in this field with the matchId you wish to filter by. The `matchId`'s value can be obtained through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion) endpoint.
+              type: string
+            matcherId:
+              default: vtex-matcher
+              description: Identifies the matching entity. It can be either VTEX's matcher, or an external matcher developed by partners, for example. The `matcherId`'s value can be obtained through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion) endpoint.
+              type: string
+            productRef:
+              default: 123 product ref
+              description: Fill in this field on your request when the matched item is a product. This field is mandatory for the 'productassociation' action.
+              nullable: true
+              type: string
+            sellerId:
+              default: seller123
+              description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+              type: string
+            skuRef:
+              default: 123 sku ref
+              description: Fill in this field on your request when the matched item is an SKU. This field is mandatory for the 'skuassociation' action.
+              nullable: true
+              type: string
+            versionId:
+              default: ""
+              description: Whenever an SKU Suggestion is updated or changed, a new version of the original one is created. All versions are logged, so you can search for previous our current states of SKU suggestions. This field is the versionId associated to the version you choose to search for. You can get this field's value through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion). through the `latestVersionId` field.
+              type: string
+          required:
+            - itemId
+            - versionId
+            - matchId
+            - matcherId
+            - categoryId
+            - sellerId
+          title: ""
+          type: object
+      title: MatchMultiple
+      type: array
+    MatchRequest:
+      example:
+        matchType: itemMatch
+        matcherId: "{{matcherid}}"
+        product:
+          brandId: 1234567
+          categoryId: 12
+          description: Descricao exemplo
+          name: Produto exemplo
+          specifications: null
+        productRef: "{{productRef}}(should be specified when match is a product match)"
+        score: "{{score}} (must be decimal)"
+        sku:
+          eans:
+            - "12345678901213"
+          height: 1
+          images:
+            - imagem1.jpg: imageurl.example
+          length: 1
+          measurementUnit: un
+          name: Sku exemplo
+          refId: null
+          specifications:
+            Embalagem: 3 kg
+          unitMultiplier: 1
+          weight: 1
+          width: 1
+        skuRef: "{{skuid}}(should be specifed when match is a sku match)"
+      properties:
+        matchType:
+          default: itemMatch
+          description: |-
+            Define the action you want to apply to each SKU. Values include: 
+
+            1. `newproduct`: match the SKU as a new product. 
+
+            2. `itemMatch`: associate the received SKU to an existing SKU. 
+
+            3. `productMatch`: associate the received SKU to an existing product. 
+
+            4. `deny`: deny the received SKU. 
+
+            5. `pending`: the received SKU requires attention. 
+
+            6. `incomplete`: the received SKU is lacking information to be matched. 
+
+            7. `insufficientScore`: the score given by the Matcher to this received SKU doesn't qualify it to be matched. 
+
+            Note that  if the autoApprove setting is enabled, the SKUs will be approved, regardless of the Score.
+          title: Match Type
+          type: string
+        matcherId:
+          default: vtex-matcher
+          description: Identifies the matching entity. It can be either VTEX's matcher, or an external matcher developed by partners, for example. The `matcherId`'s value can be obtained through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion) endpoint.
+          type: string
+        product:
+          $ref: "#/components/schemas/Product"
+        productRef:
+          default: ""
+          description: In `productMatch` actions, fill in this field on your request to match the item to an existing product in the marketplace.
+          nullable: true
+          type: string
+        score:
+          default: "80"
+          description: |-
+            Matcher rates received SKUs by correlating the data sent by sellers, to existing fields in the marketplace. The calculation of these scores determines whether the product has been: 
+
+            `Approved`: score equal to or greater than 80 points. 
+
+            `Pending`: from 31 to 79 points.
+
+            `Denied`: from 0 to 30 points. 
+
+            Note that  if the autoApprove setting is enabled, the SKUs will be approved, regardless of the Score.
+          type: string
+        sku:
+          $ref: "#/components/schemas/Sku"
+        skuRef:
+          default: ""
+          description: In `itemMatch` actions, fill in this field on your request to match the item to an existing SKU in the marketplace.
+          nullable: true
+          type: string
+      required:
+        - matcherId
+        - score
+        - matchType
+      title: ""
+      type: object
+    Matcher:
+      properties:
+        Description:
+          default: null
+          description: Insert in this field any notes about the approval. This field is optional.
+          nullable: true
+          type: string
+        IsActive:
+          default: true
+          description: Whether the matcher is active in the account (`true`), or not (`false`).
+          type: boolean
+        MatcherId:
+          default: vtex-matcher
+          description: Identifies the matching entity. It can be either VTEX's matcher, or an external matcher developed by partners, for example. The `matcherId`'s value can be obtained through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion) endpoint.
+          type: string
+        UpdatesNotificationEndpoint:
+          default: null
+          description: The Received SKUs module uses this endpoint to send updates about a suggestion, to the chosen Matcher.
+          nullable: true
+          type: string
+        hook-base-address:
+          default: http://simple-suggestion-matcher.vtex.com.br
+          description: The chosen Matcher's url. It is the endpoint that the Received SKUs module calls, to send new suggestions for the Matcher's review.
+          type: string
+      required:
+        - MatcherId
+        - hook-base-address
+        - IsActive
+        - UpdatesNotificationEndpoint
+      title: Matcher
+      type: object
+    Product:
+      properties:
+        brandId:
+          default: 1234567
+          description: Marketplace's Brand ID that the product belongs to, configured in the Catalog. It should be the brand chosen for the received SKU to be matched with. The brandId is already mapped through the Get Suggestions API. This field is nulled when the inserted value is 0.
+          format: int32
+          type: integer
+        categoryId:
+          default: 12
+          description: Marketplace's Category ID that the product belongs to, configured in the Catalog. It should be the category chosen for the received SKU to be matched with. The `categoryId` is already mapped through the [Get SKU Suggestion by ID](https://developers.vtex.com/vtex-rest-api/reference/getsuggestion). You can choose to keep the same suggested `categoryID`, or overwrite it with another value in this request. This field is nulled when the inserted value is 0.
+          format: int32
+          type: integer
+        description:
+          default: Description of the product, how it will appear on the marketplace.
+          description: Product's description.
+          type: string
+        name:
+          default: Book
+          description: Name of the product that will be matched.
+          type: string
+        specifications:
+          default: ""
+          description: This field is optional. Add here any product specifications or details.
+          nullable: true
+          type: string
+      required:
+        - name
+        - description
+        - categoryId
+        - brandId
+        - specifications
+      title: Product
+      type: object
+    ProductSpecification:
+      example:
+        fieldName: Color
+        fieldValues:
+          - Red
+          - Green
+      properties:
+        fieldName:
+          default: Fabric type
+          description: "Name of the product specification field. Example: 'Fabric'."
+          type: string
+        fieldValues:
+          description: "Value of the product specification field. Example: 'Cotton'."
+          items:
+            default: Cotton
+            description: Value of the product specification field.
+            type: string
+          type: array
+      title: Product Specification
+      type: object
+    PutselleraccountconfigRequest:
+      properties:
+        mapping:
+          default:
+            Choose size: Size
+            Choose type: Type
+            Choose voltage: Voltage
+            Choose volume: Volume
+          description: |-
+            Mapping of SKU and product Specifications. This object should be sent in the following format for all fields you wish to map:
+
+            {specificationName}:{specificationValue},
+
+            Example:
+
+            Choose voltage: Voltage,
+
+            Choose size: Size
+          nullable: true
+          type: object
+        matchFlux:
+          default: autoApprove
+          description: |-
+            This field determines the type of approval configuration applied to SKUs received  from a seller. The possible values include: 
+
+            - `default` where the Matcher reviews the SKU, and approves it based on its score 
+
+            - `manual` for manual approvals through the Received SKU UI or Match API 
+
+            - `autoApprove` for every SKU received from a given seller to be approved automatically, regardless of the Matcher Score.
+          type: string
+        sellerId:
+          default: seller123
+          description: A string that identifies the seller in the marketplace. This ID must be created by the marketplace.
+          type: string
+      required:
+        - sellerId
+        - mapping
+        - matchFlux
+      title: PutselleraccountconfigRequest
+      type: object
+    SaveSuggestionRequest:
+      default:
+        AvailableQuantity: 111
+        BrandName: Brand 1
+        CategoryFullPath: Category 1
+        EAN: EAN123
+        Height: 1
+        Images:
+          - imageName: Principal
+            imageUrl: https://i.pinimg.com/originals/2d/96/4a/2d964a6bf37d9224d0615dc85fccdd62.jpg
+        Length: 1
+        MeasurementUnit: un
+        NameComplete: My complete product name?
+        Pricing:
+          Currency: BRL
+          CurrencySymbol: R$
+          SalePrice: 399
+        ProductDescription: sample
+        ProductId: "321"
+        ProductName: Product sample
+        ProductSpecifications:
+          - fieldName: prodspec1
+            fieldValues:
+              - value1
+              - value2
+        RefId: REFID123
+        SellerId: "123"
+        SellerStockKeepingUnitId: 567
+        SkuName: Sku sample
+        SkuSpecifications:
+          - fieldName: skuspec1
+            fieldValues:
+              - value1
+              - value2
+        UnitMultiplier: 1
+        Updated: null
+        Weight: 1
+        Width: 1
+      properties:
+        AvailableQuantity:
+          description: ""
+          format: int32
+          type: integer
+        BrandName:
+          description: Name of the brand to which this SKU belongs. It must match the brand created in the marketplace.
+          type: string
+        CategoryFullPath:
+          description: "Full path to the SKU's category. It should be written as {department}/{category}. For example: if the department is **Appliances** and the category is **Oven**, the full path should be 'Appliances/Oven'."
+          type: string
+        EAN:
+          default: EAN10
+          description: SKU reference code. Mandatory if the RefId is not informed.
+          type: string
+        Height:
+          default: 10
+          description: Height of the SKU.
+          format: decimal
+          type: integer
+        Images:
+          description: Array containing the URLs and names the SKU images.
+          items:
+            $ref: "#/components/schemas/Image"
+          type: array
+        Length:
+          default: 10
+          description: Length of the SKU.
+          format: decimal
+          type: integer
+        MeasurementUnit:
+          description: Measurement unit that should be used for this SKU. If this information doesn't apply, you should use the default value `un`.
+          type: string
+        Pricing:
+          description: ""
+          properties:
+            Currency:
+              type: string
+            CurrencySymbol:
+              type: string
+            SalePrice:
+              format: int32
+              type: integer
+          type: object
+        ProductDescription:
+          description: Product Description containing the main information about the product (not the SKU).
+          type: string
+        ProductId:
+          default: "1234"
+          description: Product ID in seller's account.
+          type: string
+        ProductName:
+          default: ""
+          description: Name of the suggested product. This field has a limit of 150 characters.
+          type: string
+        ProductSpecifications:
+          description: Array containing the names and values of the product specifications.
+          items:
+            $ref: "#/components/schemas/ProductSpecification"
+          type: array
+        RefId:
+          default: REF10
+          description: SKU reference code. Mandotory if the EAN is not informed.
+          type: string
+        SellerId:
+          default: "1"
+          description: ID of the seller in the marketplace. This ID must be created by the marketplace and informed to the seller before the integration is built.
+          type: string
+        SellerStockKeepingUnitId:
+          description: ID of the SKU registered in the seller.
+          format: int32
+          type: integer
+        SkuName:
+          description: Name of the suggested SKU.
+          type: string
+        SkuSpecifications:
+          description: Array containing the names and values of the SKU specifications.
+          items:
+            $ref: "#/components/schemas/SkuSpecification"
+          type: array
+        UnitMultiplier:
+          description: Unit multiplier for this SKU. If this information doesn't apply, you should use the default value `1`.
+          format: int32
+          type: integer
+        Weight:
+          default: 100
+          description: Weight of the SKU in grams.
+          format: decimal
+          type: integer
+        Width:
+          default: 10
+          description: Width of the SKU.
+          format: decimal
+          type: integer
+      required:
+        - ProductName
+        - ProductId
+        - ProductDescription
+        - BrandName
+        - SkuName
+        - SellerId
+        - Height
+        - Width
+        - Length
+        - Weight
+        - Updated
+        - RefId
+        - CategoryFullPath
+        - Images
+        - EAN
+        - AvailableQuantity
+        - Pricing
+      title: SaveSuggestionRequest
+      type: object
+    SaveaccountconfigRequest:
+      example:
+        MatchFlux: AutoApprove
+        Matchers:
+          - Description: null
+            IsActive: true
+            MatcherId: vtex-matcher
+            UpdatesNotificationEndpoint: null
+            hook-base-address: http://simple-suggestion-matcher.vtex.com.br
+        Score:
+          Approve: 80
+          Reject: 30
+        SpecificationsMapping: []
+      properties:
+        MatchFlux:
+          default: autoApprove
+          description: |-
+            This field determines the type of approval configuration applied to SKUs received  from a seller. The possible values include: 
+
+            - `default` where the Matcher reviews the SKU, and approves it based on its score 
+
+            - `manual` for manual approvals through the Received SKU UI or Match API 
+
+            - `autoApprove` for every SKU received from a given seller to be approved automatically, regardless of the Matcher Score.
+          type: string
+        Matchers:
+          description: Matchers for approving and rejecting SKUs received from sellers.
+          items:
+            $ref: "#/components/schemas/Matcher"
+          type: array
+        Score:
+          $ref: "#/components/schemas/Score"
+        SpecificationsMapping:
+          description: This attribute maps product and SKU specifications.
+          items:
+            default: |2-
+                                  "SellerId": "sellerID",
+                                  "Mapping": {
+                                      "Choose voltage": "Voltage",
+                                      "Choose size": "Size",
+                                      "Choose volume": "Volume",
+                                      "Choose type": "Type"
+                                  }
+            type: string
+          type: array
+      required:
+        - Score
+        - Matchers
+        - SpecificationsMapping
+        - MatchFlux
+      title: SaveaccountconfigRequest
+      type: object
+    SaveautoapproveforaccountRequest:
+      properties:
+        Enabled:
+          default: true
+          description: Insert `true` if you wish to activate the autoapprove rule for an entire marketplace account. Insert `false` if you wish to deactivate it. Be aware that once enabling the setting through this request, all received SKUs will be automatically approved on your store, regardless of the seller, or the Matcher Score.
+          type: boolean
+      required:
+        - Enabled
+      title: SaveautoapproveforaccountRequest
+      type: object
+    SaveautoapproveforaccountsellerRequest:
+      properties:
+        Enabled:
+          default: true
+          description: Insert `true` if you wish to activate the autoapprove rule for that specific seller account. Insert `false` if you wish to deactivate it. Be aware that once enabling the setting through this request, all SKUs received from this seller will be automatically approved on your store regardless of the Matcher Score.
+          type: boolean
+      required:
+        - Enabled
+      title: SaveautoapproveforaccountsellerRequest
+      type: object
+    Score:
+      description: "Matcher rates received SKUs by comparing the data sent by sellers to existing fields in the marketplace. The calculation of these scores determines whether the product has been: `Approved` or `Denied`."
+      properties:
+        Approve:
+          default: 80
+          description: Insert in this field the desired minimum score to approve SKUs. If this field is set as 99, it means all approvals will be made manually.
+          format: int32
+          type: integer
+        Reject:
+          default: 30
+          description: Insert in this field the desired maximum score to reject SKUs.
+          format: int32
+          type: integer
+      required:
+        - Approve
+        - Reject
+      title: Score
+      type: object
+    Sku:
+      example:
+        eans:
+          - "12345678901213"
+        height: 1
+        images:
+          - imagem1.jpg: imageurl.example
+        length: 1
+        measurementUnit: un
+        name: Sku exemplo
+        refId: null
+        specifications:
+          Embalagem: 3 kg
+        unitMultiplier: 1
+        weight: 1
+        width: 1
+      properties:
+        eans:
+          default:
+            - "12345678901213"
+          description: SKU reference code.
+          items:
+            type: string
+          nullable: true
+          type: array
+        height:
+          default: 10
+          description: Height of the SKU.
+          format: int32
+          type: integer
+        images:
+          $ref: "#/components/schemas/Images"
+        length:
+          default: 10
+          description: Length of the SKU.
+          format: int32
+          type: integer
+        measurementUnit:
+          default: un
+          description: Measurement unit that should be used for this SKU. If this information doesn't apply, you should use the default value un.
+          nullable: true
+          type: string
+        name:
+          default: ""
+          description: ""
+          type: string
+        refId:
+          default: "1234"
+          description: SKU reference code.
+          nullable: true
+          type: string
+        specifications:
+          $ref: "#/components/schemas/Specifications"
+        unitMultiplier:
+          default: 1
+          description: Unit multiplier for this SKU. If this information doesn't apply, you should use the default value 1.
+          format: int32
+          type: integer
+        weight:
+          default: 100
+          description: Weight of the SKU.
+          format: int32
+          type: integer
+        width:
+          default: 20
+          description: Width of the SKU.
+          format: int32
+          type: integer
+      required:
+        - name
+        - eans
+        - refId
+        - height
+        - width
+        - length
+        - weight
+        - images
+        - unitMultiplier
+        - measurementUnit
+        - specifications
+      title: SKU
+      type: object
+    SkuSpecification:
+      default:
+        fieldName: Color
+        fieldValues:
+          - Red
+          - Green
+      properties:
+        fieldName:
+          default: color
+          description: "Name of the SKU specification field. Example: 'Color'."
+          type: string
+        fieldValues:
+          default:
+            - Red
+          description: "Array with values of the SKU specification field. Example: 'Red'."
+          items:
+            default: Red
+            description: Value of the SKU specification field.
+            type: string
+          type: array
+      title: skuSpecification
+      type: object
+    Specifications:
+      example:
+        Embalagem: 3 kg
+      properties:
+        Embalagem:
+          description: Packaging specifications. Should include package's weight.
+          type: string
+      required:
+        - Embalagem
+      title: Specifications
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

@@ -1,0 +1,1214 @@
+openapi: 3.0.0
+servers:
+  - url: https://cloudsupport.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: "Manages Google Cloud technical support cases for Customer Care support offerings. "
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Cloud Support API
+  version: v2beta
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_upload.wikimedia.org_wikipedia_commons_e_e1_YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://cloudsupport.googleapis.com/$discovery/rest?version=v2beta
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: cloudsupport
+externalDocs:
+  url: https://cloud.google.com/support/docs/apis
+tags:
+  - name: caseClassifications
+  - name: cases
+  - name: media
+paths:
+  /v2beta/caseClassifications:search:
+    get:
+      description: Retrieve valid classifications to be used when creating a support case. The classications are hierarchical, with each classification containing all levels of the hierarchy, separated by " > ". For example "Technical Issue > Compute > Compute Engine".
+      operationId: cloudsupport.caseClassifications.search
+      parameters:
+        - description: The maximum number of cases fetched with each request.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying the page of results to return. If unspecified, the first page is retrieved.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: An expression written in the Cloud filter language. If non-empty, then only cases whose fields match the filter are returned. If empty, then no messages are filtered out.
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchCaseClassificationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - caseClassifications
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v2beta/cases:search:
+    get:
+      description: Search cases using the specified query.
+      operationId: cloudsupport.cases.search
+      parameters:
+        - description: The maximum number of cases fetched with each request. The default page size is 10.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying the page of results to return. If unspecified, the first page is retrieved.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: 'An expression written in filter language. A query uses the following fields with the operators equals (`=`) and `AND`: - `organization`: An organization name in the form `organizations/`. - `project`: A project name in the form `projects/`. - `state`: The accepted values are `OPEN` or `CLOSED`. - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You can specify multiple values for priority using the `OR` operator. For example, `priority=P1 OR priority=P2`. - [DEPRECATED] `severity`: The accepted values are `S0`, `S1`, `S2`, `S3`, or `S4`. - `creator.email`: The email address of the case creator. - `billingAccount`: A billing account in the form `billingAccounts/` You must specify eitehr `organization` or `project`. To search across `displayName`, `description`, and comments, use a global restriction with no keyword or operator. For example, `"my search"`. To search only cases updated after a certain date, use `update_time` retricted with that particular date, time, and timezone in ISO datetime format. For example, `update_time>"2020-01-01T00:00:00-05:00"`. `update_time` only supports the greater than operator (`>`). Examples: - `organization="organizations/123456789"` - `project="projects/my-project-id"` - `project="projects/123456789"` - `billing_account="billingAccounts/123456-A0B0C0-CUZ789"` - `organization="organizations/123456789" AND state=CLOSED` - `project="projects/my-project-id" AND creator.email="tester@example.com"` - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`'
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchCasesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2beta/{name}":
+    get:
+      description: Retrieve the specified case.
+      operationId: cloudsupport.cases.get
+      parameters:
+        - description: Required. The fully qualified name of a case to be retrieved.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Case"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update the specified case. Only a subset of fields can be updated.
+      operationId: cloudsupport.cases.patch
+      parameters:
+        - description: The resource name for the case.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "A list of attributes of the case object that should be updated as part of this request. Supported values are severity, display_name, and subscriber_email_addresses. If no fields are specified, all supported fields are updated. WARNING: If you do not provide a field mask, then you may accidentally clear some fields. For example, if you leave field mask empty and do not provide a value for subscriber_email_addresses, then subscriber_email_addresses is updated to empty."
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Case"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Case"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+  "/v2beta/{name}:close":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Close the specified case.
+      operationId: cloudsupport.cases.close
+      parameters:
+        - description: Required. The fully qualified name of the case resource to be closed.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloseCaseRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Case"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+  "/v2beta/{name}:download":
+    get:
+      description: 'Download a file attachment on a case. Note: HTTP requests must append "?alt=media" to the URL.'
+      operationId: cloudsupport.media.download
+      parameters:
+        - description: The resource name of the attachment to be downloaded.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Media"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - media
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2beta/{name}:escalate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Escalate a case. Escalating a case will initiate the Cloud Support escalation management process. This operation is only available to certain Customer Care tiers. Go to https://cloud.google.com/support and look for 'Technical support escalations' in the feature list to find out which tiers are able to perform escalations.
+      operationId: cloudsupport.cases.escalate
+      parameters:
+        - description: Required. The fully qualified name of the Case resource to be escalated.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EscalateCaseRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Case"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+  "/v2beta/{parent}/attachments":
+    get:
+      description: Retrieve all attachments associated with a support case.
+      operationId: cloudsupport.cases.attachments.list
+      parameters:
+        - description: Required. The resource name of Case object for which attachments should be listed.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of attachments fetched with each request. If not provided, the default is 10. The maximum page size that will be returned is 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying the page of results to return. If unspecified, the first page is retrieved.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAttachmentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Create a file attachment on a case or Cloud resource. The attachment object must have the following fields set: filename."
+      operationId: cloudsupport.media.upload
+      parameters:
+        - description: Required. The resource name of the case (or case parent) to which the attachment should be attached.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/CreateAttachmentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attachment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - media
+  "/v2beta/{parent}/cases":
+    get:
+      description: "Retrieve all cases under the specified parent. Note: Listing cases under an Organization returns only the cases directly parented by that organization. To retrieve all cases under an organization, including cases parented by projects under that organization, use `cases.search`."
+      operationId: cloudsupport.cases.list
+      parameters:
+        - description: Required. The fully qualified name of parent resource to list cases under.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "An expression written in filter language. If non-empty, the query returns the cases that match the filter. Else, the query doesn't filter the cases. Filter expressions use the following fields with the operators equals (`=`) and `AND`: - `state`: The accepted values are `OPEN` or `CLOSED`. - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You can specify multiple values for priority using the `OR` operator. For example, `priority=P1 OR priority=P2`. - [DEPRECATED] `severity`: The accepted values are `S0`, `S1`, `S2`, `S3`, or `S4`. - `creator.email`: The email address of the case creator. Examples: - `state=CLOSED` - `state=OPEN AND creator.email=\"tester@example.com\"` - `state=OPEN AND (priority=P0 OR priority=P1)`"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of cases fetched with each request. Defaults to 10.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying the page of results to return. If unspecified, the first page is retrieved.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCasesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Create a new case and associate it with the given Cloud resource. The case object must have the following fields set: display_name, description, classification, and severity."
+      operationId: cloudsupport.cases.create
+      parameters:
+        - description: Required. The name of the Cloud resource under which the case should be created.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Case"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Case"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+  "/v2beta/{parent}/comments":
+    get:
+      description: Retrieve all Comments associated with the Case object.
+      operationId: cloudsupport.cases.comments.list
+      parameters:
+        - description: Required. The resource name of Case object for which comments should be listed.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of comments fetched with each request. Defaults to 10.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying the page of results to return. If unspecified, the first page is retrieved.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCommentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Add a new comment to the specified Case. The comment object must have the following fields set: body."
+      operationId: cloudsupport.cases.comments.create
+      parameters:
+        - description: Required. The resource name of Case to which this comment should be added.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Comment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - cases
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Actor:
+      description: An object containing information about the effective user and authenticated principal responsible for an action.
+      properties:
+        displayName:
+          description: The name to display for the actor. If not provided, it is inferred from credentials supplied during case creation. When an email is provided, a display name must also be provided. This will be obfuscated if the user is a Google Support agent.
+          type: string
+        email:
+          description: The email address of the actor. If not provided, it is inferred from credentials supplied during case creation. If the authenticated principal does not have an email address, one must be provided. When a name is provided, an email must also be provided. This will be obfuscated if the user is a Google Support agent.
+          type: string
+        googleSupport:
+          description: Output only. Whether the actor is a Google support actor.
+          readOnly: true
+          type: boolean
+      type: object
+    Attachment:
+      description: Represents a file attached to a support case.
+      properties:
+        createTime:
+          description: Output only. The time at which the attachment was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          $ref: "#/components/schemas/Actor"
+          description: Output only. The user who uploaded the attachment. Note, the name and email will be obfuscated if the attachment was uploaded by Google support.
+          readOnly: true
+        filename:
+          description: The filename of the attachment (e.g. `"graph.jpg"`).
+          type: string
+        mimeType:
+          description: Output only. The MIME type of the attachment (e.g. text/plain).
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name of the attachment.
+          readOnly: true
+          type: string
+        sizeBytes:
+          description: Output only. The size of the attachment in bytes.
+          format: int64
+          readOnly: true
+          type: string
+      type: object
+    Blobstore2Info:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        blobGeneration:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: int64
+          type: string
+        blobId:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        downloadReadHandle:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        readToken:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        uploadMetadataContainer:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+      type: object
+    Case:
+      description: A support case.
+      properties:
+        classification:
+          $ref: "#/components/schemas/CaseClassification"
+          description: The issue classification applicable to this case.
+        contactEmail:
+          description: A user-supplied email address to send case update notifications for. This should only be used in BYOID flows, where we cannot infer the user's email address directly from their EUCs.
+          type: string
+        createTime:
+          description: Output only. The time this case was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          $ref: "#/components/schemas/Actor"
+          description: "The user who created the case. Note: The name and email will be obfuscated if the case was created by Google Support."
+        description:
+          description: A broad description of the issue.
+          type: string
+        displayName:
+          description: The short summary of the issue reported in this case.
+          type: string
+        escalated:
+          description: Whether the case is currently escalated.
+          type: boolean
+        languageCode:
+          description: 'The language the user has requested to receive support in. This should be a BCP 47 language code (e.g., `"en"`, `"zh-CN"`, `"zh-TW"`, `"ja"`, `"ko"`). If no language or an unsupported language is specified, this field defaults to English (en). Language selection during case creation may affect your available support options. For a list of supported languages and their support working hours, see: https://cloud.google.com/support/docs/language-working-hours'
+          type: string
+        name:
+          description: The resource name for the case.
+          type: string
+        priority:
+          description: The priority of this case. If this is set, do not set severity.
+          enum:
+            - PRIORITY_UNSPECIFIED
+            - P0
+            - P1
+            - P2
+            - P3
+            - P4
+          type: string
+        severity:
+          description: REMOVED. The severity of this case. Use priority instead.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - S0
+            - S1
+            - S2
+            - S3
+            - S4
+          type: string
+        state:
+          description: Output only. The current status of the support case.
+          enum:
+            - STATE_UNSPECIFIED
+            - NEW
+            - IN_PROGRESS_GOOGLE_SUPPORT
+            - ACTION_REQUIRED
+            - SOLUTION_PROVIDED
+            - CLOSED
+          readOnly: true
+          type: string
+        subscriberEmailAddresses:
+          description: The email addresses to receive updates on this case.
+          items:
+            type: string
+          type: array
+        testCase:
+          description: Whether this case was created for internal API testing and should not be acted on by the support team.
+          type: boolean
+        timeZone:
+          description: "The timezone of the user who created the support case. It should be in a format IANA recognizes: https://www.iana.org/time-zones. There is no additional validation done by the API."
+          type: string
+        updateTime:
+          description: Output only. The time this case was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    CaseClassification:
+      description: A classification object with a product type and value.
+      properties:
+        displayName:
+          description: The display name of the classification.
+          type: string
+        id:
+          description: The unique ID for a classification. Must be specified for case creation. To retrieve valid classification IDs for case creation, use `caseClassifications.search`.
+          type: string
+      type: object
+    CloseCaseRequest:
+      description: The request message for the CloseCase endpoint.
+      properties: {}
+      type: object
+    Comment:
+      description: A comment associated with a support case.
+      properties:
+        body:
+          description: The full comment body. Maximum of 12800 characters. This can contain rich text syntax.
+          type: string
+        createTime:
+          description: Output only. The time when this comment was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          $ref: "#/components/schemas/Actor"
+          description: Output only. The user or Google Support agent created this comment.
+          readOnly: true
+        name:
+          description: Output only. The resource name for the comment.
+          readOnly: true
+          type: string
+        plainTextBody:
+          description: Output only. DEPRECATED. An automatically generated plain text version of body with all rich text syntax stripped.
+          readOnly: true
+          type: string
+      type: object
+    CompositeMedia:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        blobRef:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        blobstore2Info:
+          $ref: "#/components/schemas/Blobstore2Info"
+          description: "# gdata.* are outside protos with mising documentation"
+        cosmoBinaryReference:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        crc32cHash:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: uint32
+          type: integer
+        inline:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        length:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: int64
+          type: string
+        md5Hash:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        objectId:
+          $ref: "#/components/schemas/ObjectId"
+          description: "# gdata.* are outside protos with mising documentation"
+        path:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        referenceType:
+          description: "# gdata.* are outside protos with mising documentation"
+          enum:
+            - PATH
+            - BLOB_REF
+            - INLINE
+            - BIGSTORE_REF
+            - COSMO_BINARY_REFERENCE
+          type: string
+        sha1Hash:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+      type: object
+    ContentTypeInfo:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        bestGuess:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        fromBytes:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        fromFileName:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        fromHeader:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        fromUrlPath:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+      type: object
+    CreateAttachmentRequest:
+      description: The request message for the CreateAttachment endpoint.
+      properties:
+        attachment:
+          $ref: "#/components/schemas/Attachment"
+          description: Required. The attachment to be created.
+      type: object
+    DiffChecksumsResponse:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        checksumsLocation:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: "# gdata.* are outside protos with mising documentation"
+        chunkSizeBytes:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: int64
+          type: string
+        objectLocation:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: "# gdata.* are outside protos with mising documentation"
+        objectSizeBytes:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: int64
+          type: string
+        objectVersion:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+      type: object
+    DiffDownloadResponse:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        objectLocation:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: "# gdata.* are outside protos with mising documentation"
+      type: object
+    DiffUploadRequest:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        checksumsInfo:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: "# gdata.* are outside protos with mising documentation"
+        objectInfo:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: "# gdata.* are outside protos with mising documentation"
+        objectVersion:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+      type: object
+    DiffUploadResponse:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        objectVersion:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        originalObject:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: "# gdata.* are outside protos with mising documentation"
+      type: object
+    DiffVersionResponse:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        objectSizeBytes:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: int64
+          type: string
+        objectVersion:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+      type: object
+    DownloadParameters:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        allowGzipCompression:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: boolean
+        ignoreRange:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: boolean
+      type: object
+    EscalateCaseRequest:
+      description: The request message for the EscalateCase endpoint.
+      properties:
+        escalation:
+          $ref: "#/components/schemas/Escalation"
+          description: The escalation object to be sent with the escalation request.
+      type: object
+    Escalation:
+      description: An escalation of a support case.
+      properties:
+        justification:
+          description: Required. A free text description to accompany the `reason` field above. Provides additional context on why the case is being escalated.
+          type: string
+        reason:
+          description: Required. The reason why the Case is being escalated.
+          enum:
+            - REASON_UNSPECIFIED
+            - RESOLUTION_TIME
+            - TECHNICAL_EXPERTISE
+            - BUSINESS_IMPACT
+          type: string
+      type: object
+    ListAttachmentsResponse:
+      description: The response message for the ListAttachments endpoint.
+      properties:
+        attachments:
+          description: The list of attachments associated with the given case.
+          items:
+            $ref: "#/components/schemas/Attachment"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results. This should be set in the `page_token` field of subsequent `cases.attachments.list` requests. If unspecified, there are no more results to retrieve.
+          type: string
+      type: object
+    ListCasesResponse:
+      description: The response message for the ListCases endpoint.
+      properties:
+        cases:
+          description: The list of cases associated with the cloud resource, after any filters have been applied.
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results. This should be set in the `page_token` field of subsequent `ListCasesRequest` message that is issued. If unspecified, there are no more results to retrieve.
+          type: string
+      type: object
+    ListCommentsResponse:
+      description: The response message for the ListComments endpoint.
+      properties:
+        comments:
+          description: The list of Comments associated with the given Case.
+          items:
+            $ref: "#/components/schemas/Comment"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results. This should be set in the `page_token` field of subsequent `ListCommentsRequest` message that is issued. If unspecified, there are no more results to retrieve.
+          type: string
+      type: object
+    Media:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        algorithm:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        bigstoreObjectRef:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        blobRef:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        blobstore2Info:
+          $ref: "#/components/schemas/Blobstore2Info"
+          description: "# gdata.* are outside protos with mising documentation"
+        compositeMedia:
+          description: "# gdata.* are outside protos with mising documentation"
+          items:
+            $ref: "#/components/schemas/CompositeMedia"
+          type: array
+        contentType:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        contentTypeInfo:
+          $ref: "#/components/schemas/ContentTypeInfo"
+          description: "# gdata.* are outside protos with mising documentation"
+        cosmoBinaryReference:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        crc32cHash:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: uint32
+          type: integer
+        diffChecksumsResponse:
+          $ref: "#/components/schemas/DiffChecksumsResponse"
+          description: "# gdata.* are outside protos with mising documentation"
+        diffDownloadResponse:
+          $ref: "#/components/schemas/DiffDownloadResponse"
+          description: "# gdata.* are outside protos with mising documentation"
+        diffUploadRequest:
+          $ref: "#/components/schemas/DiffUploadRequest"
+          description: "# gdata.* are outside protos with mising documentation"
+        diffUploadResponse:
+          $ref: "#/components/schemas/DiffUploadResponse"
+          description: "# gdata.* are outside protos with mising documentation"
+        diffVersionResponse:
+          $ref: "#/components/schemas/DiffVersionResponse"
+          description: "# gdata.* are outside protos with mising documentation"
+        downloadParameters:
+          $ref: "#/components/schemas/DownloadParameters"
+          description: "# gdata.* are outside protos with mising documentation"
+        filename:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        hash:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        hashVerified:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: boolean
+        inline:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        isPotentialRetry:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: boolean
+        length:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: int64
+          type: string
+        md5Hash:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        mediaId:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        objectId:
+          $ref: "#/components/schemas/ObjectId"
+          description: "# gdata.* are outside protos with mising documentation"
+        path:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        referenceType:
+          description: "# gdata.* are outside protos with mising documentation"
+          enum:
+            - PATH
+            - BLOB_REF
+            - INLINE
+            - GET_MEDIA
+            - COMPOSITE_MEDIA
+            - BIGSTORE_REF
+            - DIFF_VERSION_RESPONSE
+            - DIFF_CHECKSUMS_RESPONSE
+            - DIFF_DOWNLOAD_RESPONSE
+            - DIFF_UPLOAD_REQUEST
+            - DIFF_UPLOAD_RESPONSE
+            - COSMO_BINARY_REFERENCE
+            - ARBITRARY_BYTES
+          type: string
+        sha1Hash:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        sha256Hash:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: byte
+          type: string
+        timestamp:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: uint64
+          type: string
+        token:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+      type: object
+    ObjectId:
+      description: "# gdata.* are outside protos with mising documentation"
+      properties:
+        bucketName:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+        generation:
+          description: "# gdata.* are outside protos with mising documentation"
+          format: int64
+          type: string
+        objectName:
+          description: "# gdata.* are outside protos with mising documentation"
+          type: string
+      type: object
+    SearchCaseClassificationsResponse:
+      description: The response message for SearchCaseClassifications endpoint.
+      properties:
+        caseClassifications:
+          description: The classifications retrieved.
+          items:
+            $ref: "#/components/schemas/CaseClassification"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results. This should be set in the `page_token` field of subsequent `SearchCaseClassificationsRequest` message that is issued. If unspecified, there are no more results to retrieve.
+          type: string
+      type: object
+    SearchCasesResponse:
+      description: The response message for the SearchCases endpoint.
+      properties:
+        cases:
+          description: The list of Case associated with the cloud resource, after any filters have been applied.
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results. This should be set in the `page_token` field of subsequent `SearchCaseRequest` message that is issued. If unspecified, there are no more results to retrieve.
+          type: string
+      type: object
+    WorkflowOperationMetadata:
+      description: Metadata about the operation. Used to lookup the current status.
+      properties:
+        namespace:
+          description: The namespace that the job was scheduled in. Must be included in the workflow metadata so the workflow status can be retrieved.
+          type: string
+        operationAction:
+          description: The type of action the operation is classified as.
+          enum:
+            - OPERATION_ACTION_UNSPECIFIED
+            - CREATE_SUPPORT_ACCOUNT
+            - UPDATE_SUPPORT_ACCOUNT
+            - PURCHASE_SUPPORT_ACCOUNT
+          type: string
+        workflowOperationType:
+          description: Which version of the workflow service this operation came from.
+          enum:
+            - UNKNOWN_OPERATION_TYPE
+            - WORKFLOWS_V1
+            - WORKFLOWS_V2
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

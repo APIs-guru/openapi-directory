@@ -1,0 +1,662 @@
+openapi: 3.0.3
+servers:
+  - url: https://ipqualityscore.com/api
+info:
+  contact: {}
+  title: IPQualityScore API
+  version: 1.0.0
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_ipqualityscore.com_templates_img_icons_fav_apple-touch-icon.png
+  x-origin:
+    - format: postman
+      url: https://raw.githubusercontent.com/IPQualityScore/IP_Quality_Score_API_Spec/Review1/postman/collections/IP%20API%20Spec%20Review%201.json
+      version: 2.x
+  x-providerName: ipqualityscore.com
+tags:
+  - name: email_validation
+  - name: phone_validation
+  - name: malicious_url_scanner
+paths:
+  "/json/email/{YOUR_API_KEY_HERE}/{USER_EMAIL_HERE}":
+    get:
+      description: Email Validation
+      operationId: emailValidation
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Successful response:
+                  value:
+                    associated_names:
+                      names:
+                        - names
+                        - names
+                      status: Enterprise Plus or higher required.
+                    associated_phone_numbers:
+                      phone_numbers:
+                        - phone_numbers
+                        - phone_numbers
+                      status: Enterprise Plus or higher required.
+                    catch_all: true
+                    common: false
+                    deliverability: high.
+                    disposable: false
+                    dns_valid: true
+                    domain_age:
+                      human: 9 years ago
+                      iso: 2013-09-10T14:18:53-04:00
+                      timestamp: 1378837133
+                    domain_velocity: none
+                    first_name: Success.
+                    first_seen:
+                      human: 9 years ago
+                      iso: 2013-09-10T14:18:53-04:00
+                      timestamp: 1378837133
+                    fraud_score: 1
+                    frequent_complainer: false
+                    generic: false
+                    honeypot: false
+                    leaked: false
+                    message: Success.
+                    overall_score: 2
+                    recent_abuse: false
+                    request_id: 8cib1Ircsadw3gB
+                    sanitized_email: example@example.com
+                    smtp_score: 5
+                    spam_trap_score: none.
+                    success: true
+                    suggested_domain: N/A
+                    suspect: false
+                    timed_out: true
+                    user_activity: Enterprise L4+ required.
+                    valid: true
+              schema:
+                properties:
+                  associated_names:
+                    properties:
+                      names:
+                        example:
+                          - names
+                          - names
+                        items:
+                          example: names
+                          type: string
+                        type: array
+                      status:
+                        example: Enterprise Plus or higher required.
+                        type: string
+                    type: object
+                  associated_phone_numbers:
+                    properties:
+                      phone_numbers:
+                        example:
+                          - phone_numbers
+                          - phone_numbers
+                        items:
+                          example: phone_numbers
+                          type: string
+                        type: array
+                      status:
+                        example: Enterprise Plus or higher required.
+                        type: string
+                    type: object
+                  catch_all:
+                    example: true
+                    type: boolean
+                  common:
+                    example: false
+                    type: boolean
+                  deliverability:
+                    example: high.
+                    type: string
+                  disposable:
+                    example: false
+                    type: boolean
+                  dns_valid:
+                    example: true
+                    type: boolean
+                  domain_age:
+                    properties:
+                      human:
+                        example: 9 years ago
+                        type: string
+                      iso:
+                        example: 2013-09-10T14:18:53-04:00
+                        type: string
+                      timestamp:
+                        example: 1378837133
+                        type: number
+                    type: object
+                  domain_velocity:
+                    example: none
+                    type: string
+                  first_name:
+                    example: Success.
+                    type: string
+                  first_seen:
+                    properties:
+                      human:
+                        example: 9 years ago
+                        type: string
+                      iso:
+                        example: 2013-09-10T14:18:53-04:00
+                        type: string
+                      timestamp:
+                        example: 1378837133
+                        type: number
+                    type: object
+                  fraud_score:
+                    example: 1
+                    type: number
+                  frequent_complainer:
+                    example: false
+                    type: boolean
+                  generic:
+                    example: false
+                    type: boolean
+                  honeypot:
+                    example: false
+                    type: boolean
+                  leaked:
+                    example: false
+                    type: boolean
+                  message:
+                    example: Success.
+                    type: string
+                  overall_score:
+                    example: 2
+                    type: number
+                  recent_abuse:
+                    example: false
+                    type: boolean
+                  request_id:
+                    example: 8cib1Ircsadw3gB
+                    type: string
+                  sanitized_email:
+                    example: example@example.com
+                    type: string
+                  smtp_score:
+                    example: 5
+                    type: number
+                  spam_trap_score:
+                    example: none.
+                    type: string
+                  success:
+                    example: true
+                    type: boolean
+                  suggested_domain:
+                    example: N/A
+                    type: string
+                  suspect:
+                    example: false
+                    type: boolean
+                  timed_out:
+                    example: true
+                    type: boolean
+                  user_activity:
+                    example: Enterprise L4+ required.
+                    type: string
+                  valid:
+                    example: true
+                    type: boolean
+                type: object
+          description: Successful response
+        "400":
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value:
+                    message: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    request_id: 4OTORR352FU0p
+                    success: false
+              schema:
+                properties:
+                  message:
+                    example: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    type: string
+                  request_id:
+                    example: 4OTORR352FU0p
+                    type: string
+                  success:
+                    example: false
+                    type: boolean
+                type: object
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              examples:
+                Unexpected error:
+                  value:
+                    message: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    request_id: 4OTORR352FU0p
+                    success: false
+              schema:
+                properties:
+                  message:
+                    example: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    type: string
+                  request_id:
+                    example: 4OTORR352FU0p
+                    type: string
+                  success:
+                    example: false
+                    type: boolean
+                type: object
+          description: Unexpected error
+      summary: Email Validation
+      tags:
+        - email_validation
+    parameters:
+      - description: (Required) YOUR_API_KEY_HERE
+        in: path
+        name: YOUR_API_KEY_HERE
+        required: true
+        schema:
+          example: asd24#sdfs322#
+          type: string
+      - description: (Required) USER_EMAIL_HERE
+        in: path
+        name: USER_EMAIL_HERE
+        required: true
+        schema:
+          example: example@example.com
+          type: string
+  "/json/phone/{YOUR_API_KEY_HERE}/{USER_PHONE_HERE}":
+    get:
+      description: Phone Validation
+      operationId: phoneValidation
+      parameters:
+        - description: country
+          in: query
+          name: country
+          schema:
+            example: UK
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Successful response:
+                  value:
+                    VOIP: true
+                    active: true
+                    active_status: N/A
+                    associated_email_addresses:
+                      emails:
+                        - names
+                        - names
+                      status: No associated emails found.
+                    carrier: ONVOY, LLC
+                    city: SEATTLE
+                    country: US
+                    dialing_code: 1
+                    do_not_call: false
+                    formatted: "+3234232342"
+                    fraud_score: 100
+                    leaked: false
+                    line_type: VOIP
+                    local_format: (206) 456-3059
+                    mcc: N/A
+                    message: Success.
+                    mnc: N/A
+                    name: N/A
+                    prepaid: tempor ea proident quis
+                    recent_abuse: true
+                    region: WA
+                    request_id: 8ctDi1gwuP
+                    risky: true
+                    sms_domain: N/A
+                    sms_email: N/A
+                    spammer: false
+                    success: true
+                    timezone: America/Los_Angeles
+                    user_activity: Enterprise L4+ required.
+                    valid: true
+                    zip_code: "98104"
+              schema:
+                properties:
+                  VOIP:
+                    example: true
+                    type: boolean
+                  active:
+                    example: true
+                    type: boolean
+                  active_status:
+                    example: N/A
+                    type: string
+                  associated_email_addresses:
+                    properties:
+                      emails:
+                        example:
+                          - names
+                          - names
+                        items:
+                          example: names
+                          type: string
+                        type: array
+                      status:
+                        example: No associated emails found.
+                        type: string
+                    type: object
+                  carrier:
+                    example: ONVOY, LLC
+                    type: string
+                  city:
+                    example: SEATTLE
+                    type: string
+                  country:
+                    example: US
+                    type: string
+                  dialing_code:
+                    example: 1
+                    type: number
+                  do_not_call:
+                    example: false
+                    type: boolean
+                  formatted:
+                    example: "+3234232342"
+                    type: string
+                  fraud_score:
+                    example: 100
+                    type: number
+                  leaked:
+                    example: false
+                    type: boolean
+                  line_type:
+                    example: VOIP
+                    type: string
+                  local_format:
+                    example: (206) 456-3059
+                    type: string
+                  mcc:
+                    example: N/A
+                    type: string
+                  message:
+                    example: Success.
+                    type: string
+                  mnc:
+                    example: N/A
+                    type: string
+                  name:
+                    example: N/A
+                    type: string
+                  prepaid:
+                    example: tempor ea proident quis
+                    type: string
+                  recent_abuse:
+                    example: true
+                    type: boolean
+                  region:
+                    example: WA
+                    type: string
+                  request_id:
+                    example: 8ctDi1gwuP
+                    type: string
+                  risky:
+                    example: true
+                    type: boolean
+                  sms_domain:
+                    example: N/A
+                    type: string
+                  sms_email:
+                    example: N/A
+                    type: string
+                  spammer:
+                    example: false
+                    type: boolean
+                  success:
+                    example: true
+                    type: boolean
+                  timezone:
+                    example: America/Los_Angeles
+                    type: string
+                  user_activity:
+                    example: Enterprise L4+ required.
+                    type: string
+                  valid:
+                    example: true
+                    type: boolean
+                  zip_code:
+                    example: "98104"
+                    type: string
+                type: object
+          description: Successful response
+        "400":
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value:
+                    message: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    request_id: 4OTORR352FU0p
+                    success: false
+              schema:
+                properties:
+                  message:
+                    example: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    type: string
+                  request_id:
+                    example: 4OTORR352FU0p
+                    type: string
+                  success:
+                    example: false
+                    type: boolean
+                type: object
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              examples:
+                Unexpected error:
+                  value:
+                    message: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    request_id: 4OTORR352FU0p
+                    success: false
+              schema:
+                properties:
+                  message:
+                    example: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    type: string
+                  request_id:
+                    example: 4OTORR352FU0p
+                    type: string
+                  success:
+                    example: false
+                    type: boolean
+                type: object
+          description: Unexpected error
+      summary: Phone Validation
+      tags:
+        - phone_validation
+    parameters:
+      - description: (Required) YOUR_API_KEY_HERE
+        in: path
+        name: YOUR_API_KEY_HERE
+        required: true
+        schema:
+          example: asd24#sdfs322#
+          type: string
+      - description: (Required) USER_PHONE_HERE
+        in: path
+        name: USER_PHONE_HERE
+        required: true
+        schema:
+          example: "18007132618"
+          type: string
+  "/json/url/{YOUR_API_KEY_HERE}/{URL_HERE}":
+    get:
+      description: Malicious URL Scanner
+      operationId: maliciousUrlScanner
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Successful response:
+                  value:
+                    adult: false
+                    category: Search Engine
+                    content_type: text/html; charset=UTF-8
+                    dns_valid: true
+                    domain: google.com
+                    domain_age:
+                      human: 3 months ago
+                      iso: 2019-09-09T16:40:34-04:00
+                      timestamp: 1568061634
+                    domain_rank: 1
+                    ip_address: 172.217.7.206
+                    malware: false
+                    message: Success.
+                    page_size: 68553
+                    parking: false
+                    phishing: false
+                    request_id: 4ZGSfWu9RDf3oH
+                    risk_score: 0
+                    server: nginx
+                    spamming: false
+                    status_code: 200
+                    success: true
+                    suspicious: false
+                    unsafe: true
+              schema:
+                properties:
+                  adult:
+                    example: false
+                    type: boolean
+                  category:
+                    example: Search Engine
+                    type: string
+                  content_type:
+                    example: text/html; charset=UTF-8
+                    type: string
+                  dns_valid:
+                    example: true
+                    type: boolean
+                  domain:
+                    example: google.com
+                    type: string
+                  domain_age:
+                    properties:
+                      human:
+                        example: 3 months ago
+                        type: string
+                      iso:
+                        example: 2019-09-09T16:40:34-04:00
+                        type: string
+                      timestamp:
+                        example: 1568061634
+                        type: number
+                    type: object
+                  domain_rank:
+                    example: 1
+                    type: number
+                  ip_address:
+                    example: 172.217.7.206
+                    type: string
+                  malware:
+                    example: false
+                    type: boolean
+                  message:
+                    example: Success.
+                    type: string
+                  page_size:
+                    example: 68553
+                    type: number
+                  parking:
+                    example: false
+                    type: boolean
+                  phishing:
+                    example: false
+                    type: boolean
+                  request_id:
+                    example: 4ZGSfWu9RDf3oH
+                    type: string
+                  risk_score:
+                    example: 0
+                    type: number
+                  server:
+                    example: nginx
+                    type: string
+                  spamming:
+                    example: false
+                    type: boolean
+                  status_code:
+                    example: 200
+                    type: number
+                  success:
+                    example: true
+                    type: boolean
+                  suspicious:
+                    example: false
+                    type: boolean
+                  unsafe:
+                    example: true
+                    type: boolean
+                type: object
+          description: Successful response
+        "400":
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value:
+                    message: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    request_id: 4OTORR352FU0p
+                    success: false
+              schema:
+                properties:
+                  message:
+                    example: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    type: string
+                  request_id:
+                    example: 4OTORR352FU0p
+                    type: string
+                  success:
+                    example: false
+                    type: boolean
+                type: object
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              examples:
+                Unexpected error:
+                  value:
+                    message: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    request_id: 4OTORR352FU0p
+                    success: false
+              schema:
+                properties:
+                  message:
+                    example: You have insufficient credits to make this query. Please contact IPQualityScore support if this error persists.
+                    type: string
+                  request_id:
+                    example: 4OTORR352FU0p
+                    type: string
+                  success:
+                    example: false
+                    type: boolean
+                type: object
+          description: Unexpected error
+      summary: Malicious URL Scanner
+      tags:
+        - malicious_url_scanner
+    parameters:
+      - description: (Required) YOUR_API_KEY_HERE
+        in: path
+        name: YOUR_API_KEY_HERE
+        required: true
+        schema:
+          example: asd24#sdfs322#
+          type: string
+      - description: (Required) URL_HERE
+        in: path
+        name: URL_HERE
+        required: true
+        schema:
+          example: https%3A%2F%2Fgoogle.com
+          type: string

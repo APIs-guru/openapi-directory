@@ -1,0 +1,43 @@
+{
+  "apis": {
+    "rebilly.com": {
+      "added": "2020-03-19T10:44:04.000Z",
+      "info": {
+        "contact": {
+          "email": "integrations@rebilly.com",
+          "name": "Rebilly API Support",
+          "url": "https://www.rebilly.com/contact/"
+        },
+        "description": "# Introduction\nThe Rebilly API is built on HTTP.  Our API is RESTful.  It has predictable\nresource URLs.  It returns HTTP response codes to indicate errors.  It also\naccepts and returns JSON in the HTTP body.  You can use your favorite\nHTTP/REST library for your programming language to use Rebilly's API, or\nyou can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php)\nand [Javascript](https://github.com/Rebilly/rebilly-js-sdk)).\n\nWe have other APIs that are also available.  Every action from our [app](https://app.rebilly.com)\nis supported by an API which is documented and available for use so that you\nmay automate any workflows necessary.  This document contains the most commonly\nintegrated resources.\n\n# Authentication\n\nWhen you sign up for an account, you are given your first secret API key.\nYou can generate additional API keys, and delete API keys (as you may\nneed to rotate your keys in the future). You authenticate to the\nRebilly API by providing your secret key in the request header.\n\nRebilly offers three forms of authentication:  secret key, publishable key, JSON Web Tokens, and public signature key.\n- [Secret API key](#section/Authentication/SecretApiKey): used for requests made\n  from the server side. Never share these keys. Keep them guarded and secure.\n- [Publishable API key](#section/Authentication/PublishableApiKey): used for \n  requests from the client side. For now can only be used to create \n  a [Payment Token](#operation/PostToken) and \n  a [File token](#operation/PostFile).\n- [JWT](#section/Authentication/JWT): short lifetime tokens that can be assigned a specific expiration time.\n\nNever share your secret keys. Keep them guarded and secure.\n\n&lt;!-- ReDoc-Inject: &lt;security-definitions&gt; --&gt;\n\n# Errors\nRebilly follow's the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs.  As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.\n\n## Forbidden\n&lt;RedocResponse pointer={\"#/components/responses/Forbidden\"} /&gt;\n\n## Conflict\n&lt;RedocResponse pointer={\"#/components/responses/Conflict\"} /&gt;\n\n## NotFound\n&lt;RedocResponse pointer={\"#/components/responses/NotFound\"} /&gt;\n\n## Unauthorized\n&lt;RedocResponse pointer={\"#/components/responses/Unauthorized\"} /&gt;\n\n## ValidationError\n&lt;RedocResponse pointer={\"#/components/responses/ValidationError\"} /&gt;\n\n# SDKs\n\nRebilly offers a Javascript SDK and a PHP SDK to help interact with\nthe API.  However, no SDK is required to use the API.\n\nRebilly also offers [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/),\n a client-side iFrame-based solution to help\ncreate payment tokens while minimizing PCI DSS compliance burdens\nand maximizing the customizability. [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)\nis interacting with the [payment tokens creation operation](#operation/PostToken).\n\n## Javascript SDK\n\nInstallation and usage instructions can be found [here](https://docs.rebilly.com/docs/developer-docs/sdks).\nSDK code examples are included in these docs.\n\n## PHP SDK\nFor all PHP SDK examples provided in these docs you will need to configure the `$client`.\nYou may do it like this:\n\n```php\n$client = new Rebilly\\Client([\n    'apiKey' =&gt; 'YourApiKeyHere',\n    'baseUrl' =&gt; 'https://api.rebilly.com',\n]);\n```\n\n# Using filter with collections\nRebilly provides collections filtering. You can use `?filter` param on collections to define which records should be shown in the response.\n\nHere is filter format description:\n\n- Fields and values in filter are separated with `:`: `?filter=firstName:John`.\n\n- Sub-fields are separated with `.`: `?filter=billingAddress.country:US`.\n\n- Multiple filters are separated with `;`: `?filter=firstName:John;lastName:Doe`. They will be joined with `AND` logic. In this example: `firstName:John` AND `lastName:Doe`.\n\n- You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`. Multiple values specified for a field will be joined with `OR` logic. In this example: `firstName:John` OR `firstName:Bob`.\n\n- To negate the filter use `!`: `?filter=firstName:!John`. Note that you can negate multiple values like this: `?filter=firstName:!John,!Bob`. This filter rule will exclude all Johns and Bobs from the response.\n\n- You can use range filters like this: `?filter=amount:1..10`.\n\n- You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`. This also works for datetime-based fields.\n\n- You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`.\n\n- Datetime-based fields accept values formatted using RFC 3339 like this: `?filter=createdTime:2021-02-14T13:30:00Z`. \n\n# Expand to include embedded objects\nRebilly provides the ability to pre-load additional \nobjects with a request. \n\nYou can use `?expand` param on most requests to expand\nand include embedded objects within the\n`_embedded` property of the response.\n\nThe `_embedded` property contains an array of \nobjects keyed by the expand parameter value(s).\n\nYou may expand multiple objects by passing them\nas comma-separated to the expand value like so:\n\n```\n?expand=recentInvoice,customer\n```\n\nAnd in the response, you would see:\n\n```\n\"_embedded\": [\n    \"recentInvoice\": {...},\n    \"customer\": {...}\n]\n```\nExpand may be utilitized not only on `GET` requests but also on `PATCH`, `POST`, `PUT` requests too.\n\n\n# Getting started guide\n\nRebilly's API has over 300 operations.  That's more than you'll \nneed to implement your use cases.  If you have a use \ncase you would like to implement, please consult us for\nfeedback on the best API operations for the task.\n\nOur getting started guide will demonstrate a basic order form use\ncase.  It will allow us to highlight core resources\nin Rebilly that will be helpful for many other use cases\ntoo.\n\nWithin 25 minutes, you'll have sent API requests (via our console)\nto create a subscription order.\n",
+        "license": {
+          "name": "Rebilly",
+          "url": "https://www.rebilly.com/api-license/"
+        },
+        "termsOfService": "https://www.rebilly.com/terms-of-use/",
+        "title": "Rebilly REST API",
+        "version": "2.1",
+        "x-apisguru-categories": [
+          "payment",
+          "ecommerce"
+        ],
+        "x-logo": {
+          "backgroundColor": "#0033A0",
+          "url": "https://api.apis.guru/v2/cache/logo/https_rebilly-core.redoc.ly_rb_apiLogo.svg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://api-reference.rebilly.com/openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "rebilly.com"
+      },
+      "updated": "2021-06-07T19:26:00.828Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/rebilly.com/2.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/rebilly.com/2.1/openapi.yaml",
+      "openapiVer": "3.0.3",
+      "link": "https://api.apis.guru/v2/specs/rebilly.com/2.1.json"
+    }
+  }
+}

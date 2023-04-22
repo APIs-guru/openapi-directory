@@ -1,0 +1,3317 @@
+openapi: 3.0.1
+servers:
+  - url: https://messaging.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Messaging
+  version: 1.42.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_static1.twilio.com_marketing_bundles_marketing_img_logos_wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_messaging_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_messaging_v1
+paths:
+  /v1/Deactivations:
+    description: A Deactivation resource to retrieve a list of United States phone numbers that have been deactivated by mobile carriers on a specific date.
+    get:
+      description: Fetch a list of all United States numbers that have been deactivated on a specific date.
+      operationId: FetchDeactivation
+      parameters:
+        - description: The request will return a list of all United States Phone Numbers that were deactivated on the day specified by this parameter. This date should be specified in YYYY-MM-DD format.
+          in: query
+          name: Date
+          schema:
+            format: date
+            type: string
+      responses:
+        "307":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.deactivation"
+          description: Temporary Redirect
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      className: deactivations
+      defaultOutputProperties:
+        - redirect_to
+      pathType: instance
+  "/v1/LinkShortening/Domains/{DomainSid}/Certificate":
+    delete:
+      description: ""
+      operationId: DeleteDomainCertV4
+      parameters:
+        - description: Unique string used to identify the domain that this certificate should be associated with.
+          in: path
+          name: DomainSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^DN[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchDomainCertV4
+      parameters:
+        - description: Unique string used to identify the domain that this certificate should be associated with.
+          in: path
+          name: DomainSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^DN[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.domain_cert_v4"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateDomainCertV4
+      parameters:
+        - description: Unique string used to identify the domain that this certificate should be associated with.
+          in: path
+          name: DomainSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^DN[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                TlsCert:
+                  description: "Contains the full TLS certificate and private for this domain in PEM format: https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail. Twilio uses this information to process HTTPS traffic sent to your domain."
+                  type: string
+              required:
+                - TlsCert
+              title: UpdateDomainCertV4Request
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.domain_cert_v4"
+          description: OK
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.domain_cert_v4"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      className: domain_certs
+      defaultOutputProperties:
+        - certificate_sid
+        - domain_name
+        - domain_sid
+        - date_expires
+        - date_created
+        - date_updated
+        - url
+      mountName: domain_certs
+      pathType: instance
+  "/v1/LinkShortening/Domains/{DomainSid}/Config":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchDomainConfig
+      parameters:
+        - description: Unique string used to identify the domain that this config should be associated with.
+          in: path
+          name: DomainSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^DN[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.domain_config"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateDomainConfig
+      parameters:
+        - description: Unique string used to identify the domain that this config should be associated with.
+          in: path
+          name: DomainSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^DN[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CallbackUrl:
+                  description: URL to receive click events to your webhook whenever the recipients click on the shortened links
+                  format: uri
+                  type: string
+                FallbackUrl:
+                  description: Any requests we receive to this domain that do not match an existing shortened message will be redirected to the fallback url. These will likely be either expired messages, random misdirected traffic, or intentional scraping.
+                  format: uri
+                  type: string
+              title: UpdateDomainConfigRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.domain_config"
+          description: OK
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.domain_config"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - config_sid
+        - fallback_url
+        - callback_url
+        - date_created
+        - date_updated
+        - url
+      mountName: domain_config
+      pathType: instance
+  "/v1/LinkShortening/Domains/{DomainSid}/MessagingServices/{MessagingServiceSid}":
+    delete:
+      description: ""
+      operationId: DeleteLinkshorteningMessagingService
+      parameters:
+        - description: The domain SID to dissociate from a messaging service. With URL shortening enabled, links in messages sent with the associated messaging service will be shortened to the provided domain
+          in: path
+          name: DomainSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^DN[0-9a-fA-F]{32}$
+            type: string
+        - description: A messaging service SID to dissociate from a domain. With URL shortening enabled, links in messages sent with the provided messaging service will be shortened to the associated domain
+          in: path
+          name: MessagingServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: "TODO: Resource-level docs"
+    post:
+      description: ""
+      operationId: CreateLinkshorteningMessagingService
+      parameters:
+        - description: The domain SID to associate with a messaging service. With URL shortening enabled, links in messages sent with the associated messaging service will be shortened to the provided domain
+          in: path
+          name: DomainSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^DN[0-9a-fA-F]{32}$
+            type: string
+        - description: A messaging service SID to associate with a domain. With URL shortening enabled, links in messages sent with the provided messaging service will be shortened to the associated domain
+          in: path
+          name: MessagingServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.linkshortening_messaging_service"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - messaging_service_sid
+        - domain_sid
+        - url
+      mountName: linkshortening_messaging_service
+      pathType: instance
+  "/v1/LinkShortening/MessagingService/{MessagingServiceSid}/DomainConfig":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchDomainConfigMessagingService
+      parameters:
+        - description: Unique string used to identify the Messaging service that this domain should be associated with.
+          in: path
+          name: MessagingServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.domain_config_messaging_service"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - domain_sid
+        - config_sid
+        - fallback_url
+        - callback_url
+        - date_created
+        - date_updated
+        - url
+        - messaging_service_sid
+      mountName: domain_config_messaging_service
+      pathType: instance
+  /v1/Services:
+    description: A Messaging Service resource to create, fetch, update, delete or add/remove senders from Messaging Services.
+    get:
+      description: ""
+      operationId: ListService
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  services:
+                    items:
+                      $ref: "#/components/schemas/messaging.v1.service"
+                    type: array
+                title: ListServiceResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateService
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AreaCodeGeomatch:
+                  description: Whether to enable [Area Code Geomatch](https://www.twilio.com/docs/sms/services#area-code-geomatch) on the Service Instance.
+                  type: boolean
+                FallbackMethod:
+                  description: "The HTTP method we should use to call `fallback_url`. Can be: `GET` or `POST`."
+                  enum:
+                    - HEAD
+                    - GET
+                    - POST
+                    - PATCH
+                    - PUT
+                    - DELETE
+                  format: http-method
+                  type: string
+                FallbackToLongCode:
+                  description: Whether to enable [Fallback to Long Code](https://www.twilio.com/docs/sms/services#fallback-to-long-code) for messages sent through the Service instance.
+                  type: boolean
+                FallbackUrl:
+                  description: The URL that we call using `fallback_method` if an error occurs while retrieving or executing the TwiML from the Inbound Request URL. If the `use_inbound_webhook_on_number` field is enabled then the webhook url defined on the phone number will override the `fallback_url` defined for the Messaging Service.
+                  format: uri
+                  type: string
+                FriendlyName:
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
+                  type: string
+                InboundMethod:
+                  description: The HTTP method we should use to call `inbound_request_url`. Can be `GET` or `POST` and the default is `POST`.
+                  enum:
+                    - HEAD
+                    - GET
+                    - POST
+                    - PATCH
+                    - PUT
+                    - DELETE
+                  format: http-method
+                  type: string
+                InboundRequestUrl:
+                  description: The URL we call using `inbound_method` when a message is received by any phone number or short code in the Service. When this property is `null`, receiving inbound messages is disabled. All messages sent to the Twilio phone number or short code will not be logged and received on the Account. If the `use_inbound_webhook_on_number` field is enabled then the webhook url defined on the phone number will override the `inbound_request_url` defined for the Messaging Service.
+                  format: uri
+                  type: string
+                MmsConverter:
+                  description: Whether to enable the [MMS Converter](https://www.twilio.com/docs/sms/services#mms-converter) for messages sent through the Service instance.
+                  type: boolean
+                ScanMessageContent:
+                  $ref: "#/components/schemas/service_enum_scan_message_content"
+                  description: Reserved.
+                  type: string
+                SmartEncoding:
+                  description: Whether to enable [Smart Encoding](https://www.twilio.com/docs/sms/services#smart-encoding) for messages sent through the Service instance.
+                  type: boolean
+                StatusCallback:
+                  description: The URL we should call to [pass status updates](https://www.twilio.com/docs/sms/api/message-resource#message-status-values) about message delivery.
+                  format: uri
+                  type: string
+                StickySender:
+                  description: Whether to enable [Sticky Sender](https://www.twilio.com/docs/sms/services#sticky-sender) on the Service instance.
+                  type: boolean
+                SynchronousValidation:
+                  description: Reserved.
+                  type: boolean
+                UseInboundWebhookOnNumber:
+                  description: A boolean value that indicates either the webhook url configured on the phone number will be used or `inbound_request_url`/`fallback_url` url will be called when a message is received from the phone number. If this field is enabled then the webhook url defined on the phone number will override the `inbound_request_url`/`fallback_url` defined for the Messaging Service.
+                  type: boolean
+                Usecase:
+                  description: "A string that describes the scenario in which the Messaging Service will be used. Examples: [notification, marketing, verification, poll ..]."
+                  type: string
+                ValidityPeriod:
+                  description: How long, in seconds, messages sent from the Service are valid. Can be an integer from `1` to `14,400`.
+                  type: integer
+              required:
+                - FriendlyName
+              title: CreateServiceRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: list
+  /v1/Services/PreregisteredUsa2p:
+    description: Resource to associate preregistered campaign with Messaging Service.
+    post:
+      description: ""
+      operationId: CreateExternalCampaign
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CampaignId:
+                  description: ID of the preregistered campaign.
+                  type: string
+                MessagingServiceSid:
+                  description: The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/services/api) that the resource is associated with.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^MG[0-9a-fA-F]{32}$
+                  type: string
+              required:
+                - CampaignId
+                - MessagingServiceSid
+              title: CreateExternalCampaignRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.external_campaign"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - campaign_id
+        - messaging_service_sid
+      mountName: external_campaign
+      pathType: list
+  /v1/Services/Usecases:
+    description: Use Case resource. Fetch possible use cases for a Messaging Service.
+    get:
+      description: ""
+      operationId: FetchUsecase
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.usecase"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - usecases
+      pathType: list
+  "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p":
+    description: A service for (fetch/create/delete) A2P Campaign for a Messaging Service
+    get:
+      description: ""
+      operationId: ListUsAppToPerson
+      parameters:
+        - description: The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/services/api) to fetch the resource from.
+          in: path
+          name: MessagingServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  compliance:
+                    items:
+                      $ref: "#/components/schemas/messaging.v1.service.us_app_to_person"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListUsAppToPersonResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateUsAppToPerson
+      parameters:
+        - description: The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/services/api) to create the resources from.
+          in: path
+          name: MessagingServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                BrandRegistrationSid:
+                  description: A2P Brand Registration SID
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^BN[0-9a-fA-F]{32}$
+                  type: string
+                Description:
+                  description: "A short description of what this SMS campaign does. Min length: 40 characters. Max length: 4096 characters."
+                  type: string
+                HasEmbeddedLinks:
+                  description: Indicates that this SMS campaign will send messages that contain links.
+                  type: boolean
+                HasEmbeddedPhone:
+                  description: Indicates that this SMS campaign will send messages that contain phone numbers.
+                  type: boolean
+                HelpKeywords:
+                  description: End users should be able to text in a keyword to receive help. Those keywords must be provided as part of the campaign registration request. This field is required if managing help keywords yourself (i.e. not using Twilio's Default or Advanced Opt Out features). Values must be alphanumeric. 255 character maximum.
+                  items:
+                    type: string
+                  type: array
+                HelpMessage:
+                  description: When customers receive the help keywords from their end users, Twilio customers are expected to send back an auto-generated response; this may include the brand name and additional support contact information. This field is required if managing help keywords yourself (i.e. not using Twilio's Default or Advanced Opt Out features). 20 character minimum. 320 character maximum.
+                  type: string
+                MessageFlow:
+                  description: Required for all Campaigns. Details around how a consumer opts-in to their campaign, therefore giving consent to receive their messages. If multiple opt-in methods can be used for the same campaign, they must all be listed. 40 character minimum. 2048 character maximum.
+                  type: string
+                MessageSamples:
+                  description: Message samples, at least 1 and up to 5 sample messages (at least 2 for sole proprietor), >=20 chars, <=1024 chars each.
+                  items:
+                    type: string
+                  type: array
+                OptInKeywords:
+                  description: If end users can text in a keyword to start receiving messages from this campaign, those keywords must be provided. This field is required if end users can text in a keyword to start receiving messages from this campaign. Values must be alphanumeric. 255 character maximum.
+                  items:
+                    type: string
+                  type: array
+                OptInMessage:
+                  description: If end users can text in a keyword to start receiving messages from this campaign, the auto-reply messages sent to the end users must be provided. The opt-in response should include the Brand name, confirmation of opt-in enrollment to a recurring message campaign, how to get help, and clear description of how to opt-out. This field is required if end users can text in a keyword to start receiving messages from this campaign. 20 character minimum. 320 character maximum.
+                  type: string
+                OptOutKeywords:
+                  description: End users should be able to text in a keyword to stop receiving messages from this campaign. Those keywords must be provided. This field is required if managing opt out keywords yourself (i.e. not using Twilio's Default or Advanced Opt Out features). Values must be alphanumeric. 255 character maximum.
+                  items:
+                    type: string
+                  type: array
+                OptOutMessage:
+                  description: Upon receiving the opt-out keywords from the end users, Twilio customers are expected to send back an auto-generated response, which must provide acknowledgment of the opt-out request and confirmation that no further messages will be sent. It is also recommended that these opt-out messages include the brand name. This field is required if managing opt out keywords yourself (i.e. not using Twilio's Default or Advanced Opt Out features). 20 character minimum. 320 character maximum.
+                  type: string
+                UsAppToPersonUsecase:
+                  description: "A2P Campaign Use Case. Examples: [ 2FA, EMERGENCY, MARKETING..]"
+                  type: string
+              required:
+                - BrandRegistrationSid
+                - Description
+                - MessageFlow
+                - MessageSamples
+                - UsAppToPersonUsecase
+                - HasEmbeddedLinks
+                - HasEmbeddedPhone
+              title: CreateUsAppToPersonRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.us_app_to_person"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - brand_registration_sid
+        - campaign_status
+        - date_created
+      mountName: us_app_to_person
+      parent: /Services/{Sid}
+      pathType: list
+  "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/Usecases":
+    description: Messaging Service Use Case resource. Fetch possible use cases for service. The Use Cases API returns an empty list if there is an issue with the customer's A2P brand registration. This Brand cannot register any campaign use cases. Customers are requested to contact support with their A2P brand information.
+    get:
+      description: ""
+      operationId: FetchUsAppToPersonUsecase
+      parameters:
+        - description: The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/services/api) to fetch the resource from.
+          in: path
+          name: MessagingServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The unique string to identify the A2P brand.
+          in: query
+          name: BrandRegistrationSid
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BN[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.us_app_to_person_usecase"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - us_app_to_person_usecases
+      mountName: us_app_to_person_usecases
+      parent: /Services/{Sid}
+      pathType: list
+  "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteUsAppToPerson
+      parameters:
+        - description: The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/services/api) to delete the resource from.
+          in: path
+          name: MessagingServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The SID of the US A2P Compliance resource to delete `QE2c6890da8086d771620e9b13fadeba0b`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^QE[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: A service for (fetch/create/delete) A2P Campaign for a Messaging Service
+    get:
+      description: ""
+      operationId: FetchUsAppToPerson
+      parameters:
+        - description: The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/services/api) to fetch the resource from.
+          in: path
+          name: MessagingServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The SID of the US A2P Compliance resource to fetch `QE2c6890da8086d771620e9b13fadeba0b`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^QE[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.us_app_to_person"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - brand_registration_sid
+        - campaign_status
+        - date_created
+      mountName: us_app_to_person
+      parent: /Services/{Sid}
+      pathType: instance
+  "/v1/Services/{ServiceSid}/AlphaSenders":
+    description: A Messaging Service resource to add, fetch or remove an Alpha Sender ID from a Messaging Service.
+    get:
+      description: ""
+      operationId: ListAlphaSender
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to read the resources from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  alpha_senders:
+                    items:
+                      $ref: "#/components/schemas/messaging.v1.service.alpha_sender"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListAlphaSenderResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateAlphaSender
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to create the resource under.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AlphaSender:
+                  description: The Alphanumeric Sender ID string. Can be up to 11 characters long. Valid characters are A-Z, a-z, 0-9, space, hyphen `-`, plus `+`, underscore `_` and ampersand `&`. This value cannot contain only numbers.
+                  type: string
+              required:
+                - AlphaSender
+              title: CreateAlphaSenderRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.alpha_sender"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - alpha_sender
+      parent: /Services/{Sid}
+      pathType: list
+  "/v1/Services/{ServiceSid}/AlphaSenders/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteAlphaSender
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to delete the resource from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The SID of the AlphaSender resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: A Messaging Service resource to add, fetch or remove an Alpha Sender ID from a Messaging Service.
+    get:
+      description: ""
+      operationId: FetchAlphaSender
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to fetch the resource from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The SID of the AlphaSender resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.alpha_sender"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - alpha_sender
+      parent: /Services/{Sid}
+      pathType: instance
+  "/v1/Services/{ServiceSid}/PhoneNumbers":
+    description: A Messaging Service resource to add, fetch or remove phone numbers from a Messaging Service.
+    get:
+      description: ""
+      operationId: ListPhoneNumber
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to read the resources from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  phone_numbers:
+                    items:
+                      $ref: "#/components/schemas/messaging.v1.service.phone_number"
+                    type: array
+                title: ListPhoneNumberResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreatePhoneNumber
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to create the resource under.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                PhoneNumberSid:
+                  description: The SID of the Phone Number being added to the Service.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^PN[0-9a-fA-F]{32}$
+                  type: string
+              required:
+                - PhoneNumberSid
+              title: CreatePhoneNumberRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.phone_number"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - phone_number
+        - country_code
+      parent: /Services/{Sid}
+      pathType: list
+  "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}":
+    delete:
+      description: ""
+      operationId: DeletePhoneNumber
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to delete the resource from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The SID of the PhoneNumber resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: A Messaging Service resource to add, fetch or remove phone numbers from a Messaging Service.
+    get:
+      description: ""
+      operationId: FetchPhoneNumber
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to fetch the resource from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The SID of the PhoneNumber resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.phone_number"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - phone_number
+        - country_code
+      parent: /Services/{Sid}
+      pathType: instance
+  "/v1/Services/{ServiceSid}/ShortCodes":
+    description: A Messaging Service resource to add, fetch or remove short code numbers from a Messaging Service.
+    get:
+      description: ""
+      operationId: ListShortCode
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to read the resources from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  short_codes:
+                    items:
+                      $ref: "#/components/schemas/messaging.v1.service.short_code"
+                    type: array
+                title: ListShortCodeResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateShortCode
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to create the resource under.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ShortCodeSid:
+                  description: The SID of the ShortCode resource being added to the Service.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^SC[0-9a-fA-F]{32}$
+                  type: string
+              required:
+                - ShortCodeSid
+              title: CreateShortCodeRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.short_code"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - short_code
+        - country_code
+      parent: /Services/{Sid}
+      pathType: list
+  "/v1/Services/{ServiceSid}/ShortCodes/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteShortCode
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to delete the resource from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The SID of the ShortCode resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: A Messaging Service resource to add, fetch or remove short code numbers from a Messaging Service.
+    get:
+      description: ""
+      operationId: FetchShortCode
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) to fetch the resource from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+        - description: The SID of the ShortCode resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service.short_code"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - short_code
+        - country_code
+      parent: /Services/{Sid}
+      pathType: instance
+  "/v1/Services/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteService
+      parameters:
+        - description: The SID of the Service resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: A Messaging Service resource to create, fetch, update, delete or add/remove senders from Messaging Services.
+    get:
+      description: ""
+      operationId: FetchService
+      parameters:
+        - description: The SID of the Service resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateService
+      parameters:
+        - description: The SID of the Service resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^MG[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AreaCodeGeomatch:
+                  description: Whether to enable [Area Code Geomatch](https://www.twilio.com/docs/sms/services#area-code-geomatch) on the Service Instance.
+                  type: boolean
+                FallbackMethod:
+                  description: "The HTTP method we should use to call `fallback_url`. Can be: `GET` or `POST`."
+                  enum:
+                    - HEAD
+                    - GET
+                    - POST
+                    - PATCH
+                    - PUT
+                    - DELETE
+                  format: http-method
+                  type: string
+                FallbackToLongCode:
+                  description: Whether to enable [Fallback to Long Code](https://www.twilio.com/docs/sms/services#fallback-to-long-code) for messages sent through the Service instance.
+                  type: boolean
+                FallbackUrl:
+                  description: The URL that we call using `fallback_method` if an error occurs while retrieving or executing the TwiML from the Inbound Request URL. If the `use_inbound_webhook_on_number` field is enabled then the webhook url defined on the phone number will override the `fallback_url` defined for the Messaging Service.
+                  format: uri
+                  type: string
+                FriendlyName:
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
+                  type: string
+                InboundMethod:
+                  description: The HTTP method we should use to call `inbound_request_url`. Can be `GET` or `POST` and the default is `POST`.
+                  enum:
+                    - HEAD
+                    - GET
+                    - POST
+                    - PATCH
+                    - PUT
+                    - DELETE
+                  format: http-method
+                  type: string
+                InboundRequestUrl:
+                  description: The URL we call using `inbound_method` when a message is received by any phone number or short code in the Service. When this property is `null`, receiving inbound messages is disabled. All messages sent to the Twilio phone number or short code will not be logged and received on the Account. If the `use_inbound_webhook_on_number` field is enabled then the webhook url defined on the phone number will override the `inbound_request_url` defined for the Messaging Service.
+                  format: uri
+                  type: string
+                MmsConverter:
+                  description: Whether to enable the [MMS Converter](https://www.twilio.com/docs/sms/services#mms-converter) for messages sent through the Service instance.
+                  type: boolean
+                ScanMessageContent:
+                  $ref: "#/components/schemas/service_enum_scan_message_content"
+                  description: Reserved.
+                  type: string
+                SmartEncoding:
+                  description: Whether to enable [Smart Encoding](https://www.twilio.com/docs/sms/services#smart-encoding) for messages sent through the Service instance.
+                  type: boolean
+                StatusCallback:
+                  description: The URL we should call to [pass status updates](https://www.twilio.com/docs/sms/api/message-resource#message-status-values) about message delivery.
+                  format: uri
+                  type: string
+                StickySender:
+                  description: Whether to enable [Sticky Sender](https://www.twilio.com/docs/sms/services#sticky-sender) on the Service instance.
+                  type: boolean
+                SynchronousValidation:
+                  description: Reserved.
+                  type: boolean
+                UseInboundWebhookOnNumber:
+                  description: A boolean value that indicates either the webhook url configured on the phone number will be used or `inbound_request_url`/`fallback_url` url will be called when a message is received from the phone number. If this field is enabled then the webhook url defined on the phone number will override the `inbound_request_url`/`fallback_url` defined for the Messaging Service.
+                  type: boolean
+                Usecase:
+                  description: "A string that describes the scenario in which the Messaging Service will be used. Examples: [notification, marketing, verification, poll ..]"
+                  type: string
+                ValidityPeriod:
+                  description: How long, in seconds, messages sent from the Service are valid. Can be an integer from `1` to `14,400`.
+                  type: integer
+              title: UpdateServiceRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.service"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: instance
+  /v1/Tollfree/Verifications:
+    description: A Messaging resource to add and fetch Tollfree Verifications.
+    get:
+      description: ""
+      operationId: ListTollfreeVerification
+      parameters:
+        - description: The SID of the Phone Number associated with the Tollfree Verification.
+          in: query
+          name: TollfreePhoneNumberSid
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^PN[0-9a-fA-F]{32}$
+            type: string
+        - description: The compliance status of the Tollfree Verification record.
+          in: query
+          name: Status
+          schema:
+            $ref: "#/components/schemas/tollfree_verification_enum_status"
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  verifications:
+                    items:
+                      $ref: "#/components/schemas/messaging.v1.tollfree_verification"
+                    type: array
+                title: ListTollfreeVerificationResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateTollfreeVerification
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AdditionalInformation:
+                  description: Additional information to be provided for verification.
+                  type: string
+                BusinessCity:
+                  description: The city of the business or organization using the Tollfree number.
+                  type: string
+                BusinessContactEmail:
+                  description: The email address of the contact for the business or organization using the Tollfree number.
+                  type: string
+                BusinessContactFirstName:
+                  description: The first name of the contact for the business or organization using the Tollfree number.
+                  type: string
+                BusinessContactLastName:
+                  description: The last name of the contact for the business or organization using the Tollfree number.
+                  type: string
+                BusinessContactPhone:
+                  description: The phone number of the contact for the business or organization using the Tollfree number.
+                  format: phone-number
+                  type: string
+                BusinessCountry:
+                  description: The country of the business or organization using the Tollfree number.
+                  type: string
+                BusinessName:
+                  description: The name of the business or organization using the Tollfree number.
+                  type: string
+                BusinessPostalCode:
+                  description: The postal code of the business or organization using the Tollfree number.
+                  type: string
+                BusinessStateProvinceRegion:
+                  description: The state/province/region of the business or organization using the Tollfree number.
+                  type: string
+                BusinessStreetAddress:
+                  description: The address of the business or organization using the Tollfree number.
+                  type: string
+                BusinessStreetAddress2:
+                  description: The address of the business or organization using the Tollfree number.
+                  type: string
+                BusinessWebsite:
+                  description: The website of the business or organization using the Tollfree number.
+                  type: string
+                CustomerProfileSid:
+                  description: Customer's Profile Bundle BundleSid.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^BU[0-9a-fA-F]{32}$
+                  type: string
+                ExternalReferenceId:
+                  description: An optional external reference ID supplied by customer and echoed back on status retrieval.
+                  type: string
+                MessageVolume:
+                  description: Estimate monthly volume of messages from the Tollfree Number.
+                  type: string
+                NotificationEmail:
+                  description: The email address to receive the notification about the verification result. .
+                  type: string
+                OptInImageUrls:
+                  description: Link to an image that shows the opt-in workflow. Multiple images allowed and must be a publicly hosted URL.
+                  items:
+                    type: string
+                  type: array
+                OptInType:
+                  $ref: "#/components/schemas/tollfree_verification_enum_opt_in_type"
+                  description: Describe how a user opts-in to text messages.
+                  type: string
+                ProductionMessageSample:
+                  description: An example of message content, i.e. a sample message.
+                  type: string
+                TollfreePhoneNumberSid:
+                  description: The SID of the Phone Number associated with the Tollfree Verification.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^PN[0-9a-fA-F]{32}$
+                  type: string
+                UseCaseCategories:
+                  description: The category of the use case for the Tollfree Number. List as many are applicable..
+                  items:
+                    type: string
+                  type: array
+                UseCaseSummary:
+                  description: Use this to further explain how messaging is used by the business or organization.
+                  type: string
+              required:
+                - BusinessName
+                - BusinessWebsite
+                - NotificationEmail
+                - UseCaseCategories
+                - UseCaseSummary
+                - ProductionMessageSample
+                - OptInImageUrls
+                - OptInType
+                - MessageVolume
+                - TollfreePhoneNumberSid
+              title: CreateTollfreeVerificationRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.tollfree_verification"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - date_created
+      mountName: tollfree_verifications
+      pathType: list
+  "/v1/Tollfree/Verifications/{Sid}":
+    description: A Messaging resource to add and fetch Tollfree Verifications.
+    get:
+      description: ""
+      operationId: FetchTollfreeVerification
+      parameters:
+        - description: The unique string to identify Tollfree Verification.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^HH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.tollfree_verification"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateTollfreeVerification
+      parameters:
+        - description: The unique string to identify Tollfree Verification.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^HH[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AdditionalInformation:
+                  description: Additional information to be provided for verification.
+                  type: string
+                BusinessCity:
+                  description: The city of the business or organization using the Tollfree number.
+                  type: string
+                BusinessContactEmail:
+                  description: The email address of the contact for the business or organization using the Tollfree number.
+                  type: string
+                BusinessContactFirstName:
+                  description: The first name of the contact for the business or organization using the Tollfree number.
+                  type: string
+                BusinessContactLastName:
+                  description: The last name of the contact for the business or organization using the Tollfree number.
+                  type: string
+                BusinessContactPhone:
+                  description: The phone number of the contact for the business or organization using the Tollfree number.
+                  format: phone-number
+                  type: string
+                BusinessCountry:
+                  description: The country of the business or organization using the Tollfree number.
+                  type: string
+                BusinessName:
+                  description: The name of the business or organization using the Tollfree number.
+                  type: string
+                BusinessPostalCode:
+                  description: The postal code of the business or organization using the Tollfree number.
+                  type: string
+                BusinessStateProvinceRegion:
+                  description: The state/province/region of the business or organization using the Tollfree number.
+                  type: string
+                BusinessStreetAddress:
+                  description: The address of the business or organization using the Tollfree number.
+                  type: string
+                BusinessStreetAddress2:
+                  description: The address of the business or organization using the Tollfree number.
+                  type: string
+                BusinessWebsite:
+                  description: The website of the business or organization using the Tollfree number.
+                  type: string
+                MessageVolume:
+                  description: Estimate monthly volume of messages from the Tollfree Number.
+                  type: string
+                NotificationEmail:
+                  description: The email address to receive the notification about the verification result. .
+                  type: string
+                OptInImageUrls:
+                  description: Link to an image that shows the opt-in workflow. Multiple images allowed and must be a publicly hosted URL.
+                  items:
+                    type: string
+                  type: array
+                OptInType:
+                  $ref: "#/components/schemas/tollfree_verification_enum_opt_in_type"
+                  description: Describe how a user opts-in to text messages.
+                  type: string
+                ProductionMessageSample:
+                  description: An example of message content, i.e. a sample message.
+                  type: string
+                UseCaseCategories:
+                  description: The category of the use case for the Tollfree Number. List as many are applicable..
+                  items:
+                    type: string
+                  type: array
+                UseCaseSummary:
+                  description: Use this to further explain how messaging is used by the business or organization.
+                  type: string
+              title: UpdateTollfreeVerificationRequest
+              type: object
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.tollfree_verification"
+          description: Accepted
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - date_created
+      mountName: tollfree_verifications
+      pathType: instance
+  /v1/a2p/BrandRegistrations:
+    description: A Messaging Service resource to add and fetch Brand Registrations.
+    get:
+      description: ""
+      operationId: ListBrandRegistrations
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/messaging.v1.brand_registrations"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListBrandRegistrationsResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateBrandRegistrations
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                A2PProfileBundleSid:
+                  description: A2P Messaging Profile Bundle Sid.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^BU[0-9a-fA-F]{32}$
+                  type: string
+                BrandType:
+                  description: 'Type of brand being created. One of: "STANDARD", "SOLE_PROPRIETOR". SOLE_PROPRIETOR is for low volume, SOLE_PROPRIETOR use cases. STANDARD is for all other use cases.'
+                  type: string
+                CustomerProfileBundleSid:
+                  description: Customer Profile Bundle Sid.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^BU[0-9a-fA-F]{32}$
+                  type: string
+                Mock:
+                  description: A boolean that specifies whether brand should be a mock or not. If true, brand will be registered as a mock brand. Defaults to false if no value is provided.
+                  type: boolean
+                SkipAutomaticSecVet:
+                  description: A flag to disable automatic secondary vetting for brands which it would otherwise be done.
+                  type: boolean
+              required:
+                - CustomerProfileBundleSid
+                - A2PProfileBundleSid
+              title: CreateBrandRegistrationsRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.brand_registrations"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - date_created
+      pathType: list
+  "/v1/a2p/BrandRegistrations/{BrandRegistrationSid}/SmsOtp":
+    description: A Messaging Service resource to retry OTP verification for Sole Proprietor Brand Registrations.
+    post:
+      description: ""
+      operationId: CreateBrandRegistrationOtp
+      parameters:
+        - description: Brand Registration Sid of Sole Proprietor Brand.
+          in: path
+          name: BrandRegistrationSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BN[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.brand_registrations.brand_registration_otp"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - brand_registration_sid
+      mountName: brand_registration_otps
+      parent: /a2p/BrandRegistrations/{Sid}
+      pathType: list
+  "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings":
+    description: A Messaging Service resource to add and get Brand Vettings.
+    get:
+      description: ""
+      operationId: ListBrandVetting
+      parameters:
+        - description: The SID of the Brand Registration resource of the vettings to read .
+          in: path
+          name: BrandSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BN[0-9a-fA-F]{32}$
+            type: string
+        - description: The third-party provider of the vettings to read
+          in: query
+          name: VettingProvider
+          schema:
+            $ref: "#/components/schemas/brand_vetting_enum_vetting_provider"
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page index. This value is simply for client state.
+          in: query
+          name: Page
+          schema:
+            minimum: 0
+            type: integer
+        - description: The page token. This is provided by the API.
+          in: query
+          name: PageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/messaging.v1.brand_registrations.brand_vetting"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        nullable: true
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListBrandVettingResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateBrandVetting
+      parameters:
+        - description: The SID of the Brand Registration resource of the vettings to create .
+          in: path
+          name: BrandSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BN[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                VettingId:
+                  description: The unique ID of the vetting
+                  type: string
+                VettingProvider:
+                  $ref: "#/components/schemas/brand_vetting_enum_vetting_provider"
+                  description: The third-party provider of the vettings to create .
+                  type: string
+              required:
+                - VettingProvider
+              title: CreateBrandVettingRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.brand_registrations.brand_vetting"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - brand_sid
+        - brand_vetting_sid
+        - date_created
+        - date_updated
+        - vetting_status
+        - vetting_class
+      mountName: brand_vettings
+      parent: /a2p/BrandRegistrations/{Sid}
+      pathType: list
+  "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings/{BrandVettingSid}":
+    description: A Messaging Service resource to add and get Brand Vettings.
+    get:
+      description: ""
+      operationId: FetchBrandVetting
+      parameters:
+        - description: The SID of the Brand Registration resource of the vettings to read .
+          in: path
+          name: BrandSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BN[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio SID of the third-party vetting record.
+          in: path
+          name: BrandVettingSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VT[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.brand_registrations.brand_vetting"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - brand_sid
+        - brand_vetting_sid
+        - date_created
+        - date_updated
+        - vetting_status
+        - vetting_class
+      mountName: brand_vettings
+      parent: /a2p/BrandRegistrations/{Sid}
+      pathType: instance
+  "/v1/a2p/BrandRegistrations/{Sid}":
+    description: A Messaging Service resource to add and fetch Brand Registrations.
+    get:
+      description: ""
+      operationId: FetchBrandRegistrations
+      parameters:
+        - description: The SID of the Brand Registration resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BN[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.brand_registrations"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateBrandRegistrations
+      parameters:
+        - description: The SID of the Brand Registration resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BN[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/messaging.v1.brand_registrations"
+          description: Accepted
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://messaging.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - date_created
+      pathType: instance
+components:
+  schemas:
+    brand_registrations_enum_brand_feedback:
+      enum:
+        - TAX_ID
+        - STOCK_SYMBOL
+        - NONPROFIT
+        - GOVERNMENT_ENTITY
+        - OTHERS
+      type: string
+    brand_registrations_enum_identity_status:
+      enum:
+        - SELF_DECLARED
+        - UNVERIFIED
+        - VERIFIED
+        - VETTED_VERIFIED
+      type: string
+    brand_registrations_enum_status:
+      enum:
+        - PENDING
+        - APPROVED
+        - FAILED
+        - IN_REVIEW
+        - DELETED
+      type: string
+    brand_vetting_enum_vetting_provider:
+      enum:
+        - campaign-verify
+      type: string
+    messaging.v1.brand_registrations:
+      properties:
+        a2p_profile_bundle_sid:
+          description: A2P Messaging Profile Bundle BundleSid.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^BU[0-9a-fA-F]{32}$
+          type: string
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Brand Registration resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        brand_feedback:
+          description: Feedback on how to improve brand score
+          items:
+            $ref: "#/components/schemas/brand_registrations_enum_brand_feedback"
+            type: string
+          nullable: true
+          type: array
+        brand_score:
+          description: The secondary vetting score if it was done. Otherwise, it will be the brand score if it's returned from TCR. It may be null if no score is available.
+          nullable: true
+          type: integer
+        brand_type:
+          description: 'Type of brand. One of: "STANDARD", "SOLE_PROPRIETOR". SOLE_PROPRIETOR is for the low volume, SOLE_PROPRIETOR campaign use case. There can only be one SOLE_PROPRIETOR campaign created per SOLE_PROPRIETOR brand. STANDARD is for all other campaign use cases. Multiple campaign use cases can be created per STANDARD brand.'
+          nullable: true
+          type: string
+        customer_profile_bundle_sid:
+          description: A2P Messaging Profile Bundle BundleSid.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^BU[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        failure_reason:
+          description: A reason why brand registration has failed. Only applicable when status is FAILED.
+          nullable: true
+          type: string
+        government_entity:
+          description: Identified as a government entity
+          nullable: true
+          type: boolean
+        identity_status:
+          $ref: "#/components/schemas/brand_registrations_enum_identity_status"
+          description: When a brand is registered, TCR will attempt to verify the identity of the brand based on the supplied information.
+          nullable: true
+          type: string
+        links:
+          format: uri-map
+          nullable: true
+          type: object
+        mock:
+          description: A boolean that specifies whether brand should be a mock or not. If true, brand will be registered as a mock brand. Defaults to false if no value is provided.
+          nullable: true
+          type: boolean
+        russell_3000:
+          description: Publicly traded company identified in the Russell 3000 Index
+          nullable: true
+          type: boolean
+        sid:
+          description: The unique string to identify Brand Registration.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^BN[0-9a-fA-F]{32}$
+          type: string
+        skip_automatic_sec_vet:
+          description: A flag to disable automatic secondary vetting for brands which it would otherwise be done.
+          nullable: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/brand_registrations_enum_status"
+          description: Brand Registration status. One of "PENDING", "APPROVED", "FAILED", "IN_REVIEW", "DELETED".
+          nullable: true
+          type: string
+        tax_exempt_status:
+          description: Nonprofit organization tax-exempt status per section 501 of the U.S. tax code.
+          nullable: true
+          type: string
+        tcr_id:
+          description: Campaign Registry (TCR) Brand ID. Assigned only after successful brand registration.
+          nullable: true
+          type: string
+        url:
+          description: The absolute URL of the Brand Registration resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.brand_registrations.brand_registration_otp:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Brand Registration resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        brand_registration_sid:
+          description: The unique string to identify Brand Registration of Sole Proprietor Brand
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^BN[0-9a-fA-F]{32}$
+          type: string
+      type: object
+    messaging.v1.brand_registrations.brand_vetting:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the vetting record.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        brand_sid:
+          description: The unique string to identify Brand Registration.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^BN[0-9a-fA-F]{32}$
+          type: string
+        brand_vetting_sid:
+          description: The Twilio SID of the third-party vetting record.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^VT[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        url:
+          description: The absolute URL of the Brand Vetting resource.
+          format: uri
+          nullable: true
+          type: string
+        vetting_class:
+          description: The type of vetting that has been conducted. One of “STANDARD” (Aegis) or “POLITICAL” (Campaign Verify).
+          nullable: true
+          type: string
+        vetting_id:
+          description: The unique identifier of the vetting from the third-party provider.
+          nullable: true
+          type: string
+        vetting_provider:
+          $ref: "#/components/schemas/brand_vetting_enum_vetting_provider"
+          description: The third-party provider that has conducted the vetting. One of “CampaignVerify” (Campaign Verify tokens) or “AEGIS” (Secondary Vetting).
+          nullable: true
+          type: string
+        vetting_status:
+          description: The status of the import vetting attempt. One of “PENDING,” “SUCCESS,” or “FAILED”.
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.deactivation:
+      properties:
+        redirect_to:
+          description: Returns an authenticated url that redirects to a file containing the deactivated numbers for the requested day. This url is valid for up to two minutes.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.domain_cert_v4:
+      properties:
+        cert_in_validation:
+          description: Optional JSON field describing the status and upload date of a new certificate in the process of validation
+          nullable: true
+        certificate_sid:
+          description: The unique string that we created to identify this Certificate resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^CW[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: Date that this Domain was registered to the Twilio platform to create a new Domain object.
+          format: date-time
+          nullable: true
+          type: string
+        date_expires:
+          description: Date that the private certificate associated with this domain expires. You will need to update the certificate before that date to ensure your shortened links will continue to work.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: Date that this Domain was last updated.
+          format: date-time
+          nullable: true
+          type: string
+        domain_name:
+          description: Full url path for this domain.
+          format: uri
+          nullable: true
+          type: string
+        domain_sid:
+          description: The unique string that we created to identify the Domain resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^DN[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.domain_config:
+      properties:
+        callback_url:
+          description: URL to receive click events to your webhook whenever the recipients click on the shortened links.
+          format: uri
+          nullable: true
+          type: string
+        config_sid:
+          description: The unique string that we created to identify the Domain config (prefix ZK).
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^ZK[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: Date this Domain Config was created.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: Date that this Domain Config was last updated.
+          format: date-time
+          nullable: true
+          type: string
+        domain_sid:
+          description: The unique string that we created to identify the Domain resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^DN[0-9a-fA-F]{32}$
+          type: string
+        fallback_url:
+          description: Any requests we receive to this domain that do not match an existing shortened message will be redirected to the fallback url. These will likely be either expired messages, random misdirected traffic, or intentional scraping.
+          format: uri
+          nullable: true
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.domain_config_messaging_service:
+      properties:
+        callback_url:
+          description: URL to receive click events to your webhook whenever the recipients click on the shortened links.
+          format: uri
+          nullable: true
+          type: string
+        config_sid:
+          description: The unique string that we created to identify the Domain config (prefix ZK).
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^ZK[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: Date this Domain Config was created.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: Date that this Domain Config was last updated.
+          format: date-time
+          nullable: true
+          type: string
+        domain_sid:
+          description: The unique string that we created to identify the Domain resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^DN[0-9a-fA-F]{32}$
+          type: string
+        fallback_url:
+          description: Any requests we receive to this domain that do not match an existing shortened message will be redirected to the fallback url. These will likely be either expired messages, random misdirected traffic, or intentional scraping.
+          format: uri
+          nullable: true
+          type: string
+        messaging_service_sid:
+          description: The unique string that identifies the messaging service
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.external_campaign:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the Campaign belongs to.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        campaign_id:
+          description: ID of the preregistered campaign.
+          nullable: true
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        messaging_service_sid:
+          description: The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/services/api) that the resource is associated with.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          description: The unique string that identifies a US A2P Compliance resource `QE2c6890da8086d771620e9b13fadeba0b`.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^QE[0-9a-fA-F]{32}$
+          type: string
+      type: object
+    messaging.v1.linkshortening_messaging_service:
+      properties:
+        domain_sid:
+          description: The unique string identifies the domain resource
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^DN[0-9a-fA-F]{32}$
+          type: string
+        messaging_service_sid:
+          description: The unique string that identifies the messaging service
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.service:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        area_code_geomatch:
+          description: Whether to enable [Area Code Geomatch](https://www.twilio.com/docs/sms/services#area-code-geomatch) on the Service Instance.
+          nullable: true
+          type: boolean
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        fallback_method:
+          description: "The HTTP method we use to call `fallback_url`. Can be: `GET` or `POST`."
+          enum:
+            - HEAD
+            - GET
+            - POST
+            - PATCH
+            - PUT
+            - DELETE
+          format: http-method
+          nullable: true
+          type: string
+        fallback_to_long_code:
+          description: Whether to enable [Fallback to Long Code](https://www.twilio.com/docs/sms/services#fallback-to-long-code) for messages sent through the Service instance.
+          nullable: true
+          type: boolean
+        fallback_url:
+          description: The URL that we call using `fallback_method` if an error occurs while retrieving or executing the TwiML from the Inbound Request URL. If the `use_inbound_webhook_on_number` field is enabled then the webhook url defined on the phone number will override the `fallback_url` defined for the Messaging Service.
+          format: uri
+          nullable: true
+          type: string
+        friendly_name:
+          description: The string that you assigned to describe the resource.
+          nullable: true
+          type: string
+        inbound_method:
+          description: The HTTP method we use to call `inbound_request_url`. Can be `GET` or `POST`.
+          enum:
+            - HEAD
+            - GET
+            - POST
+            - PATCH
+            - PUT
+            - DELETE
+          format: http-method
+          nullable: true
+          type: string
+        inbound_request_url:
+          description: The URL we call using `inbound_method` when a message is received by any phone number or short code in the Service. When this property is `null`, receiving inbound messages is disabled. All messages sent to the Twilio phone number or short code will not be logged and received on the Account. If the `use_inbound_webhook_on_number` field is enabled then the webhook url defined on the phone number will override the `inbound_request_url` defined for the Messaging Service.
+          format: uri
+          nullable: true
+          type: string
+        links:
+          description: The absolute URLs of related resources.
+          format: uri-map
+          nullable: true
+          type: object
+        mms_converter:
+          description: Whether to enable the [MMS Converter](https://www.twilio.com/docs/sms/services#mms-converter) for messages sent through the Service instance.
+          nullable: true
+          type: boolean
+        scan_message_content:
+          $ref: "#/components/schemas/service_enum_scan_message_content"
+          description: Reserved.
+          nullable: true
+          type: string
+        sid:
+          description: The unique string that we created to identify the Service resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        smart_encoding:
+          description: Whether to enable [Smart Encoding](https://www.twilio.com/docs/sms/services#smart-encoding) for messages sent through the Service instance.
+          nullable: true
+          type: boolean
+        status_callback:
+          description: The URL we call to [pass status updates](https://www.twilio.com/docs/sms/api/message-resource#message-status-values) about message delivery.
+          format: uri
+          nullable: true
+          type: string
+        sticky_sender:
+          description: Whether to enable [Sticky Sender](https://www.twilio.com/docs/sms/services#sticky-sender) on the Service instance.
+          nullable: true
+          type: boolean
+        synchronous_validation:
+          description: Reserved.
+          nullable: true
+          type: boolean
+        url:
+          description: The absolute URL of the Service resource.
+          format: uri
+          nullable: true
+          type: string
+        us_app_to_person_registered:
+          description: Whether US A2P campaign is registered for this Service.
+          nullable: true
+          type: boolean
+        use_inbound_webhook_on_number:
+          description: A boolean value that indicates either the webhook url configured on the phone number will be used or `inbound_request_url`/`fallback_url` url will be called when a message is received from the phone number. If this field is enabled then the webhook url defined on the phone number will override the `inbound_request_url`/`fallback_url` defined for the Messaging Service.
+          nullable: true
+          type: boolean
+        usecase:
+          description: "A string that describes the scenario in which the Messaging Service will be used. Examples: [notification, marketing, verification, poll ..]"
+          nullable: true
+          type: string
+        validity_period:
+          description: How long, in seconds, messages sent from the Service are valid. Can be an integer from `1` to `14,400`.
+          nullable: true
+          type: integer
+      type: object
+    messaging.v1.service.alpha_sender:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the AlphaSender resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        alpha_sender:
+          description: The Alphanumeric Sender ID string.
+          nullable: true
+          type: string
+        capabilities:
+          description: "An array of values that describe whether the number can receive calls or messages. Can be: `SMS`."
+          items:
+            type: string
+          nullable: true
+          type: array
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        service_sid:
+          description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the resource is associated with.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          description: The unique string that we created to identify the AlphaSender resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AI[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The absolute URL of the AlphaSender resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.service.phone_number:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the PhoneNumber resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        capabilities:
+          description: "An array of values that describe whether the number can receive calls or messages. Can be: `Voice`, `SMS`, and `MMS`."
+          items:
+            type: string
+          nullable: true
+          type: array
+        country_code:
+          description: The 2-character [ISO Country Code](https://www.iso.org/iso-3166-country-codes.html) of the number.
+          nullable: true
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        phone_number:
+          description: The phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
+          format: phone-number
+          nullable: true
+          type: string
+        service_sid:
+          description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the resource is associated with.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          description: The unique string that we created to identify the PhoneNumber resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^PN[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The absolute URL of the PhoneNumber resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.service.short_code:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the ShortCode resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        capabilities:
+          description: "An array of values that describe whether the number can receive calls or messages. Can be: `SMS` and `MMS`."
+          items:
+            type: string
+          nullable: true
+          type: array
+        country_code:
+          description: The 2-character [ISO Country Code](https://www.iso.org/iso-3166-country-codes.html) of the number.
+          nullable: true
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        service_sid:
+          description: The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the resource is associated with.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        short_code:
+          description: The [E.164](https://www.twilio.com/docs/glossary/what-e164) format of the short code.
+          nullable: true
+          type: string
+        sid:
+          description: The unique string that we created to identify the ShortCode resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^SC[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The absolute URL of the ShortCode resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.service.us_app_to_person:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the Campaign belongs to.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        brand_registration_sid:
+          description: The unique string to identify the A2P brand.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^BN[0-9a-fA-F]{32}$
+          type: string
+        campaign_id:
+          description: The Campaign Registry (TCR) Campaign ID.
+          nullable: true
+          type: string
+        campaign_status:
+          description: "Campaign status. Examples: IN_PROGRESS, VERIFIED, FAILED."
+          nullable: true
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        description:
+          description: "A short description of what this SMS campaign does. Min length: 40 characters. Max length: 4096 characters."
+          nullable: true
+          type: string
+        has_embedded_links:
+          description: Indicate that this SMS campaign will send messages that contain links.
+          nullable: true
+          type: boolean
+        has_embedded_phone:
+          description: Indicates that this SMS campaign will send messages that contain phone numbers.
+          nullable: true
+          type: boolean
+        help_keywords:
+          description: End users should be able to text in a keyword to receive help. Those keywords must be provided as part of the campaign registration request. This field is required if managing help keywords yourself (i.e. not using Twilio's Default or Advanced Opt Out features). Values must be alphanumeric. 255 character maximum.
+          items:
+            type: string
+          nullable: true
+          type: array
+        help_message:
+          description: When customers receive the help keywords from their end users, Twilio customers are expected to send back an auto-generated response; this may include the brand name and additional support contact information. This field is required if managing help keywords yourself (i.e. not using Twilio's Default or Advanced Opt Out features). 20 character minimum. 320 character maximum.
+          nullable: true
+          type: string
+        is_externally_registered:
+          description: Indicates whether the campaign was registered externally or not.
+          nullable: true
+          type: boolean
+        message_flow:
+          description: Details around how a consumer opts-in to their campaign, therefore giving consent to receive their messages. If multiple opt-in methods can be used for the same campaign, they must all be listed. 40 character minimum. 2048 character maximum.
+          nullable: true
+          type: string
+        message_samples:
+          description: Message samples, at least 1 and up to 5 sample messages (at least 2 for starter/sole proprietor), >=20 chars, <=1024 chars each.
+          items:
+            type: string
+          nullable: true
+          type: array
+        messaging_service_sid:
+          description: The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/services/api) that the resource is associated with.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        mock:
+          description: A boolean that specifies whether campaign is a mock or not. Mock campaigns will be automatically created if using a mock brand. Mock campaigns should only be used for testing purposes.
+          nullable: true
+          type: boolean
+        opt_in_keywords:
+          description: If end users can text in a keyword to start receiving messages from this campaign, those keywords must be provided. This field is required if end users can text in a keyword to start receiving messages from this campaign. Values must be alphanumeric. 255 character maximum.
+          items:
+            type: string
+          nullable: true
+          type: array
+        opt_in_message:
+          description: If end users can text in a keyword to start receiving messages from this campaign, the auto-reply messages sent to the end users must be provided. The opt-in response should include the Brand name, confirmation of opt-in enrollment to a recurring message campaign, how to get help, and clear description of how to opt-out. This field is required if end users can text in a keyword to start receiving messages from this campaign. 20 character minimum. 320 character maximum.
+          nullable: true
+          type: string
+        opt_out_keywords:
+          description: End users should be able to text in a keyword to stop receiving messages from this campaign. Those keywords must be provided. This field is required if managing opt out keywords yourself (i.e. not using Twilio's Default or Advanced Opt Out features). Values must be alphanumeric. 255 character maximum.
+          items:
+            type: string
+          nullable: true
+          type: array
+        opt_out_message:
+          description: Upon receiving the opt-out keywords from the end users, Twilio customers are expected to send back an auto-generated response, which must provide acknowledgment of the opt-out request and confirmation that no further messages will be sent. It is also recommended that these opt-out messages include the brand name. This field is required if managing opt out keywords yourself (i.e. not using Twilio's Default or Advanced Opt Out features). 20 character minimum. 320 character maximum.
+          nullable: true
+          type: string
+        rate_limits:
+          description: Rate limit and/or classification set by each carrier, Ex. AT&T or T-Mobile.
+          nullable: true
+        sid:
+          description: The unique string that identifies a US A2P Compliance resource `QE2c6890da8086d771620e9b13fadeba0b`.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^QE[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The absolute URL of the US App to Person resource.
+          format: uri
+          nullable: true
+          type: string
+        us_app_to_person_usecase:
+          description: "A2P Campaign Use Case. Examples: [ 2FA, EMERGENCY, MARKETING, SOLE_PROPRIETOR...]. SOLE_PROPRIETOR campaign use cases can only be created by SOLE_PROPRIETOR Brands, and there can only be one SOLE_PROPRIETOR campaign created per SOLE_PROPRIETOR Brand."
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.service.us_app_to_person_usecase:
+      properties:
+        us_app_to_person_usecases:
+          description: Human readable name, code, description and post_approval_required (indicates whether or not post approval is required for this Use Case) of A2P Campaign Use Cases.
+          items: {}
+          nullable: true
+          type: array
+      type: object
+    messaging.v1.tollfree_verification:
+      properties:
+        account_sid:
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Tollfree Verification resource.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        additional_information:
+          description: Additional information to be provided for verification.
+          nullable: true
+          type: string
+        business_city:
+          description: The city of the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_contact_email:
+          description: The email address of the contact for the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_contact_first_name:
+          description: The first name of the contact for the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_contact_last_name:
+          description: The last name of the contact for the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_contact_phone:
+          description: The phone number of the contact for the business or organization using the Tollfree number.
+          format: phone-number
+          nullable: true
+          type: string
+        business_country:
+          description: The country of the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_name:
+          description: The name of the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_postal_code:
+          description: The postal code of the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_state_province_region:
+          description: The state/province/region of the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_street_address:
+          description: The address of the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_street_address2:
+          description: The address of the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        business_website:
+          description: The website of the business or organization using the Tollfree number.
+          nullable: true
+          type: string
+        customer_profile_sid:
+          description: Customer's Profile Bundle BundleSid.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^BU[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date-time
+          nullable: true
+          type: string
+        error_code:
+          description: The error code given when a Tollfree Verification has been rejected.
+          nullable: true
+          type: integer
+        external_reference_id:
+          description: An optional external reference ID supplied by customer and echoed back on status retrieval.
+          nullable: true
+          type: string
+        message_volume:
+          description: Estimate monthly volume of messages from the Tollfree Number.
+          nullable: true
+          type: string
+        notification_email:
+          description: The email address to receive the notification about the verification result. .
+          nullable: true
+          type: string
+        opt_in_image_urls:
+          description: Link to an image that shows the opt-in workflow. Multiple images allowed and must be a publicly hosted URL.
+          items:
+            type: string
+          nullable: true
+          type: array
+        opt_in_type:
+          $ref: "#/components/schemas/tollfree_verification_enum_opt_in_type"
+          description: Describe how a user opts-in to text messages.
+          nullable: true
+          type: string
+        production_message_sample:
+          description: An example of message content, i.e. a sample message.
+          nullable: true
+          type: string
+        regulated_item_sid:
+          description: The SID of the Regulated Item.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^RA[0-9a-fA-F]{32}$
+          type: string
+        rejection_reason:
+          description: The rejection reason given when a Tollfree Verification has been rejected.
+          nullable: true
+          type: string
+        resource_links:
+          description: The URLs of the documents associated with the Tollfree Verification resource.
+          nullable: true
+        sid:
+          description: The unique string to identify Tollfree Verification.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^HH[0-9a-fA-F]{32}$
+          type: string
+        status:
+          $ref: "#/components/schemas/tollfree_verification_enum_status"
+          description: The compliance status of the Tollfree Verification record.
+          nullable: true
+          type: string
+        tollfree_phone_number_sid:
+          description: The SID of the Phone Number associated with the Tollfree Verification.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^PN[0-9a-fA-F]{32}$
+          type: string
+        trust_product_sid:
+          description: Tollfree TrustProduct Bundle BundleSid.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^BU[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The absolute URL of the Tollfree Verification resource.
+          format: uri
+          nullable: true
+          type: string
+        use_case_categories:
+          description: The category of the use case for the Tollfree Number. List as many are applicable..
+          items:
+            type: string
+          nullable: true
+          type: array
+        use_case_summary:
+          description: Use this to further explain how messaging is used by the business or organization.
+          nullable: true
+          type: string
+      type: object
+    messaging.v1.usecase:
+      properties:
+        usecases:
+          description: Human readable use case details (usecase, description and purpose) of Messaging Service Use Cases.
+          items: {}
+          nullable: true
+          type: array
+      type: object
+    service_enum_scan_message_content:
+      enum:
+        - inherit
+        - enable
+        - disable
+      type: string
+    tollfree_verification_enum_opt_in_type:
+      enum:
+        - VERBAL
+        - WEB_FORM
+        - PAPER_FORM
+        - VIA_TEXT
+        - MOBILE_QR_CODE
+      type: string
+    tollfree_verification_enum_status:
+      enum:
+        - PENDING_REVIEW
+        - IN_REVIEW
+        - TWILIO_APPROVED
+        - TWILIO_REJECTED
+      type: string
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: This product is Generally Available.
+    name: GA
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
+    name: Beta

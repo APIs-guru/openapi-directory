@@ -1,0 +1,36 @@
+{
+  "added": "2017-12-04T09:12:06.000Z",
+  "info": {
+    "description": "The Data Migration Service helps people migrate their data from on-premise database servers to Azure, or from older database software to newer software. The service manages one or more workers that are joined to a customer's virtual network, which is assumed to provide connectivity to their databases. To avoid frequent updates to the resource provider, data migration tasks are implemented by the resource provider in a generic way as task resources, each of which has a task type (which identifies the type of work to run), input, and output. The client is responsible for providing appropriate task type and inputs, which will be passed through unexamined to the machines that implement the functionality, and for understanding the output, which is passed back unexamined to the client.",
+    "title": "Azure Data Migration Service Resource Provider",
+    "version": "2017-11-15-preview",
+    "x-apisguru-categories": [
+      "cloud"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_assets.onestore.ms_cdnfiles_onestorerolling-1606-01000_shell_v3_images_logo_microsoft.png"
+    },
+    "x-ms-code-generation-settings": {
+      "name": "DataMigrationServiceClient"
+    },
+    "x-origin": [
+      {
+        "format": "swagger",
+        "url": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2017-11-15-preview/datamigration.json",
+        "version": "2.0"
+      }
+    ],
+    "x-preferred": false,
+    "x-providerName": "azure.com",
+    "x-serviceName": "datamigration",
+    "x-tags": [
+      "Azure",
+      "Microsoft"
+    ]
+  },
+  "updated": "2018-03-10T10:27:22.000Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/azure.com/datamigration/2017-11-15-preview/swagger.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/azure.com/datamigration/2017-11-15-preview/swagger.yaml",
+  "openapiVer": "2.0",
+  "link": "https://api.apis.guru/v2/specs/azure.com:datamigration/2017-11-15-preview.json"
+}

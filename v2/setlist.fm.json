@@ -1,0 +1,34 @@
+{
+  "apis": {
+    "setlist.fm": {
+      "added": "2018-06-08T08:41:08.000Z",
+      "info": {
+        "contact": {
+          "x-twitter": "setlistfm"
+        },
+        "description": "<p>\nThe setlist.fm API has been designed to give you easy access to setlist data in order to build fancy websites and\nother applications. Before starting to use the API, be sure to ...\n<ol>\n<li>... understand how setlist.fm works (the <a href=\"https://www.setlist.fm/faq\">FAQ</a> and the\n<a href=\"https://www.setlist.fm/guidelines\">Guidelines</a> are a good starting point),</li>\n<li>... read this documentation carefully and</li>\n<li>... <a href=\"https://www.setlist.fm/settings/api\">apply for an API key</a> (link for logged in users only) - if\nyou're no registered user yet, then <a href=\"https://www.setlist.fm/signup\">register first</a> (it's free).</li>\n</ol>\n</p>\n<p>\nIf this documentation isn't enough or if you've got other things you'd like to tell us about the API, visit the\n<a href=\"https://www.setlist.fm/forum/setlistfm/setlistfm-api\">API Forum</a>.\n</p>\n<p>\nNote that the setlist.fm API is, according to the <a href=\"https://www.setlist.fm/help/api-terms\">API terms of\nservice</a>, only free for non-commercial projects. If you're interested in using the API for commercial purposes,\n<a href=\"https://www.setlist.fm/contact\">contact us</a>.\n</p>\n\n<h2>About this Service</h2>\n<p>\nThis service provides methods to get both setlists and components of setlists such as artists, cities, countries or\nvenues.\n</p>\n\n<h2>Supported Content Types</h2>\n<p>\nThe REST service currently supports XML (default) and JSON content.\n</p>\n<p>\nTo receive a JSON response, set the <code>Accept</code>\n<a href=\"https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1\">header</a> to <em>application/json</em>.\n</p>\n\n<h2>Internationalization</h2>\n<p>\n<small>(Please note that this is an experimental feature and does not work for all cities!)</small>\n</p>\n<p>\nMost of the featured methods honor the <code>Accept-Language</code>\n<a href=\"https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4\">header</a>. This header is used for\nlocalizing cities and countries. The default language is English (en), but you can provide any of the languages\nSpanish (es), French (fr), German (de), Portuguese (pt), Turkish (tr), Italian (it) or Polish (pl).\n</p>\n<p>\nE.g. if you search a setlist for a concert that took place in Vienna and you pass &quot;de&quot; as header, you'll\nget <em>&quot;Wien, &Ouml;sterreich&quot;</em> instead of <em>&quot;Vienna, Austria&quot;</em>.<br/>\nThis also works if you use a different language than the country's native language.\n</p>\n<p>\nE.g. for a concert in New York, you'll get <em>&quot;Nueva York, Estados Unidos&quot;</em> instead of <em>&quot;New\nYork, United States&quot;</em> if you pass &quot;es&quot; as language.\n</p>\n\n<h2>API Keys</h2>\n\nAPI keys (<a href=\"https://www.setlist.fm/settings/api\">application form</a>) must be included in the request with\nthe <code>x-api-key</code> header.\n\n<h2>Version History</h2>\n<table class=\"table table-bordered table-versions\">\n<thead>\n<tr>\n<th>Version</th>\n<th>Docs</th>\n<th>End of Service</th>\n</tr>\n</thead> <tbody>\n<tr>\n<td><strong>1.0</strong></td>\n<td><a href=\"/docs/1.0\">Docs</a></td>\n<td>-</li>\n</tr>\n<tr>\n<td><strong>0.1</strong></td>\n<td></td>\n<td>December 31, 2017</li>\n</tr>\n</tbody>\n</table>",
+        "title": "setlist.fm API",
+        "version": "1.0",
+        "x-apisguru-categories": [
+          "media"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_setlistfm_profile_image.jpeg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://api.setlist.fm/docs/1.0/ui/swagger.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "setlist.fm"
+      },
+      "updated": "2023-03-06T07:12:59.965Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/setlist.fm/1.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/setlist.fm/1.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/setlist.fm/1.0.json"
+    }
+  }
+}

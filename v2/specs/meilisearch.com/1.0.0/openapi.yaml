@@ -1,0 +1,1476 @@
+openapi: 3.0.3
+servers:
+  - url: http://localhost:7700/
+info:
+  contact: {}
+  title: Meilisearch v1.0
+  version: 1.0.0
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_meilisearch.com_apple-touch-icon.png
+  x-origin:
+    - format: postman
+      url: https://raw.githubusercontent.com/meilisearch/documentation/master/.vuepress/public/postman/meilisearch-collection.json
+      version: 2.x
+  x-providerName: meilisearch.com
+tags:
+  - name: Documents
+  - name: Search
+  - name: Tasks
+  - name: Indexes
+  - name: Settings
+  - name: Sub-routes
+  - name: Key Management
+  - name: Stats
+  - name: Dumps
+paths:
+  /dumps:
+    post:
+      description: Create a dump
+      operationId: createADump
+      responses:
+        "200":
+          description: ""
+      summary: Create a dump
+      tags:
+        - Dumps
+  /health:
+    get:
+      description: Health
+      operationId: health
+      responses:
+        "200":
+          description: ""
+      summary: Health
+      tags:
+        - Stats
+  /indexes:
+    get:
+      description: Get indexes
+      operationId: getIndexes
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            example: "0"
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "2"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Get indexes
+      tags:
+        - Indexes
+    post:
+      description: Create index with primary key
+      operationId: createIndexWithPrimaryKey
+      requestBody:
+        content:
+          application/json:
+            example:
+              primaryKey: number
+              uid: books
+            schema:
+              properties:
+                primaryKey:
+                  example: number
+                  type: string
+                uid:
+                  example: books
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Create index with primary key
+      tags:
+        - Indexes
+  /indexes/books:
+    delete:
+      description: Delete an index
+      operationId: deleteAnIndex
+      responses:
+        "200":
+          description: ""
+      summary: Delete an index
+      tags:
+        - Indexes
+    get:
+      description: Show index
+      operationId: showIndex
+      responses:
+        "200":
+          description: ""
+      summary: Show index
+      tags:
+        - Indexes
+    patch:
+      description: Can only change the document identifier if it has not already been added before.
+      operationId: udpateIndex
+      requestBody:
+        content:
+          application/json:
+            example:
+              primaryKey: title
+            schema:
+              properties:
+                primaryKey:
+                  example: title
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: "Udpate index "
+      tags:
+        - Indexes
+  /indexes/books/documents:
+    delete:
+      description: Delete all documents
+      operationId: deleteAllDocuments
+      responses:
+        "200":
+          description: ""
+      summary: Delete all documents
+      tags:
+        - Documents
+    get:
+      description: Get documents
+      operationId: getDocuments
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            example: "1"
+            type: string
+        - in: query
+          name: offset
+          schema:
+            example: "10"
+            type: string
+        - in: query
+          name: fields
+          schema:
+            example: id
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Get documents
+      tags:
+        - Documents
+    post:
+      description: Add or replace documents
+      operationId: addOrReplaceDocuments
+      parameters:
+        - in: query
+          name: primaryKey
+          schema:
+            example: id
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              - author: Jane Austen
+                genre: romance
+                id: 2
+                price: 3.5
+                title: Pride and Prejudice
+              - author: Antoine de Saint-Exupéry
+                genre: adventure
+                id: 456
+                price: 10
+                title: Le Petit Prince
+              - author: Lewis Carroll
+                genre: fantasy
+                id: 1
+                price: 25.99
+                title: Alice In Wonderland
+              - author: J. R. R. Tolkien
+                genre: fantasy
+                id: 1344
+                title: The Hobbit
+              - author: J. K. Rowling
+                genre: fantasy
+                id: 4
+                title: Harry Potter and the Half-Blood Prince
+              - author: Douglas Adams
+                id: 42
+                title: The Hitchhiker's Guide to the Galaxy
+            schema:
+              example:
+                - author: Jane Austen
+                  genre: romance
+                  id: 2
+                  price: 3.5
+                  title: Pride and Prejudice
+                - author: Antoine de Saint-Exupéry
+                  genre: adventure
+                  id: 456
+                  price: 10
+                  title: Le Petit Prince
+                - author: Lewis Carroll
+                  genre: fantasy
+                  id: 1
+                  price: 25.99
+                  title: Alice In Wonderland
+                - author: J. R. R. Tolkien
+                  genre: fantasy
+                  id: 1344
+                  title: The Hobbit
+                - author: J. K. Rowling
+                  genre: fantasy
+                  id: 4
+                  title: Harry Potter and the Half-Blood Prince
+                - author: Douglas Adams
+                  id: 42
+                  title: The Hitchhiker's Guide to the Galaxy
+              items:
+                properties:
+                  author:
+                    example: Jane Austen
+                    type: string
+                  genre:
+                    example: romance
+                    type: string
+                  id:
+                    example: 2
+                    type: number
+                  price:
+                    example: 3.5
+                    type: number
+                  title:
+                    example: Pride and Prejudice
+                    type: string
+                type: object
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Add or replace documents
+      tags:
+        - Documents
+    put:
+      description: Add or update documents
+      operationId: addOrUpdateDocuments
+      parameters:
+        - in: query
+          name: primaryKey
+          schema:
+            example: id
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              - author: J. Austen
+                date: "1813"
+                id: 2
+            schema:
+              example:
+                - author: J. Austen
+                  date: "1813"
+                  id: 2
+              items:
+                properties:
+                  author:
+                    example: J. Austen
+                    type: string
+                  date:
+                    example: "1813"
+                    type: string
+                  id:
+                    example: 2
+                    type: number
+                type: object
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Add or update documents
+      tags:
+        - Documents
+  /indexes/books/documents/1:
+    delete:
+      description: Delete one document
+      operationId: deleteOneDocument
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          description: ""
+      summary: Delete one document
+      tags:
+        - Documents
+  /indexes/books/documents/2:
+    get:
+      description: Get one document
+      operationId: getOneDocument
+      parameters:
+        - in: query
+          name: fields
+          schema:
+            example: id
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Get one document
+      tags:
+        - Documents
+  /indexes/books/documents/delete-batch:
+    post:
+      description: Delete documents
+      operationId: deleteDocuments
+      requestBody:
+        content:
+          application/json:
+            example:
+              - 1
+              - 2
+            schema:
+              example:
+                - 1
+                - 2
+              items:
+                example: 1
+                type: number
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Delete documents
+      tags:
+        - Documents
+  /indexes/books/search:
+    get:
+      description: Search in index
+      operationId: searchInIndex
+      parameters:
+        - in: query
+          name: q
+          schema:
+            example: prinec
+            type: string
+        - in: query
+          name: offset
+          schema:
+            example: "0"
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "1"
+            type: string
+        - in: query
+          name: attributesToRetrieve
+          schema:
+            example: title,author
+            type: string
+        - in: query
+          name: attributesToCrop
+          schema:
+            example: title
+            type: string
+        - in: query
+          name: attributesToHighlight
+          schema:
+            example: "*"
+            type: string
+        - in: query
+          name: cropLength
+          schema:
+            example: "5"
+            type: string
+        - in: query
+          name: cropMarker
+          schema:
+            example: "[...]"
+            type: string
+        - in: query
+          name: filter
+          schema:
+            example: genre="fantasy"
+            type: string
+        - in: query
+          name: showMatchesPosition
+          schema:
+            example: "true"
+            type: string
+        - in: query
+          name: facets
+          schema:
+            example: genre
+            type: string
+        - in: query
+          name: sort
+          schema:
+            example: price
+            type: string
+        - in: query
+          name: highlightPreTag
+          schema:
+            example: <mark>
+            type: string
+        - in: query
+          name: highlightPostTag
+          schema:
+            example: </mark>
+            type: string
+        - in: query
+          name: matchingStrategy
+          schema:
+            example: all
+            type: string
+        - in: query
+          name: page
+          schema:
+            example: "2"
+            type: string
+        - in: query
+          name: hitsPerPage
+          schema:
+            example: "50"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Search in index
+      tags:
+        - Search
+    post:
+      description: Search in index
+      operationId: searchInIndex1
+      requestBody:
+        content:
+          application/json:
+            example:
+              attributesToHighlight:
+                - title
+              q: ""
+            schema:
+              properties:
+                attributesToHighlight:
+                  example:
+                    - title
+                  items:
+                    example: title
+                    type: string
+                  type: array
+                q:
+                  example: ""
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Search in index
+      tags:
+        - Search
+  /indexes/books/settings:
+    delete:
+      description: Reset all settings
+      operationId: resetAllSettings
+      responses:
+        "200":
+          description: ""
+      summary: Reset all settings
+      tags:
+        - Settings
+    get:
+      description: Get all settings
+      operationId: getAllSettings
+      responses:
+        "200":
+          description: ""
+      summary: Get all settings
+      tags:
+        - Settings
+    patch:
+      description: Update settings
+      operationId: updateSettings
+      requestBody:
+        content:
+          application/json:
+            example:
+              displayedAttributes:
+                - title
+                - author
+                - genre
+                - price
+              filterableAttributes:
+                - genre
+                - price
+              searchableAttributes:
+                - title
+                - author
+              sortableAttributes:
+                - price
+              stopWords:
+                - of
+                - the
+            schema:
+              properties:
+                displayedAttributes:
+                  example:
+                    - title
+                    - author
+                    - genre
+                    - price
+                  items:
+                    example: title
+                    type: string
+                  type: array
+                filterableAttributes:
+                  example:
+                    - genre
+                    - price
+                  items:
+                    example: genre
+                    type: string
+                  type: array
+                searchableAttributes:
+                  example:
+                    - title
+                    - author
+                  items:
+                    example: title
+                    type: string
+                  type: array
+                sortableAttributes:
+                  example:
+                    - price
+                  items:
+                    example: price
+                    type: string
+                  type: array
+                stopWords:
+                  example:
+                    - of
+                    - the
+                  items:
+                    example: of
+                    type: string
+                  type: array
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Update settings
+      tags:
+        - Settings
+  /indexes/books/settings/displayed-attributes:
+    delete:
+      description: Reset displayed attributes
+      operationId: resetDisplayedAttributes
+      responses:
+        "200":
+          description: ""
+      summary: Reset displayed attributes
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get displayed attributes
+      operationId: getDisplayedAttributes
+      responses:
+        "200":
+          description: ""
+      summary: Get displayed attributes
+      tags:
+        - Settings
+        - Sub-routes
+    put:
+      description: Update displayed attributes
+      operationId: updateDisplayedAttributes
+      requestBody:
+        content:
+          application/json:
+            example:
+              - title
+            schema:
+              example:
+                - title
+              items:
+                example: title
+                type: string
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Update displayed attributes
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/distinct-attribute:
+    delete:
+      description: Reset distinct attribute
+      operationId: resetDistinctAttribute
+      responses:
+        "200":
+          description: ""
+      summary: Reset distinct attribute
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get distinct attribute
+      operationId: getDistinctAttribute
+      responses:
+        "200":
+          description: ""
+      summary: Get distinct attribute
+      tags:
+        - Settings
+        - Sub-routes
+    put:
+      description: Update distinct attribute
+      operationId: updateDistinctAttribute
+      requestBody:
+        content:
+          application/octet-stream:
+            example: '"genre"'
+      responses:
+        "200":
+          description: ""
+      summary: Update distinct attribute
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/faceting:
+    delete:
+      description: Reset faceting
+      operationId: resetFaceting
+      responses:
+        "200":
+          description: ""
+      summary: Reset faceting
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get faceting
+      operationId: getFaceting
+      responses:
+        "200":
+          description: ""
+      summary: Get faceting
+      tags:
+        - Settings
+        - Sub-routes
+    patch:
+      description: Update faceting
+      operationId: updateFaceting
+      requestBody:
+        content:
+          application/json:
+            example:
+              maxValuesPerFacet: 3000
+            schema:
+              properties:
+                maxValuesPerFacet:
+                  example: 3000
+                  type: number
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Update faceting
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/filterable-attributes:
+    delete:
+      description: Reset filterable attributes
+      operationId: resetFilterableAttributes
+      responses:
+        "200":
+          description: ""
+      summary: Reset filterable attributes
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get filterable attributes
+      operationId: getFilterableAttributes
+      responses:
+        "200":
+          description: ""
+      summary: Get filterable attributes
+      tags:
+        - Settings
+        - Sub-routes
+    put:
+      description: Update filterable attributes
+      operationId: updateFilterableAttributes
+      requestBody:
+        content:
+          application/json:
+            example:
+              - genre
+            schema:
+              example:
+                - genre
+              items:
+                example: genre
+                type: string
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Update filterable attributes
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/pagination:
+    delete:
+      description: Reset pagination
+      operationId: resetPagination
+      responses:
+        "200":
+          description: ""
+      summary: Reset pagination
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get pagination
+      operationId: getPagination
+      responses:
+        "200":
+          description: ""
+      summary: Get pagination
+      tags:
+        - Settings
+        - Sub-routes
+    patch:
+      description: Update pagination
+      operationId: updatePagination
+      requestBody:
+        content:
+          application/json:
+            example:
+              maxTotalHits: 2000
+            schema:
+              properties:
+                maxTotalHits:
+                  example: 2000
+                  type: number
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Update pagination
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/ranking-rules:
+    delete:
+      description: Reset ranking rules
+      operationId: resetRankingRules
+      responses:
+        "200":
+          description: ""
+      summary: Reset ranking rules
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get ranking rules
+      operationId: getRankingRules
+      responses:
+        "200":
+          description: ""
+      summary: Get ranking rules
+      tags:
+        - Settings
+        - Sub-routes
+    put:
+      description: Update ranking rules
+      operationId: updateRankingRules
+      requestBody:
+        content:
+          application/json:
+            example:
+              - typo
+            schema:
+              example:
+                - typo
+              items:
+                example: typo
+                type: string
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Update ranking rules
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/searchable-attributes:
+    delete:
+      description: Reset searchable attributes
+      operationId: resetSearchableAttributes
+      responses:
+        "200":
+          description: ""
+      summary: Reset searchable attributes
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get searchable attributes
+      operationId: getSearchableAttributes
+      responses:
+        "200":
+          description: ""
+      summary: Get searchable attributes
+      tags:
+        - Settings
+        - Sub-routes
+    put:
+      description: Update searchable attributes
+      operationId: updateSearchableAttributes
+      requestBody:
+        content:
+          application/json:
+            example:
+              - title
+              - author
+            schema:
+              example:
+                - title
+                - author
+              items:
+                example: title
+                type: string
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Update searchable attributes
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/sortable-attributes:
+    delete:
+      description: Reset sortable attributes
+      operationId: resetSortableAttributes
+      responses:
+        "200":
+          description: ""
+      summary: Reset sortable attributes
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get sortable attributes
+      operationId: getSortableAttributes
+      responses:
+        "200":
+          description: ""
+      summary: Get sortable attributes
+      tags:
+        - Settings
+        - Sub-routes
+    put:
+      description: Update sortable attributes
+      operationId: updateSortableAttributes
+      requestBody:
+        content:
+          application/json:
+            example:
+              - price
+            schema:
+              example:
+                - price
+              items:
+                example: price
+                type: string
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Update sortable attributes
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/stop-words:
+    delete:
+      description: Reset stop-words
+      operationId: resetStopWords
+      responses:
+        "200":
+          description: ""
+      summary: Reset stop-words
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get stop-words
+      operationId: getStopWords
+      requestBody:
+        content:
+          application/json:
+            example:
+              - the
+            schema:
+              example:
+                - the
+              items:
+                example: the
+                type: string
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Get stop-words
+      tags:
+        - Settings
+        - Sub-routes
+    put:
+      description: Update stop-words
+      operationId: updateStopWords
+      requestBody:
+        content:
+          application/json:
+            example:
+              - the
+              - of
+            schema:
+              example:
+                - the
+                - of
+              items:
+                example: the
+                type: string
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Update stop-words
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/synonyms:
+    delete:
+      description: Reset synonyms
+      operationId: resetSynonyms
+      requestBody:
+        content:
+          text/plain:
+            example: '"["wizard"]"'
+      responses:
+        "200":
+          description: ""
+      summary: Reset synonyms
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get synonyms
+      operationId: getSynonyms
+      responses:
+        "200":
+          description: ""
+      summary: Get synonyms
+      tags:
+        - Settings
+        - Sub-routes
+    put:
+      description: Update synonyms
+      operationId: updateSynonyms
+      requestBody:
+        content:
+          application/json:
+            example:
+              harry potter:
+                - hp
+              hp:
+                - harry potter
+            schema:
+              properties:
+                harry potter:
+                  example:
+                    - hp
+                  items:
+                    example: hp
+                    type: string
+                  type: array
+                hp:
+                  example:
+                    - harry potter
+                  items:
+                    example: harry potter
+                    type: string
+                  type: array
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Update synonyms
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/settings/typo-tolerance:
+    delete:
+      description: Reset typo-tolerance
+      operationId: resetTypoTolerance
+      responses:
+        "200":
+          description: ""
+      summary: Reset typo-tolerance
+      tags:
+        - Settings
+        - Sub-routes
+    get:
+      description: Get typo-tolerance
+      operationId: getTypoTolerance
+      responses:
+        "200":
+          description: ""
+      summary: Get typo-tolerance
+      tags:
+        - Settings
+        - Sub-routes
+    patch:
+      description: Update typo-tolerance
+      operationId: updateTypoTolerance
+      requestBody:
+        content:
+          application/json:
+            example:
+              disableOnAttributes:
+                - genre
+              disableOnWords:
+                - Prince
+              minWordSizeForTypos:
+                oneTypo: 2
+                twoTypos: 11
+            schema:
+              properties:
+                disableOnAttributes:
+                  example:
+                    - genre
+                  items:
+                    example: genre
+                    type: string
+                  type: array
+                disableOnWords:
+                  example:
+                    - Prince
+                  items:
+                    example: Prince
+                    type: string
+                  type: array
+                minWordSizeForTypos:
+                  properties:
+                    oneTypo:
+                      example: 2
+                      type: number
+                    twoTypos:
+                      example: 11
+                      type: number
+                  type: object
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Update typo-tolerance
+      tags:
+        - Settings
+        - Sub-routes
+  /indexes/books/stats:
+    get:
+      description: Stats of an index
+      operationId: statsOfAnIndex
+      responses:
+        "200":
+          description: ""
+      summary: Stats of an index
+      tags:
+        - Stats
+  /indexes/swap-indexes:
+    post:
+      description: Swap indexes
+      operationId: swapIndexes
+      requestBody:
+        content:
+          application/json:
+            example:
+              - indexes:
+                  - books
+                  - books_temp
+            schema:
+              example:
+                - indexes:
+                    - books
+                    - books_temp
+              items:
+                properties:
+                  indexes:
+                    example:
+                      - books
+                      - books_temp
+                    items:
+                      example: books
+                      type: string
+                    type: array
+                type: object
+              type: array
+      responses:
+        "200":
+          description: ""
+      summary: Swap indexes
+      tags:
+        - Indexes
+  /keys:
+    get:
+      description: Get keys
+      operationId: getKeys
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            example: "0"
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "10"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Get keys
+      tags:
+        - Key Management
+    post:
+      description: Create a key
+      operationId: createAKey
+      requestBody:
+        content:
+          application/json:
+            example:
+              actions:
+                - documents.add
+                - documents.delete
+              description: Key to add and delete documents, in `books` index.
+              expiresAt: null
+              indexes:
+                - books
+              name: docs-key
+            schema:
+              properties:
+                actions:
+                  example:
+                    - documents.add
+                    - documents.delete
+                  items:
+                    example: documents.add
+                    type: string
+                  type: array
+                description:
+                  example: Key to add and delete documents, in `books` index.
+                  type: string
+                expiresAt:
+                  example: null
+                  nullable: true
+                indexes:
+                  example:
+                    - books
+                  items:
+                    example: books
+                    type: string
+                  type: array
+                name:
+                  example: docs-key
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Create a key
+      tags:
+        - Key Management
+  /keys/L8l05tFb188aab693735bbaf1f898b9902fb39f865160d39dddba2b47b940115a0430705:
+    get:
+      description: Get one key
+      operationId: getOneKey
+      responses:
+        "200":
+          description: ""
+      summary: Get one key
+      tags:
+        - Key Management
+  /keys/kN2aK9EO8a7b627e425717d9196c8081552ca004e513545ed178f8a56981dbd3080d4a5b:
+    delete:
+      description: Delete a key
+      operationId: deleteAKey
+      responses:
+        "200":
+          description: ""
+      summary: Delete a key
+      tags:
+        - Key Management
+  /keys/wYZjGJyBcdb0621b97999c233246a8ec0a35d0fcd9a6417ef8ccee0c8978b64b123af2dd:
+    patch:
+      description: Update a key
+      operationId: updateAKey
+      requestBody:
+        content:
+          application/json:
+            example:
+              description: Key to add and delete documents, but also to create indexes, in `book` index.
+            schema:
+              properties:
+                description:
+                  example: Key to add and delete documents, but also to create indexes, in `book` index.
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Update a key
+      tags:
+        - Key Management
+  /stats:
+    get:
+      description: Global stats
+      operationId: globalStats
+      responses:
+        "200":
+          description: ""
+      summary: Global stats
+      tags:
+        - Stats
+  /tasks:
+    delete:
+      description: Delete tasks
+      operationId: deleteTasks
+      parameters:
+        - in: query
+          name: uids
+          schema:
+            type: string
+        - in: query
+          name: indexUids
+          schema:
+            example: books
+            type: string
+        - in: query
+          name: types
+          schema:
+            example: documentAdditionOrUpdate
+            type: string
+        - in: query
+          name: statuses
+          schema:
+            example: failed
+            type: string
+        - in: query
+          name: beforeEnqueuedAt
+          schema:
+            type: string
+        - in: query
+          name: afterEnqueuedAt
+          schema:
+            type: string
+        - in: query
+          name: beforeStartedAt
+          schema:
+            type: string
+        - in: query
+          name: afterStartedAt
+          schema:
+            type: string
+        - in: query
+          name: beforeFinishedAt
+          schema:
+            type: string
+        - in: query
+          name: afterFinishedAt
+          schema:
+            type: string
+        - in: query
+          name: canceledBy
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "2"
+            type: string
+        - in: query
+          name: from
+          schema:
+            example: "10"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Delete tasks
+      tags:
+        - Tasks
+    get:
+      description: Get all tasks
+      operationId: getAllTasks
+      parameters:
+        - in: query
+          name: uids
+          schema:
+            example: "3"
+            type: string
+        - in: query
+          name: indexUids
+          schema:
+            example: books
+            type: string
+        - in: query
+          name: types
+          schema:
+            example: documentAdditionOrUpdate
+            type: string
+        - in: query
+          name: statuses
+          schema:
+            example: failed
+            type: string
+        - in: query
+          name: beforeEnqueuedAt
+          schema:
+            type: string
+        - in: query
+          name: afterEnqueuedAt
+          schema:
+            type: string
+        - in: query
+          name: beforeStartedAt
+          schema:
+            type: string
+        - in: query
+          name: afterStartedAt
+          schema:
+            type: string
+        - in: query
+          name: beforeFinishedAt
+          schema:
+            type: string
+        - in: query
+          name: afterFinishedAt
+          schema:
+            type: string
+        - in: query
+          name: canceledBy
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "2"
+            type: string
+        - in: query
+          name: from
+          schema:
+            example: "10"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Get all tasks
+      tags:
+        - Tasks
+  /tasks/0:
+    get:
+      description: Get one task
+      operationId: getOneTask
+      responses:
+        "200":
+          description: ""
+      summary: Get one task
+      tags:
+        - Tasks
+  /tasks/cancel:
+    post:
+      description: Cancel tasks
+      operationId: cancelTasks
+      parameters:
+        - in: query
+          name: uids
+          schema:
+            type: string
+        - in: query
+          name: indexUids
+          schema:
+            example: books
+            type: string
+        - in: query
+          name: types
+          schema:
+            example: documentAdditionOrUpdate
+            type: string
+        - in: query
+          name: statuses
+          schema:
+            example: failed
+            type: string
+        - in: query
+          name: beforeEnqueuedAt
+          schema:
+            type: string
+        - in: query
+          name: afterEnqueuedAt
+          schema:
+            type: string
+        - in: query
+          name: beforeStartedAt
+          schema:
+            type: string
+        - in: query
+          name: afterStartedAt
+          schema:
+            type: string
+        - in: query
+          name: beforeFinishedAt
+          schema:
+            type: string
+        - in: query
+          name: afterFinishedAt
+          schema:
+            type: string
+        - in: query
+          name: canceledBy
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            example: "2"
+            type: string
+        - in: query
+          name: from
+          schema:
+            example: "10"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Cancel tasks
+      tags:
+        - Tasks
+  /version:
+    get:
+      description: Version
+      operationId: version
+      responses:
+        "200":
+          description: ""
+      summary: Version
+      tags:
+        - Stats

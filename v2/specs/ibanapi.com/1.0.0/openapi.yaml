@@ -1,0 +1,300 @@
+openapi: 3.0.0
+servers:
+  - description: IBANAPI Server
+    url: https://api.ibanapi.com/v1
+info:
+  contact:
+    email: samy@ibanapi.com
+  description: IBANAPI OpenApi documentation
+  title: IBANAPI OpenApi Documentation
+  version: 1.0.0
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_ibanapi.com_assets_favicon_apple-touch-icon.png
+  x-origin:
+    - format: openapi
+      url: https://api.ibanapi.com/docs/api-docs.json
+      version: "3.0"
+  x-providerName: ibanapi.com
+tags:
+  - description: API Endpoints of IBANAPI
+    name: IBANAPI
+paths:
+  /balance:
+    get:
+      description: Returns the account balance and expiry
+      operationId: getBalance
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalanceResponse"
+          description: SUCCESS
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400"
+          description: Your balance is exhausted or bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401"
+          description: Package expired or account was blocked
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403"
+          description: Invalid API Key
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/422"
+          description: API key is missing
+      security:
+        - api_key_security: []
+      summary: Get Account Balance
+      tags:
+        - IBANAPI
+  /validate:
+    get:
+      description: Returns the validation results
+      operationId: validateIBAN
+      parameters:
+        - $ref: "#/components/parameters/iban"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IBANResult"
+          description: Valid IBAN response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400"
+          description: Your balance is exhausted or bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401"
+          description: Package expired or account was blocked
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403"
+          description: Invalid API Key
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/422"
+          description: API key is missing
+      security:
+        - api_key_security: []
+      summary: Validate IBAN
+      tags:
+        - IBANAPI
+  /validate-basic:
+    get:
+      description: Returns the basic validation results
+      operationId: validateIBANBasic
+      parameters:
+        - $ref: "#/components/parameters/iban"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IBANResultBasic"
+          description: Valid IBAN response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400"
+          description: Your balance is exhausted or bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401"
+          description: Package expired or account was blocked
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403"
+          description: Invalid API Key
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/422"
+          description: API key is missing
+      security:
+        - api_key_security: []
+      summary: Validate IBAN Basic
+      tags:
+        - IBANAPI
+components:
+  parameters:
+    iban:
+      description: The IBAN
+      in: query
+      name: iban
+      required: true
+      schema:
+        type: string
+  schemas:
+    "400":
+      properties:
+        data:
+          example: "{}"
+          type: object
+        message:
+          example: Your balance is exhausted
+          type: string
+        result:
+          example: "400"
+          type: integer
+      type: object
+    "401":
+      properties:
+        data:
+          example: "{}"
+          type: object
+        message:
+          example: Your package has expired
+          type: string
+        result:
+          example: "401"
+          type: integer
+      type: object
+    "403":
+      properties:
+        data:
+          example: "{}"
+          type: object
+        message:
+          example: Invalid API Key
+          type: string
+        result:
+          example: "403"
+          type: integer
+      type: object
+    "422":
+      properties:
+        data:
+          example: "{}"
+          type: object
+        message:
+          example: API key is missing
+          type: string
+        result:
+          example: "422"
+          type: integer
+      type: object
+    BalanceResponse:
+      properties:
+        data:
+          example:
+            bank_balance: 100
+            basic_balance: 2000
+            expiry_date: 2021-05-16
+          type: object
+        message:
+          example: SUCCESS
+          type: string
+        result:
+          example: "200"
+          type: integer
+      type: object
+    IBANResult:
+      properties:
+        data:
+          example:
+            bank:
+              address: TORNIMAE 2 FLOOR 10
+              bank_name: AS SEB PANK
+              bic: EEUHEE2X
+              city: TALLINN
+              phone: ""
+              state: ""
+              zip: "15010"
+            bank_account: "00102014568"
+            bban: "1000001020145685"
+            country_code: EE
+            country_name: Estonia
+            currency_code: EUR
+            iso_alpha3: EST
+            sepa:
+              sepa_b2b: No
+              sepa_card_clearing: No
+              sepa_credit_transfer: Yes
+              sepa_direct_debit: No
+              sepa_sdd_core: No
+            sepa_member: Yes
+          type: object
+        expremental:
+          example: "0"
+          type: integer
+        message:
+          example: Valid IBAN Number
+          type: string
+        result:
+          example: "200"
+          type: integer
+        validations:
+          example:
+            - message: Valid IBAN length
+              result: 200
+            - message: Valid IBAN Checksum
+              result: 200
+          items: {}
+          type: array
+      type: object
+    IBANResultBasic:
+      properties:
+        data:
+          example:
+            bban: "1000001020145685"
+            country_code: EE
+            country_name: Estonia
+            currency_code: EUR
+            iso_alpha3: EST
+            sepa: []
+            sepa_member: Yes
+          type: object
+        expremental:
+          example: "0"
+          type: integer
+        message:
+          example: Valid IBAN Number
+          type: string
+        result:
+          example: "200"
+          type: integer
+        validations:
+          example:
+            - message: Valid IBAN length
+              result: 200
+            - message: Valid IBAN Checksum
+              result: 200
+          items: {}
+          type: array
+      type: object
+  securitySchemes:
+    api_key_security:
+      description: Your API Key, you can get it from https://ibanapi.com
+      in: query
+      name: api_key
+      type: apiKey

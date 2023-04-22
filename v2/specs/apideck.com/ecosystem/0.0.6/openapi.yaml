@@ -1,0 +1,1275 @@
+openapi: 3.0.3
+servers:
+  - description: Production
+    url: https://api.apideck.com
+info:
+  contact:
+    email: hello@apideck.com
+    url: https://developers.apideck.com
+  description: Ecosystem API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Ecosystem API
+  version: 0.0.6
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_developers.apideck.com_icon.png
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/ecosystem.yml
+      version: "3.0"
+  x-providerName: apideck.com
+  x-serviceName: ecosystem
+  x-tags:
+    - partner
+externalDocs:
+  description: Apideck Developer Docs
+  url: https://developers.apideck.com
+security: []
+tags:
+  - description: ""
+    name: Ecosystem
+  - description: ""
+    name: Listing
+  - description: ""
+    name: Collection
+  - description: ""
+    name: Category
+  - description: ""
+    name: Product
+paths:
+  "/ecosystems/{ecosystem_id}":
+    get:
+      description: Get ecosystem
+      operationId: ecosystemsOne
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEcosystemResponse"
+      summary: Get ecosystem
+      tags:
+        - Ecosystem
+  "/ecosystems/{ecosystem_id}/categories":
+    get:
+      description: List categories
+      operationId: categoriesAll
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCategoriesResponse"
+      summary: List categories
+      tags:
+        - Category
+  "/ecosystems/{ecosystem_id}/categories/{id}":
+    get:
+      description: Get category
+      operationId: categoriesOne
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCategoryResponse"
+      summary: Get category
+      tags:
+        - Category
+  "/ecosystems/{ecosystem_id}/categories/{id}/listings":
+    get:
+      description: List category listings
+      operationId: categoryListingsAll
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetListingsResponse"
+      summary: List category listings
+      tags:
+        - Category
+  "/ecosystems/{ecosystem_id}/collections":
+    get:
+      description: List collections
+      operationId: collectionsAll
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCollectionsResponse"
+      summary: List collections
+      tags:
+        - Collection
+  "/ecosystems/{ecosystem_id}/collections/{id}":
+    get:
+      description: Get collection
+      operationId: collectionsOne
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCollectionResponse"
+      summary: Get collection
+      tags:
+        - Collection
+  "/ecosystems/{ecosystem_id}/collections/{id}/listings":
+    get:
+      description: List collection listings
+      operationId: collectionListingsAll
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetListingsResponse"
+      summary: List collection listings
+      tags:
+        - Collection
+  "/ecosystems/{ecosystem_id}/listings":
+    get:
+      description: List listings
+      operationId: listingsAll
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/external_id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetListingsResponse"
+      summary: List listings
+      tags:
+        - Listing
+  "/ecosystems/{ecosystem_id}/listings/{id}":
+    get:
+      description: Get listing
+      operationId: listingsOne
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetListingResponse"
+      summary: Get listing
+      tags:
+        - Listing
+  "/ecosystems/{ecosystem_id}/products":
+    get:
+      description: List products
+      operationId: productsAll
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetProductsResponse"
+      summary: List products
+      tags:
+        - Product
+  "/ecosystems/{ecosystem_id}/products/{id}":
+    get:
+      description: Get product
+      operationId: productsOne
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetProductResponse"
+      summary: Get product
+      tags:
+        - Product
+  "/ecosystems/{ecosystem_id}/products/{id}/listings":
+    get:
+      description: List product listings
+      operationId: productListingsAll
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetListingsResponse"
+      summary: List product listings
+      tags:
+        - Product
+components:
+  parameters:
+    cursor:
+      description: Cursor to start from. You can find cursors for next/previous pages in the meta.cursors property of the response.
+      in: query
+      name: cursor
+      schema:
+        nullable: true
+        type: string
+    ecosystem_id:
+      in: path
+      name: ecosystem_id
+      required: true
+      schema:
+        type: string
+    external_id:
+      description: Filter on external_id
+      in: query
+      name: external_id
+      schema:
+        type: string
+    id:
+      description: ID of the record you are acting upon.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    limit:
+      description: Number of records to return
+      in: query
+      name: limit
+      schema:
+        default: 50
+        maximum: 200
+        minimum: 1
+        type: integer
+  responses:
+    GetCategoriesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetCategoriesResponse"
+      description: Categories
+    GetCategoryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetCategoryResponse"
+      description: Category
+    GetCollectionResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetCollectionResponse"
+      description: Collection
+    GetCollectionsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetCollectionsResponse"
+      description: Collections
+    GetEcosystemResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetEcosystemResponse"
+      description: Ecosystems
+    GetListingResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetListingResponse"
+      description: Listing
+    GetListingsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetListingsResponse"
+      description: Listings
+    GetProductResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetProductResponse"
+      description: Product
+    GetProductsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetProductsResponse"
+      description: Products
+  schemas:
+    CTASettings:
+      additionalProperties: false
+      properties:
+        background_color:
+          type: string
+        button_background_color:
+          type: string
+        button_color:
+          type: string
+        button_label:
+          type: string
+        button_link:
+          type: string
+        color:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        title:
+          type: string
+      type: object
+    CardSettings:
+      additionalProperties: false
+      properties:
+        background_color:
+          type: string
+        border_color:
+          type: string
+        border_radius:
+          type: string
+        border_size:
+          type: string
+        color:
+          type: string
+        columns:
+          type: integer
+        description_lines:
+          type: integer
+        icon_border_radius:
+          type: string
+        icon_shadow_enabled:
+          type: boolean
+        icon_size:
+          type: integer
+        shadow_enabled:
+          type: boolean
+        show_action:
+          type: boolean
+        show_badges:
+          type: boolean
+        show_category:
+          type: boolean
+        show_description:
+          type: boolean
+        style:
+          type: string
+      type: object
+    Category:
+      additionalProperties: false
+      properties:
+        count:
+          example: 1
+          type: integer
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        listing_description_text_template:
+          type: string
+        listing_features_text_template:
+          type: string
+        listing_pricing_text_template:
+          type: string
+        logo:
+          $ref: "#/components/schemas/Logo"
+        name:
+          type: string
+        slug:
+          type: string
+        translations:
+          $ref: "#/components/schemas/Translations"
+        updated_at:
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+        - name
+        - slug
+      type: object
+    Collection:
+      additionalProperties: false
+      properties:
+        card_background_color:
+          type: string
+        card_background_image:
+          $ref: "#/components/schemas/File"
+        card_columns:
+          type: integer
+        card_style:
+          type: string
+        count:
+          example: 1
+          type: integer
+        description:
+          type: string
+        hidden_from_homepage:
+          type: boolean
+        id:
+          type: string
+        logo:
+          $ref: "#/components/schemas/File"
+        name:
+          type: string
+        sequence:
+          type: integer
+        show_max_items_homepage:
+          type: integer
+        slug:
+          type: string
+        translations:
+          $ref: "#/components/schemas/Translations"
+        visible:
+          type: boolean
+      required:
+        - name
+        - slug
+        - visible
+      type: object
+    Contact:
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        last_name:
+          type: string
+        linked_in:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+        twitter:
+          type: string
+      required:
+        - name
+      type: object
+    CustomSettings:
+      additionalProperties: false
+      properties:
+        css:
+          type: string
+        css_link:
+          type: string
+        domain:
+          type: string
+        html_footer:
+          type: string
+        html_nav:
+          type: string
+        java_script_link:
+          type: string
+      type: object
+    Ecosystem:
+      additionalProperties: false
+      properties:
+        about:
+          type: string
+        alternatives_background_color:
+          type: string
+        alternatives_color:
+          type: string
+        attribution:
+          type: boolean
+        body_background_color:
+          type: string
+        body_button_background_color:
+          type: string
+        body_button_color:
+          type: string
+        body_color:
+          type: string
+        body_link_color:
+          type: string
+        card_settings:
+          $ref: "#/components/schemas/CardSettings"
+        categories_count_badge:
+          type: boolean
+        categories_show_max_items:
+          type: integer
+        collections_count_badge:
+          type: boolean
+        collections_title:
+          type: string
+        create_link:
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        cta_settings:
+          $ref: "#/components/schemas/CTASettings"
+        custom_domain:
+          type: string
+        custom_settings:
+          $ref: "#/components/schemas/CustomSettings"
+        detail_pages_enabled:
+          type: boolean
+        footer_background_color:
+          type: string
+        footer_color:
+          type: string
+        google_site_verification_id:
+          type: string
+        hide_install_buttons:
+          type: boolean
+        home_page_collection_category_cards:
+          type: boolean
+        home_page_show_all_listings:
+          type: boolean
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        installation_request_flow_enabled:
+          type: boolean
+        integration_settings:
+          $ref: "#/components/schemas/IntegrationSettings"
+        is_published:
+          type: boolean
+        lead_form_settings:
+          $ref: "#/components/schemas/LeadFormSettings"
+        listing_settings:
+          $ref: "#/components/schemas/ListingSettings"
+        masthead_settings:
+          $ref: "#/components/schemas/MastheadSettings"
+        menu_position:
+          enum:
+            - TOP
+            - LEFT
+            - RIGHT
+            - HIDDEN
+          type: string
+        menu_style:
+          enum:
+            - LIST
+            - PILL
+            - FILTER
+          type: string
+        meta_tag_settings:
+          $ref: "#/components/schemas/MetaTagSettings"
+        name:
+          type: string
+        navigation_background_color:
+          type: string
+        navigation_color:
+          type: string
+        navigation_logo_post_fix:
+          type: string
+        navigation_mobile_menu_type:
+          enum:
+            - ICON
+            - TEXT
+          type: string
+        navigation_sticky:
+          type: boolean
+        primary_color:
+          type: string
+        privacy_link:
+          type: string
+        request_link:
+          type: string
+        shadow_page_description:
+          type: string
+        shadow_pages_enabled:
+          type: boolean
+        show_attribution_badge:
+          type: boolean
+        show_requested_listings:
+          type: boolean
+        slug:
+          type: string
+        terms_link:
+          type: string
+        total_published_listings:
+          type: integer
+        unify_application_id:
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          type: string
+        utm_campaign:
+          type: string
+        website:
+          type: string
+        zaps_menu_title:
+          type: string
+        zaps_page_enabled:
+          type: boolean
+      required:
+        - name
+        - slug
+        - is_published
+      type: object
+    File:
+      properties:
+        content_type:
+          example: application/jpeg
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        type:
+          enum:
+            - LOGO
+            - BANNER
+            - SCREENSHOT
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          type: string
+        url:
+          type: string
+      required:
+        - url
+      type: object
+    GetCategoriesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Category"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetCategoryResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Category"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetCollectionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Collection"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetCollectionsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Collection"
+          type: array
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetEcosystemResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Ecosystem"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetListingResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Listing"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetListingsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Listing"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetProductResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Product"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetProductsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Product"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    IntegrationSettings:
+      additionalProperties: false
+      properties:
+        albacross_id:
+          type: string
+        automate_enabled:
+          type: boolean
+        blendr_enabled:
+          type: boolean
+        combidesk_enabled:
+          type: boolean
+        crisp_id:
+          type: string
+        drift_id:
+          type: string
+        google_analytics_id:
+          type: string
+        google_tag_manager_id:
+          type: string
+        heap_id:
+          type: string
+        hubspot_portal_id:
+          type: string
+        integromat_enabled:
+          type: boolean
+        intercom_app_id:
+          type: string
+        iubenda_cookie_policy_id:
+          type: string
+        iubenda_site_id:
+          type: string
+        journy_io_domain:
+          type: string
+        journy_io_id:
+          type: string
+        livechat_id:
+          type: string
+        metomic_id:
+          type: string
+        microsoft_flow_enabled:
+          type: boolean
+        microsoft_flow_id:
+          type: string
+        onetrust_id:
+          type: string
+        piesync_enabled:
+          type: boolean
+        segment_enabled:
+          type: boolean
+        segment_id:
+          type: string
+        tray_io_enabled:
+          type: boolean
+        zapier_beta_link:
+          type: string
+        zapier_enabled:
+          type: boolean
+        zapier_id:
+          type: string
+      type: object
+    LeadFormSettings:
+      additionalProperties: false
+      properties:
+        capture_form_enabled:
+          type: boolean
+        first_name_field_enabled:
+          type: boolean
+        first_name_field_required:
+          type: boolean
+        integration_enabled:
+          type: boolean
+        last_name_field_enabled:
+          type: boolean
+        last_name_field_required:
+          type: boolean
+        telephone_field_enabled:
+          type: boolean
+        telephone_field_required:
+          type: boolean
+        work_email_validation:
+          type: boolean
+      type: object
+    Links:
+      description: Links to navigate to previous or next pages through the API
+      properties:
+        current:
+          description: Link to navigate to the current page through the API
+          example: https://api.apideck.com/ecosystem/123abc/listings
+          type: string
+        next:
+          description: Link to navigate to the previous page through the API
+          example: https://api.apideck.com/ecosystem/123abc/listings?cursor=em9oby1jcm06OnBhZ2U6OjM
+          type: string
+        previous:
+          description: Link to navigate to the previous page through the API
+          example: https://api.apideck.com/ecosystem/123abc/listings?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
+          type: string
+      required:
+        - current
+      type: object
+    Listing:
+      additionalProperties: false
+      properties:
+        automate_id:
+          type: string
+        blendr_id:
+          type: string
+        card_background_color:
+          type: string
+        card_background_image:
+          $ref: "#/components/schemas/File"
+        categories:
+          items:
+            $ref: "#/components/schemas/Category"
+          type: array
+        cloud_service_id:
+          type: string
+        collections:
+          items:
+            $ref: "#/components/schemas/Collection"
+          type: array
+        combidesk_id:
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          type: string
+        detail_page_disabled:
+          type: boolean
+        external_id:
+          example: "12345"
+          readOnly: true
+          type: string
+        features:
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        integromat_id:
+          type: string
+        logo:
+          $ref: "#/components/schemas/Logo"
+        media:
+          items:
+            $ref: "#/components/schemas/Media"
+          type: array
+        meta_tag_description:
+          type: string
+        meta_tag_keywords:
+          type: string
+        meta_tag_title:
+          type: string
+        microsoft_flow_id:
+          type: string
+        name:
+          type: string
+        native_integration:
+          type: boolean
+        native_integration_link:
+          type: string
+        partner:
+          $ref: "#/components/schemas/Partner"
+        piesync_id:
+          type: string
+        pricing:
+          type: string
+        products:
+          items:
+            $ref: "#/components/schemas/Product"
+          type: array
+        published:
+          type: boolean
+        published_at:
+          format: date-time
+          readOnly: true
+          type: string
+        screenshots:
+          items:
+            $ref: "#/components/schemas/Screenshot"
+          type: array
+        segment_id:
+          type: string
+        slug:
+          type: string
+        sticky:
+          type: boolean
+        tag_line:
+          type: string
+        third_party_integration:
+          type: boolean
+        third_party_integration_link:
+          type: string
+        translations:
+          $ref: "#/components/schemas/Translations"
+        tray_io_id:
+          type: string
+        unify_connector_id:
+          type: string
+        upcoming:
+          type: boolean
+        updated_at:
+          format: date-time
+          readOnly: true
+          type: string
+        zapier_id:
+          type: string
+      required:
+        - name
+        - slug
+      type: object
+    ListingSettings:
+      additionalProperties: false
+      properties:
+        description_text_template:
+          type: string
+        description_title:
+          type: string
+        features_text_template:
+          type: string
+        features_title:
+          type: string
+        install_button_label:
+          type: string
+        name_postfix:
+          type: string
+        naming:
+          enum:
+            - LISTING
+            - LISTINGS
+            - INTEGRATIONS
+            - APPS
+            - CONNECTORS
+            - DATASOURCES
+            - ADDONS
+            - PLUGINS
+            - PARTNERS
+            - CHANNELS
+            - CONNECTIONS
+            - EXTENSIONS
+          type: string
+        native_integration_link:
+          type: string
+        pricing_disabled:
+          type: boolean
+        pricing_text_template:
+          type: string
+        pricing_title:
+          type: string
+        sidebar_position:
+          enum:
+            - TOP
+            - LEFT
+            - RIGHT
+            - HIDDEN
+          type: string
+      type: object
+    Logo:
+      additionalProperties: false
+      properties:
+        content_type:
+          type: string
+        id:
+          type: string
+        type:
+          enum:
+            - LOGO
+            - BANNER
+            - SCREENSHOT
+          type: string
+        url:
+          type: string
+      required:
+        - url
+      type: object
+    MastheadSettings:
+      additionalProperties: false
+      properties:
+        background:
+          type: string
+        background_color:
+          type: string
+        color:
+          type: string
+        columns:
+          type: integer
+        description:
+          type: string
+        title:
+          type: string
+      type: object
+    Media:
+      additionalProperties: false
+      properties:
+        caption:
+          example: Media
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        sequence:
+          example: 1
+          type: integer
+        translations:
+          $ref: "#/components/schemas/Translations"
+        type:
+          enum:
+            - SCREENSHOT
+            - VIDEO
+          type: string
+        url:
+          type: string
+      required:
+        - url
+      type: object
+    Meta:
+      description: Response metadata
+      properties:
+        cursors:
+          description: Cursors to navigate to previous or next pages through the API
+          properties:
+            current:
+              description: Cursor to navigate to the current page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjI=
+              nullable: true
+              type: string
+            next:
+              description: Cursor to navigate to the next page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjM=
+              nullable: true
+              type: string
+            previous:
+              description: Cursor to navigate to the previous page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjE=
+              nullable: true
+              type: string
+          type: object
+        items_on_page:
+          description: Number of items returned in the data property of the response
+          example: 50
+          type: integer
+      type: object
+    MetaTagSettings:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        description_category_page:
+          type: string
+        description_collection_page:
+          type: string
+        description_listing_page:
+          type: string
+        keywords:
+          type: string
+        title:
+          type: string
+        title_postfix:
+          type: string
+      type: object
+    Partner:
+      additionalProperties: false
+      properties:
+        company:
+          type: string
+        contacts:
+          items:
+            $ref: "#/components/schemas/Contact"
+          type: array
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        icon:
+          $ref: "#/components/schemas/File"
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        listed:
+          type: string
+        twitter:
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          type: string
+        website:
+          type: string
+      required:
+        - company
+      type: object
+    Product:
+      additionalProperties: false
+      properties:
+        count:
+          example: 1
+          type: integer
+        description:
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        logo:
+          $ref: "#/components/schemas/File"
+        name:
+          type: string
+        sequence:
+          example: 1
+          type: integer
+        slug:
+          type: string
+        translations:
+          $ref: "#/components/schemas/Translations"
+        visible:
+          type: boolean
+      required:
+        - name
+        - slug
+        - visible
+      type: object
+    Screenshot:
+      additionalProperties: false
+      properties:
+        caption:
+          example: Screenshot
+          type: string
+        file:
+          $ref: "#/components/schemas/File"
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        translations:
+          $ref: "#/components/schemas/Translations"
+      type: object
+    Translation:
+      properties:
+        key:
+          type: string
+        locale:
+          type: string
+        value:
+          type: string
+      required:
+        - key
+        - locale
+      type: object
+    Translations:
+      items:
+        $ref: "#/components/schemas/Translation"
+      nullable: true
+      required:
+        - key
+        - locale
+        - value
+      type: array

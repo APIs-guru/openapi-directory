@@ -1,0 +1,2041 @@
+openapi: 3.0.1
+servers:
+  - url: https://api.nexmo.com/v1/messages
+info:
+  contact:
+    email: devrel@nexmo.com
+    name: Nexmo DevRel
+    url: https://developer.nexmo.com/
+  description: The Messages API consolidates and normalises exchanges across all messaging channels. It allows you to use a single API to interact with our various channels such as SMS, MMS, WhatsApp, Viber and Facebook Messenger
+  title: Messages API
+  version: 1.4.0
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_www.vonage.com_content_dam_vonage_us-en_api_illustrations_Mobile_APIs_Services.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/messages-olympus.yml
+      version: "3.0"
+  x-providerName: nexmo.com
+  x-serviceName: messages-olympus
+paths:
+  /:
+    post:
+      callbacks:
+        message-status:
+          "{$request.body#/callback}":
+            post:
+              description: Webhooks provide information about events happening to the message such as whether it has been sent, delivered or rejected by the provider.
+              operationId: message-status
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      oneOf:
+                        - $ref: "#/components/schemas/messageStatusSMS"
+                        - $ref: "#/components/schemas/messageStatusMMS"
+                        - $ref: "#/components/schemas/messageStatusWhatsApp"
+                        - $ref: "#/components/schemas/messageStatusMessenger"
+                        - $ref: "#/components/schemas/messageStatusViber"
+                required: true
+              responses:
+                "200":
+                  description: Your server returns this code if it accepts the callback.
+              summary: Message Status
+              x-example-path: /webhooks/message-status
+      description: Send a Message
+      operationId: SendMessage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - oneOf:
+                    - allOf:
+                        - $ref: "#/components/schemas/Text"
+                        - properties:
+                            text:
+                              description: |
+                                The text of message to send; limited to 1000 characters. The Messages API automatically detects unicode characters when sending SMS and sends the message as a unicode SMS. For more information on how concatenation and encoding please visit: [developer.nexmo.com/messaging/sms/guides/concatenation-and-encoding](https://developer.nexmo.com/messaging/sms/guides/concatenation-and-encoding).
+                        - $ref: "#/components/schemas/channelOptionsSms"
+                  title: SMS
+                  x-tab-id: SMS
+                - oneOf:
+                    - allOf:
+                        - $ref: "#/components/schemas/Image"
+                        - properties:
+                            image:
+                              properties:
+                                caption:
+                                  description: Additional text to accompany the image.
+                                  example: Additional text to accompany the image.
+                                  maxLength: 2000
+                                  minLength: 1
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the image attachment.
+
+                                    Supports `.jpg`, `.jpeg`, `.png` and `.gif`.
+                                  example: https://example.com/image.jpg
+                                  type: string
+                              required:
+                                - url
+                        - $ref: "#/components/schemas/channelOptionsMms"
+                    - allOf:
+                        - $ref: "#/components/schemas/vCard"
+                        - properties:
+                            vcard:
+                              properties:
+                                url:
+                                  description: |
+                                    The URL of the vCard attachment.
+
+                                    Supports `.vcf` only.
+                                  example: https://example.com/contact.vcf
+                                  type: string
+                              required:
+                                - url
+                        - $ref: "#/components/schemas/channelOptionsMms"
+                    - allOf:
+                        - $ref: "#/components/schemas/Audio"
+                        - properties:
+                            audio:
+                              properties:
+                                caption:
+                                  description: Additional text to accompany the audio file.
+                                  example: Additional text to accompany the audio file.
+                                  maxLength: 2000
+                                  minLength: 1
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the audio attachment.
+                                  example: https://example.com/audio.mp3
+                                  type: string
+                              required:
+                                - url
+                            message_type:
+                              description: |
+                                The type of message to send. You must provide `audio` in this field.
+
+                                For best device and network support .mp3 is recommended. Not supported for US short codes.
+                              enum:
+                                - audio
+                              example: audio
+                              type: string
+                        - $ref: "#/components/schemas/channelOptionsMms"
+                    - allOf:
+                        - $ref: "#/components/schemas/Video"
+                        - properties:
+                            message_type:
+                              description: |
+                                The type of message to send. You must provide `video` in this field.
+
+                                For best device and network support .mp4 is recommended. Not supported for US short codes.
+                              enum:
+                                - video
+                              example: video
+                              type: string
+                            video:
+                              properties:
+                                caption:
+                                  description: Additional text to accompany the video file.
+                                  example: Additional text to accompany the video file.
+                                  maxLength: 2000
+                                  minLength: 1
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the video attachment.
+                                  example: https://example.com/video.mp4
+                                  type: string
+                              required:
+                                - url
+                        - $ref: "#/components/schemas/channelOptionsMms"
+                  title: MMS
+                  x-tab-id: MMS
+                - oneOf:
+                    - allOf:
+                        - $ref: "#/components/schemas/Text"
+                        - properties:
+                            text:
+                              description: |
+                                The text of message to send; limited to 4096 characters, including unicode.
+                        - $ref: "#/components/schemas/channelOptionsWhatsapp"
+                    - allOf:
+                        - $ref: "#/components/schemas/Location"
+                        - properties:
+                            text:
+                              description: |
+                                The location to be sent in the message.
+                        - $ref: "#/components/schemas/channelOptionsWhatsapp"
+                    - allOf:
+                        - $ref: "#/components/schemas/Image"
+                        - properties:
+                            image:
+                              properties:
+                                caption:
+                                  description: Additional text to accompany the image.
+                                  example: Additional text to accompany the image.
+                                  maxLength: 3000
+                                  minLength: 1
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the image attachment.
+
+                                    Supports `.jpg`, `.jpeg`, and `.png`.
+                                  example: https://example.com/image.jpg
+                                  type: string
+                              required:
+                                - url
+                        - $ref: "#/components/schemas/channelOptionsWhatsapp"
+                    - allOf:
+                        - $ref: "#/components/schemas/Audio"
+                        - properties:
+                            audio:
+                              properties:
+                                url:
+                                  description: |
+                                    The URL of the audio attachment.
+
+                                    Supports `.aac`, `.m4a`, `.amr`, `.mp3` and `.opus`.
+                                  maxLength: 2000
+                                  minLength: 10
+                              required:
+                                - url
+                        - $ref: "#/components/schemas/channelOptionsWhatsapp"
+                    - allOf:
+                        - $ref: "#/components/schemas/Video"
+                        - properties:
+                            video:
+                              properties:
+                                caption:
+                                  description: Additional text to accompany the file.
+                                  example: Additional text.
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the video attachment.
+
+                                    Supports `.mp4` and `.3gpp`. Note, only `H.264` video codec and `AAC` audio codec is supported.
+                              required:
+                                - url
+                        - $ref: "#/components/schemas/channelOptionsWhatsapp"
+                    - allOf:
+                        - $ref: "#/components/schemas/File"
+                        - properties:
+                            file:
+                              properties:
+                                caption:
+                                  description: Additional text to accompany the file.
+                                  example: Additional text.
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the file attachment.
+
+                                    Supports supports a wide range of attachments including `.zip`, `.csv` and `.pdf`.
+                              required:
+                                - url
+                        - $ref: "#/components/schemas/channelOptionsWhatsapp"
+                    - allOf:
+                        - required:
+                            - message_type
+                            - whatsapp
+                        - $ref: "#/components/schemas/Template"
+                        - $ref: "#/components/schemas/channelOptionsWhatsapp"
+                        - properties:
+                            whatsapp:
+                              properties:
+                                locale:
+                                  description: The [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag) language of the template. See [the WhatsApp documentation](https://developers.facebook.com/docs/whatsapp/api/messages/message-templates#supported-languages-) for supported languages.
+                                  example: en_US
+                                  type: string
+                                policy:
+                                  description: Policy for resolving what language template to use. As of right now the only valid choice is `deterministic`.
+                                  enum:
+                                    - deterministic
+                                  example: deterministic
+                                  type: string
+                              required:
+                                - locale
+                              type: object
+                    - allOf:
+                        - required:
+                            - message_type
+                        - $ref: "#/components/schemas/Custom"
+                        - $ref: "#/components/schemas/channelOptionsWhatsapp"
+                  title: WhatsApp
+                  x-tab-id: WhatsApp
+                - oneOf:
+                    - allOf:
+                        - $ref: "#/components/schemas/Text"
+                        - properties:
+                            text:
+                              description: |
+                                The text of message to send; limited to 640 characters, including unicode.
+                        - $ref: "#/components/schemas/channelOptionsMessenger"
+                    - allOf:
+                        - $ref: "#/components/schemas/Image"
+                        - properties:
+                            image:
+                              properties:
+                                url:
+                                  description: |
+                                    The URL of the image attachment.
+
+                                    Supports `.jpg`, `.jpeg`, `.png` and `.gif`.
+                                  example: https://example.com/image.jpg
+                                  type: string
+                        - $ref: "#/components/schemas/channelOptionsMessenger"
+                    - allOf:
+                        - $ref: "#/components/schemas/Audio"
+                        - properties:
+                            audio:
+                              properties:
+                                url:
+                                  description: |
+                                    The URL of the audio attachment.
+
+                                    Only supports `.mp3` files
+                                  maxLength: 2000
+                                  minLength: 10
+                        - $ref: "#/components/schemas/channelOptionsMessenger"
+                    - allOf:
+                        - $ref: "#/components/schemas/Video"
+                        - properties:
+                            video:
+                              properties:
+                                url:
+                                  description: |
+                                    The URL of the video attachment.
+
+                                    Supports `.mp4` files. Note, only `H.264` video codec and `AAC` audio codec is supported.
+                        - $ref: "#/components/schemas/channelOptionsMessenger"
+                    - allOf:
+                        - $ref: "#/components/schemas/File"
+                        - properties:
+                            file:
+                              properties:
+                                url:
+                                  description: |
+                                    The URL of the file attachment.
+
+                                    Supports a wide range of attachments including `.zip`, `.csv` and `.pdf`.
+                        - $ref: "#/components/schemas/channelOptionsMessenger"
+                  title: Messenger
+                  x-tab-id: Messenger
+                - oneOf:
+                    - allOf:
+                        - $ref: "#/components/schemas/Text"
+                        - properties:
+                            text:
+                              description: |
+                                The text of message to send; limited to 1000 characters, including unicode.
+                        - $ref: "#/components/schemas/channelOptionsViberWithButton"
+                    - allOf:
+                        - $ref: "#/components/schemas/Image"
+                        - properties:
+                            image:
+                              properties:
+                                caption:
+                                  description: A caption to accompany the image. Required if the message includes an action button.
+                                  example: Check out this new promotion
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the image attachment.
+
+                                    Supports `.jpg`, `.jpeg`, and `.png`.
+                                  example: https://example.com/image.jpg
+                                  type: string
+                        - $ref: "#/components/schemas/channelOptionsViberWithButton"
+                    - allOf:
+                        - $ref: "#/components/schemas/Video"
+                        - properties:
+                            video:
+                              properties:
+                                caption:
+                                  description: Text caption to accompany message.
+                                  example: Check out this new video
+                                  type: string
+                                thumb_url:
+                                  description: URL to an image file for a thumbnail preview of the video.
+                                  example: https://example.com/file1.jpg
+                                  maxLength: 1000
+                                  type: string
+                                url:
+                                  description: The URL of the video attachment.
+                                  example: https://example.com/image.jpg
+                                  type: string
+                              required:
+                                - url
+                                - duration
+                                - file_size
+                                - thumb_url
+                        - $ref: "#/components/schemas/channelOptionsViberVideo"
+                    - allOf:
+                        - $ref: "#/components/schemas/File"
+                        - properties:
+                            file:
+                              description: "An object containing details of the file to be sent. Note: allowed file types are `.doc,` `.docx`, `.rtf`, `.dot`, `.dotx`, `.odt`, `.odf`, `.fodt`, `.txt`, `.info`, `.pdf`, `.xps`, `.pdax`, `.eps`, `.xls`, `.xlsx`, `.ods`, `.fods`, `.csv`, `.xlsm`, `.xltx`. Maximum file size is 200MB"
+                              properties:
+                                name:
+                                  description: The name and extension of the file.
+                                  example: example.pdf
+                                  maxLength: 25
+                                  type: string
+                                url:
+                                  description: The URL for the file attachment *or* the path for the location of the file attachement. If `name` is included, can just be the path. If  `name` is not included, must include the filename and extension.
+                                  example: https://example.com/files/
+                                  type: string
+                        - $ref: "#/components/schemas/channelOptionsViber"
+                  title: Viber
+                  x-tab-id: Viber
+        description: Send a Message.
+        required: true
+        x-show-example-request: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - description: SMS
+                    properties:
+                      message_uuid:
+                        $ref: "#/components/schemas/MessageUuid"
+                    type: object
+                    x-tab-id: SMS
+                  - description: MMS
+                    properties:
+                      message_uuid:
+                        $ref: "#/components/schemas/MessageUuid"
+                    type: object
+                    x-tab-id: MMS
+                  - description: WhatsApp
+                    properties:
+                      message_uuid:
+                        $ref: "#/components/schemas/MessageUuid"
+                    type: object
+                    x-tab-id: WhatsApp
+                  - description: Messenger
+                    properties:
+                      message_uuid:
+                        $ref: "#/components/schemas/MessageUuid"
+                    type: object
+                    x-tab-id: Messenger
+                  - description: Viber
+                    properties:
+                      message_uuid:
+                        $ref: "#/components/schemas/MessageUuid"
+                    type: object
+                    x-tab-id: Viber
+                type: object
+          description: Accepted.
+        "401":
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/ErrorUnauthorizedMissingCredentials"
+                  - $ref: "#/components/schemas/ErrorUnauthorizedInvalidApplication"
+          description: Authentication failure
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorPaymentRequired"
+          description: Payment Required
+        "422":
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/ErrorInvalidJson"
+                  - $ref: "#/components/schemas/ErrorChannel"
+                  - $ref: "#/components/schemas/ErrorChannelParams"
+                  - $ref: "#/components/schemas/ErrorSender"
+                  - $ref: "#/components/schemas/ErrorRecipient"
+                  - $ref: "#/components/schemas/ErrorMessageType"
+                  - $ref: "#/components/schemas/ErrorMessageParams"
+                  - $ref: "#/components/schemas/ErrorClientReference"
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorThrottled"
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorInternal"
+          description: Internal error
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Send a message to the given channel.
+components:
+  schemas:
+    Audio:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            audio:
+              properties:
+                url:
+                  example: https://example.com/audio.mp3
+                  format: url
+                  type: string
+              required:
+                - url
+              type: object
+            message_type:
+              description: The type of message to send. You must provide `audio` in this field
+              enum:
+                - audio
+              example: audio
+              type: string
+          required:
+            - audio
+          title: Audio
+          type: object
+          x-tab-id: Audio
+    Context:
+      description: |
+        This is only present for the Inbound Message where the user is quoting another message, or for a `product` message where the user has selected the 'Message Business' 
+        option. It provides information about the quoted message and/or the product message being responded to. 
+      properties:
+        message_from:
+          description: The phone number of the **original sender** of the message being quoted in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Not present in a `context` object which is the result of a user selecting 'Message Business' in a `product` message.
+          example: "447700900000"
+          type: string
+        message_uuid:
+          description: The UUID of the message being quoted. Not present in a `context` object which is the result of a user selecting 'Message Business' in a `product` message.
+          example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
+          type: string
+        whatsapp_referred_product:
+          description: |
+            An object containing details of a product from a `product` message being quoted or replied to using the 'Message Business' option.
+          properties:
+            catalog_id:
+              description: The ID of the catalog associated with the product from the `product` message being quoted or replied to using the 'Message Business' option.
+              example: "1267260820787549"
+              type: string
+            product_retailer_id:
+              description: The ID of the product from the `product` message being quoted or replied to using the 'Message Business' option.
+              example: r07qei73l7
+              type: string
+          required:
+            - catalog_id
+            - product_retailer_id
+          type: object
+      required:
+        - message_uuid
+        - message_from
+      type: object
+    Custom:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            custom:
+              additionalProperties: true
+              description: A custom payload, which is passed directly to WhatsApp for certain features such as templates and interactive messages. The schema of a custom object can vary widely. [Read more about Custom Objects](https://developer.vonage.com/messages/concepts/custom-objects).
+              type: object
+            message_type:
+              description: The type of message to send. You must provide `custom` in this field
+              enum:
+                - custom
+              example: custom
+              type: string
+          title: Custom
+          type: object
+          x-tab-id: Custom
+    ErrorChannel:
+      description: Unsupported channel
+      properties:
+        detail:
+          description: Additional information about the error
+          example: The specified channel is not supported.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Unsupported channel
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#1100
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorChannelParams:
+      description: Invalid channel parameters
+      properties:
+        detail:
+          description: Additional information about the error
+          example: The value of one or more parameters is invalid.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        invalid_parameters:
+          items:
+            properties:
+              name:
+                description: Name of invalid parameter
+                example: messenger.category
+                type: string
+              reason:
+                description: Reason of failure
+                example: Must be one of `response`, `update` or `message_tag`.
+                type: string
+            type: object
+          type: array
+        title:
+          description: Generic error message
+          example: Invalid channel parameters
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#1110
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorClientReference:
+      description: Invalid client reference
+      properties:
+        detail:
+          description: Additional information about the error
+          example: The client reference can be a string of up to 40 characters.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Invalid client reference
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#1060
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorInternal:
+      properties:
+        detail:
+          description: Additional information about the error
+          example: There was an error processing your request in the Platform.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Internal error
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#1000
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorInvalidJson:
+      description: Invalid JSON
+      properties:
+        detail:
+          description: Additional information about the error
+          example: "Unexpected character ('\"' (code 34)): was expecting comma to separate Object entries"
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: The request body did not contain valid JSON
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors#invalid-json
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorMessageParams:
+      description: Invalid message parameters
+      properties:
+        detail:
+          description: Additional information about the error
+          example: The value of one or more parameters is invalid.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        invalid_parameters:
+          items:
+            properties:
+              name:
+                description: Name of invalid parameter
+                example: image.url
+                type: string
+              reason:
+                description: Reason of failure
+                example: is required.
+                type: string
+            type: object
+          type: array
+        title:
+          description: Generic error message
+          example: Invalid params
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#1150
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorMessageType:
+      description: Invalid message type
+      properties:
+        detail:
+          description: Additional information about the error
+          example: The `to` parameter is invalid for the given channel.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Invalid message type
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#1140
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorPaymentRequired:
+      properties:
+        detail:
+          description: Additional information about the error
+          example: This request could not be performed due to your account balance being low.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Low balance
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/#low-balance
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorRecipient:
+      description: Invalid recipient
+      properties:
+        detail:
+          description: Additional information about the error
+          example: The `to` parameter is invalid for the given channel.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Invalid recipient
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#110
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorSender:
+      description: Invalid sender
+      properties:
+        detail:
+          description: Additional information about the error
+          example: The `from` parameter is invalid for the given channel.
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Invalid sender
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#1120
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorThrottled:
+      properties:
+        detail:
+          description: Additional information about the error
+          example: Please wait, then retry your request
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Rate Limit Hit
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/messages-olympus#1000
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
+    ErrorUnauthorizedInvalidApplication:
+      description: Invalid Application Type
+      properties:
+        detail:
+          description: Additional information about the error
+          example: Check your API key is correct and has been whitelisted
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: The crendentials provided do not have access to the requested product
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/#unprovisioned
+          type: string
+      required:
+        - type
+        - title
+        - details
+        - instance
+      type: object
+    ErrorUnauthorizedMissingCredentials:
+      description: Missing or Invalid Credentials
+      properties:
+        detail:
+          description: Additional information about the error
+          example: Check that you're using the correct credentials, and that your account has this feature enabled
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: You did not provide correct credentials.
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/#unathorized
+          type: string
+      required:
+        - type
+        - title
+        - details
+        - instance
+      type: object
+    File:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            file:
+              properties:
+                url:
+                  example: https://example.com/file.pdf
+                  type: string
+              required:
+                - url
+              type: object
+            message_type:
+              description: The type of message to send. You must provide `file` in this field
+              enum:
+                - file
+              example: file
+              type: string
+          required:
+            - file
+          title: File
+          type: object
+          x-tab-id: File
+    FromId:
+      description: |
+        The ID of the message sender
+      example: "9876543210"
+      maxLength: 50
+      minLength: 1
+      type: string
+    FromNumber:
+      description: |
+        The phone number of the message **sender** in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000. For SMS in certain localities alpha-numeric sender id's will work as well, see [Global Messaging](https://developer.nexmo.com/messaging/sms/guides/country-specific-features#country-specific-features) for more details
+      example: "447700900001"
+      type: string
+    Image:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            image:
+              properties:
+                url:
+                  description: The publicly accessible URL of the image attachment. The image file is available for 48 hours after it is created. Supported types are .jpg, .jpeg, and .png
+                  example: https://example.com/image.jpg
+                  format: url
+                  type: string
+              required:
+                - url
+              type: object
+            message_type:
+              description: The type of message to send. You must provide `image` in this field
+              enum:
+                - image
+              example: image
+              type: string
+          required:
+            - image
+          title: Image
+          type: object
+          x-tab-id: Image
+    InboundMessengerMessageCommon:
+      properties:
+        channel:
+          description: The channel that the message came in on
+          enum:
+            - messenger
+          example: messenger
+          type: string
+        from:
+          $ref: "#/components/schemas/FromId"
+        message_uuid:
+          $ref: "#/components/schemas/MessageUuid"
+        timestamp:
+          $ref: "#/components/schemas/Timestamp"
+        to:
+          $ref: "#/components/schemas/ToId"
+      required:
+        - channel
+        - message_uuid
+        - to
+        - from
+        - timestamp
+      title: Messenger
+      x-tab-id: Messenger
+    InboundViberMessageCommon:
+      properties:
+        channel:
+          description: The channel that the message came in on
+          enum:
+            - viber_service
+          example: viber_service
+          type: string
+        context:
+          description: Object containing contextual details for the inbound message when it is a response to another message.
+          properties:
+            message_uuid:
+              description: The ID of the message being replied to.
+              example: 1234567890abcdef
+              type: string
+          type: object
+        from:
+          $ref: "#/components/schemas/FromNumber"
+        message_uuid:
+          $ref: "#/components/schemas/MessageUuid"
+        timestamp:
+          $ref: "#/components/schemas/Timestamp"
+        to:
+          $ref: "#/components/schemas/ToId"
+      required:
+        - channel
+        - message_uuid
+        - to
+        - from
+        - timestamp
+      title: Viber
+      x-tab-id: Viber
+    Location:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            location:
+              properties:
+                address:
+                  description: Address of the location. Only displayed if `name` is present.
+                  example: 23 Main St, Holmdel, NJ 07733, USA
+                  type: string
+                lat:
+                  description: Latitude of the location.
+                  example: 40.34772
+                  type: number
+                long:
+                  description: Longitude of the location.
+                  example: -74.18847
+                  type: number
+                name:
+                  description: Name of the location.
+                  example: Vonage
+                  type: string
+              required:
+                - lat
+                - long
+              type: object
+            message_type:
+              description: The type of message to send. You must provide `location` in this field
+              enum:
+                - location
+              example: location
+              type: string
+          required:
+            - location
+          title: Location
+          type: object
+          x-tab-id: Location
+    MessageUuid:
+      description: The UUID of the message
+      example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
+      type: string
+    Order:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            message_type:
+              description: The type of message to send.
+              enum:
+                - order
+              example: order
+              type: string
+            order:
+              properties:
+                catalog_id:
+                  description: The ID of the catalog containing the products in this order.
+                  example: "2806150799683508"
+                  type: string
+                product_items:
+                  items:
+                    properties:
+                      currency:
+                        description: The currency code representing the currency for this specific item.
+                        example: USD
+                        type: string
+                      item_price:
+                        description: The unit price for this specific item.
+                        example: "9.99"
+                        type: string
+                      product_retailer_id:
+                        description: The ID of the specific product being ordered.
+                        example: pk1v7rudbg
+                        type: string
+                      quantity:
+                        description: The quantity ordered for this specific item.
+                        example: "1"
+                        type: string
+                    type: object
+                  type: array
+              required:
+                - catalog_id
+                - product_items
+              type: object
+          required:
+            - order
+          title: Order
+          type: object
+          x-tab-id: Order
+    Profile:
+      properties:
+        name:
+          description: The WhatsApp number's displayed profile name
+          example: Jane Smith
+          type: string
+      required:
+        - name
+      type: object
+    Reply:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            message_type:
+              description: The type of message to send. You must provide `custom` in this field.
+              enum:
+                - reply
+              example: reply
+              type: string
+            reply:
+              properties:
+                description:
+                  description: A description that may be added to the interactive options presented (available only on interactive lists).
+                  example: Select 9am appointmaent time
+                  type: string
+                id:
+                  description: An identifier to help identify the exact interactive message response.
+                  example: row1
+                  type: string
+                title:
+                  description: The title displayed on the interactive option chosen.
+                  example: 9am
+                  type: string
+              required:
+                - id
+                - title
+              type: object
+          required:
+            - reply
+          title: Reply
+          type: object
+          x-tab-id: Reply
+    Template:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            message_type:
+              description: The type of message to send. You must provide `template` in this field
+              enum:
+                - template
+              example: template
+              type: string
+            template:
+              properties:
+                name:
+                  description: "The name of the template. For WhatsApp use your WhatsApp namespace (available via Facebook Business Manager), followed by a colon : and the name of the template to use."
+                  example: 9b6b4fcb_da19_4a26_8fe8_78074a91b584:verify
+                  type: string
+                parameters:
+                  $ref: "#/components/schemas/TemplateParameters"
+              required:
+                - name
+              type: object
+          required:
+            - template
+          title: Template
+          type: object
+          x-tab-id: Template
+    TemplateParameters:
+      description: The parameters are an array of strings, with the first string being used for {{1}} in the template, with the second being {{2}} etc. Only required if the template specified by `name` contains parameters.
+      example:
+        - Verification
+        - "2526"
+        - "5"
+      items:
+        type: string
+      type: array
+    Text:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - description: The text of message to send.
+          properties:
+            message_type:
+              description: The type of message to send. You must provide `text` in this field
+              enum:
+                - text
+              example: text
+              type: string
+            text:
+              example: "Nexmo Verification code: 12345.<br />Valid for 10 minutes."
+              type: string
+          required:
+            - text
+          title: Text
+          x-tab-id: Text
+    Timestamp:
+      description: The datetime of when the event occurred, in `ISO 8601` format.
+      example: 2020-01-01T14:00:00.000Z
+      type: string
+    ToId:
+      description: |
+        The ID of the message recipient
+      example: "0123456789"
+      maxLength: 50
+      minLength: 1
+      type: string
+    ToNumber:
+      description: |
+        The phone number of the message **recipient** in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+      example: "447700900000"
+      maxLength: 15
+      minLength: 7
+      type: string
+    Unsupported:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            message_type:
+              description: The type of message to send. Will be `unsupported` if the type of message received from user is not supported by the channel.
+              enum:
+                - unsupported
+              example: unsupported
+              type: string
+          required:
+            - message_type
+          title: Unsupported
+          type: object
+          x-tab-id: Unsupported
+    Usage:
+      properties:
+        currency:
+          description: The charge currency in ISO 4217 format.
+          enum:
+            - EUR
+          example: EUR
+          type: string
+        price:
+          description: The charge amount as a stringified number.
+          example: "0.0333"
+          type: string
+      type: object
+    Video:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            message_type:
+              description: The type of message to send. You must provide `video` in this field
+              enum:
+                - video
+              example: video
+              type: string
+            video:
+              properties:
+                url:
+                  description: |
+                    Publicly accessible URL of the video attachment. Supports file types .mp4 and .3gpp
+                    > Note: Only supports video codec H.264 and audio codec AAC
+                  example: https://example.com/video.mp4
+                  format: url
+                  type: string
+              required:
+                - url
+              type: object
+          required:
+            - video
+          title: Video
+          type: object
+          x-tab-id: Video
+    baseMessageType:
+      properties:
+        client_ref:
+          description: Client reference of up to 100 characters. The reference will be present in every message status.
+          type: string
+      required:
+        - to
+        - from
+        - message
+        - message_type
+        - channel
+      type: object
+    channelOptionsMessenger:
+      properties:
+        channel:
+          description: The channel to send to. You must provide `messenger` in this field
+          enum:
+            - messenger
+          example: messenger
+          type: string
+        from:
+          $ref: "#/components/schemas/FromId"
+        messenger:
+          properties:
+            category:
+              description: The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Vonage maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Vonage sends the `response` category to Facebook Messenger.
+              enum:
+                - response
+                - update
+                - message_tag
+              example: response
+              type: string
+            tag:
+              description: A tag describing the type and relevance of the 1:1 communication between your app and the end user. A full list of available tags is available [here](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)
+              example: CONFIRMED_EVENT_UPDATE
+              type: string
+          type: object
+        to:
+          $ref: "#/components/schemas/ToId"
+      type: object
+    channelOptionsMms:
+      properties:
+        channel:
+          description: The channel to send to. You must provide `mms` in this field
+          enum:
+            - mms
+          example: mms
+          type: string
+        from:
+          $ref: "#/components/schemas/FromNumber"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+      type: object
+    channelOptionsSms:
+      properties:
+        channel:
+          description: The channel to send to. You must provide `sms` in this field
+          enum:
+            - sms
+          example: sms
+          type: string
+        from:
+          $ref: "#/components/schemas/FromNumber"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+      type: object
+    channelOptionsViber:
+      properties:
+        channel:
+          description: The channel to send to. You must provide `viber_service` in this field
+          enum:
+            - viber_service
+          example: viber_service
+          type: string
+        from:
+          $ref: "#/components/schemas/FromId"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+        viber_service:
+          properties:
+            category:
+              description: The use of different category tags enables the business to send messages for different use cases. For Viber Business Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Business Messages.
+              enum:
+                - transaction
+                - promotion
+              type: string
+            ttl:
+              description: Set the time-to-live of message to be delivered in seconds. i.e. if the message is not delivered in 600 seconds then delete the message.
+              example: 600
+              maximum: 259200
+              minimum: 30
+              type: integer
+            type:
+              description: Viber-specific type definition. To use "template", please contact your Vonage Account Manager to setup your templates. To find out more please visit the [product page](https://www.vonage.com/communications-apis/messages/)
+              type: string
+          type: object
+      type: object
+    channelOptionsViberVideo:
+      properties:
+        channel:
+          description: The channel to send to. You must provide `viber_service` in this field
+          enum:
+            - viber_service
+          example: viber_service
+          type: string
+        from:
+          $ref: "#/components/schemas/FromId"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+        viber_service:
+          properties:
+            category:
+              description: The use of different category tags enables the business to send messages for different use cases. For Viber Business Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Business Messages.
+              enum:
+                - transaction
+                - promotion
+              type: string
+            duration:
+              description: The duration of the video in seconds.
+              example: "123"
+              maximum: 600
+              minimum: 1
+              type: string
+            file_size:
+              description: The file size of the video in MB.
+              example: "1"
+              maximum: 200
+              minimum: 1
+              type: string
+            ttl:
+              description: Set the time-to-live of message to be delivered in seconds. i.e. if the message is not delivered in 600 seconds then delete the message.
+              example: 600
+              maximum: 259200
+              minimum: 30
+              type: integer
+            type:
+              description: Viber-specific type definition. To use "template", please contact your Vonage Account Manager to setup your templates. To find out more please visit the [product page](https://www.vonage.com/communications-apis/messages/)
+              type: string
+          type: object
+      type: object
+    channelOptionsViberWithButton:
+      properties:
+        channel:
+          description: The channel to send to. You must provide `viber_service` in this field
+          enum:
+            - viber_service
+          example: viber_service
+          type: string
+        from:
+          $ref: "#/components/schemas/FromId"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+        viber_service:
+          properties:
+            action:
+              description: Node for Viber action buttons.
+              properties:
+                text:
+                  description: Text which is rendered on the action button.
+                  example: Find out more
+                  maxLength: 30
+                  type: string
+                url:
+                  description: A URL which is requested when the action button is clicked.
+                  example: https://example.com/page1.html
+                  type: string
+              type: object
+            category:
+              description: The use of different category tags enables the business to send messages for different use cases. For Viber Business Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Business Messages.
+              enum:
+                - transaction
+                - promotion
+              type: string
+            ttl:
+              description: Set the time-to-live of message to be delivered in seconds. i.e. if the message is not delivered in 600 seconds then delete the message.
+              example: 600
+              maximum: 259200
+              minimum: 30
+              type: integer
+            type:
+              description: Viber-specific type definition. To use "template", please contact your Vonage Account Manager to setup your templates. To find out more please visit the [product page](https://www.vonage.com/communications-apis/messages/)
+              type: string
+          type: object
+      type: object
+    channelOptionsWhatsapp:
+      properties:
+        channel:
+          description: The channel to send to. You must provide `whatsapp` in this field
+          enum:
+            - whatsapp
+          example: whatsapp
+          type: string
+        from:
+          $ref: "#/components/schemas/FromNumber"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+      type: object
+    inboundMessageMMS:
+      properties:
+        channel:
+          description: The channel the message came in on
+          enum:
+            - mms
+          example: mms
+          type: string
+        from:
+          $ref: "#/components/schemas/FromNumber"
+        message_uuid:
+          $ref: "#/components/schemas/MessageUuid"
+        timestamp:
+          $ref: "#/components/schemas/Timestamp"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+      required:
+        - channel
+        - message_uuid
+        - to
+        - from
+        - timestamp
+      title: MMS
+      type: object
+      x-tab-id: MMS
+    inboundMessageSMS:
+      properties:
+        channel:
+          description: The channel the message came in on
+          enum:
+            - sms
+          example: sms
+          type: string
+        from:
+          $ref: "#/components/schemas/FromNumber"
+        message_uuid:
+          $ref: "#/components/schemas/MessageUuid"
+        sms:
+          description: Channel specific metadata for SMS
+          properties:
+            keyword:
+              description: The first word of the message sent to uppercase.
+              example: HELLO
+              type: string
+            num_messages:
+              description: The number of inbound SMS messages concatenated together to comprise this message. SMS messages are 160 characters, if an inbound message exceeds that size they are concatenated together to forma single message. This number indicates how many messages formed this webhook.
+              example: "2"
+              type: string
+          type: object
+        text:
+          description: |
+            The UTF-8 encoded text of the inbound message.
+          example: Hello From Vonage!
+          type: string
+        timestamp:
+          $ref: "#/components/schemas/Timestamp"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+        usage:
+          $ref: "#/components/schemas/Usage"
+      required:
+        - channel
+        - message_uuid
+        - to
+        - from
+        - timestamp
+        - text
+      title: SMS
+      type: object
+    inboundWhatsAppMessageCommon:
+      properties:
+        channel:
+          description: The channel that the message came in on
+          enum:
+            - whatsapp
+          example: whatsapp
+          type: string
+        context:
+          $ref: "#/components/schemas/Context"
+        from:
+          $ref: "#/components/schemas/FromNumber"
+        message_uuid:
+          $ref: "#/components/schemas/MessageUuid"
+        profile:
+          $ref: "#/components/schemas/Profile"
+        provider_message:
+          description: A message from the channel provider, which may contain a description, error codes or other information
+          type: string
+        timestamp:
+          $ref: "#/components/schemas/Timestamp"
+        to:
+          $ref: "#/components/schemas/ToNumber"
+      required:
+        - channel
+        - message_uuid
+        - to
+        - from
+        - timestamp
+      title: WhatsApp
+      type: object
+      x-tab-id: WhatsApp
+    messageStatusBase:
+      properties:
+        client_ref:
+          description: Client reference of up to 100 characters. The reference will be present in every message status.
+          type: string
+        error:
+          description: If the message encountered a problem a descriptive error will be supplied in this object.
+          properties:
+            detail:
+              description: Text describing the error. See [our errors list](https://developer.nexmo.com/api-errors/messages-olympus) for a list of possible errors
+              example: Throttled - You have exceeded the submission capacity allowed on this account. Please wait and retry
+              type: string
+            instance:
+              description: The record id of this error's occurrence.
+              example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+              type: string
+            title:
+              description: The error code encountered when sending the message. See [our errors list](https://developer.nexmo.com/api-errors/messages-olympus) for a list of possible errors
+              example: 1000
+              type: string
+            type:
+              description: The type of error encountered, follow URL for more details
+              example: https://developer.nexmo.com/api-errors/messages-olympus#1000
+              format: url
+              type: string
+          type: object
+        from:
+          $ref: "#/components/schemas/FromNumber"
+        message_uuid:
+          $ref: "#/components/schemas/MessageUuid"
+        status:
+          description: The status of the message.
+          enum:
+            - submitted
+            - delivered
+            - rejected
+            - undeliverable
+          example: submitted
+          type: string
+        timestamp:
+          description: The datetime of when the event occurred, in `ISO 8601` format.
+          example: 2020-01-01T14:00:00.000Z
+          type: string
+        to:
+          $ref: "#/components/schemas/ToNumber"
+        usage:
+          properties:
+            currency:
+              description: The charge currency in ISO 4217 format.
+              enum:
+                - EUR
+              example: EUR
+              type: string
+            price:
+              description: The charge amount as a stringified number.
+              example: "0.0333"
+              type: string
+          type: object
+      required:
+        - message_uuid
+        - channel
+        - to
+        - from
+        - timestamp
+        - status
+      type: object
+    messageStatusMMS:
+      allOf:
+        - $ref: "#/components/schemas/messageStatusBase"
+        - description: MMS
+          properties:
+            channel:
+              description: The channel sending to.
+              enum:
+                - mms
+              example: mms
+              type: string
+          title: MMS
+          x-tab-id: MMS
+    messageStatusMessenger:
+      allOf:
+        - $ref: "#/components/schemas/messageStatusBase"
+        - description: Messenger
+          properties:
+            channel:
+              description: The channel sending to.
+              enum:
+                - messenger
+              example: messenger
+              type: string
+            from:
+              $ref: "#/components/schemas/FromId"
+            status:
+              enum:
+                - submitted
+                - delivered
+                - rejected
+                - undeliverable
+                - read
+              example: read
+            to:
+              $ref: "#/components/schemas/ToId"
+          title: Messenger
+          x-tab-id: Messenger
+    messageStatusSMS:
+      allOf:
+        - $ref: "#/components/schemas/messageStatusBase"
+        - description: SMS
+          properties:
+            channel:
+              description: The channel sending to.
+              enum:
+                - sms
+              example: sms
+              type: string
+          title: SMS
+          x-tab-id: SMS
+    messageStatusViber:
+      allOf:
+        - $ref: "#/components/schemas/messageStatusBase"
+        - description: Viber
+          properties:
+            channel:
+              description: The channel sending to.
+              enum:
+                - viber_service
+              example: viber_service
+              type: string
+            status:
+              enum:
+                - submitted
+                - delivered
+                - rejected
+                - undeliverable
+                - read
+              example: read
+          title: Viber
+          x-tab-id: Viber
+    messageStatusWhatsApp:
+      allOf:
+        - $ref: "#/components/schemas/messageStatusBase"
+        - description: WhatsApp
+          properties:
+            channel:
+              description: The channel sending to.
+              enum:
+                - whatsapp
+              example: whatsapp
+              type: string
+            status:
+              enum:
+                - submitted
+                - delivered
+                - rejected
+                - undeliverable
+                - read
+              example: read
+            usage:
+              properties:
+                currency:
+                  description: The charge currency in ISO 4217 format.
+                  enum:
+                    - EUR
+                  example: EUR
+                  type: string
+                price:
+                  description: The charge amount as a stringified number. For WhatsApp this is the default Vonage charge per conversation.
+                  example: "0.0333"
+                  type: string
+              type: object
+            whatsapp:
+              description: An object contining meta-data related to the WhatsApp message that triggered this callback. Only present for callbacks with a `status` of `delivered`.
+              properties:
+                conversation:
+                  description: An object contining data for the conversation to which the message relates.
+                  properties:
+                    id:
+                      description: The id of the conversation.
+                      example: "1234567890"
+                      type: string
+                    origin:
+                      description: An object contining data related to the origin of the conversation.
+                      properties:
+                        type:
+                          description: The conversation type.
+                          example: user_initiated
+                          type: string
+                      type: object
+                  type: object
+              type: object
+          title: WhatsApp
+          x-tab-id: WhatsApp
+    vCard:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            message_type:
+              description: The type of message to send. You must provide `vcard` in this field
+              enum:
+                - vcard
+              example: vcard
+              type: string
+            vcard:
+              properties:
+                url:
+                  description: The publicly accessible URL of the vCard attachment. Supported types are .vcf only
+                  example: https://example.com/conatact.vcf
+                  format: url
+                  type: string
+              required:
+                - url
+              type: object
+          required:
+            - vcard
+          title: vCard
+          type: object
+          x-tab-id: vCard
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-errors:
+  "1000":
+    description: Throttled - You have exceeded the submission capacity allowed on this account. Please wait and retry
+  "1010":
+    description: Missing params - Your request is incomplete and missing some mandatory parameters.
+  "1020":
+    description: Invalid params  -  The value of one or more parameters is invalid.
+  "1021":
+    description: Invalid tag  -  The tag value is invalid.
+  "1022":
+    description: Invalid template  -  Invalid template or template parameters
+  "1030":
+    description: Internal error  -  There was an error processing your request in the Platform.
+  "1040":
+    description: Invalid message  -  The Platform was unable to process your request. For example, due to an unrecognised prefix for the phone number.
+  "1050":
+    description: Number barred  -  The number you are trying to submit to is blacklisted and may not receive messages.
+  "1060":
+    description: Partner account barred  -  The `api_key` you supplied is for an account that has been barred from submitting messages.
+  "1070":
+    description: Partner quota exceeded  -  Your pre-paid account does not have sufficient credit to process this message.
+  "1080":
+    description: Account not enabled for REST  -  This account is not provisioned for REST submission, you should use SMPP on the SMS API.
+  "1090":
+    description: Message too long  -  The length of `udh` and `body` was greater than 140 octets for a binary type SMS request.
+  "1100":
+    description: Communication Failed  -  Message was not submitted because there was a communication failure.
+  "1120":
+    description: Illegal Sender Address - rejected  -  Due to local regulations, the `SenderID` you set in from in the request was not accepted. Please check the Global messaging section.
+  "1130":
+    description: Invalid TTL  -  The value of `ttl` in your request was invalid.
+  "1140":
+    description: Facility not allowed  -  Your request makes use of a facility that is not enabled on your account.
+  "1150":
+    description: Invalid Message class  -  The value of `message-`class in your request was out of range. See https://en.wikipedia.org/wiki/Data_Coding_Scheme.
+  "1160":
+    description: Non White-listed Destination  -  The phone number you set in to is not in your pre-approved destination list. To send messages to this phone number, add it using Dashboard.
+  "1170":
+    description: Invalid or Missing Msisdn Param  -  The phone number you supplied in the to parameter of your request was either missing or invalid.
+  "1180":
+    description: Absent Subscriber Temporary  -  This message was not delivered because to was temporarily unavailable. For example, the handset used for to was out of coverage or switched off. This is a temporary failure, retry later for a positive result.
+  "1190":
+    description: Absent Subscriber Permanent  -  `to` is no longer active, You should remove this phone number from your database.
+  "1200":
+    description: Portability Error  -  There is an issue after the user has changed carrier for to. If the user wants to receive messages from you, they need to contact their carrier directly.
+  "1210":
+    description: Anti-Spam Rejection  -  Carriers often apply restrictions that block messages following different criteria. For example on SenderID or message content.
+  "1220":
+    description: Handset Busy  -  The handset associated with to was not available when this message was sent. If status is rejected, this is a temporary failure; retry later for a positive result. If status is submitted, this message has is in the retry scheme and will be resent until it expires in 24-48 hours.
+  "1230":
+    description: Network Error  -  A network failure while sending your message. This is a temporary failure, retry later for a positive result.
+  "1240":
+    description: Illegal Number  -  You tried to send a message to a blacklisted phone number. That is, the user has already sent a STOP opt-out message and no longer wishes to receive messages from you.
+  "1241":
+    description: Too many send requests  -  Too many send requests to phone numbers.
+  "1250":
+    description: Unroutable  -  The chosen route to send your message is not available. This is because the phone number is either currently on an unsupported network or on a pre-paid or reseller account that could not receive a message sent by from. To resolve this issue either email us at support@nexmo.com or create a helpdesk ticket at https://help.nexmo.com.
+  "1260":
+    description: Destination unreachable  -  The message could not be delivered to the phone number. If using Viber Business Messages your account might not be enabled for this country.
+  "1270":
+    description: Subscriber Age Restriction  -  The carrier blocked this message because the content is not suitable for to based on age restrictions.
+  "1280":
+    description: Number Blocked by Carrier  -  The carrier blocked this message. This could be due to several reasons. For example, to's plan does not include SMS or the account is suspended.
+  "1290":
+    description: Pre-Paid - Insufficient funds  -  to’s pre-paid account does not have enough credit to receive the message.
+  "1300":
+    description: Not part of the provider network  -  The number or ID is not a user in the provider network.
+  "1310":
+    description: Not suitable device  -  The user's device can't receive the message.
+  "1320":
+    description: Message already sent  -  The message was already sent.
+  "1330":
+    description: Unknown  -  An unknown error was received from the carrier who tried to send this this message. Depending on the carrier, that to is unknown. When you see this error, and status is rejected, always check if to in your request was valid.
+  "1331":
+    description: Provider error  -  The provider is not responding or unable to process the request. Please try sending your message in a few minutes time.
+  "1340":
+    description: Outside of the allowed window  -  This message is sent outside of allowed response window.
+  "1350":
+    description: Phone matching fee not paid  -  Requires phone matching access fee to be paid by the Facebook Page.
+  "1360":
+    description: TTL was activated  -  TTL was activated, no callbacks and no charge will be issued.
+  "1370":
+    description: Expired access Token - Please reauthenticate your Facebook Page with Vonage.
+  "1380":
+    description: Invalid resource - Please check that the URL your provided to your resource is accessible and valid.
+  "1381":
+    description: Resource size is too large - Please try sending a smaller media file.
+  "1382":
+    description: Resource type is invalid - Please check that the file you are trying to send is valid.
+  "1400":
+    description: Unsupported channel - The channel specified in the request is not supported.
+  "1410":
+    description: Invalid channel parameters -  The value of one or more parameters is invalid.
+  "1420":
+    description: Invalid sender -  The `from` parameter is invalid for the given channel.
+  "1430":
+    description: Invalid recipient -  The `to` parameter is invalid for the given channel.
+  "1440":
+    description: Invalid message type - The message type specified in the request is not supported for the given channel.
+  "1450":
+    description: Invalid client reference -  The client reference can be a string of up to 40 characters.
+x-webhooks:
+  inbound-message:
+    "{$request.body#/callback}":
+      post:
+        description: An inbound message from a customer to you.
+        operationId: inbound-message
+        requestBody:
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/inboundMessageSMS"
+                  - oneOf:
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundMessageMMS"
+                          - $ref: "#/components/schemas/Text"
+                          - properties:
+                              text:
+                                description: The text in the inbound message.
+                                example: This is sample text.
+                                maxLength: 640
+                                type: string
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundMessageMMS"
+                          - $ref: "#/components/schemas/Image"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundMessageMMS"
+                          - $ref: "#/components/schemas/vCard"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundMessageMMS"
+                          - $ref: "#/components/schemas/Audio"
+                          - properties:
+                              audio:
+                                properties:
+                                  url:
+                                    description: Publicly accessible URL of the audio attachment.
+                                    maxLength: 2000
+                                    minLength: 10
+                                    type: string
+                                required:
+                                  - url
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundMessageMMS"
+                          - $ref: "#/components/schemas/Video"
+                          - properties:
+                              video:
+                                properties:
+                                  url:
+                                    description: Publicly accessible URL of the video attachment.
+                                    type: string
+                                required:
+                                  - url
+                    title: MMS
+                    x-tab-id: MMS
+                  - oneOf:
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Text"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Image"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Video"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/File"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Audio"
+                          - properties:
+                              audio:
+                                properties:
+                                  url:
+                                    maxLength: 2000
+                                    minLength: 10
+                                required:
+                                  - url
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Location"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Reply"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Order"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Unsupported"
+                    title: WhatsApp
+                    x-tab-id: WhatsApp
+                  - oneOf:
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundMessengerMessageCommon"
+                          - $ref: "#/components/schemas/Text"
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundMessengerMessageCommon"
+                          - $ref: "#/components/schemas/Image"
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundMessengerMessageCommon"
+                          - $ref: "#/components/schemas/Video"
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundMessengerMessageCommon"
+                          - $ref: "#/components/schemas/File"
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundMessengerMessageCommon"
+                          - $ref: "#/components/schemas/Audio"
+                          - properties:
+                              audio:
+                                properties:
+                                  url:
+                                    maxLength: 2000
+                                    minLength: 10
+                                required:
+                                  - url
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundMessengerMessageCommon"
+                          - $ref: "#/components/schemas/Unsupported"
+                    title: Messenger
+                    x-tab-id: Messenger
+                  - oneOf:
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundViberMessageCommon"
+                          - $ref: "#/components/schemas/Text"
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundViberMessageCommon"
+                          - $ref: "#/components/schemas/Image"
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundViberMessageCommon"
+                          - $ref: "#/components/schemas/Video"
+                      - allOf:
+                          - $ref: "#/components/schemas/InboundViberMessageCommon"
+                          - $ref: "#/components/schemas/File"
+                    title: Viber
+                    x-tab-id: Viber
+          required: true
+        responses:
+          "200":
+            description: Your server returns this code if it accepts the callback.
+        summary: Inbound Message
+        x-example-path: /webhooks/inbound-message

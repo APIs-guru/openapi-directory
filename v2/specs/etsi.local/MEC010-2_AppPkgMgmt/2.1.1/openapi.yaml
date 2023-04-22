@@ -1,0 +1,1693 @@
+openapi: 3.0.0
+servers:
+  - url: http://etsi.local
+  - url: https://localhost/app_pkgm/v1
+info:
+  contact:
+    email: cti_support@etsi.org
+    name: ETSI Forge
+    url: https://forge.etsi.org/rep/mec/gs010-2-app-pkg-lcm-api
+  description: "ETSI GS MEC 010-2 - Part 2: Application lifecycle, rules and requirements management described using OpenAPI."
+  license:
+    name: BSD-3-Clause
+    url: https://forge.etsi.org/legal-matters
+  title: "ETSI GS MEC 010-2 - Part 2: Application lifecycle, rules and requirements management"
+  version: 2.1.1
+  x-apisguru-categories:
+    - telecom
+  x-origin:
+    - format: openapi
+      url: https://forge.etsi.org/rep/mec/gs010-2-app-pkg-lcm-api/raw/v2.1.1/MEC010-2_AppPkgMgmt.yaml
+      version: "3.0"
+  x-providerName: etsi.local
+  x-serviceName: MEC010-2_AppPkgMgmt
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+externalDocs:
+  description: "ETSI GS MEC 010-2 - Part 2: Application lifecycle, rules and requirements management, v2.1.1"
+  url: https://www.etsi.org/deliver/etsi_gs/MEC/001_099/01002/02.01.01_60/gs_MEC01002v020101p.pdf
+tags:
+  - description: App Package management
+    name: app-pkgm
+  - description: App Package management notifications
+    name: app-pkgm-notifications
+paths:
+  /app_packages:
+    get:
+      description: queries information relating to on-boarded application packages in the MEO
+      operationId: app_packagesGET
+      parameters:
+        - description: Attribute-based filtering parameters according to ETSI GS MEC 009
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: Include all complex attributes in the response.
+          in: query
+          name: all_fields
+          required: false
+          schema:
+            type: string
+        - description: Complex attributes of AppPkgInfo to be included into the response
+          in: query
+          name: fields
+          required: false
+          schema:
+            type: string
+        - description: Complex attributes of AppPkgInfo to be excluded from the response.
+          in: query
+          name: exclude_fields
+          required: false
+          schema:
+            type: string
+        - description: Indicates to exclude the following complex attributes of AppPkgInfo from the response.
+          in: query
+          name: exclude_default
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AppPkgInfo"
+                type: array
+          description: Contains a representation of the application package resource
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Queries information relating to on-boarded application packages in the MEO
+      tags:
+        - app-pkgm
+    post:
+      description: Create a resource for on-boarding an application package to a MEO
+      operationId: app_packagesPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAppPkg"
+        description: Resource to be created
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AppPkgInfo"
+                type: array
+          description: Successful response for resource creation
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Create a resource for on-boarding an application package to a MEO
+      tags:
+        - app-pkgm
+  "/app_packages/{appPkgId}":
+    delete:
+      description: Deletes an individual application package resources
+      operationId: app_packageDELETE
+      responses:
+        "204":
+          $ref: "#/components/responses/204"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Deletes an individual application package resources
+      tags:
+        - app-pkgm
+    get:
+      description: Queries the information related to individual application package resources
+      operationId: app_packageGET
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppPkgInfo"
+          description: Contains a representation of the application package resource
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Queries the information related to individual application package resources
+      tags:
+        - app-pkgm
+    parameters:
+      - description: Identifier of an individual application package resource
+        in: path
+        name: appPkgId
+        required: true
+        schema:
+          type: string
+    patch:
+      description: Updates the operational state of an individual application package resources
+      operationId: app_packagePATCH
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppPkgInfoModifications"
+        description: Operational state to be set
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppPkgInfoModifications"
+          description: Shows that the operation has been completed successfully
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "409":
+          $ref: "#/components/responses/409"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Updates the operational state of an individual application package resource
+      tags:
+        - app-pkgm
+  "/app_packages/{appPkgId}/appd":
+    get:
+      description: Reads the content of the AppD of on-boarded individual application package resources.
+      operationId: appPkgIdGET
+      parameters:
+        - description: Attribute-based filtering parameters according to ETSI GS MEC 009
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: Include all complex attributes in the response.
+          in: query
+          name: all_fields
+          required: false
+          schema:
+            type: string
+        - description: Complex attributes of AppPkgInfo to be included into the response
+          in: query
+          name: fields
+          required: false
+          schema:
+            type: string
+        - description: Complex attributes of AppPkgInfo to be excluded from the response.
+          in: query
+          name: exclude_fields
+          required: false
+          schema:
+            type: string
+        - description: Indicates to exclude the following complex attributes of AppPkgInfo from the response.
+          in: query
+          name: exclude_default
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/zip:
+              schema:
+                $ref: "#/components/schemas/AppD"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/AppD"
+          description: Content of the AppD is returned.
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Reads the content of the AppD of on-boarded individual application package resources.
+      tags:
+        - app-pkgm
+    parameters:
+      - description: Identifier of an on-boarded individual application package
+        in: path
+        name: appPkgId
+        required: true
+        schema:
+          type: string
+  "/app_packages/{appPkgId}/package_content":
+    get:
+      description: Fetch the onboarded application package content identified by appPkgId or appDId.
+      operationId: appPkgGET
+      responses:
+        "200":
+          $ref: "#/components/responses/AppPkgContent.200"
+        "206":
+          $ref: "#/components/responses/206"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "416":
+          $ref: "#/components/responses/416"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Fetch the onboarded application package content identified by appPkgId or appDId.
+      tags:
+        - app-pkgm
+    parameters:
+      - description: Identifier of an on-boarded individual application package
+        in: path
+        name: appPkgId
+        required: true
+        schema:
+          type: string
+    put:
+      description: Uploads the content of application package.
+      operationId: appPkgPUT
+      requestBody:
+        content:
+          application/zip:
+            schema:
+              format: binary
+              type: string
+      responses:
+        "202":
+          description: The application package has been accepted for uploading, but the processing has not been completed.
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "409":
+          $ref: "#/components/responses/409"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Uploads the content of application package.
+      tags:
+        - app-pkgm
+  "/onboarded_app_packages/{appDId}/appd":
+    get:
+      description: Reads the content of the AppD of on-boarded individual application package resources.
+      operationId: appDGET
+      parameters:
+        - description: Attribute-based filtering parameters according to ETSI GS MEC 009
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: Include all complex attributes in the response.
+          in: query
+          name: all_fields
+          required: false
+          schema:
+            type: string
+        - description: Complex attributes of AppPkgInfo to be included into the response
+          in: query
+          name: fields
+          required: false
+          schema:
+            type: string
+        - description: Complex attributes of AppPkgInfo to be excluded from the response.
+          in: query
+          name: exclude_fields
+          required: false
+          schema:
+            type: string
+        - description: Indicates to exclude the following complex attributes of AppPkgInfo from the response.
+          in: query
+          name: exclude_default
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/zip:
+              schema:
+                $ref: "#/components/schemas/AppD"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/AppD"
+          description: Content of the AppD is returned.
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Reads the content of the AppD of on-boarded individual application package resources.
+      tags:
+        - app-pkgm
+    parameters:
+      - description: Identifier of an application descriptor
+        in: path
+        name: appDId
+        required: true
+        schema:
+          type: string
+  "/onboarded_app_packages/{appDId}/package_content":
+    get:
+      description: Fetch the onboarded application package content identified by appPkgId or appDId.
+      operationId: appDIdGET
+      responses:
+        "200":
+          $ref: "#/components/responses/AppPkgContent.200"
+        "206":
+          $ref: "#/components/responses/206"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "416":
+          $ref: "#/components/responses/416"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Fetch the onboarded application package content identified by appPkgId or appDId.
+      tags:
+        - app-pkgm
+    parameters:
+      - description: Identifier of an application descriptor
+        in: path
+        name: appDId
+        required: true
+        schema:
+          type: string
+    put:
+      description: Uploads the content of application package.
+      operationId: appDIdPUT
+      requestBody:
+        content:
+          application/zip:
+            schema:
+              format: binary
+              type: string
+      responses:
+        "202":
+          description: The application package has been accepted for uploading, but the processing has not been completed.
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "409":
+          $ref: "#/components/responses/409"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Uploads the content of application package.
+      tags:
+        - app-pkgm
+  /subscriptions:
+    get:
+      description: used to retrieve the information of subscriptions to individual application package resource in MEO package
+      operationId: subscriptionsGET
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppPkgSubscriptionLinkList"
+          description: List of zero or more subscriptions
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: used to retrieve the information of subscriptions to individual application package resource in MEO
+      tags:
+        - app-pkgm
+    post:
+      callbacks:
+        notification:
+          "{$request.body#/subscription.href}":
+            post:
+              description: " The notification is triggered when a new application package is onboarded"
+              operationId: notificationPOST
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/AppPkgNotification"
+                description: Subscription notification
+                required: true
+              responses:
+                "204":
+                  $ref: "#/components/responses/204"
+              summary: Callback POST used to send a notification
+      description: Subscribe to notifications about on-boarding an application package
+      operationId: subscriptionsPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppPkgSubscription"
+        description: The input parameters of subscribe operation to notifications
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppPkgSubscriptionInfo"
+          description: Successful response for created subscription
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Subscribe to notifications about on-boarding an application package
+      tags:
+        - app-pkgm
+  "/subscriptions/{subscriptionId}":
+    delete:
+      description: Deletes the individual subscription to notifications about application package changes in MEO.
+      operationId: individualSubscriptionDELETE
+      responses:
+        "204":
+          $ref: "#/components/responses/204"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Deletes the individual subscription to notifications about application package changes in MEO.
+      tags:
+        - app-pkgm
+    get:
+      description: Used to represent an individual subscription to notifications about application package changes.
+      operationId: individualSubscriptionGET
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppPkgSubscriptionInfo"
+          description: Representation of the resource.
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "406":
+          $ref: "#/components/responses/406"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Used to represent an individual subscription to notifications about application package changes.
+      tags:
+        - app-pkgm
+    parameters:
+      - description: Identifier of an individual subscription to notifications about application package changes
+        in: path
+        name: subscriptionId
+        required: true
+        schema:
+          type: string
+  /user_defined_notification:
+    post:
+      description: Registers a notification endpoint to notify application package operations
+      operationId: app_pkg_notificationPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppPkgNotification"
+        description: Notification endpoint to be created
+        required: true
+      responses:
+        "204":
+          $ref: "#/components/responses/204"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Registers a notification endpoint to notify application package operations
+      tags:
+        - app-pkgm-notifications
+components:
+  responses:
+    "204":
+      description: No Content
+    "206":
+      description: Partial content
+    "400":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Bad Request : used to indicate that incorrect parameters were passed to the request."
+    "401":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Unauthorized :  used when the client did not submit credentials."
+    "403":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Forbidden :  operation is not allowed given the current status of the resource."
+    "404":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Not Found :  used when a client provided a URI that cannot be mapped to a valid resource URI."
+    "406":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Not Acceptable : used to indicate that the server cannot provide the any of the content formats supported by the client."
+    "409":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Conflict : The operation cannot be executed currently, due to a conflict with the state of the resource"
+    "412":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Precondition failed :  used when a condition has failed during conditional requests, e.g. when using ETags to avoid write conflicts when using PUT"
+    "414":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "URI Too Long : used to indicate that the server is refusing to process the request because the request URI is longer than the server is willing or able to process."
+    "415":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Unsupported Media Type :  used to indicate that the server or the client does not support the content type of the entity body."
+    "416":
+      description: Range Not Satisfiable .
+    "422":
+      content:
+        application/json:
+          example:
+            application/problem+json:
+              problemDetails:
+                detail: The target area for the request is considered too large
+                instance: /meAppClient.example.com/77777/msgs/abc
+                status: "422"
+                title: Too many targets
+                type: https://meAppServer.example.com/rni/v2/probs/too-many targets
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Unprocessable Entity : used to indicate that the server understands the content type of the request entity and that the syntax of the request entity is correct but that the server is unable to process the contained instructions. This error condition can occur if an JSON request body is syntactically correct but semantically incorrect, for example if the target area for the request is considered too large. This error condition can also occur if the capabilities required by the request are not supported."
+    "429":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+      description: "Too Many Requests : used when a rate limiter has triggered."
+    AppPkgContent.200:
+      description: The payload body shall contain a copy of the file representing the AppD or a ZIP file that contains the file or multiple files representing the AppD.
+  schemas:
+    Action:
+      description: "'Identifies the action of the MEC host data plane, when a packet matches the trafficFilter.'"
+      enum:
+        - DROP
+        - FORWARD_DECAPSULATED
+        - FORWARD_AS_IS
+        - PASSTHROUGH
+        - DUPLICATED_DECAPSULATED
+        - DUPLICATE_AS_IS
+      type: string
+    Algorithm:
+      description: " Name of the algorithm used to generate the checksum,  as defined in ETSI GS NFV-SOL 004. For example, SHA-256, SHA-512."
+      type: string
+    AppD:
+      properties:
+        appDId:
+          description: Identifier of this MEC application descriptor. This attribute shall be globally unique. See note 1.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        appDNSRule:
+          description: Describes DNS rules the MEC application requires.
+          items:
+            $ref: "#/components/schemas/DNSRuleDescriptor"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: DNSRuleDescriptor
+        appDVersion:
+          description: Identifies the version of the application descriptor.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        appDescription:
+          description: Human readable description of the MEC application.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        appExtCpd:
+          description: Describes external interface(s) exposed by this MEC application.
+          items:
+            $ref: "#/components/schemas/AppExternalCpd"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: AppExternalCpd
+        appFeatureOptional:
+          description: Describes features a MEC application may use if available.
+          items:
+            $ref: "#/components/schemas/FeatureDependency"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: FeatureDependency
+        appFeatureRequired:
+          description: Describes features a MEC application requires to run.
+          items:
+            $ref: "#/components/schemas/FeatureDependency"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: FeatureDependency
+        appInfoName:
+          description: Human readable name for the MEC application.
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: String
+        appLatency:
+          $ref: "#/components/schemas/LatencyDescriptor"
+        appName:
+          description: Name to identify the MEC application.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        appProvider:
+          description: Provider of the application and of the AppD.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        appServiceOptional:
+          description: Describes services a MEC application may use if available.
+          items:
+            $ref: "#/components/schemas/ServiceDependency"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: ServiceDependency
+        appServiceProduced:
+          description: Describes services a MEC application is able to produce to the platform or other MEC applications. Only relevant for service-producing apps.
+          items:
+            $ref: "#/components/schemas/ServiceDescriptor"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: ServiceDescriptor
+        appServiceRequired:
+          description: Describes services a MEC application requires to run.
+          items:
+            $ref: "#/components/schemas/ServiceDependency"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: ServiceDependency
+        appSoftVersion:
+          description: Identifies the version of software of the MEC application.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        appTrafficRule:
+          description: Describes traffic rules the MEC application requires.
+          items:
+            $ref: "#/components/schemas/TrafficRuleDescriptor"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: TrafficRuleDescriptor
+        changeAppInstanceStateOpConfig:
+          $ref: "#/components/schemas/ChangeAppInstanceStateOpConfig"
+        mecVersion:
+          description: Identifies version(s) of MEC system compatible with the MEC application described in this version of the AppD.
+          items:
+            type: string
+          minItems: 1
+          type: array
+          x-etsi-mec-cardinality: 1..N
+          x-etsi-mec-origin-type: String
+        swImageDescriptor:
+          $ref: "#/components/schemas/SwImageDescriptor"
+        terminateAppInstanceOpConfig:
+          $ref: "#/components/schemas/TerminateAppInstanceOpConfig"
+        transportDependencies:
+          description: Transports, if any, that this application requires to be provided by the platform. These transports will be used by the application to deliver services provided by this application. Only relevant for service-producing apps. See note 2.
+          items:
+            $ref: "#/components/schemas/TransportDependency"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: TransportDependency
+        virtualComputeDescriptor:
+          $ref: "#/components/schemas/VirtualComputeDescription"
+        virtualStorageDescriptor:
+          description: Defines descriptors of virtual storage resources to be used by the MEC application.
+          items:
+            $ref: "#/components/schemas/VirtualStorageDescriptor"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: VirtualStorageDescriptor
+      required:
+        - appDId
+        - appName
+        - appProvider
+        - appSoftVersion
+        - appDVersion
+        - mecVersion
+        - appDescription
+        - virtualComputeDescriptor
+        - swImageDescriptor
+      type: object
+      x-etsi-notes: |-
+        NOTE 1:	The appDId shall be used as the unique identifier of the application package that contains this AppD.
+        NOTE 2:	This attribute indicates groups of transport bindings which a service-producing MEC application requires to be supported by the platform in order to be able to produce its services. At least one of the indicated groups needs to be supported to fulfil the requirements.
+      x-etsi-ref: 6.2.1.2
+    AppDId:
+      description: Identifier of this MEC application descriptor. This attribute shall be globally unique.
+      type: string
+    AppDVersion:
+      description: Identifies the version of the application descriptor.
+      type: string
+    AppExternalCpd:
+      properties:
+        inherited_attributes:
+          description: All attributes inherited from Cpd.
+          type: object
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: inherited_attributes
+        virtualNetworkInterfaceRequirements:
+          description: Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.
+          items:
+            $ref: "#/components/schemas/VirtualNetworkInterfaceRequirements"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+      required:
+        - inherited_attributes
+      type: object
+      x-etsi-ref: 6.2.1.6
+    AppName:
+      description: Name to identify the MEC application.
+      type: string
+    AppPkg.NotificationType:
+      description: Discriminator for the different notification types
+      enum:
+        - AppPackageOnBoarded
+        - AppPacakgeEnabled
+        - AppPacakgeDisabled
+        - AppPackageDeleted
+      type: string
+    AppPkg.OperationalState:
+      description: "Operational state of the onboarded application package: Ã¢â‚¬Â¢ENABLED: the application package can be used for instantiation of new application instances. Ã¢â‚¬Â¢DISABLED: the application package cannot be used for further application instantiation requests."
+      enum:
+        - ENABLED
+        - DISABLED
+      type: string
+    AppPkg.SubscriptionType:
+      description: Subscribed notification type.
+      enum:
+        - AppPackageOnBoarding
+        - AppPacakgeOperationChange
+        - AppPackageDeletion
+      type: string
+    AppPkgArtifactInfo:
+      description: Additional information of application package artifacts that are not application software images. Type is TBD
+    AppPkgFilter:
+      description: The attribute-based filter is to filter application packages on which the query applies.
+      type: string
+    AppPkgId:
+      description: Identifier of the onboarded application package.
+      type: string
+    AppPkgInfo:
+      description: "'The data type AppPkgInfo represents the parameters for an application package resource'"
+      properties:
+        _links:
+          $ref: "#/components/schemas/AppPkgInfo.links"
+        additionalArtifacts:
+          $ref: "#/components/schemas/AppPkgArtifactInfo"
+        appDId:
+          $ref: "#/components/schemas/AppDId"
+        appDVersion:
+          $ref: "#/components/schemas/AppDVersion"
+        appName:
+          $ref: "#/components/schemas/AppName"
+        appProvider:
+          $ref: "#/components/schemas/AppProvider"
+        appSoftwareVersion:
+          $ref: "#/components/schemas/AppSoftwareVersion"
+        checksum:
+          $ref: "#/components/schemas/Checksum"
+        id:
+          $ref: "#/components/schemas/AppPkgId"
+        onboardingState:
+          $ref: "#/components/schemas/OnboardingState"
+        operationalState:
+          $ref: "#/components/schemas/AppPkg.OperationalState"
+        softwareImages:
+          $ref: "#/components/schemas/AppPkgSWImageInfo"
+        usageState:
+          $ref: "#/components/schemas/UsageState"
+        userDefinedData:
+          $ref: "#/components/schemas/KeyValuePairs"
+      required:
+        - id
+        - appDId
+        - appName
+        - appSoftwareVersion
+        - appDVersion
+        - checksum
+        - softwareImages
+        - onboardingState
+        - operationalState
+        - usageState
+        - _links
+      type: object
+    AppPkgInfo.links:
+      description: Links to resources related to this resource.
+      properties:
+        appD:
+          $ref: "#/components/schemas/LinkType"
+        appPkgContent:
+          $ref: "#/components/schemas/LinkType"
+        self:
+          $ref: "#/components/schemas/LinkType"
+      required:
+        - self
+        - appD
+        - appPkgContent
+      type: object
+    AppPkgInfoModifications:
+      description: "'The data type represents the operational state for an application package resource'"
+      properties:
+        operationState:
+          enum:
+            - DISABLED
+            - ENABLED
+          type: string
+      required:
+        - operationState
+      type: object
+    AppPkgNotification:
+      description: "'This data type represents an application package management notification for informing the subscribers about onboarding application package resources. The notification is triggered when a new application package is onboarded'"
+      properties:
+        _links:
+          $ref: "#/components/schemas/AppPkgNotification.links"
+        appDId:
+          $ref: "#/components/schemas/AppDId"
+        appPkgId:
+          $ref: "#/components/schemas/AppPkgId"
+        id:
+          $ref: "#/components/schemas/AppPkgNotification.Id"
+        notificationType:
+          $ref: "#/components/schemas/AppPkg.NotificationType"
+        operationalState:
+          enum:
+            - DISABLED
+            - ENABLED
+          type: string
+        subscriptionId:
+          $ref: "#/components/schemas/SubscriptionId"
+        timeStamp:
+          $ref: "#/components/schemas/TimeStamp"
+      required:
+        - id
+        - notificationType
+        - subscriptionId
+        - timeStamp
+        - appPkgId
+        - appDId
+        - operationalState
+        - _links
+      type: object
+    AppPkgNotification.Id:
+      description: "''"
+      type: string
+    AppPkgNotification.links:
+      description: Links to resources related to this resource.
+      properties:
+        subscription:
+          $ref: "#/components/schemas/LinkType"
+      required:
+        - subscription
+      type: object
+    AppPkgSWImageInfo:
+      description: Information of application software image in application package. Type is TBD
+    AppPkgSubscription:
+      description: "'The data type represents the input parameters of \"subscription operation\" to notification of application package management for the onboarding, or operational state change of application package.'"
+      properties:
+        appPkgFilter:
+          items:
+            $ref: "#/components/schemas/AppPkgFilter"
+          type: array
+        callbackUri:
+          $ref: "#/components/schemas/CallbackUri"
+        subsctiptionType:
+          $ref: "#/components/schemas/SubsctiptionType.AppPkg"
+      required:
+        - callbackUri
+        - subsctiptionType
+      type: object
+    AppPkgSubscriptionInfo:
+      description: "'The data type represents a subscription to notification of application package management for the onboarding, or operational state change of application package'"
+      properties:
+        _links:
+          $ref: "#/components/schemas/AppPkgSubscriptionInfo.links"
+        callbackUri:
+          $ref: "#/components/schemas/CallbackUri"
+        id:
+          $ref: "#/components/schemas/AppPkgSubscriptionInfo.Id"
+        subscriptionType:
+          $ref: "#/components/schemas/AppPkg.SubscriptionType"
+      required:
+        - id
+        - subscriptionType
+        - callbackUri
+        - _links
+      type: object
+    AppPkgSubscriptionInfo.Id:
+      description: "''"
+      type: string
+    AppPkgSubscriptionInfo.links:
+      description: Links to resources related to this resource.
+      properties:
+        self:
+          $ref: "#/components/schemas/LinkType"
+      required:
+        - self
+      type: object
+    AppPkgSubscriptionLinkList:
+      description: "'The data type represents a subscription link list of notification on application package management'"
+      properties:
+        _links:
+          $ref: "#/components/schemas/AppPkgSubscriptionLinkList.links"
+      required:
+        - _links
+      type: object
+    AppPkgSubscriptionLinkList.links:
+      description: Links to resources related to this resource.
+      properties:
+        self:
+          $ref: "#/components/schemas/LinkType"
+        subscriptions:
+          items:
+            $ref: "#/components/schemas/Subscriptions.AppPkgSubscription"
+          type: array
+      required:
+        - self
+      type: object
+    AppProvider:
+      description: Provider of the application and of the AppD.
+      type: string
+    AppSoftwareVersion:
+      description: Software version of the application. This is updated when there is any change to the software in the onboarded application package.
+      type: string
+    CallbackUri:
+      description: The URI of the endpoint for the notification to be sent to.
+      format: uri
+      type: string
+    CategoryRef:
+      description: See MEC011
+    ChangeAppInstanceStateOpConfig:
+      description: NFV
+      type: string
+    Checksum:
+      description: ""
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/Algorithm"
+        hash:
+          $ref: "#/components/schemas/Hash"
+      required:
+        - algorithm
+        - hash
+      type: object
+    CreateAppPkg:
+      properties:
+        appPkgName:
+          description: Name of the application package to be onboarded.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        appPkgPath:
+          $ref: "#/components/schemas/URI"
+        appPkgVersion:
+          description: |-
+            Version of the application package to be onboarded.
+            The appPkgName with appPkgVersion can be used to uniquely identify the application package.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        appProvider:
+          description: The provider's name of the application package to be onboarded.
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: String
+        checksum:
+          $ref: "#/components/schemas/Checksum"
+        userDefinedData:
+          $ref: "#/components/schemas/KeyValuePairs"
+      required:
+        - appPkgName
+        - appPkgVersion
+        - checksum
+        - appPkgPath
+      type: object
+      x-etsi-notes: "NOTE:\tIt is for further study how to convey appPkgPath, and align with ETSI GS NFV-SOL 005 [i.7]."
+      x-etsi-ref: 6.2.3.2
+    DNSRuleDescriptor:
+      properties:
+        dnsRuleId:
+          description: Identifies the DNS Rule
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        domainName:
+          description: FQDN of the DNS rule
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        ipAddress:
+          description: IP address given by the DNS rule
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        ipAddressType:
+          $ref: "#/components/schemas/IpAddressType"
+        ttl:
+          description: Time-to-live value
+          type: integer
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: Int
+      required:
+        - dnsRuleId
+        - domainName
+        - ipAddressType
+        - ipAddress
+      type: object
+      x-etsi-ref: 6.2.1.13
+    FeatureDependency:
+      properties:
+        featureName:
+          description: The name of the feature, for example, UserApps, UEIdentity, etc.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        version:
+          description: The version of the feature.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+      required:
+        - featureName
+        - version
+      type: object
+      x-etsi-ref: 6.2.1.8
+    FilterType:
+      description: "Definition of filter type: per FLOW or PACKET"
+      enum:
+        - FLOW
+        - PACKET
+      type: string
+    Hash:
+      description: "'String 1 The hexadecimal value of the checksum'"
+      type: string
+    Href:
+      description: The URI referring to the subscription.
+      format: uri
+      type: string
+    InterfaceDescriptor:
+      properties:
+        dstIPAddress:
+          description: If the interface type is IP, the destination address identifies the IP address of the destination. Only used for dstInterface.
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: String
+        dstMACAddress:
+          description: If the interface type is MAC, the destination address identifies the MAC address of the destination. Only used for dstInterface.
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: String
+        interfaceType:
+          $ref: "#/components/schemas/InterfaceType"
+        srcMACAddress:
+          description: If the interface type is MAC, the source address identifies the MAC address of the interface.
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: String
+        tunnelInfo:
+          $ref: "#/components/schemas/TunnelInfo"
+      required:
+        - interfaceType
+      type: object
+      x-etsi-ref: 6.2.1.11
+    InterfaceType:
+      description: Type of interface.
+      enum:
+        - TUNNEL
+        - MAC
+        - IP
+      type: string
+    IpAddressType:
+      description: Specifies the IP address type
+      enum:
+        - IP_V6
+        - IP_V4
+      type: string
+    KeyValuePairs:
+      additionalProperties: true
+      description: "'This data type represents a list of key-value pairs. The order of the pairs in the list is not significant. In JSON, a set of key-value pairs is represented as an object. It shall comply with the provisions defined in clause 4 of IETF RFC 8259'"
+      type: object
+    LatencyDescriptor:
+      properties:
+        maxLatency:
+          description: The value of the maximum latency in nano seconds tolerated by the MEC application. See note.
+          format: Uint32
+          type: integer
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: Uint32
+      required:
+        - maxLatency
+      type: object
+      x-etsi-notes: "NOTE:\tThe latency is considered to be the one way end-to-end latency between the client application (e.g. in a device) and the service (i.e. the MEC Application instance)."
+      x-etsi-ref: 6.2.1.14
+    LinkType:
+      properties:
+        href:
+          description: URI referring to a resource
+          format: uri
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: URI
+      required:
+        - href
+      type: object
+      x-etsi-ref: 6.5.2
+    Not_specified:
+      type: string
+    OnboardingState:
+      description: Onboarding state of application package
+      enum:
+        - CREATED
+        - UPLOADING
+        - PROCESSING
+        - ONBOARDED
+      format: enum
+      type: string
+    ProblemDetails:
+      properties:
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: String
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem
+          format: uri
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: URI
+        status:
+          description: The HTTP status code for this occurrence of the problem
+          format: uint32
+          type: integer
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: Uint32
+        title:
+          description: A short, human-readable summary of the problem type
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: String
+        type:
+          description: A URI reference according to IETF RFC 3986 that identifies the problem type
+          format: uri
+          type: string
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: URI
+      type: object
+    SecurityInfo:
+      description: See MEC011
+    SerName:
+      description: The name of the service, for example, RNIS, LocationService, etc.
+      type: string
+    SerVersion:
+      description: The version of the service.
+      type: string
+    SerializerTypes:
+      type: string
+    Serializers:
+      description: "'Information about the serializers in this binding, as defined in the SerializerTypes type in ETSI GS MEC 011 '"
+      items:
+        $ref: "#/components/schemas/SerializerTypes"
+      minItems: 1
+      type: array
+    ServiceDependency:
+      properties:
+        requestedPermissions:
+          description: |-
+            Requested permissions regarding the access of the application to the service. See clause 8.2 of ETSI GS MEC 009 [4].
+            The format of this attribute is left for the data model design stage.
+          items:
+            $ref: "#/components/schemas/Not_specified"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: Not_specified
+        serCategory:
+          $ref: "#/components/schemas/CategoryRef"
+        serName:
+          description: The name of the service, for example, RNIS, LocationService, etc.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        serTransportDependencies:
+          description: Indicates transport and serialization format dependencies of consuming the service. Defaults to REST + JSON if absent. See note.
+          items:
+            $ref: "#/components/schemas/TransportDependency"
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: TransportDependency
+        version:
+          description: The version of the service.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+      required:
+        - serName
+        - version
+      type: object
+      x-etsi-notes: "NOTE:\tThis attribute indicates groups of transport bindings that a service-consuming MEC application supports for the consumption of the MEC service defined by this ServiceDependency structure. If at least one of the indicated groups is supported by the service it may be consumed by the application."
+      x-etsi-ref: 6.2.1.17
+    ServiceDescriptor:
+      description: "'The ServiceDescriptor data type describes a MEC service produced by a service-providing MEC application.'"
+      properties:
+        serCategory:
+          $ref: "#/components/schemas/CategoryRef"
+        serName:
+          $ref: "#/components/schemas/SerName"
+        transportsSupported:
+          $ref: "#/components/schemas/TransportsSupported"
+        version:
+          $ref: "#/components/schemas/SerVersion"
+      required:
+        - serName
+        - version
+      type: object
+    SubscriptionId:
+      description: Identifier of the subscription related to this notification.
+      type: string
+    Subscriptions.AppPkgSubscription:
+      description: "'The data type represents the input parameters of \"subscription operation\" to notification of application package management for the onboarding, or operational state change of application package.'"
+      properties:
+        href:
+          $ref: "#/components/schemas/Href"
+        subsctiptionType:
+          $ref: "#/components/schemas/SubsctiptionType.AppPkg"
+      required:
+        - href
+        - subsctiptionType
+      type: object
+    SubsctiptionType.AppPkg:
+      description: "'Subscribed notification type'"
+      enum:
+        - AppPackageOnBoarding
+        - AppPacakgeOperationChange
+        - AppPackageDeletion
+      type: string
+    SwImageDescriptor:
+      description: Ref NFV
+      type: string
+    TerminateAppInstanceOpConfig:
+      description: NFV
+      type: string
+      x-etsi-ref: 6.2.2.9
+    TimeStamp:
+      properties:
+        nanoSeconds:
+          description: The nanoseconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.
+          format: Uint32
+          type: integer
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: Uint32
+        seconds:
+          description: The seconds part of the Time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.
+          format: Uint32
+          type: integer
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: Uint32
+      required:
+        - seconds
+        - nanoSeconds
+      type: object
+      x-etsi-ref: 6.2.5.4
+    TrafficFilter:
+      properties:
+        dSCP:
+          description: Used to match all IPv4 packets that have the same DSCP.
+          type: integer
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: Int
+        dstAddress:
+          description: A IP address or a range of IP addresses.For IPv4, the IP address could be an IP address plus mask, or an individual IP address, or a range of IP addresses.For IPv6, the IP address could be an IP prefix, or a range of IP prefixes.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        dstPort:
+          description: A port or a range of ports.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        dstTunnelPort:
+          description: Used for GTP tunnel based traffic rule.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        protocol:
+          description: Specify the protocol of the traffic filter.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        qCI:
+          description: Used to match all packets that have the same QCI.
+          type: integer
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: Int
+        srcAddress:
+          description: An IP address or a range of IP addresses.For IPv4, the IP address could be an IP address plus mask, or an individual IP address, or a range of IP addresses.For IPv6, the IP address could be an IP prefix, or a range of IP prefixes.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        srcPort:
+          description: A port or a range of ports.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        srcTunnelAddress:
+          description: Used for GTP tunnel based traffic rule.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        srcTunnelPort:
+          description: Used for GTP tunnel based traffic rule.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        tC:
+          description: Used to match all IPv6 packets that have the same TC.
+          type: integer
+          x-etsi-mec-cardinality: 0..1
+          x-etsi-mec-origin-type: Int
+        tag:
+          description: Used for tag based traffic rule.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+        tgtTunnelAddress:
+          description: Used for GTP tunnel based traffic rule.
+          items:
+            type: string
+          minItems: 0
+          type: array
+          x-etsi-mec-cardinality: 0..N
+          x-etsi-mec-origin-type: String
+      type: object
+      x-etsi-ref: 6.2.1.10
+    TrafficRuleDescriptor:
+      properties:
+        action:
+          $ref: "#/components/schemas/Action"
+        dstInterface:
+          items:
+            $ref: "#/components/schemas/InterfaceDescriptor"
+          maxItems: 2
+          minItems: 0
+          type: array
+        filterType:
+          $ref: "#/components/schemas/FilterType"
+        priority:
+          description: Priority of this traffic rule. If traffic rule conflicts, the one with higher priority take precedence.
+          type: integer
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: Int
+        trafficFilter:
+          description: The filter used to identify specific flow/packets that need to be handled by the MEC host.
+          items:
+            $ref: "#/components/schemas/TrafficFilter"
+          minItems: 1
+          type: array
+          x-etsi-mec-cardinality: 1..N
+          x-etsi-mec-origin-type: TrafficFilter
+        trafficRuleId:
+          description: Identifies the traffic rule.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+      required:
+        - trafficRuleId
+        - filterType
+        - priority
+        - trafficFilter
+        - action
+      type: object
+      x-etsi-ref: 6.2.1.9
+    TransportDependency:
+      properties:
+        labels:
+          description: Set of labels that allow to define groups of transport bindings. The mechanism of the grouping is defined below this table.
+          items:
+            type: string
+          minItems: 1
+          type: array
+          x-etsi-mec-cardinality: 1..N
+          x-etsi-mec-origin-type: String
+        serializers:
+          description: Information about the serializers in this transport binding, as defined in the SerializerTypes type in ETSI GS MEC 011 [i.4]. Support for at least one of the entries is required in conjunction with the transport.
+          items:
+            $ref: "#/components/schemas/SerializerTypes"
+          minItems: 1
+          type: array
+          x-etsi-mec-cardinality: 1..N
+          x-etsi-mec-origin-type: SerializerTypes
+        transport:
+          $ref: "#/components/schemas/TransportDescriptor"
+      required:
+        - transport
+        - serializers
+        - labels
+      type: object
+      x-etsi-ref: 6.2.1.18
+    TransportDescriptor:
+      properties:
+        protocol:
+          description: The name of the protocol used. Shall be set to HTTP for a REST API.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        security:
+          $ref: "#/components/schemas/SecurityInfo"
+        type:
+          $ref: "#/components/schemas/TransportTypes"
+        version:
+          description: The version of the protocol used.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+      required:
+        - type
+        - protocol
+        - version
+        - security
+      type: object
+      x-etsi-ref: 6.2.1.19
+    TransportTypes:
+      type: string
+    TransportsSupported:
+      description: "'Indicates transports and serialization formats supported made available to the service-consuming application. Defaults to REST + JSON if absent.'"
+      properties:
+        serializers:
+          $ref: "#/components/schemas/Serializers"
+        transport:
+          $ref: "#/components/schemas/TransportDescriptor"
+      required:
+        - featureName
+        - version
+      type: object
+    TunnelInfo:
+      properties:
+        tunnelDstAddress:
+          description: Destination address of the tunnel.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        tunnelSpecificData:
+          $ref: "#/components/schemas/Not_specified"
+        tunnelSrcAddress:
+          description: Source address of the tunnel.
+          type: string
+          x-etsi-mec-cardinality: "1"
+          x-etsi-mec-origin-type: String
+        tunnelType:
+          $ref: "#/components/schemas/TunnelType"
+      required:
+        - tunnelType
+        - tunnelDstAddress
+        - tunnelSrcAddress
+      type: object
+      x-etsi-ref: 6.2.1.12
+    TunnelType:
+      description: Type of tunnel.
+      enum:
+        - GTP-U
+        - GRE
+      type: string
+    URI:
+      type: string
+    UsageState:
+      description: Usage state of the onboarded instance of the application package
+      enum:
+        - IN_USE
+        - NOT_IN_USE
+      format: enum
+      type: string
+    VirtualComputeDescription:
+      description: Ref NFV
+      type: string
+    VirtualNetworkInterfaceRequirements:
+      type: string
+    VirtualStorageDescriptor:
+      description: Ref NFV
+      type: string

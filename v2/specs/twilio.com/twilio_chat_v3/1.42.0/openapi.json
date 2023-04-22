@@ -1,0 +1,274 @@
+{
+  "openapi": "3.0.1",
+  "servers": [
+    {
+      "url": "https://chat.twilio.com"
+    }
+  ],
+  "info": {
+    "contact": {
+      "email": "support@twilio.com",
+      "name": "Twilio Support",
+      "url": "https://support.twilio.com"
+    },
+    "description": "This is the public Twilio REST API.",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "title": "Twilio - Chat",
+    "version": "1.42.0",
+    "x-apisguru-categories": [
+      "telecom",
+      "messaging"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_static1.twilio.com_marketing_bundles_marketing_img_logos_wordmark-red.svg"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_chat_v3.json",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "twilio.com",
+    "x-serviceName": "twilio_chat_v3"
+  },
+  "paths": {
+    "/v3/Services/{ServiceSid}/Channels": {
+      "description": "A Channel resource represents a chat/conversation channel with an ordered list of messages and a participant roster.",
+      "servers": [
+        {
+          "url": "https://chat.twilio.com"
+        }
+      ],
+      "x-twilio": {
+        "defaultOutputProperties": [
+          "sid",
+          "unique_name",
+          "friendly_name"
+        ],
+        "pathType": "list"
+      }
+    },
+    "/v3/Services/{ServiceSid}/Channels/{Sid}": {
+      "description": "A Channel resource represents a chat/conversation channel with an ordered list of messages and a participant roster.",
+      "post": {
+        "description": "Update a specific Channel.",
+        "operationId": "UpdateChannel",
+        "parameters": [
+          {
+            "description": "The unique SID identifier of the Service.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A 34 character string that uniquely identifies this Channel.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The X-Twilio-Webhook-Enabled HTTP request header",
+            "in": "header",
+            "name": "X-Twilio-Webhook-Enabled",
+            "schema": {
+              "$ref": "#/components/schemas/channel_enum_webhook_enabled_type",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "MessagingServiceSid": {
+                    "description": "The unique ID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) this channel belongs to.",
+                    "maxLength": 34,
+                    "minLength": 34,
+                    "pattern": "^MG[0-9a-fA-F]{32}$",
+                    "type": "string"
+                  },
+                  "Type": {
+                    "$ref": "#/components/schemas/channel_enum_channel_type",
+                    "description": "TThe Type for this Channel to migrate to. Can only be `private`. Migration to 'public' is not allowed.",
+                    "type": "string"
+                  }
+                },
+                "title": "UpdateChannelRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/chat.v3.channel"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "x-maturity": [
+          "GA"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://chat.twilio.com"
+        }
+      ],
+      "x-twilio": {
+        "defaultOutputProperties": [
+          "sid",
+          "unique_name",
+          "friendly_name"
+        ],
+        "pathType": "instance"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "channel_enum_channel_type": {
+        "enum": [
+          "public",
+          "private"
+        ],
+        "type": "string"
+      },
+      "channel_enum_webhook_enabled_type": {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string"
+      },
+      "chat.v3.channel": {
+        "properties": {
+          "account_sid": {
+            "description": "The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Channel resource.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "attributes": {
+            "description": "The JSON string that stores application-specific data. If attributes have not been set, `{}` is returned.",
+            "nullable": true,
+            "type": "string"
+          },
+          "created_by": {
+            "description": "The `identity` of the User that created the channel. If the Channel was created by using the API, the value is `system`.",
+            "nullable": true,
+            "type": "string"
+          },
+          "date_created": {
+            "description": "The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "date_updated": {
+            "description": "The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "friendly_name": {
+            "description": "The string that you assigned to describe the resource.",
+            "nullable": true,
+            "type": "string"
+          },
+          "members_count": {
+            "description": "The number of Members in the Channel.",
+            "nullable": true,
+            "type": "integer"
+          },
+          "messages_count": {
+            "description": "The number of Messages that have been passed in the Channel.",
+            "nullable": true,
+            "type": "integer"
+          },
+          "messaging_service_sid": {
+            "description": "The unique ID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) this channel belongs to.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "service_sid": {
+            "description": "The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the Channel resource is associated with.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "sid": {
+            "description": "The unique string that we created to identify the Channel resource.",
+            "maxLength": 34,
+            "minLength": 34,
+            "nullable": true,
+            "pattern": "^CH[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/channel_enum_channel_type",
+            "description": "The visibility of the channel. Can be: `public` or `private`.",
+            "nullable": true,
+            "type": "string"
+          },
+          "unique_name": {
+            "description": "An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL.",
+            "nullable": true,
+            "type": "string"
+          },
+          "url": {
+            "description": "The absolute URL of the Channel resource.",
+            "format": "uri",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "accountSid_authToken": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "x-maturity": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
+}

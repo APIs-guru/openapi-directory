@@ -1,0 +1,255 @@
+openapi: 3.1.0
+servers:
+  - url: https://api.urlbox.io
+info:
+  description: A plugin that allows the user to capture screenshots of a web page from a URL or HTML using ChatGPT.
+  title: Urlbox API
+  version: v1
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_www.urlbox.io_logos_logo4.png
+  x-origin:
+    - format: openapi
+      url: https://www.urlbox.io/.well-known/open-api.yaml
+      version: "3.1"
+  x-providerName: urlbox.io
+paths:
+  /v1/render/sync:
+    post:
+      operationId: renderSync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenderRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RenderResponse"
+          description: Successful operation
+          headers:
+            x-renders-allowed:
+              description: The number of renders allowed
+              schema:
+                type: integer
+            x-renders-reset:
+              description: The date and time when the render count will reset
+              schema:
+                type: string
+            x-renders-used:
+              description: The number of renders used
+              schema:
+                type: integer
+            x-urlbox-acceptedby:
+              description: The server that accepted the request
+              schema:
+                type: string
+            x-urlbox-cache-status:
+              description: The cache status of the response
+              schema:
+                type: string
+            x-urlbox-cachekey:
+              description: The cache key used by URLBox
+              schema:
+                type: string
+            x-urlbox-renderedby:
+              description: The server that rendered the response
+              schema:
+                type: string
+            x-urlbox-requestid:
+              description: The request ID assigned by URLBox
+              schema:
+                type: string
+        "307":
+          content:
+            application/json:
+              example:
+                location: https://api.urlbox.io/v1/redirect/BQxxwO98uwkSsuJf/1dca9bae-c49d-42d3-8282-89450afb7e73/1
+                message: Please follow the redirect to continue your long running request
+              schema:
+                $ref: "#/components/schemas/RedirectResponse"
+          description: Temporary Redirect
+          headers:
+            Location:
+              schema:
+                description: The URL to follow for the long running request
+                format: uri
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: ApiKeyNotFound
+                  message: Api Key does not exist
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+          headers:
+            x-urlbox-error-message:
+              description: An error message describing the reason the request failed
+              schema:
+                type: string
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: ApiKeyNotFound
+                  message: Api Key does not exist
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+          headers:
+            x-urlbox-error-message:
+              description: An error message describing the reason the request failed
+              schema:
+                type: string
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: ApiKeyNotFound
+                  message: Something went wrong rendering that
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+          headers:
+            x-urlbox-error-message:
+              description: An error message describing the reason the request failed
+              schema:
+                type: string
+      security:
+        - SecretKey: []
+      summary: Render a URL as an image or video
+components:
+  schemas:
+    ErrorResponse:
+      properties:
+        error:
+          properties:
+            code:
+              description: A machine-readable error code
+              type: string
+            message:
+              description: A human-readable error message
+              type: string
+          type: object
+      required:
+        - error
+      type: object
+    RedirectResponse:
+      properties:
+        location:
+          description: The URL to follow for the long running request
+          format: uri
+          type: string
+        message:
+          description: A human-readable message indicating the need to follow the redirect
+          type: string
+      required:
+        - message
+        - location
+      type: object
+    RenderRequest:
+      oneOf:
+        - required:
+            - url
+        - required:
+            - html
+      properties:
+        block_ads:
+          description: Whether to block ads on the rendered page
+          type: boolean
+        click_accept:
+          description: Whether to automatically click accept buttons on the rendered page
+          type: boolean
+        delay:
+          description: The amount of milliseconds to delay before taking a screenshot
+          type: string
+        format:
+          description: The format of the rendered output
+          enum:
+            - png
+            - jpg
+            - pdf
+            - svg
+            - mp4
+            - webp
+            - webm
+            - html
+          type: string
+        full_page:
+          description: Whether to capture the full page
+          type: boolean
+        gpu:
+          description: Whether to enable GPU rendering
+          type: boolean
+        height:
+          description: The viewport height of the rendered output
+          type: integer
+        hide_cookie_banners:
+          description: Whether to hide cookie banners on the rendered page
+          type: boolean
+        html:
+          description: The raw HTML to render as an image or video
+          type: string
+        metadata:
+          description: Whether to return metadata about the URL
+          type: boolean
+        retina:
+          description: Whether to render the image in retina quality
+          type: boolean
+        selector:
+          description: The CSS selector of an element you would like to capture
+          type: string
+        thumb_height:
+          description: The height of the thumbnail image
+          type: integer
+        thumb_width:
+          description: The width of the thumbnail image
+          type: integer
+        url:
+          description: The URL to render as an image or video
+          type: string
+        wait_for:
+          description: CSS selector of an element to wait to be present in the web page before rendering
+          type: string
+        wait_to_leave:
+          description: CSS selector of an element, such as a loading spinner, to wait to leave the web page before rendering
+          type: string
+        wait_until:
+          description: When
+          enum:
+            - requestsfinished
+            - mostrequestsfinished
+            - loaded
+            - domloaded
+          type: string
+        width:
+          description: The viewport width of the rendered output
+          type: integer
+      type: object
+    RenderResponse:
+      properties:
+        renderUrl:
+          description: The URL where the rendered output is stored
+          format: uri
+          type: string
+        size:
+          description: The size of the rendered output in bytes
+          format: int64
+          type: integer
+      type: object
+  securitySchemes:
+    SecretKey:
+      bearerFormat: JWT
+      description: |
+        The Urlbox API uses your secret API key to authenticate. To find your secret key, login to the Urlbox dashboard at https://urlbox.io/dashboard.
+      scheme: bearer
+      type: http

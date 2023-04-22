@@ -1,0 +1,215 @@
+openapi: 3.0.1
+servers:
+  - url: https://{defaultHost}
+    variables:
+      defaultHost:
+        default: www.versioneye.com
+  - url: http://{defaultHost}
+    variables:
+      defaultHost:
+        default: localhost:8080
+info:
+  description: VersionEye is a cross-platform search engine for free/libre/open source software libraries.
+  title: API V1
+  version: v1
+  x-apisguru-categories:
+    - open_data
+    - search
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_versioneye.files.wordpress.com_2015_05_versioneyetransparent.png
+  x-origin:
+    - format: openapi
+      url: https://www.versioneye.com/api-docs/v1/swagger.yaml
+      version: "3.0"
+  x-providerName: versioneye.com
+paths:
+  /api/v1/scans:
+    get:
+      parameters:
+        - in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                result:
+                  current_page: 1
+                  max_pages: 6
+                  organisation: versioneye
+                  per_page: 50
+                  project_filter: null
+                  project_scans:
+                    - created_at: 2021-03-13T15:40:07.236Z
+                      dependencies_count: 999
+                      file_count: 2
+                      file_ids:
+                        - 604cdcd7319f0564a8648683
+                        - 604cdcd7319f0564a86486e6
+                      id: 604cdcd7319f0564a8648682
+                      license_unknown_count: 0
+                      license_violations_count: 0
+                      name: ve-web
+                      outdated_count: 330
+                      outdated_perc_count: 33
+                      post_process: false
+                      source: API
+                      sv_count: 0
+                      unknown_count: 0
+                    - created_at: 2021-03-13T15:35:37.015Z
+                      dependencies_count: 31
+                      file_count: 1
+                      file_ids:
+                        - 604cdbc9319f0564a8648662
+                      id: 604cdbc9319f0564a8648661
+                      license_unknown_count: 0
+                      license_violations_count: 0
+                      name: ve-core
+                      outdated_count: 0
+                      outdated_perc_count: 0
+                      post_process: false
+                      source: API
+                      sv_count: 0
+                      unknown_count: 0
+                  total_count: 253
+          description: scans found
+        "404":
+          description: scans not found
+      security:
+        - api_key: []
+      summary: Retrieves all scans
+      tags:
+        - Scans
+  "/api/v1/scans/{id}":
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                created_at: 2021-03-13T15:35:37.015Z
+                dependencies_count: 31
+                file_count: 1
+                file_ids:
+                  - 604cdbc9319f0564a8648662
+                license_unknown_count: 0
+                license_violations_count: 0
+                name: ve-core
+                outdated_count: 0
+                outdated_perc_count: 0
+                post_process: false
+                sv_count: 0
+                unknown_count: 0
+          description: scan found
+        "404":
+          description: scan not found
+      security:
+        - api_key: []
+      summary: Retrieves a project scan result
+      tags:
+        - Scans
+  "/api/v1/scans/{id}/files/{file_id}":
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: file_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                component_whitelist_id: ""
+                created_at: 2021-03-13T15:35:37.022Z
+                current_page: 1
+                dependencies:
+                  - branch: null
+                    commit_sha: null
+                    comparator: =
+                    created_at: 2021-03-13T15:35:37.091Z
+                    ext_link: null
+                    id: 604cdbc9319f0564a8648677
+                    lang_key: Ruby/activemodel
+                    lang_keyver: Ruby/activemodel/6.1.3
+                    lang_name: Ruby/activemodel
+                    language: Ruby
+                    license_concatenation: OR
+                    license_violation: false
+                    licenses:
+                      - name: MIT
+                        on_component_whitelist: false
+                        on_license_whitelist: true
+                    name: activemodel
+                    outdated: false
+                    prod_key: activemodel
+                    release: false
+                    repo_fullname: null
+                    repo_ref: null
+                    scope: compile
+                    stability: ""
+                    tag: null
+                    unknown_license: false
+                    updated_at: 2021-03-13T15:35:37.091Z
+                    version_current: 6.1.3
+                    version_label: 6.1.3
+                    version_requested: 6.1.3
+                    whitelisted: false
+                dependencies_count: 31
+                dependency_manager: gem
+                file_name: Gemfile.lock
+                id: 604cdbc9319f0564a8648662
+                language: Ruby
+                license_unknown_count: 0
+                license_violations_count: 0
+                license_whitelist_id: 5f929939ac7df80001ffeba5
+                max_pages: 1
+                outdated_count: 0
+                outdated_perc_count: 0
+                parsing_errors: []
+                per_page: 50
+                post_process: false
+                scopes:
+                  - compile
+                sec_count: 0
+                sv_count: 0
+                unknown_count: 0
+          description: file found
+        "404":
+          description: file not found
+      security:
+        - api_key: []
+      summary: Retrieves a file object, containing information about dependencies in the file
+      tags:
+        - Scans
+components:
+  securitySchemes:
+    api_key:
+      in: header
+      name: apiKey
+      type: apiKey

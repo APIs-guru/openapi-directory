@@ -1,0 +1,646 @@
+openapi: 3.0.2
+servers:
+  - url: /api/v1
+info:
+  description: |-
+    IOTVAS API enables you to discover IoT/Connected devices in the network and provides 
+        detailed real-time risk analysis, including firmware vulnerability analysis without requiring the user to upload the firmware file.
+        Please visit the [signup page](https://iotvas-api.firmalyzer.com/portal/signup) to create an API key.
+        IoTVAS API can be easily integrated with vulnerability scanning and network port scanner tools. For example,
+        we have also released the [IOTVAS NSE script](https://github.com/firmalyzer/iotvas-nmap) that turns the nmap port scanner 
+        to a IoT/connected device discovery and real-time risk assessment tool. For more infromation on IoTVAS and other 
+        solutions please visit [Firmalyzer web site](https://www.firmalyzer.com).
+  title: IoTVAS API
+  version: "1.0"
+  x-apisguru-categories:
+    - iot
+    - security
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_firmalyzer.com_static_img_apple-icon-57x57.png
+  x-origin:
+    - format: openapi
+      url: https://iotvas-api.firmalyzer.com/api/v1/openapi.json
+      version: "3.0"
+  x-providerName: firmalyzer.com
+  x-serviceName: iotvas
+paths:
+  /device/detect:
+    post:
+      description: Use device service banners and mac address captured by your network port scanner, vulnerability assessment or asset discovery tools to detect device maker, model and firmware information
+      operationId: detect_device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceFeatures"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceInfo"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - api-key-header: []
+      summary: Detect iot device by service banners and mac address
+      tags:
+        - device
+  "/firmware/{firmware_hash}/accounts":
+    get:
+      operationId: get_accounts
+      parameters:
+        - description: SHA2 hash of device firmware
+          in: path
+          name: firmware_hash
+          required: true
+          schema:
+            description: SHA2 hash of device firmware
+            example: af88b1aaac0b222df8539f3ae1479b5c8eaeae41f1776b5dd2fa805cb33a1175
+            title: Firmware Hash
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DefaultAccount"
+                title: Response Firmware Accounts Firmware  Firmware Hash  Accounts Get
+                type: array
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - api-key-header: []
+      summary: Get default accounts and password hashes of a firmware
+      tags:
+        - firmware
+  "/firmware/{firmware_hash}/config-issues":
+    get:
+      operationId: get_config_issues
+      parameters:
+        - description: SHA2 hash of device firmware
+          in: path
+          name: firmware_hash
+          required: true
+          schema:
+            description: SHA2 hash of device firmware
+            example: aa96e4d41a4b0ceb3f1ae4d94f3cb445621b9501e3a9c69e6b9eb37c5888a03c
+            title: Firmware Hash
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ConfigIssue"
+                title: Response Firmware Config Issues Firmware  Firmware Hash  Config Issues Get
+                type: array
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - api-key-header: []
+      summary: Get default OS configuration issues of a device firmware
+      tags:
+        - firmware
+  "/firmware/{firmware_hash}/expired-certs":
+    get:
+      operationId: get_expired_certs
+      parameters:
+        - description: SHA2 hash of device firmware
+          in: path
+          name: firmware_hash
+          required: true
+          schema:
+            description: SHA2 hash of device firmware
+            example: ac7c090c34338ea6a3b335004755e24578e7e4eee739c5c33736f0822b64907e
+            title: Firmware Hash
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ExpiredCert"
+                title: Response Firmware Expired Certs Firmware  Firmware Hash  Expired Certs Get
+                type: array
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - api-key-header: []
+      summary: Get expired digital certificates embedded in a device firmware
+      tags:
+        - firmware
+  "/firmware/{firmware_hash}/private-keys":
+    get:
+      operationId: get_private_keys
+      parameters:
+        - description: SHA2 hash of device firmware
+          in: path
+          name: firmware_hash
+          required: true
+          schema:
+            description: SHA2 hash of device firmware
+            example: 90e3e68e1c61850f20c50e551816d47d484d7feb46890f5bc0a0e0dab3e3ba0b
+            title: Firmware Hash
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CryptoKey"
+                title: Response Firmware Private Keys Firmware  Firmware Hash  Private Keys Get
+                type: array
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - api-key-header: []
+      summary: Get private crypto keys embedded in a device firmware
+      tags:
+        - firmware
+  "/firmware/{firmware_hash}/risk":
+    get:
+      operationId: get_risk
+      parameters:
+        - description: SHA2 hash of device firmware
+          in: path
+          name: firmware_hash
+          required: true
+          schema:
+            description: SHA2 hash of device firmware
+            example: af88b1aaac0b222df8539f3ae1479b5c8eaeae41f1776b5dd2fa805cb33a1175
+            title: Firmware Hash
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirmwareRisk"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - api-key-header: []
+      summary: Get iot device firmware risk analysis
+      tags:
+        - firmware
+  "/firmware/{firmware_hash}/weak-certs":
+    get:
+      operationId: get_weak_certs
+      parameters:
+        - description: SHA2 hash of device firmware
+          in: path
+          name: firmware_hash
+          required: true
+          schema:
+            description: SHA2 hash of device firmware
+            example: 52841661d61e00649451cc471e9b56d169df8041926b1252bb3fd0710c27b12c
+            title: Firmware Hash
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WeakCert"
+                title: Response Firmware Weak Certs Firmware  Firmware Hash  Weak Certs Get
+                type: array
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - api-key-header: []
+      summary: Get certificates with weak fingerprinting algorithms that are mebedded in a device firmware
+      tags:
+        - firmware
+  "/firmware/{firmware_hash}/weak-keys":
+    get:
+      operationId: get_weak_keys
+      parameters:
+        - description: SHA2 hash of device firmware
+          in: path
+          name: firmware_hash
+          required: true
+          schema:
+            description: SHA2 hash of device firmware
+            example: 852031776c09f8152c90496f2c3fac85b46a938d20612d7fc03eea8aab46f23e
+            title: Firmware Hash
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CryptoKey"
+                title: Response Firmware Weak Keys Firmware  Firmware Hash  Weak Keys Get
+                type: array
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+        - api-key-header: []
+      summary: Get weak crypto keys with short length
+      tags:
+        - firmware
+components:
+  schemas:
+    ConfigIssue:
+      properties:
+        config_file:
+          title: Vulnerable configuration file name
+          type: string
+        issues:
+          items:
+            type: string
+          nullable: true
+          title: List of detected issues
+          type: array
+        service_name:
+          nullable: true
+          title: Affected network service name
+          type: string
+        suggestions:
+          items:
+            type: string
+          nullable: true
+          title: List of suggestions to fix the issues
+          type: array
+      title: ConfigIssue
+      type: object
+    CryptoKey:
+      properties:
+        algorithm:
+          nullable: true
+          title: Crypto algorithm name of the key
+          type: string
+        bits:
+          nullable: true
+          title: Key length in bits
+          type: integer
+        file_hash:
+          title: SHA2 hash of the crypto key file
+          type: string
+        file_name:
+          title: Crypto key file name
+          type: string
+        pem_type:
+          nullable: true
+          title: Key type, e.g., RSAPrivateKey, ECPublicKey, etc
+          type: string
+      title: CryptoKey
+      type: object
+    DefaultAccount:
+      properties:
+        gid:
+          nullable: true
+          title: Group id of the account
+          type: integer
+        hash_algorithm:
+          nullable: true
+          title: "Hash algorithm, '0': DES, '1': '5': SHA2, '2a': Blowfish"
+          type: string
+        home_dir:
+          nullable: true
+          title: Path to the home folder of the account
+          type: string
+        name:
+          title: OS account name
+          type: string
+        pwd_hash:
+          nullable: true
+          title: Password hash of the account
+          type: string
+        shell:
+          nullable: true
+          title: Path to the shell binary of the account
+          type: string
+        uid:
+          nullable: true
+          title: "*nix user id of the account"
+          type: integer
+      title: DefaultAccount
+      type: object
+    DeviceFeatures:
+      example:
+        ftp_banner: AXIS P3346 Fixed Dome Network Camera 5.20 (2017) ready.
+        hostname: ""
+        http_response: ""
+        https_response: ""
+        nic_mac: ""
+        snmp_sysdescr: ""
+        snmp_sysoid: ""
+        telnet_banner: ""
+        upnp_response: ""
+      properties:
+        ftp_banner:
+          default: ""
+          title: FTP service banner(excluding status code, eg. 220)
+          type: string
+        hostname:
+          default: ""
+          title: Device hostname
+          type: string
+        http_response:
+          default: ""
+          title: Raw response of the http service
+          type: string
+        https_response:
+          default: ""
+          title: Raw response of the https service
+          type: string
+        nic_mac:
+          default: ""
+          title: MAC address of the device network interface in dash or dot separated format
+          type: string
+        snmp_sysdescr:
+          default: ""
+          title: sysDescr OID string of the SNMP service
+          type: string
+        snmp_sysoid:
+          default: ""
+          title: sysObjectID OID string of the SNMP service
+          type: string
+        telnet_banner:
+          default: ""
+          title: Telnet service banner
+          type: string
+        upnp_response:
+          default: ""
+          title: UPnP service response
+          type: string
+      title: DeviceFeatures
+      type: object
+    DeviceInfo:
+      properties:
+        cve_list:
+          items:
+            $ref: "#/components/schemas/Vulnerability"
+          nullable: true
+          title: List of CVEs for the specified firmware version
+          type: array
+        device_type:
+          nullable: true
+          title: Device type,e.g., IP camera, etc
+          type: string
+        firmware_info:
+          allOf:
+            - $ref: "#/components/schemas/FirmwareInfo"
+          nullable: true
+          title: Device firmware infromation, release date, download Url, etc
+        firmware_version:
+          nullable: true
+          title: Device firmware version
+          type: string
+        is_discontinued:
+          nullable: true
+          title: Device discontinued/retired indicator
+          type: boolean
+        latest_firmware_info:
+          allOf:
+            - $ref: "#/components/schemas/FirmwareInfo"
+          nullable: true
+          title: Latest firmware infromation of the device
+        manufacturer:
+          nullable: true
+          title: Device manufacturer name
+          type: string
+        model_name:
+          nullable: true
+          title: Device model name
+          type: string
+      title: DeviceInfo
+      type: object
+    ExpiredCert:
+      properties:
+        file_hash:
+          title: SHA2 hash of the certificate file
+          type: string
+        file_name:
+          title: Certificate file name
+          type: string
+        public_key:
+          allOf:
+            - $ref: "#/components/schemas/PublicKey"
+          nullable: true
+          title: Public key infromation of the certificate
+        subject_name:
+          nullable: true
+          title: Certificate subject name
+          type: string
+        thumb_print:
+          nullable: true
+          title: Certificate fingerprint
+          type: string
+        valid_from:
+          nullable: true
+          title: Certificate validity start date
+          type: string
+        valid_to:
+          nullable: true
+          title: Certificate expiry date
+          type: string
+      title: ExpiredCert
+      type: object
+    FirmwareInfo:
+      properties:
+        download_url:
+          nullable: true
+          title: Download url of the firmware file on vendor's site
+          type: string
+        name:
+          nullable: true
+          title: Title of the firmware file published by the device vendor
+          type: string
+        release_date:
+          nullable: true
+          title: Release date of the firmware file
+          type: string
+        sha2:
+          nullable: true
+          title: Firmware file SHA2 hash
+          type: string
+        version:
+          nullable: true
+          title: Published firmware file version
+          type: string
+      title: FirmwareInfo
+      type: object
+    FirmwareRisk:
+      properties:
+        risk_summary:
+          allOf:
+            - $ref: "#/components/schemas/RiskSummary"
+          title: Qualitative risk levels of network services, crypto libraries, kernel and client tools in the analyzed firmware
+        vulnerable_components:
+          items:
+            $ref: "#/components/schemas/VulnerableComponent"
+          title: Details of vulnerable firmware components
+          type: array
+      title: FirmwareRisk
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: "#/components/schemas/ValidationError"
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    PublicKey:
+      properties:
+        algorithm:
+          title: Crypto algorithm name
+          type: string
+        bits:
+          nullable: true
+          title: key length in bits
+          type: integer
+      title: PublicKey
+      type: object
+    RiskSummary:
+      properties:
+        client_tools_risk:
+          title: Risk level of client tools such as busybox
+          type: string
+        crypto_risk:
+          title: Crypto libraries risk level
+          type: string
+        kernel_risk:
+          title: Kernel risk level
+          type: string
+        net_services_risk:
+          title: Qualitative risk level of device network services in the scale of 'Critical' to 'None'
+          type: string
+      title: RiskSummary
+      type: object
+    ValidationError:
+      properties:
+        loc:
+          items:
+            type: string
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+      type: object
+    Vulnerability:
+      properties:
+        cve_id:
+          title: CVE ID of the vulnerability
+          type: string
+        cvss:
+          title: CVSS v3 score of the vulnerability
+          type: number
+      title: Vulnerability
+      type: object
+    VulnerableComponent:
+      properties:
+        category:
+          title: "Component category: 'UPnP Server', 'Web Server', etc"
+          type: string
+        cvss_max:
+          title: Maximum CVSS score of the detected vulnerabilities
+          type: number
+        name:
+          title: Vulnerable component name, e.g., upnp, busybox, etc
+          type: string
+        version:
+          title: Vulnerable component version
+          type: string
+        vulnerabilities:
+          items:
+            $ref: "#/components/schemas/Vulnerability"
+          title: List of component vulnerabilities
+          type: array
+      title: VulnerableComponent
+      type: object
+    WeakCert:
+      properties:
+        file_hash:
+          title: SHA2 hash of the certificate file
+          type: string
+        file_name:
+          title: Certificate file name
+          type: string
+        sign_algorithm:
+          nullable: true
+          title: Ceritifcate signing algorithm name, e.g., sha1
+          type: string
+        subject_name:
+          nullable: true
+          title: Certificate subject name
+          type: string
+        thumb_print:
+          nullable: true
+          title: Certificate fingerprint
+          type: string
+        valid_from:
+          nullable: true
+          title: Certificate validity start date
+          type: string
+        valid_to:
+          nullable: true
+          title: Certificate expiry date
+          type: string
+      title: WeakCert
+      type: object
+  securitySchemes:
+    api-key-header:
+      in: header
+      name: x-api-key
+      type: apiKey

@@ -1,0 +1,1264 @@
+{
+  "apis": {
+    "amadeus.com": {
+      "added": "2020-09-04T08:31:58.705Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, if you are not returning any results try with big cities/airports like LON (London) or NYC (New-York).",
+        "title": "Flight Offers Search",
+        "version": "2.2.0",
+        "x-apisguru-categories": [
+          "location"
+        ],
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://developers.amadeus.com/PAS-EAS/api/v0/documents/10181/file",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "2.0.0": [
+            "Initial Version",
+            "Includes search and price flight offer"
+          ],
+          "2.1.0": [
+            "Add currencies, aircraft and carriers dictionary"
+          ],
+          "2.2.0": [
+            "Add maxPrice filtering"
+          ]
+        },
+        "x-status": "validated",
+        "x-tags": [
+          "#online-retail",
+          "#mobile-services",
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/2.2.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/2.2.0/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com/2.2.0.json"
+    },
+    "amadeus.com:amadeus-airline-code-lookup": {
+      "added": "2023-03-05T12:18:14.544Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, to see what is included in test please refer to our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Airline Code Lookup API",
+        "version": "1.1.1",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/AirlineCodeLookUp_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "initial version",
+            "List all airlines information (name and code)",
+            "Introduction of search per IATA or ICAO code"
+          ],
+          "1.1.0": [
+            "Correct example",
+            "Regroup parameter \"IATACode\" and \"ICAOCode\" under the same name \"airlineCodes\""
+          ]
+        },
+        "x-serviceName": "amadeus-airline-code-lookup",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-airline-code-lookup/1.1.1/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-airline-code-lookup/1.1.1/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-airline-code-lookup/1.1.1.json"
+    },
+    "amadeus.com:amadeus-airport-&-city-search": {
+      "added": "2023-03-05T12:21:24.642Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, in test this API only contains data from the United States, Spain, United Kingdom, Germany and India. ",
+        "title": "Airport & City Search",
+        "version": "1.2.3",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/AirportCitySearch_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "Initial Version"
+          ],
+          "1.1": [
+            "AFD-1091 - change from \"traveller\" to \"traveler\"",
+            "change default value of view indicator to FULL",
+            "Change search algorithm",
+            "Addition of \"id\" for location",
+            "New operation GET Airport or City by id",
+            "Traveler score become interger (PTR 14827552)",
+            "Change the option parameter into view and onlyMajor parameter",
+            "add a characters restriction on keyword parameter"
+          ],
+          "1.2": [
+            "Remove parameter onlyMajor",
+            "Correct example"
+          ]
+        },
+        "x-serviceName": "amadeus-airport-&-city-search",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-airport-&-city-search/1.2.3/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-airport-&-city-search/1.2.3/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-airport-&-city-search/1.2.3.json"
+    },
+    "amadeus.com:amadeus-airport-nearest-relevant": {
+      "added": "2023-03-05T12:22:42.950Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.\n\nPlease also be aware that our test environment is based on a subset of the production, this API in test only returns a few selected cities. You can find the list in our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Airport Nearest Relevant",
+        "version": "1.1.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/AirportNearestRelevant_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "Initial Version"
+          ],
+          "1.0.1": [
+            "Improvement of relevance calculation",
+            "Remove flights and travelers figures",
+            "Flights and Travelers score become integer (PTR 14827552)"
+          ],
+          "1.0.2": [
+            "AFD-1091 - change from \"traveller\" to \"traveler\""
+          ],
+          "1.1.0": [
+            "Add radius parameter"
+          ],
+          "1.1.1": [
+            "Correct example"
+          ]
+        },
+        "x-serviceName": "amadeus-airport-nearest-relevant",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-airport-nearest-relevant/1.1.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-airport-nearest-relevant/1.1.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-airport-nearest-relevant/1.1.2.json"
+    },
+    "amadeus.com:amadeus-airport-on-time-performance": {
+      "added": "2023-03-05T12:22:27.409Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.",
+        "title": "Airport On-Time Performance",
+        "version": "1.0.4",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/AirportOnTimePerformance_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "Initial Version"
+          ]
+        },
+        "x-serviceName": "amadeus-airport-on-time-performance",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-airport-on-time-performance/1.0.4/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-airport-on-time-performance/1.0.4/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-airport-on-time-performance/1.0.4.json"
+    },
+    "amadeus.com:amadeus-branded-fares-upsell": {
+      "added": "2023-03-05T12:22:11.638Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, if you are not returning any results try with big cities/airports like LON (London) or NYC (New-York).",
+        "title": "Branded Fares Upsell",
+        "version": "1.0.1",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/BrandedFaresUpsell_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "First version of Branded Fares Upsell"
+          ]
+        },
+        "x-serviceName": "amadeus-branded-fares-upsell",
+        "x-status": "validated",
+        "x-tags": [
+          "#quick-connect",
+          "#online-retail",
+          "#mobile-services",
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-branded-fares-upsell/1.0.1/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-branded-fares-upsell/1.0.1/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-branded-fares-upsell/1.0.1.json"
+    },
+    "amadeus.com:amadeus-flight-availabilities-search": {
+      "added": "2023-03-05T12:21:56.087Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, if you are not returning any results try with big cities/airports like LON (London) or NYC (New-York).",
+        "title": "Flight Availibilities Search",
+        "version": "1.0.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightAvailabilitiesSearch_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "Initial release of Flight Availibilities Search"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-availabilities-search",
+        "x-status": "validated",
+        "x-tags": [
+          "#quick-connect",
+          "#online-retail",
+          "#mobile-services",
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-availabilities-search/1.0.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-availabilities-search/1.0.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-availabilities-search/1.0.2.json"
+    },
+    "amadeus.com:amadeus-flight-busiest-traveling-period": {
+      "added": "2023-03-05T12:16:39.476Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.\n\nPlease also be aware that our test environment is based on a subset of the production, to see what is included in test please refer to our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Flight Busiest Traveling Period",
+        "version": "1.0.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightBusiestTravelingPeriod_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "Initial Version"
+          ],
+          "1.0.1": [
+            "Correct example"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-busiest-traveling-period",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-busiest-traveling-period/1.0.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-busiest-traveling-period/1.0.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-busiest-traveling-period/1.0.2.json"
+    },
+    "amadeus.com:amadeus-flight-cheapest-date-search": {
+      "added": "2023-03-05T12:16:54.840Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.\n\nPlease also be aware that our test environment is based on a subset of the production, to see what is included in test please refer to our **[data collection](https://github.com/amadeus4dev/data-collection)**.\n",
+        "title": "Flight Cheapest Date Search",
+        "version": "1.0.6",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightCheapestDateSearch_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "Initial Version"
+          ],
+          "1.0.1": [
+            "Clarified example for the parameters origin, destination and currency",
+            "Added links to ISO, IATA kind of references"
+          ],
+          "1.0.2": [
+            "Update example"
+          ],
+          "1.0.3": [
+            "Hide currency parameter"
+          ],
+          "1.0.4": [
+            "Update example",
+            "Change link of FlightOffer from v1 to v2"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-cheapest-date-search",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-cheapest-date-search/1.0.6/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-cheapest-date-search/1.0.6/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-cheapest-date-search/1.0.6.json"
+    },
+    "amadeus.com:amadeus-flight-check-in-links": {
+      "added": "2023-03-05T12:17:10.821Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.\n\nPlease also be aware that our test environment is based on a subset of the production, to see what is included in test please refer to our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Flight Check-in Links",
+        "version": "2.1.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightCheck-inLinks_v2_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "2.0": [
+            "Initial Version"
+          ],
+          "2.1.0": [
+            "Change parameter \"airline\" by \"airlineCode\"",
+            "Correct example"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-check-in-links",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-check-in-links/2.1.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-check-in-links/2.1.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-check-in-links/2.1.2.json"
+    },
+    "amadeus.com:amadeus-flight-choice-prediction": {
+      "added": "2023-03-05T12:15:52.364Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, to see what is included in test please refer to our **[data collection](https://github.com/amadeus4dev/data-collection)**.\n",
+        "title": "Flight Choice Prediction",
+        "version": "2.0.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightChoicePrediction_v2_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "2.0.0": [
+            "Initial Version"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-choice-prediction",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-choice-prediction/2.0.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-choice-prediction/2.0.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-choice-prediction/2.0.2.json"
+    },
+    "amadeus.com:amadeus-flight-create-orders": {
+      "added": "2023-03-05T12:21:40.303Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, if you are not returning any results try with big cities/airports like LON (London) or NYC (New-York).",
+        "title": "Flight Create Orders",
+        "version": "1.9.0",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightCreateOrders_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "Initial version"
+          ],
+          "1.1.0": [
+            "Add Co2Emissions information into Create flight-order reply",
+            "Add language in Contact for the APN feature"
+          ],
+          "1.2.0": [
+            "Add new sources \"LTC\" and \"EAC\" - **only available in Enterprise**"
+          ],
+          "1.3.0": [
+            "Add new airlineRemark subtype \"ADVANCED_TICKET_TIME_LIMIT\""
+          ],
+          "1.4.0": [
+            "Add new Gender enum \"UNSPECIFIED\" and \"UNDISCLOSED\"",
+            "Add EasyPay credit card brand - **only available in Enterprise**"
+          ],
+          "1.5.0": [
+            "Add new General Remark enum \"TOUR_CODE\""
+          ],
+          "1.6.0": [
+            "Add Margins and Discounts content from Margin Manager product - **only available in Enterprise**"
+          ],
+          "1.7.0": [
+            "Add new PaymentBrand enum \"PYTON\" - **only available in Enterprise**",
+            "Add new OtherPaymentMethod enum \"PYTON\" - **only available in Enterprise**",
+            "Add FM Commission - **only available in Enterprise**"
+          ],
+          "1.8.0": [
+            "Add new source \"NDC\" - **only available in Enterprise**"
+          ],
+          "1.9.0": [
+            "Add FormIdentification into the flight-order"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-create-orders",
+        "x-status": "validated",
+        "x-tags": [
+          "#travel-booking",
+          "#quick-connect",
+          "#mobile-services",
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-create-orders/1.9.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-create-orders/1.9.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-create-orders/1.9.0.json"
+    },
+    "amadeus.com:amadeus-flight-delay-prediction": {
+      "added": "2023-03-05T12:16:08.146Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.",
+        "title": "Flight Delay Prediction",
+        "version": "1.0.6",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightDelayPrediction_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "Initial Version"
+          ],
+          "1.0.1": [
+            "Add enum values on result"
+          ],
+          "1.0.2": [
+            "update examples"
+          ],
+          "1.0.3": [
+            "update examples"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-delay-prediction",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-delay-prediction/1.0.6/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-delay-prediction/1.0.6/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-delay-prediction/1.0.6.json"
+    },
+    "amadeus.com:amadeus-flight-inspiration-search": {
+      "added": "2023-03-05T12:15:36.706Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.\n\nPlease also be aware that our test environment is based on a subset of the production, to see what is included in test please refer to our **[data collection](https://github.com/amadeus4dev/data-collection)**.\n",
+        "title": "Flight Inspiration Search",
+        "version": "1.0.6",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightInspirationSearch_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "Initial Version"
+          ],
+          "1.0.1": [
+            "Clarified example for the parameters origin and currency",
+            "Added links to ISO, IATA kind of references"
+          ],
+          "1.0.2": [
+            "Correct example"
+          ],
+          "1.0.3": [
+            "Hide currency parameter"
+          ],
+          "1.0.4": [
+            "Update example",
+            "Change link of FlightOffer from v1 to v2"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-inspiration-search",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-inspiration-search/1.0.6/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-inspiration-search/1.0.6/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-inspiration-search/1.0.6.json"
+    },
+    "amadeus.com:amadeus-flight-most-booked-destinations": {
+      "added": "2023-03-05T12:16:23.796Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.\n\nPlease also be aware that our test environment is based on a subset of the production, this API in test only returns a few selected cities. You can find the list in our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Flight Most Booked Destinations",
+        "version": "1.1.1",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightMostBookedDestinations_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "Initial Version"
+          ],
+          "1.1.0": [
+            "AFD-1091 - change from \"traveller\" to \"traveler\"",
+            "Correct example",
+            "Naming of parameter origin changed for originCityCode"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-most-booked-destinations",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-most-booked-destinations/1.1.1/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-most-booked-destinations/1.1.1/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-most-booked-destinations/1.1.1.json"
+    },
+    "amadeus.com:amadeus-flight-most-traveled-destinations": {
+      "added": "2023-03-05T16:52:06.509Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.\n\nPlease also be aware that our test environment is based on a subset of the production, this API in test only returns a few selected cities. You can find the list in our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Flight Most Traveled Destinations",
+        "version": "1.1.1",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightMostTraveledDestinations_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "Initial Version"
+          ],
+          "1.0.1": [
+            "replace \"flight\" and \"traveller\" values by score"
+          ],
+          "1.0.2": [
+            "AFD-743 - add subtype in the reply"
+          ],
+          "1.0.3": [
+            "AFD-953 - change score format"
+          ],
+          "1.1.0": [
+            "AFD-1091 - change from \"traveller\" to \"traveler\"",
+            "Correct example",
+            "Naming of parameter origin changed for originCityCode"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-most-traveled-destinations",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-most-traveled-destinations/1.1.1/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-most-traveled-destinations/1.1.1/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-most-traveled-destinations/1.1.1.json"
+    },
+    "amadeus.com:amadeus-flight-offers-price": {
+      "added": "2023-03-05T12:20:53.525Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, if you are not returning any results try with big cities/airports like LON (London) or NYC (New-York).",
+        "title": "Flight Offers Price",
+        "version": "1.2.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightOffersPrice_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "Initial version"
+          ],
+          "1.1.0": [
+            "Add traveler in pricing input"
+          ],
+          "1.2.0": [
+            "Add DetailedFareRules"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-offers-price",
+        "x-status": "validated",
+        "x-tags": [
+          "#quick-connect",
+          "#online-retail",
+          "#mobile-services",
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-offers-price/1.2.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-offers-price/1.2.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-offers-price/1.2.2.json"
+    },
+    "amadeus.com:amadeus-flight-order-management": {
+      "added": "2023-03-05T12:17:58.150Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, if you are not returning any results try with big cities/airports like LON (London) or NYC (New-York).",
+        "title": "Flight Order Management",
+        "version": "1.9.0",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightOrderManagement_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0.0": [
+            "Initial version"
+          ],
+          "1.1.0": [
+            "Add Delete flight Order End point",
+            "Add Patch flight Order End Point - **only available in Enterprise**"
+          ],
+          "1.2.0": [
+            "Add PATCH flight Order End point - **only available in Enterprise**"
+          ],
+          "1.3.0": [
+            "Add new sources \"LTC\" and \"EAC\" - **only available in Enterprise**"
+          ],
+          "1.4.0": [
+            "Add new airlineRemark subtype \"ADVANCED_TICKET_TIME_LIMIT\""
+          ],
+          "1.5.0": [
+            "Add new Gender enum \"UNSPECIFIED\" and \"UNDISCLOSED\"",
+            "Add EasyPay credit card brand - **only available in Enterprise**"
+          ],
+          "1.6.0": [
+            "Add BookingStatus information",
+            "Add included Meals content",
+            "Add extra bags options on Get Flight Order - **only available in Enterprise**",
+            "Add Margins and Discounts content from Margin Manager product - **only available in Enterprise**"
+          ],
+          "1.7.0": [
+            "Add new PaymentBrand enum \"PYTON\" - **only available in Enterprise**",
+            "Add new OtherPaymentMethod enum \"PYTON\" - **only available in Enterprise**",
+            "Add FM Commission - **only available in Enterprise**"
+          ],
+          "1.8.0": [
+            "Add new source \"NDC\" - **only available in Enterprise**"
+          ],
+          "1.9.0": [
+            "Add FormIdentification into the flight-order"
+          ]
+        },
+        "x-serviceName": "amadeus-flight-order-management",
+        "x-status": "validated",
+        "x-tags": [
+          "#online-retail",
+          "#mobile-services",
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-order-management/1.9.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-order-management/1.9.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-order-management/1.9.0.json"
+    },
+    "amadeus.com:amadeus-flight-price-analysis": {
+      "added": "2023-03-05T12:19:02.125Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.",
+        "title": "Flight Price Analysis API",
+        "version": "1.0.1",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/FlightPriceAnalysis_v1_swagger_specification.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-serviceName": "amadeus-flight-price-analysis"
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-price-analysis/1.0.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-flight-price-analysis/1.0.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-flight-price-analysis/1.0.1.json"
+    },
+    "amadeus.com:amadeus-hotel-booking": {
+      "added": "2023-03-05T12:20:37.042Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production for this API it may change dynamically. For your tests, use big cities like LON (London) or NYC (New-York).\n\n\n**Warning: Do not perform test booking in production**. All requests are sent and processed by hotel providers. An excessive amount of fake/canceled reservation will make you blacklisted by hotel providers.\n",
+        "title": "Hotel Booking",
+        "version": "1.1.3",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/HotelBooking_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-serviceName": "amadeus-hotel-booking",
+        "x-status": "validated",
+        "x-tags": [
+          "#mobile-services"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-booking/1.1.3/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-booking/1.1.3/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-hotel-booking/1.1.3.json"
+    },
+    "amadeus.com:amadeus-hotel-name-autocomplete": {
+      "added": "2023-03-05T12:15:20.931Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production for this API it may change dynamically. For your tests, use big cities like LON (London) or NYC (New-York).",
+        "title": "Hotel Name Autocomplete",
+        "version": "1.0.3",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/HotelNameAutocomplete_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-serviceName": "amadeus-hotel-name-autocomplete"
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-name-autocomplete/1.0.3/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-name-autocomplete/1.0.3/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-hotel-name-autocomplete/1.0.3.json"
+    },
+    "amadeus.com:amadeus-hotel-ratings": {
+      "added": "2023-03-05T12:18:30.297Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, this API in test only offers 24 hotels; 10 in London and 14 in New-York. You can find the list in our **[data collection](https://github.com/amadeus4dev/data-collection)**.\n",
+        "title": "Hotel Ratings",
+        "version": "1.0.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/HotelRatings_v2_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-serviceName": "amadeus-hotel-ratings"
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-ratings/1.0.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-ratings/1.0.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-hotel-ratings/1.0.2.json"
+    },
+    "amadeus.com:amadeus-hotel-search": {
+      "added": "2023-03-05T12:20:21.228Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production for this API it may change dynamically. For your tests, use big cities like LON (London) or NYC (New-York).",
+        "title": "Hotel Search API",
+        "version": "3.0.8",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/HotelSearch_v3_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-serviceName": "amadeus-hotel-search"
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-search/3.0.8/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-search/3.0.8/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-hotel-search/3.0.8.json"
+    },
+    "amadeus.com:amadeus-location-score": {
+      "added": "2023-03-05T16:52:11.882Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n  \nPlease also be aware that our test environment is based on a subset of the production, this API in test only returns a few selected cities. You can find the list in our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Location Score",
+        "version": "1.0.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/LocationScore_v1_swagger_specification.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-serviceName": "amadeus-location-score"
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-location-score/1.0.2/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-location-score/1.0.2/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-location-score/1.0.2.json"
+    },
+    "amadeus.com:amadeus-on-demand-flight-status": {
+      "added": "2023-03-05T12:18:46.047Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n  \nPlease also be aware that our test environment is based on a subset of the production, to see what is included in test please refer to our **[data collection](https://github.com/amadeus4dev/data-collection)**.\n",
+        "title": "On-Demand Flight Status",
+        "version": "2.0.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/OnDemandFlightStatus_v2_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "2.0": [
+            "Initial version"
+          ]
+        },
+        "x-serviceName": "amadeus-on-demand-flight-status",
+        "x-status": "validated"
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-on-demand-flight-status/2.0.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-on-demand-flight-status/2.0.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-on-demand-flight-status/2.0.2.json"
+    },
+    "amadeus.com:amadeus-points-of-interest": {
+      "added": "2023-03-05T12:19:33.676Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.\n\nPlease also be aware that our test environment is based on a subset of the production, this API in test only returns a few selected cities. You can find the list in our **[data collection](https://github.com/amadeus4dev/data-collection)**.\n",
+        "title": "Points of Interest",
+        "version": "1.1.1",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/PointsOfInterest_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "Initial Version"
+          ],
+          "1.0.1": [
+            "Move from PointOfInterst to Location definition"
+          ],
+          "1.0.2": [
+            "New by-square endpoint as secondary resource"
+          ],
+          "1.1": [
+            "Add an id, self and rank to location resource",
+            "Introduce GET by id",
+            "add filter parameter for search operation"
+          ]
+        },
+        "x-serviceName": "amadeus-points-of-interest",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-points-of-interest/1.1.1/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-points-of-interest/1.1.1/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-points-of-interest/1.1.1.json"
+    },
+    "amadeus.com:amadeus-safe-place-": {
+      "added": "2023-03-05T12:19:49.370Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n  \nPlease also be aware that our test environment is based on a subset of the production, this API in test only returns a few selected cities. You can find the list in our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Safe Place",
+        "version": "1.0.0",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/SafePlaceAPI_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "Initial Version"
+          ]
+        },
+        "x-serviceName": "amadeus-safe-place-",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-safe-place-/1.0.0/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-safe-place-/1.0.0/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-safe-place-/1.0.0.json"
+    },
+    "amadeus.com:amadeus-seatmap-display": {
+      "added": "2023-03-05T12:19:17.647Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n\nPlease also be aware that our test environment is based on a subset of the production, if you are not returning any results try with big cities/airports like LON (London) or NYC (New-York).",
+        "title": "Seatmap Display",
+        "version": "1.9.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/SeatMapDisplay_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "first version"
+          ],
+          "1.1": [
+            "Add the posibility to includes traveler information in the display seat map from offer to benefits from discount and FF.",
+            "Align flight Offer model with Feb-20 release"
+          ],
+          "1.2": [
+            "Retrieve the Amenities per cabin"
+          ],
+          "1.3": [
+            "Add support of Light Ticketing Carrier (LTC) and Extended Air Choice (EAC) as flight offer source - **available only in Enterprise**"
+          ],
+          "1.4": [
+            "Add the Operating flight in the response for codeshare awareness, aligned with flight offer"
+          ],
+          "1.5": [
+            "Document warnings and new error codes",
+            "Document new premium seat characteristic (1A_AQC_PREMIUM_SEAT)"
+          ],
+          "1.6": [
+            "Add Medias in seat amenity to carry rich content",
+            "Add field for number of seats available",
+            "Support flightOrderId as input parameter in GET as replacement for DEPRECATED flight-orderId"
+          ],
+          "1.7": [
+            "Add new ENUM value for Power Amenity"
+          ],
+          "1.8": [
+            "Add new input parameter seatNumberServiceBookingStatusRequired - **available only in Enterprise** ",
+            "Add new output parameter seatNumberServiceBookingStatus - **available only in Enterprise** "
+          ],
+          "1.9": [
+            "Add new usbType with a new enum in the PowerAmenity"
+          ]
+        },
+        "x-serviceName": "amadeus-seatmap-display",
+        "x-status": "validated",
+        "x-tags": [
+          "#online-retail",
+          "#mobile-services",
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-seatmap-display/1.9.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-seatmap-display/1.9.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-seatmap-display/1.9.2.json"
+    },
+    "amadeus.com:amadeus-tours-and-activities": {
+      "added": "2023-03-05T12:21:08.974Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token. \n  \nPlease also be aware that our test environment is based on a subset of the production, this API in test only returns a few selected cities. You can find the list in our **[data collection](https://github.com/amadeus4dev/data-collection)**.",
+        "title": "Tours and Activities",
+        "version": "1.0.2",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/ToursandActivities_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "First version"
+          ]
+        },
+        "x-serviceName": "amadeus-tours-and-activities",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-tours-and-activities/1.0.2/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-tours-and-activities/1.0.2/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-tours-and-activities/1.0.2.json"
+    },
+    "amadeus.com:amadeus-travel-recommendations": {
+      "added": "2023-03-05T12:17:42.141Z",
+      "info": {
+        "description": "Before using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.",
+        "title": "Travel Recommendations API",
+        "version": "1.0.3",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/TravelRecommendations_v1_swagger_specification.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-serviceName": "amadeus-travel-recommendations"
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-travel-recommendations/1.0.3/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-travel-recommendations/1.0.3/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-travel-recommendations/1.0.3.json"
+    },
+    "amadeus.com:amadeus-trip-parser": {
+      "added": "2023-03-05T12:20:05.299Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.",
+        "title": "Trip Parser",
+        "version": "3.0.1",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/TripParser_v3_swagger_specification.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-serviceName": "amadeus-trip-parser"
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-trip-parser/3.0.1/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-trip-parser/3.0.1/openapi.yaml",
+      "openapiVer": "3.0.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-trip-parser/3.0.1.json"
+    },
+    "amadeus.com:amadeus-trip-purpose-prediction": {
+      "added": "2023-03-05T12:17:26.380Z",
+      "info": {
+        "description": "\nBefore using this API, we recommend you read our **[Authorization Guide](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262)** for more information on how to generate an access token.",
+        "title": "Trip Purpose Prediction",
+        "version": "1.1.4",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_amadeus.com_images_en_technology_mobile-tablet_mobile-woman-office-city.jpg.transform_medium_img.jpg"
+        },
+        "x-origin": [
+          {
+            "format": "swagger",
+            "url": "https://raw.githubusercontent.com/amadeus4dev/amadeus-open-api-specification/main/spec/json/TripPurposePrediction_v1_swagger_specification.json",
+            "version": "2.0"
+          }
+        ],
+        "x-providerName": "amadeus.com",
+        "x-release-note": {
+          "1.0": [
+            "Initial Version"
+          ],
+          "1.1": [
+            "Remove self section from data",
+            "Add defaults to meta",
+            "Change result into an enum"
+          ]
+        },
+        "x-serviceName": "amadeus-trip-purpose-prediction",
+        "x-status": "validated",
+        "x-tags": [
+          "#ama-for-dev"
+        ]
+      },
+      "updated": "2023-03-24T18:30:03.102Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-trip-purpose-prediction/1.1.4/swagger.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-trip-purpose-prediction/1.1.4/swagger.yaml",
+      "openapiVer": "2.0",
+      "link": "https://api.apis.guru/v2/specs/amadeus.com:amadeus-trip-purpose-prediction/1.1.4.json"
+    }
+  }
+}

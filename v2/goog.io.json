@@ -1,0 +1,36 @@
+{
+  "apis": {
+    "goog.io": {
+      "added": "2020-09-07T16:02:20.825Z",
+      "info": {
+        "contact": {
+          "email": "support@goog.io",
+          "name": "API Support",
+          "url": "https://goog.io"
+        },
+        "description": "# Intoduction\n\nThis is the OpenAPI V3 documentation for https://api.goog.io\n\nAn API to perform Google Searches. Extremely fast and accurate. Zero proxies. Clean USA IPs.\n\nSimple to use API, but advance enough to support special parameters such as languages, country and geographic locality.\n\nGoogio is the ultimate search API for Google Searches, Google News, and Google SERP.\n# Docs\n\n> An Unofficial Google Search API\n\nAn API to perform Google Searches. Extremely fast and accurate. Zero proxies. Clean USA IPs.\n\nSimple to use API, but advance enough to support special parameters such as languages, country and geographic locality.\n\n# Example Code\n\n Check out [Github repo](https://github.com/googio/googio_examples) for example code for calling the API with various languages.\n\n# Authentication\n\n### API Key\n\nOptional API key for authenticated access. Note that we use \"API key\" interchangably in these docs.\n\nAuthenticated requests must include an `apikey` header containing your subscription's API Key.\n\n| Security Schema Type | Header Name | Example Token |\n| --- | --- | --- |\n| API Key | `apikey` | c5bfb018-ab46-4e61-9271-4ec7e9c04a6e |\n\nIn the following example, `YOU_APIKEY` represents the auth token for your account.\n\n```\ncurl --header 'apikey: YOU_APIKEY'\n```\n\nYou can view and manage your API keys in the [Dashboard](/dashboard).\n\nBe sure to keep your API keys secure. Do not share them in publicly accessible areas such as GitHub, client-side code, and so forth.\n\nAlso note that all API requests must be made over **HTTPS**. Calls made over plain HTTP will attempt to be automatically upgraded to HTTPS, though this use cases is discouraged.\n\n\n## Rate Limits\n\nAPI requests may be rate limited depending on your subscription plan and traffic patterns. The following response headers will be present in these cases:\n\n| Header | Description |\n| ------ | ----------- |\n| `X-RateLimit-Limit` | The maximum number of requests that the consumer is permitted to make. |\n| `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window. |\n| `X-RateLimit-Reset` | The time at which the current rate limit window resets in UTC epoch seconds. |\n\nWhen the rate limit is **exceeded**, an error is returned with the status \"**429 Too Many Requests**\":\n\n```json\n{\n  \"error\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"Rate limit exceeded\"\n  }\n}\n```\n\n\n\n## Errors\n\nThis API uses conventional HTTP response codes to indicate the success or failure of API requests. In general: Codes in the `2xx` range indicate success. Codes in the `4xx` range indicate an error that failed given the information provided (e.g., a required parameter was omitted, endpoint not found, etc.). Codes in the `5xx` range indicate an error with our API (these are rare).\n\n\n",
+        "title": "goog.io | Unoffical Google Search API",
+        "version": "0.1.0",
+        "x-apisguru-categories": [
+          "search"
+        ],
+        "x-origin": [
+          {
+            "format": "openapi",
+            "url": "https://goog.io/openapi.json",
+            "version": "3.0"
+          }
+        ],
+        "x-providerName": "goog.io",
+        "x-logo": {
+          "url": "https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg"
+        }
+      },
+      "updated": "2021-06-21T12:16:53.715Z",
+      "swaggerUrl": "https://api.apis.guru/v2/specs/goog.io/0.1.0/openapi.json",
+      "swaggerYamlUrl": "https://api.apis.guru/v2/specs/goog.io/0.1.0/openapi.yaml",
+      "openapiVer": "3.0.2",
+      "link": "https://api.apis.guru/v2/specs/goog.io/0.1.0.json"
+    }
+  }
+}

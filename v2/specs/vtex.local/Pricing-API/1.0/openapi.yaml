@@ -1,0 +1,2233 @@
+openapi: 3.0.0
+servers:
+  - url: https://vtex.local
+  - description: VTEX server url
+    url: https://api.vtex.com/{accountName}
+    variables:
+      accountName:
+        default: "{accountName}"
+        description: Name of the VTEX account. Used as part of the URL
+info:
+  contact: {}
+  description: "\r
+
+    > Check the new [Pricing onboarding guide](https://developers.vtex.com/vtex-rest-api/docs/pricing-overview). We created this guide to improve the onboarding experience for developers at VTEX. It assembles all documentation on our Developer Portal about Pricing and is organized by focusing on the developer's journey.\r
+
+    \r
+
+    Pricing is the VTEX module responsible for the SKU's price list. At this module we have the base price of each SKU, some optional fixed prices by trade policy, and some rules that can be applied to generate dynamically different final prices according to the purchase context and the trade policy. The variables used in this collection are:\r
+
+    \r
+
+    \  * **{{accountName}}** = You VTEX account name.\r
+
+    \  * **{{tradePolicyId}}** = Current Trade Policy ID.\r
+
+    \  * **{{itemId}}** = SKU ID.\r
+
+    \  * **{{X-VTEX-API-AppKey}}** and **{{X-VTEX-API-AppToken}}** = Credentials.\r
+
+    \r
+
+    You can get more information about how to use this module and its business logic at [VTEX Help](http://help.vtex.com).\r
+
+    \r
+
+    ## Rate Limits\r
+
+    \r
+
+    ### Limits per route\r
+
+    \r
+
+    - `GET`:  routes are not rate limited at the moment\r
+
+    - `PUT or POST`: `40 requests/second/account` in any **price insert/update route** with 1000 *Burst Credits*\r
+
+    - `DELETE`: `16 requests/second/account` in any **price deletion route**, with 300 *Burst Credits*.\r
+
+    \r
+
+    ### What are Burst Credits?\r
+
+    \r
+
+    In case the account exceeds the limit frequency for a  `Rate Limiter` (for instance, when one account makes `41 requests/second` in any `price insert/update route`), we decrease from the *Burst Credit* count the exceeding (in this example, *1 Credit*).\r
+
+    \r
+
+    In the event of the *Burst Credits* reaching **0 (zero)**, the request is blocked with a `Status 429` response.\r
+
+    \r
+
+    The credits fill up over time when the route is not being used, in the same rate as the route's `Rate Limiter`. In our example, for each second not sending a **PUT or POST request**, we increase *40 Burst Credits* to this `Rate Limiter`\r
+
+    \r
+
+    ### New Response Headers\r
+
+    \r
+
+    In the response headers of any request to Pricing v2 there are some new headers indicating the current status of the Rate Limiting.\r
+
+    This information may be useful to evaluate the ideal frequency to send requests to a route, and when to send a new request in the event of reaching a Rate Limit.\r
+
+    \r
+
+    - `Ratelimit-Limit` - Total *Burst Credits* offered to a route\r
+
+    - `Ratelimit-Remaining` - How many *Burst Credits* are still available to use\r
+
+    - `Ratelimit-Reset` - How long (in seconds) it will take to the *Burst Credits* to fill up completely (It will fill up to the `Ratelimit-Limit`)\r
+
+    - `Retry-After` - Indicates how many seconds you will need to wait until the `Rate Limiter` accepts a new request to this route again. If this header response exists, this means your current request has been rate limited and has not been processed.\r
+
+    \r
+
+    ### How to integrate with Pricing v2 considering our Rate Limits\r
+
+    \r
+
+    Integrate considering the limits of **requests/route/account** specified in the [*Limits per route*](#rate-limits) section, avoiding to surpass this frequency.\r
+
+    \r
+
+    If you happen to be Rate Limited, wait the time in seconds specified in `Retry-After` before making another request to the service, and reduce the rate of requests per second that your integration is making."
+  title: Pricing API
+  version: "1.0"
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/vtex/openapi-schemas/master/VTEX - Pricing API.json
+      version: "3.0"
+  x-providerName: vtex.local
+  x-serviceName: Pricing-API
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - appKey: []
+    appToken: []
+tags:
+  - name: Price Tables
+  - name: Prices and Fixed Prices
+  - name: Pricing Configuration
+paths:
+  /pricing/config:
+    get:
+      deprecated: false
+      description: "Retrieves Pricing Configuration.\r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"hasMigrated\": true,\r
+
+        \    \"migrationStatus\": \"Completed\",\r
+
+        \    \"defaultMarkup\": 100,\r
+
+        \    \"priceVariation\": {\r
+
+        \        \"upperLimit\": null,\r
+
+        \        \"lowerLimit\": null\r
+
+        \    },\r
+
+        \    \"minimumMarkups\": {\r
+
+        \        \"1\": 100,\r
+
+        \        \"2\": 90\r
+
+        \    },\r
+
+        \    \"tradePolicyConfigs\": [],\r
+
+        \    \"sellersToOverride\": [],\r
+
+        \    \"hasPriceInheritance\": false,\r
+
+        \    \"priceInheritance\": \"never\",\r
+
+        \    \"hasOptionalBasePrice\": false,\r
+
+        \    \"blockAccount\": false,\r
+
+        \    \"blockedRoutes\": null,\r
+
+        \    \"priceTableSelectionStrategy\": \"first\",\r
+
+        \    \"priceTableLimit\": null\r
+
+        }\r
+
+        ```"
+      operationId: GetPricingConfig
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+              example:
+                blockAccount: false
+                blockedRoutes: null
+                defaultMarkup: 100
+                hasMigrated: true
+                hasOptionalBasePrice: false
+                hasPriceInheritance: false
+                migrationStatus: Completed
+                minimumMarkups:
+                  "1": 100
+                  "2": 90
+                priceInheritance: never
+                priceTableLimit: null
+                priceTableSelectionStrategy: first
+                priceVariation:
+                  lowerLimit: null
+                  upperLimit: null
+                sellersToOverride: []
+                tradePolicyConfigs: []
+              schema:
+                $ref: "#/components/schemas/PricingConfiguration"
+          description: OK
+          headers:
+            Access-Control-Allow-Credentials:
+              content:
+                text/plain:
+                  example: "true"
+                  schema:
+                    type: string
+            Access-Control-Allow-Origin:
+              content:
+                text/plain:
+                  example: "*"
+                  schema:
+                    type: string
+            Connection:
+              content:
+                text/plain:
+                  example: keep-alive
+                  schema:
+                    type: string
+            Content-Encoding:
+              content:
+                text/plain:
+                  example: gzip
+                  schema:
+                    type: string
+            Content-Length:
+              content:
+                text/plain:
+                  example: "118"
+                  schema:
+                    type: string
+            Date:
+              content:
+                text/plain:
+                  example: Tue, 21 Feb 2017 16:11:39 GMT
+                  schema:
+                    type: string
+            Server:
+              content:
+                text/plain:
+                  example: nginx
+                  schema:
+                    type: string
+            X-CDNIgnore:
+              content:
+                text/plain:
+                  example: "1"
+                  schema:
+                    type: string
+            X-Powered-by-VTEX-Janus-Edge:
+              content:
+                text/plain:
+                  example: v1.35.3
+                  schema:
+                    type: string
+            X-Track:
+              content:
+                text/plain:
+                  example: stable
+                  schema:
+                    type: string
+            X-VTEX-Janus-Router-Backend-App:
+              content:
+                text/plain:
+                  example: pricing-v3.21.12
+                  schema:
+                    type: string
+      servers:
+        - url: https://api.vtex.com/{account}/pricing
+          variables:
+            account:
+              default: DefaultParameterValue
+      summary: Get Pricing Configuration
+      tags:
+        - Pricing Configuration
+  /pricing/migration:
+    get:
+      deprecated: false
+      description: "Retrieves Pricing v2 Status. \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"isActive\": true,\r
+
+        \    \"hasMigrated\": true\r
+
+        }\r
+
+        ```"
+      operationId: GetPricingv2Status
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+              example:
+                hasMigrated: true
+                isActive: true
+              schema:
+                properties:
+                  hasMigrated:
+                    description: Defines if the account has migrated to Pricing V2.
+                    example: true
+                    type: boolean
+                  isActive:
+                    description: Defines if the account is active.
+                    example: true
+                    type: boolean
+                type: object
+          description: OK
+          headers:
+            Access-Control-Allow-Credentials:
+              content:
+                text/plain:
+                  example: "true"
+                  schema:
+                    type: string
+            Access-Control-Allow-Origin:
+              content:
+                text/plain:
+                  example: "*"
+                  schema:
+                    type: string
+            Connection:
+              content:
+                text/plain:
+                  example: keep-alive
+                  schema:
+                    type: string
+            Content-Encoding:
+              content:
+                text/plain:
+                  example: gzip
+                  schema:
+                    type: string
+            Content-Length:
+              content:
+                text/plain:
+                  example: "52"
+                  schema:
+                    type: string
+            Date:
+              content:
+                text/plain:
+                  example: Tue, 21 Feb 2017 16:13:39 GMT
+                  schema:
+                    type: string
+            Server:
+              content:
+                text/plain:
+                  example: nginx
+                  schema:
+                    type: string
+            X-CDNIgnore:
+              content:
+                text/plain:
+                  example: "1"
+                  schema:
+                    type: string
+            X-Powered-by-VTEX-Janus-Edge:
+              content:
+                text/plain:
+                  example: v1.35.3
+                  schema:
+                    type: string
+            X-Track:
+              content:
+                text/plain:
+                  example: stable
+                  schema:
+                    type: string
+            X-VTEX-Janus-Router-Backend-App:
+              content:
+                text/plain:
+                  example: pricing-v3.21.12
+                  schema:
+                    type: string
+      servers:
+        - url: https://api.vtex.com/{account}/pricing
+          variables:
+            account:
+              default: DefaultParameterValue
+      summary: Get Pricing v2 Status
+      tags:
+        - Pricing Configuration
+  /pricing/pipeline/catalog:
+    get:
+      deprecated: false
+      description: "This method will retrieve all price tables and their rules.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \    {\r
+
+        \        \"tradePolicyId\": \"2\",\r
+
+        \        \"rules\": [\r
+
+        \            {\r
+
+        \                \"id\": 0,\r
+
+        \                \"context\": {\r
+
+        \                    \"categories\": {},\r
+
+        \                    \"brands\": {},\r
+
+        \                    \"stockStatuses\": null,\r
+
+        \                    \"internalCategories\": null,\r
+
+        \                    \"markupRange\": null,\r
+
+        \                    \"dateRange\": null\r
+
+        \                },\r
+
+        \                \"percentualModifier\": 20\r
+
+        \            }\r
+
+        \        ]\r
+
+        \    },\r
+
+        \    {\r
+
+        \        \"tradePolicyId\": \"b2c\",\r
+
+        \        \"rules\": [\r
+
+        \            {\r
+
+        \                \"id\": 0,\r
+
+        \                \"context\": {\r
+
+        \                    \"categories\": {},\r
+
+        \                    \"brands\": {\r
+
+        \                        \"2000009\": \"Whiskas\"\r
+
+        \                    },\r
+
+        \                    \"stockStatuses\": null,\r
+
+        \                    \"internalCategories\": null,\r
+
+        \                    \"markupRange\": null,\r
+
+        \                    \"dateRange\": null\r
+
+        \                },\r
+
+        \                \"percentualModifier\": 15\r
+
+        \            }\r
+
+        \        ]\r
+
+        \    }\r
+
+        ]\r
+
+        ```"
+      operationId: getallpricetablesandrules
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - rules:
+                    - context:
+                        brands: {}
+                        categories: {}
+                        dateRange: null
+                        internalCategories: null
+                        markupRange: null
+                        stockStatuses: null
+                      id: 0
+                      percentualModifier: 20
+                  tradePolicyId: "2"
+                - rules:
+                    - context:
+                        brands:
+                          "2000009": Whiskas
+                        categories: {}
+                        dateRange: null
+                        internalCategories: null
+                        markupRange: null
+                        stockStatuses: null
+                      id: 0
+                      percentualModifier: 15
+                  tradePolicyId: b2c
+              schema:
+                items:
+                  properties:
+                    percentualModifier:
+                      description: Percentual modifier.
+                      type: integer
+                    rules:
+                      description: Array of rules for the price table.
+                      items:
+                        description: Object containing a price table rule.
+                        properties:
+                          context:
+                            description: Rule Context is a group of filters to be checked at an item level when applying the rule. If all those filters check out, the rule will be applied for that item, unless there is a fixed price for that item.
+                            properties:
+                              brands:
+                                additionalProperties:
+                                  additionalProperties:
+                                    description: Brand Name.
+                                    type: string
+                                  description: Brand ID.
+                                  type: string
+                                description: "Brands that an item should have to be eligible for the rule. Format: key: `brandId`, value: `brandName`."
+                                type: object
+                              categories:
+                                additionalProperties:
+                                  additionalProperties:
+                                    description: Category Name.
+                                    type: string
+                                  description: Category ID.
+                                  type: string
+                                description: "Categories that an item should have to be eligible for the rule. Format: key: `categoryId`, value: `categoryName`."
+                                type: object
+                              dateRange:
+                                description: The rule will be active during this time range.
+                                nullable: true
+                                properties:
+                                  from:
+                                    description: "Date when rule will be activated. Date format: `RFC3339`."
+                                    type: string
+                                  to:
+                                    description: "Date when the rule will be deactivated. Date format: `RFC3339`."
+                                    type: string
+                                type: object
+                              internalCategories:
+                                description: Internal Categories.
+                                nullable: true
+                                type: object
+                              markupRange:
+                                description: For an item to be eligible to the rule, it's markup should be in this Markup Range.
+                                nullable: true
+                                properties:
+                                  from:
+                                    description: Item markup should be greater than or equal to this value.
+                                    type: integer
+                                  to:
+                                    description: Item markup should be less than or equal to this value.
+                                    type: integer
+                                type: object
+                              stockStatuses:
+                                description: Stock statuses.
+                                nullable: true
+                                type: object
+                            type: object
+                          id:
+                            description: Rule ID.
+                            type: number
+                        type: object
+                      type: array
+                    tradePolicyId:
+                      description: Trade Policy ID (Price Table ID).
+                      type: string
+                  type: object
+                title: ""
+                type: array
+          description: OK
+      servers:
+        - url: https://api.vtex.com/{account}/pricing
+          variables:
+            account:
+              default: DefaultParameterValue
+      summary: Get all price tables and their rules
+      tags:
+        - Price Tables
+  "/pricing/pipeline/catalog/{priceTableId}":
+    get:
+      deprecated: false
+      description: "This method will retrieve the rules from a specific Price Table.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"tradePolicyId\": \"b2c\",\r
+
+        \    \"rules\": [{\r
+
+        \        \"id\": 0,\r
+
+        \        \"context\": {\r
+
+        \            \"categories\": {},\r
+
+        \            \"brands\": {\r
+
+        \                \"2000009\": \"Whiskas\"\r
+
+        \            },\r
+
+        \            \"stockStatuses\": null,\r
+
+        \            \"internalCategories\": null,\r
+
+        \            \"markupRange\": null,\r
+
+        \            \"dateRange\": null\r
+
+        \        },\r
+
+        \        \"percentualModifier\": 15\r
+
+        \    }]\r
+
+        }\r
+
+        ```"
+      operationId: Getrulesforapricetable
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Price Table Name.
+          in: path
+          name: priceTableId
+          required: true
+          schema:
+            example: b2c
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                rules:
+                  - context:
+                      brands:
+                        "2000009": Whiskas
+                      categories: {}
+                      dateRange: null
+                      internalCategories: null
+                      markupRange: null
+                      stockStatuses: null
+                    id: 0
+                    percentualModifier: 15
+                tradePolicyId: b2c
+              schema:
+                properties:
+                  percentualModifier:
+                    description: Percentual modifier.
+                    type: integer
+                  rules:
+                    description: Array of rules for the price table.
+                    items:
+                      description: Object containing a price table rule.
+                      properties:
+                        context:
+                          description: Rule Context is a group of filters to be checked at an item level when applying the rule. If all those filters check out, the rule will be applied for that item, unless there is a fixed price for that item.
+                          properties:
+                            brands:
+                              additionalProperties:
+                                additionalProperties:
+                                  description: Brand Name.
+                                  type: string
+                                description: Brand ID.
+                                type: string
+                              description: "Brands that an item should have to be eligible for the rule. Format: key: `brandId`, value: `brandName`."
+                              type: object
+                            categories:
+                              additionalProperties:
+                                additionalProperties:
+                                  description: Category Name.
+                                  type: string
+                                description: Category ID.
+                                type: string
+                              description: "Categories that an item should have to be eligible for the rule. Format: key: `categoryId`, value: `categoryName`."
+                              type: object
+                            dateRange:
+                              description: The rule will be active during this time range.
+                              nullable: true
+                              properties:
+                                from:
+                                  description: "Date when rule will be activated. Date format: `RFC3339`."
+                                  type: string
+                                to:
+                                  description: "Date when the rule will be deactivated. Date format: `RFC3339`."
+                                  type: string
+                              type: object
+                            internalCategories:
+                              description: Internal Categories.
+                              nullable: true
+                              type: object
+                            markupRange:
+                              description: For an item to be eligible to the rule, it's markup should be in this Markup Range.
+                              nullable: true
+                              properties:
+                                from:
+                                  description: Item markup should be greater than or equal to this value.
+                                  type: integer
+                                to:
+                                  description: Item markup should be less than or equal to this value.
+                                  type: integer
+                              type: object
+                            stockStatuses:
+                              description: Stock statuses.
+                              nullable: true
+                              type: object
+                          type: object
+                        id:
+                          description: Rule ID.
+                          type: number
+                      type: object
+                    type: array
+                  tradePolicyId:
+                    description: Trade Policy ID (Price Table ID).
+                    type: string
+                title: ""
+                type: object
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "429":
+          description: Too many requests
+      servers:
+        - url: https://api.vtex.com/{account}/pricing
+          variables:
+            account:
+              default: DefaultParameterValue
+      summary: Get rules for a price table
+      tags:
+        - Price Tables
+    put:
+      description: "This method will update the rules from a specific Price Table. It will delete all the rules from the requested Price Table and create new rules based on the content of the request.\r
+
+        \r
+
+        ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"rules\": [\r
+
+        \          {\r
+
+        \               \"id\": 1,\r
+
+        \               \"context\": {\r
+
+        \                    \"categories\": {\r
+
+        \                         \"Category ID\": \"1\",\r
+
+        \                         \"Category Name\": \"Alimentação\"\r
+
+        \                    },\r
+
+        \                    \"brands\": {\r
+
+        \                         \"Brand ID\": \"2000002\",\r
+
+        \                         \"Brand Name\": \"Whiskas\"\r
+
+        \                    },\r
+
+        \                    \"markupRange\": {\r
+
+        \                         \"from\": 0,\r
+
+        \                         \"to\": 200\r
+
+        \                    },\r
+
+        \                    \"dateRange\": {\r
+
+        \                         \"from\": \"2022-01-23T19:00:00.000Z\",\r
+
+        \                         \"to\": \"2023-10-26T00:00:00.000Z\"\r
+
+        \                    }\r
+
+        \               },\r
+
+        \               \"percentualModifier\": 0\r
+
+        \          }\r
+
+        \    ]\r
+
+        }\r
+
+        ```"
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Price Table Name.
+          in: path
+          name: priceTableId
+          required: true
+          schema:
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                rules:
+                  - context:
+                      brands:
+                        Brand ID: "2000002"
+                        Brand Name: Whiskas
+                      categories:
+                        Category ID: "1"
+                        Category Name: Alimentação
+                      dateRange:
+                        from: 2022-01-23T19:00:00.000Z
+                        to: 2023-10-26T00:00:00.000Z
+                      markupRange:
+                        from: 0
+                        to: 200
+                    id: 1
+                    percentualModifier: 0
+              properties:
+                rules:
+                  description: Array of rules for the price table.
+                  items:
+                    description: Object containing a price table rule.
+                    properties:
+                      context:
+                        description: Rule Context is a group of filters to be checked at an item level when applying the rule. If all those filters check out, the rule will be applied for that item, unless there is a fixed price for that item.
+                        properties:
+                          brands:
+                            additionalProperties:
+                              additionalProperties:
+                                description: Brand Name.
+                                example: Goldman
+                                type: string
+                              description: Brand ID.
+                              example: "421"
+                              type: string
+                            description: "Brands that an item should have to be eligible for the rule. Format: key: `brandId`, value: `brandName`."
+                            title: brands
+                            type: object
+                          categories:
+                            additionalProperties:
+                              additionalProperties:
+                                description: Category Name.
+                                example: Books
+                                type: string
+                              description: Category ID.
+                              example: "209"
+                              type: string
+                            description: "Categories that an item should have to be eligible for the rule. Format: key: `categoryId`, value: `categoryName`."
+                            title: categories
+                            type: object
+                          dateRange:
+                            description: The rule will be active during this time range.
+                            properties:
+                              from:
+                                description: "Date when rule will be activated. Date format: `RFC3339`."
+                                example: 2019-10-23T19:00:00.000Z
+                                title: from
+                                type: string
+                              to:
+                                description: "Date when the rule will be deactivated. Date format: `RFC3339`."
+                                example: 2019-10-26T00:00:00.000Z
+                                title: to
+                                type: string
+                            required:
+                              - from
+                              - to
+                            title: dateRange
+                            type: object
+                          internalCategories:
+                            description: Internal Categories.
+                            example: null
+                            nullable: true
+                            title: internalCategories
+                            type: object
+                          markupRange:
+                            description: For an item to be eligible to the rule, it's markup should be in this Markup Range.
+                            example: null
+                            nullable: true
+                            properties:
+                              from:
+                                description: Item markup should be greater than or equal to this value.
+                                example: 0
+                                title: from
+                                type: integer
+                              to:
+                                description: Item markup should be less than or equal to this value.
+                                example: 200
+                                title: to
+                                type: integer
+                            required:
+                              - from
+                              - to
+                            title: markupRange
+                            type: object
+                          stockStatuses:
+                            description: Stock statuses.
+                            example: null
+                            nullable: true
+                            title: stockStatuses
+                            type: object
+                        required:
+                          - categories
+                          - brands
+                          - markupRange
+                          - dateRange
+                        title: context
+                        type: object
+                      id:
+                        description: Rule ID.
+                        example: 0
+                        title: id
+                        type: integer
+                      percentualModifier:
+                        description: Percentual modifier.
+                        example: 0
+                        title: percentualModifier
+                        type: number
+                    required:
+                      - id
+                      - context
+                      - percentualModifier
+                    type: object
+                  title: rules
+                  type: array
+              required:
+                - rules
+              type: object
+        description: ""
+      responses:
+        "201":
+          description: Created
+      summary: Update rules for a price table
+      tags:
+        - Price Tables
+  "/pricing/prices/{itemId}":
+    delete:
+      deprecated: false
+      description: Deletes the Base Price and all available Fixed Prices for an SKU in all trade policies.
+      operationId: DeletePrice
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: SKU ID.
+          in: path
+          name: itemId
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete Price
+      tags:
+        - Prices and Fixed Prices
+    get:
+      deprecated: false
+      description: "Retrieves price data given a specific SKU ID. Within the `fixedPrices` object, there might be a list of prices for specific Trade Policies and Minimium Quantities of the SKU. Fixed Prices may also be scheduled.\r
+
+        \r
+
+        \ ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"itemId\": \"1\",\r
+
+        \    \"listPrice\": 50,\r
+
+        \    \"costPrice\": 90,\r
+
+        \    \"markup\": 30,\r
+
+        \    \"basePrice\": 117,\r
+
+        \    \"fixedPrices\": [\r
+
+        \        {\r
+
+        \            \"tradePolicyId\": \"1\",\r
+
+        \            \"value\": 50.5,\r
+
+        \            \"listPrice\": 50.5,\r
+
+        \            \"minQuantity\": 2,\r
+
+        \            \"dateRange\": {\r
+
+        \                \"from\": \"2021-12-31T01:00:00Z\",\r
+
+        \                \"to\": \"2022-12-31T01:00:00Z\"\r
+
+        \            }\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"tradePolicyId\": \"2\",\r
+
+        \            \"value\": 30,\r
+
+        \            \"listPrice\": 50,\r
+
+        \            \"minQuantity\": 2\r
+
+        \        }\r
+
+        \    ]\r
+
+        }\r
+
+        ```"
+      operationId: GetPrice
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: SKU ID.
+          in: path
+          name: itemId
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                basePrice: 117
+                costPrice: 90
+                fixedPrices:
+                  - dateRange:
+                      from: 2021-12-31T01:00:00Z
+                      to: 2022-12-31T01:00:00Z
+                    listPrice: 50.5
+                    minQuantity: 2
+                    tradePolicyId: "1"
+                    value: 50.5
+                  - listPrice: 50
+                    minQuantity: 2
+                    tradePolicyId: "2"
+                    value: 30
+                itemId: "1"
+                listPrice: 50
+                markup: 30
+              schema:
+                $ref: "#/components/schemas/Getprice"
+          description: OK
+      summary: Get Price
+      tags:
+        - Prices and Fixed Prices
+    put:
+      description: "Creates or updates an SKU Base Price or Fixed Prices. The **base price** is the basic selling price of a product, it comprises the cost price and the markup wanted in the sale of the product. The **fixed price** is an optional price of the SKU for a specific trade policy with a specific minimum quantity to be activated.\r
+
+        \r
+
+        \ <p> You may optionally set a list price. Additionally, you may set either a cost price or a markup value. By defining either one of them, the other will be calculated to conform to the formula <code>costPrice * (1 + markup) = basePrice</code>.</p> <h2>Request body example</h2>\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"markup\": 30,\r
+
+        \    \"basePrice\": 100,\r
+
+        \    \"listPrice\": 35,\r
+
+        \    \"fixedPrices\": [\r
+
+        \        {\r
+
+        \            \"tradePolicyId\": \"1\",\r
+
+        \            \"value\": 31,\r
+
+        \            \"listPrice\": 32,\r
+
+        \            \"minQuantity\": 1,\r
+
+        \            \"dateRange\": {\r
+
+        \                \"from\": \"2022-05-21T22:00:00Z\",\r
+
+        \                \"to\": \"2023-05-28T22:00:00Z\"\r
+
+        \            }\r
+
+        \        },\r
+
+        \        {\r
+
+        \            \"tradePolicyId\": \"1\",\r
+
+        \            \"value\": 31.5,\r
+
+        \            \"listPrice\": 33,\r
+
+        \            \"minQuantity\": 2\r
+
+        \        }\r
+
+        \    ]\r
+
+        }\r
+
+        ```"
+      operationId: CreateUpdatePriceOrFixedPrice
+      parameters:
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: SKU unique identifier number.
+          in: path
+          name: itemId
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                basePrice:
+                  default: 100
+                  description: SKU selling base price. If you decide to fill only the `basePrice` item, the `markup` and `costPrice` will be automatically generated to adapt to the number inserted in `basePrice`.
+                  title: basePrice
+                  type: number
+                costPrice:
+                  default: 35
+                  description: SKU selling cost price. If you decide to fill the `costPrice` item, you must also fill the `markup` and `basePrice` will be automatically generated based on both values.
+                  title: costPrice
+                  type: number
+                fixedPrices:
+                  items:
+                    default: []
+                    description: Array with general information about the SKU's fixed prices.
+                    properties:
+                      dateRange:
+                        description: Period of time when the fixed price will be applied to the SKU.
+                        properties:
+                          from:
+                            description: Start date of the price.
+                            example: 2021-12-30T22:00:00-03:00
+                            title: from
+                            type: string
+                          to:
+                            description: End date of the price.
+                            example: 2021-12-30T22:00:00-03:00
+                            title: to
+                            type: string
+                        required:
+                          - from
+                          - to
+                        title: dateRange
+                        type: object
+                      listPrice:
+                        description: SKU List Fixed Price.
+                        example: 50.5
+                        title: listPrice
+                        type: number
+                      minQuantity:
+                        description: Minimum quantity of the SKU for the fixed price to be applied.
+                        example: 2
+                        title: minQuantity
+                        type: integer
+                      tradePolicyId:
+                        description: Trade policy name or ID that will have the fixed price configured.
+                        example: "1"
+                        title: tradePolicyId
+                        type: string
+                      value:
+                        description: Fixed price value.
+                        example: 50.5
+                        title: value
+                        type: number
+                    required:
+                      - minQuantity
+                      - value
+                      - tradePolicyId
+                    title: fixedPrices
+                  type: array
+                listPrice:
+                  default: 50
+                  description: SKU's suggested selling price.
+                  title: listPrice
+                  type: number
+                markup:
+                  default: 30
+                  description: The profit percentage that is to be obtained from the sale of that SKU. If you decide to fill the `markup` item, you must also fill the `costPrice`. The `basePrice` will be automatically generated based on both values.
+                  title: markup
+                  type: integer
+              required:
+                - markup
+                - basePrice
+                - listPrice
+              title: ""
+              type: object
+        description: ""
+      responses:
+        "200":
+          description: OK
+      summary: Create or Update Base Price or Fixed Prices
+      tags:
+        - Prices and Fixed Prices
+  "/pricing/prices/{itemId}/computed/{priceTableId}":
+    get:
+      deprecated: false
+      description: "Gets the Computed Price, which is the price after all the steps in the Pricing pipeline, for an SKU in a specific price table or trade policy. \r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        {\r
+
+        \    \"tradePolicyId\": \"1\",\r
+
+        \    \"listPrice\": 30,\r
+
+        \    \"costPrice\": 76.92,\r
+
+        \    \"sellingPrice\": 18.9,\r
+
+        \    \"priceValidUntil\": \"2018-12-20T18:12:14Z\"\r
+
+        }\r
+
+        ```"
+      operationId: GetComputedPricebypricetable
+      parameters:
+        - description: Category ID.
+          explode: true
+          in: query
+          name: categoryIds
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: form
+        - description: Brand ID.
+          explode: true
+          in: query
+          name: brandId
+          required: true
+          schema:
+            example: 3
+            type: integer
+          style: form
+        - description: SKU quantity.
+          explode: true
+          in: query
+          name: quantity
+          required: true
+          schema:
+            example: 2
+            type: integer
+          style: form
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: SKU ID.
+          in: path
+          name: itemId
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: simple
+        - description: SKU Price Table Name.
+          in: path
+          name: priceTableId
+          required: true
+          schema:
+            example: gold
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+              example:
+                costPrice: 76.92
+                listPrice: 30
+                priceValidUntil: 2018-12-20T18:12:14Z
+                sellingPrice: 18.9
+                tradePolicyId: "1"
+              schema:
+                $ref: "#/components/schemas/Getcomputedprice"
+          description: OK
+      servers:
+        - url: https://api.vtex.com/{account}/pricing
+          variables:
+            account:
+              default: DefaultParameterValue
+      summary: Get Computed Price by price table or trade policy
+      tags:
+        - Prices and Fixed Prices
+  "/pricing/prices/{itemId}/fixed":
+    get:
+      deprecated: false
+      description: "The **fixed price** is an optional price of the SKU for a specific trade policy with a specific minimum quantity to be activated. This method retrieves an array of Fixed Prices for an SKU in a Trade Policy with Minimum Quantities.\r
+
+        \r
+
+        \ The default value for a Minimum Quantity is `1`. This means a Fixed Price will be valid for a SKU in a Trade Policy for orders containing the specified number of Minimum Quantity or above, unless a higher Minimum Quantity is specified.\r
+
+        \r
+
+        \ Fixed prices may, optionally, be scheduled. If so, these objects will contain the `dateRange` object with `from` and `to` properties, indicating the start and end time of the scheduled fixed price in the RFC3339 timestamp format (`YYYY-MM-DDT23:59:60Z`).\r
+
+        \r
+
+        \ Note that the 'Z', at the end, represents the UTC time (GMT+00:00). If it was in GMT-03:00, for example, it would be (`YYYY-MM-DDT23:59:60-03:00`).\r
+
+        \r
+
+        \ ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \    {\r
+
+        \        \"tradePolicyId\": \"6\",\r
+
+        \        \"value\": 20.9,\r
+
+        \        \"listPrice\": 22.9,\r
+
+        \        \"minQuantity\": 1,\r
+
+        \        \"dateRange\": {\r
+
+        \            \"from\": \"2021-12-30T22:00:00-03:00\",\r
+
+        \            \"to\": \"2021-12-30T22:00:00-03:00\"\r
+
+        \        }\r
+
+        \    },\r
+
+        \    {\r
+
+        \        \"tradePolicyId\": \"1\",\r
+
+        \        \"value\": 18.9,\r
+
+        \        \"listPrice\": null,\r
+
+        \        \"minQuantity\": 1,\r
+
+        \        \"dateRange\": {\r
+
+        \            \"from\": \"2021-12-30T22:00:00-03:00\",\r
+
+        \            \"to\": \"2021-12-30T22:00:00-03:00\"\r
+
+        \        }\r
+
+        \    }\r
+
+        ]\r
+
+        ```"
+      operationId: GetFixedPrices
+      parameters:
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: SKU ID.
+          in: path
+          name: itemId
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+              example:
+                - dateRange:
+                    from: 2021-12-30T22:00:00-03:00
+                    to: 2021-12-30T22:00:00-03:00
+                  listPrice: 22.9
+                  minQuantity: 1
+                  tradePolicyId: "6"
+                  value: 20.9
+                - dateRange:
+                    from: 2021-12-30T22:00:00-03:00
+                    to: 2021-12-30T22:00:00-03:00
+                  listPrice: null
+                  minQuantity: 1
+                  tradePolicyId: "1"
+                  value: 18.9
+              schema:
+                items:
+                  $ref: "#/components/schemas/FixedPrice"
+                type: array
+          description: OK
+      summary: Get Fixed Prices
+      tags:
+        - Prices and Fixed Prices
+  "/pricing/prices/{itemId}/fixed/{priceTableId}":
+    delete:
+      deprecated: false
+      description: Deletes all Fixed Prices of an SKU in a specific Price Table or Trade Policy.
+      operationId: Deletefixedpricesonapricetableortradepolicy
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: SKU ID.
+          in: path
+          name: itemId
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: simple
+        - description: Price Table or Trade Policy Name.
+          in: path
+          name: priceTableId
+          required: true
+          schema:
+            example: gold
+            type: string
+          style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete Fixed Prices on a price table or trade policy
+      tags:
+        - Prices and Fixed Prices
+    get:
+      deprecated: false
+      description: "Retrieves all Fixed Prices on a price table or trade policy. \r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \    {\r
+
+        \        \"tradePolicyId\": \"6\",\r
+
+        \        \"value\": 20.9,\r
+
+        \        \"listPrice\": 22.9,\r
+
+        \        \"minQuantity\": 1,\r
+
+        \        \"dateRange\": {\r
+
+        \            \"from\": \"2021-12-30T22:00:00-03:00\",\r
+
+        \            \"to\": \"2021-12-30T22:00:00-04:00\"\r
+
+        \        }\r
+
+        \    },\r
+
+        \    {\r
+
+        \        \"tradePolicyId\": \"1\",\r
+
+        \        \"value\": 18.9,\r
+
+        \        \"listPrice\": null,\r
+
+        \        \"minQuantity\": 1\r
+
+        \    }\r
+
+        ]\r
+
+        ```"
+      operationId: GetFixedPricesonapricetable
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: ""
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+        - description: SKU ID.
+          in: path
+          name: itemId
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: simple
+        - description: Price Table Name
+          in: path
+          name: priceTableId
+          required: true
+          schema:
+            example: gold
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+              example:
+                - dateRange:
+                    from: 2021-12-30T22:00:00-03:00
+                    to: 2021-12-30T22:00:00-04:00
+                  listPrice: 22.9
+                  minQuantity: 1
+                  tradePolicyId: "6"
+                  value: 20.9
+                - listPrice: null
+                  minQuantity: 1
+                  tradePolicyId: "1"
+                  value: 18.9
+              schema:
+                items:
+                  $ref: "#/components/schemas/FixedPrice"
+                type: array
+          description: OK
+      summary: Get Fixed Prices on a price table or trade policy
+      tags:
+        - Prices and Fixed Prices
+    post:
+      deprecated: false
+      description: "Creates or updates the fixed prices of an SKU for a specific price table or trade policy. You can add one or multiple fixed prices per SKU.\r
+
+        \r
+
+        \ ## Request body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \  {\r
+
+        \    \"value\": 50.5,\r
+
+        \    \"listPrice\": 50.5,\r
+
+        \    \"minQuantity\": 2,\r
+
+        \    \"dateRange\": {\r
+
+        \      \"from\": \"2021-12-30T22:00:00-03:00\",\r
+
+        \      \"to\": \"2021-12-30T22:00:00-04:00\"\r
+
+        \    }\r
+
+        \  }\r
+
+        ]\r
+
+        ```"
+      operationId: createorupdatefixedpricesonpricetableortradepolicy
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: SKU ID.
+          in: path
+          name: itemId
+          required: true
+          schema:
+            example: 1
+            type: integer
+          style: simple
+        - description: SKU **price table** name or **trade policy** ID.
+          in: path
+          name: priceTableId
+          required: true
+          schema:
+            example: priceTableA
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                properties:
+                  dateRange:
+                    description: Period of time when the fixed price will be applied to the SKU.
+                    properties:
+                      from:
+                        description: Start date of the price.
+                        example: 2021-12-30T22:00:00-03:00
+                        title: from
+                        type: string
+                      to:
+                        description: End date of the price.
+                        example: 2021-12-30T22:00:00-04:00
+                        title: to
+                        type: string
+                    required:
+                      - from
+                      - to
+                    title: dateRange
+                    type: object
+                  listPrice:
+                    description: SKU List Fixed Price.
+                    example: 50.5
+                    title: listPrice
+                    type: number
+                  minQuantity:
+                    description: The minimum SKU quantity for the fixed price to be applied.
+                    example: 2
+                    title: minQuantity
+                    type: integer
+                  value:
+                    description: Fixed price value.
+                    example: 50.5
+                    title: value
+                    type: number
+                required:
+                  - value
+                  - minQuantity
+                type: object
+              title: ""
+              type: array
+        description: ""
+      responses:
+        "200":
+          description: OK
+      summary: Create or Update Fixed Prices on a price table or trade policy
+      tags:
+        - Prices and Fixed Prices
+  /pricing/tables:
+    get:
+      deprecated: false
+      description: "This method will list all price tables.\r
+
+        \r
+
+        ## Response body example\r
+
+        \r
+
+        ```json\r
+
+        [\r
+
+        \    \"1\",\r
+
+        \    \"2\",\r
+
+        \    \"3\",\r
+
+        \    \"b2c\",\r
+
+        \    \"b2b\",\r
+
+        \    \"gold\"\r
+
+        ]\r
+
+        ```"
+      operationId: Listpricetables
+      parameters:
+        - description: Describes the type of the content being sent.
+          in: header
+          name: Content-Type
+          required: true
+          schema:
+            default: application/json
+            type: string
+          style: simple
+        - description: HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.
+          in: header
+          name: Accept
+          required: true
+          schema:
+            example: application/json
+            type: string
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - "1"
+                - "2"
+                - "3"
+                - b2c
+                - b2b
+                - gold
+              schema:
+                description: Array of price tables.
+                items:
+                  description: Price table name.
+                  type: string
+                type: array
+          description: OK
+      servers:
+        - url: https://api.vtex.com/{account}/pricing
+          variables:
+            account:
+              default: DefaultParameterValue
+      summary: List price tables
+      tags:
+        - Price Tables
+components:
+  schemas:
+    DateRange:
+      description: Trade Policy Fixed Price Validity Period Object.
+      example:
+        from: 2017-12-07T14:30:00Z
+        to: 2017-12-30T14:30:00Z
+      properties:
+        from:
+          description: Indicates the date and time when the fixed price will start to be valid.
+          type: string
+        to:
+          description: Indicates the date and time from which the fixed price will no longer be valid.
+          type: string
+      required:
+        - from
+        - to
+      title: dateRange
+      type: object
+    FixedPrice:
+      example:
+        dateRange:
+          from: 2017-12-07T14:30:00Z
+          to: 2017-12-30T14:30:00Z
+        listPrice: null
+        minQuantity: 1
+        tradePolicyId: "9"
+        value: 300
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/DateRange"
+        listPrice:
+          description: Trade Policy List Price Value.
+          nullable: true
+          type: number
+        minQuantity:
+          description: Trade Policy Fixed Price Minimum Item Quantity.
+          format: int32
+          type: integer
+        tradePolicyId:
+          description: Trade Policy ID.
+          type: string
+        value:
+          description: Trade Policy Fixed Price Value.
+          type: number
+      required:
+        - tradePolicyId
+        - value
+        - listPrice
+        - minQuantity
+      title: FixedPrice
+      type: object
+    Getcomputedprice:
+      example:
+        costPrice: 76.92
+        listPrice: 30
+        priceValidUntil: 2018-12-20T18:12:14Z
+        sellingPrice: 18.9
+        tradePolicyId: "1"
+      properties:
+        costPrice:
+          description: Cost price.
+          type: number
+        listPrice:
+          description: Trade Policy List Price, also known as "from" price.
+          format: int32
+          type: integer
+        priceValidUntil:
+          description: Date until when the computed price will be valid, due to price scheduling. If no price scheduling applies, this will be set a year from the current time.
+          type: string
+        sellingPrice:
+          description: Computed Price before applying coupons, promotions and taxes. This price may change before reaching the shelf.
+          type: number
+        tradePolicyId:
+          description: Trade Policy ID.
+          type: string
+      required:
+        - tradePolicyId
+        - listPrice
+        - sellingPrice
+        - priceValidUntil
+      title: Get Computed Price response
+      type: object
+    Getprice:
+      example:
+        basePrice: 250
+        costPrice: 10
+        fixedPrices:
+          - listPrice: null
+            minQuantity: 1
+            tradePolicyId: "1"
+            value: 666.66
+          - listPrice: null
+            minQuantity: 1
+            tradePolicyId: "9"
+            value: 4500
+          - dateRange:
+              from: 2017-12-07T14:30:00Z
+              to: 2017-12-30T14:30:00Z
+            listPrice: null
+            minQuantity: 1
+            tradePolicyId: "9"
+            value: 600
+          - dateRange:
+              from: 2017-12-20T14:30:00Z
+              to: 2017-12-22T14:30:00Z
+            listPrice: null
+            minQuantity: 1
+            tradePolicyId: "9"
+            value: 5555.55
+          - dateRange:
+              from: 2017-12-06T15:00:00Z
+              to: 2017-12-14T15:00:00Z
+            listPrice: null
+            minQuantity: 1
+            tradePolicyId: "9"
+            value: 555.55
+          - listPrice: null
+            minQuantity: 1
+            tradePolicyId: "10"
+            value: 5555.55
+          - listPrice: null
+            minQuantity: 1
+            tradePolicyId: "18"
+            value: 555.55
+        itemId: "1234512354"
+        listPrice: 300
+        markup: 2400
+      properties:
+        basePrice:
+          description: SKU's reference price.
+          format: int32
+          type: integer
+        costPrice:
+          description: SKU's cost price.
+          format: int32
+          type: integer
+        fixedPrices:
+          description: The fixed price is a price that overlaps all other existing price configurations of a price table.
+          items:
+            $ref: "#/components/schemas/FixedPrice"
+          type: array
+        itemId:
+          description: SKU ID.
+          type: string
+        listPrice:
+          description: Suggested retail price for the SKU.
+          format: int32
+          type: integer
+        markup:
+          description: Desired profit margin with the SKU's sale.
+          format: int32
+          type: integer
+      required:
+        - itemId
+        - listPrice
+        - costPrice
+        - markup
+        - basePrice
+        - fixedPrices
+      title: Get Price response
+      type: object
+    PricingConfiguration:
+      example:
+        blockAccount: false
+        blockedRoutes: null
+        defaultMarkup: 100
+        hasMigrated: true
+        hasOptionalBasePrice: false
+        hasPriceInheritance: false
+        migrationStatus: Completed
+        minimumMarkups:
+          "1": 100
+          "2": 90
+        priceInheritance: never
+        priceTableLimit: null
+        priceTableSelectionStrategy: first
+        priceVariation:
+          lowerLimit: null
+          upperLimit: null
+        sellersToOverride: []
+        tradePolicyConfigs: []
+      properties:
+        blockAccount:
+          description: Defines if access to the Pricing APIs is blocked for external requests.
+          example: false
+          type: boolean
+        blockedRoutes:
+          description: Array with all blocked routes.
+          items:
+            description: Blocked route.
+            type: string
+          nullable: true
+          type: array
+        defaultMarkup:
+          description: Account default markup.
+          example: 2
+          format: int32
+          type: integer
+        hasMigrated:
+          description: Defines if the account has migrated to Pricing V2.
+          example: true
+          type: boolean
+        hasOptionalBasePrice:
+          description: Defines if optional base price is allowed.
+          example: false
+          type: boolean
+        hasPriceInheritance:
+          deprecated: true
+          description: Deprecated. Use the `priceInheritance` field instead.
+          type: boolean
+        migrationStatus:
+          description: Pricing V2 migration status.
+          example: Completed
+          type: string
+        minimumMarkups:
+          additionalProperties:
+            format: int32
+            type: integer
+          description: Account minimum markup.
+          type: object
+        priceInheritance:
+          description: "Condition of price inheritance from its parent account. This field can have three possible values: `never` if the store should never inherit prices, `nonexistent` if the store should only inherit prices in case of nonexistent prices for a given product, or `always` if the store should always inherit prices, regardless of its own prices."
+          example: nonexistent
+          type: string
+        priceTableLimit:
+          description: Price Table Limit.
+          example: 100
+          nullable: true
+          type: integer
+        priceTableSelectionStrategy:
+          default: first
+          description: "The strategy used to get prices when there is more than one option. Possible values: `first`, `highest`, `lowest`. Default: `first`."
+          example: highest
+          type: string
+        priceVariation:
+          description: Price Variation object.
+          properties:
+            lowerLimit:
+              description: Lower variation limit.
+              example: 1
+              nullable: true
+              type: integer
+            upperLimit:
+              description: Upper variation limit.
+              example: 10
+              nullable: true
+              type: integer
+          type: object
+        sellersToOverride:
+          description: Overrides prices from sellers.
+          items: {}
+          type: array
+        tradePolicyConfigs:
+          description: Trade Policy Configurations array.
+          items:
+            properties:
+              minimumMarkup:
+                description: Trade Policy Minimum Markup.
+                example: 80
+                type: integer
+              rulesShouldAffectListPrice:
+                description: Defines if the Price Rule should affect the list price too.
+                example: false
+                type: boolean
+              tradePolicyId:
+                description: Trade Policy ID.
+                example: b2c
+                type: string
+            type: object
+          type: array
+      required:
+        - hasMigrated
+        - defaultMarkup
+        - minimumMarkups
+      title: Pricing Configuration response
+      type: object
+  securitySchemes:
+    appKey:
+      in: header
+      name: X-VTEX-API-AppKey
+      type: apiKey
+    appToken:
+      in: header
+      name: X-VTEX-API-AppToken
+      type: apiKey

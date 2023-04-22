@@ -1,0 +1,140 @@
+openapi: 3.0.0
+servers:
+  - description: Go-UPC Barcode-Lookup API
+    url: https://go-upc.com/api/v1
+info:
+  description: Find information on products from around the globe. The API supports UPC, EAN, and ISBN barcode numbers, and info returned includes product name, description, brand, image URL, and more.
+  title: Go-UPC Barcode-Lookup API
+  version: 1.0.0
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_go-upc.com_img_favicon.png
+  x-origin:
+    - format: openapi
+      url: https://gist.githubusercontent.com/blizzrdof77/c3aa75284830179b44acc1aebd236e1a/raw/437d7bbb822f069efd700f1081a55f421bb3453d/go-upc-barcode-api-definition.yaml
+      version: "3.0"
+  x-providerName: go-upc.com
+security:
+  - ApiKeyAuth: []
+paths:
+  "/code/{code}":
+    get:
+      operationId: getProductInfo
+      parameters:
+        - in: path
+          name: code
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  barcodeUrl:
+                    description: The URL to the scannable barcode image.
+                    example: https://go-upc.com/barcode/829576019311
+                    format: uri
+                    type: string
+                  codeType:
+                    description: The type of product code (UPC/EAN/ISBN).
+                    enum:
+                      - UPC
+                      - EAN
+                      - ISBN
+                    example: UPC
+                    type: string
+                  product:
+                    description: all matching product details.
+                    properties:
+                      brand:
+                        description: The brand of the product (if available).
+                        example: Goodfellow and Co
+                        type: string
+                      category:
+                        description: The category of the product (if available).
+                        example: Hair Care
+                        type: string
+                      description:
+                        description: A description of the product (if available).
+                        example: Gives you an easy way to achieve the hairstyle you love. Made with jojoba esters, vegetable-derived lanolin, glycerin and carnauba wax.
+                        type: string
+                      ean:
+                        description: The EAN code of the product.
+                        example: 829576019311
+                        type: integer
+                      imageUrl:
+                        description: The URL for the product image.
+                        example: http://go-upc.s3.amazonaws.com/images/54066938.jpeg
+                        format: uri
+                        type: string
+                      name:
+                        description: The name of the product.
+                        example: Blue Sage Tonka Texturizing Fiber
+                        type: string
+                      region:
+                        description: The region of the product.
+                        example: USA or Canada
+                        type: string
+                      specs:
+                        description: A list of additional item specifications (if available).
+                        example:
+                          - - Item Form
+                            - Clay
+                          - - Liquid Volume
+                            - 4 Fluid Ounces
+                          - - Scent
+                            - Lime
+                        items:
+                          items:
+                            type: string
+                          type: array
+                        type: array
+                      upc:
+                        description: The UPC code of the product.
+                        example: 829576019311
+                        type: integer
+                    type: object
+                type: object
+          description: The product corresponding to the provided `code`
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: No product information was found for the given `code`.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Unexpected error
+      summary: Retrieve product info for a particular barcode number (UPC, EAN, or ISBN).
+      tags:
+        - Product
+components:
+  schemas:
+    code:
+      description: The standardized product code in UPC/EAN format.
+      type: string
+    error:
+      properties:
+        code:
+          description: The provided code.
+          example: "329576019311"
+          type: string
+        codeType:
+          description: The type of code provided.
+          example: null
+        error:
+          description: A human readable error message.
+          example: The provided code is not in a recognized format.
+          type: string
+      required:
+        - error
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: query
+      name: key
+      type: apiKey

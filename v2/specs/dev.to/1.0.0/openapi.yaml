@@ -1,0 +1,2907 @@
+openapi: 3.0.3
+servers:
+  - description: Production server
+    url: https://dev.to/api
+info:
+  description: |-
+    Access Forem articles, users and other resources via API.
+            For a real-world example of Forem in action, check out [DEV](https://www.dev.to).
+            All endpoints can be accessed with the 'api-key' header and a accept header, but
+            some of them are accessible publicly without authentication.
+
+            Dates and date times, unless otherwise specified, must be in
+            the [RFC 3339](https://tools.ietf.org/html/rfc3339) format.
+  title: Forem API V1
+  version: 1.0.0
+  x-apisguru-categories:
+    - social
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/forem/forem/main/swagger/v1/api_v1.json
+      version: "3.0"
+  x-providerName: dev.to
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+security:
+  - api-key: []
+paths:
+  /api/admin/users:
+    post:
+      description: |-
+        This endpoint allows the client to trigger an invitation to the provided email address.
+
+                It requires a token from a user with `super_admin` privileges.
+      operationId: postAdminUsersCreate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInviteParam"
+      responses:
+        "200":
+          description: Successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+        "422":
+          content:
+            application/json:
+              example:
+                error: "param is missing or the value is empty: email"
+                status: 422
+          description: Unprocessable Entity
+      summary: Invite a User
+      tags:
+        - users
+  /api/articles:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of articles.
+
+        "Articles" are all the posts that users create on DEV that typically
+        show up in the feed. They can be a blog post, a discussion question,
+        a help thread etc. but is referred to as article within the code.
+
+        By default it will return featured, published articles ordered
+        by descending popularity.
+
+        It supports pagination, each page will contain `30` articles by default.
+      operationId: getArticles
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+        - description: |-
+            Using this parameter will retrieve articles that contain the requested tag. Articles
+            will be ordered by descending popularity.This parameter can be used in conjuction with `top`.
+          example: discuss
+          in: query
+          name: tag
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Using this parameter will retrieve articles with any of the comma-separated tags.
+            Articles will be ordered by descending popularity.
+          example: javascript, css
+          in: query
+          name: tags
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Using this parameter will retrieve articles that do _not_ contain _any_
+            of comma-separated tags. Articles will be ordered by descending popularity.
+          example: node, java
+          in: query
+          name: tags_exclude
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Using this parameter will retrieve articles belonging
+                        to a User or Organization ordered by descending publication date.
+                        If `state=all` the number of items returned will be `1000` instead of the default `30`.
+                        This parameter can be used in conjuction with `state`.
+          example: ben
+          in: query
+          name: username
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Using this parameter will allow the client to check which articles are fresh or rising.
+                        If `state=fresh` the server will return fresh articles.
+                        If `state=rising` the server will return rising articles.
+                        This param can be used in conjuction with `username`, only if set to `all`.
+          example: fresh
+          in: query
+          name: state
+          required: false
+          schema:
+            enum:
+              - fresh
+              - rising
+              - all
+            type: string
+        - description: |-
+            Using this parameter will allow the client to return the most popular articles
+            in the last `N` days.
+            `top` indicates the number of days since publication of the articles returned.
+            This param can be used in conjuction with `tag`.
+          example: 2
+          in: query
+          name: top
+          required: false
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+        - description: |-
+            Adding this will allow the client to return the list of articles
+            belonging to the requested collection, ordered by ascending publication date.
+          example: 99
+          in: query
+          name: collection_id
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - canonical_url: http://localhost:3000/username387/the-winds-twelve-quarters175-p58
+                  collection_id: null
+                  comments_count: 0
+                  cover_image: http://localhost:3000/assets/10-56ac1726da8a3bcbe4f93b48752287ea41bb79199cd8a8a61a9e4280ce9ae5b8.png
+                  created_at: 2023-02-27T10:58:04Z
+                  crossposted_at: null
+                  description: Iphone yr etsy goth skateboard sustainable twee direct trade. Freegan cardigan +1 twee blog gastropub...
+                  edited_at: null
+                  flare_tag:
+                    bg_color_hex: "#000000"
+                    name: discuss
+                    text_color_hex: "#ffffff"
+                  id: 610
+                  last_comment_at: 2023-02-27T10:58:04Z
+                  organization:
+                    name: O'Connell, Bosco and Skiles
+                    profile_image: /uploads/organization/profile_image/72/0ac6f538-133b-4535-a194-9762e9953ed2.png
+                    profile_image_90: /uploads/organization/profile_image/72/0ac6f538-133b-4535-a194-9762e9953ed2.png
+                    slug: org70
+                    username: org70
+                  path: /username387/the-winds-twelve-quarters175-p58
+                  positive_reactions_count: 0
+                  public_reactions_count: 0
+                  published_at: 2023-02-27T10:58:04Z
+                  published_timestamp: 2023-02-27T10:58:04Z
+                  readable_publish_date: Feb 27
+                  reading_time_minutes: 1
+                  slug: the-winds-twelve-quarters175-p58
+                  social_image: http://localhost:3000/assets/10-56ac1726da8a3bcbe4f93b48752287ea41bb79199cd8a8a61a9e4280ce9ae5b8.png
+                  tag_list:
+                    - discuss
+                  tags: discuss
+                  title: The Wind's Twelve Quarters175
+                  type_of: article
+                  url: http://localhost:3000/username387/the-winds-twelve-quarters175-p58
+                  user:
+                    github_username: github387
+                    name: Boyce "Jimmy" \:/ Ledner
+                    profile_image: /uploads/user/profile_image/823/265a22f6-a63a-4bae-9f3f-6a5d8d046de5.jpeg
+                    profile_image_90: /uploads/user/profile_image/823/265a22f6-a63a-4bae-9f3f-6a5d8d046de5.jpeg
+                    twitter_username: twitter387
+                    user_id: 823
+                    username: username387
+                    website_url: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: A List of Articles
+      security: []
+      summary: Published articles
+      tags:
+        - articles
+    post:
+      description: |-
+        This endpoint allows the client to create a new article.
+
+        "Articles" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.
+      operationId: createArticle
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Article"
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                body_html: |+
+                  <p><strong>New</strong> body for the article</p>
+
+                body_markdown: "**New** body for the article"
+                canonical_url: https://dev.to/fdocr/headless-chrome-dual-mode-tests-for-ruby-on-rails-4p6g
+                collection_id: 16
+                comments_count: 0
+                cover_image: https://thepracticaldev.s3.amazonaws.com/i/5wfo25724gzgk5e5j50g.jpg
+                created_at: 2023-02-27T10:58:03Z
+                crossposted_at: null
+                description: New post example
+                edited_at: null
+                id: 607
+                last_comment_at: 2023-02-27T10:58:03Z
+                path: /username383/new-article-1j5a
+                positive_reactions_count: 0
+                public_reactions_count: 0
+                published_at: 2023-02-27T10:58:03Z
+                published_timestamp: 2023-02-27T10:58:03Z
+                readable_publish_date: Feb 27
+                reading_time_minutes: 1
+                slug: new-article-1j5a
+                social_image: https://thepracticaldev.s3.amazonaws.com/i/5wfo25724gzgk5e5j50g.jpg
+                tag_list: ""
+                tags: []
+                title: New article
+                type_of: article
+                url: http://localhost:3000/username383/new-article-1j5a
+                user:
+                  github_username: github383
+                  name: King "Kurtis" \:/ Hilpert
+                  profile_image: /uploads/user/profile_image/819/8d11e7ba-593a-4192-8977-14b323d77018.jpeg
+                  profile_image_90: /uploads/user/profile_image/819/8d11e7ba-593a-4192-8977-14b323d77018.jpeg
+                  twitter_username: twitter383
+                  user_id: 819
+                  username: username383
+                  website_url: null
+          description: An Article
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+        "422":
+          content:
+            application/json:
+              example:
+                error: "param is missing or the value is empty: article"
+                status: 422
+          description: Unprocessable Entity
+      summary: Publish article
+      tags:
+        - articles
+  /api/articles/latest:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of articles. ordered by descending publish date.
+
+        It supports pagination, each page will contain 30 articles by default.
+      operationId: getLatestArticles
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - canonical_url: http://localhost:3000/username390/absalom-absalom178-4a5e
+                  collection_id: null
+                  comments_count: 0
+                  cover_image: http://localhost:3000/assets/24-377bc0861a9a539e8d1875ea9d4eea9e0226d93e1b6e9317e0c73c754699cc14.png
+                  created_at: 2023-02-27T10:58:04Z
+                  crossposted_at: null
+                  description: Sartorial photo booth muggle magic chambray occupy umami leggings. Celiac pug paleo yolo...
+                  edited_at: null
+                  flare_tag:
+                    bg_color_hex: "#000000"
+                    name: discuss
+                    text_color_hex: "#ffffff"
+                  id: 613
+                  last_comment_at: 2023-02-27T10:58:04Z
+                  path: /username390/absalom-absalom178-4a5e
+                  positive_reactions_count: 0
+                  public_reactions_count: 0
+                  published_at: 2023-02-27T10:58:04Z
+                  published_timestamp: 2023-02-27T10:58:04Z
+                  readable_publish_date: Feb 27
+                  reading_time_minutes: 1
+                  slug: absalom-absalom178-4a5e
+                  social_image: http://localhost:3000/assets/24-377bc0861a9a539e8d1875ea9d4eea9e0226d93e1b6e9317e0c73c754699cc14.png
+                  tag_list:
+                    - javascript
+                    - html
+                    - discuss
+                  tags: javascript, html, discuss
+                  title: Absalom, Absalom!178
+                  type_of: article
+                  url: http://localhost:3000/username390/absalom-absalom178-4a5e
+                  user:
+                    github_username: github390
+                    name: Samantha "Clemencia" \:/ Kemmer
+                    profile_image: /uploads/user/profile_image/826/dd79a3c7-6da2-4138-ac15-fab1628b409d.jpeg
+                    profile_image_90: /uploads/user/profile_image/826/dd79a3c7-6da2-4138-ac15-fab1628b409d.jpeg
+                    twitter_username: twitter390
+                    user_id: 826
+                    username: username390
+                    website_url: null
+                - canonical_url: http://localhost:3000/username389/if-not-now-when177-4iin
+                  collection_id: null
+                  comments_count: 0
+                  cover_image: http://localhost:3000/assets/2-1a96ae446ded018b65b215cce3aecc40a00e701642da521fdd6edd3c593ff6c1.png
+                  created_at: 2023-02-27T10:58:04Z
+                  crossposted_at: null
+                  description: Master taxidermy yuccie polaroid tousled 90's street. Green juice helvetica chartreuse listicle banh...
+                  edited_at: null
+                  flare_tag:
+                    bg_color_hex: "#000000"
+                    name: discuss
+                    text_color_hex: "#ffffff"
+                  id: 612
+                  last_comment_at: 2023-02-27T10:58:04Z
+                  path: /username389/if-not-now-when177-4iin
+                  positive_reactions_count: 0
+                  public_reactions_count: 0
+                  published_at: 2023-02-27T10:58:04Z
+                  published_timestamp: 2023-02-27T10:58:04Z
+                  readable_publish_date: Feb 27
+                  reading_time_minutes: 1
+                  slug: if-not-now-when177-4iin
+                  social_image: http://localhost:3000/assets/2-1a96ae446ded018b65b215cce3aecc40a00e701642da521fdd6edd3c593ff6c1.png
+                  tag_list:
+                    - javascript
+                    - html
+                    - discuss
+                  tags: javascript, html, discuss
+                  title: If Not Now, When?177
+                  type_of: article
+                  url: http://localhost:3000/username389/if-not-now-when177-4iin
+                  user:
+                    github_username: github389
+                    name: Brianna "Gabriel" \:/ Mante
+                    profile_image: /uploads/user/profile_image/825/3bf3e66f-9268-4e22-89d9-431e0a5fa9dc.jpeg
+                    profile_image_90: /uploads/user/profile_image/825/3bf3e66f-9268-4e22-89d9-431e0a5fa9dc.jpeg
+                    twitter_username: twitter389
+                    user_id: 825
+                    username: username389
+                    website_url: null
+                - canonical_url: http://localhost:3000/username388/have-his-carcase176-1phd
+                  collection_id: null
+                  comments_count: 0
+                  cover_image: http://localhost:3000/assets/24-377bc0861a9a539e8d1875ea9d4eea9e0226d93e1b6e9317e0c73c754699cc14.png
+                  created_at: 2023-02-27T10:58:04Z
+                  crossposted_at: null
+                  description: Salvia sartorial carry you probably haven't heard of them try-hard dreamcatcher meggings 8-bit....
+                  edited_at: null
+                  flare_tag:
+                    bg_color_hex: "#000000"
+                    name: discuss
+                    text_color_hex: "#ffffff"
+                  id: 611
+                  last_comment_at: 2023-02-27T10:58:04Z
+                  path: /username388/have-his-carcase176-1phd
+                  positive_reactions_count: 0
+                  public_reactions_count: 0
+                  published_at: 2023-02-27T10:58:04Z
+                  published_timestamp: 2023-02-27T10:58:04Z
+                  readable_publish_date: Feb 27
+                  reading_time_minutes: 1
+                  slug: have-his-carcase176-1phd
+                  social_image: http://localhost:3000/assets/24-377bc0861a9a539e8d1875ea9d4eea9e0226d93e1b6e9317e0c73c754699cc14.png
+                  tag_list:
+                    - javascript
+                    - html
+                    - discuss
+                  tags: javascript, html, discuss
+                  title: Have His Carcase176
+                  type_of: article
+                  url: http://localhost:3000/username388/have-his-carcase176-1phd
+                  user:
+                    github_username: github388
+                    name: Leeanna "Miles" \:/ Hills
+                    profile_image: /uploads/user/profile_image/824/50463451-9323-40fc-b439-c7df125a27fa.jpeg
+                    profile_image_90: /uploads/user/profile_image/824/50463451-9323-40fc-b439-c7df125a27fa.jpeg
+                    twitter_username: twitter388
+                    user_id: 824
+                    username: username388
+                    website_url: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: A List of Articles
+      security: []
+      summary: Published articles sorted by published date
+      tags:
+        - articles
+  /api/articles/me:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of published articles on behalf of an authenticated user.
+
+        "Articles" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.
+
+        Published articles will be in reverse chronological publication order.
+
+        It will return published articles with pagination. By default a page will contain 30 articles.
+      operationId: getUserArticles
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example: []
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: A List of the authenticated user's Articles
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+      summary: User's articles
+      tags:
+        - articles
+        - users
+  /api/articles/me/all:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of all articles on behalf of an authenticated user.
+
+        "Articles" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.
+
+        It will return both published and unpublished articles with pagination.
+
+        Unpublished articles will be at the top of the list in reverse chronological creation order. Published articles will follow in reverse chronological publication order.
+
+        By default a page will contain 30 articles.
+      operationId: getUserAllArticles
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example: []
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: A List of the authenticated user's Articles
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+      summary: User's all articles
+      tags:
+        - articles
+        - users
+  /api/articles/me/published:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of published articles on behalf of an authenticated user.
+
+        "Articles" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.
+
+        Published articles will be in reverse chronological publication order.
+
+        It will return published articles with pagination. By default a page will contain 30 articles.
+      operationId: getUserPublishedArticles
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example: []
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: A List of the authenticated user's Articles
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+      summary: User's published articles
+      tags:
+        - articles
+        - users
+  /api/articles/me/unpublished:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of unpublished articles on behalf of an authenticated user.
+
+        "Articles" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.
+
+        Unpublished articles will be in reverse chronological creation order.
+
+        It will return unpublished articles with pagination. By default a page will contain 30 articles.
+      operationId: getUserUnpublishedArticles
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example: []
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: A List of the authenticated user's Articles
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+      summary: User's unpublished articles
+      tags:
+        - articles
+        - users
+  "/api/articles/{id}":
+    get:
+      description: This endpoint allows the client to retrieve a single published article given its `id`.
+      operationId: getArticleById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                body_html: |+
+                  <p>Banjo carry cray vhs swag. Whatever celiac quinoa pabst chillwave. Vice pickled park lumbersexual salvia synth. Blog etsy austin mustache.</p>
+
+                  <p>Biodiesel forage street thundercats deep v.</p>
+
+                body_markdown: |+
+                  ---
+                  title: Cover Her Face179
+                  published: true
+                  tags: discuss
+                  date: 
+                  series: 
+                  canonical_url: 
+
+                  ---
+
+                  Banjo carry cray vhs swag. Whatever celiac quinoa pabst chillwave. Vice pickled park lumbersexual salvia synth. Blog etsy austin mustache.
+
+
+                  Biodiesel forage street thundercats deep v.
+
+                canonical_url: http://localhost:3000/username391/cover-her-face179-4gbc
+                collection_id: null
+                comments_count: 0
+                cover_image: http://localhost:3000/assets/2-1a96ae446ded018b65b215cce3aecc40a00e701642da521fdd6edd3c593ff6c1.png
+                created_at: 2023-02-27T10:58:04Z
+                crossposted_at: null
+                description: Banjo carry cray vhs swag. Whatever celiac quinoa pabst chillwave. Vice pickled park lumbersexual...
+                edited_at: null
+                flare_tag:
+                  bg_color_hex: "#000000"
+                  name: discuss
+                  text_color_hex: "#ffffff"
+                id: 614
+                last_comment_at: 2023-02-27T10:58:04Z
+                path: /username391/cover-her-face179-4gbc
+                positive_reactions_count: 0
+                public_reactions_count: 0
+                published_at: 2023-02-27T10:58:04Z
+                published_timestamp: 2023-02-27T10:58:04Z
+                readable_publish_date: Feb 27
+                reading_time_minutes: 1
+                slug: cover-her-face179-4gbc
+                social_image: http://localhost:3000/assets/2-1a96ae446ded018b65b215cce3aecc40a00e701642da521fdd6edd3c593ff6c1.png
+                tag_list: discuss
+                tags:
+                  - discuss
+                title: Cover Her Face179
+                type_of: article
+                url: http://localhost:3000/username391/cover-her-face179-4gbc
+                user:
+                  github_username: github391
+                  name: Von "Joan" \:/ Swaniawski
+                  profile_image: /uploads/user/profile_image/827/90d87f32-bafb-49f5-8001-c7f1146a84f8.jpeg
+                  profile_image_90: /uploads/user/profile_image/827/90d87f32-bafb-49f5-8001-c7f1146a84f8.jpeg
+                  twitter_username: twitter391
+                  user_id: 827
+                  username: username391
+                  website_url: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: object
+          description: An Article
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Article Not Found
+      security: []
+      summary: Published article by id
+      tags:
+        - articles
+    put:
+      description: |-
+        This endpoint allows the client to update an existing article.
+
+        "Articles" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.
+      operationId: updateArticle
+      parameters:
+        - description: The ID of the user to unpublish.
+          example: 123
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Article"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                body_html: |+
+                  <p><strong>New</strong> body for the article</p>
+
+                body_markdown: "**New** body for the article"
+                canonical_url: http://localhost:3000/username392/nectar-in-a-sieve180-51j6
+                collection_id: null
+                comments_count: 0
+                cover_image: http://localhost:3000/assets/16-77521848e7b5fcc073ac3e0bb004826e97f737238194e4c79330f662cc946ab2.png
+                created_at: 2023-02-27T10:58:04Z
+                crossposted_at: null
+                description: Humblebrag brooklyn master 3 wolf moon small batch thundercats typewriter chia. Gluten-free direct...
+                edited_at: 2023-02-27T10:58:04Z
+                id: 615
+                last_comment_at: 2023-02-27T10:58:04Z
+                path: /username392/nectar-in-a-sieve180-51j6
+                positive_reactions_count: 0
+                public_reactions_count: 0
+                published_at: 2023-02-27T10:58:04Z
+                published_timestamp: 2023-02-27T10:58:04Z
+                readable_publish_date: Feb 27
+                reading_time_minutes: 1
+                slug: nectar-in-a-sieve180-51j6
+                social_image: http://localhost:3000/assets/16-77521848e7b5fcc073ac3e0bb004826e97f737238194e4c79330f662cc946ab2.png
+                tag_list: ""
+                tags: []
+                title: Nectar in a Sieve180
+                type_of: article
+                url: http://localhost:3000/username392/nectar-in-a-sieve180-51j6
+                user:
+                  github_username: github392
+                  name: Lyndon "Kaley" \:/ Torphy
+                  profile_image: /uploads/user/profile_image/828/bd640b77-6394-4cf5-8d72-646c8ef542d5.jpeg
+                  profile_image_90: /uploads/user/profile_image/828/bd640b77-6394-4cf5-8d72-646c8ef542d5.jpeg
+                  twitter_username: twitter392
+                  user_id: 828
+                  username: username392
+                  website_url: null
+          description: An Article
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Article Not Found
+        "422":
+          content:
+            application/json:
+              example:
+                error: "param is missing or the value is empty: article"
+                status: 422
+          description: Unprocessable Entity
+      summary: Update an article by id
+      tags:
+        - articles
+  "/api/articles/{id}/unpublish":
+    put:
+      description: |-
+        This endpoint allows the client to unpublish an article.
+
+        The user associated with the API key must have any 'admin' or 'moderator' role.
+
+        The article will be unpublished and will no longer be visible to the public. It will remain
+        in the database and will set back to draft status on the author's posts dashboard. Any
+        notifications associated with the article will be deleted. Any comments on the article
+        will remain.
+      operationId: unpublishArticle
+      parameters:
+        - description: The ID of the article to unpublish.
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+        - description: Content for the note that's created along with unpublishing
+          example: Admin requested unpublishing all articles via API
+          in: query
+          name: note
+          required: false
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Article successfully unpublished
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Article Not Found
+      summary: Unpublish an article
+      tags:
+        - articles
+  "/api/articles/{username}/{slug}":
+    get:
+      description: This endpoint allows the client to retrieve a single published article given its `path`.
+      operationId: getArticleByPath
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                body_html: |+
+                  <p>Synth tote bag venmo vice hoodie disrupt bitters mixtape. Fashion axe goth shoreditch kogi loko literally.</p>
+
+                  <p>Franzen ramps forage wayfarers thundercats put a bird on it loko.</p>
+
+                body_markdown: |+
+                  ---
+                  title: The Line of Beauty183
+                  published: true
+                  tags: discuss
+                  date: 
+                  series: 
+                  canonical_url: 
+
+                  ---
+
+                  Synth tote bag venmo vice hoodie disrupt bitters mixtape. Fashion axe goth shoreditch kogi loko literally.
+
+
+                  Franzen ramps forage wayfarers thundercats put a bird on it loko.
+
+                canonical_url: http://localhost:3000/username396/the-line-of-beauty183-33nj
+                collection_id: null
+                comments_count: 0
+                cover_image: http://localhost:3000/assets/3-93b6b57b5a6115cffe5d63d29a22825eb9e65f647bfef57a88244bc2b98186f0.png
+                created_at: 2023-02-27T10:58:04Z
+                crossposted_at: null
+                description: Synth tote bag venmo vice hoodie disrupt bitters mixtape. Fashion axe goth shoreditch kogi loko...
+                edited_at: null
+                flare_tag:
+                  bg_color_hex: "#000000"
+                  name: discuss
+                  text_color_hex: "#ffffff"
+                id: 618
+                last_comment_at: 2023-02-27T10:58:04Z
+                path: /username396/the-line-of-beauty183-33nj
+                positive_reactions_count: 0
+                public_reactions_count: 0
+                published_at: 2023-02-27T10:58:04Z
+                published_timestamp: 2023-02-27T10:58:04Z
+                readable_publish_date: Feb 27
+                reading_time_minutes: 1
+                slug: the-line-of-beauty183-33nj
+                social_image: http://localhost:3000/assets/3-93b6b57b5a6115cffe5d63d29a22825eb9e65f647bfef57a88244bc2b98186f0.png
+                tag_list: discuss
+                tags:
+                  - discuss
+                title: The Line of Beauty183
+                type_of: article
+                url: http://localhost:3000/username396/the-line-of-beauty183-33nj
+                user:
+                  github_username: github396
+                  name: Danial "Charles" \:/ Grant
+                  profile_image: /uploads/user/profile_image/832/80339e58-8c50-4c64-b8a5-0ae9d3bf6d2d.jpeg
+                  profile_image_90: /uploads/user/profile_image/832/80339e58-8c50-4c64-b8a5-0ae9d3bf6d2d.jpeg
+                  twitter_username: twitter396
+                  user_id: 832
+                  username: username396
+                  website_url: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: object
+          description: An Article
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Article Not Found
+      security: []
+      summary: Published article by path
+      tags:
+        - articles
+  /api/comments:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve all comments belonging to an article or podcast episode as threaded conversations.
+
+        It will return the all top level comments with their nested comments as threads. See the format specification for further details.
+      operationId: getCommentsByArticleId
+      parameters:
+        - description: Article identifier.
+          example: "321"
+          in: query
+          name: a_id
+          required: false
+          schema:
+            type: string
+        - description: Podcast Episode identifier.
+          example: "321"
+          in: query
+          name: p_id
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - body_html: |+
+                    <p>Tumblr organic put a bird on it everyday mustache typewriter pug.</p>
+
+                  children: []
+                  created_at: 2023-02-27T10:58:05Z
+                  id_code: "60"
+                  type_of: comment
+                  user:
+                    github_username: github410
+                    name: Dwight "Pedro" \:/ Parker
+                    profile_image: /uploads/user/profile_image/846/8af90bef-f000-41c1-a90f-0e364c163a8a.jpeg
+                    profile_image_90: /uploads/user/profile_image/846/8af90bef-f000-41c1-a90f-0e364c163a8a.jpeg
+                    twitter_username: twitter410
+                    user_id: 846
+                    username: username410
+                    website_url: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/Comment"
+                type: array
+          description: A List of Comments
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Resource Not Found
+      security: []
+      summary: Comments
+      tags:
+        - comments
+  "/api/comments/{id}":
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a comment as well as his descendants comments.
+
+          It will return the required comment (the root) with its nested descendants as a thread.
+
+          See the format specification for further details.
+      operationId: getCommentById
+      parameters:
+        - description: Comment identifier.
+          example: "321"
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                body_html: |+
+                  <p>Farm-to-table park banjo. Cronut gentrify farm-to-table. Salvia distillery letterpress deep v keffiyeh kickstarter thundercats cray.</p>
+
+                children: []
+                created_at: 2023-02-27T10:58:05Z
+                id_code: "62"
+                type_of: comment
+                user:
+                  github_username: github414
+                  name: Gilbert "Alverta" \:/ Schroeder
+                  profile_image: /uploads/user/profile_image/850/6976f67a-4df7-4ed1-967f-0a3ea0d52670.jpeg
+                  profile_image_90: /uploads/user/profile_image/850/6976f67a-4df7-4ed1-967f-0a3ea0d52670.jpeg
+                  twitter_username: twitter414
+                  user_id: 850
+                  username: username414
+                  website_url: null
+          description: A List of the Comments
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Comment Not Found
+      security: []
+      summary: Comment by id
+      tags:
+        - comments
+  /api/display_ads:
+    get:
+      description: This endpoint allows the client to retrieve a list of all display ads.
+      responses:
+        "200":
+          content:
+            application/json:
+              example: []
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+      summary: display ads
+      tags:
+        - display ads
+    post:
+      description: This endpoint allows the client to create a new display ad.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                approved:
+                  description: Ad must be both published and approved to be in rotation
+                  type: boolean
+                body_markdown:
+                  description: The text (in markdown) of the ad (required)
+                  type: string
+                creator_id:
+                  description: Identifies the user who created the ad.
+                  type: integer
+                display_to:
+                  default: all
+                  description: Potentially limits visitors to whom the ad is visible
+                  enum:
+                    - all
+                    - logged_in
+                    - logged_out
+                  type: string
+                name:
+                  description: For internal use, helps distinguish ads from one another
+                  type: string
+                organization_id:
+                  description: Identifies the organization to which the ad belongs
+                  type: integer
+                placement_area:
+                  description: Identifies which area of site layout the ad can appear in
+                  enum:
+                    - sidebar_left
+                    - sidebar_left_2
+                    - sidebar_right
+                    - post_sidebar
+                    - post_comments
+                  type: string
+                published:
+                  description: Ad must be both published and approved to be in rotation
+                  type: boolean
+                tag_list:
+                  description: Tags on which this ad can be displayed (blank is all/any tags)
+                  type: string
+                type_of:
+                  default: in_house
+                  description: |
+                    Types of the billboards:
+                    in_house (created by admins),
+                    community (created by an entity, appears on entity's content),
+                    external ( created by an entity, or a non-entity, can appear everywhere)
+                  enum:
+                    - in_house
+                    - community
+                    - external
+                  type: string
+              required:
+                - name
+                - body_markdown
+                - placement_area
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                approved: true
+                body_markdown: |-
+                  # Hi, this is ad
+                  Yep, it's an ad
+                cached_tag_list: ""
+                clicks_count: 0
+                created_at: 2023-02-27T21:58:05.881+11:00
+                creator_id: null
+                display_to: all
+                id: 10
+                impressions_count: 0
+                name: Example Ad
+                organization_id: null
+                placement_area: post_comments
+                processed_html: <h1>  <a href="#hi-this-is-ad" class="anchor">  </a>  Hi, this is ad</h1><p>Yep, it's an ad</p>
+                published: true
+                success_rate: 0
+                tag_list: ""
+                type_of: in_house
+                updated_at: 2023-02-27T21:58:05.881+11:00
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+        "422":
+          content:
+            application/json:
+              example:
+                approved: true
+                body_markdown: |-
+                  # Hi, this is ad
+                  Yep, it's an ad
+                cached_tag_list: null
+                clicks_count: 0
+                created_at: null
+                creator_id: null
+                display_to: all
+                id: null
+                impressions_count: 0
+                name: Example Ad
+                organization_id: null
+                placement_area: moon
+                processed_html: null
+                published: true
+                success_rate: 0
+                tag_list: null
+                type_of: in_house
+                updated_at: null
+          description: unprocessable
+      summary: display ads
+      tags:
+        - display ads
+  "/api/display_ads/{id}":
+    get:
+      description: This endpoint allows the client to retrieve a single display ad, via its id.
+      parameters:
+        - description: The ID of the user to unpublish.
+          example: 123
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                approved: false
+                body_markdown: Hello _hey_ Hey hey 9
+                cached_tag_list: ""
+                clicks_count: 0
+                created_at: 2023-02-27T21:58:06.000+11:00
+                creator_id: null
+                display_to: all
+                id: 11
+                impressions_count: 0
+                name: Display Ad 11
+                organization_id: 73
+                placement_area: sidebar_left
+                processed_html: <p>Hello <em>hey</em> Hey hey 9</p>
+                published: false
+                success_rate: 0
+                tag_list: ""
+                type_of: in_house
+                updated_at: 2023-02-27T21:58:06.003+11:00
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Unknown DisplayAd ID
+      summary: display ad
+      tags:
+        - display ads
+    put:
+      description: This endpoint allows the client to update the attributes of a single display ad, via its id.
+      parameters:
+        - description: The ID of the user to unpublish.
+          example: 123
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                approved:
+                  description: Ad must be both published and approved to be in rotation
+                  type: boolean
+                body_markdown:
+                  description: The text (in markdown) of the ad (required)
+                  type: string
+                creator_id:
+                  description: Identifies the user who created the ad.
+                  type: integer
+                display_to:
+                  default: all
+                  description: Potentially limits visitors to whom the ad is visible
+                  enum:
+                    - all
+                    - logged_in
+                    - logged_out
+                  type: string
+                name:
+                  description: For internal use, helps distinguish ads from one another
+                  type: string
+                organization_id:
+                  description: Identifies the organization to which the ad belongs, required for 'community' type ads
+                  type: integer
+                placement_area:
+                  description: Identifies which area of site layout the ad can appear in
+                  enum:
+                    - sidebar_left
+                    - sidebar_left_2
+                    - sidebar_right
+                    - post_sidebar
+                    - post_comments
+                  type: string
+                published:
+                  description: Ad must be both published and approved to be in rotation
+                  type: boolean
+                tag_list:
+                  description: Tags on which this ad can be displayed (blank is all/any tags)
+                  type: string
+              required:
+                - name
+                - body_markdown
+                - placement_area
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                approved: false
+                body_markdown: Hello _hey_ Hey hey 10
+                cached_tag_list: ""
+                clicks_count: 0
+                created_at: 2023-02-27T21:58:06.134+11:00
+                creator_id: null
+                display_to: all
+                id: 12
+                impressions_count: 0
+                name: Display Ad 12
+                organization_id: 74
+                placement_area: sidebar_left
+                processed_html: <p>Hello <em>hey</em> Hey hey 10</p>
+                published: false
+                success_rate: 0
+                tag_list: ""
+                type_of: in_house
+                updated_at: 2023-02-27T21:58:06.137+11:00
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: not found
+      summary: display ads
+      tags:
+        - display ads
+  "/api/display_ads/{id}/unpublish":
+    put:
+      description: This endpoint allows the client to remove a display ad from rotation by un-publishing it.
+      parameters:
+        - description: The ID of the user to unpublish.
+          example: 123
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      responses:
+        "204":
+          description: no content
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: not found
+      summary: unpublish
+      tags:
+        - display ads
+  /api/followers/users:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of the followers they have.
+                "Followers" are users that are following other users on the website.
+                It supports pagination, each page will contain 80 followers by default.
+      operationId: getFollowers
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+        - description: |-
+            Default is 'created_at'. Specifies the sort order for the created_at param of the follow
+                                            relationship. To sort by newest followers first (descending order) specify
+                                            ?sort=-created_at.
+          example: created_at
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - created_at: 2023-02-27T10:58:06Z
+                  id: 7
+                  name: Benjamin "Sol" \:/ Senger
+                  path: /username435
+                  profile_image: /uploads/user/profile_image/871/51d055b1-32e3-4ccd-878a-a63e0ab5f69b.jpeg
+                  type_of: user_follower
+                  user_id: 871
+                  username: username435
+                - created_at: 2023-02-27T10:58:06Z
+                  id: 6
+                  name: Christin "Anthony" \:/ Metz
+                  path: /username433
+                  profile_image: /uploads/user/profile_image/869/8ba1b0fb-ed63-4d36-a21d-11615b8e42d0.jpeg
+                  type_of: user_follower
+                  user_id: 869
+                  username: username433
+              schema:
+                items:
+                  description: A follower
+                  properties:
+                    id:
+                      format: int32
+                      type: integer
+                    name:
+                      description: The follower's name
+                      type: string
+                    path:
+                      description: A path to the follower's profile
+                      type: string
+                    profile_image:
+                      description: Profile image (640x640)
+                      type: string
+                    type_of:
+                      description: user_follower by default
+                      type: string
+                    user_id:
+                      description: The follower's user id
+                      format: int32
+                      type: integer
+                  type: object
+                type: array
+          description: A List of followers
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+      summary: Followers
+      tags:
+        - followers
+  /api/follows/tags:
+    get:
+      description: This endpoint allows the client to retrieve a list of the tags they follow.
+      operationId: getFollowedTags
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - id: 1220
+                  name: tag3
+                  points: 1
+                - id: 1221
+                  name: tag4
+                  points: 1
+              schema:
+                items:
+                  $ref: "#/components/schemas/FollowedTag"
+                type: array
+          description: A List of followed tags
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+      summary: Followed Tags
+      tags:
+        - followed_tags
+        - tags
+  "/api/organizations/{username}":
+    get:
+      description: This endpoint allows the client to retrieve a single organization by their username
+      operationId: getOrganization
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                github_username: org217
+                id: 79
+                joined_at: 2023-02-27T10:58:06Z
+                location: null
+                name: Beatty Inc
+                profile_image: /uploads/organization/profile_image/79/a1244f11-60ba-4f71-8c00-4e3f29ddf7f3.png
+                story: null
+                summary: Stumptown schlitz umami try-hard blog mumblecore. Typewriter 8-bit five dollar toast neutra locavore put a bird on it farm-to-table tilde.
+                tag_line: null
+                tech_stack: null
+                twitter_username: org8840
+                type_of: organization
+                url: http://spinka-armstrong.com/hollis
+                username: org77
+              schema:
+                items:
+                  $ref: "#/components/schemas/Organization"
+                type: object
+          description: An Organization
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Not Found
+      security: []
+      summary: An organization
+      tags:
+        - organizations
+  "/api/organizations/{username}/articles":
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of Articles belonging to the organization
+
+        It supports pagination, each page will contain `30` users by default.
+      operationId: getOrgArticles
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - canonical_url: http://localhost:3000/org81/postern-of-fate195-51k4
+                  collection_id: null
+                  comments_count: 0
+                  cover_image: http://localhost:3000/assets/12-f9d673ae4ff98002f782ab82c641f2f26673be728e8f5409bea83f2d1de15323.png
+                  created_at: 2023-02-27T10:58:07Z
+                  crossposted_at: null
+                  description: Tilde master jean shorts farm-to-table yuccie. Poutine freegan semiotics. Cronut tacos post-ironic...
+                  edited_at: null
+                  id: 630
+                  last_comment_at: 2023-02-27T10:58:07Z
+                  organization:
+                    name: Schaden-Fritsch
+                    profile_image: /uploads/organization/profile_image/83/8d2996b4-f9fb-4947-aea3-17898ab9d7ec.png
+                    profile_image_90: /uploads/organization/profile_image/83/8d2996b4-f9fb-4947-aea3-17898ab9d7ec.png
+                    slug: org81
+                    username: org81
+                  path: /org81/postern-of-fate195-51k4
+                  positive_reactions_count: 0
+                  public_reactions_count: 0
+                  published_at: 2023-02-27T10:58:07Z
+                  published_timestamp: 2023-02-27T10:58:07Z
+                  readable_publish_date: Feb 27
+                  reading_time_minutes: 1
+                  slug: postern-of-fate195-51k4
+                  social_image: http://localhost:3000/assets/12-f9d673ae4ff98002f782ab82c641f2f26673be728e8f5409bea83f2d1de15323.png
+                  tag_list:
+                    - javascript
+                    - html
+                    - discuss
+                  tags: javascript, html, discuss
+                  title: Postern of Fate195
+                  type_of: article
+                  url: http://localhost:3000/org81/postern-of-fate195-51k4
+                  user:
+                    github_username: github453
+                    name: Rowena "Zack" \:/ Howell
+                    profile_image: /uploads/user/profile_image/889/9d1a2834-1117-4f0d-9e87-aa4f3d3dc525.jpeg
+                    profile_image_90: /uploads/user/profile_image/889/9d1a2834-1117-4f0d-9e87-aa4f3d3dc525.jpeg
+                    twitter_username: twitter453
+                    user_id: 889
+                    username: username453
+                    website_url: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: An Organization's Articles
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Not Found
+      security: []
+      summary: Organization's Articles
+      tags:
+        - organizations
+        - articles
+  "/api/organizations/{username}/users":
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of users belonging to the organization
+
+        It supports pagination, each page will contain `30` users by default.
+      operationId: getOrgUsers
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - github_username: github445
+                  id: 881
+                  joined_at: Feb 27, 2023
+                  location: null
+                  name: Jeromy "Spencer" \:/ VonRueden
+                  profile_image: /uploads/user/profile_image/881/66c7cfc8-df38-4758-aad0-3d8b6b225a35.jpeg
+                  summary: null
+                  twitter_username: twitter445
+                  type_of: user
+                  username: username445
+                  website_url: null
+                - github_username: github446
+                  id: 882
+                  joined_at: Feb 27, 2023
+                  location: null
+                  name: Annabel "Tisa" \:/ Rogahn
+                  profile_image: /uploads/user/profile_image/882/9cc02e02-adbb-4735-85bf-5f336714bb18.jpeg
+                  summary: null
+                  twitter_username: twitter446
+                  type_of: user
+                  username: username446
+                  website_url: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/User"
+                type: array
+          description: An Organization's users
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Not Found
+      security: []
+      summary: Organization's users
+      tags:
+        - organizations
+        - users
+  /api/pages:
+    get:
+      description: This endpoint allows the client to retrieve details for all Page objects.
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - body_html: null
+                  body_json: null
+                  body_markdown: Velit autem nisi distinctio.
+                  description: Voluptas ut laboriosam neque.
+                  id: 1
+                  is_top_level_path: false
+                  landing_page: false
+                  processed_html: |+
+                    <p>Velit autem nisi distinctio.</p>
+
+                  slug: push_premium
+                  social_image:
+                    url: null
+                  template: contained
+                  title: This Side of Paradise
+              schema:
+                items:
+                  $ref: "#/components/schemas/Page"
+                type: array
+          description: successful
+      security: []
+      summary: show details for all pages
+      tags:
+        - pages
+    post:
+      description: This endpoint allows the client to create a new page.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                body_json:
+                  description: For JSON pages, the JSON body
+                  type: string
+                body_markdown:
+                  description: The text (in markdown) of the ad (required)
+                  type: string
+                description:
+                  description: For internal use, helps similar pages from one another
+                  type: string
+                is_top_level_path:
+                  description: If true, the page is available at '/{slug}' instead of '/page/{slug}', use with caution
+                  type: boolean
+                slug:
+                  description: Used to link to this page in URLs, must be unique and URL-safe
+                  type: string
+                template:
+                  default: contained
+                  description: Controls what kind of layout the page is rendered in
+                  enum:
+                    - contained
+                    - full_within_layout
+                    - nav_bar_included
+                    - json
+                  type: string
+                title:
+                  description: Title of the page
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                body_html: null
+                body_json: null
+                body_markdown: |-
+                  # Hi, this is a New Page
+                  Yep, it's an a new page
+                description: a new page
+                id: 3
+                is_top_level_path: false
+                landing_page: false
+                processed_html: |+
+                  <h1>
+                    <a name="hi-this-is-a-new-page" href="#hi-this-is-a-new-page">
+                    </a>
+                    Hi, this is a New Page
+                  </h1>
+
+                  <p>Yep, it's an a new page</p>
+
+                slug: example1
+                social_image:
+                  url: null
+                template: contained
+                title: Example Page
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+        "422":
+          content:
+            application/json:
+              example:
+                body_html: null
+                body_json: null
+                body_markdown: |-
+                  # Hi, this is a New Page
+                  Yep, it's an a new page
+                description: a new page
+                id: null
+                is_top_level_path: false
+                landing_page: false
+                processed_html: null
+                slug: example1
+                social_image:
+                  url: null
+                template: moon
+                title: Example Page
+          description: unprocessable
+      summary: pages
+      tags:
+        - pages
+  "/api/pages/{id}":
+    delete:
+      description: This endpoint allows the client to delete a single Page object, specified by ID.
+      parameters:
+        - description: The ID of the page.
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                body_html: null
+                body_json: null
+                body_markdown: In soluta qui odio.
+                description: Est molestias eius voluptas.
+                id: 10
+                is_top_level_path: false
+                landing_page: false
+                processed_html: |+
+                  <p>In soluta qui odio.</p>
+
+                slug: message-premium
+                social_image:
+                  url: null
+                template: contained
+                title: The Green Bay Tree
+              schema:
+                $ref: "#/components/schemas/Page"
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+        "422":
+          content:
+            application/json:
+              example:
+                __expired: false
+                __sending_message: null
+                doubled_module:
+                  const_name: Page
+                  object: Page
+                name: null
+          description: unprocessable
+      summary: remove a page
+      tags:
+        - pages
+    get:
+      description: This endpoint allows the client to retrieve details for a single Page object, specified by ID.
+      parameters:
+        - description: The ID of the page.
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                body_html: null
+                body_json: null
+                body_markdown: Amet rerum nostrum earum.
+                description: Voluptatibus quod dolor dolores.
+                id: 6
+                is_top_level_path: false
+                landing_page: false
+                processed_html: |+
+                  <p>Amet rerum nostrum earum.</p>
+
+                slug: satisfaction-scale
+                social_image:
+                  url: null
+                template: contained
+                title: In a Glass Darkly
+              schema:
+                $ref: "#/components/schemas/Page"
+          description: successful
+      security: []
+      summary: show details for a page
+      tags:
+        - pages
+    put:
+      description: This endpoint allows the client to retrieve details for a single Page object, specified by ID.
+      parameters:
+        - description: The ID of the page.
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Page"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                body_html: null
+                body_json: null
+                body_markdown: Qui sed sit dolorem.
+                description: Ut reiciendis qui iste.
+                id: 7
+                is_top_level_path: false
+                landing_page: false
+                processed_html: |+
+                  <p>Qui sed sit dolorem.</p>
+
+                slug: corn-premium
+                social_image:
+                  url: null
+                template: contained
+                title: New Title
+              schema:
+                $ref: "#/components/schemas/Page"
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+        "422":
+          content:
+            application/json:
+              example:
+                body_html: null
+                body_json: null
+                body_markdown: Dolorum earum quod deleniti.
+                description: Sapiente rerum labore est.
+                id: 9
+                is_top_level_path: false
+                landing_page: false
+                processed_html: |+
+                  <p>Voluptas illo dolorem nisi.</p>
+
+                slug: seller_arena
+                social_image:
+                  url: null
+                template: moon
+                title: Dying of the Light
+          description: unprocessable
+      summary: update details for a page
+      tags:
+        - pages
+  /api/podcast_episodes:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of podcast episodes.
+                "Podcast episodes" are episodes belonging to podcasts.
+                It will only return active (reachable) podcast episodes that belong to published podcasts available on the platform, ordered by descending publication date.
+                It supports pagination, each page will contain 30 articles by default.
+      operationId: getPodcastEpisodes
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+        - description: Using this parameter will retrieve episodes belonging to a specific podcast.
+          example: codenewbie
+          in: query
+          name: username
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - class_name: PodcastEpisode
+                  id: 4
+                  image_url: /uploads/podcast/image/4/5e637d0a-0446-47a1-a77c-09dd5adaa4b6.jpeg
+                  path: /codenewbie/slug-4
+                  podcast:
+                    image_url: /uploads/podcast/image/4/5e637d0a-0446-47a1-a77c-09dd5adaa4b6.jpeg
+                    slug: codenewbie
+                    title: Delirium Tremens
+                  title: "20"
+                  type_of: podcast_episodes
+              schema:
+                items:
+                  $ref: "#/components/schemas/PodcastEpisodeIndex"
+                type: array
+          description: A List of Podcast episodes filtered by username
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Unknown Podcast username
+      security: []
+      summary: Podcast Episodes
+      tags:
+        - podcast_episodes
+  "/api/profile_images/{username}":
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a user or organization profile image information by its
+                corresponding username.
+      operationId: getProfileImage
+      parameters:
+        - description: The parameter is the username of the user or the username of the organization.
+          example: janedoe
+          in: path
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                image_of: user
+                profile_image: /uploads/user/profile_image/904/b992f4eb-7fca-49a1-b292-d3f9b013d81c.jpeg
+                profile_image_90: /uploads/user/profile_image/904/b992f4eb-7fca-49a1-b292-d3f9b013d81c.jpeg
+                type_of: profile_image
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProfileImage"
+                type: object
+          description: An object containing profile image details
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Resource Not Found
+      summary: A Users or organizations profile image
+      tags:
+        - profile images
+  /api/reactions:
+    post:
+      description: |-
+        This endpoint allows the client to create a reaction to a specified reactable (eg, Article, Comment, or User). For examples:
+                * "Like"ing an Article will create a new "like" Reaction from the user for that Articles
+                * "Like"ing that Article a second time will return the previous "like"
+      parameters:
+        - in: query
+          name: category
+          required: true
+          schema:
+            enum:
+              - like
+              - unicorn
+              - exploding_head
+              - raised_hands
+              - fire
+            type: string
+        - in: query
+          name: reactable_id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: reactable_type
+          required: true
+          schema:
+            enum:
+              - Comment
+              - Article
+              - User
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                category: like
+                id: 11
+                reactable_id: 634
+                reactable_type: Article
+                result: none
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+      summary: create reaction
+      tags:
+        - reactions
+  /api/reactions/toggle:
+    post:
+      description: |-
+        This endpoint allows the client to toggle the user's reaction to a specified reactable (eg, Article, Comment, or User). For examples:
+                * "Like"ing an Article will create a new "like" Reaction from the user for that Articles
+                * "Like"ing that Article a second time will remove the "like" from the user
+      parameters:
+        - in: query
+          name: category
+          required: true
+          schema:
+            enum:
+              - like
+              - unicorn
+              - exploding_head
+              - raised_hands
+              - fire
+            type: string
+        - in: query
+          name: reactable_id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: reactable_type
+          required: true
+          schema:
+            enum:
+              - Comment
+              - Article
+              - User
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                category: like
+                id: 9
+                reactable_id: 632
+                reactable_type: Article
+                result: create
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: unauthorized
+      summary: toggle reaction
+      tags:
+        - reactions
+  /api/readinglist:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of articles that were saved to a Users readinglist.
+                It supports pagination, each page will contain `30` articles by default
+      operationId: getReadinglist
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example: []
+              schema:
+                items:
+                  $ref: "#/components/schemas/ArticleIndex"
+                type: array
+          description: A list of articles in the users readinglist
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+      summary: Readinglist
+      tags:
+        - readinglist
+  /api/tags:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of tags that can be used to tag articles.
+
+        It will return tags ordered by popularity.
+
+        It supports pagination, each page will contain 10 tags by default.
+      operationId: getTags
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam10to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - bg_color_hex: null
+                  id: 1254
+                  name: tag7
+                  text_color_hex: null
+                - bg_color_hex: null
+                  id: 1253
+                  name: tag6
+                  text_color_hex: null
+                - bg_color_hex: null
+                  id: 1252
+                  name: tag5
+                  text_color_hex: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/Tag"
+                type: array
+          description: A List of all tags
+      security: []
+      summary: Tags
+      tags:
+        - tags
+  /api/users/me:
+    get:
+      description: This endpoint allows the client to retrieve information about the authenticated user
+      operationId: getUserMe
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                github_username: github480
+                id: 916
+                joined_at: Feb 27, 2023
+                location: null
+                name: Dennis "Rodger" \:/ Gorczany
+                profile_image: /uploads/user/profile_image/916/fc0d6dd7-6dee-4df6-9720-ac6618f19fd5.jpeg
+                summary: null
+                twitter_username: twitter480
+                type_of: user
+                username: username480
+                website_url: null
+              schema:
+                items:
+                  $ref: "#/components/schemas/User"
+                type: object
+          description: successful
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+      summary: The authenticated user
+      tags:
+        - users
+  "/api/users/{id}":
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a single user, either by id
+        or by the user's username.
+
+        For complete documentation, see the v0 API docs: https://developers.forem.com/api/v0#tag/users/operation/getUser
+      operationId: getUser
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/User"
+                type: object
+          description: successful
+      summary: A User
+      tags:
+        - users
+  "/api/users/{id}/suspend":
+    put:
+      description: |-
+        This endpoint allows the client to suspend a user.
+
+        The user associated with the API key must have any 'admin' or 'moderator' role.
+
+        This specified user will be assigned the 'suspended' role. Suspending a user will stop the
+        user from posting new posts and comments. It doesn't delete any of the user's content, just
+        prevents them from creating new content while suspended. Users are not notified of their suspension
+        in the UI, so if you want them to know about this, you must notify them.
+      operationId: suspendUser
+      parameters:
+        - description: The ID of the user to suspend.
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      responses:
+        "204":
+          description: User successfully unpublished
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Unknown User ID
+      summary: Suspend a User
+      tags:
+        - users
+  "/api/users/{id}/unpublish":
+    put:
+      description: |-
+        This endpoint allows the client to unpublish all of the articles and
+        comments created by a user.
+
+        The user associated with the API key must have any 'admin' or 'moderator' role.
+
+        This specified user's articles and comments will be unpublished and will no longer be
+        visible to the public. They will remain in the database and will set back to draft status
+        on the specified user's  dashboard. Any notifications associated with the specified user's
+        articles and comments will be deleted.
+
+        Note this endpoint unpublishes articles and comments asychronously: it will return a 204 NO CONTENT
+        status code immediately, but the articles and comments will not be unpublished until the
+        request is completed on the server.
+      operationId: unpublishUser
+      parameters:
+        - description: The ID of the user to unpublish.
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            minimum: 1
+            type: integer
+      responses:
+        "204":
+          description: User's articles and comments successfully unpublished
+        "401":
+          content:
+            application/json:
+              example:
+                error: unauthorized
+                status: 401
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error: not found
+                status: 404
+          description: Unknown User ID (still accepted for async processing)
+      summary: Unpublish a User's Articles and Comments
+      tags:
+        - users
+  /api/videos:
+    get:
+      description: |-
+        This endpoint allows the client to retrieve a list of articles that are uploaded with a video.
+
+        It will only return published video articles ordered by descending popularity.
+
+        It supports pagination, each page will contain 24 articles by default.
+      operationId: videos
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam24to1000"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - cloudinary_video_url: https://dw71fyauz7yz9.cloudfront.net/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f/thumbs-video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f-00001.png
+                  id: 636
+                  path: /username499/i-know-why-the-caged-bird-sings201-4ncl
+                  title: I Know Why the Caged Bird Sings201
+                  type_of: video_article
+                  user:
+                    name: Kenneth "Ardelia" \:/ Luettgen
+                  user_id: 936
+                  video_duration_in_minutes: 00:00
+                  video_source_url: https://dw71fyauz7yz9.cloudfront.net/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f.m3u8
+                - cloudinary_video_url: https://dw71fyauz7yz9.cloudfront.net/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f/thumbs-video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f-00001.png
+                  id: 637
+                  path: /username500/as-i-lay-dying202-1ba2
+                  title: As I Lay Dying202
+                  type_of: video_article
+                  user:
+                    name: Fleta "Alleen" \:/ Jerde
+                  user_id: 937
+                  video_duration_in_minutes: 00:00
+                  video_source_url: https://dw71fyauz7yz9.cloudfront.net/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f.m3u8
+              schema:
+                items:
+                  $ref: "#/components/schemas/VideoArticle"
+                type: array
+          description: A List of all articles with videos
+      security: []
+      summary: Articles with a video
+      tags:
+        - videos
+        - articles
+components:
+  parameters:
+    listingCategoryParam:
+      description: |-
+        Using this parameter will return listings belonging to the
+                      requested category.
+      example: cfp
+      in: query
+      name: category
+      schema:
+        type: string
+    pageParam:
+      description: Pagination page
+      in: query
+      name: page
+      required: false
+      schema:
+        default: 1
+        format: int32
+        minimum: 1
+        type: integer
+    perPageParam10to1000:
+      description: Page size (the number of items to return per page). The default maximum value can be overridden by "API_PER_PAGE_MAX" environment variable.
+      in: query
+      name: per_page
+      required: false
+      schema:
+        default: 10
+        format: int32
+        maximum: 1000
+        minimum: 1
+        type: integer
+    perPageParam24to1000:
+      description: Page size (the number of items to return per page). The default maximum value can be overridden by "API_PER_PAGE_MAX" environment variable.
+      in: query
+      name: per_page
+      required: false
+      schema:
+        default: 24
+        format: int32
+        maximum: 1000
+        minimum: 1
+        type: integer
+    perPageParam30to100:
+      description: Page size (the number of items to return per page). The default maximum value can be overridden by "API_PER_PAGE_MAX" environment variable.
+      in: query
+      name: per_page
+      required: false
+      schema:
+        default: 30
+        format: int32
+        maximum: 100
+        minimum: 1
+        type: integer
+    perPageParam30to1000:
+      description: Page size (the number of items to return per page). The default maximum value can be overridden by "API_PER_PAGE_MAX" environment variable.
+      in: query
+      name: per_page
+      required: false
+      schema:
+        default: 30
+        format: int32
+        maximum: 1000
+        minimum: 1
+        type: integer
+    perPageParam80to1000:
+      description: Page size (the number of items to return per page). The default maximum value can be overridden by "API_PER_PAGE_MAX" environment variable.
+      in: query
+      name: per_page
+      required: false
+      schema:
+        default: 80
+        format: int32
+        maximum: 1000
+        minimum: 1
+        type: integer
+  schemas:
+    Article:
+      description: Representation of an Article to be created/updated
+      properties:
+        article:
+          properties:
+            body_markdown:
+              type: string
+            canonical_url:
+              nullable: true
+              type: string
+            description:
+              type: string
+            main_image:
+              nullable: true
+              type: string
+            organization_id:
+              nullable: true
+              type: integer
+            published:
+              default: false
+              type: boolean
+            series:
+              nullable: true
+              type: string
+            tags:
+              type: string
+            title:
+              type: string
+          type: object
+      type: object
+    ArticleFlareTag:
+      description: Flare tag of the article
+      properties:
+        bg_color_hex:
+          description: Background color (hexadecimal)
+          nullable: true
+          type: string
+        name:
+          type: string
+        text_color_hex:
+          description: Text color (hexadecimal)
+          nullable: true
+          type: string
+      type: object
+    ArticleIndex:
+      description: Representation of an article or post returned in a list
+      properties:
+        canonical_url:
+          format: url
+          type: string
+        cover_image:
+          format: url
+          nullable: true
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        crossposted_at:
+          format: date-time
+          nullable: true
+          type: string
+        description:
+          type: string
+        edited_at:
+          format: date-time
+          nullable: true
+          type: string
+        flare_tag:
+          $ref: "#/components/schemas/ArticleFlareTag"
+        id:
+          format: int32
+          type: integer
+        last_comment_at:
+          format: date-time
+          type: string
+        organization:
+          $ref: "#/components/schemas/SharedOrganization"
+        path:
+          format: path
+          type: string
+        positive_reactions_count:
+          format: int32
+          type: integer
+        public_reactions_count:
+          format: int32
+          type: integer
+        published_at:
+          format: date-time
+          type: string
+        published_timestamp:
+          description: Crossposting or published date time
+          format: date-time
+          type: string
+        readable_publish_date:
+          type: string
+        reading_time_minutes:
+          description: Reading time, in minutes
+          format: int32
+          type: integer
+        slug:
+          type: string
+        social_image:
+          format: url
+          type: string
+        tag_list:
+          items:
+            type: string
+          type: array
+        tags:
+          type: string
+        title:
+          type: string
+        type_of:
+          type: string
+        url:
+          format: url
+          type: string
+        user:
+          $ref: "#/components/schemas/SharedUser"
+      required:
+        - type_of
+        - id
+        - title
+        - description
+        - cover_image
+        - readable_publish_date
+        - social_image
+        - tag_list
+        - tags
+        - slug
+        - path
+        - url
+        - canonical_url
+        - comments_count
+        - positive_reactions_count
+        - public_reactions_count
+        - created_at
+        - edited_at
+        - crossposted_at
+        - published_at
+        - last_comment_at
+        - published_timestamp
+        - user
+        - reading_time_minutes
+      type: object
+    Comment:
+      description: A Comment on an Article or Podcast Episode
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id_code:
+          type: string
+        image_url:
+          description: Podcast image url
+          format: url
+          type: string
+        type_of:
+          type: string
+      type: object
+    FollowedTag:
+      description: Representation of a followed tag
+      properties:
+        id:
+          description: Tag id
+          format: int64
+          type: integer
+        name:
+          type: string
+        points:
+          format: float
+          type: number
+      required:
+        - id
+        - name
+        - points
+      type: object
+    Organization:
+      description: Representation of an Organization
+      properties:
+        github_username:
+          type: string
+        joined_at:
+          type: string
+        location:
+          type: string
+        name:
+          type: string
+        story:
+          nullable: true
+          type: string
+        summary:
+          type: string
+        tag_line:
+          nullable: true
+          type: string
+        tech_stack:
+          type: string
+        twitter_username:
+          type: string
+        type_of:
+          type: string
+        url:
+          type: string
+        username:
+          type: string
+      type: object
+    Page:
+      description: Representation of a page object
+      properties:
+        body_json:
+          description: For JSON pages, the JSON body
+          nullable: true
+          type: string
+        body_markdown:
+          description: The text (in markdown) of the ad (required)
+          nullable: true
+          type: string
+        description:
+          description: For internal use, helps similar pages from one another
+          type: string
+        is_top_level_path:
+          description: If true, the page is available at '/{slug}' instead of '/page/{slug}', use with caution
+          type: boolean
+        slug:
+          description: Used to link to this page in URLs, must be unique and URL-safe
+          type: string
+        social_image:
+          nullable: true
+          type: object
+        template:
+          default: contained
+          description: Controls what kind of layout the page is rendered in
+          enum:
+            - contained
+            - full_within_layout
+            - nav_bar_included
+            - json
+          type: string
+        title:
+          description: Title of the page
+          type: string
+      required:
+        - title
+        - slug
+        - description
+        - template
+      type: object
+    PodcastEpisodeIndex:
+      description: Representation of a podcast episode returned in a list
+      properties:
+        class_name:
+          type: string
+        id:
+          format: int32
+          type: integer
+        image_url:
+          description: Podcast episode image url or podcast image url
+          format: url
+          type: string
+        path:
+          format: path
+          type: string
+        podcast:
+          $ref: "#/components/schemas/SharedPodcast"
+        title:
+          type: string
+        type_of:
+          type: string
+      required:
+        - type_of
+        - class_name
+        - id
+        - path
+        - title
+        - image_url
+        - podcast
+      type: object
+    ProfileImage:
+      description: A profile image object
+      properties:
+        image_of:
+          description: Determines the type of the profile image owner (user or organization)
+          type: string
+        profile_image:
+          description: Profile image (640x640)
+          type: string
+        profile_image_90:
+          description: Profile image (90x90)
+          type: string
+        type_of:
+          description: Return profile_image
+          type: string
+      type: object
+    SharedOrganization:
+      description: The organization the resource belongs to
+      properties:
+        name:
+          type: string
+        profile_image:
+          description: Profile image (640x640)
+          format: url
+          type: string
+        profile_image_90:
+          description: Profile image (90x90)
+          format: url
+          type: string
+        slug:
+          type: string
+        username:
+          type: string
+      type: object
+    SharedPodcast:
+      description: The podcast that the resource belongs to
+      properties:
+        image_url:
+          description: Podcast image url
+          format: url
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+      type: object
+    SharedUser:
+      description: The resource creator
+      properties:
+        github_username:
+          nullable: true
+          type: string
+        name:
+          type: string
+        profile_image:
+          description: Profile image (640x640)
+          type: string
+        profile_image_90:
+          description: Profile image (90x90)
+          type: string
+        twitter_username:
+          nullable: true
+          type: string
+        username:
+          type: string
+        website_url:
+          format: url
+          nullable: true
+          type: string
+      type: object
+    Tag:
+      description: Representation of a tag
+      properties:
+        bg_color_hex:
+          nullable: true
+          type: string
+        id:
+          description: Tag id
+          format: int64
+          type: integer
+        name:
+          type: string
+        text_color_hex:
+          nullable: true
+          type: string
+      type: object
+    User:
+      description: The representation of a user
+      properties:
+        github_username:
+          type: string
+        id:
+          format: int64
+          type: integer
+        joined_at:
+          type: string
+        location:
+          nullable: true
+          type: string
+        name:
+          type: string
+        profile_image:
+          type: string
+        summary:
+          nullable: true
+          type: string
+        twitter_username:
+          type: string
+        type_of:
+          type: string
+        username:
+          type: string
+        website_url:
+          nullable: true
+          type: string
+      type: object
+    UserInviteParam:
+      description: User invite parameters
+      properties:
+        email:
+          type: string
+        name:
+          nullable: true
+          type: string
+      type: object
+    VideoArticle:
+      description: Representation of an Article with video
+      properties:
+        cloudinary_video_url:
+          type: string
+        id:
+          format: int64
+          type: integer
+        path:
+          type: string
+        title:
+          type: string
+        type_of:
+          type: string
+        user:
+          description: Author of the article
+          properties:
+            name:
+              type: string
+          type: object
+        user_id:
+          format: int64
+          type: integer
+        video_duration_in_minutes:
+          type: string
+        video_source_url:
+          type: string
+      type: object
+  securitySchemes:
+    api-key:
+      description: |-
+        API Key authentication.
+
+        Authentication for some endpoints, like write operations on the
+        Articles API require a DEV API key.
+
+        All authenticated endpoints are CORS disabled, the API key is intended for non-browser scripts.
+
+        ### Getting an API key
+
+        To obtain one, please follow these steps:
+
+          - visit https://dev.to/settings/extensions
+          - in the "DEV API Keys" section create a new key by adding a
+            description and clicking on "Generate API Key"
+
+            ![obtain a DEV API Key](https://user-images.githubusercontent.com/37842/172718105-bd93664e-76e0-477d-99c4-265dda0b06c5.png)
+
+          - You'll see the newly generated key in the same view
+            ![generated DEV API Key](https://user-images.githubusercontent.com/37842/172718151-e7fe26a0-9937-42e8-96c6-333acdab9e49.png)
+      in: header
+      name: api-key
+      type: apiKey

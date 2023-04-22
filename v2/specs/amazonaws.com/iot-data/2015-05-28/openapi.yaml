@@ -1,0 +1,976 @@
+openapi: 3.0.0
+info:
+  version: 2015-05-28
+  x-release: v4
+  title: AWS IoT Data Plane
+  description: '<fullname>IoT data</fullname> <p>IoT data enables secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the Amazon Web Services cloud. It implements a broker for applications and things to publish messages over HTTP (Publish) and retrieve, update, and delete shadows. A shadow is a persistent representation of your things and their state in the Amazon Web Services cloud.</p> <p>Find the endpoint address for actions in IoT data by running this CLI command:</p> <p> <code>aws iot describe-endpoint --endpoint-type iot:Data-ATS</code> </p> <p>The service name used by <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Amazon Web ServicesSignature Version 4</a> to sign requests is: <i>iotdevicegateway</i>.</p>'
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_awscloud_profile_image.png
+    backgroundColor: "#FFFFFF"
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: iot-data
+  x-aws-signingName: iotdata
+  x-origin:
+    - contentType: application/json
+      url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iot-data-2015-05-28.normal.json
+      converter:
+        url: https://github.com/mermade/aws2openapi
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/iot/
+servers:
+  - url: http://data-ats.iot.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS IoT Data Plane multi-region endpoint
+  - url: https://data-ats.iot.{region}.amazonaws.com
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS IoT Data Plane multi-region endpoint
+  - url: http://data-ats.iot.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS IoT Data Plane endpoint for China (Beijing) and China (Ningxia)
+  - url: https://data-ats.iot.{region}.amazonaws.com.cn
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS IoT Data Plane endpoint for China (Beijing) and China (Ningxia)
+paths:
+  "/things/{thingName}/shadow":
+    delete:
+      operationId: DeleteThingShadow
+      description: <p>Deletes the shadow for the specified thing.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteThingShadow</a> action.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html">DeleteThingShadow</a> in the IoT Developer Guide.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteThingShadowResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedException"
+        "484":
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableException"
+        "485":
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalFailureException"
+        "486":
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedException"
+        "487":
+          description: UnsupportedDocumentEncodingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnsupportedDocumentEncodingException"
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          description: The name of the thing.
+          schema:
+            type: string
+            pattern: "[a-zA-Z0-9:_-]+"
+            minLength: 1
+            maxLength: 128
+        - name: name
+          in: query
+          required: false
+          description: The name of the shadow.
+          schema:
+            type: string
+            pattern: "[a-zA-Z0-9:_-]+"
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+    get:
+      operationId: GetThingShadow
+      description: <p>Gets the shadow for the specified thing.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetThingShadow</a> action.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html">GetThingShadow</a> in the IoT Developer Guide.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetThingShadowResponse"
+        "480":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "481":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedException"
+        "484":
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableException"
+        "485":
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalFailureException"
+        "486":
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedException"
+        "487":
+          description: UnsupportedDocumentEncodingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnsupportedDocumentEncodingException"
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          description: The name of the thing.
+          schema:
+            type: string
+            pattern: "[a-zA-Z0-9:_-]+"
+            minLength: 1
+            maxLength: 128
+        - name: name
+          in: query
+          required: false
+          description: The name of the shadow.
+          schema:
+            type: string
+            pattern: "[a-zA-Z0-9:_-]+"
+            minLength: 1
+            maxLength: 64
+    post:
+      operationId: UpdateThingShadow
+      description: <p>Updates the shadow for the specified thing.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateThingShadow</a> action.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a> in the IoT Developer Guide.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateThingShadowResponse"
+        "480":
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictException"
+        "481":
+          description: RequestEntityTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEntityTooLargeException"
+        "482":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "483":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "484":
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedException"
+        "485":
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableException"
+        "486":
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalFailureException"
+        "487":
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedException"
+        "488":
+          description: UnsupportedDocumentEncodingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnsupportedDocumentEncodingException"
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          description: The name of the thing.
+          schema:
+            type: string
+            pattern: "[a-zA-Z0-9:_-]+"
+            minLength: 1
+            maxLength: 128
+        - name: name
+          in: query
+          required: false
+          description: The name of the shadow.
+          schema:
+            type: string
+            pattern: "[a-zA-Z0-9:_-]+"
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - payload
+              properties:
+                payload:
+                  description: The state information, in JSON format.
+                  type: string
+  "/retainedMessage/{topic}":
+    get:
+      operationId: GetRetainedMessage
+      description: <p>Gets the details of a single retained message for the specified topic.</p> <p>This action returns the message payload of the retained message, which can incur messaging costs. To list only the topic names of the retained messages, call <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html">ListRetainedMessages</a>.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions">GetRetainedMessage</a> action.</p> <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">Amazon Web Services IoT Core pricing - Messaging</a>.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRetainedMessageResponse"
+        "480":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "481":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedException"
+        "484":
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableException"
+        "485":
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalFailureException"
+        "486":
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedException"
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          description: The topic name of the retained message to retrieve.
+          schema:
+            type: string
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/api/things/shadow/ListNamedShadowsForThing/{thingName}":
+    get:
+      operationId: ListNamedShadowsForThing
+      description: <p>Lists the shadows for the specified thing.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListNamedShadowsForThing</a> action.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNamedShadowsForThingResponse"
+        "480":
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+        "481":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "482":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "483":
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedException"
+        "484":
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableException"
+        "485":
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalFailureException"
+        "486":
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedException"
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          description: The name of the thing.
+          schema:
+            type: string
+            pattern: "[a-zA-Z0-9:_-]+"
+            minLength: 1
+            maxLength: 128
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to retrieve the next set of results.
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          required: false
+          description: The result page size.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  /retainedMessage:
+    get:
+      operationId: ListRetainedMessages
+      description: <p>Lists summary information about the retained messages stored for the account.</p> <p>This action returns only the topic names of the retained messages. It doesn't return any message payloads. Although this action doesn't return a message payload, it can still incur messaging costs.</p> <p>To get the message payload of a retained message, call <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_GetRetainedMessage.html">GetRetainedMessage</a> with the topic name of the retained message.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions">ListRetainedMessages</a> action.</p> <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">Amazon Web Services IoT Core pricing - Messaging</a>.</p>
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRetainedMessagesResponse"
+        "480":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "481":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+        "482":
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedException"
+        "483":
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableException"
+        "484":
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalFailureException"
+        "485":
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedException"
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+  "/topics/{topic}":
+    post:
+      operationId: Publish
+      description: <p>Publishes an MQTT message.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">Publish</a> action.</p> <p>For more information about MQTT messages, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html">MQTT Protocol</a> in the IoT Developer Guide.</p> <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">Amazon Web Services IoT Core pricing - Messaging</a>.</p>
+      responses:
+        "200":
+          description: Success
+        "480":
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalFailureException"
+        "481":
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidRequestException"
+        "482":
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedException"
+        "483":
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedException"
+        "484":
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThrottlingException"
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          description: The name of the MQTT topic.
+          schema:
+            type: string
+        - name: qos
+          in: query
+          required: false
+          description: The Quality of Service (QoS) level. The default QoS level is 0.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+        - name: retain
+          in: query
+          required: false
+          description: "<p>A Boolean value that determines whether to set the RETAIN flag when the message is published.</p> <p>Setting the RETAIN flag causes the message to be retained and sent to new subscribers to the topic.</p> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Default value: <code>false</code> </p>"
+          schema:
+            type: boolean
+        - name: x-amz-mqtt5-user-properties
+          in: header
+          required: false
+          description: '<p>A JSON string that contains an array of JSON objects. If you don’t use Amazon Web Services SDK or CLI, you must encode the JSON string to base64 format before adding it to the HTTP header. <code>userProperties</code> is an HTTP header value in the API.</p> <p>The following example <code>userProperties</code> parameter is a JSON string which represents two User Properties. Note that it needs to be base64-encoded:</p> <p> <code>[{"deviceName": "alpha"}, {"deviceCnt": "45"}]</code> </p>'
+          schema:
+            type: string
+        - name: x-amz-mqtt5-payload-format-indicator
+          in: header
+          required: false
+          description: An <code>Enum</code> string value that indicates whether the payload is formatted as UTF-8. <code>payloadFormatIndicator</code> is an HTTP header value in the API.
+          schema:
+            type: string
+            enum:
+              - UNSPECIFIED_BYTES
+              - UTF8_DATA
+        - name: contentType
+          in: query
+          required: false
+          description: A UTF-8 encoded string that describes the content of the publishing message.
+          schema:
+            type: string
+        - name: responseTopic
+          in: query
+          required: false
+          description: A UTF-8 encoded string that's used as the topic name for a response message. The response topic is used to describe the topic which the receiver should publish to as part of the request-response flow. The topic must not contain wildcard characters.
+          schema:
+            type: string
+        - name: x-amz-mqtt5-correlation-data
+          in: header
+          required: false
+          description: The base64-encoded binary data used by the sender of the request message to identify which request the response message is for when it's received. <code>correlationData</code> is an HTTP header value in the API.
+          schema:
+            type: string
+        - name: messageExpiry
+          in: query
+          required: false
+          description: A user-defined integer value that represents the message expiry interval in seconds. If absent, the message doesn't expire. For more information about the limits of <code>messageExpiry</code>, see <a href="https://docs.aws.amazon.com/general/latest/gr/iot-core.html#message-broker-limits">Amazon Web Services IoT Core message broker and protocol limits and quotas </a> from the Amazon Web Services Reference Guide.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  description: <p>The message body. MQTT accepts text, binary, and empty (null) message payloads.</p> <p>Publishing an empty (null) payload with <b>retain</b> = <code>true</code> deletes the retained message identified by <b>topic</b> from Amazon Web Services IoT Core.</p>
+                  type: string
+    parameters:
+      - $ref: "#/components/parameters/X-Amz-Content-Sha256"
+      - $ref: "#/components/parameters/X-Amz-Date"
+      - $ref: "#/components/parameters/X-Amz-Algorithm"
+      - $ref: "#/components/parameters/X-Amz-Credential"
+      - $ref: "#/components/parameters/X-Amz-Security-Token"
+      - $ref: "#/components/parameters/X-Amz-Signature"
+      - $ref: "#/components/parameters/X-Amz-SignedHeaders"
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    DeleteThingShadowResponse:
+      type: object
+      required:
+        - payload
+      properties:
+        payload:
+          allOf:
+            - $ref: "#/components/schemas/JsonDocument"
+            - description: The state information, in JSON format.
+      description: The output from the DeleteThingShadow operation.
+    ResourceNotFoundException: {}
+    InvalidRequestException: {}
+    ThrottlingException: {}
+    UnauthorizedException: {}
+    ServiceUnavailableException: {}
+    InternalFailureException: {}
+    MethodNotAllowedException: {}
+    UnsupportedDocumentEncodingException: {}
+    GetRetainedMessageResponse:
+      type: object
+      properties:
+        topic:
+          allOf:
+            - $ref: "#/components/schemas/Topic"
+            - description: The topic name to which the retained message was published.
+        payload:
+          allOf:
+            - $ref: "#/components/schemas/Payload"
+            - description: The Base64-encoded message payload of the retained message body.
+        qos:
+          allOf:
+            - $ref: "#/components/schemas/Qos"
+            - description: The quality of service (QoS) level used to publish the retained message.
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The Epoch date and time, in milliseconds, when the retained message was stored by IoT.
+        userProperties:
+          allOf:
+            - $ref: "#/components/schemas/UserPropertiesBlob"
+            - description: "<p>A base64-encoded JSON string that includes an array of JSON objects, or null if the retained message doesn't include any user properties.</p> <p>The following example <code>userProperties</code> parameter is a JSON string that represents two user properties. Note that it will be base64-encoded:</p> <p> <code>[{\"deviceName\": \"alpha\"}, {\"deviceCnt\": \"45\"}]</code> </p>"
+      description: The output from the GetRetainedMessage operation.
+    GetThingShadowResponse:
+      type: object
+      properties:
+        payload:
+          allOf:
+            - $ref: "#/components/schemas/JsonDocument"
+            - description: The state information, in JSON format.
+      description: The output from the GetThingShadow operation.
+    ListNamedShadowsForThingResponse:
+      type: object
+      properties:
+        results:
+          allOf:
+            - $ref: "#/components/schemas/NamedShadowList"
+            - description: The list of shadows for the specified thing.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: The token to use to get the next set of results, or <b>null</b> if there are no additional results.
+        timestamp:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The Epoch date and time the response was generated by IoT.
+    ListRetainedMessagesResponse:
+      type: object
+      properties:
+        retainedTopics:
+          allOf:
+            - $ref: "#/components/schemas/RetainedMessageList"
+            - description: A summary list the account's retained messages. The information returned doesn't include the message payloads of the retained messages.
+        nextToken:
+          allOf:
+            - $ref: "#/components/schemas/NextToken"
+            - description: The token for the next set of results, or null if there are no additional results.
+    UpdateThingShadowResponse:
+      type: object
+      properties:
+        payload:
+          allOf:
+            - $ref: "#/components/schemas/JsonDocument"
+            - description: The state information, in JSON format.
+      description: The output from the UpdateThingShadow operation.
+    ConflictException: {}
+    RequestEntityTooLargeException: {}
+    ContentType:
+      type: string
+    CorrelationData:
+      type: string
+    ThingName:
+      type: string
+      pattern: "[a-zA-Z0-9:_-]+"
+      minLength: 1
+      maxLength: 128
+    ShadowName:
+      type: string
+      pattern: "[a-zA-Z0-9:_-]+"
+      minLength: 1
+      maxLength: 64
+    DeleteThingShadowRequest:
+      type: object
+      title: DeleteThingShadowRequest
+      properties: {}
+      description: The input for the DeleteThingShadow operation.
+    JsonDocument:
+      type: string
+    Topic:
+      type: string
+    GetRetainedMessageRequest:
+      type: object
+      title: GetRetainedMessageRequest
+      properties: {}
+      description: The input for the GetRetainedMessage operation.
+    Payload:
+      type: string
+    Qos:
+      type: integer
+      minimum: 0
+      maximum: 1
+    Timestamp:
+      type: integer
+    UserPropertiesBlob:
+      type: string
+    GetThingShadowRequest:
+      type: object
+      title: GetThingShadowRequest
+      properties: {}
+      description: The input for the GetThingShadow operation.
+    NextToken:
+      type: string
+    PageSize:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListNamedShadowsForThingRequest:
+      type: object
+      title: ListNamedShadowsForThingRequest
+      properties: {}
+    NamedShadowList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ShadowName"
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 200
+    ListRetainedMessagesRequest:
+      type: object
+      title: ListRetainedMessagesRequest
+      properties: {}
+    RetainedMessageList:
+      type: array
+      items:
+        $ref: "#/components/schemas/RetainedMessageSummary"
+    MessageExpiry:
+      type: integer
+    PayloadFormatIndicator:
+      type: string
+      enum:
+        - UNSPECIFIED_BYTES
+        - UTF8_DATA
+    PayloadSize:
+      type: integer
+    Retain:
+      type: boolean
+    UserProperties:
+      type: string
+    ResponseTopic:
+      type: string
+    PublishRequest:
+      type: object
+      title: PublishRequest
+      properties:
+        payload:
+          allOf:
+            - $ref: "#/components/schemas/Payload"
+            - description: <p>The message body. MQTT accepts text, binary, and empty (null) message payloads.</p> <p>Publishing an empty (null) payload with <b>retain</b> = <code>true</code> deletes the retained message identified by <b>topic</b> from Amazon Web Services IoT Core.</p>
+      description: The input for the Publish operation.
+    RetainedMessageSummary:
+      type: object
+      properties:
+        topic:
+          allOf:
+            - $ref: "#/components/schemas/Topic"
+            - description: The topic name to which the retained message was published.
+        payloadSize:
+          allOf:
+            - $ref: "#/components/schemas/PayloadSize"
+            - description: The size of the retained message's payload in bytes.
+        qos:
+          allOf:
+            - $ref: "#/components/schemas/Qos"
+            - description: The quality of service (QoS) level used to publish the retained message.
+        lastModifiedTime:
+          allOf:
+            - $ref: "#/components/schemas/Timestamp"
+            - description: The Epoch date and time, in milliseconds, when the retained message was stored by IoT.
+      description: Information about a single retained message.
+    UpdateThingShadowRequest:
+      type: object
+      required:
+        - payload
+      title: UpdateThingShadowRequest
+      properties:
+        payload:
+          allOf:
+            - $ref: "#/components/schemas/JsonDocument"
+            - description: The state information, in JSON format.
+      description: The input for the UpdateThingShadow operation.
+security:
+  - hmac: []

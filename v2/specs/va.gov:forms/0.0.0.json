@@ -1,0 +1,31 @@
+{
+  "added": "2021-04-06T16:44:51.347Z",
+  "info": {
+    "contact": {
+      "name": "va.gov"
+    },
+    "description": "Use the VA Forms API to search for VA forms, get the form's PDF link and metadata, and check for new versions.\n\nVisit our VA Lighthouse [Contact Us page](https://developer.va.gov/support) for further assistance.\n\n## Background\nThis API offers an efficient way to stay up-to-date with the latest VA forms and information. The forms information listed on VA.gov matches the information returned by this API.\n- Search by form number, keyword, or title\n- Get a link to the form in PDF format\n- Get detailed form metadata including the number of pages, related forms, benefit categories, language, and more\n- Retrieve the latest date of PDF changes and the SHA256 checksum\n- Identify when a form is deleted by the VA\n\n## Technical summary\nThe VA Forms API collects form data from the official VA Form Repository on a nightly basis.  The Index endpoint can return all available forms or, if an optional query parameter is passed, will return only forms that may relate to the query value. When a valid form name is passed to the Show endpoint, it will return a single form with additional metadata and full revision history. A JSON response is given with the PDF link (if published) and the corresponding form metadata.\n\n### Authentication and authorization\nThe form information shared by this API is publicly available.  API requests are authorized through a symmetric API token, provided in an HTTP header with name apikey. [Get a sandbox API Key](https://developer.va.gov/apply).\n\n### Testing in sandbox environment\nForm data in the sandbox environment is for testing your API only, and is not guaranteed to be up-to-date. This API also has a reduced API rate limit. When you're ready to move to production, be sure to [request a production API key.](https://developer.va.gov/go-live)\n\n### SHA256 revision history\nEach form is checked nightly for recent file changes. A corresponding SHA256 checksum is calculated, which provides a record of when the PDF changed and the SHA256 hash that was calculated. This allows end users to know that they have the most recent version and can verify the integrity of a previously downloaded PDF.\n\n### Valid PDF link\nAdditionally, during the nightly refresh process, the link to the form PDF is verified and the `valid_pdf` metadata is updated accordingly. If marked `true`, the link is valid and is a current form. If marked `false`, the link is either broken or the form has been removed.\n\n### Deleted forms\nIf the `deleted_at` metadata is set, that means the VA has removed this form from the repository and it is no longer to be used.\n",
+    "title": "VA Forms",
+    "version": "0.0.0",
+    "x-apisguru-categories": [
+      "forms"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com_img_design_icons_apple-touch-icon.png"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://api.va.gov/services/va_forms/docs/v0/api",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "va.gov",
+    "x-serviceName": "forms"
+  },
+  "updated": "2023-03-06T07:12:59.965Z",
+  "swaggerUrl": "https://api.apis.guru/v2/specs/va.gov/forms/0.0.0/openapi.json",
+  "swaggerYamlUrl": "https://api.apis.guru/v2/specs/va.gov/forms/0.0.0/openapi.yaml",
+  "openapiVer": "3.0.0",
+  "link": "https://api.apis.guru/v2/specs/va.gov:forms/0.0.0.json"
+}

@@ -1,0 +1,1119 @@
+{
+  "openapi": "3.0.1",
+  "servers": [
+    {
+      "description": "Generated server url",
+      "url": "http://peoplegeneratorapi.live"
+    }
+  ],
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0",
+    "x-apisguru-categories": [
+      "tools"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_peoplegeneratorapi.live_static_Logo.svg"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://peoplegeneratorapi.live/v3/api-docs",
+        "version": "3.0"
+      }
+    ],
+    "x-providerName": "peoplegeneratorapi.live"
+  },
+  "paths": {
+    "/api/address": {
+      "get": {
+        "operationId": "generateAddress",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/address/": {
+      "get": {
+        "operationId": "generateAddress_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/lifestory": {
+      "get": {
+        "operationId": "generateLifeStory_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lifestory"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/lifestory/": {
+      "get": {
+        "operationId": "generateLifeStory",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lifestory"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person": {
+      "get": {
+        "operationId": "getPerson_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/": {
+      "get": {
+        "operationId": "getPerson",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/age": {
+      "get": {
+        "operationId": "age_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/age/": {
+      "get": {
+        "operationId": "age",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/bloodtype": {
+      "get": {
+        "operationId": "bloodtype_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/bloodtype/": {
+      "get": {
+        "operationId": "bloodtype",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/creditcardnumber": {
+      "get": {
+        "operationId": "creditcardnumber",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/creditcardnumber/": {
+      "get": {
+        "operationId": "creditcardnumber_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/creditscore": {
+      "get": {
+        "operationId": "creditscore_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/creditscore/": {
+      "get": {
+        "operationId": "creditscore",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/email": {
+      "get": {
+        "operationId": "email",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/email/": {
+      "get": {
+        "operationId": "email_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/eyecolor": {
+      "get": {
+        "operationId": "eyecolor_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/eyecolor/": {
+      "get": {
+        "operationId": "eyecolor",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/gender": {
+      "get": {
+        "operationId": "gender",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/gender/": {
+      "get": {
+        "operationId": "gender_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/gpa": {
+      "get": {
+        "operationId": "gpa",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "double",
+                  "type": "number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/gpa/": {
+      "get": {
+        "operationId": "gpa_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "double",
+                  "type": "number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/haschildren": {
+      "get": {
+        "operationId": "haschildren_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/haschildren/": {
+      "get": {
+        "operationId": "haschildren",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/hasdegree": {
+      "get": {
+        "operationId": "hasdegree",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/hasdegree/": {
+      "get": {
+        "operationId": "hasdegree_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/height": {
+      "get": {
+        "operationId": "height",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "double",
+                  "type": "number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/height/": {
+      "get": {
+        "operationId": "height_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "double",
+                  "type": "number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/income": {
+      "get": {
+        "operationId": "income",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/income/": {
+      "get": {
+        "operationId": "income_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/job": {
+      "get": {
+        "operationId": "job",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/job/": {
+      "get": {
+        "operationId": "job_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/maritalstatus": {
+      "get": {
+        "operationId": "maritalstatus_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/maritalstatus/": {
+      "get": {
+        "operationId": "maritalstatus",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/name": {
+      "get": {
+        "operationId": "name_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/name/": {
+      "get": {
+        "operationId": "name",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/politicalleaning": {
+      "get": {
+        "operationId": "politicalLeaning",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "double",
+                  "type": "number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/politicalleaning/": {
+      "get": {
+        "operationId": "politicalLeaning_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "double",
+                  "type": "number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/religion": {
+      "get": {
+        "operationId": "religion_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/religion/": {
+      "get": {
+        "operationId": "religion",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/username": {
+      "get": {
+        "operationId": "username_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/username/": {
+      "get": {
+        "operationId": "username",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/weight": {
+      "get": {
+        "operationId": "weight",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "double",
+                  "type": "number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/weight/": {
+      "get": {
+        "operationId": "weight_1",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "double",
+                  "type": "number"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/{number}": {
+      "get": {
+        "operationId": "getCompressedPerson_1",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "number",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "format": "byte",
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    },
+    "/api/person/{number}/": {
+      "get": {
+        "operationId": "getCompressedPerson",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "number",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "format": "byte",
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "peoplegeneratorapi-application"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "geonameID": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "ipaddress": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "streetAddress": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Lifestory": {
+        "properties": {
+          "lifestory": {
+            "type": "string"
+          },
+          "person": {
+            "$ref": "#/components/schemas/Person"
+          }
+        },
+        "type": "object"
+      },
+      "Person": {
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "age": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "bloodType": {
+            "type": "string"
+          },
+          "creditCardNumber": {
+            "type": "string"
+          },
+          "creditScore": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "dateOfBirth": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "eyeColor": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "gpa": {
+            "format": "double",
+            "type": "number"
+          },
+          "hasChildren": {
+            "type": "boolean"
+          },
+          "hasDegree": {
+            "type": "boolean"
+          },
+          "height": {
+            "format": "double",
+            "type": "number"
+          },
+          "incomeInUSD": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "job": {
+            "type": "string"
+          },
+          "married": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "politicalLeaning": {
+            "format": "double",
+            "type": "number"
+          },
+          "religion": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "weight": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}

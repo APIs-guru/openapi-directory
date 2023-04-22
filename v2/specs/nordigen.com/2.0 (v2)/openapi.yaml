@@ -1,0 +1,4311 @@
+openapi: 3.0.3
+servers:
+  - url: https://ob.nordigen.com
+info:
+  title: Nordigen Account Information Services API
+  version: 2.0 (v2)
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_assets.nordigen.com_static_assets_img_nordigen_favicon_favicon-196x196.png
+  x-origin:
+    - format: openapi
+      url: https://ob.nordigen.com/api/swagger.json
+      version: "3.0"
+  x-providerName: nordigen.com
+security:
+  - jwtAuth: []
+paths:
+  "/api/v2/accounts/premium/{id}/transactions/":
+    get:
+      description: Access account premium transactions.
+      operationId: retrieve account transactions v2
+      parameters:
+        - description: ISO 3166 two-character country code
+          examples:
+            Austria:
+              description: ISO 3166 two-character code for Austria
+              summary: Austria
+              value: AT
+            Belgium:
+              description: ISO 3166 two-character code for Belgium
+              summary: Belgium
+              value: BE
+            Bulgaria:
+              description: ISO 3166 two-character code for Bulgaria
+              summary: Bulgaria
+              value: BG
+            Croatia:
+              description: ISO 3166 two-character code for Croatia
+              summary: Croatia
+              value: HR
+            Cyprus:
+              description: ISO 3166 two-character code for Cyprus
+              summary: Cyprus
+              value: CY
+            Czechia:
+              description: ISO 3166 two-character code for Czechia
+              summary: Czechia
+              value: CZ
+            Denmark:
+              description: ISO 3166 two-character code for Denmark
+              summary: Denmark
+              value: DK
+            Estonia:
+              description: ISO 3166 two-character code for Estonia
+              summary: Estonia
+              value: EE
+            Finland:
+              description: ISO 3166 two-character code for Finland
+              summary: Finland
+              value: FI
+            France:
+              description: ISO 3166 two-character code for France
+              summary: France
+              value: FR
+            Germany:
+              description: ISO 3166 two-character code for Germany
+              summary: Germany
+              value: DE
+            Greece:
+              description: ISO 3166 two-character code for Greece
+              summary: Greece
+              value: GR
+            Hungary:
+              description: ISO 3166 two-character code for Hungary
+              summary: Hungary
+              value: HU
+            Iceland:
+              description: ISO 3166 two-character code for Iceland
+              summary: Iceland
+              value: IS
+            Ireland:
+              description: ISO 3166 two-character code for Ireland
+              summary: Ireland
+              value: IE
+            Italy:
+              description: ISO 3166 two-character code for Italy
+              summary: Italy
+              value: IT
+            Latvia:
+              description: ISO 3166 two-character code for Latvia
+              summary: Latvia
+              value: LV
+            Liechtenstein:
+              description: ISO 3166 two-character code for Liechtenstein
+              summary: Liechtenstein
+              value: LI
+            Lithuania:
+              description: ISO 3166 two-character code for Lithuania
+              summary: Lithuania
+              value: LT
+            Luxembourg:
+              description: ISO 3166 two-character code for Luxembourg
+              summary: Luxembourg
+              value: LU
+            Malta:
+              description: ISO 3166 two-character code for Malta
+              summary: Malta
+              value: MT
+            Netherlands:
+              description: ISO 3166 two-character code for Netherlands
+              summary: Netherlands
+              value: NL
+            Norway:
+              description: ISO 3166 two-character code for Norway
+              summary: Norway
+              value: NO
+            Poland:
+              description: ISO 3166 two-character code for Poland
+              summary: Poland
+              value: PL
+            Portugal:
+              description: ISO 3166 two-character code for Portugal
+              summary: Portugal
+              value: PT
+            Romania:
+              description: ISO 3166 two-character code for Romania
+              summary: Romania
+              value: RO
+            Slovakia:
+              description: ISO 3166 two-character code for Slovakia
+              summary: Slovakia
+              value: SK
+            Slovenia:
+              description: ISO 3166 two-character code for Slovenia
+              summary: Slovenia
+              value: SI
+            Spain:
+              description: ISO 3166 two-character code for Spain
+              summary: Spain
+              value: ES
+            Sweden:
+              description: ISO 3166 two-character code for Sweden
+              summary: Sweden
+              value: SE
+            UnitedKingdom:
+              description: ISO 3166 two-character code for United Kingdom
+              summary: United Kingdom
+              value: GB
+          in: query
+          name: country
+          schema:
+            type: string
+        - examples:
+            2022-12-03:
+              description: ISO 8601 format date
+              summary: 2022-12-03
+              value: 2022-12-03
+          in: query
+          name: date_from
+          schema:
+            format: date
+            type: string
+        - examples:
+            2023-03-03:
+              description: ISO 8601 format date
+              summary: 2023-03-03
+              value: 2023-03-03
+          in: query
+          name: date_to
+          schema:
+            format: date
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: A UUID string identifying this account.
+            format: uuid
+            type: string
+      responses:
+        "200":
+          description: No response body
+        "400":
+          content:
+            application/json:
+              examples:
+                DateRangeError:
+                  description: Incorrect date range in query parameters
+                  summary: Date range error
+                  value:
+                    detail: Starting date '2023-03-13' is greater than end date '2023-03-03'. When specifying date range, starting date must precede the end date
+                    status_code: 400
+                    summary: Incorrect date range
+                InvalidID:
+                  description: Invalid Account ID
+                  summary: Invalid ID
+                  value:
+                    detail: "$ACCOUNT_ID is not a valid Account UUID. "
+                    status_code: 400
+                    summary: Invalid Account ID
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "401":
+          content:
+            application/json:
+              examples:
+                AccessExpiredError:
+                  description: Couldn't update account transactions
+                  summary: Access Expired Error
+                  value:
+                    detail: Access has expired or it has been revoked. To restore access reconnect the account.
+                    status_code: 401
+                    summary: Couldn't update account transactions
+                    type: AccessExpiredError
+                AccountInactiveError:
+                  description: Couldn't update account transactions
+                  summary: Account Inactive Error
+                  value:
+                    detail: Account has been deactivated or it no longer exists.
+                    status_code: 401
+                    summary: Couldn't update account transactions
+                    type: AccountInactiveError
+                FailedAuthentication:
+                  description: Couldn't update account transactions
+                  summary: Failed Authentication
+                  value:
+                    detail: SSN Verification has failed
+                    status_code: 401
+                    summary: Couldn't update account transactions
+                    type: FailedAuthentication
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                AccountAccessForbidden:
+                  description: Couldn't update account transactions
+                  summary: Account Access Forbidden
+                  value:
+                    detail: Access to account is forbidden. The user might not have the necessary permissions.
+                    status_code: 403
+                    summary: Couldn't update account transactions
+                    type: AccountAccessForbidden
+                AccountEUAScopeError:
+                  description: EUA doesn't allow access to account transactions.
+                  summary: Account EUA scope error
+                  value:
+                    detail: EUA doesn't allow access to account transactions. Check EUA access scope. Or create new EUA with correct access scope
+                    status_code: 403
+                    summary: End User Agreement (EUA) access scope error
+                AccountValidEUAError:
+                  description: Account has no valid End User Agreement
+                  summary: Account valid EUA error
+                  value:
+                    detail: Account exists but there is no valid End User Agreement permitting you to access it
+                    status_code: 403
+                    summary: No valid End User Agreement
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                AccountNotFoundError:
+                  description: Account not found
+                  summary: Account not found error
+                  value:
+                    detail: Please check whether you specified a valid Account ID
+                    status_code: 404
+                    summary: Account ID $ACC_ID not found
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "409":
+          content:
+            application/json:
+              examples:
+                AccountStateError:
+                  description: Account state does not support this operation
+                  summary: Account state error
+                  value:
+                    aspsp_identifier: string
+                    created: 2023-03-03 17:05:05.270281+00:00
+                    iban: string
+                    id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    last_accessed: 2023-03-03 17:05:05.270299+00:00
+                    status: ERROR
+                AccountSuspendedError:
+                  description: Account or its requisition suspended
+                  summary: Account suspended error
+                  value:
+                    detail: This account or its requisition was suspended due to numerous errors that occurred while accessing it.
+                    status_code: 409
+                    summary: Account suspended
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "429":
+          content:
+            application/json:
+              examples:
+                RateLimitError:
+                  description: Couldn't update account transactions
+                  summary: Rate Limit Error
+                  value:
+                    detail: Daily request limit set by the Institution has been exceeded.
+                    status_code: 429
+                    summary: Couldn't update account transactions
+                    type: RateLimitError
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "500":
+          content:
+            application/json:
+              examples:
+                UnknownRequestError:
+                  description: Couldn't update account transactions
+                  summary: Unknown Request Error
+                  value:
+                    detail: Request to Institution returned an error
+                    status_code: 500
+                    summary: Couldn't update account transactions
+                    type: UnknownRequestError
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "503":
+          content:
+            application/json:
+              examples:
+                ConnectionError:
+                  description: Couldn't update account transactions
+                  summary: Connection Error
+                  value:
+                    detail: Couldn't connect to Institution
+                    status_code: 503
+                    summary: Couldn't update account transactions
+                    type: ConnectionError
+                ServiceError:
+                  description: Couldn't update account transactions
+                  summary: Service Error
+                  value:
+                    detail: Institution service unavailable
+                    status_code: 503
+                    summary: Couldn't update account transactions
+                    type: ServiceError
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+      tags:
+        - premium
+  "/api/v2/accounts/{id}/":
+    get:
+      description: |-
+        Access account metadata.
+
+        Information about the account record, such as the processing status and IBAN.
+
+        Account status is recalculated based on the error count in the latest req.
+      operationId: retrieve account metadata
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: A UUID string identifying this account.
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountV2"
+          description: sample account metadata
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                AccountNotFoundError:
+                  description: Account not found
+                  summary: Account not found error
+                  value:
+                    detail: Please check whether you specified a valid Account ID
+                    status_code: 404
+                    summary: Account ID $ACC_ID not found
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account not found
+      tags:
+        - accounts
+  "/api/v2/accounts/{id}/balances/":
+    get:
+      description: |-
+        Access account balances.
+
+        Balances will be returned in Berlin Group PSD2 format.
+      operationId: accounts_balances_retrieve
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: A UUID string identifying this account.
+            format: uuid
+            type: string
+      responses:
+        "400":
+          content:
+            application/json:
+              examples:
+                DateRangeError:
+                  description: Incorrect date range in query parameters
+                  summary: Date range error
+                  value:
+                    detail: Starting date '2023-03-13' is greater than end date '2023-03-03'. When specifying date range, starting date must precede the end date
+                    status_code: 400
+                    summary: Incorrect date range
+                InvalidID:
+                  description: Invalid Account ID
+                  summary: Invalid ID
+                  value:
+                    detail: "$ACCOUNT_ID is not a valid Account UUID. "
+                    status_code: 400
+                    summary: Invalid Account ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Date range error
+        "401":
+          content:
+            application/json:
+              examples:
+                AccessExpiredError:
+                  description: Couldn't update account balances
+                  summary: Access Expired Error
+                  value:
+                    detail: Access has expired or it has been revoked. To restore access reconnect the account.
+                    status_code: 401
+                    summary: Couldn't update account balances
+                    type: AccessExpiredError
+                AccountInactiveError:
+                  description: Couldn't update account balances
+                  summary: Account Inactive Error
+                  value:
+                    detail: Account has been deactivated or it no longer exists.
+                    status_code: 401
+                    summary: Couldn't update account balances
+                    type: AccountInactiveError
+                FailedAuthentication:
+                  description: Couldn't update account balances
+                  summary: Failed Authentication
+                  value:
+                    detail: SSN Verification has failed
+                    status_code: 401
+                    summary: Couldn't update account balances
+                    type: FailedAuthentication
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Failed Authentication
+        "403":
+          content:
+            application/json:
+              examples:
+                AccountAccessForbidden:
+                  description: Couldn't update account balances
+                  summary: Account Access Forbidden
+                  value:
+                    detail: Access to account is forbidden. The user might not have the necessary permissions.
+                    status_code: 403
+                    summary: Couldn't update account balances
+                    type: AccountAccessForbidden
+                AccountEUAScopeError:
+                  description: EUA doesn't allow access to account balances.
+                  summary: Account EUA scope error
+                  value:
+                    detail: EUA doesn't allow access to account balances. Check EUA access scope. Or create new EUA with correct access scope
+                    status_code: 403
+                    summary: End User Agreement (EUA) access scope error
+                AccountValidEUAError:
+                  description: Account has no valid End User Agreement
+                  summary: Account valid EUA error
+                  value:
+                    detail: Account exists but there is no valid End User Agreement permitting you to access it
+                    status_code: 403
+                    summary: No valid End User Agreement
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account Access Forbidden
+        "404":
+          content:
+            application/json:
+              examples:
+                AccountNotFoundError:
+                  description: Account not found
+                  summary: Account not found error
+                  value:
+                    detail: Please check whether you specified a valid Account ID
+                    status_code: 404
+                    summary: Account ID $ACC_ID not found
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account not found error
+        "409":
+          content:
+            application/json:
+              examples:
+                AccountStateError:
+                  description: Account state does not support this operation
+                  summary: Account state error
+                  value:
+                    aspsp_identifier: string
+                    created: 2023-03-03 17:05:05.270281+00:00
+                    iban: string
+                    id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    last_accessed: 2023-03-03 17:05:05.270299+00:00
+                    status: ERROR
+                AccountSuspendedError:
+                  description: Account or its requisition suspended
+                  summary: Account suspended error
+                  value:
+                    detail: This account or its requisition was suspended due to numerous errors that occurred while accessing it.
+                    status_code: 409
+                    summary: Account suspended
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account state error
+        "429":
+          content:
+            application/json:
+              examples:
+                RateLimitError:
+                  description: Couldn't update account balances
+                  summary: Rate Limit Error
+                  value:
+                    detail: Daily request limit set by the Institution has been exceeded.
+                    status_code: 429
+                    summary: Couldn't update account balances
+                    type: RateLimitError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Rate Limit Error
+        "500":
+          content:
+            application/json:
+              examples:
+                UnknownRequestError:
+                  description: Couldn't update account balances
+                  summary: Unknown Request Error
+                  value:
+                    detail: Request to Institution returned an error
+                    status_code: 500
+                    summary: Couldn't update account balances
+                    type: UnknownRequestError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Request Error
+        "503":
+          content:
+            application/json:
+              examples:
+                ConnectionError:
+                  description: Couldn't update account balances
+                  summary: Connection Error
+                  value:
+                    detail: Couldn't connect to Institution
+                    status_code: 503
+                    summary: Couldn't update account balances
+                    type: ConnectionError
+                ServiceError:
+                  description: Couldn't update account balances
+                  summary: Service Error
+                  value:
+                    detail: Institution service unavailable
+                    status_code: 503
+                    summary: Couldn't update account balances
+                    type: ServiceError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Connection Error
+      tags:
+        - accounts
+  "/api/v2/accounts/{id}/details/":
+    get:
+      description: |-
+        Access account details.
+
+        Account details will be returned in Berlin Group PSD2 format.
+      operationId: accounts_details_retrieve
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: A UUID string identifying this account.
+            format: uuid
+            type: string
+      responses:
+        "400":
+          content:
+            application/json:
+              examples:
+                DateRangeError:
+                  description: Incorrect date range in query parameters
+                  summary: Date range error
+                  value:
+                    detail: Starting date '2023-03-13' is greater than end date '2023-03-03'. When specifying date range, starting date must precede the end date
+                    status_code: 400
+                    summary: Incorrect date range
+                InvalidID:
+                  description: Invalid Account ID
+                  summary: Invalid ID
+                  value:
+                    detail: "$ACCOUNT_ID is not a valid Account UUID. "
+                    status_code: 400
+                    summary: Invalid Account ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Date range error
+        "401":
+          content:
+            application/json:
+              examples:
+                AccessExpiredError:
+                  description: Couldn't update account details
+                  summary: Access Expired Error
+                  value:
+                    detail: Access has expired or it has been revoked. To restore access reconnect the account.
+                    status_code: 401
+                    summary: Couldn't update account details
+                    type: AccessExpiredError
+                AccountInactiveError:
+                  description: Couldn't update account details
+                  summary: Account Inactive Error
+                  value:
+                    detail: Account has been deactivated or it no longer exists.
+                    status_code: 401
+                    summary: Couldn't update account details
+                    type: AccountInactiveError
+                FailedAuthentication:
+                  description: Couldn't update account details
+                  summary: Failed Authentication
+                  value:
+                    detail: SSN Verification has failed
+                    status_code: 401
+                    summary: Couldn't update account details
+                    type: FailedAuthentication
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Failed Authentication
+        "403":
+          content:
+            application/json:
+              examples:
+                AccountAccessForbidden:
+                  description: Couldn't update account details
+                  summary: Account Access Forbidden
+                  value:
+                    detail: Access to account is forbidden. The user might not have the necessary permissions.
+                    status_code: 403
+                    summary: Couldn't update account details
+                    type: AccountAccessForbidden
+                AccountEUAScopeError:
+                  description: EUA doesn't allow access to account details.
+                  summary: Account EUA scope error
+                  value:
+                    detail: EUA doesn't allow access to account details. Check EUA access scope. Or create new EUA with correct access scope
+                    status_code: 403
+                    summary: End User Agreement (EUA) access scope error
+                AccountValidEUAError:
+                  description: Account has no valid End User Agreement
+                  summary: Account valid EUA error
+                  value:
+                    detail: Account exists but there is no valid End User Agreement permitting you to access it
+                    status_code: 403
+                    summary: No valid End User Agreement
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account Access Forbidden
+        "404":
+          content:
+            application/json:
+              examples:
+                AccountNotFoundError:
+                  description: Account not found
+                  summary: Account not found error
+                  value:
+                    detail: Please check whether you specified a valid Account ID
+                    status_code: 404
+                    summary: Account ID $ACC_ID not found
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account not found error
+        "409":
+          content:
+            application/json:
+              examples:
+                AccountStateError:
+                  description: Account state does not support this operation
+                  summary: Account state error
+                  value:
+                    aspsp_identifier: string
+                    created: 2023-03-03 17:05:05.270281+00:00
+                    iban: string
+                    id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    last_accessed: 2023-03-03 17:05:05.270299+00:00
+                    status: ERROR
+                AccountSuspendedError:
+                  description: Account or its requisition suspended
+                  summary: Account suspended error
+                  value:
+                    detail: This account or its requisition was suspended due to numerous errors that occurred while accessing it.
+                    status_code: 409
+                    summary: Account suspended
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account state error
+        "429":
+          content:
+            application/json:
+              examples:
+                RateLimitError:
+                  description: Couldn't update account details
+                  summary: Rate Limit Error
+                  value:
+                    detail: Daily request limit set by the Institution has been exceeded.
+                    status_code: 429
+                    summary: Couldn't update account details
+                    type: RateLimitError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Rate Limit Error
+        "500":
+          content:
+            application/json:
+              examples:
+                UnknownRequestError:
+                  description: Couldn't update account details
+                  summary: Unknown Request Error
+                  value:
+                    detail: Request to Institution returned an error
+                    status_code: 500
+                    summary: Couldn't update account details
+                    type: UnknownRequestError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Request Error
+        "503":
+          content:
+            application/json:
+              examples:
+                ConnectionError:
+                  description: Couldn't update account details
+                  summary: Connection Error
+                  value:
+                    detail: Couldn't connect to Institution
+                    status_code: 503
+                    summary: Couldn't update account details
+                    type: ConnectionError
+                ServiceError:
+                  description: Couldn't update account details
+                  summary: Service Error
+                  value:
+                    detail: Institution service unavailable
+                    status_code: 503
+                    summary: Couldn't update account details
+                    type: ServiceError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Connection Error
+      tags:
+        - accounts
+  "/api/v2/accounts/{id}/transactions/":
+    get:
+      description: |-
+        Access account transactions.
+
+        Transactions will be returned in Berlin Group PSD2 format.
+      operationId: accounts_transactions_retrieve
+      parameters:
+        - examples:
+            2022-12-03:
+              description: ISO 8601 format date
+              summary: 2022-12-03
+              value: 2022-12-03
+          in: query
+          name: date_from
+          schema:
+            format: date
+            type: string
+        - examples:
+            2023-03-03:
+              description: ISO 8601 format date
+              summary: 2023-03-03
+              value: 2023-03-03
+          in: query
+          name: date_to
+          schema:
+            format: date
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: A UUID string identifying this account.
+            format: uuid
+            type: string
+      responses:
+        "400":
+          content:
+            application/json:
+              examples:
+                DateRangeError:
+                  description: Incorrect date range in query parameters
+                  summary: Date range error
+                  value:
+                    detail: Starting date '2023-03-13' is greater than end date '2023-03-03'. When specifying date range, starting date must precede the end date
+                    status_code: 400
+                    summary: Incorrect date range
+                InvalidID:
+                  description: Invalid Account ID
+                  summary: Invalid ID
+                  value:
+                    detail: "$ACCOUNT_ID is not a valid Account UUID. "
+                    status_code: 400
+                    summary: Invalid Account ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Date range error
+        "401":
+          content:
+            application/json:
+              examples:
+                AccessExpiredError:
+                  description: Couldn't update account transactions
+                  summary: Access Expired Error
+                  value:
+                    detail: Access has expired or it has been revoked. To restore access reconnect the account.
+                    status_code: 401
+                    summary: Couldn't update account transactions
+                    type: AccessExpiredError
+                AccountInactiveError:
+                  description: Couldn't update account transactions
+                  summary: Account Inactive Error
+                  value:
+                    detail: Account has been deactivated or it no longer exists.
+                    status_code: 401
+                    summary: Couldn't update account transactions
+                    type: AccountInactiveError
+                FailedAuthentication:
+                  description: Couldn't update account transactions
+                  summary: Failed Authentication
+                  value:
+                    detail: SSN Verification has failed
+                    status_code: 401
+                    summary: Couldn't update account transactions
+                    type: FailedAuthentication
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Failed Authentication
+        "403":
+          content:
+            application/json:
+              examples:
+                AccountAccessForbidden:
+                  description: Couldn't update account transactions
+                  summary: Account Access Forbidden
+                  value:
+                    detail: Access to account is forbidden. The user might not have the necessary permissions.
+                    status_code: 403
+                    summary: Couldn't update account transactions
+                    type: AccountAccessForbidden
+                AccountEUAScopeError:
+                  description: EUA doesn't allow access to account transactions.
+                  summary: Account EUA scope error
+                  value:
+                    detail: EUA doesn't allow access to account transactions. Check EUA access scope. Or create new EUA with correct access scope
+                    status_code: 403
+                    summary: End User Agreement (EUA) access scope error
+                AccountValidEUAError:
+                  description: Account has no valid End User Agreement
+                  summary: Account valid EUA error
+                  value:
+                    detail: Account exists but there is no valid End User Agreement permitting you to access it
+                    status_code: 403
+                    summary: No valid End User Agreement
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account Access Forbidden
+        "404":
+          content:
+            application/json:
+              examples:
+                AccountNotFoundError:
+                  description: Account not found
+                  summary: Account not found error
+                  value:
+                    detail: Please check whether you specified a valid Account ID
+                    status_code: 404
+                    summary: Account ID $ACC_ID not found
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account not found error
+        "409":
+          content:
+            application/json:
+              examples:
+                AccountStateError:
+                  description: Account state does not support this operation
+                  summary: Account state error
+                  value:
+                    aspsp_identifier: string
+                    created: 2023-03-03 17:05:05.270281+00:00
+                    iban: string
+                    id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    last_accessed: 2023-03-03 17:05:05.270299+00:00
+                    status: ERROR
+                AccountSuspendedError:
+                  description: Account or its requisition suspended
+                  summary: Account suspended error
+                  value:
+                    detail: This account or its requisition was suspended due to numerous errors that occurred while accessing it.
+                    status_code: 409
+                    summary: Account suspended
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Account state error
+        "429":
+          content:
+            application/json:
+              examples:
+                RateLimitError:
+                  description: Couldn't update account transactions
+                  summary: Rate Limit Error
+                  value:
+                    detail: Daily request limit set by the Institution has been exceeded.
+                    status_code: 429
+                    summary: Couldn't update account transactions
+                    type: RateLimitError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Rate Limit Error
+        "500":
+          content:
+            application/json:
+              examples:
+                UnknownRequestError:
+                  description: Couldn't update account transactions
+                  summary: Unknown Request Error
+                  value:
+                    detail: Request to Institution returned an error
+                    status_code: 500
+                    summary: Couldn't update account transactions
+                    type: UnknownRequestError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Request Error
+        "503":
+          content:
+            application/json:
+              examples:
+                ConnectionError:
+                  description: Couldn't update account transactions
+                  summary: Connection Error
+                  value:
+                    detail: Couldn't connect to Institution
+                    status_code: 503
+                    summary: Couldn't update account transactions
+                    type: ConnectionError
+                ServiceError:
+                  description: Couldn't update account transactions
+                  summary: Service Error
+                  value:
+                    detail: Institution service unavailable
+                    status_code: 503
+                    summary: Couldn't update account transactions
+                    type: ServiceError
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Connection Error
+      tags:
+        - accounts
+  /api/v2/agreements/enduser/:
+    get:
+      description: Retrieve all end user agreements belonging to the company
+      operationId: retrieve all EUAs for an end user v2
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 100
+            minimum: 1
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedEndUserAgreementList"
+          description: Retrieve all end user agreements
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - agreements
+    post:
+      description: Create an end user agreement
+      operationId: create EUA v2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndUserAgreementRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/EndUserAgreementRequest"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/EndUserAgreementRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndUserAgreement"
+          description: Create enduser agreement
+        "400":
+          content:
+            application/json:
+              examples:
+                AccessScopeFieldErrors:
+                  description: Errors related to 'access_scope' field.
+                  summary: Access scope field errors
+                  value:
+                    access_scope:
+                      - detail: Choose one or several from ['balances', 'details', 'transactions']
+                        summary: Unknown value '$SCOPE' in access_scope
+                      - detail: "For this institution the following scopes are required together: ['balances', 'details']"
+                        summary: Institution access scope dependencies error
+                      - detail: "The following scopes are mandatory for this institution: ['transactions']"
+                        summary: Institution access scope dependencies error
+                    status_code: 400
+                AccessValidForDaysFieldErrors:
+                  description: Errors related to 'access_valid_for_days' field.
+                  summary: Access valid for days field errors
+                  value:
+                    access_valid_for_days:
+                      - detail: access_valid_for_days must be > 0 and <= 90
+                        summary: Incorrect access_valid_for_days
+                    status_code: 400
+                AgreementFieldErrors:
+                  description: Errors related to 'agreement' field.
+                  summary: Agreement field errors
+                  value:
+                    agreement:
+                      detail: "Provided Institution ID: '$INSTITUTION_ID' for requisition does not match EUA institution ID '$EUA_INSTITUTION_ID'. Please provide correct institution ID: '$EUA_INSTITUTION_ID'"
+                      summary: Incorrect Institution ID $INSTITUTION_ID
+                    status_code: 400
+                InstitutionFieldErrors:
+                  description: Errors related to 'institution' field.
+                  summary: Institution field errors
+                  value:
+                    institution_id:
+                      detail: Get Institution IDs from /institutions/?country={$COUNTRY_CODE}
+                      summary: Unknown Institution ID $INSTITUTION_ID
+                    status_code: 400
+                MaxHistoricalDaysFieldErrors:
+                  description: Errors related to 'max_historical_days' field.
+                  summary: Max historical days field errors
+                  value:
+                    max_historical_days:
+                      - detail: max_historical_days must be > 0 and <= N26_NTSBDEB1 transaction_total_days (730)
+                        summary: Incorrect max_historical_days
+                    status_code: 400
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Agreement field errors
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+      tags:
+        - agreements
+  "/api/v2/agreements/enduser/{id}/":
+    delete:
+      description: Delete an end user agreement
+      operationId: delete EUA by id v2
+      parameters:
+        - description: A UUID string identifying this end user agreement.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "400":
+          content:
+            application/json:
+              examples:
+                CannotDeleteEUA:
+                  description: Cannot delete End User Agreement
+                  summary: Cannot delete EUA
+                  value:
+                    detail: "Cannot delete accepted End User Agreement: $EUA_ID. Only non accepted agreements can be deleted"
+                    status_code: 400
+                    summary: Cannot delete End User Agreement
+                InvalidID:
+                  description: Invalid ID
+                  summary: Invalid ID
+                  value:
+                    detail: 272785d5-de45-4efb-aa1a-f8157ffa94 is not a valid UUID.
+                    status_code: 400
+                    summary: Invalid ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid ID
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - agreements
+    get:
+      description: Retrieve end user agreement by ID
+      operationId: retrieve EUA by id v2
+      parameters:
+        - description: A UUID string identifying this end user agreement.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndUserAgreement"
+          description: Retrieve end user agreement by ID
+        "400":
+          content:
+            application/json:
+              examples:
+                InvalidID:
+                  description: Invalid ID
+                  summary: Invalid ID
+                  value:
+                    detail: 272785d5-de45-4efb-aa1a-f8157ffa94 is not a valid UUID.
+                    status_code: 400
+                    summary: Invalid ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid ID
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - agreements
+  "/api/v2/agreements/enduser/{id}/accept/":
+    put:
+      description: Accept an end-user agreement via the API
+      operationId: accept EUA
+      parameters:
+        - description: A UUID string identifying this end user agreement.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnduserAcceptanceDetailsRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/EnduserAcceptanceDetailsRequest"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/EnduserAcceptanceDetailsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndUserAgreement"
+          description: EUA
+        "400":
+          content:
+            application/json:
+              examples:
+                InvalidID:
+                  description: Invalid ID
+                  summary: Invalid ID
+                  value:
+                    detail: 272785d5-de45-4efb-aa1a-f8157ffa94 is not a valid UUID.
+                    status_code: 400
+                    summary: Invalid ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid ID
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+                InsufficientPermissions:
+                  description: Company doesn't have permission to accept EUA
+                  summary: Insufficient permissions
+                  value:
+                    detail: Your company doesn't have permission to accept EUA. You'll have to use our default form for this action.
+                    status_code: 403
+                    summary: Insufficient permissions
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+        "405":
+          content:
+            application/json:
+              examples:
+                EUAAccepted:
+                  description: End User Agreements cannot be accepted more than once
+                  summary: EUA accepted
+                  value:
+                    detail: End User Agreements cannot be accepted more than once
+                    status_code: 405
+                    summary: EUA cannot be accepted more than once
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: EUA accepted
+      tags:
+        - agreements
+  /api/v2/institutions/:
+    get:
+      description: List all available institutions
+      operationId: retrieve all supported Institutions in a given country
+      parameters:
+        - description: ISO 3166 two-character country code
+          examples:
+            Austria:
+              description: ISO 3166 two-character code for Austria
+              summary: Austria
+              value: AT
+            Belgium:
+              description: ISO 3166 two-character code for Belgium
+              summary: Belgium
+              value: BE
+            Bulgaria:
+              description: ISO 3166 two-character code for Bulgaria
+              summary: Bulgaria
+              value: BG
+            Croatia:
+              description: ISO 3166 two-character code for Croatia
+              summary: Croatia
+              value: HR
+            Cyprus:
+              description: ISO 3166 two-character code for Cyprus
+              summary: Cyprus
+              value: CY
+            Czechia:
+              description: ISO 3166 two-character code for Czechia
+              summary: Czechia
+              value: CZ
+            Denmark:
+              description: ISO 3166 two-character code for Denmark
+              summary: Denmark
+              value: DK
+            Estonia:
+              description: ISO 3166 two-character code for Estonia
+              summary: Estonia
+              value: EE
+            Finland:
+              description: ISO 3166 two-character code for Finland
+              summary: Finland
+              value: FI
+            France:
+              description: ISO 3166 two-character code for France
+              summary: France
+              value: FR
+            Germany:
+              description: ISO 3166 two-character code for Germany
+              summary: Germany
+              value: DE
+            Greece:
+              description: ISO 3166 two-character code for Greece
+              summary: Greece
+              value: GR
+            Hungary:
+              description: ISO 3166 two-character code for Hungary
+              summary: Hungary
+              value: HU
+            Iceland:
+              description: ISO 3166 two-character code for Iceland
+              summary: Iceland
+              value: IS
+            Ireland:
+              description: ISO 3166 two-character code for Ireland
+              summary: Ireland
+              value: IE
+            Italy:
+              description: ISO 3166 two-character code for Italy
+              summary: Italy
+              value: IT
+            Latvia:
+              description: ISO 3166 two-character code for Latvia
+              summary: Latvia
+              value: LV
+            Liechtenstein:
+              description: ISO 3166 two-character code for Liechtenstein
+              summary: Liechtenstein
+              value: LI
+            Lithuania:
+              description: ISO 3166 two-character code for Lithuania
+              summary: Lithuania
+              value: LT
+            Luxembourg:
+              description: ISO 3166 two-character code for Luxembourg
+              summary: Luxembourg
+              value: LU
+            Malta:
+              description: ISO 3166 two-character code for Malta
+              summary: Malta
+              value: MT
+            Netherlands:
+              description: ISO 3166 two-character code for Netherlands
+              summary: Netherlands
+              value: NL
+            Norway:
+              description: ISO 3166 two-character code for Norway
+              summary: Norway
+              value: NO
+            Poland:
+              description: ISO 3166 two-character code for Poland
+              summary: Poland
+              value: PL
+            Portugal:
+              description: ISO 3166 two-character code for Portugal
+              summary: Portugal
+              value: PT
+            Romania:
+              description: ISO 3166 two-character code for Romania
+              summary: Romania
+              value: RO
+            Slovakia:
+              description: ISO 3166 two-character code for Slovakia
+              summary: Slovakia
+              value: SK
+            Slovenia:
+              description: ISO 3166 two-character code for Slovenia
+              summary: Slovenia
+              value: SI
+            Spain:
+              description: ISO 3166 two-character code for Spain
+              summary: Spain
+              value: ES
+            Sweden:
+              description: ISO 3166 two-character code for Sweden
+              summary: Sweden
+              value: SE
+            UnitedKingdom:
+              description: ISO 3166 two-character code for United Kingdom
+              summary: United Kingdom
+              value: GB
+          in: query
+          name: country
+          schema:
+            type: string
+        - description: Boolean value, indicating if payments are enabled
+          examples:
+            PaymentsEnabled:
+              description: Boolean value representing whether                            payments are enabled
+              summary: payments_enabled
+              value: "false"
+          in: query
+          name: payments_enabled
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                SupportedInstitutions:
+                  description: some of supported Institutions
+                  summary: Supported Institutions
+                  value:
+                    - bic: NTSBDEB1
+                      countries:
+                        - GB
+                        - NO
+                        - SE
+                        - FI
+                        - DK
+                        - EE
+                        - LV
+                        - LT
+                        - NL
+                        - CZ
+                        - ES
+                        - PL
+                        - BE
+                        - DE
+                        - AT
+                        - BG
+                        - HR
+                        - CY
+                        - FR
+                        - GR
+                        - HU
+                        - IS
+                        - IE
+                        - IT
+                        - LI
+                        - LU
+                        - MT
+                        - PT
+                        - RO
+                        - SK
+                        - SI
+                      id: N26_NTSBDEB1
+                      logo: https://cdn.nordigen.com/ais/N26_SANDBOX_NTSBDEB1.png
+                      name: N26 Bank
+                      transaction_total_days: "90"
+                    - bic: FTSBDEFAXXX
+                      countries:
+                        - DE
+                      id: ABNAMRO_FTSBDEFAXXX
+                      logo: https://cdn.nordigen.com/ais/ABNAMRO_FTSBDEFAXXX.png
+                      name: ABN AMRO Bank Commercial
+                      transaction_total_days: "558"
+              schema:
+                items:
+                  $ref: "#/components/schemas/Integration"
+                type: array
+          description: list of supported Institutions in the country
+        "400":
+          content:
+            application/json:
+              examples:
+                NotAValidChoice:
+                  description: Provided country is not valid
+                  summary: Not a valid choice
+                  value:
+                    country:
+                      - GBA is not a valid choice.
+                    status_code: 400
+                    summary: Invalid country choice.
+                UnknownFields:
+                  description: Unknown Fields
+                  summary: Unknown Fields
+                  value:
+                    detail: Unknown fields {${FIELD}} in {${LOCATION}}
+                    status_code: 400
+                    summary: Unknown fields
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Fields
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - institutions
+  "/api/v2/institutions/{id}/":
+    get:
+      description: Get details about a specific Institution
+      operationId: retrieve institution
+      parameters:
+        - examples:
+            N26:
+              description: Nordigen's Institution ID for N26
+              summary: N26
+              value: N26_NTSBDEB1
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                ABNAMROBank:
+                  description: ABN AMRO Bank
+                  summary: ABN AMRO Bank
+                  value:
+                    bic: FTSBDEFAXXX
+                    countries:
+                      - DE
+                    id: ABNAMRO_FTSBDEFAXXX
+                    logo: https://cdn.nordigen.com/ais/ABNAMRO_FTSBDEFAXXX.png
+                    name: ABN AMRO Bank Commercial
+                    transaction_total_days: "558"
+                N26Bank:
+                  description: N26 Bank
+                  summary: N26 Bank
+                  value:
+                    bic: NTSBDEB1
+                    countries:
+                      - GB
+                      - NO
+                      - SE
+                      - FI
+                      - DK
+                      - EE
+                      - LV
+                      - LT
+                      - NL
+                      - CZ
+                      - ES
+                      - PL
+                      - BE
+                      - DE
+                      - AT
+                      - BG
+                      - HR
+                      - CY
+                      - FR
+                      - GR
+                      - HU
+                      - IS
+                      - IE
+                      - IT
+                      - LI
+                      - LU
+                      - MT
+                      - PT
+                      - RO
+                      - SK
+                      - SI
+                    id: N26_NTSBDEB1
+                    logo: https://cdn.nordigen.com/ais/N26_SANDBOX_NTSBDEB1.png
+                    name: N26 Bank
+                    transaction_total_days: "90"
+              schema:
+                $ref: "#/components/schemas/Integration"
+          description: Retrieve institution by id
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - institutions
+  /api/v2/payments/:
+    get:
+      description: Retrieve all payments belonging to the company
+      operationId: list payments
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 100
+            minimum: 1
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedPaymentReadList"
+          description: List payments
+        "400":
+          content:
+            application/json:
+              examples:
+                UnknownFields:
+                  description: Unknown Fields
+                  summary: Unknown Fields
+                  value:
+                    detail: Unknown fields {${FIELD}} in {${LOCATION}}
+                    status_code: 400
+                    summary: Unknown fields
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Fields
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+      tags:
+        - payments
+    post:
+      description: Create payment
+      operationId: create payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentWriteRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PaymentWriteRequest"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PaymentWriteRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentWrite"
+          description: Create payment
+        "400":
+          content:
+            application/json:
+              examples:
+                UnknownFields:
+                  description: Unknown Fields
+                  summary: Unknown Fields
+                  value:
+                    detail: Unknown fields {${FIELD}} in {${LOCATION}}
+                    status_code: 400
+                    summary: Unknown fields
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Fields
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+      tags:
+        - payments
+  /api/v2/payments/account/:
+    get:
+      description: Retrieve all payment creditor accounts
+      operationId: retrieve all payment creditor accounts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CreditorAccount"
+                type: array
+          description: Retrieve all payment creditor accounts
+        "400":
+          content:
+            application/json:
+              examples:
+                UnknownFields:
+                  description: Unknown Fields
+                  summary: Unknown Fields
+                  value:
+                    detail: Unknown fields {${FIELD}} in {${LOCATION}}
+                    status_code: 400
+                    summary: Unknown fields
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Fields
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+      tags:
+        - payments
+  /api/v2/payments/creditors/:
+    get:
+      description: API endpoints related to creditor accounts.
+      operationId: payments_creditors_list
+      parameters:
+        - in: query
+          name: account
+          schema:
+            type: string
+        - in: query
+          name: address_country
+          schema:
+            type: string
+        - in: query
+          name: agent
+          schema:
+            type: string
+        - in: query
+          name: currency
+          schema:
+            type: string
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 100
+            minimum: 1
+            type: integer
+        - in: query
+          name: name
+          schema:
+            type: string
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+        - in: query
+          name: type
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedCreditorAccountList"
+          description: ""
+      tags:
+        - payments
+    post:
+      description: API endpoints related to creditor accounts.
+      operationId: payments_creditors_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreditorAccountWriteRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CreditorAccountWriteRequest"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CreditorAccountWriteRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreditorAccountWrite"
+          description: ""
+      tags:
+        - payments
+  "/api/v2/payments/creditors/{id}/":
+    delete:
+      description: API endpoints related to creditor accounts.
+      operationId: payments_creditors_destroy
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: Unique entry ID
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No response body
+      tags:
+        - payments
+    get:
+      description: API endpoints related to creditor accounts.
+      operationId: payments_creditors_retrieve
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: Unique entry ID
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreditorAccount"
+          description: ""
+      tags:
+        - payments
+  "/api/v2/payments/fields/{institution_id}/":
+    get:
+      description: List minimum required fields for institution
+      operationId: list minimum required fields for institution
+      parameters:
+        - in: path
+          name: institution_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                MinimumRequiredFields:
+                  description: Fields to be used in API request for specific Institution
+                  summary: Minimum required fields
+                  value:
+                    single-payment:
+                      SCT:
+                        creditor_account: <creditor_account_id>
+                        custom_payment_id: <custom_payment_id>
+                        description: <payment_description>
+                        institution_id: <institution_id>
+                        instructed_amount:
+                          amount: 10
+                          currency: EUR
+                        payment_product: SCT
+                        redirect: <https://example.com>
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Minimum required fields
+        "400":
+          content:
+            application/json:
+              examples:
+                UnknownFields:
+                  description: Unknown Fields
+                  summary: Unknown Fields
+                  value:
+                    detail: Unknown fields {${FIELD}} in {${LOCATION}}
+                    status_code: 400
+                    summary: Unknown fields
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Fields
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+      tags:
+        - payments
+  "/api/v2/payments/{id}/":
+    delete:
+      description: Delete periodic payment
+      operationId: delete periodic payment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: Unique entry ID
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                PaymentDeleted:
+                  description: Periodic payment is deleted
+                  summary: Payment deleted
+                  value:
+                    detail: Periodic payment '$PAYMENT_ID' deleted
+                    summary: Periodic payment deleted
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Payment deleted
+        "400":
+          content:
+            application/json:
+              examples:
+                InvalidID:
+                  description: Invalid ID
+                  summary: Invalid ID
+                  value:
+                    detail: 272785d5-de45-4efb-aa1a-f8157ffa94 is not a valid UUID.
+                    status_code: 400
+                    summary: Invalid ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid ID
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+        "409":
+          content:
+            application/json:
+              examples:
+                PaymentDeleteError:
+                  description: Periodic payment cannot be deleted
+                  summary: Payment delete error
+                  value:
+                    detail: Periodic payment '$PAYMENT_ID' cannot be deleted at this moment. Please try again later.
+                    status_code: 409
+                    summary: Periodic payment cannot be deleted
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Payment delete error
+      tags:
+        - payments
+    get:
+      description: Retrieve payment
+      operationId: retrieve payment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: Unique entry ID
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRead"
+          description: Retrieve payment information
+        "400":
+          content:
+            application/json:
+              examples:
+                InvalidID:
+                  description: Invalid ID
+                  summary: Invalid ID
+                  value:
+                    detail: 272785d5-de45-4efb-aa1a-f8157ffa94 is not a valid UUID.
+                    status_code: 400
+                    summary: Invalid ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid ID
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - payments
+  /api/v2/requisitions/:
+    get:
+      description: Retrieve all requisitions belonging to the company
+      operationId: retrieve all requisitions
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 100
+            minimum: 1
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedRequisitionV2List"
+          description: Retrieve all requisitions
+        "400":
+          content:
+            application/json:
+              examples:
+                UnknownFields:
+                  description: Unknown Fields
+                  summary: Unknown Fields
+                  value:
+                    detail: Unknown fields {${FIELD}} in {${LOCATION}}
+                    status_code: 400
+                    summary: Unknown fields
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Unknown Fields
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - requisitions
+    post:
+      description: Create a new requisition
+      operationId: requisition created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequisitionV2Request"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/RequisitionV2Request"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/RequisitionV2Request"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpectacularRequisitionV2"
+          description: Requisition has been successfully created
+        "400":
+          content:
+            application/json:
+              examples:
+                AccountSelectionFieldErrors:
+                  description: Errors related to 'account_selection' field.
+                  summary: Account selection field errors
+                  value:
+                    account_selection:
+                      detail: Account selection not supported for $INSTITUTION_ID
+                      summary: Account selection not supported
+                    status_code: 400
+                AgreementFieldErrors:
+                  description: Errors related to 'agreement' field.
+                  summary: Agreement field errors
+                  value:
+                    agreement:
+                      - detail: Get Institution IDs from /institutions/?country={$COUNTRY_CODE}
+                        summary: Unknown Institution ID $ASPSP_ID
+                      - detail: $AGREEMENT_ID is not a valid EndUserAgreement UUID.  Please specify valid agreement from /api/agreements/enduser/?={$ENDUSER_ID} or create a new one
+                        summary: Invalid EndUserAgreement ID
+                    status_code: 400
+                FieldsRequired:
+                  description: Field is required
+                  summary: Fields required
+                  value:
+                    institution_id:
+                      - This field is required.
+                    redirect:
+                      - This field is required.
+                    status_code: 400
+                InstitutionFieldErrors:
+                  description: Errors related to 'institution' field.
+                  summary: Institution field errors
+                  value:
+                    institution_id:
+                      detail: Get Institution IDs from /institutions/?country={$COUNTRY_CODE}
+                      summary: Unknown Institution ID $INSTITUTION_ID
+                    status_code: 400
+                RedirectFieldErrors:
+                  description: Errors related to 'redirect' field.
+                  summary: Redirect field errors
+                  value:
+                    redirect:
+                      - detail: Where an end user will be redirected after finishing authentication in ASPSP
+                        summary: Redirect URL is required
+                      - detail: Redirect URI must have a valid URI structure
+                        summary: Invalid redirect URI
+                    status_code: 400
+                ReferenceFieldErrors:
+                  description: Errors related to 'reference' field.
+                  summary: Reference field errors
+                  value:
+                    reference:
+                      detail: "Client reference: $REFERENCE_ID already exists"
+                      summary: Client reference must be unique
+                    status_code: 400
+                SSNFieldErrors:
+                  description: Errors related to 'ssn' field.
+                  summary: SSN field errors
+                  value:
+                    ssn:
+                      detail: SSN verification not supported for $INSTITUTION_ID
+                      summary: SSN verification not supported
+                    status_code: 400
+                UnknownFields:
+                  description: Unknown Fields
+                  summary: Unknown Fields
+                  value:
+                    detail: Unknown fields {${FIELD}} in {${LOCATION}}
+                    status_code: 400
+                    summary: Unknown fields
+                UserLanguageFieldErrors:
+                  description: Errors related to 'user_language' field.
+                  summary: User language field errors
+                  value:
+                    status_code: 400
+                    user_language:
+                      detail: "'$LNG_CODE' is an invalid or unsupported language"
+                      summary: Provided user_language is invalid or not supported
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Fields required
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                AgreementNotFoundErrors:
+                  description: Errors related to 'agreement' field.
+                  summary: Agreement not found errors
+                  value:
+                    agreement:
+                      detail: Please check whether you specified a valid ID
+                      summary: ID $AGREEMENT_ID not found
+                    status_code: 404
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Agreement not found errors
+      tags:
+        - requisitions
+  "/api/v2/requisitions/{id}/":
+    delete:
+      description: Delete requisition and its end user agreement
+      operationId: delete requisition by id v2
+      parameters:
+        - description: A UUID string identifying this requisition.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "400":
+          content:
+            application/json:
+              examples:
+                InvalidID:
+                  description: Invalid ID
+                  summary: Invalid ID
+                  value:
+                    detail: 272785d5-de45-4efb-aa1a-f8157ffa94 is not a valid UUID.
+                    status_code: 400
+                    summary: Invalid ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid ID
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - requisitions
+    get:
+      description: Retrieve a requisition by ID
+      operationId: requisition by id
+      parameters:
+        - description: A UUID string identifying this requisition.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequisitionV2"
+          description: Get requisition by ID
+        "400":
+          content:
+            application/json:
+              examples:
+                InvalidID:
+                  description: Invalid ID
+                  summary: Invalid ID
+                  value:
+                    detail: 272785d5-de45-4efb-aa1a-f8157ffa94 is not a valid UUID.
+                    status_code: 400
+                    summary: Invalid ID
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid ID
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+        "404":
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  description: Not found error
+                  summary: Not found error
+                  value:
+                    detail: Not found.
+                    status_code: 404
+                    summary: Not found.
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Not found error
+      tags:
+        - requisitions
+  /api/v2/token/new/:
+    post:
+      description: Obtain JWT pair
+      operationId: JWT Obtain
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JWTObtainPairRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/JWTObtainPairRequest"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/JWTObtainPairRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpectacularJWTObtain"
+          description: Obtain JWT response.
+        "401":
+          content:
+            application/json:
+              examples:
+                AuthenticationFailed:
+                  description: Incorrect secret key or id
+                  summary: Authentication failed
+                  value:
+                    detail: No active account found with the given credentials
+                    status_code: 401
+                    summary: Authentication failed
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Authentication failed
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+      tags:
+        - token
+  /api/v2/token/refresh/:
+    post:
+      description: Refresh access token
+      operationId: JWT Refresh
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JWTRefreshRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/JWTRefreshRequest"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/JWTRefreshRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpectacularJWTRefresh"
+          description: Refresh access token.
+        "401":
+          content:
+            application/json:
+              examples:
+                InvalidToken:
+                  description: Token is invalid or expired
+                  summary: Invalid token
+                  value:
+                    detail: Token is invalid or expired
+                    status_code: 401
+                    summary: Invalid token
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Invalid token
+        "403":
+          content:
+            application/json:
+              examples:
+                IPAccessDenied:
+                  description: IP address not whitelisted
+                  summary: IP Access denied
+                  value:
+                    detail: Your IP $IP_ADDRESS isn't whitelisted to perform this action
+                    status_code: 403
+                    summary: IP address access denied
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: IP Access denied
+      tags:
+        - token
+components:
+  schemas:
+    AccountV2:
+      description: AccountV2Serializer.
+      properties:
+        created:
+          description: The date & time at which the account object was created.
+          format: date-time
+          readOnly: true
+          title: Created date/time
+          type: string
+        iban:
+          description: The Account IBAN
+          readOnly: true
+          type: string
+        id:
+          description: The ID of this Account, used to refer to this account in other API calls.
+          format: uuid
+          readOnly: true
+          title: Account ID
+          type: string
+        institution_id:
+          description: The ASPSP associated with this account.
+          readOnly: true
+          title: ASPSP ID
+          type: string
+        last_accessed:
+          description: The date & time at which the account object was last accessed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Last accessed date/time
+          type: string
+        owner_name:
+          description: The name of the account owner.
+          readOnly: true
+          title: Account Owner Name
+          type: string
+        status:
+          allOf:
+            - $ref: "#/components/schemas/AccountV2StatusEnum"
+          description: The processing status of this account.
+          readOnly: true
+          title: Account Status
+      type: object
+    AccountV2StatusEnum:
+      enum:
+        - DISCOVERED
+        - PROCESSING
+        - READY
+        - ERROR
+        - SUSPENDED
+      type: string
+    AddressCountryEnum:
+      enum:
+        - AT
+        - BE
+        - BG
+        - HR
+        - CY
+        - CZ
+        - DK
+        - EE
+        - FI
+        - FR
+        - DE
+        - GR
+        - HU
+        - IS
+        - IE
+        - IT
+        - LV
+        - LI
+        - LT
+        - LU
+        - MT
+        - NL
+        - NO
+        - PL
+        - PT
+        - RO
+        - SK
+        - SI
+        - ES
+        - SE
+        - GB
+      type: string
+    CountryEnum:
+      enum:
+        - AT
+        - BE
+        - BG
+        - HR
+        - CY
+        - CZ
+        - DK
+        - EE
+        - FI
+        - FR
+        - DE
+        - GR
+        - HU
+        - IS
+        - IE
+        - IT
+        - LV
+        - LI
+        - LT
+        - LU
+        - MT
+        - NL
+        - NO
+        - PL
+        - PT
+        - RO
+        - SK
+        - SI
+        - ES
+        - SE
+        - GB
+      type: string
+    CreditorAccount:
+      description: Creditor account read serializer.
+      properties:
+        account:
+          description: Creditor account type identifier
+          maxLength: 128
+          type: string
+        address_country:
+          description: Creditor account address country
+          maxLength: 2
+          type: string
+        currency:
+          description: Creditor account currency
+          maxLength: 3
+          type: string
+        id:
+          description: Unique entry ID
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: Creditor account name
+          maxLength: 70
+          type: string
+        type:
+          allOf:
+            - $ref: "#/components/schemas/TypeEnum"
+          default: IBAN
+          description: Creditor account type
+      required:
+        - account
+        - currency
+        - name
+      type: object
+    CreditorAccountWrite:
+      description: Creditor account write serializer.
+      properties:
+        account:
+          description: Creditor account type identifier
+          maxLength: 128
+          type: string
+        address_country:
+          $ref: "#/components/schemas/AddressCountryEnum"
+        address_street:
+          description: Creditor account address street
+          maxLength: 140
+          type: string
+        agent:
+          description: Creditor account BICFI Identifier
+          maxLength: 128
+          type: string
+        agent_name:
+          description: Creditor account agent name
+          maxLength: 140
+          type: string
+        currency:
+          description: Creditor account currency
+          maxLength: 3
+          type: string
+        id:
+          description: Unique entry ID
+          format: uuid
+          readOnly: true
+          type: string
+        institution_id:
+          description: an Institution ID for this CreditorAccount
+          type: string
+        name:
+          description: Creditor account name
+          maxLength: 70
+          type: string
+        post_code:
+          description: Creditor account address post code
+          maxLength: 30
+          type: string
+        type:
+          allOf:
+            - $ref: "#/components/schemas/TypeEnum"
+          default: IBAN
+          description: Creditor account type
+      required:
+        - account
+        - currency
+        - name
+      type: object
+    CreditorAccountWriteRequest:
+      description: Creditor account write serializer.
+      properties:
+        account:
+          description: Creditor account type identifier
+          maxLength: 128
+          type: string
+        address_country:
+          $ref: "#/components/schemas/AddressCountryEnum"
+        address_street:
+          description: Creditor account address street
+          maxLength: 140
+          type: string
+        agent:
+          description: Creditor account BICFI Identifier
+          maxLength: 128
+          type: string
+        agent_name:
+          description: Creditor account agent name
+          maxLength: 140
+          type: string
+        currency:
+          description: Creditor account currency
+          maxLength: 3
+          type: string
+        institution_id:
+          description: an Institution ID for this CreditorAccount
+          type: string
+        name:
+          description: Creditor account name
+          maxLength: 70
+          type: string
+        post_code:
+          description: Creditor account address post code
+          maxLength: 30
+          type: string
+        type:
+          allOf:
+            - $ref: "#/components/schemas/TypeEnum"
+          default: IBAN
+          description: Creditor account type
+      required:
+        - account
+        - currency
+        - name
+      type: object
+    DebtorAccountWrite:
+      description: Debtor account write serializer.
+      properties:
+        account:
+          description: Debtor account type identifier
+          maxLength: 128
+          type: string
+        address_country:
+          description: Debtor account address country
+          maxLength: 2
+          type: string
+        address_street:
+          description: Debtor account address street
+          maxLength: 140
+          type: string
+        currency:
+          description: Debtor account currency
+          maxLength: 3
+          type: string
+        name:
+          description: Debtor account name
+          maxLength: 70
+          type: string
+        post_code:
+          description: Debtor account post code
+          maxLength: 30
+          type: string
+        type:
+          allOf:
+            - $ref: "#/components/schemas/TypeEnum"
+          default: IBAN
+          description: Debtor account type
+        type_number:
+          description: Debtor account type identifier
+          maxLength: 128
+          type: string
+      required:
+        - name
+      type: object
+    DebtorAccountWriteRequest:
+      description: Debtor account write serializer.
+      properties:
+        account:
+          description: Debtor account type identifier
+          maxLength: 128
+          type: string
+        address_country:
+          description: Debtor account address country
+          maxLength: 2
+          type: string
+        address_street:
+          description: Debtor account address street
+          maxLength: 140
+          type: string
+        currency:
+          description: Debtor account currency
+          maxLength: 3
+          type: string
+        name:
+          description: Debtor account name
+          maxLength: 70
+          type: string
+        post_code:
+          description: Debtor account post code
+          maxLength: 30
+          type: string
+        type:
+          allOf:
+            - $ref: "#/components/schemas/TypeEnum"
+          default: IBAN
+          description: Debtor account type
+        type_number:
+          description: Debtor account type identifier
+          maxLength: 128
+          type: string
+      required:
+        - name
+      type: object
+    EndUserAgreement:
+      description: EndUserAgreement.
+      properties:
+        accepted:
+          description: The date & time at which the end user accepted the agreement.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Accepted Date
+          type: string
+        access_scope:
+          default:
+            - balances
+            - details
+            - transactions
+          description: Array containing one or several values of ['balances', 'details', 'transactions']
+          items:
+            items:
+              default:
+                - balances
+                - details
+                - transactions
+            title: Level of information to access (by default all)
+            type: array
+          title: Level of information to access (by default all)
+          type: array
+        access_valid_for_days:
+          default: 90
+          description: Number of days from acceptance that the access can be used.
+          maximum: 90
+          minimum: 1
+          title: Access Valid For (Days)
+          type: integer
+        created:
+          description: The date & time at which the end user agreement was created.
+          format: date-time
+          readOnly: true
+          title: Created Date
+          type: string
+        id:
+          description: The ID of this End User Agreement, used to refer to this end user agreement in other API calls.
+          format: uuid
+          readOnly: true
+          title: End User Agreement ID
+          type: string
+        institution_id:
+          description: an Institution ID for this EUA
+          type: string
+        max_historical_days:
+          default: 90
+          description: Maximum number of days of transaction data to retrieve.
+          maximum: 730
+          minimum: 1
+          title: Maximum Historical Days
+          type: integer
+      required:
+        - institution_id
+      type: object
+    EndUserAgreementRequest:
+      description: EndUserAgreement.
+      properties:
+        access_scope:
+          default:
+            - balances
+            - details
+            - transactions
+          description: Array containing one or several values of ['balances', 'details', 'transactions']
+          items:
+            items:
+              default:
+                - balances
+                - details
+                - transactions
+            title: Level of information to access (by default all)
+            type: array
+          title: Level of information to access (by default all)
+          type: array
+        access_valid_for_days:
+          default: 90
+          description: Number of days from acceptance that the access can be used.
+          maximum: 90
+          minimum: 1
+          title: Access Valid For (Days)
+          type: integer
+        institution_id:
+          description: an Institution ID for this EUA
+          type: string
+        max_historical_days:
+          default: 90
+          description: Maximum number of days of transaction data to retrieve.
+          maximum: 730
+          minimum: 1
+          title: Maximum Historical Days
+          type: integer
+      required:
+        - institution_id
+      type: object
+    EnduserAcceptanceDetailsRequest:
+      description: Represents end-user details.
+      properties:
+        ip_address:
+          title: end user IP address
+          type: string
+        user_agent:
+          title: user agent string for the end user
+          type: string
+      required:
+        - ip_address
+        - user_agent
+      type: object
+    ExecutionRuleEnum:
+      enum:
+        - following
+        - preceding
+      type: string
+    FrequencyEnum:
+      enum:
+        - Daily
+        - Weekly
+        - EveryTwoWeeks
+        - Monthly
+        - EveryTwoMonths
+        - Quarterly
+        - SemiAnnual
+        - Annual
+        - MonthlyVariable
+      type: string
+    InstructedAmount:
+      description: InstructedAmountSerializer.
+      properties:
+        amount:
+          description: Instructed amount
+          format: decimal
+          minimum: 0.01
+          pattern: ^\d{0,10}(\.\d{0,2})?$
+          type: string
+        currency:
+          description: Instructed amount currency
+          maxLength: 3
+          type: string
+      required:
+        - amount
+        - currency
+      type: object
+    InstructedAmountRequest:
+      description: InstructedAmountSerializer.
+      properties:
+        amount:
+          description: Instructed amount
+          format: decimal
+          minimum: 0.01
+          pattern: ^\d{0,10}(\.\d{0,2})?$
+          type: string
+        currency:
+          description: Instructed amount currency
+          maxLength: 3
+          type: string
+      required:
+        - amount
+        - currency
+      type: object
+    Integration:
+      description: Represents an Integration.
+      properties:
+        bic:
+          type: string
+        countries:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        logo:
+          type: string
+        name:
+          type: string
+        transaction_total_days:
+          default: "90"
+          type: string
+      required:
+        - countries
+        - id
+        - logo
+        - name
+      type: object
+    JWTObtainPairRequest:
+      description: Obtain JWT pair.
+      properties:
+        secret_id:
+          description: Secret id from /user-secrets/
+          type: string
+        secret_key:
+          description: Secret key from /user-secrets/
+          type: string
+      required:
+        - secret_id
+        - secret_key
+      type: object
+    JWTRefreshRequest:
+      description: Refresh access token.
+      properties:
+        refresh:
+          type: string
+      required:
+        - refresh
+      type: object
+    PaginatedCreditorAccountList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/CreditorAccount"
+          type: array
+      type: object
+    PaginatedEndUserAgreementList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: https://ob.nordigen.com/api/v2/agreements/enduser/?limit=100&offset=0
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: https://ob.nordigen.com/api/v2/agreements/enduser/?limit=100&offset=0
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/EndUserAgreement"
+          type: array
+      type: object
+    PaginatedPaymentReadList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/PaymentRead"
+          type: array
+      type: object
+    PaginatedRequisitionV2List:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: https://ob.nordigen.com/api/v2/requisitions/?limit=100&offset=0
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: https://ob.nordigen.com/api/v2/requisitions/?limit=100&offset=0
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/RequisitionV2"
+          type: array
+      type: object
+    PaymentProductEnum:
+      enum:
+        - T2P
+        - SCT
+        - ISCT
+        - CBCT
+      type: string
+    PaymentRead:
+      description: PaymentReadSerializer.
+      properties:
+        creditor_account:
+          description: Registered creditor account
+          format: uuid
+          type: string
+        custom_payment_id:
+          description: Payment Custom Payment ID
+          maxLength: 35
+          title: Payment end to end identification.
+          type: string
+        debtor_account:
+          $ref: "#/components/schemas/DebtorAccountWrite"
+        description:
+          default: GOCARDLESS
+          description: Payment description
+          type: string
+        instructed_amount:
+          allOf:
+            - $ref: "#/components/schemas/InstructedAmount"
+          description: Instructed amount
+        payment_id:
+          description: Payment ID
+          readOnly: true
+          type: string
+        payment_product:
+          allOf:
+            - $ref: "#/components/schemas/PaymentProductEnum"
+          default: ISCT
+          description: Payment product
+        payment_status:
+          allOf:
+            - $ref: "#/components/schemas/PaymentStatusEnum"
+          description: Payment end to end identification
+          readOnly: true
+        payment_type:
+          allOf:
+            - $ref: "#/components/schemas/PaymentTypeEnum"
+          description: Payment Type
+          readOnly: true
+        redirect:
+          description: Redirect URL to your application after payment is done
+          format: uri
+          maxLength: 1024
+          nullable: true
+          type: string
+      required:
+        - creditor_account
+        - debtor_account
+        - instructed_amount
+        - redirect
+      type: object
+    PaymentStatusEnum:
+      enum:
+        - INIT
+        - ERRE
+        - ERRS
+        - ACCC
+        - ACCP
+        - ACSC
+        - ACSP
+        - ACTC
+        - ACWC
+        - ACWP
+        - RCVD
+        - PDNG
+        - RJCT
+        - CANC
+        - ACFC
+        - PATC
+        - PART
+      type: string
+    PaymentTypeEnum:
+      enum:
+        - single-payment
+        - bulk-payment
+        - periodic-payment
+      type: string
+    PaymentWrite:
+      description: PaymentWriteSerializer.
+      properties:
+        creditor_account:
+          description: Registered creditor account
+          format: uuid
+          type: string
+        custom_payment_id:
+          description: Payment Custom Payment ID
+          maxLength: 35
+          title: Payment end to end identification.
+          type: string
+        description:
+          default: GOCARDLESS
+          description: Payment description
+          type: string
+        instructed_amount:
+          allOf:
+            - $ref: "#/components/schemas/InstructedAmount"
+          description: Instructed amount
+        link:
+          default: https://ob.nordigen.com/pis/start/83ca8de5-dbef-45fc-a137-f185d0e7a0d8/{$INSTITUTION_ID}
+          description: Link to initiate authorization with Institution
+          format: uri
+          readOnly: true
+          type: string
+        payment_id:
+          description: Payment ID
+          readOnly: true
+          type: string
+        payment_product:
+          allOf:
+            - $ref: "#/components/schemas/PaymentProductEnum"
+          default: ISCT
+          description: Payment product
+        payment_status:
+          allOf:
+            - $ref: "#/components/schemas/PaymentStatusEnum"
+          description: Payment end to end identification
+          readOnly: true
+        payment_type:
+          allOf:
+            - $ref: "#/components/schemas/PaymentTypeEnum"
+          description: Payment Type
+          readOnly: true
+        periodic_payment:
+          $ref: "#/components/schemas/PeriodicPayment"
+        redirect:
+          description: Redirect URL to your application after payment is done
+          format: uri
+          maxLength: 1024
+          nullable: true
+          type: string
+        requested_execution_date:
+          description: Payment Execution date (for periodic payments)
+          format: date
+          type: string
+      required:
+        - creditor_account
+        - instructed_amount
+        - redirect
+      type: object
+    PaymentWriteRequest:
+      description: PaymentWriteSerializer.
+      properties:
+        creditor_account:
+          description: Registered creditor account
+          format: uuid
+          type: string
+        custom_payment_id:
+          description: Payment Custom Payment ID
+          maxLength: 35
+          title: Payment end to end identification.
+          type: string
+        debtor_account:
+          allOf:
+            - $ref: "#/components/schemas/DebtorAccountWriteRequest"
+          description: Debtor account
+          writeOnly: true
+        description:
+          default: GOCARDLESS
+          description: Payment description
+          type: string
+        institution_id:
+          default: SWEDBANK_SANDBOX_SANDLV22
+          description: Institution ID for Payment
+          type: string
+          writeOnly: true
+        instructed_amount:
+          allOf:
+            - $ref: "#/components/schemas/InstructedAmountRequest"
+          description: Instructed amount
+        payment_product:
+          allOf:
+            - $ref: "#/components/schemas/PaymentProductEnum"
+          default: ISCT
+          description: Payment product
+        periodic_payment:
+          $ref: "#/components/schemas/PeriodicPaymentRequest"
+        redirect:
+          description: Redirect URL to your application after payment is done
+          format: uri
+          maxLength: 1024
+          nullable: true
+          type: string
+        requested_execution_date:
+          description: Payment Execution date (for periodic payments)
+          format: date
+          type: string
+      required:
+        - creditor_account
+        - instructed_amount
+        - redirect
+      type: object
+    PeriodicPayment:
+      description: Periodic Payment Serializer.
+      properties:
+        day_of_execution:
+          type: string
+        end_date:
+          format: date
+          type: string
+        execution_rule:
+          allOf:
+            - $ref: "#/components/schemas/ExecutionRuleEnum"
+          default: following
+          description: Behavior when periodic payment dates fall on holiday.
+        frequency:
+          allOf:
+            - $ref: "#/components/schemas/FrequencyEnum"
+          default: Monthly
+        start_date:
+          format: date
+          type: string
+      required:
+        - start_date
+      type: object
+    PeriodicPaymentRequest:
+      description: Periodic Payment Serializer.
+      properties:
+        day_of_execution:
+          type: string
+        end_date:
+          format: date
+          type: string
+        execution_rule:
+          allOf:
+            - $ref: "#/components/schemas/ExecutionRuleEnum"
+          default: following
+          description: Behavior when periodic payment dates fall on holiday.
+        frequency:
+          allOf:
+            - $ref: "#/components/schemas/FrequencyEnum"
+          default: Monthly
+        start_date:
+          format: date
+          type: string
+      required:
+        - start_date
+      type: object
+    PremiumAccountQuery:
+      description: Filter country.
+      properties:
+        country:
+          $ref: "#/components/schemas/CountryEnum"
+        date_from:
+          format: date
+          type: string
+        date_to:
+          format: date
+          type: string
+      type: object
+    RequisitionLinkParamsRequest:
+      description: RequisitionLinkParamsSerializer.
+      properties:
+        aspsp_id:
+          description: ASPSP ID. Should match one used while creating EUA, if it's linked to this requisition
+          type: string
+      required:
+        - aspsp_id
+      type: object
+    RequisitionLinks:
+      description: RequisitionLinksSerializer.
+      properties:
+        initiate:
+          format: uri
+          readOnly: true
+          type: string
+      type: object
+    RequisitionV2:
+      description: RequisitionV2Serializer.
+      properties:
+        account_selection:
+          default: false
+          description: option to enable account selection view for the end user
+          type: boolean
+        accounts:
+          description: array of account IDs retrieved within a scope of this requisition
+          items:
+            format: uuid
+            title: accounts
+            type: string
+          readOnly: true
+          type: array
+        agreement:
+          description: EUA associated with this requisition
+          format: uuid
+          type: string
+        created:
+          description: The date & time at which the requisition was created.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Created Date
+          type: string
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        institution_id:
+          description: an Institution ID for this Requisition
+          type: string
+        link:
+          default: https://ob.nordigen.com/psd2/start/3fa85f64-5717-4562-b3fc-2c963f66afa6/{$INSTITUTION_ID}
+          description: link to initiate authorization with Institution
+          format: uri
+          readOnly: true
+          type: string
+        redirect:
+          description: redirect URL to your application after end-user authorization with ASPSP
+          format: uri
+          maxLength: 1024
+          nullable: true
+          type: string
+        redirect_immediate:
+          default: false
+          description: enable redirect back to the client after account list received
+          type: boolean
+        reference:
+          description: additional ID to identify the end user
+          maxLength: 256
+          type: string
+        ssn:
+          description: optional SSN field to verify ownership of the account
+          maxLength: 64
+          type: string
+        status:
+          allOf:
+            - $ref: "#/components/schemas/Status1c5Enum"
+          description: status of this requisition
+          readOnly: true
+          title: Requisition status
+        user_language:
+          description: A two-letter country code (ISO 639-1)
+          maxLength: 5
+          type: string
+      required:
+        - institution_id
+        - redirect
+      type: object
+    RequisitionV2Request:
+      description: RequisitionV2Serializer.
+      properties:
+        account_selection:
+          default: false
+          description: option to enable account selection view for the end user
+          type: boolean
+        agreement:
+          description: EUA associated with this requisition
+          format: uuid
+          type: string
+        institution_id:
+          description: an Institution ID for this Requisition
+          type: string
+        redirect:
+          description: redirect URL to your application after end-user authorization with ASPSP
+          format: uri
+          maxLength: 1024
+          nullable: true
+          type: string
+        redirect_immediate:
+          default: false
+          description: enable redirect back to the client after account list received
+          type: boolean
+        reference:
+          description: additional ID to identify the end user
+          maxLength: 256
+          type: string
+        ssn:
+          description: optional SSN field to verify ownership of the account
+          maxLength: 64
+          type: string
+        user_language:
+          description: A two-letter country code (ISO 639-1)
+          maxLength: 5
+          type: string
+      required:
+        - institution_id
+        - redirect
+      type: object
+    SpectacularJWTObtain:
+      description: Obtain new JWT pair.
+      properties:
+        access:
+          description: Your access token
+          readOnly: true
+          type: string
+        access_expires:
+          default: 86400
+          description: Access token expires in seconds
+          readOnly: true
+          type: integer
+        refresh:
+          description: Your refresh token
+          readOnly: true
+          type: string
+        refresh_expires:
+          default: 2592000
+          description: Refresh token expires in seconds
+          readOnly: true
+          type: integer
+      type: object
+    SpectacularJWTRefresh:
+      description: Refresh Access token.
+      properties:
+        access:
+          description: Your access token
+          readOnly: true
+          type: string
+        access_expires:
+          default: 86400
+          description: Access token expires in seconds
+          readOnly: true
+          type: integer
+      type: object
+    SpectacularRequisitionV2:
+      description: Create requisition.
+      properties:
+        account_selection:
+          default: false
+          description: option to enable account selection view for the end user
+          type: boolean
+        accounts:
+          default: []
+          description: array of account IDs retrieved within a scope of this requisition
+          items: {}
+          readOnly: true
+          type: array
+        agreement:
+          description: EUA associated with this requisition
+          format: uuid
+          type: string
+        created:
+          description: The date & time at which the requisition was created.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Created Date
+          type: string
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        institution_id:
+          description: an Institution ID for this Requisition
+          type: string
+        link:
+          default: https://ob.nordigen.com/psd2/start/3fa85f64-5717-4562-b3fc-2c963f66afa6/{$INSTITUTION_ID}
+          description: link to initiate authorization with Institution
+          format: uri
+          readOnly: true
+          type: string
+        redirect:
+          description: redirect URL to your application after end-user authorization with ASPSP
+          format: uri
+          maxLength: 1024
+          nullable: true
+          type: string
+        redirect_immediate:
+          default: false
+          description: enable redirect back to the client after account list received
+          type: boolean
+        reference:
+          description: additional ID to identify the end user
+          maxLength: 256
+          type: string
+        ssn:
+          description: optional SSN field to verify ownership of the account
+          maxLength: 64
+          type: string
+        status:
+          allOf:
+            - $ref: "#/components/schemas/Status1c5Enum"
+          description: status of this requisition
+          readOnly: true
+          title: Requisition status
+        user_language:
+          description: A two-letter country code (ISO 639-1)
+          maxLength: 5
+          type: string
+      required:
+        - institution_id
+        - redirect
+      type: object
+    Status1c5Enum:
+      enum:
+        - CR
+        - ID
+        - LN
+        - RJ
+        - ER
+        - SU
+        - EX
+        - GC
+        - UA
+        - GA
+        - SA
+      type: string
+    TypeEnum:
+      enum:
+        - IBAN
+        - SCAN
+      type: string
+  securitySchemes:
+    jwtAuth:
+      bearerFormat: Bearer
+      scheme: bearer
+      type: http
