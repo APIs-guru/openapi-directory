@@ -1,0 +1,188 @@
+swagger: "2.0"
+basePath: /
+servers:
+  - url: https://dev.reversepp.com/
+info:
+  description: Programmatic API access to the reversepp.com planning application database
+  title: Reverse Planning Permission API
+  version: "1.0"
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: https://lh3.googleusercontent.com/FgmxE0k87WHz0WdUX-abBHpDqJ9fk9fwJcn8N3XYfnyTXxPLrZBs29XKAKWpYVp9qyx5tM8vb7eIZJU0cBndyx99pg=w128-h128-e365-rj-sc0x00ffffff
+  x-origin:
+    - format: swagger
+      url: https://dev.reversepp.com/swagger.json
+      version: "2.0"
+  x-providerName: reversepp.com
+consumes:
+  - application/json
+produces:
+  - application/json
+responses:
+  MaskError:
+    description: When any error occurs on mask
+  ParseError:
+    description: When a mask can't be parsed
+tags:
+  - description: Programmatic API access to the reversepp.com planning application database
+    name: Reverse Planning Permission API
+paths:
+  /applicant_multi:
+    parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          properties:
+            api-key:
+              type: string
+            applicant:
+              type: string
+          type: object
+    post:
+      description: "Retrieve 50 planning applications for an applicant name (example: John Smith). Rate limit is 100/day;10/minute"
+      operationId: post_applicant_single_/applicant_multi
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Reverse Planning Permission API
+  /applicant_single:
+    parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          properties:
+            api-key:
+              type: string
+            applicant:
+              type: string
+          type: object
+    post:
+      description: "Retrieve a single planning application for an applicant (example: John Smith). Rate limit is 100/day;10/minute"
+      operationId: post_applicant_single_/applicant_single
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Reverse Planning Permission API
+  /free:
+    parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          properties:
+            key-word:
+              type: string
+          type: object
+    post:
+      description: "Retrieve 1 planning application for proposal key word (example: Swimming Pool). Rate limit is 100/day;10/minute"
+      operationId: post_free_end_point_/free
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Reverse Planning Permission API
+  /partial_address_multi:
+    parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          properties:
+            api-key:
+              type: string
+            p_address:
+              type: string
+          type: object
+    post:
+      description: "Retrieve 50 planning applications for a partial address (example: Station Road). Rate limit is 100/day;10/minute"
+      operationId: post_partial_address_multi_/partial_address_multi
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Reverse Planning Permission API
+  /partial_address_single:
+    parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          properties:
+            api-key:
+              type: string
+            p_address:
+              type: string
+          type: object
+    post:
+      description: "Retrieve a single planning application for a partial address (example: Station Road). Rate limit is 100/day;10/minute"
+      operationId: post_partial_addres_single_/partial_address_single
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Reverse Planning Permission API
+  /postcode_multi:
+    parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          properties:
+            api-key:
+              type: string
+            postcode:
+              type: string
+          type: object
+    post:
+      description: Retrieve 50 planning applications for a postcode. Rate limit is 100/day;10/minute
+      operationId: post_postcode_multi_/postcode_multi
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Reverse Planning Permission API
+  /postcode_single:
+    parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          properties:
+            api-key:
+              type: string
+            postcode:
+              type: string
+          type: object
+    post:
+      description: Retrieve a single planning application for a postcode. Rate limit is 100/day;10/minute
+      operationId: post_postcode_single_/postcode_single
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Reverse Planning Permission API
+  /proposal:
+    parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          properties:
+            api-key:
+              type: string
+            key-word:
+              type: string
+          type: object
+    post:
+      description: "Retrieve 50 planning applications for proposal key word (example: Swimming Pool). Rate limit is 100/day;10/minute"
+      operationId: post_proposal_multi_/proposal
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Reverse Planning Permission API
