@@ -34,7 +34,7 @@ paths:
           name: height
           schema:
             type: integer
-        - description: The output format of the chart, e.g., 'png', 'jpg', 'svg', or 'webp'.
+        - description: The output format of the chart, 'png', 'jpg', 'svg', or 'webp'.
           in: query
           name: format
           schema:
@@ -76,10 +76,10 @@ paths:
                   description: The background color of the chart.
                   type: string
                 chart:
-                  description: The chart configuration in JSON format.
+                  description: The chart configuration in Chart.js format (JSON or Javascript).
                   type: object
                 format:
-                  description: The output format of the chart, e.g., 'png', 'jpg', 'svg', or 'webp'.
+                  description: The output format of the chart, 'png', 'jpg', 'svg', or 'webp'.
                   type: string
                 height:
                   description: The height of the chart in pixels.

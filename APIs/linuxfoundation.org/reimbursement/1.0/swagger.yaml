@@ -62,6 +62,29 @@ paths:
       summary: Get swagger documentation
       tags:
         - docs
+  "/expense/{action}/{reportId}":
+    post:
+      description: approves or rejects expense report
+      operationId: expenseAction
+      parameters:
+        - in: path
+          name: action
+          required: true
+          type: string
+        - in: path
+          name: reportId
+          required: true
+          type: string
+      responses:
+        "200":
+          $ref: "#/responses/ok"
+        "400":
+          $ref: "#/responses/invalid-request"
+        "401":
+          $ref: "#/responses/unauthorized"
+        "500":
+          $ref: "#/responses/error"
+      summary: Expense Action
   /health:
     get:
       operationId: healthCheck
@@ -148,6 +171,26 @@ paths:
         "500":
           $ref: "#/responses/error"
       summary: Reset Policy
+  /tag:
+    post:
+      description: Tag adds a tag to the policy
+      operationId: tagPolicy
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/policy-tag-input"
+      responses:
+        "200":
+          $ref: "#/responses/ok"
+        "400":
+          $ref: "#/responses/invalid-request"
+        "401":
+          $ref: "#/responses/unauthorized"
+        "500":
+          $ref: "#/responses/error"
+      summary: Tag Policy
 definitions:
   contact:
     description: Contact information
@@ -242,6 +285,27 @@ definitions:
     required:
       - PolicyID
     title: Policy Reset
+    type: object
+  policy-tag-input:
+    description: Expensify policy tag information
+    properties:
+      Email:
+        description: email of the individual or beneficiary
+        example: john-doe@email.com
+        type: string
+      TicketID:
+        description: Unique ID of the ticket - required for travel funds
+        example: F11B6C1D67DC6A3D
+        type: string
+      TxnType:
+        description: Type of transaction
+        example: Travel Fund
+        type: string
+      Username:
+        description: Unique username or lfId of the individual
+        example: john_doe
+        type: string
+    title: Policy Tag
     type: object
   policy-update-input:
     description: Reimbursement update information

@@ -415,6 +415,17 @@ paths:
       summary: Create a new JWT Token
       tags:
         - auth
+  /auth/logout:
+    post:
+      operationId: post_logout_resource
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Logout impossible
+      summary: Revoke the current token, effectively logging out the user
+      tags:
+        - auth
   /auth/reset_password:
     post:
       operationId: post_reset_password
@@ -725,7 +736,7 @@ paths:
                   type: string
                 key_value_flag:
                   default: true
-                  description: If true the result will only contains mapping of prediction = value
+                  description: If true the result will only contain a mapping of prediction = value
                   type: boolean
               required:
                 - file
@@ -869,28 +880,6 @@ paths:
         required: true
         schema:
           type: string
-  "/documents/{document_id}/compare_versions":
-    parameters:
-      - in: path
-        name: document_id
-        required: true
-        schema:
-          type: string
-    post:
-      operationId: post_document_compare_versions_resource
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/VersionCompare"
-        required: true
-      responses:
-        "200":
-          description: Success
-        "403":
-          description: Permission insufficient
-      tags:
-        - documents
   "/documents/{document_id}/custom_output":
     get:
       description: |-
@@ -1296,7 +1285,7 @@ paths:
                   type: string
                 key_value_flag:
                   default: false
-                  description: If true the result will only contains mapping of prediction = value
+                  description: If true the result will only contain a mapping of prediction = value
                   type: boolean
                 sync:
                   default: true
@@ -1669,6 +1658,28 @@ paths:
         "404":
           description: Not Found
       summary: Update inbox
+      tags:
+        - inboxes
+  "/inboxes/{inbox_id}/compare_versions":
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: post_inbox_compare_resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VersionCompare"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "403":
+          description: Permission insufficient
       tags:
         - inboxes
   "/inboxes/{inbox_id}/document_versions":
@@ -2982,13 +2993,13 @@ paths:
           name: start_date
           required: true
           schema:
-            default: 2023-01-31T13:36:39
+            default: 2023-02-28T08:47:25
             type: string
         - in: query
           name: end_date
           required: true
           schema:
-            default: 2023-03-02T13:36:39
+            default: 2023-03-30T08:47:25
             type: string
         - description: "Set to 'true' to get data in an excel. (Default output format: JSON)"
           in: query
@@ -3064,13 +3075,13 @@ paths:
         - in: query
           name: start_date
           schema:
-            default: 2023-02-02T13:36:39.252495
+            default: 2023-02-28T08:47:25.215200
             format: date-time
             type: string
         - in: query
           name: end_date
           schema:
-            default: 2023-03-02T13:36:39.252527
+            default: 2023-03-30T08:47:25.215228
             format: date-time
             type: string
         - description: provide the version name to evaluate
@@ -3118,7 +3129,7 @@ paths:
             schema:
               properties:
                 end_date:
-                  default: 2023-03-02T13:36:39.250962
+                  default: 2023-03-30T08:47:25.213653
                   format: date-time
                   type: string
                 fields_to_exclude:
@@ -3134,7 +3145,7 @@ paths:
                   description: invoice,receipt
                   type: string
                 start_date:
-                  default: 2023-02-02T13:36:39.250933
+                  default: 2023-02-28T08:47:25.213625
                   format: date-time
                   type: string
                 version_name:
@@ -3167,13 +3178,13 @@ paths:
         - in: query
           name: start_date
           schema:
-            default: 2023-02-02T13:36:39.251355
+            default: 2023-02-28T08:47:25.214049
             format: date-time
             type: string
         - in: query
           name: end_date
           schema:
-            default: 2023-03-02T13:36:39.251385
+            default: 2023-03-30T08:47:25.214078
             format: date-time
             type: string
         - in: query
@@ -3231,13 +3242,13 @@ paths:
         - in: query
           name: start_date
           schema:
-            default: 2023-02-02T13:36:39.251761
+            default: 2023-02-28T08:47:25.214488
             format: date-time
             type: string
         - in: query
           name: end_date
           schema:
-            default: 2023-03-02T13:36:39.251794
+            default: 2023-03-30T08:47:25.214523
             format: date-time
             type: string
         - description: Group stats per this given attribute. Only **pages** is supported
@@ -3267,13 +3278,13 @@ paths:
         - in: query
           name: start_date
           schema:
-            default: 2023-02-02T13:36:39.252098
+            default: 2023-02-28T08:47:25.214847
             format: date-time
             type: string
         - in: query
           name: end_date
           schema:
-            default: 2023-03-02T13:36:39.252127
+            default: 2023-03-30T08:47:25.214876
             format: date-time
             type: string
         - in: query
@@ -3307,13 +3318,13 @@ paths:
         - in: query
           name: start_date
           schema:
-            default: 2023-02-02T13:36:39.250494
+            default: 2023-02-28T08:47:25.213188
             format: date-time
             type: string
         - in: query
           name: end_date
           schema:
-            default: 2023-03-02T13:36:39.250527
+            default: 2023-03-30T08:47:25.213219
             format: date-time
             type: string
         - in: query
@@ -3360,13 +3371,13 @@ paths:
         - in: query
           name: start_date
           schema:
-            default: 2023-02-02T13:36:39.250021
+            default: 2023-02-28T08:47:25.212739
             format: date-time
             type: string
         - in: query
           name: end_date
           schema:
-            default: 2023-03-02T13:36:39.250091
+            default: 2023-03-30T08:47:25.212796
             format: date-time
             type: string
         - description: Provide the evaluated version name to inspect automation (of the predictions) for
@@ -3397,6 +3408,19 @@ paths:
         schema:
           type: string
   /style/custom.css:
+    delete:
+      description: "**Permission required:** edit_dashboard_settings"
+      operationId: delete_style_sheet_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Delete the custom CSS file
+      tags:
+        - style
     get:
       operationId: get_style_sheet_resource
       responses:
@@ -3419,10 +3443,23 @@ paths:
           description: Permission insufficient
         "422":
           description: File input invalid
-      summary: Upload the custom logo
+      summary: Upload the custom CSS file
       tags:
         - style
   /style/logo.png:
+    delete:
+      description: "**Permission required:** edit_dashboard_settings"
+      operationId: delete_style_logo_resource
+      responses:
+        "204":
+          description: Success
+        "403":
+          description: Permission insufficient
+        "404":
+          description: Not Found
+      summary: Delete the custom logo
+      tags:
+        - style
     get:
       operationId: get_style_logo_resource
       responses:
@@ -4537,8 +4574,6 @@ components:
           type: object
         splitting_cutoff:
           type: integer
-        uer_pre_config:
-          type: object
       type: object
     LabelModel:
       properties:
@@ -5506,12 +5541,12 @@ components:
           type: string
         cmp_version_2:
           type: string
-        name:
+        new_version_name:
           type: string
       required:
         - cmp_version_1
         - cmp_version_2
-        - name
+        - new_version_name
       type: object
     VersionPost:
       properties:

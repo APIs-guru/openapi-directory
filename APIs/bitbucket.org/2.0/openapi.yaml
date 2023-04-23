@@ -3984,7 +3984,7 @@ paths:
       summary: Update a repository deploy key
       tags:
         - Deployments
-  "/repositories/{workspace}/{repo_slug}/deployments/":
+  "/repositories/{workspace}/{repo_slug}/deployments":
     get:
       description: Find deployments
       operationId: getDeploymentsForRepository
@@ -4821,7 +4821,7 @@ paths:
         required: true
         schema:
           type: string
-  "/repositories/{workspace}/{repo_slug}/environments/":
+  "/repositories/{workspace}/{repo_slug}/environments":
     get:
       description: Find environments
       operationId: getEnvironmentsForRepository
@@ -4971,7 +4971,7 @@ paths:
       summary: Get an environment
       tags:
         - Deployments
-  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/":
+  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes":
     post:
       description: Update an environment
       operationId: updateEnvironmentForRepository
@@ -7974,149 +7974,7 @@ paths:
       summary: Update an explicit user permission for a repository
       tags:
         - Repositories
-  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches":
-    delete:
-      description: Delete repository cache versions by name.
-      operationId: deleteRepositoryPipelineCaches
-      parameters:
-        - description: The account.
-          in: path
-          name: workspace
-          required: true
-          schema:
-            type: string
-        - description: The repository.
-          in: path
-          name: repo_slug
-          required: true
-          schema:
-            type: string
-        - description: The cache name.
-          in: query
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: The caches were deleted.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-          description: The workspace, repository or cache name was not found.
-      summary: Delete caches
-      tags:
-        - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/":
-    get:
-      description: Retrieve the repository pipelines caches.
-      operationId: getRepositoryPipelineCaches
-      parameters:
-        - description: The account.
-          in: path
-          name: workspace
-          required: true
-          schema:
-            type: string
-        - description: The repository.
-          in: path
-          name: repo_slug
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/paginated_pipeline_caches"
-          description: The list of caches for the given repository.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-          description: The account or repository was not found.
-      summary: List caches
-      tags:
-        - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}":
-    delete:
-      description: Delete a repository cache.
-      operationId: deleteRepositoryPipelineCache
-      parameters:
-        - description: The account.
-          in: path
-          name: workspace
-          required: true
-          schema:
-            type: string
-        - description: The repository.
-          in: path
-          name: repo_slug
-          required: true
-          schema:
-            type: string
-        - description: The UUID of the cache to delete.
-          in: path
-          name: cache_uuid
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: The cache was deleted.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-          description: The workspace, repository or cache_uuid with given UUID was not found.
-      summary: Delete a cache
-      tags:
-        - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}/content-uri":
-    get:
-      description: Retrieve the URI of the content of the specified cache.
-      operationId: getRepositoryPipelineCacheContentURI
-      parameters:
-        - description: The account.
-          in: path
-          name: workspace
-          required: true
-          schema:
-            type: string
-        - description: The repository.
-          in: path
-          name: repo_slug
-          required: true
-          schema:
-            type: string
-        - description: The UUID of the cache.
-          in: path
-          name: cache_uuid
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/pipeline_cache_content_uri"
-          description: The cache content uri.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-          description: The workspace, repository or cache_uuid with given UUID was not found.
-      summary: Get cache content URI
-      tags:
-        - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines/":
+  "/repositories/{workspace}/{repo_slug}/pipelines":
     get:
       description: Find pipelines
       operationId: getPipelinesForRepository
@@ -8364,6 +8222,147 @@ paths:
       summary: Run a pipeline
       tags:
         - Pipelines
+  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches":
+    delete:
+      description: Delete repository cache versions by name.
+      operationId: deleteRepositoryPipelineCaches
+      parameters:
+        - description: The account.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - description: The repository.
+          in: path
+          name: repo_slug
+          required: true
+          schema:
+            type: string
+        - description: The cache name.
+          in: query
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The caches were deleted.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: The workspace, repository or cache name was not found.
+      summary: Delete caches
+      tags:
+        - Pipelines
+    get:
+      description: Retrieve the repository pipelines caches.
+      operationId: getRepositoryPipelineCaches
+      parameters:
+        - description: The account.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - description: The repository.
+          in: path
+          name: repo_slug
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/paginated_pipeline_caches"
+          description: The list of caches for the given repository.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: The account or repository was not found.
+      summary: List caches
+      tags:
+        - Pipelines
+  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}":
+    delete:
+      description: Delete a repository cache.
+      operationId: deleteRepositoryPipelineCache
+      parameters:
+        - description: The account.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - description: The repository.
+          in: path
+          name: repo_slug
+          required: true
+          schema:
+            type: string
+        - description: The UUID of the cache to delete.
+          in: path
+          name: cache_uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The cache was deleted.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: The workspace, repository or cache_uuid with given UUID was not found.
+      summary: Delete a cache
+      tags:
+        - Pipelines
+  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}/content-uri":
+    get:
+      description: Retrieve the URI of the content of the specified cache.
+      operationId: getRepositoryPipelineCacheContentURI
+      parameters:
+        - description: The account.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - description: The repository.
+          in: path
+          name: repo_slug
+          required: true
+          schema:
+            type: string
+        - description: The UUID of the cache.
+          in: path
+          name: cache_uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/pipeline_cache_content_uri"
+          description: The cache content uri.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: The workspace, repository or cache_uuid with given UUID was not found.
+      summary: Get cache content URI
+      tags:
+        - Pipelines
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}":
     get:
       description: Retrieve a specified pipeline
@@ -8403,7 +8402,7 @@ paths:
       summary: Get a pipeline
       tags:
         - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/":
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps":
     get:
       description: Find steps for the given pipeline.
       operationId: getPipelineStepsForRepository
@@ -8860,7 +8859,7 @@ paths:
       summary: Update the next build number
       tags:
         - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/":
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules":
     get:
       description: Retrieve the configured schedules for the given repository.
       operationId: getRepositoryPipelineSchedules
@@ -8913,7 +8912,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/pipeline_schedule"
+              $ref: "#/components/schemas/pipeline_schedule_post_request_body"
         description: The schedule to create.
         required: true
       responses:
@@ -9043,7 +9042,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/pipeline_schedule"
+              $ref: "#/components/schemas/pipeline_schedule_put_request_body"
         description: The schedule to update.
         required: true
       responses:
@@ -9062,7 +9061,7 @@ paths:
       summary: Update a schedule
       tags:
         - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/":
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions":
     get:
       description: Retrieve the executions of a given schedule.
       operationId: getRepositoryPipelineScheduleExecutions
@@ -9201,7 +9200,7 @@ paths:
       summary: Update SSH key pair
       tags:
         - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/":
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts":
     get:
       description: Find repository level known hosts.
       operationId: getRepositoryPipelineKnownHosts
@@ -9396,7 +9395,7 @@ paths:
       summary: Update a known host
       tags:
         - Pipelines
-  "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/":
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/variables":
     get:
       description: Find repository level variables.
       operationId: getRepositoryPipelineVariables
@@ -10935,6 +10934,100 @@ paths:
         - basic: []
         - api_key: []
       summary: Update a comment on a pull request
+      tags:
+        - Pullrequests
+  "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}/resolve":
+    delete:
+      description: ""
+      responses:
+        "204":
+          description: The comment is reopened.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: |-
+            If the authenticated user does not have access to the pull request,
+            or if the provided comment is not a top-level comment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: If the comment does not exist, or if the comment has not been resolved
+      security:
+        - oauth2:
+            - pullrequest
+        - basic: []
+        - api_key: []
+      summary: Reopen a comment thread
+      tags:
+        - Pullrequests
+    parameters:
+      - description: The id of the comment.
+        in: path
+        name: comment_id
+        required: true
+        schema:
+          type: integer
+      - description: The id of the pull request.
+        in: path
+        name: pull_request_id
+        required: true
+        schema:
+          type: integer
+      - description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        in: path
+        name: repo_slug
+        required: true
+        schema:
+          type: string
+      - description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        in: path
+        name: workspace
+        required: true
+        schema:
+          type: string
+    post:
+      description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/comment_resolution"
+          description: The comment resolution details.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: |-
+            If the authenticated user does not have access to the pull request,
+            or if the provided comment is not a top-level comment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: If the comment does not exist.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: If the comment has already been resolved.
+      security:
+        - oauth2:
+            - pullrequest
+        - basic: []
+        - api_key: []
+      summary: Resolve a comment thread
       tags:
         - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits":
@@ -15080,7 +15173,7 @@ paths:
         required: true
         schema:
           type: string
-  "/teams/{username}/pipelines_config/variables/":
+  "/teams/{username}/pipelines_config/variables":
     get:
       deprecated: true
       description: |-
@@ -15776,7 +15869,7 @@ paths:
         required: true
         schema:
           type: string
-  "/users/{selected_user}/pipelines_config/variables/":
+  "/users/{selected_user}/pipelines_config/variables":
     get:
       deprecated: true
       description: |-
@@ -19396,6 +19489,22 @@ components:
               $ref: "#/components/schemas/account"
           title: Comment
           type: object
+    comment_resolution:
+      additionalProperties: true
+      description: The resolution object for a Comment.
+      properties:
+        created_on:
+          description: The ISO8601 timestamp the resolution was created.
+          format: date-time
+          type: string
+        type:
+          type: string
+        user:
+          $ref: "#/components/schemas/account"
+      required:
+        - type
+      title: Comment Resolution
+      type: object
     commit:
       allOf:
         - $ref: "#/components/schemas/base_commit"
@@ -19510,8 +19619,8 @@ components:
               enum:
                 - INPROGRESS
                 - SUCCESSFUL
-                - STOPPED
                 - FAILED
+                - STOPPED
               type: string
             updated_on:
               format: date-time
@@ -20153,31 +20262,31 @@ components:
         event:
           description: The event identifier.
           enum:
-            - pullrequest:changes_request_created
-            - pullrequest:rejected
-            - issue:updated
-            - pullrequest:unapproved
-            - pullrequest:comment_deleted
-            - repo:commit_status_updated
             - pullrequest:changes_request_removed
-            - pullrequest:comment_created
-            - repo:transfer
-            - pullrequest:fulfilled
-            - repo:commit_comment_created
             - issue:comment_created
-            - project:updated
-            - pullrequest:comment_updated
-            - repo:created
-            - repo:fork
-            - repo:updated
             - repo:push
-            - pullrequest:approved
-            - repo:deleted
-            - repo:commit_status_created
+            - repo:commit_status_updated
             - repo:imported
-            - issue:created
-            - pullrequest:updated
+            - pullrequest:unapproved
+            - repo:updated
+            - pullrequest:rejected
+            - pullrequest:fulfilled
             - pullrequest:created
+            - pullrequest:approved
+            - repo:transfer
+            - repo:commit_status_created
+            - repo:fork
+            - issue:updated
+            - project:updated
+            - repo:created
+            - issue:created
+            - repo:commit_comment_created
+            - pullrequest:updated
+            - repo:deleted
+            - pullrequest:comment_updated
+            - pullrequest:changes_request_created
+            - pullrequest:comment_deleted
+            - pullrequest:comment_created
           type: string
         label:
           description: Summary of the webhook event type.
@@ -20312,6 +20421,7 @@ components:
               $ref: "#/components/schemas/repository"
             state:
               enum:
+                - submitted
                 - new
                 - open
                 - resolved
@@ -22344,15 +22454,13 @@ components:
               format: date-time
               type: string
             cron_pattern:
-              description: The cron expression that the schedule applies.
+              description: "The cron expression with second precision (7 fields) that the schedule applies. For example, for expression: 0 0 12 * * ? *, will execute at 12pm UTC every day."
               type: string
             enabled:
               description: Whether the schedule is enabled.
               type: boolean
-            selector:
-              $ref: "#/components/schemas/pipeline_selector"
             target:
-              $ref: "#/components/schemas/pipeline_target"
+              $ref: "#/components/schemas/pipeline_ref_target"
             updated_on:
               description: The timestamp when the schedule was updated.
               format: date-time
@@ -22387,6 +22495,50 @@ components:
           properties:
             pipeline:
               $ref: "#/components/schemas/pipeline"
+          type: object
+    pipeline_schedule_post_request_body:
+      allOf:
+        - $ref: "#/components/schemas/object"
+        - additionalProperties: true
+          properties:
+            cron_pattern:
+              description: "The cron expression with second precision (7 fields) that the schedule applies. For example, for expression: 0 0 12 * * ? *, will execute at 12pm UTC every day."
+              type: string
+            enabled:
+              description: Whether the schedule is enabled.
+              type: boolean
+            target:
+              description: The target on which the schedule will be executed.
+              properties:
+                ref_name:
+                  description: The name of the reference.
+                  type: string
+                ref_type:
+                  description: The type of reference (branch only).
+                  enum:
+                    - branch
+                  type: string
+                selector:
+                  $ref: "#/components/schemas/pipeline_selector"
+              required:
+                - selector
+                - ref_name
+                - ref_type
+              type: object
+          required:
+            - target
+            - cron_pattern
+          title: Request body for Pipeline Schedule POST request
+          type: object
+    pipeline_schedule_put_request_body:
+      allOf:
+        - $ref: "#/components/schemas/object"
+        - additionalProperties: true
+          properties:
+            enabled:
+              description: Whether the schedule is enabled.
+              type: boolean
+          title: Request body for Pipeline Schedule PUT request
           type: object
     pipeline_selector:
       allOf:
@@ -24313,31 +24465,31 @@ components:
               description: The events this webhook is subscribed to.
               items:
                 enum:
-                  - pullrequest:changes_request_created
-                  - pullrequest:rejected
-                  - issue:updated
-                  - pullrequest:unapproved
-                  - pullrequest:comment_deleted
-                  - repo:commit_status_updated
                   - pullrequest:changes_request_removed
-                  - pullrequest:comment_created
-                  - repo:transfer
-                  - pullrequest:fulfilled
-                  - repo:commit_comment_created
                   - issue:comment_created
-                  - project:updated
-                  - pullrequest:comment_updated
-                  - repo:created
-                  - repo:fork
-                  - repo:updated
                   - repo:push
-                  - pullrequest:approved
-                  - repo:deleted
-                  - repo:commit_status_created
+                  - repo:commit_status_updated
                   - repo:imported
-                  - issue:created
-                  - pullrequest:updated
+                  - pullrequest:unapproved
+                  - repo:updated
+                  - pullrequest:rejected
+                  - pullrequest:fulfilled
                   - pullrequest:created
+                  - pullrequest:approved
+                  - repo:transfer
+                  - repo:commit_status_created
+                  - repo:fork
+                  - issue:updated
+                  - project:updated
+                  - repo:created
+                  - issue:created
+                  - repo:commit_comment_created
+                  - pullrequest:updated
+                  - repo:deleted
+                  - pullrequest:comment_updated
+                  - pullrequest:changes_request_created
+                  - pullrequest:comment_deleted
+                  - pullrequest:comment_created
                 type: string
               minItems: 1
               type: array
@@ -26042,4 +26194,4 @@ x-atlassian-narrative:
       description: Build Bitbucket add-ons with Connect
       icon: data:image/svg+xml;base64,b'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjU3LjMxNjMgMTYyLjU5OTQiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGlzb2xhdGlvbjogaXNvbGF0ZTsKICAgICAgfQoKICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjMzQ0NTYzOwogICAgICB9CgogICAgICAuY2xzLTMgewogICAgICAgIGZpbGw6ICMxZGI5ZDQ7CiAgICAgIH0KCiAgICAgIC5jbHMtNCB7CiAgICAgICAgZmlsbDogIzAwNTdkODsKICAgICAgfQoKICAgICAgLmNscy01LCAuY2xzLTcsIC5jbHMtOSB7CiAgICAgICAgbWl4LWJsZW5kLW1vZGU6IG11bHRpcGx5OwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6IHVybCgjTjc1KTsKICAgICAgfQoKICAgICAgLmNscy02IHsKICAgICAgICBmaWxsOiAjMDA2NWZmOwogICAgICB9CgogICAgICAuY2xzLTcgewogICAgICAgIGZpbGw6IHVybCgjTjc1LTIpOwogICAgICB9CgogICAgICAuY2xzLTggewogICAgICAgIGZpbGw6IHVybCgjbGluZWFyLWdyYWRpZW50KTsKICAgICAgfQoKICAgICAgLmNscy05IHsKICAgICAgICBmaWxsOiB1cmwoI043NS0zKTsKICAgICAgfQoKICAgICAgLmNscy0xMCB7CiAgICAgICAgZmlsbDogdXJsKCNUMjAwLVQ3NSk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Ik43NSIgeDE9Ii0yMTg5LjU1NiIgeTE9IjI4MDguMjI4NCIgeDI9Ii0yMDkxLjE1NTEiIHkyPSIyODA4LjIyODQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMC4xNjgxLCAwLjk4NTgsIDAuOTg1OCwgLTAuMTY4MSwgLTIzNzMuNzM2LCAyNzIyLjEyNzgpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U1ZThlYyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNWU4ZWMiIHN0b3Atb3BhY2l0eT0iMC4xIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMiIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjE2OC41OTQ3IiB5MT0iMjkzNS4wNTU2IiB4Mj0iLTIwNzAuMTkzNyIgeTI9IjI5MzUuMDU1NiIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIxOTAuMzU0NyIgeTE9IjE1OS45NjciIHgyPSIyNTkuOTQ4NyIgeTI9IjkwLjM3MyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNDQ1NjMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWU2Yzg0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMyIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjI1Ny4zOTc3IiB5MT0iMjg4NC4yMjYzIiB4Mj0iLTIxNTguOTk2NyIgeTI9IjI4ODQuMjI2MyIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJUMjAwLVQ3NSIgeDE9IjEyNi4wMjU3IiB5MT0iODUuMTA4IiB4Mj0iMTk1LjYxOTciIHkyPSIxNS41MTQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM2RjN2RjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljZTNlZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHRpdGxlPkFkZCBPbiBCbG9ja3MgMjwvdGl0bGU+CiAgPGcgY2xhc3M9ImNscy0xIj4KICAgIDxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPgogICAgICA8ZyBpZD0iT2JqZWN0cyI+CiAgICAgICAgPHJlY3QgaWQ9Il9SZWN0YW5nbGVfIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTIiIHg9IjEyOC42NTgxIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV8yIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTMiIHg9IjY0LjMyOTEiIHk9IjEyLjg4MTUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxyZWN0IGlkPSJfUmVjdGFuZ2xlXzMiIGRhdGEtbmFtZT0iJmx0O1JlY3RhbmdsZSZndDsiIGNsYXNzPSJjbHMtNCIgeT0iODcuNzQwNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuMzI5MSw4Ny43NEg1OC42NTIzYTYyLjc4NzcsNjIuNzg3NywwLDAsMC0yNC41Njg0LDIwLjc2MjFjLTguMjYwNywxMi4xOTYtNC4zNDM3LDE4LjI0MTUtMTEuNjYzNywzMS42Mzk1QzE2LjUxLDE1MC45Niw4LjA1MSwxNTcuODIsMCwxNjIuNTU2di4wNDM1aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV80IiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTYiIHg9IjY0LjMyOTEiIHk9Ijg3Ljc0MDUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTE5Mi45ODcyLDg3Ljc0SDE4My4zNDNhNjIuNzg3Nyw2Mi43ODc3LDAsMCwwLTI0LjU2ODQsMjAuNzYyMWMtOC4yNjA3LDEyLjE5Ni00LjM0MzgsMTguMjQxNS0xMS42NjM3LDMxLjYzOTVhNTYuNzI0Niw1Ni43MjQ2LDAsMCwxLTE4LjQ1MjcsMTkuOTF2Mi41NDc0aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTgiIHg9IjE5Mi45ODcyIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTkiIGQ9Ik0xMjguNjU4MiwxMi44ODE1SDExNi41OUE2MS45NjQ2LDYxLjk2NDYsMCwwLDAsMTAxLjMyMzMsMjguMjE1QzkzLjA2MjUsNDAuNDEwOSw5Ni45Nzk0LDQ2LjQ1NjUsODkuNjYsNTkuODU0NCw4My4wMzE2LDcxLjk4NTcsNzMuMTk3LDc5LjE1MTQsNjQuMzI5MSw4My45MTA4djMuODNoNjQuMzI5MVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTEwIiB4PSIxMjguNjU4MSIgeT0iMTIuODgxNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSIxMC4xNjA1IiB5PSI3NC44NTkiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTQiIHg9IjUxLjk1MjMiIHk9Ijc0Ljg1OSIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtNCIgeD0iOTMuNzQ0MSIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxMzguODE4NiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxODAuNjEwNCIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIyMjIuNDAyMiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI3NC40ODk1IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSIxMTYuMjgxNCIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMyIgeD0iMTU4LjA3MzIiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg=='
       title: Atlassian Connect
-x-revision: 8dae26bb4cf1
+x-revision: 823a155d590f

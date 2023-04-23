@@ -742,6 +742,7 @@ paths:
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
         - $ref: "#/components/parameters/videosSort"
+        - $ref: "#/components/parameters/excludeAlreadyWatched"
       responses:
         "200":
           content:
@@ -1375,6 +1376,7 @@ paths:
         - $ref: "#/components/parameters/count"
         - $ref: "#/components/parameters/searchTarget"
         - $ref: "#/components/parameters/videosSearchSort"
+        - $ref: "#/components/parameters/excludeAlreadyWatched"
         - description: Get videos that are published after this date
           in: query
           name: startDate
@@ -2316,6 +2318,7 @@ paths:
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
         - $ref: "#/components/parameters/videosSort"
+        - $ref: "#/components/parameters/excludeAlreadyWatched"
       responses:
         "200":
           content:
@@ -3298,6 +3301,7 @@ paths:
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
         - $ref: "#/components/parameters/videosSort"
+        - $ref: "#/components/parameters/excludeAlreadyWatched"
       responses:
         "200":
           content:
@@ -3631,6 +3635,7 @@ paths:
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
         - $ref: "#/components/parameters/videosSort"
+        - $ref: "#/components/parameters/excludeAlreadyWatched"
       responses:
         "200":
           content:
@@ -3852,6 +3857,8 @@ paths:
                   type: string
                 privacy:
                   $ref: "#/components/schemas/VideoPrivacySet"
+                replaySettings:
+                  $ref: "#/components/schemas/LiveVideoReplaySettings"
                 saveReplay:
                   type: boolean
                 support:
@@ -4011,7 +4018,7 @@ paths:
         - Video Ownership Change
   /api/v1/videos/privacies:
     get:
-      operationId: getPrivacyPolicies
+      operationId: getVideoPrivacyPolicies
       responses:
         "200":
           content:
@@ -5368,6 +5375,12 @@ components:
         maximum: 100
         minimum: 1
         type: integer
+    excludeAlreadyWatched:
+      description: Whether or not to exclude videos that are in the user's video history
+      in: query
+      name: excludeAlreadyWatched
+      schema:
+        type: boolean
     followState:
       in: query
       name: state
@@ -5952,8 +5965,6 @@ components:
         - username
         - password
         - email
-        - videoQuota
-        - videoQuotaDaily
         - role
     AddUserResponse:
       properties:
@@ -6128,6 +6139,11 @@ components:
         - 2
         - 3
       type: integer
+    LiveVideoReplaySettings:
+      properties:
+        privacy:
+          $ref: "#/components/schemas/VideoPrivacySet"
+      type: object
     LiveVideoResponse:
       properties:
         latencyMode:
@@ -6136,6 +6152,8 @@ components:
         permanentLive:
           description: User can stream multiple times in a permanent live
           type: boolean
+        replaySettings:
+          $ref: "#/components/schemas/LiveVideoReplaySettings"
         rtmpUrl:
           description: Included in the response if an appropriate token is provided
           type: string
@@ -6194,6 +6212,8 @@ components:
         permanentLive:
           description: User can stream multiple times in a permanent live
           type: boolean
+        replaySettings:
+          $ref: "#/components/schemas/LiveVideoReplaySettings"
         saveReplay:
           type: boolean
     MRSSGroupContent:
@@ -8039,7 +8059,7 @@ components:
         label:
           type: string
     VideoPlaylistPrivacySet:
-      description: Video playlist privacy policy (see [/video-playlists/privacies])
+      description: Video playlist privacy policy (see [/video-playlists/privacies](#operation/getPlaylistPrivacyPolicies))
       enum:
         - 1
         - 2
@@ -8064,7 +8084,7 @@ components:
         label:
           type: string
     VideoPrivacySet:
-      description: privacy id of the video (see [/videos/privacies](#operation/getPrivacyPolicies))
+      description: privacy id of the video (see [/videos/privacies](#operation/getVideoPrivacyPolicies))
       enum:
         - 1
         - 2

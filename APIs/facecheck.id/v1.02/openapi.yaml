@@ -70,7 +70,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/BrowserJsonResponse"
           description: Success
-      summary: Submit a search request to the search engine and get back search results that contain URLs and all images in base64/webp format
       tags:
         - FaceCheckAPI
   /api/upload_pic:
@@ -100,7 +99,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/BrowserJsonResponse"
           description: Success
-      summary: Upload 1 to 3 images as multipart/form-data, and get back a search request that contains id_search and 1 to 3 preview thumbnails
       tags:
         - FaceCheckAPI
 components:
@@ -114,6 +112,9 @@ components:
         error:
           nullable: true
           type: string
+        hasEmptyImages:
+          readOnly: true
+          type: boolean
         id_search:
           nullable: true
           type: string
@@ -216,6 +217,10 @@ components:
         score:
           format: int32
           type: integer
+        seen:
+          format: int64
+          nullable: true
+          type: integer
         url:
           nullable: true
           type: string
@@ -251,6 +256,9 @@ components:
           nullable: true
           readOnly: true
           type: string
+        scaned_till_index:
+          format: int32
+          type: integer
         searchedFaces:
           format: int32
           nullable: true

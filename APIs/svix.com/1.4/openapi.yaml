@@ -3500,6 +3500,180 @@ paths:
               -d '{
                 "key": "whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD"
             }'
+  "/api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example/":
+    post:
+      description: Send an example message for event
+      operationId: send_event_type_example_message_api_v1_app__app_id__endpoint__endpoint_id__send_example__post
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            description: The application's ID or UID
+            example: app_1srOrx2ZWZBpBUvZwXKQmoEYga2
+            maxLength: 256
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-_.]+$
+            title: App Id
+            type: string
+        - in: path
+          name: endpoint_id
+          required: true
+          schema:
+            description: The endpoint's ID or UID
+            example: ep_1srOrx2ZWZBpBUvZwXKQmoEYga2
+            maxLength: 256
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-_.]+$
+            title: Endpoint Id
+            type: string
+        - description: The request's idempotency key
+          in: header
+          name: idempotency-key
+          required: false
+          schema:
+            description: The request's idempotency key
+            nullable: true
+            title: Idempotency-Key
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventExampleIn"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageOut"
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpErrorOut"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpErrorOut"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpErrorOut"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpErrorOut"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpErrorOut"
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpErrorOut"
+          description: Too Many Requests
+      security:
+        - HTTPBearer: []
+      summary: Send Event Type Example Message
+      tags:
+        - Endpoint
+      x-codeSamples:
+        - label: JavaScript
+          lang: JavaScript
+          source: |-
+            const messageOut = await svix.endpoint.sendExample('app_id', 'endpoint_id', {
+                eventType: "user.signup"
+            });
+        - label: TypeScript
+          lang: JavaScript
+          source: |-
+            const messageOut = await svix.endpoint.sendExample('app_id', 'endpoint_id', {
+                eventType: "user.signup"
+            });
+        - label: Python
+          lang: Python
+          source: |-
+            message_out = svix.endpoint.send_example('app_id', 'endpoint_id', EventExampleIn(
+                event_type="user.signup"
+            ))
+        - label: Python (Async)
+          lang: Python
+          source: |-
+            message_out = await svix.endpoint.send_example('app_id', 'endpoint_id', EventExampleIn(
+                event_type="user.signup"
+            ))
+        - label: Go
+          lang: Go
+          source: |-
+            messageOut, err := svixClient.Endpoint.SendExample("app_id", "endpoint_id", &svix.EventExampleIn{
+                EventType: "user.signup"
+            })
+        - label: Kotlin
+          lang: Kotlin
+          source: |-
+            val messageOut = svix.endpoint.sendExample('app_id', 'endpoint_id', EventExampleIn()
+                .eventType("user.signup")
+            )
+        - label: Java
+          lang: Java
+          source: |-
+            MessageOut messageOut = svix.getEndpoint().sendExample('app_id', 'endpoint_id', new EventExampleIn()
+                .eventType("user.signup")
+            )
+        - label: Ruby
+          lang: Ruby
+          source: |-
+            message_out = svix.endpoint.send_example('app_id', 'endpoint_id', Svix::EventExampleIn.new({
+                "event_type": "user.signup"
+            }))
+        - label: Rust
+          lang: Rust
+          source: |-
+            let message_out = svix.endpoint().send_example("app_id", "endpoint_id", EventExampleIn {
+                event_type: "user.signup".to_string()
+            }).await?;
+        - label: C#
+          lang: C#
+          source: |-
+            var messageOut = await svix.Endpoint.SendExampleAsync("app_id", "endpoint_id", new EventExampleIn{
+                eventType: "user.signup"
+            })
+        - label: CLI
+          lang: Shell
+          source: |-
+            svix endpoint send-example 'app_id' 'endpoint_id' '{
+                "eventType": "user.signup"
+            }'
+        - label: cURL
+          lang: Shell
+          source: |-
+            curl -X 'POST' \
+              'https://api.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example/' \
+              -H 'Authorization: Bearer AUTH_TOKEN' \
+              -H 'accept: application/json' \
+              -H 'Content-Type: application/json' \
+              -d '{
+                "eventType": "user.signup"
+            }'
   "/api/v1/app/{app_id}/endpoint/{endpoint_id}/stats/":
     get:
       description: Get basic statistics for the endpoint.
@@ -9292,6 +9466,18 @@ components:
         - appId
         - endpointId
       title: EndpointUpdatedEventData
+      type: object
+    EventExampleIn:
+      properties:
+        eventType:
+          example: user.signup
+          maxLength: 256
+          pattern: ^[a-zA-Z0-9\-_.]+$
+          title: Eventtype
+          type: string
+      required:
+        - eventType
+      title: EventExampleIn
       type: object
     EventTypeIn:
       properties:

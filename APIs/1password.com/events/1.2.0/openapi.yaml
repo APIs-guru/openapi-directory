@@ -1,0 +1,611 @@
+openapi: 3.0.0
+servers:
+  - description: 1Password
+    url: https://events.1password.com
+  - description: 1Password CA
+    url: https://events.1password.ca
+  - description: 1Password EU
+    url: https://events.1password.eu
+  - description: 1Password Enterprise
+    url: https://events.ent.1password.com
+info:
+  description: 1Password Events API Specification.
+  title: Events API
+  version: 1.2.0
+  x-apisguru-categories:
+    - security
+  x-logo: https://1password.com/img/meta-og-image.png
+  x-origin:
+    - format: openapi
+      url: https://i.1password.com/media/1password-events-reporting/1password-events-api.yaml
+      version: "3.0"
+  x-providerName: 1password.com
+  x-serviceName: events
+paths:
+  /api/auth/introspect:
+    get:
+      deprecated: true
+      operationId: getAuthIntrospect
+      responses:
+        "200":
+          $ref: "#/components/responses/IntrospectResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      security:
+        - jwtsa: []
+      summary: Performs introspection of the provided Bearer JWT token
+      tags:
+        - auth
+  /api/v1/auditevents:
+    post:
+      description: This endpoint requires your JSON Web Token to have the *auditevents* feature.
+      operationId: getAuditEvents
+      requestBody:
+        $ref: "#/components/requestBodies/AuditEventsRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/AuditEventsResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      security:
+        - jwtsa: []
+      summary: Retrieves audit events for actions performed by team members within a 1Password account
+      tags:
+        - api-v1
+  /api/v1/itemusages:
+    post:
+      description: This endpoint requires your JSON Web Token to have the *itemusages* feature.
+      operationId: getItemUsages
+      requestBody:
+        $ref: "#/components/requestBodies/ItemUsagesRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemUsagesResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      security:
+        - jwtsa: []
+      summary: Retrieves events for each usage of an item stored in a shared vault within a 1Password account
+      tags:
+        - api-v1
+  /api/v1/signinattempts:
+    post:
+      description: This endpoint requires your JSON Web Token to have the *signinattempts* feature.
+      operationId: getSignInAttempts
+      requestBody:
+        $ref: "#/components/requestBodies/SignInAttemptsRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SignInAttemptsResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      security:
+        - jwtsa: []
+      summary: Retrieves events for both successful and failed attempts to sign into a 1Password account
+      tags:
+        - api-v1
+  /api/v2/auth/introspect:
+    get:
+      operationId: getAuthIntrospectV2
+      responses:
+        "200":
+          $ref: "#/components/responses/IntrospectV2Response"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      security:
+        - jwtsa: []
+      summary: Performs introspection of the provided Bearer JWT token
+      tags:
+        - auth
+components:
+  examples:
+    Cursor:
+      summary: Used for continued calling with a cursor
+      value:
+        cursor: aGVsbG8hIGlzIGl0IG1lIHlvdSBhcmUgbG9va2luZyBmb3IK
+    ResetCursor:
+      summary: Used for reseting the cursor
+      value:
+        limit: 100
+        start_time: 2021-06-11T16:32:50-03:00
+  requestBodies:
+    AuditEventsRequest:
+      $ref: "#/components/requestBodies/CursorRequest"
+    CursorRequest:
+      content:
+        application/json:
+          examples:
+            Continuing cursor:
+              $ref: "#/components/examples/Cursor"
+            Resetting cursor:
+              $ref: "#/components/examples/ResetCursor"
+          schema:
+            oneOf:
+              - $ref: "#/components/schemas/Cursor"
+              - $ref: "#/components/schemas/ResetCursor"
+    ItemUsagesRequest:
+      $ref: "#/components/requestBodies/CursorRequest"
+    SignInAttemptsRequest:
+      $ref: "#/components/requestBodies/CursorRequest"
+  responses:
+    AuditEventsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuditEventItems"
+      description: Audit events response object
+    GenericErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Generic error
+    InternalServerErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Internal Server Error
+    IntrospectResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Introspection"
+      description: Introspection object
+    IntrospectV2Response:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/IntrospectionV2"
+      description: Introspection v2 object
+    ItemUsagesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ItemUsageItems"
+      description: Item usages response object
+    SignInAttemptsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SignInAttemptItems"
+      description: Sign-in attempts response object
+    UnauthorizedErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Unauthorized
+  schemas:
+    AuditEvent:
+      description: A single audit event object
+      properties:
+        action:
+          $ref: "#/components/schemas/AuditEventActions"
+        actor_uuid:
+          $ref: "#/components/schemas/UUID"
+        aux_id:
+          type: integer
+        aux_info:
+          type: string
+        aux_uuid:
+          $ref: "#/components/schemas/UUID"
+        location:
+          $ref: "#/components/schemas/Location"
+        object_type:
+          $ref: "#/components/schemas/AuditEventObjectTypes"
+        object_uuid:
+          $ref: "#/components/schemas/UUID"
+        session:
+          $ref: "#/components/schemas/Session"
+        timestamp:
+          $ref: "#/components/schemas/DateTimeRFC3339"
+        uuid:
+          $ref: "#/components/schemas/UUID"
+    AuditEventActions:
+      enum:
+        - activate
+        - update
+        - delete
+        - convert
+        - enblduo
+        - updatduo
+        - disblduo
+        - rdmchild
+        - detchild
+        - dlgsess
+        - create
+        - deolddev
+        - dealldev
+        - reauth
+        - begin
+        - complete
+        - propose
+        - updatfw
+        - join
+        - leave
+        - role
+        - purge
+        - view
+        - export
+        - replace
+        - grant
+        - revoke
+        - share
+        - delshare
+        - uisas
+        - enblmfa
+        - updatmfa
+        - disblmfa
+        - musercom
+        - muserdec
+        - sendpkg
+        - resendts
+        - prsndall
+        - trename
+        - tverify
+        - trevoke
+        - ssotknv
+        - enblsso
+        - disblsso
+        - chngpsso
+        - chngasso
+        - chngdsso
+        - delgsso
+        - addgsso
+        - cancel
+        - hide
+        - unhide
+        - upguest
+        - verify
+        - reactive
+        - suspend
+        - beginr
+        - provsn
+        - sendts
+        - unknown
+        - completr
+        - cancelr
+        - trvlaway
+        - trvlback
+        - changeks
+        - changemp
+        - changesk
+        - changenm
+        - changela
+        - tdvcsso
+        - sdvcsso
+        - patch
+        - updatea
+        - vrfydmn
+        - uvrfydmn
+        - dvrfydmn
+      type: string
+    AuditEventItems:
+      allOf:
+        - properties:
+            items:
+              items:
+                $ref: "#/components/schemas/AuditEvent"
+              type: array
+        - $ref: "#/components/schemas/CursorCollection"
+      description: An object wrapping cursor properties and a list of audit events
+    AuditEventObjectTypes:
+      enum:
+        - account
+        - user
+        - device
+        - group
+        - gm
+        - vault
+        - item
+        - items
+        - itemhist
+        - vaultkey
+        - template
+        - uva
+        - gva
+        - invite
+        - ec
+        - miguser
+        - sso
+        - sub
+        - card
+        - pm
+        - slackapp
+        - file
+        - famchild
+        - sa
+        - satoken
+        - dlgdsess
+        - ssotkn
+        - report
+      type: string
+    Client:
+      description: Metadata gathered about the client
+      properties:
+        app_name:
+          example: 1Password Extension
+          type: string
+        app_version:
+          example: "20127"
+          type: string
+        ip_address:
+          example: 13.227.95.22
+          type: string
+        os_name:
+          example: MacOSX
+          type: string
+        os_version:
+          example: 10.15.6
+          type: string
+        platform_name:
+          example: Chrome
+          type: string
+        platform_version:
+          description: Depending on the platform used, this can be the version of the browser that the client extension is installed, the model of computer that the native application is installed or the machine's CPU version that the CLI was installed
+          type: string
+    Cursor:
+      description: Cursor
+      properties:
+        cursor:
+          description: Cursor to fetch more data if available or continue the polling process if required
+          example: aGVsbG8hIGlzIGl0IG1lIHlvdSBhcmUgbG9va2luZyBmb3IK
+          type: string
+    CursorCollection:
+      allOf:
+        - $ref: "#/components/schemas/Cursor"
+        - properties:
+            has_more:
+              description: Whether there may still be more data to fetch using the returned cursor. If true, the subsequent request could still be empty.
+              type: boolean
+      description: Common cursor properties for collection responses
+    DateTimeRFC3339:
+      example: 2020-06-11T16:32:50-03:00
+      format: date-time
+      type: string
+    Details:
+      description: Additional information about the sign-in attempt
+      properties:
+        value:
+          description: For firewall prevented sign-ins, the value is the chosen continent, country, etc. that blocked the sign-in attempt
+          example: Europe
+          type: string
+    Error:
+      properties:
+        Error:
+          properties:
+            Message:
+              description: The error message.
+              type: string
+          type: object
+      type: object
+    Introspection:
+      properties:
+        Features:
+          example:
+            - auditevents
+            - itemusages
+            - signinattempts
+          items:
+            type: string
+          type: array
+        IssuedAt:
+          $ref: "#/components/schemas/DateTimeRFC3339"
+        UUID:
+          type: string
+      type: object
+    IntrospectionV2:
+      properties:
+        features:
+          example:
+            - auditevents
+            - itemusages
+            - signinattempts
+          items:
+            type: string
+          type: array
+        issued_at:
+          $ref: "#/components/schemas/DateTimeRFC3339"
+        uuid:
+          type: string
+      type: object
+    ItemUsage:
+      description: A single item usage object
+      properties:
+        action:
+          enum:
+            - fill
+            - select-sso-provider
+            - enter-item-edit-mode
+            - export
+            - share
+            - secure-copy
+            - reveal
+            - server-create
+            - server-update
+            - server-fetch
+          example: reveal
+          type: string
+        client:
+          $ref: "#/components/schemas/Client"
+        item_uuid:
+          $ref: "#/components/schemas/UUID"
+        location:
+          $ref: "#/components/schemas/Location"
+        timestamp:
+          $ref: "#/components/schemas/DateTimeRFC3339"
+        used_version:
+          type: integer
+        user:
+          $ref: "#/components/schemas/User"
+        uuid:
+          $ref: "#/components/schemas/UUID"
+        vault_uuid:
+          $ref: "#/components/schemas/UUID"
+    ItemUsageItems:
+      allOf:
+        - properties:
+            items:
+              items:
+                $ref: "#/components/schemas/ItemUsage"
+              type: array
+        - $ref: "#/components/schemas/CursorCollection"
+      description: An object wrapping cursor properties and a list of items usages
+    Location:
+      description: Geolocation Info about the client
+      properties:
+        city:
+          example: Toronto
+          type: string
+        country:
+          example: CA
+          type: string
+        latitude:
+          example: -79.433
+          type: number
+        longitude:
+          example: 43.64
+          type: number
+        region:
+          example: Ontario
+          type: string
+    ResetCursor:
+      description: Reset cursor
+      properties:
+        end_time:
+          $ref: "#/components/schemas/DateTimeRFC3339"
+        limit:
+          maximum: 1000
+          minimum: 1
+          type: number
+        start_time:
+          $ref: "#/components/schemas/DateTimeRFC3339"
+    Session:
+      description: Session information gathered about the client
+      properties:
+        device_uuid:
+          $ref: "#/components/schemas/UUID"
+        ip:
+          example: 13.227.95.22
+          type: string
+        login_time:
+          $ref: "#/components/schemas/DateTimeRFC3339"
+        uuid:
+          $ref: "#/components/schemas/UUID"
+    SignInAttempt:
+      description: A single sign-in attempt object
+      properties:
+        category:
+          enum:
+            - success
+            - credentials_failed
+            - mfa_failed
+            - sso_failed
+            - modern_version_failed
+            - firewall_failed
+            - firewall_reported_success
+          example: firewall_failed
+          type: string
+        client:
+          $ref: "#/components/schemas/Client"
+        country:
+          description: Country ISO Code
+          example: France
+          type: string
+        details:
+          $ref: "#/components/schemas/Details"
+        location:
+          $ref: "#/components/schemas/Location"
+        session_uuid:
+          $ref: "#/components/schemas/UUID"
+        target_user:
+          $ref: "#/components/schemas/User"
+        timestamp:
+          $ref: "#/components/schemas/DateTimeRFC3339"
+        type:
+          enum:
+            - credentials_ok
+            - mfa_ok
+            - password_secret_bad
+            - mfa_missing
+            - totp_disabled
+            - totp_bad
+            - totp_timeout
+            - u2f_disabled
+            - u2f_bad
+            - u2f_timout
+            - duo_disabled
+            - duo_bad
+            - duo_timeout
+            - duo_native_bad
+            - service_account_sso_denied
+            - non_sso_user
+            - sso_user_mismatch
+            - platform_secret_disabled
+            - platform_secret_bad
+            - platform_secret_proxy
+            - code_disabled
+            - code_bad
+            - code_timeout
+            - ip_blocked
+            - continent_blocked
+            - country_blocked
+            - anonymous_blocked
+            - all_blocked
+            - modern_version_missing
+            - modern_version_old
+          example: continent_blocked
+          type: string
+        uuid:
+          $ref: "#/components/schemas/UUID"
+    SignInAttemptItems:
+      allOf:
+        - properties:
+            items:
+              items:
+                $ref: "#/components/schemas/SignInAttempt"
+              type: array
+        - $ref: "#/components/schemas/CursorCollection"
+      description: An object wrapping cursor properties and a list of sign-in attempts
+    UUID:
+      example: 56YE2TYN2VFYRLNSHKPW5NVT5E
+      type: string
+    User:
+      description: User object
+      properties:
+        email:
+          format: email
+          type: string
+        name:
+          description: Full name
+          example: Jack O'Neill
+          type: string
+        uuid:
+          $ref: "#/components/schemas/UUID"
+  securitySchemes:
+    jwtsa:
+      bearerFormat: JWT-SA
+      description: A JWT SA token issued to this service
+      scheme: bearer
+      type: http

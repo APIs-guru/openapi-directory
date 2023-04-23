@@ -2575,6 +2575,79 @@ paths:
                                           - name
                                         type: object
                                       type: array
+                                    ingress:
+                                      description: Specification for app ingress configurations.
+                                      properties:
+                                        rules:
+                                          description: Rules for configuring HTTP ingress for component routes, CORS, rewrites, and redirects.
+                                          items:
+                                            properties:
+                                              component:
+                                                description: The component to route to. Only one of `component` or `redirect` may be set.
+                                                properties:
+                                                  name:
+                                                    description: The name of the component to route to.
+                                                    example: web
+                                                    type: string
+                                                  preserve_path_prefix:
+                                                    description: "An optional flag to preserve the path that is forwarded to the backend service. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If this value is `true`, the path will remain `/api/list`. Note: this is not applicable for Functions Components and is mutually exclusive with `rewrite`."
+                                                    example: "true"
+                                                    type: string
+                                                  rewrite:
+                                                    description: "An optional field that will rewrite the path of the component to be what is specified here. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If you specified the rewrite to be `/v1/`, requests to `/api/list` would be rewritten to `/v1/list`. Note: this is mutually exclusive with `preserve_path_prefix`."
+                                                    example: /api/v1/
+                                                    type: string
+                                                required:
+                                                  - name
+                                                type: object
+                                              cors:
+                                                $ref: "#/paths/~1v2~1apps/get/responses/200/content/application~1json/schema/allOf/0/properties/apps/items/properties/active_deployment/properties/spec/properties/services/items/allOf/2/properties/cors"
+                                              match:
+                                                description: The match configuration for the rule.
+                                                properties:
+                                                  path:
+                                                    description: The path to match on.
+                                                    properties:
+                                                      prefix:
+                                                        description: Prefix-based match. For example, `/api` will match `/api`, `/api/`, and any nested paths such as `/api/v1/endpoint`.
+                                                        example: /api
+                                                        maxLength: 256
+                                                        type: string
+                                                    required:
+                                                      - prefix
+                                                    type: object
+                                                required:
+                                                  - path
+                                                type: object
+                                              redirect:
+                                                description: The redirect configuration for the rule. Only one of `component` or `redirect` may be set.
+                                                properties:
+                                                  authority:
+                                                    description: "The authority/host to redirect to. This can be a hostname or IP address. Note: use `port` to set the port."
+                                                    example: example.com
+                                                    type: string
+                                                  port:
+                                                    description: The port to redirect to.
+                                                    example: 443
+                                                    format: int64
+                                                    type: integer
+                                                  redirect_code:
+                                                    description: The redirect code to use. Defaults to `302`. Supported values are 300, 301, 302, 303, 304, 307, 308.
+                                                    example: 302
+                                                    format: int64
+                                                    type: integer
+                                                  scheme:
+                                                    description: "The scheme to redirect to. Supported values are `http` or `https`. Default: `https`."
+                                                    example: https
+                                                    type: string
+                                                  uri:
+                                                    description: "An optional URI path to redirect to. Note: if this is specified the whole URI of the original request will be overwritten to this value, irrespective of the original request URI being matched."
+                                                    example: /about
+                                                    type: string
+                                                type: object
+                                            type: object
+                                          type: array
+                                      type: object
                                     jobs:
                                       description: Pre and post deployment workloads which do not expose publicly-accessible HTTP routes.
                                       items:
@@ -7528,7 +7601,7 @@ paths:
                             - mysql
                             - redis
                             - mongodb
-                          example: pg
+                          example: mysql
                           type: string
                         id:
                           description: A unique ID that can be used to identify and reference a database cluster.
@@ -7631,6 +7704,11 @@ paths:
                               - value
                             type: object
                           type: array
+                        semantic_version:
+                          description: A string representing the semantic version of the database engine in use for the cluster.
+                          example: 8.0.28
+                          readOnly: true
+                          type: string
                         size:
                           description: The slug identifier representing the size of the nodes in the database cluster.
                           example: db-s-2vcpu-4gb
@@ -7701,7 +7779,7 @@ paths:
                           type: array
                         version:
                           description: A string representing the version of the database engine in use for the cluster.
-                          example: "10"
+                          example: "8"
                           type: string
                         version_end_of_availability:
                           description: A timestamp referring to the date when the particular version will no longer be available for creating new clusters. If null, the version does not have an end of availability timeline.
@@ -7883,6 +7961,7 @@ paths:
                     user: doadmin
                   private_network_uuid: d455e75d-4858-4eec-8c95-da2f0a5f93a7
                   region: nyc3
+                  semantic_version: "14.5"
                   size: db-s-2vcpu-4gb
                   status: creating
                   tags:

@@ -196,7 +196,17 @@ paths:
         content:
           application/json:
             examples:
-              Example:
+              Example (1 asset):
+                description: Compute the turbulence index of 1 asset
+                value:
+                  assets: 1
+                  assetsAverageReturns:
+                    - 0.5
+                  assetsCovarianceMatrix:
+                    - - 1
+                  assetsReturns:
+                    - 1
+              Example (2 assets):
                 description: Compute the turbulence index of 2 assets
                 value:
                   assets: 2
@@ -221,22 +231,22 @@ paths:
                   description: assetsAverageReturns[i] is the average return of asset i over an historical reference period
                   items:
                     type: number
-                  minItems: 2
+                  minItems: 1
                   type: array
                 assetsCovarianceMatrix:
                   description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j over an historical reference period
                   items:
                     items:
                       type: number
-                    minItems: 2
+                    minItems: 1
                     type: array
-                  minItems: 2
+                  minItems: 1
                   type: array
                 assetsReturns:
                   description: assetsReturns[i] is the return of asset i over a period different from the historical reference period
                   items:
                     type: number
-                  minItems: 2
+                  minItems: 1
                   type: array
               required:
                 - assets
@@ -251,7 +261,7 @@ paths:
             application/json:
               examples:
                 Example:
-                  description: Computed turbulence index of 2 assets
+                  description: Computed turbulence index
                   value:
                     assetsTurbulenceIndex: 0.5624999999999999
               schema:
@@ -425,7 +435,7 @@ paths:
                   minItems: 2
                   type: array
                 assetsGroup:
-                  description: assetsGroup[k] is the indexes of the assets belonging to the assets group
+                  description: assetsGroup[k] is the indexes of the assets belonging to the assets group k
                   items:
                     minimum: 1
                     type: integer
@@ -2269,7 +2279,7 @@ paths:
             application/json:
               examples:
                 Example:
-                  description: Computed an arithmetic return of 100% for the first asset and arithmetic returns of respectively 50% and 100% for the second asset
+                  description: Computed arithmetic returns for 2 assets
                   value:
                     assets:
                       - assetReturns:
@@ -2372,6 +2382,86 @@ paths:
       tags:
         - Assets / Returns
       x-codegen-request-body-name: body
+  /assets/returns/logarithmic:
+    post:
+      description: |
+        Compute the logarithmic return(s) of one or several asset(s) for one or several time period(s).
+
+        References
+        * [Wikipedia, Logarithmic or continuously compounded return](https://en.wikipedia.org/wiki/Rate_of_return#Logarithmic_or_continuously_compounded_return)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Compute the logarithmic returns of 2 assets, one with prices 1,2 and the other with prices 2,3,6
+                value:
+                  assets:
+                    - assetPrices:
+                        - 1
+                        - 2
+                    - assetPrices:
+                        - 2
+                        - 3
+                        - 6
+            schema:
+              properties:
+                assets:
+                  items:
+                    properties:
+                      assetPrices:
+                        description: assetPrices[t] is the price of the asset at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetPrices
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - assets
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed logarithmic returns for 2 assets
+                  value:
+                    assets:
+                      - assetReturns:
+                          - 0.6931471805599453
+                      - assetReturns:
+                          - 0.4054651081081644
+                          - 0.6931471805599453
+              schema:
+                properties:
+                  assets:
+                    items:
+                      properties:
+                        assetReturns:
+                          description: assetReturns[t] is the logarithmic return of the asset from the time t-1 to the time t, in percentage
+                          items:
+                            type: number
+                          type: array
+                      required:
+                        - assetReturns
+                      type: object
+                    type: array
+                required:
+                  - assets
+                type: object
+          description: OK
+      summary: Logarithmic Returns
+      tags:
+        - Assets / Returns
+      x-codegen-request-body-name: body
   /assets/returns/simulation/bootstrap:
     post:
       description: |
@@ -2438,7 +2528,7 @@ paths:
                     - stationaryBlock
                   type: string
                 simulations:
-                  default: 25
+                  default: 1
                   description: The number of simulations to perform
                   minimum: 1
                   type: integer
@@ -2476,9 +2566,10 @@ paths:
                           items:
                             properties:
                               assetReturns:
-                                description: assetReturns[t] is the simulated return of the i-th asset for the t-th time period, in percentage
+                                description: assetReturns[t] is the simulated return of the i-th asset for the t-th time period
                                 items:
                                   type: number
+                                minItems: 1
                                 type: array
                             required:
                               - assetReturns
@@ -2495,6 +2586,433 @@ paths:
       summary: Bootstrap
       tags:
         - Assets / Returns Simulation
+      x-codegen-request-body-name: body
+  /assets/returns/simulation/monte-carlo/cornish-fisher:
+    post:
+      description: |
+        Simulate the return(s) of one asset for one or several time period(s) using a Cornish-Fisher distribution.
+
+        References
+        * [Maillard, Didier, A User’s Guide to the Cornish Fisher Expansion](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1997178)
+        * [Lamb, John D., Maura E. Monville, and Kai-Hong Tee. Making Cornish–Fisher Fit for Risk Measurement, Journal of Risk, Volume 21, Number 5, p. 53-81](http://doi.org/10.21314/JOR.2019.408)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Perform 5 simulations over 4 time periods using a Cornish-Fisher distribution with mean parameter 5%, standard deviation parameter 20%, skewness parameter 0.5 and (excess) kurtosis parameter 1.
+                value:
+                  assetAverageReturnParameter: 0.05
+                  assetKurtosisParameter: 1
+                  assetSkewnessParameter: 0.5
+                  assetVolatilityParameter: 0.2
+                  simulations: 5
+                  simulationsLength: 4
+            schema:
+              properties:
+                assetAverageReturnParameter:
+                  description: The mean parameter of the Cornish-Fisher distribution, corresponding to the arithmetic average return of the asset
+                  type: number
+                assetKurtosisParameter:
+                  description: The (excess) kurtosis parameter of the Cornish-Fisher distribution, corresponding approximately to the (excess) kurtosis of the asset returns
+                  type: number
+                assetSkewnessParameter:
+                  description: The skewness parameter of the Cornish-Fisher distribution, corresponding approximately to the skewness of the asset returns
+                  type: number
+                assetVolatilityParameter:
+                  description: The volatility parameter of the Cornish-Fisher distribution, corresponding approximately to the volatility of the asset returns
+                  exclusiveMinimum: true
+                  minimum: 0
+                  type: number
+                simulations:
+                  default: 1
+                  description: The number of simulations to perform
+                  minimum: 1
+                  type: integer
+                simulationsLength:
+                  default: 1
+                  description: The number of time period(s) to simulate per simulation
+                  minimum: 1
+                  type: integer
+              required:
+                - assetAverageReturnParameter
+                - assetVolatilityParameter
+                - assetSkewnessParameter
+                - assetKurtosisParameter
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Results of 1 simulation of returns for 2 time periods
+                  value:
+                    simulations:
+                      - assets:
+                          - assetReturns:
+                              - 0.01
+                              - 0.02
+              schema:
+                properties:
+                  simulations:
+                    items:
+                      properties:
+                        assets:
+                          description: assets[i] is the data for the i-th asset
+                          items:
+                            properties:
+                              assetReturns:
+                                description: assetReturns[t] is the simulated return of the i-th asset for the t-th time period
+                                items:
+                                  type: number
+                                minItems: 1
+                                type: array
+                            required:
+                              - assetReturns
+                            type: object
+                          maxItems: 1
+                          minItems: 1
+                          type: array
+                      required:
+                        - assets
+                      type: object
+                    type: array
+                required:
+                  - simulations
+                type: object
+          description: OK
+      summary: Cornish-Fisher Distribution
+      tags:
+        - Assets / Monte Carlo Returns Simulation
+      x-codegen-request-body-name: body
+  /assets/returns/simulation/monte-carlo/cornish-fisher/corrected:
+    post:
+      description: |
+        Simulate the return(s) of one asset for one or several time period(s) using a corrected Cornish-Fisher distribution.
+
+        References
+        * [Maillard, Didier, A User’s Guide to the Cornish Fisher Expansion](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1997178)
+        * [Lamb, John D., Maura E. Monville, and Kai-Hong Tee. Making Cornish–fisher Fit for Risk Measurement, Journal of Risk, Volume 21, Number 5, p. 53-81](http://doi.org/10.21314/JOR.2019.408)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Perform 5 simulations over 4 time periods using a corrected Cornish-Fisher distribution with mean 5%, standard deviation 20%, skewness 0.5 and (excess) kurtosis 1.
+                value:
+                  assetAverageReturn: 0.05
+                  assetKurtosis: 1
+                  assetSkewness: 0.5
+                  assetVolatility: 0.2
+                  simulations: 5
+                  simulationsLength: 4
+            schema:
+              properties:
+                assetAverageReturn:
+                  description: The arithmetic average return of the asset, corresponding to the mean of the corrected Cornish-Fisher distribution
+                  type: number
+                assetKurtosis:
+                  description: The kurtosis of the asset returns, corresponding to the kurtosis of the Cornish-Fisher distribution
+                  type: number
+                assetSkewness:
+                  description: The skewness of the asset returns, corresponding to the skewness of the Cornish-Fisher distribution
+                  type: number
+                assetVolatility:
+                  description: The volatility of the asset returns, corresponding to the volatility of the Cornish-Fisher distribution
+                  exclusiveMinimum: true
+                  minimum: 0
+                  type: number
+                simulations:
+                  default: 1
+                  description: The number of simulations to perform
+                  minimum: 1
+                  type: integer
+                simulationsLength:
+                  default: 1
+                  description: The number of time period(s) to simulate per simulation
+                  minimum: 1
+                  type: integer
+              required:
+                - assetAverageReturn
+                - assetVolatility
+                - assetSkewness
+                - assetKurtosis
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Results of 1 simulation of returns for 2 time periods
+                  value:
+                    simulations:
+                      - assets:
+                          - assetReturns:
+                              - 0.01
+                              - 0.02
+              schema:
+                properties:
+                  simulations:
+                    items:
+                      properties:
+                        assets:
+                          description: assets[i] is the data for the i-th asset
+                          items:
+                            properties:
+                              assetReturns:
+                                description: assetReturns[t] is the simulated return of the i-th asset for the t-th time period
+                                items:
+                                  type: number
+                                minItems: 1
+                                type: array
+                            required:
+                              - assetReturns
+                            type: object
+                          maxItems: 1
+                          minItems: 1
+                          type: array
+                      required:
+                        - assets
+                      type: object
+                    type: array
+                required:
+                  - simulations
+                type: object
+          description: OK
+        "500":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Failed computation of skewness and kurtosis parameters
+                  value:
+                    message: "internal error: impossible to compute accurate Cornish-Fisher parameters"
+          description: Failed computation of Cornish-Fisher skewness and (excess) kurtosis parameters corresponding to the asset skewness and (excess) kurtosis
+      summary: Corrected Cornish-Fisher Distribution
+      tags:
+        - Assets / Monte Carlo Returns Simulation
+      x-codegen-request-body-name: body
+  /assets/returns/simulation/monte-carlo/gaussian:
+    post:
+      description: |
+        Simulate the return(s) of one asset for one or several time period(s) using a Gaussian distribution.
+
+        References
+        * [Wikipedia, Normal distribution](https://en.wikipedia.org/wiki/Normal_distribution)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Perform 5 simulations over 4 time periods using a Gaussian distribution with mean 5% and standard deviation 20%.
+                value:
+                  assetAverageReturn: 0.05
+                  assetVolatility: 0.2
+                  simulations: 5
+                  simulationsLength: 4
+            schema:
+              properties:
+                assetAverageReturn:
+                  description: The arithmetic average return of the asset, corresponding to the mean of the Gaussian distribution
+                  type: number
+                assetVolatility:
+                  description: The volatility of the asset returns, corresponding to the standard deviation of the Gaussian distribution
+                  exclusiveMinimum: true
+                  minimum: 0
+                  type: number
+                simulations:
+                  default: 1
+                  description: The number of simulations to perform
+                  minimum: 1
+                  type: integer
+                simulationsLength:
+                  default: 1
+                  description: The number of time period(s) to simulate per simulation
+                  minimum: 1
+                  type: integer
+              required:
+                - assetAverageReturn
+                - assetVolatility
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Results of 1 simulation of returns for 2 time periods
+                  value:
+                    simulations:
+                      - assets:
+                          - assetReturns:
+                              - 0.01
+                              - 0.02
+              schema:
+                properties:
+                  simulations:
+                    items:
+                      properties:
+                        assets:
+                          description: assets[i] is the data for the i-th asset
+                          items:
+                            properties:
+                              assetReturns:
+                                description: assetReturns[t] is the simulated return of the i-th asset for the t-th time period
+                                items:
+                                  type: number
+                                minItems: 1
+                                type: array
+                            required:
+                              - assetReturns
+                            type: object
+                          maxItems: 1
+                          minItems: 1
+                          type: array
+                      required:
+                        - assets
+                      type: object
+                    type: array
+                required:
+                  - simulations
+                type: object
+          description: OK
+      summary: Gaussian Distribution
+      tags:
+        - Assets / Monte Carlo Returns Simulation
+      x-codegen-request-body-name: body
+  /assets/returns/turbulence-partitioned:
+    post:
+      description: |
+        Partition asset returns into several subsets based on their turbulence index.
+
+        References
+        * [George Chow, Jacquier, E., Kritzman, M., & Kenneth Lowry. (1999). Optimal Portfolios in Good Times and Bad. Financial Analysts Journal, 55(3), 65–73.](https://www.jstor.org/stable/4480169)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Partition the asset returns of 2 assets, using two turbulence thresholds of 80% and 95%
+                value:
+                  assets:
+                    - assetReturns:
+                        - 0
+                        - 0.1
+                        - 0.05
+                        - -0.01
+                        - 0.025
+                    - assetReturns:
+                        - 0.005
+                        - 0.05
+                        - 0.1
+                        - -0.02
+                        - 0
+                  turbulenceThresholds:
+                    - 0.8
+                    - 0.95
+            schema:
+              properties:
+                assets:
+                  items:
+                    properties:
+                      assetReturns:
+                        description: assetReturns[t] is the return of the asset at the time t; all the assetReturns arrays must have the same length
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetReturns
+                    type: object
+                  minItems: 1
+                  type: array
+                turbulenceThresholds:
+                  description: The turbulence threshold(s), in percentage; in case several turbulence thresholds are provided, they must be provided in increasing order
+                  items:
+                    exclusiveMaximum: true
+                    exclusiveMinimum: true
+                    maximum: 1
+                    minimum: 0
+                    type: number
+                  maxItems: 3
+                  minItems: 1
+                  type: array
+                turbulenceThresholdsConversionMethod:
+                  default: chisquareInverseDistribution
+                  description: The method to use to convert the turbulence threshold(s) into turbulence score(s)
+                  enum:
+                    - empiricalQuantileDistribution
+                    - chisquareInverseDistribution
+                  type: string
+              required:
+                - assets
+                - turbulenceThresholds
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed partitioning of the asset returns of 2 assets, using 2 turbulence thresholds
+                  value:
+                    assets:
+                      - assetTurbulencePartitionedReturns:
+                          - assetReturns:
+                              - 0
+                              - -0.01
+                              - 0.025
+                          - assetReturns:
+                              - 0.1
+                              - 0.05
+                          - assetReturns: []
+                      - assetTurbulencePartitionedReturns:
+                          - assetReturns:
+                              - 0.005
+                              - -0.02
+                              - 0
+                          - assetReturns:
+                              - 0.05
+                              - 0.1
+                          - assetReturns: []
+              schema:
+                properties:
+                  assets:
+                    items:
+                      properties:
+                        assetTurbulencePartitionedReturns:
+                          description: assetTurbulencePartitionedReturns[k] corresponds to all the asset returns whose turbulence index is lower than or equal to the turbulence score associated with the turbulence threshold turbulenceThresholds[k]; the length of the array assetTurbulencePartitionedReturns is equal to the length of the array turbulenceThresholds plus 1
+                          items:
+                            properties:
+                              assetReturns:
+                                description: assetReturns[t] is the return of the asset at a time t; the array assetReturns is possibly empty in case no asset returns have a turbulence index lower than or equal to the turbulence score associated with the turbulence threshold turbulenceThresholds[k]
+                                items:
+                                  type: number
+                                minItems: 0
+                                type: array
+                            required:
+                              - assetReturns
+                            type: object
+                          maxItems: 4
+                          minItems: 2
+                          type: array
+                      required:
+                        - assetTurbulencePartitionedReturns
+                      type: object
+                    type: array
+                required:
+                  - assets
+                type: object
+          description: OK
+      summary: Turbulence-partitioned Asset Returns
+      tags:
+        - Assets / Returns
       x-codegen-request-body-name: body
   /assets/skewness:
     post:
@@ -3168,91 +3686,6 @@ paths:
                 type: object
           description: OK
       summary: Beta
-      tags:
-        - Portfolio Analysis
-      x-codegen-request-body-name: body
-  /portfolio/analysis/conditional-value-at-risk:
-    post:
-      description: |
-        Compute the conditional value at risk of one or several portfolio(s) from portfolio values.
-
-        References
-        * [Wikipedia, Value at risk](https://en.wikipedia.org/wiki/Value_at_risk)
-        * [Acerbi, C. and Tasche, D. (2002), Expected Shortfall: A Natural Coherent Alternative to Value at Risk. Economic Notes, 31: 379-388](https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0300.00091)
-      requestBody:
-        content:
-          application/json:
-            examples:
-              From portfolio values:
-                description: Compute the 5% conditional value at risk of a portfolio based on portfolio values
-                value:
-                  alpha: 0.05
-                  portfolios:
-                    - portfolioValues:
-                        - 100
-                        - 95
-                        - 100
-                        - 90
-                        - 85
-                        - 70
-            schema:
-              properties:
-                alpha:
-                  description: The conditional value at risk level
-                  exclusiveMaximum: true
-                  exclusiveMinimum: true
-                  maximum: 1
-                  minimum: 0
-                  type: number
-                portfolios:
-                  items:
-                    properties:
-                      portfolioValues:
-                        description: portfolioValues[t] is the value of the portfolio at the time t
-                        items:
-                          exclusiveMinimum: true
-                          minimum: 0
-                          type: number
-                        minItems: 2
-                        type: array
-                    required:
-                      - portfolioValues
-                    type: object
-                  minItems: 1
-                  type: array
-              required:
-                - portfolios
-                - alpha
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                Example:
-                  description: Computed conditional value at risk of a portfolio
-                  value:
-                    portfolios:
-                      - portfolioConditionalValueAtRisk: 0.17647058823529413
-              schema:
-                properties:
-                  portfolios:
-                    items:
-                      properties:
-                        portfolioConditionalValueAtRisk:
-                          description: The conditional value at risk of the portfolio
-                          type: number
-                      required:
-                        - portfolioConditionalValueAtRisk
-                      type: object
-                    minItems: 1
-                    type: array
-                required:
-                  - portfolios
-                type: object
-          description: OK
-      summary: Conditional Value At Risk
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
@@ -5604,22 +6037,22 @@ paths:
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
-  /portfolio/analysis/value-at-risk:
+  /portfolio/analysis/value-at-risk/conditional/cornish-fisher:
     post:
       description: |
-        Compute the value at risk of one or several portfolio(s) from portfolio values.
+        Compute the Cornish-Fisher conditional value at risk of one or several portfolio(s) from portfolio values.
 
         References
-        * [Wikipedia, Value at risk](https://en.wikipedia.org/wiki/Value_at_risk)
-        * [Acerbi, C. and Tasche, D. (2002), Expected Shortfall: A Natural Coherent Alternative to Value at Risk. Economic Notes, 31: 379-388](https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0300.00091)
+        * [Boudt, Kris and Peterson, Brian G. and Croux, Christophe, Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal Returns (October 31, 2007). Journal of Risk, Vol. 11, No. 2, pp. 79-103, 2008](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1024151).
+        * [Maillard, Didier, A User’s Guide to the Cornish Fisher Expansion](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1997178)
+        * [Lamb, John D., Maura E. Monville, and Kai-Hong Tee. Making Cornish–fisher Fit for Risk Measurement, Journal of Risk, Volume 21, Number 5, p. 53-81](http://doi.org/10.21314/JOR.2019.408)
       requestBody:
         content:
           application/json:
             examples:
               From portfolio values:
-                description: Compute the 5% value at risk of a portfolio based on portfolio values
+                description: Compute the Cornish-Fisher conditional value at risk of a portfolio based on portfolio values, at the default 95% confidence level
                 value:
-                  alpha: 0.05
                   portfolios:
                     - portfolioValues:
                         - 100
@@ -5630,8 +6063,260 @@ paths:
                         - 70
             schema:
               properties:
-                alpha:
-                  description: The value at risk level
+                confidenceLevel:
+                  default: 0.95
+                  description: The confidence level
+                  exclusiveMaximum: true
+                  exclusiveMinimum: true
+                  maximum: 1
+                  minimum: 0
+                  type: number
+                portfolios:
+                  items:
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 5
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - portfolios
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed conditional value at risk of a portfolio
+                  value:
+                    portfolios:
+                      - portfolioConditionalValueAtRisk: 0.17647058823529413
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioConditionalValueAtRisk:
+                          description: The conditional value at risk of the portfolio
+                          type: number
+                      required:
+                        - portfolioConditionalValueAtRisk
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Cornish-Fisher Conditional Value At Risk
+      tags:
+        - Portfolio Analysis / Conditional Value At Risk
+      x-codegen-request-body-name: body
+  /portfolio/analysis/value-at-risk/conditional/cornish-fisher/corrected:
+    post:
+      description: |
+        Compute the corrected Cornish-Fisher conditional value at risk of one or several portfolio(s) from portfolio values.
+
+        References
+        * [Maillard, Didier, A User’s Guide to the Cornish Fisher Expansion](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1997178)
+        * [Lamb, John D., Maura E. Monville, and Kai-Hong Tee. Making Cornish–fisher Fit for Risk Measurement, Journal of Risk, Volume 21, Number 5, p. 53-81](http://doi.org/10.21314/JOR.2019.408)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From portfolio values:
+                description: Compute the corrected Cornish-Fisher conditional value at risk of a portfolio based on portfolio values, at the default 95% confidence level
+                value:
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
+            schema:
+              properties:
+                confidenceLevel:
+                  default: 0.95
+                  description: The confidence level
+                  exclusiveMaximum: true
+                  exclusiveMinimum: true
+                  maximum: 1
+                  minimum: 0
+                  type: number
+                portfolios:
+                  items:
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 5
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - portfolios
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed conditional value at risk of a portfolio
+                  value:
+                    portfolios:
+                      - portfolioConditionalValueAtRisk: 0.17647058823529413
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioConditionalValueAtRisk:
+                          description: The conditional value at risk of the portfolio
+                          type: number
+                      required:
+                        - portfolioConditionalValueAtRisk
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Corrected Cornish-Fisher Conditional Value At Risk
+      tags:
+        - Portfolio Analysis / Conditional Value At Risk
+      x-codegen-request-body-name: body
+  /portfolio/analysis/value-at-risk/conditional/gaussian:
+    post:
+      description: |
+        Compute the Gaussian conditional value at risk of one or several portfolio(s) from portfolio values.
+
+        References
+        * [Boudt, Kris and Peterson, Brian G. and Croux, Christophe, Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal Returns (October 31, 2007). Journal of Risk, Vol. 11, No. 2, pp. 79-103, 2008](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1024151).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From portfolio values:
+                description: Compute the Gaussian conditional value at risk of a portfolio based on portfolio values, at the default 95% confidence level
+                value:
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
+            schema:
+              properties:
+                confidenceLevel:
+                  default: 0.95
+                  description: The confidence level
+                  exclusiveMaximum: true
+                  exclusiveMinimum: true
+                  maximum: 1
+                  minimum: 0
+                  type: number
+                portfolios:
+                  items:
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 3
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - portfolios
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed conditional value at risk of a portfolio
+                  value:
+                    portfolios:
+                      - portfolioConditionalValueAtRisk: 0.17647058823529413
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioConditionalValueAtRisk:
+                          description: The conditional value at risk of the portfolio
+                          type: number
+                      required:
+                        - portfolioConditionalValueAtRisk
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Gaussian Conditional Value At Risk
+      tags:
+        - Portfolio Analysis / Conditional Value At Risk
+      x-codegen-request-body-name: body
+  /portfolio/analysis/value-at-risk/conditional/historical:
+    post:
+      description: |
+        Compute the historical conditional value at risk of one or several portfolio(s) from portfolio values.
+
+        References
+        * [Wikipedia, Value at risk](https://en.wikipedia.org/wiki/Value_at_risk)
+        * [Acerbi, C. and Tasche, D. (2002), Expected Shortfall: A Natural Coherent Alternative to Value at Risk. Economic Notes, 31: 379-388](https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0300.00091)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From portfolio values:
+                description: Compute the historical conditional value at risk of a portfolio based on portfolio values, at the default 95% confidence level
+                value:
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
+            schema:
+              properties:
+                confidenceLevel:
+                  default: 0.95
+                  description: The confidence level
                   exclusiveMaximum: true
                   exclusiveMinimum: true
                   maximum: 1
@@ -5655,7 +6340,90 @@ paths:
                   type: array
               required:
                 - portfolios
-                - alpha
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed conditional value at risk of a portfolio
+                  value:
+                    portfolios:
+                      - portfolioConditionalValueAtRisk: 0.17647058823529413
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioConditionalValueAtRisk:
+                          description: The conditional value at risk of the portfolio
+                          type: number
+                      required:
+                        - portfolioConditionalValueAtRisk
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Historical Conditional Value At Risk
+      tags:
+        - Portfolio Analysis / Conditional Value At Risk
+      x-codegen-request-body-name: body
+  /portfolio/analysis/value-at-risk/cornish-fisher:
+    post:
+      description: |
+        Compute the Cornish-Fisher value at risk of one or several portfolio(s) from portfolio values.
+
+        References
+        * [Laurent Favre and José-Antonio Galeano, Mean-Modified Value-at-Risk Optimization with Hedge Funds, The Journal of Alternative Investments Fall 2002, 5 (2) 21-25](https://jai.pm-research.com/content/5/2/21)
+        * [Lamb, John D., Maura E. Monville, and Kai-Hong Tee. Making Cornish–fisher Fit for Risk Measurement, Journal of Risk, Volume 21, Number 5, p. 53-81](http://doi.org/10.21314/JOR.2019.408)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From portfolio values:
+                description: Compute the Cornish-Fisher value at risk of a portfolio based on portfolio values, at the default 95% confidence level
+                value:
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
+            schema:
+              properties:
+                confidenceLevel:
+                  default: 0.95
+                  description: The confidence level
+                  exclusiveMaximum: true
+                  exclusiveMinimum: true
+                  maximum: 1
+                  minimum: 0
+                  type: number
+                portfolios:
+                  items:
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 5
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - portfolios
               type: object
         required: true
       responses:
@@ -5685,9 +6453,259 @@ paths:
                   - portfolios
                 type: object
           description: OK
-      summary: Value At Risk
+      summary: Cornish-Fisher Value At Risk
       tags:
-        - Portfolio Analysis
+        - Portfolio Analysis / Value At Risk
+      x-codegen-request-body-name: body
+  /portfolio/analysis/value-at-risk/cornish-fisher/corrected:
+    post:
+      description: |
+        Compute the corrected Cornish-Fisher value at risk of one or several portfolio(s) from portfolio values.
+
+        References
+        * [Lamb, John D., Maura E. Monville, and Kai-Hong Tee. Making Cornish–fisher Fit for Risk Measurement, Journal of Risk, Volume 21, Number 5, p. 53-81](http://doi.org/10.21314/JOR.2019.408)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From portfolio values:
+                description: Compute the corrected Cornish-Fisher value at risk of a portfolio based on portfolio values, at the default 95% confidence level
+                value:
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
+            schema:
+              properties:
+                confidenceLevel:
+                  default: 0.95
+                  description: The confidence level
+                  exclusiveMaximum: true
+                  exclusiveMinimum: true
+                  maximum: 1
+                  minimum: 0
+                  type: number
+                portfolios:
+                  items:
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 5
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - portfolios
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed value at risk of a portfolio
+                  value:
+                    portfolios:
+                      - portfolioValueAtRisk: 0.17647058823529413
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioValueAtRisk:
+                          description: The value at risk of the portfolio
+                          type: number
+                      required:
+                        - portfolioValueAtRisk
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Corrected Cornish-Fisher Value At Risk
+      tags:
+        - Portfolio Analysis / Value At Risk
+      x-codegen-request-body-name: body
+  /portfolio/analysis/value-at-risk/gaussian:
+    post:
+      description: |
+        Compute the Gaussian value at risk of one or several portfolio(s) from portfolio values.
+
+        References
+        * [Ballotta, Laura and Fusai, Gianluca, A Gentle Introduction to Value at Risk](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2942138)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From portfolio values:
+                description: Compute the Gaussian value at risk of a portfolio based on portfolio values, at the default 95% confidence level
+                value:
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
+            schema:
+              properties:
+                confidenceLevel:
+                  default: 0.95
+                  description: The confidence level
+                  exclusiveMaximum: true
+                  exclusiveMinimum: true
+                  maximum: 1
+                  minimum: 0
+                  type: number
+                portfolios:
+                  items:
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 3
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - portfolios
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed value at risk of a portfolio
+                  value:
+                    portfolios:
+                      - portfolioValueAtRisk: 0.17647058823529413
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioValueAtRisk:
+                          description: The value at risk of the portfolio
+                          type: number
+                      required:
+                        - portfolioValueAtRisk
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Gaussian Value At Risk
+      tags:
+        - Portfolio Analysis / Value At Risk
+      x-codegen-request-body-name: body
+  /portfolio/analysis/value-at-risk/historical:
+    post:
+      description: |
+        Compute the historical value at risk of one or several portfolio(s) from portfolio values.
+
+        References
+        * [Wikipedia, Value at risk](https://en.wikipedia.org/wiki/Value_at_risk)
+        * [Acerbi, C. and Tasche, D. (2002), Expected Shortfall: A Natural Coherent Alternative to Value at Risk. Economic Notes, 31: 379-388](https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0300.00091)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From portfolio values:
+                description: Compute the historical value at risk of a portfolio based on portfolio values, at the default 95% confidence level
+                value:
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
+            schema:
+              properties:
+                confidenceLevel:
+                  default: 0.95
+                  description: The confidence level
+                  exclusiveMaximum: true
+                  exclusiveMinimum: true
+                  maximum: 1
+                  minimum: 0
+                  type: number
+                portfolios:
+                  items:
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - portfolios
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed value at risk of a portfolio
+                  value:
+                    portfolios:
+                      - portfolioValueAtRisk: 0.17647058823529413
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioValueAtRisk:
+                          description: The value at risk of the portfolio
+                          type: number
+                      required:
+                        - portfolioValueAtRisk
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Historical Value At Risk
+      tags:
+        - Portfolio Analysis / Value At Risk
       x-codegen-request-body-name: body
   /portfolio/analysis/volatility:
     post:

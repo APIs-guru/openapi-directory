@@ -394,6 +394,117 @@ paths:
                 type: array
           description: ""
       summary: Player Details by Team
+  "/{format}/PlayersBasic/{team}":
+    get:
+      operationId: PlayersByTeamBasic
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "
+
+            \          The abbreviation of the requested team.
+
+            \          <br>Examples: <code>SF</code>, <code>NYY</code>.
+
+            \        "
+          in: path
+          name: team
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PlayerBasic"
+                type: array
+          description: ""
+      summary: Players by Team (Basic)
+  "/{format}/SchedulesBasic/{season}":
+    get:
+      operationId: SchedulesBasic
+      parameters:
+        - description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc."
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScheduleBasic"
+                type: array
+          description: ""
+      summary: Schedules (Basic)
+  "/{format}/ScoresBasic/{season}/{week}":
+    get:
+      operationId: GamesByWeekBasic
+      parameters:
+        - description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "
+
+            \          Year of the season.
+
+            \          <br>Examples: <code>2015</code>, <code>2016</code>, etc.
+
+            \        "
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+        - description: "
+
+            \          The week of the game(s).
+
+            \          <br>Examples: <code>1</code>, <code>2</code>, <code>3</code>, etc.
+
+            \        "
+          in: path
+          name: week
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                nullable: true
+          description: ""
+      summary: Games by Week (Basic)
   "/{format}/Stadiums":
     get:
       operationId: Stadiums
@@ -563,6 +674,30 @@ paths:
                 type: array
           description: ""
       summary: Teams
+  "/{format}/TeamsBasic":
+    get:
+      operationId: TeamsBasic
+      parameters:
+        - description: Desired response format. Valid entries are <code>xml</code> or <code>json</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamBasic"
+                type: array
+          description: ""
+      summary: Teams (Basic)
 components:
   schemas:
     Conference:
@@ -811,6 +946,136 @@ components:
         Weight:
           nullable: true
           type: integer
+    PlayerBasic:
+      properties:
+        BirthCity:
+          nullable: true
+          type: string
+        BirthState:
+          nullable: true
+          type: string
+        Class:
+          nullable: true
+          type: string
+        Created:
+          nullable: true
+          type: string
+        FirstName:
+          nullable: true
+          type: string
+        GlobalTeamID:
+          nullable: true
+          type: integer
+        Height:
+          nullable: true
+          type: integer
+        Jersey:
+          nullable: true
+          type: integer
+        LastName:
+          nullable: true
+          type: string
+        PlayerID:
+          nullable: false
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        Team:
+          nullable: true
+          type: string
+        TeamID:
+          nullable: true
+          type: integer
+        Updated:
+          nullable: true
+          type: string
+        Weight:
+          nullable: true
+          type: integer
+    ScheduleBasic:
+      properties:
+        AwayTeam:
+          nullable: true
+          type: string
+        AwayTeamID:
+          nullable: false
+          type: integer
+        AwayTeamName:
+          nullable: true
+          type: string
+        AwayTeamScore:
+          nullable: true
+          type: integer
+        Created:
+          nullable: true
+          type: string
+        DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
+          nullable: true
+          type: string
+        Day:
+          nullable: true
+          type: string
+        GameEndDateTime:
+          nullable: true
+          type: string
+        GameID:
+          nullable: false
+          type: integer
+        GlobalAwayTeamID:
+          nullable: false
+          type: integer
+        GlobalGameID:
+          nullable: false
+          type: integer
+        GlobalHomeTeamID:
+          nullable: false
+          type: integer
+        HomeTeam:
+          nullable: true
+          type: string
+        HomeTeamID:
+          nullable: false
+          type: integer
+        HomeTeamName:
+          nullable: true
+          type: string
+        HomeTeamScore:
+          nullable: true
+          type: integer
+        IsClosed:
+          nullable: false
+          type: boolean
+        NeutralVenue:
+          nullable: true
+          type: boolean
+        Season:
+          nullable: false
+          type: integer
+        SeasonType:
+          nullable: false
+          type: integer
+        StadiumID:
+          nullable: true
+          type: integer
+        Status:
+          nullable: true
+          type: string
+        Title:
+          nullable: true
+          type: string
+        Updated:
+          nullable: true
+          type: string
+        Week:
+          nullable: true
+          type: integer
     Season:
       properties:
         ApiSeason:
@@ -922,6 +1187,41 @@ components:
         Wins:
           nullable: true
           type: integer
+    TeamBasic:
+      properties:
+        Active:
+          nullable: false
+          type: boolean
+        Conference:
+          nullable: true
+          type: string
+        ConferenceID:
+          nullable: true
+          type: integer
+        GlobalTeamID:
+          nullable: false
+          type: integer
+        Key:
+          nullable: true
+          type: string
+        Name:
+          nullable: true
+          type: string
+        School:
+          nullable: true
+          type: string
+        ShortDisplayName:
+          nullable: true
+          type: string
+        StadiumID:
+          nullable: false
+          type: integer
+        TeamID:
+          nullable: false
+          type: integer
+        TeamLogoUrl:
+          nullable: true
+          type: string
     TeamGame:
       properties:
         AssistedTackles:

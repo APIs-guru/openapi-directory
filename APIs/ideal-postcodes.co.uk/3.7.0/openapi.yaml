@@ -229,6 +229,14 @@ tags:
     name: ecad_address
     x-displayName: IE Address (ECAD)
   - description: |
+      AddressBase Core Address. An alternative to UK PAF dataset from Ordnance Survey.
+
+      Please contact us to have this enabled on your account.
+
+      <SchemaDefinition schemaRef="#/components/schemas/AddressBaseCore" />
+    name: ab_address
+    x-displayName: AddressBase Core
+  - description: |
       GeoNames place record
 
       <SchemaDefinition schemaRef="#/components/schemas/GeonamesPlace" />
@@ -1743,6 +1751,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/BadRequestResponse"
           description: Bad Request
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
+          description: Rate Limit Timeout
       summary: Phone Number Validation
       tags:
         - Phone Numbers
@@ -2141,6 +2155,272 @@ paths:
               -d "api_key=iddqdmr"
 components:
   schemas:
+    AbAddress:
+      allOf:
+        - $ref: "#/components/schemas/PafBase"
+        - properties:
+            country:
+              enum:
+                - England
+                - Scotland
+                - Wales
+            country_iso:
+              enum:
+                - GBR
+            country_iso_2:
+              enum:
+                - GB
+            dataset:
+              enum:
+                - ab
+              type: string
+            language:
+              enum:
+                - en
+            native:
+              $ref: "#/components/schemas/AddressBaseCore"
+            postcode_type:
+              enum:
+                - ""
+              title: Postcode Type
+              type: string
+          required:
+            - native
+          type: object
+      description: |-
+        Address from Ordnance Survey AddressBase Ccore dataset.
+
+        Please contact us to have this enabled on your account.
+
+        All AddressBase Core address have a UPRN and a rooftop geolocation available however they may not have a UDPRN.
+      title: AddressBase Core
+    AddressBaseCore:
+      description: Represents a GB address in Ordnance Survey's AddressBase Core dataset
+      properties:
+        administrative_county:
+          $ref: "#/components/schemas/paf_administrative_county"
+        building_name:
+          description: The building name is a description applied to a single address or a group of addresses.
+          maxLength: 110
+          title: Building Name
+          type: string
+        building_number:
+          description: The building number is a number or range of numbers given to a single address or a group of addresses.
+          maxLength: 13
+          title: Building Number
+          type: string
+        change_code:
+          description: This enumeration is used in association with the attribute “CHANGE_CODE”. This enumeration identifies the type of change that has been made to a feature. The change type must be set when a feature is inserted, updated or deleted. Please see section 3 for more information. Example I = Insert, U = Update, D = Delete
+          enum:
+            - I
+            - U
+            - D
+          maxLength: 50
+          title: Change Code
+          type: string
+        classification_code:
+          description: A code that describes the classification of the address record to a maximum of a secondary level.
+          maxLength: 4
+          title: Classification Code
+          type: string
+        country:
+          $ref: "#/components/schemas/paf_country"
+        country_iso:
+          $ref: "#/components/schemas/paf_country_iso"
+        county:
+          $ref: "#/components/schemas/paf_county"
+        dataset:
+          description: Indicates the provenance of an address
+          enum:
+            - ab
+          title: Dataset
+          type: string
+        delivery_point_suffix:
+          description: A two-character code uniquely identifying an individual delivery point within a postcode, assigned by Royal Mail.
+          maxLength: 2
+          title: Delivery Point Suffix
+          type: string
+        district:
+          $ref: "#/components/schemas/paf_district"
+        eastings:
+          description: A value in metres defining the x location in accordance with the British National Grid.
+          maxLength: 8
+          multipleOf: 0.01
+          title: Easting
+          type: number
+        gss_code:
+          description: The Office for National Statistics Governmental Statistical Service (GSS) code representing the contributing Local Authority.
+          maxLength: 9
+          title: Governmental Statistical Service
+          type: string
+        id:
+          $ref: "#/components/schemas/ID"
+        island:
+          description: Third level of geographic area name to record island names where appropriate.
+          maxLength: 50
+          title: Island
+          type: string
+        language:
+          $ref: "#/components/schemas/Language"
+        last_update_date:
+          description: The latest date on which any of the attributes on this record were last changed.
+          format: date
+          title: Last Update Date
+          type: string
+        latitude:
+          description: A value in metres defining the y location in accordance with the British National Grid.
+          title: Latitude
+          type: number
+        line_1:
+          $ref: "#/components/schemas/paf_line1"
+        line_2:
+          $ref: "#/components/schemas/paf_line2"
+        line_3:
+          $ref: "#/components/schemas/paf_line3"
+        locality:
+          description: A locality defines an area or geographical identifier within a town, village or hamlet. Locality represents the lower level geographical area. The locality field should be used in conjunction with the town name and street description fields to uniquely identify geographic area where there may be more than one within an administrative area.
+          maxLength: 35
+          title: Locality
+          type: string
+        longitude:
+          description: A value defining the Longitude location in accordance with the ETRS89 coordinate reference system.
+          title: Longitude
+          type: number
+        northings:
+          description: A value in metres defining the y location in accordance with the British National Grid.
+          maxLength: 9
+          multipleOf: 0.01
+          title: Northing
+          type: number
+        organisation:
+          description: The organisation name is the business name given, when appropriate, to an address record.
+          maxLength: 100
+          title: Organisation
+          type: string
+        parent_uprn:
+          description: UPRN of the parent Record if a parent-child relationship exists.
+          maxLength: 12
+          title: PARENT_UPRN
+          type: string
+        po_box:
+          description: Text concatenation of 'PO BOX' and the Post Office Box (PO Box) number or 'BFPO' and the British Forces Post Office number.
+          maxLength: 13
+          title: PO Box
+          type: string
+        post_town:
+          description: |-
+            The town or city in which the Royal Mail sorting office is located which services this address record.
+
+            Condition:
+            POST_TOWN is not populated if this is the same as TOWN_NAME.
+          maxLength: 30
+          title: Town Name
+          type: string
+        postal_county:
+          $ref: "#/components/schemas/paf_postal_county"
+        postcode:
+          description: A postcode assigned by Royal Mail for the address record.
+          maxLength: 8
+          title: Postcode
+          type: string
+        premise:
+          $ref: "#/components/schemas/paf_premise"
+        rpc:
+          description: Representative Point Code describes the accuracy of the coordinate that has been allocated to the UPRN as indicated by the Local Authority and enhanced using large scale OS data.
+          maxLength: 1
+          title: Representative Point Code
+          type: number
+        single_address_line:
+          description: A single attribute containing text concatenation of the address elements separated by a comma.
+          maxLength: 500
+          title: Single Line Address
+          type: string
+        street_name:
+          description: Street / Road name for the address record.
+          maxLength: 100
+          title: Single Line Address
+          type: string
+        sub_building:
+          description: The sub-building name and/or number for the address record.
+          maxLength: 110
+          title: Sub-building
+          type: string
+        toid:
+          description: The Topographic Identifier taken from OS MasterMap Topography Layer. This TOID is assigned to the UPRN by performing a spatial intersection between the two identifiers. It consists of the letters 'osgb' and is followed by up to sixteen digits.
+          maxLength: 20
+          title: TOID
+          type: string
+        town_name:
+          description: Geographical town name assigned by the Local Authority. Please note this can be different from the Post Town value assigned by Royal Mail.
+          maxLength: 35
+          title: Town Name
+          type: string
+        traditional_county:
+          $ref: "#/components/schemas/paf_traditional_county"
+        udprn:
+          description: Royal Mail's Unique Delivery Point Reference Number (UDPRN).
+          maxLength: 8
+          title: UDPRN
+          type: number
+        uprn:
+          description: Unique Property Reference Number (UPRN) assigned by the LLPG Custodian or Ordnance Survey.
+          maxLength: 12
+          title: UPRN
+          type: string
+        usrn:
+          description: |-
+            Unique Street Reference Number assigned by the Street Name and Numbering Custodian OR
+
+            Ordnance Survey depending on the address record.
+          maxLength: 8
+          title: USRN
+          type: number
+        ward:
+          $ref: "#/components/schemas/paf_ward"
+      required:
+        - language
+        - dataset
+        - id
+        - line_1
+        - line_2
+        - line_3
+        - premise
+        - uprn
+        - udprn
+        - parent_uprn
+        - usrn
+        - toid
+        - classification_code
+        - eastings
+        - northings
+        - latitude
+        - longitude
+        - single_address_line
+        - street_name
+        - locality
+        - town_name
+        - delivery_point_suffix
+        - post_town
+        - gss_code
+        - rpc
+        - last_update_date
+        - island
+        - change_code
+        - building_name
+        - building_number
+        - sub_building
+        - postcode
+        - po_box
+        - organisation
+        - country
+        - country_iso
+        - county
+        - district
+        - ward
+        - traditional_county
+        - administrative_county
+        - postal_county
+      title: AddressBase Core
     AddressLatitudeParam:
       description: |
         Latitude query for reverse geocoding.
@@ -2186,6 +2466,7 @@ components:
                   - $ref: "#/components/schemas/NybAddress"
                   - $ref: "#/components/schemas/WelshPafAddress"
                   - $ref: "#/components/schemas/PafAliasAddress"
+                  - $ref: "#/components/schemas/AbAddress"
               type: array
             limit:
               default: 10
@@ -2290,8 +2571,8 @@ components:
             of first use. This field will be `null` if the purchase has not yet been 
             used.
           example: 2022-01-06T11:41:27.092Z
+          nullable: true
           type: string
-          x-nullable: true
         purchased:
           description: Number of procured lookups from this purchase.
           example: 20000
@@ -2319,8 +2600,8 @@ components:
           example: 1000
           format: int32
           minimum: 0
+          nullable: true
           type: integer
-          x-nullable: true
       required:
         - limit
         - consumed
@@ -2442,8 +2723,8 @@ components:
           example: 30
           format: int32
           minimum: 0
+          nullable: true
           type: integer
-          x-nullable: true
       required:
         - limit
       title: API Key Individual Limit
@@ -2674,21 +2955,18 @@ components:
           nullable: true
           title: Country ISO Alpha-2 Code
           type: string
-          x-nullable: true
         name:
           description: The full name of the carrier that number is associated with.
           example: BT Group
           nullable: true
           title: Name
           type: string
-          x-nullable: true
         network_code:
           description: The [Mobile Country Code](https://en.wikipedia.org/wiki/Mobile_country_code) for the carrier.
           example: "234"
           nullable: true
           title: Network Code
           type: string
-          x-nullable: true
         network_type:
           description: Type of network that number is associated with.
           enum:
@@ -2702,7 +2980,6 @@ components:
           nullable: true
           title: Network Type
           type: string
-          x-nullable: true
       required:
         - network_code
         - name
@@ -2710,7 +2987,6 @@ components:
         - network_type
       title: Carrier Object
       type: object
-      x-nullable: true
     CleanseResponse:
       properties:
         code:
@@ -2923,6 +3199,7 @@ components:
           - `nyb` (GBR) Not Yet Built File
           - `pafa` (GBR) Alias File
           - `pafw` (GBR) Welsh File
+          - `ab` (GBR) AddressBase Core
           - `ecaf` (IRL) Eircode ECAF
           - `ecad` (IRL) Eircode ECAD
           - `usps` (USA) USPS Zip+4
@@ -2935,6 +3212,7 @@ components:
         - usps
         - ecaf
         - ecad
+        - ab
       title: Dataset
       type: string
     Eastings:
@@ -3850,6 +4128,7 @@ components:
             - $ref: "#/components/schemas/EcadAddress"
             - $ref: "#/components/schemas/EcafAddress"
             - $ref: "#/components/schemas/UspsAddress"
+            - $ref: "#/components/schemas/UspsAddress"
         northings:
           description: Not available for non-UK addresses
           enum:
@@ -4000,6 +4279,7 @@ components:
             - $ref: "#/components/schemas/WelshPafAddress"
             - $ref: "#/components/schemas/PafAliasAddress"
             - $ref: "#/components/schemas/NybAddress"
+            - $ref: "#/components/schemas/AbAddress"
             - $ref: "#/components/schemas/GbrGlobalAddress"
       required:
         - message
@@ -4195,49 +4475,42 @@ components:
             - null
           nullable: true
           type: string
-          x-nullable: true
         current_carrier:
           description: Representation of current phone carrier information like network code, name, country, network type
           enum:
             - null
           nullable: true
           type: string
-          x-nullable: true
         international_format:
           description: Phone number formatted to international standard
           enum:
             - null
           nullable: true
           type: string
-          x-nullable: true
         iso_country:
           description: Country code in 3 letter ISO format
           enum:
             - null
           nullable: true
           type: string
-          x-nullable: true
         iso_country_2:
           description: Country code in 2 letter ISO format
           enum:
             - null
           nullable: true
           type: string
-          x-nullable: true
         national_format:
           description: Phone number formatted to local standard
           enum:
             - null
           nullable: true
           type: string
-          x-nullable: true
         original_carrier:
           description: Representation of original phone carrier information like network code, name, country, network type
           enum:
             - null
           nullable: true
           type: string
-          x-nullable: true
         valid:
           enum:
             - false
@@ -4376,8 +4649,8 @@ components:
               example: 10000
               format: int32
               minimum: 0
+              nullable: true
               type: number
-              x-nullable: true
           type: object
         name:
           description: Licensee individual or organisation name
@@ -5025,6 +5298,7 @@ components:
               - $ref: "#/components/schemas/NybAddress"
               - $ref: "#/components/schemas/PafAliasAddress"
               - $ref: "#/components/schemas/WelshPafAddress"
+              - $ref: "#/components/schemas/AbAddress"
               - $ref: "#/components/schemas/GbrGlobalAddress"
           type: array
       required:
@@ -5212,28 +5486,24 @@ components:
             - null
           nullable: true
           type: boolean
-          x-nullable: true
         deliverable:
           description: Deliverability is not known
           enum:
             - null
           nullable: true
           type: boolean
-          x-nullable: true
         disposable:
           description: Disposability is not known
           enum:
             - null
           nullable: true
           type: boolean
-          x-nullable: true
         free:
           description: Free email provider is not known
           enum:
             - null
           nullable: true
           type: boolean
-          x-nullable: true
         result:
           enum:
             - unknown
@@ -5244,7 +5514,6 @@ components:
             - null
           nullable: true
           type: boolean
-          x-nullable: true
       required:
         - result
         - deliverable
@@ -5366,6 +5635,7 @@ components:
             - $ref: "#/components/schemas/NybAddress"
             - $ref: "#/components/schemas/PafAliasAddress"
             - $ref: "#/components/schemas/WelshPafAddress"
+            - $ref: "#/components/schemas/AbAddress"
         plus_4_code:
           description: Not available for non-US addresses
           enum:
@@ -5998,10 +6268,11 @@ components:
       description: |-
         This indicates the type of user. It can only take the values 'S' or 'L' indicating small or large respectively. Large User Postcodes. These are assigned to one single address either due to the large volume of mail received at that address, or because a PO Box or Selectapost service has been set up. Small User Postcodes. These identify a group of Delivery Points.
 
-        On average there are 15 Delivery Points per Postcode. However this can vary between 1 and, in some cases, 100. There will never be more than 100 Delivery Points on a Postcode.
+        On average there are 19 Delivery Points per Postcode. However this can vary between 1 and, in some cases, 100. There will never be more than 100 Delivery Points on a Postcode.
       enum:
         - S
         - L
+        - ""
       title: Postcode Type
       type: string
     paf_premise:
@@ -6261,6 +6532,7 @@ x-tagGroups:
       - suggestion
       - usps_address
       - uk_address
+      - ab_address
       - ecaf_address
       - ecad_address
       - geonames_place

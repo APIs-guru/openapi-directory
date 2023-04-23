@@ -594,6 +594,479 @@ paths:
       summary: Update a price
       tags:
         - Prices
+  /v3/repricer/strategies:
+    get:
+      description: Get the list of strategies
+      operationId: getStrategies
+      parameters:
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  strategyCollections:
+                    items:
+                      properties:
+                        assignedCount:
+                          example: 1
+                          format: int32
+                          type: integer
+                        enableRepricerForPromotion:
+                          example: true
+                          type: boolean
+                        enabled:
+                          example: true
+                          type: boolean
+                        repricerStrategy:
+                          example: Buy Box Strategy For testing
+                          type: string
+                        strategies:
+                          items:
+                            properties:
+                              adjustmentType:
+                                enum:
+                                  - UNIT
+                                  - PERCENTAGE
+                                type: string
+                              adjustmentValue:
+                                example: 1.2
+                                format: double
+                                type: number
+                              strategyType:
+                                enum:
+                                  - Buy Box Price
+                                  - External Price
+                                  - Competitive Price
+                                type: string
+                            type: object
+                          type: array
+                        strategyCollectionId:
+                          example: 41678999-a088-4fd8-9eb4-55f8d8ed4ac8
+                          type: string
+                      type: object
+                    type: array
+                  totalElements:
+                    example: 1
+                    format: int32
+                    type: integer
+                type: object
+          description: Successful Operation
+      summary: List of Repricer Strategies
+      tags:
+        - Prices
+  /v3/repricer/strategy:
+    post:
+      description: Creates a new strategy for the seller
+      operationId: createStrategy
+      parameters:
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                enableRepricerForPromotion:
+                  description: Status of item on promotions to be enable on repricer
+                  example: true
+                  type: boolean
+                enabled:
+                  description: Status of the Strategy Collection
+                  example: true
+                  type: boolean
+                repricerStrategy:
+                  description: Name of the Strategy Collection
+                  example: Buy Box Strategy For testing
+                  type: string
+                strategies:
+                  description: Strategies
+                  items:
+                    properties:
+                      adjustmentType:
+                        enum:
+                          - UNIT
+                          - PERCENTAGE
+                        type: string
+                      adjustmentValue:
+                        example: 1.2
+                        format: double
+                        type: number
+                      strategyType:
+                        enum:
+                          - Buy Box Price
+                          - External Price
+                          - Competitive Price
+                        type: string
+                    type: object
+                  type: array
+              type: object
+        description: The request body will have the strategy related information
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  enableRepricerForPromotion:
+                    example: true
+                    type: boolean
+                  enabled:
+                    example: true
+                    type: boolean
+                  repricerStrategy:
+                    example: Buy Box Strategy For testing
+                    type: string
+                  strategies:
+                    items:
+                      properties:
+                        adjustmentType:
+                          enum:
+                            - UNIT
+                            - PERCENTAGE
+                          type: string
+                        adjustmentValue:
+                          example: 1.2
+                          format: double
+                          type: number
+                        strategyType:
+                          enum:
+                            - Buy Box Price
+                            - External Price
+                            - Competitive Price
+                          type: string
+                      type: object
+                    type: array
+                  strategyCollectionId:
+                    example: 41678999-a088-4fd8-9eb4-55f8d8ed4ac8
+                    type: string
+                type: object
+          description: Successful Operation
+      summary: Create Repricer Strategy
+      tags:
+        - Prices
+  "/v3/repricer/strategy/{strategyCollectionId}":
+    delete:
+      description: Deletes the strategy
+      operationId: deleteStrategy
+      parameters:
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: strategyCollectionId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Strategy with Strategy Collection Id : 41678999-a088-4fd8-9eb4-55f8d8ed4ac8 deleted successfully"
+                    type: string
+                type: object
+          description: Successful Operation
+      summary: Delete Repricer Strategy
+      tags:
+        - Prices
+    put:
+      description: Updates the existing strategy
+      operationId: updateStrategy
+      parameters:
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: strategyCollectionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                enableRepricerForPromotion:
+                  description: Status of item on promotions to be enable on repricer
+                  example: true
+                  type: boolean
+                enabled:
+                  description: Status of the Strategy Collection
+                  example: true
+                  type: boolean
+                repricerStrategy:
+                  description: Name of the Strategy Collection
+                  example: Buy Box Strategy For testing
+                  type: string
+                strategies:
+                  description: Strategies
+                  items:
+                    properties:
+                      adjustmentType:
+                        enum:
+                          - UNIT
+                          - PERCENTAGE
+                        type: string
+                      adjustmentValue:
+                        example: 1.2
+                        format: double
+                        type: number
+                      strategyType:
+                        enum:
+                          - Buy Box Price
+                          - External Price
+                          - Competitive Price
+                        type: string
+                    type: object
+                  type: array
+              type: object
+        description: The request body will have the strategy related information
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  enableRepricerForPromotion:
+                    example: true
+                    type: boolean
+                  enabled:
+                    example: true
+                    type: boolean
+                  repricerStrategy:
+                    example: Buy Box Strategy For testing
+                    type: string
+                  strategies:
+                    items:
+                      properties:
+                        adjustmentType:
+                          enum:
+                            - UNIT
+                            - PERCENTAGE
+                          type: string
+                        adjustmentValue:
+                          example: 1.2
+                          format: double
+                          type: number
+                        strategyType:
+                          enum:
+                            - Buy Box Price
+                            - External Price
+                            - Competitive Price
+                          type: string
+                      type: object
+                    type: array
+                  strategyCollectionId:
+                    example: 41678999-a088-4fd8-9eb4-55f8d8ed4ac8
+                    type: string
+                type: object
+          description: Successful Operation
+      summary: Update Repricer Strategy
+      tags:
+        - Prices
+  /v3/repricerFeeds:
+    post:
+      description: Add/Remove one or more items from a strategy
+      operationId: getRepricerFeed
+      parameters:
+        - description: The access token retrieved in the Token API call
+          example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+          in: header
+          name: WM_SEC.ACCESS_TOKEN
+          required: true
+          schema:
+            type: string
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
+          in: header
+          name: WM_CONSUMER.CHANNEL.TYPE
+          required: false
+          schema:
+            type: string
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
+          example: b3261d2d-028a-4ef7-8602-633c23200af6
+          in: header
+          name: WM_QOS.CORRELATION_ID
+          required: true
+          schema:
+            type: string
+        - description: Walmart Service Name
+          example: Walmart Service Name
+          in: header
+          name: WM_SVC.NAME
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                Item:
+                  items:
+                    properties:
+                      Strategy:
+                        properties:
+                          maximumSellerAllowedPrice:
+                            example: 8
+                            format: double
+                            type: number
+                          minimumSellerAllowedPrice:
+                            example: 7.2
+                            format: double
+                            type: number
+                          repricerStrategy:
+                            example: Match Competitive Price
+                            type: string
+                          sku:
+                            example: 06068064605122shoe
+                            type: string
+                        type: object
+                    type: object
+                  type: array
+                ItemFeedHeader:
+                  properties:
+                    locale:
+                      example: en
+                      type: string
+                    mart:
+                      example: WALMART_US
+                      type: string
+                    processMode:
+                      example: REPLACE
+                      type: string
+                    sellingChannel:
+                      example: repricerstrategy
+                      type: string
+                    subset:
+                      example: EXTERNAL
+                      type: string
+                    version:
+                      example: "1.0"
+                      type: string
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  feedId:
+                    example: AFEE4EEC9C3541B6A7B58E694416EC82@AUoBAwA
+                    type: string
+                type: object
+          description: Successful Operation
+      summary: Assign/Unassign items to/from Repricer Strategy
+      tags:
+        - Prices
 components:
   parameters:
     accept:
@@ -713,6 +1186,96 @@ components:
           type: object
         feedId:
           description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
+          type: string
+      type: object
+    FeedItemsHeaderRequestDTO:
+      properties:
+        locale:
+          example: en
+          type: string
+        mart:
+          example: WALMART_US
+          type: string
+        processMode:
+          example: REPLACE
+          type: string
+        sellingChannel:
+          example: repricerstrategy
+          type: string
+        subset:
+          example: EXTERNAL
+          type: string
+        version:
+          example: "1.0"
+          type: string
+      type: object
+    FeedItemsRequestDTO:
+      properties:
+        maximumSellerAllowedPrice:
+          example: 8
+          format: double
+          type: number
+        minimumSellerAllowedPrice:
+          example: 7.2
+          format: double
+          type: number
+        repricerStrategy:
+          example: Match Competitive Price
+          type: string
+        sku:
+          example: 06068064605122shoe
+          type: string
+      type: object
+    FeedUploadRequestDTO:
+      properties:
+        Item:
+          items:
+            properties:
+              Strategy:
+                properties:
+                  maximumSellerAllowedPrice:
+                    example: 8
+                    format: double
+                    type: number
+                  minimumSellerAllowedPrice:
+                    example: 7.2
+                    format: double
+                    type: number
+                  repricerStrategy:
+                    example: Match Competitive Price
+                    type: string
+                  sku:
+                    example: 06068064605122shoe
+                    type: string
+                type: object
+            type: object
+          type: array
+        ItemFeedHeader:
+          properties:
+            locale:
+              example: en
+              type: string
+            mart:
+              example: WALMART_US
+              type: string
+            processMode:
+              example: REPLACE
+              type: string
+            sellingChannel:
+              example: repricerstrategy
+              type: string
+            subset:
+              example: EXTERNAL
+              type: string
+            version:
+              example: "1.0"
+              type: string
+          type: object
+      type: object
+    FeedUploadResponseDTO:
+      properties:
+        feedId:
+          example: AFEE4EEC9C3541B6A7B58E694416EC82@AUoBAwA
           type: string
       type: object
     GatewayError:
@@ -1014,6 +1577,188 @@ components:
         - currentPrice
         - currentPriceType
       type: object
+    RepricerEntityCollectionResponse:
+      properties:
+        strategyCollections:
+          items:
+            properties:
+              assignedCount:
+                example: 1
+                format: int32
+                type: integer
+              enableRepricerForPromotion:
+                example: true
+                type: boolean
+              enabled:
+                example: true
+                type: boolean
+              repricerStrategy:
+                example: Buy Box Strategy For testing
+                type: string
+              strategies:
+                items:
+                  properties:
+                    adjustmentType:
+                      enum:
+                        - UNIT
+                        - PERCENTAGE
+                      type: string
+                    adjustmentValue:
+                      example: 1.2
+                      format: double
+                      type: number
+                    strategyType:
+                      enum:
+                        - Buy Box Price
+                        - External Price
+                        - Competitive Price
+                      type: string
+                  type: object
+                type: array
+              strategyCollectionId:
+                example: 41678999-a088-4fd8-9eb4-55f8d8ed4ac8
+                type: string
+            type: object
+          type: array
+        totalElements:
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    RepricerEntityDeleteResponse:
+      properties:
+        message:
+          example: "Strategy with Strategy Collection Id : 41678999-a088-4fd8-9eb4-55f8d8ed4ac8 deleted successfully"
+          type: string
+      type: object
+    RepricerEntityGetResponse:
+      properties:
+        assignedCount:
+          example: 1
+          format: int32
+          type: integer
+        enableRepricerForPromotion:
+          example: true
+          type: boolean
+        enabled:
+          example: true
+          type: boolean
+        repricerStrategy:
+          example: Buy Box Strategy For testing
+          type: string
+        strategies:
+          items:
+            properties:
+              adjustmentType:
+                enum:
+                  - UNIT
+                  - PERCENTAGE
+                type: string
+              adjustmentValue:
+                example: 1.2
+                format: double
+                type: number
+              strategyType:
+                enum:
+                  - Buy Box Price
+                  - External Price
+                  - Competitive Price
+                type: string
+            type: object
+          type: array
+        strategyCollectionId:
+          example: 41678999-a088-4fd8-9eb4-55f8d8ed4ac8
+          type: string
+      type: object
+    RepricerEntityRequest:
+      properties:
+        enableRepricerForPromotion:
+          description: Status of item on promotions to be enable on repricer
+          example: true
+          type: boolean
+        enabled:
+          description: Status of the Strategy Collection
+          example: true
+          type: boolean
+        repricerStrategy:
+          description: Name of the Strategy Collection
+          example: Buy Box Strategy For testing
+          type: string
+        strategies:
+          description: Strategies
+          items:
+            properties:
+              adjustmentType:
+                enum:
+                  - UNIT
+                  - PERCENTAGE
+                type: string
+              adjustmentValue:
+                example: 1.2
+                format: double
+                type: number
+              strategyType:
+                enum:
+                  - Buy Box Price
+                  - External Price
+                  - Competitive Price
+                type: string
+            type: object
+          type: array
+      type: object
+    RepricerEntityResponse:
+      properties:
+        enableRepricerForPromotion:
+          example: true
+          type: boolean
+        enabled:
+          example: true
+          type: boolean
+        repricerStrategy:
+          example: Buy Box Strategy For testing
+          type: string
+        strategies:
+          items:
+            properties:
+              adjustmentType:
+                enum:
+                  - UNIT
+                  - PERCENTAGE
+                type: string
+              adjustmentValue:
+                example: 1.2
+                format: double
+                type: number
+              strategyType:
+                enum:
+                  - Buy Box Price
+                  - External Price
+                  - Competitive Price
+                type: string
+            type: object
+          type: array
+        strategyCollectionId:
+          example: 41678999-a088-4fd8-9eb4-55f8d8ed4ac8
+          type: string
+      type: object
+    RepricerStrategyType:
+      properties:
+        adjustmentType:
+          enum:
+            - UNIT
+            - PERCENTAGE
+          type: string
+        adjustmentValue:
+          example: 1.2
+          format: double
+          type: number
+        strategyType:
+          enum:
+            - Buy Box Price
+            - External Price
+            - Competitive Price
+          type: string
+      type: object
     StatusInfo:
       properties:
         subsidyEnrolled:
@@ -1022,4 +1767,24 @@ components:
         subsidyPreference:
           description: A Boolean parameter that determines whether offer level subsidy setting override seller level subsidy setting
           type: boolean
+      type: object
+    StrategyDetailsRequestDTO:
+      properties:
+        Strategy:
+          properties:
+            maximumSellerAllowedPrice:
+              example: 8
+              format: double
+              type: number
+            minimumSellerAllowedPrice:
+              example: 7.2
+              format: double
+              type: number
+            repricerStrategy:
+              example: Match Competitive Price
+              type: string
+            sku:
+              example: 06068064605122shoe
+              type: string
+          type: object
       type: object

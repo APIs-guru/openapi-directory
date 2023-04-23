@@ -153,13 +153,6 @@ parameters:
     required: false
     type: boolean
     x-from-version: SaaS
-  with_enriched_attributes_coming_soon:
-    description: Return attribute values of the category (only available on SaaS platforms) <strong>[COMING SOON]<strong>
-    in: query
-    name: with_enriched_attributes
-    required: false
-    type: boolean
-    x-from-version: SaaS
   with_position:
     description: Return information about category position into its category tree (only available since the 7.0 version)
     in: query
@@ -11686,6 +11679,534 @@ paths:
       x-app-token: true
       x-versions:
         - SaaS
+  "/api/rest/v1/catalogs/{id}/mapped-products":
+    get:
+      description: This endpoint allows you to get the list of products related to a catalog when the mapping is enabled. Please, note that a disabled catalog can return an HTTP 200 with a payload containing an error message, for more details see the <a href="apps/catalogs.html#troubleshooting">App Catalog</a> section.
+      operationId: get_app_catalog_mapped_products
+      parameters:
+        - description: Catalog ID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+        - default: cursor to the first page
+          description: Cursor when using the `search_after` pagination method type. <strong>Should never be set manually</strong>, see <a href="/documentation/pagination.html">Pagination</a> section
+          in: query
+          name: search_after
+          required: false
+          type: string
+        - default: 100
+          description: Number of results by page, see <a href="/documentation/pagination.html">Pagination</a> section
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: limit
+          required: false
+          type: integer
+        - description: Filter products that have been updated BEFORE the provided date (Only available on Catalogs endpoints)
+          format: date
+          in: query
+          name: updated_before
+          required: false
+          type: string
+          x-from-version: SaaS
+        - description: Filter products that have been updated AFTER the provided date (Only available on Catalogs endpoints)
+          format: date
+          in: query
+          name: updated_after
+          required: false
+          type: string
+          x-from-version: SaaS
+      responses:
+        "200":
+          description: Return the paginated **mapped** products
+          schema:
+            allOf:
+              - properties:
+                  _links:
+                    properties:
+                      first:
+                        properties:
+                          href:
+                            description: URI of the first page of resources
+                            type: string
+                        type: object
+                      next:
+                        properties:
+                          href:
+                            description: URI of the next page of resources
+                            type: string
+                        type: object
+                      self:
+                        properties:
+                          href:
+                            description: URI of the current page of resources
+                            type: string
+                        type: object
+                    type: object
+                type: object
+              - properties:
+                  _embedded:
+                    properties:
+                      items:
+                        items:
+                          format: uuid
+                          type: string
+                        type: array
+                    type: object
+            title: Products
+            type: object
+          x-examples-per-version:
+            - x-example:
+                _embedded:
+                  items:
+                    - code: sku-1234
+                      title: Canon Video Visualiser RE-455X
+                      uuid: 04f47a54-8cc9-4c51-90e9-eb9aace0865f
+                    - code: sku-1235
+                      title: Trust Cuby Pro
+                      uuid: 06dc8c5b-9e2f-4423-b9dd-31a3aaa0a048
+                    - code: sku-1236
+                      title: Trust Urban Revolt
+                      uuid: 0c3635f9-fedc-4bbd-96ab-856f69746b56
+                    - code: sku-1237
+                      title: Microsoft LifeCam Studio
+                      uuid: 0e957ed4-fa44-48de-b6c7-7149d890fb3a
+                _links:
+                  first:
+                    href: https://demo.akeneo.com/api/rest/v1/catalogs/d259aecf-3ec1-4b07-ae0f-ce234b86c025/mapped-products?limit=100
+                  self:
+                    href: https://demo.akeneo.com/api/rest/v1/catalogs/d259aecf-3ec1-4b07-ae0f-ce234b86c025/mapped-products?limit=100
+              x-version: SaaS
+        "401":
+          description: Authentication required
+          examples:
+            code: 401
+            message: Authentication is required
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: Can be caused by a missing or expired token
+        "403":
+          description: Access forbidden
+          examples:
+            code: 403
+            message: Access forbidden. You are not allowed to list catalogs.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The app does not have the permission to execute this request
+        "404":
+          description: Catalog not found
+          examples:
+            code: 404
+            message: Catalog "65f5a521-e65c-4d7b-8be8-1f267fa2729c" does not exist or you can't access it.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The catalog id given in the URI does not exist
+      summary: Get the list of mapped products related to a catalog
+      tags:
+        - Catalog products
+      x-versions:
+        - SaaS
+  "/api/rest/v1/catalogs/{id}/mapping-schemas/product":
+    delete:
+      description: This endpoint allows you to delete the product mapping schema related to a catalog
+      operationId: delete_app_catalogs_mapping_schema_product
+      parameters:
+        - description: Catalog ID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Deleted
+        "401":
+          description: Authentication required
+          examples:
+            code: 401
+            message: Authentication is required
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: Can be caused by a missing or expired token
+        "403":
+          description: Access forbidden
+          examples:
+            code: 403
+            message: Access forbidden. You are not allowed to list catalogs.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The app does not have the permission to execute this request
+        "404":
+          description: Catalog not found
+          examples:
+            code: 404
+            message: Catalog "65f5a521-e65c-4d7b-8be8-1f267fa2729c" does not exist or you can't access it.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The catalog id given in the URI does not exist
+      summary: Delete the product mapping schema related to a catalog
+      tags:
+        - Mapping schema for products
+      x-app-token: true
+      x-versions:
+        - SaaS
+    get:
+      description: This endpoint allows you to retrieve the product mapping schema related to a catalog
+      operationId: get_app_catalogs_mapping_schema_product
+      parameters:
+        - description: Catalog ID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Return product mapping schema related to a catalog
+          schema:
+            example:
+              $comment: My schema !
+              $id: https://example.com/product
+              $schema: https://api.akeneo.com/mapping/product/0.0.6/schema
+              description: JSON Schema describing the structure of products expected by our application
+              properties:
+                available:
+                  description: Used to display when a product is out of stock on your e-commerce website.
+                  title: Is available
+                  type: boolean
+                body_html:
+                  description: Product description in raw HTML
+                  maxLength: 255
+                  minLength: 0
+                  title: Description (textarea)
+                  type: string
+                main_color:
+                  description: The main color of the product, used by grid filters on your e-commerce website.
+                  title: Main color
+                  type: string
+                main_image:
+                  description: "Format: URI/link"
+                  format: uri
+                  title: Main image
+                  type: string
+                name:
+                  title: Product name
+                  type: string
+                price:
+                  title: Price (€)
+                  type: number
+                publication_date:
+                  description: |-
+                    Format: ISO 8601 standard. 
+                    Used to filter products that must be published on your e-commerce website depending on the current date.
+                  format: date-time
+                  title: Publication date
+                  type: string
+                sku:
+                  description: |-
+                    Selling Partner SKU (stock keeping unit) identifier for the listing. 
+                     SKU uniquely identifies a listing for a Selling Partner.
+                  title: SKU (Stock Keeping Unit)
+                  type: string
+                uuid:
+                  title: Product UUID
+                  type: string
+                weight:
+                  title: Weight (g)
+                  type: number
+              title: Product Mapping
+              type: object
+            properties:
+              $comment:
+                description: allows you to add a comment
+                type: string
+              $id:
+                description: id of your schema
+                type: string
+              $schema:
+                description: $schema indicates which product mapping schema version your app uses
+                type: string
+              description:
+                description: allows you to add a description of your mapping schema
+                type: string
+              properties:
+                description: list and describe the targets your app expects
+                type: object
+              title:
+                description: allows you to add a title to your mapping schema
+                type: string
+              type:
+                description: should always be "object"
+                type: string
+            required:
+              - $schema
+              - properties
+            type: object
+        "401":
+          description: Authentication required
+          examples:
+            code: 401
+            message: Authentication is required
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: Can be caused by a missing or expired token
+        "403":
+          description: Access forbidden
+          examples:
+            code: 403
+            message: Access forbidden. You are not allowed to list catalogs.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The app does not have the permission to execute this request
+        "404":
+          description: Catalog not found
+          examples:
+            code: 404
+            message: Catalog "65f5a521-e65c-4d7b-8be8-1f267fa2729c" does not exist or you can't access it.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The catalog id given in the URI does not exist
+      summary: Get the product mapping schema related to a catalog
+      tags:
+        - Mapping schema for products
+      x-app-token: true
+      x-versions:
+        - SaaS
+    put:
+      description: This endpoint allows you to create or update the product mapping schema related to a catalog
+      operationId: put_app_catalogs_mapping_schema_product
+      parameters:
+        - description: Catalog ID
+          format: uuid
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            example:
+              $comment: My schema !
+              $id: https://example.com/product
+              $schema: https://api.akeneo.com/mapping/product/0.0.6/schema
+              description: JSON Schema describing the structure of products expected by our application
+              properties:
+                available:
+                  description: Used to display when a product is out of stock on your e-commerce website.
+                  title: Is available
+                  type: boolean
+                body_html:
+                  description: Product description in raw HTML
+                  maxLength: 255
+                  minLength: 0
+                  title: Description (textarea)
+                  type: string
+                main_color:
+                  description: The main color of the product, used by grid filters on your e-commerce website.
+                  title: Main color
+                  type: string
+                main_image:
+                  description: "Format: URI/link"
+                  format: uri
+                  title: Main image
+                  type: string
+                name:
+                  title: Product name
+                  type: string
+                price:
+                  title: Price (€)
+                  type: number
+                publication_date:
+                  description: |-
+                    Format: ISO 8601 standard. 
+                    Used to filter products that must be published on your e-commerce website depending on the current date.
+                  format: date-time
+                  title: Publication date
+                  type: string
+                sku:
+                  description: |-
+                    Selling Partner SKU (stock keeping unit) identifier for the listing. 
+                     SKU uniquely identifies a listing for a Selling Partner.
+                  title: SKU (Stock Keeping Unit)
+                  type: string
+                uuid:
+                  title: Product UUID
+                  type: string
+                weight:
+                  title: Weight (g)
+                  type: number
+              title: Product Mapping
+              type: object
+            properties:
+              $comment:
+                description: allows you to add a comment
+                type: string
+              $id:
+                description: id of your schema
+                type: string
+              $schema:
+                description: $schema indicates which product mapping schema version your app uses
+                type: string
+              description:
+                description: allows you to add a description of your mapping schema
+                type: string
+              properties:
+                description: list and describe the targets your app expects
+                type: object
+              title:
+                description: allows you to add a title to your mapping schema
+                type: string
+              type:
+                description: should always be "object"
+                type: string
+            required:
+              - $schema
+              - properties
+            type: object
+      responses:
+        "201":
+          description: Created
+          headers:
+            Location:
+              description: URI of the created resource
+              type: string
+          x-details: Means that the creation was successful
+        "401":
+          description: Authentication required
+          examples:
+            code: 401
+            message: Authentication is required
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: Can be caused by a missing or expired token
+        "403":
+          description: Access forbidden
+          examples:
+            code: 403
+            message: Access forbidden. You are not allowed to list catalogs.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The app does not have the permission to execute this request
+        "415":
+          description: Unsupported Media type
+          examples:
+            code: 415
+            message: ‘xxx’ in ‘Content-type’ header is not valid.  Only ‘application/json’ is allowed.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The `Content-type` header has to be `application/json`
+        "422":
+          description: Unprocessable entity
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The validation of the entity given in the body of the request failed
+          x-examples-per-version:
+            - x-example:
+                code: 422
+                errors:
+                  - message: You must provide a valid schema.
+                    property: product_mapping_schema
+                message: Validation failed.
+              x-version: SaaS
+      summary: Create or update the product mapping schema related to a catalog
+      tags:
+        - Mapping schema for products
+      x-app-token: true
+      x-versions:
+        - SaaS
   "/api/rest/v1/catalogs/{id}/product-uuids":
     get:
       description: This endpoint allows you to get the list of uuids of products contained in a catalog. Please, note that a disabled catalog can return an HTTP 200 with a payload containing an error message, for more details see the <a href="apps/catalogs.html#troubleshooting">App Catalog</a> section.
@@ -12837,7 +13358,7 @@ paths:
           required: false
           type: boolean
           x-from-version: "7.0"
-        - description: Return attribute values of the category (only available on SaaS platforms) <strong>[COMING SOON]<strong>
+        - description: Return attribute values of the category (only available on SaaS platforms)
           in: query
           name: with_enriched_attributes
           required: false
@@ -13244,7 +13765,7 @@ paths:
                 type: string
             type: object
           x-details: The resource code given in the URI does not correspond to any existing PIM resource
-      summary: Download a category media file [COMING SOON]
+      summary: Download a category media file
       tags:
         - Category
       x-content-type: Mime-type of the media file

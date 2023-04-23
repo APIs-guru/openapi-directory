@@ -644,6 +644,12 @@ paths:
 
         If a collaboration is being created with a group, access to
         this endpoint is dependent on the group's ability to be invited.
+
+        If collaboration is in `pending` status, the following fields
+        are redacted:
+        - `login` and `name` are hidden if a collaboration was created
+        using `user_id`,
+        -  `name` is hidden if a collaboration was created using `login`.
       operationId: post_collaborations
       parameters:
         - description: |-
@@ -1316,7 +1322,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Comment"
+                $ref: "#/components/schemas/Comment--Full"
           description: Returns a full comment object.
         default:
           content:
@@ -1376,7 +1382,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Comment"
+                $ref: "#/components/schemas/Comment--Full"
           description: Returns the updated comment object.
         default:
           content:
@@ -3149,7 +3155,7 @@ paths:
           example: "[pdf]"
           in: header
           name: x-rep-hints
-          required: true
+          required: false
           schema:
             nullable: true
             type: string
@@ -3158,7 +3164,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/File"
+                $ref: "#/components/schemas/File--Full"
           description: |-
             Returns a file object.
 
@@ -3553,7 +3559,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/File"
+                $ref: "#/components/schemas/File--Full"
           description: |-
             Returns a file object.
 
@@ -3770,7 +3776,7 @@ paths:
                       vanity_url: null
                     type: file
               schema:
-                $ref: "#/components/schemas/File"
+                $ref: "#/components/schemas/File--Full"
           description: |-
             Returns the base representation of a file with a new shared
             link attached.
@@ -3886,7 +3892,7 @@ paths:
                       vanity_url: null
                     type: file
               schema:
-                $ref: "#/components/schemas/File"
+                $ref: "#/components/schemas/File--Full"
           description: |-
             Returns the base representation of a file with the
             additional shared link information.
@@ -3977,7 +3983,7 @@ paths:
                     shared_link: null
                     type: file
               schema:
-                $ref: "#/components/schemas/File"
+                $ref: "#/components/schemas/File--Full"
           description: Returns a basic representation of a file, with the shared link removed.
         "401":
           content:
@@ -4169,7 +4175,7 @@ paths:
                       vanity_url: null
                     type: file
               schema:
-                $ref: "#/components/schemas/File"
+                $ref: "#/components/schemas/File--Full"
           description: |-
             Returns a basic representation of the file, with the updated shared
             link attached.
@@ -4737,7 +4743,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/File"
+                $ref: "#/components/schemas/File--Full"
           description: |-
             Returns a new file object representing the copied file.
 
@@ -5309,7 +5315,6 @@ paths:
                   description: A list of Box Skill cards to apply to this file.
                   items:
                     oneOf:
-                      - $ref: "#/components/schemas/SkillCard"
                       - $ref: "#/components/schemas/KeywordSkillCard"
                       - $ref: "#/components/schemas/TimelineSkillCard"
                       - $ref: "#/components/schemas/TranscriptSkillCard"
@@ -5419,7 +5424,6 @@ paths:
                   value:
                     allOf:
                       - oneOf:
-                          - $ref: "#/components/schemas/SkillCard"
                           - $ref: "#/components/schemas/KeywordSkillCard"
                           - $ref: "#/components/schemas/TimelineSkillCard"
                           - $ref: "#/components/schemas/TranscriptSkillCard"
@@ -6466,7 +6470,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FileVersion"
+                $ref: "#/components/schemas/FileVersion--Full"
           description: Returns a newly created file version object.
         default:
           content:
@@ -6591,7 +6595,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FileVersion"
+                $ref: "#/components/schemas/FileVersion--Full"
           description: |-
             Returns a specific version of a file.
 
@@ -6657,7 +6661,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FileVersion"
+                $ref: "#/components/schemas/FileVersion--Full"
           description: Returns a restored file version object.
         default:
           content:
@@ -7153,7 +7157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns a folder object.
 
@@ -7588,7 +7592,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns a folder, including the first 100 entries in the folder.
 
@@ -8038,7 +8042,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns a folder object for the updated folder
 
@@ -8297,7 +8301,7 @@ paths:
                       vanity_url: null
                     type: folder
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns the base representation of a folder with a new shared
             link attached.
@@ -8417,7 +8421,7 @@ paths:
                       vanity_url: null
                     type: folder
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns the base representation of a folder with the
             additional shared link information.
@@ -8512,7 +8516,7 @@ paths:
                     shared_link: null
                     type: folder
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: Returns a basic representation of a folder, with the shared link removed.
         "401":
           content:
@@ -8705,7 +8709,7 @@ paths:
                       vanity_url: null
                     type: folder
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns a basic representation of the folder, with the updated shared
             link attached.
@@ -8920,7 +8924,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns a new folder object representing the copied folder.
 
@@ -10992,7 +10996,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Group"
+                $ref: "#/components/schemas/Group--Full"
           description: Returns the group object
         default:
           content:
@@ -11124,7 +11128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Group"
+                $ref: "#/components/schemas/Group--Full"
           description: Returns the updated group object.
         "409":
           content:
@@ -14843,7 +14847,7 @@ paths:
               that has only `marketing` within its text. Results containing
               `BoxWorks` are omitted.
 
-            Please note that we do not support lower case (that is,
+            We do not support lower case (that is,
             `and`, `or`, and `not`) or mixed case (that is, `And`, `Or`, and `Not`)
             operators.
 
@@ -14962,7 +14966,7 @@ paths:
             by the given list of owners, defined as a list of comma separated
             user IDs.
 
-            Please note that the items still need to be owned or shared with
+            The items still need to be owned or shared with
             the currently authenticated user for them to show up in the search
             results. If the user does not have access to any files owned by any of
             the users an empty result set will be returned.
@@ -14987,7 +14991,7 @@ paths:
             by the given list of users, defined as a list of comma separated
             user IDs.
 
-            Please note that the items still need to be owned or shared with
+            The items still need to be owned or shared with
             the currently authenticated user for them to show up in the search
             results. If the user does not have access to any files owned by any of
             the users an empty result set will be returned.
@@ -15013,7 +15017,7 @@ paths:
             Search results will also include items within any subfolders
             of those ancestor folders.
 
-            Please note that the folders still need to be owned or shared with
+            The folders still need to be owned or shared with
             the currently authenticated user. If the folder is not accessible by this
             user, or it does not exist, a `HTTP 404` error code will be returned
             instead.
@@ -15189,7 +15193,7 @@ paths:
             Defines whether the search results should include any items
             that the user recently accessed through a shared link.
 
-            Please note that when this parameter has been set to true,
+            When this parameter has been set to true,
             the format of the response of this API changes to return
             a list of [Search Results with
             Shared Links](r://search_results_with_shared_links)
@@ -15236,6 +15240,60 @@ paths:
             default: 0
             format: int64
             type: integer
+        - description: |-
+            Limits the search results to items that were deleted by the given
+            list of users, defined as a list of comma separated user IDs.
+
+            The `trash_content` parameter needs to be set to `trashed_only`.
+
+            If searching in trash is not performed, an empty result set
+            is returned. The items need to be owned or shared with
+            the currently authenticated user for them to show up in the search
+            results.
+
+            If the user does not have access to any files owned by
+            any of the users, an empty result set is returned.
+
+            Data available from 2023-02-01 onwards.
+          example:
+            - "123422"
+            - "23532"
+            - "3241212"
+          in: query
+          name: deleted_user_ids
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: |-
+            Limits the search results to any items deleted within a given
+            date range.
+
+            Date ranges are defined as comma separated RFC3339 timestamps.
+
+            If the the start date is omitted (`2014-05-17T13:35:01-07:00`),
+            anything deleted before the end date will be returned.
+
+            If the end date is omitted (`2014-05-15T13:35:01-07:00`),
+            the current date will be used as the end date instead.
+
+            The `trash_content` parameter needs to be set to `trashed_only`.
+
+            If searching in trash is not performed, then an empty result
+            is returned.
+
+            Data available from 2023-02-01 onwards.
+          example:
+            - 2014-05-15T13:35:01-07:00
+            - 2014-05-17T13:35:01-07:00
+          in: query
+          name: deleted_at_range
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
       responses:
         "200":
           content:
@@ -15363,7 +15421,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/File"
+                $ref: "#/components/schemas/File--Full"
           description: |-
             Returns a full file resource if the shared link is valid and
             the user has access to it.
@@ -15448,7 +15506,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns a full folder resource if the shared link is valid and
             the user has access to it.
@@ -16915,7 +16973,6 @@ paths:
                       description: A list of Box Skill cards to apply to this file.
                       items:
                         oneOf:
-                          - $ref: "#/components/schemas/SkillCard"
                           - $ref: "#/components/schemas/KeywordSkillCard"
                           - $ref: "#/components/schemas/TimelineSkillCard"
                           - $ref: "#/components/schemas/TranscriptSkillCard"
@@ -18563,7 +18620,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/User--Full"
           description: Returns a single user object.
         default:
           content:
@@ -18763,7 +18820,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/User--Full"
           description: |-
             Returns a single user object.
 
@@ -18965,7 +19022,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/User--Full"
           description: Returns the updated user object.
         "400":
           content:
@@ -19371,7 +19428,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Folder--Full"
           description: |-
             Returns the information for the newly created
             destination folder.
@@ -21795,24 +21852,24 @@ components:
           type: object
         accessible_by:
           allOf:
-            - $ref: "#/components/schemas/User--Mini"
-            - description: The user or group that is granted access
+            - $ref: "#/components/schemas/User--Collaborations"
+            - description: The user or group that is granted access.
         acknowledged_at:
           description: |-
             When the `status` of the collaboration object changed to
-            `accepted` or `rejected`
+            `accepted` or `rejected`.
           example: 2012-12-12T10:55:20-08:00
           format: date-time
           type: string
         created_at:
-          description: When the collaboration object was created
+          description: When the collaboration object was created.
           example: 2012-12-12T10:53:43-08:00
           format: date-time
           type: string
         created_by:
           allOf:
-            - $ref: "#/components/schemas/User--Mini"
-            - description: The user who created the collaboration object
+            - $ref: "#/components/schemas/User--Collaborations"
+            - description: The user who created the collaboration object.
             - example:
                 - id: 33224412
                 - type: user
@@ -21848,7 +21905,7 @@ components:
                 `null` when the collaboration `status` is `pending`.
           nullable: true
         modified_at:
-          description: When the collaboration object was last modified
+          description: When the collaboration object was last modified.
           example: 2012-12-12T10:53:43-08:00
           format: date-time
           type: string
@@ -21866,7 +21923,9 @@ components:
           example: editor
           type: string
         status:
-          description: The status of the collaboration invitation.
+          description: |-
+            The status of the collaboration invitation. If the status
+            is `pending`, `login` and `name` return an empty string.
           enum:
             - accepted
             - pending
@@ -23737,12 +23796,6 @@ components:
       description: |-
         A full representation of a file, as can be returned from any
         file API endpoints by default
-      required:
-        - permissions
-        - tags
-        - allowed_invitee_roles
-        - is_externally_owned
-        - has_collaborations
       title: File (Full)
       type: object
       x-box-resource-id: file--full
@@ -25179,16 +25232,6 @@ components:
       description: |-
         A full representation of a folder, as can be returned from any
         folder API endpoints by default
-      required:
-        - has_collaborations
-        - permissions
-        - tags
-        - can_non_owners_invite
-        - is_externally_owned
-        - is_collaboration_restricted_to_enterprise
-        - allowed_shared_link_access_levels
-        - allowed_invitee_roles
-        - watermark_info
       title: Folder (Full)
       type: object
       x-box-resource-id: folder--full
@@ -27638,7 +27681,10 @@ components:
                 A mini representation of a retention policy object
                 that has been assigned to the content.
         start_date_field:
-          description: The date the retention policy assignment begins.
+          description: |-
+            The date the retention policy assignment begins.
+            If the `assigned_to` type is `metadata_template`,
+            this field can be a date field's metadata attribute key id.
           example: upload_date
           type: string
         type:
@@ -28743,190 +28789,6 @@ components:
       type: object
       x-box-resource-id: sign_requests
       x-box-tag: sign_requests
-    SkillCard:
-      description: A generic Box Skill metadata card.
-      properties:
-        created_at:
-          description: The optional date and time this card was created at.
-          example: 2018-04-13T13:53:23-07:00
-          format: date-time
-          type: string
-        duration:
-          description: |-
-            An optional total duration in seconds.
-
-            Used with a `skill_card_type` of `transcript` or
-            `timeline`.
-          example: 1000
-          type: integer
-        entries:
-          description: |-
-            An optional list of entries in the metadata card.
-
-            This field is used with a `skill_card_type` of
-            `transcript`, `keyword` or `timeline`.
-          items:
-            description: An entry in the `entries` attribute of a metadata card
-            properties:
-              appears:
-                description: |-
-                  Defines a list of timestamps for an entry. This is
-                  used with a `skill_card_type` of `transcript` as
-                  well as `timeline` to place items on a timeline.
-
-                  For a `skill_card_type` of `transcript` there can
-                  only be one entry in this list for each item, and
-                  only the `start` time is used to place the
-                  transcript on the timeline.
-                items:
-                  description: The timestamp for an entry.
-                  properties:
-                    end:
-                      description: |-
-                        The time in seconds when an
-                        entry should stop appearing on a timeline. For
-                        a `skill_card_type` of `transcript` this value
-                        is ignored.
-                      example: 20
-                      type: integer
-                    start:
-                      description: |-
-                        The time in seconds when an
-                        entry should start appearing on a timeline.
-                      example: 1
-                      type: integer
-                  type: object
-                required:
-                  - start
-                  - end
-                type: array
-              image_url:
-                description: |-
-                  The image to show on a for an entry that appears
-                  on a timeline. This image URL is required for any
-                  `timeline` cards. The image will be shown in a
-                  list of items (for example faces), and clicking
-                  the image will show the user where that entry
-                  appears during the duration of this entry.
-                example: https://example.com/image1.jpg
-                type: string
-              text:
-                description: |-
-                  The text of the entry. This would be the actual
-                  keyword in a `keyword` card, the line of a
-                  transcript in a `transcript` card, or the display
-                  name for an item when using the `timeline` entry.
-                example: keyword1
-                type: string
-            type: object
-          type: array
-        invocation:
-          description: |-
-            The invocation of this service, used to track
-            which instance of a service applied the metadata.
-          properties:
-            id:
-              description: |-
-                A custom identifier that represent the instance of
-                the service that applied this metadata. For example,
-                if your `image-recognition-service` runs on multiple
-                nodes, this field can be used to identify the ID of
-                the node that was used to apply the metadata.
-              example: image-recognition-service-123
-              type: string
-            type:
-              description: "`skill_invocation`"
-              enum:
-                - skill_invocation
-              example: skill_invocation
-              type: string
-          required:
-            - type
-            - id
-          type: object
-        skill:
-          description: The service that applied this metadata.
-          properties:
-            id:
-              description: |-
-                A custom identifier that represent the service that
-                applied this metadata.
-              example: image-recognition-service
-              type: string
-            type:
-              description: "`service`"
-              enum:
-                - service
-              example: service
-              type: string
-          required:
-            - type
-            - id
-          type: object
-        skill_card_title:
-          description: The title of the card.
-          properties:
-            code:
-              description: An optional identifier for the title.
-              example: my_transcripts
-              type: string
-            message:
-              description: The actual title to show in the UI.
-              example: My Transcripts
-              type: string
-          required:
-            - message
-          type: object
-        skill_card_type:
-          description: The type of card to add to the file.
-          enum:
-            - transcript
-            - keyword
-            - timeline
-            - status
-          example: status
-          type: string
-        status:
-          description: Used with a card of type `status` to set the status of the skill. This can be used to show a message to the user while the Skill is processing the data.
-          properties:
-            code:
-              description: |-
-                A code for the status of this Skill invocation. By
-                default each of these will have their own accompanied
-                messages. These can be adjusted by setting the `message`
-                value on this object.
-              enum:
-                - invoked
-                - processing
-                - success
-                - transient_failure
-                - permanent_failure
-              example: success
-              type: string
-            message:
-              description: |-
-                A custom message that can be provided with this status.
-                This will be shown in the web app to the end user.
-              example: We're preparing to process your file. Please hold on!
-              type: string
-          required:
-            - code
-          type: object
-        type:
-          description: "`skill_card`"
-          enum:
-            - skill_card
-          example: skill_card
-          type: string
-      required:
-        - type
-        - skill_card_type
-        - skill
-        - invocation
-      title: Skill Card
-      type: object
-      x-box-resource-id: skill_card
-      x-box-tag: skills
     SkillCardsMetadata:
       description: The metadata assigned to a using for Box skills.
       properties:
@@ -28976,7 +28838,6 @@ components:
           description: A list of Box Skill cards that have been applied to this file.
           items:
             oneOf:
-              - $ref: "#/components/schemas/SkillCard"
               - $ref: "#/components/schemas/KeywordSkillCard"
               - $ref: "#/components/schemas/TimelineSkillCard"
               - $ref: "#/components/schemas/TranscriptSkillCard"
@@ -31560,6 +31421,32 @@ components:
         - mini
         - standard
         - full
+    User--Collaborations:
+      allOf:
+        - $ref: "#/components/schemas/User--Base"
+        - properties:
+            login:
+              description: The primary email address of this user. If the collaboration status is `pending`, an empty string is returned.
+              example: ceo@example.com
+              format: email
+              nullable: false
+              type: string
+            name:
+              description: The display name of this user. If the collaboration status is `pending`, an empty string is returned.
+              example: Aaron Levie
+              maxLength: 50
+              nullable: false
+              type: string
+      description: |-
+        A mini representation of a user, can be returned only when
+        the status is `pending`.
+      required:
+        - name
+        - login
+      title: User (Collaborations)
+      type: object
+      x-box-resource-id: user_collaborations
+      x-box-variant: collaborations
     User--Full:
       allOf:
         - $ref: "#/components/schemas/User"

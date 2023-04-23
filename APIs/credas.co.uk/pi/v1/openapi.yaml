@@ -2068,7 +2068,7 @@ paths:
                     regCode: QX92TAG7
                     webJourneyUrl:
                       url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                      validUntil: 2023-03-06T07:31:35.7814067Z
+                      validUntil: 2023-04-23T08:45:37.8658081Z
               schema:
                 $ref: "#/components/schemas/Credas.Api.Models.Registrations.AddRegistrationResponse"
             application/xml:
@@ -2275,8 +2275,11 @@ paths:
                 response:
                   value:
                     - Comments: null
+                      CreatedByAgencyUserEmail: null
                       DITFDate: null
                       DITFStatus: 0
+                      IsExpired: false
+                      VerifiedInAppDate: null
                       bankAccountChecks:
                         - Address1: null
                           City: null
@@ -2694,8 +2697,11 @@ paths:
                 response:
                   value:
                     Comments: null
+                    CreatedByAgencyUserEmail: null
                     DITFDate: null
                     DITFStatus: 0
+                    IsExpired: false
+                    VerifiedInAppDate: null
                     bankAccountChecks:
                       - Address1: null
                         City: null
@@ -4412,8 +4418,11 @@ paths:
                 response:
                   value:
                     Comments: null
+                    CreatedByAgencyUserEmail: null
                     DITFDate: null
                     DITFStatus: 0
+                    IsExpired: false
+                    VerifiedInAppDate: null
                     bankAccountChecks:
                       - Address1: null
                         City: null
@@ -4969,7 +4978,7 @@ paths:
                       - forename: Edward
                         surname: Roberts
                         url: https://report.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                        validUntil: 2023-03-06T07:31:35.8216208Z
+                        validUntil: 2023-04-23T08:45:37.9060623Z
               schema:
                 $ref: "#/components/schemas/Credas.Api.Models.ReportView.GetReportViewResponse"
             application/xml:
@@ -5078,7 +5087,7 @@ paths:
                       - forename: Mike
                         surname: Jones
                         url: https://report.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                        validUntil: 2023-03-06T07:31:35.8237383Z
+                        validUntil: 2023-04-23T08:45:37.9077543Z
               schema:
                 $ref: "#/components/schemas/Credas.Api.Models.ReportView.GetReportViewResponse"
             application/xml:
@@ -5185,7 +5194,7 @@ paths:
                     results:
                       - journeyUrl:
                           url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                          validUntil: 2023-03-06T07:31:35.8261095Z
+                          validUntil: 2023-04-23T08:45:37.9093959Z
               schema:
                 $ref: "#/components/schemas/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
             application/xml:
@@ -5292,7 +5301,7 @@ paths:
                     results:
                       - journeyUrl:
                           url: https://verify.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                          validUntil: 2023-03-06T07:31:35.8278916Z
+                          validUntil: 2023-04-23T08:45:37.9109194Z
               schema:
                 $ref: "#/components/schemas/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
             application/xml:
@@ -6771,6 +6780,8 @@ components:
             $ref: "#/components/schemas/Credas.Api.Models.Registrations.RegistrationComment"
           type: array
           uniqueItems: false
+        CreatedByAgencyUserEmail:
+          type: string
         DITFDate:
           format: date-time
           type: string
@@ -6782,6 +6793,11 @@ components:
             - 2
           format: int32
           type: integer
+        IsExpired:
+          type: boolean
+        VerifiedInAppDate:
+          format: date-time
+          type: string
         bankAccountChecks:
           items:
             $ref: "#/components/schemas/Credas.Api.Models.BankAccounts.AccountVerificationResponse"

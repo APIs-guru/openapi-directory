@@ -307,6 +307,19 @@ paths:
                           type: string
                         currency:
                           type: string
+                        documents:
+                          properties:
+                            bank_account_ownership_verification:
+                              properties:
+                                files:
+                                  items:
+                                    maxLength: 500
+                                    type: string
+                                  type: array
+                              title: documents_param
+                              type: object
+                          title: external_account_documents_param
+                          type: object
                         object:
                           enum:
                             - bank_account
@@ -452,6 +465,12 @@ paths:
                       title: capability_param
                       type: object
                     cartes_bancaires_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    cashapp_payments:
                       properties:
                         requested:
                           type: boolean
@@ -670,6 +689,12 @@ paths:
                       type: boolean
                     executives_provided:
                       type: boolean
+                    export_license_id:
+                      maxLength: 5000
+                      type: string
+                    export_purpose_code:
+                      maxLength: 5000
+                      type: string
                     name:
                       maxLength: 100
                       type: string
@@ -1497,6 +1522,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    cashapp_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     eps_payments:
                       properties:
                         requested:
@@ -1710,6 +1741,12 @@ paths:
                       type: boolean
                     executives_provided:
                       type: boolean
+                    export_license_id:
+                      maxLength: 5000
+                      type: string
+                    export_purpose_code:
+                      maxLength: 5000
+                      type: string
                     name:
                       maxLength: 100
                       type: string
@@ -2306,6 +2343,19 @@ paths:
                           type: string
                         currency:
                           type: string
+                        documents:
+                          properties:
+                            bank_account_ownership_verification:
+                              properties:
+                                files:
+                                  items:
+                                    maxLength: 500
+                                    type: string
+                                  type: array
+                              title: documents_param
+                              type: object
+                          title: external_account_documents_param
+                          type: object
                         object:
                           enum:
                             - bank_account
@@ -2470,6 +2520,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              documents:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -2527,6 +2580,20 @@ paths:
                 default_for_currency:
                   description: When set to true, this becomes the default external account for its currency.
                   type: boolean
+                documents:
+                  description: Documents that may be submitted to satisfy various informational requests.
+                  properties:
+                    bank_account_ownership_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                  title: external_account_documents_param
+                  type: object
                 exp_month:
                   description: Two digit number representing the card’s expiration month.
                   maxLength: 5000
@@ -2894,6 +2961,19 @@ paths:
                           type: string
                         currency:
                           type: string
+                        documents:
+                          properties:
+                            bank_account_ownership_verification:
+                              properties:
+                                files:
+                                  items:
+                                    maxLength: 500
+                                    type: string
+                                  type: array
+                              title: documents_param
+                              type: object
+                          title: external_account_documents_param
+                          type: object
                         object:
                           enum:
                             - bank_account
@@ -3058,6 +3138,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              documents:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -3115,6 +3198,20 @@ paths:
                 default_for_currency:
                   description: When set to true, this becomes the default external account for its currency.
                   type: boolean
+                documents:
+                  description: Documents that may be submitted to satisfy various informational requests.
+                  properties:
+                    bank_account_ownership_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                  title: external_account_documents_param
+                  type: object
                 exp_month:
                   description: Two digit number representing the card’s expiration month.
                   maxLength: 5000
@@ -6568,7 +6665,7 @@ paths:
                   - has_more
                   - object
                   - url
-                title: PortalConfigurationList
+                title: PortalPublicResourceConfigurationList
                 type: object
                 x-expandableFields:
                   - data
@@ -8231,6 +8328,7 @@ paths:
                     type: string
                   type: array
                 instructions_email:
+                  description: For payment methods without native refund support (e.g., Konbini, PromptPay), use this email from the customer to receive refund instructions.
                   type: string
                 metadata:
                   anyOf:
@@ -8403,7 +8501,7 @@ paths:
                     type: string
                   type: array
                 instructions_email:
-                  description: Address to send refund email, use customer email if not specified
+                  description: For payment methods without native refund support (e.g., Konbini, PromptPay), use this email from the customer to receive refund instructions.
                   type: string
                 metadata:
                   anyOf:
@@ -9223,9 +9321,9 @@ paths:
                     capture_method:
                       enum:
                         - automatic
+                        - automatic_async
                         - manual
                       type: string
-                      x-stripeBypassValidation: true
                     description:
                       maxLength: 1000
                       type: string
@@ -9453,6 +9551,16 @@ paths:
                           type: string
                         statement_descriptor_suffix_kanji:
                           maxLength: 17
+                          type: string
+                      title: payment_method_options_param
+                      type: object
+                    cashapp:
+                      properties:
+                        setup_future_usage:
+                          enum:
+                            - none
+                            - off_session
+                            - on_session
                           type: string
                       title: payment_method_options_param
                       type: object
@@ -9690,6 +9798,7 @@ paths:
                       - blik
                       - boleto
                       - card
+                      - cashapp
                       - customer_balance
                       - eps
                       - fpx
@@ -9698,6 +9807,7 @@ paths:
                       - ideal
                       - klarna
                       - konbini
+                      - link
                       - oxxo
                       - p24
                       - paynow
@@ -14577,6 +14687,7 @@ paths:
               - blik
               - boleto
               - card
+              - cashapp
               - customer_balance
               - eps
               - fpx
@@ -15815,6 +15926,7 @@ paths:
                               - bancontact
                               - boleto
                               - card
+                              - cashapp
                               - customer_balance
                               - fpx
                               - giropay
@@ -16556,6 +16668,7 @@ paths:
                               - bancontact
                               - boleto
                               - card
+                              - cashapp
                               - customer_balance
                               - fpx
                               - giropay
@@ -19759,7 +19872,7 @@ paths:
                   maxLength: 5000
                   type: string
                 tax_behavior:
-                  description: Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+                  description: Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
                   enum:
                     - exclusive
                     - inclusive
@@ -20007,7 +20120,7 @@ paths:
                   description: Non-negative integer. The quantity of units for the invoice item.
                   type: integer
                 tax_behavior:
-                  description: Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+                  description: Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
                   enum:
                     - exclusive
                     - inclusive
@@ -20158,8 +20271,8 @@ paths:
               - paid
               - uncollectible
               - void
-            maxLength: 5000
             type: string
+            x-stripeBypassValidation: true
           style: form
         - description: Only return invoices for the subscription specified by this subscription ID.
           in: query
@@ -20570,6 +20683,7 @@ paths:
                               - bancontact
                               - boleto
                               - card
+                              - cashapp
                               - customer_balance
                               - fpx
                               - giropay
@@ -22549,6 +22663,7 @@ paths:
                               - bancontact
                               - boleto
                               - card
+                              - cashapp
                               - customer_balance
                               - fpx
                               - giropay
@@ -23678,6 +23793,22 @@ paths:
                 individual:
                   description: Additional information about an `individual` cardholder.
                   properties:
+                    card_issuing:
+                      properties:
+                        user_terms_acceptance:
+                          properties:
+                            date:
+                              format: unix-time
+                              type: integer
+                            ip:
+                              type: string
+                            user_agent:
+                              maxLength: 5000
+                              type: string
+                          title: terms_acceptance_param
+                          type: object
+                      title: card_issuing_param
+                      type: object
                     dob:
                       properties:
                         day:
@@ -24669,7 +24800,6 @@ paths:
               required:
                 - billing
                 - name
-                - type
               type: object
         required: true
       responses:
@@ -24820,6 +24950,22 @@ paths:
                 individual:
                   description: Additional information about an `individual` cardholder.
                   properties:
+                    card_issuing:
+                      properties:
+                        user_terms_acceptance:
+                          properties:
+                            date:
+                              format: unix-time
+                              type: integer
+                            ip:
+                              type: string
+                            user_agent:
+                              maxLength: 5000
+                              type: string
+                          title: terms_acceptance_param
+                          type: object
+                      title: card_issuing_param
+                      type: object
                     dob:
                       properties:
                         day:
@@ -30159,9 +30305,9 @@ paths:
                   description: Controls when the funds will be captured from the customer's account.
                   enum:
                     - automatic
+                    - automatic_async
                     - manual
                   type: string
-                  x-stripeBypassValidation: true
                 confirm:
                   description: Set to `true` to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this PaymentIntent immediately. This parameter defaults to `false`. When creating and confirming a PaymentIntent at the same time, parameters available in the [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
                   type: boolean
@@ -30376,6 +30522,10 @@ paths:
                           type: string
                       required:
                         - tax_id
+                      title: param
+                      type: object
+                    cashapp:
+                      properties: {}
                       title: param
                       type: object
                     customer_balance:
@@ -30606,6 +30756,7 @@ paths:
                         - bancontact
                         - blik
                         - boleto
+                        - cashapp
                         - customer_balance
                         - eps
                         - fpx
@@ -30713,6 +30864,9 @@ paths:
                               enum:
                                 - ""
                                 - manual
+                              type: string
+                            preferred_locale:
+                              maxLength: 10
                               type: string
                             setup_future_usage:
                               enum:
@@ -30977,6 +31131,26 @@ paths:
                             request_incremental_authorization_support:
                               type: boolean
                           title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    cashapp:
+                      anyOf:
+                        - properties:
+                            capture_method:
+                              enum:
+                                - ""
+                                - manual
+                              type: string
+                            setup_future_usage:
+                              enum:
+                                - ""
+                                - none
+                                - off_session
+                                - on_session
+                              type: string
+                          title: payment_intent_payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -31747,9 +31921,9 @@ paths:
                   description: Controls when the funds will be captured from the customer's account.
                   enum:
                     - automatic
+                    - automatic_async
                     - manual
                   type: string
-                  x-stripeBypassValidation: true
                 currency:
                   description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
                   type: string
@@ -31900,6 +32074,10 @@ paths:
                           type: string
                       required:
                         - tax_id
+                      title: param
+                      type: object
+                    cashapp:
+                      properties: {}
                       title: param
                       type: object
                     customer_balance:
@@ -32130,6 +32308,7 @@ paths:
                         - bancontact
                         - blik
                         - boleto
+                        - cashapp
                         - customer_balance
                         - eps
                         - fpx
@@ -32237,6 +32416,9 @@ paths:
                               enum:
                                 - ""
                                 - manual
+                              type: string
+                            preferred_locale:
+                              maxLength: 10
                               type: string
                             setup_future_usage:
                               enum:
@@ -32501,6 +32683,26 @@ paths:
                             request_incremental_authorization_support:
                               type: boolean
                           title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    cashapp:
+                      anyOf:
+                        - properties:
+                            capture_method:
+                              enum:
+                                - ""
+                                - manual
+                              type: string
+                            setup_future_usage:
+                              enum:
+                                - ""
+                                - none
+                                - off_session
+                                - on_session
+                              type: string
+                          title: payment_intent_payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -33100,7 +33302,7 @@ paths:
       description: |-
         <p>A PaymentIntent object can be canceled when it is in one of these statuses: <code>requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation</code>, <code>requires_action</code> or, <a href="/docs/payments/intents">in rare cases</a>, <code>processing</code>. </p>
 
-        <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on the PaymentIntent will fail with an error. For PaymentIntents with <code>status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will automatically be refunded. </p>
+        <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on the PaymentIntent will fail with an error. For PaymentIntents with a <code>status</code> of <code>requires_capture</code>, the remaining <code>amount_capturable</code> will automatically be refunded. </p>
 
         <p>You cannot cancel the PaymentIntent for a Checkout Session. <a href="/docs/api/checkout/sessions/expire">Expire the Checkout Session</a> instead.</p>
       operationId: PostPaymentIntentsIntentCancel
@@ -33177,6 +33379,9 @@ paths:
               expand:
                 explode: true
                 style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
               transfer_data:
                 explode: true
                 style: deepObject
@@ -33195,6 +33400,15 @@ paths:
                     maxLength: 5000
                     type: string
                   type: array
+                metadata:
+                  anyOf:
+                    - additionalProperties:
+                        type: string
+                      type: object
+                    - enum:
+                        - ""
+                      type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                 statement_descriptor:
                   description: For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
                   maxLength: 22
@@ -33299,9 +33513,9 @@ paths:
                   description: Controls when the funds will be captured from the customer's account.
                   enum:
                     - automatic
+                    - automatic_async
                     - manual
                   type: string
-                  x-stripeBypassValidation: true
                 client_secret:
                   description: The client secret of the PaymentIntent.
                   maxLength: 5000
@@ -33512,6 +33726,10 @@ paths:
                           type: string
                       required:
                         - tax_id
+                      title: param
+                      type: object
+                    cashapp:
+                      properties: {}
                       title: param
                       type: object
                     customer_balance:
@@ -33742,6 +33960,7 @@ paths:
                         - bancontact
                         - blik
                         - boleto
+                        - cashapp
                         - customer_balance
                         - eps
                         - fpx
@@ -33849,6 +34068,9 @@ paths:
                               enum:
                                 - ""
                                 - manual
+                              type: string
+                            preferred_locale:
+                              maxLength: 10
                               type: string
                             setup_future_usage:
                               enum:
@@ -34113,6 +34335,26 @@ paths:
                             request_incremental_authorization_support:
                               type: boolean
                           title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    cashapp:
+                      anyOf:
+                        - properties:
+                            capture_method:
+                              enum:
+                                - ""
+                                - manual
+                              type: string
+                            setup_future_usage:
+                              enum:
+                                - ""
+                                - none
+                                - off_session
+                                - on_session
+                              type: string
+                          title: payment_intent_payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -35248,9 +35490,9 @@ paths:
                     capture_method:
                       enum:
                         - automatic
+                        - automatic_async
                         - manual
                       type: string
-                      x-stripeBypassValidation: true
                     setup_future_usage:
                       enum:
                         - off_session
@@ -35282,6 +35524,7 @@ paths:
                       - blik
                       - boleto
                       - card
+                      - cashapp
                       - eps
                       - fpx
                       - giropay
@@ -35289,6 +35532,7 @@ paths:
                       - ideal
                       - klarna
                       - konbini
+                      - link
                       - oxxo
                       - p24
                       - paynow
@@ -35997,6 +36241,7 @@ paths:
                           - blik
                           - boleto
                           - card
+                          - cashapp
                           - eps
                           - fpx
                           - giropay
@@ -36004,6 +36249,7 @@ paths:
                           - ideal
                           - klarna
                           - konbini
+                          - link
                           - oxxo
                           - p24
                           - paynow
@@ -36444,6 +36690,7 @@ paths:
               - blik
               - boleto
               - card
+              - cashapp
               - customer_balance
               - eps
               - fpx
@@ -36555,6 +36802,9 @@ paths:
                 explode: true
                 style: deepObject
               card:
+                explode: true
+                style: deepObject
+              cashapp:
                 explode: true
                 style: deepObject
               customer_balance:
@@ -36776,6 +37026,11 @@ paths:
                       type: object
                   description: "If this is a `card` PaymentMethod, this hash contains the user's card details. For backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay, Amex Express Checkout, or legacy Checkout) into the card hash with format `card: {token: \"tok_visa\"}`. When providing a card number, you must meet the requirements for [PCI compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly recommend using Stripe.js instead of interacting with this API directly."
                   x-stripeBypassValidation: true
+                cashapp:
+                  description: If this is a `cashapp` PaymentMethod, this hash contains details about the Cash App Pay payment method.
+                  properties: {}
+                  title: param
+                  type: object
                 customer:
                   description: The `Customer` to whom the original PaymentMethod is attached.
                   maxLength: 5000
@@ -37039,6 +37294,7 @@ paths:
                     - blik
                     - boleto
                     - card
+                    - cashapp
                     - customer_balance
                     - eps
                     - fpx
@@ -38642,7 +38898,7 @@ paths:
                   title: recurring
                   type: object
                 tax_behavior:
-                  description: Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+                  description: Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
                   enum:
                     - exclusive
                     - inclusive
@@ -38978,7 +39234,7 @@ paths:
                   maxLength: 5000
                   type: string
                 tax_behavior:
-                  description: Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+                  description: Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
                   enum:
                     - exclusive
                     - inclusive
@@ -41973,7 +42229,7 @@ paths:
                     type: string
                   type: array
                 instructions_email:
-                  description: Address to send refund email, use customer email if not specified
+                  description: For payment methods without native refund support (e.g., Konbini, PromptPay), use this email from the customer to receive refund instructions.
                   type: string
                 metadata:
                   anyOf:
@@ -43588,6 +43844,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              automatic_payment_methods:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -43621,6 +43880,15 @@ paths:
 
                     It can only be used for this Stripe Account’s own money movement flows like InboundTransfer and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer, and defaults to false when attaching a PaymentMethod to a Customer.
                   type: boolean
+                automatic_payment_methods:
+                  description: When enabled, this SetupIntent will accept payment methods that you have enabled in the Dashboard and are compatible with this SetupIntent's other parameters.
+                  properties:
+                    enabled:
+                      type: boolean
+                  required:
+                    - enabled
+                  title: automatic_payment_methods_param
+                  type: object
                 confirm:
                   description: Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to `false`. If the payment method attached is a card, a return_url may be provided in case additional authentication is required.
                   type: boolean
@@ -43816,6 +44084,10 @@ paths:
                           type: string
                       required:
                         - tax_id
+                      title: param
+                      type: object
+                    cashapp:
+                      properties: {}
                       title: param
                       type: object
                     customer_balance:
@@ -44046,6 +44318,7 @@ paths:
                         - bancontact
                         - blik
                         - boleto
+                        - cashapp
                         - customer_balance
                         - eps
                         - fpx
@@ -44584,6 +44857,10 @@ paths:
                         - tax_id
                       title: param
                       type: object
+                    cashapp:
+                      properties: {}
+                      title: param
+                      type: object
                     customer_balance:
                       properties: {}
                       title: param
@@ -44812,6 +45089,7 @@ paths:
                         - bancontact
                         - blik
                         - boleto
+                        - cashapp
                         - customer_balance
                         - eps
                         - fpx
@@ -45365,6 +45643,10 @@ paths:
                         - tax_id
                       title: param
                       type: object
+                    cashapp:
+                      properties: {}
+                      title: param
+                      type: object
                     customer_balance:
                       properties: {}
                       title: param
@@ -45593,6 +45875,7 @@ paths:
                         - bancontact
                         - blik
                         - boleto
+                        - cashapp
                         - customer_balance
                         - eps
                         - fpx
@@ -48222,7 +48505,7 @@ paths:
                       properties:
                         days_until_due:
                           type: integer
-                      title: subscription_schedules_param
+                      title: subscription_schedule_default_settings_param
                       type: object
                     on_behalf_of:
                       anyOf:
@@ -48379,7 +48662,7 @@ paths:
                         properties:
                           days_until_due:
                             type: integer
-                        title: subscription_schedules_param
+                        title: invoice_settings
                         type: object
                       items:
                         items:
@@ -48633,7 +48916,7 @@ paths:
                       properties:
                         days_until_due:
                           type: integer
-                      title: subscription_schedules_param
+                      title: subscription_schedule_default_settings_param
                       type: object
                     on_behalf_of:
                       anyOf:
@@ -48788,7 +49071,7 @@ paths:
                         properties:
                           days_until_due:
                             type: integer
-                        title: subscription_schedules_param
+                        title: invoice_settings
                         type: object
                       items:
                         items:
@@ -49690,6 +49973,7 @@ paths:
                               - bancontact
                               - boleto
                               - card
+                              - cashapp
                               - customer_balance
                               - fpx
                               - giropay
@@ -50545,6 +50829,7 @@ paths:
                               - bancontact
                               - boleto
                               - card
+                              - cashapp
                               - customer_balance
                               - fpx
                               - giropay
@@ -50755,6 +51040,613 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/subscription"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  /v1/tax/calculations:
+    post:
+      description: <p>Calculates tax based on input and returns a Tax <code>Calculation</code> object.</p>
+      operationId: PostTaxCalculations
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              customer_details:
+                explode: true
+                style: deepObject
+              expand:
+                explode: true
+                style: deepObject
+              line_items:
+                explode: true
+                style: deepObject
+              shipping_cost:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                currency:
+                  description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+                  type: string
+                customer:
+                  description: The ID of an existing customer to use for this calculation. If provided, the customer's address and tax IDs are copied to `customer_details`.
+                  maxLength: 5000
+                  type: string
+                customer_details:
+                  description: Details about the customer, including address and tax IDs.
+                  properties:
+                    address:
+                      properties:
+                        city:
+                          maxLength: 5000
+                          type: string
+                        country:
+                          maxLength: 5000
+                          type: string
+                        line1:
+                          maxLength: 5000
+                          type: string
+                        line2:
+                          maxLength: 5000
+                          type: string
+                        postal_code:
+                          maxLength: 5000
+                          type: string
+                        state:
+                          maxLength: 5000
+                          type: string
+                      required:
+                        - country
+                      title: postal_address
+                      type: object
+                    address_source:
+                      enum:
+                        - billing
+                        - shipping
+                      type: string
+                    ip_address:
+                      type: string
+                    tax_ids:
+                      items:
+                        properties:
+                          type:
+                            enum:
+                              - ae_trn
+                              - au_abn
+                              - au_arn
+                              - bg_uic
+                              - br_cnpj
+                              - br_cpf
+                              - ca_bn
+                              - ca_gst_hst
+                              - ca_pst_bc
+                              - ca_pst_mb
+                              - ca_pst_sk
+                              - ca_qst
+                              - ch_vat
+                              - cl_tin
+                              - eg_tin
+                              - es_cif
+                              - eu_oss_vat
+                              - eu_vat
+                              - gb_vat
+                              - ge_vat
+                              - hk_br
+                              - hu_tin
+                              - id_npwp
+                              - il_vat
+                              - in_gst
+                              - is_vat
+                              - jp_cn
+                              - jp_rn
+                              - jp_trn
+                              - ke_pin
+                              - kr_brn
+                              - li_uid
+                              - mx_rfc
+                              - my_frp
+                              - my_itn
+                              - my_sst
+                              - no_vat
+                              - nz_gst
+                              - ph_tin
+                              - ru_inn
+                              - ru_kpp
+                              - sa_vat
+                              - sg_gst
+                              - sg_uen
+                              - si_tin
+                              - th_vat
+                              - tr_tin
+                              - tw_vat
+                              - ua_vat
+                              - us_ein
+                              - za_vat
+                            maxLength: 5000
+                            type: string
+                            x-stripeBypassValidation: true
+                          value:
+                            type: string
+                        required:
+                          - type
+                          - value
+                        title: data_params
+                        type: object
+                      type: array
+                    taxability_override:
+                      enum:
+                        - customer_exempt
+                        - none
+                        - reverse_charge
+                      type: string
+                  title: customer_details
+                  type: object
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                line_items:
+                  description: A list of items the customer is purchasing.
+                  items:
+                    properties:
+                      amount:
+                        type: integer
+                      product:
+                        maxLength: 5000
+                        type: string
+                      quantity:
+                        type: integer
+                      reference:
+                        maxLength: 500
+                        type: string
+                      tax_behavior:
+                        enum:
+                          - exclusive
+                          - inclusive
+                        type: string
+                      tax_code:
+                        type: string
+                    required:
+                      - amount
+                    title: calculation_line_item
+                    type: object
+                  type: array
+                shipping_cost:
+                  description: Shipping cost details to be used for the calculation.
+                  properties:
+                    amount:
+                      type: integer
+                    shipping_rate:
+                      maxLength: 5000
+                      type: string
+                    tax_behavior:
+                      enum:
+                        - exclusive
+                        - inclusive
+                      type: string
+                    tax_code:
+                      type: string
+                  title: shipping_cost
+                  type: object
+                tax_date:
+                  description: Timestamp of date at which the tax rules and rates in effect applies for the calculation. Measured in seconds since the Unix epoch. Can be up to 48 hours in the past, and up to 48 hours in the future.
+                  type: integer
+              required:
+                - currency
+                - line_items
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tax.calculation"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/tax/calculations/{calculation}/line_items":
+    get:
+      description: <p>Retrieves the line items of a persisted tax calculation as a collection.</p>
+      operationId: GetTaxCalculationsCalculationLineItems
+      parameters:
+        - in: path
+          name: calculation
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+        - description: A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+          in: query
+          name: ending_before
+          required: false
+          schema:
+            maxLength: 500
+            type: string
+          style: form
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+          in: query
+          name: starting_after
+          required: false
+          schema:
+            maxLength: 500
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    description: Details about each object.
+                    items:
+                      $ref: "#/components/schemas/tax.calculation_line_item"
+                    type: array
+                  has_more:
+                    description: True if this list has another page of items after this one that can be fetched.
+                    type: boolean
+                  object:
+                    description: String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+                    enum:
+                      - list
+                    type: string
+                  url:
+                    description: The URL where this list can be accessed.
+                    maxLength: 5000
+                    pattern: ^/v1/tax/calculations/:id/line_items
+                    type: string
+                required:
+                  - data
+                  - has_more
+                  - object
+                  - url
+                title: TaxProductResourceTaxCalculationLineItemList
+                type: object
+                x-expandableFields:
+                  - data
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  /v1/tax/transactions/create_from_calculation:
+    post:
+      description: <p>Creates a Tax <code>Transaction</code> from a calculation.</p>
+      operationId: PostTaxTransactionsCreateFromCalculation
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                calculation:
+                  description: Tax Calculation ID to be used as input when creating the transaction.
+                  maxLength: 5000
+                  type: string
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                metadata:
+                  additionalProperties:
+                    type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+                  type: object
+                reference:
+                  description: A custom order or sale identifier, such as 'myOrder_123'. Must be unique across all transactions, including reversals.
+                  maxLength: 500
+                  type: string
+              required:
+                - calculation
+                - reference
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tax.transaction"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  /v1/tax/transactions/create_reversal:
+    post:
+      description: <p>Partially or fully reverses a previously created <code>Transaction</code>.</p>
+      operationId: PostTaxTransactionsCreateReversal
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+              line_items:
+                explode: true
+                style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
+              shipping_cost:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                line_items:
+                  description: The line item amounts to reverse.
+                  items:
+                    properties:
+                      amount:
+                        type: integer
+                      amount_tax:
+                        type: integer
+                      metadata:
+                        additionalProperties:
+                          type: string
+                        type: object
+                      original_line_item:
+                        maxLength: 5000
+                        type: string
+                      quantity:
+                        type: integer
+                      reference:
+                        maxLength: 500
+                        type: string
+                    required:
+                      - amount
+                      - amount_tax
+                      - original_line_item
+                      - reference
+                    title: transaction_line_item_reversal
+                    type: object
+                  type: array
+                metadata:
+                  additionalProperties:
+                    type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+                  type: object
+                mode:
+                  description: If `partial`, the provided line item or shipping cost amounts are reversed. If `full`, the original transaction is fully reversed.
+                  enum:
+                    - full
+                    - partial
+                  type: string
+                original_transaction:
+                  description: The ID of the Transaction to partially or fully reverse.
+                  maxLength: 5000
+                  type: string
+                reference:
+                  description: A custom identifier for this reversal, such as 'myOrder_123-refund_1', which must be unique across all transactions. The reference helps identify this reversal transaction in exported [tax reports](https://stripe.com/docs/tax/reports).
+                  maxLength: 500
+                  type: string
+                shipping_cost:
+                  description: The shipping cost to reverse.
+                  properties:
+                    amount:
+                      type: integer
+                    amount_tax:
+                      type: integer
+                  required:
+                    - amount
+                    - amount_tax
+                  title: transaction_shipping_cost_reversal
+                  type: object
+              required:
+                - mode
+                - original_transaction
+                - reference
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tax.transaction"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/tax/transactions/{transaction}":
+    get:
+      description: <p>Retrieves a Tax <code>Transaction</code> object.</p>
+      operationId: GetTaxTransactionsTransaction
+      parameters:
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - in: path
+          name: transaction
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tax.transaction"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/tax/transactions/{transaction}/line_items":
+    get:
+      description: <p>Retrieves the line items of a committed standalone transaction as a collection.</p>
+      operationId: GetTaxTransactionsTransactionLineItems
+      parameters:
+        - description: A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+          in: query
+          name: ending_before
+          required: false
+          schema:
+            maxLength: 500
+            type: string
+          style: form
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+          in: query
+          name: starting_after
+          required: false
+          schema:
+            maxLength: 500
+            type: string
+          style: form
+        - in: path
+          name: transaction
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    description: Details about each object.
+                    items:
+                      $ref: "#/components/schemas/tax.transaction_line_item"
+                    type: array
+                  has_more:
+                    description: True if this list has another page of items after this one that can be fetched.
+                    type: boolean
+                  object:
+                    description: String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+                    enum:
+                      - list
+                    type: string
+                  url:
+                    description: The URL where this list can be accessed.
+                    maxLength: 5000
+                    pattern: ^/v1/tax/transactions/:id/line_items
+                    type: string
+                required:
+                  - data
+                  - has_more
+                  - object
+                  - url
+                title: TaxProductResourceTaxTransactionLineItemList
+                type: object
+                x-expandableFields:
+                  - data
           description: Successful response.
         default:
           content:
@@ -53289,6 +54181,9 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                amount_tip:
+                  description: Simulated on-reader tip amount.
+                  type: integer
                 card_present:
                   description: Simulated data for the card_present payment method.
                   properties:
@@ -54339,6 +55234,12 @@ paths:
                           type: boolean
                         executives_provided:
                           type: boolean
+                        export_license_id:
+                          maxLength: 5000
+                          type: string
+                        export_purpose_code:
+                          maxLength: 5000
+                          type: string
                         name:
                           maxLength: 100
                           type: string
@@ -59109,6 +60010,7 @@ paths:
                       - payout.created
                       - payout.failed
                       - payout.paid
+                      - payout.reconciliation_completed
                       - payout.updated
                       - person.created
                       - person.deleted
@@ -59486,6 +60388,7 @@ paths:
                       - payout.created
                       - payout.failed
                       - payout.paid
+                      - payout.reconciliation_completed
                       - payout.updated
                       - person.created
                       - person.deleted
@@ -59943,6 +60846,13 @@ components:
           type: string
         cartes_bancaires_payments:
           description: The status of the Cartes Bancaires payments capability of the account, or whether the account can directly process Cartes Bancaires card charges in EUR currency.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
+        cashapp_payments:
+          description: The status of the Cash App Pay capability of the account, or whether the account can directly process Cash App Pay payments.
           enum:
             - active
             - inactive
@@ -61404,6 +62314,11 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        future_requirements:
+          anyOf:
+            - $ref: "#/components/schemas/external_account_requirements"
+          description: Information about upcoming new requirements for the bank account, including what information needs to be collected.
+          nullable: true
         id:
           description: Unique identifier for the object.
           maxLength: 5000
@@ -61424,6 +62339,11 @@ components:
           enum:
             - bank_account
           type: string
+        requirements:
+          anyOf:
+            - $ref: "#/components/schemas/external_account_requirements"
+          description: Information about the requirements for the bank account, including what information needs to be collected.
+          nullable: true
         routing_number:
           description: The routing transit number for the bank account.
           maxLength: 5000
@@ -61433,7 +62353,7 @@ components:
           description: |-
             For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If Stripe can determine that the bank account exists, its status will be `validated`. Note that there often isn’t enough information to know (e.g., for smaller credit unions), and the validation is not always run. If customer bank account verification has succeeded, the bank account status will be `verified`. If the verification failed for any reason, such as microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the status to `errored` and will not continue to send transfers until the bank details are updated.
 
-            For external accounts, possible values are `new` and `errored`. Validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.
+            For external accounts, possible values are `new`, `errored` and `verification_failed`. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated. In India, if we can't [verify the owner of the bank account](https://support.stripe.com/questions/bank-account-ownership-verification), we'll set the status to `verification_failed`. Other validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply.
           maxLength: 5000
           type: string
       required:
@@ -61448,6 +62368,8 @@ components:
       x-expandableFields:
         - account
         - customer
+        - future_requirements
+        - requirements
       x-resourceId: bank_account
     bank_connections_resource_accountholder:
       description: ""
@@ -62000,7 +62922,7 @@ components:
           nullable: true
           type: array
         brand:
-          description: Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
+          description: Card brand. Can be `American Express`, `Diners Club`, `Discover`, `Eftpos Australia`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
           maxLength: 5000
           type: string
         country:
@@ -62661,6 +63583,11 @@ components:
           description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
           nullable: true
           type: string
+        currency_conversion:
+          anyOf:
+            - $ref: "#/components/schemas/payment_pages_checkout_session_currency_conversion"
+          description: Currency conversion details for automatic currency conversion sessions
+          nullable: true
         custom_fields:
           description: Collect additional information from your customer using custom fields. Up to 2 fields are supported.
           items:
@@ -62986,6 +63913,7 @@ components:
         - automatic_tax
         - consent
         - consent_collection
+        - currency_conversion
         - custom_fields
         - custom_text
         - customer
@@ -63238,6 +64166,22 @@ components:
       type: object
       x-expandableFields:
         - installments
+    checkout_cashapp_payment_method_options:
+      description: ""
+      properties:
+        setup_future_usage:
+          description: |-
+            Indicates that you intend to make future payments with this PaymentIntent's payment method.
+
+            Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+
+            When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+          enum:
+            - none
+          type: string
+      title: CheckoutCashappPaymentMethodOptions
+      type: object
+      x-expandableFields: []
     checkout_customer_balance_bank_transfer_payment_method_options:
       description: ""
       properties:
@@ -63517,6 +64461,8 @@ components:
           $ref: "#/components/schemas/checkout_boleto_payment_method_options"
         card:
           $ref: "#/components/schemas/checkout_card_payment_method_options"
+        cashapp:
+          $ref: "#/components/schemas/checkout_cashapp_payment_method_options"
         customer_balance:
           $ref: "#/components/schemas/checkout_customer_balance_payment_method_options"
         eps:
@@ -63559,6 +64505,7 @@ components:
         - bancontact
         - boleto
         - card
+        - cashapp
         - customer_balance
         - eps
         - fpx
@@ -64217,7 +65164,7 @@ components:
           description: When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment Links.
           nullable: true
         tax_behavior:
-          description: Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+          description: Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
           enum:
             - exclusive
             - inclusive
@@ -65975,7 +66922,7 @@ components:
       description: ""
       properties:
         due_by:
-          description: Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.
+          description: Date by which evidence must be submitted in order to successfully challenge dispute. Will be 0 if the customer's bank or credit card company doesn't allow a response for this particular dispute.
           format: unix-time
           nullable: true
           type: integer
@@ -66185,6 +67132,40 @@ components:
       title: Polymorphic
       x-resourceId: external_account
       x-stripeBypassValidation: true
+    external_account_requirements:
+      description: ""
+      properties:
+        currently_due:
+          description: Fields that need to be collected to keep the external account enabled. If not collected by `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.
+          items:
+            maxLength: 5000
+            type: string
+          nullable: true
+          type: array
+        errors:
+          description: Fields that are `currently_due` and need to be collected again because validation or verification failed.
+          items:
+            $ref: "#/components/schemas/account_requirements_error"
+          nullable: true
+          type: array
+        past_due:
+          description: Fields that weren't collected by `current_deadline`. These fields need to be collected to enable the external account.
+          items:
+            maxLength: 5000
+            type: string
+          nullable: true
+          type: array
+        pending_verification:
+          description: Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due`, `currently_due`, or `past_due`.
+          items:
+            maxLength: 5000
+            type: string
+          nullable: true
+          type: array
+      title: ExternalAccountRequirements
+      type: object
+      x-expandableFields:
+        - errors
     fee:
       description: ""
       properties:
@@ -67564,8 +68545,6 @@ components:
         - id
         - livemode
         - object
-        - options
-        - type
       title: GelatoVerificationReport
       type: object
       x-expandableFields:
@@ -67631,7 +68610,10 @@ components:
             - identity.verification_session
           type: string
         options:
-          $ref: "#/components/schemas/gelato_verification_session_options"
+          anyOf:
+            - $ref: "#/components/schemas/gelato_verification_session_options"
+          description: A set of options for the session’s verification checks.
+          nullable: true
         redaction:
           anyOf:
             - $ref: "#/components/schemas/verification_session_redaction"
@@ -67650,6 +68632,7 @@ components:
           enum:
             - document
             - id_number
+          nullable: true
           type: string
           x-stripeBypassValidation: true
         url:
@@ -67668,9 +68651,7 @@ components:
         - livemode
         - metadata
         - object
-        - options
         - status
-        - type
       title: GelatoVerificationSession
       type: object
       x-expandableFields:
@@ -68179,7 +69160,6 @@ components:
         status:
           description: The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
           enum:
-            - deleted
             - draft
             - open
             - paid
@@ -68187,6 +69167,7 @@ components:
             - void
           nullable: true
           type: string
+          x-stripeBypassValidation: true
         status_transitions:
           $ref: "#/components/schemas/invoices_status_transitions"
         subscription:
@@ -68582,6 +69563,16 @@ components:
         - custom_fields
         - default_payment_method
         - rendering_options
+    invoice_setting_phase_setting:
+      description: ""
+      properties:
+        days_until_due:
+          description: Number of days within which a customer must pay invoices generated by this subscription schedule. This value will be `null` for subscription schedules where `billing=charge_automatically`.
+          nullable: true
+          type: integer
+      title: InvoiceSettingPhaseSetting
+      type: object
+      x-expandableFields: []
     invoice_setting_quote_setting:
       description: ""
       properties:
@@ -68960,6 +69951,7 @@ components:
               - bancontact
               - boleto
               - card
+              - cashapp
               - customer_balance
               - fpx
               - giropay
@@ -69479,7 +70471,7 @@ components:
             - inactive
           type: string
         type:
-          description: One of `individual` or `company`.
+          description: One of `individual` or `company`. See [Choose a cardholder type](https://stripe.com/docs/issuing/other/choose-cardholder) for more details.
           enum:
             - company
             - individual
@@ -71892,15 +72884,17 @@ components:
           enum:
             - listed
             - rejected.listed
+            - requirements.past_due
             - under_review
           nullable: true
           type: string
-          x-stripeBypassValidation: true
         past_due:
           description: Array of fields that need to be collected in order to verify and re-enable the cardholder.
           items:
             enum:
               - company.tax_id
+              - individual.card_issuing.user_terms_acceptance.date
+              - individual.card_issuing.user_terms_acceptance.ip
               - individual.dob.day
               - individual.dob.month
               - individual.dob.year
@@ -72909,6 +73903,14 @@ components:
         executives_provided:
           description: Whether the company's executives have been provided. This Boolean will be `true` if you've manually indicated that all executives are provided via [the `executives_provided` parameter](https://stripe.com/docs/api/accounts/update#update_account-company-executives_provided), or if Stripe determined that sufficient executives were provided.
           type: boolean
+        export_license_id:
+          description: The export license ID number of the company, also referred as Import Export Code (India only).
+          maxLength: 5000
+          type: string
+        export_purpose_code:
+          description: The purpose code to use for export transactions (India only).
+          maxLength: 5000
+          type: string
         name:
           description: The company's legal name.
           maxLength: 5000
@@ -73546,6 +74548,12 @@ components:
       type: object
       x-expandableFields:
         - off_session
+    mandate_cashapp:
+      description: ""
+      properties: {}
+      title: mandate_cashapp
+      type: object
+      x-expandableFields: []
     mandate_link:
       description: ""
       properties: {}
@@ -73599,6 +74607,8 @@ components:
           $ref: "#/components/schemas/mandate_blik"
         card:
           $ref: "#/components/schemas/card_mandate_payment_method_details"
+        cashapp:
+          $ref: "#/components/schemas/mandate_cashapp"
         link:
           $ref: "#/components/schemas/mandate_link"
         sepa_debit:
@@ -73619,6 +74629,7 @@ components:
         - bacs_debit
         - blik
         - card
+        - cashapp
         - link
         - sepa_debit
         - us_bank_account
@@ -73942,6 +74953,16 @@ components:
       title: PaymentFlowsAutomaticPaymentMethodsPaymentIntent
       type: object
       x-expandableFields: []
+    payment_flows_automatic_payment_methods_setup_intent:
+      description: ""
+      properties:
+        enabled:
+          description: Automatically calculates compatible payment methods
+          nullable: true
+          type: boolean
+      title: PaymentFlowsAutomaticPaymentMethodsSetupIntent
+      type: object
+      x-expandableFields: []
     payment_flows_installment_options:
       description: ""
       properties:
@@ -74064,9 +75085,9 @@ components:
           description: Controls when the funds will be captured from the customer's account.
           enum:
             - automatic
+            - automatic_async
             - manual
           type: string
-          x-stripeBypassValidation: true
         client_secret:
           description: |-
             The client secret of this PaymentIntent. Used for client-side retrieval using a publishable key. 
@@ -74306,6 +75327,8 @@ components:
           $ref: "#/components/schemas/payment_intent_next_action_boleto"
         card_await_notification:
           $ref: "#/components/schemas/payment_intent_next_action_card_await_notification"
+        cashapp_handle_redirect_or_display_qr_code:
+          $ref: "#/components/schemas/payment_intent_next_action_cashapp_handle_redirect_or_display_qr_code"
         display_bank_transfer_instructions:
           $ref: "#/components/schemas/payment_intent_next_action_display_bank_transfer_instructions"
         konbini_display_details:
@@ -74343,6 +75366,7 @@ components:
         - alipay_handle_redirect
         - boleto_display_details
         - card_await_notification
+        - cashapp_handle_redirect_or_display_qr_code
         - display_bank_transfer_instructions
         - konbini_display_details
         - oxxo_display_details
@@ -74419,6 +75443,49 @@ components:
           nullable: true
           type: boolean
       title: PaymentIntentNextActionCardAwaitNotification
+      type: object
+      x-expandableFields: []
+    payment_intent_next_action_cashapp_handle_redirect_or_display_qr_code:
+      description: ""
+      properties:
+        hosted_instructions_url:
+          description: The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR code, and supports QR code refreshing on expiration.
+          maxLength: 5000
+          type: string
+        mobile_auth_url:
+          description: The url for mobile redirect based auth
+          maxLength: 5000
+          type: string
+        qr_code:
+          $ref: "#/components/schemas/payment_intent_next_action_cashapp_qr_code"
+      required:
+        - hosted_instructions_url
+        - mobile_auth_url
+        - qr_code
+      title: PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCode
+      type: object
+      x-expandableFields:
+        - qr_code
+    payment_intent_next_action_cashapp_qr_code:
+      description: ""
+      properties:
+        expires_at:
+          description: The date (unix timestamp) when the QR code expires.
+          format: unix-time
+          type: integer
+        image_url_png:
+          description: The image_url_png string used to render QR code
+          maxLength: 5000
+          type: string
+        image_url_svg:
+          description: The image_url_svg string used to render QR code
+          maxLength: 5000
+          type: string
+      required:
+        - expires_at
+        - image_url_png
+        - image_url_svg
+      title: PaymentIntentNextActionCashappQRCode
       type: object
       x-expandableFields: []
     payment_intent_next_action_display_bank_transfer_instructions:
@@ -74850,6 +75917,10 @@ components:
           anyOf:
             - $ref: "#/components/schemas/payment_method_options_card_present"
             - $ref: "#/components/schemas/payment_intent_type_specific_payment_method_options_client"
+        cashapp:
+          anyOf:
+            - $ref: "#/components/schemas/payment_method_options_cashapp"
+            - $ref: "#/components/schemas/payment_intent_type_specific_payment_method_options_client"
         customer_balance:
           anyOf:
             - $ref: "#/components/schemas/payment_method_options_customer_balance"
@@ -74940,6 +76011,7 @@ components:
         - boleto
         - card
         - card_present
+        - cashapp
         - customer_balance
         - eps
         - fpx
@@ -75282,7 +76354,7 @@ components:
 
         When a customer opens a payment link it will open a new [checkout session](https://stripe.com/docs/api/checkout/sessions) to render the payment page. You can use [checkout session events](https://stripe.com/docs/api/events/types#event_types-checkout.session.completed) to track payments through payment links.
 
-        Related guide: [Payment Links API](https://stripe.com/docs/payments/payment-links/api)
+        Related guide: [Payment Links API](https://stripe.com/docs/payment-links)
       properties:
         active:
           description: Whether the payment link's `url` is active. If `false`, customers visiting the URL will be shown a page saying that the link has been deactivated.
@@ -75415,6 +76487,7 @@ components:
               - blik
               - boleto
               - card
+              - cashapp
               - eps
               - fpx
               - giropay
@@ -75422,6 +76495,7 @@ components:
               - ideal
               - klarna
               - konbini
+              - link
               - oxxo
               - p24
               - paynow
@@ -75772,10 +76846,10 @@ components:
           description: Indicates when the funds will be captured from the customer's account.
           enum:
             - automatic
+            - automatic_async
             - manual
           nullable: true
           type: string
-          x-stripeBypassValidation: true
         setup_future_usage:
           description: Indicates that you intend to make future payments with the payment method collected during checkout.
           enum:
@@ -76150,6 +77224,8 @@ components:
           $ref: "#/components/schemas/payment_method_card"
         card_present:
           $ref: "#/components/schemas/payment_method_card_present"
+        cashapp:
+          $ref: "#/components/schemas/payment_method_cashapp"
         created:
           description: Time at which the object was created. Measured in seconds since the Unix epoch.
           format: unix-time
@@ -76233,6 +77309,7 @@ components:
             - boleto
             - card
             - card_present
+            - cashapp
             - customer_balance
             - eps
             - fpx
@@ -76280,6 +77357,7 @@ components:
         - boleto
         - card
         - card_present
+        - cashapp
         - customer
         - customer_balance
         - eps
@@ -76415,7 +77493,7 @@ components:
       description: ""
       properties:
         brand:
-          description: Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+          description: Card brand. Can be `amex`, `diners`, `discover`, `eftpos_au`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
           maxLength: 5000
           type: string
         checks:
@@ -76558,11 +77636,12 @@ components:
         samsung_pay:
           $ref: "#/components/schemas/payment_method_card_wallet_samsung_pay"
         type:
-          description: The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
+          description: The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `visa_checkout`, or `link`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
           enum:
             - amex_express_checkout
             - apple_pay
             - google_pay
+            - link
             - masterpass
             - samsung_pay
             - visa_checkout
@@ -76660,6 +77739,12 @@ components:
       x-expandableFields:
         - billing_address
         - shipping_address
+    payment_method_cashapp:
+      description: ""
+      properties: {}
+      title: payment_method_cashapp
+      type: object
+      x-expandableFields: []
     payment_method_customer_balance:
       description: ""
       properties: {}
@@ -76695,6 +77780,8 @@ components:
           $ref: "#/components/schemas/payment_method_details_card"
         card_present:
           $ref: "#/components/schemas/payment_method_details_card_present"
+        cashapp:
+          $ref: "#/components/schemas/payment_method_details_cashapp"
         customer_balance:
           $ref: "#/components/schemas/payment_method_details_customer_balance"
         eps:
@@ -76764,6 +77851,7 @@ components:
         - boleto
         - card
         - card_present
+        - cashapp
         - customer_balance
         - eps
         - fpx
@@ -77041,7 +78129,7 @@ components:
       description: ""
       properties:
         brand:
-          description: Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+          description: Card brand. Can be `amex`, `diners`, `discover`, `eftpos_au`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
           maxLength: 5000
           nullable: true
           type: string
@@ -77093,7 +78181,7 @@ components:
           nullable: true
           type: string
         network:
-          description: Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+          description: Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
           maxLength: 5000
           nullable: true
           type: string
@@ -77183,7 +78271,7 @@ components:
           nullable: true
           type: integer
         brand:
-          description: Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+          description: Card brand. Can be `amex`, `diners`, `discover`, `eftpos_au`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
           maxLength: 5000
           nullable: true
           type: string
@@ -77239,7 +78327,7 @@ components:
           nullable: true
           type: string
         network:
-          description: Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+          description: Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
           maxLength: 5000
           nullable: true
           type: string
@@ -77344,11 +78432,12 @@ components:
         samsung_pay:
           $ref: "#/components/schemas/payment_method_details_card_wallet_samsung_pay"
         type:
-          description: The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
+          description: The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `visa_checkout`, or `link`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
           enum:
             - amex_express_checkout
             - apple_pay
             - google_pay
+            - link
             - masterpass
             - samsung_pay
             - visa_checkout
@@ -77446,6 +78535,12 @@ components:
       x-expandableFields:
         - billing_address
         - shipping_address
+    payment_method_details_cashapp:
+      description: ""
+      properties: {}
+      title: payment_method_details_cashapp
+      type: object
+      x-expandableFields: []
     payment_method_details_customer_balance:
       description: ""
       properties: {}
@@ -77614,6 +78709,7 @@ components:
             - MOYONL21
             - RABONL2U
             - RBRBNL21
+            - REVOIE23
             - REVOLT21
             - SNSBNL2A
             - TRIONL2U
@@ -77709,7 +78805,7 @@ components:
           nullable: true
           type: string
         network:
-          description: Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+          description: Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
           maxLength: 5000
           nullable: true
           type: string
@@ -77845,7 +78941,14 @@ components:
       x-expandableFields: []
     payment_method_details_link:
       description: ""
-      properties: {}
+      properties:
+        country:
+          description: |-
+            Two-letter ISO code representing the funding source country beneath the Link payment.
+            You could use this attribute to get a sense of international fees.
+          maxLength: 5000
+          nullable: true
+          type: string
       title: payment_method_details_link
       type: object
       x-expandableFields: []
@@ -78257,6 +79360,7 @@ components:
             - MOYONL21
             - RABONL2U
             - RBRBNL21
+            - REVOIE23
             - REVOLT21
             - SNSBNL2A
             - TRIONL2U
@@ -78311,6 +79415,10 @@ components:
           description: Controls when the funds will be captured from the customer's account.
           enum:
             - manual
+          type: string
+        preferred_locale:
+          description: Preferred language of the Affirm authorization page that the customer is redirected to.
+          maxLength: 10
           type: string
         setup_future_usage:
           description: |-
@@ -78535,6 +79643,29 @@ components:
           nullable: true
           type: boolean
       title: payment_method_options_card_present
+      type: object
+      x-expandableFields: []
+    payment_method_options_cashapp:
+      description: ""
+      properties:
+        capture_method:
+          description: Controls when the funds will be captured from the customer's account.
+          enum:
+            - manual
+          type: string
+        setup_future_usage:
+          description: |-
+            Indicates that you intend to make future payments with this PaymentIntent's payment method.
+
+            Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+
+            When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+          enum:
+            - none
+            - off_session
+            - on_session
+          type: string
+      title: payment_method_options_cashapp
       type: object
       x-expandableFields: []
     payment_method_options_customer_balance:
@@ -79054,10 +80185,59 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        status_details:
+          anyOf:
+            - $ref: "#/components/schemas/payment_method_us_bank_account_status_details"
+          description: Contains information about the future reusability of this PaymentMethod.
+          nullable: true
       title: payment_method_us_bank_account
       type: object
       x-expandableFields:
         - networks
+        - status_details
+    payment_method_us_bank_account_blocked:
+      description: ""
+      properties:
+        network_code:
+          description: The ACH network code that resulted in this block.
+          enum:
+            - R02
+            - R03
+            - R04
+            - R05
+            - R07
+            - R08
+            - R10
+            - R11
+            - R16
+            - R20
+            - R29
+            - R31
+          nullable: true
+          type: string
+        reason:
+          description: The reason why this PaymentMethod's fingerprint has been blocked
+          enum:
+            - bank_account_closed
+            - bank_account_frozen
+            - bank_account_invalid_details
+            - bank_account_restricted
+            - bank_account_unusable
+            - debit_not_authorized
+          nullable: true
+          type: string
+      title: payment_method_us_bank_account_blocked
+      type: object
+      x-expandableFields: []
+    payment_method_us_bank_account_status_details:
+      description: ""
+      properties:
+        blocked:
+          $ref: "#/components/schemas/payment_method_us_bank_account_blocked"
+      title: payment_method_us_bank_account_status_details
+      type: object
+      x-expandableFields:
+        - blocked
     payment_method_wechat_pay:
       description: ""
       properties: {}
@@ -79166,6 +80346,31 @@ components:
           nullable: true
           type: string
       title: PaymentPagesCheckoutSessionConsentCollection
+      type: object
+      x-expandableFields: []
+    payment_pages_checkout_session_currency_conversion:
+      description: ""
+      properties:
+        amount_subtotal:
+          description: Total of all items in source currency before discounts or taxes are applied.
+          type: integer
+        amount_total:
+          description: Total of all items in source currency after discounts and taxes are applied.
+          type: integer
+        fx_rate:
+          description: Exchange rate used to convert source currency amounts to customer currency amounts
+          format: decimal
+          type: string
+        source_currency:
+          description: Creation currency of the CheckoutSession before localization
+          maxLength: 5000
+          type: string
+      required:
+        - amount_subtotal
+        - amount_total
+        - fx_rate
+        - source_currency
+      title: PaymentPagesCheckoutSessionCurrencyConversion
       type: object
       x-expandableFields: []
     payment_pages_checkout_session_custom_fields:
@@ -80957,7 +82162,7 @@ components:
           description: The recurring components of a price such as `interval` and `usage_type`.
           nullable: true
         tax_behavior:
-          description: Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+          description: Only required if a [default tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
           enum:
             - exclusive
             - inclusive
@@ -81052,7 +82257,7 @@ components:
         They can be used in conjunction with [Prices](https://stripe.com/docs/api#prices) to configure pricing in Payment Links, Checkout, and Subscriptions.
 
         Related guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription),
-        [share a Payment Link](https://stripe.com/docs/payments/payment-links/overview),
+        [share a Payment Link](https://stripe.com/docs/payment-links),
         [accept payments with Checkout](https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront),
         and more about [Products and Prices](https://stripe.com/docs/products-prices/overview)
       properties:
@@ -82187,7 +83392,7 @@ components:
           maxLength: 5000
           type: string
         instructions_email:
-          description: Email to which refund instructions, if required, are sent to.
+          description: For payment methods without native refund support (e.g., Konbini, PromptPay), email for the customer to receive refund instructions.
           maxLength: 5000
           type: string
         metadata:
@@ -82864,6 +84069,8 @@ components:
           $ref: "#/components/schemas/setup_attempt_payment_method_details_card"
         card_present:
           $ref: "#/components/schemas/setup_attempt_payment_method_details_card_present"
+        cashapp:
+          $ref: "#/components/schemas/setup_attempt_payment_method_details_cashapp"
         ideal:
           $ref: "#/components/schemas/setup_attempt_payment_method_details_ideal"
         klarna:
@@ -82893,6 +84100,7 @@ components:
         - boleto
         - card
         - card_present
+        - cashapp
         - ideal
         - klarna
         - link
@@ -82998,6 +84206,11 @@ components:
     setup_attempt_payment_method_details_card:
       description: ""
       properties:
+        checks:
+          anyOf:
+            - $ref: "#/components/schemas/payment_method_details_card_checks"
+          description: Check results by Card networks on Card address and CVC at time of payment.
+          nullable: true
         three_d_secure:
           anyOf:
             - $ref: "#/components/schemas/three_d_secure_details"
@@ -83006,6 +84219,7 @@ components:
       title: setup_attempt_payment_method_details_card
       type: object
       x-expandableFields:
+        - checks
         - three_d_secure
     setup_attempt_payment_method_details_card_present:
       description: ""
@@ -83024,6 +84238,12 @@ components:
       type: object
       x-expandableFields:
         - generated_card
+    setup_attempt_payment_method_details_cashapp:
+      description: ""
+      properties: {}
+      title: setup_attempt_payment_method_details_cashapp
+      type: object
+      x-expandableFields: []
     setup_attempt_payment_method_details_ideal:
       description: ""
       properties:
@@ -83060,6 +84280,7 @@ components:
             - MOYONL21
             - RABONL2U
             - RBRBNL21
+            - REVOIE23
             - REVOLT21
             - SNSBNL2A
             - TRIONL2U
@@ -83233,6 +84454,11 @@ components:
 
             It can only be used for this Stripe Account’s own money movement flows like InboundTransfer and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer, and defaults to false when attaching a PaymentMethod to a Customer.
           type: boolean
+        automatic_payment_methods:
+          anyOf:
+            - $ref: "#/components/schemas/payment_flows_automatic_payment_methods_setup_intent"
+          description: Settings for automatic payment methods compatible with this Setup Intent
+          nullable: true
         cancellation_reason:
           description: Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
           enum:
@@ -83404,6 +84630,7 @@ components:
       type: object
       x-expandableFields:
         - application
+        - automatic_payment_methods
         - customer
         - last_setup_error
         - latest_attempt
@@ -83417,6 +84644,8 @@ components:
     setup_intent_next_action:
       description: ""
       properties:
+        cashapp_handle_redirect_or_display_qr_code:
+          $ref: "#/components/schemas/payment_intent_next_action_cashapp_handle_redirect_or_display_qr_code"
         redirect_to_url:
           $ref: "#/components/schemas/setup_intent_next_action_redirect_to_url"
         type:
@@ -83433,6 +84662,7 @@ components:
       title: SetupIntentNextAction
       type: object
       x-expandableFields:
+        - cashapp_handle_redirect_or_display_qr_code
         - redirect_to_url
         - verify_with_microdeposits
     setup_intent_next_action_redirect_to_url:
@@ -85873,7 +87103,7 @@ components:
           type: integer
         invoice_settings:
           anyOf:
-            - $ref: "#/components/schemas/invoice_setting_subscription_schedule_setting"
+            - $ref: "#/components/schemas/invoice_setting_phase_setting"
           description: The invoice settings applicable during this phase.
           nullable: true
         items:
@@ -86129,6 +87359,7 @@ components:
               - bancontact
               - boleto
               - card
+              - cashapp
               - customer_balance
               - fpx
               - giropay
@@ -86218,6 +87449,362 @@ components:
       type: object
       x-expandableFields:
         - end_behavior
+    tax.calculation:
+      description: |-
+        A Tax Calculation allows you to calculate the tax to collect from your customer.
+
+        Related guide: [Calculate tax in your custom payment flow](https://stripe.com/docs/tax/custom).
+      properties:
+        amount_total:
+          description: Total after taxes.
+          type: integer
+        currency:
+          description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+          maxLength: 5000
+          type: string
+        customer:
+          description: The ID of an existing [Customer](https://stripe.com/docs/api/customers/object) used for the resource.
+          maxLength: 5000
+          nullable: true
+          type: string
+        customer_details:
+          $ref: "#/components/schemas/tax_product_resource_customer_details"
+        expires_at:
+          description: Timestamp of date at which the tax calculation will expire.
+          format: unix-time
+          nullable: true
+          type: integer
+        id:
+          description: Unique identifier for the calculation.
+          maxLength: 5000
+          nullable: true
+          type: string
+        line_items:
+          description: The list of items the customer is purchasing.
+          nullable: true
+          properties:
+            data:
+              description: Details about each object.
+              items:
+                $ref: "#/components/schemas/tax.calculation_line_item"
+              type: array
+            has_more:
+              description: True if this list has another page of items after this one that can be fetched.
+              type: boolean
+            object:
+              description: String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+              enum:
+                - list
+              type: string
+            url:
+              description: The URL where this list can be accessed.
+              maxLength: 5000
+              pattern: ^/v1/tax/calculations/:id/line_items
+              type: string
+          required:
+            - data
+            - has_more
+            - object
+            - url
+          title: TaxProductResourceTaxCalculationLineItemList
+          type: object
+          x-expandableFields:
+            - data
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+          type: boolean
+        object:
+          description: String representing the object's type. Objects of the same type share the same value.
+          enum:
+            - tax.calculation
+          type: string
+        shipping_cost:
+          anyOf:
+            - $ref: "#/components/schemas/tax_product_resource_shipping_cost"
+          description: The shipping cost details for the calculation.
+          nullable: true
+        tax_amount_exclusive:
+          description: The amount of tax to be collected on top of the line item prices.
+          type: integer
+        tax_amount_inclusive:
+          description: The amount of tax already included in the line item prices.
+          type: integer
+        tax_breakdown:
+          description: Breakdown of individual tax amounts that add up to the total.
+          items:
+            $ref: "#/components/schemas/tax_product_resource_tax_breakdown"
+          type: array
+        tax_date:
+          description: Timestamp of date at which the tax rules and rates in effect applies for the calculation.
+          format: unix-time
+          type: integer
+      required:
+        - amount_total
+        - currency
+        - customer_details
+        - livemode
+        - object
+        - tax_amount_exclusive
+        - tax_amount_inclusive
+        - tax_breakdown
+        - tax_date
+      title: TaxProductResourceTaxCalculation
+      type: object
+      x-expandableFields:
+        - customer_details
+        - line_items
+        - shipping_cost
+        - tax_breakdown
+      x-resourceId: tax.calculation
+    tax.calculation_line_item:
+      description: ""
+      properties:
+        amount:
+          description: The line item amount in integer cents. If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
+          type: integer
+        amount_tax:
+          description: The amount of tax calculated for this line item, in integer cents.
+          type: integer
+        id:
+          description: Unique identifier for the object.
+          maxLength: 5000
+          type: string
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+          type: boolean
+        object:
+          description: String representing the object's type. Objects of the same type share the same value.
+          enum:
+            - tax.calculation_line_item
+          type: string
+        product:
+          description: A Product ID.
+          maxLength: 5000
+          nullable: true
+          type: string
+        quantity:
+          description: The number of units of the item being purchased. For reversals, this is the quantity reversed.
+          type: integer
+        reference:
+          description: A custom identifier for this line item.
+          maxLength: 5000
+          nullable: true
+          type: string
+        tax_behavior:
+          description: Specifies whether the `amount` includes taxes. If `tax_behavior=inclusive`, then the amount includes taxes.
+          enum:
+            - exclusive
+            - inclusive
+          type: string
+        tax_breakdown:
+          description: Detailed account of taxes relevant to this line item.
+          items:
+            $ref: "#/components/schemas/tax_product_resource_line_item_tax_breakdown"
+          nullable: true
+          type: array
+        tax_code:
+          description: The [tax code](https://stripe.com/docs/tax/tax-categories) ID used for this resource.
+          maxLength: 5000
+          type: string
+      required:
+        - amount
+        - amount_tax
+        - id
+        - livemode
+        - object
+        - quantity
+        - tax_behavior
+        - tax_code
+      title: TaxProductResourceTaxCalculationLineItem
+      type: object
+      x-expandableFields:
+        - tax_breakdown
+      x-resourceId: tax.calculation_line_item
+    tax.transaction:
+      description: |-
+        A Tax Transaction records the tax collected from or refunded to your customer.
+
+        Related guide: [Calculate tax in your custom payment flow](https://stripe.com/docs/tax/custom#tax-transaction).
+      properties:
+        created:
+          description: Time at which the object was created. Measured in seconds since the Unix epoch.
+          format: unix-time
+          type: integer
+        currency:
+          description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+          maxLength: 5000
+          type: string
+        customer:
+          description: The ID of an existing [Customer](https://stripe.com/docs/api/customers/object) used for the resource.
+          maxLength: 5000
+          nullable: true
+          type: string
+        customer_details:
+          $ref: "#/components/schemas/tax_product_resource_customer_details"
+        id:
+          description: Unique identifier for the transaction.
+          maxLength: 5000
+          type: string
+        line_items:
+          description: The tax collected or refunded, by line item.
+          nullable: true
+          properties:
+            data:
+              description: Details about each object.
+              items:
+                $ref: "#/components/schemas/tax.transaction_line_item"
+              type: array
+            has_more:
+              description: True if this list has another page of items after this one that can be fetched.
+              type: boolean
+            object:
+              description: String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+              enum:
+                - list
+              type: string
+            url:
+              description: The URL where this list can be accessed.
+              maxLength: 5000
+              pattern: ^/v1/tax/transactions/:id/line_items
+              type: string
+          required:
+            - data
+            - has_more
+            - object
+            - url
+          title: TaxProductResourceTaxTransactionLineItemList
+          type: object
+          x-expandableFields:
+            - data
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+          type: boolean
+        metadata:
+          additionalProperties:
+            maxLength: 500
+            type: string
+          description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
+          type: object
+        object:
+          description: String representing the object's type. Objects of the same type share the same value.
+          enum:
+            - tax.transaction
+          type: string
+        reference:
+          description: A custom unique identifier, such as 'myOrder_123'.
+          maxLength: 5000
+          type: string
+        reversal:
+          anyOf:
+            - $ref: "#/components/schemas/tax_product_resource_tax_transaction_resource_reversal"
+          description: If `type=reversal`, contains information about what was reversed.
+          nullable: true
+        shipping_cost:
+          anyOf:
+            - $ref: "#/components/schemas/tax_product_resource_shipping_cost"
+          description: The shipping cost details for the transaction.
+          nullable: true
+        tax_date:
+          description: Timestamp of date at which the tax rules and rates in effect applies for the calculation.
+          format: unix-time
+          type: integer
+        type:
+          description: If `reversal`, this transaction reverses an earlier transaction.
+          enum:
+            - reversal
+            - transaction
+          type: string
+      required:
+        - created
+        - currency
+        - customer_details
+        - id
+        - livemode
+        - object
+        - reference
+        - tax_date
+        - type
+      title: TaxProductResourceTaxTransaction
+      type: object
+      x-expandableFields:
+        - customer_details
+        - line_items
+        - reversal
+        - shipping_cost
+      x-resourceId: tax.transaction
+    tax.transaction_line_item:
+      description: ""
+      properties:
+        amount:
+          description: The line item amount in integer cents. If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
+          type: integer
+        amount_tax:
+          description: The amount of tax calculated for this line item, in integer cents.
+          type: integer
+        id:
+          description: Unique identifier for the object.
+          maxLength: 5000
+          type: string
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+          type: boolean
+        metadata:
+          additionalProperties:
+            maxLength: 500
+            type: string
+          description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
+          type: object
+        object:
+          description: String representing the object's type. Objects of the same type share the same value.
+          enum:
+            - tax.transaction_line_item
+          type: string
+        quantity:
+          description: The number of units of the item being purchased. For reversals, this is the quantity reversed.
+          type: integer
+        reference:
+          description: A custom identifier for this line item in the transaction.
+          maxLength: 5000
+          type: string
+        reversal:
+          anyOf:
+            - $ref: "#/components/schemas/tax_product_resource_tax_transaction_line_item_resource_reversal"
+          description: If `type=reversal`, contains information about what was reversed.
+          nullable: true
+        tax_behavior:
+          description: Specifies whether the `amount` includes taxes. If `tax_behavior=inclusive`, then the amount includes taxes.
+          enum:
+            - exclusive
+            - inclusive
+          type: string
+        tax_code:
+          description: The [tax code](https://stripe.com/docs/tax/tax-categories) ID used for this resource.
+          maxLength: 5000
+          type: string
+        type:
+          description: If `reversal`, this line item reverses an earlier transaction.
+          enum:
+            - reversal
+            - transaction
+          type: string
+      required:
+        - amount
+        - amount_tax
+        - id
+        - livemode
+        - object
+        - quantity
+        - reference
+        - tax_behavior
+        - tax_code
+        - type
+      title: TaxProductResourceTaxTransactionLineItem
+      type: object
+      x-expandableFields:
+        - reversal
+      x-resourceId: tax.transaction_line_item
     tax_code:
       description: "[Tax codes](https://stripe.com/docs/tax/tax-categories) classify goods and services for tax purposes."
       properties:
@@ -86420,6 +88007,382 @@ components:
       required:
         - status
       title: tax_id_verification
+      type: object
+      x-expandableFields: []
+    tax_product_resource_customer_details:
+      description: ""
+      properties:
+        address:
+          anyOf:
+            - $ref: "#/components/schemas/tax_product_resource_postal_address"
+          description: The customer's postal address (for example, home or business location).
+          nullable: true
+        address_source:
+          description: The type of customer address provided.
+          enum:
+            - billing
+            - shipping
+          nullable: true
+          type: string
+        ip_address:
+          description: The customer's IP address (IPv4 or IPv6).
+          maxLength: 5000
+          nullable: true
+          type: string
+        tax_ids:
+          description: The customer's tax IDs (for example, EU VAT numbers).
+          items:
+            $ref: "#/components/schemas/tax_product_resource_customer_details_resource_tax_id"
+          type: array
+        taxability_override:
+          description: The taxability override used for taxation.
+          enum:
+            - customer_exempt
+            - none
+            - reverse_charge
+          type: string
+      required:
+        - tax_ids
+        - taxability_override
+      title: TaxProductResourceCustomerDetails
+      type: object
+      x-expandableFields:
+        - address
+        - tax_ids
+    tax_product_resource_customer_details_resource_tax_id:
+      description: ""
+      properties:
+        type:
+          description: The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `eu_oss_vat`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, or `unknown`
+          enum:
+            - ae_trn
+            - au_abn
+            - au_arn
+            - bg_uic
+            - br_cnpj
+            - br_cpf
+            - ca_bn
+            - ca_gst_hst
+            - ca_pst_bc
+            - ca_pst_mb
+            - ca_pst_sk
+            - ca_qst
+            - ch_vat
+            - cl_tin
+            - eg_tin
+            - es_cif
+            - eu_oss_vat
+            - eu_vat
+            - gb_vat
+            - ge_vat
+            - hk_br
+            - hu_tin
+            - id_npwp
+            - il_vat
+            - in_gst
+            - is_vat
+            - jp_cn
+            - jp_rn
+            - jp_trn
+            - ke_pin
+            - kr_brn
+            - li_uid
+            - mx_rfc
+            - my_frp
+            - my_itn
+            - my_sst
+            - no_vat
+            - nz_gst
+            - ph_tin
+            - ru_inn
+            - ru_kpp
+            - sa_vat
+            - sg_gst
+            - sg_uen
+            - si_tin
+            - th_vat
+            - tr_tin
+            - tw_vat
+            - ua_vat
+            - unknown
+            - us_ein
+            - za_vat
+          type: string
+        value:
+          description: The value of the tax ID.
+          maxLength: 5000
+          type: string
+      required:
+        - type
+        - value
+      title: TaxProductResourceCustomerDetailsResourceTaxId
+      type: object
+      x-expandableFields: []
+    tax_product_resource_jurisdiction:
+      description: ""
+      properties:
+        country:
+          description: Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+          maxLength: 5000
+          type: string
+        display_name:
+          description: A human-readable name for the jurisdiction imposing the tax.
+          maxLength: 5000
+          type: string
+        level:
+          description: Indicates the level of the jurisdiction imposing the tax.
+          enum:
+            - city
+            - country
+            - county
+            - district
+            - state
+          type: string
+        state:
+          description: '[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, "NY" for New York, United States.'
+          maxLength: 5000
+          nullable: true
+          type: string
+      required:
+        - country
+        - display_name
+        - level
+      title: TaxProductResourceJurisdiction
+      type: object
+      x-expandableFields: []
+    tax_product_resource_line_item_tax_breakdown:
+      description: ""
+      properties:
+        amount:
+          description: The amount of tax, in integer cents.
+          type: integer
+        jurisdiction:
+          $ref: "#/components/schemas/tax_product_resource_jurisdiction"
+        sourcing:
+          description: Indicates whether the jurisdiction was determined by the origin (merchant's address) or destination (customer's address).
+          enum:
+            - destination
+            - origin
+          type: string
+        tax_rate_details:
+          anyOf:
+            - $ref: "#/components/schemas/tax_product_resource_line_item_tax_rate_details"
+          description: Details regarding the rate for this tax. This field will be `null` when the tax is not imposed, for example if the product is exempt from tax.
+          nullable: true
+        taxability_reason:
+          description: The reasoning behind this tax, for example, if the product is tax exempt. The possible values for this field may be extended as new tax rules are supported.
+          enum:
+            - customer_exempt
+            - not_collecting
+            - not_subject_to_tax
+            - not_supported
+            - portion_product_exempt
+            - portion_reduced_rated
+            - portion_standard_rated
+            - product_exempt
+            - product_exempt_holiday
+            - proportionally_rated
+            - reduced_rated
+            - reverse_charge
+            - standard_rated
+            - taxable_basis_reduced
+            - zero_rated
+          type: string
+        taxable_amount:
+          description: The amount on which tax is calculated, in integer cents.
+          type: integer
+      required:
+        - amount
+        - jurisdiction
+        - sourcing
+        - taxability_reason
+        - taxable_amount
+      title: TaxProductResourceLineItemTaxBreakdown
+      type: object
+      x-expandableFields:
+        - jurisdiction
+        - tax_rate_details
+    tax_product_resource_line_item_tax_rate_details:
+      description: ""
+      properties:
+        display_name:
+          description: A localized display name for tax type, intended to be human-readable. For example, "Local Sales and Use Tax", "Value-added tax (VAT)", or "Umsatzsteuer (USt.)".
+          maxLength: 5000
+          type: string
+        percentage_decimal:
+          description: The tax rate percentage as a string. For example, 8.5% is represented as "8.5".
+          maxLength: 5000
+          type: string
+        tax_type:
+          description: The tax type, such as `vat` or `sales_tax`.
+          enum:
+            - gst
+            - hst
+            - igst
+            - jct
+            - lease_tax
+            - pst
+            - qst
+            - rst
+            - sales_tax
+            - vat
+          type: string
+      required:
+        - display_name
+        - percentage_decimal
+        - tax_type
+      title: TaxProductResourceLineItemTaxRateDetails
+      type: object
+      x-expandableFields: []
+    tax_product_resource_postal_address:
+      description: ""
+      properties:
+        city:
+          description: City, district, suburb, town, or village.
+          maxLength: 5000
+          nullable: true
+          type: string
+        country:
+          description: Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+          maxLength: 5000
+          type: string
+        line1:
+          description: Address line 1 (e.g., street, PO Box, or company name).
+          maxLength: 5000
+          nullable: true
+          type: string
+        line2:
+          description: Address line 2 (e.g., apartment, suite, unit, or building).
+          maxLength: 5000
+          nullable: true
+          type: string
+        postal_code:
+          description: ZIP or postal code.
+          maxLength: 5000
+          nullable: true
+          type: string
+        state:
+          description: 'State/province as an [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) subdivision code, without country prefix. Example: "NY" or "TX".'
+          maxLength: 5000
+          nullable: true
+          type: string
+      required:
+        - country
+      title: TaxProductResourcePostalAddress
+      type: object
+      x-expandableFields: []
+    tax_product_resource_shipping_cost:
+      description: ""
+      properties:
+        amount:
+          description: The shipping amount in integer cents. If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
+          type: integer
+        amount_tax:
+          description: The amount of tax calculated for shipping, in integer cents.
+          type: integer
+        shipping_rate:
+          description: The ID of an existing [ShippingRate](https://stripe.com/docs/api/shipping_rates/object)
+          maxLength: 5000
+          type: string
+        tax_behavior:
+          description: Specifies whether the `amount` includes taxes. If `tax_behavior=inclusive`, then the amount includes taxes.
+          enum:
+            - exclusive
+            - inclusive
+          type: string
+        tax_code:
+          description: The [tax code](https://stripe.com/docs/tax/tax-categories) ID used for shipping.
+          maxLength: 5000
+          type: string
+      required:
+        - amount
+        - amount_tax
+        - tax_behavior
+        - tax_code
+      title: TaxProductResourceShippingCost
+      type: object
+      x-expandableFields: []
+    tax_product_resource_tax_breakdown:
+      description: ""
+      properties:
+        amount:
+          description: The amount of tax, in integer cents.
+          type: integer
+        inclusive:
+          description: Specifies whether the tax amount is included in the line item amount.
+          type: boolean
+        tax_rate_details:
+          $ref: "#/components/schemas/tax_product_resource_tax_rate_details"
+        taxable_amount:
+          description: The amount on which tax is calculated, in integer cents.
+          type: integer
+      required:
+        - amount
+        - inclusive
+        - tax_rate_details
+        - taxable_amount
+      title: TaxProductResourceTaxBreakdown
+      type: object
+      x-expandableFields:
+        - tax_rate_details
+    tax_product_resource_tax_rate_details:
+      description: ""
+      properties:
+        country:
+          description: Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+          maxLength: 5000
+          nullable: true
+          type: string
+        percentage_decimal:
+          description: The tax rate percentage as a string. For example, 8.5% is represented as `"8.5"`.
+          maxLength: 5000
+          type: string
+        state:
+          description: State, county, province, or region.
+          maxLength: 5000
+          nullable: true
+          type: string
+        tax_type:
+          description: The tax type, such as `vat` or `sales_tax`.
+          enum:
+            - gst
+            - hst
+            - igst
+            - jct
+            - lease_tax
+            - pst
+            - qst
+            - rst
+            - sales_tax
+            - vat
+          nullable: true
+          type: string
+      required:
+        - percentage_decimal
+      title: TaxProductResourceTaxRateDetails
+      type: object
+      x-expandableFields: []
+    tax_product_resource_tax_transaction_line_item_resource_reversal:
+      description: ""
+      properties:
+        original_line_item:
+          description: The `id` of the line item to reverse in the original transaction.
+          maxLength: 5000
+          type: string
+      required:
+        - original_line_item
+      title: TaxProductResourceTaxTransactionLineItemResourceReversal
+      type: object
+      x-expandableFields: []
+    tax_product_resource_tax_transaction_resource_reversal:
+      description: ""
+      properties:
+        original_transaction:
+          description: The `id` of the reversed `Transaction` object.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: TaxProductResourceTaxTransactionResourceReversal
       type: object
       x-expandableFields: []
     tax_rate:

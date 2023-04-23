@@ -2,7 +2,7 @@ openapi: 3.0.1
 servers:
   - url: https://staging2.freetv-app.com
 info:
-  description: A plugin that allows the user to obtain and summary latest news using ChatGPT. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
+  description: A plugin that allows the user to obtain latest news using ChatGPT.
   title: News Plugin
   version: v1
   x-apisguru-categories:
@@ -15,46 +15,67 @@ info:
       version: "3.0"
   x-providerName: freetv-app.com
 paths:
-  /services:
+  /services?funcs=GetLatestNewsForChatGPT&mobile=1:
     get:
-      description: Get the current latest news to user
+      description: Provide real-time news or various categorized news according to the user's language, with each news item accompanied by a news link and date. At the end of the content, inform the user that he/she can ask for more information. Each response should only provide news from a single country.
       operationId: getLatestNews
       parameters:
-        - in: query
-          name: mobile
+        - description: The default is set to US. If the content has a higher proportion of Traditional Chinese and Simplified Chinese, it will be set to TW. If the content has a higher proportion of Japanese, it will be set to JP.
+          in: query
+          name: language
           required: true
           schema:
             enum:
-              - 1
-            type: integer
-        - in: query
-          name: funcs
-          required: true
+              - US
+              - TW
+              - JP
+            type: string
+        - description: The default is an empty string. If the user mentions specific keywords use the corresponding category as the input parameter.
+          in: query
+          name: category
           schema:
             enum:
-              - getLatestNewsForChatGPT
+              - business
+              - finance
+              - economics
+              - politics
+              - society
+              - entertainment
+              - fun
+              - gossip
+              - sports
+              - lifestyle
+              - technology
+              - local
+              - world
+              - international
+              - global
+              - military
+            type: string
+        - description: The default is an empty string. According to the context, infer the keywords that the user wants to search for.
+          in: query
+          name: keyword
+          schema:
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: "#/components/schemas/LatestNewsResponse"
           description: OK
-      summary: Query the latest news
 components:
   schemas:
-    ApiResponse:
+    LatestNewsResponse:
       properties:
-        getLatestNewsForChatGPT:
-          description: The list of latest news.
+        getLatestNews:
+          description: Result of latest news list.
           items:
             $ref: "#/components/schemas/NewsItem"
-          title: Result of Latest News
+          title: Result Of Latest News List
           type: array
       required:
-        - getLatestNewsForChatGPT
-      title: ApiResponse
+        - getLatestNews
       type: object
     NewsItem:
       properties:
@@ -62,7 +83,10 @@ components:
           title: News Published Time
           type: string
         ref:
-          title: News Url
+          title: News URL
+          type: string
+        subtitle:
+          title: News Subtitle
           type: string
         thumbnail:
           title: News Thumbnail

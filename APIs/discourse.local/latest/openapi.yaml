@@ -1784,6 +1784,11 @@ paths:
                         type: boolean
                       can_edit:
                         type: boolean
+                      category_setting:
+                        auto_bump_cooldown_days: 1
+                        num_auto_bump_daily: null
+                        require_reply_approval: null
+                        require_topic_approval: null
                       color:
                         type: string
                       custom_fields:
@@ -2433,6 +2438,11 @@ paths:
                         type: boolean
                       can_edit:
                         type: boolean
+                      category_setting:
+                        auto_bump_cooldown_days: 1
+                        num_auto_bump_daily: null
+                        require_reply_approval: null
+                        require_topic_approval: null
                       color:
                         type: string
                       custom_fields:
@@ -2715,6 +2725,11 @@ paths:
                         type: boolean
                       can_edit:
                         type: boolean
+                      category_setting:
+                        auto_bump_cooldown_days: 1
+                        num_auto_bump_daily: null
+                        require_reply_approval: null
+                        require_topic_approval: null
                       color:
                         type: string
                       custom_fields:
@@ -4740,18 +4755,14 @@ paths:
       tags:
         - Posts
     get:
+      description: |
+        This endpoint can be used to get the number of likes on a post using the
+        `actions_summary` property in the response. `actions_summary` responses
+        with the id of `2` signify a `like`. If there are no `actions_summary`
+        items with the id of `2`, that means there are 0 likes. Other ids likely
+        refer to various different flag types.
       operationId: getPost
       parameters:
-        - in: header
-          name: Api-Key
-          required: true
-          schema:
-            type: string
-        - in: header
-          name: Api-Username
-          required: true
-          schema:
-            type: string
         - in: path
           name: id
           required: true
@@ -4762,20 +4773,33 @@ paths:
           content:
             application/json:
               schema:
+                additionalProperties: true
                 properties:
                   actions_summary:
                     items:
+                      additionalProperties: false
                       properties:
+                        acted:
+                          type: boolean
                         can_act:
                           type: boolean
-                        id:
+                        can_undo:
+                          type: boolean
+                        count:
                           type: integer
+                        id:
+                          description: "`2`: like, `3`, `4`, `6`, `7`, `8`: flag"
+                          type: integer
+                      required:
+                        - id
                       type: object
                     type: array
                   admin:
                     type: boolean
                   avatar_template:
                     type: string
+                  bookmarked:
+                    type: boolean
                   can_delete:
                     type: boolean
                   can_edit:
@@ -4824,6 +4848,9 @@ paths:
                     type: integer
                   incoming_link_count:
                     type: integer
+                  mentioned_users:
+                    items: {}
+                    type: array
                   moderator:
                     type: boolean
                   name:
@@ -4860,8 +4887,7 @@ paths:
                     type: integer
                   reviewable_score_pending_count:
                     type: integer
-                  score:
-                    type: integer
+                  score: {}
                   staff:
                     type: boolean
                   topic_id:
@@ -4888,24 +4914,60 @@ paths:
                     type: boolean
                   yours:
                     type: boolean
-                type: object
-          description: latest posts
+                required:
+                  - id
+                  - username
+                  - avatar_template
+                  - created_at
+                  - cooked
+                  - post_number
+                  - post_type
+                  - updated_at
+                  - reply_count
+                  - reply_to_post_number
+                  - quote_count
+                  - incoming_link_count
+                  - reads
+                  - readers_count
+                  - score
+                  - yours
+                  - topic_id
+                  - topic_slug
+                  - primary_group_name
+                  - flair_name
+                  - flair_url
+                  - flair_bg_color
+                  - flair_color
+                  - version
+                  - can_edit
+                  - can_delete
+                  - can_recover
+                  - can_wiki
+                  - user_title
+                  - bookmarked
+                  - raw
+                  - actions_summary
+                  - moderator
+                  - admin
+                  - staff
+                  - user_id
+                  - hidden
+                  - trust_level
+                  - deleted_at
+                  - user_deleted
+                  - edit_reason
+                  - can_view_edit_history
+                  - wiki
+                  - reviewable_id
+                  - reviewable_score_count
+                  - reviewable_score_pending_count
+          description: single post
       summary: Retrieve a single post
       tags:
         - Posts
     put:
       operationId: updatePost
       parameters:
-        - in: header
-          name: Api-Key
-          required: true
-          schema:
-            type: string
-        - in: header
-          name: Api-Username
-          required: true
-          schema:
-            type: string
         - in: path
           name: id
           required: true
@@ -4915,8 +4977,10 @@ paths:
         content:
           application/json:
             schema:
+              additionalProperties: false
               properties:
                 post:
+                  additionalProperties: false
                   properties:
                     edit_reason:
                       type: string
@@ -4925,28 +4989,35 @@ paths:
                   required:
                     - raw
                   type: object
-              type: object
       responses:
         "200":
           content:
             application/json:
               schema:
+                additionalProperties: false
                 properties:
                   post:
+                    additionalProperties: false
                     properties:
                       actions_summary:
                         items:
+                          additionalProperties: false
                           properties:
                             can_act:
                               type: boolean
                             id:
                               type: integer
+                          required:
+                            - id
+                            - can_act
                           type: object
                         type: array
                       admin:
                         type: boolean
                       avatar_template:
                         type: string
+                      bookmarked:
+                        type: boolean
                       can_delete:
                         type: boolean
                       can_edit:
@@ -4983,6 +5054,10 @@ paths:
                         type:
                           - string
                           - "null"
+                      flair_name:
+                        type:
+                          - string
+                          - "null"
                       flair_url:
                         type:
                           - string
@@ -4993,6 +5068,9 @@ paths:
                         type: integer
                       incoming_link_count:
                         type: integer
+                      mentioned_users:
+                        items: {}
+                        type: array
                       moderator:
                         type: boolean
                       name:
@@ -5009,6 +5087,8 @@ paths:
                           - "null"
                       quote_count:
                         type: integer
+                      raw:
+                        type: string
                       readers_count:
                         type: integer
                       reads:
@@ -5027,8 +5107,7 @@ paths:
                         type: integer
                       reviewable_score_pending_count:
                         type: integer
-                      score:
-                        type: number
+                      score: {}
                       staff:
                         type: boolean
                       topic_id:
@@ -5055,8 +5134,57 @@ paths:
                         type: boolean
                       yours:
                         type: boolean
+                    required:
+                      - id
+                      - username
+                      - avatar_template
+                      - created_at
+                      - cooked
+                      - post_number
+                      - post_type
+                      - updated_at
+                      - reply_count
+                      - reply_to_post_number
+                      - quote_count
+                      - incoming_link_count
+                      - reads
+                      - readers_count
+                      - score
+                      - yours
+                      - topic_id
+                      - topic_slug
+                      - primary_group_name
+                      - flair_name
+                      - flair_url
+                      - flair_bg_color
+                      - flair_color
+                      - version
+                      - can_edit
+                      - can_delete
+                      - can_recover
+                      - can_wiki
+                      - user_title
+                      - bookmarked
+                      - raw
+                      - actions_summary
+                      - moderator
+                      - admin
+                      - staff
+                      - user_id
+                      - draft_sequence
+                      - hidden
+                      - trust_level
+                      - deleted_at
+                      - user_deleted
+                      - edit_reason
+                      - can_view_edit_history
+                      - wiki
+                      - reviewable_id
+                      - reviewable_score_count
+                      - reviewable_score_pending_count
                     type: object
-                type: object
+                required:
+                  - post
           description: post updated
       summary: Update a single post
       tags:
@@ -5695,6 +5823,8 @@ paths:
                     type:
                       - object
                       - "null"
+                  denied_emojis:
+                    type: array
                   displayed_about_plugin_stat_groups:
                     type: array
                   filters:

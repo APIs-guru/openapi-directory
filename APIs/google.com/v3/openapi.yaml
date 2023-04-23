@@ -2018,6 +2018,10 @@ components:
         userRegionCode:
           description: ISO 3116 region code of the country/region of the user. Only present if `userRegionCode` is specified in `aggregateBy` in the request
           type: string
+        vrWebsiteButtonClicks:
+          description: The total number of clicks on the "Website" button on Google for vacation rentals.
+          format: int64
+          type: string
       type: object
     QueryFreeBookingLinksReportResponse:
       description: "**DEPRECATED:** Use `QueryPropertyPerformanceReportResponse` with `PropertyPerformanceReportService` instead. Response message for FreeBookingLinksReportService.QueryFreeBookingLinksReport."

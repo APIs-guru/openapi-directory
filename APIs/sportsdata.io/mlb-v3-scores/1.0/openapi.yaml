@@ -353,6 +353,100 @@ paths:
                 type: array
           description: ""
       summary: Players by Team
+  "/{format}/PlayersBasic/{team}":
+    get:
+      operationId: PlayersByTeamBasic
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: |-
+            The abbreviation of the requested team.
+            <br>Examples: <code>SF</code>, <code>NYY</code>.
+          in: path
+          name: team
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PlayerBasic"
+                type: array
+          description: ""
+      summary: Players by Team (Basic)
+  "/{format}/SchedulesBasic/{season}":
+    get:
+      operationId: SchedulesBasic
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc."
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScheduleBasic"
+                type: array
+          description: ""
+      summary: Schedules (Basic)
+  "/{format}/ScoresBasic/{date}":
+    get:
+      operationId: GamesByDateBasic
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: |-
+            The date of the game(s).
+            <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
+          in: path
+          name: date
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScoreBasic"
+                type: array
+          description: ""
+      summary: Games by Date (Basic)
   "/{format}/Stadiums":
     get:
       operationId: Stadiums
@@ -1006,6 +1100,214 @@ components:
         YahooPlayerID:
           nullable: true
           type: integer
+    PlayerBasic:
+      properties:
+        BatHand:
+          nullable: true
+          type: string
+        BirthCity:
+          nullable: true
+          type: string
+        BirthCountry:
+          nullable: true
+          type: string
+        BirthDate:
+          nullable: true
+          type: string
+        BirthState:
+          nullable: true
+          type: string
+        FirstName:
+          nullable: true
+          type: string
+        GlobalTeamID:
+          nullable: true
+          type: integer
+        Height:
+          nullable: true
+          type: integer
+        Jersey:
+          nullable: true
+          type: integer
+        LastName:
+          nullable: true
+          type: string
+        PlayerID:
+          nullable: false
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        SportsDataID:
+          nullable: true
+          type: string
+        Status:
+          nullable: true
+          type: string
+        Team:
+          nullable: true
+          type: string
+        TeamID:
+          nullable: true
+          type: integer
+        ThrowHand:
+          nullable: true
+          type: string
+        Weight:
+          nullable: true
+          type: integer
+    ScheduleBasic:
+      properties:
+        AwayTeam:
+          nullable: true
+          type: string
+        AwayTeamID:
+          nullable: true
+          type: integer
+        DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
+          nullable: true
+          type: string
+        Day:
+          nullable: true
+          type: string
+        GameEndDateTime:
+          nullable: true
+          type: string
+        GameID:
+          nullable: true
+          type: integer
+        HomeTeam:
+          nullable: true
+          type: string
+        HomeTeamID:
+          nullable: true
+          type: integer
+        IsClosed:
+          nullable: false
+          type: boolean
+        RescheduledFromGameID:
+          nullable: true
+          type: integer
+        RescheduledGameID:
+          nullable: true
+          type: integer
+        Season:
+          nullable: false
+          type: integer
+        SeasonType:
+          nullable: false
+          type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
+        StadiumID:
+          nullable: true
+          type: integer
+        Status:
+          nullable: true
+          type: string
+        Updated:
+          nullable: true
+          type: string
+    ScoreBasic:
+      properties:
+        Attendance:
+          nullable: true
+          type: integer
+        AwayTeam:
+          nullable: true
+          type: string
+        AwayTeamErrors:
+          nullable: true
+          type: integer
+        AwayTeamHits:
+          nullable: true
+          type: integer
+        AwayTeamID:
+          nullable: true
+          type: integer
+        AwayTeamRuns:
+          nullable: true
+          type: integer
+        DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
+          nullable: true
+          type: string
+        Day:
+          nullable: true
+          type: string
+        GameEndDateTime:
+          nullable: true
+          type: string
+        GameID:
+          nullable: true
+          type: integer
+        GlobalAwayTeamID:
+          nullable: false
+          type: integer
+        GlobalGameID:
+          nullable: false
+          type: integer
+        GlobalHomeTeamID:
+          nullable: false
+          type: integer
+        HomeTeam:
+          nullable: true
+          type: string
+        HomeTeamErrors:
+          nullable: true
+          type: integer
+        HomeTeamHits:
+          nullable: true
+          type: integer
+        HomeTeamID:
+          nullable: true
+          type: integer
+        HomeTeamRuns:
+          nullable: true
+          type: integer
+        Inning:
+          nullable: true
+          type: integer
+        InningHalf:
+          nullable: true
+          type: string
+        IsClosed:
+          nullable: false
+          type: boolean
+        NeutralVenue:
+          nullable: true
+          type: boolean
+        RescheduledFromGameID:
+          nullable: true
+          type: integer
+        RescheduledGameID:
+          nullable: true
+          type: integer
+        Season:
+          nullable: false
+          type: integer
+        SeasonType:
+          nullable: false
+          type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
+        StadiumID:
+          nullable: true
+          type: integer
+        Status:
+          nullable: true
+          type: string
+        Updated:
+          nullable: true
+          type: string
     Season:
       properties:
         ApiSeason:

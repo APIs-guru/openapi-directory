@@ -146,6 +146,36 @@ paths:
       summary: Convert a scanned image into text
       tags:
         - ImageOcr
+  /ocr/pdf/get-job-status:
+    get:
+      operationId: PdfOcr_GetAsyncJobStatus
+      parameters:
+        - in: query
+          name: AsyncJobID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PdfToTextResponse"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PdfToTextResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PdfToTextResponse"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/PdfToTextResponse"
+          description: OK
+      security:
+        - Apikey: []
+      summary: Returns the result of the Async Job - possible states can be STARTED or COMPLETED
+      tags:
+        - PdfOcr
   /ocr/pdf/to/lines-with-location:
     post:
       description: Converts a PDF into lines/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.
@@ -1178,6 +1208,12 @@ components:
     PdfToTextResponse:
       description: Response from an OCR to text operation.  Includes the confidence rating and converted text result.
       properties:
+        AsyncJobID:
+          description: When the job exceeds 25 pages, an Async Job ID is returned.  Use the CheckPdfOcrJobStatus API to check on the status of this job using the AsyncJobID and get the result when it finishes
+          type: string
+        AsyncJobStatus:
+          description: Returns the job status of the Async Job, if applicable.  Possible states are STARTED and COMPLETED
+          type: string
         OcrPages:
           description: Page OCR results
           items:

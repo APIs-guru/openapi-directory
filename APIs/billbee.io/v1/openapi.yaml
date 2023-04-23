@@ -1042,10 +1042,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiResult_Rechnungsdruck.WebApp.Controllers.Api.Invoice_"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiResult_Rechnungsdruck.WebApp.Controllers.Api.Invoice_"
             text/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiResult_Rechnungsdruck.WebApp.Controllers.Api.Invoice_"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiResult_Rechnungsdruck.WebApp.Controllers.Api.Invoice_"
           description: OK
       summary: Create an invoice for an existing order. This request is extra throttled by order and api key to a maximum of 1 per 5 minutes.
       tags:
@@ -1214,10 +1220,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel_"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel_"
             text/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel_"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel_"
           description: OK
       summary: Get a list of all invoices optionally filtered by date. This request ist throttled to 1 per 1 minute for same page and minInvoiceDate
       tags:
@@ -2831,6 +2843,24 @@ components:
       description: Tags to attach
       required: true
   schemas:
+    Billbee.Interfaces.BillbeeAPI.Model.AdditionalFeeApiModel:
+      description: Stores information about additional positions like shipcost
+      properties:
+        Gross:
+          format: double
+          type: number
+        Net:
+          format: double
+          type: number
+        Type:
+          type: string
+        VatAmount:
+          format: double
+          type: number
+        VatRate:
+          format: double
+          type: number
+      type: object
     Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel:
       properties:
         Configuration:
@@ -3414,6 +3444,126 @@ components:
           format: double
           type: number
       type: object
+    Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel:
+      properties:
+        AdditionalFees:
+          items:
+            $ref: "#/components/schemas/Billbee.Interfaces.BillbeeAPI.Model.AdditionalFeeApiModel"
+          type: array
+        BillbeeId:
+          format: int64
+          type: integer
+        Company:
+          type: string
+        Currency:
+          type: string
+        CustomerNumber:
+          format: int32
+          type: integer
+        CustomerVatId:
+          description: The vat-id, that was given by the customer to fulfill this order
+          type: string
+        DebtorNumber:
+          format: int32
+          type: integer
+        Email:
+          type: string
+        FirstName:
+          type: string
+        InvoiceDate:
+          format: date-time
+          type: string
+        InvoiceNumber:
+          type: string
+        LastName:
+          type: string
+        MerchantVatId:
+          description: The vat-id, that should be displayed on the invoice and other order documents
+          type: string
+        OrderNumber:
+          type: string
+        PayDate:
+          format: date-time
+          type: string
+        PaymentTypeId:
+          format: int32
+          type: integer
+        Positions:
+          items:
+            $ref: "#/components/schemas/Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiPositionApiModel"
+          type: array
+        Salutation:
+          type: string
+        ShippingCountry:
+          description: two letters for CountryCode Identification
+          type: string
+        ShopName:
+          type: string
+        Title:
+          type: string
+        TotalGross:
+          format: double
+          type: number
+        TotalNet:
+          format: double
+          type: number
+        TransactionId:
+          type: string
+        Type:
+          type: string
+        VatFlags:
+          $ref: "#/components/schemas/Billbee.Interfaces.Order.VatDetailsRecognizedHistoryEntry.VatDetectionFlags"
+        VatMode:
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+          format: int32
+          type: integer
+      type: object
+    Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiPositionApiModel:
+      properties:
+        Amount:
+          format: double
+          type: number
+        ArticleBillbeeId:
+          format: int32
+          type: integer
+        BillbeeId:
+          format: int64
+          type: integer
+        GrossValue:
+          format: double
+          type: number
+        NetValue:
+          format: double
+          type: number
+        Position:
+          format: int32
+          type: integer
+        RebatePercent:
+          format: double
+          type: number
+        Sku:
+          type: string
+        Title:
+          type: string
+        TotalGrossValue:
+          format: double
+          type: number
+        TotalNetValue:
+          format: double
+          type: number
+        TotalVatAmount:
+          format: double
+          type: number
+        VatRate:
+          format: double
+          type: number
+      type: object
     Billbee.Interfaces.BillbeeAPI.Model.Order:
       description: A class that represents the Billbee data model of a single order
       properties:
@@ -3662,6 +3812,8 @@ components:
             - 134
             - 135
             - 136
+            - 137
+            - 138
           format: int32
           type: integer
         PaymentReference:
@@ -4260,6 +4412,33 @@ components:
         Text:
           type: string
       type: object
+    Billbee.Interfaces.Order.VatDetailsRecognizedHistoryEntry.VatDetectionFlags:
+      properties:
+        CustomerHasVatId:
+          type: boolean
+        EuDeliveryThresholdExceeded:
+          type: boolean
+        IsDistanceSale:
+          type: boolean
+        OrderDistributionCountryIsEmpty:
+          type: boolean
+        OssEnabled:
+          type: boolean
+        RatesFrom:
+          type: string
+        SellerIsRegisteredInDstCountry:
+          type: boolean
+        SetIglWhenVatIdIsAvailableEnabled:
+          type: boolean
+        SrcCountryIsEqualToDstCountry:
+          type: boolean
+        ThirdPartyCountry:
+          type: boolean
+        UserProfileCountryIsEmpty:
+          type: boolean
+        VatIdFrom:
+          type: string
+      type: object
     Billbee.Interfaces.Shipping.ProductService:
       properties:
         CanBeConfigured:
@@ -4381,6 +4560,21 @@ components:
           type: integer
       type: object
     Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel_:
+      properties:
+        Page:
+          format: int32
+          type: integer
+        PageSize:
+          format: int32
+          type: integer
+        TotalPages:
+          format: int32
+          type: integer
+        TotalRows:
+          format: int32
+          type: integer
+      type: object
+    Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel_:
       properties:
         Page:
           format: int32
@@ -4751,6 +4945,84 @@ components:
           type: string
         Paging:
           $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel_"
+      type: object
+    Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel_:
+      properties:
+        Data:
+          items:
+            $ref: "#/components/schemas/Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel"
+          type: array
+        ErrorCode:
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 13
+            - 14
+            - 15
+            - 16
+            - 17
+            - 18
+            - 19
+            - 20
+            - 21
+            - 22
+            - 23
+            - 24
+            - 25
+            - 26
+            - 27
+            - 28
+          format: int32
+          type: integer
+        ErrorDescription:
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 13
+            - 14
+            - 15
+            - 16
+            - 17
+            - 18
+            - 19
+            - 20
+            - 21
+            - 22
+            - 23
+            - 24
+            - 25
+            - 26
+            - 27
+            - 28
+          format: int32
+          readOnly: true
+          type: integer
+        ErrorMessage:
+          type: string
+        Paging:
+          $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.InvoiceApiModel_"
       type: object
     Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult_System.Collections.Generic.List_Billbee.Interfaces.BillbeeAPI.Model.Order_:
       properties:
@@ -5726,6 +5998,80 @@ components:
         ErrorMessage:
           type: string
       type: object
+    Rechnungsdruck.WebApp.Controllers.Api.ApiResult_Rechnungsdruck.WebApp.Controllers.Api.Invoice_:
+      properties:
+        Data:
+          $ref: "#/components/schemas/Rechnungsdruck.WebApp.Controllers.Api.Invoice"
+        ErrorCode:
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 13
+            - 14
+            - 15
+            - 16
+            - 17
+            - 18
+            - 19
+            - 20
+            - 21
+            - 22
+            - 23
+            - 24
+            - 25
+            - 26
+            - 27
+            - 28
+          format: int32
+          type: integer
+        ErrorDescription:
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 13
+            - 14
+            - 15
+            - 16
+            - 17
+            - 18
+            - 19
+            - 20
+            - 21
+            - 22
+            - 23
+            - 24
+            - 25
+            - 26
+            - 27
+            - 28
+          format: int32
+          readOnly: true
+          type: integer
+        ErrorMessage:
+          type: string
+      type: object
     Rechnungsdruck.WebApp.Controllers.Api.ApiResult_Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchResultsModel_:
       properties:
         Data:
@@ -6243,6 +6589,27 @@ components:
           type: string
         Zip:
           type: string
+      type: object
+    Rechnungsdruck.WebApp.Controllers.Api.Invoice:
+      properties:
+        InvoiceDate:
+          format: date-time
+          type: string
+        InvoiceNumber:
+          type: string
+        OrderNumber:
+          type: string
+        PDFData:
+          format: byte
+          type: string
+        PdfDownloadUrl:
+          type: string
+        TotalGross:
+          format: double
+          type: number
+        TotalNet:
+          format: double
+          type: number
       type: object
     Rechnungsdruck.WebApp.Controllers.Api.Order:
       properties:

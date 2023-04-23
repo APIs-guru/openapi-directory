@@ -21,924 +21,6 @@ info:
       version: "3.0"
   x-providerName: vercel.com
 paths:
-  /edge-config:
-    get:
-      description: Returns all Edge Configs.
-      operationId: getEdgeConfigs
-      parameters:
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                description: List of all edge configs.
-                properties:
-                  createdAt:
-                    type:
-                      - number
-                      - "null"
-                  creator:
-                    type: string
-                  domain:
-                    type: string
-                  id:
-                    type: string
-                  itemCount:
-                    type: number
-                  name:
-                    type: string
-                  recordType:
-                    enum:
-                      - A
-                      - AAAA
-                      - ALIAS
-                      - CAA
-                      - CNAME
-                      - MX
-                      - SRV
-                      - TXT
-                      - NS
-                    type: string
-                  sizeInBytes:
-                    type: number
-                  ttl:
-                    type: number
-                  type:
-                    enum:
-                      - record
-                      - record-sys
-                    type: string
-                  value:
-                    type: string
-                required:
-                  - sizeInBytes
-                  - itemCount
-                type: object
-          description: List of all edge configs.
-        "400":
-          description: One of the provided values in the request query is invalid.
-        "403":
-          description: You do not have permission to access this resource.
-      security:
-        - bearerToken: []
-      summary: Get Edge Configs
-      tags:
-        - edge-config
-    post:
-      description: Creates an Edge Config.
-      operationId: createEdgeConfig
-      parameters:
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                items:
-                  additionalProperties:
-                    oneOf:
-                      - oneOf:
-                          - type: string
-                          - type: number
-                          - type: boolean
-                          - type: "null"
-                          - type: object
-                      - items:
-                          oneOf:
-                            - type: string
-                            - type: number
-                            - type: boolean
-                            - type: "null"
-                            - type: object
-                        type: array
-                  propertyNames:
-                    maxLength: 256
-                    pattern: ^[\\w-]+$
-                    type: string
-                  type: object
-                slug:
-                  maxLength: 32
-                  pattern: ^[\\w-]+$
-                  type: string
-              required:
-                - slug
-              type: object
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                description: An Edge Config
-                properties:
-                  blocking:
-                    type: boolean
-                  completedAt:
-                    type: number
-                  conclusion:
-                    enum:
-                      - canceled
-                      - failed
-                      - neutral
-                      - succeeded
-                      - skipped
-                      - stale
-                    type: string
-                  createdAt:
-                    type: number
-                  deploymentId:
-                    type: string
-                  detailsUrl:
-                    type: string
-                  externalId:
-                    type: string
-                  id:
-                    type: string
-                  integrationId:
-                    type: string
-                  itemCount:
-                    type: number
-                  name:
-                    type: string
-                  output:
-                    properties:
-                      metrics:
-                        properties:
-                          CLS:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          FCP:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          LCP:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          TBT:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          virtualExperienceScore:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                        required:
-                          - FCP
-                          - LCP
-                          - CLS
-                          - TBT
-                        type: object
-                    type: object
-                  path:
-                    type: string
-                  rerequestable:
-                    type: boolean
-                  sizeInBytes:
-                    type: number
-                  startedAt:
-                    type: number
-                  status:
-                    enum:
-                      - registered
-                      - running
-                      - completed
-                    type: string
-                  updatedAt:
-                    type: number
-                required:
-                  - sizeInBytes
-                  - itemCount
-                type: object
-          description: ""
-        "400":
-          description: One of the provided values in the request body is invalid.
-        "402":
-          description: |-
-            The account was soft-blocked for an unhandled reason.
-            The account is missing a payment so payment method must be updated
-        "403":
-          description: You do not have permission to access this resource.
-      security:
-        - bearerToken: []
-      summary: Create an Edge Config
-      tags:
-        - edge-config
-  "/edge-config/{edgeConfigId}":
-    delete:
-      description: Delete an Edge Config by id.
-      operationId: deleteEdgeConfig
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      responses:
-        "204":
-          description: ""
-        "400":
-          description: One of the provided values in the request query is invalid.
-        "402":
-          description: |-
-            The account was soft-blocked for an unhandled reason.
-            The account is missing a payment so payment method must be updated
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Delete an Edge Config
-      tags:
-        - edge-config
-    get:
-      description: Returns an Edge Config.
-      operationId: getEdgeConfig
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                description: The EdgeConfig.
-                properties:
-                  createdAt:
-                    type:
-                      - number
-                      - "null"
-                  creator:
-                    type: string
-                  domain:
-                    type: string
-                  id:
-                    type: string
-                  itemCount:
-                    type: number
-                  name:
-                    type: string
-                  recordType:
-                    enum:
-                      - A
-                      - AAAA
-                      - ALIAS
-                      - CAA
-                      - CNAME
-                      - MX
-                      - SRV
-                      - TXT
-                      - NS
-                    type: string
-                  sizeInBytes:
-                    type: number
-                  ttl:
-                    type: number
-                  type:
-                    enum:
-                      - record
-                      - record-sys
-                    type: string
-                  value:
-                    type: string
-                required:
-                  - sizeInBytes
-                  - itemCount
-                type: object
-          description: The EdgeConfig.
-        "400":
-          description: One of the provided values in the request query is invalid.
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Get an Edge Config
-      tags:
-        - edge-config
-    put:
-      description: Updates an Edge Config.
-      operationId: updateEdgeConfig
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                slug:
-                  maxLength: 32
-                  pattern: ^[\\w-]+$
-                  type: string
-              required:
-                - slug
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                description: An Edge Config
-                properties:
-                  blocking:
-                    type: boolean
-                  completedAt:
-                    type: number
-                  conclusion:
-                    enum:
-                      - canceled
-                      - failed
-                      - neutral
-                      - succeeded
-                      - skipped
-                      - stale
-                    type: string
-                  createdAt:
-                    type: number
-                  deploymentId:
-                    type: string
-                  detailsUrl:
-                    type: string
-                  externalId:
-                    type: string
-                  id:
-                    type: string
-                  integrationId:
-                    type: string
-                  itemCount:
-                    type: number
-                  name:
-                    type: string
-                  output:
-                    properties:
-                      metrics:
-                        properties:
-                          CLS:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          FCP:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          LCP:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          TBT:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          virtualExperienceScore:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                        required:
-                          - FCP
-                          - LCP
-                          - CLS
-                          - TBT
-                        type: object
-                    type: object
-                  path:
-                    type: string
-                  rerequestable:
-                    type: boolean
-                  sizeInBytes:
-                    type: number
-                  startedAt:
-                    type: number
-                  status:
-                    enum:
-                      - registered
-                      - running
-                      - completed
-                    type: string
-                  updatedAt:
-                    type: number
-                required:
-                  - sizeInBytes
-                  - itemCount
-                type: object
-          description: ""
-        "400":
-          description: |-
-            One of the provided values in the request body is invalid.
-            One of the provided values in the request query is invalid.
-        "402":
-          description: |-
-            The account was soft-blocked for an unhandled reason.
-            The account is missing a payment so payment method must be updated
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Update an Edge Config
-      tags:
-        - edge-config
-  "/edge-config/{edgeConfigId}/item/{edgeConfigItemKey}":
-    get:
-      description: Returns a specific Edge Config Item.
-      operationId: getEdgeConfigItem
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: edgeConfigItemKey
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EdgeConfigItem"
-          description: The EdgeConfig.
-        "400":
-          description: One of the provided values in the request query is invalid.
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Get an Edge Config item
-      tags:
-        - edge-config
-  "/edge-config/{edgeConfigId}/items":
-    get:
-      description: Returns all items of an Edge Config.
-      operationId: getEdgeConfigItems
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EdgeConfigItem"
-          description: The EdgeConfig.
-        "400":
-          description: One of the provided values in the request query is invalid.
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Get Edge Config items
-      tags:
-        - edge-config
-    patch:
-      description: Update multiple Edge Config Items in batch.
-      operationId: patchtEdgeConfigItems
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                items:
-                  items:
-                    oneOf:
-                      - properties:
-                          key:
-                            maxLength: 256
-                            pattern: ^[\\w-]+$
-                            type: string
-                          operation:
-                            oneOf:
-                              - const: create
-                              - const: update
-                              - const: upsert
-                          value:
-                            oneOf:
-                              - oneOf:
-                                  - type: string
-                                  - type: number
-                                  - type: boolean
-                                  - type: "null"
-                                  - type: object
-                              - items:
-                                  oneOf:
-                                    - type: string
-                                    - type: number
-                                    - type: boolean
-                                    - type: "null"
-                                    - type: object
-                                type: array
-                        required:
-                          - operation
-                          - key
-                          - value
-                        type: object
-                      - properties:
-                          key:
-                            maxLength: 256
-                            pattern: ^[\\w-]+$
-                            type: string
-                          operation:
-                            const: delete
-                        required:
-                          - operation
-                          - key
-                        type: object
-                  type: array
-              required:
-                - items
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  status:
-                    type: string
-                required:
-                  - status
-                type: object
-          description: ""
-        "400":
-          description: |-
-            One of the provided values in the request body is invalid.
-            One of the provided values in the request query is invalid.
-        "402":
-          description: |-
-            The account was soft-blocked for an unhandled reason.
-            The account is missing a payment so payment method must be updated
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-        "409":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Update Edge Config items in batch
-      tags:
-        - edge-config
-  "/edge-config/{edgeConfigId}/token":
-    post:
-      description: Adds a token to an existing Edge Config.
-      operationId: createEdgeConfigToken
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                label:
-                  maxLength: 52
-                  type: string
-              required:
-                - label
-              type: object
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                properties:
-                  id:
-                    type: string
-                  token:
-                    type: string
-                required:
-                  - token
-                  - id
-                type: object
-          description: ""
-        "400":
-          description: |-
-            One of the provided values in the request body is invalid.
-            One of the provided values in the request query is invalid.
-        "402":
-          description: |-
-            The account was soft-blocked for an unhandled reason.
-            The account is missing a payment so payment method must be updated
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Create an Edge Config token
-      tags:
-        - edge-config
-  "/edge-config/{edgeConfigId}/token/{token}":
-    get:
-      description: Return meta data about an Edge Config token.
-      operationId: getEdgeConfigToken
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: token
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EdgeConfigToken"
-          description: The EdgeConfig.
-        "400":
-          description: One of the provided values in the request query is invalid.
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Get Edge Config token meta data
-      tags:
-        - edge-config
-  "/edge-config/{edgeConfigId}/tokens":
-    delete:
-      description: Deletes one or more tokens of an existing Edge Config.
-      operationId: deleteEdgeConfigTokens
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                tokens:
-                  items:
-                    type: string
-                  type: array
-              required:
-                - tokens
-              type: object
-      responses:
-        "204":
-          description: ""
-        "400":
-          description: |-
-            One of the provided values in the request body is invalid.
-            One of the provided values in the request query is invalid.
-        "402":
-          description: |-
-            The account was soft-blocked for an unhandled reason.
-            The account is missing a payment so payment method must be updated
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Delete one or more Edge Config tokens
-      tags:
-        - edge-config
-    get:
-      description: Returns all tokens of an Edge Config.
-      operationId: getEdgeConfigTokens
-      parameters:
-        - in: path
-          name: edgeConfigId
-          required: true
-          schema:
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EdgeConfigToken"
-          description: The EdgeConfig.
-        "400":
-          description: One of the provided values in the request query is invalid.
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Get all tokens of an Edge Config
-      tags:
-        - edge-config
   /registration:
     post:
       description: Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
@@ -1310,149 +392,38 @@ paths:
           content:
             application/json:
               schema:
-                description: From T, pick a set of properties whose keys are in the union K
+                description: Information for the SAML Single Sign-On configuration.
                 properties:
-                  blocking:
-                    type: boolean
-                  completedAt:
+                  connectedAt:
+                    description: Timestamp (in milliseconds) of when the configuration was connected.
+                    examples:
+                      - 1611796915677
                     type: number
-                  conclusion:
-                    enum:
-                      - canceled
-                      - failed
-                      - neutral
-                      - succeeded
-                      - skipped
-                      - stale
-                    type: string
-                  createdAt:
+                  lastReceivedWebhookEvent:
+                    description: Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+                    examples:
+                      - 1611796915677
                     type: number
-                  deploymentId:
+                  state:
+                    description: Current state of the connection.
+                    examples:
+                      - active
                     type: string
-                  detailsUrl:
-                    type: string
-                  externalId:
-                    type: string
-                  id:
-                    type: string
-                  integrationId:
-                    type: string
-                  name:
-                    type: string
-                  output:
-                    properties:
-                      metrics:
-                        properties:
-                          CLS:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          FCP:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          LCP:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          TBT:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          virtualExperienceScore:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                        required:
-                          - FCP
-                          - LCP
-                          - CLS
-                          - TBT
-                        type: object
-                    type: object
-                  path:
-                    type: string
-                  rerequestable:
-                    type: boolean
-                  startedAt:
-                    type: number
                   status:
-                    enum:
-                      - registered
-                      - running
-                      - completed
+                    description: Current status of the connection.
+                    examples:
+                      - linked
                     type: string
-                  updatedAt:
-                    type: number
+                  type:
+                    description: The Identity Provider "type", for example Okta.
+                    examples:
+                      - OktaSAML
+                    type: string
                 required:
-                  - id
-                  - name
+                  - type
                   - status
-                  - blocking
-                  - integrationId
-                  - deploymentId
-                  - createdAt
-                  - updatedAt
+                  - state
+                  - connectedAt
                 type: object
           description: ""
         "400":
@@ -1762,149 +733,38 @@ paths:
           content:
             application/json:
               schema:
-                description: From T, pick a set of properties whose keys are in the union K
+                description: Information for the SAML Single Sign-On configuration.
                 properties:
-                  blocking:
-                    type: boolean
-                  completedAt:
+                  connectedAt:
+                    description: Timestamp (in milliseconds) of when the configuration was connected.
+                    examples:
+                      - 1611796915677
                     type: number
-                  conclusion:
-                    enum:
-                      - canceled
-                      - failed
-                      - neutral
-                      - succeeded
-                      - skipped
-                      - stale
-                    type: string
-                  createdAt:
+                  lastReceivedWebhookEvent:
+                    description: Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+                    examples:
+                      - 1611796915677
                     type: number
-                  deploymentId:
+                  state:
+                    description: Current state of the connection.
+                    examples:
+                      - active
                     type: string
-                  detailsUrl:
-                    type: string
-                  externalId:
-                    type: string
-                  id:
-                    type: string
-                  integrationId:
-                    type: string
-                  name:
-                    type: string
-                  output:
-                    properties:
-                      metrics:
-                        properties:
-                          CLS:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          FCP:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          LCP:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          TBT:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                          virtualExperienceScore:
-                            properties:
-                              previousValue:
-                                type: number
-                              source:
-                                enum:
-                                  - web-vitals
-                                type: string
-                              value:
-                                type:
-                                  - number
-                                  - "null"
-                            required:
-                              - value
-                              - source
-                            type: object
-                        required:
-                          - FCP
-                          - LCP
-                          - CLS
-                          - TBT
-                        type: object
-                    type: object
-                  path:
-                    type: string
-                  rerequestable:
-                    type: boolean
-                  startedAt:
-                    type: number
                   status:
-                    enum:
-                      - registered
-                      - running
-                      - completed
+                    description: Current status of the connection.
+                    examples:
+                      - linked
                     type: string
-                  updatedAt:
-                    type: number
+                  type:
+                    description: The Identity Provider "type", for example Okta.
+                    examples:
+                      - OktaSAML
+                    type: string
                 required:
-                  - id
-                  - name
+                  - type
                   - status
-                  - blocking
-                  - integrationId
-                  - deploymentId
-                  - createdAt
-                  - updatedAt
+                  - state
+                  - connectedAt
                 type: object
           description: ""
         "400":
@@ -1996,8 +856,8 @@ paths:
         content:
           application/json:
             schema:
-              additionalProperties: false
               properties:
+                additionalProperties: false
                 mxPriority:
                   description: The MX priority value of the DNS record
                   type:
@@ -2150,6 +1010,710 @@ paths:
       summary: Update an existing DNS record
       tags:
         - dns
+  /v1/edge-config:
+    get:
+      description: Returns all Edge Configs.
+      operationId: getEdgeConfigs
+      parameters:
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: List of all edge configs.
+                properties:
+                  createdAt:
+                    type:
+                      - number
+                      - "null"
+                  creator:
+                    type: string
+                  domain:
+                    type: string
+                  id:
+                    type: string
+                  itemCount:
+                    type: number
+                  name:
+                    type: string
+                  recordType:
+                    enum:
+                      - A
+                      - AAAA
+                      - ALIAS
+                      - CAA
+                      - CNAME
+                      - MX
+                      - SRV
+                      - TXT
+                      - NS
+                    type: string
+                  sizeInBytes:
+                    type: number
+                  ttl:
+                    type: number
+                  type:
+                    enum:
+                      - record
+                      - record-sys
+                    type: string
+                  value:
+                    type: string
+                required:
+                  - sizeInBytes
+                  - itemCount
+                type: object
+          description: List of all edge configs.
+        "400":
+          description: One of the provided values in the request query is invalid.
+        "403":
+          description: You do not have permission to access this resource.
+      security:
+        - bearerToken: []
+      summary: Get Edge Configs
+      tags:
+        - edge-config
+    post:
+      description: Creates an Edge Config.
+      operationId: createEdgeConfig
+      parameters:
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                items:
+                  additionalProperties:
+                    oneOf:
+                      - oneOf:
+                          - type: string
+                          - type: number
+                          - type: boolean
+                          - type: "null"
+                          - type: object
+                      - items:
+                          oneOf:
+                            - type: string
+                            - type: number
+                            - type: boolean
+                            - type: "null"
+                            - type: object
+                        type: array
+                  propertyNames:
+                    maxLength: 256
+                    pattern: ^[\\w-]+$
+                    type: string
+                  type: object
+                slug:
+                  maxLength: 32
+                  pattern: ^[\\w-]+$
+                  type: string
+              required:
+                - slug
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                description: An Edge Config
+                properties:
+                  connectedAt:
+                    description: Timestamp (in milliseconds) of when the configuration was connected.
+                    examples:
+                      - 1611796915677
+                    type: number
+                  itemCount:
+                    type: number
+                  lastReceivedWebhookEvent:
+                    description: Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+                    examples:
+                      - 1611796915677
+                    type: number
+                  sizeInBytes:
+                    type: number
+                  state:
+                    description: Current state of the connection.
+                    examples:
+                      - active
+                    type: string
+                  status:
+                    description: Current status of the connection.
+                    examples:
+                      - linked
+                    type: string
+                  type:
+                    description: The Identity Provider "type", for example Okta.
+                    examples:
+                      - OktaSAML
+                    type: string
+                required:
+                  - sizeInBytes
+                  - itemCount
+                type: object
+          description: ""
+        "400":
+          description: One of the provided values in the request body is invalid.
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: You do not have permission to access this resource.
+      security:
+        - bearerToken: []
+      summary: Create an Edge Config
+      tags:
+        - edge-config
+  "/v1/edge-config/{edgeConfigId}":
+    delete:
+      description: Delete an Edge Config by id.
+      operationId: deleteEdgeConfig
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+        "400":
+          description: One of the provided values in the request query is invalid.
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Delete an Edge Config
+      tags:
+        - edge-config
+    get:
+      description: Returns an Edge Config.
+      operationId: getEdgeConfig
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The EdgeConfig.
+                properties:
+                  createdAt:
+                    type:
+                      - number
+                      - "null"
+                  creator:
+                    type: string
+                  domain:
+                    type: string
+                  id:
+                    type: string
+                  itemCount:
+                    type: number
+                  name:
+                    type: string
+                  recordType:
+                    enum:
+                      - A
+                      - AAAA
+                      - ALIAS
+                      - CAA
+                      - CNAME
+                      - MX
+                      - SRV
+                      - TXT
+                      - NS
+                    type: string
+                  sizeInBytes:
+                    type: number
+                  ttl:
+                    type: number
+                  type:
+                    enum:
+                      - record
+                      - record-sys
+                    type: string
+                  value:
+                    type: string
+                required:
+                  - sizeInBytes
+                  - itemCount
+                type: object
+          description: The EdgeConfig.
+        "400":
+          description: One of the provided values in the request query is invalid.
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Get an Edge Config
+      tags:
+        - edge-config
+    put:
+      description: Updates an Edge Config.
+      operationId: updateEdgeConfig
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                slug:
+                  maxLength: 32
+                  pattern: ^[\\w-]+$
+                  type: string
+              required:
+                - slug
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: An Edge Config
+                properties:
+                  connectedAt:
+                    description: Timestamp (in milliseconds) of when the configuration was connected.
+                    examples:
+                      - 1611796915677
+                    type: number
+                  itemCount:
+                    type: number
+                  lastReceivedWebhookEvent:
+                    description: Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+                    examples:
+                      - 1611796915677
+                    type: number
+                  sizeInBytes:
+                    type: number
+                  state:
+                    description: Current state of the connection.
+                    examples:
+                      - active
+                    type: string
+                  status:
+                    description: Current status of the connection.
+                    examples:
+                      - linked
+                    type: string
+                  type:
+                    description: The Identity Provider "type", for example Okta.
+                    examples:
+                      - OktaSAML
+                    type: string
+                required:
+                  - sizeInBytes
+                  - itemCount
+                type: object
+          description: ""
+        "400":
+          description: |-
+            One of the provided values in the request body is invalid.
+            One of the provided values in the request query is invalid.
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Update an Edge Config
+      tags:
+        - edge-config
+  "/v1/edge-config/{edgeConfigId}/item/{edgeConfigItemKey}":
+    get:
+      description: Returns a specific Edge Config Item.
+      operationId: getEdgeConfigItem
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: edgeConfigItemKey
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdgeConfigItem"
+          description: The EdgeConfig.
+        "400":
+          description: One of the provided values in the request query is invalid.
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Get an Edge Config item
+      tags:
+        - edge-config
+  "/v1/edge-config/{edgeConfigId}/items":
+    get:
+      description: Returns all items of an Edge Config.
+      operationId: getEdgeConfigItems
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdgeConfigItem"
+          description: The EdgeConfig.
+        "400":
+          description: One of the provided values in the request query is invalid.
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Get Edge Config items
+      tags:
+        - edge-config
+    patch:
+      description: Update multiple Edge Config Items in batch.
+      operationId: patchtEdgeConfigItems
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                items:
+                  items:
+                    oneOf:
+                      - properties:
+                          key:
+                            maxLength: 256
+                            pattern: ^[\\w-]+$
+                            type: string
+                          operation:
+                            oneOf:
+                              - const: create
+                              - const: update
+                              - const: upsert
+                          value:
+                            oneOf:
+                              - oneOf:
+                                  - type: string
+                                  - type: number
+                                  - type: boolean
+                                  - type: "null"
+                                  - type: object
+                              - items:
+                                  oneOf:
+                                    - type: string
+                                    - type: number
+                                    - type: boolean
+                                    - type: "null"
+                                    - type: object
+                                type: array
+                        required:
+                          - operation
+                          - key
+                          - value
+                        type: object
+                      - properties:
+                          key:
+                            maxLength: 256
+                            pattern: ^[\\w-]+$
+                            type: string
+                          operation:
+                            const: delete
+                        required:
+                          - operation
+                          - key
+                        type: object
+                  type: array
+              required:
+                - items
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                required:
+                  - status
+                type: object
+          description: ""
+        "400":
+          description: |-
+            One of the provided values in the request body is invalid.
+            One of the provided values in the request query is invalid.
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+        "409":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Update Edge Config items in batch
+      tags:
+        - edge-config
+  "/v1/edge-config/{edgeConfigId}/token":
+    post:
+      description: Adds a token to an existing Edge Config.
+      operationId: createEdgeConfigToken
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                label:
+                  maxLength: 52
+                  type: string
+              required:
+                - label
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                  token:
+                    type: string
+                required:
+                  - token
+                  - id
+                type: object
+          description: ""
+        "400":
+          description: |-
+            One of the provided values in the request body is invalid.
+            One of the provided values in the request query is invalid.
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Create an Edge Config token
+      tags:
+        - edge-config
+  "/v1/edge-config/{edgeConfigId}/token/{token}":
+    get:
+      description: Return meta data about an Edge Config token.
+      operationId: getEdgeConfigToken
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdgeConfigToken"
+          description: The EdgeConfig.
+        "400":
+          description: One of the provided values in the request query is invalid.
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Get Edge Config token meta data
+      tags:
+        - edge-config
+  "/v1/edge-config/{edgeConfigId}/tokens":
+    delete:
+      description: Deletes one or more tokens of an existing Edge Config.
+      operationId: deleteEdgeConfigTokens
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                tokens:
+                  items:
+                    type: string
+                  type: array
+              required:
+                - tokens
+              type: object
+      responses:
+        "204":
+          description: ""
+        "400":
+          description: |-
+            One of the provided values in the request body is invalid.
+            One of the provided values in the request query is invalid.
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Delete one or more Edge Config tokens
+      tags:
+        - edge-config
+    get:
+      description: Returns all tokens of an Edge Config.
+      operationId: getEdgeConfigTokens
+      parameters:
+        - in: path
+          name: edgeConfigId
+          required: true
+          schema:
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EdgeConfigToken"
+          description: The EdgeConfig.
+        "400":
+          description: One of the provided values in the request query is invalid.
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Get all tokens of an Edge Config
+      tags:
+        - edge-config
   "/v1/integrations/configuration/{id}":
     delete:
       description: Allows to remove the configuration with the `id` provided in the parameters. The configuration and all of its resources will be removed. This includes Webhooks, LogDrains and Project Env variables.
@@ -3148,8 +2712,8 @@ paths:
                         - ndjson
                         - syslog
                       examples:
-                        - - lambda
-                          - build
+                        - - json
+                          - ndjson
                       type: string
                     environment:
                       description: The environment to filter logs by
@@ -3196,21 +2760,12 @@ paths:
                           - build
                           - edge
                           - external
+                          - deployment
                         examples:
                           - - lambda
                             - build
                         type: string
                       type: array
-                    type:
-                      description: The log-drain defined delivery format
-                      enum:
-                        - json
-                        - ndjson
-                        - syslog
-                      examples:
-                        - - lambda
-                          - build
-                      type: string
                     url:
                       description: A string with the URL of the log-drain
                       examples:
@@ -3220,7 +2775,6 @@ paths:
                     - createdAt
                     - id
                     - ownerId
-                    - type
                     - deliveryFormat
                     - url
                   type: object
@@ -3329,8 +2883,8 @@ paths:
                       - ndjson
                       - syslog
                     examples:
-                      - - lambda
-                        - build
+                      - - json
+                        - ndjson
                     type: string
                   environment:
                     description: The environment to filter logs by
@@ -3343,7 +2897,7 @@ paths:
                   headers:
                     additionalProperties:
                       type: string
-                    description: The key/value pairs that will be sent as headers to the log-drain
+                    description: Construct a type with a set of properties K of type T
                     examples:
                       - foo: bar
                     type: object
@@ -3380,21 +2934,12 @@ paths:
                         - build
                         - edge
                         - external
+                        - deployment
                       examples:
                         - - lambda
                           - build
                       type: string
                     type: array
-                  type:
-                    description: The log-drain defined delivery format
-                    enum:
-                      - json
-                      - ndjson
-                      - syslog
-                    examples:
-                      - - lambda
-                        - build
-                    type: string
                   url:
                     description: A string with the URL of the log-drain
                     examples:
@@ -3404,7 +2949,6 @@ paths:
                   - createdAt
                   - id
                   - ownerId
-                  - type
                   - deliveryFormat
                   - url
                 type: object
@@ -3487,8 +3031,8 @@ paths:
                       - ndjson
                       - syslog
                     examples:
-                      - - lambda
-                        - build
+                      - - json
+                        - ndjson
                     type: string
                   environment:
                     description: The environment to filter logs by
@@ -3535,21 +3079,12 @@ paths:
                         - build
                         - edge
                         - external
+                        - deployment
                       examples:
                         - - lambda
                           - build
                       type: string
                     type: array
-                  type:
-                    description: The log-drain defined delivery format
-                    enum:
-                      - json
-                      - ndjson
-                      - syslog
-                    examples:
-                      - - lambda
-                        - build
-                    type: string
                   url:
                     description: A string with the URL of the log-drain
                     examples:
@@ -3559,7 +3094,6 @@ paths:
                   - createdAt
                   - id
                   - ownerId
-                  - type
                   - deliveryFormat
                   - url
                 type: object
@@ -3891,34 +3425,47 @@ paths:
           content:
             application/json:
               schema:
-                description: The member was successfully added to the team
-                properties:
-                  email:
-                    description: The email of the invited user
-                    examples:
-                      - john@user.co
-                    type: string
-                  role:
-                    description: The role used for the invitation
-                    examples:
-                      - MEMBER
-                    type: string
-                  uid:
-                    description: The ID of the invited user
-                    examples:
-                      - kr1PsOIzqEL5Xg6M4VZcZosf
-                    type: string
-                  username:
-                    description: The username of the invited user
-                    examples:
-                      - john-doe
-                    type: string
-                required:
-                  - uid
-                  - username
-                  - email
-                  - role
-                type: object
+                oneOf:
+                  - description: The member was successfully added to the team
+                    properties:
+                      email:
+                        description: The email of the invited user. Not included if the user was invited via their UID.
+                        examples:
+                          - john@user.co
+                        type: string
+                      role:
+                        description: The role used for the invitation
+                        examples:
+                          - MEMBER
+                        type: string
+                      uid:
+                        description: The ID of the invited user
+                        examples:
+                          - kr1PsOIzqEL5Xg6M4VZcZosf
+                        type: string
+                      username:
+                        description: The username of the invited user
+                        examples:
+                          - john-doe
+                        type: string
+                    required:
+                      - uid
+                      - username
+                      - email
+                      - role
+                    type: object
+                  - properties:
+                      role:
+                        type: string
+                      uid:
+                        type: string
+                      username:
+                        type: string
+                    required:
+                      - uid
+                      - username
+                      - role
+                    type: object
           description: The member was successfully added to the team
         "400":
           description: |-
@@ -4196,6 +3743,7 @@ paths:
                         - gitlab
                         - bitbucket
                         - feedback
+                        - organization-teams
                       examples:
                         - github
                       type: string
@@ -4270,6 +3818,7 @@ paths:
                           - gitlab
                           - bitbucket
                           - feedback
+                          - organization-teams
                           - mail
                           - link
                           - saml
@@ -4398,6 +3947,7 @@ paths:
                           - saml
                           - dsync
                           - feedback
+                          - organization-teams
                         type: string
                       repoId:
                         type: string
@@ -5053,6 +4603,158 @@ paths:
       summary: Get a webhook
       tags:
         - webhooks
+  "/v10/projects/{idOrName}/domains":
+    post:
+      description: Add a domain to the project by passing its domain name and by specifying the project by either passing the project `id` or `name` in the URL. If the domain is not yet verified to be used on this project, the request will return `verified = false`, and the domain will need to be verified according to the `verification` challenge via `POST /projects/:idOrName/domains/:domain/verify`. If the domain already exists on the project, the request will fail with a `400` status code.
+      operationId: addProjectDomain
+      parameters:
+        - description: The unique project identifier or the project name
+          in: path
+          name: idOrName
+          required: true
+          schema:
+            description: The unique project identifier or the project name
+            type: string
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                gitBranch:
+                  description: Git branch to link the project domain
+                  examples:
+                    - null
+                  maxLength: 250
+                  type:
+                    - string
+                    - "null"
+                name:
+                  description: The project domain name
+                  examples:
+                    - www.example.com
+                  type: string
+                redirect:
+                  description: Target destination domain for redirect
+                  examples:
+                    - foobar.com
+                  type:
+                    - string
+                    - "null"
+                redirectStatusCode:
+                  description: Status code for domain redirect
+                  enum:
+                    - null
+                    - 301
+                    - 302
+                    - 307
+                    - 308
+                  examples:
+                    - 307
+                  type:
+                    - integer
+                    - "null"
+              required:
+                - name
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  apexName:
+                    type: string
+                  createdAt:
+                    type: number
+                  gitBranch:
+                    type:
+                      - string
+                      - "null"
+                  name:
+                    type: string
+                  projectId:
+                    type: string
+                  redirect:
+                    type:
+                      - string
+                      - "null"
+                  redirectStatusCode:
+                    enum:
+                      - 307
+                      - 301
+                      - 302
+                      - 308
+                    type:
+                      - number
+                      - "null"
+                  updatedAt:
+                    type: number
+                  verification:
+                    description: "A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`."
+                    items:
+                      description: "A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`."
+                      properties:
+                        domain:
+                          type: string
+                        reason:
+                          type: string
+                        type:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                        - type
+                        - domain
+                        - value
+                        - reason
+                      type: object
+                    type: array
+                  verified:
+                    description: "`true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed."
+                    type: boolean
+                required:
+                  - name
+                  - apexName
+                  - projectId
+                  - verified
+                type: object
+          description: The domain was successfully added to the project
+        "400":
+          description: |-
+            One of the provided values in the request body is invalid.
+            One of the provided values in the request query is invalid.
+            The domain is not valid
+            You can't set both a git branch and a redirect for the domain
+            The domain can not be added because the latest production deployment for the project was not successful
+            The domain redirect is not valid
+            A domain cannot redirect to itself
+            You can not set the production branch as a branch for your domain
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: |-
+            You do not have permission to access this resource.
+            You don't have access to the domain you are adding
+        "404":
+          description: Project not found
+        "409":
+          description: |-
+            The domain is already assigned to another Vercel project
+            Cannot create project domain since owner already has `domain` on their account
+            Cannot create project domain if the current verified domain
+            The project is currently being transferred
+      security:
+        - bearerToken: []
+      summary: Add a domain to a project
+      tags:
+        - projects
   "/v10/projects/{idOrName}/env":
     post:
       description: Create one ore more environment variables for a project by passing its `key`, `value`, `type` and `target` and by specifying the project by either passing the project `id` or `name` in the URL.
@@ -5066,6 +4768,15 @@ paths:
             description: The unique project identifier or the project name
             examples:
               - prj_XLKmu1DyR1eY7zq8UgeRKbA7yVLA
+            type: string
+        - description: Allow override of environment variable if it already exists
+          in: query
+          name: upsert
+          required: false
+          schema:
+            description: Allow override of environment variable if it already exists
+            examples:
+              - "true"
             type: string
         - description: The Team identifier or slug to perform the request on behalf of.
           in: query
@@ -5174,154 +4885,6 @@ paths:
                     type: object
                   type: array
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - items:
-                      properties:
-                        configurationId:
-                          type:
-                            - string
-                            - "null"
-                        createdAt:
-                          type: number
-                        createdBy:
-                          type:
-                            - string
-                            - "null"
-                        decrypted:
-                          description: Whether `value` is decrypted.
-                          type: boolean
-                        edgeConfigId:
-                          type:
-                            - string
-                            - "null"
-                        edgeConfigTokenId:
-                          type:
-                            - string
-                            - "null"
-                        gitBranch:
-                          type: string
-                        id:
-                          type: string
-                        key:
-                          type: string
-                        target:
-                          oneOf:
-                            - items:
-                                enum:
-                                  - production
-                                  - preview
-                                  - development
-                                  - preview
-                                  - development
-                                  - preview
-                                  - development
-                                type: string
-                              type: array
-                            - enum:
-                                - production
-                                - preview
-                                - development
-                                - preview
-                                - development
-                                - preview
-                                - development
-                              type: string
-                        type:
-                          enum:
-                            - secret
-                            - system
-                            - encrypted
-                            - plain
-                            - sensitive
-                          type: string
-                        updatedAt:
-                          type: number
-                        updatedBy:
-                          type:
-                            - string
-                            - "null"
-                        value:
-                          type: string
-                      required:
-                        - type
-                        - key
-                        - value
-                      type: object
-                    type: array
-                  - properties:
-                      configurationId:
-                        type:
-                          - string
-                          - "null"
-                      createdAt:
-                        type: number
-                      createdBy:
-                        type:
-                          - string
-                          - "null"
-                      decrypted:
-                        description: Whether `value` is decrypted.
-                        type: boolean
-                      edgeConfigId:
-                        type:
-                          - string
-                          - "null"
-                      edgeConfigTokenId:
-                        type:
-                          - string
-                          - "null"
-                      gitBranch:
-                        type: string
-                      id:
-                        type: string
-                      key:
-                        type: string
-                      system:
-                        type: boolean
-                      target:
-                        oneOf:
-                          - items:
-                              enum:
-                                - production
-                                - preview
-                                - development
-                                - preview
-                                - development
-                                - preview
-                                - development
-                              type: string
-                            type: array
-                          - enum:
-                              - production
-                              - preview
-                              - development
-                              - preview
-                              - development
-                              - preview
-                              - development
-                            type: string
-                      type:
-                        enum:
-                          - secret
-                          - system
-                          - encrypted
-                          - plain
-                          - sensitive
-                        type: string
-                      updatedAt:
-                        type: number
-                      updatedBy:
-                        type:
-                          - string
-                          - "null"
-                      value:
-                        type: string
-                    type: object
-          description: The environment variable was created successfully
         "201":
           content:
             application/json:
@@ -5540,7 +5103,7 @@ paths:
                   - created
                   - failed
                 type: object
-          description: ""
+          description: The environment variable was created successfully
         "400":
           description: |-
             One of the provided values in the request body is invalid.
@@ -5900,6 +5463,9 @@ paths:
                       - registered
                       - running
                       - completed
+                    type: string
+                  connectConfigurationId:
+                    description: The ID of Vercel Connect configuration used for this deployment
                     type: string
                   createdAt:
                     description: A number containing the date when the deployment was created in milliseconds
@@ -6982,8 +6548,6 @@ paths:
                       examples:
                         - https://github.com/vercel/next.js
                       type: string
-                  required:
-                    - remoteUrl
                   type: object
                 gitSource:
                   anyOf:
@@ -7201,6 +6765,71 @@ paths:
                   type:
                     - string
                     - "null"
+                images:
+                  additionalProperties: false
+                  properties:
+                    contentDispositionType:
+                      enum:
+                        - inline
+                        - attachment
+                    contentSecurityPolicy:
+                      maxLength: 256
+                      type: string
+                    dangerouslyAllowSVG:
+                      type: boolean
+                    domains:
+                      items:
+                        maxLength: 256
+                        type: string
+                      maxItems: 50
+                      minItems: 0
+                      type: array
+                    formats:
+                      items:
+                        enum:
+                          - image/avif
+                          - image/webp
+                          - image/jpeg
+                          - image/png
+                      maxItems: 4
+                      minItems: 1
+                      type: array
+                    minimumCacheTTL:
+                      maximum: 315360000
+                      minimum: 1
+                      type: integer
+                    remotePatterns:
+                      items:
+                        additionalProperties: false
+                        properties:
+                          hostname:
+                            maxLength: 256
+                            type: string
+                          pathname:
+                            maxLength: 256
+                            type: string
+                          port:
+                            maxLength: 5
+                            type: string
+                          protocol:
+                            enum:
+                              - http
+                              - https
+                        required:
+                          - hostname
+                        type: object
+                      maxItems: 50
+                      minItems: 0
+                      type: array
+                    sizes:
+                      items:
+                        type: number
+                      maxItems: 50
+                      minItems: 1
+                      type: array
+                  required:
+                    - sizes
+                  type: object
                 installCommand:
                   description: The install command for this project. When `null` is used this value will be automatically detected
                   maxLength: 256
@@ -7632,6 +7261,8 @@ paths:
                             type: object
                           important:
                             type: boolean
+                          isInternal:
+                            type: boolean
                           locale:
                             additionalProperties: false
                             minProperties: 1
@@ -7744,7 +7375,7 @@ paths:
                   maxItems: 1024
                   type: array
                 target:
-                  description: Either not defined, `staging`, or `production`. If `staging`, a staging alias in the format `<project>.<team>.now.sh` will be assigned. If `production`, any aliases defined in `alias` will be assigned
+                  description: Either not defined, `staging`, or `production`. If `staging`, a staging alias in the format `<project>-<team>.vercel.app` will be assigned. If `production`, any aliases defined in `alias` will be assigned. If omitted, the target will be `preview`
                   enum:
                     - staging
                     - production
@@ -7857,6 +7488,9 @@ paths:
                       - registered
                       - running
                       - completed
+                    type: string
+                  connectConfigurationId:
+                    description: The ID of Vercel Connect configuration used for this deployment
                     type: string
                   createdAt:
                     description: A number containing the date when the deployment was created in milliseconds
@@ -8770,6 +8404,9 @@ paths:
                           - registered
                           - running
                           - completed
+                        type: string
+                      connectConfigurationId:
+                        description: The ID of Vercel Connect configuration used for this deployment
                         type: string
                       createdAt:
                         description: A number containing the date when the deployment was created in milliseconds
@@ -10491,12 +10128,12 @@ paths:
                           type: object
                         type:
                           enum:
-                            - delimiter
                             - command
                             - stdout
                             - stderr
                             - exit
                             - deployment-state
+                            - delimiter
                             - middleware
                             - middleware-invocation
                             - edge-function-invocation
@@ -10757,12 +10394,12 @@ paths:
                         type: object
                       type:
                         enum:
-                          - delimiter
                           - command
                           - stdout
                           - stderr
                           - exit
                           - deployment-state
+                          - delimiter
                           - middleware
                           - middleware-invocation
                           - edge-function-invocation
@@ -11021,12 +10658,12 @@ paths:
                             type: object
                           type:
                             enum:
-                              - delimiter
                               - command
                               - stdout
                               - stderr
                               - exit
                               - deployment-state
+                              - delimiter
                               - middleware
                               - middleware-invocation
                               - edge-function-invocation
@@ -11835,20 +11472,12 @@ paths:
                           - build
                           - edge
                           - external
+                          - deployment
                         examples:
                           - - build
                             - edge
                         type: string
                       type: array
-                    type:
-                      description: The type of log format
-                      enum:
-                        - json
-                        - ndjson
-                        - syslog
-                      examples:
-                        - json
-                      type: string
                     url:
                       description: The URL to call when logs are generated
                       examples:
@@ -11857,7 +11486,6 @@ paths:
                   required:
                     - createdAt
                     - id
-                    - type
                     - name
                     - ownerId
                     - url
@@ -12055,20 +11683,12 @@ paths:
                         - build
                         - edge
                         - external
+                        - deployment
                       examples:
                         - - build
                           - edge
                       type: string
                     type: array
-                  type:
-                    description: The type of log format
-                    enum:
-                      - json
-                      - ndjson
-                      - syslog
-                    examples:
-                      - json
-                    type: string
                   url:
                     description: The URL to call when logs are generated
                     examples:
@@ -12077,7 +11697,6 @@ paths:
                 required:
                   - createdAt
                   - id
-                  - type
                   - name
                   - ownerId
                   - url
@@ -12659,7 +12278,6 @@ paths:
                           type: string
                       required:
                         - id
-                        - role
                         - isDSyncUser
                       type: object
                     type: array
@@ -12756,6 +12374,7 @@ paths:
                                 - saml
                                 - dsync
                                 - feedback
+                                - organization-teams
                               type: string
                             repoId:
                               type: string
@@ -13673,248 +13292,6 @@ paths:
       summary: Get an Alias
       tags:
         - aliases
-  /v4/domains:
-    post:
-      description: This endpoint is used for registering a new domain name with Vercel for the authenticating user, and also for initiating a domain transfer request from an external Registrar to Vercel.
-      operationId: createOrTransferDomain
-      parameters:
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - additionalProperties: false
-                  properties:
-                    method:
-                      description: The domain operation to perform.
-                      examples:
-                        - move-in
-                      type: string
-                    name:
-                      description: The domain name you want to add.
-                      examples:
-                        - example.com
-                      type: string
-                    token:
-                      description: The move-in token from Move Requested email.
-                      examples:
-                        - fdhfr820ad#@FAdlj$$
-                      type: string
-                  required:
-                    - method
-                    - name
-                  type: object
-                - additionalProperties: false
-                  properties:
-                    authCode:
-                      description: The authorization code assigned to the domain.
-                      examples:
-                        - fdhfr820ad#@FAdlj$$
-                      type: string
-                    expectedPrice:
-                      description: The price you expect to be charged for the required 1 year renewal.
-                      examples:
-                        - 8
-                      type: number
-                    method:
-                      description: The domain operation to perform.
-                      examples:
-                        - transfer-in
-                      type: string
-                    name:
-                      description: The domain name you want to add.
-                      examples:
-                        - example.com
-                      type: string
-                  required:
-                    - method
-                    - name
-                  type: object
-                - additionalProperties: false
-                  properties:
-                    cdnEnabled:
-                      description: Whether the domain has the Vercel Edge Network enabled or not.
-                      examples:
-                        - true
-                      type: boolean
-                    method:
-                      description: The domain operation to perform.
-                      examples:
-                        - add
-                      type: string
-                    name:
-                      description: The domain name you want to add.
-                      examples:
-                        - example.com
-                      type: string
-                  required:
-                    - name
-                  type: object
-              properties:
-                method:
-                  description: The domain operation to perform. It can be either `add` or `transfer-in`.
-                  examples:
-                    - transfer-in
-                  type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  domain:
-                    properties:
-                      boughtAt:
-                        description: If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
-                        examples:
-                          - 1613602938882
-                        type:
-                          - number
-                          - "null"
-                      createdAt:
-                        description: Timestamp in milliseconds when the domain was created in the registry.
-                        examples:
-                          - 1613602938882
-                        type: number
-                      creator:
-                        description: An object containing information of the domain creator, including the user's id, username, and email.
-                        examples:
-                          - email: demo@example.com
-                            id: ZspSRT4ljIEEmMHgoDwKWDei
-                            username: vercel_user
-                        properties:
-                          customerId:
-                            type:
-                              - string
-                              - "null"
-                          email:
-                            type: string
-                          id:
-                            type: string
-                          isDomainReseller:
-                            type: boolean
-                          username:
-                            type: string
-                        required:
-                          - username
-                          - email
-                          - id
-                        type: object
-                      customNameservers:
-                        description: A list of custom nameservers for the domain to point to. Only applies to domains purchased with Vercel.
-                        examples:
-                          - - ns1.nameserver.net
-                            - ns2.nameserver.net
-                        items:
-                          type: string
-                        type: array
-                      expiresAt:
-                        description: Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
-                        examples:
-                          - 1613602938882
-                        type:
-                          - number
-                          - "null"
-                      id:
-                        description: The unique identifier of the domain.
-                        examples:
-                          - EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
-                        type: string
-                      intendedNameservers:
-                        description: A list of the intended nameservers for the domain to point to Vercel DNS.
-                        examples:
-                          - - ns1.vercel-dns.com
-                            - ns2.vercel-dns.com
-                        items:
-                          type: string
-                        type: array
-                      name:
-                        description: The domain name.
-                        examples:
-                          - example.com
-                        type: string
-                      nameservers:
-                        description: A list of the current nameservers of the domain.
-                        examples:
-                          - - ns1.nameserver.net
-                            - ns2.nameserver.net
-                        items:
-                          type: string
-                        type: array
-                      orderedAt:
-                        description: Timestamp in milliseconds at which the domain was ordered.
-                        examples:
-                          - 1613602938882
-                        type: number
-                      renew:
-                        description: Indicates whether the domain is set to automatically renew.
-                        examples:
-                          - true
-                        type: boolean
-                      serviceType:
-                        description: The type of service the domain is handled by. `external` if the DNS is externally handled, `zeit.world` if handled with Vercel, or `na` if the service is not available.
-                        enum:
-                          - zeit.world
-                          - external
-                          - na
-                        examples:
-                          - zeit.world
-                        type: string
-                      transferStartedAt:
-                        description: If transferred into Vercel, timestamp in milliseconds when the domain transfer was initiated.
-                        examples:
-                          - 1613602938882
-                        type: number
-                      transferredAt:
-                        description: Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
-                        examples:
-                          - 1613602938882
-                        type:
-                          - number
-                          - "null"
-                      verified:
-                        description: If the domain has the ownership verified.
-                        examples:
-                          - true
-                        type: boolean
-                    required:
-                      - verified
-                      - nameservers
-                      - intendedNameservers
-                      - creator
-                      - createdAt
-                      - id
-                      - name
-                      - expiresAt
-                      - boughtAt
-                      - serviceType
-                    type: object
-                required:
-                  - domain
-                type: object
-          description: ""
-        "400":
-          description: One of the provided values in the request body is invalid.
-        "402":
-          description: |-
-            The account was soft-blocked for an unhandled reason.
-            The account is missing a payment so payment method must be updated
-        "403":
-          description: You do not have permission to access this resource.
-        "404":
-          description: ""
-        "409":
-          description: ""
-      security:
-        - bearerToken: []
-      summary: Register or transfer-in a new Domain
-      tags:
-        - domains
   /v4/domains/buy:
     post:
       description: Allows to purchase the specified domain.
@@ -14475,6 +13852,249 @@ paths:
       summary: List all the domains
       tags:
         - domains
+    post:
+      description: This endpoint is used for registering a new domain name with Vercel for the authenticating user, and also for initiating a domain transfer request from an external Registrar to Vercel.
+      operationId: createOrTransferDomain
+      parameters:
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - additionalProperties: false
+                  properties:
+                    method:
+                      description: The domain operation to perform.
+                      examples:
+                        - move-in
+                      type: string
+                    name:
+                      description: The domain name you want to add.
+                      examples:
+                        - example.com
+                      type: string
+                    token:
+                      description: The move-in token from Move Requested email.
+                      examples:
+                        - fdhfr820ad#@FAdlj$$
+                      type: string
+                  required:
+                    - method
+                    - name
+                  type: object
+                - additionalProperties: false
+                  properties:
+                    authCode:
+                      description: The authorization code assigned to the domain.
+                      examples:
+                        - fdhfr820ad#@FAdlj$$
+                      type: string
+                    expectedPrice:
+                      description: The price you expect to be charged for the required 1 year renewal.
+                      examples:
+                        - 8
+                      type: number
+                    method:
+                      description: The domain operation to perform.
+                      examples:
+                        - transfer-in
+                      type: string
+                    name:
+                      description: The domain name you want to add.
+                      examples:
+                        - example.com
+                      type: string
+                  required:
+                    - method
+                    - name
+                  type: object
+                - additionalProperties: false
+                  properties:
+                    cdnEnabled:
+                      description: Whether the domain has the Vercel Edge Network enabled or not.
+                      examples:
+                        - true
+                      type: boolean
+                    method:
+                      description: The domain operation to perform.
+                      examples:
+                        - add
+                      type: string
+                    name:
+                      description: The domain name you want to add.
+                      examples:
+                        - example.com
+                      type: string
+                    zone:
+                      type: boolean
+                  required:
+                    - name
+                  type: object
+              properties:
+                method:
+                  description: The domain operation to perform. It can be either `add` or `transfer-in`.
+                  examples:
+                    - transfer-in
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  domain:
+                    properties:
+                      boughtAt:
+                        description: If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
+                        examples:
+                          - 1613602938882
+                        type:
+                          - number
+                          - "null"
+                      createdAt:
+                        description: Timestamp in milliseconds when the domain was created in the registry.
+                        examples:
+                          - 1613602938882
+                        type: number
+                      creator:
+                        description: An object containing information of the domain creator, including the user's id, username, and email.
+                        examples:
+                          - email: demo@example.com
+                            id: ZspSRT4ljIEEmMHgoDwKWDei
+                            username: vercel_user
+                        properties:
+                          customerId:
+                            type:
+                              - string
+                              - "null"
+                          email:
+                            type: string
+                          id:
+                            type: string
+                          isDomainReseller:
+                            type: boolean
+                          username:
+                            type: string
+                        required:
+                          - username
+                          - email
+                          - id
+                        type: object
+                      customNameservers:
+                        description: A list of custom nameservers for the domain to point to. Only applies to domains purchased with Vercel.
+                        examples:
+                          - - ns1.nameserver.net
+                            - ns2.nameserver.net
+                        items:
+                          type: string
+                        type: array
+                      expiresAt:
+                        description: Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
+                        examples:
+                          - 1613602938882
+                        type:
+                          - number
+                          - "null"
+                      id:
+                        description: The unique identifier of the domain.
+                        examples:
+                          - EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
+                        type: string
+                      intendedNameservers:
+                        description: A list of the intended nameservers for the domain to point to Vercel DNS.
+                        examples:
+                          - - ns1.vercel-dns.com
+                            - ns2.vercel-dns.com
+                        items:
+                          type: string
+                        type: array
+                      name:
+                        description: The domain name.
+                        examples:
+                          - example.com
+                        type: string
+                      nameservers:
+                        description: A list of the current nameservers of the domain.
+                        examples:
+                          - - ns1.nameserver.net
+                            - ns2.nameserver.net
+                        items:
+                          type: string
+                        type: array
+                      orderedAt:
+                        description: Timestamp in milliseconds at which the domain was ordered.
+                        examples:
+                          - 1613602938882
+                        type: number
+                      renew:
+                        description: Indicates whether the domain is set to automatically renew.
+                        examples:
+                          - true
+                        type: boolean
+                      serviceType:
+                        description: The type of service the domain is handled by. `external` if the DNS is externally handled, `zeit.world` if handled with Vercel, or `na` if the service is not available.
+                        enum:
+                          - zeit.world
+                          - external
+                          - na
+                        examples:
+                          - zeit.world
+                        type: string
+                      transferStartedAt:
+                        description: If transferred into Vercel, timestamp in milliseconds when the domain transfer was initiated.
+                        examples:
+                          - 1613602938882
+                        type: number
+                      transferredAt:
+                        description: Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
+                        examples:
+                          - 1613602938882
+                        type:
+                          - number
+                          - "null"
+                      verified:
+                        description: If the domain has the ownership verified.
+                        examples:
+                          - true
+                        type: boolean
+                    required:
+                      - verified
+                      - nameservers
+                      - intendedNameservers
+                      - creator
+                      - createdAt
+                      - id
+                      - name
+                      - expiresAt
+                      - boughtAt
+                      - serviceType
+                    type: object
+                required:
+                  - domain
+                type: object
+          description: ""
+        "400":
+          description: One of the provided values in the request body is invalid.
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: You do not have permission to access this resource.
+        "404":
+          description: ""
+        "409":
+          description: ""
+      security:
+        - bearerToken: []
+      summary: Register or transfer-in a new Domain
+      tags:
+        - domains
   "/v5/domains/{domain}":
     get:
       description: Get information for a single domain in an account or team.
@@ -14666,7 +14286,6 @@ paths:
                     type: array
                 required:
                   - tokens
-                  - testingToken
                   - pagination
                 type: object
           description: ""
@@ -14865,6 +14484,9 @@ paths:
                             - running
                             - completed
                           type: string
+                        connectConfigurationId:
+                          description: The ID of Vercel Connect configuration used for this deployment
+                          type: string
                         created:
                           description: Timestamp of when the deployment got created.
                           examples:
@@ -14933,6 +14555,106 @@ paths:
                           examples:
                             - docs
                           type: string
+                        projectSettings:
+                          description: The project settings which was used for this deployment
+                          properties:
+                            buildCommand:
+                              type:
+                                - string
+                                - "null"
+                            commandForIgnoringBuildStep:
+                              type:
+                                - string
+                                - "null"
+                            createdAt:
+                              type: number
+                            devCommand:
+                              type:
+                                - string
+                                - "null"
+                            framework:
+                              enum:
+                                - blitzjs
+                                - nextjs
+                                - gatsby
+                                - remix
+                                - astro
+                                - hexo
+                                - eleventy
+                                - docusaurus-2
+                                - docusaurus
+                                - preact
+                                - solidstart
+                                - dojo
+                                - ember
+                                - vue
+                                - scully
+                                - ionic-angular
+                                - angular
+                                - polymer
+                                - svelte
+                                - sveltekit
+                                - sveltekit-1
+                                - ionic-react
+                                - create-react-app
+                                - gridsome
+                                - umijs
+                                - sapper
+                                - saber
+                                - stencil
+                                - nuxtjs
+                                - redwoodjs
+                                - hugo
+                                - jekyll
+                                - brunch
+                                - middleman
+                                - zola
+                                - hydrogen
+                                - vite
+                                - vitepress
+                                - vuepress
+                                - parcel
+                                - sanity
+                              type:
+                                - string
+                                - "null"
+                            gitForkProtection:
+                              type: boolean
+                            gitLFS:
+                              type: boolean
+                            installCommand:
+                              type:
+                                - string
+                                - "null"
+                            nodeVersion:
+                              enum:
+                                - 18.x
+                                - 16.x
+                                - 14.x
+                                - 12.x
+                                - 10.x
+                              type: string
+                            outputDirectory:
+                              type:
+                                - string
+                                - "null"
+                            publicSource:
+                              type:
+                                - boolean
+                                - "null"
+                            rootDirectory:
+                              type:
+                                - string
+                                - "null"
+                            serverlessFunctionRegion:
+                              type:
+                                - string
+                                - "null"
+                            skipGitConnectDuringLink:
+                              type: boolean
+                            sourceFilesOutsideRootDirectory:
+                              type: boolean
+                          type: object
                         ready:
                           description: Timestamp of when the deployment got ready.
                           examples:
@@ -15445,37 +15167,6 @@ paths:
                 - hashes
               type: object
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties:
-                  oneOf:
-                    - properties:
-                        size:
-                          type: number
-                        tag:
-                          type: string
-                        taskDurationMs:
-                          type: number
-                      required:
-                        - size
-                        - taskDurationMs
-                      type: object
-                    - properties:
-                        message:
-                          type: string
-                        name:
-                          type: string
-                        stack:
-                          type: string
-                      required:
-                        - name
-                        - message
-                      type: object
-                  type: "null"
-                type: object
-          description: ""
         "400":
           description: One of the provided values in the request body is invalid.
         "401":
@@ -15602,22 +15293,6 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  status:
-                    enum:
-                      - disabled
-                      - enabled
-                      - over_limit
-                      - paused
-                    type: string
-                required:
-                  - status
-                type: object
-          description: ""
         "400":
           description: ""
         "402":
@@ -15670,12 +15345,6 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                description: An octet stream response that will be piped to the response stream.
-          description: The artifact was found and is downloaded as a stream. Content-Length should be verified.
         "400":
           description: |-
             One of the provided values in the request query is invalid.
@@ -15694,8 +15363,6 @@ paths:
             The Remote Caching usage limit has been reached for this account for this billing cycle.
             Remote Caching has been disabled for this team or user. An owner can enable it in the billing settings.
             You do not have permission to access this resource.
-        "404":
-          description: The artifact was not found
       security:
         - bearerToken: []
       summary: Download a cache artifact
@@ -15720,8 +15387,6 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          description: The artifact was found and headers are returned
         "400":
           description: One of the provided values in the request query is invalid.
         "401":
@@ -15738,8 +15403,6 @@ paths:
             The Remote Caching usage limit has been reached for this account for this billing cycle.
             Remote Caching has been disabled for this team or user. An owner can enable it in the billing settings.
             You do not have permission to access this resource.
-        "404":
-          description: The artifact was not found
       security:
         - bearerToken: []
       summary: Check if a cache artifact exists
@@ -15815,27 +15478,10 @@ paths:
           application/octet-stream:
             schema: {}
       responses:
-        "202":
-          content:
-            application/json:
-              schema:
-                properties:
-                  urls:
-                    description: Array of URLs where the artifact was updated
-                    examples:
-                      - - https://api.vercel.com/v2/now/artifact/12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-                    items:
-                      type: string
-                    type: array
-                required:
-                  - urls
-                type: object
-          description: File successfully uploaded
         "400":
           description: |-
             One of the provided values in the request query is invalid.
             One of the provided values in the headers is invalid
-            File size is not valid
         "401":
           description: |-
             Invalid token
@@ -15927,12 +15573,6 @@ paths:
           schema:
             description: Filter results by connected Edge Config Token ID
             type: string
-        - description: Filter results by linked Connect configuration ID
-          in: query
-          name: connectConfigurationId
-          schema:
-            description: Filter results by linked Connect configuration ID
-            type: string
         - description: The Team identifier or slug to perform the request on behalf of.
           in: query
           name: teamId
@@ -15989,6 +15629,8 @@ paths:
                           type:
                             - string
                             - "null"
+                        connectBuildsEnabled:
+                          type: boolean
                         connectConfigurationId:
                           type:
                             - string
@@ -16123,6 +15765,10 @@ paths:
                             - "null"
                         gitForkProtection:
                           type: boolean
+                        gitLFS:
+                          type: boolean
+                        hasActiveBranches:
+                          type: boolean
                         hasFloatingAliases:
                           type: boolean
                         id:
@@ -16214,6 +15860,8 @@ paths:
                                   - registered
                                   - running
                                   - completed
+                                type: string
+                              connectConfigurationId:
                                 type: string
                               createdAt:
                                 type: number
@@ -16519,10 +16167,6 @@ paths:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
-                            awsBillingIntegration:
-                              items:
-                                $ref: "#/components/schemas/ACLAction"
-                              type: array
                             billingAddress:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
@@ -16552,6 +16196,10 @@ paths:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
                             billingTaxId:
+                              items:
+                                $ref: "#/components/schemas/ACLAction"
+                              type: array
+                            blob:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
@@ -16588,6 +16236,10 @@ paths:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
                             deploymentCheckPreview:
+                              items:
+                                $ref: "#/components/schemas/ACLAction"
+                              type: array
+                            deploymentCheckReRunFromProductionBranch:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
@@ -16691,6 +16343,10 @@ paths:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
+                            ipBlocking:
+                              items:
+                                $ref: "#/components/schemas/ACLAction"
+                              type: array
                             job:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
@@ -16760,6 +16416,10 @@ paths:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
                             permissions:
+                              items:
+                                $ref: "#/components/schemas/ACLAction"
+                              type: array
+                            postgres:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
@@ -16920,6 +16580,10 @@ paths:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
                             webAnalytics:
+                              items:
+                                $ref: "#/components/schemas/ACLAction"
+                              type: array
+                            webAnalyticsPlan:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
@@ -17232,6 +16896,8 @@ paths:
                     type:
                       - string
                       - "null"
+                  connectBuildsEnabled:
+                    type: boolean
                   connectConfigurationId:
                     type:
                       - string
@@ -17366,6 +17032,10 @@ paths:
                       - "null"
                   gitForkProtection:
                     type: boolean
+                  gitLFS:
+                    type: boolean
+                  hasActiveBranches:
+                    type: boolean
                   hasFloatingAliases:
                     type: boolean
                   id:
@@ -17457,6 +17127,8 @@ paths:
                             - registered
                             - running
                             - completed
+                          type: string
+                        connectConfigurationId:
                           type: string
                         createdAt:
                           type: number
@@ -17762,10 +17434,6 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
-                      awsBillingIntegration:
-                        items:
-                          $ref: "#/components/schemas/ACLAction"
-                        type: array
                       billingAddress:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -17795,6 +17463,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       billingTaxId:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      blob:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -17831,6 +17503,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       deploymentCheckPreview:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      deploymentCheckReRunFromProductionBranch:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -17934,6 +17610,10 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
+                      ipBlocking:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       job:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -18003,6 +17683,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       permissions:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      postgres:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -18163,6 +17847,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       webAnalytics:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      webAnalyticsPlan:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -18354,6 +18042,8 @@ paths:
                     type:
                       - string
                       - "null"
+                  connectBuildsEnabled:
+                    type: boolean
                   connectConfigurationId:
                     type:
                       - string
@@ -18488,6 +18178,10 @@ paths:
                       - "null"
                   gitForkProtection:
                     type: boolean
+                  gitLFS:
+                    type: boolean
+                  hasActiveBranches:
+                    type: boolean
                   hasFloatingAliases:
                     type: boolean
                   id:
@@ -18579,6 +18273,8 @@ paths:
                             - registered
                             - running
                             - completed
+                          type: string
+                        connectConfigurationId:
                           type: string
                         createdAt:
                           type: number
@@ -18884,10 +18580,6 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
-                      awsBillingIntegration:
-                        items:
-                          $ref: "#/components/schemas/ACLAction"
-                        type: array
                       billingAddress:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -18917,6 +18609,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       billingTaxId:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      blob:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -18953,6 +18649,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       deploymentCheckPreview:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      deploymentCheckReRunFromProductionBranch:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -19056,6 +18756,10 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
+                      ipBlocking:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       job:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -19125,6 +18829,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       permissions:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      postgres:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -19285,6 +18993,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       webAnalytics:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      webAnalyticsPlan:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -19470,6 +19182,9 @@ paths:
                 gitForkProtection:
                   description: Specifies whether PRs from Git forks should require a team member's authorization before it can be deployed
                   type: boolean
+                gitLFS:
+                  description: Specifies whether Git LFS is enabled for this project.
+                  type: boolean
                 installCommand:
                   description: The install command for this project. When `null` is used this value will be automatically detected
                   maxLength: 256
@@ -19605,6 +19320,8 @@ paths:
                     type:
                       - string
                       - "null"
+                  connectBuildsEnabled:
+                    type: boolean
                   connectConfigurationId:
                     type:
                       - string
@@ -19739,6 +19456,10 @@ paths:
                       - "null"
                   gitForkProtection:
                     type: boolean
+                  gitLFS:
+                    type: boolean
+                  hasActiveBranches:
+                    type: boolean
                   hasFloatingAliases:
                     type: boolean
                   id:
@@ -19830,6 +19551,8 @@ paths:
                             - registered
                             - running
                             - completed
+                          type: string
+                        connectConfigurationId:
                           type: string
                         createdAt:
                           type: number
@@ -20135,10 +19858,6 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
-                      awsBillingIntegration:
-                        items:
-                          $ref: "#/components/schemas/ACLAction"
-                        type: array
                       billingAddress:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -20168,6 +19887,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       billingTaxId:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      blob:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -20204,6 +19927,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       deploymentCheckPreview:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      deploymentCheckReRunFromProductionBranch:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -20307,6 +20034,10 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
+                      ipBlocking:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       job:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -20376,6 +20107,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       permissions:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      postgres:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -20539,6 +20274,10 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
+                      webAnalyticsPlan:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       webhook:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -20583,13 +20322,167 @@ paths:
                       - "null"
                   targets:
                     additionalProperties:
-                      description: An object containing the deployment's metadata
-                      examples:
-                        - foo: bar
-                      type: string
-                    description: An object containing the deployment's metadata
-                    examples:
-                      - foo: bar
+                      properties:
+                        alias:
+                          items:
+                            type: string
+                          type: array
+                        aliasAssigned:
+                          oneOf:
+                            - type: number
+                            - type: boolean
+                          type: "null"
+                        aliasError:
+                          properties:
+                            code:
+                              type: string
+                            message:
+                              type: string
+                          required:
+                            - code
+                            - message
+                          type:
+                            - object
+                            - "null"
+                        aliasFinal:
+                          type:
+                            - string
+                            - "null"
+                        automaticAliases:
+                          items:
+                            type: string
+                          type: array
+                        buildingAt:
+                          type: number
+                        builds:
+                          items:
+                            properties:
+                              dest:
+                                type: string
+                              src:
+                                type: string
+                              use:
+                                type: string
+                            required:
+                              - use
+                            type: object
+                          type: array
+                        checksConclusion:
+                          enum:
+                            - succeeded
+                            - failed
+                            - skipped
+                            - canceled
+                          type: string
+                        checksState:
+                          enum:
+                            - registered
+                            - running
+                            - completed
+                          type: string
+                        connectConfigurationId:
+                          type: string
+                        createdAt:
+                          type: number
+                        createdIn:
+                          type: string
+                        creator:
+                          properties:
+                            email:
+                              type: string
+                            githubLogin:
+                              type: string
+                            gitlabLogin:
+                              type: string
+                            uid:
+                              type: string
+                            username:
+                              type: string
+                          required:
+                            - email
+                            - uid
+                            - username
+                          type:
+                            - object
+                            - "null"
+                        deploymentHostname:
+                          type: string
+                        forced:
+                          type: boolean
+                        id:
+                          type: string
+                        meta:
+                          additionalProperties:
+                            type: string
+                          description: Construct a type with a set of properties K of type T
+                          type: object
+                        monorepoManager:
+                          type:
+                            - string
+                            - "null"
+                        name:
+                          type: string
+                        plan:
+                          enum:
+                            - hobby
+                            - enterprise
+                            - pro
+                            - oss
+                          type: string
+                        previewCommentsEnabled:
+                          description: Whether or not preview comments are enabled for the deployment
+                          examples:
+                            - false
+                          type: boolean
+                        private:
+                          type: boolean
+                        readyAt:
+                          type: number
+                        readyState:
+                          enum:
+                            - BUILDING
+                            - ERROR
+                            - INITIALIZING
+                            - QUEUED
+                            - READY
+                            - CANCELED
+                          type: string
+                        requestedAt:
+                          type: number
+                        target:
+                          type:
+                            - string
+                            - "null"
+                        teamId:
+                          type:
+                            - string
+                            - "null"
+                        type:
+                          enum:
+                            - LAMBDAS
+                          type: string
+                        url:
+                          type: string
+                        userId:
+                          type: string
+                        withCache:
+                          type: boolean
+                      required:
+                        - createdAt
+                        - createdIn
+                        - creator
+                        - deploymentHostname
+                        - name
+                        - id
+                        - plan
+                        - private
+                        - readyState
+                        - type
+                        - url
+                        - userId
+                      type:
+                        - object
+                        - "null"
                     type: object
                   transferCompletedAt:
                     type: number
@@ -20811,157 +20704,6 @@ paths:
       security:
         - bearerToken: []
       summary: Retrieve project domains by project by id or name
-      tags:
-        - projects
-    post:
-      description: Add a domain to the project by passing its domain name and by specifying the project by either passing the project `id` or `name` in the URL. If the domain is not yet verified to be used on this project, the request will return `verified = false`, and the domain will need to be verified according to the `verification` challenge via `POST /projects/:idOrName/domains/:domain/verify`. If the domain already exists on the project, the request will fail with a `400` status code.
-      operationId: addProjectDomain
-      parameters:
-        - description: The unique project identifier or the project name
-          in: path
-          name: idOrName
-          required: true
-          schema:
-            description: The unique project identifier or the project name
-            type: string
-        - description: The Team identifier or slug to perform the request on behalf of.
-          in: query
-          name: teamId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                gitBranch:
-                  description: Git branch to link the project domain
-                  examples:
-                    - null
-                  maxLength: 250
-                  type:
-                    - string
-                    - "null"
-                name:
-                  description: The project domain name
-                  examples:
-                    - www.example.com
-                  type: string
-                redirect:
-                  description: Target destination domain for redirect
-                  examples:
-                    - foobar.com
-                  type:
-                    - string
-                    - "null"
-                redirectStatusCode:
-                  description: Status code for domain redirect
-                  enum:
-                    - null
-                    - 301
-                    - 302
-                    - 307
-                    - 308
-                  examples:
-                    - 307
-                  type:
-                    - integer
-                    - "null"
-              required:
-                - name
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  apexName:
-                    type: string
-                  createdAt:
-                    type: number
-                  gitBranch:
-                    type:
-                      - string
-                      - "null"
-                  name:
-                    type: string
-                  projectId:
-                    type: string
-                  redirect:
-                    type:
-                      - string
-                      - "null"
-                  redirectStatusCode:
-                    enum:
-                      - 307
-                      - 301
-                      - 302
-                      - 308
-                    type:
-                      - number
-                      - "null"
-                  updatedAt:
-                    type: number
-                  verification:
-                    description: "A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`."
-                    items:
-                      description: "A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`."
-                      properties:
-                        domain:
-                          type: string
-                        reason:
-                          type: string
-                        type:
-                          type: string
-                        value:
-                          type: string
-                      required:
-                        - type
-                        - domain
-                        - value
-                        - reason
-                      type: object
-                    type: array
-                  verified:
-                    description: "`true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed."
-                    type: boolean
-                required:
-                  - name
-                  - apexName
-                  - projectId
-                  - verified
-                type: object
-          description: The domain was successfully added to the project
-        "400":
-          description: |-
-            One of the provided values in the request body is invalid.
-            One of the provided values in the request query is invalid.
-            The domain is not valid
-            You can't set both a git branch and a redirect for the domain
-            The domain can not be added because the latest production deployment for the project was not successful
-            The domain redirect is not valid
-            A domain cannot redirect to itself
-            You can not set the production branch as a branch for your domain
-        "402":
-          description: |-
-            The account was soft-blocked for an unhandled reason.
-            The account is missing a payment so payment method must be updated
-        "403":
-          description: |-
-            You do not have permission to access this resource.
-            You don't have access to the domain you are adding
-        "404":
-          description: Project not found
-        "409":
-          description: |-
-            The domain is already assigned to another Vercel project
-            Cannot create project domain since owner already has `domain` on their account
-            Cannot create project domain if the current verified domain
-            The project is currently being transferred
-      security:
-        - bearerToken: []
-      summary: Add a domain to a project
       tags:
         - projects
   "/v9/projects/{idOrName}/domains/{domain}":
@@ -22313,6 +22055,8 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
@@ -22333,6 +22077,8 @@ components:
                     price:
                       type: number
                     threshold:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22356,6 +22102,8 @@ components:
                       type: number
                     threshold:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - batch
@@ -22378,6 +22126,8 @@ components:
                       type: number
                     threshold:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - batch
@@ -22399,6 +22149,8 @@ components:
                     price:
                       type: number
                     threshold:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22443,9 +22195,35 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
+                    - hidden
+                  type: object
+                cronJobInvocation:
+                  properties:
+                    batch:
+                      type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
+                    hidden:
+                      type: boolean
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    threshold:
+                      type: number
+                    tier:
+                      type: number
+                  required:
+                    - price
+                    - batch
+                    - threshold
                     - hidden
                   type: object
                 customCerts:
@@ -22485,9 +22263,59 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
+                    - hidden
+                  type: object
+                edgeConfigRead:
+                  properties:
+                    batch:
+                      type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
+                    hidden:
+                      type: boolean
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    threshold:
+                      type: number
+                    tier:
+                      type: number
+                  required:
+                    - price
+                    - batch
+                    - threshold
+                    - hidden
+                  type: object
+                edgeConfigWrite:
+                  properties:
+                    batch:
+                      type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
+                    hidden:
+                      type: boolean
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    threshold:
+                      type: number
+                    tier:
+                      type: number
+                  required:
+                    - price
+                    - batch
+                    - threshold
                     - hidden
                   type: object
                 edgeFunctionExecutionUnits:
@@ -22505,6 +22333,8 @@ components:
                     price:
                       type: number
                     threshold:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22527,6 +22357,8 @@ components:
                     price:
                       type: number
                     threshold:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22571,6 +22403,8 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
@@ -22613,6 +22447,8 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
@@ -22633,6 +22469,8 @@ components:
                     price:
                       type: number
                     threshold:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22677,6 +22515,8 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
@@ -22718,6 +22558,8 @@ components:
                     price:
                       type: number
                     quantity:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22761,6 +22603,8 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
@@ -22803,6 +22647,8 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
@@ -22823,6 +22669,8 @@ components:
                     price:
                       type: number
                     threshold:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22845,6 +22693,8 @@ components:
                     price:
                       type: number
                     threshold:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22889,6 +22739,8 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
@@ -22931,12 +22783,58 @@ components:
                       type: number
                     quantity:
                       type: number
+                    tier:
+                      type: number
                   required:
                     - price
                     - quantity
                     - hidden
                   type: object
-                webAnalyticsDataPoint:
+                webAnalytics:
+                  description: "Will be used to create an invoice item. The price must be in cents: 2000 for $20."
+                  properties:
+                    createdAt:
+                      type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
+                    frequency:
+                      properties:
+                        interval:
+                          enum:
+                            - month
+                          type: string
+                        intervalCount:
+                          enum:
+                            - 1
+                            - 3
+                            - 2
+                            - 6
+                            - 12
+                          type: number
+                      required:
+                        - interval
+                        - intervalCount
+                      type: object
+                    hidden:
+                      type: boolean
+                    maxQuantity:
+                      type: number
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    quantity:
+                      type: number
+                    tier:
+                      type: number
+                  required:
+                    - price
+                    - quantity
+                    - hidden
+                  type: object
+                webAnalyticsEvent:
                   properties:
                     batch:
                       type: number
@@ -22951,6 +22849,8 @@ components:
                     price:
                       type: number
                     threshold:
+                      type: number
+                    tier:
                       type: number
                   required:
                     - price
@@ -22974,6 +22874,8 @@ components:
               type:
                 - string
                 - "null"
+            orbCustomerId:
+              type: string
             overdue:
               type:
                 - boolean
@@ -23204,6 +23106,23 @@ components:
           examples:
             - me@example.com
           type: string
+        favoriteProjects:
+          description: A list of projects across teams that a user has marked as a favorite.
+          items:
+            description: A list of projects across teams that a user has marked as a favorite.
+            properties:
+              projectId:
+                type: string
+              scopeId:
+                type: string
+              scopeSlug:
+                type: string
+            required:
+              - projectId
+              - scopeId
+              - scopeSlug
+            type: object
+          type: array
         hasTrialAvailable:
           description: Whether the user has a trial available for a paid plan subscription.
           type: boolean
@@ -23557,6 +23476,7 @@ components:
                         - bitbucket
                         - dsync
                         - feedback
+                        - organization-teams
                       type: string
                     repoId:
                       type: string
@@ -23629,6 +23549,7 @@ components:
                         - bitbucket
                         - dsync
                         - feedback
+                        - organization-teams
                       type: string
                     repoId:
                       type: string

@@ -4223,7 +4223,7 @@ components:
           type: array
         passConstraints:
           $ref: "#/components/schemas/PassConstraints"
-          description: Pass constraints for the object.
+          description: Pass constraints for the object. Includes limiting NFC and screenshot behaviors.
         reservationInfo:
           $ref: "#/components/schemas/EventReservationInfo"
           description: Reservation details for this ticket. This is expected to be shared amongst all tickets that were purchased in the same order.
@@ -4301,7 +4301,7 @@ components:
           description: The name of the venue, such as "AT&T Park". This is required.
       type: object
     ExpiryNotification:
-      description: Indicates that the issuer would like GooglePay to send expiry notifications 2 days prior to the card expiration.
+      description: Indicates that the issuer would like Google Wallet to send expiry notifications 2 days prior to the card expiration.
       properties:
         enableNotification:
           description: Indicates if the object needs to have expiry notification enabled.
@@ -4644,7 +4644,7 @@ components:
           type: array
         passConstraints:
           $ref: "#/components/schemas/PassConstraints"
-          description: Pass constraints for the object.
+          description: Pass constraints for the object. Includes limiting NFC and screenshot behaviors.
         passengerName:
           description: 'Required. Passenger name as it would appear on the boarding pass. eg: "Dave M Gahan" or "Gahan/Dave" or "GAHAN/DAVEM"'
           type: string
@@ -4784,7 +4784,7 @@ components:
           type: array
       type: object
     GenericObject:
-      description: "Generic Object Next ID: 119"
+      description: "Generic Object Next ID: 121"
       properties:
         appLinkData:
           $ref: "#/components/schemas/AppLinkData"
@@ -4799,9 +4799,21 @@ components:
           description: Required. The class associated with this object. The class must be of the same type as this object, must already exist, and must be approved. Class IDs should follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you.
           type: string
         genericType:
-          description: Specify which `GenericType` the card belongs to. Deprecated.
+          description: Specify which `GenericType` the card belongs to.
           enum:
             - GENERIC_TYPE_UNSPECIFIED
+            - GENERIC_SEASON_PASS
+            - GENERIC_UTILITY_BILLS
+            - GENERIC_PARKING_PASS
+            - GENERIC_VOUCHER
+            - GENERIC_GYM_MEMBERSHIP
+            - GENERIC_LIBRARY_MEMBERSHIP
+            - GENERIC_RESERVATIONS
+            - GENERIC_AUTO_INSURANCE
+            - GENERIC_HOME_INSURANCE
+            - GENERIC_ENTRY_TICKET
+            - GENERIC_RECEIPT
+            - GENERIC_OTHER
           type: string
         groupingInfo:
           $ref: "#/components/schemas/GroupingInfo"
@@ -4837,7 +4849,7 @@ components:
           description: The notification settings that are enabled for this object.
         passConstraints:
           $ref: "#/components/schemas/PassConstraints"
-          description: Pass constraints for the object.
+          description: Pass constraints for the object. Includes limiting NFC and screenshot behaviors.
         rotatingBarcode:
           $ref: "#/components/schemas/RotatingBarcode"
           description: The rotating barcode settings/details.
@@ -5113,7 +5125,7 @@ components:
           type: array
         passConstraints:
           $ref: "#/components/schemas/PassConstraints"
-          description: Pass constraints for the object.
+          description: Pass constraints for the object. Includes limiting NFC and screenshot behaviors.
         pin:
           description: The card's PIN.
           type: string
@@ -5622,7 +5634,7 @@ components:
           type: array
         passConstraints:
           $ref: "#/components/schemas/PassConstraints"
-          description: Pass constraints for the object.
+          description: Pass constraints for the object. Includes limiting NFC and screenshot behaviors.
         rotatingBarcode:
           $ref: "#/components/schemas/RotatingBarcode"
           description: The rotating barcode type and value.
@@ -6191,7 +6203,7 @@ components:
           type: array
         passConstraints:
           $ref: "#/components/schemas/PassConstraints"
-          description: Pass constraints for the object.
+          description: Pass constraints for the object. Includes limiting NFC and screenshot behaviors.
         rotatingBarcode:
           $ref: "#/components/schemas/RotatingBarcode"
           description: The rotating barcode type and value.
@@ -6257,6 +6269,15 @@ components:
     PassConstraints:
       description: Container for any constraints that may be placed on passes.
       properties:
+        nfcConstraint:
+          description: The NFC constraints for the pass.
+          items:
+            enum:
+              - NFC_CONSTRAINT_UNSPECIFIED
+              - BLOCK_PAYMENT
+              - BLOCK_CLOSED_LOOP_TRANSIT
+            type: string
+          type: array
         screenshotEligibility:
           description: The screenshot eligibility for the pass.
           enum:
@@ -6981,7 +7002,7 @@ components:
           type: array
         passConstraints:
           $ref: "#/components/schemas/PassConstraints"
-          description: Pass constraints for the object.
+          description: Pass constraints for the object. Includes limiting NFC and screenshot behaviors.
         passengerNames:
           description: The name(s) of the passengers the ticket is assigned to. The above `passengerType` field is meant to give Google context on this field.
           type: string
@@ -7096,7 +7117,7 @@ components:
           type: string
       type: object
     UpcomingNotification:
-      description: Indicates that the issuer would like GooglePay send an upcoming card validity notification 1 day before card becomes valid/usable.
+      description: Indicates that the issuer would like Google Wallet to send an upcoming card validity notification 1 day before card becomes valid/usable.
       properties:
         enableNotification:
           description: Indicates if the object needs to have upcoming notification enabled.

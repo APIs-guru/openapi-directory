@@ -4756,6 +4756,22 @@ paths:
             nullable: true
             type: array
           style: form
+        - description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+          in: query
+          name: date_from
+          schema:
+            description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+            format: date-time
+            nullable: true
+            type: string
+        - description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
+          in: query
+          name: date_to
+          schema:
+            description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
+            format: date-time
+            nullable: true
+            type: string
         - description: "Filters based on which product the asset will download against.\r
 
             \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r

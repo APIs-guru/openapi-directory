@@ -34,7 +34,7 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/yaml:
               schema:
                 type: object
           description: YAML representation of our OpenAPI definition.
@@ -56,6 +56,7 @@ paths:
       operationId: downloadAsync
       parameters:
         - description: Async operation key
+          example: f0db2468-6b77-41a4-bafe-70157bc166ad
           in: query
           name: async_request_key
           required: true
@@ -126,6 +127,7 @@ paths:
       operationId: deleteCache
       parameters:
         - description: Cache key
+          example: any key
           in: path
           name: key
           required: true
@@ -241,6 +243,7 @@ paths:
       operationId: deleteContinuousProject
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -271,6 +274,7 @@ paths:
       operationId: getContinuousProject
       parameters:
         - description: Continuous Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -301,6 +305,7 @@ paths:
       operationId: updateContinuousProject
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -335,6 +340,7 @@ paths:
       operationId: getAnalyticsToken
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -359,6 +365,7 @@ paths:
       operationId: collectAnalytics
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -388,6 +395,7 @@ paths:
       operationId: complete
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -412,6 +420,7 @@ paths:
       operationId: getQuoteForDocuments
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -465,6 +474,7 @@ paths:
       operationId: completeContinuousDocument
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -472,6 +482,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -502,6 +513,7 @@ paths:
       operationId: getQuoteForDocument
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -509,6 +521,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -557,6 +570,7 @@ paths:
       operationId: getQuoteForLanguages
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -610,6 +624,7 @@ paths:
       operationId: completeLanguage
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -617,6 +632,7 @@ paths:
             format: int64
             type: integer
         - description: Target language that you want to complete
+          example: en-US
           in: path
           name: targetLanguage
           required: true
@@ -640,6 +656,7 @@ paths:
       operationId: getQuoteForLanguage
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -647,6 +664,7 @@ paths:
             format: int64
             type: integer
         - description: Target language that you want to complete
+          example: en-US
           in: path
           name: targetLanguage
           required: true
@@ -694,6 +712,7 @@ paths:
       operationId: deleteSubscription
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -728,6 +747,7 @@ paths:
       operationId: getSubscription
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -762,6 +782,7 @@ paths:
       operationId: createSubscription
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -802,6 +823,7 @@ paths:
       operationId: updateSubscription
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -843,6 +865,7 @@ paths:
       operationId: updateSubscriptionPaymentMethod
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -884,6 +907,7 @@ paths:
       operationId: translate
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -891,6 +915,7 @@ paths:
             format: int64
             type: integer
         - description: Target language that you want to instantly translate your file into.
+          example: en-US
           in: path
           name: targetLanguage
           required: true
@@ -918,6 +943,7 @@ paths:
       operationId: getContinuousProjectDocuments
       parameters:
         - description: Continuous Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -952,6 +978,7 @@ paths:
       operationId: addDocument
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -980,6 +1007,7 @@ paths:
       operationId: postContinuousProjectDocumentProgress
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1013,6 +1041,7 @@ paths:
       operationId: postContinuousProjectFileStrings
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1041,6 +1070,7 @@ paths:
       operationId: getContinuousProjectDocument
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1048,6 +1078,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID/Name
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -1076,6 +1107,7 @@ paths:
       operationId: updateDocument
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1083,6 +1115,7 @@ paths:
             format: int64
             type: integer
         - description: Continuous project document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -1111,6 +1144,7 @@ paths:
       operationId: getContinuousProjectDocumentProgress
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1118,6 +1152,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID/Name
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -1152,6 +1187,7 @@ paths:
       operationId: getContinuousProjectFileStrings
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1159,6 +1195,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID/Name
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -1182,6 +1219,7 @@ paths:
       operationId: getContinuousProjectInvoices
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1211,6 +1249,7 @@ paths:
       operationId: getContinuousProjectProgress
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1245,6 +1284,7 @@ paths:
       operationId: getContinuousProjectStrings
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1268,6 +1308,7 @@ paths:
       operationId: clearTranslationCache
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1303,6 +1344,7 @@ paths:
       operationId: getTranslationCache
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1333,6 +1375,7 @@ paths:
       operationId: recacheTranslations
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1369,6 +1412,7 @@ paths:
       operationId: getActiveWidgets
       parameters:
         - description: Continuous Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1399,6 +1443,7 @@ paths:
       operationId: createActiveWidget
       parameters:
         - description: Continuous project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1433,6 +1478,7 @@ paths:
       operationId: deleteActiveWidget
       parameters:
         - description: Continuous Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1440,6 +1486,7 @@ paths:
             format: int64
             type: integer
         - description: Active widget ID belonging to this Continuous Project
+          example: 236
           in: path
           name: widgetId
           required: true
@@ -1468,6 +1515,7 @@ paths:
       operationId: getActiveWidget
       parameters:
         - description: Continuous Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1475,6 +1523,7 @@ paths:
             format: int64
             type: integer
         - description: Active widget ID belonging to this Continuous Project
+          example: 236
           in: path
           name: widgetId
           required: true
@@ -1505,6 +1554,7 @@ paths:
       operationId: updateActiveWidget
       parameters:
         - description: Continuous Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1512,6 +1562,7 @@ paths:
             format: int64
             type: integer
         - description: Active widget ID belonging to this Continuous Project
+          example: 236
           in: path
           name: widgetId
           required: true
@@ -1546,6 +1597,7 @@ paths:
       operationId: resetActiveWidgetToken
       parameters:
         - description: Continuous Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -1553,6 +1605,7 @@ paths:
             format: int64
             type: integer
         - description: Active widget ID belonging to this Continuous Project
+          example: 236
           in: path
           name: widgetId
           required: true
@@ -1699,6 +1752,7 @@ paths:
       operationId: getCorporateById
       parameters:
         - description: Corporate ID
+          example: 2
           in: path
           name: corporateId
           required: true
@@ -1723,6 +1777,7 @@ paths:
       operationId: getAvailableCorporatePermissionsById
       parameters:
         - description: Corporate ID
+          example: 2
           in: path
           name: corporateId
           required: true
@@ -1747,6 +1802,7 @@ paths:
       operationId: getCorporateUserGroupsById
       parameters:
         - description: Corporate ID
+          example: 2
           in: path
           name: corporateId
           required: true
@@ -1769,6 +1825,7 @@ paths:
       operationId: saveCorporateUserGroupById
       parameters:
         - description: Corporate ID
+          example: 2
           in: path
           name: corporateId
           required: true
@@ -1799,6 +1856,7 @@ paths:
       operationId: getCorporateUsersById
       parameters:
         - description: Corporate ID
+          example: 2
           in: path
           name: corporateId
           required: true
@@ -1956,6 +2014,7 @@ paths:
       operationId: getDocument
       parameters:
         - description: Document ID or filename
+          example: "179469"
           in: path
           name: documentId
           required: true
@@ -1978,6 +2037,7 @@ paths:
       operationId: getDocumentProgress
       parameters:
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -2006,6 +2066,7 @@ paths:
       operationId: regeneratePreview
       parameters:
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -2030,6 +2091,7 @@ paths:
       operationId: getSimilarDocuments
       parameters:
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -2073,6 +2135,7 @@ paths:
       operationId: useAsDraft
       parameters:
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -2102,6 +2165,7 @@ paths:
       operationId: useAsRegular
       parameters:
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -2565,6 +2629,7 @@ paths:
       operationId: getClientProfileForPam
       parameters:
         - description: Client ID
+          example: 3707
           in: path
           name: clientId
           required: true
@@ -2595,6 +2660,7 @@ paths:
       operationId: getProjectCompletionReportForPam
       parameters:
         - description: Quote ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -2738,6 +2804,7 @@ paths:
       operationId: getCreditCard
       parameters:
         - description: Credit Card ID
+          example: 4242424242424242
           in: path
           name: cardId
           required: true
@@ -2766,6 +2833,7 @@ paths:
       operationId: deleteCreditCard
       parameters:
         - description: Credit Card ID
+          example: 4242424242424242
           in: path
           name: cardId
           required: true
@@ -2795,6 +2863,7 @@ paths:
       operationId: resetCardPaymentCode
       parameters:
         - description: Credit Card ID
+          example: 4242424242424242
           in: path
           name: cardId
           required: true
@@ -3011,6 +3080,7 @@ paths:
       operationId: getQuoteIdFromInternalId
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -3089,6 +3159,7 @@ paths:
       operationId: deleteProject
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3117,6 +3188,7 @@ paths:
       operationId: getProject
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3156,6 +3228,7 @@ paths:
       operationId: updateProject
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3198,6 +3271,7 @@ paths:
       operationId: assignCM
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3233,6 +3307,7 @@ paths:
       operationId: triggerCallback
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3273,6 +3348,7 @@ paths:
       operationId: cancelProject
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3307,6 +3383,7 @@ paths:
       operationId: deliverProject
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3336,6 +3413,7 @@ paths:
       operationId: download
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3372,6 +3450,7 @@ paths:
       operationId: downloadLanguage
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3379,6 +3458,7 @@ paths:
             format: int64
             type: integer
         - description: Language code. You can download the translation of only a specific language.
+          example: en-US
           in: path
           name: language
           required: true
@@ -3414,6 +3494,7 @@ paths:
       operationId: sendQuoteEmail
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3443,6 +3524,7 @@ paths:
       operationId: getInvoice
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3472,6 +3554,7 @@ paths:
       operationId: downloadHtmlInvoice
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3501,6 +3584,7 @@ paths:
       operationId: downloadPdfInvoice
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3531,6 +3615,7 @@ paths:
       operationId: launchProject
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3577,6 +3662,7 @@ paths:
       operationId: package
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3620,6 +3706,7 @@ paths:
       operationId: trackPackage
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3660,6 +3747,7 @@ paths:
       operationId: packageLanguage
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3667,6 +3755,7 @@ paths:
             format: int64
             type: integer
         - description: Language code. You can package the translation of only a specific language.
+          example: en-US
           in: path
           name: language
           required: true
@@ -3712,6 +3801,7 @@ paths:
       operationId: getProgress
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3752,6 +3842,7 @@ paths:
       operationId: recreateProject
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3787,6 +3878,7 @@ paths:
       operationId: submitProjectReports
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3826,6 +3918,7 @@ paths:
       operationId: getSalesActivities
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3863,6 +3956,7 @@ paths:
       operationId: insertSalesActivity
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3901,6 +3995,7 @@ paths:
       operationId: deleteProjectWebhook
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3929,6 +4024,7 @@ paths:
       operationId: getProjectWebhooks
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3957,6 +4053,7 @@ paths:
       operationId: postProjectWebhook
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -3990,6 +4087,7 @@ paths:
       operationId: updateProjectWebhook
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: id
           required: true
@@ -4024,6 +4122,7 @@ paths:
       operationId: getActivities
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4065,6 +4164,7 @@ paths:
       operationId: getActivity
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4072,6 +4172,7 @@ paths:
             format: int64
             type: integer
         - description: Activity ID
+          example: 6879
           in: path
           name: activityId
           required: true
@@ -4100,6 +4201,7 @@ paths:
       operationId: submitComment
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4107,6 +4209,7 @@ paths:
             format: int64
             type: integer
         - description: Activity ID
+          example: 6879
           in: path
           name: activityId
           required: true
@@ -4144,6 +4247,7 @@ paths:
       operationId: getActivityComments
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4151,6 +4255,7 @@ paths:
             format: int64
             type: integer
         - description: Activity ID
+          example: 6879
           in: path
           name: activityId
           required: true
@@ -4180,6 +4285,7 @@ paths:
       operationId: getComments
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4221,6 +4327,7 @@ paths:
       operationId: getProjectDocuments
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4260,6 +4367,7 @@ paths:
       operationId: createProjectDocument
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4321,6 +4429,7 @@ paths:
       operationId: deleteProjectDocument
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4328,6 +4437,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -4362,6 +4472,7 @@ paths:
       operationId: getProjectDocument
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4369,6 +4480,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -4408,6 +4520,7 @@ paths:
       operationId: updateProjectDocument
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4415,6 +4528,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -4476,6 +4590,7 @@ paths:
       operationId: downloadProjectDocument
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4483,6 +4598,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -4512,6 +4628,7 @@ paths:
       operationId: getDocumentTranslations
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4519,6 +4636,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -4542,6 +4660,7 @@ paths:
       operationId: downloadTranslatedDocumentForLanguage
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4549,6 +4668,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -4556,6 +4676,7 @@ paths:
             format: int64
             type: integer
         - description: Target language code.
+          example: en-US
           in: path
           name: language
           required: true
@@ -4592,6 +4713,7 @@ paths:
       operationId: getDocumentTranslationsForLanguage
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4599,6 +4721,7 @@ paths:
             format: int64
             type: integer
         - description: Document ID
+          example: 179469
           in: path
           name: documentId
           required: true
@@ -4606,6 +4729,7 @@ paths:
             format: int64
             type: integer
         - description: Target language code.
+          example: en-US
           in: path
           name: language
           required: true
@@ -4628,6 +4752,7 @@ paths:
       operationId: getGlossaries
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4656,6 +4781,7 @@ paths:
       operationId: createGlossary
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4717,6 +4843,7 @@ paths:
       operationId: deleteGlossary
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4724,6 +4851,7 @@ paths:
             format: int64
             type: integer
         - description: Glossary ID
+          example: 1411
           in: path
           name: glossaryId
           required: true
@@ -4758,6 +4886,7 @@ paths:
       operationId: getGlossary
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4765,6 +4894,7 @@ paths:
             format: int64
             type: integer
         - description: Glossary ID
+          example: 1411
           in: path
           name: glossaryId
           required: true
@@ -4793,6 +4923,7 @@ paths:
       operationId: updateGlossary
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4800,6 +4931,7 @@ paths:
             format: int64
             type: integer
         - description: Glossary ID
+          example: 1411
           in: path
           name: glossaryId
           required: true
@@ -4855,6 +4987,7 @@ paths:
       operationId: downloadGlossary
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4862,6 +4995,7 @@ paths:
             format: int64
             type: integer
         - description: Glossary ID
+          example: 1411
           in: path
           name: glossaryId
           required: true
@@ -4891,6 +5025,7 @@ paths:
       operationId: getProjectStrings
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4914,6 +5049,7 @@ paths:
       operationId: packageProjectTranslationMemory
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4955,6 +5091,7 @@ paths:
       operationId: packageProjectTranslationMemoryStatus
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4962,6 +5099,7 @@ paths:
             format: int64
             type: integer
         - description: Async operation key
+          example: f0db2468-6b77-41a4-bafe-70157bc166ad
           in: query
           name: async_request_key
           required: true
@@ -4984,6 +5122,7 @@ paths:
       operationId: packageProjectTranslationMemoryForLanguage
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -4991,6 +5130,7 @@ paths:
             format: int64
             type: integer
         - description: Language Code
+          example: en-US
           in: path
           name: languageCode
           required: true
@@ -5031,6 +5171,7 @@ paths:
       operationId: packageProjectTranslationMemoryForLanguageStatus
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5038,12 +5179,14 @@ paths:
             format: int64
             type: integer
         - description: Language Code
+          example: en-US
           in: path
           name: languageCode
           required: true
           schema:
             type: string
         - description: Async operation key
+          example: f0db2468-6b77-41a4-bafe-70157bc166ad
           in: query
           name: async_request_key
           required: true
@@ -5066,6 +5209,7 @@ paths:
       operationId: getProjectStringsForLanguage
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5073,6 +5217,7 @@ paths:
             format: int64
             type: integer
         - description: Target language code
+          example: en-US
           in: path
           name: language
           required: true
@@ -5095,6 +5240,7 @@ paths:
       operationId: getStyleGuides
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5133,6 +5279,7 @@ paths:
       operationId: createStyleGuide
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5188,6 +5335,7 @@ paths:
       operationId: deleteStyleGuide
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5195,6 +5343,7 @@ paths:
             format: int64
             type: integer
         - description: Style Guide ID
+          example: 13959
           in: path
           name: styleGuideId
           required: true
@@ -5229,6 +5378,7 @@ paths:
       operationId: getStyleGuide
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5236,6 +5386,7 @@ paths:
             format: int64
             type: integer
         - description: Style Guide ID
+          example: 13959
           in: path
           name: styleGuideId
           required: true
@@ -5274,6 +5425,7 @@ paths:
       operationId: updateStyleGuide
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5281,6 +5433,7 @@ paths:
             format: int64
             type: integer
         - description: Style guide ID
+          example: 13959
           in: path
           name: styleGuideId
           required: true
@@ -5336,6 +5489,7 @@ paths:
       operationId: downloadStyleGuide
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5343,6 +5497,7 @@ paths:
             format: int64
             type: integer
         - description: Style Guide ID
+          example: 13959
           in: path
           name: styleGuideId
           required: true
@@ -5372,6 +5527,7 @@ paths:
       operationId: getProjectTranslations
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5396,6 +5552,7 @@ paths:
       operationId: getProjectTranslationsForLanguage
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5403,6 +5560,7 @@ paths:
             format: int64
             type: integer
         - description: Target language code
+          example: en-US
           in: path
           name: language
           required: true
@@ -5426,6 +5584,7 @@ paths:
       operationId: getProjectVendors
       parameters:
         - description: Project ID
+          example: 74
           in: path
           name: projectId
           required: true
@@ -5655,6 +5814,7 @@ paths:
       operationId: searchEverywhere
       parameters:
         - description: Search query term
+          example: en-US
           in: query
           name: query
           required: true
@@ -5717,6 +5877,7 @@ paths:
       operationId: checkDocumentsReindex
       parameters:
         - description: Async operation key
+          example: f0db2468-6b77-41a4-bafe-70157bc166ad
           in: query
           name: async_request_key
           required: true
@@ -5954,6 +6115,7 @@ paths:
       operationId: packageUserTranslationMemory
       parameters:
         - description: Source Language Code
+          example: en-US
           in: path
           name: languageCode
           required: true
@@ -5994,12 +6156,14 @@ paths:
       operationId: packageUserTranslationMemoryForLanguageStatus
       parameters:
         - description: Language Code
+          example: en-US
           in: path
           name: languageCode
           required: true
           schema:
             type: string
         - description: Async operation key
+          example: f0db2468-6b77-41a4-bafe-70157bc166ad
           in: query
           name: async_request_key
           required: true
@@ -6077,18 +6241,21 @@ paths:
       operationId: getQuestions
       parameters:
         - description: Scope
+          example: vendor
           in: path
           name: scope
           required: true
           schema:
             type: string
         - description: Type
+          example: profile
           in: path
           name: type
           required: true
           schema:
             type: string
         - description: Project ID
+          example: 74
           in: query
           name: attach_answers_for_project
           required: false
@@ -6116,12 +6283,14 @@ paths:
       operationId: submitAnswers
       parameters:
         - description: Scope
+          example: vendor
           in: path
           name: scope
           required: true
           schema:
             type: string
         - description: Type
+          example: profile
           in: path
           name: type
           required: true
@@ -6305,6 +6474,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/User"
           description: Created user
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Invalid information given for user!
       summary: Create a new user
       tags:
         - User
@@ -6436,6 +6611,7 @@ paths:
       operationId: getUser
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6466,6 +6642,7 @@ paths:
       operationId: updateUser
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6499,6 +6676,7 @@ paths:
       operationId: approveVendorApplication
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6530,6 +6708,7 @@ paths:
       operationId: deleteUserAccount
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6560,6 +6739,7 @@ paths:
       operationId: getUserDocuments
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6651,6 +6831,7 @@ paths:
       operationId: downgradeUserProofreader
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6684,6 +6865,7 @@ paths:
       operationId: getUserEarnings
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6716,6 +6898,7 @@ paths:
       operationId: freezeUserAccount
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6747,6 +6930,7 @@ paths:
       operationId: makeUserProofreader
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6780,6 +6964,7 @@ paths:
       operationId: subscribeUserNotification
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6822,6 +7007,7 @@ paths:
       operationId: unsubscribeUserNotification
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6865,6 +7051,7 @@ paths:
       operationId: getUserPaymentInfo
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6893,6 +7080,7 @@ paths:
       operationId: updateUserPaymentInfo
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6927,6 +7115,7 @@ paths:
       operationId: getUserPermissions
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6950,6 +7139,7 @@ paths:
       operationId: uploadUserProfilePicture
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -6996,6 +7186,7 @@ paths:
       operationId: getVendorProjectsByUserId
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7051,6 +7242,7 @@ paths:
       operationId: rejectVendorApplication
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7082,6 +7274,7 @@ paths:
       operationId: sendUserEmailConfirmation
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7142,6 +7335,7 @@ paths:
       operationId: getUserResponsivity
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7189,6 +7383,7 @@ paths:
       operationId: getUserStats
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7221,6 +7416,7 @@ paths:
       operationId: getUserPopularPairs
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7253,6 +7449,7 @@ paths:
       operationId: getUserProjectStats
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7285,6 +7482,7 @@ paths:
       operationId: suspendUser
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7321,6 +7519,7 @@ paths:
       operationId: unfreezeUserAccount
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7352,6 +7551,7 @@ paths:
       operationId: getThisUserGroups
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7373,6 +7573,7 @@ paths:
       operationId: updateUserGroup
       parameters:
         - description: User ID
+          example: 1
           in: path
           name: userId
           required: true
@@ -7426,6 +7627,9 @@ components:
       type: object
     ActiveWidget:
       properties:
+        admin_mode:
+          description: Is the Active Widget in admin mode? This changes a couple of behaviors in the widget to configure some rules like elements, sections, pages, etc.
+          type: boolean
         allow_hash_in_url:
           description: When true, hash params are included in filenames. When false, params are ignored.
           type: boolean
@@ -7439,6 +7643,9 @@ components:
           description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
+        debug_mode:
+          description: When true, Active ecosystem will print debug-level logs from all Active modules.
+          type: boolean
         elements:
           description: Continuous project exclusive elements and rules
           type: string
@@ -7447,6 +7654,9 @@ components:
           type: boolean
         force_cache_refresh_interval:
           description: Determines whether to force-refresh local browser cache of your translations in certain period of times, no matter if there is a new activity in the project.
+          type: boolean
+        hit_backend_for_existing:
+          description: When true, Active ecosystem will collect all strings on TMS no matter if the translation is present in the cache.
           type: boolean
         id:
           format: int64

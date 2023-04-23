@@ -3174,6 +3174,12 @@ components:
           description: Min. current of the station in A
           format: int32
           type: integer
+        RSSI:
+          description: "Received Signal Strength Indicator for the connection mode (wifi or mobile). \r
+
+            \            -127 (min) to 0 (Max)"
+          format: int32
+          type: integer
         State:
           description: The state of the charging station
           enum:
@@ -3198,14 +3204,30 @@ components:
         Duration:
           description: The duration in seconds
           format: int32
+          readOnly: true
           type: integer
         EnergyUsed:
           description: The energy used (in kWh)
           format: double
+          readOnly: true
           type: number
         StartTime:
           description: The starttime of the charging (in UTC)
           format: date-time
+          readOnly: true
+          type: string
+        TransactionStopReason:
+          enum:
+            - Unknown
+            - CarDisconnected
+            - RemoteStop
+            - ErrorStop
+            - InstallationMode
+            - CableError
+            - DiodeError
+            - RcdError
+            - OverloadError
+          readOnly: true
           type: string
       type: object
     PicoLoadmanagementGroupDto:

@@ -4104,6 +4104,193 @@ components:
         totalPoints:
           type: integer
       type: object
+    Match_Score_Breakdown_2023:
+      description: See the 2023 FMS API documentation for a description of each value. https://frc-api-docs.firstinspires.org
+      properties:
+        blue:
+          $ref: "#/components/schemas/Match_Score_Breakdown_2023_Alliance"
+        red:
+          $ref: "#/components/schemas/Match_Score_Breakdown_2023_Alliance"
+      type: object
+    Match_Score_Breakdown_2023_Alliance:
+      properties:
+        activationBonusAchieved:
+          type: boolean
+        adjustPoints:
+          type: integer
+        autoBridgeState:
+          enum:
+            - NotLevel
+            - Level
+          type: string
+        autoChargeStationPoints:
+          type: integer
+        autoChargeStationRobot1:
+          enum:
+            - None
+            - Docked
+          type: string
+        autoChargeStationRobot2:
+          enum:
+            - None
+            - Docked
+          type: string
+        autoChargeStationRobot3:
+          enum:
+            - None
+            - Docked
+          type: string
+        autoCommunity:
+          properties:
+            B:
+              items:
+                enum:
+                  - None
+                  - Cone
+                  - Cube
+                type: string
+              type: array
+            M:
+              items:
+                enum:
+                  - None
+                  - Cone
+                  - Cube
+                type: string
+              type: array
+            T:
+              items:
+                enum:
+                  - None
+                  - Cone
+                  - Cube
+                type: string
+              type: array
+          type: object
+        autoDocked:
+          type: boolean
+        autoGamePieceCount:
+          type: integer
+        autoGamePiecePoints:
+          type: integer
+        autoMobilityPoints:
+          type: integer
+        autoPoints:
+          type: integer
+        coopGamePieceCount:
+          type: integer
+        coopertitionCriteriaMet:
+          type: boolean
+        endGameBridgeState:
+          enum:
+            - NotLevel
+            - Level
+          type: string
+        endGameChargeStationPoints:
+          type: integer
+        endGameChargeStationRobot1:
+          enum:
+            - None
+            - Docked
+          type: string
+        endGameChargeStationRobot2:
+          enum:
+            - None
+            - Docked
+          type: string
+        endGameChargeStationRobot3:
+          enum:
+            - None
+            - Docked
+          type: string
+        endGameParkPoints:
+          type: integer
+        extraGamePieceCount:
+          type: integer
+        foulCount:
+          type: integer
+        foulPoints:
+          type: integer
+        linkPoints:
+          type: integer
+        links:
+          items:
+            properties:
+              nodes:
+                items:
+                  enum:
+                    - None
+                    - Cone
+                    - Cube
+                  type: string
+                type: array
+              row:
+                enum:
+                  - Bottom
+                  - Mid
+                  - Top
+                type: string
+            type: object
+          type: array
+        mobilityRobot1:
+          enum:
+            - Yes
+            - No
+          type: string
+        mobilityRobot2:
+          enum:
+            - Yes
+            - No
+          type: string
+        mobilityRobot3:
+          enum:
+            - Yes
+            - No
+          type: string
+        rp:
+          type: integer
+        sustainabilityBonusAchieved:
+          type: boolean
+        techFoulCount:
+          type: integer
+        teleopCommunity:
+          properties:
+            B:
+              items:
+                enum:
+                  - None
+                  - Cone
+                  - Cube
+                type: string
+              type: array
+            M:
+              items:
+                enum:
+                  - None
+                  - Cone
+                  - Cube
+                type: string
+              type: array
+            T:
+              items:
+                enum:
+                  - None
+                  - Cone
+                  - Cube
+                type: string
+              type: array
+          type: object
+        teleopGamePieceCount:
+          type: integer
+        teleopGamePiecePoints:
+          type: integer
+        teleopPoints:
+          type: integer
+        totalChargeStationPoints:
+          type: integer
+        totalPoints:
+          type: integer
+      type: object
     Match_Simple:
       properties:
         actual_time:

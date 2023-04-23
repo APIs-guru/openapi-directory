@@ -2,7 +2,7 @@ openapi: 3.0.0
 servers:
   - url: https://api.ip2location.io
 info:
-  description: IP2Location.io IP Geolocation API provides RESTful API to obtain visitors’ geolocation information such as country, region, city, latitude & longitude, ZIP code, time zone, ASN, ISP, domain, net speed, IDD code, area code, weather station data, MNC, MCC, mobile brand, elevation, usage type, address type, advertisement category and proxy data with an IP address.
+  description: IP2Location.io IP Geolocation API provides RESTful API to obtain visitors’ geolocation information such as country, region, district, city, latitude & longitude, ZIP code, time zone, ASN, ISP, domain, net speed, IDD code, area code, weather station data, MNC, MCC, mobile brand, elevation, usage type, address type, advertisement category, ASN and proxy data with an IP address.
   title: IP2Location.io IP Geolocation API
   version: "1.0"
   x-apisguru-categories:
@@ -74,5 +74,57 @@ paths:
             application/json:
               examples:
                 "0":
-                  value: '{"ip":"8.8.8.8","country_code":"US","country_name":"United States of America","region_name":"California","city_name":"Mountain View","latitude":37.405992,"longitude":-122.078515,"zip_code":"94043","time_zone":"-07:00","asn":"15169","as":"Google LLC","isp":"Google LLC","domain":"google.com","net_speed":"T1","idd_code":"1","area_code":"650","weather_station_code":"USCA0746","weather_station_name":"Mountain View","mcc":"-","mnc":"-","mobile_brand":"-","elevation":32,"usage_type":"DCH","address_type":"Anycast","continent":{"name":"North America","code":"NA","hemisphere":["north","west"],"translation":{"lang":"ko","value":"북아메리카"}},"country":{"name":"United States of America","alpha3_code":"USA","numeric_code":840,"demonym":"Americans","flag":"https://cdn.ip2location.io/assets/img/flags/us.png","capital":"Washington, D.C.","total_area":9826675,"population":331002651,"currency":{"code":"USD","name":"United States Dollar","symbol":"$"},"language":{"code":"EN","name":"English"},"tld":"us","translation":{"lang":"ko","value":"미국"}},"region":{"name":"California","code":"US-CA","translation":{"lang":"ko","value":"캘리포니아주"}},"city":{"name":"Mountain View","translation":{"lang":null,"value":null}},"time_zone_info":{"olson":"America/Los_Angeles","current_time":"2022-05-09T23:37:36-07:00","gmt_offset":-25200,"is_dst":true,"sunrise":"06:03","sunset":"20:06"},"geotargeting":{"metro":"807"},"ads_category":"IAB19","ads_category_name":"Technology & Computing","is_proxy":false,"proxy":{"last_seen":9,"proxy_type":"DCH","threat":"-","provider":"-"}}'
+                  value: |-
+                    ip: '' country_code: '' country_name: '' region_name: '' city_name: '' latitude: null longitude: null zip_code: '' time_zone: '' asn: '' as: '' isp: '' domain: '' net_speed: '' idd_code: '' area_code: '' weather_station_code: '' weather_station_name: '' mcc: '' mnc: '' mobile_brand: '' elevation: null usage_type: '' address_type: '' continent:
+                      name: ''
+                      code: ''
+                      hemisphere: []
+                      translation:
+                        lang: null
+                        value: null
+                    district: '' country:
+                      name: ''
+                      alpha3_code: ''
+                      numeric_code: null
+                      demonym: ''
+                      flag: ''
+                      capital: ''
+                      total_area: null
+                      population: null
+                      currency:
+                        code: ''
+                        name: ''
+                        symbol: ''
+                      language:
+                        code: ''
+                        name: ''
+                      tld: us
+                      translation:
+                        lang: null
+                        value: null
+                    region:
+                      name: ''
+                      code: ''
+                      translation:
+                        lang: ''
+                        value: ''
+                    city:
+                      name: ''
+                      translation:
+                        lang: null
+                        value: null
+                    time_zone_info:
+                      olson: ''
+                      current_time: ''
+                      gmt_offset: null
+                      is_dst: boolean
+                      sunrise: ''
+                      sunset: ''
+                    geotargeting:
+                      metro: ''
+                    ads_category: '' ads_category_name: '' is_proxy: boolean proxy:
+                      last_seen: null
+                      proxy_type: ''
+                      threat: ''
+                      provider: ''
           description: Get response from IP lookup

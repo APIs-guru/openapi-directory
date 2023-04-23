@@ -32,15 +32,15 @@ paths:
     get:
       description: Top level information about EnteroBase databases
       parameters:
-        - description: Database prefix, e.g. SAL for Salmonella
-          in: query
-          name: prefix
-          required: false
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: query
           name: name
+          required: false
+          schema:
+            type: string
+        - description: Database prefix, e.g. SAL for Salmonella
+          in: query
+          name: prefix
           required: false
           schema:
             type: string
@@ -61,15 +61,15 @@ paths:
     get:
       description: Login endpoint, refresh your API token
       parameters:
-        - description: EnteroBase username
-          in: query
-          name: username
-          required: false
-          schema:
-            type: string
         - description: EnteroBase Password
           in: query
           name: password
+          required: false
+          schema:
+            type: string
+        - description: EnteroBase username
+          in: query
+          name: username
           required: false
           schema:
             type: string
@@ -144,22 +144,13 @@ paths:
     get:
       description: Genome assemblies
       parameters:
-        - description: "Field to order by. Default: barcode"
-          in: query
-          name: orderby
-          required: false
-          schema:
-            default: barcode
-            type: string
         - description: ""
-          explode: true
           in: query
-          name: only_fields
+          name: n50
           required: false
           schema:
-            items:
-              type: string
-            type: array
+            format: int32
+            type: integer
         - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
           explode: true
           in: query
@@ -169,47 +160,13 @@ paths:
             items:
               type: string
             type: array
-        - description: ""
+        - description: "Field to order by. Default: barcode"
           in: query
-          name: n50
+          name: orderby
           required: false
           schema:
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: top_species
-          required: false
-          schema:
+            default: barcode
             type: string
-        - description: ""
-          in: query
-          name: uberstrain
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: version
-          required: false
-          schema:
-            format: int32
-            type: integer
-        - description: Number of results per page
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 50
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: reldate
-          required: false
-          schema:
-            format: int32
-            type: integer
         - description: Cursor position in results
           in: query
           name: offset
@@ -224,6 +181,34 @@ paths:
           required: false
           schema:
             type: string
+        - description: ""
+          in: query
+          name: uberstrain
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: top_species
+          required: false
+          schema:
+            type: string
+        - description: ""
+          explode: true
+          in: query
+          name: only_fields
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: ""
+          in: query
+          name: reldate
+          required: false
+          schema:
+            format: int32
+            type: integer
         - description: "Order of search results: asc or desc"
           in: query
           name: sortorder
@@ -231,6 +216,21 @@ paths:
           schema:
             default: asc
             type: string
+        - description: Number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: version
+          required: false
+          schema:
+            format: int32
+            type: integer
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
@@ -248,15 +248,15 @@ paths:
     get:
       description: Genome assemblies
       parameters:
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -272,15 +272,15 @@ paths:
     post:
       description: Genome assemblies
       parameters:
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -296,15 +296,15 @@ paths:
     put:
       description: Genome assemblies
       parameters:
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -319,33 +319,6 @@ paths:
     get:
       description: Genotyping schemes
       parameters:
-        - description: "Field to order by. Default: barcode"
-          in: query
-          name: orderby
-          required: false
-          schema:
-            default: barcode
-            type: string
-        - description: ""
-          in: query
-          name: scheme_name
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: created
-          required: false
-          schema:
-            format: date-time
-            type: string
-        - description: ""
-          in: query
-          name: lastmodified
-          required: false
-          schema:
-            format: date-time
-            type: string
         - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
           explode: true
           in: query
@@ -355,6 +328,21 @@ paths:
             items:
               type: string
             type: array
+        - description: "Field to order by. Default: barcode"
+          in: query
+          name: orderby
+          required: false
+          schema:
+            default: barcode
+            type: string
+        - description: Cursor position in results
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
         - description: ""
           in: query
           name: label
@@ -372,11 +360,25 @@ paths:
             type: array
         - description: ""
           in: query
-          name: version
+          name: created
           required: false
           schema:
-            format: int32
-            type: integer
+            format: date-time
+            type: string
+        - description: ""
+          in: query
+          name: lastmodified
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: "Order of search results: asc or desc"
+          in: query
+          name: sortorder
+          required: false
+          schema:
+            default: asc
+            type: string
         - description: Number of results per page
           in: query
           name: limit
@@ -385,19 +387,17 @@ paths:
             default: 50
             format: int32
             type: integer
-        - description: "Order of search results: asc or desc"
+        - description: ""
           in: query
-          name: sortorder
+          name: scheme_name
           required: false
           schema:
-            default: asc
             type: string
-        - description: Cursor position in results
+        - description: ""
           in: query
-          name: offset
+          name: version
           required: false
           schema:
-            default: 0
             format: int32
             type: integer
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
@@ -417,15 +417,15 @@ paths:
     get:
       description: Genotyping schemes
       parameters:
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -441,15 +441,15 @@ paths:
     post:
       description: Genotyping schemes
       parameters:
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -465,15 +465,15 @@ paths:
     put:
       description: Genotyping schemes
       parameters:
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -490,22 +490,10 @@ paths:
       parameters:
         - description: ""
           in: query
-          name: comment
+          name: continent
           required: false
           schema:
             type: string
-        - description: ""
-          in: query
-          name: secondary_sample_accession
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: my_strains
-          required: false
-          schema:
-            type: boolean
         - description: Cursor position in results
           in: query
           name: offset
@@ -516,9 +504,42 @@ paths:
             type: integer
         - description: ""
           in: query
-          name: serotype
+          name: sample_accession
           required: false
           schema:
+            type: string
+        - description: ""
+          in: query
+          name: latitude
+          required: false
+          schema:
+            format: float
+            type: number
+        - description: ""
+          in: query
+          name: collection_month
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: strain_name
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: lab_contact
+          required: false
+          schema:
+            type: string
+        - description: "Order of search results: asc or desc"
+          in: query
+          name: sortorder
+          required: false
+          schema:
+            default: asc
             type: string
         - description: ""
           in: query
@@ -527,9 +548,42 @@ paths:
           schema:
             format: int32
             type: integer
+        - description: Number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int32
+            type: integer
         - description: ""
           in: query
-          name: county
+          name: serotype
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: region
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: country
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: collection_date
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: custom_fields
           required: false
           schema:
             type: string
@@ -544,64 +598,20 @@ paths:
             type: array
         - description: ""
           in: query
-          name: postcode
+          name: source_niche
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: lab_contact
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: substrains
-          required: false
-          schema:
-            type: boolean
-        - description: ""
-          in: query
-          name: custom_fields
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: city
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: strain_name
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: collection_date
+          name: collection_year
           required: false
           schema:
             format: int32
             type: integer
         - description: ""
           in: query
-          name: collection_month
-          required: false
-          schema:
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: reldate
-          required: false
-          schema:
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: continent
+          name: secondary_sample_accession
           required: false
           schema:
             type: string
@@ -613,6 +623,12 @@ paths:
             type: string
         - description: ""
           in: query
+          name: substrains
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          in: query
           name: version
           required: false
           schema:
@@ -620,52 +636,10 @@ paths:
             type: integer
         - description: ""
           in: query
-          name: latitude
-          required: false
-          schema:
-            format: float
-            type: number
-        - description: ""
-          in: query
-          name: email
+          name: source_type
           required: false
           schema:
             type: string
-        - description: ""
-          in: query
-          name: source_niche
-          required: false
-          schema:
-            type: string
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
-          explode: true
-          in: query
-          name: barcode
-          required: false
-          schema:
-            items:
-              type: string
-            type: array
-        - description: ""
-          in: query
-          name: uberstrain
-          required: false
-          schema:
-            type: string
-        - description: "Order of search results: asc or desc"
-          in: query
-          name: sortorder
-          required: false
-          schema:
-            default: asc
-            type: string
-        - description: ""
-          in: query
-          name: collection_year
-          required: false
-          schema:
-            format: int32
-            type: integer
         - description: "Field to order by. Default: strain barcode"
           in: query
           name: orderby
@@ -674,25 +648,37 @@ paths:
             type: string
         - description: ""
           in: query
-          name: assembly_status
+          name: my_strains
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          in: query
+          name: collection_time
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: source_type
+          name: county
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: country
+          name: uberstrain
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: region
+          name: top_species
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: comment
           required: false
           schema:
             type: string
@@ -705,27 +691,41 @@ paths:
             type: number
         - description: ""
           in: query
-          name: sample_accession
+          name: reldate
           required: false
           schema:
-            type: string
-        - description: Number of results per page
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 50
             format: int32
             type: integer
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_AS e.g. SAL_AA0001AA_AS
+          explode: true
+          in: query
+          name: barcode
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
         - description: ""
           in: query
-          name: top_species
+          name: postcode
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: collection_time
+          name: email
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: assembly_status
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: city
           required: false
           schema:
             type: string
@@ -748,16 +748,38 @@ paths:
       parameters:
         - description: ""
           in: query
-          name: comment
+          name: continent
+          required: false
+          schema:
+            type: string
+        - description: Cursor position in results
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: sample_accession
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: secondary_sample_accession
+          name: latitude
           required: false
           schema:
-            type: string
+            format: float
+            type: number
+        - description: ""
+          in: query
+          name: collection_month
+          required: false
+          schema:
+            format: int32
+            type: integer
         - description: ""
           in: query
           name: antigenic_formulas
@@ -766,34 +788,7 @@ paths:
             type: string
         - description: ""
           in: query
-          name: my_strains
-          required: false
-          schema:
-            type: boolean
-        - description: ""
-          in: query
-          name: serotype
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: county
-          required: false
-          schema:
-            type: string
-        - description: ""
-          explode: true
-          in: query
-          name: only_fields
-          required: false
-          schema:
-            items:
-              type: string
-            type: array
-        - description: ""
-          in: query
-          name: postcode
+          name: strain_name
           required: false
           schema:
             type: string
@@ -803,21 +798,36 @@ paths:
           required: false
           schema:
             type: string
-        - description: ""
+        - description: "Order of search results: asc or desc"
           in: query
-          name: substrains
+          name: sortorder
           required: false
           schema:
-            type: boolean
+            default: asc
+            type: string
+        - description: Number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int32
+            type: integer
         - description: ""
           in: query
-          name: city
+          name: serotype
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: strain_name
+          name: region
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: country
           required: false
           schema:
             type: string
@@ -830,21 +840,35 @@ paths:
             type: integer
         - description: ""
           in: query
-          name: collection_month
+          name: return_all
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          explode: true
+          in: query
+          name: only_fields
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: ""
+          in: query
+          name: source_niche
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: collection_year
           required: false
           schema:
             format: int32
             type: integer
         - description: ""
           in: query
-          name: reldate
-          required: false
-          schema:
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: continent
+          name: secondary_sample_accession
           required: false
           schema:
             type: string
@@ -856,6 +880,12 @@ paths:
             type: string
         - description: ""
           in: query
+          name: substrains
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          in: query
           name: version
           required: false
           schema:
@@ -863,20 +893,64 @@ paths:
             type: integer
         - description: ""
           in: query
-          name: latitude
+          name: source_type
+          required: false
+          schema:
+            type: string
+        - description: "Field to order by. Default: barcode"
+          in: query
+          name: orderby
+          required: false
+          schema:
+            default: barcode
+            type: string
+        - description: ""
+          in: query
+          name: my_strains
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          in: query
+          name: collection_time
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: county
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: uberstrain
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: comment
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: longitude
           required: false
           schema:
             format: float
             type: number
         - description: ""
           in: query
-          name: assembly_barcode
+          name: reldate
           required: false
           schema:
-            type: string
+            format: int32
+            type: integer
         - description: ""
           in: query
-          name: source_niche
+          name: assembly_barcode
           required: false
           schema:
             type: string
@@ -891,87 +965,13 @@ paths:
             type: array
         - description: ""
           in: query
-          name: uberstrain
-          required: false
-          schema:
-            type: string
-        - description: "Order of search results: asc or desc"
-          in: query
-          name: sortorder
-          required: false
-          schema:
-            default: asc
-            type: string
-        - description: Cursor position in results
-          in: query
-          name: offset
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: collection_year
-          required: false
-          schema:
-            format: int32
-            type: integer
-        - description: "Field to order by. Default: barcode"
-          in: query
-          name: orderby
-          required: false
-          schema:
-            default: barcode
-            type: string
-        - description: ""
-          in: query
-          name: return_all
-          required: false
-          schema:
-            type: boolean
-        - description: ""
-          in: query
-          name: source_type
+          name: postcode
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: country
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: region
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: longitude
-          required: false
-          schema:
-            format: float
-            type: number
-        - description: ""
-          in: query
-          name: sample_accession
-          required: false
-          schema:
-            type: string
-        - description: Number of results per page
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 50
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: collection_time
+          name: city
           required: false
           schema:
             type: string
@@ -992,15 +992,15 @@ paths:
     get:
       description: Strain metadata
       parameters:
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -1016,15 +1016,15 @@ paths:
     post:
       description: Strain metadata
       parameters:
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -1040,15 +1040,15 @@ paths:
     put:
       description: Strain metadata
       parameters:
-        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -1065,16 +1065,38 @@ paths:
       parameters:
         - description: ""
           in: query
-          name: comment
+          name: continent
+          required: false
+          schema:
+            type: string
+        - description: Cursor position in results
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: sample_accession
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: secondary_sample_accession
+          name: latitude
           required: false
           schema:
-            type: string
+            format: float
+            type: number
+        - description: ""
+          in: query
+          name: collection_month
+          required: false
+          schema:
+            format: int32
+            type: integer
         - description: ""
           in: query
           name: antigenic_formulas
@@ -1083,34 +1105,7 @@ paths:
             type: string
         - description: ""
           in: query
-          name: my_strains
-          required: false
-          schema:
-            type: boolean
-        - description: ""
-          in: query
-          name: serotype
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: county
-          required: false
-          schema:
-            type: string
-        - description: ""
-          explode: true
-          in: query
-          name: only_fields
-          required: false
-          schema:
-            items:
-              type: string
-            type: array
-        - description: ""
-          in: query
-          name: postcode
+          name: strain_name
           required: false
           schema:
             type: string
@@ -1120,21 +1115,36 @@ paths:
           required: false
           schema:
             type: string
-        - description: ""
+        - description: "Order of search results: asc or desc"
           in: query
-          name: substrains
+          name: sortorder
           required: false
           schema:
-            type: boolean
+            default: asc
+            type: string
+        - description: Number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int32
+            type: integer
         - description: ""
           in: query
-          name: city
+          name: serotype
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: strain_name
+          name: region
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: country
           required: false
           schema:
             type: string
@@ -1147,21 +1157,35 @@ paths:
             type: integer
         - description: ""
           in: query
-          name: collection_month
+          name: return_all
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          explode: true
+          in: query
+          name: only_fields
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: ""
+          in: query
+          name: source_niche
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: collection_year
           required: false
           schema:
             format: int32
             type: integer
         - description: ""
           in: query
-          name: reldate
-          required: false
-          schema:
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: continent
+          name: secondary_sample_accession
           required: false
           schema:
             type: string
@@ -1173,6 +1197,12 @@ paths:
             type: string
         - description: ""
           in: query
+          name: substrains
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          in: query
           name: version
           required: false
           schema:
@@ -1180,20 +1210,64 @@ paths:
             type: integer
         - description: ""
           in: query
-          name: latitude
+          name: source_type
+          required: false
+          schema:
+            type: string
+        - description: "Field to order by. Default: barcode"
+          in: query
+          name: orderby
+          required: false
+          schema:
+            default: barcode
+            type: string
+        - description: ""
+          in: query
+          name: my_strains
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          in: query
+          name: collection_time
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: county
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: uberstrain
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: comment
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: longitude
           required: false
           schema:
             format: float
             type: number
         - description: ""
           in: query
-          name: assembly_barcode
+          name: reldate
           required: false
           schema:
-            type: string
+            format: int32
+            type: integer
         - description: ""
           in: query
-          name: source_niche
+          name: assembly_barcode
           required: false
           schema:
             type: string
@@ -1208,87 +1282,13 @@ paths:
             type: array
         - description: ""
           in: query
-          name: uberstrain
-          required: false
-          schema:
-            type: string
-        - description: "Order of search results: asc or desc"
-          in: query
-          name: sortorder
-          required: false
-          schema:
-            default: asc
-            type: string
-        - description: Cursor position in results
-          in: query
-          name: offset
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: collection_year
-          required: false
-          schema:
-            format: int32
-            type: integer
-        - description: "Field to order by. Default: barcode"
-          in: query
-          name: orderby
-          required: false
-          schema:
-            default: barcode
-            type: string
-        - description: ""
-          in: query
-          name: return_all
-          required: false
-          schema:
-            type: boolean
-        - description: ""
-          in: query
-          name: source_type
+          name: postcode
           required: false
           schema:
             type: string
         - description: ""
           in: query
-          name: country
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: region
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: longitude
-          required: false
-          schema:
-            format: float
-            type: number
-        - description: ""
-          in: query
-          name: sample_accession
-          required: false
-          schema:
-            type: string
-        - description: Number of results per page
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 50
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: collection_time
+          name: city
           required: false
           schema:
             type: string
@@ -1309,13 +1309,6 @@ paths:
     get:
       description: Traces (sequence-reads) metadata
       parameters:
-        - description: "Field to order by. Default: barcode"
-          in: query
-          name: orderby
-          required: false
-          schema:
-            default: barcode
-            type: string
         - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
           explode: true
           in: query
@@ -1325,6 +1318,21 @@ paths:
             items:
               type: string
             type: array
+        - description: "Field to order by. Default: barcode"
+          in: query
+          name: orderby
+          required: false
+          schema:
+            default: barcode
+            type: string
+        - description: Cursor position in results
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
         - description: ""
           explode: true
           in: query
@@ -1334,14 +1342,6 @@ paths:
             items:
               type: string
             type: array
-        - description: Number of results per page
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 50
-            format: int32
-            type: integer
         - description: "Order of search results: asc or desc"
           in: query
           name: sortorder
@@ -1349,12 +1349,12 @@ paths:
           schema:
             default: asc
             type: string
-        - description: Cursor position in results
+        - description: Number of results per page
           in: query
-          name: offset
+          name: limit
           required: false
           schema:
-            default: 0
+            default: 50
             format: int32
             type: integer
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
@@ -1374,15 +1374,15 @@ paths:
     get:
       description: Traces (sequence-reads) metadata
       parameters:
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -1398,15 +1398,15 @@ paths:
     post:
       description: Traces (sequence-reads) metadata
       parameters:
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -1422,15 +1422,15 @@ paths:
     put:
       description: Traces (sequence-reads) metadata
       parameters:
-        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
-          in: path
-          name: barcode
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: Unique barcode for Traces records, <database prefix>_<ID code>_TR e.g. SAL_AA0001AA_TR
+          in: path
+          name: barcode
           required: true
           schema:
             type: string
@@ -1445,18 +1445,6 @@ paths:
     get:
       description: "Alleles  data "
       parameters:
-        - description: ""
-          in: query
-          name: allele_id
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: seq
-          required: false
-          schema:
-            type: string
         - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
           explode: true
           in: query
@@ -1468,15 +1456,22 @@ paths:
             type: array
         - description: ""
           in: query
-          name: reldate
+          name: locus
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: offset
           required: false
           schema:
+            default: 0
             format: int32
             type: integer
         - description: ""
           in: query
-          name: locus
-          required: true
+          name: allele_id
+          required: false
           schema:
             type: string
         - description: ""
@@ -1490,29 +1485,34 @@ paths:
             type: array
         - description: ""
           in: query
+          name: seq
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: reldate
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: query
           name: limit
           required: false
           schema:
             default: 50
             format: int32
             type: integer
-        - description: ""
-          in: query
-          name: offset
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: ""
-          in: path
-          name: scheme
-          required: true
-          schema:
-            type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: path
+          name: scheme
           required: true
           schema:
             type: string
@@ -1545,6 +1545,21 @@ paths:
           schema:
             type: string
         - description: ""
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: create_time
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: ""
           explode: true
           in: query
           name: only_fields
@@ -1555,13 +1570,6 @@ paths:
             type: array
         - description: ""
           in: query
-          name: create_time
-          required: false
-          schema:
-            format: date-time
-            type: string
-        - description: ""
-          in: query
           name: limit
           required: false
           schema:
@@ -1570,27 +1578,19 @@ paths:
             type: integer
         - description: ""
           in: query
-          name: offset
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: ""
-          in: query
           name: scheme
           required: false
-          schema:
-            type: string
-        - description: ""
-          in: path
-          name: scheme
-          required: true
           schema:
             type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: path
+          name: scheme
           required: true
           schema:
             type: string
@@ -1607,24 +1607,6 @@ paths:
     get:
       description: ST profile data
       parameters:
-        - description: ""
-          in: query
-          name: st_id
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: scheme
-          required: false
-          schema:
-            type: string
-        - description: ""
-          in: query
-          name: show_alleles
-          required: false
-          schema:
-            type: boolean
         - description: Unique barcode for Strain records, <database prefix>_<ID code> e.g. SAL_AA0001AA
           explode: true
           in: query
@@ -1634,6 +1616,26 @@ paths:
             items:
               type: string
             type: array
+        - description: ""
+          in: query
+          name: st_id
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: show_alleles
+          required: false
+          schema:
+            type: boolean
         - description: ""
           explode: true
           in: query
@@ -1645,6 +1647,13 @@ paths:
             type: array
         - description: ""
           in: query
+          name: reldate
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: query
           name: limit
           required: false
           schema:
@@ -1653,28 +1662,19 @@ paths:
             type: integer
         - description: ""
           in: query
-          name: reldate
-          required: false
-          schema:
-            format: int32
-            type: integer
-        - description: ""
-          in: query
-          name: offset
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: ""
-          in: path
           name: scheme
-          required: true
+          required: false
           schema:
             type: string
         - description: Species database name (senterica, ecoli, yersinia, mcatarrhalis) for Salmonella, Escherichia, Yersinia, Moraxella respectively
           in: path
           name: database
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: path
+          name: scheme
           required: true
           schema:
             type: string

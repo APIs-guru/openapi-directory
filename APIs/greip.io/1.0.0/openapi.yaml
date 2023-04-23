@@ -9,7 +9,7 @@ info:
     email: info@greip.io
     name: Greip Support
     url: https://greip.io/contact
-  description: This documentation shows how to use Greip API, By highlighting the API methods, options and some other features that allow you to get the most of this API.
+  description: This documentation shows how to use Greip API, by highlighting the API methods, options and some other features that allow you to get the most of this API.
   termsOfService: https://greip.io/terms
   title: Greip API
   version: 1.0.0
@@ -21,9 +21,133 @@ info:
       version: "3.0"
   x-providerName: greip.io
 externalDocs:
-  description: Find more info here
+  description: API Documentaion
   url: https://docs.greip.io
 paths:
+  /ASNLookup:
+    get:
+      description: "ASNLookup endpoint: This method helps you lookup any AS Number. It returns the type, organisation details, routes, etc."
+      externalDocs:
+        description: Greip API - ASN Lookup
+        url: https://docs.greip.io/methods/asn-lookup-api
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The AS Number you want to lookup
+          in: query
+          name: asn
+          required: true
+          schema:
+            example: "15169"
+            type: string
+        - description: Set this to true if you want to list all routes of both IPv4 and IPv6.
+          examples:
+            "0":
+              description: Don't return the routes.
+              summary: NO
+              value: no
+            "1":
+              description: Return the routes.
+              summary: YES
+              value: yes
+          in: query
+          name: isList
+          required: false
+          schema:
+            example: no
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: JSON
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /BINLookup:
+    get:
+      description: This method helps you validate any BIN/IIN number and retrieve the full details related to the bank, brand, type, scheme, country, etc.
+      externalDocs:
+        description: Greip API - BIN/IIN Validation
+        url: https://docs.greip.io/methods/bin-iin-validation
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The BIN/IIN you want to lookup/validate.
+          in: query
+          name: bin
+          required: true
+          schema:
+            example: "489022"
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: JSON
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
   /BulkLookup:
     get:
       description: "BulkLookup endpoint: Returns the geolocation data of multiple IP Addresses."
@@ -260,7 +384,7 @@ paths:
           description: Internal Server Error
   /GeoIP:
     get:
-      description: "GeoIP endpoint: Returns the geolocation data of the visitor."
+      description: Returns the geolocation data of the visitor.
       externalDocs:
         description: Greip API - Retrieve Visitor Info
         url: https://docs.greip.io/methods/retrieve-visitor-info
@@ -363,7 +487,7 @@ paths:
           description: Internal Server Error
   /IPLookup:
     get:
-      description: "IPLookup endpoint: Returns the geolocation data of a specific IP Address."
+      description: Returns the geolocation data of a specific IP Address.
       externalDocs:
         description: Greip API - Lookup IP Address
         url: https://docs.greip.io/methods/lookup-ip-address
@@ -529,6 +653,121 @@ paths:
           required: false
           schema:
             example: no
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: JSON
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /validateEmail:
+    get:
+      description: This method can be used as an extra-layer of your system for validating email addresses.
+      externalDocs:
+        description: Greip API - Email Validation
+        url: https://docs.greip.io/methods/data-validation/email-validation
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The Email Address you want to validate.
+          in: query
+          name: email
+          required: true
+          schema:
+            example: name@domain.com
+            type: string
+        - description: Sets the format of the API response. JSON is the default format.
+          examples:
+            "0":
+              summary: JSON Response
+              value: JSON
+            "1":
+              summary: XML Response
+              value: XML
+            "2":
+              summary: CSV Response
+              value: CSV
+            "3":
+              summary: Newline Response
+              value: Newline
+          in: query
+          name: format
+          required: false
+          schema:
+            example: JSON
+            externalDocs:
+              description: Greip API - Response Format
+              url: https://docs.greip.io/options/response-format
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /validatePhone:
+    get:
+      description: This method can be used as an extra-layer of your system for validating phone numbers.
+      externalDocs:
+        description: Greip API - Phone Number Validation
+        url: https://docs.greip.io/methods/data-validation/phone-number-validation
+      parameters:
+        - description: Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first.
+          in: query
+          name: key
+          required: true
+          schema:
+            example: 2517bc4fc3f790e8f09bc808bb63b899
+            externalDocs:
+              description: Greip API - Authentication
+              url: https://docs.greip.io/get-started/authentication
+            type: string
+        - description: The Phone Number you want to validate.
+          in: query
+          name: phone
+          required: true
+          schema:
+            example: "1234567890"
+            type: string
+        - description: The ISO 3166-1 alpha-2 format of the country code of the phone number.
+          in: query
+          name: countryCode
+          required: true
+          schema:
+            example: US
             type: string
         - description: Sets the format of the API response. JSON is the default format.
           examples:

@@ -147,25 +147,29 @@ paths:
               description: ISO 3166 two-character code for United Kingdom
               summary: United Kingdom
               value: GB
+            UnitedStatesOfAmerica:
+              description: ISO 3166 two-character code for United States of America
+              summary: United States of America
+              value: US
           in: query
           name: country
           schema:
             type: string
         - examples:
-            2022-12-03:
+            2023-01-21:
               description: ISO 8601 format date
-              summary: 2022-12-03
-              value: 2022-12-03
+              summary: 2023-01-21
+              value: 2023-01-21
           in: query
           name: date_from
           schema:
             format: date
             type: string
         - examples:
-            2023-03-03:
+            2023-04-21:
               description: ISO 8601 format date
-              summary: 2023-03-03
-              value: 2023-03-03
+              summary: 2023-04-21
+              value: 2023-04-21
           in: query
           name: date_to
           schema:
@@ -180,7 +184,45 @@ paths:
             type: string
       responses:
         "200":
-          description: No response body
+          content:
+            application/json:
+              examples:
+                RetrieveAccountTransactions:
+                  description: Sample account transactions
+                  summary: Account transactions
+                  value:
+                    transactions:
+                      booked:
+                        - bankTransactionCode: string
+                          bookingDate: date
+                          debtorAccount:
+                            iban: string
+                          debtorName: string
+                          remittanceInformationUnstructured: string
+                          transactionAmount:
+                            amount: "328.18"
+                            currency: string
+                          transactionId: string
+                          valueDate: date
+                        - bankTransactionCode: string
+                          bookingDate: date
+                          remittanceInformationUnstructured: string
+                          transactionAmount:
+                            amount: "947.26"
+                            currency: string
+                          transactionId: string
+                          valueDate: date
+                      pending:
+                        - remittanceInformationUnstructured: string
+                          transactionAmount:
+                            amount: float
+                            currency: string
+                          valueDate: date
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Retrieve account transactions
         "400":
           content:
             application/json:
@@ -189,7 +231,7 @@ paths:
                   description: Incorrect date range in query parameters
                   summary: Date range error
                   value:
-                    detail: Starting date '2023-03-13' is greater than end date '2023-03-03'. When specifying date range, starting date must precede the end date
+                    detail: Starting date '2023-05-01' is greater than end date '2023-04-21'. When specifying date range, starting date must precede the end date
                     status_code: 400
                     summary: Incorrect date range
                 InvalidID:
@@ -201,8 +243,9 @@ paths:
                     summary: Invalid Account ID
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Date range error
         "401":
           content:
             application/json:
@@ -238,10 +281,19 @@ paths:
                     detail: Token is invalid or expired
                     status_code: 401
                     summary: Invalid token
+                NoAccountsConnected:
+                  description: Couldn't update account transactions
+                  summary: No Accounts Connected
+                  value:
+                    detail: No Accounts available after authorization.
+                    status_code: 401
+                    summary: Couldn't update account transactions
+                    type: NoAccountsConnected
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Failed Authentication
         "403":
           content:
             application/json:
@@ -277,8 +329,9 @@ paths:
                     summary: IP address access denied
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Account Access Forbidden
         "404":
           content:
             application/json:
@@ -299,8 +352,9 @@ paths:
                     summary: Not found.
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Account not found error
         "409":
           content:
             application/json:
@@ -310,10 +364,10 @@ paths:
                   summary: Account state error
                   value:
                     aspsp_identifier: string
-                    created: 2023-03-03 17:05:05.270281+00:00
+                    created: 2023-04-21 17:10:08.247029+00:00
                     iban: string
                     id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                    last_accessed: 2023-03-03 17:05:05.270299+00:00
+                    last_accessed: 2023-04-21 17:10:08.247042+00:00
                     status: ERROR
                 AccountSuspendedError:
                   description: Account or its requisition suspended
@@ -324,12 +378,20 @@ paths:
                     summary: Account suspended
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Account state error
         "429":
           content:
             application/json:
               examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
                 RateLimitError:
                   description: Couldn't update account transactions
                   summary: Rate Limit Error
@@ -340,8 +402,9 @@ paths:
                     type: RateLimitError
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Rate Limit Error
         "500":
           content:
             application/json:
@@ -356,8 +419,9 @@ paths:
                     type: UnknownRequestError
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Unknown Request Error
         "503":
           content:
             application/json:
@@ -380,8 +444,9 @@ paths:
                     type: ServiceError
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Connection Error
       tags:
         - premium
   "/api/v2/accounts/{id}/":
@@ -406,7 +471,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AccountV2"
+                $ref: "#/components/schemas/Account"
           description: sample account metadata
         "401":
           content:
@@ -421,8 +486,9 @@ paths:
                     summary: Invalid token
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: Invalid token
         "403":
           content:
             application/json:
@@ -436,8 +502,9 @@ paths:
                     summary: IP address access denied
               schema:
                 additionalProperties: {}
+                description: Unspecified response body
                 type: object
-          description: ""
+          description: IP Access denied
         "404":
           content:
             application/json:
@@ -460,7 +527,23 @@ paths:
                 additionalProperties: {}
                 description: Unspecified response body
                 type: object
-          description: Account not found
+          description: Account not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - accounts
   "/api/v2/accounts/{id}/balances/":
@@ -469,7 +552,7 @@ paths:
         Access account balances.
 
         Balances will be returned in Berlin Group PSD2 format.
-      operationId: accounts_balances_retrieve
+      operationId: retrieve account balances v2
       parameters:
         - in: path
           name: id
@@ -479,6 +562,30 @@ paths:
             format: uuid
             type: string
       responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                RetrieveAccountBalances:
+                  description: Sample account balances
+                  summary: Account balances
+                  value:
+                    balances:
+                      - balanceAmount:
+                          amount: "657.49"
+                          currency: string
+                        balanceType: string
+                        referenceDate: 2021-11-22
+                      - balanceAmount:
+                          amount: "185.67"
+                          currency: string
+                        balanceType: string
+                        referenceDate: 2021-11-19
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Retrieve account balances
         "400":
           content:
             application/json:
@@ -487,7 +594,7 @@ paths:
                   description: Incorrect date range in query parameters
                   summary: Date range error
                   value:
-                    detail: Starting date '2023-03-13' is greater than end date '2023-03-03'. When specifying date range, starting date must precede the end date
+                    detail: Starting date '2023-05-01' is greater than end date '2023-04-21'. When specifying date range, starting date must precede the end date
                     status_code: 400
                     summary: Incorrect date range
                 InvalidID:
@@ -537,6 +644,14 @@ paths:
                     detail: Token is invalid or expired
                     status_code: 401
                     summary: Invalid token
+                NoAccountsConnected:
+                  description: Couldn't update account balances
+                  summary: No Accounts Connected
+                  value:
+                    detail: No Accounts available after authorization.
+                    status_code: 401
+                    summary: Couldn't update account balances
+                    type: NoAccountsConnected
               schema:
                 additionalProperties: {}
                 description: Unspecified response body
@@ -612,10 +727,10 @@ paths:
                   summary: Account state error
                   value:
                     aspsp_identifier: string
-                    created: 2023-03-03 17:05:05.270281+00:00
+                    created: 2023-04-21 17:10:08.247029+00:00
                     iban: string
                     id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                    last_accessed: 2023-03-03 17:05:05.270299+00:00
+                    last_accessed: 2023-04-21 17:10:08.247042+00:00
                     status: ERROR
                 AccountSuspendedError:
                   description: Account or its requisition suspended
@@ -633,6 +748,13 @@ paths:
           content:
             application/json:
               examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
                 RateLimitError:
                   description: Couldn't update account balances
                   summary: Rate Limit Error
@@ -696,7 +818,7 @@ paths:
         Access account details.
 
         Account details will be returned in Berlin Group PSD2 format.
-      operationId: accounts_details_retrieve
+      operationId: retrieve account details v2
       parameters:
         - in: path
           name: id
@@ -706,6 +828,27 @@ paths:
             format: uuid
             type: string
       responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                RetrieveAccountDetails:
+                  description: Sample account details
+                  summary: Sample account details
+                  value:
+                    account:
+                      cashAccountType: string
+                      currency: string
+                      iban: string
+                      name: string
+                      ownerName: string
+                      product: string
+                      resourceId: string
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Retrieve account details
         "400":
           content:
             application/json:
@@ -714,7 +857,7 @@ paths:
                   description: Incorrect date range in query parameters
                   summary: Date range error
                   value:
-                    detail: Starting date '2023-03-13' is greater than end date '2023-03-03'. When specifying date range, starting date must precede the end date
+                    detail: Starting date '2023-05-01' is greater than end date '2023-04-21'. When specifying date range, starting date must precede the end date
                     status_code: 400
                     summary: Incorrect date range
                 InvalidID:
@@ -764,6 +907,14 @@ paths:
                     detail: Token is invalid or expired
                     status_code: 401
                     summary: Invalid token
+                NoAccountsConnected:
+                  description: Couldn't update account details
+                  summary: No Accounts Connected
+                  value:
+                    detail: No Accounts available after authorization.
+                    status_code: 401
+                    summary: Couldn't update account details
+                    type: NoAccountsConnected
               schema:
                 additionalProperties: {}
                 description: Unspecified response body
@@ -839,10 +990,10 @@ paths:
                   summary: Account state error
                   value:
                     aspsp_identifier: string
-                    created: 2023-03-03 17:05:05.270281+00:00
+                    created: 2023-04-21 17:10:08.247029+00:00
                     iban: string
                     id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                    last_accessed: 2023-03-03 17:05:05.270299+00:00
+                    last_accessed: 2023-04-21 17:10:08.247042+00:00
                     status: ERROR
                 AccountSuspendedError:
                   description: Account or its requisition suspended
@@ -860,6 +1011,13 @@ paths:
           content:
             application/json:
               examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
                 RateLimitError:
                   description: Couldn't update account details
                   summary: Rate Limit Error
@@ -923,23 +1081,23 @@ paths:
         Access account transactions.
 
         Transactions will be returned in Berlin Group PSD2 format.
-      operationId: accounts_transactions_retrieve
+      operationId: retrieve account transactions v2_2
       parameters:
         - examples:
-            2022-12-03:
+            2023-01-21:
               description: ISO 8601 format date
-              summary: 2022-12-03
-              value: 2022-12-03
+              summary: 2023-01-21
+              value: 2023-01-21
           in: query
           name: date_from
           schema:
             format: date
             type: string
         - examples:
-            2023-03-03:
+            2023-04-21:
               description: ISO 8601 format date
-              summary: 2023-03-03
-              value: 2023-03-03
+              summary: 2023-04-21
+              value: 2023-04-21
           in: query
           name: date_to
           schema:
@@ -953,6 +1111,46 @@ paths:
             format: uuid
             type: string
       responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                RetrieveAccountTransactions:
+                  description: Sample account transactions
+                  summary: Account transactions
+                  value:
+                    transactions:
+                      booked:
+                        - bankTransactionCode: string
+                          bookingDate: date
+                          debtorAccount:
+                            iban: string
+                          debtorName: string
+                          remittanceInformationUnstructured: string
+                          transactionAmount:
+                            amount: "328.18"
+                            currency: string
+                          transactionId: string
+                          valueDate: date
+                        - bankTransactionCode: string
+                          bookingDate: date
+                          remittanceInformationUnstructured: string
+                          transactionAmount:
+                            amount: "947.26"
+                            currency: string
+                          transactionId: string
+                          valueDate: date
+                      pending:
+                        - remittanceInformationUnstructured: string
+                          transactionAmount:
+                            amount: float
+                            currency: string
+                          valueDate: date
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Retrieve account transactions
         "400":
           content:
             application/json:
@@ -961,7 +1159,7 @@ paths:
                   description: Incorrect date range in query parameters
                   summary: Date range error
                   value:
-                    detail: Starting date '2023-03-13' is greater than end date '2023-03-03'. When specifying date range, starting date must precede the end date
+                    detail: Starting date '2023-05-01' is greater than end date '2023-04-21'. When specifying date range, starting date must precede the end date
                     status_code: 400
                     summary: Incorrect date range
                 InvalidID:
@@ -1011,6 +1209,14 @@ paths:
                     detail: Token is invalid or expired
                     status_code: 401
                     summary: Invalid token
+                NoAccountsConnected:
+                  description: Couldn't update account transactions
+                  summary: No Accounts Connected
+                  value:
+                    detail: No Accounts available after authorization.
+                    status_code: 401
+                    summary: Couldn't update account transactions
+                    type: NoAccountsConnected
               schema:
                 additionalProperties: {}
                 description: Unspecified response body
@@ -1086,10 +1292,10 @@ paths:
                   summary: Account state error
                   value:
                     aspsp_identifier: string
-                    created: 2023-03-03 17:05:05.270281+00:00
+                    created: 2023-04-21 17:10:08.247029+00:00
                     iban: string
                     id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                    last_accessed: 2023-03-03 17:05:05.270299+00:00
+                    last_accessed: 2023-04-21 17:10:08.247042+00:00
                     status: ERROR
                 AccountSuspendedError:
                   description: Account or its requisition suspended
@@ -1107,6 +1313,13 @@ paths:
           content:
             application/json:
               examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
                 RateLimitError:
                   description: Couldn't update account transactions
                   summary: Rate Limit Error
@@ -1166,7 +1379,7 @@ paths:
         - accounts
   /api/v2/agreements/enduser/:
     get:
-      description: Retrieve all end user agreements belonging to the company
+      description: API endpoints related to end-user agreements.
       operationId: retrieve all EUAs for an end user v2
       parameters:
         - description: Number of results to return per page.
@@ -1240,10 +1453,26 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - agreements
     post:
-      description: Create an end user agreement
+      description: API endpoints related to end-user agreements.
       operationId: create EUA v2
       requestBody:
         content:
@@ -1349,6 +1578,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: IP Access denied
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - agreements
   "/api/v2/agreements/enduser/{id}/":
@@ -1435,6 +1680,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - agreements
     get:
@@ -1519,6 +1780,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - agreements
   "/api/v2/agreements/enduser/{id}/accept/":
@@ -1551,7 +1828,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/EndUserAgreement"
-          description: EUA
+          description: Accept end user agreement
         "400":
           content:
             application/json:
@@ -1639,6 +1916,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: EUA accepted
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - agreements
   /api/v2/institutions/:
@@ -1772,6 +2065,10 @@ paths:
               description: ISO 3166 two-character code for United Kingdom
               summary: United Kingdom
               value: GB
+            UnitedStatesOfAmerica:
+              description: ISO 3166 two-character code for United States of America
+              summary: United States of America
+              value: US
           in: query
           name: country
           schema:
@@ -1795,50 +2092,69 @@ paths:
                   description: some of supported Institutions
                   summary: Supported Institutions
                   value:
-                    - bic: NTSBDEB1
-                      countries:
-                        - GB
-                        - NO
-                        - SE
-                        - FI
-                        - DK
-                        - EE
-                        - LV
-                        - LT
-                        - NL
-                        - CZ
-                        - ES
-                        - PL
-                        - BE
-                        - DE
-                        - AT
-                        - BG
-                        - HR
-                        - CY
-                        - FR
-                        - GR
-                        - HU
-                        - IS
-                        - IE
-                        - IT
-                        - LI
-                        - LU
-                        - MT
-                        - PT
-                        - RO
-                        - SK
-                        - SI
-                      id: N26_NTSBDEB1
-                      logo: https://cdn.nordigen.com/ais/N26_SANDBOX_NTSBDEB1.png
-                      name: N26 Bank
-                      transaction_total_days: "90"
-                    - bic: FTSBDEFAXXX
-                      countries:
-                        - DE
-                      id: ABNAMRO_FTSBDEFAXXX
-                      logo: https://cdn.nordigen.com/ais/ABNAMRO_FTSBDEFAXXX.png
-                      name: ABN AMRO Bank Commercial
-                      transaction_total_days: "558"
+                    - - bic: NTSBDEB1
+                        countries:
+                          - GB
+                          - NO
+                          - SE
+                          - FI
+                          - DK
+                          - EE
+                          - LV
+                          - LT
+                          - NL
+                          - CZ
+                          - ES
+                          - PL
+                          - BE
+                          - DE
+                          - AT
+                          - BG
+                          - HR
+                          - CY
+                          - FR
+                          - GR
+                          - HU
+                          - IS
+                          - IE
+                          - IT
+                          - LI
+                          - LU
+                          - MT
+                          - PT
+                          - RO
+                          - SK
+                          - SI
+                        id: N26_NTSBDEB1
+                        logo: https://cdn.nordigen.com/ais/N26_SANDBOX_NTSBDEB1.png
+                        name: N26 Bank
+                        supported_features:
+                          - account_selection
+                          - business_accounts
+                          - card_accounts
+                          - payments
+                          - private_accounts
+                        supported_payments:
+                          single-payment:
+                            - SCT
+                            - ISCT
+                        transaction_total_days: "90"
+                      - bic: FTSBDEFAXXX
+                        countries:
+                          - DE
+                        id: ABNAMRO_FTSBDEFAXXX
+                        logo: https://cdn.nordigen.com/ais/ABNAMRO_FTSBDEFAXXX.png
+                        name: ABN AMRO Bank Commercial
+                        supported_features:
+                          - business_accounts
+                          - card_accounts
+                          - payments
+                          - pending_transactions
+                          - private_accounts
+                        supported_payments:
+                          single-payment:
+                            - SCT
+                        transaction_total_days: "558"
               schema:
                 items:
                   $ref: "#/components/schemas/Integration"
@@ -1852,8 +2168,7 @@ paths:
                   description: Provided country is not valid
                   summary: Not a valid choice
                   value:
-                    country:
-                      - GBA is not a valid choice.
+                    detail: GBA is not a valid choice.
                     status_code: 400
                     summary: Invalid country choice.
                 UnknownFields:
@@ -1916,6 +2231,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - institutions
   "/api/v2/institutions/{id}/":
@@ -1948,6 +2279,15 @@ paths:
                     id: ABNAMRO_FTSBDEFAXXX
                     logo: https://cdn.nordigen.com/ais/ABNAMRO_FTSBDEFAXXX.png
                     name: ABN AMRO Bank Commercial
+                    supported_features:
+                      - business_accounts
+                      - card_accounts
+                      - payments
+                      - pending_transactions
+                      - private_accounts
+                    supported_payments:
+                      single-payment:
+                        - SCT
                     transaction_total_days: "558"
                 N26Bank:
                   description: N26 Bank
@@ -1989,9 +2329,19 @@ paths:
                     id: N26_NTSBDEB1
                     logo: https://cdn.nordigen.com/ais/N26_SANDBOX_NTSBDEB1.png
                     name: N26 Bank
+                    supported_features:
+                      - account_selection
+                      - business_accounts
+                      - card_accounts
+                      - payments
+                      - private_accounts
+                    supported_payments:
+                      single-payment:
+                        - SCT
+                        - ISCT
                     transaction_total_days: "90"
               schema:
-                $ref: "#/components/schemas/Integration"
+                $ref: "#/components/schemas/IntegrationRetrieve"
           description: Retrieve institution by id
         "401":
           content:
@@ -2041,6 +2391,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - institutions
   /api/v2/payments/:
@@ -2380,6 +2746,7 @@ paths:
           name: institution_id
           required: true
           schema:
+            pattern: ^\w+$
             type: string
       responses:
         "200":
@@ -2650,6 +3017,42 @@ paths:
           description: Not found error
       tags:
         - payments
+  "/api/v2/payments/{id}/submit/":
+    post:
+      description: |-
+        Initiate the payment on bank's side.
+
+        Complete the payment and return payment details as a response.
+      operationId: payments_submit_create
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: Unique entry ID
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentReadRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PaymentReadRequest"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PaymentReadRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRead"
+          description: ""
+      tags:
+        - payments
   /api/v2/requisitions/:
     get:
       description: Retrieve all requisitions belonging to the company
@@ -2676,7 +3079,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaginatedRequisitionV2List"
+                $ref: "#/components/schemas/PaginatedRequisitionList"
           description: Retrieve all requisitions
         "400":
           content:
@@ -2742,6 +3145,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - requisitions
     post:
@@ -2751,20 +3170,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RequisitionV2Request"
+              $ref: "#/components/schemas/RequisitionRequest"
           application/x-www-form-urlencoded:
             schema:
-              $ref: "#/components/schemas/RequisitionV2Request"
+              $ref: "#/components/schemas/RequisitionRequest"
           multipart/form-data:
             schema:
-              $ref: "#/components/schemas/RequisitionV2Request"
+              $ref: "#/components/schemas/RequisitionRequest"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SpectacularRequisitionV2"
+                $ref: "#/components/schemas/SpectacularRequisition"
           description: Requisition has been successfully created
         "400":
           content:
@@ -2900,6 +3319,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Agreement not found errors
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - requisitions
   "/api/v2/requisitions/{id}/":
@@ -2979,6 +3414,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - requisitions
     get:
@@ -2997,7 +3448,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RequisitionV2"
+                $ref: "#/components/schemas/Requisition"
           description: Get requisition by ID
         "400":
           content:
@@ -3063,6 +3514,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: Not found error
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - requisitions
   /api/v2/token/new/:
@@ -3120,6 +3587,22 @@ paths:
                 description: Unspecified response body
                 type: object
           description: IP Access denied
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - token
   /api/v2/token/refresh/:
@@ -3177,12 +3660,28 @@ paths:
                 description: Unspecified response body
                 type: object
           description: IP Access denied
+        "429":
+          content:
+            application/json:
+              examples:
+                NordigenRateLimitExceeded:
+                  description: Nordigen rate limit exceeded
+                  summary: Nordigen rate limit exceeded
+                  value:
+                    detail: The rate limit for this resource is <times>/<time_period>. Please try again in 9999 seconds
+                    status_code: 429
+                    summary: Rate limit exceeded
+              schema:
+                additionalProperties: {}
+                description: Unspecified response body
+                type: object
+          description: Nordigen rate limit exceeded
       tags:
         - token
 components:
   schemas:
-    AccountV2:
-      description: AccountV2Serializer.
+    Account:
+      description: The representation of a bank account.
       properties:
         created:
           description: The date & time at which the account object was created.
@@ -3219,12 +3718,12 @@ components:
           type: string
         status:
           allOf:
-            - $ref: "#/components/schemas/AccountV2StatusEnum"
+            - $ref: "#/components/schemas/AccountStatusEnum"
           description: The processing status of this account.
           readOnly: true
           title: Account Status
       type: object
-    AccountV2StatusEnum:
+    AccountStatusEnum:
       enum:
         - DISCOVERED
         - PROCESSING
@@ -3233,6 +3732,39 @@ components:
         - SUSPENDED
       type: string
     AddressCountryEnum:
+      description: |-
+        * `AT` - Austria
+        * `BE` - Belgium
+        * `BG` - Bulgaria
+        * `HR` - Croatia
+        * `CY` - Cyprus
+        * `CZ` - Czechia
+        * `DK` - Denmark
+        * `EE` - Estonia
+        * `FI` - Finland
+        * `FR` - France
+        * `DE` - Germany
+        * `GR` - Greece
+        * `HU` - Hungary
+        * `IS` - Iceland
+        * `IE` - Ireland
+        * `IT` - Italy
+        * `LV` - Latvia
+        * `LI` - Liechtenstein
+        * `LT` - Lithuania
+        * `LU` - Luxembourg
+        * `MT` - Malta
+        * `NL` - Netherlands
+        * `NO` - Norway
+        * `PL` - Poland
+        * `PT` - Portugal
+        * `RO` - Romania
+        * `SK` - Slovakia
+        * `SI` - Slovenia
+        * `ES` - Spain
+        * `SE` - Sweden
+        * `GB` - United Kingdom
+        * `US` - United States of America
       enum:
         - AT
         - BE
@@ -3265,8 +3797,42 @@ components:
         - ES
         - SE
         - GB
+        - US
       type: string
     CountryEnum:
+      description: |-
+        * `AT` - Austria
+        * `BE` - Belgium
+        * `BG` - Bulgaria
+        * `HR` - Croatia
+        * `CY` - Cyprus
+        * `CZ` - Czechia
+        * `DK` - Denmark
+        * `EE` - Estonia
+        * `FI` - Finland
+        * `FR` - France
+        * `DE` - Germany
+        * `GR` - Greece
+        * `HU` - Hungary
+        * `IS` - Iceland
+        * `IE` - Ireland
+        * `IT` - Italy
+        * `LV` - Latvia
+        * `LI` - Liechtenstein
+        * `LT` - Lithuania
+        * `LU` - Luxembourg
+        * `MT` - Malta
+        * `NL` - Netherlands
+        * `NO` - Norway
+        * `PL` - Poland
+        * `PT` - Portugal
+        * `RO` - Romania
+        * `SK` - Slovakia
+        * `SI` - Slovenia
+        * `ES` - Spain
+        * `SE` - Sweden
+        * `GB` - United Kingdom
+        * `US` - United States of America
       enum:
         - AT
         - BE
@@ -3299,6 +3865,7 @@ components:
         - ES
         - SE
         - GB
+        - US
       type: string
     CreditorAccount:
       description: Creditor account read serializer.
@@ -3328,7 +3895,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/TypeEnum"
           default: IBAN
-          description: Creditor account type
+          description: |-
+            Creditor account type
+
+            * `IBAN` - IBAN
+            * `SCAN` - SortCodeAccountNumber
       required:
         - account
         - currency
@@ -3379,7 +3950,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/TypeEnum"
           default: IBAN
-          description: Creditor account type
+          description: |-
+            Creditor account type
+
+            * `IBAN` - IBAN
+            * `SCAN` - SortCodeAccountNumber
       required:
         - account
         - currency
@@ -3391,41 +3966,53 @@ components:
         account:
           description: Creditor account type identifier
           maxLength: 128
+          minLength: 1
           type: string
         address_country:
           $ref: "#/components/schemas/AddressCountryEnum"
         address_street:
           description: Creditor account address street
           maxLength: 140
+          minLength: 1
           type: string
         agent:
           description: Creditor account BICFI Identifier
           maxLength: 128
+          minLength: 1
           type: string
         agent_name:
           description: Creditor account agent name
           maxLength: 140
+          minLength: 1
           type: string
         currency:
           description: Creditor account currency
           maxLength: 3
+          minLength: 1
           type: string
         institution_id:
           description: an Institution ID for this CreditorAccount
+          minLength: 1
           type: string
         name:
           description: Creditor account name
           maxLength: 70
+          minLength: 1
           type: string
         post_code:
           description: Creditor account address post code
           maxLength: 30
+          minLength: 1
           type: string
         type:
           allOf:
             - $ref: "#/components/schemas/TypeEnum"
           default: IBAN
-          description: Creditor account type
+          description: |-
+            Creditor account type
+
+            * `IBAN` - IBAN
+            * `SCAN` - SortCodeAccountNumber
       required:
         - account
         - currency
@@ -3462,7 +4049,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/TypeEnum"
           default: IBAN
-          description: Debtor account type
+          description: |-
+            Debtor account type
+
+            * `IBAN` - IBAN
+            * `SCAN` - SortCodeAccountNumber
         type_number:
           description: Debtor account type identifier
           maxLength: 128
@@ -3476,41 +4067,52 @@ components:
         account:
           description: Debtor account type identifier
           maxLength: 128
+          minLength: 1
           type: string
         address_country:
           description: Debtor account address country
           maxLength: 2
+          minLength: 1
           type: string
         address_street:
           description: Debtor account address street
           maxLength: 140
+          minLength: 1
           type: string
         currency:
           description: Debtor account currency
           maxLength: 3
+          minLength: 1
           type: string
         name:
           description: Debtor account name
           maxLength: 70
+          minLength: 1
           type: string
         post_code:
           description: Debtor account post code
           maxLength: 30
+          minLength: 1
           type: string
         type:
           allOf:
             - $ref: "#/components/schemas/TypeEnum"
           default: IBAN
-          description: Debtor account type
+          description: |-
+            Debtor account type
+
+            * `IBAN` - IBAN
+            * `SCAN` - SortCodeAccountNumber
         type_number:
           description: Debtor account type identifier
           maxLength: 128
+          minLength: 1
           type: string
       required:
         - name
       type: object
     EndUserAgreement:
-      description: EndUserAgreement.
+      description: Represents an end-user agreement.
       properties:
         accepted:
           description: The date & time at which the end user accepted the agreement.
@@ -3568,7 +4170,7 @@ components:
         - institution_id
       type: object
     EndUserAgreementRequest:
-      description: EndUserAgreement.
+      description: Represents an end-user agreement.
       properties:
         access_scope:
           default:
@@ -3595,6 +4197,7 @@ components:
           type: integer
         institution_id:
           description: an Institution ID for this EUA
+          minLength: 1
           type: string
         max_historical_days:
           default: 90
@@ -3610,9 +4213,11 @@ components:
       description: Represents end-user details.
       properties:
         ip_address:
+          minLength: 1
           title: end user IP address
           type: string
         user_agent:
+          minLength: 1
           title: user agent string for the end user
           type: string
       required:
@@ -3620,11 +4225,24 @@ components:
         - user_agent
       type: object
     ExecutionRuleEnum:
+      description: |-
+        * `following` - following
+        * `preceding` - preceding
       enum:
         - following
         - preceding
       type: string
     FrequencyEnum:
+      description: |-
+        * `Daily` - Daily
+        * `Weekly` - Weekly
+        * `EveryTwoWeeks` - EveryTwoWeeks
+        * `Monthly` - Monthly
+        * `EveryTwoMonths` - EveryTwoMonths
+        * `Quarterly` - Quarterly
+        * `SemiAnnual` - SemiAnnual
+        * `Annual` - Annual
+        * `MonthlyVariable` - MonthlyVariable
       enum:
         - Daily
         - Weekly
@@ -3642,8 +4260,7 @@ components:
         amount:
           description: Instructed amount
           format: decimal
-          minimum: 0.01
-          pattern: ^\d{0,10}(\.\d{0,2})?$
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
           type: string
         currency:
           description: Instructed amount currency
@@ -3659,12 +4276,12 @@ components:
         amount:
           description: Instructed amount
           format: decimal
-          minimum: 0.01
-          pattern: ^\d{0,10}(\.\d{0,2})?$
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
           type: string
         currency:
           description: Instructed amount currency
           maxLength: 3
+          minLength: 1
           type: string
       required:
         - amount
@@ -3694,14 +4311,48 @@ components:
         - logo
         - name
       type: object
+    IntegrationRetrieve:
+      description: IntegrationSerializer for Retrieve endpoint.
+      properties:
+        bic:
+          type: string
+        countries:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        logo:
+          type: string
+        name:
+          type: string
+        supported_features:
+          items: {}
+          type: array
+        supported_payments:
+          additionalProperties: {}
+          type: object
+        transaction_total_days:
+          default: "90"
+          type: string
+      required:
+        - countries
+        - id
+        - logo
+        - name
+        - supported_features
+        - supported_payments
+      type: object
     JWTObtainPairRequest:
       description: Obtain JWT pair.
       properties:
         secret_id:
           description: Secret id from /user-secrets/
+          minLength: 1
           type: string
         secret_key:
           description: Secret key from /user-secrets/
+          minLength: 1
           type: string
       required:
         - secret_id
@@ -3711,6 +4362,7 @@ components:
       description: Refresh access token.
       properties:
         refresh:
+          minLength: 1
           type: string
       required:
         - refresh
@@ -3775,7 +4427,7 @@ components:
             $ref: "#/components/schemas/PaymentRead"
           type: array
       type: object
-    PaginatedRequisitionV2List:
+    PaginatedRequisitionList:
       properties:
         count:
           example: 123
@@ -3792,15 +4444,32 @@ components:
           type: string
         results:
           items:
-            $ref: "#/components/schemas/RequisitionV2"
+            $ref: "#/components/schemas/Requisition"
           type: array
       type: object
     PaymentProductEnum:
+      description: |-
+        * `T2P` - target-2-payments
+        * `SCT` - sepa-credit-transfers
+        * `ISCT` - instant-sepa-credit-transfer
+        * `CBCT` - cross-border-credit-transfers
+        * `BACS` - Back Payment Scheme
+        * `CHAPS` - CHAPS Payment Scheme
+        * `FPS` - Faster Payment Scheme
+        * `SWIFT` - Swift Payment Service
+        * `BT` - Balance Transfer
+        * `MT` - Money Transfer
       enum:
         - T2P
         - SCT
         - ISCT
         - CBCT
+        - BACS
+        - CHAPS
+        - FPS
+        - SWIFT
+        - BT
+        - MT
       type: string
     PaymentRead:
       description: PaymentReadSerializer.
@@ -3809,6 +4478,10 @@ components:
           description: Registered creditor account
           format: uuid
           type: string
+        creditor_object:
+          allOf:
+            - $ref: "#/components/schemas/CreditorAccountWrite"
+          description: Creditor account
         custom_payment_id:
           description: Payment Custom Payment ID
           maxLength: 35
@@ -3832,16 +4505,52 @@ components:
           allOf:
             - $ref: "#/components/schemas/PaymentProductEnum"
           default: ISCT
-          description: Payment product
+          description: |-
+            Payment product
+
+            * `T2P` - target-2-payments
+            * `SCT` - sepa-credit-transfers
+            * `ISCT` - instant-sepa-credit-transfer
+            * `CBCT` - cross-border-credit-transfers
+            * `BACS` - Back Payment Scheme
+            * `CHAPS` - CHAPS Payment Scheme
+            * `FPS` - Faster Payment Scheme
+            * `SWIFT` - Swift Payment Service
+            * `BT` - Balance Transfer
+            * `MT` - Money Transfer
         payment_status:
           allOf:
             - $ref: "#/components/schemas/PaymentStatusEnum"
-          description: Payment end to end identification
+          description: |-
+            Payment end to end identification
+
+            * `INIT` - Initiated. Payment has been initiated.
+            * `ERRE` - ExecutionError. We experienced error on payment execution.
+            * `ERRS` - StatusError. We experienced error retrieving payment status. Try again.
+            * `ACCC` - AcceptedSettlementCompleted. Settlement on the creditor's account has been completed
+            * `ACCP` - AcceptedCustomerProfile. Preceding check of technical validation was successful. Customer profile check was successful
+            * `ACSC` - AcceptedSettlementCompleted. Settlement on the debtor’s account has been completed
+            * `ACSP` - AcceptedSettlementInProcess. All preceding checks such as technical validation and customer profile were successful and therefore the payment initiation has been accepted for execution
+            * `ACTC` - AcceptedTechnicalValidation. Authentication and syntactical and semantical validation are successful
+            * `ACWC` - AcceptedWithChange. Instruction is accepted but a change will be made, such as date or remittance not sent
+            * `ACWP` - AcceptedWithoutPosting. Payment instruction included in the credit transfer is accepted without being posted to the creditor customer’s account
+            * `RCVD` - Received. Payment initiation has been received by the receiving agent
+            * `PDNG` - Pending. Payment initiation or individual transaction included in the payment initiation is pending. Further checks and status update will be performed
+            * `RJCT` - Rejected. Payment initiation or individual transaction included in the payment initiation has been rejected.
+            * `CANC` - Cancelled. Payment initiation has been cancelled before execution
+            * `ACFC` - AcceptedFundsChecked. Pre-ceeding check of technical validation and customer profile was successful and an automatic funds check was positive
+            * `PATC` - PartiallyAcceptedTechnicalCorrect. The payment initiation needs multiple authentications, where some but not yet all have been performed
+            * `PART` - PartiallyAccepted. A number of transactions have been accepted, whereas another number of transactions have not yet achieved 'accepted' status
           readOnly: true
         payment_type:
           allOf:
             - $ref: "#/components/schemas/PaymentTypeEnum"
-          description: Payment Type
+          description: |-
+            Payment Type
+
+            * `single-payment` - payment
+            * `bulk-payment` - bulk-payments
+            * `periodic-payment` - periodic-payments
           readOnly: true
         redirect:
           description: Redirect URL to your application after payment is done
@@ -3850,12 +4559,92 @@ components:
           nullable: true
           type: string
       required:
-        - creditor_account
+        - debtor_account
+        - instructed_amount
+        - redirect
+      type: object
+    PaymentReadRequest:
+      description: PaymentReadSerializer.
+      properties:
+        creditor_account:
+          description: Registered creditor account
+          format: uuid
+          type: string
+        creditor_object:
+          allOf:
+            - $ref: "#/components/schemas/CreditorAccountWriteRequest"
+          description: Creditor account
+        custom_payment_id:
+          description: Payment Custom Payment ID
+          maxLength: 35
+          minLength: 1
+          title: Payment end to end identification.
+          type: string
+        debtor_account:
+          $ref: "#/components/schemas/DebtorAccountWriteRequest"
+        description:
+          default: GOCARDLESS
+          description: Payment description
+          minLength: 1
+          type: string
+        institution_id:
+          default: SWEDBANK_SANDBOX_SANDLV22
+          description: Institution ID for Payment
+          minLength: 1
+          type: string
+          writeOnly: true
+        instructed_amount:
+          allOf:
+            - $ref: "#/components/schemas/InstructedAmountRequest"
+          description: Instructed amount
+        payment_product:
+          allOf:
+            - $ref: "#/components/schemas/PaymentProductEnum"
+          default: ISCT
+          description: |-
+            Payment product
+
+            * `T2P` - target-2-payments
+            * `SCT` - sepa-credit-transfers
+            * `ISCT` - instant-sepa-credit-transfer
+            * `CBCT` - cross-border-credit-transfers
+            * `BACS` - Back Payment Scheme
+            * `CHAPS` - CHAPS Payment Scheme
+            * `FPS` - Faster Payment Scheme
+            * `SWIFT` - Swift Payment Service
+            * `BT` - Balance Transfer
+            * `MT` - Money Transfer
+        redirect:
+          description: Redirect URL to your application after payment is done
+          format: uri
+          maxLength: 1024
+          minLength: 1
+          nullable: true
+          type: string
+      required:
         - debtor_account
         - instructed_amount
         - redirect
       type: object
     PaymentStatusEnum:
+      description: |-
+        * `INIT` - Initiated. Payment has been initiated.
+        * `ERRE` - ExecutionError. We experienced error on payment execution.
+        * `ERRS` - StatusError. We experienced error retrieving payment status. Try again.
+        * `ACCC` - AcceptedSettlementCompleted. Settlement on the creditor's account has been completed
+        * `ACCP` - AcceptedCustomerProfile. Preceding check of technical validation was successful. Customer profile check was successful
+        * `ACSC` - AcceptedSettlementCompleted. Settlement on the debtor’s account has been completed
+        * `ACSP` - AcceptedSettlementInProcess. All preceding checks such as technical validation and customer profile were successful and therefore the payment initiation has been accepted for execution
+        * `ACTC` - AcceptedTechnicalValidation. Authentication and syntactical and semantical validation are successful
+        * `ACWC` - AcceptedWithChange. Instruction is accepted but a change will be made, such as date or remittance not sent
+        * `ACWP` - AcceptedWithoutPosting. Payment instruction included in the credit transfer is accepted without being posted to the creditor customer’s account
+        * `RCVD` - Received. Payment initiation has been received by the receiving agent
+        * `PDNG` - Pending. Payment initiation or individual transaction included in the payment initiation is pending. Further checks and status update will be performed
+        * `RJCT` - Rejected. Payment initiation or individual transaction included in the payment initiation has been rejected.
+        * `CANC` - Cancelled. Payment initiation has been cancelled before execution
+        * `ACFC` - AcceptedFundsChecked. Pre-ceeding check of technical validation and customer profile was successful and an automatic funds check was positive
+        * `PATC` - PartiallyAcceptedTechnicalCorrect. The payment initiation needs multiple authentications, where some but not yet all have been performed
+        * `PART` - PartiallyAccepted. A number of transactions have been accepted, whereas another number of transactions have not yet achieved 'accepted' status
       enum:
         - INIT
         - ERRE
@@ -3876,6 +4665,10 @@ components:
         - PART
       type: string
     PaymentTypeEnum:
+      description: |-
+        * `single-payment` - payment
+        * `bulk-payment` - bulk-payments
+        * `periodic-payment` - periodic-payments
       enum:
         - single-payment
         - bulk-payment
@@ -3888,6 +4681,10 @@ components:
           description: Registered creditor account
           format: uuid
           type: string
+        creditor_object:
+          allOf:
+            - $ref: "#/components/schemas/CreditorAccountWrite"
+          description: Creditor account
         custom_payment_id:
           description: Payment Custom Payment ID
           maxLength: 35
@@ -3902,7 +4699,7 @@ components:
             - $ref: "#/components/schemas/InstructedAmount"
           description: Instructed amount
         link:
-          default: https://ob.nordigen.com/pis/start/83ca8de5-dbef-45fc-a137-f185d0e7a0d8/{$INSTITUTION_ID}
+          default: https://ob.nordigen.com/pis/start/ec728ca1-e25f-4eab-8fa6-66b94439722f/{$INSTITUTION_ID}
           description: Link to initiate authorization with Institution
           format: uri
           readOnly: true
@@ -3915,16 +4712,52 @@ components:
           allOf:
             - $ref: "#/components/schemas/PaymentProductEnum"
           default: ISCT
-          description: Payment product
+          description: |-
+            Payment product
+
+            * `T2P` - target-2-payments
+            * `SCT` - sepa-credit-transfers
+            * `ISCT` - instant-sepa-credit-transfer
+            * `CBCT` - cross-border-credit-transfers
+            * `BACS` - Back Payment Scheme
+            * `CHAPS` - CHAPS Payment Scheme
+            * `FPS` - Faster Payment Scheme
+            * `SWIFT` - Swift Payment Service
+            * `BT` - Balance Transfer
+            * `MT` - Money Transfer
         payment_status:
           allOf:
             - $ref: "#/components/schemas/PaymentStatusEnum"
-          description: Payment end to end identification
+          description: |-
+            Payment end to end identification
+
+            * `INIT` - Initiated. Payment has been initiated.
+            * `ERRE` - ExecutionError. We experienced error on payment execution.
+            * `ERRS` - StatusError. We experienced error retrieving payment status. Try again.
+            * `ACCC` - AcceptedSettlementCompleted. Settlement on the creditor's account has been completed
+            * `ACCP` - AcceptedCustomerProfile. Preceding check of technical validation was successful. Customer profile check was successful
+            * `ACSC` - AcceptedSettlementCompleted. Settlement on the debtor’s account has been completed
+            * `ACSP` - AcceptedSettlementInProcess. All preceding checks such as technical validation and customer profile were successful and therefore the payment initiation has been accepted for execution
+            * `ACTC` - AcceptedTechnicalValidation. Authentication and syntactical and semantical validation are successful
+            * `ACWC` - AcceptedWithChange. Instruction is accepted but a change will be made, such as date or remittance not sent
+            * `ACWP` - AcceptedWithoutPosting. Payment instruction included in the credit transfer is accepted without being posted to the creditor customer’s account
+            * `RCVD` - Received. Payment initiation has been received by the receiving agent
+            * `PDNG` - Pending. Payment initiation or individual transaction included in the payment initiation is pending. Further checks and status update will be performed
+            * `RJCT` - Rejected. Payment initiation or individual transaction included in the payment initiation has been rejected.
+            * `CANC` - Cancelled. Payment initiation has been cancelled before execution
+            * `ACFC` - AcceptedFundsChecked. Pre-ceeding check of technical validation and customer profile was successful and an automatic funds check was positive
+            * `PATC` - PartiallyAcceptedTechnicalCorrect. The payment initiation needs multiple authentications, where some but not yet all have been performed
+            * `PART` - PartiallyAccepted. A number of transactions have been accepted, whereas another number of transactions have not yet achieved 'accepted' status
           readOnly: true
         payment_type:
           allOf:
             - $ref: "#/components/schemas/PaymentTypeEnum"
-          description: Payment Type
+          description: |-
+            Payment Type
+
+            * `single-payment` - payment
+            * `bulk-payment` - bulk-payments
+            * `periodic-payment` - periodic-payments
           readOnly: true
         periodic_payment:
           $ref: "#/components/schemas/PeriodicPayment"
@@ -3938,8 +4771,11 @@ components:
           description: Payment Execution date (for periodic payments)
           format: date
           type: string
+        submit_payment:
+          default: false
+          description: Indicates whether payment should be submitted separately
+          type: boolean
       required:
-        - creditor_account
         - instructed_amount
         - redirect
       type: object
@@ -3950,9 +4786,14 @@ components:
           description: Registered creditor account
           format: uuid
           type: string
+        creditor_object:
+          allOf:
+            - $ref: "#/components/schemas/CreditorAccountWriteRequest"
+          description: Creditor account
         custom_payment_id:
           description: Payment Custom Payment ID
           maxLength: 35
+          minLength: 1
           title: Payment end to end identification.
           type: string
         debtor_account:
@@ -3963,10 +4804,12 @@ components:
         description:
           default: GOCARDLESS
           description: Payment description
+          minLength: 1
           type: string
         institution_id:
           default: SWEDBANK_SANDBOX_SANDLV22
           description: Institution ID for Payment
+          minLength: 1
           type: string
           writeOnly: true
         instructed_amount:
@@ -3977,21 +4820,37 @@ components:
           allOf:
             - $ref: "#/components/schemas/PaymentProductEnum"
           default: ISCT
-          description: Payment product
+          description: |-
+            Payment product
+
+            * `T2P` - target-2-payments
+            * `SCT` - sepa-credit-transfers
+            * `ISCT` - instant-sepa-credit-transfer
+            * `CBCT` - cross-border-credit-transfers
+            * `BACS` - Back Payment Scheme
+            * `CHAPS` - CHAPS Payment Scheme
+            * `FPS` - Faster Payment Scheme
+            * `SWIFT` - Swift Payment Service
+            * `BT` - Balance Transfer
+            * `MT` - Money Transfer
         periodic_payment:
           $ref: "#/components/schemas/PeriodicPaymentRequest"
         redirect:
           description: Redirect URL to your application after payment is done
           format: uri
           maxLength: 1024
+          minLength: 1
           nullable: true
           type: string
         requested_execution_date:
           description: Payment Execution date (for periodic payments)
           format: date
           type: string
+        submit_payment:
+          default: false
+          description: Indicates whether payment should be submitted separately
+          type: boolean
       required:
-        - creditor_account
         - instructed_amount
         - redirect
       type: object
@@ -4007,7 +4866,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/ExecutionRuleEnum"
           default: following
-          description: Behavior when periodic payment dates fall on holiday.
+          description: |-
+            Behavior when periodic payment dates fall on holiday.
+
+            * `following` - following
+            * `preceding` - preceding
         frequency:
           allOf:
             - $ref: "#/components/schemas/FrequencyEnum"
@@ -4022,6 +4885,7 @@ components:
       description: Periodic Payment Serializer.
       properties:
         day_of_execution:
+          minLength: 1
           type: string
         end_date:
           format: date
@@ -4030,7 +4894,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/ExecutionRuleEnum"
           default: following
-          description: Behavior when periodic payment dates fall on holiday.
+          description: |-
+            Behavior when periodic payment dates fall on holiday.
+
+            * `following` - following
+            * `preceding` - preceding
         frequency:
           allOf:
             - $ref: "#/components/schemas/FrequencyEnum"
@@ -4053,25 +4921,8 @@ components:
           format: date
           type: string
       type: object
-    RequisitionLinkParamsRequest:
-      description: RequisitionLinkParamsSerializer.
-      properties:
-        aspsp_id:
-          description: ASPSP ID. Should match one used while creating EUA, if it's linked to this requisition
-          type: string
-      required:
-        - aspsp_id
-      type: object
-    RequisitionLinks:
-      description: RequisitionLinksSerializer.
-      properties:
-        initiate:
-          format: uri
-          readOnly: true
-          type: string
-      type: object
-    RequisitionV2:
-      description: RequisitionV2Serializer.
+    Requisition:
+      description: RequisitionSerializer.
       properties:
         account_selection:
           default: false
@@ -4141,8 +4992,8 @@ components:
         - institution_id
         - redirect
       type: object
-    RequisitionV2Request:
-      description: RequisitionV2Serializer.
+    RequisitionRequest:
+      description: RequisitionSerializer.
       properties:
         account_selection:
           default: false
@@ -4154,11 +5005,13 @@ components:
           type: string
         institution_id:
           description: an Institution ID for this Requisition
+          minLength: 1
           type: string
         redirect:
           description: redirect URL to your application after end-user authorization with ASPSP
           format: uri
           maxLength: 1024
+          minLength: 1
           nullable: true
           type: string
         redirect_immediate:
@@ -4168,6 +5021,7 @@ components:
         reference:
           description: additional ID to identify the end user
           maxLength: 256
+          minLength: 1
           type: string
         ssn:
           description: optional SSN field to verify ownership of the account
@@ -4176,6 +5030,7 @@ components:
         user_language:
           description: A two-letter country code (ISO 639-1)
           maxLength: 5
+          minLength: 1
           type: string
       required:
         - institution_id
@@ -4216,7 +5071,7 @@ components:
           readOnly: true
           type: integer
       type: object
-    SpectacularRequisitionV2:
+    SpectacularRequisition:
       description: Create requisition.
       properties:
         account_selection:
@@ -4300,12 +5155,15 @@ components:
         - SA
       type: string
     TypeEnum:
+      description: |-
+        * `IBAN` - IBAN
+        * `SCAN` - SortCodeAccountNumber
       enum:
         - IBAN
         - SCAN
       type: string
   securitySchemes:
     jwtAuth:
-      bearerFormat: Bearer
+      bearerFormat: JWT
       scheme: bearer
       type: http

@@ -14,7 +14,7 @@ info:
   contact:
     name: developer.va.gov
   description: |
-    The Veteran Confirmation API allows you to confirm Veteran status for a given person. This can be useful for offering Veterans discounts or other benefits.
+    The Deprecated Veteran Confirmation API allows you to confirm Veteran status for a given person. This can be useful for offering Veterans discounts or other benefits.
 
     The API will only return “Confirmed” or “Not Confirmed”.
 
@@ -83,6 +83,7 @@ tags:
 paths:
   /status:
     post:
+      deprecated: true
       operationId: getVeteranStatus
       requestBody:
         content:
@@ -156,6 +157,7 @@ components:
       description: Veteran status confirmation for an individual
       properties:
         veteran_status:
+          deprecated: true
           description: |
             Whether the system could confirm the Veteran status of an individual based on traits
           enum:
@@ -167,14 +169,17 @@ components:
       description: Attributes required to retrieve a Veteran's status
       properties:
         birth_date:
+          deprecated: true
           description: Birth date for the person of interest in any valid ISO8601 format
           example: 1965-01-01
           type: string
         first_name:
+          deprecated: true
           description: First name for the person of interest
           example: John
           type: string
         gender:
+          deprecated: true
           description: Optional gender of M or F for the person of interest
           enum:
             - M
@@ -182,14 +187,17 @@ components:
           example: M
           type: string
         last_name:
+          deprecated: true
           description: Last name for the person of interest
           example: Doe
           type: string
         middle_name:
+          deprecated: true
           description: Optional middle name for the person of interest
           example: Theodore
           type: string
         ssn:
+          deprecated: true
           description: Social Security Number for the person of interest with or without dashes
           example: 555-55-5555
           type: string

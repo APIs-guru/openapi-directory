@@ -699,6 +699,65 @@ paths:
       summary: Batch fetch basic meta data for podcasts
       tags:
         - Directory API
+  "/podcasts/domains/{domain_name}":
+    get:
+      description: |
+        Fetch podcasts by a publisher's domain name, e.g., nytimes.com, wondery.com, npr.org...
+        Each request will return up to 10 podcasts. You can use the `page` parameter to paginate.
+      operationId: getPodcastsByDomainName
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - description: A publisher's domain name, e.g., nytimes.com, wondery.com, npr.org...
+          example: nytimes.com
+          explode: false
+          in: path
+          name: domain_name
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: Page number of the podcasts from this domain name
+          in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            examples:
+              - 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PodcastDomainResponse"
+          description: OK
+          headers:
+            X-ListenAPI-FreeQuota:
+              $ref: "#/components/headers/X-ListenAPI-FreeQuota"
+            X-ListenAPI-NextBillingDate:
+              $ref: "#/components/headers/X-ListenAPI-NextBillingDate"
+            X-ListenAPI-Usage:
+              $ref: "#/components/headers/X-ListenAPI-Usage"
+            X-listenAPI-Latency-Seconds:
+              $ref: "#/components/headers/X-listenAPI-Latency-Seconds"
+          links:
+            paginate:
+              description: Pagination through podcasts.
+              operationId: getPodcastsByDomainName
+              parameters:
+                page: $response.body#/next_page_number
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        5XX:
+          $ref: "#/components/responses/ServerError"
+      summary: Fetch podcasts by a publisher's domain name
+      tags:
+        - Insights API
   /podcasts/submit:
     post:
       description: |
@@ -1257,6 +1316,18 @@ paths:
               - 0
             type: integer
           style: form
+        - description: |
+            The maximum number of search results per page. A valid value should be an integer between 1 and 10 (inclusive).
+          explode: true
+          in: query
+          name: page_size
+          required: false
+          schema:
+            default: 10
+            examples:
+              - 10
+            type: integer
+          style: form
       responses:
         "200":
           content:
@@ -1563,6 +1634,8 @@ components:
             - true
           type: boolean
         has_previous:
+          examples:
+            - true
           type: boolean
         id:
           description: The id of this genre
@@ -2558,6 +2631,33 @@ components:
       examples:
         - <p>The Star Wars 7x7 Podcast is Rebel-rousing fun for everyday Jedi, between 7 and 14 minutes a day, 7 days a week. Join host Allen Voivod for Star Wars news, history, interviews, trivia, and deep dives into the Star Wars story as told in movies, books, comics, games, cartoons, and more. Subscribe now for your daily dose of Star Wars joy. It's destiny unleashed!</p>
       type: string
+    PodcastDomainResponse:
+      properties:
+        has_next:
+          examples:
+            - true
+          type: boolean
+        has_previous:
+          examples:
+            - true
+          type: boolean
+        next_page_number:
+          examples:
+            - 3
+          type: integer
+        page_number:
+          examples:
+            - 2
+          type: integer
+        podcasts:
+          items:
+            $ref: "#/components/schemas/PodcastSimple"
+          type: array
+        previous_page_number:
+          examples:
+            - 1
+          type: integer
+      type: object
     PodcastExtraField:
       properties:
         amazon_music_url:

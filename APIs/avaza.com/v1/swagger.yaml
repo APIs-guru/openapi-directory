@@ -1625,7 +1625,14 @@ paths:
       consumes: []
       operationId: Payment_Get
       parameters:
-        - format: date-time
+        - description: Filter for Payments that have at least one allocation against a given Invoice Transaction ID
+          format: int64
+          in: query
+          name: InvoiceTransactionID
+          required: false
+          type: integer
+        - description: Filter for Payments updated after a given date
+          format: date-time
           in: query
           name: UpdatedAfter
           required: false
@@ -5321,8 +5328,6 @@ definitions:
         type: boolean
       canUpdateTasks:
         type: boolean
-      isProjectManager:
-        type: boolean
       isTimesheetAllowed:
         type: boolean
       isTimesheetApprovalRequired:
@@ -5773,8 +5778,6 @@ definitions:
       canUpdateTasks:
         type: boolean
       isMemberDisabled:
-        type: boolean
-      isProjectManager:
         type: boolean
       isTimesheetAllowed:
         type: boolean
@@ -6676,8 +6679,6 @@ definitions:
       canDeleteTasks:
         type: boolean
       canUpdateTasks:
-        type: boolean
-      isProjectManager:
         type: boolean
       isTimesheetAllowed:
         type: boolean

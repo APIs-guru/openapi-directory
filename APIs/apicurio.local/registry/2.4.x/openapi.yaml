@@ -976,10 +976,10 @@ paths:
               $ref: "#/components/schemas/FileContent"
           application/create.extended+json:
             schema:
-              $ref: "#/components/schemas/ContentCreateRequest"
+              $ref: "#/components/schemas/ArtifactContent"
           application/vnd.create.extended+json:
             schema:
-              $ref: "#/components/schemas/ContentCreateRequest"
+              $ref: "#/components/schemas/ArtifactContent"
         description: |
           The content of the artifact being created. This is often, but not always, JSON data
           representing one of the supported artifact types:
@@ -1035,10 +1035,11 @@ paths:
         Returns the latest version of the artifact in its raw form.  The `Content-Type` of the
         response depends on the artifact type.  In most cases, this is `application/json`, but 
         for some types it may be different (for example, `PROTOBUF`).
+        If the latest version of the artifact is marked as `DISABLED`, the next available non-disabled version will be used.
 
         This operation may fail for one of the following reasons:
 
-        * No artifact with this `artifactId` exists (HTTP error `404`)
+        * No artifact with this `artifactId` exists or all versions are `DISABLED` (HTTP error `404`)
         * A server error occurred (HTTP error `500`)
       operationId: getLatestArtifact
       parameters:
@@ -1163,10 +1164,10 @@ paths:
               $ref: "#/components/schemas/FileContent"
           application/create.extended+json:
             schema:
-              $ref: "#/components/schemas/ContentCreateRequest"
+              $ref: "#/components/schemas/ArtifactContent"
           application/vnd.create.extended+json:
             schema:
-              $ref: "#/components/schemas/ContentCreateRequest"
+              $ref: "#/components/schemas/ArtifactContent"
         description: |
           The new content of the artifact being updated. This is often, but not always, JSON data
           representing one of the supported artifact types:
@@ -1201,12 +1202,12 @@ paths:
   "/groups/{groupId}/artifacts/{artifactId}/meta":
     get:
       description: |-
-        Gets the metadata for an artifact in the registry.  The returned metadata includes
+        Gets the metadata for an artifact in the registry, based on the latest version. If the latest version of the artifact is marked as `DISABLED`, the next available non-disabled version will be used. The returned metadata includes
         both generated (read-only) and editable metadata (such as name and description).
 
         This operation can fail for the following reasons:
 
-        * No artifact with this `artifactId` exists (HTTP error `404`)
+        * No artifact with this `artifactId` exists  or all versions are `DISABLED` (HTTP error `404`)
         * A server error occurred (HTTP error `500`)
       operationId: getArtifactMetaData
       responses:
@@ -1295,6 +1296,12 @@ paths:
                         summary: Get widgets
             schema:
               $ref: "#/components/schemas/FileContent"
+          application/get.extended+json:
+            schema:
+              $ref: "#/components/schemas/ArtifactContent"
+          application/vnd.get.extended+json:
+            schema:
+              $ref: "#/components/schemas/ArtifactContent"
         description: The content of an artifact version.
         required: true
       responses:
@@ -1617,9 +1624,7 @@ paths:
           $ref: "#/components/schemas/ArtifactId"
     put:
       description: |
-        Updates the state of the artifact.  For example, you can use this to mark the latest
-        version of an artifact as `DEPRECATED`.  The operation changes the state of the latest 
-        version of the artifact.  If multiple versions exist, only the most recent is changed.
+        Updates the state of the artifact.  For example, you can use this to mark the latest version of an artifact as `DEPRECATED`. The operation changes the state of the latest version of the artifact, even if this version is `DISABLED`. If multiple versions exist, only the most recent is changed.
 
         This operation can fail for the following reasons:
 
@@ -1864,10 +1869,10 @@ paths:
               $ref: "#/components/schemas/FileContent"
           application/create.extended+json:
             schema:
-              $ref: "#/components/schemas/ContentCreateRequest"
+              $ref: "#/components/schemas/ArtifactContent"
           application/vnd.create.extended+json:
             schema:
-              $ref: "#/components/schemas/ContentCreateRequest"
+              $ref: "#/components/schemas/ArtifactContent"
         description: |
           The content of the artifact version being created or the content and a set of references to other artifacts. This is often, but not always, JSON data
           representing one of the supported artifact types:
@@ -1900,6 +1905,31 @@ paths:
         - Versions
     summary: Manage all the versions of an artifact in the registry.
   "/groups/{groupId}/artifacts/{artifactId}/versions/{version}":
+    delete:
+      description: |
+        Deletes a single version of the artifact. Parameters `groupId`, `artifactId` and the unique `version`
+        are needed. If this is the only version of the artifact, this operation is the same as 
+        deleting the entire artifact.
+
+        This feature is disabled by default and it's discouraged for normal usage. To enable it, set the `registry.rest.artifact.deletion.enabled` property to true. This operation can fail for the following reasons:
+
+        * No artifact with this `artifactId` exists (HTTP error `404`)
+        * No version with this `version` exists (HTTP error `404`)
+         * Feature is disabled (HTTP error `405`)
+         * A server error occurred (HTTP error `500`)
+      operationId: deleteArtifactVersion
+      responses:
+        "204":
+          description: The artifact version was successfully deleted.
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "405":
+          $ref: "#/components/responses/MethodNotAllowed"
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Delete artifact version
+      tags:
+        - Versions
     get:
       description: |
         Retrieves a single version of the artifact content.  Both the `artifactId` and the
@@ -2584,6 +2614,17 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
       description: Common response used when an input conflicts with existing data.
+    MethodNotAllowed:
+      content:
+        application/json:
+          examples:
+            MethodNotAllowedExample:
+              value:
+                error_code: 405
+                message: Method is currently not supported or disabled.
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Common response for all operations that can fail due to method not allowed or disabled.
     NotFound:
       content:
         application/json:
@@ -2623,6 +2664,22 @@ components:
             $ref: "#/components/schemas/Error"
       description: Common response for all operations that can fail with an unexpected server error.
   schemas:
+    ArtifactContent:
+      description: ""
+      properties:
+        content:
+          description: Raw content of the artifact or a valid (and accessible) URL where the content can be found.
+          example: ""
+          type: string
+        references:
+          description: Collection of references to other artifacts.
+          items:
+            $ref: "#/components/schemas/ArtifactReference"
+          type: array
+      required:
+        - content
+        - references
+      type: object
     ArtifactDescription:
       description: Description of the artifact.
       example: '"Artifact description"'
@@ -2832,22 +2889,6 @@ components:
         - label
         - description
       title: Root Type for ConfigurationProperty
-      type: object
-    ContentCreateRequest:
-      description: ""
-      properties:
-        content:
-          description: Raw content of the artifact or a valid (and accessible) URL where the content can be found.
-          example: ""
-          type: string
-        references:
-          description: Collection of references to other artifacts.
-          items:
-            $ref: "#/components/schemas/ArtifactReference"
-          type: array
-      required:
-        - content
-        - references
       type: object
     CreateGroupMetaData:
       description: ""

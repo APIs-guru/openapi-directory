@@ -9,7 +9,7 @@ info:
   description: |
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
-    > Date: 05 March, 2023
+    > Date: 23 April, 2023
     >
     > [Recent Updates](https://meraki.io/whats-new/)
 
@@ -74,7 +74,6 @@ tags:
   - name: MX warm spare settings
   - name: Malware settings
   - name: Meraki auth users
-  - name: Monitored media servers
   - name: Named tag scope
   - name: Networks
   - name: OpenAPI Spec
@@ -315,112 +314,6 @@ paths:
       summary: Return historical records for analytic zones
       tags:
         - MV Sense
-  "/devices/{serial}/camera/qualityAndRetentionSettings":
-    get:
-      description: Returns quality and retention settings for the given camera
-      operationId: getDeviceCameraQualityAndRetentionSettings
-      parameters:
-        - in: path
-          name: serial
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    audioRecordingEnabled: false
-                    motionBasedRetentionEnabled: false
-                    motionDetectorVersion: 2
-                    profileId: "1234"
-                    quality: Standard
-                    resolution: 1280x720
-                    restrictedBandwidthModeEnabled: false
-              schema:
-                type: object
-          description: Successful operation
-      summary: Returns quality and retention settings for the given camera
-      tags:
-        - Cameras
-    put:
-      description: Update quality and retention settings for the given camera
-      operationId: updateDeviceCameraQualityAndRetentionSettings
-      parameters:
-        - in: path
-          name: serial
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                audioRecordingEnabled: false
-                motionBasedRetentionEnabled: false
-                motionDetectorVersion: 2
-                profileId: "1234"
-                quality: Standard
-                resolution: 1280x720
-                restrictedBandwidthModeEnabled: false
-              properties:
-                audioRecordingEnabled:
-                  description: Boolean indicating if audio recording is enabled(true) or disabled(false) on the camera
-                  type: boolean
-                motionBasedRetentionEnabled:
-                  description: Boolean indicating if motion-based retention is enabled(true) or disabled(false) on the camera
-                  type: boolean
-                motionDetectorVersion:
-                  description: The version of the motion detector that will be used by the camera. Only applies to Gen 2 cameras. Defaults to v2.
-                  enum:
-                    - 1
-                    - 2
-                  type: integer
-                profileId:
-                  description: The ID of a quality and retention profile to assign to the camera. The profile's settings will override all of the per-camera quality and retention settings. If the value of this parameter is null, any existing profile will be unassigned from the camera.
-                  type: string
-                quality:
-                  description: Quality of the camera. Can be one of 'Standard', 'High' or 'Enhanced'. Not all qualities are supported by every camera model.
-                  enum:
-                    - Enhanced
-                    - High
-                    - Standard
-                  type: string
-                resolution:
-                  description: Resolution of the camera. Can be one of '1280x720', '1920x1080', '1080x1080' or '2058x2058'. Not all resolutions are supported by every camera model.
-                  enum:
-                    - 1080x1080
-                    - 1280x720
-                    - 1920x1080
-                    - 2058x2058
-                  type: string
-                restrictedBandwidthModeEnabled:
-                  description: Boolean indicating if restricted bandwidth is enabled(true) or disabled(false) on the camera. This setting does not apply to MV2 cameras.
-                  type: boolean
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    audioRecordingEnabled: false
-                    motionBasedRetentionEnabled: false
-                    motionDetectorVersion: 2
-                    profileId: "1234"
-                    quality: Standard
-                    resolution: 1280x720
-                    restrictedBandwidthModeEnabled: false
-              schema:
-                type: object
-          description: Successful operation
-      summary: Update quality and retention settings for the given camera
-      tags:
-        - Cameras
   "/devices/{serial}/camera/video/settings":
     get:
       description: Returns video settings for the given camera
@@ -5450,7 +5343,8 @@ paths:
                 response:
                   value:
                     events:
-                      - clientDescription: Miles's phone
+                      - category: "80211"
+                        clientDescription: Miles's phone
                         clientId: k74272e
                         clientMac: 22:33:44:55:66:77
                         description: 802.11 association
@@ -5686,62 +5580,6 @@ paths:
                 type: object
           description: Successful operation
       summary: Return the accessibility settings of the given service ('ICMP', 'web', or 'SNMP')
-      tags:
-        - Firewalled services
-    put:
-      description: Updates the accessibility settings for the given service ('ICMP', 'web', or 'SNMP')
-      operationId: updateNetworkFirewalledService
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: service
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                access: restricted
-                allowedIps:
-                  - 123.123.123.1
-              properties:
-                access:
-                  description: A string indicating the rule for which IPs are allowed to use the specified service. Acceptable values are "blocked" (no remote IPs can access the service), "restricted" (only whitelisted IPs can access the service), and "unrestriced" (any remote IP can access the service). This field is required
-                  enum:
-                    - blocked
-                    - restricted
-                    - unrestricted
-                  type: string
-                allowedIps:
-                  description: An array of whitelisted IPs that can access the service. This field is required if "access" is set to "restricted". Otherwise this field is ignored
-                  items:
-                    type: string
-                  type: array
-              required:
-                - access
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    access: restricted
-                    allowedIps:
-                      - 123.123.123.1
-                    service: web
-              schema:
-                type: object
-          description: Successful operation
-      summary: Updates the accessibility settings for the given service ('ICMP', 'web', or 'SNMP')
       tags:
         - Firewalled services
   "/networks/{networkId}/floorPlans":
@@ -8122,50 +7960,6 @@ paths:
       summary: List the devices enrolled in an SM network with various specified fields and filters
       tags:
         - SM
-  "/networks/{networkId}/sm/devices/checkin":
-    put:
-      description: Force check-in a set of devices
-      operationId: checkinNetworkSmDevices
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                ids: '"1284392014819"'
-              properties:
-                ids:
-                  description: The ids of the devices to be checked-in.
-                  type: string
-                scope:
-                  description: The scope (one of all, none, withAny, withAll, withoutAny, or withoutAll) and a set of tags of the devices to be checked-in.
-                  type: string
-                serials:
-                  description: The serials of the devices to be checked-in.
-                  type: string
-                wifiMacs:
-                  description: The wifiMacs of the devices to be checked-in.
-                  type: string
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    success: true
-              schema:
-                type: object
-          description: Successful operation
-      summary: Force check-in a set of devices
-      tags:
-        - SM
   "/networks/{networkId}/sm/devices/tags":
     put:
       description: Add, delete, or update the tags of a set of devices
@@ -9354,11 +9148,12 @@ paths:
                   description: Specify your walled garden by entering space-separated addresses, ranges using CIDR notation, domain names, and domain wildcards (e.g. 192.168.1.1/24 192.168.37.10/32 www.yahoo.com *.google.com). Meraki's splash page is automatically included in your walled garden.
                   type: string
                 wpaEncryptionMode:
-                  description: The types of WPA encryption. ('WPA1 only', 'WPA1 and WPA2', 'WPA2 only', 'WPA3 Transition Mode' or 'WPA3 only')
+                  description: The types of WPA encryption. ('WPA1 only', 'WPA1 and WPA2', 'WPA2 only', 'WPA3 Transition Mode', 'WPA3 only' or 'WPA3 192-bit Security')
                   enum:
                     - WPA1 and WPA2
                     - WPA1 only
                     - WPA2 only
+                    - WPA3 192-bit Security
                     - WPA3 Transition Mode
                     - WPA3 only
                   type: string
@@ -10750,81 +10545,6 @@ paths:
       summary: Return the MTU configuration
       tags:
         - Switch settings
-    put:
-      description: Update the MTU configuration
-      operationId: updateNetworkSwitchSettingsMtu
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                defaultMtuSize: 9578
-                overrides:
-                  - mtuSize: 1500
-                    switches:
-                      - Q234-ABCD-0001
-                      - Q234-ABCD-0002
-                      - Q234-ABCD-0003
-                  - mtuSize: 1600
-                    switchProfiles:
-                      - "1284392014819"
-                      - "2983092129865"
-              properties:
-                defaultMtuSize:
-                  description: MTU size for the entire network. Default value is 9578.
-                  type: integer
-                overrides:
-                  description: Override MTU size for individual switches or switch profiles. An empty array will clear overrides.
-                  items:
-                    properties:
-                      mtuSize:
-                        description: MTU size for the switches or switch profiles.
-                        type: integer
-                      switchProfiles:
-                        description: List of switch profile IDs. Applicable only for template network.
-                        items:
-                          type: string
-                        type: array
-                      switches:
-                        description: List of switch serials. Applicable only for switch network.
-                        items:
-                          type: string
-                        type: array
-                    required:
-                      - mtuSize
-                    type: object
-                  type: array
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    defaultMtuSize: 9578
-                    overrides:
-                      - mtuSize: 1500
-                        switches:
-                          - Q234-ABCD-0001
-                          - Q234-ABCD-0002
-                          - Q234-ABCD-0003
-                      - mtuSize: 1600
-                        switchProfiles:
-                          - "1284392014819"
-                          - "2983092129865"
-              schema:
-                type: object
-          description: Successful operation
-      summary: Update the MTU configuration
-      tags:
-        - Switch settings
   "/networks/{networkId}/switch/settings/multicast":
     get:
       description: Return multicast settings for a network
@@ -11367,202 +11087,6 @@ paths:
                 type: array
           description: Successful operation
       summary: List the switch stacks in a network
-      tags:
-        - Switch stacks
-    post:
-      description: Create a stack
-      operationId: createNetworkSwitchStack
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                name: A cool stack
-                serials:
-                  - QBZY-XWVU-TSRQ
-                  - QBAB-CDEF-GHIJ
-              properties:
-                name:
-                  description: The name of the new stack
-                  type: string
-                serials:
-                  description: An array of switch serials to be added into the new stack
-                  items:
-                    type: string
-                  type: array
-              required:
-                - name
-                - serials
-              type: object
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    id: "8473"
-                    name: A cool stack
-                    serials:
-                      - QBZY-XWVU-TSRQ
-                      - QBAB-CDEF-GHIJ
-              schema:
-                type: object
-          description: Successful operation
-      summary: Create a stack
-      tags:
-        - Switch stacks
-  "/networks/{networkId}/switchStacks/{switchStackId}":
-    delete:
-      description: Delete a stack
-      operationId: deleteNetworkSwitchStack
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: switchStackId
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: Successful operation
-      summary: Delete a stack
-      tags:
-        - Switch stacks
-    get:
-      description: Show a switch stack
-      operationId: getNetworkSwitchStack
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: switchStackId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    id: "8473"
-                    name: A cool stack
-                    serials:
-                      - QBZY-XWVU-TSRQ
-                      - QBAB-CDEF-GHIJ
-              schema:
-                type: object
-          description: Successful operation
-      summary: Show a switch stack
-      tags:
-        - Switch stacks
-  "/networks/{networkId}/switchStacks/{switchStackId}/add":
-    post:
-      description: Add a switch to a stack
-      operationId: addNetworkSwitchStack
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: switchStackId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                serial: QBZY-XWVU-TSRQ
-              properties:
-                serial:
-                  description: The serial of the switch to be added
-                  type: string
-              required:
-                - serial
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    id: "8473"
-                    name: A cool stack
-                    serials:
-                      - QBZY-XWVU-TSRQ
-                      - QBAB-CDEF-GHIJ
-              schema:
-                type: object
-          description: Successful operation
-      summary: Add a switch to a stack
-      tags:
-        - Switch stacks
-  "/networks/{networkId}/switchStacks/{switchStackId}/remove":
-    post:
-      description: Remove a switch from a stack
-      operationId: removeNetworkSwitchStack
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: switchStackId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                serial: QBZY-XWVU-TSRQ
-              properties:
-                serial:
-                  description: The serial of the switch to be removed
-                  type: string
-              required:
-                - serial
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    id: "8473"
-                    name: A cool stack
-                    serials:
-                      - QBAB-CDEF-GHIJ
-              schema:
-                type: object
-          description: Successful operation
-      summary: Remove a switch from a stack
       tags:
         - Switch stacks
   "/networks/{networkId}/syslogServers":
@@ -14689,174 +14213,6 @@ paths:
       summary: List the devices in an organization
       tags:
         - Devices
-  "/organizations/{organizationId}/insight/monitoredMediaServers":
-    get:
-      description: List the monitored media servers for this organization. Only valid for organizations with Meraki Insight.
-      operationId: getOrganizationInsightMonitoredMediaServers
-      parameters:
-        - in: path
-          name: organizationId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    - address: 123.123.123.1
-                      id: "1284392014819"
-                      name: Sample VoIP Provider
-              schema:
-                items:
-                  type: object
-                type: array
-          description: Successful operation
-      summary: List the monitored media servers for this organization
-      tags:
-        - Monitored media servers
-    post:
-      description: Add a media server to be monitored for this organization. Only valid for organizations with Meraki Insight.
-      operationId: createOrganizationInsightMonitoredMediaServer
-      parameters:
-        - in: path
-          name: organizationId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                address: 123.123.123.1
-                name: Sample VoIP Provider
-              properties:
-                address:
-                  description: The IP address (IPv4 only) or hostname of the media server to monitor
-                  type: string
-                name:
-                  description: The name of the VoIP provider
-                  type: string
-              required:
-                - name
-                - address
-              type: object
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    address: 123.123.123.1
-                    id: "1284392014819"
-                    name: Sample VoIP Provider
-              schema:
-                type: object
-          description: Successful operation
-      summary: Add a media server to be monitored for this organization
-      tags:
-        - Monitored media servers
-  "/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}":
-    delete:
-      description: Delete a monitored media server from this organization. Only valid for organizations with Meraki Insight.
-      operationId: deleteOrganizationInsightMonitoredMediaServer
-      parameters:
-        - in: path
-          name: organizationId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: monitoredMediaServerId
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: Successful operation
-      summary: Delete a monitored media server from this organization
-      tags:
-        - Monitored media servers
-    get:
-      description: Return a monitored media server for this organization. Only valid for organizations with Meraki Insight.
-      operationId: getOrganizationInsightMonitoredMediaServer
-      parameters:
-        - in: path
-          name: organizationId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: monitoredMediaServerId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    address: 123.123.123.1
-                    id: "1284392014819"
-                    name: Sample VoIP Provider
-              schema:
-                type: object
-          description: Successful operation
-      summary: Return a monitored media server for this organization
-      tags:
-        - Monitored media servers
-    put:
-      description: Update a monitored media server for this organization. Only valid for organizations with Meraki Insight.
-      operationId: updateOrganizationInsightMonitoredMediaServer
-      parameters:
-        - in: path
-          name: organizationId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: monitoredMediaServerId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                address: 123.123.123.1
-                name: Sample VoIP Provider
-              properties:
-                address:
-                  description: The IP address (IPv4 only) or hostname of the media server to monitor
-                  type: string
-                name:
-                  description: The name of the VoIP provider
-                  type: string
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    address: 123.123.123.1
-                    id: "1284392014819"
-                    name: Sample VoIP Provider
-              schema:
-                type: object
-          description: Successful operation
-      summary: Update a monitored media server for this organization
-      tags:
-        - Monitored media servers
   "/organizations/{organizationId}/inventory":
     get:
       description: Return the inventory for an organization
@@ -16489,10 +15845,6 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/switch/linkAggregations/{linkAggregationId}
     summary: Update a link aggregation group
-  - group: MTU configuration
-    operation: update
-    resource: /networks/{networkId}/switch/settings/mtu
-    summary: Update the MTU configuration
   - group: MX l7 firewall
     operation: update
     resource: /networks/{networkId}/l7FirewallRules
@@ -16505,18 +15857,6 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/uplinkSettings
     summary: Updates the uplink settings for your MX network.
-  - group: Monitored media server
-    operation: create
-    resource: /organizations/{organizationId}/insight/monitoredMediaServers
-    summary: Add a media server to be monitored for this organization. Only valid for organizations with Meraki Insight.
-  - group: Monitored media server
-    operation: destroy
-    resource: /organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}
-    summary: Delete a monitored media server from this organization. Only valid for organizations with Meraki Insight.
-  - group: Monitored media server
-    operation: update
-    resource: /organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}
-    summary: Update a monitored media server for this organization. Only valid for organizations with Meraki Insight.
   - group: Multicast
     operation: update
     resource: /networks/{networkId}/switch/settings/multicast
@@ -16557,10 +15897,6 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/switch/settings/qosRules/{qosRuleId}
     summary: Update a quality of service rule
-  - group: Quality and retention setting
-    operation: update
-    resource: /devices/{serial}/camera/qualityAndRetentionSettings
-    summary: Update quality and retention settings for the given camera
   - group: RF profile
     operation: create
     resource: /networks/{networkId}/wireless/rfProfiles

@@ -604,7 +604,7 @@ paths:
         - personal
   "/api2/json/gender/{firstName}":
     get:
-      operationId: gender
+      operationId: gender_1
       parameters:
         - in: path
           name: firstName
@@ -629,7 +629,7 @@ paths:
         - personal
   "/api2/json/gender/{firstName}/{lastName}":
     get:
-      operationId: gender_1
+      operationId: gender
       parameters:
         - in: path
           name: firstName
@@ -1102,7 +1102,7 @@ paths:
         - japanese
   "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}":
     get:
-      operationId: japaneseNameKanjiCandidates
+      operationId: japaneseNameKanjiCandidates_1
       parameters:
         - in: path
           name: japaneseSurnameLatin
@@ -1132,7 +1132,7 @@ paths:
         - japanese
   "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{knownGender}":
     get:
-      operationId: japaneseNameKanjiCandidates_1
+      operationId: japaneseNameKanjiCandidates
       parameters:
         - in: path
           name: japaneseSurnameLatin
@@ -2194,6 +2194,63 @@ paths:
       summary: "[USES 10 UNITS PER NAME] Infer the likely origin of a list of up to 100 names at a country subclassification level (state or regeion). Initially, this is only supported for India (ISO2 code 'IN')."
       tags:
         - personal
+  "/api2/json/subclassificationFull/{countryIso2}/{fullName}":
+    get:
+      operationId: subclassificationFull
+      parameters:
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: fullName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGeoSubclassificationOut"
+          description: A classified name at a sub-country level.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely origin of a name at a country subclassification level (state or regeion). Initially, this is only supported for India (ISO2 code 'IN')."
+      tags:
+        - personal
+  /api2/json/subclassificationFullBatch:
+    post:
+      operationId: subclassificationFullBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameGeoIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameGeoSubclassificationOut"
+          description: A list of classified names at a sub-country level.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely origin of a list of up to 100 names at a country subclassification level (state or regeion). Initially, this is only supported for India (ISO2 code 'IN')."
+      tags:
+        - personal
   "/api2/json/subclassificationIndian/{firstName}/{lastName}":
     get:
       operationId: subclassificationIndian
@@ -2239,6 +2296,58 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BatchFirstLastNameGeoSubclassificationOut"
+          description: A list of classified names at a subcountry level.
+        "400":
+          description: Bad request (ex. too many names)
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely Indian state of Union territory according to ISO 3166-2:IN based on a list of up to 100 names."
+      tags:
+        - indian
+  "/api2/json/subclassificationIndianFull/{fullName}":
+    get:
+      operationId: subclassificationIndianFull
+      parameters:
+        - in: path
+          name: fullName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameGeoSubclassificationOut"
+          description: A classified name at a sub-country level.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: Email not Verified, or API Limit Reached, or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[USES 10 UNITS PER NAME] Infer the likely Indian state of Union territory according to ISO 3166-2:IN based on the name."
+      tags:
+        - indian
+  /api2/json/subclassificationIndianFullBatch:
+    post:
+      operationId: subclassificationIndianFullBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameGeoIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameGeoSubclassificationOut"
           description: A list of classified names at a subcountry level.
         "400":
           description: Bad request (ex. too many names)
@@ -3011,6 +3120,17 @@ components:
       type: object
       xml:
         name: BatchPersonalNameGeoOut
+    BatchPersonalNameGeoSubclassificationOut:
+      description: Represents the output of inferring the LIKELY country subclassification (regional names).
+      properties:
+        personalNames:
+          description: Classified names at sub country level (region or state)
+          items:
+            $ref: "#/components/schemas/PersonalNameGeoSubclassificationOut"
+          type: array
+      type: object
+      xml:
+        name: BatchPersonalNameGeoSubclassificationOut
     BatchPersonalNameGeoSubdivisionIn:
       properties:
         facts:
@@ -3860,6 +3980,54 @@ components:
       type: object
       xml:
         name: PersonalNameGeoOut
+    PersonalNameGeoSubclassificationOut:
+      description: Classified names at sub country level (region or state)
+      properties:
+        countryIso2:
+          description: The input country ISO2 code
+          type: string
+          xml:
+            attribute: true
+        id:
+          type: string
+        name:
+          description: The input name
+          type: string
+        probabilityAltCalibrated:
+          description: "The calibrated probability for subclassification OR subclassificationAlt to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        probabilityCalibrated:
+          description: "The calibrated probability for subclassification to have been guessed correctly. -1 = still calibrating. "
+          format: double
+          maximum: 1
+          minimum: -1
+          type: number
+        score:
+          description: "Compatibility to NamSor_v1 Origin score value. Higher score is better, but score is not normalized. Use calibratedProbability if available. "
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        script:
+          type: string
+        subClassification:
+          description: Most likely subclassification ISO_3166-2 code
+          type: string
+        subClassificationAlt:
+          description: "Second best alternative : subclassification ISO_3166-2 code"
+          type: string
+        subclassificationTop:
+          description: List subclassification ISO_3166-2 codes (top 10)
+          items:
+            description: List subclassification ISO_3166-2 codes (top 10)
+            type: string
+          type: array
+      type: object
+      xml:
+        name: PersonalNameGeoSubclassificationOut
     PersonalNameGeoSubdivisionIn:
       properties:
         countryIso2:

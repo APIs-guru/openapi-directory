@@ -1019,6 +1019,23 @@ components:
       type: object
     CreateLog:
       properties:
+        color:
+          description: "Color of the log. The color must be one of the following (green on unknown value or missing):\r
+
+            green, lightgreen, lime, yellow, orange, deeporange, red, pink, purple, deeppurple, blue, lightblue"
+          type: string
+        disabled:
+          description: "Set to true to disable the log on creation. Defaults to false. A log can be enabled/disabled\r
+
+            afterwards by calling the _disable and _enable endpoints."
+          type: boolean
+        environmentName:
+          description: "Environment name of the new log. Must match an environment name (case insensitive).\r
+
+            If a matching environment name was not found or the property is not set, the log\r
+
+            will appear under \"Other\" in the UI."
+          type: string
         name:
           description: Name of the new log.
           maxLength: 256

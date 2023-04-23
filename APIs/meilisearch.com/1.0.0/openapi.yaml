@@ -3,7 +3,7 @@ servers:
   - url: http://localhost:7700/
 info:
   contact: {}
-  title: Meilisearch v1.0
+  title: Meilisearch v1.1
   version: 1.0.0
   x-logo:
     url: https://meilisearch.com/apple-touch-icon.png
@@ -15,6 +15,7 @@ info:
 tags:
   - name: Documents
   - name: Search
+  - name: Multi-search
   - name: Tasks
   - name: Indexes
   - name: Settings
@@ -109,7 +110,7 @@ paths:
         - Indexes
     patch:
       description: Can only change the document identifier if it has not already been added before.
-      operationId: udpateIndex
+      operationId: updateIndex
       requestBody:
         content:
           application/json:
@@ -124,7 +125,7 @@ paths:
       responses:
         "200":
           description: ""
-      summary: "Udpate index "
+      summary: Update index
       tags:
         - Indexes
   /indexes/books/documents:
@@ -170,6 +171,11 @@ paths:
           name: primaryKey
           schema:
             example: id
+            type: string
+        - in: query
+          name: csvDelimiter
+          schema:
+            example: ;
             type: string
       requestBody:
         content:
@@ -262,6 +268,11 @@ paths:
           name: primaryKey
           schema:
             example: id
+            type: string
+        - in: query
+          name: csvDelimiter
+          schema:
+            example: ;
             type: string
       requestBody:
         content:
@@ -1240,6 +1251,55 @@ paths:
       summary: Update a key
       tags:
         - Key Management
+  /multi-search:
+    post:
+      description: Search one or more indexes
+      operationId: searchOneOrMoreIndexes
+      requestBody:
+        content:
+          application/json:
+            example:
+              queries:
+                - indexUid: books
+                  q: Pride and Prejudice
+                - attributesToHighlight:
+                    - title
+                  indexUid: books
+                  q: Alice In Wonderland
+            schema:
+              properties:
+                queries:
+                  example:
+                    - indexUid: books
+                      q: Pride and Prejudice
+                    - attributesToHighlight:
+                        - title
+                      indexUid: books
+                      q: Alice In Wonderland
+                  items:
+                    properties:
+                      attributesToHighlight:
+                        example:
+                          - title
+                        items:
+                          example: title
+                          type: string
+                        type: array
+                      indexUid:
+                        example: books
+                        type: string
+                      q:
+                        example: Pride and Prejudice
+                        type: string
+                    type: object
+                  type: array
+              type: object
+      responses:
+        "200":
+          description: ""
+      summary: Search one or more indexes
+      tags:
+        - Multi-search
   /stats:
     get:
       description: Global stats

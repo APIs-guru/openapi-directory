@@ -452,7 +452,7 @@ tags:
       | Email (`email`)                                | Allows the recipient to enter an email address. This is a one-line field that checks that a valid email address is entered. It uses the same parameters as a Text tab, with the validation message and pattern set for email information.<br><br>When getting information that includes this tab type, the original value of the tab when the associated envelope was sent is included in the response. This value can be set.                                                                                                                                                                                        |
       | Envelope ID (`envelopeId`)                     | Displays the envelope ID. Recipients cannot enter or change the information in this tab.  This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
       | First Name (`firstName`)                       | Displays the recipient's first name. This tab takes the recipient's name as entered in the recipient information, splits it into sections based on spaces and uses the first section as the first name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                  |
-      | Formula Tab (`formulaTab`)                     | The value of a formula tab is calculated from the values of other number or date tabs in the document. When the recipient completes the underlying fields, the formula tab calculates and displays the result. This value can be set.The `formula` property of the tab contains the references to the underlying tabs. See [Calculated Fields] in the DocuSign Support Center to learn more about formulas. If a formula tab contains a `paymentDetails` property, the tab is considered a payment item. See [Requesting Payments Along with Signatures] in the DocuSign Support Center to learn more about payments. |
+      | Formula Tab (`formulaTab`)                     | The value of a formula tab is calculated from the values of other number or date tabs in the document. When the recipient completes the underlying fields, the formula tab calculates and displays the result. This value can be set. The `formula` property of the tab contains the references to the underlying tabs. See [Calculated Fields] in the DocuSign Support Center to learn more about formulas. If a formula tab contains a `paymentDetails` property, the tab is considered a payment item. See [Requesting Payments Along with Signatures] in the DocuSign Support Center to learn more about payments. |
       | Full Name (`fullName`)                         | Displays the recipient's full name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
       | Initial Here (`initialHere`)                   | Allows the recipient to initial the document. May be optional. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
       | Last Name (`lastName`)                         | Displays the recipient's last name. This tab takes the recipient's name as entered in the recipient information, splits it into sections based on spaces and uses the last section as the last name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -1654,12 +1654,7 @@ tags:
       | signedDateTime | No | DateTime | Reserved: For DocuSign use only. |
       | offlineAttributes | No | &nbsp; | Reserved: For DocuSign use only.|
     name: TemplateRecipients
-  - description: |-
-      The TemplateBulkRecipients resource provide methods that allow you manage the bulk recipient file for an template.
-
-      The bulk recipient CSV (Comma Separated Value) file contains the list of recipient names and email addresses that you can add to an template to send the same document to a large number of recipients.
-       
-      The required and optional information that can be included the file is described in the BulkEnvelope: updateRecipients method
+  - description: ""
     name: TemplateBulkRecipients
   - description: |-
       The TemplateCustomFields resource provides methods that allow you manage custom fields in an template. 
@@ -1958,13 +1953,10 @@ tags:
       DocuSign eSignature includes a contacts list (also referred to as an address book) to help make sending envelopes even easier. When you send an envelope, the recipients' names and email addresses are automatically added to your contacts list. You can use the contacts list to quickly add recipients to the envelopes you send. The `Contacts` resource provides methods that enable you to manage your contacts.
 
     name: Contacts
-  - description: |+
-      Envelope attachments are files that an application can include in an envelope.
-      They are not converted to PDF. 
+  - description: |
+      Envelope attachments are files that an application can include in an envelope. They are not visible to envelope senders or recipients, and they are not converted to PDF. Envelope attachments are available only through the API.
 
-      Envelope attachments are available only through the API.
-      There is no user interface in the DocuSign web application for them.
-
+      To learn about the different types of attachments, see the [concept guide](/docs/esign-rest-api/esign101/concepts/documents/attachments/).
     name: EnvelopeAttachments
   - description: |
       An account permission profile is assigned to a group of users, enabling you to set permissions for all of the users in the group at the same time. You are not required to set Permission Profiles for a group, but it makes it easier to manage user permissions for a large number of users. 
@@ -2196,6 +2188,10 @@ tags:
     name: ReservedDomains
   - description: The EnvelopePublish resource provides a method for submitting existing envelopes to a webhook using an ad hoc Connect configuration. See the [Connect category](/docs/esign-rest-api/reference/connect/) for related endpoints.
     name: EnvelopePublish
+  - description: ""
+    name: DocumentGeneration
+  - description: ""
+    name: Authorizations
 paths:
   /service_information:
     get:
@@ -6646,7 +6642,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: A token returned in the response to a previous API call that is used to resume a search query from a specific point.
+        - description: Reserved for DocuSign.
           in: query
           name: continuation_token
           required: false
@@ -7061,7 +7057,6 @@ paths:
         Requiring authentication
 
         - [How to require access code authentication for a recipient](/docs/esign-rest-api/how-to/require-access-code-recipient/)
-        - [How to require SMS authentication for a recipient](/docs/esign-rest-api/how-to/sms-auth/)
         - [How to require phone authentication for a recipient](/docs/esign-rest-api/how-to/phone-auth/)
         - [How to require knowledge-based authentication (KBA) for a recipient](/docs/esign-rest-api/how-to/knowledge-based-authentication/)
         - [How to require ID verification (IDV) for a recipient](/docs/esign-rest-api/how-to/id-verification/)
@@ -8797,6 +8792,99 @@ paths:
       x-ds-method: update
       x-ds-methodname: updateCustomFields
       x-ds-service: Envelopes
+  "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/docGenFormFields":
+    get:
+      deprecated: false
+      description: ""
+      operationId: DocGenFormFields_GetEnvelopeDocGenFormFields
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |
+            The envelope's GUID. 
+
+            Example: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`
+          in: path
+          name: envelopeId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/docGenFormFieldResponse"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: Returns formfields for an envelope
+      tags:
+        - DocumentGeneration
+      x-ds-in-sdk: true
+      x-ds-method: getEnvelopeDocGenFormFields
+      x-ds-methodname: getEnvelopeDocGenFormFields
+      x-ds-service: Uncategorized
+    parameters: []
+    put:
+      deprecated: false
+      description: ""
+      operationId: DocGenFormFields_PutEnvelopeDocGenFormFields
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |
+            The envelope's GUID. 
+
+            Example: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`
+          in: path
+          name: envelopeId
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: update_docgen_formfields_only
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/docGenFormFieldRequest"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/docGenFormFieldResponse"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: Updates formfields for an envelope
+      tags:
+        - DocumentGeneration
+      x-ds-in-sdk: true
+      x-ds-method: updateEnvelopeDocGenFormFields
+      x-ds-methodname: updateEnvelopeDocGenFormFields
+      x-ds-service: Uncategorized
   "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents":
     delete:
       deprecated: false
@@ -8894,7 +8982,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: ""
+        - description: Reserved for DocuSign.
           in: query
           name: include_docgen_formfields
           required: false
@@ -13239,9 +13327,11 @@ paths:
 
         The default value reflects what happens
         if you omit the customization query parameter.
+        <!--
         You can use the interactive
         [Embedded Sending Demo tool](https://dsdemos.esigndemos.com/embeddedsending/v3/embeddedsending.aspx)
         to see the effect of using different query parameters.
+         -->
 
 
 
@@ -13724,9 +13814,11 @@ paths:
 
         The default value reflects what happens
         if you omit the customization query parameter.
+        <!--
         You can use the interactive
         [Embedded Sending Demo tool](https://dsdemos.esigndemos.com/embeddedsending/v3/embeddedsending.aspx)
         to see the effect of using different query parameters.
+         -->
 
         | Query Parameter             | Default Value                                                                                                    | Alternate Value                                                                                                                                                                                                                                   |
         | :-------------------------- | :--------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -18526,7 +18618,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: When **true,** the response only includes templates shared by the user. If false, the response only returns template not shared by the user. If not specified, the response is not affected.
+        - description: When **true,** the response only includes templates shared by the user. When **false,** the response only returns template not shared by the user. If not specified, templates are returned whether or not they have been shared by the user.
           in: query
           name: shared_by_me
           required: false
@@ -18576,7 +18668,7 @@ paths:
             Filters the templates in the response. Valid values are: 
 
             - `owned_by_me`: Results include only templates owned by the user.
-            - `shared_with_me`: Results include only templates owned by the user.  
+            - `shared_with_me`: Results include only templates shared with the user.  
             - `all`:  Results include all templates owned or shared with the user.
           in: query
           name: user_filter
@@ -18654,7 +18746,7 @@ paths:
         email address in the subject line
 
         To insert a recipient's name into the subject line,
-        use the `[[<roleName>_UserName]]` placholder
+        use the `[[<roleName>_UserName]]` placeholder
         in the  `emailSubject` property when you create the
         template:
 
@@ -20970,51 +21062,6 @@ paths:
       x-ds-methodname: deleteRecipient
       x-ds-service: Templates
     parameters: []
-  "/v2.1/accounts/{accountId}/templates/{templateId}/recipients/{recipientId}/bulk_recipients":
-    delete:
-      deprecated: false
-      description: Deletes the bulk recipient list on a template.
-      operationId: Recipients_DeleteTemplateBulkRecipientsFile
-      parameters:
-        - description: The external account number (int) or account ID GUID.
-          in: path
-          name: accountId
-          required: true
-          schema:
-            type: string
-        - description: A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-          in: path
-          name: recipientId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the template.
-          in: path
-          name: templateId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/bulkRecipientsUpdateResponse"
-          description: Successful response.
-        "400":
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/errorDetails"
-          description: Error encountered.
-      summary: Deletes the bulk recipient list on a template.
-      tags:
-        - TemplateBulkRecipients
-      x-ds-in-sdk: true
-      x-ds-method: delete
-      x-ds-methodname: deleteBulkRecipients
-      x-ds-service: Templates
-    parameters: []
   "/v2.1/accounts/{accountId}/templates/{templateId}/recipients/{recipientId}/document_visibility":
     get:
       deprecated: false
@@ -22281,10 +22328,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: |-
-            Filters results based on a full or partial user name.
-
-            **Note:** When you enter a partial user name, you do not use a wildcard character.
+        - description: Filters the user records returned by the user name or a sub-string of user name.
           in: query
           name: user_name_substring
           required: false
@@ -22584,6 +22628,454 @@ paths:
       x-ds-method: update
       x-ds-methodname: updateUser
       x-ds-service: Users
+  "/v2.1/accounts/{accountId}/users/{userId}/authorization":
+    parameters: []
+    post:
+      deprecated: false
+      description: ""
+      operationId: UserAuthorization_CreateUserAuthorization
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userAuthorizationCreateRequest"
+      responses:
+        "201":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/userAuthorization"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: |
+        Creates the user authorization.
+      tags:
+        - Authorizations
+      x-ds-in-sdk: true
+      x-ds-method: createUserAuthorization
+      x-ds-methodname: createUserAuthorization
+      x-ds-service: Uncategorized
+  "/v2.1/accounts/{accountId}/users/{userId}/authorization/{authorizationId}":
+    delete:
+      deprecated: false
+      description: ""
+      operationId: UserAuthorization_DeleteUserAuthorization
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: path
+          name: authorizationId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: |
+        Deletes the user authorization.
+      tags:
+        - Authorizations
+      x-ds-in-sdk: true
+      x-ds-method: deleteUserAuthorization
+      x-ds-methodname: deleteUserAuthorization
+      x-ds-service: Uncategorized
+    get:
+      deprecated: false
+      description: ""
+      operationId: UserAuthorization_GetUserAuthorization
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: path
+          name: authorizationId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/userAuthorization"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: |
+        Returns the user authorization for a given authorization ID.
+      tags:
+        - Authorizations
+      x-ds-in-sdk: true
+      x-ds-method: getUserAuthorization
+      x-ds-methodname: getUserAuthorization
+      x-ds-service: Uncategorized
+    parameters: []
+    put:
+      deprecated: false
+      description: ""
+      operationId: UserAuthorization_UpdateUserAuthorization
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: path
+          name: authorizationId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userAuthorizationUpdateRequest"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/userAuthorization"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: |
+        Updates the user authorization.
+      tags:
+        - Authorizations
+      x-ds-in-sdk: true
+      x-ds-method: updateUserAuthorization
+      x-ds-methodname: updateUserAuthorization
+      x-ds-service: Uncategorized
+  "/v2.1/accounts/{accountId}/users/{userId}/authorizations":
+    delete:
+      deprecated: false
+      description: ""
+      operationId: UserAuthorizations_DeleteUserAuthorizations
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userAuthorizationsDeleteRequest"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/userAuthorizationsDeleteResponse"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: |
+        Deletes the user authorizations.
+      tags:
+        - Authorizations
+      x-ds-in-sdk: true
+      x-ds-method: deleteUserAuthorizations
+      x-ds-methodname: deleteUserAuthorizations
+      x-ds-service: Uncategorized
+    get:
+      deprecated: false
+      description: ""
+      operationId: UserAuthorizations_GetPrincipalUserAuthorizations
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: active_only
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results to return.
+          in: query
+          name: count
+          required: false
+          schema:
+            type: string
+        - description: Filters returned user records by full email address or a substring of email address.
+          in: query
+          name: email_substring
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: permissions
+          required: false
+          schema:
+            type: string
+        - description: The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+          in: query
+          name: start_position
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Filters results based on a full or partial user name.
+
+            **Note:** When you enter a partial user name, you do not use a wildcard character.
+          in: query
+          name: user_name_substring
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/userAuthorizations"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: |
+        Returns the principal user authorizations.
+      tags:
+        - Authorizations
+      x-ds-in-sdk: true
+      x-ds-method: getPrincipalUserAuthorizations
+      x-ds-methodname: getPrincipalUserAuthorizations
+      x-ds-service: Uncategorized
+    parameters: []
+    post:
+      deprecated: false
+      description: ""
+      operationId: UserAuthorizations_PostUserAuthorizations
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userAuthorizationsRequest"
+      responses:
+        "201":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/userAuthorizationsResponse"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: |
+        Creates or updates user authorizations.
+      tags:
+        - Authorizations
+      x-ds-in-sdk: true
+      x-ds-method: createUserAuthorizations
+      x-ds-methodname: createUserAuthorizations
+      x-ds-service: Uncategorized
+  "/v2.1/accounts/{accountId}/users/{userId}/authorizations/agent":
+    get:
+      deprecated: false
+      description: ""
+      operationId: UserAgentAuthorizations_GetAgentUserAuthorizations
+      parameters:
+        - description: The external account number (int) or account ID GUID.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: active_only
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results to return.
+          in: query
+          name: count
+          required: false
+          schema:
+            type: string
+        - description: Filters returned user records by full email address or a substring of email address.
+          in: query
+          name: email_substring
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: permissions
+          required: false
+          schema:
+            type: string
+        - description: The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+          in: query
+          name: start_position
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Filters results based on a full or partial user name.
+
+            **Note:** When you enter a partial user name, you do not use a wildcard character.
+          in: query
+          name: user_name_substring
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/userAuthorizations"
+          description: Successful response.
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/errorDetails"
+          description: Error encountered.
+      summary: |
+        Returns the agent user authorizations.
+      tags:
+        - Authorizations
+      x-ds-in-sdk: true
+      x-ds-method: getAgentUserAuthorizations
+      x-ds-methodname: getAgentUserAuthorizations
+      x-ds-service: Uncategorized
+    parameters: []
   "/v2.1/accounts/{accountId}/users/{userId}/cloud_storage":
     delete:
       deprecated: false
@@ -26434,11 +26926,6 @@ components:
         checkboxTabsEnabled:
           description: When **true,** checkbox tabs are enabled.
           type: string
-        currencyTabsEnabled:
-          description: ""
-          type: string
-        currencyTabsMetadata:
-          $ref: "#/components/schemas/settingsMetadata"
         dataFieldRegexEnabled:
           description: When **true,** regular expressions are enabled for tabs that contain data fields.
           type: string
@@ -26468,6 +26955,11 @@ components:
           description: When **true,** note tabs are enabled.
           type: string
         noteTabsMetadata:
+          $ref: "#/components/schemas/settingsMetadata"
+        numericalTabsEnabled:
+          description: ""
+          type: string
+        numericalTabsMetadata:
           $ref: "#/components/schemas/settingsMetadata"
         prefillTabsEnabled:
           description: ""
@@ -26776,6 +27268,42 @@ components:
       x-ds-definition-name: accountInformation
       x-ds-order: "1"
       x-ms-summary: Account management
+    Authorizations:
+      description: ""
+      properties:
+        agentUser:
+          $ref: "#/components/schemas/authorizationUser"
+        authorizationId:
+          description: ""
+          type: string
+        created:
+          description: The UTC DateTime when the workspace user authorization was created.
+          type: string
+        createdBy:
+          description: ""
+          type: string
+        endDate:
+          description: ""
+          type: string
+        modified:
+          description: ""
+          type: string
+        modifiedBy:
+          description: The user ID (GUID) of the user who last modified this user record. This property is read-only.
+          type: string
+        permission:
+          description: ""
+          type: string
+        principalUser:
+          $ref: "#/components/schemas/authorizationUser"
+        startDate:
+          description: ""
+          type: string
+      type: object
+      x-ds-category: Accounts
+      x-ds-definition-name: userAuthorization
+      x-ds-order: "100"
+      x-ms-summary: ""
     BCCEmailArchive:
       description: |
         The `EmailArchive` resource provides methods for managing your email archive configuration, which consists of the BCC email address or addresses that you want to use to archive DocuSign emails. Each account can use up to five BCC email addresses for archiving purposes.
@@ -27301,7 +27829,10 @@ components:
             **Note:** If `useSoapInterface` is set to **true,** you must set this value.
           type: string
         urlToPublishTo:
-          description: The endpoint to which Connect should send webhook notification messages via an HTTPS POST request. The URL must start with `https`. The customer's web server must use an SSL/TLS certificate whose CA is in the Microsoft list of trusted CAs. Self-signed certificates are not acceptable, but you can use free certificates from Let's Encrypt.
+          description: |-
+            The endpoint to which Connect should send webhook notification messages via an HTTPS POST request. The URL must start with `https`. The customer's web server must use an SSL/TLS certificate whose CA is in the Microsoft list of trusted CAs. Self-signed certificates are not acceptable, but you can use free certificates from Let's Encrypt.
+
+            The maximum length of this property is 4096 bytes.
           type: string
         useSoapInterface:
           description: When **true,** indicates that the `urlToPublishTo` property contains a SOAP endpoint.
@@ -27861,6 +28392,21 @@ components:
       x-ds-definition-name: tabMetadata
       x-ds-order: "10"
       x-ms-summary: Custom tabs
+    DocumentGeneration:
+      description: ""
+      properties:
+        docGenFormFields:
+          description: ""
+          items:
+            $ref: "#/components/schemas/docGenFormFields"
+          type: array
+        errorDetails:
+          $ref: "#/components/schemas/errorDetails"
+      type: object
+      x-ds-category: Envelopes
+      x-ds-definition-name: docGenFormFieldResponse
+      x-ds-order: "100"
+      x-ms-summary: ""
     DocumentResponsiveHtml:
       description: ""
       properties:
@@ -28327,11 +28873,6 @@ components:
             [company]: /docs/esign-rest-api/reference/envelopes/enveloperecipienttabs/create/#parameters_company
           items:
             $ref: "#/components/schemas/company"
-          type: array
-        currencyTabs:
-          description: ""
-          items:
-            $ref: "#/components/schemas/currency"
           type: array
         dateSignedTabs:
           description: |
@@ -29025,11 +29566,6 @@ components:
             [company]: /docs/esign-rest-api/reference/envelopes/enveloperecipienttabs/create/#parameters_company
           items:
             $ref: "#/components/schemas/company"
-          type: array
-        currencyTabs:
-          description: ""
-          items:
-            $ref: "#/components/schemas/currency"
           type: array
         dateSignedTabs:
           description: |
@@ -30605,11 +31141,6 @@ components:
         checkboxTabsEnabled:
           description: When **true,** checkbox tabs are enabled.
           type: string
-        currencyTabsEnabled:
-          description: ""
-          type: string
-        currencyTabsMetadata:
-          $ref: "#/components/schemas/settingsMetadata"
         dataFieldRegexEnabled:
           description: When **true,** regular expressions are enabled for tabs that contain data fields.
           type: string
@@ -30639,6 +31170,11 @@ components:
           description: When **true,** note tabs are enabled.
           type: string
         noteTabsMetadata:
+          $ref: "#/components/schemas/settingsMetadata"
+        numericalTabsEnabled:
+          description: ""
+          type: string
+        numericalTabsMetadata:
           $ref: "#/components/schemas/settingsMetadata"
         prefillTabsEnabled:
           description: ""
@@ -30884,11 +31420,6 @@ components:
             [company]: /docs/esign-rest-api/reference/envelopes/enveloperecipienttabs/create/#parameters_company
           items:
             $ref: "#/components/schemas/company"
-          type: array
-        currencyTabs:
-          description: ""
-          items:
-            $ref: "#/components/schemas/currency"
           type: array
         dateSignedTabs:
           description: |
@@ -31452,11 +31983,6 @@ components:
             [company]: /docs/esign-rest-api/reference/envelopes/enveloperecipienttabs/create/#parameters_company
           items:
             $ref: "#/components/schemas/company"
-          type: array
-        currencyTabs:
-          description: ""
-          items:
-            $ref: "#/components/schemas/currency"
           type: array
         dateSignedTabs:
           description: |
@@ -33764,6 +34290,16 @@ components:
     accountSettingsInformation:
       description: Contains account settings information. Used in requests to set property values. Used in responses to report property values.
       properties:
+        EnvelopeLimitsTotalDocumentSizeAllowedInMB:
+          description: ""
+          type: string
+        EnvelopeLimitsTotalDocumentSizeAllowedInMBEnabled:
+          description: ""
+          type: string
+        EnvelopeLimitsTotalDocumentSizeAllowedInMBEnabledMetadata:
+          $ref: "#/components/schemas/settingsMetadata"
+        EnvelopeLimitsTotalDocumentSizeAllowedInMBMetadata:
+          $ref: "#/components/schemas/settingsMetadata"
         accessCodeFormat:
           $ref: "#/components/schemas/accessCodeFormat"
         accountDateTimeFormat:
@@ -33941,6 +34477,11 @@ components:
             Specifies whether eNote eOriginal integration is enabled.
           type: string
         allowENoteEOriginalMetadata:
+          $ref: "#/components/schemas/settingsMetadata"
+        allowEditingEnvelopesOnBehalfOfOthers:
+          description: ""
+          type: string
+        allowEditingEnvelopesOnBehalfOfOthersMetadata:
           $ref: "#/components/schemas/settingsMetadata"
         allowEnvelopeCorrect:
           description: |
@@ -34705,6 +35246,9 @@ components:
           type: string
         documentVisibilityMetadata:
           $ref: "#/components/schemas/settingsMetadata"
+        dss_EnableProvisioningPenConfiguration_RadminOption:
+          description: ""
+          type: string
         dss_SIGN_28411_EnableLeavePagePrompt_RadminOption:
           description: ""
           type: string
@@ -35144,16 +35688,6 @@ components:
           type: string
         envelopeIntegrationEnabledMetadata:
           $ref: "#/components/schemas/settingsMetadata"
-        envelopeLimitsTotalDocumentSizeAllowedInMB:
-          description: ""
-          type: string
-        envelopeLimitsTotalDocumentSizeAllowedInMBEnabled:
-          description: ""
-          type: string
-        envelopeLimitsTotalDocumentSizeAllowedInMBEnabledMetadata:
-          $ref: "#/components/schemas/settingsMetadata"
-        envelopeLimitsTotalDocumentSizeAllowedInMBMetadata:
-          $ref: "#/components/schemas/settingsMetadata"
         envelopeSearchMode:
           description: ""
           type: string
@@ -35324,6 +35858,9 @@ components:
           type: string
         inSessionSuppressEmailsMetadata:
           $ref: "#/components/schemas/settingsMetadata"
+        isConnectDocumentFieldsEnabled:
+          description: ""
+          type: string
         linkedExternalPrimaryAccounts:
           description: ""
           items:
@@ -35369,6 +35906,9 @@ components:
           type: string
         optInMobileSigningV02Metadata:
           $ref: "#/components/schemas/settingsMetadata"
+        optInUniversalSignatures:
+          description: ""
+          type: string
         optOutAutoNavTextAndTabColorUpdates:
           description: Boolean that allows envelope senders to opt out of the recipient signing auto-navigation feature and opt out of updating tab font color.
           type: string
@@ -36836,6 +37376,9 @@ components:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
           type: string
+        bulkSendV2Recipient:
+          description: ""
+          type: string
         clientUserId:
           description: |
             Specifies whether the recipient is embedded or remote. 
@@ -37690,6 +38233,27 @@ components:
       type: object
       x-ds-definition-name: authenticationStatus
       x-ms-summary: A complex element that contains information about a user's authentication status.
+    authorizationUser:
+      description: ""
+      properties:
+        accountId:
+          description: The account ID associated with the envelope.
+          type: string
+        email:
+          description: ""
+          type: string
+        name:
+          description: ""
+          type: string
+        userId:
+          description: |-
+            The ID of the user to access.
+
+            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+          type: string
+      type: object
+      x-ds-definition-name: authorizationUser
+      x-ms-summary: ""
     bccEmailAddress:
       description: Contains information about the BCC email address.
       properties:
@@ -38994,14 +39558,6 @@ components:
       type: object
       x-ds-definition-name: bulkProcessingLists
       x-ms-summary: ""
-    bulkRecipientsUpdateResponse:
-      description: ""
-      properties:
-        signer:
-          $ref: "#/components/schemas/signer"
-      type: object
-      x-ds-definition-name: bulkRecipientsUpdateResponse
-      x-ms-summary: ""
     bulkSendBatchActionRequest:
       description: ""
       properties:
@@ -39619,7 +40175,7 @@ components:
     bulksendingCopyDocGenFormField:
       description: ""
       properties:
-        label:
+        name:
           description: ""
           type: string
         value:
@@ -39700,6 +40256,9 @@ components:
         autoRespondedReason:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         clientUserId:
           description: Not applicable for Carbon Copy recipients.
@@ -40006,6 +40565,9 @@ components:
         autoRespondedReason:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         clientUserId:
           description: |
@@ -44869,469 +45431,6 @@ components:
       type: object
       x-ds-definition-name: creditCardTypes
       x-ms-summary: ""
-    currency:
-      description: ""
-      properties:
-        anchorAllowWhiteSpaceInCharacters:
-          description: |
-            When **true,** the text string in the document may have extra whitespace and still match the anchor string. This occurs in two cases.
-
-            First, it matches if the document string has a single extra whitespace character following a non-whitespace character in the anchor string. For example, if the anchor string is `DocuSign`, then `Docu Sign` will match. However, <code>Docu&nbsp;&nbsp;&nbsp;Sign</code> will not match.
-
-            Second, it matches if the document string has one or more extra whitespace characters following a whitespace character in the anchor string. For example, if the anchor string is `Docu Sign`, then <code>Docu&nbsp;&nbsp;&nbsp;Sign</code> will match.
-
-            The default value is **true.**
-          type: string
-        anchorAllowWhiteSpaceInCharactersMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorCaseSensitive:
-          description: |-
-            This property controls how [anchor tabs][AnchorTabs] are placed. When **true,** the text string in a document must match the case of the `anchorString` property for an anchor tab to be created. The default value is **false.**
-
-            For example, when set to **true,** if the anchor string is `DocuSign`, then `DocuSign` will match but `Docusign`, `docusign`, `DoCuSiGn`, etc. will not match. When **false,** `DocuSign`, `Docusign`, `docusign`, `DoCuSiGn`, etc. will all match.
-
-            This functionality uses the following rules:
-
-            - Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:
-
-              $~><|^+=
-
-              For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`
-
-            - Strings embedded in other strings are ignored during the matching process.
-
-            - In words that have dashes, the parts separated by dashes are treated as distinct words.
-
-              Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true.**
-
-            - Letters with accent marks are treated as distinct characters from their unaccented counterparts.
-
-            - For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.
-
-              Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.
-
-            - Unlike punctuation, numbers are not ignored when finding anchor words.
-
-              Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).
-
-            **Note:** You can only specify the value of this property in POST requests.
-
-            [AnchorTabs]: /docs/esign-rest-api/esign101/concepts/tabs/auto-place/
-          type: string
-        anchorCaseSensitiveMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorHorizontalAlignment:
-          description: |
-            This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
-
-            - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
-
-            **Note:** You can only specify the value of this property in POST requests.
-
-            [AnchorTabs]: /docs/esign-rest-api/esign101/concepts/tabs/auto-place/
-          type: string
-        anchorHorizontalAlignmentMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorIgnoreIfNotPresent:
-          description: When **true,** this tab is ignored if the `anchorString` is not found in the document.
-          type: string
-        anchorIgnoreIfNotPresentMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorMatchWholeWord:
-          description: |
-            When **true,** the text string in a document must match the value of the `anchorString` property in its entirety for an [anchor tab][AnchorTab] to be created. The default value is **false.**
-
-            For example, when set to **true,** if the input is `man` then `man` will match but `manpower`, `fireman`, and `penmanship` will not. When **false,** if the input is `man` then `man`, `manpower`, `fireman`, and `penmanship` will all match.
-
-            This functionality uses the following rules:
-
-            - Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:
-
-              $~><|^+=
-
-              For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`
-
-            - Strings embedded in other strings are ignored during the matching process.
-
-            - In words that have dashes, the parts separated by dashes are treated as distinct words.
-
-              Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true.**
-
-            - Letters with accent marks are treated as distinct characters from their unaccented counterparts.
-
-            - For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.
-
-              Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.
-
-            - Unlike punctuation, numbers are not ignored when finding anchor words.
-
-              Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).
-
-
-            **Note:** You can only specify the value of this property in POST requests.
-
-            [AnchorTab]: /docs/esign-rest-api/esign101/concepts/tabs/auto-place/
-          type: string
-        anchorMatchWholeWordMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorString:
-          description: Specifies the string to find in the document and use as the basis for tab placement.
-          type: string
-        anchorStringMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorTabProcessorVersion:
-          description: Reserved for DocuSign.
-          type: string
-        anchorTabProcessorVersionMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorUnits:
-          description: |
-            Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:
-
-            - `pixels` (default)
-            - `inches`
-            - `mms`
-            - `cms`
-          type: string
-        anchorUnitsMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorXOffset:
-          description: |
-            Specifies the X axis location of the tab in `anchorUnits` relative to the `anchorString`.
-          type: string
-        anchorXOffsetMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        anchorYOffset:
-          description: |
-            Specifies the Y axis location of the tab in `anchorUnits` relative to the `anchorString`.
-          type: string
-        anchorYOffsetMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        bold:
-          description: When **true,** the information in the tab is bold.
-          type: string
-        boldMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        caption:
-          description: ""
-          type: string
-        captionMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        concealValueOnDocument:
-          description: |-
-            When **true,** the field appears normally while the recipient is adding or modifying the information in the field, but the data is not visible (the characters are hidden by asterisks) to any other signer or the sender.
-
-            When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
-
-            This setting applies only to text boxes and does not affect list boxes, radio buttons, or check boxes.
-          type: string
-        concealValueOnDocumentMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        conditionalParentLabel:
-          description: For conditional fields this is the `tabLabel` of the parent tab that controls this tab's visibility.
-          type: string
-        conditionalParentLabelMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        conditionalParentValue:
-          description: |
-            For conditional fields, this is the value of the parent tab that controls the tab's visibility.
-
-            If the parent tab is a Checkbox, Radio button, Optional Signature, or Optional Initial use "on" as the value to show that the parent tab is active.
-          type: string
-        conditionalParentValueMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        customTabId:
-          description: |-
-            The DocuSign generated custom tab ID for the custom tab to be applied.
-            This can only be used when adding new tabs for a recipient.
-            When used, the new tab inherits all the custom tab properties.
-          type: string
-        customTabIdMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        disableAutoSize:
-          description: When **true,** disables the auto sizing of single line text boxes in the signing screen when the signer enters data. If disabled users will only be able enter as much data as the text box can hold. By default this is false. This property only affects single line text boxes.
-          type: string
-        disableAutoSizeMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        documentId:
-          description: Specifies the document ID number that the tab is placed on. This must refer to an existing document's ID attribute.
-          type: string
-        documentIdMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        errorDetails:
-          $ref: "#/components/schemas/errorDetails"
-        font:
-          description: |
-            The font to be used for the tab value. Supported fonts include:
-
-            - Default
-            - Arial
-            - ArialNarrow
-            - Calibri
-            - CourierNew
-            - Garamond
-            - Georgia
-            - Helvetica
-            - LucidaConsole
-            - MSGothic
-            - MSMincho
-            - OCR-A
-            - Tahoma
-            - TimesNewRoman
-            - Trebuchet
-            - Verdana
-          type: string
-        fontColor:
-          description: |
-            The font color to use for the information in the tab. Possible values are: 
-
-            - Black
-            - BrightBlue
-            - BrightRed
-            - DarkGreen
-            - DarkRed
-            - Gold
-            - Green
-            - NavyBlue
-            - Purple
-            - White
-          type: string
-        fontColorMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        fontMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        fontSize:
-          description: |-
-            The font size used for the information in the tab. Possible values are:
-
-            - Size7
-            - Size8
-            - Size9
-            - Size10
-            - Size11
-            - Size12
-            - Size14
-            - Size16
-            - Size18
-            - Size20
-            - Size22
-            - Size24
-            - Size26
-            - Size28
-            - Size36
-            - Size48
-            - Size72
-          type: string
-        fontSizeMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        formOrder:
-          description: An integer specifying the order in which the guided form HTML should render. The order is relative to the `formPageLabel`, the group by which to place the guided form HTML block.
-          type: string
-        formOrderMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        formPageLabel:
-          description: A string specifying the group in which to place the guided form HTML. Each group displays as a separate guided forms page in the signing experience.
-          type: string
-        formPageLabelMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        formPageNumber:
-          description: An integer specifying the order in which to present the guided form pages.
-          type: string
-        formPageNumberMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        height:
-          description: The height of the tab in pixels.
-          type: string
-        heightMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        italic:
-          description: When **true,** the information in the tab is italic.
-          type: string
-        italicMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        localePolicy:
-          $ref: "#/components/schemas/localePolicyTab"
-        locked:
-          description: When **true,** the signer cannot change the data of the custom tab.
-          type: string
-        lockedMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        maxLength:
-          description: An optional value that describes the maximum length of the property when the property is a string.
-          type: string
-        maxLengthMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        maxNumericalValue:
-          description: ""
-          type: string
-        mergeField:
-          $ref: "#/components/schemas/mergeField"
-        mergeFieldXml:
-          description: Reserved for DocuSign.
-          type: string
-        minNumericalValue:
-          description: ""
-          type: string
-        name:
-          description: ""
-          type: string
-        nameMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        numericalValue:
-          description: ""
-          type: string
-        originalValue:
-          description: "The initial value of the tab when it was sent to the recipient. "
-          type: string
-        originalValueMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        pageNumber:
-          description: Specifies the page number on which the tab is located.
-          type: string
-        pageNumberMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        recipientId:
-          description: Unique for the recipient. It is used by the tab element to indicate which recipient is to sign the document.
-          type: string
-        recipientIdGuid:
-          description: The globally-unique identifier (GUID) for a specific recipient on a specific envelope. If the same recipient is associated with multiple envelopes, they will have a different GUID for each one. This property is read-only.
-          type: string
-        recipientIdGuidMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        recipientIdMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        requireAll:
-          description: "When **true** and shared is true, information must be entered in this field to complete the envelope. "
-          type: string
-        requireAllMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        requireInitialOnSharedChange:
-          description: Optional element for field markup. When **true,** the signer is required to initial when they modify a shared field.
-          type: string
-        requireInitialOnSharedChangeMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        required:
-          description: When **true,** the signer is required to fill out this tab.
-          type: string
-        requiredMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        senderRequired:
-          description: |-
-            When **true,** the sender must populate the tab before an envelope can be sent using the template. 
-
-            This value tab can only be changed by modifying (PUT) the template. 
-
-            Tabs with a `senderRequired` value of true cannot be deleted from an envelope.
-          type: string
-        senderRequiredMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        shared:
-          description: When **true,** this custom tab is shared.
-          type: string
-        sharedMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        smartContractInformation:
-          $ref: "#/components/schemas/smartContractInformation"
-        source:
-          description: Reserved for DocuSign.
-          type: string
-        status:
-          description: |-
-            Indicates the envelope status. Valid values are:
-
-            * `sent` - The envelope is sent to the recipients. 
-            * `created` - The envelope is saved as a draft and can be modified and sent later.
-          type: string
-        statusMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        tabGroupLabels:
-          description: |-
-            An array of tab groups that this tab belongs to. Tab groups are identified by their `groupLabel` property.
-
-            To associate this tab with a tab group, add the tab group's `groupLabel` to this array.
-          items:
-            type: string
-          type: array
-        tabGroupLabelsMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        tabId:
-          description: The unique identifier for the tab.
-          type: string
-        tabIdMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        tabLabel:
-          description: |
-            The label associated with the tab. This value may be an empty string.
-            If no value is provided, the tab type is used as the value.
-
-            Maximum Length: 500 characters.
-          type: string
-        tabLabelMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        tabOrder:
-          description: |-
-            A positive integer that sets the order the tab is navigated to during signing.
-
-            Tabs on a page are navigated to in ascending order, starting with the lowest number and moving to the highest. If two or more tabs have the same `tabOrder` value, the normal auto-navigation setting behavior for the envelope is used.
-          type: string
-        tabOrderMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        tabType:
-          description: Indicates the type of tab (for example, `signHere` or `initialHere`).
-          type: string
-        tabTypeMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        templateLocked:
-          description: "When **true,** the sender cannot change any attributes of the recipient. Used only when working with template recipients. "
-          type: string
-        templateLockedMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        templateRequired:
-          description: When **true,** the sender may not remove the recipient. Used only when working with template recipients.
-          type: string
-        templateRequiredMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        toolTipMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        tooltip:
-          description: |
-            The text of a tooltip that appears when a user hovers over a form field or tab.
-          type: string
-        underline:
-          description: When **true,** the information in the tab is underlined.
-          type: string
-        underlineMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        value:
-          description: "Specifies the value of the tab. "
-          type: string
-        valueMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        width:
-          description: The width of the tab in pixels.
-          type: string
-        widthMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        xPosition:
-          description: |
-            This property indicates the horizontal offset of the object on the page.
-            DocuSign uses 72 DPI when determining position.
-            Required. May be zero.
-          type: string
-        xPositionMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-        yPosition:
-          description: |
-            This property indicates the vertical offset of the object on the page.
-            DocuSign uses 72 DPI when determining position.
-            Required. May be zero.
-          type: string
-        yPositionMetadata:
-          $ref: "#/components/schemas/propertyMetadata"
-      type: object
-      x-ds-definition-name: currency
-      x-ms-summary: ""
     currencyFeatureSetPrice:
       description: Information about the price and currency associated with the feature set. Reserved for internal DocuSign use only.
       properties:
@@ -46873,20 +46972,17 @@ components:
     delegationInfo:
       description: ""
       properties:
-        email:
+        Email:
           description: ""
           type: string
-        name:
+        Name:
           description: ""
           type: string
-        userAuthorizationId:
+        UserAuthorizationId:
           description: ""
           type: string
-        userId:
-          description: |-
-            The ID of the user to access.
-
-            **Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.
+        UserId:
+          description: ""
           type: string
       type: object
       x-ds-definition-name: delegationInfo
@@ -47066,6 +47162,52 @@ components:
           type: string
       type: object
       x-ds-definition-name: docGenFormField
+      x-ms-summary: ""
+    docGenFormFieldRequest:
+      description: ""
+      properties:
+        docGenFormFields:
+          description: ""
+          items:
+            $ref: "#/components/schemas/docGenFormFields"
+          type: array
+      type: object
+      x-ds-definition-name: docGenFormFieldRequest
+      x-ms-summary: ""
+    docGenFormFieldResponse:
+      description: ""
+      properties:
+        docGenFormFields:
+          description: ""
+          items:
+            $ref: "#/components/schemas/docGenFormFields"
+          type: array
+        errorDetails:
+          $ref: "#/components/schemas/errorDetails"
+      type: object
+      x-ds-definition-name: docGenFormFieldResponse
+      x-ms-summary: ""
+    docGenFormFields:
+      description: ""
+      properties:
+        docGenDocumentStatus:
+          description: ""
+          type: string
+        docGenErrors:
+          description: ""
+          items:
+            $ref: "#/components/schemas/docGenSyntaxError"
+          type: array
+        docGenFormFieldList:
+          description: ""
+          items:
+            $ref: "#/components/schemas/docGenFormField"
+          type: array
+        documentId:
+          description: Specifies the document ID number that the tab is placed on. This must refer to an existing Document's ID attribute.
+          type: string
+      type: object
+      x-ds-definition-name: docGenFormFields
       x-ms-summary: ""
     docGenSyntaxError:
       description: ""
@@ -48045,7 +48187,13 @@ components:
       x-ds-definition-name: draw
       x-ms-summary: A tab that allows the recipient to add a free-form drawing to the document.
     eNoteConfiguration:
-      description: This object contains information used to configure [eNote](https://www.docusign.com/products/enote) functionality. To use eNote, the Allow eNote for eOriginal account plan item must be on, and the Connect configuration for eOriginal must be set correctly.
+      description: |
+        This object contains information used to
+        configure [eNote][eNote] functionality.
+        To use eNote, the Allow eNote for eOriginal account plan item must be on,
+        and the Connect configuration for eOriginal must be set correctly.
+
+        [eNote]: https://support.docusign.com/s/document-item?language=en_US&rsc_301&bundleId=pik1583277475390&topicId=tsn1583277394951.html&_LANG=enus
       properties:
         apiKey:
           description: ""
@@ -48057,7 +48205,8 @@ components:
           description: |-
             When **false,** the user must configure eNote for the feature to work.
 
-            **Note:** In the account settings, `allowENoteEOriginal` must be set to **true** to make changes to the configuration.
+            **Note:** In the account settings, `allowENoteEOriginal` must be **true**
+            to make changes to the configuration.
           type: string
         organization:
           description: The name of the organization.
@@ -48070,7 +48219,13 @@ components:
           type: string
       type: object
       x-ds-definition-name: eNoteConfiguration
-      x-ms-summary: This object contains information used to configure [eNote](https://www.docusign.com/products/enote) functionality. To use eNote, the Allow eNote for eOriginal account plan item must be on, and the Connect configuration for eOriginal must be set correctly.
+      x-ms-summary: |
+        This object contains information used to
+        configure [eNote][eNote] functionality.
+        To use eNote, the Allow eNote for eOriginal account plan item must be on,
+        and the Connect configuration for eOriginal must be set correctly.
+
+        [eNote]: https://support.docusign.com/s/document-item?language=en_US&rsc_301&bundleId=pik1583277475390&topicId=tsn1583277394951.html&_LANG=enus
     editor:
       description: A complex type defining the management and access rights of a recipient assigned as an editor on the envelope. Editors have the same management and access rights for the envelope as the sender. They can make changes to the envelope as if they were using the Correct feature. This recipient can add name and email information, add or change the routing order and set authentication options for the remaining recipients. Additionally, this recipient can edit signature/initial tabs and text tabs for the remaining recipients.
       properties:
@@ -48100,6 +48255,9 @@ components:
         autoRespondedReason:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         clientUserId:
           description: |
@@ -51648,7 +51806,7 @@ components:
       description: "Result set for the Envelopes: listStatusChanges method"
       properties:
         continuationToken:
-          description: A token returned by an earlier API call that you can use with a new call to resume a search query at the point where it left off.  This token system enhances the performance of the API.
+          description: Reserved for DocuSign.
           type: string
         endPosition:
           description: "The last index position in the result set. "
@@ -51822,7 +51980,10 @@ components:
             The namespace value must be set if useSoapInterface is set to true.
           type: string
         url:
-          description: The endpoint to which webhook notification messages are sent via an HTTPS POST request. The URL must start with https. The customer's web server must use an SSL/TLS certificate whose CA is in the Microsoft list of trusted CAs. Self-signed certificates are not ok. Free certificates from Let's Encrypt can be used.
+          description: |
+            The endpoint to which Connect should send webhook notification messages via an HTTPS POST request. The URL must start with `https`. The customer's web server must use an SSL/TLS certificate whose CA is in the Microsoft list of trusted CAs. Self-signed certificates are not acceptable, but you can use free certificates from Let's Encrypt.
+
+            The maximum length of this property is 4096 bytes.
           type: string
         useSoapInterface:
           description: "When **true,** this tells the Connect service that the user's endpoint has implemented a SOAP interface. "
@@ -52934,6 +53095,9 @@ components:
           description: The name of the form field.
           type: string
         numericalValue:
+          description: ""
+          type: string
+        originalNumericalValue:
           description: ""
           type: string
         originalValue:
@@ -54122,6 +54286,9 @@ components:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
           type: string
+        bulkSendV2Recipient:
+          description: ""
+          type: string
         canSignOffline:
           description: When **true,** specifies that the signer can perform the signing ceremony offline.
           type: string
@@ -54945,6 +55112,9 @@ components:
         autoRespondedReason:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         clientUserId:
           description: |
@@ -57386,6 +57556,9 @@ components:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
           type: string
+        bulkSendV2Recipient:
+          description: ""
+          type: string
         clientUserId:
           description: |
             Specifies whether the recipient is embedded or remote. 
@@ -57828,6 +58001,9 @@ components:
           type: string
         bulkRecipientsUri:
           description: Reserved for DocuSign.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         canSignOffline:
           description: When **true,** specifies that the signer can perform the signing ceremony offline.
@@ -59798,6 +59974,9 @@ components:
         numericalValue:
           description: ""
           type: string
+        originalNumericalValue:
+          description: ""
+          type: string
         originalValue:
           description: "The initial value of the tab when it was sent to the recipient. "
           type: string
@@ -60108,6 +60287,9 @@ components:
         autoRespondedReason:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         clientUserId:
           description: |
@@ -62555,6 +62737,9 @@ components:
           type: string
         lockedMetadata:
           $ref: "#/components/schemas/propertyMetadata"
+        mergeFieldXml:
+          description: Reserved for DocuSign.
+          type: string
         pageNumber:
           description: |
             Specifies the page number on which the tab is located.
@@ -62866,11 +63051,17 @@ components:
     recipientFormData:
       description: ""
       properties:
-        declinedTime:
-          description: ""
+        DeclinedTime:
+          description: The date and time the recipient declined the envelope.
           type: string
-        deliveredTime:
-          description: ""
+        DeliveredTime:
+          description: The date and time the recipient viewed the documents in the envelope in the DocuSign signing UI.
+          type: string
+        SentTime:
+          description: The date and time the envelope was sent to the recipient.
+          type: string
+        SignedTime:
+          description: The date and time the recipient signed the documents.
           type: string
         email:
           description: The recipient's email address.
@@ -62885,12 +63076,6 @@ components:
           type: string
         recipientId:
           description: Unique for the recipient. It is used by the tab element to indicate which recipient is to sign the Document.
-          type: string
-        sentTime:
-          description: ""
-          type: string
-        signedTime:
-          description: ""
           type: string
       type: object
       x-ds-definition-name: recipientFormData
@@ -63445,7 +63630,7 @@ components:
             * `signing_complete`: The recipient completed the signing ceremony.
             * `ttl_expired`: The Time To Live token for the envelope has expired.
               After being successfully invoked, these tokens expire
-              after 5 minutes or if the envelope is voided.
+              after five minutes.
             * `viewing_complete`: The recipient completed viewing an envelope
               that is in a read-only/terminal state,
               such as completed, declined, or voided.
@@ -63758,6 +63943,9 @@ components:
         autoRespondedReason:
           description: |
             Error message provided by the destination email system. This field is only provided if the email notification to the recipient fails to send. This property is read-only.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         clientUserId:
           description: Not applicable.
@@ -65424,6 +65612,9 @@ components:
           type: string
         bulkRecipientsUri:
           description: Reserved for DocuSign.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         canSignOffline:
           description: When **true,** specifies that the signer can perform the signing ceremony offline.
@@ -67427,11 +67618,6 @@ components:
         checkboxTabsEnabled:
           description: When **true,** checkbox tabs are enabled.
           type: string
-        currencyTabsEnabled:
-          description: ""
-          type: string
-        currencyTabsMetadata:
-          $ref: "#/components/schemas/settingsMetadata"
         dataFieldRegexEnabled:
           description: When **true,** regular expressions are enabled for tabs that contain data fields.
           type: string
@@ -67461,6 +67647,11 @@ components:
           description: When **true,** note tabs are enabled.
           type: string
         noteTabsMetadata:
+          $ref: "#/components/schemas/settingsMetadata"
+        numericalTabsEnabled:
+          description: ""
+          type: string
+        numericalTabsMetadata:
           $ref: "#/components/schemas/settingsMetadata"
         prefillTabsEnabled:
           description: ""
@@ -68310,11 +68501,6 @@ components:
           items:
             $ref: "#/components/schemas/company"
           type: array
-        currencyTabs:
-          description: ""
-          items:
-            $ref: "#/components/schemas/currency"
-          type: array
         dateSignedTabs:
           description: |
             A list of
@@ -69088,11 +69274,6 @@ components:
             [company]: /docs/esign-rest-api/reference/envelopes/enveloperecipienttabs/create/#parameters_company
           items:
             $ref: "#/components/schemas/company"
-          type: array
-        currencyTabs:
-          description: ""
-          items:
-            $ref: "#/components/schemas/currency"
           type: array
         dateSignedTabs:
           description: |
@@ -70598,6 +70779,191 @@ components:
       type: object
       x-ds-definition-name: userAccountManagementGranularInformation
       x-ms-summary: Describes which account management capabilities a user has.
+    userAuthorization:
+      description: ""
+      properties:
+        agentUser:
+          $ref: "#/components/schemas/authorizationUser"
+        authorizationId:
+          description: ""
+          type: string
+        created:
+          description: The UTC DateTime when the workspace user authorization was created.
+          type: string
+        createdBy:
+          description: ""
+          type: string
+        endDate:
+          description: ""
+          type: string
+        modified:
+          description: ""
+          type: string
+        modifiedBy:
+          description: The user ID (GUID) of the user who last modified this user record. This property is read-only.
+          type: string
+        permission:
+          description: ""
+          type: string
+        principalUser:
+          $ref: "#/components/schemas/authorizationUser"
+        startDate:
+          description: ""
+          type: string
+      type: object
+      x-ds-definition-name: userAuthorization
+      x-ms-summary: ""
+    userAuthorizationCreateRequest:
+      description: ""
+      properties:
+        agentUser:
+          $ref: "#/components/schemas/authorizationUser"
+        endDate:
+          description: ""
+          type: string
+        permission:
+          description: ""
+          type: string
+        startDate:
+          description: ""
+          type: string
+      type: object
+      x-ds-definition-name: userAuthorizationCreateRequest
+      x-ms-summary: ""
+    userAuthorizationCreateRequestWithId:
+      description: ""
+      properties:
+        agentUser:
+          $ref: "#/components/schemas/authorizationUser"
+        authorizationId:
+          description: ""
+          type: string
+        endDate:
+          description: ""
+          type: string
+        permission:
+          description: ""
+          type: string
+        startDate:
+          description: ""
+          type: string
+      type: object
+      x-ds-definition-name: userAuthorizationCreateRequestWithId
+      x-ms-summary: ""
+    userAuthorizationIdWithStatus:
+      description: ""
+      properties:
+        authorizationId:
+          description: ""
+          type: string
+        errorMessage:
+          description: ""
+          type: string
+        success:
+          description: ""
+          type: string
+      type: object
+      x-ds-definition-name: userAuthorizationIdWithStatus
+      x-ms-summary: ""
+    userAuthorizationUpdateRequest:
+      description: ""
+      properties:
+        endDate:
+          description: ""
+          type: string
+        startDate:
+          description: ""
+          type: string
+      type: object
+      x-ds-definition-name: userAuthorizationUpdateRequest
+      x-ms-summary: ""
+    userAuthorizationWithStatus:
+      description: ""
+      properties:
+        authorization:
+          $ref: "#/components/schemas/userAuthorization"
+        errorMessage:
+          description: ""
+          type: string
+        success:
+          description: ""
+          type: string
+      type: object
+      x-ds-definition-name: userAuthorizationWithStatus
+      x-ms-summary: ""
+    userAuthorizations:
+      description: ""
+      properties:
+        authorizations:
+          description: ""
+          items:
+            $ref: "#/components/schemas/userAuthorization"
+          type: array
+        endPosition:
+          description: "The last index position in the result set. "
+          type: string
+        nextUri:
+          description: "The URI for the next chunk of records based on the search request. It is `null` if this is the last set of results for the search. "
+          type: string
+        previousUri:
+          description: "The URI for the prior chunk of records based on the search request. It is `null` if this is the first set of results for the search. "
+          type: string
+        resultSetSize:
+          description: The number of results in this response. Because you can filter which entries are included in the response, this value is always less than or equal to the `totalSetSize`.
+          type: string
+        startPosition:
+          description: The starting index position of the current result set.
+          type: string
+        totalSetSize:
+          description: The total number of items in the result set. This value is always greater than or equal to the value of `resultSetSize`.
+          type: string
+      type: object
+      x-ds-definition-name: userAuthorizations
+      x-ms-summary: ""
+    userAuthorizationsDeleteRequest:
+      description: ""
+      properties:
+        authorizations:
+          description: ""
+          items:
+            type: string
+          type: array
+      type: object
+      x-ds-definition-name: userAuthorizationsDeleteRequest
+      x-ms-summary: ""
+    userAuthorizationsDeleteResponse:
+      description: ""
+      properties:
+        results:
+          description: ""
+          items:
+            $ref: "#/components/schemas/userAuthorizationIdWithStatus"
+          type: array
+      type: object
+      x-ds-definition-name: userAuthorizationsDeleteResponse
+      x-ms-summary: ""
+    userAuthorizationsRequest:
+      description: ""
+      properties:
+        authorizations:
+          description: ""
+          items:
+            $ref: "#/components/schemas/userAuthorizationCreateRequestWithId"
+          type: array
+      type: object
+      x-ds-definition-name: userAuthorizationsRequest
+      x-ms-summary: ""
+    userAuthorizationsResponse:
+      description: ""
+      properties:
+        results:
+          description: ""
+          items:
+            $ref: "#/components/schemas/userAuthorizationWithStatus"
+          type: array
+      type: object
+      x-ds-definition-name: userAuthorizationsResponse
+      x-ms-summary: ""
     userInfo:
       description: ""
       properties:
@@ -70615,6 +70981,9 @@ components:
           type: string
         errorDetails:
           $ref: "#/components/schemas/errorDetails"
+        ipAddress:
+          description: ""
+          type: string
         loginStatus:
           description: When **true,** indicates that the user is logged in. This is a read-only property.
           type: string
@@ -72203,6 +72572,9 @@ components:
           type: string
         bulkRecipientsUri:
           description: Reserved for DocuSign.
+          type: string
+        bulkSendV2Recipient:
+          description: ""
           type: string
         canSignOffline:
           description: When **true,** specifies that the signer can perform the signing ceremony offline.

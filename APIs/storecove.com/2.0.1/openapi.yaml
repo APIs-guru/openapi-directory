@@ -781,8 +781,8 @@ paths:
         - PeppolIdentifiers
   "/legal_entities/{legal_entity_id}/received_documents":
     post:
-      description: DEPRECATED - use new path /received_documents. Receive a new Document.
-      operationId: receive_documenht
+      description: Receive a new Document.
+      operationId: receive_document
       parameters:
         - description: The id of the LegalEntity for which the document was received.
           in: path
@@ -962,41 +962,6 @@ paths:
       summary: Get Purchase invoice data as JSON with a Base64-encoded UBL string in the specified version
       tags:
         - PurchaseInvoices
-  /received_documents:
-    post:
-      description: Create a new received document.
-      operationId: create_received_document
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ReceivedDocumentCreate"
-        description: The received document to process.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReceivedDocument"
-          description: Success
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-        "422":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/ErrorModel"
-                type: array
-          description: Unprocessable Entity
-      summary: Create a new received document
-      tags:
-        - ReceivedDocuments
   "/received_documents/{guid}/{format}":
     get:
       description: "EXPERIMENTAL: use only for orders. Get a new ReceivedDocument."
@@ -1378,9 +1343,17 @@ components:
           description: DEPRECATED. Use amountExcludingTax. The amount for the allowance or charge, excluding VAT.
           title: Amount
           type: number
+        amountIncludingTax:
+          description: The amount for the allowance or charge, including tax.
+          title: Amount Including Tax
+          type: number
         baseAmountExcludingTax:
           description: The base amount for the allowance or charge, excluding tax.
           title: Base Amount Excluding Tax
+          type: number
+        baseAmountIncludingTax:
+          description: The base amount for the allowance or charge, including tax.
+          title: Base Amount Including Tax
           type: number
         reason:
           default: Agreed settlement
@@ -2256,7 +2229,7 @@ components:
       title: Discovered Participant
       type: object
     DocumentInvoiceResponse:
-      description: The invoice response to send.
+      description: The invoice response to send or received.
       properties:
         clarifications:
           description: A list of clarifications why a received invoice was rejected (RE) or under query (UQ) and what action to take.
@@ -2280,6 +2253,7 @@ components:
             - AB
             - IP
             - UQ
+            - CA
             - RE
             - AP
             - PD
@@ -2404,7 +2378,7 @@ components:
           title: Attachments
           type: array
         createPrimaryImage:
-          description: DEPRECATED. In the future we will no longer support creating PDF invoices. Whether or not to create a primary image (PDF) if one is not provided. For customers who started from December 1st 2022, the default is false. For customers who started before that, the default is true.
+          description: DEPRECATED. In the future we will no longer support creating PDF invoices. Whether or not to create a primary image (PDF) if one is not provided. For customers who started from April 1st 2023, the default is false. For customers who started before that, the default is true.
           title: Create Primary Image
           type: boolean
         document:
@@ -2691,6 +2665,14 @@ components:
           description: The amount already paid.
           title: Prepaid Amount
           type: number
+        priceMode:
+          default: price_mode_net
+          description: "The price mode. This is used to determine whether the prices are net or gross. Price Mode 'price_mode_gross' can only be used for \"x2y\": \"b2c\", sender countries ES, IT and PT, \"clearWithoutSending\": true and \"taxSystem\": \"tax_line_percentages\""
+          enum:
+            - price_mode_net
+            - price_mode_gross
+          title: Price Mode
+          type: string
         projectReference:
           description: DEPRECATED. Information about the project this invoice relates to.
           title: Project Reference
@@ -2831,9 +2813,20 @@ components:
           minItems: 0
           title: Allowance Charges
           type: array
+        amountExcludingTax:
+          description: The amount excluding tax. EXPERIMENTAL. Use amountExcludingVat.
+          nullable: true
+          title: amountExcludingTax
+          type: number
         amountExcludingVat:
           description: The amount excluding VAT. Should equal quantity x itemPrice + allowanceCharge.
+          nullable: true
           title: amountExcludingVat
+          type: number
+        amountIncludingTax:
+          description: 'The amount including tax. Can only be used for "priceMode": "price_mode_gross". Use either this property or amountExcludingTax (amountExcludingVat).'
+          nullable: true
+          title: amountIncludingTax
           type: number
         buyersItemIdentification:
           description: DEPRECATED. Use the references array with 'line_buyers_item_identification' documentType. The ID the buyer assigned to this item.
@@ -5400,8 +5393,6 @@ components:
           minItems: 0
           title: Taxes, Duties and Fees
           type: array
-      required:
-        - amountExcludingVat
       title: Invoice line
       type: object
     InvoiceRecipient:
@@ -5437,6 +5428,7 @@ components:
         clarificationCode:
           description: The code for the clarification. For details see https://docs.peppol.eu/poacc/upgrade-3/codelist/OPStatusReason/ and https://docs.peppol.eu/poacc/upgrade-3/codelist/OPStatusAction/
           enum:
+            - NON
             - REF
             - LEG
             - REC
@@ -5448,7 +5440,9 @@ components:
             - PAY
             - UNR
             - FIN
+            - PPD
             - OTH
+            - NOA
             - PIN
             - NIN
             - CNF
@@ -5463,10 +5457,30 @@ components:
             - OPStatusAction
           title: Clarification Code Type
           type: string
-      required:
-        - clarificationCodeType
-        - clarificationCode
+        conditions:
+          description: A list of conditions that triggered the error. This is only included for receiving in webhooks. You cannot currently send these conditions.
+          items:
+            $ref: "#/components/schemas/InvoiceResponseCondition"
+          minItems: 0
+          title: Conditions
+          type: array
       title: Invoice Response Clarification
+      type: object
+    InvoiceResponseCondition:
+      description: Specifies an error in the received invoice.
+      properties:
+        fieldCode:
+          description: "The code of the field with the error. Find the element here: https://docs.peppol.eu/poacc/billing/3.0/syntax/ubl-invoice/ and then get the field's Business term."
+          title: Field Code
+          type: string
+        fieldValue:
+          description: The (error) value of the field.
+          title: Field value
+          type: string
+      required:
+        - fieldCode
+        - fieldValue
+      title: Invoice Response Condition
       type: object
     InvoiceSubmission:
       description: DEPRECATED. The invoice you want Storecove to process, with some meta-data.
@@ -9433,17 +9447,15 @@ components:
           description: The Base64 encoded document.
           title: Document
           type: string
-        legal_entity_id:
-          description: The of the LegalEntity this document was received for.
-          format: int64
-          title: LegalEntity
-          type: integer
         parseStrategy:
           description: The attachment content type (mime type).
           enum:
             - rfc822
           title: Parse Stragegy
           type: string
+      required:
+        - document
+        - parseStrategy
     ReceiverParty:
       $ref: "#/components/schemas/Party"
     Reference:

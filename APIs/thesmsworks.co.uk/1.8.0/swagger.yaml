@@ -43,6 +43,10 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/BatchMessageResponse"
+        "402":
+          description: Error
+          schema:
+            $ref: "#/definitions/ExtendedErrorModel"
         default:
           description: Error
           schema:
@@ -66,6 +70,10 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/ScheduledBatchResponse"
+        "402":
+          description: Error
+          schema:
+            $ref: "#/definitions/ExtendedErrorModel"
         default:
           description: Error
           schema:
@@ -89,6 +97,10 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/BatchMessageResponse"
+        "402":
+          description: Error
+          schema:
+            $ref: "#/definitions/ExtendedErrorModel"
         default:
           description: Error
           schema:

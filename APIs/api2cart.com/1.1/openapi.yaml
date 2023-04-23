@@ -1754,7 +1754,7 @@ paths:
         - basket
   /basket.live_shipping_service.create.json:
     post:
-      description: Create live shipping rate service. (Beta)
+      description: Create live shipping rate service.
       operationId: BasketLiveShippingServiceCreate
       parameters:
         - description: Store Id
@@ -1799,7 +1799,7 @@ paths:
         - basket
   /basket.live_shipping_service.delete.json:
     delete:
-      description: Delete live shipping rate service. (Beta)
+      description: Delete live shipping rate service.
       operationId: BasketLiveShippingServiceDelete
       parameters:
         - description: Entity id
@@ -1832,7 +1832,7 @@ paths:
         - basket
   /basket.live_shipping_service.list.json:
     get:
-      description: Retrieve a list of live shipping rate services. (Beta)
+      description: Retrieve a list of live shipping rate services.
       operationId: BasketLiveShippingServiceList
       parameters:
         - description: Store Id
@@ -2542,7 +2542,6 @@ paths:
               - Etsy
               - EtsyAPIv3
               - Gambio
-              - Interspire
               - JooCart
               - Magento1212
               - Magento2Api
@@ -2578,6 +2577,7 @@ paths:
               - Hybris
               - MercadoLibre
               - Zid
+              - Zoey
             type: string
         - description: A web address of a store that you would like to connect to API2Cart
           in: query
@@ -2758,24 +2758,6 @@ paths:
         - description: AspDotNetStorefront API Password
           in: query
           name: apiPass
-          required: false
-          schema:
-            type: string
-        - description: Shopping Cart Elite Access Key
-          in: query
-          name: accessKey_scelite
-          required: false
-          schema:
-            type: string
-        - description: Shopping Cart Elite API Key
-          in: query
-          name: apiKey_scelite
-          required: false
-          schema:
-            type: string
-        - description: Shopping Cart Elite API Secret Key
-          in: query
-          name: apiSecretKey_scelite
           required: false
           schema:
             type: string
@@ -3497,6 +3479,12 @@ paths:
           required: false
           schema:
             type: string
+        - description: Language id
+          in: query
+          name: lang_id
+          required: false
+          schema:
+            type: string
         - description: Key
           in: query
           name: key
@@ -3568,6 +3556,12 @@ paths:
         - description: Store Id
           in: query
           name: store_id
+          required: false
+          schema:
+            type: string
+        - description: Language id
+          in: query
+          name: lang_id
           required: false
           schema:
             type: string
@@ -5345,115 +5339,12 @@ paths:
     put:
       description: Update information of customer in store.
       operationId: CustomerUpdate
-      parameters:
-        - description: Entity id
-          in: query
-          name: id
-          required: true
-          schema:
-            type: string
-        - description: Customer group_id
-          in: query
-          name: group_id
-          required: false
-          schema:
-            type: string
-        - description: Groups that will be assigned to a customer
-          in: query
-          name: group_ids
-          required: false
-          schema:
-            type: string
-        - description: Defines customer's first name
-          in: query
-          name: first_name
-          required: false
-          schema:
-            type: string
-        - description: Defines customer's last name
-          in: query
-          name: last_name
-          required: false
-          schema:
-            type: string
-        - description: Defines whether the newsletter subscription is available for the user
-          in: query
-          name: news_letter_subscription
-          required: false
-          schema:
-            type: boolean
-        - description: Customer tags
-          in: query
-          name: tags
-          required: false
-          schema:
-            type: string
-        - description: The ID of the address.
-          in: query
-          name: address_book_id_{x}
-          required: false
-          schema:
-            type: string
-        - description: Specifies customer's first name in the address book
-          in: query
-          name: address_book_first_name_{x}
-          required: false
-          schema:
-            type: string
-        - description: Specifies customer's last name in the address book
-          in: query
-          name: address_book_last_name_{x}
-          required: false
-          schema:
-            type: string
-        - description: Specifies customer's company name in the address book
-          in: query
-          name: address_book_company_{x}
-          required: false
-          schema:
-            type: string
-        - description: Specifies customer's phone number in the address book
-          in: query
-          name: address_book_phone_{x}
-          required: false
-          schema:
-            type: string
-        - description: Specifies customer's first address in the address book
-          in: query
-          name: address_book_address1_{x}
-          required: false
-          schema:
-            type: string
-        - description: Specifies customer's second address in the address book
-          in: query
-          name: address_book_address2_{x}
-          required: false
-          schema:
-            type: string
-        - description: Specifies customer's city in the address book
-          in: query
-          name: address_book_city_{x}
-          required: false
-          schema:
-            type: string
-        - description: ISO code or name of country
-          in: query
-          name: address_book_country_{x}
-          required: false
-          schema:
-            type: string
-        - description: ISO code or name of state.
-          in: query
-          name: address_book_state_{x}
-          required: false
-          schema:
-            type: string
-        - description: Specifies customer's postcode
-          in: query
-          name: address_book_postcode_{x}
-          required: false
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerUpdate"
+        required: true
       responses:
         "200":
           content:
@@ -5463,8 +5354,77 @@ paths:
                   result:
                     properties:
                       updated:
-                        type: string
+                        type: integer
                     type: object
+                  return_code:
+                    type: integer
+                  return_message:
+                    type: string
+                type: object
+          description: successful operation
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - customer
+  /customer.wishlist.list.json:
+    get:
+      description: Get a Wish List of customer from the store.
+      operationId: CustomerWishlistList
+      parameters:
+        - description: Retrieves orders specified by customer id
+          in: query
+          name: customer_id
+          required: true
+          schema:
+            type: string
+        - description: Entity id
+          in: query
+          name: id
+          required: false
+          schema:
+            type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          schema:
+            type: string
+        - description: This parameter sets the number from which you want to get entities
+          in: query
+          name: start
+          required: false
+          schema:
+            default: 0
+            type: integer
+        - description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          schema:
+            default: 10
+            type: integer
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          schema:
+            type: string
+        - description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: response_fields
+          required: false
+          schema:
+            default: "{return_code,return_message,pagination,result}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    $ref: "#/components/schemas/Response_Customer_WishList_List_Result"
                   return_code:
                     type: integer
                   return_message:
@@ -6566,6 +6526,12 @@ paths:
         - description: Store Id
           in: query
           name: store_id
+          required: false
+          schema:
+            type: string
+        - description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: response_fields
           required: false
           schema:
             type: string
@@ -7910,6 +7876,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: Defines product's variants ids
+          in: query
+          name: variant_ids
+          required: false
+          schema:
+            type: string
         - description: Defines image's name
           in: query
           name: image_name
@@ -8995,299 +8967,12 @@ paths:
     put:
       description: Update price and quantity for a specific product
       operationId: ProductUpdate
-      parameters:
-        - description: Defines product id that has to be updated
-          in: query
-          name: id
-          required: true
-          schema:
-            type: string
-        - description: Defines product model that has to be updated
-          in: query
-          name: model
-          required: false
-          schema:
-            type: string
-        - description: Defines product's old price
-          in: query
-          name: old_price
-          required: false
-          schema:
-            type: number
-        - description: Defines new product's price
-          in: query
-          name: price
-          required: false
-          schema:
-            type: number
-        - description: Defines new product's special price
-          in: query
-          name: special_price
-          required: false
-          schema:
-            type: number
-        - description: Defines the date of special price creation
-          in: query
-          name: sprice_create
-          required: false
-          schema:
-            type: string
-        - description: Defines the term of special price offer duration
-          in: query
-          name: sprice_expire
-          required: false
-          schema:
-            type: string
-        - description: Defines new product's cost price
-          in: query
-          name: cost_price
-          required: false
-          schema:
-            type: number
-        - description: Defines new product's retail price
-          in: query
-          name: retail_price
-          required: false
-          schema:
-            type: number
-        - description: Defines new product's quantity
-          in: query
-          name: quantity
-          required: false
-          schema:
-            type: number
-        - description: Weight
-          in: query
-          name: weight
-          required: false
-          schema:
-            type: number
-        - description: Defines the incremental changes in product quantity
-          in: query
-          name: increase_quantity
-          required: false
-          schema:
-            type: number
-        - description: Defines the decrement changes in product quantity
-          in: query
-          name: reduce_quantity
-          required: false
-          schema:
-            type: number
-        - description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
-          in: query
-          name: warehouse_id
-          required: false
-          schema:
-            type: string
-        - description: This parameter allows to reserve/unreserve product quantity.
-          in: query
-          name: reserve_quantity
-          required: false
-          schema:
-            type: number
-        - description: Defines inventory tracking for product
-          in: query
-          name: manage_stock
-          required: false
-          schema:
-            type: boolean
-        - description: Set backorder status
-          in: query
-          name: backorder_status
-          required: false
-          schema:
-            type: string
-        - description: Defines product's name that has to be updated
-          in: query
-          name: name
-          required: false
-          schema:
-            type: string
-        - description: Defines new product's sku
-          in: query
-          name: sku
-          required: false
-          schema:
-            type: string
-        - description: Set visibility status
-          in: query
-          name: visible
-          required: false
-          schema:
-            type: string
-        - description: Defines product's manufacturer
-          in: query
-          name: manufacturer
-          required: false
-          schema:
-            type: string
-        - description: Defines product's manufacturer by manufacturer_id
-          in: query
-          name: manufacturer_id
-          required: false
-          schema:
-            type: string
-        - description: Defines product add that is specified by comma-separated categories id
-          in: query
-          name: categories_ids
-          required: false
-          schema:
-            type: string
-        - description: Defines new product's description
-          in: query
-          name: description
-          required: false
-          schema:
-            type: string
-        - description: Defines short description
-          in: query
-          name: short_description
-          required: false
-          schema:
-            type: string
-        - description: Defines unique meta title for each entity
-          in: query
-          name: meta_title
-          required: false
-          schema:
-            type: string
-        - description: Defines unique meta keywords for each entity
-          in: query
-          name: meta_keywords
-          required: false
-          schema:
-            type: string
-        - description: Defines unique meta description of a entity
-          in: query
-          name: meta_description
-          required: false
-          schema:
-            type: string
-        - description: Defines store id where the product should be found
-          in: query
-          name: store_id
-          required: false
-          schema:
-            type: string
-        - description: Language id
-          in: query
-          name: lang_id
-          required: false
-          schema:
-            type: string
-        - description: Set stock status
-          in: query
-          name: in_stock
-          required: false
-          schema:
-            type: boolean
-        - description: Defines product's status
-          in: query
-          name: status
-          required: false
-          schema:
-            type: string
-        - description: Defines unique URL for SEO
-          in: query
-          name: seo_url
-          required: false
-          schema:
-            type: string
-        - description: Report request id
-          in: query
-          name: report_request_id
-          required: false
-          schema:
-            type: string
-        - description: Disable report cache for current request
-          in: query
-          name: disable_report_cache
-          required: false
-          schema:
-            default: false
-            type: boolean
-        - description: Is reindex required
-          in: query
-          name: reindex
-          required: false
-          schema:
-            default: true
-            type: boolean
-        - description: Product tags
-          in: query
-          name: tags
-          required: false
-          schema:
-            type: string
-        - description: Is cache clear required
-          in: query
-          name: clear_cache
-          required: false
-          schema:
-            default: true
-            type: boolean
-        - description: Global Trade Item Number. An GTIN is an identifier for trade items.
-          in: query
-          name: gtin
-          required: false
-          schema:
-            type: string
-        - description: Specifies whether a tax is charged
-          in: query
-          name: taxable
-          required: false
-          schema:
-            default: true
-            type: boolean
-        - description: A categorization for the product
-          in: query
-          name: product_class
-          required: false
-          schema:
-            type: string
-        - description: Defines product's height
-          in: query
-          name: height
-          required: false
-          schema:
-            type: number
-        - description: Defines product's length
-          in: query
-          name: length
-          required: false
-          schema:
-            type: number
-        - description: Defines product's width
-          in: query
-          name: width
-          required: false
-          schema:
-            type: number
-        - description: Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
-          in: query
-          name: harmonized_system_code
-          required: false
-          schema:
-            type: string
-        - description: The country where the inventory item was made
-          in: query
-          name: country_of_origin
-          required: false
-          schema:
-            type: string
-        - description: Defines unique search keywords
-          in: query
-          name: search_keywords
-          required: false
-          schema:
-            type: string
-        - description: A barcode is a unique code composed of numbers used as a product identifier.
-          in: query
-          name: barcode
-          required: false
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductUpdate"
+        required: true
       responses:
         "200":
           content:
@@ -9344,6 +9029,7 @@ paths:
         - product
   /product.variant.count.json:
     get:
+      deprecated: true
       description: Get count variants.
       operationId: ProductVariantCount
       parameters:
@@ -9537,7 +9223,8 @@ paths:
         - product
   /product.variant.info.json:
     get:
-      description: Get variant info.
+      deprecated: true
+      description: Get variant info. This method is deprecated, and its development is stopped. Please use "product.child_item.info" instead.
       operationId: ProductVariantInfo
       parameters:
         - description: Set this parameter in order to choose which entity fields you want to retrieve
@@ -9586,7 +9273,8 @@ paths:
         - product
   /product.variant.list.json:
     get:
-      description: Get list variants.
+      deprecated: true
+      description: Get a list of variants. This method is deprecated, and its development is stopped. Please use "product.child_item.list" instead.
       operationId: ProductVariantList
       parameters:
         - description: This parameter sets the number from which you want to get entities
@@ -9725,10 +9413,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: Product id
+          in: query
+          name: product_id
+          required: true
+          schema:
+            type: string
         - description: Defines variants's group prices
           in: query
           name: group_prices
-          required: false
+          required: true
           schema:
             type: string
       responses:
@@ -9789,270 +9483,12 @@ paths:
     put:
       description: Update variant.
       operationId: ProductVariantUpdate
-      parameters:
-        - description: Defines store id where the variant should be found
-          in: query
-          name: store_id
-          required: false
-          schema:
-            type: string
-        - description: Defines variant update specified by variant id
-          in: query
-          name: id
-          required: true
-          schema:
-            type: string
-        - description: Defines product's id where the variant has to be updated
-          in: query
-          name: product_id
-          required: true
-          schema:
-            type: string
-        - description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
-          in: query
-          name: warehouse_id
-          required: false
-          schema:
-            type: string
-        - description: This parameter allows to reserve/unreserve product variants quantity.
-          in: query
-          name: reserve_quantity
-          required: false
-          schema:
-            type: number
-        - description: Defines new products' variants quantity
-          in: query
-          name: quantity
-          required: false
-          schema:
-            type: number
-        - description: Defines the incremental changes in product quantity
-          in: query
-          name: increase_quantity
-          required: false
-          schema:
-            default: 0
-            type: number
-        - description: Defines the decrement changes in product quantity
-          in: query
-          name: reduce_quantity
-          required: false
-          schema:
-            default: 0
-            type: number
-        - description: Defines new product's variant price
-          in: query
-          name: price
-          required: false
-          schema:
-            type: number
-        - description: Defines new product's variant special price
-          in: query
-          name: special_price
-          required: false
-          schema:
-            type: number
-        - description: Defines new product's retail price
-          in: query
-          name: retail_price
-          required: false
-          schema:
-            type: number
-        - description: Defines product's old price
-          in: query
-          name: old_price
-          required: false
-          schema:
-            type: number
-        - description: Defines new product's cost price
-          in: query
-          name: cost_price
-          required: false
-          schema:
-            type: number
-        - description: Defines the date of special price creation
-          in: query
-          name: sprice_create
-          required: false
-          schema:
-            type: string
-        - description: Defines the term of special price offer duration
-          in: query
-          name: sprice_expire
-          required: false
-          schema:
-            type: string
-        - description: Defines inventory tracking for product variant
-          in: query
-          name: manage_stock
-          required: false
-          schema:
-            type: boolean
-        - description: Set stock status
-          in: query
-          name: in_stock
-          required: false
-          schema:
-            type: boolean
-        - description: Defines variant's name that has to be updated
-          in: query
-          name: name
-          required: false
-          schema:
-            type: string
-        - description: Specifies variant's description
-          in: query
-          name: description
-          required: false
-          schema:
-            type: string
-        - description: Defines new product's variant sku
-          in: query
-          name: sku
-          required: false
-          schema:
-            type: string
-        - description: Defines unique meta title for each entity
-          in: query
-          name: meta_title
-          required: false
-          schema:
-            type: string
-        - description: Defines unique meta description of a entity
-          in: query
-          name: meta_description
-          required: false
-          schema:
-            type: string
-        - description: Defines unique meta keywords for each entity
-          in: query
-          name: meta_keywords
-          required: false
-          schema:
-            type: string
-        - description: Defines short description
-          in: query
-          name: short_description
-          required: false
-          schema:
-            type: string
-        - description: Set visibility status
-          in: query
-          name: visible
-          required: false
-          schema:
-            type: string
-        - description: Defines product variant's status
-          in: query
-          name: status
-          required: false
-          schema:
-            type: string
-        - description: Set backorder status
-          in: query
-          name: backorder_status
-          required: false
-          schema:
-            type: string
-        - description: Weight
-          in: query
-          name: weight
-          required: false
-          schema:
-            default: 0
-            type: number
-        - description: A barcode is a unique code composed of numbers used as a product identifier.
-          in: query
-          name: barcode
-          required: false
-          schema:
-            type: string
-        - description: Is reindex required
-          in: query
-          name: reindex
-          required: false
-          schema:
-            default: true
-            type: boolean
-        - description: Specifies whether a tax is charged
-          in: query
-          name: taxable
-          required: false
-          schema:
-            default: true
-            type: boolean
-        - description: Defines variant's options list
-          explode: false
-          in: query
-          name: options
-          required: false
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
-          in: query
-          name: harmonized_system_code
-          required: false
-          schema:
-            type: string
-        - description: The country where the inventory item was made
-          in: query
-          name: country_of_origin
-          required: false
-          schema:
-            type: string
-        - description: Defines product's width
-          in: query
-          name: width
-          required: false
-          schema:
-            type: number
-        - description: Defines product's height
-          in: query
-          name: height
-          required: false
-          schema:
-            type: number
-        - description: Defines product's length
-          in: query
-          name: length
-          required: false
-          schema:
-            type: number
-        - description: Global Trade Item Number. An GTIN is an identifier for trade items.
-          in: query
-          name: gtin
-          required: false
-          schema:
-            type: string
-        - description: Is cache clear required
-          in: query
-          name: clear_cache
-          required: false
-          schema:
-            default: true
-            type: boolean
-        - description: Language id
-          in: query
-          name: lang_id
-          required: false
-          schema:
-            type: string
-        - description: Specifies variant's model that has to be added
-          in: query
-          name: model
-          required: false
-          schema:
-            type: string
-        - description: Specifies the set of visible/invisible product's variants for sale
-          in: query
-          name: available_for_sale
-          required: false
-          schema:
-            default: true
-            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductVariantUpdate"
+        required: true
       responses:
         "200":
           content:
@@ -10678,7 +10114,6 @@ components:
             - Etsy
             - EtsyAPIv3
             - Gambio
-            - Interspire
             - JooCart
             - Magento1212
             - Magento2Api
@@ -10714,6 +10149,7 @@ components:
             - Hybris
             - MercadoLibre
             - Zid
+            - Zoey
           type: string
         commercehq_api_key:
           description: CommerceHQ api key
@@ -11499,6 +10935,10 @@ components:
           type: number
         dimensions_unit:
           type: string
+        discounts:
+          items:
+            $ref: "#/components/schemas/Discount"
+          type: array
         ean:
           type: string
         full_description:
@@ -11556,6 +10996,8 @@ components:
         tax_class_id:
           type: string
         upc:
+          type: string
+        url:
           type: string
         weight:
           type: number
@@ -11759,6 +11201,8 @@ components:
           type: string
         ip_address:
           type: string
+        lang_id:
+          type: string
         last_login:
           $ref: "#/components/schemas/A2CDateTime"
         last_name:
@@ -11816,11 +11260,17 @@ components:
               address_book_gender:
                 description: Specifies customer's gender
                 type: string
+              address_book_identification_number:
+                description: The national ID card number of this person, or a unique tax identification number.
+                type: string
               address_book_last_name:
                 description: Specifies customer's last name in the address book
                 type: string
               address_book_phone:
                 description: Specifies customer's phone number in the address book
+                type: string
+              address_book_phone_mobile:
+                description: Specifies customer's mobile phone number in the address book
                 type: string
               address_book_postcode:
                 description: Specifies customer's postcode
@@ -11830,6 +11280,9 @@ components:
                 type: string
               address_book_state:
                 description: ISO code or name of state.
+                type: string
+              address_book_tax_id:
+                description: Add Tax Id
                 type: string
               address_book_type:
                 description: Specifies customer's address type
@@ -11900,6 +11353,92 @@ components:
         - first_name
         - last_name
       type: object
+    CustomerUpdate:
+      properties:
+        address:
+          items:
+            properties:
+              address_book_address1:
+                description: Specifies customer's first address in the address book
+                type: string
+              address_book_address2:
+                description: Specifies customer's second address in the address book
+                type: string
+              address_book_city:
+                description: Specifies customer's city in the address book
+                type: string
+              address_book_company:
+                description: Specifies customer's company name in the address book
+                type: string
+              address_book_country:
+                description: ISO code or name of country
+                type: string
+              address_book_default:
+                description: Defines whether the address is used by default
+                type: boolean
+              address_book_fax:
+                description: Specifies customer's fax in the address book
+                type: string
+              address_book_first_name:
+                description: Specifies customer's first name in the address book
+                type: string
+              address_book_id:
+                description: The ID of the address.
+                type: string
+              address_book_identification_number:
+                description: The national ID card number of this person, or a unique tax identification number.
+                type: string
+              address_book_last_name:
+                description: Specifies customer's last name in the address book
+                type: string
+              address_book_phone:
+                description: Specifies customer's phone number in the address book
+                type: string
+              address_book_phone_mobile:
+                description: Specifies customer's mobile phone number in the address book
+                type: string
+              address_book_postcode:
+                description: Specifies customer's postcode
+                type: string
+              address_book_state:
+                description: ISO code or name of state.
+                type: string
+              address_book_tax_id:
+                description: Add Tax Id
+                type: string
+              address_book_type:
+                description: Specifies customer's address type
+                type: string
+            type: object
+          type: array
+        email:
+          description: Defines customer's email
+          type: string
+        first_name:
+          description: Defines customer's first name
+          type: string
+        group_id:
+          description: Customer group_id
+          type: string
+        group_ids:
+          description: Groups that will be assigned to a customer
+          type: string
+        id:
+          description: Entity id
+          type: string
+        last_name:
+          description: Defines customer's last name
+          type: string
+        news_letter_subscription:
+          description: Defines whether the newsletter subscription is available for the user
+          type: boolean
+        phone:
+          description: Defines customer's phone number
+          type: string
+        tags:
+          description: Customer tags
+          type: string
+      type: object
     Customer_Address:
       properties:
         additional_fields:
@@ -11926,9 +11465,13 @@ components:
           type: string
         id:
           type: string
+        identification_number:
+          type: string
         last_name:
           type: string
         phone:
+          type: string
+        phone_mobile:
           type: string
         postcode:
           type: string
@@ -11936,6 +11479,8 @@ components:
           type: string
         state:
           $ref: "#/components/schemas/State"
+        tax_id:
+          type: string
         type:
           type: string
         website:
@@ -11981,6 +11526,67 @@ components:
           type: string
         name:
           type: string
+      type: object
+    Customer_WishList:
+      properties:
+        additional_fields:
+          type: object
+        created_at:
+          $ref: "#/components/schemas/A2CDateTime"
+        custom_fields:
+          type: object
+        description:
+          type: string
+        id:
+          type: string
+        is_public:
+          type: string
+        modified_at:
+          $ref: "#/components/schemas/A2CDateTime"
+        name:
+          type: string
+        products:
+          items:
+            $ref: "#/components/schemas/Customer_WishList_Item"
+          type: array
+      type: object
+    Customer_WishList_Item:
+      properties:
+        additional_fields:
+          type: object
+        child_id:
+          type: string
+        created_time:
+          $ref: "#/components/schemas/A2CDateTime"
+        custom_fields:
+          type: object
+        id:
+          type: string
+        product_id:
+          type: string
+      type: object
+    Discount:
+      properties:
+        additional_fields:
+          type: object
+        custom_fields:
+          type: object
+        customer_group_ids:
+          type: string
+        from_time:
+          type: string
+        id:
+          type: string
+        modifier_type:
+          type: string
+        name:
+          type: string
+        sort_order:
+          type: integer
+        to_time:
+          type: string
+        value:
+          type: number
       type: object
     GiftCard:
       properties:
@@ -13389,6 +12995,10 @@ components:
           type: string
         dimensions_unit:
           type: string
+        discounts:
+          items:
+            $ref: "#/components/schemas/Discount"
+          type: array
         group_items:
           items:
             $ref: "#/components/schemas/Product_GroupItem"
@@ -13405,6 +13015,8 @@ components:
           items:
             $ref: "#/components/schemas/Image"
           type: array
+        in_stock:
+          type: boolean
         inventory:
           items:
             $ref: "#/components/schemas/Product_Inventory"
@@ -13748,7 +13360,7 @@ components:
           type: string
         tax_class_id:
           description: Defines tax classes where entity has to be added
-          type: integer
+          type: string
         taxable:
           default: true
           description: Specifies whether a tax is charged
@@ -13908,6 +13520,157 @@ components:
         - name
         - tax_rates
       type: object
+    ProductUpdate:
+      properties:
+        backorder_status:
+          description: Set backorder status
+          type: string
+        barcode:
+          description: A barcode is a unique code composed of numbers used as a product identifier.
+          type: string
+        categories_ids:
+          description: Defines product add that is specified by comma-separated categories id
+          type: string
+        clear_cache:
+          default: true
+          description: Is cache clear required
+          type: boolean
+        cost_price:
+          description: Defines new product's cost price
+          type: number
+        country_of_origin:
+          description: The country where the inventory item was made
+          type: string
+        description:
+          description: Defines new product's description
+          type: string
+        disable_report_cache:
+          default: false
+          description: Disable report cache for current request
+          type: boolean
+        gtin:
+          description: Global Trade Item Number. An GTIN is an identifier for trade items.
+          type: string
+        harmonized_system_code:
+          description: Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
+          type: string
+        height:
+          description: Defines product's height
+          type: number
+        id:
+          description: Defines product id that has to be updated
+          type: string
+        in_stock:
+          description: Set stock status
+          type: boolean
+        increase_quantity:
+          description: Defines the incremental changes in product quantity
+          type: number
+        lang_id:
+          description: Language id
+          type: string
+        length:
+          description: Defines product's length
+          type: number
+        manage_stock:
+          description: Defines inventory tracking for product
+          type: boolean
+        manufacturer:
+          description: Defines product's manufacturer
+          type: string
+        manufacturer_id:
+          description: Defines product's manufacturer by manufacturer_id
+          type: string
+        meta_description:
+          description: Defines unique meta description of a entity
+          type: string
+        meta_keywords:
+          description: Defines unique meta keywords for each entity
+          type: string
+        meta_title:
+          description: Defines unique meta title for each entity
+          type: string
+        model:
+          description: Defines product model that has to be updated
+          type: string
+        name:
+          description: Defines product's name that has to be updated
+          type: string
+        old_price:
+          description: Defines product's old price
+          type: number
+        price:
+          description: Defines new product's price
+          type: number
+        product_class:
+          description: A categorization for the product
+          type: string
+        quantity:
+          description: Defines new product's quantity
+          type: number
+        reduce_quantity:
+          description: Defines the decrement changes in product quantity
+          type: number
+        reindex:
+          default: true
+          description: Is reindex required
+          type: boolean
+        report_request_id:
+          description: Report request id
+          type: string
+        reserve_quantity:
+          description: This parameter allows to reserve/unreserve product quantity.
+          type: number
+        retail_price:
+          description: Defines new product's retail price
+          type: number
+        search_keywords:
+          description: Defines unique search keywords
+          type: string
+        seo_url:
+          description: Defines unique URL for SEO
+          type: string
+        short_description:
+          description: Defines short description
+          type: string
+        sku:
+          description: Defines new product's sku
+          type: string
+        special_price:
+          description: Defines new product's special price
+          type: number
+        sprice_create:
+          description: Defines the date of special price creation
+          type: string
+        sprice_expire:
+          description: Defines the term of special price offer duration
+          type: string
+        status:
+          description: Defines product's status
+          type: string
+        store_id:
+          description: Defines store id where the product should be found
+          type: string
+        tags:
+          description: Product tags
+          type: string
+        taxable:
+          default: true
+          description: Specifies whether a tax is charged
+          type: boolean
+        visible:
+          description: Set visibility status
+          type: string
+        warehouse_id:
+          description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+          type: string
+        weight:
+          description: Weight
+          type: number
+        width:
+          description: Defines product's width
+          type: number
+      type: object
     ProductVariantAdd:
       properties:
         attributes:
@@ -14015,7 +13778,7 @@ components:
           type: string
         tax_class_id:
           description: Defines tax classes where entity has to be added
-          type: integer
+          type: string
         taxable:
           default: true
           description: Specifies whether a tax is charged
@@ -14101,6 +13864,11 @@ components:
         id:
           description: Defines the variant to which the price has to be added
           type: string
+        product_id:
+          description: Product id
+          type: string
+      required:
+        - group_prices
       type: object
     ProductVariantPriceUpdate:
       properties:
@@ -14119,6 +13887,154 @@ components:
         id:
           description: Defines the variant where the price has to be updated
           type: string
+        product_id:
+          description: Product id
+          type: string
+      required:
+        - group_prices
+      type: object
+    ProductVariantUpdate:
+      properties:
+        available_for_sale:
+          default: true
+          description: Specifies the set of visible/invisible product's variants for sale
+          type: boolean
+        backorder_status:
+          description: Set backorder status
+          type: string
+        barcode:
+          description: A barcode is a unique code composed of numbers used as a product identifier.
+          type: string
+        clear_cache:
+          default: true
+          description: Is cache clear required
+          type: boolean
+        cost_price:
+          description: Defines new product's cost price
+          type: number
+        country_of_origin:
+          description: The country where the inventory item was made
+          type: string
+        description:
+          description: Specifies variant's description
+          type: string
+        gtin:
+          description: Global Trade Item Number. An GTIN is an identifier for trade items.
+          type: string
+        harmonized_system_code:
+          description: Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
+          type: string
+        height:
+          description: Defines product's height
+          type: number
+        id:
+          description: Defines variant update specified by variant id
+          type: string
+        in_stock:
+          description: Set stock status
+          type: boolean
+        increase_quantity:
+          default: 0
+          description: Defines the incremental changes in product quantity
+          type: number
+        lang_id:
+          description: Language id
+          type: string
+        length:
+          description: Defines product's length
+          type: number
+        manage_stock:
+          description: Defines inventory tracking for product variant
+          type: boolean
+        meta_description:
+          description: Defines unique meta description of a entity
+          type: string
+        meta_keywords:
+          description: Defines unique meta keywords for each entity
+          type: string
+        meta_title:
+          description: Defines unique meta title for each entity
+          type: string
+        model:
+          description: Specifies variant's model that has to be added
+          type: string
+        name:
+          description: Defines variant's name that has to be updated
+          type: string
+        old_price:
+          description: Defines product's old price
+          type: number
+        options:
+          description: Defines variant's options list
+          items:
+            properties:
+              option_name:
+                type: string
+              option_value:
+                type: string
+            type: object
+          type: array
+        price:
+          description: Defines new product's variant price
+          type: number
+        product_id:
+          description: Defines product's id where the variant has to be updated
+          type: string
+        quantity:
+          description: Defines new products' variants quantity
+          type: number
+        reduce_quantity:
+          default: 0
+          description: Defines the decrement changes in product quantity
+          type: number
+        reindex:
+          default: true
+          description: Is reindex required
+          type: boolean
+        reserve_quantity:
+          description: This parameter allows to reserve/unreserve product variants quantity.
+          type: number
+        retail_price:
+          description: Defines new product's retail price
+          type: number
+        short_description:
+          description: Defines short description
+          type: string
+        sku:
+          description: Defines new product's variant sku
+          type: string
+        special_price:
+          description: Defines new product's variant special price
+          type: number
+        sprice_create:
+          description: Defines the date of special price creation
+          type: string
+        sprice_expire:
+          description: Defines the term of special price offer duration
+          type: string
+        status:
+          description: Defines product variant's status
+          type: string
+        store_id:
+          description: Defines store id where the variant should be found
+          type: string
+        taxable:
+          default: true
+          description: Specifies whether a tax is charged
+          type: boolean
+        visible:
+          description: Set visibility status
+          type: string
+        warehouse_id:
+          description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+          type: string
+        weight:
+          default: 0
+          description: Weight
+          type: number
+        width:
+          description: Defines product's width
+          type: number
       type: object
     Product_AdvancedPrice:
       properties:
@@ -14472,6 +14388,19 @@ components:
           type: array
         customers_count:
           type: integer
+      type: object
+    Response_Customer_WishList_List_Result:
+      properties:
+        additional_fields:
+          type: object
+        custom_fields:
+          type: object
+        total_count:
+          type: integer
+        wish_lists:
+          items:
+            $ref: "#/components/schemas/Customer_WishList"
+          type: array
       type: object
     Response_Order_Abandoned_List_Result:
       properties:

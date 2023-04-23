@@ -75,7 +75,7 @@ parameters:
     required: true
     type: string
   orderIdentifiers:
-    description: One or several Order Identifiers or Order References separated by semicolon. Order Identifiers are integer numbers. Order References are strings - each must be percent-encoded and surrounded by double quotation marks.
+    description: One or several Order Identifiers or Order References separated by semicolon. Order Identifiers are integer numbers. Order References are strings - each must be percent-encoded and surrounded by double quotation marks. The maximum number of identifiers is 100.
     example: /orders/"ref";1001;"Reference%3BWith%3BSpecial%3BSymbols!";2345/
     in: path
     name: orderIdentifiers
@@ -113,98 +113,6 @@ tags:
   - name: Orders
   - name: Labels
 paths:
-  /manifests:
-    post:
-      description: |
-        For more information on how to manifest orders using the API, including examples of different use-cases please 
-        visit either the <a href="https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-How-to-import-orders-with-the-Click-Drop-API">Click & Drop API Help Page</a> 
-        or <a href="https://support.channelshipper.com/hc/en-gb/articles/360014653117-How-to-import-orders-with-the-ChannelShipper-API">ChannelShipper Help Page</a>.
-      operationId: CreateManifestsAsync
-      parameters:
-        - in: body
-          name: request
-          required: true
-          schema:
-            $ref: "#/definitions/CreateManifestsRequest"
-      responses:
-        "200":
-          description: Request is valid but no orders eligible for manifesting were found
-          schema:
-            $ref: "#/definitions/CreateManifestsResponse"
-        "202":
-          description: Request Accepted and manifests are being processed
-          schema:
-            $ref: "#/definitions/CreateManifestsResponse"
-        "400":
-          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-          schema:
-            $ref: "#/definitions/CreateManifestsErrorResponse"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden (Feature available for OBA accounts only)
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-      security:
-        - Bearer: []
-      summary: Manifest orders
-      tags:
-        - Manifests
-  "/manifests/{manifestGuid}":
-    get:
-      operationId: GetManifestAsync
-      parameters:
-        - $ref: "#/parameters/manifestGuid"
-      responses:
-        "200":
-          description: Provides information about manifest
-          schema:
-            $ref: "#/definitions/GetManifestResponse"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden (Feature available for OBA accounts only)
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-      security:
-        - Bearer: []
-      summary: Retrieve manifest status and documentation
-      tags:
-        - Manifests
-  "/manifests/{manifestGuid}/retry":
-    post:
-      description: Request will result in a 400 response if called within 30 mins of a previously failed manifest or retry attempt.
-      operationId: RetryManifestAsync
-      parameters:
-        - $ref: "#/parameters/manifestGuid"
-      responses:
-        "202":
-          description: Request Accepted and manifest is being processed
-        "400":
-          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden (Feature available for OBA accounts only)
-        "404":
-          description: Not Found
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-      security:
-        - Bearer: []
-      summary: Retry failed manifest
-      tags:
-        - Manifests
   /orders:
     get:
       operationId: GetOrdersAsync
@@ -303,8 +211,9 @@ paths:
         - description: |
             At least one of 'orderIdentifier' and 'orderReference' is required. Providing both is disallowed to avoid ambiguity.
 
-            When the status is set to 'despatchedByOtherCourier', if the optional parameter 'trackingNumber' is provided 
+            When the status is set to 'despatchedByOtherCourier', if the optional parameter 'trackingNumber' is provided
             then the parameters 'despatchDate', 'shippingCarrier' and 'shippingService' are also required.
+            The maximum collection lenght is 100.
           in: body
           name: request
           required: true
@@ -337,13 +246,13 @@ paths:
   "/orders/{orderIdentifiers}":
     delete:
       description: |
-        <b>Reserved for ChannelShipper customers only - please visit 
+        <b>Reserved for ChannelShipper customers only - please visit
         <a href="https://channelshipper.com/" target="_self">ChannelShipper.com</a> for more information</b>
 
         Please be aware labels generated on orders which are deleted are no longer valid and must be destroyed.
 
-        Cancelled label information is automatically shared with Royal Mail Revenue Protection, and should 
-        a cancelled label be identified on an item in the Royal Mail Network, you will be charged on your account 
+        Cancelled label information is automatically shared with Royal Mail Revenue Protection, and should
+        a cancelled label be identified on an item in the Royal Mail Network, you will be charged on your account
         and an additional handling fee applied.
       operationId: DeleteOrdersAsync
       parameters:
@@ -443,9 +352,9 @@ paths:
       description: |
         <b>Reserved for OBA customers only</b>
 
-        The account "Label format" settings page will control the page format settings used to print the postage label 
-        and associated documents. Certain combinations of these settings may prevent associated documents from being 
-        printed together with the postage label within a single document. If this occurs the documentType option can be 
+        The account "Label format" settings page will control the page format settings used to print the postage label
+        and associated documents. Certain combinations of these settings may prevent associated documents from being
+        printed together with the postage label within a single document. If this occurs the documentType option can be
         used in a separate call to print missing documents.
       operationId: GetOrdersLabelAsync
       parameters:
@@ -588,7 +497,7 @@ definitions:
         type: array
       allOrders:
         description: |
-          Set to <code>true</code> and leave all the other parameters empty to manifest all orders in an eligible state 
+          Set to <code>true</code> and leave all the other parameters empty to manifest all orders in an eligible state
           up to and including the current day (orders with a future despatch date will not be included).
           Do not specify this parameter or alternatively set to <code>false</code> if specifying any other parameter options.
         example: false
@@ -596,8 +505,8 @@ definitions:
       endDateTime:
         description: |
           Date and time in UTC.
-          Used together with <b>startDateTime</b> to manifest all orders in an eligible state in a date/time range. 
-          If a <b>startDateTime</b> is specified without this parameter the end of the date/time range will be the latest 
+          Used together with <b>startDateTime</b> to manifest all orders in an eligible state in a date/time range.
+          If a <b>startDateTime</b> is specified without this parameter the end of the date/time range will be the latest
           possible order. Cannot be mixed with other parameter types.
         format: date-time
         type: string
@@ -616,8 +525,8 @@ definitions:
       startDateTime:
         description: |
           Date and time in UTC.
-          Used together with <b>endDateTime</b> to manifest all orders in an eligible state in a date/time range. 
-          If an <b>endDateTime</b> is specified without this parameter the start of the date/time range will be the earliest 
+          Used together with <b>endDateTime</b> to manifest all orders in an eligible state in a date/time range.
+          If an <b>endDateTime</b> is specified without this parameter the start of the date/time range will be the earliest
           possible order. Cannot be mixed with other parameter types.
         format: date-time
         type: string
@@ -1367,17 +1276,17 @@ definitions:
       status:
         description: |
           <br/>
-          "<i>despatchedByOtherCourier</i> ": <b>Reserved for ChannelShipper customers only - please visit 
+          "<i>despatchedByOtherCourier</i> ": <b>Reserved for ChannelShipper customers only - please visit
           <a href="https://channelshipper.com/" target="_self">ChannelShipper.com</a> for more information</b>
 
           "<i>new</i> ": This will remove the order from its batch. Order information will not be lost during this process.
 
-          Please be aware labels generated on orders which are then set to "new" (reset) are no longer valid 
-          and must be destroyed. If the order is required to be despatched after setting to "new" status, a new 
+          Please be aware labels generated on orders which are then set to "new" (reset) are no longer valid
+          and must be destroyed. If the order is required to be despatched after setting to "new" status, a new
           label must be generated to attach to the item.
 
-          Cancelled label information is automatically shared with Royal Mail Revenue Protection, and should a 
-          cancelled label be identified on an item in the Royal Mail Network, you will be charged on your account 
+          Cancelled label information is automatically shared with Royal Mail Revenue Protection, and should a
+          cancelled label be identified on an item in the Royal Mail Network, you will be charged on your account
           and an additional handling fee applied.
         enum:
           - new

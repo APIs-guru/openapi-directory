@@ -20,7 +20,7 @@ info:
 paths:
   /air_quality:
     get:
-      description: |
+      description: |-
         ## Air quality forecast for a single location
 
         ### Location specification
@@ -128,7 +128,7 @@ paths:
         - Point weather
   /find_places:
     get:
-      description: |
+      description: |-
         ## Search for places
 
         You can use this endpoint to obtain `place_id` of the location you want, to be used in `point` endpoint.
@@ -229,7 +229,7 @@ paths:
         - Location endpoints
   /find_places_prefix:
     get:
-      description: |
+      description: |-
         ## Search for places by prefix
 
         You can use this endpoint to obtain `place_id` of the location you want, to be used in `point` endpoint. The response also contains detailed information about the location, such as coordinates, timezone and the country the place belongs to.
@@ -327,7 +327,7 @@ paths:
         - Location endpoints
   /map:
     get:
-      description: |
+      description: |-
         ## PNG weather forecast maps for given area and variable
 
         ### Area specification
@@ -518,7 +518,7 @@ paths:
         - Weather maps
   /nearest_place:
     get:
-      description: |
+      description: |-
         ## Search for nearest place by coordinates
 
         You can use this endpoint to find the nearest place from given coordinates.
@@ -621,7 +621,7 @@ paths:
         - Location endpoints
   /point:
     get:
-      description: |
+      description: |-
         ## Current weather and forecast for single location
 
         ### Location specification
@@ -825,10 +825,10 @@ paths:
         - Point weather
   /time_machine:
     get:
-      description: |
+      description: |-
         ## Actual weather data for a single location and day in the past
 
-        The output contains actual weather data for each day up to 8 years in the past, and long-term statistics of selected weather variables aggregated over 40 years.
+        The output contains actual weather data for each day up to 20 years in the past, and long-term statistics of selected weather variables aggregated over 40 years.
 
         ### Location specification
         The location of the weather data must be specified. There are two ways to do this:
@@ -863,13 +863,13 @@ paths:
             title: Lon
             type: string
         - description: |
-            The UTC day of the data in the past. Specify in `YYYY-MM-DD` format, e.g. `2021-08-24`.
+            The day of the data in the past. Specify in `YYYY-MM-DD` format, e.g. `2021-08-24`.
           in: query
           name: date
           required: true
           schema:
             description: |
-              The UTC day of the data in the past. Specify in `YYYY-MM-DD` format, e.g. `2021-08-24`.
+              The day of the data in the past. Specify in `YYYY-MM-DD` format, e.g. `2021-08-24`.
             format: date
             title: Date
             type: string
@@ -1601,9 +1601,7 @@ components:
           title: Dir
           type: string
         gusts:
-          description: |-
-            Wind gust speed. (afternoon max)
-            Units: metric = m/s, us = mph, uk = mph, ca = km/h
+          description: "Units: metric = m/s, us = mph, uk = mph, ca = km/h"
           title: Gusts
           type: number
         speed:
@@ -1771,15 +1769,11 @@ components:
           title: Temperature
           type: number
         temperature_max:
-          description: |-
-            Temperature 2 metres above ground. (allday max)
-            Units: metric = °C, us = °F, uk = °C, ca = °C
+          description: "Units: metric = °C, us = °F, uk = °C, ca = °C"
           title: Temperature Max
           type: number
         temperature_min:
-          description: |-
-            Temperature 2 metres above ground. (allday min)
-            Units: metric = °C, us = °F, uk = °C, ca = °C
+          description: "Units: metric = °C, us = °F, uk = °C, ca = °C"
           title: Temperature Min
           type: number
         visibility:
@@ -1801,15 +1795,11 @@ components:
           title: Wind Chill
           type: number
         wind_chill_max:
-          description: |-
-            Temperature 2 metres above ground. (allday max)
-            Units: metric = °C, us = °F, uk = °C, ca = °C
+          description: "Units: metric = °C, us = °F, uk = °C, ca = °C"
           title: Wind Chill Max
           type: number
         wind_chill_min:
-          description: |-
-            Temperature 2 metres above ground. (allday min)
-            Units: metric = °C, us = °F, uk = °C, ca = °C
+          description: "Units: metric = °C, us = °F, uk = °C, ca = °C"
           title: Wind Chill Min
           type: number
       required:
@@ -1882,9 +1872,7 @@ components:
           title: Dir
           type: string
         gusts:
-          description: |-
-            Wind gust speed. (allday max)
-            Units: metric = m/s, us = mph, uk = mph, ca = km/h
+          description: "Units: metric = m/s, us = mph, uk = mph, ca = km/h"
           title: Gusts
           type: number
         speed:
@@ -2201,9 +2189,7 @@ components:
           title: Dir
           type: string
         gusts:
-          description: |-
-            Wind gust speed. (evening max)
-            Units: metric = m/s, us = mph, uk = mph, ca = km/h
+          description: "Units: metric = m/s, us = mph, uk = mph, ca = km/h"
           title: Gusts
           type: number
         speed:
@@ -2455,9 +2441,7 @@ components:
           title: Dir
           type: string
         gusts:
-          description: |-
-            Wind gust speed. (morning max)
-            Units: metric = m/s, us = mph, uk = mph, ca = km/h
+          description: "Units: metric = m/s, us = mph, uk = mph, ca = km/h"
           title: Gusts
           type: number
         speed:

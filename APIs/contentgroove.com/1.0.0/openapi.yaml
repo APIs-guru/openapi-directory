@@ -1,7 +1,7 @@
 openapi: 3.0.1
 servers:
-  - description: API server
-    url: https://api.contentgroove.com
+  - description: V1 API server
+    url: https://api.contentgroove.com/api/v1
 info:
   description: |
     # Overview
@@ -131,8 +131,9 @@ info:
       version: "3.0"
   x-providerName: contentgroove.com
 paths:
-  /api/v1/clips:
+  /clips:
     get:
+      operationId: getClips
       parameters:
         - description: |+
             Filters to be applied to the query.
@@ -215,6 +216,8 @@ paths:
                 links:
                   current: http://api.contentgroove.com/api/v1/clips?page[number]=1
                   self: http://api.contentgroove.com/api/v1/clips
+              schema:
+                $ref: "#/components/schemas/clips_response_object"
           description: successful
         "401":
           content:
@@ -222,6 +225,8 @@ paths:
               example:
                 errors:
                   - message: You need to sign in or sign up before continuing.
+              schema:
+                $ref: "#/components/schemas/unauthorized_error_response_object"
           description: unauthorized
         "429":
           content:
@@ -231,11 +236,14 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
       summary: list clips
     post:
+      operationId: createClip
       parameters: []
       requestBody:
         content:
@@ -304,6 +312,8 @@ paths:
                   type: clips
                 links:
                   self: http://api.contentgroove.com/api/v1/clips
+              schema:
+                $ref: "#/components/schemas/clip_response_object"
           description: successful
         "401":
           content:
@@ -311,6 +321,8 @@ paths:
               example:
                 errors:
                   - message: You need to sign in or sign up before continuing.
+              schema:
+                $ref: "#/components/schemas/unauthorized_error_response_object"
           description: unauthorized
         "402":
           content:
@@ -323,6 +335,8 @@ paths:
                       pointer: ""
                     status: "422"
                     title: Unprocessable Entity
+              schema:
+                $ref: "#/components/schemas/payment_required_error_response_object"
           description: payment required
         "429":
           content:
@@ -332,12 +346,15 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
       summary: create clip
-  "/api/v1/clips/{id}":
+  "/clips/{id}":
     delete:
+      operationId: deleteClipById
       responses:
         "204":
           description: no content
@@ -371,6 +388,7 @@ paths:
         - BearerHeader: []
       summary: delete clip
     get:
+      operationId: getClipById
       responses:
         "200":
           content:
@@ -404,6 +422,8 @@ paths:
                   type: clips
                 links:
                   self: http://api.contentgroove.com/api/v1/clips/32caa472-6a12-4a77-974a-52d1175502ab
+              schema:
+                $ref: "#/components/schemas/clip_response_object"
           description: successful
         "401":
           content:
@@ -430,6 +450,8 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
@@ -442,6 +464,7 @@ paths:
         schema:
           type: string
     put:
+      operationId: updateClipById
       parameters: []
       requestBody:
         content:
@@ -502,6 +525,8 @@ paths:
                   type: clips
                 links:
                   self: http://api.contentgroove.com/api/v1/clips/32caa472-6a12-4a77-974a-52d1175502ab
+              schema:
+                $ref: "#/components/schemas/clip_response_object"
           description: successful
         "401":
           content:
@@ -518,12 +543,15 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
       summary: update clip
-  /api/v1/direct_uploads:
+  /direct_uploads:
     get:
+      operationId: getUploadUrl
       responses:
         "200":
           content:
@@ -535,6 +563,8 @@ paths:
                     upload_url: (example URL for documentation only) https://file-uploads.contentgroove.com/vmf93z4328ioirtd6f5yb2nwbnq4d0ps?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ44FA4RJICA5SPPQ%2F20220919%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220919T165555Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host-content-type&X-Amz-Signature=df840423555070b29264382599459f1497ba2bd5e10e6a6dd41a29ebe239a8e0ecf
                   id: 71eeab42-c29b-4f14-a05c-c76dd80c39b7
                   type: direct_upload_blobs
+              schema:
+                $ref: "#/components/schemas/direct_upload_response_object"
           description: successful
         "401":
           content:
@@ -551,12 +581,15 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
       summary: prepare presigned upload url
-  /api/v1/medias:
+  /medias:
     get:
+      operationId: getMedias
       parameters:
         - description: |+
             Filters to be applied to the query.
@@ -635,6 +668,8 @@ paths:
                 links:
                   current: http://api.contentgroove.com/api/v1/medias?page[number]=1
                   self: http://api.contentgroove.com/api/v1/medias
+              schema:
+                $ref: "#/components/schemas/medias_response_object"
           description: successful
         "401":
           content:
@@ -651,6 +686,8 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
@@ -852,6 +889,7 @@ paths:
                   description: successful
               security: []
               summary: The webhook that is sent after the media is finished processing
+      operationId: createMedia
       parameters: []
       requestBody:
         content:
@@ -913,6 +951,8 @@ paths:
                   type: medias
                 links:
                   self: http://api.contentgroove.com/api/v1/medias
+              schema:
+                $ref: "#/components/schemas/media_response_object"
           description: successful
         "401":
           content:
@@ -941,12 +981,15 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
       summary: create media
-  "/api/v1/medias/{id}":
+  "/medias/{id}":
     delete:
+      operationId: deleteMediaById
       responses:
         "204":
           description: no content
@@ -980,6 +1023,7 @@ paths:
         - BearerHeader: []
       summary: delete media
     get:
+      operationId: getMediaById
       responses:
         "200":
           content:
@@ -1011,6 +1055,8 @@ paths:
                   type: medias
                 links:
                   self: http://api.contentgroove.com/api/v1/medias/f98fae60-8086-41d5-8966-36698bf13de0
+              schema:
+                $ref: "#/components/schemas/media_response_object"
           description: successful
         "401":
           content:
@@ -1037,6 +1083,8 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
@@ -1049,6 +1097,7 @@ paths:
         schema:
           type: string
     put:
+      operationId: updateMediaById
       parameters: []
       requestBody:
         content:
@@ -1104,6 +1153,8 @@ paths:
                   type: medias
                 links:
                   self: http://api.contentgroove.com/api/v1/medias/f98fae60-8086-41d5-8966-36698bf13de0
+              schema:
+                $ref: "#/components/schemas/media_response_object"
           description: successful
         "401":
           content:
@@ -1120,12 +1171,15 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
       summary: update media
-  /api/v1/webhook_subscriptions:
+  /webhook_subscriptions:
     get:
+      operationId: getWebhookSubscriptions
       parameters:
         - description: |+
             Filters to be applied to the query.
@@ -1185,6 +1239,8 @@ paths:
                 links:
                   current: http://api.contentgroove.com/api/v1/webhook_subscriptions?page[number]=1
                   self: http://api.contentgroove.com/api/v1/webhook_subscriptions
+              schema:
+                $ref: "#/components/schemas/webhook_subscriptions_response_object"
           description: successful
         "401":
           content:
@@ -1201,11 +1257,14 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
       summary: list webhook subscriptions
     post:
+      operationId: createWebhookSubscription
       parameters: []
       requestBody:
         content:
@@ -1217,9 +1276,9 @@ paths:
                     attributes:
                       properties:
                         subscribed_events:
-                          example:
-                            - media.processing_finished
-                          items: {}
+                          items:
+                            example: media.processing_finished
+                            type: string
                           type: array
                         url:
                           example: https://example.com/contentgroove_webhooks/12345
@@ -1258,6 +1317,8 @@ paths:
                   type: webhook_subscriptions
                 links:
                   self: http://api.contentgroove.com/api/v1/webhook_subscriptions
+              schema:
+                $ref: "#/components/schemas/webhook_subscription_response_object"
           description: successful
         "401":
           content:
@@ -1274,12 +1335,15 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
       summary: create webhook subscription
-  "/api/v1/webhook_subscriptions/{id}":
+  "/webhook_subscriptions/{id}":
     delete:
+      operationId: deleteWebhookSubscriptionById
       responses:
         "204":
           description: no content
@@ -1313,6 +1377,7 @@ paths:
         - BearerHeader: []
       summary: delete webhook subscription
     get:
+      operationId: getWebhookSubscriptionById
       responses:
         "200":
           content:
@@ -1337,6 +1402,8 @@ paths:
                   type: webhook_subscriptions
                 links:
                   self: http://api.contentgroove.com/api/v1/webhook_subscriptions/481f57a0-ecdf-42ec-9837-bc551eb6909b
+              schema:
+                $ref: "#/components/schemas/webhook_subscription_response_object"
           description: successful
         "401":
           content:
@@ -1363,6 +1430,8 @@ paths:
                   - detail: You have exceeded the maximum number of requests in the current window. Please try again later.
                     status: "429"
                     title: Too Many Requests
+              schema:
+                $ref: "#/components/schemas/too_many_requests_error_response_object"
           description: too many requests
       security:
         - BearerHeader: []
@@ -1375,6 +1444,323 @@ paths:
         schema:
           type: string
 components:
+  schemas:
+    clip_response_object:
+      properties:
+        data:
+          $ref: "#/components/schemas/clip_response_object_data"
+        links:
+          $ref: "#/components/schemas/links_object_data"
+      type: object
+    clip_response_object_data:
+      properties:
+        attributes:
+          properties:
+            created_at:
+              type: string
+            end_char:
+              type: integer
+            end_time:
+              type: number
+            external_id:
+              nullable: true
+              type: string
+            is_processing:
+              nullable: true
+              type: boolean
+            media_file_content_duration:
+              nullable: true
+              type: string
+            media_file_content_type:
+              nullable: true
+              type: string
+            media_file_height:
+              nullable: true
+              type: string
+            media_file_preview_image_url:
+              nullable: true
+              type: string
+            media_file_url:
+              nullable: true
+              type: string
+            media_file_width:
+              nullable: true
+              type: string
+            name:
+              type: string
+            processing_started_at:
+              nullable: true
+              type: string
+            rank:
+              nullable: true
+              type: integer
+            start_char:
+              type: integer
+            start_time:
+              type: number
+            text:
+              nullable: true
+              type: string
+          type: object
+        id:
+          type: string
+        relationships:
+          properties:
+            media:
+              properties:
+                data:
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                  type: object
+              type: object
+          type: object
+        type:
+          type: string
+      type: object
+    clips_response_object:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/clip_response_object_data"
+          type: array
+        links:
+          $ref: "#/components/schemas/links_object_data"
+      type: object
+    direct_upload_response_object:
+      properties:
+        data:
+          properties:
+            attributes:
+              properties:
+                upload_id:
+                  example: eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaWs1T0dNNU16Um1ZUzAzT1dZMUxUUXhORFF0T0RobVpTMDNNV1prT1RKaE9XWTVNVGtHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6ImJsb2JfaWQifX0=--f52b7cf73db1f05b8e74dcf057b7f8348128c600
+                  type: string
+                upload_url:
+                  example: (example URL for documentation only) https://file-uploads.contentgroove.com/vmf93z4328ioirtd6f5yb2nwbnq4d0ps?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ44FA4RJICA5SPPQ%2F20220919%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220919T165555Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host-content-type&X-Amz-Signature=df840423555070b29264382599459f1497ba2bd5e10e6a6dd41a29ebe239a8e0ecf
+                  type: string
+              type: object
+            id:
+              example: 98c934fa-79f5-4144-88fe-71fd92a9f919
+              type: string
+            type:
+              example: direct_upload_blobs
+              type: string
+          type: object
+      type: object
+    links_object_data:
+      properties:
+        current:
+          nullable: true
+          type: string
+        first:
+          nullable: true
+          type: string
+        last:
+          nullable: true
+          type: string
+        next:
+          nullable: true
+          type: string
+        prev:
+          nullable: true
+          type: string
+        self:
+          type: string
+      type: object
+    media_response_object:
+      properties:
+        data:
+          $ref: "#/components/schemas/media_response_object_data"
+        links:
+          $ref: "#/components/schemas/links_object_data"
+      type: object
+    media_response_object_data:
+      properties:
+        attributes:
+          properties:
+            created_at:
+              type: string
+            description:
+              nullable: true
+              type: string
+            external_id:
+              nullable: true
+              type: string
+            has_fetch_error:
+              type: boolean
+            is_processing:
+              nullable: true
+              type: boolean
+            name:
+              type: string
+            original_created_at:
+              nullable: true
+              type: string
+            processing_started_at:
+              nullable: true
+              type: string
+            source_created_at:
+              nullable: true
+              type: string
+            source_file_content_type:
+              nullable: true
+              type: string
+            source_file_duration:
+              nullable: true
+              type: number
+            source_file_height:
+              nullable: true
+              type: number
+            source_file_preview_image_url:
+              nullable: true
+              type: string
+            source_file_width:
+              nullable: true
+              type: number
+            source_url:
+              nullable: true
+              type: string
+          type: object
+        id:
+          type: string
+        relationships:
+          properties:
+            clips:
+              properties:
+                data:
+                  items:
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                    type: object
+                  type: array
+              type: object
+          type: object
+        type:
+          type: string
+      type: object
+    medias_response_object:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/media_response_object_data"
+          type: array
+        links:
+          $ref: "#/components/schemas/links_object_data"
+      type: object
+    payment_required_error_response_object:
+      properties:
+        errors:
+          items:
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                properties:
+                  pointer:
+                    type: string
+                type: object
+              status:
+                type: string
+              title:
+                type: string
+            type: object
+          type: array
+      type: object
+    too_many_requests_error_response_object:
+      properties:
+        errors:
+          items:
+            properties:
+              detail:
+                type: string
+              status:
+                type: string
+              title:
+                type: string
+            type: object
+          type: array
+      type: object
+    unauthorized_error_response_object:
+      properties:
+        errors:
+          items:
+            properties:
+              message:
+                type: string
+            type: object
+          type: array
+      type: object
+    webhook_subscription_response_object:
+      properties:
+        data:
+          $ref: "#/components/schemas/webhook_subscription_response_object_data"
+        links:
+          $ref: "#/components/schemas/links_object_data"
+      type: object
+    webhook_subscription_response_object_data:
+      properties:
+        attributes:
+          properties:
+            active:
+              type: boolean
+            created_at:
+              type: string
+            subscribed_events:
+              items:
+                type: string
+              type: array
+            updated_at:
+              type: string
+            url:
+              type: string
+          type: object
+        id:
+          type: string
+        relationships:
+          properties:
+            user:
+              properties:
+                data:
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                  type: object
+              type: object
+            webhook_events:
+              properties:
+                data:
+                  items:
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                    type: object
+                  type: array
+              type: object
+          type: object
+        type:
+          type: string
+      type: object
+    webhook_subscriptions_response_object:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/webhook_subscription_response_object_data"
+          type: array
+        links:
+          $ref: "#/components/schemas/links_object_data"
+      type: object
   securitySchemes:
     BearerHeader:
       description: Generate an API key in settings -> api keys

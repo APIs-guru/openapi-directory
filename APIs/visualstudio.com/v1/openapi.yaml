@@ -1816,6 +1816,47 @@ paths:
           description: Not Found
       tags:
         - Configuration
+  "/api/v1/GenevaActions/Environments/storage/{environmentIdOrFriendlyName}/{targetBlob}":
+    get:
+      parameters:
+        - in: path
+          name: environmentIdOrFriendlyName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: targetBlob
+          required: true
+          schema:
+            default: None
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
   "/api/v1/GenevaActions/Environments/{environmentId}":
     delete:
       parameters:
@@ -1901,46 +1942,6 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/CloudEnvironmentResult"
-          description: Success
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Not Found
-      tags:
-        - Environments
-  "/api/v1/GenevaActions/Environments/{environmentId}/archived_storage_sas/{targetBlob}":
-    get:
-      parameters:
-        - in: path
-          name: environmentId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: targetBlob
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-            text/plain:
-              schema:
-                type: string
           description: Success
         "404":
           content:
@@ -2699,97 +2700,6 @@ paths:
           description: Not Found
       tags:
         - Prebuilds
-  "/api/v1/Prebuilds/templates/repo/{repoId}/branch/{branchName}/hash/{prebuildHash}/location/{location}/skus":
-    get:
-      operationId: GetPrebuildReadinessRoute
-      parameters:
-        - in: path
-          name: repoId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: branchName
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: prebuildHash
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: location
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: storageType
-          schema:
-            $ref: "#/components/schemas/StorageType"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PrebuildReadinessResult"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/PrebuildReadinessResult"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/PrebuildReadinessResult"
-          description: Success
-        "400":
-          content:
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-            text/plain:
-              schema:
-                type: string
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Not Found
-      tags:
-        - Prebuilds
   /api/v1/Sas:
     get:
       responses:
@@ -3379,246 +3289,6 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/PlanResource"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Tokens
-  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/deleteAllCodespaces":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Tokens
-  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/deleteAllEnvironments":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Tokens
-  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/readAllCodespaces":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Tokens
-  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/readAllEnvironments":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Tokens
-  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/writeCodespaces":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Tokens
-  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/writeDelegates":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Tokens
-  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/writeEnvironments":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            type: string
       responses:
         "200":
           description: Success
@@ -6842,63 +6512,6 @@ paths:
           description: Not Found
       tags:
         - Netmon
-  /tunnelauth:
-    get:
-      parameters:
-        - in: query
-          name: id
-          schema:
-            type: string
-        - in: query
-          name: cluster
-          schema:
-            type: string
-        - in: query
-          name: name
-          schema:
-            type: string
-        - in: query
-          name: port
-          schema:
-            format: int32
-            type: integer
-        - in: query
-          name: pb
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Authentication
-    post:
-      parameters:
-        - in: query
-          name: op
-          schema:
-            type: string
-        - in: query
-          name: id
-          schema:
-            type: string
-        - in: query
-          name: cluster
-          schema:
-            type: string
-        - in: query
-          name: name
-          schema:
-            type: string
-        - in: query
-          name: port
-          schema:
-            format: int32
-            type: integer
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Authentication
   /warmup:
     get:
       responses:
@@ -7512,6 +7125,12 @@ components:
           type: object
         friendlyName:
           type: string
+        gitHubPrebuildInstanceEndpoint:
+          nullable: true
+          type: string
+        gitHubPrebuildTemplateEndpoint:
+          nullable: true
+          type: string
         planId:
           nullable: true
           type: string
@@ -7839,6 +7458,7 @@ components:
         - 35 (GitHubProxyError)
         - 36 (PrebuildTemplateDeletionIsNotAllowed)
         - 37 (TierCapacityIsUnavailable)
+        - 38 (EnvironmentIsNotRestorable)
       format: int32
       type: integer
     NetmonCorrelationDataBody:
@@ -8195,6 +7815,9 @@ components:
           type: string
         storageType:
           $ref: "#/components/schemas/StorageType"
+        subscription:
+          nullable: true
+          type: string
       type: object
     PoolStatusResponseBody:
       additionalProperties: false
@@ -8304,6 +7927,9 @@ components:
         commitId:
           nullable: true
           type: string
+        devcontainerPath:
+          nullable: true
+          type: string
         id:
           nullable: true
           type: string
@@ -8319,6 +7945,9 @@ components:
             type: string
           nullable: true
           type: array
+        prebuildConfigurationId:
+          nullable: true
+          type: string
         prebuildHash:
           nullable: true
           type: string

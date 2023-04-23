@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://api.snyk.io/api/v1
+  - url: https://api.snyk.io/v1
 x-hasEquivalentPaths: true
 info:
   description: |-
@@ -22,7 +22,7 @@ info:
 
     ## API url
 
-    The base URL for all API endpoints is https://api.snyk.io/api/v1/
+    The base URL for all API endpoints is https://api.snyk.io/v1/
 
     ## Authorization
 
@@ -204,7 +204,7 @@ info:
 
     To ensure resilience against increasing request rates, we are starting to introduce rate-limiting.
     We are monitoring the rate-limiting system to ensure minimal impact on users while ensuring system stability.
-    Current limit is up to 2000 requests per minute, per user. This limit is above industry standards, and is subject to change. As such, we recommend calls to the API are throttled regardless of the current limit.
+    The limit is up to 2000 requests per minute, per user, subject to change. As such, we recommend calls to the API are throttled regardless of the current limit.
     All requests above the limit will get a response with status code `429` - `Too many requests` until requests stop for the duration of the rate-limiting interval (currently a minute).
 
     ## Consuming Webhooks
@@ -614,8 +614,12 @@ paths:
                         - group.settings.feature_flag.edit
                         - group.sso.auth0_connection.create
                         - group.sso.auth0_connection.edit
+                        - group.sso.add
                         - group.sso.create
+                        - group.sso.delete
                         - group.sso.edit
+                        - group.sso.membership.sync
+                        - group.sso.remove
                         - group.tag.create
                         - group.tag.delete
                         - group.user.add
@@ -650,8 +654,12 @@ paths:
                         - group.settings.feature_flag.edit
                         - group.sso.auth0_connection.create
                         - group.sso.auth0_connection.edit
+                        - group.sso.add
                         - group.sso.create
+                        - group.sso.delete
                         - group.sso.edit
+                        - group.sso.membership.sync
+                        - group.sso.remove
                         - group.tag.create
                         - group.tag.delete
                         - group.user.add
@@ -1401,8 +1409,6 @@ paths:
                       description: Will return only logs for this specific event. Only one of event and excludeEvent may be specified in a request.
                       enum:
                         - api.access
-                        - org.billing.info.edit
-                        - org.billing.subscription.edit
                         - org.cloud_config.settings.edit
                         - org.create
                         - org.delete
@@ -1417,6 +1423,9 @@ paths:
                         - org.license_rule.delete
                         - org.license_rule.edit
                         - org.notification_settings.edit
+                        - org.org_source.create
+                        - org.org_source.delete
+                        - org.org_source.edit
                         - org.policy.edit
                         - org.project.add
                         - org.project.attributes.edit
@@ -1469,8 +1478,6 @@ paths:
                       description: Will return logs except logs for this event. Only one of event and excludeEvent may be specified in a request.
                       enum:
                         - api.access
-                        - org.billing.info.edit
-                        - org.billing.subscription.edit
                         - org.cloud_config.settings.edit
                         - org.create
                         - org.delete
@@ -1485,6 +1492,9 @@ paths:
                         - org.license_rule.delete
                         - org.license_rule.edit
                         - org.notification_settings.edit
+                        - org.org_source.create
+                        - org.org_source.delete
+                        - org.org_source.edit
                         - org.policy.edit
                         - org.project.add
                         - org.project.attributes.edit
@@ -3067,7 +3077,7 @@ paths:
                           description: name of the repo
                           type: string
                         owner:
-                          description: "for Github: account owner of the repository; for Azure Repos, this is `Project ID`; for Bitbucket Cloud, this is the `Workspace ID`"
+                          description: "for Github: account owner of the repository; for Azure Repos, this is `Project ID`"
                           type: string
                       required:
                         - owner
@@ -3100,6 +3110,33 @@ paths:
                       required:
                         - id
                         - branch
+                      type: object
+                  type: object
+                - example:
+                    files:
+                      - path: example/package.json
+                    target:
+                      name: goof
+                      owner: org-security
+                  properties:
+                    exclusionGlobs:
+                      description: a comma-separated list of up to 10 folder names to exclude from scanning (each folder name must not exceed 100 characters). If not specified, it will default to "fixtures, tests, \_\_tests\_\_, node_modules". If an empty string is provided - no folders will be excluded. This attribute is only respected with Open Source and Container scan targets.
+                      type: string
+                    files:
+                      description: an array of file objects
+                      items: {}
+                      type: array
+                    target:
+                      properties:
+                        name:
+                          description: name of the repo
+                          type: string
+                        owner:
+                          description: this is the `Workspace ID`
+                          type: string
+                      required:
+                        - owner
+                        - name
                       type: object
                   type: object
                 - example:
@@ -19213,8 +19250,12 @@ components:
                 - group.settings.feature_flag.edit
                 - group.sso.auth0_connection.create
                 - group.sso.auth0_connection.edit
+                - group.sso.add
                 - group.sso.create
+                - group.sso.delete
                 - group.sso.edit
+                - group.sso.membership.sync
+                - group.sso.remove
                 - group.tag.create
                 - group.tag.delete
                 - group.user.add
@@ -19249,8 +19290,12 @@ components:
                 - group.settings.feature_flag.edit
                 - group.sso.auth0_connection.create
                 - group.sso.auth0_connection.edit
+                - group.sso.add
                 - group.sso.create
+                - group.sso.delete
                 - group.sso.edit
+                - group.sso.membership.sync
+                - group.sso.remove
                 - group.tag.create
                 - group.tag.delete
                 - group.user.add
@@ -20167,8 +20212,6 @@ components:
               description: Will return only logs for this specific event. Only one of event and excludeEvent may be specified in a request.
               enum:
                 - api.access
-                - org.billing.info.edit
-                - org.billing.subscription.edit
                 - org.cloud_config.settings.edit
                 - org.create
                 - org.delete
@@ -20183,6 +20226,9 @@ components:
                 - org.license_rule.delete
                 - org.license_rule.edit
                 - org.notification_settings.edit
+                - org.org_source.create
+                - org.org_source.delete
+                - org.org_source.edit
                 - org.policy.edit
                 - org.project.add
                 - org.project.attributes.edit
@@ -20235,8 +20281,6 @@ components:
               description: Will return logs except logs for this event. Only one of event and excludeEvent may be specified in a request.
               enum:
                 - api.access
-                - org.billing.info.edit
-                - org.billing.subscription.edit
                 - org.cloud_config.settings.edit
                 - org.create
                 - org.delete
@@ -20251,6 +20295,9 @@ components:
                 - org.license_rule.delete
                 - org.license_rule.edit
                 - org.notification_settings.edit
+                - org.org_source.create
+                - org.org_source.delete
+                - org.org_source.edit
                 - org.policy.edit
                 - org.project.add
                 - org.project.attributes.edit

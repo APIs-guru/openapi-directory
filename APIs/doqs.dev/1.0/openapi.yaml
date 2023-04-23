@@ -12,9 +12,9 @@ info:
 security:
   - apiKeyAuth: []
 paths:
-  /designer/templates/:
+  /designer/templates:
     get:
-      operationId: list_templates_designer_templates__get
+      operationId: list_templates_designer_templates_get
       parameters:
         - in: query
           name: limit
@@ -54,7 +54,7 @@ paths:
           description: Server Error
       summary: List Templates
     post:
-      operationId: create_template_designer_templates__post
+      operationId: create_template_designer_templates_post
       requestBody:
         content:
           application/json:
@@ -571,6 +571,15 @@ components:
         header_html:
           title: Header Html
           type: string
+        margin:
+          allOf:
+            - $ref: "#/components/schemas/Margin"
+          default:
+            bottom: 0
+            left: 0
+            right: 0
+            top: 0
+          title: Margin
         name:
           title: Name
           type: string
@@ -692,6 +701,8 @@ components:
         id:
           title: Id
           type: string
+        margin:
+          $ref: "#/components/schemas/Margin"
         name:
           title: Name
           type: string
@@ -711,6 +722,7 @@ components:
         - orientation
         - components
         - preview_payload
+        - margin
       title: DesignerTemplate
       type: object
     FillTemplateRequest:
@@ -802,6 +814,30 @@ components:
         - name
         - page
       title: ImageField
+      type: object
+    Margin:
+      properties:
+        bottom:
+          default: 0
+          minimum: 0
+          title: Bottom
+          type: integer
+        left:
+          default: 0
+          minimum: 0
+          title: Left
+          type: integer
+        right:
+          default: 0
+          minimum: 0
+          title: Right
+          type: integer
+        top:
+          default: 0
+          minimum: 0
+          title: Top
+          type: integer
+      title: Margin
       type: object
     Orientation:
       description: An enumeration.

@@ -1859,10 +1859,13 @@ paths:
           name: postal_code
           schema:
             type: string
-        - description: Radius around postal code
+        - description: Radius around the search location (Unit - Miles)
           in: query
           name: radius
           schema:
+            format: int32
+            maximum: 100
+            minimum: 0
             type: integer
       responses:
         "200":
@@ -2229,6 +2232,7 @@ paths:
         - $ref: "#/components/parameters/high_value_features"
         - $ref: "#/components/parameters/min_photo_links"
         - $ref: "#/components/parameters/min_photo_links_cached"
+        - $ref: "#/components/parameters/client_filters"
       responses:
         "200":
           content:
@@ -3326,6 +3330,7 @@ paths:
       operationId: search
       parameters:
         - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/uk_append_api_key"
         - $ref: "#/components/parameters/latitude"
         - $ref: "#/components/parameters/longitude"
         - $ref: "#/components/parameters/radius"
@@ -3338,7 +3343,6 @@ paths:
         - $ref: "#/components/parameters/model"
         - $ref: "#/components/parameters/variant"
         - $ref: "#/components/parameters/trim"
-        - $ref: "#/components/parameters/vin"
         - $ref: "#/components/parameters/body_type"
         - $ref: "#/components/parameters/ymmt"
         - $ref: "#/components/parameters/transmission"
@@ -3464,6 +3468,8 @@ paths:
         - $ref: "#/components/parameters/owned"
         - $ref: "#/components/parameters/min_photo_links"
         - $ref: "#/components/parameters/min_photo_links_cached"
+        - $ref: "#/components/parameters/match"
+        - $ref: "#/components/parameters/ulez_compliant"
       responses:
         "200":
           content:
@@ -3517,13 +3523,10 @@ paths:
         - $ref: "#/components/parameters/model"
         - $ref: "#/components/parameters/trim"
         - $ref: "#/components/parameters/dealer_id"
-        - $ref: "#/components/parameters/vin"
         - $ref: "#/components/parameters/source"
         - $ref: "#/components/parameters/body_type"
         - $ref: "#/components/parameters/body_subtype"
         - $ref: "#/components/parameters/vehicle_type"
-        - $ref: "#/components/parameters/car_vins"
-        - $ref: "#/components/parameters/car_taxonomy_vins"
         - $ref: "#/components/parameters/ymmt"
         - $ref: "#/components/parameters/match"
         - $ref: "#/components/parameters/cylinders"
@@ -5095,6 +5098,13 @@ components:
       description: Comma separated list of 17 digit vins to search the matching cars for. Only 10 VINs allowed per request. If the request contains more than 10 VINs the first 10 VINs will be considered. Could be used as a More Like This or Similar Vehicles search for the given VINs. Ths vins parameter is an alternative to taxonomy_vins or ymmt parameters available with the search API. vins and taxonomy_vins parameters could be used to filter our cars with the exact build represented by the vins or taxonomy_vins whereas ymmt is a top level filter that does not filter cars by the build attributes like doors, drivetrain, cylinders, body type, body subtype, vehicle type etc
       in: query
       name: vins
+      required: false
+      schema:
+        type: string
+    car_vrms:
+      description: Comma separated list of vrms to search the matching cars for. Only 10 VRMs allowed per request. If the request contains more than 10 VRMs the first 10 VRMs will be considered. Could be used as a More Like This or Similar Vehicles search for the given VRMs.
+      in: query
+      name: vrms
       required: false
       schema:
         type: string
@@ -6754,6 +6764,13 @@ components:
         transformConstraints:
           - transformer: caseTransformer
             type: string
+    uk_append_api_key:
+      description: Flag on whether to include api_key in response API urls (if any)
+      in: query
+      name: append_api_key
+      schema:
+        default: false
+        type: boolean
     uk_city_mpg_range:
       description: City mileage range for UK to filter listings with the mileage in the range given. Range to be given in the format - min-max e.g. 1000-5000
       in: query
@@ -6811,6 +6828,13 @@ components:
             defaultMin: 0
             transformer: parseFloat
             type: integer
+    ulez_compliant:
+      description: Filter listings based on drive into ultra low emmition zone
+      in: query
+      name: ulez_compliant
+      required: false
+      schema:
+        type: boolean
     uvc_id:
       description: To filter on uvc id
       in: query

@@ -5395,7 +5395,10 @@ paths:
                 - TRADE_RESEND_AUTH_EMAIL
                 - TRANSFER
                 - TRANSFER_IN
+                - TRANSFER_IN_ACCEPT
                 - TRANSFER_IN_CANCEL
+                - TRANSFER_IN_RESTART
+                - TRANSFER_IN_RETRY
                 - TRANSFER_OUT
                 - TRANSFER_OUT_ACCEPT
                 - TRANSFER_OUT_REJECT
@@ -5582,6 +5585,203 @@ paths:
       summary: Acknowledge a domain notification
       tags:
         - Notifications
+  "/v2/customers/{customerId}/domains/register":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/DomainPurchaseV2"
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/REGISTER to poll status
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request was malformed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: There is already a similar action processing
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Based on restrictions declared in JSON schema returned by `./schema/{tld}`
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Purchase and register the specified Domain
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/register/schema/{tld}":
+    get:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: The Top-Level Domain whose schema should be retrieved
+          in: path
+          name: tld
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonSchema"
+          description: Request was successful
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The tld does not exist
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: "`tld` must be specified"
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Retrieve the schema to be submitted when registering a Domain for the specified TLD
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/register/validate":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/DomainPurchaseV2"
+      responses:
+        "204":
+          description: Request was successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request was malformed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The customer does not exist
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Based on restrictions declared in JSON schema returned by `./schema/{tld}`
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Validate the request body using the Domain Registration Schema for the specified TLD
+      tags:
+        - Domains
   "/v2/customers/{customerId}/domains/{domain}":
     get:
       parameters:
@@ -5784,7 +5984,10 @@ paths:
               - TRADE_PURCHASE_AUTH_TEXT_MESSAGE
               - TRADE_RESEND_AUTH_EMAIL
               - TRANSFER
+              - TRANSFER_IN_ACCEPT
               - TRANSFER_IN_CANCEL
+              - TRANSFER_IN_RESTART
+              - TRANSFER_IN_RETRY
               - TRANSFER_OUT_ACCEPT
               - TRANSFER_OUT_REJECT
               - TRANSFER_OUT_REQUESTED
@@ -5889,7 +6092,10 @@ paths:
               - TRADE_RESEND_AUTH_EMAIL
               - TRANSFER
               - TRANSFER_IN
+              - TRANSFER_IN_ACCEPT
               - TRANSFER_IN_CANCEL
+              - TRANSFER_IN_RESTART
+              - TRANSFER_IN_RETRY
               - TRANSFER_OUT
               - TRANSFER_OUT_ACCEPT
               - TRANSFER_OUT_REJECT
@@ -6017,6 +6223,450 @@ paths:
       summary: Purchase a restore for the given domain to bring it out of redemption
       tags:
         - Domains
+  "/v2/customers/{customerId}/domains/{domain}/renew":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Domain to be renewed
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DomainRenewV2"
+        description: Options for renewing existing Domain
+        required: true
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/RENEW to poll status
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request was malformed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain does not exist
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: There is already a similar action processing
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request body doesn't fulfill schema, see details in `fields`
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Renew the specified Domain
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/{domain}/transfer":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Domain to transfer in
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DomainTransferInV2"
+        description: Details for domain transfer purchase
+        required: true
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/TRANSFER to poll status
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request was malformed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain does not exist
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: There is already a similar action processing
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Based on restrictions declared in JSON schema returned by `./schema/{tld}`
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Purchase and start or restart transfer process
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/{domain}/transferInAccept":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Domain to accept the transfer in for
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/DomainTransferAuthCode"
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/TRANSFER_IN_ACCEPT to poll status
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request was malformed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain does not exist
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain status does not allow performing the operation
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request body doesn't fulfill schema, see details in `fields`
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Accepts the transfer in
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/{domain}/transferInCancel":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Domain to cancel the transfer in for
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/TRANSFER_IN_CANCEL to poll status
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain does not exist
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: There is already a similar action processing
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Cancels the transfer in
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/{domain}/transferInRestart":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Domain to restart the transfer in
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/TRANSFER_IN_RESTART to poll status
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Resource not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain status does not allow performing the operation
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Restarts transfer in request from the beginning
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/{domain}/transferInRetry":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Domain to retry the transfer in
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/DomainTransferAuthCode"
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/TRANSFER_IN_RETRY to poll status
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request was malformed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Resource not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain status does not allow performing the operation
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request body doesn't fulfill schema, see details in `fields`
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Retries the current transfer in request with supplied Authorization code
+      tags:
+        - Domains
   "/v2/customers/{customerId}/domains/{domain}/transferOut":
     post:
       parameters:
@@ -6090,6 +6740,146 @@ paths:
                 $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Initiate transfer out to another registrar for a .uk domain.
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/{domain}/transferOutAccept":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Domain to accept the transfer out for
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/TRANSFER_OUT_ACCEPT to poll status
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain does not exist
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: There is already a similar action processing
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Accept transfer out
+      tags:
+        - Domains
+  "/v2/customers/{customerId}/domains/{domain}/transferOutReject":
+    post:
+      parameters:
+        - description: A client provided identifier for tracking this request.
+          in: header
+          name: X-Request-Id
+          required: false
+          schema:
+            type: string
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Domain to reject the transfer out for
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+        - description: Transfer out reject reason
+          in: query
+          name: reason
+          required: false
+          schema:
+            enum:
+              - EVIDENCE_OF_FRAUD
+              - URDP_ACTION
+              - COURT_ORDER
+              - DISPUTE_OVER_IDENTITY
+              - NO_PAYMENT_FOR_PREVIOUS_REGISTRATION_PERIOD
+              - WRITTEN_OBJECTION
+              - TRANSFERRED_WITHIN_SIXTY_DAYS
+            type: string
+      responses:
+        "202":
+          description: Request Accepted. You may use GET /v2/customers/{customerId}/domains/{domain}/actions/TRANSFER_OUT_REJECT to poll status
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The domain does not exist
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: There is already a similar action processing
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+      summary: Reject transfer out
       tags:
         - Domains
   /v2/domains/maintenances:
@@ -6255,6 +7045,20 @@ components:
             $ref: "#/components/schemas/DomainPurchase"
       description: An instance document expected to match the JSON schema returned by `./schema/{tld}`
       required: true
+    DomainPurchaseV2:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DomainPurchaseV2"
+      description: An instance document expected to match the JSON schema returned by `./schema/{tld}`
+      required: true
+    DomainTransferAuthCode:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DomainTransferAuthCode"
+      description: An Authorization code for transferring the Domain
+      required: true
   schemas:
     Action:
       properties:
@@ -6297,7 +7101,7 @@ components:
             - SUCCESS
           type: string
         type:
-          description: "The type of action being performed<br/><ul><li><strong style='margin-left: 12px;'>AUTH_CODE_PURCHASE</strong> - Request for an auth code for a .de domain via POST /v2/customers/{customerId}/domains/{domain}/purchaseAuthCode.</li><li><strong style='margin-left: 12px;'>AUTH_CODE_REGENERATE</strong> - Request to regenerate the authCode for a domain via POST /v2/customers/{customerId}/domains/{domain}/regenerateAuthCode</li><li><strong style='margin-left: 12px;'>AUTO_RENEWAL</strong> - A Domain Auto Renew is in progress.</li><li><strong style='margin-left: 12px;'>BACKORDER_PURCHASE</strong> - Request to purchase a domain backorder via POST /v2/customers/{customerId}/domains/backorders/purchase.</li><li><strong style='margin-left: 12px;'>BACKORDER_DELETE</strong> - Request to cancel the current domain backorder via DELETE /v2/customers/{customerId}/domains/backorders/{domain}.</li><li><strong style='margin-left: 12px;'>BACKORDER_UPDATE</strong> - Request update the current domain backorder via PATCH /v2/customers/{customerId}/domains/backorders/{domain}.</li><li><strong style='margin-left: 12px;'>CONTACT_CREATE</strong> - Request to create a contact via POST /v2/customers/{customerId}/domains/contacts.</li><li><strong style='margin-left: 12px;'>CONTACT_DELETE</strong> - Request to delete a contact via DELETE /v2/customers/{customerId}/domains/contacts/{contactId}</li><li><strong style='margin-left: 12px;'>CONTACT_UPDATE</strong> - Request to update a contact via PATCH /v2/customers/{customerId}/domains/contacts/{contactId}</li><li><strong style='margin-left: 12px;'>DNS_VERIFICATION</strong> - Domain requires zone file setup.</li><li><strong style='margin-left: 12px;'>DNSSEC_CREATE</strong> - Request to create DNSSEC record for the domain via PATCH /v2/customers/{customerId}/domains/{domain}/dnssecRecords.</li><li><strong style='margin-left: 12px;'>DNSSEC_DELETE</strong> - Request to delete DNSSEC record for the domain via DELETE /v2/customers/{customerId}/domains/{domain}/dnssecRecords.</li><li><strong style='margin-left: 12px;'>DOMAIN_DELETE</strong> - Request to delete the domain via DELETE /v2/customers/{customerId}/domains/{domain}</li><li><strong style='margin-left: 12px;'>DOMAIN_UPDATE</strong> - Request to update the domain via PATCH /v2/customers/{customerId}/domains/{domain}</li><li><strong style='margin-left: 12px;'>DOMAIN_UPDATE_CONTACTS</strong> -Request to update the domain contacts via PATCH /v2/customers/{customerId}/domains/{domain}/contacts</li><li><strong style='margin-left: 12px;'>DOMAIN_UPDATE_NAME_SERVERS</strong> - Request to update the domain name servers via PUT /v2/customers/{customerId}/domains/{domain}/nameServers</li><li><strong style='margin-left: 12px;'>EXPIRY</strong> - A Domain Expiration is in progress.</li><li><strong style='margin-left: 12px;'>HOST_CREATE</strong> - Request to create a hostname via PUT /v2/customers/{customerId}/domains/{domain}/hosts/{hostname}</li><li><strong style='margin-left: 12px;'>HOST_DELETE</strong> - Request to delete a hostname via DELETE /v2/customers/{customerId}/domains/{domain}/hosts/{hostname}</li><li><strong style='margin-left: 12px;'>ICANN_VERIFICATION</strong> - Domain requires registrant verification for Icann.</li><li><strong style='margin-left: 12px;'>PREMIUM</strong> - Premium Domain domain sale is in progress.</li><li><strong style='margin-left: 12px;'>PRIVACY_PURCHASE</strong> - Request to purchase privacy for a domain via POST /v2/customers/{customerId}/domains/{domain}/privacy/purchase</li><li><strong style='margin-left: 12px;'>PRIVACY_DELETE</strong> - Request to remove privacy from a domain via DELETE /v2/customers/{customerId}/domains/{domain}/privacy</li><li><strong style='margin-left: 12px;'>REDEEM</strong> - Request to redeem a domain via POST /v2/customers/{customerId}/domains/{domain}/redeem</li><li><strong style='margin-left: 12px;'>REGISTER</strong> - Request to register a domain via POST /v2/customers/{customerId}/domains/{domain}/register</li><li><strong style='margin-left: 12px;'>RENEW</strong> - Request to renew a domain via POST /v2/customers/{customerId}/domains/{domain}/renew</li><li><strong style='margin-left: 12px;'>RENEW_UNDO</strong> - Request to undo a renewal for a uk domain via POST /v2/customers/{customerId}/domains/{domain}/undoRenew</li><li><strong style='margin-left: 12px;'>TRADE</strong> - A domain trade request is in progress</li><li><strong style='margin-left: 12px;'>TRADE_CANCEL</strong> - Request to cancel a trade for a domain via POST /v2/customers/{customerId}/domains/{domain}/tradeCancel</li><li><strong style='margin-left: 12px;'>TRADE_PURCHASE</strong> - Request to purchase a trade for a domain via POST /v2/customers/{customerId}/domains/{domain}/tradePurchase</li><li><strong style='margin-left: 12px;'>TRADE_PURCHASE_AUTH_TEXT_MESSAGE</strong> - Request for a trade purchase text message for a domain via POST /v2/customers/{customerId}/domains/{domain}/tradePurchaseAuthorizationTextMessage</li><li><strong style='margin-left: 12px;'>TRADE_RESEND_AUTH_EMAIL</strong> - Request to resend the trade auth email message for a domain via POST /v2/customers/{customerId}/domains/{domain}/tradeResendAuthorizationEmail</li><li><strong style='margin-left: 12px;'>TRANSFER</strong> - Request to transfer a domain via POST /v2/customers/{customerId}/domains/{domain}/transfer</li><li><strong style='margin-left: 12px;'>TRANSFER_IN</strong> - A domain transfer in request is in progress.</li><li><strong style='margin-left: 12px;'>TRANSFER_IN_CANCEL</strong> - Request to cancel a domain transfer via POST /v2/customers/{customerId}/domains/{domain}/transferInCancel</li><li><strong style='margin-left: 12px;'>TRANSFER_OUT</strong> - A domain transfer out request is in progress.</li><li><strong style='margin-left: 12px;'>TRANSFER_OUT_ACCEPT</strong> - Request to accept a transfer out request for a domain via POST /v2/customers/{customerId}/domains/{domain}/transferOutAccept</li><li><strong style='margin-left: 12px;'>TRANSFER_OUT_REJECT</strong> - Request to reject a transfer out request for a domain via POST /v2/customers/{customerId}/domains/{domain}/transferOutReject</li><li><strong style='margin-left: 12px;'>TRANSFER_OUT_REQUESTED</strong> - Request to transfer out for a domain (.de) via POST /v2/customers/{customerId}/domains/{domain}/transferOut</li><li><strong style='margin-left: 12px;'>TRANSIT</strong> - Request to transit a de or at domain at the registry via POST /v2/customers/{customerId}/domains/{domain}/transit</li></ul>"
+          description: "The type of action being performed<br/><ul><li><strong style='margin-left: 12px;'>AUTH_CODE_PURCHASE</strong> - Request for an auth code for a .de domain via POST /v2/customers/{customerId}/domains/{domain}/purchaseAuthCode.</li><li><strong style='margin-left: 12px;'>AUTH_CODE_REGENERATE</strong> - Request to regenerate the authCode for a domain via POST /v2/customers/{customerId}/domains/{domain}/regenerateAuthCode</li><li><strong style='margin-left: 12px;'>AUTO_RENEWAL</strong> - A Domain Auto Renew is in progress.</li><li><strong style='margin-left: 12px;'>BACKORDER_PURCHASE</strong> - Request to purchase a domain backorder via POST /v2/customers/{customerId}/domains/backorders/purchase.</li><li><strong style='margin-left: 12px;'>BACKORDER_DELETE</strong> - Request to cancel the current domain backorder via DELETE /v2/customers/{customerId}/domains/backorders/{domain}.</li><li><strong style='margin-left: 12px;'>BACKORDER_UPDATE</strong> - Request update the current domain backorder via PATCH /v2/customers/{customerId}/domains/backorders/{domain}.</li><li><strong style='margin-left: 12px;'>CONTACT_CREATE</strong> - Request to create a contact via POST /v2/customers/{customerId}/domains/contacts.</li><li><strong style='margin-left: 12px;'>CONTACT_DELETE</strong> - Request to delete a contact via DELETE /v2/customers/{customerId}/domains/contacts/{contactId}</li><li><strong style='margin-left: 12px;'>CONTACT_UPDATE</strong> - Request to update a contact via PATCH /v2/customers/{customerId}/domains/contacts/{contactId}</li><li><strong style='margin-left: 12px;'>DNS_VERIFICATION</strong> - Domain requires zone file setup.</li><li><strong style='margin-left: 12px;'>DNSSEC_CREATE</strong> - Request to create DNSSEC record for the domain via PATCH /v2/customers/{customerId}/domains/{domain}/dnssecRecords.</li><li><strong style='margin-left: 12px;'>DNSSEC_DELETE</strong> - Request to delete DNSSEC record for the domain via DELETE /v2/customers/{customerId}/domains/{domain}/dnssecRecords.</li><li><strong style='margin-left: 12px;'>DOMAIN_DELETE</strong> - Request to delete the domain via DELETE /v2/customers/{customerId}/domains/{domain}</li><li><strong style='margin-left: 12px;'>DOMAIN_UPDATE</strong> - Request to update the domain via PATCH /v2/customers/{customerId}/domains/{domain}</li><li><strong style='margin-left: 12px;'>DOMAIN_UPDATE_CONTACTS</strong> -Request to update the domain contacts via PATCH /v2/customers/{customerId}/domains/{domain}/contacts</li><li><strong style='margin-left: 12px;'>DOMAIN_UPDATE_NAME_SERVERS</strong> - Request to update the domain name servers via PUT /v2/customers/{customerId}/domains/{domain}/nameServers</li><li><strong style='margin-left: 12px;'>EXPIRY</strong> - A Domain Expiration is in progress.</li><li><strong style='margin-left: 12px;'>HOST_CREATE</strong> - Request to create a hostname via PUT /v2/customers/{customerId}/domains/{domain}/hosts/{hostname}</li><li><strong style='margin-left: 12px;'>HOST_DELETE</strong> - Request to delete a hostname via DELETE /v2/customers/{customerId}/domains/{domain}/hosts/{hostname}</li><li><strong style='margin-left: 12px;'>ICANN_VERIFICATION</strong> - Domain requires registrant verification for Icann.</li><li><strong style='margin-left: 12px;'>PREMIUM</strong> - Premium Domain domain sale is in progress.</li><li><strong style='margin-left: 12px;'>PRIVACY_PURCHASE</strong> - Request to purchase privacy for a domain via POST /v2/customers/{customerId}/domains/{domain}/privacy/purchase</li><li><strong style='margin-left: 12px;'>PRIVACY_DELETE</strong> - Request to remove privacy from a domain via DELETE /v2/customers/{customerId}/domains/{domain}/privacy</li><li><strong style='margin-left: 12px;'>REDEEM</strong> - Request to redeem a domain via POST /v2/customers/{customerId}/domains/{domain}/redeem</li><li><strong style='margin-left: 12px;'>REGISTER</strong> - Request to register a domain via POST /v2/customers/{customerId}/domains/{domain}/register</li><li><strong style='margin-left: 12px;'>RENEW</strong> - Request to renew a domain via POST /v2/customers/{customerId}/domains/{domain}/renew</li><li><strong style='margin-left: 12px;'>RENEW_UNDO</strong> - Request to undo a renewal for a uk domain via POST /v2/customers/{customerId}/domains/{domain}/undoRenew</li><li><strong style='margin-left: 12px;'>TRADE</strong> - A domain trade request is in progress</li><li><strong style='margin-left: 12px;'>TRADE_CANCEL</strong> - Request to cancel a trade for a domain via POST /v2/customers/{customerId}/domains/{domain}/tradeCancel</li><li><strong style='margin-left: 12px;'>TRADE_PURCHASE</strong> - Request to purchase a trade for a domain via POST /v2/customers/{customerId}/domains/{domain}/tradePurchase</li><li><strong style='margin-left: 12px;'>TRADE_PURCHASE_AUTH_TEXT_MESSAGE</strong> - Request for a trade purchase text message for a domain via POST /v2/customers/{customerId}/domains/{domain}/tradePurchaseAuthorizationTextMessage</li><li><strong style='margin-left: 12px;'>TRADE_RESEND_AUTH_EMAIL</strong> - Request to resend the trade auth email message for a domain via POST /v2/customers/{customerId}/domains/{domain}/tradeResendAuthorizationEmail</li><li><strong style='margin-left: 12px;'>TRANSFER</strong> - Request to transfer a domain via POST /v2/customers/{customerId}/domains/{domain}/transfer</li><li><strong style='margin-left: 12px;'>TRANSFER_IN</strong> - A domain transfer in request is in progress.</li><li><strong style='margin-left: 12px;'>TRANSFER_IN_ACCEPT</strong> - Request to accept a domain transfer in via POST /v2/customers/{customerId}/domains/{domain}/transferInAccept</li><li><strong style='margin-left: 12px;'>TRANSFER_IN_CANCEL</strong> - Request to cancel a domain transfer via POST /v2/customers/{customerId}/domains/{domain}/transferInCancel</li><li><strong style='margin-left: 12px;'>TRANSFER_IN_RESTART</strong> - Request to restart a domain transfer in via POST /v2/customers/{customerId}/domains/{domain}/transferInRestart</li><li><strong style='margin-left: 12px;'>TRANSFER_IN_RETRY</strong> - Request to retry a domain transfer in via POST /v2/customers/{customerId}/domains/{domain}/transferInRetry</li><li><strong style='margin-left: 12px;'>TRANSFER_OUT</strong> - A domain transfer out request is in progress.</li><li><strong style='margin-left: 12px;'>TRANSFER_OUT_ACCEPT</strong> - Request to accept a transfer out request for a domain via POST /v2/customers/{customerId}/domains/{domain}/transferOutAccept</li><li><strong style='margin-left: 12px;'>TRANSFER_OUT_REJECT</strong> - Request to reject a transfer out request for a domain via POST /v2/customers/{customerId}/domains/{domain}/transferOutReject</li><li><strong style='margin-left: 12px;'>TRANSFER_OUT_REQUESTED</strong> - Request to transfer out for a domain (.de) via POST /v2/customers/{customerId}/domains/{domain}/transferOut</li><li><strong style='margin-left: 12px;'>TRANSIT</strong> - Request to transit a de or at domain at the registry via POST /v2/customers/{customerId}/domains/{domain}/transit</li></ul>"
           enum:
             - AUTH_CODE_PURCHASE
             - AUTH_CODE_REGENERATE
@@ -6335,7 +7139,10 @@ components:
             - TRADE_RESEND_AUTH_EMAIL
             - TRANSFER
             - TRANSFER_IN
+            - TRANSFER_IN_ACCEPT
             - TRANSFER_IN_CANCEL
+            - TRANSFER_IN_RESTART
+            - TRANSFER_IN_RETRY
             - TRANSFER_OUT
             - TRANSFER_OUT_ACCEPT
             - TRANSFER_OUT_REJECT
@@ -6715,6 +7522,71 @@ components:
         - currency
         - agreedBy
         - agreedAt
+    ConsentRenew:
+      additionalProperties: false
+      properties:
+        agreedAt:
+          description: Timestamp indicating when the end-user consented to these legal agreements
+          format: iso-datetime
+          type: string
+        agreedBy:
+          description: Originating client IP address of the end-user's computer when they consented to these legal agreements
+          type: string
+        currency:
+          default: USD
+          description: Currency in which the `price` is listed
+          format: iso-currency-code
+          pattern: ^[A-Z][A-Z][A-Z]$
+          type: string
+        price:
+          description: Price of the domain excluding taxes or fees. Please use GET /v2/customers/{customerId}/domains/{domain} to retrieve the renewal price and currency for the domain
+          format: currency-micro-unit
+          type: integer
+        registryPremiumPricing:
+          description: Only required for hosted registrar if domain is premium. If true indicates that the `price` and `currency` listed are the registry premium price and currency for the domain
+          type: boolean
+      required:
+        - price
+        - currency
+        - agreedBy
+        - agreedAt
+    ConsentV2:
+      additionalProperties: false
+      properties:
+        agreedAt:
+          description: Timestamp indicating when the end-user consented to these legal agreements
+          format: iso-datetime
+          type: string
+        agreedBy:
+          description: Originating client IP address of the end-user's computer when they consented to these legal agreements
+          type: string
+        agreementKeys:
+          description: Unique identifiers of the legal agreements to which the end-user has agreed, as returned from the/domains/agreements endpoint
+          items:
+            type: string
+          type: array
+        claimToken:
+          description: The trademark claim token, only needed if the domain has an active trademark claim
+          type: string
+        currency:
+          default: USD
+          description: Currency in which the `price` is listed
+          format: iso-currency-code
+          pattern: ^[A-Z][A-Z][A-Z]$
+          type: string
+        price:
+          description: Price of the domain excluding taxes or fees. Please use GET /v1/domains/available to retrieve the price and currency for the domain
+          format: currency-micro-unit
+          type: integer
+        registryPremiumPricing:
+          description: Only required for hosted registrar if domain is premium. If true indicates that the `price` and `currency` listed are the registry premium price and currency for the domain
+          type: boolean
+      required:
+        - agreementKeys
+        - price
+        - currency
+        - agreedBy
+        - agreedAt
     Contact:
       properties:
         addressMailing:
@@ -6821,6 +7693,56 @@ components:
         - phone
         - addressMailing
         - exposeWhois
+    ContactDomainCreate:
+      additionalProperties: false
+      properties:
+        addressMailing:
+          $ref: "#/components/schemas/Address"
+        email:
+          format: email
+          maxLength: 80
+          type: string
+        encoding:
+          default: ASCII
+          description: "The encoding of the contact data<br/><ul><li><strong style='margin-left: 12px;'>ASCII</strong> - Data contains only ASCII characters that are not region or language specific</li><li><strong style='margin-left: 12px;'>UTF-8</strong> - Data contains characters that are specific to a region or language</li></ul>"
+          enum:
+            - ASCII
+            - UTF-8
+          type: string
+        fax:
+          format: phone
+          maxLength: 17
+          type: string
+        jobTitle:
+          type: string
+        metadata:
+          description: The contact eligibility data fields as specified by GET /v2/customers/{customerId}/domains/contacts/schema/{tld}
+          type: object
+        nameFirst:
+          format: person-name
+          maxLength: 30
+          type: string
+        nameLast:
+          format: person-name
+          maxLength: 30
+          type: string
+        nameMiddle:
+          type: string
+        organization:
+          format: organization-name
+          maxLength: 100
+          type: string
+        phone:
+          format: phone
+          maxLength: 17
+          type: string
+      required:
+        - encoding
+        - nameFirst
+        - nameLast
+        - email
+        - phone
+        - addressMailing
     DNSRecord:
       properties:
         data:
@@ -7017,6 +7939,34 @@ components:
           $ref: "#/components/schemas/Contact"
       required:
         - contactRegistrant
+    DomainContactsCreateV2:
+      additionalProperties: false
+      properties:
+        admin:
+          $ref: "#/components/schemas/ContactDomainCreate"
+        adminId:
+          description: |
+            Unique identifier of the contact that the user wants to use for the domain admin contact. This can be specified instead of the `admin` property.
+          type: string
+        billing:
+          $ref: "#/components/schemas/ContactDomainCreate"
+        billingId:
+          description: |
+            Unique identifier of the contact that the user wants to use for the domain billing contact. This can be specified instead of the `billing` property.
+          type: string
+        registrant:
+          $ref: "#/components/schemas/ContactDomainCreate"
+        registrantId:
+          description: |
+            Unique identifier of the contact that the user wants to use for the domain registrant contact. This can be specified instead of the `registrant` property.
+          type: string
+        tech:
+          $ref: "#/components/schemas/ContactDomainCreate"
+        techId:
+          description: |
+            Unique identifier of the contact that the user wants to use for the domain tech contact. This can be specified instead of the `tech` property.
+          type: string
+      type: object
     DomainContactsV2:
       additionalProperties: false
       properties:
@@ -7482,7 +8432,10 @@ components:
             - TRADE_RESEND_AUTH_EMAIL
             - TRANSFER
             - TRANSFER_IN
+            - TRANSFER_IN_ACCEPT
             - TRANSFER_IN_CANCEL
+            - TRANSFER_IN_RESTART
+            - TRANSFER_IN_RETRY
             - TRANSFER_OUT
             - TRANSFER_OUT_ACCEPT
             - TRANSFER_OUT_REJECT
@@ -7538,7 +8491,10 @@ components:
             - TRADE_RESEND_AUTH_EMAIL
             - TRANSFER
             - TRANSFER_IN
+            - TRANSFER_IN_ACCEPT
             - TRANSFER_IN_CANCEL
+            - TRANSFER_IN_RESTART
+            - TRANSFER_IN_RETRY
             - TRANSFER_OUT
             - TRANSFER_OUT_ACCEPT
             - TRANSFER_OUT_REJECT
@@ -7606,6 +8562,43 @@ components:
         - orderId
         - itemCount
         - total
+    DomainPurchaseV2:
+      additionalProperties: false
+      properties:
+        consent:
+          $ref: "#/components/schemas/ConsentV2"
+        contacts:
+          $ref: "#/components/schemas/DomainContactsCreateV2"
+        domain:
+          description: For internationalized domain names with non-ascii characters, the domain name is converted to punycode before format and pattern validation rules are checked
+          format: domain
+          pattern: ^[^.]{1,63}.[^.]{2,}$
+          type: string
+        metadata:
+          description: The domain eligibility data fields as specified by GET /v2/customers/{customerId}/domains/register/schema/{tld}
+          type: object
+        nameServers:
+          items:
+            format: host-name
+            type: string
+          maxItems: 2
+          type: array
+        period:
+          default: 1
+          format: integer-positive
+          maximum: 10
+          minimum: 1
+          pattern: ^[0-9]+$
+          type: integer
+        privacy:
+          default: false
+          type: boolean
+        renewAuto:
+          default: true
+          type: boolean
+      required:
+        - domain
+        - consent
     DomainRedeemV2:
       additionalProperties: false
       properties:
@@ -7621,6 +8614,25 @@ components:
           maximum: 10
           minimum: 1
           type: integer
+    DomainRenewV2:
+      additionalProperties: false
+      properties:
+        consent:
+          $ref: "#/components/schemas/ConsentRenew"
+        expires:
+          description: Current date when this domain will expire
+          format: iso-datetime
+          type: string
+        period:
+          description: Number of years to extend the Domain. Must not exceed maximum for TLD. When omitted, defaults to `period` specified during original purchase
+          format: integer-positive
+          maximum: 10
+          minimum: 1
+          pattern: ^[0-9]+$
+          type: integer
+      required:
+        - consent
+        - expires
     DomainSuggestion:
       properties:
         domain:
@@ -7740,6 +8752,15 @@ components:
         - transferProtected
         - createdAt
         - contactRegistrant
+    DomainTransferAuthCode:
+      additionalProperties: false
+      properties:
+        authCode:
+          description: Authorization code for transferring the Domain
+          type: string
+      required:
+        - authCode
+      type: object
     DomainTransferIn:
       properties:
         authCode:
@@ -7761,6 +8782,41 @@ components:
           format: integer-positive
           maximum: 10
           minimum: 1
+          type: integer
+        privacy:
+          default: false
+          description: Whether or not privacy has been requested
+          type: boolean
+        renewAuto:
+          default: true
+          description: Whether or not the domain should be configured to automatically renew
+          type: boolean
+      required:
+        - authCode
+        - consent
+    DomainTransferInV2:
+      additionalProperties: false
+      properties:
+        authCode:
+          description: Authorization code from registrar for transferring a domain
+          type: string
+        consent:
+          $ref: "#/components/schemas/ConsentV2"
+        contacts:
+          $ref: "#/components/schemas/DomainContactsCreateV2"
+        identityDocumentId:
+          description: Unique identifier of the identify document that the user wants to associate with the domain being transferred in. This is required only if the gaining registry has a requirement for an approved identity document
+          type: string
+        metadata:
+          description: The domain eligibility data fields as specified by GET /v2/customers/{customerId}/domains/register/schema/{tld}
+          type: object
+        period:
+          default: 1
+          description: Can be more than 1 but no more than 10 years total including current registration length
+          format: integer-positive
+          maximum: 10
+          minimum: 1
+          pattern: ^[0-9]+$
           type: integer
         privacy:
           default: false
@@ -8305,7 +9361,7 @@ components:
             - UNABLE_TO_RETRIEVE_STATUS
           type: string
         icann:
-          description: "Status of the Icann verification of domain registrant contact by completing email and/or phone verification<br/><ul><li><strong style='margin-left: 12px;'>COMPLETED</strong> - Icann verification has been completed.</li><li><strong style='margin-left: 12px;'>PENDING</strong> - Icann verification has not been completed.</li></ul>"
+          description: "Status of the Icann verification of domain registrant contact by completing email and/or phone verification<br/><ul><li><strong style='margin-left: 12px;'>COMPLETED</strong> - Icann verification has been completed.</li><li><strong style='margin-left: 12px;'>PENDING</strong> - Icann verification has not been completed.</li><li><strong style='margin-left: 12px;'>UNABLE_TO_RETRIEVE_STATUS</strong> - Icann verification not supported for specified TLD.</li></ul>"
           enum:
             - COMPLETED
             - PENDING

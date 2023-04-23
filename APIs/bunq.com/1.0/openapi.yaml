@@ -1397,6 +1397,10 @@ info:
   x-providerName: bunq.com
 tags:
   - description: ""
+    name: additional-transaction-information-category
+  - description: ""
+    name: additional-transaction-information-category-user-defined
+  - description: ""
     name: attachment
   - description: ""
     name: attachment-public
@@ -1530,6 +1534,8 @@ tags:
     name: payment-service-provider-credential
   - description: ""
     name: payment-service-provider-draft-payment
+  - description: ""
+    name: payment-service-provider-issuer-transaction
   - description: ""
     name: pdf-content
   - description: ""
@@ -2746,6 +2752,89 @@ paths:
       summary: ""
       tags:
         - user
+  "/user/{userID}/additional-transaction-information-category":
+    get:
+      description: Get the available categories.
+      operationId: List_all_AdditionalTransactionInformationCategory_for_User
+      parameters:
+        - description: ""
+          in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/Cache-Control"
+        - $ref: "#/components/parameters/User-Agent"
+        - $ref: "#/components/parameters/X-Bunq-Language"
+        - $ref: "#/components/parameters/X-Bunq-Region"
+        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
+        - $ref: "#/components/parameters/X-Bunq-Geolocation"
+        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AdditionalTransactionInformationCategoryListing"
+                type: array
+          description: Get the available categories.
+          headers:
+            X-Bunq-Client-Request-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
+            X-Bunq-Client-Response-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
+            X-Bunq-Server-Signature:
+              $ref: "#/components/headers/X-Bunq-Server-Signature"
+        "400":
+          $ref: "#/components/responses/GenericError"
+      summary: ""
+      tags:
+        - additional-transaction-information-category
+  "/user/{userID}/additional-transaction-information-category-user-defined":
+    post:
+      description: Manage user-defined categories.
+      operationId: CREATE_AdditionalTransactionInformationCategoryUserDefined_for_User
+      parameters:
+        - description: ""
+          in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/Cache-Control"
+        - $ref: "#/components/parameters/User-Agent"
+        - $ref: "#/components/parameters/X-Bunq-Language"
+        - $ref: "#/components/parameters/X-Bunq-Region"
+        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
+        - $ref: "#/components/parameters/X-Bunq-Geolocation"
+        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdditionalTransactionInformationCategoryUserDefined"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdditionalTransactionInformationCategoryUserDefinedCreate"
+          description: Manage user-defined categories.
+          headers:
+            X-Bunq-Client-Request-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
+            X-Bunq-Client-Response-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
+            X-Bunq-Server-Signature:
+              $ref: "#/components/headers/X-Bunq-Server-Signature"
+        "400":
+          $ref: "#/components/responses/GenericError"
+      summary: ""
+      tags:
+        - additional-transaction-information-category-user-defined
   "/user/{userID}/attachment/{attachmentID}/content":
     get:
       description: Get the raw content of a specific attachment.
@@ -5959,6 +6048,49 @@ paths:
       summary: ""
       tags:
         - monetary-account-external
+    post:
+      description: Endpoint for managing monetary accounts which are connected to external services.
+      operationId: CREATE_MonetaryAccountExternal_for_User
+      parameters:
+        - description: ""
+          in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/Cache-Control"
+        - $ref: "#/components/parameters/User-Agent"
+        - $ref: "#/components/parameters/X-Bunq-Language"
+        - $ref: "#/components/parameters/X-Bunq-Region"
+        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
+        - $ref: "#/components/parameters/X-Bunq-Geolocation"
+        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MonetaryAccountExternal"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonetaryAccountExternalCreate"
+          description: Endpoint for managing monetary accounts which are connected to external services.
+          headers:
+            X-Bunq-Client-Request-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
+            X-Bunq-Client-Response-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
+            X-Bunq-Server-Signature:
+              $ref: "#/components/headers/X-Bunq-Server-Signature"
+        "400":
+          $ref: "#/components/responses/GenericError"
+      summary: ""
+      tags:
+        - monetary-account-external
   "/user/{userID}/monetary-account-external/{itemId}":
     get:
       description: Endpoint for managing monetary accounts which are connected to external services.
@@ -5989,6 +6121,55 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MonetaryAccountExternalRead"
+          description: Endpoint for managing monetary accounts which are connected to external services.
+          headers:
+            X-Bunq-Client-Request-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
+            X-Bunq-Client-Response-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
+            X-Bunq-Server-Signature:
+              $ref: "#/components/headers/X-Bunq-Server-Signature"
+        "400":
+          $ref: "#/components/responses/GenericError"
+      summary: ""
+      tags:
+        - monetary-account-external
+    put:
+      description: Endpoint for managing monetary accounts which are connected to external services.
+      operationId: UPDATE_MonetaryAccountExternal_for_User
+      parameters:
+        - description: ""
+          in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+        - description: ""
+          in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/Cache-Control"
+        - $ref: "#/components/parameters/User-Agent"
+        - $ref: "#/components/parameters/X-Bunq-Language"
+        - $ref: "#/components/parameters/X-Bunq-Region"
+        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
+        - $ref: "#/components/parameters/X-Bunq-Geolocation"
+        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MonetaryAccountExternal"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonetaryAccountExternalUpdate"
           description: Endpoint for managing monetary accounts which are connected to external services.
           headers:
             X-Bunq-Client-Request-Id:
@@ -20269,6 +20450,180 @@ paths:
       summary: ""
       tags:
         - payment-service-provider-draft-payment
+  "/user/{userID}/payment-service-provider-issuer-transaction":
+    get:
+      description: The endpoint for payment service provider issuer transactions
+      operationId: List_all_PaymentServiceProviderIssuerTransaction_for_User
+      parameters:
+        - description: ""
+          in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/Cache-Control"
+        - $ref: "#/components/parameters/User-Agent"
+        - $ref: "#/components/parameters/X-Bunq-Language"
+        - $ref: "#/components/parameters/X-Bunq-Region"
+        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
+        - $ref: "#/components/parameters/X-Bunq-Geolocation"
+        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PaymentServiceProviderIssuerTransactionListing"
+                type: array
+          description: The endpoint for payment service provider issuer transactions
+          headers:
+            X-Bunq-Client-Request-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
+            X-Bunq-Client-Response-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
+            X-Bunq-Server-Signature:
+              $ref: "#/components/headers/X-Bunq-Server-Signature"
+        "400":
+          $ref: "#/components/responses/GenericError"
+      summary: ""
+      tags:
+        - payment-service-provider-issuer-transaction
+    post:
+      description: The endpoint for payment service provider issuer transactions
+      operationId: CREATE_PaymentServiceProviderIssuerTransaction_for_User
+      parameters:
+        - description: ""
+          in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/Cache-Control"
+        - $ref: "#/components/parameters/User-Agent"
+        - $ref: "#/components/parameters/X-Bunq-Language"
+        - $ref: "#/components/parameters/X-Bunq-Region"
+        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
+        - $ref: "#/components/parameters/X-Bunq-Geolocation"
+        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentServiceProviderIssuerTransaction"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentServiceProviderIssuerTransactionCreate"
+          description: The endpoint for payment service provider issuer transactions
+          headers:
+            X-Bunq-Client-Request-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
+            X-Bunq-Client-Response-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
+            X-Bunq-Server-Signature:
+              $ref: "#/components/headers/X-Bunq-Server-Signature"
+        "400":
+          $ref: "#/components/responses/GenericError"
+      summary: ""
+      tags:
+        - payment-service-provider-issuer-transaction
+  "/user/{userID}/payment-service-provider-issuer-transaction/{itemId}":
+    get:
+      description: The endpoint for payment service provider issuer transactions
+      operationId: READ_PaymentServiceProviderIssuerTransaction_for_User
+      parameters:
+        - description: ""
+          in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+        - description: ""
+          in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/Cache-Control"
+        - $ref: "#/components/parameters/User-Agent"
+        - $ref: "#/components/parameters/X-Bunq-Language"
+        - $ref: "#/components/parameters/X-Bunq-Region"
+        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
+        - $ref: "#/components/parameters/X-Bunq-Geolocation"
+        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentServiceProviderIssuerTransactionRead"
+          description: The endpoint for payment service provider issuer transactions
+          headers:
+            X-Bunq-Client-Request-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
+            X-Bunq-Client-Response-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
+            X-Bunq-Server-Signature:
+              $ref: "#/components/headers/X-Bunq-Server-Signature"
+        "400":
+          $ref: "#/components/responses/GenericError"
+      summary: ""
+      tags:
+        - payment-service-provider-issuer-transaction
+    put:
+      description: The endpoint for payment service provider issuer transactions
+      operationId: UPDATE_PaymentServiceProviderIssuerTransaction_for_User
+      parameters:
+        - description: ""
+          in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+        - description: ""
+          in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/Cache-Control"
+        - $ref: "#/components/parameters/User-Agent"
+        - $ref: "#/components/parameters/X-Bunq-Language"
+        - $ref: "#/components/parameters/X-Bunq-Region"
+        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
+        - $ref: "#/components/parameters/X-Bunq-Geolocation"
+        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentServiceProviderIssuerTransaction"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentServiceProviderIssuerTransactionUpdate"
+          description: The endpoint for payment service provider issuer transactions
+          headers:
+            X-Bunq-Client-Request-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
+            X-Bunq-Client-Response-Id:
+              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
+            X-Bunq-Server-Signature:
+              $ref: "#/components/headers/X-Bunq-Server-Signature"
+        "400":
+          $ref: "#/components/responses/GenericError"
+      summary: ""
+      tags:
+        - payment-service-provider-issuer-transaction
   "/user/{userID}/registry/{registryID}/registry-settlement":
     get:
       description: Get a listing of all Slice group settlements.
@@ -22366,6 +22721,88 @@ components:
           description: Proof that the user acknowledged the terms and conditions for chargebacks.
           readOnly: true
           type: string
+          writeOnly: false
+      type: object
+    AdditionalTransactionInformationCategoryListing:
+      properties:
+        category:
+          description: The category.
+          readOnly: true
+          type: string
+          writeOnly: false
+        color:
+          description: The color of the category.
+          readOnly: true
+          type: string
+          writeOnly: false
+        description:
+          description: The description of the category.
+          readOnly: true
+          type: string
+          writeOnly: false
+        description_translated:
+          description: The translation of the description of the category.
+          readOnly: true
+          type: string
+          writeOnly: false
+        icon:
+          description: The icon of the category.
+          readOnly: true
+          type: string
+          writeOnly: false
+        order:
+          description: The sort order of the category.
+          readOnly: true
+          type: integer
+          writeOnly: false
+        status:
+          description: Whether this category is active. Only relevant for user-defined categories.
+          readOnly: true
+          type: string
+          writeOnly: false
+        type:
+          description: Who created this category.
+          readOnly: true
+          type: string
+          writeOnly: false
+      type: object
+    AdditionalTransactionInformationCategoryUserDefined:
+      properties:
+        category:
+          description: The category.
+          readOnly: false
+          type: string
+          writeOnly: true
+        color:
+          description: The color of the category.
+          readOnly: false
+          type: string
+          writeOnly: true
+        description:
+          description: The description of the category.
+          readOnly: false
+          type: string
+          writeOnly: true
+        icon:
+          description: The icon of the category.
+          readOnly: false
+          type: string
+          writeOnly: true
+        status:
+          description: Whether this category is active. Only relevant for user-defined categories.
+          readOnly: false
+          type: string
+          writeOnly: true
+      required:
+        - status
+      type: object
+    AdditionalTransactionInformationCategoryUserDefinedCreate:
+      properties:
+        Id:
+          $ref: "#/components/schemas/BunqId"
+          description: The id of the created item
+          readOnly: true
+          type: object
           writeOnly: false
       type: object
     Address:
@@ -24715,6 +25152,11 @@ components:
           readOnly: true
           type: object
           writeOnly: false
+        order_type:
+          description: The order type, buying or selling.
+          readOnly: true
+          type: string
+          writeOnly: false
         payment:
           $ref: "#/components/schemas/Payment"
           description: The payment associated with this conversion.
@@ -24732,7 +25174,7 @@ components:
           type: string
           writeOnly: false
         type:
-          description: The type of this conversion in the pair.
+          description: The type of this conversion.
           readOnly: true
           type: string
           writeOnly: false
@@ -24763,6 +25205,11 @@ components:
           writeOnly: true
         currency_target:
           description: The currency we are converting towards.
+          readOnly: false
+          type: string
+          writeOnly: true
+        order_type:
+          description: The type of the quote, SELL or BUY.
           readOnly: false
           type: string
           writeOnly: true
@@ -24886,6 +25333,11 @@ components:
           readOnly: true
           type: object
           writeOnly: false
+        order_type:
+          description: The order type, buying or selling.
+          readOnly: true
+          type: string
+          writeOnly: false
         payment:
           $ref: "#/components/schemas/Payment"
           description: The payment associated with this conversion.
@@ -24903,7 +25355,7 @@ components:
           type: string
           writeOnly: false
         type:
-          description: The type of this conversion in the pair.
+          description: The type of this conversion.
           readOnly: true
           type: string
           writeOnly: false
@@ -26661,6 +27113,16 @@ components:
           writeOnly: false
         category:
           description: The category.
+          readOnly: true
+          type: string
+          writeOnly: false
+        category_color:
+          description: The color of the category.
+          readOnly: true
+          type: string
+          writeOnly: false
+        category_icon:
+          description: The icon of the category.
           readOnly: true
           type: string
           writeOnly: false
@@ -28628,42 +29090,11 @@ components:
       type: object
     MonetaryAccountExternal:
       properties:
-        alias:
-          description: The Aliases for the MonetaryAccountExternal.
-          items:
-            $ref: "#/components/schemas/Pointer"
-          readOnly: true
-          type: array
-          writeOnly: false
-        all_auto_save_id:
-          description: The ids of the AutoSave.
-          items:
-            $ref: "#/components/schemas/BunqId"
-          readOnly: true
-          type: array
-          writeOnly: false
-        avatar:
-          $ref: "#/components/schemas/Avatar"
-          description: The Avatar of the MonetaryAccountExternal.
-          readOnly: true
-          type: object
-          writeOnly: false
         avatar_uuid:
           description: The UUID of the Avatar of the MonetaryAccountExternal.
           readOnly: false
           type: string
           writeOnly: true
-        balance:
-          $ref: "#/components/schemas/Amount"
-          description: The current available balance Amount of the MonetaryAccountExternal.
-          readOnly: true
-          type: object
-          writeOnly: false
-        created:
-          description: The timestamp of the MonetaryAccountExternal's creation.
-          readOnly: true
-          type: string
-          writeOnly: false
         currency:
           description: The currency of the MonetaryAccountExternal as an ISO 4217 formatted currency code.
           readOnly: false
@@ -28685,38 +29116,21 @@ components:
           readOnly: false
           type: string
           writeOnly: false
-        id:
-          description: The id of the MonetaryAccountExternal.
-          readOnly: true
-          type: integer
-          writeOnly: false
-        monetary_account_profile:
-          $ref: "#/components/schemas/MonetaryAccountProfile"
-          description: The profile of the account.
-          readOnly: true
-          type: object
-          writeOnly: false
-        overdraft_limit:
-          $ref: "#/components/schemas/Amount"
-          description: The maximum Amount the MonetaryAccountExternal can be 'in the red'.
-          readOnly: true
-          type: object
-          writeOnly: false
-        public_uuid:
-          description: The MonetaryAccountExternal's public UUID.
-          readOnly: true
-          type: string
-          writeOnly: false
         reason:
-          description: The reason for voluntarily cancelling (closing) the MonetaryAccountExternal, can only be OTHER.
+          description: The reason for voluntarily cancelling (closing) the MonetaryAccountExternal, can only be OTHER. Should only be specified if updating the status to CANCELLED.
           readOnly: false
           type: string
           writeOnly: false
         reason_description:
-          description: The optional free-form reason for voluntarily cancelling (closing) the MonetaryAccountExternal. Can be any user provided message.
+          description: The optional free-form reason for voluntarily cancelling (closing) the MonetaryAccountExternal. Can be any user provided message. Should only be specified if updating the status to CANCELLED.
           readOnly: false
           type: string
           writeOnly: false
+        service:
+          description: The service the MonetaryAccountExternal is connected with.
+          readOnly: false
+          type: string
+          writeOnly: true
         setting:
           $ref: "#/components/schemas/MonetaryAccountSetting"
           description: The settings of the MonetaryAccountExternal.
@@ -28724,24 +29138,26 @@ components:
           type: object
           writeOnly: false
         status:
-          description: "The status of the MonetaryAccountExternal. Can be: ACTIVE, BLOCKED, CANCELLED or PENDING_REOPEN"
+          description: The status of the MonetaryAccountExternal. Ignored in POST requests (always set to ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the MonetaryAccountExternal. When updating the status and/or sub_status no other fields can be updated in the same request (and vice versa).
           readOnly: false
           type: string
           writeOnly: false
         sub_status:
-          description: The sub-status of the MonetaryAccountExternal providing extra information regarding the status. Will be NONE for ACTIVE or PENDING_REOPEN, COMPLETELY or ONLY_ACCEPTING_INCOMING for BLOCKED and REDEMPTION_INVOLUNTARY, REDEMPTION_VOLUNTARY or PERMANENT for CANCELLED.
+          description: The sub-status of the MonetaryAccountExternal providing extra information regarding the status. Should be ignored for POST requests. In case of PUT requests with status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can only be NONE. When updating the status and/or sub_status no other fields can be updated in the same request (and vice versa).
           readOnly: false
           type: string
           writeOnly: false
-        updated:
-          description: The timestamp of the MonetaryAccountExternal's last update.
+      required:
+        - currency
+        - service
+      type: object
+    MonetaryAccountExternalCreate:
+      properties:
+        Id:
+          $ref: "#/components/schemas/BunqId"
+          description: The id of the created item
           readOnly: true
-          type: string
-          writeOnly: false
-        user_id:
-          description: The id of the User who owns the MonetaryAccountExternal.
-          readOnly: true
-          type: integer
+          type: object
           writeOnly: false
       type: object
     MonetaryAccountExternalListing:
@@ -28968,6 +29384,15 @@ components:
           description: The id of the User who owns the MonetaryAccountExternal.
           readOnly: true
           type: integer
+          writeOnly: false
+      type: object
+    MonetaryAccountExternalUpdate:
+      properties:
+        Id:
+          $ref: "#/components/schemas/BunqId"
+          description: The id of the created item
+          readOnly: true
+          type: object
           writeOnly: false
       type: object
     MonetaryAccountInvestment:
@@ -29651,11 +30076,6 @@ components:
           description: The bank the fill is supposed to happen from, with BIC and bank name.
           readOnly: false
           type: object
-          writeOnly: false
-        method_fill:
-          description: The method used to fill the monetary account. Currently only iDEAL is supported, and it is the default one.
-          readOnly: false
-          type: string
           writeOnly: false
         status:
           description: The status of the profile.
@@ -34263,6 +34683,174 @@ components:
           type: object
           writeOnly: false
       type: object
+    PaymentServiceProviderIssuerTransaction:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The money amount of this transaction
+          readOnly: false
+          type: object
+          writeOnly: false
+        counterparty_alias:
+          $ref: "#/components/schemas/Pointer"
+          description: The counter party this transaction should be sent to.
+          readOnly: false
+          type: object
+          writeOnly: false
+        description:
+          description: The description of this transaction, to be shown to the user and to the counter party.
+          readOnly: false
+          type: string
+          writeOnly: false
+        status:
+          description: The status of the transaction. Can only be used for cancelling the transaction.
+          readOnly: false
+          type: string
+          writeOnly: false
+        time_expiry:
+          description: The (optional) expiration time of the transaction. Defaults to 10 minutes.
+          readOnly: false
+          type: string
+          writeOnly: false
+        url_redirect:
+          description: The url to which the user should be redirected once the transaction is accepted or rejected.
+          readOnly: false
+          type: string
+          writeOnly: false
+      required:
+        - counterparty_alias
+        - amount
+        - description
+        - url_redirect
+      type: object
+    PaymentServiceProviderIssuerTransactionCreate:
+      properties:
+        Id:
+          $ref: "#/components/schemas/BunqId"
+          description: The id of the created item
+          readOnly: true
+          type: object
+          writeOnly: false
+      type: object
+    PaymentServiceProviderIssuerTransactionListing:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The money amount of this transaction
+          readOnly: true
+          type: object
+          writeOnly: false
+        counterparty_alias:
+          $ref: "#/components/schemas/Pointer"
+          description: The counter party this transaction should be sent to.
+          readOnly: true
+          type: object
+          writeOnly: false
+        created:
+          description: The time this transaction was created.
+          readOnly: true
+          type: string
+          writeOnly: false
+        description:
+          description: The description of this transaction, to be shown to the user and to the counter party.
+          readOnly: true
+          type: string
+          writeOnly: false
+        id:
+          description: The id of this transaction.
+          readOnly: true
+          type: integer
+          writeOnly: false
+        public_uuid:
+          description: The public uuid used to identify this transaction.
+          readOnly: true
+          type: string
+          writeOnly: false
+        status:
+          description: The status of the transaction. Can only be used for cancelling the transaction.
+          readOnly: true
+          type: string
+          writeOnly: false
+        time_expiry:
+          description: The (optional) expiration time of the transaction. Defaults to 10 minutes.
+          readOnly: true
+          type: string
+          writeOnly: false
+        updated:
+          description: The time this transaction was last updated.
+          readOnly: true
+          type: string
+          writeOnly: false
+        url_redirect:
+          description: The url to which the user should be redirected once the transaction is accepted or rejected.
+          readOnly: true
+          type: string
+          writeOnly: false
+      type: object
+    PaymentServiceProviderIssuerTransactionRead:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The money amount of this transaction
+          readOnly: true
+          type: object
+          writeOnly: false
+        counterparty_alias:
+          $ref: "#/components/schemas/Pointer"
+          description: The counter party this transaction should be sent to.
+          readOnly: true
+          type: object
+          writeOnly: false
+        created:
+          description: The time this transaction was created.
+          readOnly: true
+          type: string
+          writeOnly: false
+        description:
+          description: The description of this transaction, to be shown to the user and to the counter party.
+          readOnly: true
+          type: string
+          writeOnly: false
+        id:
+          description: The id of this transaction.
+          readOnly: true
+          type: integer
+          writeOnly: false
+        public_uuid:
+          description: The public uuid used to identify this transaction.
+          readOnly: true
+          type: string
+          writeOnly: false
+        status:
+          description: The status of the transaction. Can only be used for cancelling the transaction.
+          readOnly: true
+          type: string
+          writeOnly: false
+        time_expiry:
+          description: The (optional) expiration time of the transaction. Defaults to 10 minutes.
+          readOnly: true
+          type: string
+          writeOnly: false
+        updated:
+          description: The time this transaction was last updated.
+          readOnly: true
+          type: string
+          writeOnly: false
+        url_redirect:
+          description: The url to which the user should be redirected once the transaction is accepted or rejected.
+          readOnly: true
+          type: string
+          writeOnly: false
+      type: object
+    PaymentServiceProviderIssuerTransactionUpdate:
+      properties:
+        Id:
+          $ref: "#/components/schemas/BunqId"
+          description: The id of the created item
+          readOnly: true
+          type: object
+          writeOnly: false
+      type: object
     PermittedDevice:
       properties:
         description:
@@ -34385,6 +34973,11 @@ components:
           readOnly: true
           type: object
           writeOnly: false
+        membership_ticount_id:
+          description: The original TricountId of the membership for backwards compatibility. May be used as an alternative to the UUID to identify specific memberships to allow clients to sync changes made offline before the Tricount migration.
+          readOnly: false
+          type: integer
+          writeOnly: true
         registry_id:
           description: The registry id.
           readOnly: true
@@ -35412,6 +36005,11 @@ components:
           readOnly: true
           type: string
           writeOnly: false
+        currency_conversion_quote_id:
+          description: When the request is accepted on a monetary account with a different currency, a quote is expected to convert.
+          readOnly: false
+          type: integer
+          writeOnly: true
         description:
           description: The description for the RequestResponse provided by the requesting party. Maximum 9000 characters.
           readOnly: true
@@ -35450,6 +36048,11 @@ components:
           writeOnly: false
         monetary_account_id:
           description: The id of the MonetaryAccount the RequestResponse was received on.
+          readOnly: true
+          type: integer
+          writeOnly: false
+        monetary_account_preferred_id:
+          description: The ID of the monetary account this user prefers to pay the request from.
           readOnly: true
           type: integer
           writeOnly: false
@@ -35613,6 +36216,11 @@ components:
           readOnly: true
           type: integer
           writeOnly: false
+        monetary_account_preferred_id:
+          description: The ID of the monetary account this user prefers to pay the request from.
+          readOnly: true
+          type: integer
+          writeOnly: false
         redirect_url:
           description: The URL which the user is sent to after accepting or rejecting the Request.
           readOnly: true
@@ -35770,6 +36378,11 @@ components:
           writeOnly: false
         monetary_account_id:
           description: The id of the MonetaryAccount the RequestResponse was received on.
+          readOnly: true
+          type: integer
+          writeOnly: false
+        monetary_account_preferred_id:
+          description: The ID of the monetary account this user prefers to pay the request from.
           readOnly: true
           type: integer
           writeOnly: false

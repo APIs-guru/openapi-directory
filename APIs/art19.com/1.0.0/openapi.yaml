@@ -282,7 +282,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="390087cf-b76d-47a0-a57d-cef05199824c"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="ad3f51ff-4d11-43b9-9612-6a55ecefe2df"'
               },
               params: {
                 # add filters if desired
@@ -306,7 +306,7 @@ paths:
               const response = await fetch('https://art19.com/classification_inclusions?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="8c678eef-8c71-4405-85bc-5b76eb9e6451"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="0f1a0647-0efb-487d-a736-fb2fcf516a42"'
                 }
               });
 
@@ -342,7 +342,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="d485d205-1888-468a-bcc7-63204f59442c"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="1f653814-5fa6-492e-86ad-2cfc88c0936e"'
               ));
 
               // Execute the request and grab all status information
@@ -371,13 +371,13 @@ paths:
           source: |
             curl 'https://art19.com/classification_inclusions?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="4b866157-04d6-414f-89bc-0fd22157c8c4"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="fc346b8c-62c4-4483-8bb6-e4b810466778"' \
               --compressed
   "/classification_inclusions/{id}":
     get:
       parameters:
         - description: The ID of the classification inclusion resource to load.
-          example: d1d90de9-c143-42e7-9e00-eca75e984847
+          example: 3c1da8b0-fce6-4b8e-b5e3-fd007472206b
           in: path
           name: id
           required: true
@@ -416,11 +416,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/classification_inclusions/a640cf0d-582e-40d1-a0ce-99aca12387ad",
+              "https://art19.com/classification_inclusions/a3d7bca1-d6c8-41e9-8640-9b0950be5123",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="7f5cb2aa-e1b7-49e1-8a75-b73e08c6db93"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="30cfe370-809a-4a88-bc42-e44dae664cb4"'
               },
               timeout: 10
             )
@@ -437,10 +437,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/classification_inclusions/a640cf0d-582e-40d1-a0ce-99aca12387ad', {
+              const response = await fetch('https://art19.com/classification_inclusions/a3d7bca1-d6c8-41e9-8640-9b0950be5123', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="5a85ca02-b02a-41ca-adbe-dc19ccd75dac"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e9c8c90b-2df7-4337-94ad-c5d82305ecce"'
                 }
               });
 
@@ -462,13 +462,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/classification_inclusions/a640cf0d-582e-40d1-a0ce-99aca12387ad');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/classification_inclusions/a3d7bca1-d6c8-41e9-8640-9b0950be5123');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="5d754aff-89aa-41cd-8d8e-cf77937aa418"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="7410ebaf-5459-4c29-a51e-affe5900832c"'
               ));
 
               // Execute the request and grab all status information
@@ -495,9 +495,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/classification_inclusions/a640cf0d-582e-40d1-a0ce-99aca12387ad' \
+            curl 'https://art19.com/classification_inclusions/a3d7bca1-d6c8-41e9-8640-9b0950be5123' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f294168a-5198-408b-8041-6d11d842ae79"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="9e419a11-990c-4156-925b-8c5c0d776cdb"' \
               --compressed
   /classifications:
     get:
@@ -668,7 +668,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="9c5a51f7-21f6-4f94-81fb-5e3e7cc2f12f"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="4814609f-e1cb-4232-bcf8-cddb03771710"'
               },
               params: {
                 # add filters if desired
@@ -692,7 +692,7 @@ paths:
               const response = await fetch('https://art19.com/classifications?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="aa7710fd-f5aa-4287-bb3e-947589e6f1d0"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="ed13badd-d235-4303-a572-cf5b2640a127"'
                 }
               });
 
@@ -728,7 +728,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="4567e7f5-93ce-4d31-8131-9c7342e27de3"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="0673cdce-d5b6-425f-b113-761ce249d775"'
               ));
 
               // Execute the request and grab all status information
@@ -757,13 +757,13 @@ paths:
           source: |
             curl 'https://art19.com/classifications?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="db9812ce-83d0-439c-9c4f-117f1a856ada"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6bb1e316-8593-4242-a9ac-bd8f0e45da89"' \
               --compressed
   "/classifications/{id}":
     get:
       parameters:
         - description: The ID of the classification resource to load.
-          example: 6fb61aa8-e221-4caf-b166-30b7ccda7114
+          example: aafe5a7a-bbb3-4b7e-8cc5-4b8231639c28
           in: path
           name: id
           required: true
@@ -802,11 +802,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/classifications/b39be1a9-b7c3-4c64-8cc6-3c5bd6bc86e7",
+              "https://art19.com/classifications/1f209989-fdb6-492b-b42d-feb7fcc5d77c",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="eff18ee3-6886-47e6-97eb-bba23f83ebf8"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b3427539-3fa8-4c65-91d6-f12cd38a0d7f"'
               },
               timeout: 10
             )
@@ -823,10 +823,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/classifications/b39be1a9-b7c3-4c64-8cc6-3c5bd6bc86e7', {
+              const response = await fetch('https://art19.com/classifications/1f209989-fdb6-492b-b42d-feb7fcc5d77c', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="27de0bf8-fc55-4f79-972c-ed56b03abba0"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="52f9f879-936f-4a8e-be61-134a57b71967"'
                 }
               });
 
@@ -848,13 +848,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/classifications/b39be1a9-b7c3-4c64-8cc6-3c5bd6bc86e7');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/classifications/1f209989-fdb6-492b-b42d-feb7fcc5d77c');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="3c7ac501-3b8d-4f09-a85f-0a7afe46d710"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ea6f3275-7207-43b6-ae2d-e123bb228ce3"'
               ));
 
               // Execute the request and grab all status information
@@ -881,9 +881,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/classifications/b39be1a9-b7c3-4c64-8cc6-3c5bd6bc86e7' \
+            curl 'https://art19.com/classifications/1f209989-fdb6-492b-b42d-feb7fcc5d77c' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="1d2fb50f-86f5-484e-bd24-8472ed9cc456"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="b7c457a5-27d8-4e8e-849c-bdcaefa5a3d0"' \
               --compressed
   /credits:
     get:
@@ -1045,7 +1045,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="3bd3f88e-fba4-4a73-a2c5-731321843136"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6e9f43df-ba69-4b34-a7bf-a404a1ce2c91"'
               },
               params: {
                 # add filters if desired
@@ -1069,7 +1069,7 @@ paths:
               const response = await fetch('https://art19.com/credits?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="211f169e-cae9-43ea-9c1e-5c0c2ffda295"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d24beb73-0d00-4f8a-9965-1428c13ffa10"'
                 }
               });
 
@@ -1105,7 +1105,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="fa68535a-f792-4bae-ad9a-c5b054cc74d6"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="86aa529e-7e7c-405b-9d7c-343df164bf04"'
               ));
 
               // Execute the request and grab all status information
@@ -1134,13 +1134,13 @@ paths:
           source: |
             curl 'https://art19.com/credits?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="9d05ac66-cd62-4878-8c36-ced1f920981b"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="a32f46a0-5a99-40e6-b7fc-2f43b29847d2"' \
               --compressed
   "/credits/{id}":
     get:
       parameters:
         - description: The ID of the credit resource to load.
-          example: e345d7b6-cc47-437c-b06e-032a04a2c8cf
+          example: 446a6df2-7565-4088-a045-fc5cf0c460c4
           in: path
           name: id
           required: true
@@ -1179,11 +1179,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/credits/df6147ef-51a8-45e9-a910-7f646d87eb5c",
+              "https://art19.com/credits/552a4535-6b9a-41a7-875b-94d1145b55a1",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e3c4c74d-e30a-4483-9a80-b3a388c95fe9"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="2ef2148d-4f43-4533-a876-e38109642432"'
               },
               timeout: 10
             )
@@ -1200,10 +1200,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/credits/df6147ef-51a8-45e9-a910-7f646d87eb5c', {
+              const response = await fetch('https://art19.com/credits/552a4535-6b9a-41a7-875b-94d1145b55a1', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b4aa295b-e290-4460-ae5c-ca0c3974c161"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="9e247e02-3a42-4a5c-9c4c-0db783dcb40b"'
                 }
               });
 
@@ -1225,13 +1225,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/credits/df6147ef-51a8-45e9-a910-7f646d87eb5c');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/credits/552a4535-6b9a-41a7-875b-94d1145b55a1');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="948ae066-4773-44ab-a2bc-5d006df9feea"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f600984a-7e2a-4245-872f-b2c16d6d44ac"'
               ));
 
               // Execute the request and grab all status information
@@ -1258,9 +1258,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/credits/df6147ef-51a8-45e9-a910-7f646d87eb5c' \
+            curl 'https://art19.com/credits/552a4535-6b9a-41a7-875b-94d1145b55a1' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="b22e22ad-5553-4c35-9a53-18cc1443e918"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="20de6005-8606-43a2-87da-b7b215d75224"' \
               --compressed
   /episodes:
     get:
@@ -1475,7 +1475,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="799e1415-2783-4751-b1a7-1b5b98bc2e63"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="1c6bf089-bf44-41ff-8548-00633174949c"'
               },
               params: {
                 # add filters if desired
@@ -1499,7 +1499,7 @@ paths:
               const response = await fetch('https://art19.com/episodes?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d6a2e179-f982-49bc-876a-e417c2e78499"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="69c4a3cb-7262-490c-94be-4dea70bb1cd8"'
                 }
               });
 
@@ -1535,7 +1535,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="9f24a5f4-e0a9-447c-b552-7faa0cba08cf"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="5cdc08c4-b1c1-4c85-bab8-05c07a0448fc"'
               ));
 
               // Execute the request and grab all status information
@@ -1564,13 +1564,13 @@ paths:
           source: |
             curl 'https://art19.com/episodes?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="38b3bf39-92e3-440d-9c23-ddb1499f2c25"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="772b87aa-9fe0-4fa4-b24f-cb086b1d3ce6"' \
               --compressed
   "/episodes/{id}":
     get:
       parameters:
         - description: The ID of the episode resource to load.
-          example: 00fb9e1b-88b3-43e5-a974-28551e8e4ca8
+          example: ee10fd32-c808-493c-b804-0de9359a7203
           in: path
           name: id
           required: true
@@ -1609,11 +1609,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/episodes/203ad0de-c391-4f1b-9c03-6705611b1114",
+              "https://art19.com/episodes/41f1a82c-0010-40ce-a757-034b05d1350b",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b18e997c-996a-41a6-9129-3bd52fd35af4"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="084d390a-a53a-4e6a-a5a6-7558e101dc2d"'
               },
               timeout: 10
             )
@@ -1630,10 +1630,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/episodes/203ad0de-c391-4f1b-9c03-6705611b1114', {
+              const response = await fetch('https://art19.com/episodes/41f1a82c-0010-40ce-a757-034b05d1350b', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6d8b0c23-e0b9-4447-a5d7-77085dd4dfb1"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="c5ddc856-8762-48b9-99aa-7a68d4d85852"'
                 }
               });
 
@@ -1655,13 +1655,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/203ad0de-c391-4f1b-9c03-6705611b1114');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/41f1a82c-0010-40ce-a757-034b05d1350b');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="fd6d266a-a5b6-4983-9fb9-4842be856ca9"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="fd5732d8-0cbc-4388-bdc6-7c9a28411410"'
               ));
 
               // Execute the request and grab all status information
@@ -1688,15 +1688,15 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/episodes/203ad0de-c391-4f1b-9c03-6705611b1114' \
+            curl 'https://art19.com/episodes/41f1a82c-0010-40ce-a757-034b05d1350b' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="94dccd04-27b3-48b8-8cc7-8f2c60b08072"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="bf5f8eaf-b12b-47b1-84af-88f2179e6bac"' \
               --compressed
   "/episodes/{id}/next_sibling":
     get:
       parameters:
         - description: The ID of the episode to find the one episode released right after it.
-          example: e9ac30cf-db68-4629-ac87-df8ba85d41ad
+          example: 68879bce-6127-4383-9860-b7beda43b48f
           in: path
           name: id
           required: true
@@ -1741,11 +1741,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/episodes/33fbf42b-221a-4744-8de5-bb3903c976fb/next_sibling",
+              "https://art19.com/episodes/eac56e99-c7a3-4985-b44c-9ea2374bfd6f/next_sibling",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b00a5c9b-78f1-4b4b-a121-13b3be05003b"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="4ea0f6af-2876-44ab-8235-ebc1c3d7017c"'
               },
               timeout: 10
             )
@@ -1762,10 +1762,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/episodes/33fbf42b-221a-4744-8de5-bb3903c976fb/next_sibling', {
+              const response = await fetch('https://art19.com/episodes/eac56e99-c7a3-4985-b44c-9ea2374bfd6f/next_sibling', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b14df393-573f-4088-abce-6cfadc776cbd"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="a4f48847-4b6a-443b-8cd4-f4a6a95b7ff1"'
                 }
               });
 
@@ -1787,13 +1787,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/33fbf42b-221a-4744-8de5-bb3903c976fb/next_sibling');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/eac56e99-c7a3-4985-b44c-9ea2374bfd6f/next_sibling');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="c40de9e8-cc98-45d5-8809-c8a890eee8a9"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="d21582c4-16b1-437b-8391-31ada8b7a742"'
               ));
 
               // Execute the request and grab all status information
@@ -1820,15 +1820,15 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/episodes/33fbf42b-221a-4744-8de5-bb3903c976fb/next_sibling' \
+            curl 'https://art19.com/episodes/eac56e99-c7a3-4985-b44c-9ea2374bfd6f/next_sibling' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="b6b7c79b-7e3b-495c-a720-cd58f7ec1875"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="8534b3b5-ead1-40b5-8820-fbd1eeeae465"' \
               --compressed
   "/episodes/{id}/previous_sibling":
     get:
       parameters:
         - description: The ID of the episode to find the one episode released right before it.
-          example: 7a8006b1-30d9-4d54-9484-e22532c298f4
+          example: 841eef4c-b141-424e-a5ea-9a2452da263d
           in: path
           name: id
           required: true
@@ -1873,11 +1873,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/episodes/49c57fbf-b0f3-4a57-ac47-87f7218a9ac7/previous_sibling",
+              "https://art19.com/episodes/09b3beee-d1e2-4559-8eab-43ddc7204382/previous_sibling",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="de6f1a55-35ba-48ba-919a-dbdd6c1d075a"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="df9311d5-3e1f-41d1-b6c9-0e5a03b53a95"'
               },
               timeout: 10
             )
@@ -1894,10 +1894,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/episodes/49c57fbf-b0f3-4a57-ac47-87f7218a9ac7/previous_sibling', {
+              const response = await fetch('https://art19.com/episodes/09b3beee-d1e2-4559-8eab-43ddc7204382/previous_sibling', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="fe973310-932d-4f58-bfe2-9961933feda4"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="37d68b4d-1558-41aa-b0c2-84f5346ed333"'
                 }
               });
 
@@ -1919,13 +1919,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/49c57fbf-b0f3-4a57-ac47-87f7218a9ac7/previous_sibling');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/episodes/09b3beee-d1e2-4559-8eab-43ddc7204382/previous_sibling');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="1b5a85bf-ec7d-4b05-983e-06e01d732c60"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ae22404e-28f1-4941-89e0-f84bb528a17c"'
               ));
 
               // Execute the request and grab all status information
@@ -1952,9 +1952,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/episodes/49c57fbf-b0f3-4a57-ac47-87f7218a9ac7/previous_sibling' \
+            curl 'https://art19.com/episodes/09b3beee-d1e2-4559-8eab-43ddc7204382/previous_sibling' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="14f87d2e-6dfc-41e6-934a-86cfd4da7aaf"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="da643b8c-43ea-4cdd-b108-27e58bf6eff8"' \
               --compressed
   /images:
     get:
@@ -2101,7 +2101,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="728b506a-a113-4b99-936f-2be4df9d202e"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="4289d71b-545f-41d9-a419-14eb25ff2a00"'
               },
               params: {
                 # add filters if desired
@@ -2125,7 +2125,7 @@ paths:
               const response = await fetch('https://art19.com/images?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b1b7afcf-d66c-4031-8803-c285600a7164"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="11adf3b0-0052-47e3-8633-33486368a73c"'
                 }
               });
 
@@ -2161,7 +2161,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="7571026f-ef81-4d34-8bca-1637ee3f4ffc"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="de981c92-2c80-4c1a-a1f2-e4fa78ed0562"'
               ));
 
               // Execute the request and grab all status information
@@ -2190,7 +2190,7 @@ paths:
           source: |
             curl 'https://art19.com/images?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="fc984163-d766-416a-b24b-bc9ae295cf41"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="0ddb38cd-f04c-4b97-8254-12d1daae737f"' \
               --compressed
   "/images/{id}":
     get:
@@ -2235,7 +2235,7 @@ paths:
 
       parameters:
         - description: The ID of the image resource to load.
-          example: e63cb0b7-2a08-4cd9-bee7-cf34f54c1ce2
+          example: 7494968c-e16b-4a73-b0c9-dbf73ec49d1c
           in: path
           name: id
           required: true
@@ -2274,11 +2274,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/images/9df97f05-4506-49ef-943f-5864d085da8b",
+              "https://art19.com/images/86362d4e-cc3a-4f4c-aedd-50bd9fa2da77",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="59382995-3c58-4f28-a52e-dab3da78dcae"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="aac0f7f4-aa1c-440e-b072-ed0f47bf061b"'
               },
               timeout: 10
             )
@@ -2295,10 +2295,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/images/9df97f05-4506-49ef-943f-5864d085da8b', {
+              const response = await fetch('https://art19.com/images/86362d4e-cc3a-4f4c-aedd-50bd9fa2da77', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="ca57d0b7-0793-4b54-9df6-5100c2f985d1"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e98b6ba7-eda2-4402-aaa1-263c841f019e"'
                 }
               });
 
@@ -2320,13 +2320,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/images/9df97f05-4506-49ef-943f-5864d085da8b');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/images/86362d4e-cc3a-4f4c-aedd-50bd9fa2da77');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="e2092181-e8ca-4eae-8404-043888861416"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="c792691c-ba00-441c-b387-b99c3133bdff"'
               ));
 
               // Execute the request and grab all status information
@@ -2353,9 +2353,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/images/9df97f05-4506-49ef-943f-5864d085da8b' \
+            curl 'https://art19.com/images/86362d4e-cc3a-4f4c-aedd-50bd9fa2da77' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="365d8559-ff68-4e7c-bf32-3524b4ec979b"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="3313bb3c-19f9-4de4-bb30-55d1684fca2d"' \
               --compressed
   /media_assets:
     get:
@@ -2512,7 +2512,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="698d4e31-2c7b-4227-949c-84204b516d02"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6d9b60fa-7b4c-4f32-b337-2d6a97eb0b3b"'
               },
               params: {
                 # add filters if desired
@@ -2536,7 +2536,7 @@ paths:
               const response = await fetch('https://art19.com/media_assets?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="12c2b102-2149-47b1-82b7-930410f6264e"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e4a37606-2b84-4f14-8da0-43c3a0b4079c"'
                 }
               });
 
@@ -2572,7 +2572,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="98006cb7-e84b-4769-905a-b01edc343ff4"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="4739a124-9f84-4484-a4e0-5413eac9c122"'
               ));
 
               // Execute the request and grab all status information
@@ -2601,7 +2601,7 @@ paths:
           source: |
             curl 'https://art19.com/media_assets?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="1928c383-a24c-49dd-badd-f1657393832c"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="e53cb949-b867-4bda-8b37-5d8090834aa0"' \
               --compressed
   "/media_assets/{id}":
     get:
@@ -2656,7 +2656,7 @@ paths:
 
       parameters:
         - description: The ID of the media asset resource to load.
-          example: 80803e71-1ebf-4a66-ac69-662eac0039b8
+          example: 1da164cd-b463-4a03-8485-90892013a785
           in: path
           name: id
           required: true
@@ -2695,11 +2695,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/media_assets/a4696094-e2fb-45a6-b07e-6e130cb7ad1d",
+              "https://art19.com/media_assets/cf755c0b-4f26-428d-9f5f-e7fac7ab5395",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="ddc1c63e-0430-449d-af8f-e29ca8dce16a"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e4e3b373-e0d1-4cb7-9a65-4fc8a7ef6870"'
               },
               timeout: 10
             )
@@ -2716,10 +2716,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/media_assets/a4696094-e2fb-45a6-b07e-6e130cb7ad1d', {
+              const response = await fetch('https://art19.com/media_assets/cf755c0b-4f26-428d-9f5f-e7fac7ab5395', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="0683a832-c0c4-49f5-892b-7f248102135c"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="51f5542c-6c05-4fc4-84b6-2d197a6b6863"'
                 }
               });
 
@@ -2741,13 +2741,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/media_assets/a4696094-e2fb-45a6-b07e-6e130cb7ad1d');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/media_assets/cf755c0b-4f26-428d-9f5f-e7fac7ab5395');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="9c812aed-aa68-4f26-92b4-3480869d191d"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="943a9931-ecc3-4a98-9663-f636a73a945d"'
               ));
 
               // Execute the request and grab all status information
@@ -2774,9 +2774,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/media_assets/a4696094-e2fb-45a6-b07e-6e130cb7ad1d' \
+            curl 'https://art19.com/media_assets/cf755c0b-4f26-428d-9f5f-e7fac7ab5395' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="48acb3ab-ef10-4a97-8ac2-c819b09003b2"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="83d96204-fd4b-468b-b0a0-b79b7b4349aa"' \
               --compressed
   /networks:
     get:
@@ -2950,7 +2950,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="6298b4b3-46ec-4144-a04b-3ee1e9efdd9b"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="80ca3d76-0aab-4a30-81b8-34e02cc7934e"'
               },
               params: {
                 # add filters if desired
@@ -2974,7 +2974,7 @@ paths:
               const response = await fetch('https://art19.com/networks?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e63dbb28-be79-4cd4-aeb2-faf6d8dfb2c1"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="f26ef368-91dc-4974-8561-d893729b5134"'
                 }
               });
 
@@ -3010,7 +3010,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="d2d51a92-5b6e-465e-8889-40ca05430655"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="9f05c5bc-841e-491a-993d-7a3a02e48eda"'
               ));
 
               // Execute the request and grab all status information
@@ -3039,7 +3039,7 @@ paths:
           source: |
             curl 'https://art19.com/networks?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="779c66b3-69a6-4b2a-8b81-1b51fa322d4d"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ab9095b7-87cc-430b-9f93-4c61f24b704d"' \
               --compressed
   "/networks/{id}":
     get:
@@ -3050,7 +3050,7 @@ paths:
           and will be removed from the response in a future release.
       parameters:
         - description: The ID of the network resource to load.
-          example: 04f32378-5ad0-422b-a271-c98f81a9e3fb
+          example: 033b09a7-5aa4-4491-bd2c-d8a2d46e3473
           in: path
           name: id
           required: true
@@ -3089,11 +3089,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/networks/d18c1895-6ef9-4bf8-95e7-09f2343ea08f",
+              "https://art19.com/networks/47189776-fbc7-4d38-aca5-85c9af9e1a00",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="0eaa91c3-0f79-4286-a629-3580d9c7ceed"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="71d166b0-b936-41e8-8045-e8f8081a578d"'
               },
               timeout: 10
             )
@@ -3110,10 +3110,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/networks/d18c1895-6ef9-4bf8-95e7-09f2343ea08f', {
+              const response = await fetch('https://art19.com/networks/47189776-fbc7-4d38-aca5-85c9af9e1a00', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d1d8ec19-292b-47d8-b62c-a61c90391dcb"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d4171b37-283a-4e2a-949a-12619da2c624"'
                 }
               });
 
@@ -3135,13 +3135,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/networks/d18c1895-6ef9-4bf8-95e7-09f2343ea08f');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/networks/47189776-fbc7-4d38-aca5-85c9af9e1a00');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="49bb9da7-9271-47c3-8f0b-8debe21cf41d"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="2fe8bbf5-4c32-45db-8e2d-4096dffacaf9"'
               ));
 
               // Execute the request and grab all status information
@@ -3168,9 +3168,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/networks/d18c1895-6ef9-4bf8-95e7-09f2343ea08f' \
+            curl 'https://art19.com/networks/47189776-fbc7-4d38-aca5-85c9af9e1a00' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="8a788a67-66ad-4807-ac88-785ebc2b16ef"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6ec5d1c3-081c-491d-9521-069c8b0919b2"' \
               --compressed
   /people:
     get:
@@ -3321,7 +3321,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="387c645b-bb1b-4d39-a128-1ddf9ffccec5"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="e3278a89-d98d-48fc-a7fd-6665bec43380"'
               },
               params: {
                 # add filters if desired
@@ -3345,7 +3345,7 @@ paths:
               const response = await fetch('https://art19.com/people?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="64a22a4d-870c-44e0-a14b-1dc395f91bf2"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="8df1493a-c9c8-4c9a-9d00-c022ad97d586"'
                 }
               });
 
@@ -3381,7 +3381,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="d8849e21-05d6-4021-b52f-c61288a4d5b0"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ee4283f8-ad65-46c0-8e78-84eefe9f3fee"'
               ));
 
               // Execute the request and grab all status information
@@ -3410,7 +3410,7 @@ paths:
           source: |
             curl 'https://art19.com/people?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="9a776d31-1ff3-482a-a2b9-4cd8ea10a850"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="9faadd2e-aeca-4e85-97e0-29b402ee5cc0"' \
               --compressed
   "/people/{id}":
     get:
@@ -3420,7 +3420,7 @@ paths:
         Each Person added will have no additional access or permissions granted as a result of being included in the Credits section.
       parameters:
         - description: The ID of the person resource to load.
-          example: b934651d-d80d-4565-a342-65ade270c804
+          example: 1d47dde9-36e4-41b8-8918-4678852e0e5f
           in: path
           name: id
           required: true
@@ -3459,11 +3459,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/people/93ef5d8a-1d28-471c-8827-aa0c4812030e",
+              "https://art19.com/people/0772230c-beae-4db2-ab5c-af2bd4cb4c06",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="275fb9ae-28a5-4db3-b1e2-4dc5690e991c"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="8e234c91-bb03-4d6a-9722-9ac9ccbdf14a"'
               },
               timeout: 10
             )
@@ -3480,10 +3480,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/people/93ef5d8a-1d28-471c-8827-aa0c4812030e', {
+              const response = await fetch('https://art19.com/people/0772230c-beae-4db2-ab5c-af2bd4cb4c06', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="4a8a51cf-0545-450a-917c-172c4c876ace"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="9c2a6802-62cd-4fd2-8a9c-b143419bde2e"'
                 }
               });
 
@@ -3505,13 +3505,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/people/93ef5d8a-1d28-471c-8827-aa0c4812030e');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/people/0772230c-beae-4db2-ab5c-af2bd4cb4c06');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="996438a8-0681-4e8e-810d-4ad6c56e7fd5"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="95840612-7f40-4098-8836-4cff3e855df8"'
               ));
 
               // Execute the request and grab all status information
@@ -3538,9 +3538,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/people/93ef5d8a-1d28-471c-8827-aa0c4812030e' \
+            curl 'https://art19.com/people/0772230c-beae-4db2-ab5c-af2bd4cb4c06' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="16a05c38-7e8c-47bb-800e-3f80c3c80100"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="662633c7-d790-4ed3-af3f-5ed47fa76959"' \
               --compressed
   /seasons:
     get:
@@ -3698,7 +3698,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d11d081f-2df8-43ab-bf8a-b3dcf84b8408"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="338ae7a0-3eec-4b1f-b8b2-e112e2880a86"'
               },
               params: {
                 # add filters if desired
@@ -3722,7 +3722,7 @@ paths:
               const response = await fetch('https://art19.com/seasons?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="8821d13a-2118-4ce7-8350-e175059a8279"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="7576efc3-3346-4181-a8c5-8694cdd391df"'
                 }
               });
 
@@ -3758,7 +3758,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ebc035e2-9b9b-4100-8c86-1b9b199ff024"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="175aa287-dcf2-4f1f-8360-1c86c3e53107"'
               ));
 
               // Execute the request and grab all status information
@@ -3787,13 +3787,13 @@ paths:
           source: |
             curl 'https://art19.com/seasons?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="3046ebb9-29ab-4d13-9370-2ac479ca9423"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="e096fb61-23c2-498d-a50d-d5d5173daa28"' \
               --compressed
   "/seasons/{id}":
     get:
       parameters:
         - description: The ID of the season resource to load.
-          example: 8b92fc98-1e8c-4d1a-88ae-e40bd7d96dad
+          example: 5d97bfa9-fbea-4bbf-bc13-5eb005a888e3
           in: path
           name: id
           required: true
@@ -3832,11 +3832,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/seasons/d643da6e-ee0d-4f79-8baa-04928cfc9d97",
+              "https://art19.com/seasons/2fd364c9-daca-443d-8167-c1dcaac7a6bb",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="9655227e-043b-4bab-9c5b-44d07a89be41"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="8168ad0a-b203-425d-915e-66795e0a8255"'
               },
               timeout: 10
             )
@@ -3853,10 +3853,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/seasons/d643da6e-ee0d-4f79-8baa-04928cfc9d97', {
+              const response = await fetch('https://art19.com/seasons/2fd364c9-daca-443d-8167-c1dcaac7a6bb', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="d4ec84b8-1f39-4d07-b809-c51694a74a3a"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="4e1bf678-e4dd-40a9-bb45-22a9613342c9"'
                 }
               });
 
@@ -3878,13 +3878,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/seasons/d643da6e-ee0d-4f79-8baa-04928cfc9d97');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/seasons/2fd364c9-daca-443d-8167-c1dcaac7a6bb');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="e2dfb8e0-ed3c-4ae2-ba36-dc7f00fd21f4"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="8448bd77-df67-4525-887c-db36ab2dc6f8"'
               ));
 
               // Execute the request and grab all status information
@@ -3911,9 +3911,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/seasons/d643da6e-ee0d-4f79-8baa-04928cfc9d97' \
+            curl 'https://art19.com/seasons/2fd364c9-daca-443d-8167-c1dcaac7a6bb' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="2eaba3db-8697-496f-9df8-a4ce0560fe41"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="11ef1dd1-0ecc-4e93-a364-773fe88a9980"' \
               --compressed
   /series:
     get:
@@ -4081,7 +4081,7 @@ paths:
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="b41fee0b-44de-4402-9529-c92e9f60739a"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="929d09d8-988b-45d6-a617-32ce1641f21a"'
               },
               params: {
                 # add filters if desired
@@ -4105,7 +4105,7 @@ paths:
               const response = await fetch('https://art19.com/series?page%5Bnumber%5D=1&page%5Bsize%5D=25', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="61ab529f-043d-4aa6-a323-741dc5869e97"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="cdcaccd9-14f1-46f1-a579-2a5160cd02f7"'
                 }
               });
 
@@ -4141,7 +4141,7 @@ paths:
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="a28eab2c-217e-4d0a-9454-7f42fb267f6c"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="133d3f55-3aa4-43d7-9077-c8041b0eea6a"'
               ));
 
               // Execute the request and grab all status information
@@ -4170,13 +4170,13 @@ paths:
           source: |
             curl 'https://art19.com/series?page%5Bnumber%5D=1&page%5Bsize%5D=25' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="90656198-958a-4cd4-88c8-8b2595f64401"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="0cc5bb72-9bba-4b45-adcd-0e2c0119e870"' \
               --compressed
   "/series/{id}":
     get:
       parameters:
         - description: The ID of the series resource to load.
-          example: c96cba77-1677-4053-a070-70c110f13d1b
+          example: f2fd57b8-23c2-4e9f-b0a9-405648cdc7ab
           in: path
           name: id
           required: true
@@ -4215,11 +4215,11 @@ paths:
           lang: ruby
           source: |
             response = Typhoeus.get(
-              "https://art19.com/series/8bc49bd4-3e5d-437b-b1d9-b1aec6f81e2e",
+              "https://art19.com/series/3b2e252e-6819-457e-a389-17d206635fb9",
               accept_encoding: 'gzip',
               headers: {
                 Accept:        'application/vnd.api+json',
-                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="3b3b7399-5195-48f2-98df-e44a4a65dd32"'
+                Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="1b9a6052-aaa1-4130-a973-ad53d215a4ee"'
               },
               timeout: 10
             )
@@ -4236,10 +4236,10 @@ paths:
           lang: javascript
           source: |
             try {
-              const response = await fetch('https://art19.com/series/8bc49bd4-3e5d-437b-b1d9-b1aec6f81e2e', {
+              const response = await fetch('https://art19.com/series/3b2e252e-6819-457e-a389-17d206635fb9', {
                 headers: {
                   Accept:        'application/vnd.api+json',
-                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="ab5db3ba-8f34-4f69-b2a4-c08df1e18b75"'
+                  Authorization: 'Token token="UVd4c0lFTnZjSKbElFSm", credential="1a54b00c-69b4-48ef-9377-2392f9a9f8e6"'
                 }
               });
 
@@ -4261,13 +4261,13 @@ paths:
 
             try {
               // Configure the cURL options
-              curl_setopt($request, CURLOPT_URL, 'https://art19.com/series/8bc49bd4-3e5d-437b-b1d9-b1aec6f81e2e');
+              curl_setopt($request, CURLOPT_URL, 'https://art19.com/series/3b2e252e-6819-457e-a389-17d206635fb9');
               curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
               curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($request, CURLOPT_ENCODING, '');
               curl_setopt($request, CURLOPT_HTTPHEADER, array(
                 'Accept: application/vnd.api+json',
-                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="f78e3684-ab0b-472d-9063-61b9ce11b5b8"'
+                'Authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="ed1470ed-e4a4-41f3-b40a-13a42edf6642"'
               ));
 
               // Execute the request and grab all status information
@@ -4294,9 +4294,9 @@ paths:
         - label: cURL
           lang: shell
           source: |
-            curl 'https://art19.com/series/8bc49bd4-3e5d-437b-b1d9-b1aec6f81e2e' \
+            curl 'https://art19.com/series/3b2e252e-6819-457e-a389-17d206635fb9' \
               -H 'accept: application/vnd.api+json' \
-              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="af265b56-5ae3-423d-9697-18d037f01299"' \
+              -H 'authorization: Token token="UVd4c0lFTnZjSKbElFSm", credential="6ae8356d-6049-4606-a33f-28364ad4704c"' \
               --compressed
 components:
   responses:
@@ -4367,8 +4367,8 @@ components:
                 For hierarchical classifications this is the list of IDs reflecting the hierarchy starting
                 with the root level node.
               example:
-                - cf6cfcd6-6221-4b63-b068-14d885193a8e
-                - 6172c736-8d9e-4d40-8c43-8bf7070c0c94
+                - e93856cc-e41d-432f-9dc3-c77374b0a184
+                - 68d04c27-0f6c-47cb-9763-bc4059707399
               items:
                 format: uuid
                 type: string
@@ -5151,7 +5151,7 @@ components:
       properties:
         id:
           description: The ID of the resource
-          example: 2d7e9be5-0b5a-43d3-9b75-04ec0c0edae8
+          example: 5ea7da99-be17-45d5-84f5-c7bc01a2b1d6
           format: uuid
           type: string
         type:
@@ -5343,6 +5343,9 @@ components:
       properties:
         attributes:
           properties:
+            amazon_subscription_badge_enabled:
+              description: If `null` or `true`, the ART19 web player will render an Amazon subscription badge
+              type: boolean
             amazon_subscription_url:
               description: The Amazon Music subscription URL
               type: string

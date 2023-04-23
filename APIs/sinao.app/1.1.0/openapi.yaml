@@ -74,6 +74,7 @@ paths:
       security:
         - {}
         - {}
+        - {}
       summary: Create an app
       tags:
         - hidden
@@ -1010,6 +1011,11 @@ paths:
       operationId: app.sapAttestations.generateSapAttestations
       parameters:
         - $ref: "#/components/parameters/appId"
+        - description: year number to generate
+          in: query
+          name: year
+          schema:
+            type: integer
       responses:
         "200":
           description: Success
@@ -3392,6 +3398,29 @@ paths:
       summary: Start force autoreconciliation
       tags:
         - hidden
+  "/apps/{appId}/openai/billing/estimate":
+    get:
+      operationId: app.openai.billings.estimate
+      parameters:
+        - $ref: "#/components/parameters/appId"
+        - in: query
+          name: description
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+      security:
+        - {}
+        - {}
+      summary: Get the import state of Stripe data
+      tags:
+        - OpenAI
   "/apps/{appId}/organization":
     get:
       operationId: app.organization.get
@@ -8852,6 +8881,134 @@ paths:
       summary: Create a signature
       tags:
         - Signature
+  "/apps/{appId}/sponsorship/activate":
+    post:
+      operationId: app.sponsorship.activate
+      parameters:
+        - $ref: "#/components/parameters/appId"
+        - in: query
+          name: referrer_app_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: recipient
+          required: true
+          schema:
+            format: email
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Success
+        "404":
+          description: Not found
+      security:
+        - {}
+        - {}
+      summary: Activate the invitation for sponsorship
+      tags:
+        - Sponsorship
+  "/apps/{appId}/sponsorship/invite":
+    post:
+      operationId: app.sponsorship.send_invitation
+      parameters:
+        - $ref: "#/components/parameters/appId"
+        - in: query
+          name: from
+          required: true
+          schema:
+            format: email
+            type: string
+        - in: query
+          name: recipient
+          required: true
+          schema:
+            format: email
+            type: string
+        - in: query
+          name: referrer_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+      security:
+        - {}
+        - {}
+      summary: Send an email
+      tags:
+        - Emails
+  "/apps/{appId}/sponsorship/list/referrals":
+    get:
+      operationId: app.sponsorship.referrals
+      parameters:
+        - $ref: "#/components/parameters/appId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Success
+        "404":
+          description: Not found
+      security:
+        - {}
+      summary: Get all referrals for a referrer
+      tags:
+        - Sponsorship
+  "/apps/{appId}/sponsorship/referrer":
+    get:
+      operationId: app.sponsorship.referrer
+      parameters:
+        - $ref: "#/components/parameters/appId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Success
+        "404":
+          description: Not found
+      security:
+        - {}
+      summary: Get the referrer information for my app
+      tags:
+        - Sponsorship
+  "/apps/{appId}/sponsorship/referrer/url":
+    get:
+      operationId: app.sponsorship.referrer_url
+      parameters:
+        - $ref: "#/components/parameters/appId"
+        - in: query
+          name: referrer_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Success
+        "404":
+          description: Not found
+      security:
+        - {}
+      summary: Get the referrer url for my app
+      tags:
+        - Sponsorship
   "/apps/{appId}/statistics/charts/{type}":
     get:
       description: ""
@@ -9128,6 +9285,80 @@ paths:
       summary: Obtain statistics about vat
       tags:
         - Statistics
+  "/apps/{appId}/stripe/import/launch":
+    post:
+      operationId: app.stripeImport.import_launch
+      parameters:
+        - $ref: "#/components/parameters/appId"
+        - in: query
+          name: public_key
+          required: true
+          schema:
+            x-ype: string
+        - in: query
+          name: secret_key
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: private_webhook
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: start_at
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+      security:
+        - {}
+        - {}
+      summary: Launch the import of Stripe data
+      tags:
+        - Stripe
+  "/apps/{appId}/stripe/import/state":
+    get:
+      operationId: app.stripeImport.import_state
+      parameters:
+        - $ref: "#/components/parameters/appId"
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+      security:
+        - {}
+        - {}
+      summary: Get the import state of Stripe data
+      tags:
+        - Stripe
+  "/apps/{appId}/stripe/import/status":
+    get:
+      operationId: app.stripeImport.import_status
+      parameters:
+        - $ref: "#/components/parameters/appId"
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+      security:
+        - {}
+        - {}
+      summary: Get the import status of Stripe data
+      tags:
+        - Stripe
   "/apps/{appId}/subscription/anchordate":
     post:
       operationId: app.subscription.anchordate

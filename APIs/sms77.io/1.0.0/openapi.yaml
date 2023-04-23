@@ -1,17 +1,17 @@
 openapi: 3.0.0
 servers:
-  - url: https://gateway.sms77.io/api
+  - url: https://gateway.seven.io/api
 info:
   contact:
-    email: support@sms77.io
+    email: support@seven.io
     name: Support
-    url: https://sms77.io/en/company/contact
-  description: sms77.io Swagger API. Get your API-Key now at sms77.io.
+    url: https://seven.io/en/company/contact
+  description: seven.io Swagger API. Get your API-Key now at seven.io.
   license:
     name: Licensed by Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: https://sms77.io/en/company/terms/
-  title: sms77.io API
+  termsOfService: https://seven.io/en/company/terms/
+  title: seven.io API
   version: 1.0.0
   x-apisguru-categories:
     - telecom
@@ -23,50 +23,50 @@ info:
       version: "3.0"
   x-providerName: sms77.io
 externalDocs:
-  description: Find out more about the Sms77.io SMS gateway.
-  url: https://sms77.io/en/docs/gateway/http-api
+  description: Find out more about the seven.io SMS gateway.
+  url: https://seven.io/en/docs/gateway/http-api
 security:
   - ApiKeyAuth: []
 tags:
   - externalDocs:
       description: Retrieve analytics
-      url: https://www.sms77.io/en/docs/gateway/http-api/analytics
+      url: https://www.seven.io/en/docs/gateway/http-api/analytics
     name: analytics
   - externalDocs:
       description: Send one/multiple SMS
-      url: https://sms77.io/en/docs/gateway/http-api/sms-disptach
+      url: https://seven.io/en/docs/gateway/http-api/sms-disptach
     name: sms
   - externalDocs:
       description: Retrieve account balance
-      url: https://sms77.io/en/docs/gateway/http-api/credit-balance
+      url: https://seven.io/en/docs/gateway/http-api/credit-balance
     name: balance
   - externalDocs:
       description: Retrieve/edit/delete contact(s)
-      url: https://sms77.io/en/docs/gateway/http-api/contacts
+      url: https://seven.io/en/docs/gateway/http-api/contacts
     name: contacts
   - externalDocs:
       description: Retrieve pricing information
-      url: https://sms77.io/en/docs/gateway/http-api/pricing
+      url: https://seven.io/en/docs/gateway/http-api/pricing
     name: pricing
   - externalDocs:
       description: Retrieve the status for a sent SMS with the given ID
-      url: https://sms77.io/en/docs/gateway/http-api/status-reports
+      url: https://seven.io/en/docs/gateway/http-api/status-reports
     name: status
   - externalDocs:
       description: Validate caller ID for voice Voice API
-      url: https://sms77.io/en/docs/gateway/http-api/caller-ids
+      url: https://seven.io/en/docs/gateway/http-api/caller-ids
     name: validate_for_voice
   - externalDocs:
       description: Issue voice call to phone number
-      url: https://sms77.io/en/docs/gateway/http-api/voice
+      url: https://seven.io/en/docs/gateway/http-api/voice
     name: voice
   - externalDocs:
       description: Get number format, CNAM,- HLR- or MNP information for given phone number
-      url: https://sms77.io/en/docs/gateway/http-api
+      url: https://seven.io/en/docs/gateway/http-api
     name: lookup
   - externalDocs:
       description: Create, view and delete webhooks
-      url: https://www.sms77.io/en/docs/gateway/http-api/webhooks/
+      url: https://www.seven.io/en/docs/gateway/http-api/webhooks/
     name: hooks
 paths:
   /analytics:

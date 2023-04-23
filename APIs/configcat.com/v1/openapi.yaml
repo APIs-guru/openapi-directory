@@ -426,6 +426,125 @@ paths:
       summary: Get values
       tags:
         - Feature Flag & Setting values
+    post:
+      description: |-
+        This endpoint replaces the values of a specified Config's Feature Flags or Settings identified by the `configId` parameter
+        in a specified Environment identified by the `environmentId` parameter.
+
+        Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+
+        **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't 
+        want to change in its original state. Not listing one means that it will reset.
+
+        For example: We have the following resource.
+        ```
+        {
+            "settingValues": [
+        		{
+        			"rolloutPercentageItems": [
+        				{
+        					"percentage": 30,
+        					"value": true
+        				},
+        				{
+        					"percentage": 70,
+        					"value": false
+        				}
+        			],
+        			"rolloutRules": [],
+        			"value": false,
+        			"settingId": 1
+        		}
+        	]
+        }
+        ```
+        If we send a replace request body as below:
+        ```
+        { 
+        	"settingValues": [
+        		{
+        			"value": true,
+        			"settingId": 1
+        		}
+        	]
+        }
+        ```
+        Then besides that the default value is set to `true`, all the Percentage Rules are deleted. 
+        So we get a response like this:
+        ```
+        {
+        	"settingValues": [
+        		{
+        			"rolloutPercentageItems": [],
+        			"rolloutRules": [],
+        			"value": true,
+        			"setting": 
+        			{
+        				"settingId": 1
+        			}
+        		}
+        	]
+        }
+        ```
+
+        The `rolloutRules` property describes two types of rules:
+
+        - **Targeting rules**: When you want to add or update a targenting rule, the `comparator`, `comparisonAttribute`, and `comparisonValue` members are required.
+        - **Segment rules**: When you want to add add or update a segment rule, the `segmentId` which identifies the desired segment and the `segmentComparator` members are required.
+      operationId: post-setting-values
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+          in: query
+          name: reason
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateSettingValuesWithIdModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSettingValuesWithIdModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSettingValuesWithIdModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ConfigSettingValuesModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigSettingValuesModel"
+          description: When everything is ok, the updated setting values returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Post values
+      tags:
+        - Feature Flag & Setting values
   "/v1/configs/{configId}/settings":
     get:
       description: |-
@@ -5763,6 +5882,39 @@ components:
         value:
           description: The value to serve. It must respect the setting type.
           nullable: true
+      type: object
+    UpdateSettingValueWithSettingIdModel:
+      additionalProperties: false
+      properties:
+        rolloutPercentageItems:
+          description: The percentage rule collection.
+          items:
+            $ref: "#/components/schemas/RolloutPercentageItemModel"
+          nullable: true
+          type: array
+        rolloutRules:
+          description: The targeting rule collection.
+          items:
+            $ref: "#/components/schemas/RolloutRuleModel"
+          nullable: true
+          type: array
+        settingId:
+          description: The id of the Setting.
+          format: int32
+          type: integer
+        value:
+          description: The value to serve. It must respect the setting type.
+          nullable: true
+      type: object
+    UpdateSettingValuesWithIdModel:
+      additionalProperties: false
+      properties:
+        settingValues:
+          description: The values to update.
+          items:
+            $ref: "#/components/schemas/UpdateSettingValueWithSettingIdModel"
+          nullable: true
+          type: array
       type: object
     UpdateTagModel:
       additionalProperties: false

@@ -5583,7 +5583,7 @@ paths:
               title: ChangeDNSPTRRequest
               type: object
         description: |
-          Select the IP address for which to change the DNS entry by passing `ip`. For a Floating IP of type `ipv4` this must exactly match the IP address of the Floating IP. For a Floating IP of type `ipv6` this must be a single IP within the IPv6 /64 range that belongs to this Floating IP.
+          Select the IP address for which to change the DNS entry by passing `ip`. For a Floating IP of type `ipv4` this must exactly match the IP address of the Floating IP. For a Floating IP of type `ipv6` this must be a single IP within the IPv6 /64 range that belongs to this Floating IP. You can add up to 100 IPv6 reverse DNS entries.
 
           The target hostname is set by passing `dns_ptr`.
       responses:
@@ -6106,6 +6106,12 @@ paths:
         - description: Can be used to filter resources by labels. The response will only contain resources matching the label selector.
           in: query
           name: label_selector
+          required: false
+          schema:
+            type: string
+        - description: Return only Images with the given architecture.
+          in: query
+          name: architecture
           required: false
           schema:
             type: string
@@ -7099,6 +7105,18 @@ paths:
           required: false
           schema:
             type: string
+        - description: Return only ISOs with the given architecture.
+          in: query
+          name: architecture
+          required: false
+          schema:
+            type: string
+        - description: Include Images with wildcard architecture (architecture is null). Works only if architecture filter is specified.
+          in: query
+          name: include_architecture_wildcard
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -7108,6 +7126,14 @@ paths:
                   isos:
                     items:
                       properties:
+                        architecture:
+                          description: Type of cpu architecture this iso is compatible with. Null indicates no restriction on the architecture (wildcard).
+                          enum:
+                            - x86
+                            - arm
+                          example: x86
+                          nullable: true
+                          type: string
                         deprecated:
                           description: ISO 8601 timestamp of deprecation, null if ISO is still available. After the deprecation time it will no longer be possible to attach the ISO to Servers.
                           example: 2018-02-28T00:00:00+00:00
@@ -7138,6 +7164,7 @@ paths:
                         - description
                         - type
                         - deprecated
+                        - architecture
                       type: object
                     type: array
                   meta:
@@ -7208,6 +7235,14 @@ paths:
                 properties:
                   iso:
                     properties:
+                      architecture:
+                        description: Type of cpu architecture this iso is compatible with. Null indicates no restriction on the architecture (wildcard).
+                        enum:
+                          - x86
+                          - arm
+                        example: x86
+                        nullable: true
+                        type: string
                       deprecated:
                         description: ISO 8601 timestamp of deprecation, null if ISO is still available. After the deprecation time it will no longer be possible to attach the ISO to Servers.
                         example: 2018-02-28T00:00:00+00:00
@@ -7238,6 +7273,7 @@ paths:
                       - description
                       - type
                       - deprecated
+                      - architecture
                     type: object
                 required:
                   - iso
@@ -7883,7 +7919,7 @@ paths:
                           items:
                             properties:
                               health_status:
-                                description: List of health statuses of the services on this target
+                                description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                                 items:
                                   properties:
                                     listen_port:
@@ -7897,9 +7933,10 @@ paths:
                                       example: healthy
                                       type: string
                                   type: object
+                                title: LoadBalancerTargetHealthStatus
                                 type: array
                               ip:
-                                description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                                description: IP targets where the traffic should be routed to. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well. Only present for target type "ip".
                                 properties:
                                   ip:
                                     description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
@@ -7907,9 +7944,10 @@ paths:
                                     type: string
                                 required:
                                   - ip
+                                title: LoadBalancerTargetIP
                                 type: object
                               label_selector:
-                                description: Label selector and a list of selected targets
+                                description: Label selector used to determine targets. Only present for target type "label_selector".
                                 properties:
                                   selector:
                                     description: Label selector
@@ -7917,9 +7955,10 @@ paths:
                                     type: string
                                 required:
                                   - selector
+                                title: LoadBalancerTargetLabelSelector
                                 type: object
                               server:
-                                description: Server where the traffic should be routed through
+                                description: Server where the traffic should be routed to. Only present for target type "server".
                                 properties:
                                   id:
                                     description: ID of the Server
@@ -7930,10 +7969,11 @@ paths:
                                 title: LoadBalancerTargetServer
                                 type: object
                               targets:
-                                description: List of selected targets
+                                description: List of resolved label selector target Servers. Only present for type "label_selector".
                                 items:
                                   properties:
                                     health_status:
+                                      description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                                       items:
                                         properties:
                                           listen_port:
@@ -7947,22 +7987,28 @@ paths:
                                             example: healthy
                                             type: string
                                         type: object
+                                      title: LoadBalancerTargetHealthStatus
                                       type: array
                                     server:
+                                      description: Server where the traffic should be routed to. Only present for target type "server".
                                       properties:
                                         id:
                                           description: ID of the Server
-                                          example: 85
+                                          example: 80
                                           type: integer
                                       required:
                                         - id
+                                      title: LoadBalancerTargetServer
                                       type: object
                                     type:
+                                      description: Type of the resource. Here always "server".
                                       example: server
                                       type: string
                                     use_private_ip:
-                                      example: false
+                                      description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                                      title: LoadBalancerTargetUsePrivateIP
                                       type: boolean
+                                  title: LoadBalancerTargetTarget
                                   type: object
                                 type: array
                               type:
@@ -7973,7 +8019,8 @@ paths:
                                   - ip
                                 type: string
                               use_private_ip:
-                                description: Use the private network IP instead of the public IP. Default value is false.
+                                description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                                title: LoadBalancerTargetUsePrivateIP
                                 type: boolean
                             required:
                               - type
@@ -8246,7 +8293,7 @@ paths:
                   items:
                     properties:
                       health_status:
-                        description: List of health statuses of the services on this target
+                        description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                         items:
                           properties:
                             listen_port:
@@ -8260,9 +8307,10 @@ paths:
                               example: healthy
                               type: string
                           type: object
+                        title: LoadBalancerTargetHealthStatus
                         type: array
                       ip:
-                        description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                        description: IP targets where the traffic should be routed to. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well. Only present for target type "ip".
                         properties:
                           ip:
                             description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
@@ -8270,9 +8318,10 @@ paths:
                             type: string
                         required:
                           - ip
+                        title: LoadBalancerTargetIP
                         type: object
                       label_selector:
-                        description: Label selector and a list of selected targets
+                        description: Label selector used to determine targets. Only present for target type "label_selector".
                         properties:
                           selector:
                             description: Label selector
@@ -8280,9 +8329,10 @@ paths:
                             type: string
                         required:
                           - selector
+                        title: LoadBalancerTargetLabelSelector
                         type: object
                       server:
-                        description: Server where the traffic should be routed through
+                        description: Server where the traffic should be routed to. Only present for target type "server".
                         properties:
                           id:
                             description: ID of the Server
@@ -8293,10 +8343,11 @@ paths:
                         title: LoadBalancerTargetServer
                         type: object
                       targets:
-                        description: List of selected targets
+                        description: List of resolved label selector target Servers. Only present for type "label_selector".
                         items:
                           properties:
                             health_status:
+                              description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                               items:
                                 properties:
                                   listen_port:
@@ -8310,22 +8361,28 @@ paths:
                                     example: healthy
                                     type: string
                                 type: object
+                              title: LoadBalancerTargetHealthStatus
                               type: array
                             server:
+                              description: Server where the traffic should be routed to. Only present for target type "server".
                               properties:
                                 id:
                                   description: ID of the Server
-                                  example: 85
+                                  example: 80
                                   type: integer
                               required:
                                 - id
+                              title: LoadBalancerTargetServer
                               type: object
                             type:
+                              description: Type of the resource. Here always "server".
                               example: server
                               type: string
                             use_private_ip:
-                              example: false
+                              description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                              title: LoadBalancerTargetUsePrivateIP
                               type: boolean
+                          title: LoadBalancerTargetTarget
                           type: object
                         type: array
                       type:
@@ -8336,7 +8393,8 @@ paths:
                           - ip
                         type: string
                       use_private_ip:
-                        description: Use the private network IP instead of the public IP. Default value is false.
+                        description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                        title: LoadBalancerTargetUsePrivateIP
                         type: boolean
                     required:
                       - type
@@ -8905,7 +8963,7 @@ paths:
                         items:
                           properties:
                             health_status:
-                              description: List of health statuses of the services on this target
+                              description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                               items:
                                 properties:
                                   listen_port:
@@ -8919,9 +8977,10 @@ paths:
                                     example: healthy
                                     type: string
                                 type: object
+                              title: LoadBalancerTargetHealthStatus
                               type: array
                             ip:
-                              description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                              description: IP targets where the traffic should be routed to. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well. Only present for target type "ip".
                               properties:
                                 ip:
                                   description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
@@ -8929,9 +8988,10 @@ paths:
                                   type: string
                               required:
                                 - ip
+                              title: LoadBalancerTargetIP
                               type: object
                             label_selector:
-                              description: Label selector and a list of selected targets
+                              description: Label selector used to determine targets. Only present for target type "label_selector".
                               properties:
                                 selector:
                                   description: Label selector
@@ -8939,9 +8999,10 @@ paths:
                                   type: string
                               required:
                                 - selector
+                              title: LoadBalancerTargetLabelSelector
                               type: object
                             server:
-                              description: Server where the traffic should be routed through
+                              description: Server where the traffic should be routed to. Only present for target type "server".
                               properties:
                                 id:
                                   description: ID of the Server
@@ -8952,10 +9013,11 @@ paths:
                               title: LoadBalancerTargetServer
                               type: object
                             targets:
-                              description: List of selected targets
+                              description: List of resolved label selector target Servers. Only present for type "label_selector".
                               items:
                                 properties:
                                   health_status:
+                                    description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                                     items:
                                       properties:
                                         listen_port:
@@ -8969,22 +9031,28 @@ paths:
                                           example: healthy
                                           type: string
                                       type: object
+                                    title: LoadBalancerTargetHealthStatus
                                     type: array
                                   server:
+                                    description: Server where the traffic should be routed to. Only present for target type "server".
                                     properties:
                                       id:
                                         description: ID of the Server
-                                        example: 85
+                                        example: 80
                                         type: integer
                                     required:
                                       - id
+                                    title: LoadBalancerTargetServer
                                     type: object
                                   type:
+                                    description: Type of the resource. Here always "server".
                                     example: server
                                     type: string
                                   use_private_ip:
-                                    example: false
+                                    description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                                    title: LoadBalancerTargetUsePrivateIP
                                     type: boolean
+                                title: LoadBalancerTargetTarget
                                 type: object
                               type: array
                             type:
@@ -8995,7 +9063,8 @@ paths:
                                 - ip
                               type: string
                             use_private_ip:
-                              description: Use the private network IP instead of the public IP. Default value is false.
+                              description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                              title: LoadBalancerTargetUsePrivateIP
                               type: boolean
                           required:
                             - type
@@ -9430,7 +9499,7 @@ paths:
                         items:
                           properties:
                             health_status:
-                              description: List of health statuses of the services on this target
+                              description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                               items:
                                 properties:
                                   listen_port:
@@ -9444,9 +9513,10 @@ paths:
                                     example: healthy
                                     type: string
                                 type: object
+                              title: LoadBalancerTargetHealthStatus
                               type: array
                             ip:
-                              description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                              description: IP targets where the traffic should be routed to. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well. Only present for target type "ip".
                               properties:
                                 ip:
                                   description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
@@ -9454,9 +9524,10 @@ paths:
                                   type: string
                               required:
                                 - ip
+                              title: LoadBalancerTargetIP
                               type: object
                             label_selector:
-                              description: Label selector and a list of selected targets
+                              description: Label selector used to determine targets. Only present for target type "label_selector".
                               properties:
                                 selector:
                                   description: Label selector
@@ -9464,9 +9535,10 @@ paths:
                                   type: string
                               required:
                                 - selector
+                              title: LoadBalancerTargetLabelSelector
                               type: object
                             server:
-                              description: Server where the traffic should be routed through
+                              description: Server where the traffic should be routed to. Only present for target type "server".
                               properties:
                                 id:
                                   description: ID of the Server
@@ -9477,10 +9549,11 @@ paths:
                               title: LoadBalancerTargetServer
                               type: object
                             targets:
-                              description: List of selected targets
+                              description: List of resolved label selector target Servers. Only present for type "label_selector".
                               items:
                                 properties:
                                   health_status:
+                                    description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                                     items:
                                       properties:
                                         listen_port:
@@ -9494,22 +9567,28 @@ paths:
                                           example: healthy
                                           type: string
                                       type: object
+                                    title: LoadBalancerTargetHealthStatus
                                     type: array
                                   server:
+                                    description: Server where the traffic should be routed to. Only present for target type "server".
                                     properties:
                                       id:
                                         description: ID of the Server
-                                        example: 85
+                                        example: 80
                                         type: integer
                                     required:
                                       - id
+                                    title: LoadBalancerTargetServer
                                     type: object
                                   type:
+                                    description: Type of the resource. Here always "server".
                                     example: server
                                     type: string
                                   use_private_ip:
-                                    example: false
+                                    description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                                    title: LoadBalancerTargetUsePrivateIP
                                     type: boolean
+                                title: LoadBalancerTargetTarget
                                 type: object
                               type: array
                             type:
@@ -9520,7 +9599,8 @@ paths:
                                 - ip
                               type: string
                             use_private_ip:
-                              description: Use the private network IP instead of the public IP. Default value is false.
+                              description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                              title: LoadBalancerTargetUsePrivateIP
                               type: boolean
                           required:
                             - type
@@ -10053,7 +10133,7 @@ paths:
                         items:
                           properties:
                             health_status:
-                              description: List of health statuses of the services on this target
+                              description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                               items:
                                 properties:
                                   listen_port:
@@ -10067,9 +10147,10 @@ paths:
                                     example: healthy
                                     type: string
                                 type: object
+                              title: LoadBalancerTargetHealthStatus
                               type: array
                             ip:
-                              description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                              description: IP targets where the traffic should be routed to. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well. Only present for target type "ip".
                               properties:
                                 ip:
                                   description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
@@ -10077,9 +10158,10 @@ paths:
                                   type: string
                               required:
                                 - ip
+                              title: LoadBalancerTargetIP
                               type: object
                             label_selector:
-                              description: Label selector and a list of selected targets
+                              description: Label selector used to determine targets. Only present for target type "label_selector".
                               properties:
                                 selector:
                                   description: Label selector
@@ -10087,9 +10169,10 @@ paths:
                                   type: string
                               required:
                                 - selector
+                              title: LoadBalancerTargetLabelSelector
                               type: object
                             server:
-                              description: Server where the traffic should be routed through
+                              description: Server where the traffic should be routed to. Only present for target type "server".
                               properties:
                                 id:
                                   description: ID of the Server
@@ -10100,10 +10183,11 @@ paths:
                               title: LoadBalancerTargetServer
                               type: object
                             targets:
-                              description: List of selected targets
+                              description: List of resolved label selector target Servers. Only present for type "label_selector".
                               items:
                                 properties:
                                   health_status:
+                                    description: List of health statuses of the services on this target. Only present for target types "server" and "ip".
                                     items:
                                       properties:
                                         listen_port:
@@ -10117,22 +10201,28 @@ paths:
                                           example: healthy
                                           type: string
                                       type: object
+                                    title: LoadBalancerTargetHealthStatus
                                     type: array
                                   server:
+                                    description: Server where the traffic should be routed to. Only present for target type "server".
                                     properties:
                                       id:
                                         description: ID of the Server
-                                        example: 85
+                                        example: 80
                                         type: integer
                                     required:
                                       - id
+                                    title: LoadBalancerTargetServer
                                     type: object
                                   type:
+                                    description: Type of the resource. Here always "server".
                                     example: server
                                     type: string
                                   use_private_ip:
-                                    example: false
+                                    description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                                    title: LoadBalancerTargetUsePrivateIP
                                     type: boolean
+                                title: LoadBalancerTargetTarget
                                 type: object
                               type: array
                             type:
@@ -10143,7 +10233,8 @@ paths:
                                 - ip
                               type: string
                             use_private_ip:
-                              description: Use the private network IP instead of the public IP. Default value is false.
+                              description: Use the private network IP instead of the public IP. Default value is false. Only present for target types "server" and "label_selector".
+                              title: LoadBalancerTargetUsePrivateIP
                               type: boolean
                           required:
                             - type
@@ -10644,7 +10735,7 @@ paths:
             schema:
               properties:
                 ip:
-                  description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                  description: IP targets where the traffic should be routed to. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well. Only present for target type "ip".
                   properties:
                     ip:
                       description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
@@ -10652,6 +10743,7 @@ paths:
                       type: string
                   required:
                     - ip
+                  title: LoadBalancerTargetIP
                   type: object
                 label_selector:
                   description: Configuration for label selector targets, required if type is `label_selector`
@@ -11945,7 +12037,7 @@ paths:
             schema:
               properties:
                 ip:
-                  description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                  description: IP targets where the traffic should be routed to. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well. Only present for target type "ip".
                   properties:
                     ip:
                       description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
@@ -11953,6 +12045,7 @@ paths:
                       type: string
                   required:
                     - ip
+                  title: LoadBalancerTargetIP
                   type: object
                 label_selector:
                   description: Configuration for label selector targets, required if type is `label_selector`
@@ -12943,6 +13036,10 @@ paths:
                           - server
                           - vswitch
                         type: string
+                      vswitch_id:
+                        description: ID of the robot vSwitch. Must be supplied if the subnet is of type vswitch.
+                        example: 1000
+                        type: integer
                     required:
                       - type
                       - network_zone
@@ -16687,7 +16784,7 @@ paths:
               title: ChangeDNSPTRRequest
               type: object
         description: |
-          Select the IP address for which to change the DNS entry by passing `ip`. For a Primary IP of type `ipv4` this must exactly match the IP address of the Primary IP. For a Primary IP of type `ipv6` this must be a single IP within the IPv6 /64 range that belongs to this Primary IP.
+          Select the IP address for which to change the DNS entry by passing `ip`. For a Primary IP of type `ipv4` this must exactly match the IP address of the Primary IP. For a Primary IP of type `ipv6` this must be a single IP within the IPv6 /64 range that belongs to this Primary IP. You can add up to 100 IPv6 reverse DNS entries.
 
           The target hostname is set by passing `dns_ptr`.
       responses:
@@ -17063,6 +17160,13 @@ paths:
                   server_types:
                     items:
                       properties:
+                        architecture:
+                          description: Type of cpu architecture
+                          enum:
+                            - x86
+                            - arm
+                          example: x86
+                          type: string
                         cores:
                           description: Number of cpu cores a Server of this type will have
                           example: 1
@@ -17158,6 +17262,7 @@ paths:
                         - prices
                         - storage_type
                         - cpu_type
+                        - architecture
                       type: object
                     type: array
                 required:
@@ -17185,6 +17290,13 @@ paths:
                 properties:
                   server_type:
                     properties:
+                      architecture:
+                        description: Type of cpu architecture
+                        enum:
+                          - x86
+                          - arm
+                        example: x86
+                        type: string
                       cores:
                         description: Number of cpu cores a Server of this type will have
                         example: 1
@@ -17280,6 +17392,7 @@ paths:
                       - prices
                       - storage_type
                       - cpu_type
+                      - architecture
                     type: object
                 required:
                   - server_type
@@ -17645,6 +17758,14 @@ paths:
                           description: ISO Image that is attached to this Server. Null if no ISO is attached.
                           nullable: true
                           properties:
+                            architecture:
+                              description: Type of cpu architecture this iso is compatible with. Null indicates no restriction on the architecture (wildcard).
+                              enum:
+                                - x86
+                                - arm
+                              example: x86
+                              nullable: true
+                              type: string
                             deprecated:
                               description: ISO 8601 timestamp of deprecation, null if ISO is still available. After the deprecation time it will no longer be possible to attach the ISO to Servers.
                               example: 2018-02-28T00:00:00+00:00
@@ -17675,6 +17796,7 @@ paths:
                             - description
                             - type
                             - deprecated
+                            - architecture
                           type: object
                         labels:
                           additionalProperties:
@@ -18221,6 +18343,7 @@ paths:
                         - 3
                   id: 42
                   image:
+                    architecture: x86
                     bound_to: null
                     created: 2016-01-30T23:50:00+00:00
                     created_from:
@@ -18245,6 +18368,7 @@ paths:
                   included_traffic: 654321
                   ingoing_traffic: 123456
                   iso:
+                    architecture: x86
                     deprecated: 2018-02-28T00:00:00+00:00
                     description: FreeBSD 11.0 x64
                     id: 4711
@@ -18283,6 +18407,7 @@ paths:
                       ip: 2001:db8::/64
                   rescue_enabled: false
                   server_type:
+                    architecture: x86
                     cores: 1
                     cpu_type: shared
                     deprecated: true
@@ -18718,6 +18843,14 @@ paths:
                         description: ISO Image that is attached to this Server. Null if no ISO is attached.
                         nullable: true
                         properties:
+                          architecture:
+                            description: Type of cpu architecture this iso is compatible with. Null indicates no restriction on the architecture (wildcard).
+                            enum:
+                              - x86
+                              - arm
+                            example: x86
+                            nullable: true
+                            type: string
                           deprecated:
                             description: ISO 8601 timestamp of deprecation, null if ISO is still available. After the deprecation time it will no longer be possible to attach the ISO to Servers.
                             example: 2018-02-28T00:00:00+00:00
@@ -18748,6 +18881,7 @@ paths:
                           - description
                           - type
                           - deprecated
+                          - architecture
                         type: object
                       labels:
                         additionalProperties:
@@ -19470,6 +19604,14 @@ paths:
                         description: ISO Image that is attached to this Server. Null if no ISO is attached.
                         nullable: true
                         properties:
+                          architecture:
+                            description: Type of cpu architecture this iso is compatible with. Null indicates no restriction on the architecture (wildcard).
+                            enum:
+                              - x86
+                              - arm
+                            example: x86
+                            nullable: true
+                            type: string
                           deprecated:
                             description: ISO 8601 timestamp of deprecation, null if ISO is still available. After the deprecation time it will no longer be possible to attach the ISO to Servers.
                             example: 2018-02-28T00:00:00+00:00
@@ -19500,6 +19642,7 @@ paths:
                           - description
                           - type
                           - deprecated
+                          - architecture
                         type: object
                       labels:
                         additionalProperties:
@@ -20140,6 +20283,14 @@ paths:
                         description: ISO Image that is attached to this Server. Null if no ISO is attached.
                         nullable: true
                         properties:
+                          architecture:
+                            description: Type of cpu architecture this iso is compatible with. Null indicates no restriction on the architecture (wildcard).
+                            enum:
+                              - x86
+                              - arm
+                            example: x86
+                            nullable: true
+                            type: string
                           deprecated:
                             description: ISO 8601 timestamp of deprecation, null if ISO is still available. After the deprecation time it will no longer be possible to attach the ISO to Servers.
                             example: 2018-02-28T00:00:00+00:00
@@ -20170,6 +20321,7 @@ paths:
                           - description
                           - type
                           - deprecated
+                          - architecture
                         type: object
                       labels:
                         additionalProperties:

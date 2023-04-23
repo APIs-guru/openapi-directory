@@ -611,12 +611,10 @@ components:
           type: string
         countryCode:
           type: string
-        geonameID:
+        geonameId:
           format: int32
           type: integer
-        ipaddress:
-          type: string
-        nationality:
+        ipAddress:
           type: string
         phoneNumber:
           type: string
@@ -624,7 +622,7 @@ components:
           type: string
         streetAddress:
           type: string
-        zipCode:
+        zip:
           type: string
       type: object
     Lifestory:
@@ -643,12 +641,12 @@ components:
           type: integer
         bloodType:
           type: string
-        creditCardNumber:
+        ccNumber:
           type: string
         creditScore:
           format: int32
           type: integer
-        dateOfBirth:
+        doB:
           type: string
         email:
           type: string
@@ -666,7 +664,7 @@ components:
         height:
           format: double
           type: number
-        incomeInUSD:
+        incomeUSD:
           format: int32
           type: integer
         job:

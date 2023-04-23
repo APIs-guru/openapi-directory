@@ -791,6 +791,12 @@ components:
           description: The end date/time of this appointment.
           format: date-time
           type: string
+        LinkedGuest:
+          description: Linked Guest Model:-
+          items:
+            $ref: "#/components/schemas/LinkedGuestModel"
+          readOnly: true
+          type: array
         LinkedProperties:
           description: A collection of properties linked to the appointment:-
           items:
@@ -1056,6 +1062,35 @@ components:
         StartDate:
           description: The start date of the Tenancy
           format: date-time
+          type: string
+      type: object
+    LinkedGuestModel:
+      description: Holds information on guests
+      properties:
+        CreatedAt:
+          description: Guest Created At:-
+          format: date-time
+          readOnly: true
+          type: string
+        Email:
+          description: Guest Email:-
+          readOnly: true
+          type: string
+        GlobalReference:
+          description: Guest Global Reference:-
+          readOnly: true
+          type: string
+        Mobile:
+          description: Guest Mobile:-
+          readOnly: true
+          type: string
+        Name:
+          description: Guest Name:-
+          readOnly: true
+          type: string
+        OID:
+          description: Guest OID:-
+          readOnly: true
           type: string
       type: object
     LinkedLandlordModel:

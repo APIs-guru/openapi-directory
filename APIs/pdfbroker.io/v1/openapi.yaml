@@ -604,39 +604,36 @@ components:
       additionalProperties: false
       description: Set color
       properties:
-        B:
+        b:
           description: Get or sets B value of RGB color
           format: int32
           maximum: 255
           minimum: 0
-          readOnly: true
           type: integer
-        G:
+        g:
           description: Get or sets G value of RGB color
           format: int32
           maximum: 255
           minimum: 0
-          readOnly: true
           type: integer
-        R:
+        r:
           description: Get or sets R value of RGB color
           format: int32
           maximum: 255
           minimum: 0
-          readOnly: true
           type: integer
       type: object
     ErrorResponseDto:
       additionalProperties: false
       properties:
-        Description:
+        description:
           nullable: true
           type: string
-        ErrorMessage:
+        errorMessage:
           description: If any error occurs the message will be displayed in here
           nullable: true
           type: string
-        StatusCode:
+        statusCode:
           format: int32
           type: integer
       type: object
@@ -644,14 +641,15 @@ components:
       additionalProperties: false
       description: The basic request with the XSL-FO document as a Base64 encoded string with a set of resources provided with a name and the data of the resource as a Base64 encoded string.
       properties:
-        FoDocumentBase64String:
+        foDocumentBase64String:
           description: This is the complete XSL-FO document provided using Base64 encoding.
           nullable: true
           type: string
-        Metadata:
+        metadata:
           $ref: "#/components/schemas/PdfMetadataDto"
-        Resources:
+        resources:
           additionalProperties:
+            nullable: true
             type: string
           description: This is a set of key-value pairs of digital resources like images that is referenced in the XSL-FO document. It uses the filename as key and the data is provided as a Base64 encoded string.
           nullable: true
@@ -661,19 +659,20 @@ components:
       additionalProperties: false
       description: The XSL-FO transform document and xml data document as a Base64 encoded string with a set of resources provided with a name and the data of the resource as a Base64 encoded string.
       properties:
-        FoDocumentBase64String:
+        foDocumentBase64String:
           description: This is the complete XSL-FO document provided using Base64 encoding.
           nullable: true
           type: string
-        Metadata:
+        metadata:
           $ref: "#/components/schemas/PdfMetadataDto"
-        Resources:
+        resources:
           additionalProperties:
+            nullable: true
             type: string
           description: This is a set of key-value pairs of digital resources like images that is referenced in the XSL-FO document. It uses the filename as key and the data is provided as a Base64 encoded string.
           nullable: true
           type: object
-        XmlDataDocumentBase64String:
+        xmlDataDocumentBase64String:
           description: This is xml data document on which the XSL-FO transform document is applied. Provided using Base64 encoding.
           nullable: true
           type: string
@@ -682,17 +681,15 @@ components:
       additionalProperties: false
       description: The Font dto object
       properties:
-        Name:
+        name:
           description: Gets the name of the font
           nullable: true
-          readOnly: true
           type: string
-        Size:
+        size:
           description: Gets the size of the font
           format: float
-          readOnly: true
           type: number
-        Style:
+        style:
           $ref: "#/components/schemas/FontStyle"
       type: object
     FontStyle:
@@ -708,11 +705,11 @@ components:
       additionalProperties: false
       description: When setting the Accept-header in the request to "application/json" the image file will be return as Base64 encoded string. Note that converting data to Base64 encoded strings increases the response size with approximately 33%, if you can accept the a binary format it's better to use Accept-header "image/jpeg", "image/png" or "image/gif".
       properties:
-        ErrorMessage:
+        errorMessage:
           description: If any error occurs the message will be displayed in here
           nullable: true
           type: string
-        ImageBase64String:
+        imageBase64String:
           description: The Base64 encoded string that is the image file. This is a complete data uri, including media type that can be used directly as src on a img-tag e.g.
           nullable: true
           type: string
@@ -721,7 +718,7 @@ components:
       additionalProperties: false
       description: Request to concatenate a list of Pdf documents to a single Pdf document.
       properties:
-        PdfDocumentsAsBase64String:
+        pdfDocumentsAsBase64String:
           description: The list of Pdf documents encoded as Base64 strings.
           items:
             type: string
@@ -732,45 +729,45 @@ components:
       additionalProperties: false
       description: Enter meta data for pdf document
       properties:
-        Author:
+        author:
           description: Pdf document author
           nullable: true
           type: string
-        EnableAdd:
+        enableAdd:
           description: "Enables or disables adding or modifying text annotations and interactive\r
 
             form fields."
           type: boolean
-        EnableCopy:
+        enableCopy:
           description: Enables or disables copying of text and graphics.
           type: boolean
-        EnableModify:
+        enableModify:
           description: "Enables or disables modifying document contents (other than text annotations and \r
 
             interactive form fields)."
           type: boolean
-        EnablePrinting:
+        enablePrinting:
           description: Enables or disables printing.
           type: boolean
-        Keywords:
+        keywords:
           description: Pdf document keywords
           items:
             type: string
           nullable: true
           type: array
-        OwnerPassword:
+        ownerPassword:
           description: Specifies the owner password that will protect full access to any generated PDF documents.
           nullable: true
           type: string
-        Subject:
+        subject:
           description: Pdf document subject
           nullable: true
           type: string
-        Title:
+        title:
           description: Pdf document title
           nullable: true
           type: string
-        UserPassword:
+        userPassword:
           description: Specifies the user password that will protect access to any generated PDF documents.
           nullable: true
           type: string
@@ -779,11 +776,11 @@ components:
       additionalProperties: false
       description: When setting the Accept-header in the request to "application/json" the content of the pdf file will be return as Base64 encoded string. Note that converting data to Base64 encoded strings increases the response size with approximately 33%, if you can accept the a binary format it's better to use Accept-header "application/pdf".
       properties:
-        ErrorMessage:
+        errorMessage:
           description: If any error occurs the message will be displayed in here
           nullable: true
           type: string
-        PdfFileBase64String:
+        pdfFileBase64String:
           description: The Base64 encoded string that is the pdf file.
           nullable: true
           type: string
@@ -791,38 +788,38 @@ components:
     PdfToImageOptions:
       additionalProperties: false
       properties:
-        Height:
+        height:
           description: Set the height of the output image, default value is width of source document. To scale height, and keeping proportions, do not set width;
           format: int32
           type: integer
-        HorizontalResolution:
+        horizontalResolution:
           description: Set the horizontal resolution, default is 96 dpi;
           format: double
           type: number
-        ImageFormat:
+        imageFormat:
           description: Valid options are "image/jpeg", "image/png" or "image/gif". Default is "image/png"
           nullable: true
           type: string
-        JpegQuality:
+        jpegQuality:
           description: Sets the quality of jpeg images, range 0 to 100, default is 75
           format: int32
           type: integer
-        PageNumber:
+        pageNumber:
           description: Which page of the pdf file to generate image from, default is first page
           format: int32
           type: integer
-        PngCompressionLevel:
+        pngCompressionLevel:
           description: Sets the png compression level, range 1 - 9, default is 6
           format: int32
           type: integer
-        Transparent:
+        transparent:
           description: Keep the background of the image transparent. This setting is not available in JPEG-files, since transparency is not supported in the JPEG format.
           type: boolean
-        VerticalResolution:
+        verticalResolution:
           description: Set the vertical resolution, default is 96 dpi;
           format: double
           type: number
-        Width:
+        width:
           description: Set the width of the output image, default value is width of source document. To scale width, and keeping proportions, do not set height;
           format: int32
           type: integer
@@ -830,9 +827,9 @@ components:
     PdfToImageRequestDto:
       additionalProperties: false
       properties:
-        Options:
+        options:
           $ref: "#/components/schemas/PdfToImageOptions"
-        PdfFileBase64String:
+        pdfFileBase64String:
           description: The pdf file to generate image from, as Base64 encoded string.
           nullable: true
           type: string
@@ -841,27 +838,27 @@ components:
       additionalProperties: false
       description: Options for writing string in pdf page;
       properties:
-        Font:
+        font:
           $ref: "#/components/schemas/FontDto"
-        PageNumber:
+        pageNumber:
           description: Get or set which page in the pdf to write on, default is first page.
           format: int32
           type: integer
-        Text:
+        text:
           description: The text to write in the pdf
           nullable: true
           type: string
-        TextColor:
+        textColor:
           $ref: "#/components/schemas/ColorDto"
-        XOrigin:
+        xOrigin:
           $ref: "#/components/schemas/XOriginPoint"
-        XPosition:
+        xPosition:
           description: Get or set the X axis position on where to write string, in reference to XOrigin.
           format: float
           type: number
-        YOrigin:
+        yOrigin:
           $ref: "#/components/schemas/YOriginPoint"
-        YPosition:
+        yPosition:
           description: Get or set the Y axis position on where to write string, in reference to YOrigin.
           format: float
           type: number
@@ -870,13 +867,13 @@ components:
       additionalProperties: false
       description: The request dto object to write a string on pdf page
       properties:
-        FontFileBase64String:
+        fontFileBase64String:
           description: System fonts are available, but you can provide your own font file to be embedded in the pdf document. Send font as Base64 encoded string.
           nullable: true
           type: string
-        Options:
+        options:
           $ref: "#/components/schemas/PdfWriteStringOptions"
-        PdfFileBase64String:
+        pdfFileBase64String:
           description: The pdf file to add text to, as Base64 encoded string.
           nullable: true
           type: string
@@ -885,22 +882,24 @@ components:
       additionalProperties: false
       description: WkHtmlToPdfRequestDto is the data transfer object for generating a pdf using wkhtmltopdf;
       properties:
-        HtmlBase64String:
+        htmlBase64String:
           description: Base64 encoded string with html. If property Url is set, it will be used, not HtmlBase64String.
           nullable: true
           type: string
-        Resources:
+        resources:
           additionalProperties:
+            nullable: true
             type: string
           description: This is a set of key-value pairs of digital resources like images that is referenced in the HtmlBase64String document. It uses the filename including relative path as key and the data is provided as a Base64 encoded string.
           nullable: true
           type: object
-        Url:
+        url:
           description: The url to generate pdf from. Url has precedence over HtmlBase64String value if both are set.
           nullable: true
           type: string
-        WkHtmlToPdfArguments:
+        wkHtmlToPdfArguments:
           additionalProperties:
+            nullable: true
             type: string
           description: Command line arguments passed to wkhtmltopdf.
           nullable: true

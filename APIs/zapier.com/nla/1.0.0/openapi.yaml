@@ -451,9 +451,7 @@ paths:
       summary: Check
   /api/v1/configuration-link/:
     get:
-      description: |-
-        If the user wants to execute actions that are not exposed, they can
-        go here to configure and expose more.
+      description: Provides a link to configure more actions. Alternatively, searching through apps and actions will provide more specific configuration links.
       operationId: get_configuration_link
       parameters: []
       responses:
@@ -465,6 +463,39 @@ paths:
         - AccessPointApiKeyQuery: []
         - AccessPointOAuth: []
       summary: Get Configuration Link
+  "/api/v1/execution-log/{execution_log_id}/":
+    get:
+      description: Get the execution log for a given execution log id.
+      operationId: get_execution_log_endpoint
+      parameters:
+        - in: path
+          name: execution_log_id
+          required: true
+          schema:
+            pattern: ^[A-Z0-9]{26}$
+            title: Execution Log Id
+            type: string
+            x-examples:
+              - 01ARZ3NDEKTSV4RRFFQ69G5FAV
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExecuteResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+      security:
+        - SessionAuth: []
+        - AccessPointApiKeyHeader: []
+        - AccessPointApiKeyQuery: []
+        - AccessPointOAuth: []
+      summary: Get Execution Log Endpoint
   /api/v1/exposed/:
     get:
       description: List all the currently exposed actions for the given account.
@@ -485,10 +516,7 @@ paths:
       summary: List Exposed Actions
   "/api/v1/exposed/{exposed_app_action_id}/execute/":
     post:
-      description: |-
-        Give us a plain english description of exact action you want to do.
-        There should be dynamically generated documentation for this endpoint
-        for each action that is exposed.
+      description: Give us a plain english description of exact action you want to do. There should be dynamically generated documentation for this endpoint for each action that is exposed.
       operationId: execute_app_action_endpoint
       parameters:
         - in: path
@@ -544,7 +572,7 @@ components:
         (1) Providers who allow side effects or (2) actions that do not have a side effect should use this class.
       properties:
         instructions:
-          description: Plain english instructions. Provide as much detail as possible.
+          description: Plain english instructions. Provide as much detail as possible, even if other fields are present.
           title: Instructions
           type: string
         preview_only:
@@ -563,6 +591,16 @@ components:
           description: The name of the action that was executed.
           title: Action Used
           type: string
+        additional_results:
+          description: The rest of the full results. Always returns an array of objects
+          items:
+            type: object
+          title: Additional Results
+          type: array
+        assistant_hint:
+          description: A hint for the assistant on what to do next.
+          title: Assistant Hint
+          type: string
         error:
           description: The error message if the execution failed.
           title: Error
@@ -578,6 +616,10 @@ components:
         result:
           description: A trimmed down result of the first item of the full results. Ideal for humans and language models!
           title: Result
+          type: object
+        result_field_labels:
+          description: Human readable labels for some of the keys in the result.
+          title: Result Field Labels
           type: object
         review_url:
           description: The URL to run the action or review the AI choices the AI made for input_params given instructions.
@@ -598,6 +640,7 @@ components:
         - action_used
         - input_params
         - review_url
+        - additional_results
       title: ExecuteResponse
       type: object
     ExposedActionResponseSchema:

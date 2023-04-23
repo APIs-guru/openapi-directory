@@ -115,6 +115,8 @@ tags:
     name: Phone Number Assignments
   - description: Recording Settings Information
     name: Recording Settings
+  - description: Role Information
+    name: Roles
   - description: Saved List Views
     name: Saved List Views
   - description: Steps
@@ -2543,6 +2545,13 @@ paths:
           required: false
           schema:
             type: string
+        - description: |
+            calendar_id of the user who created or included as a guest to the event.
+          in: query
+          name: calendar_id
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -2659,6 +2668,11 @@ paths:
                   type: string
                 title:
                   description: Title of the calendar event
+                  type: string
+                updated_at:
+                  description: |2
+                      Last modification time of the event in the ISO 8601 format with a time zone offset. The event will not be updated if the 'updated_at' timestamp from the payload is earlier than the one in the database.
+                      Example: `2022-02-14T10:12:59+00:00`.
                   type: string
               required:
                 - id
@@ -3401,6 +3415,91 @@ paths:
       summary: Update a custom field
       tags:
         - Custom Fields
+  /v2/custom_roles.json:
+    get:
+      description: |
+        Fetches multiple custom role records. The records can be filtered, and sorted according to
+        the respective parameters. A custom role is any role that is not Admin or User.
+      parameters:
+        - description: IDs of roles to fetch.
+          explode: false
+          in: query
+          name: ids
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: "Key to sort on, must be one of: id, name. Defaults to id"
+          in: query
+          name: sort_by
+          required: false
+          schema:
+            type: string
+        - description: "Direction to sort in, must be one of: ASC, DESC. Defaults to DESC"
+          in: query
+          name: sort_direction
+          required: false
+          schema:
+            type: string
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
+          in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+        - description: The current page to fetch results from. Defaults to 1
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          schema:
+            type: boolean
+        - description: Specifies whether the max limit of 10k records should be applied to pagination counts. Affects the total_count and total_pages data
+          in: query
+          name: limit_paging_counts
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                items:
+                  $ref: "#/components/schemas/CustomRole"
+                type: array
+          description: Success
+      summary: List custom roles
+      tags:
+        - Roles
+  "/v2/custom_roles/{id}.json":
+    get:
+      description: |
+        Fetches a custom role, by ID only.
+      parameters:
+        - description: Custom Role ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/CustomRole"
+          description: Success
+      summary: Fetch a custom role
+      tags:
+        - Roles
   /v2/email_template_attachments.json:
     get:
       description: |
@@ -3980,17 +4079,17 @@ paths:
               type: integer
             type: array
           style: form
-        - description: Filters meetings by event IDs
+        - description: List of event IDs. If both event_ids and i_cal_uids params are passed, this filters will be ORed. If a record can't be found, that record won't be returned and your request will be successful
           explode: false
           in: query
           name: event_ids
           required: false
           schema:
             items:
-              type: integer
+              type: string
             type: array
           style: form
-        - description: Filters meetings by UIDs provided by calendar provider
+        - description: List of UIDs provided by calendar provider. If both event_ids and i_cal_uids params are passed, this filters will be ORed. If a record can't be found, that record won't be returned and your request will be successful
           explode: false
           in: query
           name: i_cal_uids
@@ -4024,6 +4123,20 @@ paths:
           explode: false
           in: query
           name: start_time
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: |
+            Equality filters that are applied to the created_at field. A single filter can be used by itself or combined with other filters to create a range.
+
+            ---CUSTOM---
+            {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
+          explode: false
+          in: query
+          name: created_at
           required: false
           schema:
             items:
@@ -4147,12 +4260,6 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Specifies whether the max limit of 10k records should be applied to pagination counts. Affects the total_count and total_pages data
-          in: query
-          name: limit_paging_counts
-          required: false
-          schema:
-            type: boolean
       responses:
         "200":
           content:
@@ -4228,6 +4335,9 @@ paths:
                 primary_calendar_name:
                   description: Display name of the primary calendar
                   type: string
+                reschedule_meetings_enabled:
+                  description: Determines if a user enabled reschedule meetings feature
+                  type: boolean
                 schedule_buffer_enabled:
                   description: Determines if meetings are scheduled with a 15 minute buffer between them
                   type: boolean
@@ -4282,6 +4392,9 @@ paths:
                 no_show:
                   description: Whether the meeting is a No Show meeting
                   type: boolean
+                reschedule_status:
+                  description: "Status of the meeting rescheduling progress. Possible values are: pending, booked, failed, retry"
+                  type: string
                 status:
                   description: "Status of the meeting creation progress. Possible values are: pending, booked, failed, retry"
                   type: string
@@ -6853,6 +6966,44 @@ paths:
       summary: Fetch a user
       tags:
         - Users
+    put:
+      description: |
+        Updates a user.
+      parameters:
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                active:
+                  description: Active status of the user's account
+                  type: boolean
+                group_id:
+                  description: Group assigned to the user
+                  type: integer
+                role_id:
+                  description: "Role assigned to the user. Must be one of: Admin, User, or a custom role ID"
+                  type: string
+                work_country:
+                  description: The user's work country (alpha-2 code)
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Success
+      summary: Update a user
+      tags:
+        - Users
   /v2/webhook_subscriptions:
     get:
       description: Fetches all of the customer's webhook subscriptions for your application.
@@ -6995,7 +7146,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         archived_at:
           description: Datetime of when the Account was archived, if archived
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         city:
@@ -7020,7 +7171,7 @@ components:
           $ref: "#/components/schemas/EmbeddedAccountCounts"
         created_at:
           description: Datetime of when the Account was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         creator:
@@ -7069,7 +7220,7 @@ components:
           type: string
         last_contacted_at:
           description: Datetime this Account was last contacted
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         last_contacted_by:
@@ -7136,7 +7287,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the Account was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user_relationships:
@@ -7177,7 +7328,7 @@ components:
       properties:
         created_at:
           description: Datetime of when the Account Tier was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         id:
@@ -7194,7 +7345,7 @@ components:
           type: integer
         updated_at:
           description: Datetime of when the Account Tier was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     AccountUpsert:
@@ -7212,7 +7363,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         created_at:
           description: Datetime of when the Action was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         due:
@@ -7221,7 +7372,7 @@ components:
           type: boolean
         due_on:
           description: When action is due
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         id:
@@ -7253,7 +7404,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the Action was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user:
@@ -7262,7 +7413,7 @@ components:
       properties:
         updated_at:
           description: Datetime of when the Activity was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     ActivityHistory:
@@ -7420,7 +7571,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         archived_at:
           description: Datetime of when the cadence was archived, if archived
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         bounced_stage:
@@ -7448,7 +7599,7 @@ components:
           $ref: "#/components/schemas/CadenceCounts"
         created_at:
           description: Datetime of when the cadence was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         creator:
@@ -7513,7 +7664,7 @@ components:
           type: boolean
         updated_at:
           description: Datetime of when the cadence was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     CadenceCounts:
@@ -7552,7 +7703,7 @@ components:
       properties:
         added_at:
           description: Datetime of when the person was last added to this cadence
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         cadence:
@@ -7561,7 +7712,7 @@ components:
           $ref: "#/components/schemas/CadenceMembershipCounts"
         created_at:
           description: Datetime of when the person was first added to this cadence
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         current_state:
@@ -7603,7 +7754,7 @@ components:
           type: boolean
         updated_at:
           description: Datetime of when the record was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user:
@@ -7639,7 +7790,7 @@ components:
         all_day:
           description: Whether the calendar event is an all-day event.
           example: false
-          type: string
+          type: boolean
         attendees:
           description: The attendees of the calendar event.
           example:
@@ -7655,7 +7806,8 @@ components:
               organizer: false
               status: accepted
               status_changed: false
-          type: object
+          items: {}
+          type: array
         body_html:
           description: Raw body content from Microsoft calendar events
           example: some html text
@@ -7670,7 +7822,8 @@ components:
           type: string
         canceled_at:
           description: The canceled date of the calendar event.
-          example: iso8601_now
+          example: 2023-04-13T15:34:06.989910Z
+          format: date-time
           type: string
         conference_data:
           description: The conference-related information, such as details of a Google Meet conference.
@@ -7678,19 +7831,20 @@ components:
           type: object
         created_at:
           description: Creation time of the calendar event.
-          example: iso8601_now
+          example: 2023-04-13T15:34:06.989803Z
+          format: date-time
           type: string
         creator:
           description: The creator email of the calendar event.
           example: creator@example.com
-          type: object
+          type: string
         description:
           description: Description of the calendar event
           example: Calendar event description
           type: string
         end_time:
           description: The (exclusive) end time of the calendar event.
-          example: 2022-08-23T08:18:47.853983Z
+          example: 2023-04-13T15:34:06.989568Z
           format: date-time
           type: string
         extended_properties:
@@ -7724,10 +7878,10 @@ components:
         recurring:
           description: Whether the calendar event is a recurring event.
           example: false
-          type: string
+          type: boolean
         start_time:
           description: The (inclusive) start time of the calendar event.
-          example: 2022-08-23T08:18:47.832113Z
+          example: 2023-04-13T15:34:06.971963Z
           format: date-time
           type: string
         status:
@@ -7744,7 +7898,8 @@ components:
           type: string
         updated_at:
           description: Last modification time of the calendar event.
-          example: iso8601_now
+          example: 2023-04-13T15:34:06.989849Z
+          format: date-time
           type: string
         user_guid:
           description: User GUID of the user calendar.
@@ -7760,7 +7915,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         created_at:
           description: Datetime of when the call was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         crm_activity:
@@ -7800,7 +7955,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the call was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user:
@@ -7821,7 +7976,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         created_at:
           description: Datetime of when the call was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         direction:
@@ -7852,7 +8007,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the call was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user:
@@ -7861,7 +8016,7 @@ components:
       properties:
         created_at:
           description: Datetime of when the call disposition was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         id:
@@ -7874,14 +8029,14 @@ components:
           type: string
         updated_at:
           description: Datetime of when the call disposition was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     CallInstruction:
       properties:
         created_at:
           description: Datetime of when the call instructions were created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         id:
@@ -7894,14 +8049,14 @@ components:
           type: string
         updated_at:
           description: Datetime of when the call instructions were last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     CallSentiment:
       properties:
         created_at:
           description: Datetime of when the call sentiment was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         id:
@@ -7914,7 +8069,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the call sentiment was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     CallerId:
@@ -7972,7 +8127,7 @@ components:
           type: string
         created_at:
           description: Datetime of when the crm activity was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         crm_id:
@@ -8004,7 +8159,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the crm activity was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user:
@@ -8013,7 +8168,7 @@ components:
       properties:
         created_at:
           description: Datetime of when the CrmActivityField was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         crm_object_type:
@@ -8057,7 +8212,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the CrmActivityField was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         value:
@@ -8070,7 +8225,7 @@ components:
       properties:
         created_at:
           description: Datetime of when the crm user was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         crm_id:
@@ -8083,7 +8238,7 @@ components:
           type: integer
         updated_at:
           description: Datetime of when the crm user was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user:
@@ -8092,7 +8247,7 @@ components:
       properties:
         created_at:
           description: Datetime of when the Custom Field was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         field_type:
@@ -8109,12 +8264,22 @@ components:
           type: string
         updated_at:
           description: Datetime of when the Custom Field was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         value_type:
           description: "Value Type of the Custom Field. Value must be one of: text, date."
           example: text
+          type: string
+    CustomRole:
+      properties:
+        id:
+          description: ID of the custom role
+          example: "1"
+          type: string
+        name:
+          description: Name of the custom role
+          example: Test name
           type: string
     Email:
       properties:
@@ -8134,7 +8299,7 @@ components:
           $ref: "#/components/schemas/EmailCounts"
         created_at:
           description: Datetime of when the email was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         crm_activity:
@@ -8168,12 +8333,12 @@ components:
           type: string
         send_after:
           description: When this email will be sent, or null if already sent
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         sent_at:
           description: When this email was sent, or null if it was not sent
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         status:
@@ -8189,7 +8354,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         updated_at:
           description: Datetime of when the email was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user:
@@ -8233,7 +8398,7 @@ components:
           type: object
         archived_at:
           description: Datetime of when the email template was archived, if archived
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         body:
@@ -8267,7 +8432,7 @@ components:
           $ref: "#/components/schemas/EmailTemplateCounts"
         created_at:
           description: Datetime of when the email template was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         groups:
@@ -8284,7 +8449,7 @@ components:
           type: integer
         last_used_at:
           description: Datetime of when the email template was last used
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         open_tracking_enabled:
@@ -8317,7 +8482,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the email template was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     EmailTemplateAttachment:
@@ -8495,7 +8660,7 @@ components:
       properties:
         created_at:
           description: Datetime of when the import was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         current_people_count:
@@ -8516,7 +8681,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the import was last updated, ignoring relationship changes
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     JobData:
@@ -8752,6 +8917,10 @@ components:
           description: Name of the meeting invite recipient
           example: John Doe
           type: string
+        reschedule_status:
+          description: "Status of the meeting rescheduling progress. Possible values are: pending, booked, failed, retry"
+          example: booked
+          type: string
         start_time:
           description: Start time of the meeting
           example: 2022-12-19T16:49:17.917818+02:00
@@ -8857,6 +9026,10 @@ components:
           description: Display name of the primary calendar
           example: My Meetings Calendar
           type: string
+        reschedule_meetings_enabled:
+          description: Determines if a user enabled reschedule meetings feature
+          example: false
+          type: boolean
         schedule_buffer_enabled:
           description: Determines if meetings are scheduled with a 15 minute buffer between them
           example: true
@@ -8953,7 +9126,7 @@ components:
           type: string
         created_at:
           description: Datetime of when the note was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-06:00
           format: date-time
           type: string
         id:
@@ -8962,7 +9135,7 @@ components:
           type: integer
         updated_at:
           description: Datetime of when the note was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-06:00
           format: date-time
           type: string
         user:
@@ -9016,7 +9189,7 @@ components:
           $ref: "#/components/schemas/PersonCounts"
         created_at:
           description: Datetime of when the person was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         crm_id:
@@ -9081,7 +9254,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         last_contacted_at:
           description: Last datetime this person was contacted
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         last_contacted_by:
@@ -9096,7 +9269,7 @@ components:
           type: string
         last_replied_at:
           description: Last datetime this person replied to an email
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         linkedin_url:
@@ -9191,7 +9364,7 @@ components:
           type: boolean
         updated_at:
           description: Datetime of when the person was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         work_city:
@@ -9236,7 +9409,7 @@ components:
       properties:
         created_at:
           description: Datetime of when the Person Stage was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         id:
@@ -9253,7 +9426,7 @@ components:
           type: integer
         updated_at:
           description: Datetime of when the Person Stage was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     PersonUpsert:
@@ -9312,7 +9485,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         created_at:
           description: Datetime of when the Step was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         day:
@@ -9352,7 +9525,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the Step was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     Subscription:
@@ -9391,7 +9564,7 @@ components:
           $ref: "#/components/schemas/SuccessCounts"
         created_at:
           description: Datetime of when the success was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         id:
@@ -9412,17 +9585,17 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         succeeded_at:
           description: Datetime of when the success was recorded
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         success_window_started_at:
           description: Datetime of when this person was first worked, leading up to the success
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         updated_at:
           description: Datetime of when the success was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         user:
@@ -9455,14 +9628,14 @@ components:
       properties:
         completed_at:
           description: Datetime of when the task was completed, ISO-8601 datetime format required
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         completed_by:
           $ref: "#/components/schemas/EmbeddedResource"
         created_at:
           description: Datetime of when the Task was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         created_by_user:
@@ -9477,7 +9650,7 @@ components:
           type: string
         due_at:
           description: Datetime of when the Task is due, can be null.  ISO-8601 datetime format required
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         due_date:
@@ -9493,7 +9666,7 @@ components:
           $ref: "#/components/schemas/EmbeddedResource"
         remind_at:
           description: Datetime of when the user will be reminded of the task, ISO-8601 datetime format required
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         subject:
@@ -9506,7 +9679,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the Task was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-08:00
           format: date-time
           type: string
         user:
@@ -9531,7 +9704,7 @@ components:
           type: boolean
         created_at:
           description: Datetime of when the team was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         custom_tracking_domain:
@@ -9598,7 +9771,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the team was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     TeamTemplate:
@@ -9610,7 +9783,7 @@ components:
           type: object
         archived_at:
           description: Datetime of when the team template was archived, if archived
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         body:
@@ -9640,7 +9813,7 @@ components:
           $ref: "#/components/schemas/TeamTemplateCounts"
         created_at:
           description: Datetime of when the team template was created
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         id:
@@ -9649,14 +9822,14 @@ components:
           type: string
         last_modified_at:
           description: Datetime of when the team template was last modified
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         last_modified_user:
           $ref: "#/components/schemas/EmbeddedResource"
         last_used_at:
           description: Datetime of when the team template was last used
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
         open_tracking_enabled:
@@ -9681,7 +9854,7 @@ components:
           type: string
         updated_at:
           description: Datetime of when the team template was last updated
-          example: 2023-01-01T00:00:00.000000-05:00
+          example: 2022-01-01T00:00:00.000000-05:00
           format: date-time
           type: string
     TeamTemplateAttachment:

@@ -661,20 +661,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `expires_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `expires_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `expires_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `expires_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_lt
@@ -682,13 +675,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `expires_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `expires_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `expires_at`.
       responses:
         "200":
           content:
@@ -1019,41 +1012,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `name`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `name` and `app_type`. Valid field combinations are `[ name, app_type ]` and `[ app_type, name ]`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `name`.
       responses:
         "200":
           content:
@@ -1140,20 +1105,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lt
@@ -1161,13 +1119,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
         - description: As2 Partner ID.  If provided, will return message specific to that partner.
           in: query
           name: as2_partner_id
@@ -1262,20 +1220,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lt
@@ -1283,13 +1234,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
         - description: As2 Partner ID.  If provided, will return message specific to that partner.
           in: query
           name: as2_partner_id
@@ -1421,6 +1372,9 @@ paths:
                   format: int32
                   type: integer
                   x-ms-summary: Id of As2Station for this partner
+                enable_dedicated_ips:
+                  type: boolean
+                  x-ms-summary: null
                 name:
                   description: AS2 Name
                   type: string
@@ -1610,6 +1564,9 @@ paths:
           multipart/form-data:
             schema:
               properties:
+                enable_dedicated_ips:
+                  type: boolean
+                  x-ms-summary: null
                 name:
                   description: AS2 Name
                   type: string
@@ -2027,41 +1984,6 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `status`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `status`.
-          in: query
-          name: filter_gt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `status`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `status`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `status`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `status`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `status`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `status`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `status`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `status`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `status`.
         - description: ID of the associated Automation.
           example: 1
           in: query
@@ -2197,48 +2119,48 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, sort records by the specified field in either `asc` or `desc` direction (e.g. `sort_by[automation]=desc`). Valid fields are `automation`, `disabled`, `last_modified_at` or `name`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
+        - description: If set, return records where the specified field is equal to the supplied value.
+          in: query
+          name: automation
+          required: false
+          schema:
+            type: string
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value.
+        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `disabled`, `last_modified_at` or `automation`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
           in: query
           name: filter
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `disabled`, `last_modified_at` or `automation`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
+        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `last_modified_at`.
           in: query
           name: filter_gt
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
+          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `last_modified_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `last_modified_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `last_modified_at`.
+        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `last_modified_at`.
           in: query
           name: filter_lt
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
+          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `last_modified_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `last_modified_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `automation`, `last_modified_at` or `disabled`. Valid field combinations are `[ automation, disabled ]` and `[ disabled, automation ]`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `last_modified_at`.
         - description: Set to true to include deleted automations in the results.
           in: query
           name: with_deleted
@@ -2246,13 +2168,6 @@ paths:
           schema:
             type: boolean
           x-ms-summary: Set to true to include deleted automations in the results.
-        - description: "DEPRECATED: Type of automation to filter by. Use `filter[automation]` instead."
-          in: query
-          name: automation
-          required: false
-          schema:
-            type: string
-          x-ms-summary: "DEPRECATED: Type of automation to filter by. Use `filter[automation]` instead."
       responses:
         "200":
           content:
@@ -2372,6 +2287,12 @@ paths:
                   description: Path on which this Automation runs.  Supports globs.
                   type: string
                   x-ms-summary: Path on which this Automation runs.  Supports globs.
+                recurring_day:
+                  description: "If trigger type is `daily`, this specifies a day number to run in one of the supported intervals: `week`, `month`, `quarter`, `year`."
+                  example: 25
+                  format: int32
+                  type: integer
+                  x-ms-summary: "If trigger type is `daily`, this specifies a day number to run in one of the supported intervals: `week`, `month`, `quarter`, `year`."
                 schedule:
                   description: Custom schedule for running this automation.
                   example:
@@ -2660,6 +2581,12 @@ paths:
                   description: Path on which this Automation runs.  Supports globs.
                   type: string
                   x-ms-summary: Path on which this Automation runs.  Supports globs.
+                recurring_day:
+                  description: "If trigger type is `daily`, this specifies a day number to run in one of the supported intervals: `week`, `month`, `quarter`, `year`."
+                  example: 25
+                  format: int32
+                  type: integer
+                  x-ms-summary: "If trigger type is `daily`, this specifies a day number to run in one of the supported intervals: `week`, `month`, `quarter`, `year`."
                 schedule:
                   description: Custom schedule for running this automation.
                   example:
@@ -2797,20 +2724,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `logged_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `logged_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `logged_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `logged_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `logged_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `logged_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `logged_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `logged_at`.
           in: query
           name: filter_lt
@@ -2818,13 +2738,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `logged_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `logged_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `logged_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `logged_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `logged_at`.
       responses:
         "200":
           content:
@@ -2897,6 +2817,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, sort records by the specified field in either `asc` or `desc` direction (e.g. `sort_by[behavior]=desc`). Valid fields are `behavior`.
+        - description: If set, return records where the specified field is equal to the supplied value.
+          in: query
+          name: behavior
+          required: false
+          schema:
+            type: string
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value.
         - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `behavior`.
           in: query
           name: filter
@@ -2904,48 +2831,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `behavior`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `behavior`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `behavior`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `behavior`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `behavior`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `behavior`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `behavior`.
-        - description: If set, only shows folder behaviors matching this behavior type.
-          in: query
-          name: behavior
-          required: false
-          schema:
-            type: string
-          x-ms-summary: If set, only shows folder behaviors matching this behavior type.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `behavior`.
       responses:
         "200":
           content:
@@ -3107,41 +2999,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `behavior`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `behavior`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `behavior`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `behavior`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `behavior`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `behavior`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `behavior`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `behavior`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `behavior`.
         - description: Path to operate on.
           in: path
           name: path
@@ -3507,20 +3371,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lt
@@ -3528,13 +3385,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
         - description: Bundle ID
           in: query
           name: bundle_id
@@ -3623,15 +3480,27 @@ paths:
             format: int32
             type: integer
           x-ms-summary: "Number of records to show per page.  (Max: 10,000, 1,000 or less is recommended)."
-        - description: Bundle ID to notify on
-          example: 1
+        - description: If set, sort records by the specified field in either `asc` or `desc` direction (e.g. `sort_by[bundle_id]=desc`). Valid fields are `bundle_id`.
+          in: query
+          name: sort_by
+          required: false
+          schema:
+            type: object
+          x-ms-summary: If set, sort records by the specified field in either `asc` or `desc` direction (e.g. `sort_by[bundle_id]=desc`). Valid fields are `bundle_id`.
+        - description: If set, return records where the specified field is equal to the supplied value.
           in: query
           name: bundle_id
           required: false
           schema:
-            format: int32
-            type: integer
-          x-ms-summary: Bundle ID to notify on
+            type: string
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value.
+        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `bundle_id`.
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: object
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `bundle_id`.
       responses:
         "200":
           content:
@@ -3968,41 +3837,6 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_gt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `has_registrations`.
         - description: List recipients for the bundle with this ID.
           in: query
           name: bundle_id
@@ -4272,20 +4106,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lt
@@ -4293,13 +4120,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
       responses:
         "200":
           content:
@@ -5262,41 +5089,41 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
+        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_gt
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
+          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `remote_server_type`.
           in: query
-          name: filter_like
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `remote_server_type`.
+        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lt
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
+          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`, `event_type`, `remote_server_type`, `status` or `folder_behavior_id`. Valid field combinations are `[ event_type, status, created_at ]`, `[ event_type, created_at ]` or `[ status, created_at ]`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
       responses:
         "200":
           content:
@@ -6592,6 +6419,13 @@ paths:
           schema:
             type: string
           x-ms-summary: Request a preview size.  Can be `small` (default), `large`, `xlarge`, or `pdf`.
+        - description: Search by field and direction. Valid fields are `path`, `size`, `modified_at_datetime`, `provided_modified_at`.  Valid directions are `asc` and `desc`.  Defaults to `{"path":"asc"}`.
+          in: query
+          name: sort_by
+          required: false
+          schema:
+            type: object
+          x-ms-summary: Search by field and direction. Valid fields are `path`, `size`, `modified_at_datetime`, `provided_modified_at`.  Valid directions are `asc` and `desc`.  Defaults to `{"path":"asc"}`.
         - description: If `search_all` is `true`, provide the search string here.  Otherwise, this parameter acts like an alias of `filter`.
           in: query
           name: search
@@ -7331,41 +7165,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `name`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `name`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `name`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `name`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `name`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `name`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `name`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `name`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `name`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `name`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `name`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `name`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `name`.
         - description: Comma-separated list of group ids to include in results.
           in: query
           name: ids
@@ -7637,41 +7443,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
         - description: "DEPRECATED: Permission path.  If provided, will scope permissions to this path. Use `filter[path]` instead."
           in: query
           name: path
@@ -7934,9 +7712,9 @@ paths:
                   type: boolean
                   x-ms-summary: Can the user access with FTP/FTPS?
                 grant_permission:
-                  description: Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, or `history`.
+                  description: Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, `read+write`, or `list+write`
                   type: string
-                  x-ms-summary: Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, or `history`.
+                  x-ms-summary: Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, `read+write`, or `list+write`
                 group_ids:
                   description: A list of group ids to associate this user with.  Comma delimited.
                   type: string
@@ -8335,41 +8113,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `user_id`, `folder` or `path`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `user_id`, `folder` or `path`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `user_id`, `folder` or `path`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `user_id`, `folder` or `path`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `user_id`, `folder` or `path`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `user_id`, `folder` or `path`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `user_id`, `folder` or `path`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `user_id`, `folder` or `path`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `user_id`, `folder` or `path`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `user_id`, `folder` or `path`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `user_id`, `folder` or `path`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
       responses:
         "200":
           content:
@@ -9121,14 +8871,6 @@ paths:
       description: List Inbox Recipients
       operationId: GetInboxRecipients
       parameters:
-        - description: User ID.  Provide a value of `0` to operate the current session's user.
-          in: query
-          name: user_id
-          required: false
-          schema:
-            format: int32
-            type: integer
-          x-ms-summary: User ID.  Provide a value of `0` to operate the current session's user.
         - description: "Used for pagination.  When a list request has more records available, cursors are provided in the response headers `X-Files-Cursor-Next` and `X-Files-Cursor-Prev`.  Send one of those cursor value here to resume an existing list from the next available record.  Note: many of our SDKs have iterator methods that will automatically handle cursor-based pagination."
           in: query
           name: cursor
@@ -9158,41 +8900,6 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_gt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `has_registrations`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `has_registrations`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `has_registrations`.
         - description: List recipients for the inbox with this ID.
           in: query
           name: inbox_id
@@ -9282,15 +8989,11 @@ paths:
                   description: Set to true to share the link with the recipient upon creation.
                   type: boolean
                   x-ms-summary: Set to true to share the link with the recipient upon creation.
-                user_id:
-                  description: User ID.  Provide a value of `0` to operate the current session's user.
-                  format: int32
-                  type: integer
-                  x-ms-summary: User ID.  Provide a value of `0` to operate the current session's user.
               required:
                 - inbox_id
                 - recipient
               type: object
+        required: true
       responses:
         "201":
           content:
@@ -9447,20 +9150,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `created_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lt
@@ -9468,13 +9164,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `created_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `created_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `created_at`.
         - description: InboxRegistration ID
           in: query
           name: inbox_registration_id
@@ -11215,56 +10911,27 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, sort records by the specified field in either `asc` or `desc` direction (e.g. `sort_by[path]=desc`). Valid fields are `path`, `user_id` or `group_id`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `user_id`, `group_id` or `path`.
+        - description: If set, return records where the specified field is equal to the supplied value.
+          in: query
+          name: group_id
+          required: false
+          schema:
+            type: string
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value.
+        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `path`, `user_id` or `group_id`.
           in: query
           name: filter
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `user_id`, `group_id` or `path`.
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `path`, `user_id` or `group_id`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `user_id`, `group_id` or `path`.
-        - description: "DEPRECATED: Show notifications for this Group ID. Use `filter[group_id]` instead."
-          in: query
-          name: group_id
-          required: false
-          schema:
-            format: int32
-            type: integer
-          x-ms-summary: "DEPRECATED: Show notifications for this Group ID. Use `filter[group_id]` instead."
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
         - description: Show notifications for this Path.
           in: query
           name: path
@@ -11862,41 +11529,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
         - description: "DEPRECATED: Permission path.  If provided, will scope permissions to this path. Use `filter[path]` instead."
           in: query
           name: path
@@ -12792,20 +12431,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `logged_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `logged_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `logged_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `logged_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `logged_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `logged_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `logged_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `logged_at`.
           in: query
           name: filter_lt
@@ -12813,13 +12445,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `logged_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `logged_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `logged_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `logged_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `logged_at`.
       responses:
         "200":
           content:
@@ -13746,6 +13378,20 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, sort records by the specified field in either `asc` or `desc` direction (e.g. `sort_by[api_key_id]=desc`). Valid fields are `api_key_id`, `created_at` or `user_id`.
+        - description: If set, return records where the specified field is equal to the supplied value.
+          in: query
+          name: api_key_id
+          required: false
+          schema:
+            type: string
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value.
+        - description: If set, return records where the specified field is equal to the supplied value.
+          in: query
+          name: user_id
+          required: false
+          schema:
+            type: string
+          x-ms-summary: If set, return records where the specified field is equal to the supplied value.
         - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `api_key_id` and `user_id`.
           in: query
           name: filter
@@ -13753,41 +13399,6 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `api_key_id` and `user_id`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `api_key_id` and `user_id`.
-          in: query
-          name: filter_gt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `api_key_id` and `user_id`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `api_key_id` and `user_id`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `api_key_id` and `user_id`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `api_key_id` and `user_id`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `api_key_id` and `user_id`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `api_key_id` and `user_id`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `api_key_id` and `user_id`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `api_key_id` and `user_id`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `api_key_id` and `user_id`.
       responses:
         "200":
           content:
@@ -14522,10 +14133,6 @@ paths:
                   description: Use servers in the USA only?
                   type: boolean
                   x-ms-summary: Use servers in the USA only?
-                overage_notify:
-                  description: Notify site email of overages?
-                  type: boolean
-                  x-ms-summary: Notify site email of overages?
                 password_min_length:
                   description: Shortest password length for users
                   format: int32
@@ -14819,20 +14426,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `expires_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `expires_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `expires_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `expires_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_lt
@@ -14840,13 +14440,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `expires_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `expires_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `expires_at`.
       responses:
         "200":
           content:
@@ -15562,41 +15162,34 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
+        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `date`.
           in: query
           name: filter_gt
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
+          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `date`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `date`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `date`.
+        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `date`.
           in: query
           name: filter_lt
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
+          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `date`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `date`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `date` and `usage_snapshot_id`. Valid field combinations are `[ usage_snapshot_id, date ]`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `date`.
       responses:
         "200":
           content:
@@ -15814,20 +15407,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `expires_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `expires_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `expires_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `expires_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_lt
@@ -15835,13 +15421,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `expires_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `expires_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `expires_at`.
       responses:
         "200":
           content:
@@ -16503,41 +16089,41 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
+        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `password_validity_days`, `last_login_at` or `authenticate_until`.
           in: query
           name: filter_gt
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
+          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `password_validity_days`, `last_login_at` or `authenticate_until`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `password_validity_days`, `last_login_at` or `authenticate_until`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `password_validity_days`, `last_login_at` or `authenticate_until`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `username`, `email` or `company`.
           in: query
-          name: filter_like
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `username`, `email` or `company`.
+        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `password_validity_days`, `last_login_at` or `authenticate_until`.
           in: query
           name: filter_lt
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
+          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `password_validity_days`, `last_login_at` or `authenticate_until`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `password_validity_days`, `last_login_at` or `authenticate_until`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `username`, `email`, `company`, `site_admin`, `password_validity_days`, `ssl_required`, `last_login_at`, `authenticate_until` or `not_site_admin`. Valid field combinations are `[ not_site_admin, username ]`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `password_validity_days`, `last_login_at` or `authenticate_until`.
         - description: comma-separated list of User IDs
           in: query
           name: ids
@@ -17085,20 +16671,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `expires_at`.
+        - description: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_gteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `expires_at`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `expires_at`.
+          x-ms-summary: If set, return records where the specified field is greater than or equal the supplied value. Valid fields are `expires_at`.
         - description: If set, return records where the specified field is less than the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_lt
@@ -17106,13 +16685,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `expires_at`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `expires_at`.
+        - description: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `expires_at`.
           in: query
           name: filter_lteq
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `expires_at`.
+          x-ms-summary: If set, return records where the specified field is less than or equal the supplied value. Valid fields are `expires_at`.
       responses:
         "200":
           content:
@@ -17453,41 +17032,13 @@ paths:
           schema:
             type: object
           x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is greater than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
+        - description: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
           in: query
-          name: filter_gt
+          name: filter_prefix
           required: false
           schema:
             type: object
-          x-ms-summary: If set, return records where the specified field is greater than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_gteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is greater than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_like
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is less than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_lt
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-        - description: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
-          in: query
-          name: filter_lteq
-          required: false
-          schema:
-            type: object
-          x-ms-summary: If set, return records where the specified field is less than or equal to the supplied value. Valid fields are `group_id`, `user_id` or `path`. Valid field combinations are `[ group_id, path ]` and `[ user_id, path ]`.
+          x-ms-summary: If set, return records where the specified field is prefixed by the supplied value. Valid fields are `path`.
         - description: "DEPRECATED: Permission path.  If provided, will scope permissions to this path. Use `filter[path]` instead."
           in: query
           name: path
@@ -17983,9 +17534,9 @@ components:
                 type: boolean
                 x-ms-summary: Can the user access with FTP/FTPS?
               grant_permission:
-                description: Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, or `history`.
+                description: Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, `read+write`, or `list+write`
                 type: string
-                x-ms-summary: Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, or `history`.
+                x-ms-summary: Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, `read+write`, or `list+write`
               group_id:
                 description: Group ID to associate this user with.
                 format: int32
@@ -19483,6 +19034,10 @@ components:
           example: 1
           format: int32
           type: integer
+        enable_dedicated_ips:
+          description: "`true` if remote server only accepts connections from dedicated IPs"
+          example: true
+          type: boolean
         hex_public_certificate_serial:
           description: Serial of public certificate used for message security in hex format.
           example: A5:EB:C1:95:DC:D8:2B:E7
@@ -19680,6 +19235,11 @@ components:
           description: Path on which this Automation runs.  Supports globs.
           example: example
           type: string
+        recurring_day:
+          description: "If trigger type is `daily`, this specifies a day number to run in one of the supported intervals: `week`, `month`, `quarter`, `year`."
+          example: 25
+          format: int32
+          type: integer
         schedule:
           description: If trigger is `custom_schedule`, Custom schedule description for when the automation should be run.
           example: example
@@ -20140,7 +19700,7 @@ components:
           example: "{{name}}_{{ip}}"
           type: string
         paths:
-          description: A list of paths in this bundle
+          description: A list of paths in this bundle.  For performance reasons, this is not provided when listing bundles.
           example:
             - file.txt
           items:
@@ -20760,6 +20320,10 @@ components:
           description: Reference name for this upload part
           example: upload-1
           type: string
+        retry_parts:
+          description: If `true`, parts may be retried. If `false`, a part cannot be retried and the upload should be restarted.
+          example: true
+          type: boolean
         send:
           description: Content-Type and File to send
           example:
@@ -22686,15 +22250,6 @@ components:
           description: Use servers in the USA only?
           example: true
           type: boolean
-        overage_notified_at:
-          description: Last time the site was notified about an overage
-          example: 2000-01-01T01:00:00Z
-          format: date-time
-          type: string
-        overage_notify:
-          description: Notify site email of overages?
-          example: true
-          type: boolean
         overdue:
           description: Is this site's billing overdue?
           example: true
@@ -23856,7 +23411,7 @@ x-behaviors:
           - "*.pdf"
           - "*so*.jpg"
         name: triggering_filenames
-      - description: May be `JSON`, `XML`, or `RAW`.  If set to `RAW` or left blank, we will deliver the webhook using the HTTP GET params or POST body.  If JSON or XML, we will encode the payload accordingly and send a matching `Content-Type` header.
+      - description: May be `JSON`, `XML`, `RAW`, `EV1`, or `EV2`.  If set to `RAW` or left blank, we will deliver the webhook using the HTTP GET params or POST body.  If JSON or XML, we will encode the payload accordingly and send a matching `Content-Type` header.  If set to EV1, we will encode the payload to emulate ExaVault's version 1 webhook format.  If set to EV2, we will encode the payload to emulate ExaVault's version 2.0 webhook format.
         example: RAW
         name: encoding
       - description: Hash of HTTP Headers to send.
@@ -23867,6 +23422,9 @@ x-behaviors:
         example:
           MY_BODY_PARAM: bar
         name: body
+      - description: If provided, this token will be used to sign webhook messages cryptographically to allow you to verify the webhook authenticity.
+        example: tok12345
+        name: verification_token
       - description: A string specifying the name of a form field containing the contents of the file that triggered this webhook send. If this value is present, the webhook will submit a `multipart/form-data` POST with no request body encoding.
         example: my_form_field
         name: file_form_field
@@ -24122,7 +23680,7 @@ x-behaviors:
           - john@test.com
           - mydomain.com
         name: whitelist
-    visible_to_non_admins: true
+    visible_to_non_admins: false
   - behavior: append_timestamp
     children_can_add: false
     children_can_override: false
@@ -24371,11 +23929,17 @@ x-errors:
     title: Invalid Etags
     type: bad-request/invalid-etags
   - http-code: 400
+    title: Invalid Filter Alias Combination
+    type: bad-request/invalid-filter-alias-combination
+  - http-code: 400
     title: Invalid Filter Combination
     type: bad-request/invalid-filter-combination
   - http-code: 400
     title: Invalid Filter Field
     type: bad-request/invalid-filter-field
+  - http-code: 400
+    title: Invalid Filter Param
+    type: bad-request/invalid-filter-param
   - http-code: 400
     title: Invalid Input Encoding
     type: bad-request/invalid-input-encoding

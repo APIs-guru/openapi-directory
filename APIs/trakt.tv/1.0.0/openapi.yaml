@@ -382,6 +382,7 @@ info:
     | `C++` | `libtraqt` | https://github.com/RobertMe/libtraqt |
     | `Clojure` | `clj-trakt` | https://github.com/niamu/clj-trakt |
     | `Java` | `trakt-java` | https://github.com/UweTrottmann/trakt-java |
+    | `Kotlin` | `trakt-api` | https://github.com/MoviebaseApp/trakt-api |
     | `Node.js` | `Trakt.tv` | https://github.com/vankasteelj/trakt.tv |
     |  | `TraktApi2` | https://github.com/PatrickE94/traktapi2 |
     | `Python` | `trakt.py` | https://github.com/fuzeman/trakt.py |
@@ -1601,6 +1602,7 @@ paths:
         | Key | Type |
         |---|---|
         | `twitter` | boolean |
+        | `mastodon` | boolean |
         | `tumblr` | boolean |
 
         **Note:** If a checkin is already in progress, a `409` HTTP status code will returned. The response will contain an `expires_at` timestamp which is when the user can check in again.
@@ -1637,6 +1639,7 @@ paths:
                   title: Guardians of the Galaxy
                   year: 2014
                 sharing:
+                  mastodon: true
                   tumblr: false
                   twitter: true
               properties:
@@ -1666,6 +1669,8 @@ paths:
                   type: object
                 sharing:
                   properties:
+                    mastodon:
+                      type: boolean
                     tumblr:
                       type: boolean
                     twitter:
@@ -1690,6 +1695,7 @@ paths:
                       title: Light the Fire of Shandia! Wiper the Warrior
                     id: 3373536622
                     sharing:
+                      mastodon: true
                       tumblr: false
                       twitter: true
                     show:
@@ -2090,6 +2096,7 @@ paths:
                         likes: 0
                         name: Star Wars
                         privacy: public
+                        share_link: https://trakt.tv/lists/51
                         updated_at: 2015-04-22T22:01:39.000Z
                       type: list
           description: OK
@@ -2346,6 +2353,7 @@ paths:
                         likes: 0
                         name: Star Wars
                         privacy: public
+                        share_link: https://trakt.tv/lists/51
                         updated_at: 2015-04-22T22:01:39.000Z
                       type: list
           description: OK
@@ -2602,6 +2610,7 @@ paths:
                         likes: 0
                         name: Star Wars
                         privacy: public
+                        share_link: https://trakt.tv/lists/51
                         updated_at: 2015-04-22T22:01:39.000Z
                       type: list
           description: OK
@@ -3405,6 +3414,7 @@ paths:
                         likes: 109
                         name: Top Chihuahua Movies
                         privacy: public
+                        share_link: https://trakt.tv/lists/1338
                         sort_by: rank
                         sort_how: asc
                         type: personal
@@ -3432,6 +3442,7 @@ paths:
                         likes: 99
                         name: Incredible Thoughts
                         privacy: public
+                        share_link: https://trakt.tv/lists/1337
                         sort_by: rank
                         sort_how: asc
                         type: personal
@@ -3505,6 +3516,7 @@ paths:
                         likes: 99
                         name: Incredible Thoughts
                         privacy: public
+                        share_link: https://trakt.tv/lists/1337
                         sort_by: rank
                         sort_how: asc
                         type: personal
@@ -3532,6 +3544,7 @@ paths:
                         likes: 109
                         name: Top Chihuahua Movies
                         privacy: public
+                        share_link: https://trakt.tv/lists/1338
                         sort_by: rank
                         sort_how: asc
                         type: personal
@@ -3611,6 +3624,7 @@ paths:
                     likes: 0
                     name: Star Wars in machete order
                     privacy: public
+                    share_link: https://trakt.tv/lists/55
                     sort_by: rank
                     sort_how: asc
                     type: personal
@@ -5424,6 +5438,7 @@ paths:
                       likes: 99
                       name: Incredible Thoughts
                       privacy: public
+                      share_link: https://trakt.tv/lists/1337
                       sort_by: rank
                       sort_how: asc
                       type: personal
@@ -6984,6 +6999,7 @@ paths:
                       likes: 99
                       name: Incredible Thoughts
                       privacy: public
+                      share_link: https://trakt.tv/lists/1337
                       sort_by: rank
                       sort_how: asc
                       type: personal
@@ -7177,6 +7193,8 @@ paths:
         #### &#128274; OAuth Required &#10024; Extended Info
 
         Movie recommendations for a user. By default, `10` results are returned. You can send a `limit` to get up to `100` results per page. Set `ignore_collected=true` to filter out movies the user has already collected or `ignore_watchlisted=true` to filter out movies the user has already watchlisted.
+
+        The `recommended_by` array contains all users who recommended the item along with any notes they added.
       operationId: Get movie recommendations
       parameters:
         - description: filter out collected movies
@@ -7225,6 +7243,16 @@ paths:
                         slug: blackfish-2013
                         tmdb: 158999
                         trakt: 58
+                      recommended_by:
+                        - notes: This is a great documentary about killer whales.
+                          user:
+                            ids:
+                              slug: sean
+                            name: Justin Nemeth
+                            private: false
+                            username: justin
+                            vip: true
+                            vip_ep: false
                       title: Blackfish
                       year: 2013
                     - ids:
@@ -7232,6 +7260,7 @@ paths:
                         slug: waiting-for-superman-2010
                         tmdb: 39440
                         trakt: 289
+                      recommended_by: []
                       title: Waiting for Superman
                       year: 2010
                     - ids:
@@ -7239,6 +7268,7 @@ paths:
                         slug: inside-job-2010
                         tmdb: 44639
                         trakt: 329
+                      recommended_by: []
                       title: Inside Job
                       year: 2010
                     - ids:
@@ -7246,6 +7276,7 @@ paths:
                         slug: school-of-rock-2003
                         tmdb: 1584
                         trakt: 503
+                      recommended_by: []
                       title: School of Rock
                       year: 2003
                     - ids:
@@ -7253,6 +7284,7 @@ paths:
                         slug: the-lincoln-lawyer-2011
                         tmdb: 50348
                         trakt: 513
+                      recommended_by: []
                       title: The Lincoln Lawyer
                       year: 2011
                     - ids:
@@ -7260,6 +7292,7 @@ paths:
                         slug: the-change-up-2011
                         tmdb: 49520
                         trakt: 822
+                      recommended_by: []
                       title: The Change-Up
                       year: 2011
                     - ids:
@@ -7267,6 +7300,7 @@ paths:
                         slug: 50-50-2011
                         tmdb: 40807
                         trakt: 907
+                      recommended_by: []
                       title: 50/50
                       year: 2011
                     - ids:
@@ -7274,6 +7308,7 @@ paths:
                         slug: moneyball-2011
                         tmdb: 60308
                         trakt: 945
+                      recommended_by: []
                       title: Moneyball
                       year: 2011
                     - ids:
@@ -7281,6 +7316,7 @@ paths:
                         slug: killer-at-large-2008
                         tmdb: 37312
                         trakt: 3549
+                      recommended_by: []
                       title: Killer at Large
                       year: 2008
                     - ids:
@@ -7288,6 +7324,7 @@ paths:
                         slug: green-day-bullet-in-a-bible-2005
                         tmdb: 26627
                         trakt: 3770
+                      recommended_by: []
                       title: "Green Day: Bullet in a Bible"
                       year: 2005
           description: OK
@@ -7347,6 +7384,8 @@ paths:
         #### &#128274; OAuth Required &#10024; Extended Info
 
         TV show recommendations for a user. By default, `10` results are returned. You can send a `limit` to get up to `100` results per page. Set `ignore_collected=true` to filter out shows the user has already collected or `ignore_watchlisted=true` to filter out shows the user has already watchlisted.
+
+        The `recommended_by` array contains all users who recommended the item along with any notes they added.
       operationId: Get show recommendations
       parameters:
         - description: filter out collected shows
@@ -7396,6 +7435,16 @@ paths:
                         tmdb: 579
                         trakt: 9
                         tvdb: 75166
+                      recommended_by:
+                        - notes: This show is inspiring!
+                          user:
+                            ids:
+                              slug: sean
+                            name: Justin Nemeth
+                            private: false
+                            username: justin
+                            vip: true
+                            vip_ep: false
                       title: The Biggest Loser
                       year: 2004
                     - ids:
@@ -7404,6 +7453,7 @@ paths:
                         tmdb: 30703
                         trakt: 36
                         tvdb: 100981
+                      recommended_by: []
                       title: Shark Tank
                       year: 2009
                     - ids:
@@ -7412,6 +7462,7 @@ paths:
                         tmdb: 2370
                         trakt: 40
                         tvdb: 74897
+                      recommended_by: []
                       title: Hell's Kitchen
                       year: 2005
                     - ids:
@@ -7420,6 +7471,7 @@ paths:
                         tmdb: 32406
                         trakt: 51
                         tvdb: 161501
+                      recommended_by: []
                       title: The Big C
                       year: 2010
                     - ids:
@@ -7428,6 +7480,7 @@ paths:
                         tmdb: 7097
                         trakt: 69
                         tvdb: 83463
+                      recommended_by: []
                       title: United States of Tara
                       year: 2009
                     - ids:
@@ -7436,6 +7489,7 @@ paths:
                         tmdb: 18614
                         trakt: 168
                         tvdb: 82091
+                      recommended_by: []
                       title: Hung
                       year: 2009
                     - ids:
@@ -7444,6 +7498,7 @@ paths:
                         tmdb: 4392
                         trakt: 272
                         tvdb: 74156
+                      recommended_by: []
                       title: Big Love
                       year: 2006
                     - ids:
@@ -7452,6 +7507,7 @@ paths:
                         tmdb: 48891
                         trakt: 599
                         tvdb: 269586
+                      recommended_by: []
                       title: Brooklyn Nine-Nine
                       year: 2013
                     - ids:
@@ -7460,6 +7516,7 @@ paths:
                         tmdb: 19092
                         trakt: 677
                         tvdb: 84024
+                      recommended_by: []
                       title: FlashForward
                       year: 2009
                     - ids:
@@ -7468,6 +7525,7 @@ paths:
                         tmdb: 4624
                         trakt: 717
                         tvdb: 73965
+                      recommended_by: []
                       title: Roswell
                       year: 1999
           description: OK
@@ -7613,6 +7671,7 @@ paths:
                       year: 2014
                     progress: 75
                     sharing:
+                      mastodon: false
                       tumblr: false
                       twitter: false
           description: Created
@@ -7717,6 +7776,7 @@ paths:
                     id: 0
                     progress: 10
                     sharing:
+                      mastodon: true
                       tumblr: false
                       twitter: true
                     show:
@@ -7836,6 +7896,7 @@ paths:
                       year: 2014
                     progress: 75
                     sharing:
+                      mastodon: true
                       tumblr: false
                       twitter: false
           description: Created
@@ -8128,6 +8189,7 @@ paths:
                         likes: 6
                         name: Open Your Eyes
                         privacy: public
+                        share_link: https://trakt.tv/lists/2180135
                         sort_by: rank
                         sort_how: asc
                         type: personal
@@ -9715,6 +9777,7 @@ paths:
                       likes: 99
                       name: Incredible Thoughts
                       privacy: public
+                      share_link: https://trakt.tv/lists/1337
                       sort_by: rank
                       sort_how: asc
                       type: personal
@@ -11584,6 +11647,7 @@ paths:
                       likes: 99
                       name: Incredible Thoughts
                       privacy: public
+                      share_link: https://trakt.tv/lists/1337
                       sort_by: rank
                       sort_how: asc
                       type: personal
@@ -12140,6 +12204,7 @@ paths:
                       likes: 99
                       name: Incredible Thoughts
                       privacy: public
+                      share_link: https://trakt.tv/lists/1337
                       sort_by: rank
                       sort_how: asc
                       type: personal
@@ -16161,6 +16226,7 @@ paths:
                       dropbox: false
                       facebook: false
                       google: true
+                      mastodon: true
                       medium: false
                       microsoft: false
                       slack: false
@@ -16671,6 +16737,7 @@ paths:
                         likes: 0
                         name: Star Wars
                         privacy: public
+                        share_link: https://trakt.tv/lists/51
                         updated_at: 2015-04-22T22:01:39.000Z
                       type: list
           description: |-
@@ -17187,6 +17254,7 @@ paths:
                         likes: 0
                         name: Star Wars in NEW machete order
                         privacy: private
+                        share_link: https://trakt.tv/lists/55
                         updated_at: 2014-10-11T17:00:54.000Z
                         user:
                           ids:
@@ -17267,6 +17335,7 @@ paths:
                       likes: 0
                       name: Star Wars in machete order
                       privacy: public
+                      share_link: https://trakt.tv/lists/55
                       sort_by: rank
                       sort_how: asc
                       type: personal
@@ -17282,7 +17351,8 @@ paths:
                       item_count: 5
                       likes: 0
                       name: Vampires FTW
-                      privacy: public
+                      privacy: link
+                      share_link: https://trakt.tv/lists/share/83cea6a8252e6ec9cc74e72ce9d8fde7
                       sort_by: rank
                       sort_how: asc
                       type: personal
@@ -17302,13 +17372,24 @@ paths:
 
         If the user's list limit is exceeded, a `420` HTTP error code is returned. Use the [**/users/settings**](/reference/users/settings) method to get all limits for a user account. In most cases, upgrading to [**Trakt VIP**](https://trakt.tv/vip) will increase the limits.
 
+        #### Privacy
+
+        Lists will be `private` by default. Here is what each value means.
+
+        | Value | Privacy impact... |
+        |---|---|
+        | `private` | Only you can see the list. |
+        | `link` | Anyone with the `share_link` can see the list. |
+        | `friends` | Only your friends can see the list. |
+        | `public` | Anyone can see the list. |
+
         #### JSON POST Data
 
         | Key | Type | Default | Value |
         |---|---|---|---|
         | `name` <span style="color:red;">*</a> | string |  | Name of the list. |
         | `description` | string |  | Description for this list. |
-        | `privacy` | string | `private` | `private`, `friends`, `public` |
+        | `privacy` | string | `private` | `private`, `link`, `friends`, `public` |
         | `display_numbers` | boolean | `false` | Should each item be numbered? |
         | `allow_comments` | boolean | `true` | Are comments allowed? |
         | `sort_by` | string | `rank` | `rank`, `added`, `title`, `released`, `runtime`, `popularity`, `percentage`, `votes`, `my_rating`, `random`, `watched`, `collected` |
@@ -17382,6 +17463,7 @@ paths:
                     likes: 0
                     name: Star Wars in machete order
                     privacy: public
+                    share_link: https://trakt.tv/lists/55
                     sort_by: rank
                     sort_how: asc
                     type: personal
@@ -17453,6 +17535,7 @@ paths:
                       likes: 1
                       name: Our Favorite Movies
                       privacy: private
+                      share_link: https://trakt.tv/lists/2612438
                       sort_by: rank
                       sort_how: asc
                       type: personal
@@ -17633,6 +17716,7 @@ paths:
                     likes: 0
                     name: Star Wars in machete order
                     privacy: public
+                    share_link: https://trakt.tv/lists/55
                     sort_by: rank
                     sort_how: asc
                     type: personal
@@ -17662,13 +17746,24 @@ paths:
 
         Update a personal list by sending 1 or more parameters. If you update the list name, the original slug will still be retained so existing references to this list won't break.
 
+        #### Privacy
+
+        Lists will be `private` by default. Here is what each value means.
+
+        | Value | Privacy impact... |
+        |---|---|
+        | `private` | Only you can see the list. |
+        | `link` | Anyone with the `share_link` can see the list. |
+        | `friends` | Only your friends can see the list. |
+        | `public` | Anyone can see the list. |
+
         #### JSON POST Data
 
         | Key | Type | Value |
         |---|---|---|---|
         | `name` | string | Name of the list. |
         | `description` | string | Description for this list. |
-        | `privacy` | string | `private`, `friends`, `public` |
+        | `privacy` | string | `private`, `link`, `friends`, `public` |
         | `display_numbers` | boolean | Should each item be numbered? |
         | `allow_comments` | boolean | Are comments allowed? |
         | `sort_by` | string | `rank`, `added`, `title`, `released`, `runtime`, `popularity`, `percentage`, `votes`, `my_rating`, `random`, `watched`, `collected` |
@@ -17742,6 +17837,7 @@ paths:
                     likes: 0
                     name: Star Wars in NEW machete order
                     privacy: private
+                    share_link: https://trakt.tv/lists/55
                     sort_by: rank
                     sort_how: asc
                     type: personal

@@ -440,7 +440,7 @@ paths:
     get:
       deprecated: true
       description: Retrieve a list of transactions against an account. Recommended to use the v3 endpoint instead.
-      operationId: getTransactionsByIdv1
+      operationId: getTransactionsByAccountIdv1
       parameters:
         - in: path
           name: ican
@@ -472,10 +472,12 @@ paths:
                   dateRangeTo:
                     description: milisecond timestamp of date range to value.
                     example: 1547744156603
+                    format: int64
                     type: integer
                   total:
                     description: The total number of card transactions in the list.
                     example: 1
+                    format: int64
                     type: integer
                   transactions:
                     items:
@@ -974,7 +976,7 @@ paths:
         * `searchKeyword` - Search term to filter by from the reference field (`myRef`).
         * `transactionTypes` - One or more of the transaction types above. This field can be repeated multiple times to allow for multiple transaction types.
         * `offset` - The page offset. Defaults to 0. This is the record number that the returned list will start at. E.g. offset = 40 and limit = 20 will return records 40 to 59.
-      operationId: getTransactionsFilteredById
+      operationId: getTransactionsByAccountIdFiltered
       parameters:
         - in: path
           name: ican
@@ -1027,10 +1029,12 @@ paths:
                   dateRangeTo:
                     description: milisecond timestamp of date range to value.
                     example: 1547744156603
+                    format: int64
                     type: integer
                   total:
                     description: The total number of card transactions in the list.
                     example: 1
+                    format: int64
                     type: integer
                   transactions:
                     items:
@@ -1816,10 +1820,11 @@ paths:
         - in: query
           name: batchTypes
           schema:
-            description: The type of the batch. Can be one of the 3 listed enums.
+            description: The type of the batch. Can be one of the listed enums.
             enum:
               - INTERNAL_TRANSFER
               - BANK_TRANSFER
+              - INTERNATIONAL_TRANSFER
               - NEW_PAYEE
             example: INTERNAL_TRANSFER
             type: string
@@ -1995,7 +2000,7 @@ paths:
                   example: https://my.webserver.com/cb/payroll
                   type: string
                 currency:
-                  description: GBP or EUR
+                  description: 3 digit ISO code for the currency you wish to send - GBP, EUR, USD, CAD, etc...
                   example: EUR
                   type: string
                 jobNumber:
@@ -2007,6 +2012,7 @@ paths:
                   enum:
                     - BANK_TRANSFER
                     - INTERNAL_TRANSFER
+                    - INTERNATIONAL_TRANSFER
                   type: string
               title: newBatch
               type: object
@@ -2076,8 +2082,8 @@ paths:
                     example: https://my.webserver.com/cb/payroll
                     type: string
                   currency:
-                    description: All payments in the batch must be the same currency - either EUR or GBP
-                    example: EUR
+                    description: All payments in the batch must be the same currency.
+                    example: EUR, GBP, USD
                     type: string
                   dateCreated:
                     description: The datestamp the batch was created - ISO format - e.g. 2018-04-04T00:53:21.910Z
@@ -2126,10 +2132,11 @@ paths:
                     example: COMPLETE
                     type: string
                   type:
-                    description: The type of the batch - can be one of the listed 3
+                    description: The type of the batch - can be one of the listed enums
                     enum:
                       - INTERNAL_TRANSFER
                       - BANK_TRANSFER
+                      - INTERNATIONAL_TRANSFER
                       - NEW_PAYEE
                     type: string
                   valueOfItemsFailed:
@@ -2155,7 +2162,7 @@ paths:
         - Payment Batches
     put:
       description: |
-        Submits the Batch (for approval in the case of a **BANK_TRANSFER**). If this is an **INTERNAL_TRANSFER** batch, the transfers are immediately queued for processing. If this is a **BANK_TRANSFER** batch, this will trigger requests for approval to the firework mobile apps of authorised users. Once those users approve the batch, it is queued for processing.
+        Submits the Batch (for approval in the case of a **BANK_TRANSFER** or **INTERNATIONAL_TRANSFER**). If this is an **INTERNAL_TRANSFER** batch, the transfers are immediately queued for processing. If this is a **BANK_TRANSFER** or **INTERNATIONAL_TRANSFER** batch, this will trigger requests for approval to the firework mobile apps of authorised users. Once those users approve the batch, it is queued for processing.
 
         You can only submit a batch while it is in the OPEN state.
       operationId: submitBatch
@@ -2347,7 +2354,7 @@ paths:
                 title: batchItems
                 type: object
           description: A fire.com list object of Batch Items (Internal transfers or Bank transfers).
-      summary: List items in a Batch
+      summary: List items in a Batch (Bank Transfers)
       tags:
         - Payment Batches
     post:
@@ -2607,7 +2614,7 @@ paths:
                 title: batchItems
                 type: object
           description: A fire.com list object of Batch Items (Internal transfers or Bank transfers).
-      summary: List items in a Batch
+      summary: List items in a Batch (Internal Transfers)
       tags:
         - Payment Batches
     post:
@@ -2908,10 +2915,12 @@ paths:
                     dateRangeTo:
                       description: milisecond timestamp of date range to value.
                       example: 1547744156603
+                      format: int64
                       type: integer
                     total:
                       description: The total number of card transactions in the list.
                       example: 1
+                      format: int64
                       type: integer
                     transactions:
                       items:
@@ -4914,11 +4923,223 @@ paths:
       summary: Returns list of all users on your fire.com account
       tags:
         - Users
+  "/v2/batches/{batchUuid}/internationaltransfers":
+    get:
+      description: Returns a paginated list of items in the specified batch.
+      operationId: getItemsBatchInternationalTransfer
+      parameters:
+        - in: path
+          name: batchUuid
+          required: true
+          schema:
+            description: The uuid of the batch.
+            example: 4ADFB67A-0F5B-4A9A-9D74-34437250045C
+            type: string
+        - in: query
+          name: offset
+          schema:
+            description: The page offset. Defaults to 0. This is the record number that the returned list will start at. E.g. offset = 40 and limit = 20 will return records 40 to 59.
+            example: "0"
+            format: int64
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            description: The number of records to return. Defaults to 10 - max is 200.
+            example: "10"
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  items:
+                    items:
+                      properties:
+                        amount:
+                          description: The amount of funds to send. In cent or pence
+                          example: 10000
+                          format: int64
+                          type: integer
+                        amountAfterCharges:
+                          description: The amount of the transfer after fees and taxes. in pence or cent.
+                          example: 10000
+                          format: int64
+                          type: integer
+                        batchItemUuid:
+                          description: A UUID for this item.
+                          example: F2AF3F2B-4406-4199-B249-B354F2CC6019
+                          type: string
+                        dateCreated:
+                          description: The datestamp the batch was created - ISO format - e.g. 2018-04-04T00:53:21.910Z
+                          example: 2021-04-04T10:48:53.540Z
+                          format: date-time
+                          type: string
+                        feeAmount:
+                          description: The fee charged by fire.com for the payment. In pence or cent.
+                          example: 0
+                          format: int64
+                          type: integer
+                        icanFrom:
+                          description: The Fire account ID of the source account.
+                          example: 2150
+                          format: int64
+                          type: integer
+                        icanTo:
+                          description: The Fire account ID for the fire.com account the funds are sent to.
+                          example: 1002
+                          format: int64
+                          type: integer
+                        lastUpdated:
+                          description: The datestamp of the last action on this batch - ISO format - e.g. 2018-04-04T10:48:53.540Z
+                          example: 2021-04-04T10:48:53.540Z
+                          format: date-time
+                          type: string
+                        ref:
+                          description: The reference on the transaction.
+                          example: Testing a transfer via batch
+                          type: string
+                        refId:
+                          description: The ID of the resulting payment in your account. Can be used to retrieve the transaction using the https://api.fire.com/business/v1/accounts/{accountId}/transactions/{refId} endpoint.
+                          example: 123782
+                          format: int64
+                          type: integer
+                        result:
+                          description: The outcome of the attempted transaction.
+                          properties:
+                            code:
+                              example: 500001
+                              format: int64
+                              type: integer
+                            message:
+                              example: SUCCESS
+                              type: string
+                          type: object
+                        status:
+                          description: status of the batch if internal trasnfer
+                          enum:
+                            - SUBMITTED
+                            - REMOVED
+                            - SUCCEEDED
+                            - FAILED
+                          example: SUCCEEDED
+                          type: string
+                        taxAmount:
+                          description: Any taxes/duty collected by fire.com for this payments (e.g. stamp duty etc). In pence or cent.
+                          example: 0
+                          format: int64
+                          type: integer
+                      title: batchItem
+                      type: object
+                    type: array
+                  total:
+                    description: total number of batches returned
+                    example: 1
+                    format: int64
+                    type: integer
+                title: batchItems
+                type: object
+          description: A fire.com list object of Batch Items (Internal transfers, Bank transfers or International transfers).
+      summary: List items in a Batch (International Transfers)
+      tags:
+        - Payment Batches
+    post:
+      description: |
+        International transfers must be added to a batch using the Payee ID (**Mode 1**). Payees must be set up using the web application.
+
+        **Mode 1:** Use the payee IDs of existing approved payees set up against your account. These batches can be approved in the normal manner.
+      operationId: addInternationalTransferBatchPayment
+      parameters:
+        - in: path
+          name: batchUuid
+          required: true
+          schema:
+            description: The uuid of the batch.
+            example: 4ADFB67A-0F5B-4A9A-9D74-34437250045C
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                amount:
+                  description: The value of the payment in the beneficiary currency.
+                  example: 500
+                  format: int64
+                  type: integer
+                icanFrom:
+                  description: The Fire account ID for the fire.com account the funds are taken from.
+                  example: 2001
+                  format: int64
+                  type: integer
+                myRef:
+                  description: The reference on the transaction for your records - not shown to the beneficiary.
+                  example: Payment to John Smith for Consultancy in device.
+                  type: string
+                payeeId:
+                  description: The ID of the existing payee
+                  example: 15002
+                  format: int64
+                  type: integer
+                paymentReason:
+                  description: The reason for the payment, used for transaction monitoring purposes. Must be one of Invoice Payment|Salary/Dividend Payment|Expenses|Savings|Other
+                  example: Invoice Payment, Salary/Dividend Payment
+                  type: string
+                yourRef:
+                  description: The reference on the transaction - displayed on the beneficiary bank statement.
+                  example: ACME LTD - INV 23434
+                  type: string
+              title: batchItemInternationalTransferMode1
+              type: object
+        description: Details of **Mode 1**
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  batchItemUuid:
+                    description: A Batch Item UUID for this item. Note* Do not confuse this for BatchUuid when submitting a batch.
+                    example: fba4a76a-ce51-4fc1-b562-98ec01299e4d
+                    type: string
+                title: newBatchItemResponse
+                type: object
+          description: Batch payment added successfully. **Note*** Please use batchUuid when submitting a batch, not batchItemUuid.
+      summary: Add an international transfer payment to the batch.
+      tags:
+        - Payment Batches
+  "/v2/batches/{batchUuid}/internationaltransfers/{itemUuid}":
+    delete:
+      description: Removes a Payment from the Batch (International Transfers). You can only remove payments before the batch is submitted for approval (while it is in the OPEN state).
+      operationId: deleteInternationalTransferBatchPayment
+      parameters:
+        - in: path
+          name: batchUuid
+          required: true
+          schema:
+            description: The uuid of the batch.
+            example: 4ADFB67A-0F5B-4A9A-9D74-34437250045C
+            type: string
+        - in: path
+          name: itemUuid
+          required: true
+          schema:
+            description: The uuid of the item to remove.
+            type: string
+      responses:
+        "200":
+          description: Batch payment deleted successfully.
+      summary: Remove a Payment from the Batch (International Transfers)
+      tags:
+        - Payment Batches
   "/v3/accounts/{ican}/transactions":
     get:
       description: |
         Retrieve a list of transactions against an account. Initially, use the optional `limit`, `dateRangeFrom` and `dateRangeTo` query params to limit your query, then use the embedded `next` or `prev` links in the response to get newer or older pages.
-      operationId: getTransactionsByIdv3
+      operationId: getTransactionsByAccountIdv3
       parameters:
         - in: path
           name: ican

@@ -348,7 +348,7 @@ components:
       description: Object defining the movie to be rendered
       example:
         comment: MyProject
-        resolution: 640x360
+        resolution: full-hd
         scenes:
           - elements:
               - src: https://example.com/path/to/my/video.mp4
@@ -380,6 +380,14 @@ components:
               - $ref: "#/components/schemas/template"
               - $ref: "#/components/schemas/audio"
               - $ref: "#/components/schemas/voice"
+          type: array
+        exports:
+          description: You can define different types of exports for your movie. Check the <a href="https://json2video.com/docs/tutorial/exports">documentation</a> for more information
+          items:
+            x-export:
+              description: Export type
+              title: export
+              type: object
           type: array
         fps:
           default: 25
