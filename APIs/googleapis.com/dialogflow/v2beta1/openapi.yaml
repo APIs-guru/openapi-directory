@@ -3114,7 +3114,7 @@ components:
           format: byte
           type: string
         agentUri:
-          description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
+          description: The URI to a file containing the exported agent. This field is populated if `agent_uri` is specified in ExportAgentRequest.
           type: string
       type: object
     GoogleCloudDialogflowCxV3ExportFlowResponse:
@@ -3353,7 +3353,7 @@ components:
           type: boolean
       type: object
     GoogleCloudDialogflowCxV3Intent:
-      description: "An intent represents a user's intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent. Next ID: 15"
+      description: An intent represents a user's intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent.
       properties:
         description:
           description: "Human readable description for better understanding an intent like its scope, content, result etc. Maximum character limit: 140 characters."
@@ -4356,7 +4356,7 @@ components:
           format: byte
           type: string
         agentUri:
-          description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
+          description: The URI to a file containing the exported agent. This field is populated if `agent_uri` is specified in ExportAgentRequest.
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1ExportFlowResponse:
@@ -4653,7 +4653,7 @@ components:
           type: boolean
       type: object
     GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase:
-      description: "Represents an example that the agent is trained on to identify the intent. Next ID: 15"
+      description: Represents an example that the agent is trained on to identify the intent.
       properties:
         id:
           description: Output only. The unique identifier of the training phrase.
@@ -8076,6 +8076,9 @@ components:
           description: Configuration of barge-in behavior during the streaming of input audio.
         disableNoSpeechRecognizedEvent:
           description: Only used in Participants.AnalyzeContent and Participants.StreamingAnalyzeContent. If `false` and recognition doesn't return any result, trigger `NO_SPEECH_RECOGNIZED` event to Dialogflow agent.
+          type: boolean
+        enableAutomaticPunctuation:
+          description: Enable automatic punctuation option at the speech backend.
           type: boolean
         enableWordInfo:
           description: If `true`, Dialogflow returns SpeechWordInfo in StreamingRecognitionResult with information about the recognized speech words, e.g. start and end time offsets. If false or unspecified, Speech doesn't return any word-level information.

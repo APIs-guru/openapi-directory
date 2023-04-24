@@ -2961,10 +2961,10 @@ components:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterBetweenFilter"
           description: A filter for numeric or date values between certain values on a dimension or metric.
         fieldName:
-          description: Required. Immutable. The dimension name or metric name to filter.
+          description: Required. Immutable. The dimension name or metric name to filter. If the field name refers to a custom dimension or metric, a scope prefix will be added to the front of the custom dimensions or metric name. For more on scope prefixes or custom dimensions/metrics, reference the [Google Analytics Data API documentation] (https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#custom_dimensions).
           type: string
         inAnyNDayPeriod:
-          description: Optional. If set, specifies the time window for which to evaluate data in number of days. If not set, then audience data is evaluated against lifetime data (i.e., infinite time window). For example, if set to 1 day, only the current day's data is evaluated. The reference point is the current day when at_any_point_in_time is unset or false. It can only be set when Audience scope is ACROSS_ALL_SESSIONS and cannot be greater than 60 days.
+          description: Optional. If set, specifies the time window for which to evaluate data in number of days. If not set, then audience data is evaluated against lifetime data (For example, infinite time window). For example, if set to 1 day, only the current day's data is evaluated. The reference point is the current day when at_any_point_in_time is unset or false. It can only be set when Audience scope is ACROSS_ALL_SESSIONS and cannot be greater than 60 days.
           format: int32
           type: integer
         inListFilter:
@@ -3054,7 +3054,7 @@ components:
           type: string
         eventParameterFilterExpression:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAudienceFilterExpression"
-          description: Optional. If specified, this filter matches events that match both the single event name and the parameter filter expressions. AudienceEventFilter inside the parameter filter expression cannot be set (i.e., nested event filters are not supported). This should be a single and_group of dimension_or_metric_filter or not_expression; ANDs of ORs are not supported. Also, if it includes a filter for "eventCount", only that one will be considered; all the other filters will be ignored.
+          description: Optional. If specified, this filter matches events that match both the single event name and the parameter filter expressions. AudienceEventFilter inside the parameter filter expression cannot be set (For example, nested event filters are not supported). This should be a single and_group of dimension_or_metric_filter or not_expression; ANDs of ORs are not supported. Also, if it includes a filter for "eventCount", only that one will be considered; all the other filters will be ignored.
       type: object
     GoogleAnalyticsAdminV1alphaAudienceEventTrigger:
       description: Specifies an event to log when a user joins the Audience.
@@ -3071,7 +3071,7 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaAudienceFilterClause:
-      description: A clause for defining either a simple or sequence filter. A filter can be inclusive (i.e., users satisfying the filter clause are included in the Audience) or exclusive (i.e., users satisfying the filter clause are excluded from the Audience).
+      description: A clause for defining either a simple or sequence filter. A filter can be inclusive (For example, users satisfying the filter clause are included in the Audience) or exclusive (For example, users satisfying the filter clause are excluded from the Audience).
       properties:
         clauseType:
           description: Required. Specifies whether this is an include or exclude filter clause.
@@ -3101,7 +3101,7 @@ components:
           description: Creates a filter that matches a specific event. This cannot be set on the top level AudienceFilterExpression.
         notExpression:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAudienceFilterExpression"
-          description: A filter expression to be NOT'ed (i.e., inverted, complemented). It can only include a dimension_or_metric_filter. This cannot be set on the top level AudienceFilterExpression.
+          description: A filter expression to be NOT'ed (For example, inverted, complemented). It can only include a dimension_or_metric_filter. This cannot be set on the top level AudienceFilterExpression.
         orGroup:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList"
           description: A list of expressions to OR’ed together. It cannot contain AudienceFilterExpressions with and_group or or_group.
@@ -3140,7 +3140,7 @@ components:
       description: A condition that must occur in the specified step order for this user to match the sequence.
       properties:
         constraintDuration:
-          description: Optional. When set, this step must be satisfied within the constraint_duration of the previous step (i.e., t[i] - t[i-1] <= constraint_duration). If not set, there is no duration requirement (the duration is effectively unlimited). It is ignored for the first step.
+          description: Optional. When set, this step must be satisfied within the constraint_duration of the previous step (For example, t[i] - t[i-1] <= constraint_duration). If not set, there is no duration requirement (the duration is effectively unlimited). It is ignored for the first step.
           format: google-duration
           type: string
         filterExpression:

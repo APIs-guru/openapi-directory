@@ -3800,7 +3800,7 @@ components:
           description: Name of CloudKMS key to use for the encryption of secrets in etcd. Ex. projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key
           type: string
         state:
-          description: Denotes the state of etcd encryption.
+          description: The desired state of etcd encryption.
           enum:
             - UNKNOWN
             - ENCRYPTED
@@ -4957,13 +4957,14 @@ components:
             - SET_NODE_POOL_SIZE
             - SET_NETWORK_POLICY
             - SET_MAINTENANCE_POLICY
+            - RESIZE_CLUSTER
           type: string
         progress:
           $ref: "#/components/schemas/OperationProgress"
           description: Output only. [Output only] Progress information for an operation.
           readOnly: true
         selfLink:
-          description: Server-defined URL for the resource.
+          description: "Server-defined URI for the operation. Example: `https://container.googleapis.com/v1alpha1/projects/123/locations/us-central1/operations/operation-123`."
           type: string
         startTime:
           description: "[Output only] The time the operation started, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format."
@@ -4982,7 +4983,7 @@ components:
           readOnly: true
           type: string
         targetLink:
-          description: Server-defined URL for the target of the operation.
+          description: "Server-defined URI for the target of the operation. The format of this is a URI to the resource being modified (such as a cluster, node pool, or node). For node pool repairs, there may be multiple nodes being repaired, but only one will be the target. Examples: - `https://container.googleapis.com/v1beta1/projects/123/locations/us-central1/clusters/my-cluster` - `https://container.googleapis.com/v1beta1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np` - `https://container.googleapis.com/v1beta1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`"
           type: string
         zone:
           description: The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation is taking place. This field is deprecated, use location instead.

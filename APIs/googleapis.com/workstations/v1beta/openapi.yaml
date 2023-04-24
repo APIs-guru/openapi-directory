@@ -110,12 +110,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: If set, and the config is not found, a new config will be created. In this situation, update_mask is ignored.
+        - description: If set and the workstation configuration is not found, a new workstation configuration is created. In this situation, update_mask is ignored.
           in: query
           name: allowMissing
           schema:
             type: boolean
-        - description: Required. Mask specifying which fields in the config should be updated.
+        - description: Required. Mask specifying which fields in the workstation configuration should be updated.
           in: query
           name: updateMask
           schema:
@@ -470,7 +470,7 @@ paths:
           name: validateOnly
           schema:
             type: boolean
-        - description: Required. ID to use for the config.
+        - description: Required. ID to use for the workstation configuration.
           in: query
           name: workstationConfigId
           schema:
@@ -543,7 +543,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/workstations":
     get:
-      description: Returns all Workstations using the specified config.
+      description: Returns all Workstations using the specified workstation configuration.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.workstations.list
       parameters:
         - description: Required. Parent resource name.
@@ -629,7 +629,7 @@ paths:
         - projects
   "/v1beta/{parent}/workstations:listUsable":
     get:
-      description: Returns all Workstations using the specified config on which the caller has the "workstations.workstations.use" permission.
+      description: Returns all workstations using the specified workstation configuration on which the caller has the "workstations.workstations.use" permission.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.workstations.listUsable
       parameters:
         - description: Required. Parent resource name.
@@ -985,7 +985,7 @@ components:
           description: Environment variables passed to the container.
           type: object
         image:
-          description: Docker image defining the container. This image must be accessible by the config's service account.
+          description: Docker image defining the container. This image must be accessible by the service account specified in the workstation configuration.
           type: string
         runAsUser:
           description: If set, overrides the USER specified in the image with the given uid.
@@ -1049,7 +1049,7 @@ components:
           format: int32
           type: integer
         serviceAccount:
-          description: Email address of the service account that will be used on VM instances used to support this config. If not set, VMs will run with a Google-managed service account. This service account must have permission to pull the specified container image, otherwise the image must be publicly accessible.
+          description: Email address of the service account used on VM instances used to support this configuration. If not set, VMs run with a Google-managed service account. This service account must have permission to pull the specified container image; otherwise, the image must be publicly accessible.
           type: string
         shieldedInstanceConfig:
           $ref: "#/components/schemas/GceShieldedInstanceConfig"
@@ -1431,7 +1431,7 @@ components:
           description: Environment variables passed to the workstation container.
           type: object
         etag:
-          description: Checksum computed by the server. May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
+          description: Checksum computed by the server. May be sent on update and delete requests to make sure that the client has an up-to-date value before proceeding.
           type: string
         host:
           description: Output only. Host to which clients can send HTTPS traffic that will be received by the workstation. Authorized traffic will be received to the workstation as HTTP on port 80. To send traffic to a different port, clients may prefix the host with the destination port in the format `{port}-{host}`.
@@ -1484,7 +1484,7 @@ components:
           readOnly: true
           type: array
         controlPlaneIp:
-          description: Output only. The private IP address of the control plane for this cluster. Workstation VMs need access to this IP address to work with the service, so please ensure your firewall rules allow egress from the Workstation VMs to this address.
+          description: Output only. The private IP address of the control plane for this cluster. Workstation VMs need access to this IP address to work with the service, so make sure that your firewall rules allow egress from the workstation VMs to this address.
           readOnly: true
           type: string
         createTime:
@@ -1505,7 +1505,7 @@ components:
           description: Human-readable name for this resource.
           type: string
         etag:
-          description: Checksum computed by the server. May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
+          description: Checksum computed by the server. May be sent on update and delete requests to make sure that the client has an up-to-date value before proceeding.
           type: string
         labels:
           additionalProperties:
@@ -1577,9 +1577,9 @@ components:
           type: boolean
         encryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
-          description: Immutable. Encrypts resources of this workstation configuration using a customer-managed encryption key. If specified, the boot disk of the Compute Engine instance and the persistent disk are encrypted using this encryption key. If this field is not set, the disks are encrypted using a generated key. Customer-managed encryption keys do not protect disk metadata. If the customer-managed encryption key is rotated, when the workstation instance is stopped, the system attempts to recreate the persistent disk with the new version of the key. Be sure to keep older versions of the key until the persistent disk is recreated. Otherwise, data on the persistent disk will be lost. If the encryption key is revoked, the workstation session will automatically be stopped within 7 hours. Immutable after workstation config is created.
+          description: Immutable. Encrypts resources of this workstation configuration using a customer-managed encryption key. If specified, the boot disk of the Compute Engine instance and the persistent disk are encrypted using this encryption key. If this field is not set, the disks are encrypted using a generated key. Customer-managed encryption keys do not protect disk metadata. If the customer-managed encryption key is rotated, when the workstation instance is stopped, the system attempts to recreate the persistent disk with the new version of the key. Be sure to keep older versions of the key until the persistent disk is recreated. Otherwise, data on the persistent disk will be lost. If the encryption key is revoked, the workstation session will automatically be stopped within 7 hours. Immutable after the workstation configuration is created.
         etag:
-          description: Checksum computed by the server. May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
+          description: Checksum computed by the server. May be sent on update and delete requests to make sure that the client has an up-to-date value before proceeding.
           type: string
         host:
           $ref: "#/components/schemas/Host"
