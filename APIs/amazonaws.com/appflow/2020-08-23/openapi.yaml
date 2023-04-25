@@ -2821,7 +2821,7 @@ components:
     AuthCode:
       type: string
       pattern: \S+
-      maxLength: 2048
+      maxLength: 4096
     AuthCodeUrl:
       type: string
       pattern: '^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'
@@ -5806,7 +5806,7 @@ components:
     RefreshToken:
       type: string
       pattern: \S+
-      maxLength: 2048
+      maxLength: 4096
     OAuthScopeList:
       type: array
       items:
