@@ -262,6 +262,14 @@ components:
             - PRIORITY_HIGH
             - PRIORITY_MAX
           type: string
+        proxy:
+          description: Setting to control when a notification may be proxied.
+          enum:
+            - PROXY_UNSPECIFIED
+            - ALLOW
+            - DENY
+            - IF_PRIORITY_LOWERED
+          type: string
         sound:
           description: The sound to play when the device receives the notification. Supports "default" or the filename of a sound resource bundled in the app. Sound files must reside in /res/raw/.
           type: string

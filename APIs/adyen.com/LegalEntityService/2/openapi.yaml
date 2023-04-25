@@ -45,7 +45,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-04-11T19:23:17Z
+  x-timestamp: 2023-04-25T13:22:00Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2729,6 +2729,7 @@ components:
     CapabilityProblemEntity:
       properties:
         documents:
+          description: List of document IDs corresponding to the verification errors from capabilities.
           items:
             type: string
           type: array
@@ -2746,6 +2747,7 @@ components:
     CapabilityProblemEntity-recursive:
       properties:
         documents:
+          description: List of document IDs corresponding to the verification errors from capabilities.
           items:
             type: string
           type: array
@@ -3897,6 +3899,10 @@ components:
         realLastFour:
           description: Four last digits of the bank account number.
           type: string
+        trustedSource:
+          description: Identifies if the TI was created from a trusted source.
+          readOnly: true
+          type: boolean
       required:
         - id
         - accountIdentifier
