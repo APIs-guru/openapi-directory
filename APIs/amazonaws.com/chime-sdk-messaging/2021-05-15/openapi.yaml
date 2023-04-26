@@ -1403,24 +1403,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
         '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
           description: UnauthorizedClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedClientException'
-        '483':
+        '484':
           description: ThrottledClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottledClientException'
-        '484':
+        '485':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           content:
             application/json:
@@ -1445,15 +1451,6 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
-        - name: sub-channel-id
-          in: query
-          required: false
-          description: The ID of the SubChannel in the request.
-          schema:
-            type: string
-            pattern: '[-_a-zA-Z0-9]*'
-            minLength: 1
-            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2635,30 +2632,36 @@ paths:
         '204':
           description: Success
         '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
           description: ForbiddenException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
-        '481':
+        '482':
           description: UnauthorizedClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedClientException'
-        '482':
+        '483':
           description: ThrottledClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottledClientException'
-        '483':
+        '484':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '484':
+        '485':
           description: ServiceFailureException
           content:
             application/json:
@@ -4982,19 +4985,6 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                SubChannelId:
-                  description: The ID of the SubChannel in the request.
-                  type: string
-                  pattern: '[-_a-zA-Z0-9]*'
-                  minLength: 1
-                  maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5678,10 +5668,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the channel.
-        SubChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SubChannelId'
-            - description: The ID of the SubChannel in the response.
     AllowNotifications:
       type: string
       enum:
@@ -7003,11 +6989,7 @@ components:
     UpdateChannelReadMarkerRequest:
       type: object
       title: UpdateChannelReadMarkerRequest
-      properties:
-        SubChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SubChannelId'
-            - description: The ID of the SubChannel in the request.
+      properties: {}
     UpdateChannelRequest:
       type: object
       title: UpdateChannelRequest

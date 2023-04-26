@@ -115,6 +115,51 @@ servers:
     description: The DataSync endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=FmrsService.AddStorageSystem:
+    post:
+      operationId: AddStorageSystem
+      description: Creates an Amazon Web Services resource for an on-premises storage system that you want DataSync Discovery to collect information about.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddStorageSystemResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddStorageSystemRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.AddStorageSystem
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=FmrsService.CancelTaskExecution:
     post:
       operationId: CancelTaskExecution
@@ -568,7 +613,7 @@ paths:
   /#X-Amz-Target=FmrsService.CreateLocationS3:
     post:
       operationId: CreateLocationS3
-      description: 'Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli">Create an Amazon S3 location</a>.'
+      description: '<p>A <i>location</i> is an endpoint for an Amazon S3 bucket. DataSync can use the location as a source or destination for copying data.</p> <important> <p>Before you create your location, make sure that you read the following sections:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes">Storage class considerations with Amazon S3 locations</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests">Evaluating S3 request costs when using DataSync</a> </p> </li> </ul> </important> <p> For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli">Creating an Amazon S3 location</a>.</p>'
       responses:
         '200':
           description: Success
@@ -658,7 +703,7 @@ paths:
   /#X-Amz-Target=FmrsService.CreateTask:
     post:
       operationId: CreateTask
-      description: '<p>Configures a task, which defines where and how DataSync transfers your data.</p> <p>A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).</p>'
+      description: '<p>Configures a task, which defines where and how DataSync transfers your data.</p> <p>A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).</p> <important> <p>If you''re planning to transfer data to or from an Amazon S3 location, review <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests">how DataSync can affect your S3 request charges</a> and the <a href="http://aws.amazon.com/datasync/pricing/">DataSync pricing page</a> before you begin.</p> </important>'
       responses:
         '200':
           description: Success
@@ -872,6 +917,51 @@ paths:
             type: string
             enum:
               - FmrsService.DescribeAgent
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.DescribeDiscoveryJob:
+    post:
+      operationId: DescribeDiscoveryJob
+      description: Returns information about a DataSync discovery job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDiscoveryJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDiscoveryJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.DescribeDiscoveryJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1330,6 +1420,165 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.DescribeStorageSystem:
+    post:
+      operationId: DescribeStorageSystem
+      description: Returns information about an on-premises storage system that you're using with DataSync Discovery.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStorageSystemResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStorageSystemRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.DescribeStorageSystem
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.DescribeStorageSystemResourceMetrics:
+    post:
+      operationId: DescribeStorageSystemResourceMetrics
+      description: 'Returns information, including performance data and capacity usage, which DataSync Discovery collects about a specific resource in your-premises storage system.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStorageSystemResourceMetricsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStorageSystemResourceMetricsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.DescribeStorageSystemResourceMetrics
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.DescribeStorageSystemResources:
+    post:
+      operationId: DescribeStorageSystemResources
+      description: Returns information that DataSync Discovery collects about resources in your on-premises storage system.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStorageSystemResourcesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStorageSystemResourcesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.DescribeStorageSystemResources
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=FmrsService.DescribeTask:
     post:
       operationId: DescribeTask
@@ -1420,6 +1669,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.GenerateRecommendations:
+    post:
+      operationId: GenerateRecommendations
+      description: '<p>Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system''s resources. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html">Recommendations provided by DataSync Discovery</a>.</p> <p>Once generated, you can view your recommendations by using the <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeStorageSystemResources.html">DescribeStorageSystemResources</a> operation.</p> <note> <p>If your <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table">discovery job completes successfully</a>, you don''t need to use this operation. DataSync Discovery generates the recommendations for you automatically.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateRecommendationsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.GenerateRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=FmrsService.ListAgents:
     post:
       operationId: ListAgents
@@ -1477,6 +1771,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.ListDiscoveryJobs:
+    post:
+      operationId: ListDiscoveryJobs
+      description: Provides a list of the existing discovery jobs in the Amazon Web Services Region and Amazon Web Services account where you're using DataSync Discovery.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDiscoveryJobsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDiscoveryJobsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.ListDiscoveryJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=FmrsService.ListLocations:
     post:
       operationId: ListLocations
@@ -1526,6 +1877,63 @@ paths:
             type: string
             enum:
               - FmrsService.ListLocations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.ListStorageSystems:
+    post:
+      operationId: ListStorageSystems
+      description: Lists the on-premises storage systems that you're using with DataSync Discovery.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStorageSystemsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStorageSystemsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.ListStorageSystems
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1705,10 +2113,100 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.RemoveStorageSystem:
+    post:
+      operationId: RemoveStorageSystem
+      description: 'Permanently removes a storage system resource from DataSync Discovery, including the associated discovery jobs, collected data, and recommendations.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveStorageSystemResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveStorageSystemRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.RemoveStorageSystem
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.StartDiscoveryJob:
+    post:
+      operationId: StartDiscoveryJob
+      description: 'Runs a DataSync discovery job on your on-premises storage system. If you haven''t added the storage system to DataSync Discovery yet, do this first by using the <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_AddStorageSystem.html">AddStorageSystem</a> operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDiscoveryJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartDiscoveryJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.StartDiscoveryJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=FmrsService.StartTaskExecution:
     post:
       operationId: StartTaskExecution
-      description: '<p>Starts an DataSync task. For each task, you can only run one task execution at a time.</p> <p>There are several phases to a task execution. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses">Task execution statuses</a>.</p>'
+      description: '<p>Starts an DataSync task. For each task, you can only run one task execution at a time.</p> <p>There are several phases to a task execution. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses">Task execution statuses</a>.</p> <important> <p>If you''re planning to transfer data to or from an Amazon S3 location, review <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests">how DataSync can affect your S3 request charges</a> and the <a href="http://aws.amazon.com/datasync/pricing/">DataSync pricing page</a> before you begin.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1742,6 +2240,51 @@ paths:
             type: string
             enum:
               - FmrsService.StartTaskExecution
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.StopDiscoveryJob:
+    post:
+      operationId: StopDiscoveryJob
+      description: '<p>Stops a running DataSync discovery job.</p> <p>You can stop a discovery job anytime. A job that''s stopped before it''s scheduled to end likely will provide you some information about your on-premises storage system resources. To get recommendations for a stopped job, you must use the <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_GenerateRecommendations.html">GenerateRecommendations</a> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopDiscoveryJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopDiscoveryJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.StopDiscoveryJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1877,6 +2420,51 @@ paths:
             type: string
             enum:
               - FmrsService.UpdateAgent
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.UpdateDiscoveryJob:
+    post:
+      operationId: UpdateDiscoveryJob
+      description: Edits a DataSync discovery job configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDiscoveryJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDiscoveryJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.UpdateDiscoveryJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2065,6 +2653,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.UpdateStorageSystem:
+    post:
+      operationId: UpdateStorageSystem
+      description: Modifies some configurations of an on-premises storage system resource that you're using with DataSync Discovery.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateStorageSystemResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStorageSystemRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.UpdateStorageSystem
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=FmrsService.UpdateTask:
     post:
       operationId: UpdateTask
@@ -2113,7 +2746,7 @@ paths:
   /#X-Amz-Target=FmrsService.UpdateTaskExecution:
     post:
       operationId: UpdateTaskExecution
-      description: '<p>Updates execution of a task.</p> <p>You can modify bandwidth throttling for a task execution that is running or queued. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling">Adjusting Bandwidth Throttling for a Task Execution</a>.</p> <note> <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code> is <code> <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond">BytesPerSecond</a> </code>.</p> </note>'
+      description: '<p>Modifies a running DataSync task.</p> <note> <p>Currently, the only <code>Option</code> that you can modify with <code>UpdateTaskExecution</code> is <code> <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond">BytesPerSecond</a> </code>, which throttles bandwidth for a running or queued task.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2207,6 +2840,59 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AddStorageSystemResponse:
+      type: object
+      required:
+        - StorageSystemArn
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: The ARN of the on-premises storage system that you can use with DataSync Discovery.
+    AddStorageSystemRequest:
+      type: object
+      required:
+        - ServerConfiguration
+        - SystemType
+        - AgentArns
+        - ClientToken
+        - Credentials
+      title: AddStorageSystemRequest
+      properties:
+        ServerConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryServerConfiguration'
+            - description: Specifies the server name and network port required to connect with the management interface of your on-premises storage system.
+        SystemType:
+          allOf:
+            - $ref: '#/components/schemas/DiscoverySystemType'
+            - description: <p>Specifies the type of on-premises storage system that you want DataSync Discovery to collect information about.</p> <note> <p>DataSync Discovery currently supports NetApp Fabric-Attached Storage (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or later.</p> </note>
+        AgentArns:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryAgentArnList'
+            - description: Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads from your on-premises storage system's management interface.
+        CloudWatchLogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupArn'
+            - description: Specifies the ARN of the Amazon CloudWatch log group for monitoring and logging discovery job events.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/InputTagList'
+            - description: 'Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your on-premises storage system.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: Specifies a familiar name for your on-premises storage system.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyUUID'
+            - description: 'Specifies a client token to make sure requests with this API operation are idempotent. If you don''t specify a client token, DataSync generates one for you automatically.'
+        Credentials:
+          allOf:
+            - $ref: '#/components/schemas/Credentials'
+            - description: Specifies the user name and password for accessing your on-premises storage system's management interface.
+    InvalidRequestException: {}
+    InternalException: {}
     CancelTaskExecutionResponse:
       type: object
       properties: {}
@@ -2221,8 +2907,6 @@ components:
             - $ref: '#/components/schemas/TaskExecutionArn'
             - description: The Amazon Resource Name (ARN) of the task execution to stop.
       description: CancelTaskExecutionRequest
-    InvalidRequestException: {}
-    InternalException: {}
     CreateAgentResponse:
       type: object
       properties:
@@ -2835,6 +3519,43 @@ components:
             - $ref: '#/components/schemas/AgentArn'
             - description: Specifies the Amazon Resource Name (ARN) of the DataSync agent to describe.
       description: DescribeAgent
+    DescribeDiscoveryJobResponse:
+      type: object
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: The ARN of the on-premises storage system you're running the discovery job on.
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: The ARN of the discovery job.
+        CollectionDurationMinutes:
+          allOf:
+            - $ref: '#/components/schemas/CollectionDurationMinutes'
+            - description: The number of minutes that the discovery job runs.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobStatus'
+            - description: 'Indicates the status of a discovery job. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table">Discovery job statuses</a>.'
+        JobStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryTime'
+            - description: The time when the discovery job started.
+        JobEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryTime'
+            - description: The time when the discovery job ended.
+    DescribeDiscoveryJobRequest:
+      type: object
+      required:
+        - DiscoveryJobArn
+      title: DescribeDiscoveryJobRequest
+      properties:
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: Specifies the Amazon Resource Name (ARN) of the discovery job that you want information about.
     DescribeLocationEfsResponse:
       type: object
       properties:
@@ -3235,6 +3956,148 @@ components:
             - $ref: '#/components/schemas/LocationArn'
             - description: The Amazon Resource Name (ARN) of the SMB location to describe.
       description: DescribeLocationSmbRequest
+    DescribeStorageSystemResponse:
+      type: object
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: The ARN of the on-premises storage system that the discovery job looked at.
+        ServerConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryServerConfiguration'
+            - description: The server name and network port required to connect with your on-premises storage system's management interface.
+        SystemType:
+          allOf:
+            - $ref: '#/components/schemas/DiscoverySystemType'
+            - description: <p>The type of on-premises storage system.</p> <note> <p>DataSync Discovery currently only supports NetApp Fabric-Attached Storage (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or later. </p> </note>
+        AgentArns:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryAgentArnList'
+            - description: The ARN of the DataSync agent that connects to and reads from your on-premises storage system.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name that you gave your on-premises storage system when adding it to DataSync Discovery.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: Describes the connectivity error that the DataSync agent is encountering with your on-premises storage system.
+        ConnectivityStatus:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemConnectivityStatus'
+            - description: Indicates whether your DataSync agent can connect to your on-premises storage system.
+        CloudWatchLogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupArn'
+            - description: The ARN of the Amazon CloudWatch log group that's used to monitor and log discovery job events.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when you added the on-premises storage system to DataSync Discovery.
+        SecretsManagerArn:
+          allOf:
+            - $ref: '#/components/schemas/SecretsManagerArn'
+            - description: 'The ARN of the secret that stores your on-premises storage system''s credentials. DataSync Discovery stores these credentials in <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-configure-storage.html#discovery-add-storage">Secrets Manager</a>.'
+    DescribeStorageSystemRequest:
+      type: object
+      required:
+        - StorageSystemArn
+      title: DescribeStorageSystemRequest
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: Specifies the Amazon Resource Name (ARN) of an on-premises storage system that you're using with DataSync Discovery.
+    DescribeStorageSystemResourceMetricsResponse:
+      type: object
+      properties:
+        Metrics:
+          allOf:
+            - $ref: '#/components/schemas/Metrics'
+            - description: The details that your discovery job collected about your storage system resource.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryNextToken'
+            - description: The opaque string that indicates the position to begin the next list of results in the response.
+    DescribeStorageSystemResourceMetricsRequest:
+      type: object
+      required:
+        - DiscoveryJobArn
+        - ResourceType
+        - ResourceId
+      title: DescribeStorageSystemResourceMetricsRequest
+      properties:
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: Specifies the Amazon Resource Name (ARN) of the discovery job that collects information about your on-premises storage system.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryResourceType'
+            - description: Specifies the kind of storage system resource that you want information about.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: Specifies the universally unique identifier (UUID) of the storage system resource that you want information about.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryTime'
+            - description: 'Specifies a time within the total duration that the discovery job ran. To see information gathered during a certain time frame, use this parameter with <code>EndTime</code>.'
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryTime'
+            - description: 'Specifies a time within the total duration that the discovery job ran. To see information gathered during a certain time frame, use this parameter with <code>StartTime</code>.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryMaxResults'
+            - description: Specifies how many results that you want in the response.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryNextToken'
+            - description: Specifies an opaque string that indicates the position to begin the next list of results in the response.
+    DescribeStorageSystemResourcesResponse:
+      type: object
+      properties:
+        ResourceDetails:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDetails'
+            - description: '<p>The information collected about your storage system''s resources. A response can also include Amazon Web Services storage service recommendations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-findings.html">storage resource information</a> collected by and <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html">recommendations</a> provided by DataSync Discovery.</p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryNextToken'
+            - description: The opaque string that indicates the position to begin the next list of results in the response.
+    DescribeStorageSystemResourcesRequest:
+      type: object
+      required:
+        - DiscoveryJobArn
+        - ResourceType
+      title: DescribeStorageSystemResourcesRequest
+      properties:
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: Specifies the Amazon Resource Name (ARN) of the discovery job that's collecting data from your on-premises storage system.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryResourceType'
+            - description: Specifies what kind of storage system resources that you want information about.
+        ResourceIds:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIds'
+            - description: Specifies the universally unique identifiers (UUIDs) of the storage system resources that you want information about. You can't use this parameter in combination with the <code>Filter</code> parameter.
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/ResourceFilters'
+            - description: 'Filters the storage system resources that you want returned. For example, this might be volumes associated with a specific storage virtual machine (SVM).'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryMaxResults'
+            - description: Specifies the maximum number of storage system resources that you want to list in a response.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryNextToken'
+            - description: Specifies an opaque string that indicates the position to begin the next list of results in the response.
     DescribeTaskResponse:
       type: object
       properties:
@@ -3379,6 +4242,29 @@ components:
             - $ref: '#/components/schemas/TaskExecutionArn'
             - description: The Amazon Resource Name (ARN) of the task that is being executed.
       description: DescribeTaskExecutionRequest
+    GenerateRecommendationsResponse:
+      type: object
+      properties: {}
+    GenerateRecommendationsRequest:
+      type: object
+      required:
+        - DiscoveryJobArn
+        - ResourceIds
+        - ResourceType
+      title: GenerateRecommendationsRequest
+      properties:
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: Specifies the Amazon Resource Name (ARN) of the discovery job that collects information about your on-premises storage system.
+        ResourceIds:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIds'
+            - description: Specifies the universally unique identifiers (UUIDs) of the resources in your storage system that you want recommendations on.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryResourceType'
+            - description: Specifies the type of resource in your storage system that you want recommendations on.
     ListAgentsResponse:
       type: object
       properties:
@@ -3404,6 +4290,33 @@ components:
             - $ref: '#/components/schemas/NextToken'
             - description: Specifies an opaque string that indicates the position to begin the next list of results in the response.
       description: ListAgentsRequest
+    ListDiscoveryJobsResponse:
+      type: object
+      properties:
+        DiscoveryJobs:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobList'
+            - description: The discovery jobs that you've run.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryNextToken'
+            - description: The opaque string that indicates the position to begin the next list of results in the response.
+    ListDiscoveryJobsRequest:
+      type: object
+      title: ListDiscoveryJobsRequest
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: Specifies the Amazon Resource Name (ARN) of an on-premises storage system. Use this parameter if you only want to list the discovery jobs that are associated with a specific storage system.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryMaxResults'
+            - description: Specifies how many results you want in the response.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryNextToken'
+            - description: Specifies an opaque string that indicates the position to begin the next list of results in the response.
     ListLocationsResponse:
       type: object
       properties:
@@ -3433,6 +4346,29 @@ components:
             - $ref: '#/components/schemas/LocationFilters'
             - description: 'You can use API filters to narrow down the list of resources returned by <code>ListLocations</code>. For example, to retrieve all tasks on a specific source location, you can use <code>ListLocations</code> with filter name <code>LocationType S3</code> and <code>Operator Equals</code>.'
       description: ListLocationsRequest
+    ListStorageSystemsResponse:
+      type: object
+      properties:
+        StorageSystems:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemList'
+            - description: The Amazon Resource Names ARNs) of the on-premises storage systems that you're using with DataSync Discovery.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryNextToken'
+            - description: The opaque string that indicates the position to begin the next list of results in the response.
+    ListStorageSystemsRequest:
+      type: object
+      title: ListStorageSystemsRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryMaxResults'
+            - description: Specifies how many results you want in the response.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryNextToken'
+            - description: 'Specifies an opaque string that indicates the position to begin the next list of results in the response. '
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -3522,6 +4458,50 @@ components:
             - $ref: '#/components/schemas/TaskFilters'
             - description: 'You can use API filters to narrow down the list of resources returned by <code>ListTasks</code>. For example, to retrieve all tasks on a specific source location, you can use <code>ListTasks</code> with filter name <code>LocationId</code> and <code>Operator Equals</code> with the ARN for the location.'
       description: ListTasksRequest
+    RemoveStorageSystemResponse:
+      type: object
+      properties: {}
+    RemoveStorageSystemRequest:
+      type: object
+      required:
+        - StorageSystemArn
+      title: RemoveStorageSystemRequest
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: Specifies the Amazon Resource Name (ARN) of the storage system that you want to permanently remove from DataSync Discovery.
+    StartDiscoveryJobResponse:
+      type: object
+      properties:
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: The ARN of the discovery job that you started.
+    StartDiscoveryJobRequest:
+      type: object
+      required:
+        - StorageSystemArn
+        - CollectionDurationMinutes
+        - ClientToken
+      title: StartDiscoveryJobRequest
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: Specifies the Amazon Resource Name (ARN) of the on-premises storage system that you want to run the discovery job on.
+        CollectionDurationMinutes:
+          allOf:
+            - $ref: '#/components/schemas/CollectionDurationMinutes'
+            - description: '<p>Specifies in minutes how long you want the discovery job to run.</p> <note> <p>For more accurate recommendations, we recommend a duration of at least 14 days. Longer durations allow time to collect a sufficient number of data points and provide a realistic representation of storage performance and utilization.</p> </note>'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyUUID'
+            - description: 'Specifies a client token to make sure requests with this API operation are idempotent. If you don''t specify a client token, DataSync generates one for you automatically.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/InputTagList'
+            - description: 'Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.'
     StartTaskExecutionResponse:
       type: object
       properties:
@@ -3555,6 +4535,19 @@ components:
             - $ref: '#/components/schemas/InputTagList'
             - description: '<p>Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task execution.</p> <p> <i>Tags</i> are key-value pairs that help you manage, filter, and search for your DataSync resources.</p>'
       description: StartTaskExecutionRequest
+    StopDiscoveryJobResponse:
+      type: object
+      properties: {}
+    StopDiscoveryJobRequest:
+      type: object
+      required:
+        - DiscoveryJobArn
+      title: StopDiscoveryJobRequest
+      properties:
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: 'Specifies the Amazon Resource Name (ARN) of the discovery job that you want to stop. '
     TagResourceResponse:
       type: object
       properties: {}
@@ -3611,6 +4604,24 @@ components:
             - $ref: '#/components/schemas/TagValue'
             - description: The name that you want to use to configure the agent.
       description: UpdateAgentRequest
+    UpdateDiscoveryJobResponse:
+      type: object
+      properties: {}
+    UpdateDiscoveryJobRequest:
+      type: object
+      required:
+        - DiscoveryJobArn
+        - CollectionDurationMinutes
+      title: UpdateDiscoveryJobRequest
+      properties:
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: Specifies the Amazon Resource Name (ARN) of the discovery job that you want to update.
+        CollectionDurationMinutes:
+          allOf:
+            - $ref: '#/components/schemas/CollectionDurationMinutes'
+            - description: Specifies in minutes how long that you want the discovery job to run. (You can't set this parameter to less than the number of minutes that the job has already run for.)
     UpdateLocationHdfsResponse:
       type: object
       properties: {}
@@ -3769,6 +4780,39 @@ components:
             - description: The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.
         MountOptions:
           $ref: '#/components/schemas/SmbMountOptions'
+    UpdateStorageSystemResponse:
+      type: object
+      properties: {}
+    UpdateStorageSystemRequest:
+      type: object
+      required:
+        - StorageSystemArn
+      title: UpdateStorageSystemRequest
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: Specifies the ARN of the on-premises storage system that you want reconfigure.
+        ServerConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryServerConfiguration'
+            - description: Specifies the server name and network port required to connect with your on-premises storage system's management interface.
+        AgentArns:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryAgentArnList'
+            - description: Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads your on-premises storage system.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: Specifies a familiar name for your on-premises storage system.
+        CloudWatchLogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupArn'
+            - description: Specifies the ARN of the Amazon CloudWatch log group for monitoring and logging discovery job events.
+        Credentials:
+          allOf:
+            - $ref: '#/components/schemas/Credentials'
+            - description: Specifies the user name and password for accessing your on-premises storage system's management interface.
     UpdateTaskResponse:
       type: object
       properties: {}
@@ -3818,13 +4862,74 @@ components:
         TaskExecutionArn:
           allOf:
             - $ref: '#/components/schemas/TaskExecutionArn'
-            - description: 'The Amazon Resource Name (ARN) of the specific task execution that is being updated. '
+            - description: Specifies the Amazon Resource Name (ARN) of the task execution that you're updating.
         Options:
           $ref: '#/components/schemas/Options'
     ActivationKey:
       type: string
       pattern: '[A-Z0-9]{5}(-[A-Z0-9]{5}){4}'
       maxLength: 29
+    DiscoveryServerConfiguration:
+      type: object
+      required:
+        - ServerHostname
+      properties:
+        ServerHostname:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryServerHostname'
+            - description: The domain name or IP address of your storage system's management interface.
+        ServerPort:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryServerPort'
+            - description: The network port for accessing the storage system's management interface.
+      description: The network settings that DataSync Discovery uses to connect with your on-premises storage system's management interface.
+    DiscoverySystemType:
+      type: string
+      enum:
+        - NetAppONTAP
+    DiscoveryAgentArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AgentArn'
+      minItems: 1
+      maxItems: 1
+    LogGroupArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\-0-9]+:[0-9]{12}:log-group:([^:\*]*)(:\*)?$'
+      maxLength: 562
+    InputTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagListEntry'
+      minItems: 0
+      maxItems: 50
+    Name:
+      type: string
+      pattern: '^[\p{L}\p{M}\p{N}\s+=._:@\/-]+$'
+      minLength: 1
+      maxLength: 256
+    PtolemyUUID:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    Credentials:
+      type: object
+      required:
+        - Username
+        - Password
+      properties:
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyUsername'
+            - description: Specifies the user name for your storage system's management interface.
+        Password:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyPassword'
+            - description: Specifies the password for your storage system's management interface.
+      description: '<p>The credentials that provide DataSync Discovery read access to your on-premises storage system''s management interface.</p> <p>DataSync Discovery stores these credentials in <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">Secrets Manager</a>. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-configure-storage.html">Accessing your on-premises storage system</a>.</p>'
+    StorageSystemArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:system/storage-system-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+      maxLength: 128
     AgentArn:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$'
@@ -3877,12 +4982,29 @@ components:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$'
       maxLength: 128
-    InputTagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/TagListEntry'
-      minItems: 0
-      maxItems: 50
+    NonNegativeLong:
+      type: integer
+      minimum: 0
+    Capacity:
+      type: object
+      properties:
+        Used:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The amount of space that's being used in a storage system resource.
+        Provisioned:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The total amount of space available in a storage system resource.
+        LogicalUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The amount of space that's being used in a storage system resource without accounting for compression or deduplication.
+      description: 'The storage capacity of an on-premises storage system resource (for example, a volume).'
+    CollectionDurationMinutes:
+      type: integer
+      minimum: 60
+      maximum: 44640
     VpcEndpointId:
       type: string
       pattern: '^vpce-[0-9a-f]{17}$'
@@ -4141,12 +5263,8 @@ components:
         Version:
           allOf:
             - $ref: '#/components/schemas/SmbVersion'
-            - description: '<p>By default, DataSync automatically chooses an SMB protocol version based on negotiation with your SMB file server. You also can configure DataSync to use a specific SMB version, but we recommend doing this only if DataSync has trouble negotiating with the SMB file server automatically.</p> <p>These are the following options for configuring the SMB version:</p> <ul> <li> <p> <code>AUTOMATIC</code> (default): DataSync and the SMB file server negotiate a protocol version that they mutually support. (DataSync supports SMB versions 1.0 and later.)</p> <p>This is the recommended option. If you instead choose a specific version that your file server doesn''t support, you may get an <code>Operation Not Supported</code> error.</p> </li> <li> <p> <code>SMB3</code>: Restricts the protocol negotiation to only SMB version 3.0.2.</p> </li> <li> <p> <code>SMB2</code>: Restricts the protocol negotiation to only SMB version 2.1.</p> </li> <li> <p> <code>SMB2_0</code>: Restricts the protocol negotiation to only SMB version 2.0.</p> </li> <li> <p> <code>SMB1</code>: Restricts the protocol negotiation to only SMB version 1.0.</p> <note> <p>The <code>SMB1</code> option isn''t available when <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationFsxOntap.html">creating an Amazon FSx for NetApp ONTAP location</a>.</p> </note> </li> </ul>'
+            - description: '<p>By default, DataSync automatically chooses an SMB protocol version based on negotiation with your SMB file server. You also can configure DataSync to use a specific SMB version, but we recommend doing this only if DataSync has trouble negotiating with the SMB file server automatically.</p> <p>These are the following options for configuring the SMB version:</p> <ul> <li> <p> <code>AUTOMATIC</code> (default): DataSync and the SMB file server negotiate the highest version of SMB that they mutually support between 2.1 and 3.1.1.</p> <p>This is the recommended option. If you instead choose a specific version that your file server doesn''t support, you may get an <code>Operation Not Supported</code> error.</p> </li> <li> <p> <code>SMB3</code>: Restricts the protocol negotiation to only SMB version 3.0.2.</p> </li> <li> <p> <code>SMB2</code>: Restricts the protocol negotiation to only SMB version 2.1.</p> </li> <li> <p> <code>SMB2_0</code>: Restricts the protocol negotiation to only SMB version 2.0.</p> </li> <li> <p> <code>SMB1</code>: Restricts the protocol negotiation to only SMB version 1.0.</p> <note> <p>The <code>SMB1</code> option isn''t available when <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationFsxOntap.html">creating an Amazon FSx for NetApp ONTAP location</a>.</p> </note> </li> </ul>'
       description: Specifies the version of the Server Message Block (SMB) protocol that DataSync uses to access an SMB file server.
-    LogGroupArn:
-      type: string
-      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)(:\*)?$'
-      maxLength: 562
     Options:
       type: object
       properties:
@@ -4231,6 +5349,16 @@ components:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$'
       maxLength: 128
+    PtolemyUsername:
+      type: string
+      pattern: '^(?!.*[:\"][^:"]*$).+$'
+      maxLength: 1024
+      format: password
+    PtolemyPassword:
+      type: string
+      pattern: '^(?!.*[:\"][^:"]*$).+$'
+      maxLength: 1024
+      format: password
     Time:
       type: string
       format: date-time
@@ -4260,10 +5388,91 @@ components:
             - $ref: '#/components/schemas/PLSecurityGroupArnList'
             - description: The Amazon Resource Names (ARNs) of the security groups that are configured for the EC2 resource that hosts an agent activated in a VPC or an agent that has access to a VPC endpoint.
       description: 'The VPC endpoint, subnet, and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).'
+    DiscoveryJobArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:system/storage-system-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/job/discovery-job-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+      maxLength: 256
+    DiscoveryJobStatus:
+      type: string
+      enum:
+        - RUNNING
+        - WARNING
+        - TERMINATED
+        - FAILED
+        - STOPPED
+        - COMPLETED
+        - COMPLETED_WITH_ISSUES
+    DiscoveryTime:
+      type: string
+      format: date-time
     LocationUri:
       type: string
       pattern: '^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$'
       maxLength: 4360
+    DiscoveryResourceType:
+      type: string
+      enum:
+        - SVM
+        - VOLUME
+        - CLUSTER
+    ResourceId:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    DiscoveryMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    DiscoveryNextToken:
+      type: string
+      pattern: '[a-zA-Z0-9=_-]+'
+      maxLength: 65535
+    Metrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceMetrics'
+    ResourceIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceId'
+      minItems: 1
+      maxItems: 100
+    ResourceFilters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FilterMembers'
+    ResourceDetails:
+      type: object
+      properties:
+        NetAppONTAPSVMs:
+          allOf:
+            - $ref: '#/components/schemas/NetAppONTAPSVMs'
+            - description: The information that DataSync Discovery collects about storage virtual machines (SVMs) in your on-premises storage system.
+        NetAppONTAPVolumes:
+          allOf:
+            - $ref: '#/components/schemas/NetAppONTAPVolumes'
+            - description: The information that DataSync Discovery collects about volumes in your on-premises storage system.
+        NetAppONTAPClusters:
+          allOf:
+            - $ref: '#/components/schemas/NetAppONTAPClusters'
+            - description: The information that DataSync Discovery collects about the cluster in your on-premises storage system.
+      description: Information provided by DataSync Discovery about the resources in your on-premises storage system.
+    ErrorMessage:
+      type: string
+      pattern: .*
+      maxLength: 128
+    StorageSystemConnectivityStatus:
+      type: string
+      enum:
+        - PASS
+        - FAIL
+        - UNKNOWN
+    Timestamp:
+      type: string
+      format: date-time
+    SecretsManagerArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z\-0-9]+:[0-9]{12}:secret:.*'
+      maxLength: 2048
     TaskExecutionStatus:
       type: string
       enum:
@@ -4338,6 +5547,34 @@ components:
       type: string
       pattern: '^arn:aws[\-a-z]{0,}:ec2:[a-z\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$'
       maxLength: 128
+    DiscoveryJobListEntry:
+      type: object
+      properties:
+        DiscoveryJobArn:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobArn'
+            - description: The Amazon Resource Name (ARN) of a discovery job.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryJobStatus'
+            - description: 'The status of a discovery job. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table">Discovery job statuses</a>.'
+      description: The details about a specific DataSync discovery job.
+    DiscoveryJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DiscoveryJobListEntry'
+    DiscoveryResourceFilter:
+      type: string
+      enum:
+        - SVM
+    DiscoveryServerHostname:
+      type: string
+      pattern: '^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])$'
+      maxLength: 255
+    DiscoveryServerPort:
+      type: integer
+      minimum: 1
+      maximum: 65535
     Duration:
       type: integer
       minimum: 0
@@ -4347,8 +5584,16 @@ components:
       maxLength: 128
     Ec2SecurityGroupArn:
       type: string
-      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$'
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$'
       maxLength: 128
+    PtolemyString:
+      type: string
+      pattern: '^.{0,1024}$'
+      maxLength: 1024
+    EnabledProtocols:
+      type: array
+      items:
+        $ref: '#/components/schemas/PtolemyString'
     Endpoint:
       type: string
       pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
@@ -4371,6 +5616,10 @@ components:
             - $ref: '#/components/schemas/FilterValue'
             - description: '<p>A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|" (that is, a pipe), for example: <code>/folder1|/folder2</code> </p> <p> </p>'
       description: 'Specifies which files, folders, and objects to include or exclude when transferring files from source to destination.'
+    FilterMembers:
+      type: array
+      items:
+        $ref: '#/components/schemas/PtolemyString'
     FilterType:
       type: string
       enum:
@@ -4457,6 +5706,30 @@ components:
         - AUTHENTICATION
         - INTEGRITY
         - PRIVACY
+    NonNegativeDouble:
+      type: number
+      format: double
+      minimum: 0
+    IOPS:
+      type: object
+      properties:
+        Read:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak IOPS related to read operations.
+        Write:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak IOPS related to write operations.
+        Other:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak IOPS unrelated to read and write operations.
+        Total:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak total IOPS on your on-premises storage system resource.
+      description: The IOPS peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
     TagListEntry:
       type: object
       required:
@@ -4471,6 +5744,22 @@ components:
             - $ref: '#/components/schemas/TagValue'
             - description: The value for an Amazon Web Services resource tag.
       description: A key-value pair representing a single tag that's been applied to an Amazon Web Services resource.
+    Latency:
+      type: object
+      properties:
+        Read:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak latency for read operations.
+        Write:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak latency for write operations.
+        Other:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak latency for operations unrelated to read and write operations.
+      description: The latency peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
     MaxResults:
       type: integer
       minimum: 0
@@ -4487,9 +5776,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LocationListEntry'
+    StorageSystemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StorageSystemListEntry'
     TaggableResourceArn:
       type: string
-      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[a-f0-9]{17}(/execution/exec-[a-f0-9]{17})?$'
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location|system)/((agent|task|loc)-[a-f0-9]{17}|storage-system-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(/execution/exec-[a-f0-9]{17})?$'
       maxLength: 128
     OutputTagList:
       type: array
@@ -4566,11 +5859,268 @@ components:
         - 'OFF'
         - BASIC
         - TRANSFER
+    MaxP95Performance:
+      type: object
+      properties:
+        IopsRead:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak IOPS related to read operations.
+        IopsWrite:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak IOPS related to write operations.
+        IopsOther:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak IOPS unrelated to read and write operations.
+        IopsTotal:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak total IOPS on your on-premises storage system resource.
+        ThroughputRead:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak throughput related to read operations.
+        ThroughputWrite:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak throughput related to write operations.
+        ThroughputOther:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak throughput unrelated to read and write operations.
+        ThroughputTotal:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak total throughput on your on-premises storage system resource.
+        LatencyRead:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak latency for read operations.
+        LatencyWrite:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak latency for write operations.
+        LatencyOther:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak latency for operations unrelated to read and write operations.
+      description: The performance data that DataSync Discovery collects about an on-premises storage system resource.
+    ResourceMetrics:
+      type: object
+      properties:
+        Timestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when DataSync Discovery collected this information from the resource.
+        P95Metrics:
+          allOf:
+            - $ref: '#/components/schemas/P95Metrics'
+            - description: The types of performance data that DataSync Discovery collects about the on-premises storage system resource.
+        Capacity:
+          allOf:
+            - $ref: '#/components/schemas/Capacity'
+            - description: The storage capacity of the on-premises storage system resource.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The universally unique identifier (UUID) of the on-premises storage system resource.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryResourceType'
+            - description: The type of on-premises storage system resource.
+      description: 'Information, including performance data and capacity usage, provided by DataSync Discovery about a resource in your on-premises storage system.'
     Mtime:
       type: string
       enum:
         - NONE
         - PRESERVE
+    Recommendations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Recommendation'
+    RecommendationStatus:
+      type: string
+      enum:
+        - NONE
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+    NetAppONTAPCluster:
+      type: object
+      properties:
+        CifsShareCount:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The number of CIFS shares in the cluster.
+        NfsExportedVolumes:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The number of NFS volumes in the cluster.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyUUID'
+            - description: The universally unique identifier (UUID) of the cluster.
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyString'
+            - description: The name of the cluster.
+        MaxP95Performance:
+          allOf:
+            - $ref: '#/components/schemas/MaxP95Performance'
+            - description: The performance data that DataSync Discovery collects about the cluster.
+        ClusterBlockStorageSize:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The total storage space that's available in the cluster.
+        ClusterBlockStorageUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The storage space that's being used in a cluster.
+        ClusterBlockStorageLogicalUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The storage space that's being used in the cluster without accounting for compression or deduplication.
+        Recommendations:
+          allOf:
+            - $ref: '#/components/schemas/Recommendations'
+            - description: 'The Amazon Web Services storage services that DataSync Discovery recommends for the cluster. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html">Recommendations provided by DataSync Discovery</a>.'
+        RecommendationStatus:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationStatus'
+            - description: '<p>Indicates whether DataSync Discovery recommendations for the cluster are ready to view, incomplete, or can''t be determined.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table">Recommendation statuses</a>.</p>'
+      description: The information that DataSync Discovery collects about an on-premises storage system cluster.
+    NetAppONTAPClusters:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetAppONTAPCluster'
+    NetAppONTAPSVM:
+      type: object
+      properties:
+        ClusterUuid:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyUUID'
+            - description: The universally unique identifier (UUID) of the cluster associated with the SVM.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyUUID'
+            - description: The UUID of the SVM.
+        SvmName:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyString'
+            - description: The name of the SVM
+        CifsShareCount:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The number of CIFS shares in the SVM.
+        EnabledProtocols:
+          allOf:
+            - $ref: '#/components/schemas/EnabledProtocols'
+            - description: The data transfer protocols (such as NFS) configured for the SVM.
+        TotalCapacityUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The storage space that's being used in the SVM.
+        TotalCapacityProvisioned:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The total storage space that's available in the SVM.
+        TotalLogicalCapacityUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The storage space that's being used in the SVM without accounting for compression or deduplication.
+        MaxP95Performance:
+          allOf:
+            - $ref: '#/components/schemas/MaxP95Performance'
+            - description: The performance data that DataSync Discovery collects about the SVM.
+        Recommendations:
+          allOf:
+            - $ref: '#/components/schemas/Recommendations'
+            - description: 'The Amazon Web Services storage services that DataSync Discovery recommends for the SVM. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html">Recommendations provided by DataSync Discovery</a>.'
+        NfsExportedVolumes:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The number of NFS volumes in the SVM.
+        RecommendationStatus:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationStatus'
+            - description: '<p>Indicates whether DataSync Discovery recommendations for the SVM are ready to view, incomplete, or can''t be determined.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table">Recommendation statuses</a>.</p>'
+        TotalSnapshotCapacityUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The amount of storage in the SVM that's being used for snapshots.
+      description: The information that DataSync Discovery collects about a storage virtual machine (SVM) in your on-premises storage system.
+    NetAppONTAPSVMs:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetAppONTAPSVM'
+    PtolemyBoolean:
+      type: boolean
+    NetAppONTAPVolume:
+      type: object
+      properties:
+        VolumeName:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyString'
+            - description: The name of the volume.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyUUID'
+            - description: The universally unique identifier (UUID) of the volume.
+        CifsShareCount:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The number of CIFS shares in the volume.
+        SecurityStyle:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyString'
+            - description: The volume's security style (such as Unix or NTFS).
+        SvmUuid:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyUUID'
+            - description: The UUID of the storage virtual machine (SVM) associated with the volume.
+        SvmName:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyString'
+            - description: The name of the SVM associated with the volume.
+        CapacityUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The storage space that's being used in the volume.
+        CapacityProvisioned:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The total storage space that's available in the volume.
+        LogicalCapacityUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The storage space that's being used in the volume without accounting for compression or deduplication.
+        NfsExported:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyBoolean'
+            - description: The number of NFS volumes in the volume.
+        SnapshotCapacityUsed:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeLong'
+            - description: The amount of storage in the volume that's being used for snapshots.
+        MaxP95Performance:
+          allOf:
+            - $ref: '#/components/schemas/MaxP95Performance'
+            - description: The performance data that DataSync Discovery collects about the volume.
+        Recommendations:
+          allOf:
+            - $ref: '#/components/schemas/Recommendations'
+            - description: 'The Amazon Web Services storage services that DataSync Discovery recommends for the volume. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html">Recommendations provided by DataSync Discovery</a>.'
+        RecommendationStatus:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationStatus'
+            - description: '<p>Indicates whether DataSync Discovery recommendations for the volume are ready to view, incomplete, or can''t be determined.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table">Recommendation statuses</a>.</p>'
+      description: The information that DataSync Discovery collects about a volume in your on-premises storage system.
+    NetAppONTAPVolumes:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetAppONTAPVolume'
     NfsVersion:
       type: string
       enum:
@@ -4632,12 +6182,68 @@ components:
         - NONE
         - OWNER_DACL
         - OWNER_DACL_SACL
+    Throughput:
+      type: object
+      properties:
+        Read:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak throughput related to read operations.
+        Write:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak throughput related to write operations.
+        Other:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak throughput unrelated to read and write operations.
+        Total:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: Peak total throughput on your on-premises storage system resource.
+      description: The throughput peaks for an on-premises storage system volume. Each data point represents the 95th percentile peak value during a 1-hour interval.
+    P95Metrics:
+      type: object
+      properties:
+        IOPS:
+          allOf:
+            - $ref: '#/components/schemas/IOPS'
+            - description: The IOPS peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+        Throughput:
+          allOf:
+            - $ref: '#/components/schemas/Throughput'
+            - description: The throughput peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+        Latency:
+          allOf:
+            - $ref: '#/components/schemas/Latency'
+            - description: The latency peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+      description: The types of performance data that DataSync Discovery collects about an on-premises storage system resource.
     PhaseStatus:
       type: string
       enum:
         - PENDING
         - SUCCESS
         - ERROR
+    RecommendationsConfigMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/PtolemyString'
+    Recommendation:
+      type: object
+      properties:
+        StorageType:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyString'
+            - description: A recommended Amazon Web Services storage service that you can migrate data to based on information that DataSync Discovery collects about your on-premises storage system.
+        StorageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationsConfigMap'
+            - description: Information about how you can set up a recommended Amazon Web Services storage service.
+        EstimatedMonthlyStorageCost:
+          allOf:
+            - $ref: '#/components/schemas/PtolemyString'
+            - description: The estimated monthly cost of the recommended Amazon Web Services storage service.
+      description: '<p>The details about an Amazon Web Services storage service that DataSync Discovery recommends for a resource in your on-premises storage system.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html">Recommendations provided by DataSync Discovery</a>.</p>'
     ScheduleExpressionCron:
       type: string
       pattern: '^[a-zA-Z0-9\ \_\*\?\,\|\^\-\/\#\s\(\)\+]*$'
@@ -4650,6 +6256,18 @@ components:
         - SMB3
         - SMB1
         - SMB2_0
+    StorageSystemListEntry:
+      type: object
+      properties:
+        StorageSystemArn:
+          allOf:
+            - $ref: '#/components/schemas/StorageSystemArn'
+            - description: The Amazon Resource Names (ARN) of an on-premises storage system that you added to DataSync Discovery.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of an on-premises storage system that you added to DataSync Discovery.
+      description: Information that identifies an on-premises storage system that you're using with DataSync Discovery.
     TagKey:
       type: string
       pattern: '^[a-zA-Z0-9\s+=._:/-]+$'

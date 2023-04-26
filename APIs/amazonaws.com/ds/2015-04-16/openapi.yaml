@@ -6763,6 +6763,7 @@ components:
     RemoteDomainName:
       type: string
       pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+[.]?$'
+      maxLength: 1024
     DnsIpAddrs:
       type: array
       items:
@@ -7010,6 +7011,8 @@ components:
       minimum: 2
     DirectoryConfigurationSettingAllowedValues:
       type: string
+    DirectoryConfigurationSettingDataType:
+      type: string
     DirectoryConfigurationSettingLastRequestedDateTime:
       type: string
       format: date-time
@@ -7031,7 +7034,7 @@ components:
       type: string
     DirectoryConfigurationSettingValue:
       type: string
-      pattern: '^[a-zA-Z0-9]*$'
+      pattern: '^[a-zA-Z0-9_]*$'
       minLength: 1
       maxLength: 255
     VpcId:
@@ -7792,7 +7795,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/DirectoryConfigurationSettingType'
-            - description: 'The type of directory setting. For example, <code>Protocol</code> or <code>Cipher</code>.'
+            - description: 'The type, or category, of a directory setting. Similar settings have the same type. For example, <code>Protocol</code>, <code>Cipher</code>, or <code>Certificate-Based Authentication</code>.'
         Name:
           allOf:
             - $ref: '#/components/schemas/DirectoryConfigurationSettingName'
@@ -7800,7 +7803,7 @@ components:
         AllowedValues:
           allOf:
             - $ref: '#/components/schemas/DirectoryConfigurationSettingAllowedValues'
-            - description: The valid range of values for the directory setting.
+            - description: The valid range of values for the directory setting. These values depend on the <code>DataType</code> of your directory.
         AppliedValue:
           allOf:
             - $ref: '#/components/schemas/DirectoryConfigurationSettingValue'
@@ -7829,6 +7832,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DirectoryConfigurationSettingLastRequestedDateTime'
             - description: The date and time when the request to update a directory setting was last submitted.
+        DataType:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingDataType'
+            - description: 'The data type of a directory setting. This is used to define the <code>AllowedValues</code> of a setting. For example a data type can be <code>Boolean</code>, <code>DurationInSeconds</code>, or <code>Enum</code>.'
       description: Contains information about the specified configurable setting for a directory.
     Settings:
       type: array

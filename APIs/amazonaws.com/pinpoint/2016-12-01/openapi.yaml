@@ -1625,7 +1625,7 @@ paths:
                     RefreshOnSegmentUpdate:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
-                        - description: Specifies whether a journey should be refreshed on segment update.
+                        - description: Indicates whether the journey participants should be refreshed when a segment is updated.
                     JourneyChannelSettings:
                       allOf:
                         - $ref: '#/components/schemas/JourneyChannelSettings'
@@ -1633,7 +1633,7 @@ paths:
                     SendingSchedule:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
-                        - description: Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+                        - description: Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.
                     OpenHours:
                       allOf:
                         - $ref: '#/components/schemas/OpenHours'
@@ -6007,7 +6007,7 @@ paths:
                     RefreshOnSegmentUpdate:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
-                        - description: Specifies whether a journey should be refreshed on segment update.
+                        - description: Indicates whether the journey participants should be refreshed when a segment is updated.
                     JourneyChannelSettings:
                       allOf:
                         - $ref: '#/components/schemas/JourneyChannelSettings'
@@ -6015,7 +6015,7 @@ paths:
                     SendingSchedule:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
-                        - description: Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+                        - description: Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.
                     OpenHours:
                       allOf:
                         - $ref: '#/components/schemas/OpenHours'
@@ -8132,7 +8132,7 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
+          description: 'The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
@@ -8218,13 +8218,289 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
+          description: 'The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
           in: query
           required: false
           description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/journeys/{journey-id}/runs/{run-id}/activities/{journey-activity-id}/execution-metrics':
+    get:
+      operationId: GetJourneyRunExecutionActivityMetrics
+      description: Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey activity.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJourneyRunExecutionActivityMetricsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.
+          schema:
+            type: string
+        - name: journey-activity-id
+          in: path
+          required: true
+          description: The unique identifier for the journey activity.
+          schema:
+            type: string
+        - name: journey-id
+          in: path
+          required: true
+          description: The unique identifier for the journey.
+          schema:
+            type: string
+        - name: next-token
+          in: query
+          required: false
+          description: 'The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
+          schema:
+            type: string
+        - name: page-size
+          in: query
+          required: false
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
+          schema:
+            type: string
+        - name: run-id
+          in: path
+          required: true
+          description: The unique identifier for the journey run.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/journeys/{journey-id}/runs/{run-id}/execution-metrics':
+    get:
+      operationId: GetJourneyRunExecutionMetrics
+      description: Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJourneyRunExecutionMetricsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.
+          schema:
+            type: string
+        - name: journey-id
+          in: path
+          required: true
+          description: The unique identifier for the journey.
+          schema:
+            type: string
+        - name: next-token
+          in: query
+          required: false
+          description: 'The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
+          schema:
+            type: string
+        - name: page-size
+          in: query
+          required: false
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
+          schema:
+            type: string
+        - name: run-id
+          in: path
+          required: true
+          description: The unique identifier for the journey run.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/journeys/{journey-id}/runs':
+    get:
+      operationId: GetJourneyRuns
+      description: Provides information about the runs of a journey.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJourneyRunsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.
+          schema:
+            type: string
+        - name: journey-id
+          in: path
+          required: true
+          description: The unique identifier for the journey.
+          schema:
+            type: string
+        - name: page-size
+          in: query
+          required: false
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
+          schema:
+            type: string
+        - name: token
+          in: query
+          required: false
+          description: The NextToken string that specifies which page of results to return in a paginated response.
           schema:
             type: string
     parameters:
@@ -10160,48 +10436,48 @@ components:
         EMAIL:
           allOf:
             - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
-            - description: Rules for Email Channel.
+            - description: Specifies the schedule settings for the email channel.
         SMS:
           allOf:
             - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
-            - description: Rules for SMS Channel.
+            - description: Specifies the schedule settings for the SMS channel.
         PUSH:
           allOf:
             - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
-            - description: Rules for Push Channel.
+            - description: Specifies the schedule settings for the push channel.
         VOICE:
           allOf:
             - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
-            - description: Rules for Voice Channel.
+            - description: Specifies the schedule settings for the voice channel.
         CUSTOM:
           allOf:
             - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
-            - description: Rules for Custom Channel.
-      description: The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+            - description: Specifies the schedule settings for the custom channel.
+      description: Specifies the times when message are allowed to be sent to endpoints.
     ClosedDays:
       type: object
       properties:
         EMAIL:
           allOf:
             - $ref: '#/components/schemas/ListOfClosedDaysRules'
-            - description: Rules for Email Channel.
+            - description: Rules for the Email channel.
         SMS:
           allOf:
             - $ref: '#/components/schemas/ListOfClosedDaysRules'
-            - description: Rules for SMS Channel.
+            - description: Rules for the SMS channel.
         PUSH:
           allOf:
             - $ref: '#/components/schemas/ListOfClosedDaysRules'
-            - description: Rules for Push Channel.
+            - description: Rules for the Push channel.
         VOICE:
           allOf:
             - $ref: '#/components/schemas/ListOfClosedDaysRules'
-            - description: Rules for Voice Channel.
+            - description: Rules for the Voice channel.
         CUSTOM:
           allOf:
             - $ref: '#/components/schemas/ListOfClosedDaysRules'
-            - description: Rules for Custom Channel.
-      description: The time when journey will stop sending messages.
+            - description: Rules for the Custom channel.
+      description: The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.
     CreatePushTemplateResponse:
       type: object
       required:
@@ -10758,6 +11034,58 @@ components:
       properties:
         JourneyExecutionMetricsResponse:
           $ref: '#/components/schemas/JourneyExecutionMetricsResponse'
+    GetJourneyRunExecutionActivityMetricsResponse:
+      type: object
+      required:
+        - JourneyRunExecutionActivityMetricsResponse
+      example:
+        JourneyRunExecutionActivityMetricsResponse:
+          ApplicationId: '11111111112222222222333333333344'
+          JourneyId: aaaaaaaaaabbbbbbbbbbccccccccccdd
+          RunId: '99999999998888888888777777777766'
+          JourneyActivityId: AAAAAAAAAA
+          ActivityType: EMAIL
+          LastEvaluatedTime: '2000-01-01T00:00:05.000Z'
+          Metrics:
+            SUCCESS: '1'
+      properties:
+        JourneyRunExecutionActivityMetricsResponse:
+          $ref: '#/components/schemas/JourneyRunExecutionActivityMetricsResponse'
+    GetJourneyRunExecutionMetricsResponse:
+      type: object
+      required:
+        - JourneyRunExecutionMetricsResponse
+      example:
+        JourneyRunExecutionMetricsResponse:
+          ApplicationId: '11111111112222222222333333333344'
+          JourneyId: aaaaaaaaaabbbbbbbbbbccccccccccdd
+          RunId: '99999999998888888888777777777766'
+          LastEvaluatedTime: '2000-01-01T00:00:05.000Z'
+          Metrics:
+            ENDPOINT_PRODUCED: '1'
+            ENDPOINT_ENTERED: '1'
+            ENDPOINT_LEFT: '1'
+      properties:
+        JourneyRunExecutionMetricsResponse:
+          $ref: '#/components/schemas/JourneyRunExecutionMetricsResponse'
+    GetJourneyRunsResponse:
+      type: object
+      required:
+        - JourneyRunsResponse
+      example:
+        JourneyRunsResponse:
+          Item:
+            - RunId: '99999999998888888888777777777766'
+              CreationTime: '2000-01-01T00:00:00.000Z'
+              LastUpdateTime: '2000-01-01T00:00:05.000Z'
+              Status: COMPLETED
+            - RunId: ffffffffffeeeeeeeeeeddddddddddcc
+              CreationTime: '2000-01-01T00:00:10.000Z'
+              LastUpdateTime: '2000-01-01T00:00:10.000Z'
+              Status: SCHEDULED
+      properties:
+        JourneyRunsResponse:
+          $ref: '#/components/schemas/JourneyRunsResponse'
     GetPushTemplateResponse:
       type: object
       required:
@@ -12134,6 +12462,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The unique identifier for the campaign treatment that the activity applies to. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
+        ExecutionMetrics:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: 'A JSON object that contains metrics relating to the campaign execution for this campaign activity. For information about the structure and contents of the results, see <a href="https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.'
       description: Provides information about an activity that was performed by a campaign.
     AddressConfiguration:
       type: object
@@ -13340,7 +13672,7 @@ components:
         RefreshOnSegmentUpdate:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: Specifies whether a journey should be refreshed on segment update.
+            - description: Indicates whether the journey participants should be refreshed when a segment is updated.
         JourneyChannelSettings:
           allOf:
             - $ref: '#/components/schemas/JourneyChannelSettings'
@@ -13348,7 +13680,7 @@ components:
         SendingSchedule:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+            - description: Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.
         OpenHours:
           allOf:
             - $ref: '#/components/schemas/OpenHours'
@@ -13436,11 +13768,11 @@ components:
         WaitForQuietTime:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+            - description: Indicates whether endpoints in quiet hours should enter a wait activity until quiet hours have elapsed.
         RefreshOnSegmentUpdate:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: Specifies whether a journey should be refreshed on segment update.
+            - description: Indicates whether the journey participants should be refreshed when a segment is updated.
         JourneyChannelSettings:
           allOf:
             - $ref: '#/components/schemas/JourneyChannelSettings'
@@ -13448,15 +13780,15 @@ components:
         SendingSchedule:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+            - description: Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.
         OpenHours:
           allOf:
             - $ref: '#/components/schemas/OpenHours'
-            - description: The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+            - description: The time when a journey can send messages. QuietTime should be configured first and SendingSchedule should be set to true.
         ClosedDays:
           allOf:
             - $ref: '#/components/schemas/ClosedDays'
-            - description: The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
+            - description: The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.
       description: 'Provides information about the status, configuration, and other settings for a journey.'
     PushNotificationTemplateRequest:
       type: object
@@ -15377,7 +15709,7 @@ components:
         ActivityType:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: '<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT - For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE - For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT - For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT - For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT - For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>'
+            - description: '<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE – For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>'
         ApplicationId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -15432,6 +15764,102 @@ components:
       type: object
       title: GetJourneyRequest
       properties: {}
+    GetJourneyRunExecutionActivityMetricsRequest:
+      type: object
+      title: GetJourneyRunExecutionActivityMetricsRequest
+      properties: {}
+    JourneyRunExecutionActivityMetricsResponse:
+      type: object
+      required:
+        - Metrics
+        - JourneyId
+        - LastEvaluatedTime
+        - JourneyActivityId
+        - ActivityType
+        - RunId
+        - ApplicationId
+      properties:
+        ActivityType:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: '<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE – For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>'
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the application that the metric applies to.
+        JourneyActivityId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the activity that the metric applies to.
+        JourneyId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the journey that the metric applies to.
+        LastEvaluatedTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the execution status of the activity for this journey run and updated the data for the metric.'
+        Metrics:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: 'A JSON object that contains the results of the query. For information about the structure and contents of the results, see see <a href="https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.'
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the journey run that the metric applies to.
+      description: 'Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity for a particular journey run, and provides information about that query.'
+    GetJourneyRunExecutionMetricsRequest:
+      type: object
+      title: GetJourneyRunExecutionMetricsRequest
+      properties: {}
+    JourneyRunExecutionMetricsResponse:
+      type: object
+      required:
+        - Metrics
+        - JourneyId
+        - LastEvaluatedTime
+        - RunId
+        - ApplicationId
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the application that the metric applies to.
+        JourneyId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the journey that the metric applies to.
+        LastEvaluatedTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the journey run and updated the data for the metric.'
+        Metrics:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: 'A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href="https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.'
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the journey run that the metric applies to.
+      description: 'Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey run, and provides information about that query.'
+    GetJourneyRunsRequest:
+      type: object
+      title: GetJourneyRunsRequest
+      properties: {}
+    JourneyRunsResponse:
+      type: object
+      required:
+        - Item
+      properties:
+        Item:
+          allOf:
+            - $ref: '#/components/schemas/ListOfJourneyRunResponse'
+            - description: 'An array of responses, one for each run of the journey'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+      description: Provides information from all runs of a journey.
     GetPushTemplateRequest:
       type: object
       title: GetPushTemplateRequest
@@ -15943,6 +16371,42 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: '<p>The number of seconds that the push notification service should keep the message, if the service is unable to deliver the notification the first time. This value is converted to an expiration value when it''s sent to a push-notification service. If this value is 0, the service treats the notification as if it expires immediately and the service doesn''t store or try to deliver the notification again.</p> <p>This value doesn''t apply to messages that are sent through the Amazon Device Messaging (ADM) service.</p>'
       description: Specifies the message configuration for a push notification that's sent to participants in a journey.
+    JourneyRunStatus:
+      type: string
+      enum:
+        - SCHEDULED
+        - RUNNING
+        - COMPLETED
+        - CANCELLED
+    JourneyRunResponse:
+      type: object
+      required:
+        - Status
+        - LastUpdateTime
+        - CreationTime
+        - RunId
+      properties:
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time when the journey run was created or scheduled, in ISO 8601 format.'
+        LastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The last time the journey run was updated, in ISO 8601 format..'
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the run.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/JourneyRunStatus'
+            - description: The current status of the journey run.
+      description: Provides information from a specified run of a journey.
+    ListOfJourneyRunResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/JourneyRunResponse'
     JourneySMSMessage:
       type: object
       properties:
@@ -17306,12 +17770,12 @@ components:
         StartTime:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: Local start time in ISO 8601 format.
+            - description: 'The start of the scheduled time, in ISO 8601 format, when the channel can send messages.'
         EndTime:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: Local start time in ISO 8601 format.
-      description: List of OpenHours Rules.
+            - description: 'The end of the scheduled time, in ISO 8601 format, when the channel can''t send messages.'
+      description: Specifies the start and end time for OpenHours.
     ListOfOpenHoursRules:
       type: array
       items:
@@ -17328,16 +17792,16 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: Name of the rule.
+            - description: The name of the closed day rule.
         StartDateTime:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: Start Datetime in ISO 8601 format.
+            - description: Start DateTime ISO 8601 format
         EndDateTime:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: End Datetime in ISO 8601 format.
-      description: Closed Days Rule. Part of Journey sending schedule.
+            - description: End DateTime ISO 8601 format
+      description: Specifies the rule settings for when messages can't be sent.
     ListOfClosedDaysRules:
       type: array
       items:
