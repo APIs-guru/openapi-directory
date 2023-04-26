@@ -3014,6 +3014,9 @@ components:
         gcpFilestoreCsiDriverConfig:
           $ref: "#/components/schemas/GcpFilestoreCsiDriverConfig"
           description: Configuration for the GCP Filestore CSI driver.
+        gcsFuseCsiDriverConfig:
+          $ref: "#/components/schemas/GcsFuseCsiDriverConfig"
+          description: Configuration for the Cloud Storage Fuse CSI driver.
         gkeBackupAgentConfig:
           $ref: "#/components/schemas/GkeBackupAgentConfig"
           description: Configuration for the Backup for GKE agent addon.
@@ -3936,6 +3939,13 @@ components:
       properties:
         enabled:
           description: Whether the GCP Filestore CSI driver is enabled for this cluster.
+          type: boolean
+      type: object
+    GcsFuseCsiDriverConfig:
+      description: Configuration for the Cloud Storage Fuse CSI driver.
+      properties:
+        enabled:
+          description: Whether the Cloud Storage Fuse CSI driver is enabled for this cluster.
           type: boolean
       type: object
     GetJSONWebKeysResponse:

@@ -658,6 +658,23 @@ components:
             - conversation.newMessage
             - conversation.privacyDeletion
             - conversation.propertyChange
+            - contact.merge
+            - company.merge
+            - deal.merge
+            - ticket.merge
+            - product.merge
+            - line_item.merge
+            - contact.restore
+            - company.restore
+            - deal.restore
+            - ticket.restore
+            - product.restore
+            - line_item.restore
+            - contact.associationChange
+            - company.associationChange
+            - deal.associationChange
+            - ticket.associationChange
+            - line_item.associationChange
           type: string
         propertyName:
           description: The internal name of the property to monitor for changes. Only applies when `eventType` is `propertyChange`.
@@ -722,6 +739,23 @@ components:
             - conversation.newMessage
             - conversation.privacyDeletion
             - conversation.propertyChange
+            - contact.merge
+            - company.merge
+            - deal.merge
+            - ticket.merge
+            - product.merge
+            - line_item.merge
+            - contact.restore
+            - company.restore
+            - deal.restore
+            - ticket.restore
+            - product.restore
+            - line_item.restore
+            - contact.associationChange
+            - company.associationChange
+            - deal.associationChange
+            - ticket.associationChange
+            - line_item.associationChange
           type: string
         id:
           description: The unique ID of the subscription.

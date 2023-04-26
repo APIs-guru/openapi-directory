@@ -1244,7 +1244,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   /files/trash:
     delete:
-      description: Permanently deletes all of the user's trashed files.
+      description: Permanently deletes all trashed files of a user or shared drive.
       operationId: drive.files.emptyTrash
       parameters:
         - description: If set, empties the trash of the provided shared drive.
@@ -3901,7 +3901,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won't create a notification.
+      description: Subscribe to changes on a file.
       operationId: drive.files.watch
       parameters:
         - description: The ID for the file in question.

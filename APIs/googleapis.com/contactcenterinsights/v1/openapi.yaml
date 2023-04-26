@@ -1183,6 +1183,25 @@ components:
         runSilenceAnnotator:
           description: Whether to run the silence annotator.
           type: boolean
+        runSummarizationAnnotator:
+          description: Whether to run the summarization annotator.
+          type: boolean
+        summarizationConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1AnnotatorSelectorSummarizationConfig"
+          description: Configuration for the summarization annotator.
+      type: object
+    GoogleCloudContactcenterinsightsV1AnnotatorSelectorSummarizationConfig:
+      description: Configuration for summarization.
+      properties:
+        conversationProfile:
+          description: "Resource name of the Dialogflow conversation profile. Format: projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}"
+          type: string
+        summarizationModel:
+          description: Default summarization model to be used.
+          enum:
+            - SUMMARIZATION_MODEL_UNSPECIFIED
+            - BASELINE_MODEL
+          type: string
       type: object
     GoogleCloudContactcenterinsightsV1AnswerFeedback:
       description: The feedback that the customer has about a certain answer in the conversation.
@@ -1439,6 +1458,10 @@ components:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1Analysis"
           description: Output only. The conversation's latest analysis, if one exists.
           readOnly: true
+        latestSummary:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ConversationSummarizationSuggestionData"
+          description: Output only. Latest summary of the conversation.
+          readOnly: true
         medium:
           description: Immutable. The conversation medium, if unspecified will default to PHONE_CALL.
           enum:
@@ -1538,6 +1561,33 @@ components:
         userId:
           description: A user-specified ID representing the participant.
           type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1ConversationSummarizationSuggestionData:
+      description: Conversation summarization suggestion data.
+      properties:
+        answerRecord:
+          description: "The name of the answer record. Format: projects/{project}/locations/{location}/answerRecords/{answer_record}"
+          type: string
+        confidence:
+          description: The confidence score of the summarization.
+          format: float
+          type: number
+        conversationModel:
+          description: "The name of the model that generates this summary. Format: projects/{project}/locations/{location}/conversationModels/{conversation_model}"
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: A map that contains metadata about the summarization and the document from which it originates.
+          type: object
+        text:
+          description: The summarization content that is concatenated into one string.
+          type: string
+        textSections:
+          additionalProperties:
+            type: string
+          description: The summarization content that is divided into sections. The key is the section's name and the value is the section's content. There is no specific format for the key or value.
+          type: object
       type: object
     GoogleCloudContactcenterinsightsV1ConversationTranscript:
       description: A message representing the transcript of a conversation.
@@ -2361,6 +2411,9 @@ components:
         articleSuggestion:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ArticleSuggestionData"
           description: Agent Assist Article Suggestion data.
+        conversationSummarizationSuggestion:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ConversationSummarizationSuggestionData"
+          description: Conversation summarization suggestion data.
         createTime:
           description: The time at which this annotation was created.
           format: google-datetime
@@ -2694,6 +2747,25 @@ components:
         runSilenceAnnotator:
           description: Whether to run the silence annotator.
           type: boolean
+        runSummarizationAnnotator:
+          description: Whether to run the summarization annotator.
+          type: boolean
+        summarizationConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1AnnotatorSelectorSummarizationConfig"
+          description: Configuration for the summarization annotator.
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1AnnotatorSelectorSummarizationConfig:
+      description: Configuration for summarization.
+      properties:
+        conversationProfile:
+          description: "Resource name of the Dialogflow conversation profile. Format: projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}"
+          type: string
+        summarizationModel:
+          description: Default summarization model to be used.
+          enum:
+            - SUMMARIZATION_MODEL_UNSPECIFIED
+            - BASELINE_MODEL
+          type: string
       type: object
     GoogleCloudContactcenterinsightsV1alpha1AnswerFeedback:
       description: The feedback that the customer has about a certain answer in the conversation.
@@ -2876,6 +2948,10 @@ components:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1Analysis"
           description: Output only. The conversation's latest analysis, if one exists.
           readOnly: true
+        latestSummary:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ConversationSummarizationSuggestionData"
+          description: Output only. Latest summary of the conversation.
+          readOnly: true
         medium:
           description: Immutable. The conversation medium, if unspecified will default to PHONE_CALL.
           enum:
@@ -2975,6 +3051,33 @@ components:
         userId:
           description: A user-specified ID representing the participant.
           type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ConversationSummarizationSuggestionData:
+      description: Conversation summarization suggestion data.
+      properties:
+        answerRecord:
+          description: "The name of the answer record. Format: projects/{project}/locations/{location}/answerRecords/{answer_record}"
+          type: string
+        confidence:
+          description: The confidence score of the summarization.
+          format: float
+          type: number
+        conversationModel:
+          description: "The name of the model that generates this summary. Format: projects/{project}/locations/{location}/conversationModels/{conversation_model}"
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: A map that contains metadata about the summarization and the document from which it originates.
+          type: object
+        text:
+          description: The summarization content that is concatenated into one string.
+          type: string
+        textSections:
+          additionalProperties:
+            type: string
+          description: The summarization content that is divided into sections. The key is the section's name and the value is the section's content. There is no specific format for the key or value.
+          type: object
       type: object
     GoogleCloudContactcenterinsightsV1alpha1ConversationTranscript:
       description: A message representing the transcript of a conversation.
@@ -3607,6 +3710,9 @@ components:
         articleSuggestion:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ArticleSuggestionData"
           description: Agent Assist Article Suggestion data.
+        conversationSummarizationSuggestion:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ConversationSummarizationSuggestionData"
+          description: Conversation summarization suggestion data.
         createTime:
           description: The time at which this annotation was created.
           format: google-datetime

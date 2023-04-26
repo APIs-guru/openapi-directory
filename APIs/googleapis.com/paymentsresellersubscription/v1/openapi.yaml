@@ -874,7 +874,7 @@ components:
           readOnly: true
           type: string
         products:
-          description: "Required. Deprecated: consider using `line_items` as the input. Required. Resource name that identifies the purchased products. The format will be 'partners/{partner_id}/products/{product_id}'."
+          description: "Optional. Deprecated: consider using `line_items` as the input. Required. Resource name that identifies the purchased products. The format will be 'partners/{partner_id}/products/{product_id}'."
           items:
             type: string
           type: array

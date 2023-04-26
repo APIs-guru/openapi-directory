@@ -12025,6 +12025,11 @@ components:
         treatmentForUnderage:
           description: Whether this particular request may come from a user under the age of 16 (may differ by country), under compliance with the European Union's General Data Protection Regulation (GDPR).
           type: boolean
+        userIdentifiers:
+          description: The user identifiers to enhance the conversion. The maximum number of user identifiers for each conversion is 5.
+          items:
+            $ref: "#/components/schemas/UserIdentifier"
+          type: array
         value:
           description: The value of the conversion.
           format: double
@@ -15225,6 +15230,31 @@ components:
             - ALL
           type: string
       type: object
+    OfflineUserAddressInfo:
+      description: Identify a user by name and address.
+      properties:
+        city:
+          description: City of the address.
+          type: string
+        countryCode:
+          description: 2-letter country code in ISO-3166-1 alpha-2 of the user's address.
+          type: string
+        hashedFirstName:
+          description: First name of the user, which is hashed as SHA-256 after normalized (Lowercase all characters; Remove any extra spaces before, after, and in between).
+          type: string
+        hashedLastName:
+          description: Last name of the user, which is hashed as SHA-256 after normalized (lower case only and no punctuation).
+          type: string
+        hashedStreetAddress:
+          description: The street address of the user hashed using SHA-256 hash function after normalization (lower case only).
+          type: string
+        postalCode:
+          description: Postal code of the user's address.
+          type: string
+        state:
+          description: State code of the address.
+          type: string
+      type: object
     OffsetPosition:
       description: Offset Position.
       properties:
@@ -17763,6 +17793,19 @@ components:
             - U98
             - U99
             - U100
+          type: string
+      type: object
+    UserIdentifier:
+      description: User identifying information. Exactly one type of identifier must be specified.
+      properties:
+        addressInfo:
+          $ref: "#/components/schemas/OfflineUserAddressInfo"
+          description: Address information.
+        hashedEmail:
+          description: Hashed email address using SHA-256 hash function after normalization.
+          type: string
+        hashedPhoneNumber:
+          description: Hashed phone number using SHA-256 hash function after normalization (E164 standard).
           type: string
       type: object
     UserProfile:

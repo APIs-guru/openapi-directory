@@ -537,6 +537,26 @@ components:
       schema:
         type: string
   schemas:
+    AbuseDetected:
+      description: A generic alert for abusive user activity occurring with a customer.
+      properties:
+        additionalDetails:
+          $ref: "#/components/schemas/EntityList"
+          description: List of abusive users/entities to be displayed in a table in the alert.
+        product:
+          description: Product that the abuse is originating from.
+          type: string
+        subAlertId:
+          description: Unique identifier of each sub alert that is onboarded.
+          type: string
+        variationType:
+          description: Variation of AbuseDetected alerts. The variation_type determines the texts displayed the alert details. This differs from sub_alert_id because each sub alert can have multiple variation_types, representing different stages of the alert.
+          enum:
+            - ABUSE_DETECTED_VARIATION_TYPE_UNSPECIFIED
+            - DRIVE_ABUSIVE_CONTENT
+            - LIMITED_DISABLE
+          type: string
+      type: object
     AccountSuspensionDetails:
       description: Details about why an account is receiving an account suspension warning.
       properties:
@@ -558,7 +578,7 @@ components:
           type: string
       type: object
     AccountSuspensionWarning:
-      description: LINT.IfChange A warning that the customer's account is about to be suspended.
+      description: A warning that the customer's account is about to be suspended.
       properties:
         appealWindow:
           description: The amount of time remaining to appeal an imminent suspension. After this window has elapsed, the account will be suspended. Only populated if the account suspension is in WARNING state.
@@ -992,6 +1012,38 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    Entity:
+      description: Individual entity affected by, or related to, an alert.
+      properties:
+        link:
+          description: Link to a Security Investigation Tool search based on this entity, if available.
+          type: string
+        name:
+          description: Human-readable name of this entity, such as an email address, file ID, or device name.
+          type: string
+        values:
+          description: Extra values beyond name. The order of values should align with headers in EntityList.
+          items:
+            type: string
+          type: array
+      type: object
+    EntityList:
+      description: EntityList stores entities in a format that can be translated to a table in the Alert Center UI.
+      properties:
+        entities:
+          description: List of entities affected by the alert.
+          items:
+            $ref: "#/components/schemas/Entity"
+          type: array
+        headers:
+          description: Headers of the values in entities. If no value is defined in Entity, this field should be empty.
+          items:
+            type: string
+          type: array
+        name:
+          description: Name of the key detail used to display this entity list.
+          type: string
       type: object
     GmailMessageInfo:
       description: Details of a message in phishing spike alert.
