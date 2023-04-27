@@ -1600,7 +1600,7 @@ components:
       properties:
         deployJob:
           $ref: "#/components/schemas/Job"
-          description: Output only. The deploy Job. This is the first job run in the phase.
+          description: Output only. The deploy Job. This is the deploy job in the phase.
           readOnly: true
         verifyJob:
           $ref: "#/components/schemas/Job"
@@ -1957,7 +1957,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".

@@ -1165,6 +1165,12 @@ components:
           description: Output only. Additional description for this value.
           readOnly: true
           type: string
+        fieldDependencies:
+          description: Output only. Field conditions required for this value to be valid.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchemaFieldDependencies"
+          readOnly: true
+          type: array
         value:
           description: Output only. The string represenstation of the value that can be set for the field.
           readOnly: true

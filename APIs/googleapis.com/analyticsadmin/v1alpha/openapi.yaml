@@ -3399,6 +3399,9 @@ components:
         attributionSettings:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAttributionSettings"
           description: A snapshot of AttributionSettings resource in change history.
+        audience:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAudience"
+          description: A snapshot of an Audience resource in change history.
         bigqueryLink:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBigQueryLink"
           description: A snapshot of a BigQuery link resource in change history.
@@ -4743,6 +4746,7 @@ components:
               - EXPANDED_DATA_SET
               - CHANNEL_GROUP
               - ENHANCED_MEASUREMENT_SETTINGS
+              - AUDIENCE
             type: string
           type: array
       type: object

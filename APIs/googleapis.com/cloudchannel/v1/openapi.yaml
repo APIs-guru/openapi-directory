@@ -2330,6 +2330,9 @@ components:
         associationInfo:
           $ref: "#/components/schemas/GoogleCloudChannelV1AssociationInfo"
           description: Association information to other entitlements.
+        billingAccount:
+          description: Optional. The billing account resource name that is used to pay for this entitlement.
+          type: string
         commitmentSettings:
           $ref: "#/components/schemas/GoogleCloudChannelV1CommitmentSettings"
           description: Commitment settings for a commitment-based Offer. Required for commitment based offers.
@@ -3582,6 +3585,9 @@ components:
         associationInfo:
           $ref: "#/components/schemas/GoogleCloudChannelV1alpha1AssociationInfo"
           description: Association information to other entitlements.
+        billingAccount:
+          description: Optional. The billing account resource name that is used to pay for this entitlement.
+          type: string
         channelPartnerId:
           description: "Cloud Identity ID of a channel partner who will be the direct reseller for the customer's order. This field is generally used in 2-tier ordering, where the order is placed by a top-level distributor on behalf of their channel partner or reseller. Required for distributors. Deprecated: `channel_partner_id` has been moved to the Customer."
           type: string
