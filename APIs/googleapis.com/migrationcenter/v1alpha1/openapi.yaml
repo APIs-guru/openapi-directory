@@ -2640,7 +2640,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
@@ -3477,6 +3477,15 @@ components:
           description: The information confidence of the source. The higher the value, the higher the confidence.
           format: int32
           type: integer
+        state:
+          description: Output only. The state of the source.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETING
+            - INVALID
+          readOnly: true
+          type: string
         type:
           description: Data source type.
           enum:

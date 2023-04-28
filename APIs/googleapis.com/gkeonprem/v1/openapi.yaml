@@ -1,0 +1,3731 @@
+openapi: 3.0.0
+servers:
+  - url: https://gkeonprem.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: ""
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Anthos On-Prem API
+  version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://gkeonprem.googleapis.com/$discovery/rest?version=v1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: gkeonprem
+externalDocs:
+  url: https://cloud.google.com/anthos/clusters/docs/on-prem/
+tags:
+  - name: projects
+paths:
+  "/v1/{name}":
+    delete:
+      description: Deletes a single VMware node pool.
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.delete
+      parameters:
+        - description: "Required. The name of the node pool to delete. Format: projects/{project}/locations/{location}/vmwareClusters/{cluster}/vmwareNodePools/{nodepool}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: If set to true, and the VMware node pool is not found, the request will succeed but no action will be taken on the server and return a completed LRO.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
+        - description: The current etag of the VmwareNodePool. If an etag is provided and does not match the current etag of the node pool, deletion will be blocked and an ABORTED error will be returned.
+          in: query
+          name: etag
+          schema:
+            type: string
+        - description: "If set to true, the deletion of a VMware node pool resource will succeed even if errors occur during deletion. This parameter can be used when you want to delete GCP's node pool resource and you've already deleted the on-prem admin cluster that hosted your node pool. WARNING: Using this parameter when your user cluster still exists may result in a deleted GCP node pool but an existing on-prem node pool."
+          in: query
+          name: ignoreErrors
+          schema:
+            type: boolean
+        - description: If set, only validate the request, but do not actually delete the node pool.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates the parameters of a single VMware node pool.
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.patch
+      parameters:
+        - description: Immutable. The resource name of this node pool.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. Field mask is used to specify the fields to be overwritten in the VMwareNodePool resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all populated fields in the VMwareNodePool message will be updated. Empty fields will be ignored unless a field mask is used.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+        - description: Validate the request without actually doing any updates.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VmwareNodePool"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}/locations":
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: gkeonprem.projects.locations.list
+      parameters:
+        - description: The resource that owns the locations collection, if applicable.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like `"displayName=tokyo"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. If not set, the service selects a default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}/operations":
+    get:
+      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.operations.list
+      parameters:
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOperationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: gkeonprem.projects.locations.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:unenroll":
+    delete:
+      description: Unenrolls a VMware node pool to Anthos On-Prem API
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.unenroll
+      parameters:
+        - description: "Required. The name of the node pool to unenroll. Format: projects/{project}/locations/{location}/vmwareClusters/{cluster}/vmwareNodePools/{nodepool}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The current etag of the VMware node pool. If an etag is provided and does not match the current etag of node pool, deletion will be blocked and an ABORTED error will be returned.
+          in: query
+          name: etag
+          schema:
+            type: string
+        - description: If set, only validate the request, but do not actually unenroll the node pool.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+        - description: This is required if the cluster has any associated node pools. When set, any child node pools will also be unenrolled.
+          in: query
+          name: force
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/bareMetalAdminClusters":
+    get:
+      description: Lists bare metal admin clusters in a given project and location.
+      operationId: gkeonprem.projects.locations.bareMetalAdminClusters.list
+      parameters:
+        - description: 'Required. The parent of the project and location where the clusters are listed in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, at most 50 clusters will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: View for bare metal admin clusters. When `BASIC` is specified, only the admin cluster resource name and membership are returned. The default/unset value `CLUSTER_VIEW_UNSPECIFIED` is the same as `FULL', which returns the complete admin cluster configuration details.
+          in: query
+          name: view
+          schema:
+            enum:
+              - CLUSTER_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBareMetalAdminClustersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Creates a new bare metal admin cluster in a given project and location. The API needs to be combined with creating a bootstrap cluster to work. See: https://cloud.google.com/anthos/clusters/docs/bare-metal/latest/installing/creating-clusters/create-admin-cluster-api#prepare_bootstrap_environment"
+      operationId: gkeonprem.projects.locations.bareMetalAdminClusters.create
+      parameters:
+        - description: 'Required. The parent of the project and location where the cluster is created in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. User provided identifier that is used as part of the resource name; must conform to RFC-1034 and additionally restrict to lower-cased letters. This comes out roughly to: /^a-z+[a-z0-9]$/"
+          in: query
+          name: bareMetalAdminClusterId
+          schema:
+            type: string
+        - description: Validate the request without actually doing any updates.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BareMetalAdminCluster"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/bareMetalAdminClusters:enroll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enrolls an existing bare metal admin cluster to the Anthos On-Prem API within a given project and location. Through enrollment, an existing admin cluster will become Anthos On-Prem API managed. The corresponding GCP resources will be created and all future modifications to the cluster will be expected to be performed through the API.
+      operationId: gkeonprem.projects.locations.bareMetalAdminClusters.enroll
+      parameters:
+        - description: 'Required. The parent of the project and location where the cluster is enrolled in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrollBareMetalAdminClusterRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/bareMetalAdminClusters:queryVersionConfig":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Queries the bare metal admin cluster version config.
+      operationId: gkeonprem.projects.locations.bareMetalAdminClusters.queryVersionConfig
+      parameters:
+        - description: 'Required. The parent of the project and location to query for version config. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'The admin cluster resource name. This is the full resource name of the admin cluster resource. Format: "projects/{project}/locations/{location}/bareMetalAdminClusters/{bare_metal_admin_cluster}"'
+          in: query
+          name: upgradeConfig.clusterName
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryBareMetalAdminVersionConfigResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/bareMetalClusters":
+    get:
+      description: Lists bare metal clusters in a given project and location.
+      operationId: gkeonprem.projects.locations.bareMetalClusters.list
+      parameters:
+        - description: 'Required. The parent of the project and location where the clusters are listed in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: A resource filtering expression following https://google.aip.dev/160. When non-empty, only resource's whose attributes field matches the filter are returned.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, at most 50 clusters will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: View for bare metal Clusters. When `BASIC` is specified, only the cluster resource name and admin cluster membership are returned. The default/unset value `CLUSTER_VIEW_UNSPECIFIED` is the same as `FULL', which returns the complete cluster configuration details.
+          in: query
+          name: view
+          schema:
+            enum:
+              - CLUSTER_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBareMetalClustersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new bare metal cluster in a given project and location.
+      operationId: gkeonprem.projects.locations.bareMetalClusters.create
+      parameters:
+        - description: 'Required. The parent of the project and location where the cluster is created in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. User provided identifier that is used as part of the resource name; must conform to RFC-1034 and additionally restrict to lower-cased letters. This comes out roughly to: /^a-z+[a-z0-9]$/"
+          in: query
+          name: bareMetalClusterId
+          schema:
+            type: string
+        - description: Validate the request without actually doing any updates.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BareMetalCluster"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/bareMetalClusters:enroll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enrolls an existing bare metal user cluster and its node pools to the Anthos On-Prem API within a given project and location. Through enrollment, an existing cluster will become Anthos On-Prem API managed. The corresponding GCP resources will be created and all future modifications to the cluster and/or its node pools will be expected to be performed through the API.
+      operationId: gkeonprem.projects.locations.bareMetalClusters.enroll
+      parameters:
+        - description: 'Required. The parent of the project and location where the cluster is enrolled in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrollBareMetalClusterRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/bareMetalClusters:queryVersionConfig":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Queries the bare metal user cluster version config.
+      operationId: gkeonprem.projects.locations.bareMetalClusters.queryVersionConfig
+      parameters:
+        - description: 'Required. The parent of the project and location to query for version config. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "The admin cluster membership. This is the full resource name of the admin cluster's fleet membership. Format: \"projects/{project}/locations/{location}/memberships/{membership}\""
+          in: query
+          name: createConfig.adminClusterMembership
+          schema:
+            type: string
+        - description: 'The admin cluster resource name. This is the full resource name of the admin cluster resource. Format: "projects/{project}/locations/{location}/bareMetalAdminClusters/{bare_metal_admin_cluster}"'
+          in: query
+          name: createConfig.adminClusterName
+          schema:
+            type: string
+        - description: 'The user cluster resource name. This is the full resource name of the user cluster resource. Format: "projects/{project}/locations/{location}/bareMetalClusters/{bare_metal_cluster}"'
+          in: query
+          name: upgradeConfig.clusterName
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryBareMetalVersionConfigResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/bareMetalNodePools":
+    get:
+      description: Lists bare metal node pools in a given project, location and bare metal cluster.
+      operationId: gkeonprem.projects.locations.bareMetalClusters.bareMetalNodePools.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of node pools. Format: projects/{project}/locations/{location}/bareMetalClusters/{bareMetalCluster}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of node pools to return. The service may return fewer than this value. If unspecified, at most 50 node pools will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListBareMetalNodePools` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListBareMetalNodePools` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBareMetalNodePoolsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new bare metal node pool in a given project, location and Bare Metal cluster.
+      operationId: gkeonprem.projects.locations.bareMetalClusters.bareMetalNodePools.create
+      parameters:
+        - description: Required. The parent resource where this node pool will be created. projects/{project}/locations/{location}/bareMetalClusters/{cluster}
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "The ID to use for the node pool, which will become the final component of the node pool's resource name. This value must be up to 63 characters, and valid characters are /a-z-/. The value must not be permitted to be a UUID (or UUID-like: anything matching /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i)."
+          in: query
+          name: bareMetalNodePoolId
+          schema:
+            type: string
+        - description: If set, only validate the request, but do not actually create the node pool.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BareMetalNodePool"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/bareMetalNodePools:enroll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enrolls an existing bare metal node pool to the Anthos On-Prem API within a given project and location. Through enrollment, an existing node pool will become Anthos On-Prem API managed. The corresponding GCP resources will be created.
+      operationId: gkeonprem.projects.locations.bareMetalClusters.bareMetalNodePools.enroll
+      parameters:
+        - description: Required. The parent resource where this node pool will be created. projects/{project}/locations/{location}/bareMetalClusters/{cluster}
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrollBareMetalNodePoolRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/vmwareAdminClusters":
+    get:
+      description: Lists VMware admin clusters in a given project and location.
+      operationId: gkeonprem.projects.locations.vmwareAdminClusters.list
+      parameters:
+        - description: 'Required. The parent of the project and location where the clusters are listed in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, at most 50 clusters will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: View for VMware admin clusters. When `BASIC` is specified, only the admin cluster resource name and membership are returned. The default/unset value `CLUSTER_VIEW_UNSPECIFIED` is the same as `FULL', which returns the complete admin cluster configuration details.
+          in: query
+          name: view
+          schema:
+            enum:
+              - CLUSTER_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVmwareAdminClustersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/vmwareAdminClusters:enroll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enrolls an existing VMware admin cluster to the Anthos On-Prem API within a given project and location. Through enrollment, an existing admin cluster will become Anthos On-Prem API managed. The corresponding GCP resources will be created and all future modifications to the cluster will be expected to be performed through the API.
+      operationId: gkeonprem.projects.locations.vmwareAdminClusters.enroll
+      parameters:
+        - description: 'Required. The parent of the project and location where the cluster is enrolled in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrollVmwareAdminClusterRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/vmwareClusters":
+    get:
+      description: Lists VMware Clusters in a given project and location.
+      operationId: gkeonprem.projects.locations.vmwareClusters.list
+      parameters:
+        - description: 'Required. The parent of the project and location where the clusters are listed in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: A resource filtering expression following https://google.aip.dev/160. When non-empty, only resource's whose attributes field matches the filter are returned.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, at most 50 clusters will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: View for VMware clusters. When `BASIC` is specified, only the cluster resource name and admin cluster membership are returned. The default/unset value `CLUSTER_VIEW_UNSPECIFIED` is the same as `FULL', which returns the complete cluster configuration details.
+          in: query
+          name: view
+          schema:
+            enum:
+              - CLUSTER_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVmwareClustersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new VMware cluster in a given project and location.
+      operationId: gkeonprem.projects.locations.vmwareClusters.create
+      parameters:
+        - description: 'Required. The parent of the project and location where this cluster is created in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Validate the request without actually doing any updates.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+        - description: User provided identifier that is used as part of the resource name; This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
+          in: query
+          name: vmwareClusterId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VmwareCluster"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/vmwareClusters:enroll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enrolls an existing VMware user cluster and its node pools to the Anthos On-Prem API within a given project and location. Through enrollment, an existing cluster will become Anthos On-Prem API managed. The corresponding GCP resources will be created and all future modifications to the cluster and/or its node pools will be expected to be performed through the API.
+      operationId: gkeonprem.projects.locations.vmwareClusters.enroll
+      parameters:
+        - description: 'Required. The parent of the project and location where the cluster is Enrolled in. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrollVmwareClusterRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/vmwareClusters:queryVersionConfig":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Queries the VMware user cluster version config.
+      operationId: gkeonprem.projects.locations.vmwareClusters.queryVersionConfig
+      parameters:
+        - description: 'Required. The parent of the project and location to query for version config. Format: "projects/{project}/locations/{location}"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "The admin cluster membership. This is the full resource name of the admin cluster's fleet membership. Format: \"projects/{project}/locations/{location}/memberships/{membership}\""
+          in: query
+          name: createConfig.adminClusterMembership
+          schema:
+            type: string
+        - description: 'The admin cluster resource name. This is the full resource name of the admin cluster resource. Format: "projects/{project}/locations/{location}/vmwareAdminClusters/{vmware_admin_cluster}"'
+          in: query
+          name: createConfig.adminClusterName
+          schema:
+            type: string
+        - description: 'The user cluster resource name. This is the full resource name of the user cluster resource. Format: "projects/{project}/locations/{location}/vmwareClusters/{vmware_cluster}"'
+          in: query
+          name: upgradeConfig.clusterName
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryVmwareVersionConfigResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/vmwareNodePools":
+    get:
+      description: Lists VMware node pools in a given project, location and VMWare cluster.
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of node pools. Format: projects/{project}/locations/{location}/vmwareClusters/{vmwareCluster}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of node pools to return. The service may return fewer than this value. If unspecified, at most 50 node pools will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListVmwareNodePools` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListVmwareNodePools` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVmwareNodePoolsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new VMware node pool in a given project, location and VMWare cluster.
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.create
+      parameters:
+        - description: Required. The parent resource where this node pool will be created. projects/{project}/locations/{location}/vmwareClusters/{cluster}
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: If set, only validate the request, but do not actually create the node pool.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+        - description: "The ID to use for the node pool, which will become the final component of the node pool's resource name. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format. The value must not be permitted to be a UUID (or UUID-like: anything matching /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i)."
+          in: query
+          name: vmwareNodePoolId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VmwareNodePool"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/vmwareNodePools:enroll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enrolls a VMware node pool to Anthos On-Prem API
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.enroll
+      parameters:
+        - description: Required. The parent resource where the node pool is enrolled in.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrollVmwareNodePoolRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{resource}:getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.getIamPolicy
+      parameters:
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+          in: query
+          name: options.requestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{resource}:setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.setIamPolicy
+      parameters:
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetIamPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{resource}:testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
+      operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.testIamPermissions
+      parameters:
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Authorization:
+      description: Authorization defines the On-Prem cluster authorization configuration to bootstrap onto the admin cluster.
+      properties:
+        adminUsers:
+          description: Required. For VMware user, bare metal user and standalone clusters, users that will be granted the cluster-admin role on the cluster, providing full access to the cluster. For bare metal Admin cluster, users will be granted the view role, which is a view only access.
+          items:
+            $ref: "#/components/schemas/ClusterUser"
+          type: array
+      type: object
+    BareMetalAdminApiServerArgument:
+      description: "BareMetalAdminApiServerArgument represents an arg name->value pair. Only a subset of customized flags are supported. Please refer to the API server documentation below to know the exact format: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/"
+      properties:
+        argument:
+          description: Required. The argument name as it appears on the API Server command line please make sure to remove the leading dashes.
+          type: string
+        value:
+          description: Required. The value of the arg as it will be passed to the API Server command line.
+          type: string
+      type: object
+    BareMetalAdminCluster:
+      description: Resource that represents a bare metal admin cluster.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: "Annotations on the bare metal admin cluster. This field has the same restrictions as Kubernetes annotations. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
+          type: object
+        bareMetalVersion:
+          type: string
+        clusterOperations:
+          $ref: "#/components/schemas/BareMetalAdminClusterOperationsConfig"
+          description: Cluster operations configuration.
+        controlPlane:
+          $ref: "#/components/schemas/BareMetalAdminControlPlaneConfig"
+          description: Control plane configuration.
+        createTime:
+          description: Output only. The time at which this bare metal admin cluster was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The time at which this bare metal admin cluster was deleted. If the resource is not deleted, this must be empty
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: A human readable description of this bare metal admin cluster.
+          type: string
+        endpoint:
+          description: Output only. The IP address name of bare metal admin cluster's API server.
+          readOnly: true
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding. Allows clients to perform consistent read-modify-writes through optimistic concurrency control.
+          type: string
+        fleet:
+          $ref: "#/components/schemas/Fleet"
+          description: Output only. Fleet configuration for the cluster.
+          readOnly: true
+        loadBalancer:
+          $ref: "#/components/schemas/BareMetalAdminLoadBalancerConfig"
+          description: Load balancer configuration.
+        localName:
+          description: Output only. The object name of the bare metal cluster custom resource. This field is used to support conflicting names when enrolling existing clusters to the API. When used as a part of cluster enrollment, this field will differ from the ID in the resource name. For new clusters, this field will match the user provided cluster name and be visible in the last component of the resource name. It is not modifiable. All users should use this name to access their cluster using gkectl or kubectl and should expect to see the local name when viewing admin cluster controller logs.
+          readOnly: true
+          type: string
+        maintenanceConfig:
+          $ref: "#/components/schemas/BareMetalAdminMaintenanceConfig"
+          description: Maintenance configuration.
+        maintenanceStatus:
+          $ref: "#/components/schemas/BareMetalAdminMaintenanceStatus"
+          description: Output only. MaintenanceStatus representing state of maintenance.
+          readOnly: true
+        name:
+          description: Immutable. The bare metal admin cluster resource name.
+          type: string
+        networkConfig:
+          $ref: "#/components/schemas/BareMetalAdminNetworkConfig"
+          description: Network configuration.
+        nodeAccessConfig:
+          $ref: "#/components/schemas/BareMetalAdminNodeAccessConfig"
+          description: Node access related configurations.
+        nodeConfig:
+          $ref: "#/components/schemas/BareMetalAdminWorkloadNodeConfig"
+          description: Workload node configuration.
+        osEnvironmentConfig:
+          $ref: "#/components/schemas/BareMetalAdminOsEnvironmentConfig"
+          description: OS environment related configurations.
+        proxy:
+          $ref: "#/components/schemas/BareMetalAdminProxyConfig"
+          description: Proxy configuration.
+        reconciling:
+          description: Output only. If set, there are currently changes in flight to the bare metal Admin Cluster.
+          readOnly: true
+          type: boolean
+        securityConfig:
+          $ref: "#/components/schemas/BareMetalAdminSecurityConfig"
+          description: Security related configuration.
+        state:
+          description: Output only. The current state of the bare metal admin cluster.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - RUNNING
+            - RECONCILING
+            - STOPPING
+            - ERROR
+            - DEGRADED
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ResourceStatus"
+          description: Output only. ResourceStatus representing detailed cluster status.
+          readOnly: true
+        storage:
+          $ref: "#/components/schemas/BareMetalAdminStorageConfig"
+          description: Storage configuration.
+        uid:
+          description: Output only. The unique identifier of the bare metal admin cluster.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time at which this bare metal admin cluster was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        validationCheck:
+          $ref: "#/components/schemas/ValidationCheck"
+          description: Output only. ValidationCheck representing the result of the preflight check.
+          readOnly: true
+      type: object
+    BareMetalAdminClusterOperationsConfig:
+      description: BareMetalAdminClusterOperationsConfig specifies the admin cluster's observability infrastructure.
+      properties:
+        enableApplicationLogs:
+          description: Whether collection of application logs/metrics should be enabled (in addition to system logs/metrics).
+          type: boolean
+      type: object
+    BareMetalAdminControlPlaneConfig:
+      description: BareMetalAdminControlPlaneConfig specifies the control plane configuration.
+      properties:
+        apiServerArgs:
+          description: "Customizes the default API server args. Only a subset of customized flags are supported. Please refer to the API server documentation below to know the exact format: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/"
+          items:
+            $ref: "#/components/schemas/BareMetalAdminApiServerArgument"
+          type: array
+        controlPlaneNodePoolConfig:
+          $ref: "#/components/schemas/BareMetalAdminControlPlaneNodePoolConfig"
+          description: Configures the node pool running the control plane. If specified the corresponding NodePool will be created for the cluster's control plane. The NodePool will have the same name and namespace as the cluster.
+      type: object
+    BareMetalAdminControlPlaneNodePoolConfig:
+      description: BareMetalAdminControlPlaneNodePoolConfig specifies the control plane node pool configuration. We have a control plane specific node pool config so that we can flexible about supporting control plane specific fields in the future.
+      properties:
+        nodePoolConfig:
+          $ref: "#/components/schemas/BareMetalNodePoolConfig"
+          description: The generic configuration for a node pool running the control plane.
+      type: object
+    BareMetalAdminDrainedMachine:
+      description: BareMetalAdminDrainedMachine represents the machines that are drained.
+      properties:
+        nodeIp:
+          description: Drained machine IP address.
+          type: string
+      type: object
+    BareMetalAdminDrainingMachine:
+      description: BareMetalAdminDrainingMachine represents the machines that are currently draining.
+      properties:
+        nodeIp:
+          description: Draining machine IP address.
+          type: string
+        podCount:
+          description: The count of pods yet to drain.
+          format: int32
+          type: integer
+      type: object
+    BareMetalAdminIslandModeCidrConfig:
+      description: BareMetalAdminIslandModeCidrConfig specifies the cluster CIDR configuration while running in island mode.
+      properties:
+        podAddressCidrBlocks:
+          description: Required. All pods in the cluster are assigned an RFC1918 IPv4 address from these ranges. This field cannot be changed after creation.
+          items:
+            type: string
+          type: array
+        serviceAddressCidrBlocks:
+          description: Required. All services in the cluster are assigned an RFC1918 IPv4 address from these ranges. This field cannot be changed after creation.
+          items:
+            type: string
+          type: array
+      type: object
+    BareMetalAdminLoadBalancerConfig:
+      description: BareMetalAdminLoadBalancerConfig specifies the load balancer configuration.
+      properties:
+        manualLbConfig:
+          $ref: "#/components/schemas/BareMetalAdminManualLbConfig"
+          description: Manually configured load balancers.
+        portConfig:
+          $ref: "#/components/schemas/BareMetalAdminPortConfig"
+          description: Configures the ports that the load balancer will listen on.
+        vipConfig:
+          $ref: "#/components/schemas/BareMetalAdminVipConfig"
+          description: The VIPs used by the load balancer.
+      type: object
+    BareMetalAdminMachineDrainStatus:
+      description: BareMetalAdminMachineDrainStatus represents the status of bare metal node machines that are undergoing drain operations.
+      properties:
+        drainedMachines:
+          description: The list of drained machines.
+          items:
+            $ref: "#/components/schemas/BareMetalAdminDrainedMachine"
+          type: array
+        drainingMachines:
+          description: The list of draning machines.
+          items:
+            $ref: "#/components/schemas/BareMetalAdminDrainingMachine"
+          type: array
+      type: object
+    BareMetalAdminMaintenanceConfig:
+      description: BareMetalAdminMaintenanceConfig specifies configurations to put bare metal Admin cluster CRs nodes in and out of maintenance.
+      properties:
+        maintenanceAddressCidrBlocks:
+          description: Required. All IPv4 address from these ranges will be placed into maintenance mode. Nodes in maintenance mode will be cordoned and drained. When both of these are true, the "baremetal.cluster.gke.io/maintenance" annotation will be set on the node resource.
+          items:
+            type: string
+          type: array
+      type: object
+    BareMetalAdminMaintenanceStatus:
+      description: BareMetalAdminMaintenanceStatus represents the maintenance status for bare metal Admin cluster CR's nodes.
+      properties:
+        machineDrainStatus:
+          $ref: "#/components/schemas/BareMetalAdminMachineDrainStatus"
+          description: Represents the status of draining and drained machine nodes. This is used to show the progress of cluster upgrade.
+      type: object
+    BareMetalAdminManualLbConfig:
+      description: BareMetalAdminManualLbConfig represents configuration parameters for a manual load balancer.
+      properties:
+        enabled:
+          description: Whether manual load balancing is enabled.
+          type: boolean
+      type: object
+    BareMetalAdminNetworkConfig:
+      description: BareMetalAdminNetworkConfig specifies the cluster network configuration.
+      properties:
+        islandModeCidr:
+          $ref: "#/components/schemas/BareMetalAdminIslandModeCidrConfig"
+          description: Configuration for Island mode CIDR.
+      type: object
+    BareMetalAdminNodeAccessConfig:
+      description: Specifies the node access related settings for the bare metal admin cluster.
+      properties:
+        loginUser:
+          description: Required. LoginUser is the user name used to access node machines. It defaults to "root" if not set.
+          type: string
+      type: object
+    BareMetalAdminOsEnvironmentConfig:
+      description: Specifies operating system operation settings for cluster provisioning.
+      properties:
+        packageRepoExcluded:
+          description: Whether the package repo should be added when initializing bare metal machines.
+          type: boolean
+      type: object
+    BareMetalAdminPortConfig:
+      description: BareMetalAdminPortConfig is the specification of load balancer ports.
+      properties:
+        controlPlaneLoadBalancerPort:
+          format: int32
+          type: integer
+      type: object
+    BareMetalAdminProxyConfig:
+      description: BareMetalAdminProxyConfig specifies the cluster proxy configuration.
+      properties:
+        noProxy:
+          description: 'A list of IPs, hostnames, and domains that should skip the proxy. Examples: ["127.0.0.1", "example.com", ".corp", "localhost"].'
+          items:
+            type: string
+          type: array
+        uri:
+          description: "Required. Specifies the address of your proxy server. Examples: `http://domain` WARNING: Do not provide credentials in the format `http://(username:password@)domain` these will be rejected by the server."
+          type: string
+      type: object
+    BareMetalAdminSecurityConfig:
+      description: Specifies the security related settings for the bare metal admin cluster.
+      properties:
+        authorization:
+          $ref: "#/components/schemas/Authorization"
+          description: Configures user access to the admin cluster.
+      type: object
+    BareMetalAdminStorageConfig:
+      description: BareMetalAdminStorageConfig specifies the cluster storage configuration.
+      properties:
+        lvpNodeMountsConfig:
+          $ref: "#/components/schemas/BareMetalLvpConfig"
+          description: Required. Specifies the config for local PersistentVolumes backed by mounted node disks. These disks need to be formatted and mounted by the user, which can be done before or after cluster creation.
+        lvpShareConfig:
+          $ref: "#/components/schemas/BareMetalLvpShareConfig"
+          description: Required. Specifies the config for local PersistentVolumes backed by subdirectories in a shared filesystem. These subdirectores are automatically created during cluster creation.
+      type: object
+    BareMetalAdminVipConfig:
+      description: BareMetalAdminVipConfig for bare metal load balancer configurations.
+      properties:
+        controlPlaneVip:
+          description: The VIP which you previously set aside for the Kubernetes API of this bare metal admin cluster.
+          type: string
+      type: object
+    BareMetalAdminWorkloadNodeConfig:
+      description: BareMetalAdminWorkloadNodeConfig specifies the workload node configurations.
+      properties:
+        maxPodsPerNode:
+          description: The maximum number of pods a node can run. The size of the CIDR range assigned to the node will be derived from this parameter. By default 110 Pods are created per Node. Upper bound is 250 for both HA and non-HA admin cluster. Lower bound is 64 for non-HA admin cluster and 32 for HA admin cluster.
+          format: int64
+          type: string
+      type: object
+    BareMetalApiServerArgument:
+      description: Represents an arg name->value pair. Only a subset of customized flags are supported. For the exact format, refer to the [API server documentation](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/).
+      properties:
+        argument:
+          description: Required. The argument name as it appears on the API Server command line, make sure to remove the leading dashes.
+          type: string
+        value:
+          description: Required. The value of the arg as it will be passed to the API Server command line.
+          type: string
+      type: object
+    BareMetalBgpLbConfig:
+      description: BareMetalBgpLbConfig represents configuration parameters for a Border Gateway Protocol (BGP) load balancer.
+      properties:
+        addressPools:
+          description: Required. AddressPools is a list of non-overlapping IP pools used by load balancer typed services. All addresses must be routable to load balancer nodes. IngressVIP must be included in the pools.
+          items:
+            $ref: "#/components/schemas/BareMetalLoadBalancerAddressPool"
+          type: array
+        asn:
+          description: Required. BGP autonomous system number (ASN) of the cluster. This field can be updated after cluster creation.
+          format: int64
+          type: string
+        bgpPeerConfigs:
+          description: Required. The list of BGP peers that the cluster will connect to. At least one peer must be configured for each control plane node. Control plane nodes will connect to these peers to advertise the control plane VIP. The Services load balancer also uses these peers by default. This field can be updated after cluster creation.
+          items:
+            $ref: "#/components/schemas/BareMetalBgpPeerConfig"
+          type: array
+        loadBalancerNodePoolConfig:
+          $ref: "#/components/schemas/BareMetalLoadBalancerNodePoolConfig"
+          description: Specifies the node pool running data plane load balancing. L2 connectivity is required among nodes in this pool. If missing, the control plane node pool is used for data plane load balancing.
+      type: object
+    BareMetalBgpPeerConfig:
+      description: BareMetalBgpPeerConfig represents configuration parameters for a Border Gateway Protocol (BGP) peer.
+      properties:
+        asn:
+          description: Required. BGP autonomous system number (ASN) for the network that contains the external peer device.
+          format: int64
+          type: string
+        controlPlaneNodes:
+          description: The IP address of the control plane node that connects to the external peer. If you don't specify any control plane nodes, all control plane nodes can connect to the external peer. If you specify one or more IP addresses, only the nodes specified participate in peering sessions.
+          items:
+            type: string
+          type: array
+        ipAddress:
+          description: Required. The IP address of the external peer device.
+          type: string
+      type: object
+    BareMetalCluster:
+      description: Resource that represents a bare metal user cluster.
+      properties:
+        adminClusterMembership:
+          description: Required. The admin cluster this bare metal user cluster belongs to. This is the full resource name of the admin cluster's fleet membership.
+          type: string
+        adminClusterName:
+          description: Output only. The resource name of the bare metal admin cluster managing this user cluster.
+          readOnly: true
+          type: string
+        annotations:
+          additionalProperties:
+            type: string
+          description: "Annotations on the bare metal user cluster. This field has the same restrictions as Kubernetes annotations. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
+          type: object
+        bareMetalVersion:
+          description: Required. The Anthos clusters on bare metal version for your user cluster.
+          type: string
+        clusterOperations:
+          $ref: "#/components/schemas/BareMetalClusterOperationsConfig"
+          description: Cluster operations configuration.
+        controlPlane:
+          $ref: "#/components/schemas/BareMetalControlPlaneConfig"
+          description: Required. Control plane configuration.
+        createTime:
+          description: Output only. The time when the bare metal user cluster was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The time when the bare metal user cluster was deleted. If the resource is not deleted, this must be empty
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: A human readable description of this bare metal user cluster.
+          type: string
+        endpoint:
+          description: Output only. The IP address of the bare metal user cluster's API server.
+          readOnly: true
+          type: string
+        etag:
+          description: Output only. This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding. Allows clients to perform consistent read-modify-writes through optimistic concurrency control.
+          readOnly: true
+          type: string
+        fleet:
+          $ref: "#/components/schemas/Fleet"
+          description: Output only. Fleet configuration for the cluster.
+          readOnly: true
+        loadBalancer:
+          $ref: "#/components/schemas/BareMetalLoadBalancerConfig"
+          description: Required. Load balancer configuration.
+        localName:
+          description: Output only. The object name of the bare metal user cluster custom resource on the associated admin cluster. This field is used to support conflicting names when enrolling existing clusters to the API. When used as a part of cluster enrollment, this field will differ from the name in the resource name. For new clusters, this field will match the user provided cluster name and be visible in the last component of the resource name. It is not modifiable. When the local name and cluster name differ, the local name is used in the admin cluster controller logs. You use the cluster name when accessing the cluster using bmctl and kubectl.
+          readOnly: true
+          type: string
+        maintenanceConfig:
+          $ref: "#/components/schemas/BareMetalMaintenanceConfig"
+          description: Maintenance configuration.
+        maintenanceStatus:
+          $ref: "#/components/schemas/BareMetalMaintenanceStatus"
+          description: Output only. Status of on-going maintenance tasks.
+          readOnly: true
+        name:
+          description: Immutable. The bare metal user cluster resource name.
+          type: string
+        networkConfig:
+          $ref: "#/components/schemas/BareMetalNetworkConfig"
+          description: Required. Network configuration.
+        nodeAccessConfig:
+          $ref: "#/components/schemas/BareMetalNodeAccessConfig"
+          description: Node access related configurations.
+        nodeConfig:
+          $ref: "#/components/schemas/BareMetalWorkloadNodeConfig"
+          description: Workload node configuration.
+        osEnvironmentConfig:
+          $ref: "#/components/schemas/BareMetalOsEnvironmentConfig"
+          description: OS environment related configurations.
+        proxy:
+          $ref: "#/components/schemas/BareMetalProxyConfig"
+          description: Proxy configuration.
+        reconciling:
+          description: Output only. If set, there are currently changes in flight to the bare metal user cluster.
+          readOnly: true
+          type: boolean
+        securityConfig:
+          $ref: "#/components/schemas/BareMetalSecurityConfig"
+          description: Security related setting configuration.
+        state:
+          description: Output only. The current state of the bare metal user cluster.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - RUNNING
+            - RECONCILING
+            - STOPPING
+            - ERROR
+            - DEGRADED
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ResourceStatus"
+          description: Output only. Detailed cluster status.
+          readOnly: true
+        storage:
+          $ref: "#/components/schemas/BareMetalStorageConfig"
+          description: Required. Storage configuration.
+        uid:
+          description: Output only. The unique identifier of the bare metal user cluster.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time when the bare metal user cluster was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        validationCheck:
+          $ref: "#/components/schemas/ValidationCheck"
+          description: Output only. The result of the preflight check.
+          readOnly: true
+      type: object
+    BareMetalClusterOperationsConfig:
+      description: Specifies the bare metal user cluster's observability infrastructure.
+      properties:
+        enableApplicationLogs:
+          description: Whether collection of application logs/metrics should be enabled (in addition to system logs/metrics).
+          type: boolean
+      type: object
+    BareMetalControlPlaneConfig:
+      description: Specifies the control plane configuration.
+      properties:
+        apiServerArgs:
+          description: Customizes the default API server args. Only a subset of customized flags are supported. For the exact format, refer to the [API server documentation](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/).
+          items:
+            $ref: "#/components/schemas/BareMetalApiServerArgument"
+          type: array
+        controlPlaneNodePoolConfig:
+          $ref: "#/components/schemas/BareMetalControlPlaneNodePoolConfig"
+          description: Required. Configures the node pool running the control plane.
+      type: object
+    BareMetalControlPlaneNodePoolConfig:
+      description: Specifies the control plane node pool configuration.
+      properties:
+        nodePoolConfig:
+          $ref: "#/components/schemas/BareMetalNodePoolConfig"
+          description: Required. The generic configuration for a node pool running the control plane.
+      type: object
+    BareMetalDrainedMachine:
+      description: Represents a machine that is currently drained.
+      properties:
+        nodeIp:
+          description: Drained machine IP address.
+          type: string
+      type: object
+    BareMetalDrainingMachine:
+      description: Represents a machine that is currently draining.
+      properties:
+        nodeIp:
+          description: Draining machine IP address.
+          type: string
+        podCount:
+          description: The count of pods yet to drain.
+          format: int32
+          type: integer
+      type: object
+    BareMetalIslandModeCidrConfig:
+      description: Specifies the cluster CIDR configuration while running in island mode.
+      properties:
+        podAddressCidrBlocks:
+          description: Required. All pods in the cluster are assigned an RFC1918 IPv4 address from these ranges. This field cannot be changed after creation.
+          items:
+            type: string
+          type: array
+        serviceAddressCidrBlocks:
+          description: Required. All services in the cluster are assigned an RFC1918 IPv4 address from these ranges. This field is mutable after creation starting with version 1.15.
+          items:
+            type: string
+          type: array
+      type: object
+    BareMetalKubeletConfig:
+      description: "KubeletConfig defines the modifiable kubelet configurations for baremetal machines. Note: this list includes fields supported in GKE (see https://cloud.google.com/kubernetes-engine/docs/how-to/node-system-config#kubelet-options)."
+      properties:
+        registryBurst:
+          description: The maximum size of bursty pulls, temporarily allows pulls to burst to this number, while still not exceeding registry_pull_qps. The value must not be a negative number. Updating this field may impact scalability by changing the amount of traffic produced by image pulls. Defaults to 10.
+          format: int32
+          type: integer
+        registryPullQps:
+          description: The limit of registry pulls per second. Setting this value to 0 means no limit. Updating this field may impact scalability by changing the amount of traffic produced by image pulls. Defaults to 5.
+          format: int32
+          type: integer
+        serializeImagePullsDisabled:
+          description: Prevents the Kubelet from pulling multiple images at a time. We recommend *not* changing the default value on nodes that run docker daemon with version < 1.9 or an Another Union File System (Aufs) storage backend. Issue https://github.com/kubernetes/kubernetes/issues/10959 has more details.
+          type: boolean
+      type: object
+    BareMetalLoadBalancerAddressPool:
+      description: Represents an IP pool used by the load balancer.
+      properties:
+        addresses:
+          description: Required. The addresses that are part of this pool. Each address must be either in the CIDR form (1.2.3.0/24) or range form (1.2.3.1-1.2.3.5).
+          items:
+            type: string
+          type: array
+        avoidBuggyIps:
+          description: If true, avoid using IPs ending in .0 or .255. This avoids buggy consumer devices mistakenly dropping IPv4 traffic for those special IP addresses.
+          type: boolean
+        manualAssign:
+          description: If true, prevent IP addresses from being automatically assigned.
+          type: boolean
+        pool:
+          description: Required. The name of the address pool.
+          type: string
+      type: object
+    BareMetalLoadBalancerConfig:
+      description: Specifies the load balancer configuration.
+      properties:
+        bgpLbConfig:
+          $ref: "#/components/schemas/BareMetalBgpLbConfig"
+          description: Configuration for BGP typed load balancers. When set network_config.advanced_networking is automatically set to true.
+        manualLbConfig:
+          $ref: "#/components/schemas/BareMetalManualLbConfig"
+          description: Manually configured load balancers.
+        metalLbConfig:
+          $ref: "#/components/schemas/BareMetalMetalLbConfig"
+          description: Configuration for MetalLB load balancers.
+        portConfig:
+          $ref: "#/components/schemas/BareMetalPortConfig"
+          description: Configures the ports that the load balancer will listen on.
+        vipConfig:
+          $ref: "#/components/schemas/BareMetalVipConfig"
+          description: The VIPs used by the load balancer.
+      type: object
+    BareMetalLoadBalancerNodePoolConfig:
+      description: Specifies the load balancer's node pool configuration.
+      properties:
+        nodePoolConfig:
+          $ref: "#/components/schemas/BareMetalNodePoolConfig"
+          description: The generic configuration for a node pool running a load balancer.
+      type: object
+    BareMetalLvpConfig:
+      description: Specifies the configs for local persistent volumes (PVs).
+      properties:
+        path:
+          description: Required. The host machine path.
+          type: string
+        storageClass:
+          description: Required. The StorageClass name that PVs will be created with.
+          type: string
+      type: object
+    BareMetalLvpShareConfig:
+      description: Specifies the configs for local persistent volumes under a shared file system.
+      properties:
+        lvpConfig:
+          $ref: "#/components/schemas/BareMetalLvpConfig"
+          description: Required. Defines the machine path and storage class for the LVP Share.
+        sharedPathPvCount:
+          description: The number of subdirectories to create under path.
+          format: int32
+          type: integer
+      type: object
+    BareMetalMachineDrainStatus:
+      description: Represents the status of node machines that are undergoing drain operations.
+      properties:
+        drainedMachines:
+          description: The list of drained machines.
+          items:
+            $ref: "#/components/schemas/BareMetalDrainedMachine"
+          type: array
+        drainingMachines:
+          description: The list of draning machines.
+          items:
+            $ref: "#/components/schemas/BareMetalDrainingMachine"
+          type: array
+      type: object
+    BareMetalMaintenanceConfig:
+      description: Specifies configurations to put bare metal nodes in and out of maintenance.
+      properties:
+        maintenanceAddressCidrBlocks:
+          description: Required. All IPv4 address from these ranges will be placed into maintenance mode. Nodes in maintenance mode will be cordoned and drained. When both of these are true, the "baremetal.cluster.gke.io/maintenance" annotation will be set on the node resource.
+          items:
+            type: string
+          type: array
+      type: object
+    BareMetalMaintenanceStatus:
+      description: Represents the maintenance status of the bare metal user cluster.
+      properties:
+        machineDrainStatus:
+          $ref: "#/components/schemas/BareMetalMachineDrainStatus"
+          description: The maintenance status of node machines.
+      type: object
+    BareMetalManualLbConfig:
+      description: Represents configuration parameters for a manual load balancer.
+      properties:
+        enabled:
+          description: Whether manual load balancing is enabled.
+          type: boolean
+      type: object
+    BareMetalMetalLbConfig:
+      description: Represents configuration parameters for a MetalLB load balancer.
+      properties:
+        addressPools:
+          description: Required. AddressPools is a list of non-overlapping IP pools used by load balancer typed services. All addresses must be routable to load balancer nodes. IngressVIP must be included in the pools.
+          items:
+            $ref: "#/components/schemas/BareMetalLoadBalancerAddressPool"
+          type: array
+        loadBalancerNodePoolConfig:
+          $ref: "#/components/schemas/BareMetalLoadBalancerNodePoolConfig"
+          description: Specifies the node pool running the load balancer. L2 connectivity is required among nodes in this pool. If missing, the control plane node pool is used as the load balancer pool.
+      type: object
+    BareMetalMultipleNetworkInterfacesConfig:
+      description: Specifies the multiple networking interfaces cluster configuration.
+      properties:
+        enabled:
+          description: Whether to enable multiple network interfaces for your pods. When set network_config.advanced_networking is automatically set to true.
+          type: boolean
+      type: object
+    BareMetalNetworkConfig:
+      description: Specifies the cluster network configuration.
+      properties:
+        advancedNetworking:
+          description: Enables the use of advanced Anthos networking features, such as Bundled Load Balancing with BGP or the egress NAT gateway. Setting configuration for advanced networking features will automatically set this flag.
+          type: boolean
+        islandModeCidr:
+          $ref: "#/components/schemas/BareMetalIslandModeCidrConfig"
+          description: Configuration for island mode CIDR. In an island-mode network, nodes have unique IP addresses, but pods don't have unique addresses across clusters. This doesn't cause problems because pods in one cluster never directly communicate with pods in another cluster. Instead, there are gateways that mediate between a pod in one cluster and a pod in another cluster.
+        multipleNetworkInterfacesConfig:
+          $ref: "#/components/schemas/BareMetalMultipleNetworkInterfacesConfig"
+          description: Configuration for multiple network interfaces.
+        srIovConfig:
+          $ref: "#/components/schemas/BareMetalSrIovConfig"
+          description: Configuration for SR-IOV.
+      type: object
+    BareMetalNodeAccessConfig:
+      description: Specifies the node access related settings for the bare metal user cluster.
+      properties:
+        loginUser:
+          description: LoginUser is the user name used to access node machines. It defaults to "root" if not set.
+          type: string
+      type: object
+    BareMetalNodeConfig:
+      description: BareMetalNodeConfig lists machine addresses to access Nodes.
+      properties:
+        labels:
+          additionalProperties:
+            type: string
+          description: 'The labels assigned to this node. An object containing a list of key/value pairs. The labels here, unioned with the labels set on BareMetalNodePoolConfig are the set of labels that will be applied to the node. If there are any conflicts, the BareMetalNodeConfig labels take precedence. Example: { "name": "wrench", "mass": "1.3kg", "count": "3" }.'
+          type: object
+        nodeIp:
+          description: "The default IPv4 address for SSH access and Kubernetes node. Example: 192.168.0.1"
+          type: string
+      type: object
+    BareMetalNodePool:
+      description: Resource that represents a bare metal node pool.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: "Annotations on the bare metal node pool. This field has the same restrictions as Kubernetes annotations. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
+          type: object
+        createTime:
+          description: Output only. The time at which this bare metal node pool was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The time at which this bare metal node pool was deleted. If the resource is not deleted, this must be empty
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: The display name for the bare metal node pool.
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding. Allows clients to perform consistent read-modify-writes through optimistic concurrency control.
+          type: string
+        name:
+          description: Immutable. The bare metal node pool resource name.
+          type: string
+        nodePoolConfig:
+          $ref: "#/components/schemas/BareMetalNodePoolConfig"
+          description: Required. Node pool configuration.
+        reconciling:
+          description: Output only. If set, there are currently changes in flight to the bare metal node pool.
+          readOnly: true
+          type: boolean
+        state:
+          description: Output only. The current state of the bare metal node pool.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - RUNNING
+            - RECONCILING
+            - STOPPING
+            - ERROR
+            - DEGRADED
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ResourceStatus"
+          description: Output only. ResourceStatus representing the detailed node pool status.
+          readOnly: true
+        uid:
+          description: Output only. The unique identifier of the bare metal node pool.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time at which this bare metal node pool was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    BareMetalNodePoolConfig:
+      description: BareMetalNodePoolConfig describes the configuration of all nodes within a given bare metal node pool.
+      properties:
+        kubeletConfig:
+          $ref: "#/components/schemas/BareMetalKubeletConfig"
+          description: The modifiable kubelet configurations for the baremetal machines.
+        labels:
+          additionalProperties:
+            type: string
+          description: 'The labels assigned to nodes of this node pool. An object containing a list of key/value pairs. Example: { "name": "wrench", "mass": "1.3kg", "count": "3" }.'
+          type: object
+        nodeConfigs:
+          description: Required. The list of machine addresses in the bare metal node pool.
+          items:
+            $ref: "#/components/schemas/BareMetalNodeConfig"
+          type: array
+        operatingSystem:
+          description: "Specifies the nodes operating system (default: LINUX)."
+          enum:
+            - OPERATING_SYSTEM_UNSPECIFIED
+            - LINUX
+          type: string
+        taints:
+          description: The initial taints assigned to nodes of this node pool.
+          items:
+            $ref: "#/components/schemas/NodeTaint"
+          type: array
+      type: object
+    BareMetalOsEnvironmentConfig:
+      description: Specifies operating system settings for cluster provisioning.
+      properties:
+        packageRepoExcluded:
+          description: Whether the package repo should not be included when initializing bare metal machines.
+          type: boolean
+      type: object
+    BareMetalPortConfig:
+      description: Specifies load balancer ports for the bare metal user cluster.
+      properties:
+        controlPlaneLoadBalancerPort:
+          description: The port that control plane hosted load balancers will listen on.
+          format: int32
+          type: integer
+      type: object
+    BareMetalProxyConfig:
+      description: Specifies the cluster proxy configuration.
+      properties:
+        noProxy:
+          description: 'A list of IPs, hostnames, and domains that should skip the proxy. Examples: ["127.0.0.1", "example.com", ".corp", "localhost"].'
+          items:
+            type: string
+          type: array
+        uri:
+          description: "Required. Specifies the address of your proxy server. Examples: `http://domain` Do not provide credentials in the format `http://(username:password@)domain` these will be rejected by the server."
+          type: string
+      type: object
+    BareMetalSecurityConfig:
+      description: Specifies the security related settings for the bare metal user cluster.
+      properties:
+        authorization:
+          $ref: "#/components/schemas/Authorization"
+          description: Configures user access to the user cluster.
+      type: object
+    BareMetalSrIovConfig:
+      description: Specifies the SR-IOV networking operator config.
+      properties:
+        enabled:
+          description: Whether to install the SR-IOV operator.
+          type: boolean
+      type: object
+    BareMetalStorageConfig:
+      description: BareMetalStorageConfig specifies the cluster storage configuration.
+      properties:
+        lvpNodeMountsConfig:
+          $ref: "#/components/schemas/BareMetalLvpConfig"
+          description: Required. Specifies the config for local PersistentVolumes backed by mounted node disks. These disks need to be formatted and mounted by the user, which can be done before or after cluster creation.
+        lvpShareConfig:
+          $ref: "#/components/schemas/BareMetalLvpShareConfig"
+          description: Required. Specifies the config for local PersistentVolumes backed by subdirectories in a shared filesystem. These subdirectores are automatically created during cluster creation.
+      type: object
+    BareMetalVersionInfo:
+      description: Contains information about a specific Anthos on bare metal version.
+      properties:
+        hasDependencies:
+          description: If set, the cluster dependencies (e.g. the admin cluster, other user clusters managed by the same admin cluster, version skew policy, etc) must be upgraded before this version can be installed or upgraded to.
+          type: boolean
+        version:
+          description: Version number e.g. 1.13.1.
+          type: string
+      type: object
+    BareMetalVipConfig:
+      description: Specifies the VIP config for the bare metal load balancer.
+      properties:
+        controlPlaneVip:
+          description: The VIP which you previously set aside for the Kubernetes API of this bare metal user cluster.
+          type: string
+        ingressVip:
+          description: The VIP which you previously set aside for ingress traffic into this bare metal user cluster.
+          type: string
+      type: object
+    BareMetalWorkloadNodeConfig:
+      description: Specifies the workload node configurations.
+      properties:
+        containerRuntime:
+          description: Specifies which container runtime will be used.
+          enum:
+            - CONTAINER_RUNTIME_UNSPECIFIED
+            - CONTAINERD
+          type: string
+        maxPodsPerNode:
+          description: The maximum number of pods a node can run. The size of the CIDR range assigned to the node will be derived from this parameter.
+          format: int64
+          type: string
+      type: object
+    Binding:
+      description: Associates `members`, or principals, with a `role`.
+      properties:
+        condition:
+          $ref: "#/components/schemas/Expr"
+          description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+        members:
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding."
+          items:
+            type: string
+          type: array
+        role:
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
+      type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
+    ClusterUser:
+      description: ClusterUser configures user principals for an RBAC policy.
+      properties:
+        username:
+          description: Required. The name of the user, e.g. `my-gcp-id@gmail.com`.
+          type: string
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    EnrollBareMetalAdminClusterRequest:
+      description: Message for enrolling an existing bare metal admin cluster to the GKE on-prem API.
+      properties:
+        bareMetalAdminClusterId:
+          description: User provided OnePlatform identifier that is used as part of the resource name. This must be unique among all GKE on-prem clusters within a project and location and will return a 409 if the cluster already exists. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
+          type: string
+        localName:
+          description: The object name of the bare metal OnPremAdminCluster custom resource on the associated admin cluster. This field is used to support conflicting resource names when enrolling existing clusters to the API. When not provided, this field will resolve to the bare_metal_admin_cluster_id. Otherwise, it must match the object name of the bare metal OnPremAdminCluster custom resource. It is not modifiable outside / beyond the enrollment operation.
+          type: string
+        membership:
+          description: Required. This is the full resource name of this admin cluster's fleet membership.
+          type: string
+      type: object
+    EnrollBareMetalClusterRequest:
+      description: Message for enrolling an existing bare metal cluster to the Anthos On-Prem API.
+      properties:
+        adminClusterMembership:
+          description: Required. The admin cluster this bare metal user cluster belongs to. This is the full resource name of the admin cluster's fleet membership. In the future, references to other resource types might be allowed if admin clusters are modeled as their own resources.
+          type: string
+        bareMetalClusterId:
+          description: User provided OnePlatform identifier that is used as part of the resource name. This must be unique among all bare metal clusters within a project and location and will return a 409 if the cluster already exists. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
+          type: string
+        localName:
+          description: The object name of the bare metal cluster custom resource on the associated admin cluster. This field is used to support conflicting resource names when enrolling existing clusters to the API. When not provided, this field will resolve to the bare_metal_cluster_id. Otherwise, it must match the object name of the bare metal cluster custom resource. It is not modifiable outside / beyond the enrollment operation.
+          type: string
+      type: object
+    EnrollBareMetalNodePoolRequest:
+      description: Message for enrolling an existing bare metal node pool to the GKE on-prem API.
+      properties:
+        bareMetalNodePoolId:
+          description: User provided OnePlatform identifier that is used as part of the resource name. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
+          type: string
+        validateOnly:
+          description: If set, only validate the request, but do not actually enroll the node pool.
+          type: boolean
+      type: object
+    EnrollVmwareAdminClusterRequest:
+      description: Message for enrolling an existing VMware admin cluster to the GKE on-prem API.
+      properties:
+        localName:
+          description: The object name of the VMware OnPremAdminCluster custom resource on the associated admin cluster. This field is used to support conflicting resource names when enrolling existing clusters to the API. When not provided, this field will resolve to the vmware_admin_cluster_id. Otherwise, it must match the object name of the VMware OnPremAdminCluster custom resource. It is not modifiable outside / beyond the enrollment operation.
+          type: string
+        membership:
+          description: Required. This is the full resource name of this admin cluster's fleet membership.
+          type: string
+        vmwareAdminClusterId:
+          description: User provided OnePlatform identifier that is used as part of the resource name. This must be unique among all GKE on-prem clusters within a project and location and will return a 409 if the cluster already exists. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
+          type: string
+      type: object
+    EnrollVmwareClusterRequest:
+      description: Message for enrolling an existing VMware cluster to the Anthos On-Prem API.
+      properties:
+        adminClusterMembership:
+          description: Required. The admin cluster this VMware user cluster belongs to. This is the full resource name of the admin cluster's fleet membership. In the future, references to other resource types might be allowed if admin clusters are modeled as their own resources.
+          type: string
+        localName:
+          description: The object name of the VMware OnPremUserCluster custom resource on the associated admin cluster. This field is used to support conflicting resource names when enrolling existing clusters to the API. When not provided, this field will resolve to the vmware_cluster_id. Otherwise, it must match the object name of the VMware OnPremUserCluster custom resource. It is not modifiable outside / beyond the enrollment operation.
+          type: string
+        validateOnly:
+          description: Validate the request without actually doing any updates.
+          type: boolean
+        vmwareClusterId:
+          description: User provided OnePlatform identifier that is used as part of the resource name. This must be unique among all GKE on-prem clusters within a project and location and will return a 409 if the cluster already exists. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
+          type: string
+      type: object
+    EnrollVmwareNodePoolRequest:
+      description: Message for enrolling a VMware node pool.
+      properties:
+        vmwareNodePoolId:
+          description: The target node pool id to be enrolled.
+          type: string
+      type: object
+    Expr:
+      description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
+      properties:
+        description:
+          description: Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
+          type: string
+        expression:
+          description: Textual representation of an expression in Common Expression Language syntax.
+          type: string
+        location:
+          description: Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
+          type: string
+        title:
+          description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+    Fleet:
+      description: "Fleet related configuration. Fleets are a Google Cloud concept for logically organizing clusters, letting you use and manage multi-cluster capabilities and apply consistent policies across your systems. See [Anthos Fleets](`https://cloud.google.com/anthos/multicluster-management/fleets`) for more details on Anthos multi-cluster capabilities using Fleets. ##"
+      properties:
+        membership:
+          description: Output only. The name of the managed fleet Membership resource associated to this cluster. Membership names are formatted as `projects//locations//memberships/`.
+          readOnly: true
+          type: string
+      type: object
+    ListBareMetalAdminClustersResponse:
+      description: Response message for listing bare metal admin clusters.
+      properties:
+        bareMetalAdminClusters:
+          description: The list of bare metal admin cluster.
+          items:
+            $ref: "#/components/schemas/BareMetalAdminCluster"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return. If the token is not empty this means that more results are available and should be retrieved by repeating the request with the provided page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListBareMetalClustersResponse:
+      description: Response message for listing bare metal Clusters.
+      properties:
+        bareMetalClusters:
+          description: The list of bare metal Clusters.
+          items:
+            $ref: "#/components/schemas/BareMetalCluster"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return. If the token is not empty this means that more results are available and should be retrieved by repeating the request with the provided page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListBareMetalNodePoolsResponse:
+      description: Response message for listing bare metal node pools.
+      properties:
+        bareMetalNodePools:
+          description: The node pools from the specified parent resource.
+          items:
+            $ref: "#/components/schemas/BareMetalNodePool"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListLocationsResponse:
+      description: The response message for Locations.ListLocations.
+      properties:
+        locations:
+          description: A list of locations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Location"
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListVmwareAdminClustersResponse:
+      description: Response message for listing VMware admin clusters.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results the server should return. If the token is not empty this means that more results are available and should be retrieved by repeating the request with the provided page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        vmwareAdminClusters:
+          description: The list of VMware admin cluster.
+          items:
+            $ref: "#/components/schemas/VmwareAdminCluster"
+          type: array
+      type: object
+    ListVmwareClustersResponse:
+      description: Response message for listing VMware Clusters.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results the server should return. If the token is not empty this means that more results are available and should be retrieved by repeating the request with the provided page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        vmwareClusters:
+          description: The list of VMware Cluster.
+          items:
+            $ref: "#/components/schemas/VmwareCluster"
+          type: array
+      type: object
+    ListVmwareNodePoolsResponse:
+      description: Response message for listing VMware node pools.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        vmwareNodePools:
+          description: The node pools from the specified parent resource.
+          items:
+            $ref: "#/components/schemas/VmwareNodePool"
+          type: array
+      type: object
+    Location:
+      description: A resource that represents a Google Cloud location.
+      properties:
+        displayName:
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+          type: object
+        locationId:
+          description: 'The canonical id for this location. For example: `"us-east1"`.'
+          type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata. For example the available capacity at the given location.
+          type: object
+        name:
+          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
+      type: object
+    NodeTaint:
+      description: NodeTaint applied to every Kubernetes node in a node pool. Kubernetes taints can be used together with tolerations to control how workloads are scheduled to your nodes. Node taints are permanent.
+      properties:
+        effect:
+          description: The taint effect.
+          enum:
+            - EFFECT_UNSPECIFIED
+            - NO_SCHEDULE
+            - PREFER_NO_SCHEDULE
+            - NO_EXECUTE
+          type: string
+        key:
+          description: Key associated with the effect.
+          type: string
+        value:
+          description: Value associated with the effect.
+          type: string
+      type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
+    OperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have [Operation.error] value with a [google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        type:
+          description: Output only. Type of operation being executed.
+          enum:
+            - OPERATION_TYPE_UNSPECIFIED
+            - CREATE
+            - DELETE
+            - UPDATE
+            - UPGRADE
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    Policy:
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      properties:
+        bindings:
+          description: Associates a list of `members`, or principals, with a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one principal. The `bindings` in a `Policy` can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the `bindings` grant 50 different roles to `user:alice@example.com`, and not to any other principal, then you can add another 1,450 principals to the `bindings` in the `Policy`.
+          items:
+            $ref: "#/components/schemas/Binding"
+          type: array
+        etag:
+          description: "`etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy. **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost."
+          format: byte
+          type: string
+        version:
+          description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
+          format: int32
+          type: integer
+      type: object
+    QueryBareMetalAdminVersionConfigResponse:
+      description: Response message for querying bare metal admin cluster version config.
+      properties:
+        versions:
+          description: List of available versions to install or to upgrade to.
+          items:
+            $ref: "#/components/schemas/BareMetalVersionInfo"
+          type: array
+      type: object
+    QueryBareMetalVersionConfigResponse:
+      description: Response message for querying bare metal admin cluster version config.
+      properties:
+        versions:
+          description: List of available versions to install or to upgrade to.
+          items:
+            $ref: "#/components/schemas/BareMetalVersionInfo"
+          type: array
+      type: object
+    QueryVmwareVersionConfigResponse:
+      description: Response message for querying VMware user cluster version config.
+      properties:
+        versions:
+          description: List of available versions to install or to upgrade to.
+          items:
+            $ref: "#/components/schemas/VmwareVersionInfo"
+          type: array
+      type: object
+    ResourceCondition:
+      description: ResourceCondition provides a standard mechanism for higher-level status reporting from controller.
+      properties:
+        lastTransitionTime:
+          description: Last time the condition transit from one status to another.
+          format: google-datetime
+          type: string
+        message:
+          description: Human-readable message indicating details about last transition.
+          type: string
+        reason:
+          description: Machine-readable message indicating details about last transition.
+          type: string
+        state:
+          description: state of the condition.
+          enum:
+            - STATE_UNSPECIFIED
+            - STATE_TRUE
+            - STATE_FALSE
+            - STATE_UNKNOWN
+          type: string
+        type:
+          description: Type of the condition. (e.g., ClusterRunning, NodePoolRunning or ServerSidePreflightReady)
+          type: string
+      type: object
+    ResourceStatus:
+      description: ResourceStatus describes why a cluster or node pool has a certain status. (e.g., ERROR or DEGRADED).
+      properties:
+        conditions:
+          description: ResourceCondition provide a standard mechanism for higher-level status reporting from controller.
+          items:
+            $ref: "#/components/schemas/ResourceCondition"
+          type: array
+        errorMessage:
+          description: Human-friendly representation of the error message from controller. The error message can be temporary as the controller controller creates a cluster or node pool. If the error message persists for a longer period of time, it can be used to surface error message to indicate real problems requiring user intervention.
+          type: string
+      type: object
+    SetIamPolicyRequest:
+      description: Request message for `SetIamPolicy` method.
+      properties:
+        policy:
+          $ref: "#/components/schemas/Policy"
+          description: "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them."
+      type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    TestIamPermissionsRequest:
+      description: Request message for `TestIamPermissions` method.
+      properties:
+        permissions:
+          description: The set of permissions to check for the `resource`. Permissions with wildcards (such as `*` or `storage.*`) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+          items:
+            type: string
+          type: array
+      type: object
+    TestIamPermissionsResponse:
+      description: Response message for `TestIamPermissions` method.
+      properties:
+        permissions:
+          description: A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
+          items:
+            type: string
+          type: array
+      type: object
+    ValidationCheck:
+      description: ValidationCheck represents the result of preflight check.
+      properties:
+        option:
+          description: Options used for the validation check
+          enum:
+            - OPTIONS_UNSPECIFIED
+            - SKIP_VALIDATION_CHECK_BLOCKING
+            - SKIP_VALIDATION_ALL
+          type: string
+        scenario:
+          description: Output only. The scenario when the preflight checks were run.
+          enum:
+            - SCENARIO_UNSPECIFIED
+            - CREATE
+            - UPDATE
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ValidationCheckStatus"
+          description: Output only. The detailed validation check status.
+          readOnly: true
+      type: object
+    ValidationCheckResult:
+      description: ValidationCheckResult defines the details about the validation check.
+      properties:
+        category:
+          description: The category of the validation.
+          type: string
+        description:
+          description: The description of the validation check.
+          type: string
+        details:
+          description: Detailed failure information, which might be unformatted.
+          type: string
+        reason:
+          description: A human-readable message of the check failure.
+          type: string
+        state:
+          description: The validation check state.
+          enum:
+            - STATE_UNKNOWN
+            - STATE_FAILURE
+            - STATE_SKIPPED
+            - STATE_FATAL
+            - STATE_WARNING
+          type: string
+      type: object
+    ValidationCheckStatus:
+      description: ValidationCheckStatus defines the detailed validation check status.
+      properties:
+        result:
+          description: Individual checks which failed as part of the Preflight check execution.
+          items:
+            $ref: "#/components/schemas/ValidationCheckResult"
+          type: array
+      type: object
+    VmwareAAGConfig:
+      description: "Specifies anti affinity group config for the VMware user cluster. "
+      properties:
+        aagConfigDisabled:
+          description: Spread nodes across at least three physical hosts (requires at least three hosts). Enabled by default.
+          type: boolean
+      type: object
+    VmwareAddressPool:
+      description: Represents an IP pool used by the load balancer.
+      properties:
+        addresses:
+          description: Required. The addresses that are part of this pool. Each address must be either in the CIDR form (1.2.3.0/24) or range form (1.2.3.1-1.2.3.5).
+          items:
+            type: string
+          type: array
+        avoidBuggyIps:
+          description: If true, avoid using IPs ending in .0 or .255. This avoids buggy consumer devices mistakenly dropping IPv4 traffic for those special IP addresses.
+          type: boolean
+        manualAssign:
+          description: If true, prevent IP addresses from being automatically assigned.
+          type: boolean
+        pool:
+          description: Required. The name of the address pool.
+          type: string
+      type: object
+    VmwareAdminAddonNodeConfig:
+      description: VmwareAdminAddonNodeConfig contains add-on node configurations for VMware admin cluster.
+      properties:
+        autoResizeConfig:
+          $ref: "#/components/schemas/VmwareAutoResizeConfig"
+          description: VmwareAutoResizeConfig config specifies auto resize config.
+      type: object
+    VmwareAdminCluster:
+      description: Resource that represents a VMware admin cluster.
+      properties:
+        addonNode:
+          $ref: "#/components/schemas/VmwareAdminAddonNodeConfig"
+          description: The VMware admin cluster addon node configuration.
+        annotations:
+          additionalProperties:
+            type: string
+          description: "Annotations on the VMware admin cluster. This field has the same restrictions as Kubernetes annotations. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
+          type: object
+        antiAffinityGroups:
+          $ref: "#/components/schemas/VmwareAAGConfig"
+          description: The VMware admin cluster anti affinity group configuration.
+        autoRepairConfig:
+          $ref: "#/components/schemas/VmwareAutoRepairConfig"
+          description: The VMware admin cluster auto repair configuration.
+        bootstrapClusterMembership:
+          description: The bootstrap cluster this VMware admin cluster belongs to.
+          type: string
+        controlPlaneNode:
+          $ref: "#/components/schemas/VmwareAdminControlPlaneNodeConfig"
+          description: The VMware admin cluster control plane node configuration.
+        createTime:
+          description: Output only. The time at which VMware admin cluster was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: A human readable description of this VMware admin cluster.
+          type: string
+        endpoint:
+          description: Output only. The DNS name of VMware admin cluster's API server.
+          readOnly: true
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding. Allows clients to perform consistent read-modify-writes through optimistic concurrency control.
+          type: string
+        fleet:
+          $ref: "#/components/schemas/Fleet"
+          description: Output only. Fleet configuration for the cluster.
+          readOnly: true
+        imageType:
+          description: The OS image type for the VMware admin cluster.
+          type: string
+        loadBalancer:
+          $ref: "#/components/schemas/VmwareAdminLoadBalancerConfig"
+          description: The VMware admin cluster load balancer configuration.
+        localName:
+          description: Output only. The object name of the VMware OnPremAdminCluster custom resource. This field is used to support conflicting names when enrolling existing clusters to the API. When used as a part of cluster enrollment, this field will differ from the ID in the resource name. For new clusters, this field will match the user provided cluster name and be visible in the last component of the resource name. It is not modifiable. All users should use this name to access their cluster using gkectl or kubectl and should expect to see the local name when viewing admin cluster controller logs.
+          readOnly: true
+          type: string
+        name:
+          description: Immutable. The VMware admin cluster resource name.
+          type: string
+        networkConfig:
+          $ref: "#/components/schemas/VmwareAdminNetworkConfig"
+          description: The VMware admin cluster network configuration.
+        onPremVersion:
+          description: The Anthos clusters on the VMware version for the admin cluster.
+          type: string
+        platformConfig:
+          $ref: "#/components/schemas/VmwarePlatformConfig"
+          description: The VMware platform configuration.
+        reconciling:
+          description: Output only. If set, there are currently changes in flight to the VMware admin cluster.
+          readOnly: true
+          type: boolean
+        state:
+          description: Output only. The current state of VMware admin cluster.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - RUNNING
+            - RECONCILING
+            - STOPPING
+            - ERROR
+            - DEGRADED
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ResourceStatus"
+          description: Output only. ResourceStatus representing detailed cluster state.
+          readOnly: true
+        uid:
+          description: Output only. The unique identifier of the VMware admin cluster.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time at which VMware admin cluster was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        vcenter:
+          $ref: "#/components/schemas/VmwareAdminVCenterConfig"
+          description: The VMware admin cluster VCenter configuration.
+      type: object
+    VmwareAdminControlPlaneNodeConfig:
+      description: VmwareAdminControlPlaneNodeConfig contains control plane node configuration for VMware admin cluster.
+      properties:
+        cpus:
+          description: The number of vCPUs for the control-plane node of the admin cluster.
+          format: int64
+          type: string
+        memory:
+          description: The number of mebibytes of memory for the control-plane node of the admin cluster.
+          format: int64
+          type: string
+      type: object
+    VmwareAdminF5BigIpConfig:
+      description: VmwareAdminF5BigIpConfig represents configuration parameters for an F5 BIG-IP load balancer.
+      properties:
+        address:
+          description: The load balancer's IP address.
+          type: string
+        partition:
+          description: "The preexisting partition to be used by the load balancer. This partition is usually created for the admin cluster for example: 'my-f5-admin-partition'."
+          type: string
+        snatPool:
+          description: The pool name. Only necessary, if using SNAT.
+          type: string
+      type: object
+    VmwareAdminLoadBalancerConfig:
+      description: VmwareAdminLoadBalancerConfig contains load balancer configuration for VMware admin cluster.
+      properties:
+        f5Config:
+          $ref: "#/components/schemas/VmwareAdminF5BigIpConfig"
+          description: Configuration for F5 Big IP typed load balancers.
+        manualLbConfig:
+          $ref: "#/components/schemas/VmwareAdminManualLbConfig"
+          description: Manually configured load balancers.
+        metalLbConfig:
+          $ref: "#/components/schemas/VmwareAdminMetalLbConfig"
+          description: MetalLB load balancers.
+        vipConfig:
+          $ref: "#/components/schemas/VmwareAdminVipConfig"
+          description: The VIPs used by the load balancer.
+      type: object
+    VmwareAdminManualLbConfig:
+      properties:
+        addonsNodePort:
+          description: NodePort for add-ons server in the admin cluster.
+          format: int32
+          type: integer
+        controlPlaneNodePort:
+          description: NodePort for control plane service. The Kubernetes API server in the admin cluster is implemented as a Service of type NodePort (ex. 30968).
+          format: int32
+          type: integer
+        ingressHttpNodePort:
+          description: NodePort for ingress service's http. The ingress service in the admin cluster is implemented as a Service of type NodePort (ex. 32527).
+          format: int32
+          type: integer
+        ingressHttpsNodePort:
+          description: NodePort for ingress service's https. The ingress service in the admin cluster is implemented as a Service of type NodePort (ex. 30139).
+          format: int32
+          type: integer
+        konnectivityServerNodePort:
+          description: NodePort for konnectivity server service running as a sidecar in each kube-apiserver pod (ex. 30564).
+          format: int32
+          type: integer
+      type: object
+    VmwareAdminMetalLbConfig:
+      description: VmwareAdminMetalLbConfig represents configuration parameters for a MetalLB load balancer. For admin clusters, currently no configurations is needed.
+      properties: {}
+      type: object
+    VmwareAdminNetworkConfig:
+      description: VmwareAdminNetworkConfig contains network configuration for VMware admin cluster.
+      properties:
+        dhcpIpConfig:
+          $ref: "#/components/schemas/VmwareDhcpIpConfig"
+          description: Configuration settings for a DHCP IP configuration.
+        hostConfig:
+          $ref: "#/components/schemas/VmwareHostConfig"
+          description: Represents common network settings irrespective of the host's IP address.
+        podAddressCidrBlocks:
+          description: Required. All pods in the cluster are assigned an RFC1918 IPv4 address from these ranges. Only a single range is supported. This field cannot be changed after creation.
+          items:
+            type: string
+          type: array
+        serviceAddressCidrBlocks:
+          description: Required. All services in the cluster are assigned an RFC1918 IPv4 address from these ranges. Only a single range is supported. This field cannot be changed after creation.
+          items:
+            type: string
+          type: array
+        staticIpConfig:
+          $ref: "#/components/schemas/VmwareStaticIpConfig"
+          description: Configuration settings for a static IP configuration.
+        vcenterNetwork:
+          description: vcenter_network specifies vCenter network name.
+          type: string
+      type: object
+    VmwareAdminVCenterConfig:
+      description: VmwareAdminVCenterConfig contains VCenter configuration for VMware admin cluster.
+      properties:
+        address:
+          description: The vCenter IP address.
+          type: string
+        caCertData:
+          description: Contains the vCenter CA certificate public key for SSL verification.
+          type: string
+        cluster:
+          description: The name of the vCenter cluster for the admin cluster.
+          type: string
+        dataDisk:
+          description: The name of the virtual machine disk (VMDK) for the admin cluster.
+          type: string
+        datacenter:
+          description: The name of the vCenter datacenter for the admin cluster.
+          type: string
+        datastore:
+          description: The name of the vCenter datastore for the admin cluster.
+          type: string
+        folder:
+          description: The name of the vCenter folder for the admin cluster.
+          type: string
+        resourcePool:
+          description: The name of the vCenter resource pool for the admin cluster.
+          type: string
+      type: object
+    VmwareAdminVipConfig:
+      description: VmwareAdminVipConfig for VMware load balancer configurations.
+      properties:
+        addonsVip:
+          description: The VIP to configure the load balancer for add-ons.
+          type: string
+        controlPlaneVip:
+          description: The VIP which you previously set aside for the Kubernetes API of the admin cluster.
+          type: string
+      type: object
+    VmwareAutoRepairConfig:
+      description: Specifies config to enable/disable auto repair. The cluster-health-controller is deployed only if Enabled is true.
+      properties:
+        enabled:
+          description: Whether auto repair is enabled.
+          type: boolean
+      type: object
+    VmwareAutoResizeConfig:
+      description: Represents auto resizing configurations for the VMware user cluster.
+      properties:
+        enabled:
+          description: Whether to enable controle plane node auto resizing.
+          type: boolean
+      type: object
+    VmwareBundleConfig:
+      description: VmwareBundleConfig represents configuration for the bundle.
+      properties:
+        status:
+          $ref: "#/components/schemas/ResourceStatus"
+          description: Output only. Resource status for the bundle.
+          readOnly: true
+        version:
+          description: The version of the bundle.
+          type: string
+      type: object
+    VmwareCluster:
+      description: "Resource that represents a VMware user cluster. ##"
+      properties:
+        adminClusterMembership:
+          description: Required. The admin cluster this VMware user cluster belongs to. This is the full resource name of the admin cluster's fleet membership. In the future, references to other resource types might be allowed if admin clusters are modeled as their own resources.
+          type: string
+        adminClusterName:
+          description: Output only. The resource name of the VMware admin cluster hosting this user cluster.
+          readOnly: true
+          type: string
+        annotations:
+          additionalProperties:
+            type: string
+          description: "Annotations on the VMware user cluster. This field has the same restrictions as Kubernetes annotations. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
+          type: object
+        antiAffinityGroups:
+          $ref: "#/components/schemas/VmwareAAGConfig"
+          description: AAGConfig specifies whether to spread VMware user cluster nodes across at least three physical hosts in the datacenter.
+        authorization:
+          $ref: "#/components/schemas/Authorization"
+          description: RBAC policy that will be applied and managed by the Anthos On-Prem API.
+        autoRepairConfig:
+          $ref: "#/components/schemas/VmwareAutoRepairConfig"
+          description: Configuration for auto repairing.
+        controlPlaneNode:
+          $ref: "#/components/schemas/VmwareControlPlaneNodeConfig"
+          description: VMware user cluster control plane nodes must have either 1 or 3 replicas.
+        createTime:
+          description: Output only. The time at which VMware user cluster was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        dataplaneV2:
+          $ref: "#/components/schemas/VmwareDataplaneV2Config"
+          description: VmwareDataplaneV2Config specifies configuration for Dataplane V2.
+        deleteTime:
+          description: Output only. The time at which VMware user cluster was deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: A human readable description of this VMware user cluster.
+          type: string
+        enableControlPlaneV2:
+          description: Enable control plane V2. Default to false.
+          type: boolean
+        endpoint:
+          description: Output only. The DNS name of VMware user cluster's API server.
+          readOnly: true
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding. Allows clients to perform consistent read-modify-writes through optimistic concurrency control.
+          type: string
+        fleet:
+          $ref: "#/components/schemas/Fleet"
+          description: Output only. Fleet configuration for the cluster.
+          readOnly: true
+        loadBalancer:
+          $ref: "#/components/schemas/VmwareLoadBalancerConfig"
+          description: Load balancer configuration.
+        localName:
+          description: Output only. The object name of the VMware OnPremUserCluster custom resource on the associated admin cluster. This field is used to support conflicting names when enrolling existing clusters to the API. When used as a part of cluster enrollment, this field will differ from the ID in the resource name. For new clusters, this field will match the user provided cluster name and be visible in the last component of the resource name. It is not modifiable. All users should use this name to access their cluster using gkectl or kubectl and should expect to see the local name when viewing admin cluster controller logs.
+          readOnly: true
+          type: string
+        name:
+          description: Immutable. The VMware user cluster resource name.
+          type: string
+        networkConfig:
+          $ref: "#/components/schemas/VmwareNetworkConfig"
+          description: The VMware user cluster network configuration.
+        onPremVersion:
+          description: The Anthos clusters on the VMware version for your user cluster. Defaults to the admin cluster version.
+          type: string
+        reconciling:
+          description: Output only. If set, there are currently changes in flight to the VMware user cluster.
+          readOnly: true
+          type: boolean
+        state:
+          description: Output only. The current state of VMware user cluster.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - RUNNING
+            - RECONCILING
+            - STOPPING
+            - ERROR
+            - DEGRADED
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ResourceStatus"
+          description: Output only. ResourceStatus representing detailed cluster state.
+          readOnly: true
+        storage:
+          $ref: "#/components/schemas/VmwareStorageConfig"
+          description: Storage configuration.
+        uid:
+          description: Output only. The unique identifier of the VMware user cluster.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time at which VMware user cluster was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        validationCheck:
+          $ref: "#/components/schemas/ValidationCheck"
+          description: Output only. ValidationCheck represents the result of the preflight check job.
+          readOnly: true
+        vcenter:
+          $ref: "#/components/schemas/VmwareVCenterConfig"
+          description: Output only. VmwareVCenterConfig specifies vCenter config for the user cluster. Inherited from the admin cluster.
+          readOnly: true
+        vmTrackingEnabled:
+          description: Enable VM tracking.
+          type: boolean
+      type: object
+    VmwareControlPlaneNodeConfig:
+      description: Specifies control plane node config for the VMware user cluster.
+      properties:
+        autoResizeConfig:
+          $ref: "#/components/schemas/VmwareAutoResizeConfig"
+          description: AutoResizeConfig provides auto resizing configurations.
+        cpus:
+          description: "The number of CPUs for each admin cluster node that serve as control planes for this VMware user cluster. (default: 4 CPUs)"
+          format: int64
+          type: string
+        memory:
+          description: "The megabytes of memory for each admin cluster node that serves as a control plane for this VMware user cluster (default: 8192 MB memory)."
+          format: int64
+          type: string
+        replicas:
+          description: "The number of control plane nodes for this VMware user cluster. (default: 1 replica)."
+          format: int64
+          type: string
+        vsphereConfig:
+          $ref: "#/components/schemas/VmwareControlPlaneVsphereConfig"
+          description: Output only. Vsphere-specific config.
+          readOnly: true
+      type: object
+    VmwareControlPlaneV2Config:
+      description: Specifies control plane V2 config.
+      properties:
+        controlPlaneIpBlock:
+          $ref: "#/components/schemas/VmwareIpBlock"
+          description: Static IP addresses for the control plane nodes.
+      type: object
+    VmwareControlPlaneVsphereConfig:
+      description: Specifies control plane node config.
+      properties:
+        datastore:
+          description: The Vsphere datastore used by the control plane Node.
+          type: string
+      type: object
+    VmwareDataplaneV2Config:
+      description: "Contains configurations for Dataplane V2, which is optimized dataplane for Kubernetes networking. For more information, see: https://cloud.google.com/kubernetes-engine/docs/concepts/dataplane-v2"
+      properties:
+        advancedNetworking:
+          description: Enable advanced networking which requires dataplane_v2_enabled to be set true.
+          type: boolean
+        dataplaneV2Enabled:
+          description: Enables Dataplane V2.
+          type: boolean
+        windowsDataplaneV2Enabled:
+          description: Enable Dataplane V2 for clusters with Windows nodes.
+          type: boolean
+      type: object
+    VmwareDhcpIpConfig:
+      description: Represents the network configuration required for the VMware user clusters with DHCP IP configurations.
+      properties:
+        enabled:
+          description: enabled is a flag to mark if DHCP IP allocation is used for VMware user clusters.
+          type: boolean
+      type: object
+    VmwareF5BigIpConfig:
+      description: Represents configuration parameters for an F5 BIG-IP load balancer.
+      properties:
+        address:
+          description: The load balancer's IP address.
+          type: string
+        partition:
+          description: "The preexisting partition to be used by the load balancer. This partition is usually created for the admin cluster for example: 'my-f5-admin-partition'."
+          type: string
+        snatPool:
+          description: The pool name. Only necessary, if using SNAT.
+          type: string
+      type: object
+    VmwareHostConfig:
+      description: Represents the common parameters for all the hosts irrespective of their IP address.
+      properties:
+        dnsSearchDomains:
+          description: DNS search domains.
+          items:
+            type: string
+          type: array
+        dnsServers:
+          description: DNS servers.
+          items:
+            type: string
+          type: array
+        ntpServers:
+          description: NTP servers.
+          items:
+            type: string
+          type: array
+      type: object
+    VmwareHostIp:
+      description: Represents VMware user cluster node's network configuration.
+      properties:
+        hostname:
+          description: Hostname of the machine. VM's name will be used if this field is empty.
+          type: string
+        ip:
+          description: IP could be an IP address (like 1.2.3.4) or a CIDR (like 1.2.3.0/24).
+          type: string
+      type: object
+    VmwareIpBlock:
+      description: Represents a collection of IP addresses to assign to nodes.
+      properties:
+        gateway:
+          description: The network gateway used by the VMware user cluster.
+          type: string
+        ips:
+          description: The node's network configurations used by the VMware user cluster.
+          items:
+            $ref: "#/components/schemas/VmwareHostIp"
+          type: array
+        netmask:
+          description: The netmask used by the VMware user cluster.
+          type: string
+      type: object
+    VmwareLoadBalancerConfig:
+      description: Specifies the locad balancer config for the VMware user cluster.
+      properties:
+        f5Config:
+          $ref: "#/components/schemas/VmwareF5BigIpConfig"
+          description: Configuration for F5 Big IP typed load balancers.
+        manualLbConfig:
+          $ref: "#/components/schemas/VmwareManualLbConfig"
+          description: Manually configured load balancers.
+        metalLbConfig:
+          $ref: "#/components/schemas/VmwareMetalLbConfig"
+          description: Configuration for MetalLB typed load balancers.
+        vipConfig:
+          $ref: "#/components/schemas/VmwareVipConfig"
+          description: The VIPs used by the load balancer.
+      type: object
+    VmwareManualLbConfig:
+      properties:
+        controlPlaneNodePort:
+          description: NodePort for control plane service. The Kubernetes API server in the admin cluster is implemented as a Service of type NodePort (ex. 30968).
+          format: int32
+          type: integer
+        ingressHttpNodePort:
+          description: NodePort for ingress service's http. The ingress service in the admin cluster is implemented as a Service of type NodePort (ex. 32527).
+          format: int32
+          type: integer
+        ingressHttpsNodePort:
+          description: NodePort for ingress service's https. The ingress service in the admin cluster is implemented as a Service of type NodePort (ex. 30139).
+          format: int32
+          type: integer
+        konnectivityServerNodePort:
+          description: NodePort for konnectivity server service running as a sidecar in each kube-apiserver pod (ex. 30564).
+          format: int32
+          type: integer
+      type: object
+    VmwareMetalLbConfig:
+      description: Represents configuration parameters for the MetalLB load balancer.
+      properties:
+        addressPools:
+          description: Required. AddressPools is a list of non-overlapping IP pools used by load balancer typed services. All addresses must be routable to load balancer nodes. IngressVIP must be included in the pools.
+          items:
+            $ref: "#/components/schemas/VmwareAddressPool"
+          type: array
+      type: object
+    VmwareNetworkConfig:
+      description: Specifies network config for the VMware user cluster.
+      properties:
+        controlPlaneV2Config:
+          $ref: "#/components/schemas/VmwareControlPlaneV2Config"
+          description: Configuration for control plane V2 mode.
+        dhcpIpConfig:
+          $ref: "#/components/schemas/VmwareDhcpIpConfig"
+          description: Configuration settings for a DHCP IP configuration.
+        hostConfig:
+          $ref: "#/components/schemas/VmwareHostConfig"
+          description: Represents common network settings irrespective of the host's IP address.
+        podAddressCidrBlocks:
+          description: Required. All pods in the cluster are assigned an RFC1918 IPv4 address from these ranges. Only a single range is supported. This field cannot be changed after creation.
+          items:
+            type: string
+          type: array
+        serviceAddressCidrBlocks:
+          description: Required. All services in the cluster are assigned an RFC1918 IPv4 address from these ranges. Only a single range is supported. This field cannot be changed after creation.
+          items:
+            type: string
+          type: array
+        staticIpConfig:
+          $ref: "#/components/schemas/VmwareStaticIpConfig"
+          description: Configuration settings for a static IP configuration.
+        vcenterNetwork:
+          description: Output only. vcenter_network specifies vCenter network name. Inherited from the admin cluster.
+          readOnly: true
+          type: string
+      type: object
+    VmwareNodeConfig:
+      description: Parameters that describe the configuration of all nodes within a given node pool.
+      properties:
+        bootDiskSizeGb:
+          description: VMware disk size to be used during creation.
+          format: int64
+          type: string
+        cpus:
+          description: The number of CPUs for each node in the node pool.
+          format: int64
+          type: string
+        enableLoadBalancer:
+          description: Allow node pool traffic to be load balanced. Only works for clusters with MetalLB load balancers.
+          type: boolean
+        image:
+          description: The OS image name in vCenter, only valid when using Windows.
+          type: string
+        imageType:
+          description: Required. The OS image to be used for each node in a node pool. Currently `cos`, `ubuntu`, `ubuntu_containerd` and `windows` are supported.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: "The map of Kubernetes labels (key/value pairs) to be applied to each node. These will added in addition to any default label(s) that Kubernetes may apply to the node. In case of conflict in label keys, the applied set may differ depending on the Kubernetes version -- it's best to assume the behavior is undefined and conflicts should be avoided. For more information, including usage and the valid values, see: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/"
+          type: object
+        memoryMb:
+          description: The megabytes of memory for each node in the node pool.
+          format: int64
+          type: string
+        replicas:
+          description: The number of nodes in the node pool.
+          format: int64
+          type: string
+        taints:
+          description: The initial taints assigned to nodes of this node pool.
+          items:
+            $ref: "#/components/schemas/NodeTaint"
+          type: array
+        vsphereConfig:
+          $ref: "#/components/schemas/VmwareVsphereConfig"
+          description: Output only. Specifies the vSphere config for node pool.
+          readOnly: true
+      type: object
+    VmwareNodePool:
+      description: "Resource VmwareNodePool represents a VMware node pool. ##"
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: "Annotations on the node pool. This field has the same restrictions as Kubernetes annotations. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
+          type: object
+        config:
+          $ref: "#/components/schemas/VmwareNodeConfig"
+          description: Required. The node configuration of the node pool.
+        createTime:
+          description: Output only. The time at which this node pool was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The time at which this node pool was deleted. If the resource is not deleted, this must be empty
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: The display name for the node pool.
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding. Allows clients to perform consistent read-modify-writes through optimistic concurrency control.
+          type: string
+        name:
+          description: Immutable. The resource name of this node pool.
+          type: string
+        nodePoolAutoscaling:
+          $ref: "#/components/schemas/VmwareNodePoolAutoscalingConfig"
+          description: Node pool autoscaling config for the node pool.
+        onPremVersion:
+          description: Anthos version for the node pool. Defaults to the user cluster version.
+          type: string
+        reconciling:
+          description: Output only. If set, there are currently changes in flight to the node pool.
+          readOnly: true
+          type: boolean
+        state:
+          description: Output only. The current state of the node pool.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONING
+            - RUNNING
+            - RECONCILING
+            - STOPPING
+            - ERROR
+            - DEGRADED
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ResourceStatus"
+          description: Output only. ResourceStatus representing the detailed VMware node pool state.
+          readOnly: true
+        uid:
+          description: Output only. The unique identifier of the node pool.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time at which this node pool was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    VmwareNodePoolAutoscalingConfig:
+      description: NodePoolAutoscaling config for the NodePool to allow for the kubernetes to scale NodePool.
+      properties:
+        maxReplicas:
+          description: Maximum number of replicas in the NodePool.
+          format: int32
+          type: integer
+        minReplicas:
+          description: Minimum number of replicas in the NodePool.
+          format: int32
+          type: integer
+      type: object
+    VmwarePlatformConfig:
+      description: VmwarePlatformConfig represents configuration for the VMware platform.
+      properties:
+        bundles:
+          description: Output only. The list of bundles installed in the admin cluster.
+          items:
+            $ref: "#/components/schemas/VmwareBundleConfig"
+          readOnly: true
+          type: array
+        platformVersion:
+          description: Output only. The platform version e.g. 1.13.2.
+          readOnly: true
+          type: string
+        requiredPlatformVersion:
+          description: Input only. The required platform version e.g. 1.13.1. If the current platform version is lower than the target version, the platform version will be updated to the target version. If the target version is not installed in the platform (bundle versions), download the target version bundle.
+          type: string
+        status:
+          $ref: "#/components/schemas/ResourceStatus"
+          description: Output only. Resource status for the platform.
+          readOnly: true
+      type: object
+    VmwareStaticIpConfig:
+      description: Represents the network configuration required for the VMware user clusters with Static IP configurations.
+      properties:
+        ipBlocks:
+          description: Represents the configuration values for static IP allocation to nodes.
+          items:
+            $ref: "#/components/schemas/VmwareIpBlock"
+          type: array
+      type: object
+    VmwareStorageConfig:
+      description: Specifies vSphere CSI components deployment config in the VMware user cluster.
+      properties:
+        vsphereCsiDisabled:
+          description: Whether or not to deploy vSphere CSI components in the VMware user cluster. Enabled by default.
+          type: boolean
+      type: object
+    VmwareVCenterConfig:
+      description: Represents configuration for the VMware VCenter for the user cluster.
+      properties:
+        address:
+          description: The vCenter IP address.
+          type: string
+        caCertData:
+          description: Contains the vCenter CA certificate public key for SSL verification.
+          type: string
+        cluster:
+          description: The name of the vCenter cluster for the user cluster.
+          type: string
+        datacenter:
+          description: The name of the vCenter datacenter for the user cluster.
+          type: string
+        datastore:
+          description: The name of the vCenter datastore for the user cluster.
+          type: string
+        folder:
+          description: The name of the vCenter folder for the user cluster.
+          type: string
+        resourcePool:
+          description: The name of the vCenter resource pool for the user cluster.
+          type: string
+      type: object
+    VmwareVersionInfo:
+      description: Contains information about a specific Anthos on VMware version.
+      properties:
+        hasDependencies:
+          description: If set, the cluster dependencies (e.g. the admin cluster, other user clusters managed by the same admin cluster) must be upgraded before this version can be installed or upgraded to.
+          type: boolean
+        isInstalled:
+          description: If set, the version is installed in the admin cluster. Otherwise, the version bundle must be downloaded and installed before a user cluster can be created at or upgraded to this version.
+          type: boolean
+        version:
+          description: Version number e.g. 1.13.1-gke.1000.
+          type: string
+      type: object
+    VmwareVipConfig:
+      description: Specifies the VIP config for the VMware user cluster load balancer.
+      properties:
+        controlPlaneVip:
+          description: The VIP which you previously set aside for the Kubernetes API of this cluster.
+          type: string
+        ingressVip:
+          description: The VIP which you previously set aside for ingress traffic into this cluster.
+          type: string
+      type: object
+    VmwareVsphereConfig:
+      description: VmwareVsphereConfig represents configuration for the VMware VCenter for node pool.
+      properties:
+        datastore:
+          description: The name of the vCenter datastore. Inherited from the user cluster.
+          type: string
+        tags:
+          description: Tags to apply to VMs.
+          items:
+            $ref: "#/components/schemas/VmwareVsphereTag"
+          type: array
+      type: object
+    VmwareVsphereTag:
+      description: VmwareVsphereTag describes a vSphere tag to be placed on VMs in the node pool. For more information, see https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vcenterhost.doc/GUID-E8E854DD-AA97-4E0C-8419-CE84F93C4058.html
+      properties:
+        category:
+          description: The Vsphere tag category.
+          type: string
+        tag:
+          description: The Vsphere tag name.
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

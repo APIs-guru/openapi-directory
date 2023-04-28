@@ -1620,6 +1620,25 @@ components:
         issuerUri:
           description: Required. The OIDC issuer URI. Must be a valid URI using the 'https' scheme.
           type: string
+        webSsoConfig:
+          $ref: "#/components/schemas/GoogleIamAdminV1WorkforcePoolProviderOidcWebSsoConfig"
+          description: Required. Configuration for web single sign-on for the OIDC provider. Here, web sign-in refers to console sign-in and gcloud sign-in through the browser.
+      type: object
+    GoogleIamAdminV1WorkforcePoolProviderOidcWebSsoConfig:
+      description: Configuration for web single sign-on for the OIDC provider.
+      properties:
+        assertionClaimsBehavior:
+          description: Required. The behavior for how OIDC Claims are included in the `assertion` object used for attribute mapping and attribute condition.
+          enum:
+            - ASSERTION_CLAIMS_BEHAVIOR_UNSPECIFIED
+            - ONLY_ID_TOKEN_CLAIMS
+          type: string
+        responseType:
+          description: Required. The Response Type to request for in the OIDC Authorization Request for web sign-in.
+          enum:
+            - RESPONSE_TYPE_UNSPECIFIED
+            - ID_TOKEN
+          type: string
       type: object
     GoogleIamAdminV1WorkforcePoolProviderSaml:
       description: Represents a SAML identity provider.
@@ -2293,7 +2312,7 @@ components:
           description: A user-specified description of the pool. Cannot exceed 256 characters.
           type: string
         disabled:
-          description: Whether the pool is disabled. You cannot use a disabled pool to exchange tokens, or use existing tokens to access resources. If the pool is re-enabled, existing tokens grant access again.
+          description: Disables the workforce pool. You cannot use a disabled pool to exchange tokens, or use existing tokens to access resources. If the pool is re-enabled, existing tokens grant access again.
           type: boolean
         displayName:
           description: A user-specified display name of the pool in Google Cloud Console. Cannot exceed 32 characters.
@@ -2333,7 +2352,7 @@ components:
           description: A user-specified description of the provider. Cannot exceed 256 characters.
           type: string
         disabled:
-          description: Whether the provider is disabled. You cannot use a disabled provider to exchange tokens. However, existing tokens still grant access.
+          description: Disables the workforce pool provider. You cannot use a disabled provider to exchange tokens. However, existing tokens still grant access.
           type: boolean
         displayName:
           description: A user-specified display name for the provider. Cannot exceed 32 characters.

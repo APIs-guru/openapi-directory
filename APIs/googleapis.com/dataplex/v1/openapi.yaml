@@ -2648,7 +2648,11 @@ components:
       type: object
     GoogleCloudDataplexV1DataProfileSpec:
       description: DataProfileScan related setting.
-      properties: {}
+      properties:
+        samplingPercent:
+          description: Optional. The percentage of the records to be selected from the dataset for DataScan. Value can range between 0.0 and 100.0 with up to 3 significant decimal digits. Sampling is not applied if sampling_percent is not specified, 0 or 100.
+          format: float
+          type: number
       type: object
     GoogleCloudDataplexV1DataQualityDimensionResult:
       description: DataQualityDimensionResult provides a more detailed, per-dimension view of the results.
@@ -2837,6 +2841,10 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualityRule"
           type: array
+        samplingPercent:
+          description: Optional. The percentage of the records to be selected from the dataset for DataScan. Value can range between 0.0 and 100.0 with up to 3 significant decimal digits. Sampling is not applied if sampling_percent is not specified, 0 or 100.
+          format: float
+          type: number
       type: object
     GoogleCloudDataplexV1DataScan:
       description: "Represents a user-visible job which provides the insights for the related data source.For example: Data Quality: generates queries based on the rules and runs against the data to get data quality check results. Data Profile: analyzes the data in table(s) and generates insights about the structure, content and relationships (such as null percent, cardinality, min/max/mean, etc)."
@@ -4644,7 +4652,7 @@ components:
           type: string
       type: object
     GoogleCloudLocationLocation:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".

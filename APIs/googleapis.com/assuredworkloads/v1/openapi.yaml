@@ -635,7 +635,7 @@ components:
       properties: {}
       type: object
     GoogleCloudAssuredworkloadsV1Violation:
-      description: "Workload monitoring Violation. Next Id: 22"
+      description: "Workload monitoring Violation. Next Id: 27"
       properties:
         acknowledged:
           description: A boolean that indicates if the violation is acknowledged
@@ -665,12 +665,6 @@ components:
           description: "Output only. Immutable. Audit Log link to find business justification provided for violation exception. Format: https://console.cloud.google.com/logs/query;query={logName}{protoPayload.resourceName}{protoPayload.methodName}{timeRange}{organization}"
           readOnly: true
           type: string
-        exceptionContexts:
-          description: Output only. List of all the exception detail added for the violation.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationExceptionContext"
-          readOnly: true
-          type: array
         name:
           description: "Output only. Immutable. Name of the Violation. Format: organizations/{organization}/locations/{location}/workloads/{workload_id}/violations/{violations_id}"
           readOnly: true
@@ -705,20 +699,6 @@ components:
           description: Output only. The last time when the Violation record was updated.
           format: google-datetime
           readOnly: true
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsV1ViolationExceptionContext:
-      description: "Violation exception detail. Next Id: 5"
-      properties:
-        acknowledgementTime:
-          description: Timestamp when the violation was acknowledged.
-          format: google-datetime
-          type: string
-        comment:
-          description: Business justification provided towards the acknowledgement of the violation.
-          type: string
-        principalEmail:
-          description: Email address of the user (or service account) who acknowledged the violation.
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1ViolationRemediation:

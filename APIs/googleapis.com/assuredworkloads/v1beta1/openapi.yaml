@@ -652,7 +652,7 @@ components:
       properties: {}
       type: object
     GoogleCloudAssuredworkloadsV1beta1Violation:
-      description: "Workload monitoring Violation. Next Id: 22"
+      description: "Workload monitoring Violation. Next Id: 27"
       properties:
         acknowledged:
           description: A boolean that indicates if the violation is acknowledged
@@ -682,12 +682,6 @@ components:
           description: "Output only. Immutable. Audit Log link to find business justification provided for violation exception. Format: https://console.cloud.google.com/logs/query;query={logName}{protoPayload.resourceName}{protoPayload.methodName}{timeRange}{organization}"
           readOnly: true
           type: string
-        exceptionContexts:
-          description: Output only. List of all the exception detail added for the violation.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1ViolationExceptionContext"
-          readOnly: true
-          type: array
         name:
           description: "Output only. Immutable. Name of the Violation. Format: organizations/{organization}/locations/{location}/workloads/{workload_id}/violations/{violations_id}"
           readOnly: true
@@ -722,20 +716,6 @@ components:
           description: Output only. The last time when the Violation record was updated.
           format: google-datetime
           readOnly: true
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1ViolationExceptionContext:
-      description: "Violation exception detail. Next Id: 5"
-      properties:
-        acknowledgementTime:
-          description: Timestamp when the violation was acknowledged.
-          format: google-datetime
-          type: string
-        comment:
-          description: Business justification provided towards the acknowledgement of the violation.
-          type: string
-        principalEmail:
-          description: Email address of the user (or service account) who acknowledged the violation.
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1beta1ViolationRemediation:
@@ -847,6 +827,10 @@ components:
             type: string
           readOnly: true
           type: array
+        controls:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceControls"
+          description: Output only. Controls associated with the customer workload
+          readOnly: true
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.
           format: google-datetime
@@ -929,6 +913,29 @@ components:
         kmsSettings:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadKMSSettings"
           description: Input only. Immutable. Settings used to create a CMEK crypto key.
+      type: object
+    GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceControls:
+      description: Controls enabled to the user associated with this workload
+      properties:
+        appliedOrgPolicies:
+          description: Output only. Org policies currently applied by this Assured Workload
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceControlsOrgPolicyControl"
+          readOnly: true
+          type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceControlsOrgPolicyControl:
+      description: An org policy control applied by Assured Workloads
+      properties:
+        constraint:
+          description: "Output only. Constraint name of the org policy control Example: constraints/gcp.resourcelocations"
+          readOnly: true
+          type: string
+        version:
+          description: Output only. Org policy version
+          format: int32
+          readOnly: true
+          type: integer
       type: object
     GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceStatus:
       description: Represents the Compliance Status of this workload

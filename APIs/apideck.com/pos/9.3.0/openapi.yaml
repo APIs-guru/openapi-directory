@@ -450,6 +450,8 @@ paths:
                 price_currency: 'USD',
                 cost: 2,
                 tax_ids: ['12345', '67890'],
+                is_revenue: false,
+                use_default_tax_rates: false,
                 absent_at_location_ids: ['12345', '67890'],
                 present_at_all_locations: false,
                 available_for_pickup: false,
@@ -664,6 +666,8 @@ paths:
                 price_currency: 'USD',
                 cost: 2,
                 tax_ids: ['12345', '67890'],
+                is_revenue: false,
+                use_default_tax_rates: false,
                 absent_at_location_ids: ['12345', '67890'],
                 present_at_all_locations: false,
                 available_for_pickup: false,
@@ -6716,6 +6720,11 @@ components:
           type: string
         idempotency_key:
           $ref: "#/components/schemas/IdempotencyKey"
+        is_revenue:
+          description: True if this item should be counted as revenue. For example, gift cards and donations would not be counted as revenue.
+          example: false
+          title: Is Revenue
+          type: boolean
         modifier_groups:
           example:
             - id: "12345"
@@ -6797,6 +6806,10 @@ components:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
+        use_default_tax_rates:
+          example: false
+          title: Use default tax rates
+          type: boolean
         variations:
           example:
             - id: "12345"
@@ -7383,6 +7396,8 @@ components:
                 example: percentage
                 type: string
                 x-apideck-enum-id: orders.discounts.type
+            required:
+              - type
             type: object
             x-apideck-weights:
               amount: medium
