@@ -1651,7 +1651,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: GCP labels for this Feature.
+          description: Labels for this Feature.
           type: object
         membershipSpecs:
           additionalProperties:
@@ -1746,7 +1746,7 @@ components:
           description: "Optional. A user-assigned display name of the Fleet. When present, it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, single-quote, double-quote, space, and exclamation point. Example: `Production Fleet`"
           type: string
         name:
-          description: Output only. The full, unique resource name of this fleet in the format of `projects/{project}/locations/{location}/fleets/{fleet}`. Each GCP project can have at most one fleet resource, named "default".
+          description: Output only. The full, unique resource name of this fleet in the format of `projects/{project}/locations/{location}/fleets/{fleet}`. Each Google Cloud project can have at most one fleet resource, named "default".
           readOnly: true
           type: string
         state:
@@ -1779,11 +1779,24 @@ components:
       type: object
     FleetObservabilityFeatureSpec:
       description: "**Fleet Observability**: The Hub-wide input for the FleetObservability feature."
-      properties: {}
+      properties:
+        loggingConfig:
+          $ref: "#/components/schemas/FleetObservabilityLoggingConfig"
+          description: Specified if fleet logging feature is enabled for the entire fleet. If UNSPECIFIED, fleet logging feature is disabled for the entire fleet.
       type: object
     FleetObservabilityFeatureState:
       description: "**FleetObservability**: An empty state left as an example Hub-wide Feature state."
       properties: {}
+      type: object
+    FleetObservabilityLoggingConfig:
+      description: LoggingConfig defines the configuration for different types of logs.
+      properties:
+        defaultConfig:
+          $ref: "#/components/schemas/FleetObservabilityRoutingConfig"
+          description: Specified if applying the default routing config to logs not specified in other configs.
+        fleetScopeLogsConfig:
+          $ref: "#/components/schemas/FleetObservabilityRoutingConfig"
+          description: Specified if applying the routing config to all logs for all fleet scopes.
       type: object
     FleetObservabilityMembershipSpec:
       description: "**FleetObservability**: The membership-specific input for FleetObservability feature."
@@ -1792,6 +1805,17 @@ components:
     FleetObservabilityMembershipState:
       description: "**FleetObservability**: An empty state left as an example membership-specific Feature state."
       properties: {}
+      type: object
+    FleetObservabilityRoutingConfig:
+      description: RoutingConfig configures the behaviour of fleet logging feature.
+      properties:
+        mode:
+          description: mode configures the logs routing mode.
+          enum:
+            - MODE_UNSPECIFIED
+            - COPY
+            - MOVE
+          type: string
       type: object
     GoogleRpcStatus:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -2032,7 +2056,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
@@ -2330,12 +2354,12 @@ components:
       description: BundleInstallSpec is the specification configuration for a single managed bundle.
       properties:
         exemptedNamespaces:
-          description: "the set of namespaces to be exempted from the bundle TODO (b/271878194): Decrement this"
+          description: the set of namespaces to be exempted from the bundle
           items:
             type: string
           type: array
         management:
-          description: "Management specifies how the bundle will be managed by the controller. TODO (b/271878194): Remove this"
+          description: Management specifies how the bundle will be managed by the controller.
           enum:
             - MANAGEMENT_UNSPECIFIED
             - INSTALLED
@@ -2355,7 +2379,7 @@ components:
         deploymentConfigs:
           additionalProperties:
             $ref: "#/components/schemas/PolicyControllerPolicyControllerDeploymentConfig"
-          description: Map of deployment configs to deployments (“admission”, “audit”, “mutation”).
+          description: Map of deployment configs to deployments ("admission", "audit", "mutation').
           type: object
         exemptableNamespaces:
           description: The set of namespaces that are excluded from Policy Controller checks. Namespaces do not need to currently exist on the cluster.
@@ -2387,7 +2411,7 @@ components:
           type: boolean
         templateLibraryConfig:
           $ref: "#/components/schemas/PolicyControllerTemplateLibraryConfig"
-          description: "Configures the library templates to install along with Policy Controller. TODO (b/271878194): Remove this"
+          description: Configures the library templates to install along with Policy Controller.
       type: object
     PolicyControllerMembershipSpec:
       description: "**Policy Controller**: Configuration for a single cluster. Intended to parallel the PolicyController CR."
@@ -2410,11 +2434,11 @@ components:
         contentStates:
           additionalProperties:
             $ref: "#/components/schemas/PolicyControllerOnClusterState"
-          description: "The state of the template library and any bundles included in the chosen version of the manifest TODO (b/271878194): Remove this"
+          description: The state of the template library and any bundles included in the chosen version of the manifest
           type: object
         policyContentState:
           $ref: "#/components/schemas/PolicyControllerPolicyContentState"
-          description: "The overall content state observed by the Hub Feature controller. TODO (b/271878194): Decrement this"
+          description: The overall content state observed by the Hub Feature controller.
         state:
           description: The overall Policy Controller lifecycle state observed by the Hub Feature controller.
           enum:
@@ -2529,10 +2553,10 @@ components:
       description: The config specifying which default library templates to install.
       properties:
         included:
-          description: "Whether the standard template library should be installed or not. TODO (b/271878194): Remove this"
+          description: Whether the standard template library should be installed or not.
           type: boolean
         installation:
-          description: "Configures the manner in which the template library is installed on the cluster. TODO (b/271878194): Decrement this"
+          description: Configures the manner in which the template library is installed on the cluster.
           enum:
             - INSTALLATION_UNSPECIFIED
             - NOT_INSTALLED

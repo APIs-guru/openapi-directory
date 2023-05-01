@@ -40,7 +40,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: If set, the request will be rejected if the latest version of the workstation on the server does not have this etag.
+        - description: If set, the request will be rejected if the latest version of the workstation on the server does not have this ETag.
           in: query
           name: etag
           schema:
@@ -982,7 +982,7 @@ components:
         env:
           additionalProperties:
             type: string
-          description: Environment variables passed to the container.
+          description: Environment variables passed to the container's entrypoint.
           type: object
         image:
           description: Docker image defining the container. This image must be accessible by the service account specified in the workstation configuration.
@@ -1045,8 +1045,13 @@ components:
           description: The name of a Compute Engine machine type.
           type: string
         poolSize:
-          description: Number of instances to pool for faster workstation starup.
+          description: Number of instances to pool for faster workstation startup.
           format: int32
+          type: integer
+        pooledInstances:
+          description: Output only. Number of instances currently available in the pool for faster workstation startup.
+          format: int32
+          readOnly: true
           type: integer
         serviceAccount:
           description: Email address of the service account used on VM instances used to support this configuration. If not set, VMs run with a Google-managed service account. This service account must have permission to pull the specified container image; otherwise, the image must be publicly accessible.
@@ -1113,7 +1118,7 @@ components:
       description: Response message for GenerateAccessToken.
       properties:
         accessToken:
-          description: "The generated bearer access token. To use this token, include it in an Authorization header of an HTTP request sent to the associated workstation's hostname, for example, `Authorization: Bearer `."
+          description: "The generated bearer access token. To use this token, include it in an Authorization header of an HTTP request sent to the associated workstation's hostname—for example, `Authorization: Bearer `."
           type: string
         expireTime:
           description: Time at which the generated token will expire.
@@ -1337,6 +1342,17 @@ components:
           readOnly: true
           type: string
       type: object
+    ReadinessCheck:
+      description: A readiness check to be performed on a workstation.
+      properties:
+        path:
+          description: Path to which the request should be sent.
+          type: string
+        port:
+          description: Port to which the request should be sent.
+          format: int32
+          type: integer
+      type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
       properties:
@@ -1352,7 +1368,7 @@ components:
       description: Request message for StartWorkstation.
       properties:
         etag:
-          description: If set, the request will be rejected if the latest version of the workstation on the server does not have this etag.
+          description: If set, the request will be rejected if the latest version of the workstation on the server does not have this ETag.
           type: string
         validateOnly:
           description: If set, validate the request and preview the review, but do not actually apply it.
@@ -1380,7 +1396,7 @@ components:
       description: Request message for StopWorkstation.
       properties:
         etag:
-          description: If set, the request will be rejected if the latest version of the workstation on the server does not have this etag.
+          description: If set, the request will be rejected if the latest version of the workstation on the server does not have this ETag.
           type: string
         validateOnly:
           description: If set, validate the request and preview the review, but do not actually apply it.
@@ -1428,7 +1444,7 @@ components:
         env:
           additionalProperties:
             type: string
-          description: Environment variables passed to the workstation container.
+          description: Environment variables passed to the workstation container's entrypoint.
           type: object
         etag:
           description: Checksum computed by the server. May be sent on update and delete requests to make sure that the client has an up-to-date value before proceeding.
@@ -1600,6 +1616,11 @@ components:
           description: Directories to persist across workstation sessions.
           items:
             $ref: "#/components/schemas/PersistentDirectory"
+          type: array
+        readinessChecks:
+          description: Readiness checks to perform when starting a workstation using this workstation configuration. Mark a workstation as running only after all specified readiness checks return 200 status codes.
+          items:
+            $ref: "#/components/schemas/ReadinessCheck"
           type: array
         reconciling:
           description: Output only. Indicates whether this resource is currently being updated to match its intended state.

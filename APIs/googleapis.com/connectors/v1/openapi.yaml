@@ -915,6 +915,9 @@ components:
           items:
             $ref: "#/components/schemas/ConfigVariable"
           type: array
+        authKey:
+          description: Identifier key for auth config
+          type: string
         authType:
           description: The type of authentication configured.
           enum:
@@ -944,6 +947,9 @@ components:
     AuthConfigTemplate:
       description: AuthConfigTemplate defines required field over an authentication type.
       properties:
+        authKey:
+          description: Identifier key for auth config
+          type: string
         authType:
           description: The type of authentication configured.
           enum:

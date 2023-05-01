@@ -1277,7 +1277,7 @@ components:
       description: ApplianceCluster contains information specific to GDC Edge Appliance Clusters.
       properties:
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the Appliance Cluster. For example: //transferappliance.googleapis.com/projects/my-project/locations/us-west1-a/appliances/my-appliance"
+          description: "Immutable. Self-link of the Google Cloud resource for the Appliance Cluster. For example: //transferappliance.googleapis.com/projects/my-project/locations/us-west1-a/appliances/my-appliance"
           type: string
       type: object
     AuditConfig:
@@ -1946,7 +1946,7 @@ components:
       description: EdgeCluster contains information specific to Google Edge Clusters.
       properties:
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the Edge Cluster. For example: //edgecontainer.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster"
+          description: "Immutable. Self-link of the Google Cloud resource for the Edge Cluster. For example: //edgecontainer.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster"
           type: string
       type: object
     Empty:
@@ -1988,7 +1988,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: GCP labels for this Feature.
+          description: Labels for this Feature.
           type: object
         membershipSpecs:
           additionalProperties:
@@ -2097,7 +2097,7 @@ components:
           description: "Optional. A user-assigned display name of the Fleet. When present, it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, single-quote, double-quote, space, and exclamation point. Example: `Production Fleet`"
           type: string
         name:
-          description: Output only. The full, unique resource name of this fleet in the format of `projects/{project}/locations/{location}/fleets/{fleet}`. Each GCP project can have at most one fleet resource, named "default".
+          description: Output only. The full, unique resource name of this fleet in the format of `projects/{project}/locations/{location}/fleets/{fleet}`. Each Google Cloud project can have at most one fleet resource, named "default".
           readOnly: true
           type: string
         state:
@@ -2130,11 +2130,24 @@ components:
       type: object
     FleetObservabilityFeatureSpec:
       description: "**Fleet Observability**: The Hub-wide input for the FleetObservability feature."
-      properties: {}
+      properties:
+        loggingConfig:
+          $ref: "#/components/schemas/FleetObservabilityLoggingConfig"
+          description: Specified if fleet logging feature is enabled for the entire fleet. If UNSPECIFIED, fleet logging feature is disabled for the entire fleet.
       type: object
     FleetObservabilityFeatureState:
       description: "**FleetObservability**: An empty state left as an example Hub-wide Feature state."
       properties: {}
+      type: object
+    FleetObservabilityLoggingConfig:
+      description: LoggingConfig defines the configuration for different types of logs.
+      properties:
+        defaultConfig:
+          $ref: "#/components/schemas/FleetObservabilityRoutingConfig"
+          description: Specified if applying the default routing config to logs not specified in other configs.
+        fleetScopeLogsConfig:
+          $ref: "#/components/schemas/FleetObservabilityRoutingConfig"
+          description: Specified if applying the routing config to all logs for all fleet scopes.
       type: object
     FleetObservabilityMembershipSpec:
       description: "**FleetObservability**: The membership-specific input for FleetObservability feature."
@@ -2143,6 +2156,17 @@ components:
     FleetObservabilityMembershipState:
       description: "**FleetObservability**: An empty state left as an example membership-specific Feature state."
       properties: {}
+      type: object
+    FleetObservabilityRoutingConfig:
+      description: RoutingConfig configures the behaviour of fleet logging feature.
+      properties:
+        mode:
+          description: mode configures the logs routing mode.
+          enum:
+            - MODE_UNSPECIFIED
+            - COPY
+            - MOVE
+          type: string
       type: object
     GenerateConnectManifestResponse:
       description: GenerateConnectManifestResponse contains manifest information for installing/upgrading a Connect agent.
@@ -2161,7 +2185,7 @@ components:
           readOnly: true
           type: boolean
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE cluster. For example: //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster Zonal clusters are also supported."
+          description: "Immutable. Self-link of the Google Cloud resource for the GKE cluster. For example: //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster Zonal clusters are also supported."
           type: string
       type: object
     GoogleRpcStatus:
@@ -2491,7 +2515,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
@@ -2542,7 +2566,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Optional. GCP labels for this membership.
+          description: Optional. Labels for this membership.
           type: object
         lastConnectionTime:
           description: Output only. For clusters using Connect, the timestamp of the most recent connection established with Google Cloud. This time is updated every several minutes, not continuously. For clusters that do not use GKE Connect, or that have never connected successfully, this field will be unset.
@@ -2774,7 +2798,7 @@ components:
           readOnly: true
           type: boolean
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE Multi-Cloud cluster. For example: //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/awsClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/azureClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/attachedClusters/my-cluster"
+          description: "Immutable. Self-link of the Google Cloud resource for the GKE Multi-Cloud cluster. For example: //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/awsClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/azureClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/attachedClusters/my-cluster"
           type: string
       type: object
     MultiClusterIngressFeatureSpec:
@@ -2858,7 +2882,7 @@ components:
             - USER
           type: string
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE On-Prem cluster. For example: //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/vmwareClusters/my-cluster //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/bareMetalClusters/my-cluster"
+          description: "Immutable. Self-link of the Google Cloud resource for the GKE On-Prem cluster. For example: //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/vmwareClusters/my-cluster //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/bareMetalClusters/my-cluster"
           type: string
       type: object
     Operation:
@@ -2944,12 +2968,12 @@ components:
       description: BundleInstallSpec is the specification configuration for a single managed bundle.
       properties:
         exemptedNamespaces:
-          description: "the set of namespaces to be exempted from the bundle TODO (b/271878194): Decrement this"
+          description: the set of namespaces to be exempted from the bundle
           items:
             type: string
           type: array
         management:
-          description: "Management specifies how the bundle will be managed by the controller. TODO (b/271878194): Remove this"
+          description: Management specifies how the bundle will be managed by the controller.
           enum:
             - MANAGEMENT_UNSPECIFIED
             - INSTALLED
@@ -2969,7 +2993,7 @@ components:
         deploymentConfigs:
           additionalProperties:
             $ref: "#/components/schemas/PolicyControllerPolicyControllerDeploymentConfig"
-          description: Map of deployment configs to deployments (“admission”, “audit”, “mutation”).
+          description: Map of deployment configs to deployments ("admission", "audit", "mutation').
           type: object
         exemptableNamespaces:
           description: The set of namespaces that are excluded from Policy Controller checks. Namespaces do not need to currently exist on the cluster.
@@ -3001,7 +3025,7 @@ components:
           type: boolean
         templateLibraryConfig:
           $ref: "#/components/schemas/PolicyControllerTemplateLibraryConfig"
-          description: "Configures the library templates to install along with Policy Controller. TODO (b/271878194): Remove this"
+          description: Configures the library templates to install along with Policy Controller.
       type: object
     PolicyControllerMembershipSpec:
       description: "**Policy Controller**: Configuration for a single cluster. Intended to parallel the PolicyController CR."
@@ -3024,11 +3048,11 @@ components:
         contentStates:
           additionalProperties:
             $ref: "#/components/schemas/PolicyControllerOnClusterState"
-          description: "The state of the template library and any bundles included in the chosen version of the manifest TODO (b/271878194): Remove this"
+          description: The state of the template library and any bundles included in the chosen version of the manifest
           type: object
         policyContentState:
           $ref: "#/components/schemas/PolicyControllerPolicyContentState"
-          description: "The overall content state observed by the Hub Feature controller. TODO (b/271878194): Decrement this"
+          description: The overall content state observed by the Hub Feature controller.
         state:
           description: The overall Policy Controller lifecycle state observed by the Hub Feature controller.
           enum:
@@ -3143,10 +3167,10 @@ components:
       description: The config specifying which default library templates to install.
       properties:
         included:
-          description: "Whether the standard template library should be installed or not. TODO (b/271878194): Remove this"
+          description: Whether the standard template library should be installed or not.
           type: boolean
         installation:
-          description: "Configures the manner in which the template library is installed on the cluster. TODO (b/271878194): Decrement this"
+          description: Configures the manner in which the template library is installed on the cluster.
           enum:
             - INSTALLATION_UNSPECIFIED
             - NOT_INSTALLED

@@ -919,7 +919,7 @@ components:
       description: ApplianceCluster contains information specific to GDC Edge Appliance Clusters.
       properties:
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the Appliance Cluster. For example: //transferappliance.googleapis.com/projects/my-project/locations/us-west1-a/appliances/my-appliance"
+          description: "Immutable. Self-link of the Google Cloud resource for the Appliance Cluster. For example: //transferappliance.googleapis.com/projects/my-project/locations/us-west1-a/appliances/my-appliance"
           type: string
       type: object
     AuditConfig:
@@ -1515,7 +1515,7 @@ components:
       description: EdgeCluster contains information specific to Google Edge Clusters.
       properties:
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the Edge Cluster. For example: //edgecontainer.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster"
+          description: "Immutable. Self-link of the Google Cloud resource for the Edge Cluster. For example: //edgecontainer.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster"
           type: string
       type: object
     Empty:
@@ -1557,7 +1557,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: GCP labels for this Feature.
+          description: Labels for this Feature.
           type: object
         membershipSpecs:
           additionalProperties:
@@ -1668,7 +1668,7 @@ components:
           readOnly: true
           type: boolean
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE cluster. For example: //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster Zonal clusters are also supported."
+          description: "Immutable. Self-link of the Google Cloud resource for the GKE cluster. For example: //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster Zonal clusters are also supported."
           type: string
       type: object
     GoogleRpcStatus:
@@ -1945,7 +1945,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
@@ -1996,7 +1996,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Optional. GCP labels for this membership.
+          description: Optional. Labels for this membership.
           type: object
         lastConnectionTime:
           description: Output only. For clusters using Connect, the timestamp of the most recent connection established with Google Cloud. This time is updated every several minutes, not continuously. For clusters that do not use GKE Connect, or that have never connected successfully, this field will be unset.
@@ -2187,7 +2187,7 @@ components:
           readOnly: true
           type: boolean
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE Multi-Cloud cluster. For example: //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/awsClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/azureClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/attachedClusters/my-cluster"
+          description: "Immutable. Self-link of the Google Cloud resource for the GKE Multi-Cloud cluster. For example: //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/awsClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/azureClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/attachedClusters/my-cluster"
           type: string
       type: object
     MultiClusterIngressFeatureSpec:
@@ -2217,7 +2217,7 @@ components:
             - USER
           type: string
         resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE On-Prem cluster. For example: //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/vmwareClusters/my-cluster //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/bareMetalClusters/my-cluster"
+          description: "Immutable. Self-link of the Google Cloud resource for the GKE On-Prem cluster. For example: //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/vmwareClusters/my-cluster //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/bareMetalClusters/my-cluster"
           type: string
       type: object
     Operation:

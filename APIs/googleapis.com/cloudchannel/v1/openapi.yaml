@@ -2287,10 +2287,10 @@ components:
       properties:
         invoiceEndDate:
           $ref: "#/components/schemas/GoogleTypeDate"
-          description: The latest invoice date (exclusive). If your product uses monthly invoices, and this value is not the beginning of a month, this will adjust the date to the first day of the following month.
+          description: The latest invoice date (inclusive). If this value is not the last day of a month, this will move it forward to the last day of the given month.
         invoiceStartDate:
           $ref: "#/components/schemas/GoogleTypeDate"
-          description: The earliest invoice date (inclusive). If your product uses monthly invoices, and this value is not the beginning of a month, this will adjust the date to the first day of the given month.
+          description: The earliest invoice date (inclusive). If this value is not the first day of a month, this will move it back to the first day of the given month.
         usageEndDateTime:
           $ref: "#/components/schemas/GoogleTypeDateTime"
           description: The latest usage date time (exclusive). If you use time groupings (daily, weekly, etc), each group uses midnight to midnight (Pacific time). The usage end date is rounded down to include all usage from the specified date. We recommend that clients pass `usage_start_date_time` in Pacific time.
@@ -2508,6 +2508,11 @@ components:
         pageToken:
           description: Optional. A token that specifies a page of results beyond the first page. Obtained through FetchReportResultsResponse.next_page_token of the previous CloudChannelReportsService.FetchReportResults call.
           type: string
+        partitionKeys:
+          description: Optional. List of keys specifying which report partitions to return. If empty, returns all partitions.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudChannelV1FetchReportResultsResponse:
       description: Response message for CloudChannelReportsService.FetchReportResults. Contains a tabular representation of the report results.
@@ -3280,6 +3285,9 @@ components:
     GoogleCloudChannelV1Row:
       description: A row of report values.
       properties:
+        partitionKey:
+          description: The key for the partition this row belongs to. This field is empty if the report is not partitioned.
+          type: string
         values:
           description: The list of values in the row.
           items:
@@ -3564,10 +3572,10 @@ components:
       properties:
         invoiceEndDate:
           $ref: "#/components/schemas/GoogleTypeDate"
-          description: The latest invoice date (exclusive). If your product uses monthly invoices, and this value is not the beginning of a month, this will adjust the date to the first day of the following month.
+          description: The latest invoice date (inclusive). If this value is not the last day of a month, this will move it forward to the last day of the given month.
         invoiceStartDate:
           $ref: "#/components/schemas/GoogleTypeDate"
-          description: The earliest invoice date (inclusive). If your product uses monthly invoices, and this value is not the beginning of a month, this will adjust the date to the first day of the given month.
+          description: The earliest invoice date (inclusive). If this value is not the first day of a month, this will move it back to the first day of the given month.
         usageEndDateTime:
           $ref: "#/components/schemas/GoogleTypeDateTime"
           description: The latest usage date time (exclusive). If you use time groupings (daily, weekly, etc), each group uses midnight to midnight (Pacific time). The usage end date is rounded down to include all usage from the specified date. We recommend that clients pass `usage_start_date_time` in Pacific time.

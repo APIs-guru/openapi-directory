@@ -1314,6 +1314,15 @@ components:
           description: The fully qualified customer provided Cloud KMS key name to use for customer data encryption, in the following form:projects/{project_number}/locations/{location_id}/keyRings/{key_ring_id}/cryptoKeys/{crypto_key_id}.
           type: string
       type: object
+    ErrorDetails:
+      description: Error details in public error message for DataprocMetastore.QueryMetadata.
+      properties:
+        details:
+          additionalProperties:
+            type: string
+          description: Additional structured details about this error.Keys define the failure items. Value describes the exception or details of the item.
+          type: object
+      type: object
     ExportMetadataRequest:
       description: Request message for DataprocMetastore.ExportMetadata.
       properties:
@@ -1550,7 +1559,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
