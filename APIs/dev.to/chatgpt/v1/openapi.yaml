@@ -1,0 +1,214 @@
+openapi: 3.0.1
+servers:
+  - url: https://dev.to
+info:
+  description: A plugin that recommends resources like articles or users to a user using ChatGP.
+  title: DEV Community
+  version: v1
+  x-apisguru-categories:
+    - social
+    - machine_learning
+  x-logo:
+    url: https://thepracticaldev.s3.amazonaws.com/i/6hqmcjaxbgbon8ydw93z.png
+  x-origin:
+    - format: openapi
+      url: https://dev.to/openapi.yml
+      version: "3.0"
+  x-providerName: dev.to
+  x-serviceName: chatgpt
+paths:
+  /api/articles/search:
+    get:
+      operationId: getArticles
+      parameters:
+        - description: Accepts keywords to use as a search query.
+          in: query
+          name: q
+          required: false
+          schema:
+            type: string
+        - description: Pagination Page
+          in: query
+          name: page
+          required: false
+          schema:
+            default: 0
+            format: int32
+            minimum: 0
+            type: integer
+        - description: Page size (the number of items to return per page).
+          in: query
+          name: per_page
+          required: false
+          schema:
+            default: 60
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: Returns the most popular articles in the last N days. 'top' indicates the number of days since publication of the articles returned. This param can be used in conjuction with q or tag.
+          in: query
+          name: top
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/vnd.forem.api-v1+json:
+              schema:
+                $ref: "#/components/schemas/getArticlesResponse"
+          description: OK
+      summary: Get a list of filtered articles
+components:
+  schemas:
+    SharedOrganization:
+      description: The organization the resource belongs to
+      properties:
+        name:
+          type: string
+        profile_image:
+          description: Profile image (640x640)
+          format: url
+          type: string
+        profile_image_90:
+          description: Profile image (90x90)
+          format: url
+          type: string
+        slug:
+          type: string
+        username:
+          type: string
+      type: object
+    SharedUser:
+      description: The author
+      properties:
+        github_username:
+          nullable: true
+          type: string
+        name:
+          type: string
+        profile_image:
+          description: Profile image (640x640)
+          type: string
+        profile_image_90:
+          description: Profile image (90x90)
+          type: string
+        twitter_username:
+          nullable: true
+          type: string
+        username:
+          type: string
+        website_url:
+          format: url
+          nullable: true
+          type: string
+      type: object
+    getArticlesResponse:
+      description: Representation of an article returned in a list
+      properties:
+        body_markdown:
+          description: The body of the article
+          type: string
+        canonical_url:
+          format: url
+          type: string
+        cover_image:
+          format: url
+          nullable: true
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        crossposted_at:
+          format: date-time
+          nullable: true
+          type: string
+        description:
+          description: A description of the article
+          type: string
+        edited_at:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: int32
+          type: integer
+        last_comment_at:
+          format: date-time
+          type: string
+        organization:
+          $ref: "#/components/schemas/SharedOrganization"
+        path:
+          description: A relative path of the article.
+          format: path
+          type: string
+        positive_reactions_count:
+          format: int32
+          type: integer
+        public_reactions_count:
+          format: int32
+          type: integer
+        published_at:
+          format: date-time
+          type: string
+        published_timestamp:
+          description: Crossposting or published date time
+          format: date-time
+          type: string
+        readable_publish_date:
+          type: string
+        reading_time_minutes:
+          description: Reading time, in minutes
+          format: int32
+          type: integer
+        slug:
+          type: string
+        social_image:
+          format: url
+          type: string
+        tag_list:
+          description: An array representation of the tags that are associated with an article
+          items:
+            type: string
+          type: array
+        tags:
+          description: An array representation of the tags that are associated with an article
+          type: string
+        title:
+          description: The article title
+          type: string
+        type_of:
+          type: string
+        url:
+          description: The url of the article. Can be used to link to the article.
+          format: url
+          type: string
+        user:
+          $ref: "#/components/schemas/SharedUser"
+      required:
+        - type_of
+        - id
+        - title
+        - description
+        - cover_image
+        - readable_publish_date
+        - social_image
+        - tag_list
+        - tags
+        - slug
+        - path
+        - url
+        - canonical_url
+        - comments_count
+        - positive_reactions_count
+        - public_reactions_count
+        - created_at
+        - edited_at
+        - crossposted_at
+        - published_at
+        - last_comment_at
+        - published_timestamp
+        - user
+        - reading_time_minutes
+      type: object
