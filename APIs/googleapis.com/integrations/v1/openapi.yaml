@@ -4641,6 +4641,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudConnectorsV1ConfigVariable"
           type: array
+        authKey:
+          description: Identifier key for auth config
+          type: string
         authType:
           description: The type of authentication configured.
           enum:
@@ -4840,6 +4843,14 @@ components:
           $ref: "#/components/schemas/GoogleCloudConnectorsV1ConnectionStatus"
           description: Output only. Current status of the connection.
           readOnly: true
+        subscriptionType:
+          description: Output only. This subscription type enum value states if the metrics should be sent for billing or not.
+          enum:
+            - SUBSCRIPTION_TYPE_UNSPECIFIED
+            - PAY_G
+            - PAID
+          readOnly: true
+          type: string
         suspended:
           description: Optional. Suspended indicates if a user has suspended a connection or not.
           type: boolean
@@ -6918,7 +6929,7 @@ components:
           type: string
       type: object
     GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIdRequest:
-      description: "Use this request to post all workflows associated with a given trigger id. Next available id: 10"
+      description: "Use this request to post all workflows associated with a given trigger id. Next available id: 11"
       properties:
         clientId:
           description: Optional. If the client id is provided, then the combination of trigger id and client id is matched across all the workflows. If the client id is not provided, then workflows with matching trigger id are executed for each client id in the {@link TriggerConfig}. For Api Trigger, the client id is required and will be validated against the allowed clients.
@@ -6940,6 +6951,9 @@ components:
           type: string
         requestId:
           description: "Optional. This is used to de-dup incoming request: if the duplicate request was detected, the response from the previous execution is returned. Must have no more than 36 characters and contain only alphanumeric characters and hyphens."
+          type: string
+        resourceName:
+          description: 'This field is only required when using Admin Access. The resource name of target, or the parent resource name. For example: "projects/*/locations/*/integrations/*"'
           type: string
         scheduledTime:
           description: Optional. Time in milliseconds since epoch when the given event would be scheduled.

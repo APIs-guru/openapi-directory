@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-04-18T17:29:01Z
+  x-timestamp: 2023-04-26T16:27:03Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -715,9 +715,7 @@ components:
           description: The name of the city.
           type: string
         country:
-          description: |-
-            The two-character ISO 3166-1 alpha-2 country code. For example, **US**.
-            >If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
+          description: The two-character ISO 3166-1 alpha-2 country code. For example, **US**, **NL**, or **GB**.
           type: string
         line1:
           description: First line of the street address.

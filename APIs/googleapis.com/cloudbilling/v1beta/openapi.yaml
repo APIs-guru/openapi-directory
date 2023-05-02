@@ -50,7 +50,7 @@ paths:
       description: Use custom pricing in the estimate, using a `CostScenario` with a defined `billingAccount`.
       operationId: cloudbilling.billingAccounts.estimateCostScenario
       parameters:
-        - description: Resource name of the billing account for the cost estimate. The resource name has the form `billingAccounts/{billing_acount_id}`. For example, `billingAccounts/012345-567890-ABCDEF` is the resource name for billing account `012345-567890-ABCDEF`. Must be specified.
+        - description: Resource name of the billing account for the cost estimate. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF` is the resource name for billing account `012345-567890-ABCDEF`. Must be specified.
           in: path
           name: billingAccount
           required: true

@@ -139,7 +139,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiResponseWrapper"
+                $ref: "#/components/schemas/GoogleCloudApigeeV1DeleteResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -4881,6 +4881,9 @@ components:
     GoogleCloudApigeeV1ApiCategoryData:
       description: the Api category resource.
       properties:
+        gcpResource:
+          description: GCP name of api category resource.
+          type: string
         id:
           description: ID of the category (a UUID).
           type: string
@@ -5114,21 +5117,6 @@ components:
           type: array
         type:
           description: Type. Set to `Application`. Maintained for compatibility with the Apigee Edge API.
-          type: string
-      type: object
-    GoogleCloudApigeeV1ApiResponseWrapper:
-      properties:
-        errorCode:
-          description: ID that can be used to find errors in the log files.
-          type: string
-        message:
-          description: Description of the operation.
-          type: string
-        requestId:
-          description: ID that can be used to find request details in the log files.
-          type: string
-        status:
-          description: Status of the operation.
           type: string
       type: object
     GoogleCloudApigeeV1ApiSecurityConfig:
@@ -5863,6 +5851,25 @@ components:
       properties:
         message:
           description: The response contains only a message field.
+          type: string
+      type: object
+    GoogleCloudApigeeV1DeleteResponse:
+      description: Response for certain delete operations.
+      properties:
+        errorCode:
+          description: ID that can be used to find errors in the log files.
+          type: string
+        gcpResource:
+          description: GCP name of deleted resource.
+          type: string
+        message:
+          description: Description of the operation.
+          type: string
+        requestId:
+          description: ID that can be used to find request details in the log files.
+          type: string
+        status:
+          description: Status of the operation.
           type: string
       type: object
     GoogleCloudApigeeV1Deployment:
