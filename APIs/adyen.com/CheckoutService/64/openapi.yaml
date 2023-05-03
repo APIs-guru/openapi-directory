@@ -59,7 +59,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-04-20T10:22:09Z
+  x-timestamp: 2023-05-03T10:31:53Z
 tags:
   - name: Modifications
   - name: Orders
@@ -5192,146 +5192,166 @@ components:
       properties:
         airline.agency_invoice_number:
           description: |-
-            Reference number for the invoice, issued by the agency.
-            * minLength: 1
-            * maxLength: 6
+            The reference number for the invoice, issued by the agency.
+            * Encoding: ASCII
+            * minLength: 1 character
+            * maxLength: 6 characters
           type: string
         airline.agency_plan_name:
           description: |-
-            2-letter agency plan identifier; alphabetical.
-            * minLength: 2
-            * maxLength: 2
+            The two-letter agency plan identifier.
+            * Encoding: ASCII
+            * minLength: 2 characters
+            * maxLength: 2 characters
           type: string
         airline.airline_code:
           description: |-
-            [IATA](https://www.iata.org/services/pages/codes.aspx) 3-digit accounting code (PAX); numeric. It identifies the carrier.
+            The [IATA](https://www.iata.org/services/pages/codes.aspx) 3-digit accounting code (PAX) that identifies the carrier.
             * Format: IATA 3-digit accounting code (PAX)
             * Example: KLM = 074
-            * minLength: 3
-            * maxLength: 3
+            * minLength: 3 characters
+            * maxLength: 3 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.airline_designator_code:
           description: |-
-            [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX); alphabetical. It identifies the carrier.
-            * Format: [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter airline code
+            The [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX) that identifies the carrier.
+            * Encoding: ASCII
             * Example: KLM = KL
-            * minLength: 2
-            * maxLength: 2
+            * minLength: 2 characters
+            * maxLength: 2 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.boarding_fee:
           description: |-
-            Chargeable amount for boarding the plane.
-            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
-            * minLength: 1
-            * maxLength: 18
+            The amount charged for boarding the plane, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            * Encoding: Numeric
+            * minLength: 1 character
+            * maxLength: 18 characters
           type: string
         airline.computerized_reservation_system:
           description: |-
             The [CRS](https://en.wikipedia.org/wiki/Computer_reservation_system) used to make the reservation and purchase the ticket.
-            * Format: alphanumeric.
-            * minLength: 4
-            * maxLength: 4
+            * Encoding: ASCII
+            * minLength: 4 characters
+            * maxLength: 4 characters
           type: string
         airline.customer_reference_number:
           description: |-
-            Reference number; alphanumeric.
-            * minLength: 0
-            * maxLength: 20
+            The alphanumeric customer reference number.
+            * Encoding: ASCII
+            * maxLength: 20 characters
+            * If you send more than 20 characters, the customer reference number is truncated
+            * Must not be all spaces
           type: string
         airline.document_type:
           description: |-
-            Optional 2-digit code; alphanumeric. It identifies the type of product of the transaction. The description of the code may appear on credit card statements.
-            * Format: 2-digit code
+            A code that identifies the type of item bought. The description of the code can appear on credit card statements.
+            * Encoding: ASCII
             * Example: Passenger ticket = 01
-            * minLength: 2
-            * maxLength: 2
+            * minLength: 2 characters
+            * maxLength: 2 characters
           type: string
         airline.flight_date:
           description: |-
-            Flight departure date. Local time `(HH:mm)` is optional.
+            The flight departure date. Local time `(HH:mm)` is optional.
             * Date format: `yyyy-MM-dd`
             * Date and time format: `yyyy-MM-dd HH:mm`
-            * minLength: 10
-            * maxLength: 16
+            * minLength: 10 characters
+            * maxLength: 16 characters
           type: string
         airline.leg.carrier_code:
           description: |-
-            [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX); alphabetical. It identifies the carrier.
-            This field is required/mandatory if the airline data includes leg details.
-            * Format: IATA 2-letter airline code
+            The [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX) that identifies the carrier.
+            This field is required if the airline data includes leg details.
             * Example: KLM = KL
-            * minLength: 2
-            * maxLength: 2
+            * minLength: 2 characters
+            * maxLength: 2 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.leg.class_of_travel:
           description: |-
-            1-letter travel class identifier; alphabetical. There is no standard; however, the following codes are used rather consistently:
-            * F: first class
+            A one-letter travel class identifier.
+             The following are common:
+             * F: first class
             * J: business class
             * Y: economy class
             * W: premium economy
 
-            Limitations:
-            * minLength: 1
-            * maxLength: 1
+            * Encoding: ASCII
+            * minLength: 1 character
+            * maxLength: 1 character
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.leg.date_of_travel:
           description: |-
             	
-            Date and time of travel. [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)-compliant.
-            * Format: `yyyy-MM-dd HH:mm`
-            * minLength: 16
-            * maxLength: 16
+            Date and time of travel in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format `yyyy-MM-dd HH:mm`.
+            * Encoding: ASCII
+            * minLength: 16 characters
+            * maxLength: 16 characters
           type: string
         airline.leg.depart_airport:
           description: |-
-            Alphabetical identifier of the departure airport.
+            The [IATA](https://www.iata.org/services/pages/codes.aspx) three-letter airport code of the departure airport.
             This field is required if the airline data includes leg details.
-            * Format: [IATA](https://www.iata.org/services/pages/codes.aspx) 3-letter airport code.
+
+            * Encoding: ASCII
             * Example: Amsterdam = AMS
-            * minLength: 3
-            * maxLength: 3
+            * minLength: 3 characters
+            * maxLength: 3 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.leg.depart_tax:
           description: |-
-            [Departure tax](https://en.wikipedia.org/wiki/Departure_tax). Amount charged by a country to an individual upon their leaving. The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
+            The amount of [departure tax](https://en.wikipedia.org/wiki/Departure_tax) charged, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            * Encoding: Numeric
             * minLength: 1
             * maxLength: 12
+            * Must not be all zeros
           type: string
         airline.leg.destination_code:
           description: |-
-            Alphabetical identifier of the destination/arrival airport.
-            This field is required/mandatory if the airline data includes leg details.
-            * Format: [IATA](https://www.iata.org/services/pages/codes.aspx) 3-letter airport code.
+            The [IATA](https://www.iata.org/services/pages/codes.aspx) 3-letter airport code of the destination airport.
+            This field is required if the airline data includes leg details.
             * Example: Amsterdam = AMS
-            * minLength: 3
-            * maxLength: 3
+            * Encoding: ASCII
+            * minLength: 3 characters
+            * maxLength: 3 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.leg.fare_base_code:
           description: |-
-            [Fare basis code](https://en.wikipedia.org/wiki/Fare_basis_code); alphanumeric.
-            * minLength: 1
-            * maxLength: 7
+            The [fare basis code](https://en.wikipedia.org/wiki/Fare_basis_code), alphanumeric.
+            * minLength: 1 character
+            * maxLength: 6 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.leg.flight_number:
           description: |-
             The flight identifier.
-            * minLength: 1
-            * maxLength: 5
+            * minLength: 1 character
+            * maxLength: 5 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.leg.stop_over_code:
           description: |-
-            1-letter code that indicates whether the passenger is entitled to make a stopover. Only two types of characters are allowed:
-            * O: Stopover allowed
-            * X: Stopover not allowed
-
-            Limitations:
-            * minLength: 1
-            * maxLength: 1
+            A one-letter code that indicates whether the passenger is entitled to make a stopover. Can be a space, O if the passenger is entitled to make a stopover, or X if they are not.
+            * Encoding: ASCII
+            * minLength: 1 character
+            * maxLength: 1 character
           type: string
         airline.passenger.date_of_birth:
           description: |-
-            Date of birth of the passenger.
+            The passenger's date of birth.
 
             Date format: `yyyy-MM-dd`
             * minLength: 10
@@ -5339,59 +5359,73 @@ components:
           type: string
         airline.passenger.first_name:
           description: |-
-            Passenger first name/given name.
-            > This field is required/mandatory if the airline data includes passenger details or leg details.
+            The passenger's first name.
+            > This field is required if the airline data includes passenger details or leg details.
+            * Encoding: ASCII
           type: string
         airline.passenger.last_name:
           description: |-
-            Passenger last name/family name.
-            > This field is required/mandatory if the airline data includes passenger details or leg details.
+            The passenger's last name.
+            > This field is required if the airline data includes passenger details or leg details.
+            * Encoding: ASCII
           type: string
         airline.passenger.telephone_number:
           description: |-
-            Telephone number of the passenger, including country code. This is an alphanumeric field that can include the '+' and '-' signs.
-            * minLength: 3
-            * maxLength: 30
+            The passenger's telephone number, including country code. This is an alphanumeric field that can include the '+' and '-' signs.
+            * Encoding: ASCII
+            * minLength: 3 characters
+            * maxLength: 30 characters
           type: string
         airline.passenger.traveller_type:
           description: |-
-            Passenger type code (PTC). IATA PTC values are 3-letter alphabetical. Example: ADT, SRC, CNN, INS.
-
-            However, several carriers use non-standard codes that can be up to 5 alphanumeric characters.
-            * minLength: 3
-            * maxLength: 6
+            The IATA passenger type code (PTC).
+            * Encoding: ASCII
+            * minLength: 3 characters
+            * maxLength: 6 characters
           type: string
         airline.passenger_name:
           description: |-
-            Passenger name, initials, and a title.
-            * Format: last name + first name or initials + title.
-            * Example: *FLYER / MARY MS*.
-            * minLength: 1
-            * maxLength: 49
+            The passenger's name, initials, and title.
+            * Format: last name + first name or initials + title
+            * Example: *FLYER / MARY MS*
+            * minLength: 1 character
+            * maxLength: 20 characters
+            * If you send more than 20 characters, the name is truncated
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.ticket_issue_address:
           description: |-
-            Address of the place/agency that issued the ticket.
-            * minLength: 0
-            * maxLength: 16
+            The address of the organization that issued the ticket.
+            * minLength: 0 characters
+            * maxLength: 16 characters
           type: string
         airline.ticket_number:
           description: |-
             The ticket's unique identifier.
-            * minLength: 1
-            * maxLength: 150
+            * minLength: 1 character
+            * maxLength: 15 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.travel_agency_code:
           description: |-
-            IATA number, also ARC number or ARC/IATA number. Unique identifier number for travel agencies.
-            * minLength: 1
-            * maxLength: 8
+            The unique identifier from IATA or ARC for the travel agency that issues the ticket.
+            * Encoding: ASCII
+            * minLength: 1 character
+            * maxLength: 8 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         airline.travel_agency_name:
           description: |-
             The name of the travel agency.
-            * minLength: 1
-            * maxLength: 25
+
+            * Encoding: ASCII
+            * minLength: 1 character
+            * maxLength: 25 characters
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
       required:
         - airline.passenger_name
@@ -5400,7 +5434,7 @@ components:
       properties:
         carRental.checkOutDate:
           description: |-
-            Pick-up date.
+            The pick-up date.
             * Date format: `yyyyMMdd`
           type: string
         carRental.customerServiceTollFreeNumber:
@@ -5408,91 +5442,113 @@ components:
             The customer service phone number of the car rental company.
             * Format: Alphanumeric
             * maxLength: 17
+            * For US and CA numbers must be 10 characters in length
+            * Must not start with a space
+            * Must not be all zeros
+            * Must not contain any special characters such as + or -
           type: string
         carRental.daysRented:
           description: |-
             Number of days for which the car is being rented.
             * Format: Numeric
-            * maxLength: 19
+            * maxLength: 2
+            * Must not be all spaces
           type: string
         carRental.fuelCharges:
           description: |-
-            Any fuel charges associated with the rental.
+            Any fuel charges associated with the rental, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
             * Format: Numeric
             * maxLength: 12
           type: string
         carRental.insuranceCharges:
           description: |-
-            Any insurance charges associated with the rental.
+            Any insurance charges associated with the rental, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
             * Format: Numeric
             * maxLength: 12
+            * Must not be all spaces
+            * Must not be all zeros
           type: string
         carRental.locationCity:
           description: |-
-            The city from which the car is rented.
+            The city where the car is rented.
             * Format: Alphanumeric
             * maxLength: 18
+            * Must not start with a space or be all spaces
+            * Must not be all zeros
           type: string
         carRental.locationCountry:
           description: |-
-            The country from which the car is rented.
+            The country where the car is rented, in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
             * Format: Alphanumeric
             * maxLength: 2
           type: string
         carRental.locationStateProvince:
           description: |-
-            The state or province from where the car is rented.
+            The state or province where the car is rented.
             * Format: Alphanumeric
-            * maxLength: 3
+            * maxLength: 2
+            * Must not start with a space or be all spaces
+            * Must not be all zeros
           type: string
         carRental.noShowIndicator:
           description: |-
-            Indicates if the customer was a "no-show" (neither keeps nor cancels their booking).
-            * Y - Customer was a no show.
-            * N - Not applicable.
+            Indicates if the customer didn't pick up their rental car.
+            * Y - Customer did not pick up their car
+            * N - Not applicable
           type: string
         carRental.oneWayDropOffCharges:
-          description: Charge associated with not returning a vehicle to the original rental location.
+          description: |-
+            The charge for not returning a car to the original rental location, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            * maxLength: 12
           type: string
         carRental.rate:
           description: |-
-            Daily rental rate.
+            The daily rental rate, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
             * Format: Alphanumeric
             * maxLength: 12
           type: string
         carRental.rateIndicator:
           description: |-
             Specifies whether the given rate is applied daily or weekly.
-            * D - Daily rate.
-            * W - Weekly rate.
+            * D - Daily rate
+            * W - Weekly rate
           type: string
         carRental.rentalAgreementNumber:
           description: |-
-            The rental agreement number associated with this car rental.
+            The rental agreement number for the car rental.
             * Format: Alphanumeric
             * maxLength: 9
+            * Must not start with a space or be all spaces
+            * Must not be all zeros
           type: string
         carRental.rentalClassId:
           description: |-
-            Daily rental rate.
+            The classification of the rental car.
             * Format: Alphanumeric
-            * maxLength: 12
+            * maxLength: 4
+            * Must not start with a space or be all spaces
+            * Must not be all zeros
           type: string
         carRental.renterName:
           description: |-
             The name of the person renting the car.
             * Format: Alphanumeric
             * maxLength: 26
+            * If you send more than 26 characters, the name is truncated
+            * Must not start with a space or be all spaces
+            * Must not be all zeros
           type: string
         carRental.returnCity:
           description: |-
             The city where the car must be returned.
             * Format: Alphanumeric
             * maxLength: 18
+            * Must not start with a space or be all spaces
+            * Must not be all zeros
           type: string
         carRental.returnCountry:
           description: |-
-            The country where the car must be returned.
+            The country where the car must be returned, in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
             * Format: Alphanumeric
             * maxLength: 2
           type: string
@@ -5500,22 +5556,27 @@ components:
           description: |-
             The last date to return the car by.
             * Date format: `yyyyMMdd`
+            * maxLength: 8
           type: string
         carRental.returnLocationId:
           description: |-
-            Agency code, phone number, or address abbreviation
+            The agency code, phone number, or address abbreviation
             * Format: Alphanumeric
             * maxLength: 10
+            * Must not start with a space or be all spaces
+            * Must not be all zeros
           type: string
         carRental.returnStateProvince:
           description: |-
             The state or province where the car must be returned.
             * Format: Alphanumeric
             * maxLength: 3
+            * Must not start with a space or be all spaces
+            * Must not be all zeros
           type: string
         carRental.taxExemptIndicator:
           description: |-
-            Indicates whether the goods or services were tax-exempt, or tax was not collected.
+            Indicates if the goods or services were tax-exempt, or if tax was not paid on them.
 
             Values:
             * Y - Goods or services were tax exempt
@@ -5523,13 +5584,13 @@ components:
           type: string
         travelEntertainmentAuthData.duration:
           description: |-
-            Number of nights.  This should be included in the auth message.
+            Number of days the car is rented for. This should be included in the auth message.
             * Format: Numeric
             * maxLength: 2
           type: string
         travelEntertainmentAuthData.market:
           description: |-
-            Indicates what market-specific dataset will be submitted or is being submitted. Value should be "A" for Car rental. This should be included in the auth message.
+            Indicates what market-specific dataset will be submitted or is being submitted. Value should be 'A' for car rental. This should be included in the auth message.
             * Format: Alphanumeric
             * maxLength: 1
           type: string
@@ -5657,142 +5718,186 @@ components:
       properties:
         enhancedSchemeData.customerReference:
           description: |-
-            Customer code, if supplied by a customer.
+            The customer code, if supplied by a customer.
 
-            Encoding: ASCII.
+            Encoding: ASCII
 
-            Max length: 25 characters.
+            Max length: 25 characters
 
-            > Required for Level 2 and Level 3 data.
+            Must not start with a space or be all spaces
+
+            Must not be all zeros
           type: string
         enhancedSchemeData.destinationCountryCode:
           description: |-
-            Destination country code.
+            The three-letter [ISO 3166-1 alpha-3 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) for the destination address.
 
-            Encoding: ASCII.
+            Encoding: ASCII
 
-            Max length: 3 characters.
+            Fixed length: 3 characters
           type: string
         enhancedSchemeData.destinationPostalCode:
           description: |-
-            The postal code of a destination address.
+            The postal code of the destination address.
 
-            Encoding: ASCII.
+            Encoding: ASCII
 
-            Max length: 10 characters.
+            Max length: 10 characters
 
-            > Required for American Express.
+            Must not start with a space
           type: string
         enhancedSchemeData.destinationStateProvinceCode:
           description: |-
             Destination state or province code.
 
-            Encoding: ASCII.Max length: 3 characters.
+            Encoding: ASCII
+
+            Max length: 3 characters
+
+            Must not start with a space
           type: string
         enhancedSchemeData.dutyAmount:
           description: |-
-            Duty amount, in minor units.
+            The duty amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 
             For example, 2000 means USD 20.00.
 
-            Max length: 12 characters.
+            Encoding: Numeric
+
+            Max length: 12 characters
           type: string
         enhancedSchemeData.freightAmount:
           description: |-
-            Shipping amount, in minor units.
+            The shipping amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 
             For example, 2000 means USD 20.00.
 
-            Max length: 12 characters.
+            Encoding: Numeric
+
+            Max length: 12 characters
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].commodityCode":
           description: |-
-            Item commodity code.
+            The [UNSPC commodity code](https://www.unspsc.org/) of the item.
 
-            Encoding: ASCII.
+            Encoding: ASCII
 
-            Max length: 12 characters.
+            Max length: 12 characters
+
+            Must not start with a space or be all spaces
+
+            Must not be all zeros
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].description":
           description: |-
-            Item description.
+            A description of the item.
 
-            Encoding: ASCII.
+            Encoding: ASCII
 
-            Max length: 26 characters.
+            Max length: 26 characters
+
+            Must not start with a space or be all spaces
+
+            Must not be all zeros
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].discountAmount":
           description: |-
-            Discount amount, in minor units.
+            The discount amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 
             For example, 2000 means USD 20.00.
 
-            Max length: 12 characters.
+            Encoding: Numeric
+
+            Max length: 12 characters
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].productCode":
           description: |-
-            Product code.
+            The product code.
 
             Encoding: ASCII.
 
-            Max length: 12 characters.
+            Max length: 12 characters
+
+            Must not start with a space or be all spaces
+
+            Must not be all zeros
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].quantity":
-          description: |-
-            Quantity, specified as an integer value.
+          description: |+
+            The number of items. Must be an integer greater than zero.
 
-            Value must be greater than 0.
+            Encoding: Numeric
 
-            Max length: 12 characters.
+            Max length: 12 characters
+
+            Must not start with a space or be all spaces
+
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].totalAmount":
           description: |-
-            Total amount, in minor units.
+            The total amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 
             For example, 2000 means USD 20.00.
 
-            Max length: 12 characters.
+            Max length: 12 characters
+
+            Must not start with a space or be all spaces
+
+            Must not be all zeros
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].unitOfMeasure":
           description: |-
-            Item unit of measurement.
+            The unit of measurement for an item.
 
-            Encoding: ASCII.
+            Encoding: ASCII
 
-            Max length: 3 characters.
+            Max length: 3 characters
+
+            Must not start with a space or be all spaces
+
+            Must not be all zeros
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].unitPrice":
           description: |-
-            Unit price, specified in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            Max length: 12 characters.
-          type: string
-        enhancedSchemeData.orderDate:
-          description: |-
-            Order date.
-            * Format: `ddMMyy`
-
-            Encoding: ASCII.
-
-            Max length: 6 characters.
-          type: string
-        enhancedSchemeData.shipFromPostalCode:
-          description: |-
-            The postal code of a "ship-from" address.
-
-            Encoding: ASCII.
-
-            Max length: 10 characters.
-          type: string
-        enhancedSchemeData.totalTaxAmount:
-          description: |-
-            Total tax amount, in minor units.
+            The unit price in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 
             For example, 2000 means USD 20.00.
 
-            Max length: 12 characters.
+            Encoding: Numeric
 
-            > Required for Level 2 and Level 3 data.
+            Max length: 12 characters
+          type: string
+        enhancedSchemeData.orderDate:
+          description: |-
+            The order date.
+            * Format: `ddMMyy`
+
+            Encoding: ASCII
+
+            Max length: 6 characters
+          type: string
+        enhancedSchemeData.shipFromPostalCode:
+          description: |-
+            The postal code of the address the item is shipped from.
+
+            Encoding: ASCII
+
+            Max length: 10 characters
+
+            Must not start with a space or be all spaces
+
+            Must not be all zeros
+          type: string
+        enhancedSchemeData.totalTaxAmount:
+          description: |+
+            The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+
+            For example, 2000 means USD 20.00.
+
+            Encoding: Numeric
+
+            Max length: 12 characters
+
           type: string
       type: object
     AdditionalDataLodging:
@@ -5810,100 +5915,102 @@ components:
         lodging.customerServiceTollFreeNumber:
           description: |-
             The toll-free phone number for the lodging.
-            * Format: alphanumeric.
+            * Format: numeric
             * Max length: 17 characters.
-            * For US numbers: must start with 3 digits and be at least 10 characters in length. Otherwise, the capture can fail.
+            * For US and CA numbers must be 10 characters in length
+            * Must not start with a space
+            * Must not be all zeros
+            * Must not contain any special characters such as + or -
           type: string
         lodging.fireSafetyActIndicator:
           description: |-
-            Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Values can be: 'Y' or 'N'.
-            * Format: alphabetic.
-            * Max length: 1 character.
+            Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Must be 'Y' or 'N'.
+            * Format: alphabetic
+            * Max length: 1 character
           type: string
         lodging.folioCashAdvances:
           description: |-
-            The folio cash advances.
-            * Format: numeric.
-            * Max length: 12 characters.
+            The folio cash advances, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            * Format: numeric
+            * Max length: 12 characters
           type: string
         lodging.folioNumber:
           description: |-
             The card acceptor’s internal invoice or billing ID reference number.
-            * Format: alphanumeric.
             * Max length: 25 characters.
+            * Must not start with a space
+            * Must not be all zeros
           type: string
         lodging.foodBeverageCharges:
           description: |-
-            The additional charges for food and beverages associated with the booking.
-            * Format: numeric.
-            * Max length: 12 characters.
+            Any charges for food and beverages associated with the booking, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            * Format: numeric
+            * Max length: 12 characters
           type: string
         lodging.noShowIndicator:
           description: |-
             Indicates if the customer didn't check in for their booking.
              Possible values: 
-             * **Y**: the customer didn't check in. 
-             **N**: the customer checked in.
+            * **Y**: the customer didn't check in 
+            * **N**: the customer checked in
           type: string
         lodging.prepaidExpenses:
           description: |-
             The prepaid expenses for the booking.
-            * Format: numeric.
-            * Max length: 12 characters.
+            * Format: numeric
+            * Max length: 12 characters
           type: string
         lodging.propertyPhoneNumber:
           description: |-
-            Identifies the location of the lodging by its local phone number.
-            * Format: alphanumeric.
-            * Max length: 17 characters.
-            * For US numbers: must start with 3 digits and be at least 10 characters in length. Otherwise, the capture can fail.
+            The lodging property location's phone number.
+            * Format: numeric.
+            * Min length: 10 characters
+            * Max length: 17 characters
+            * For US and CA numbers must be 10 characters in length
+            * Must not start with a space
+            * Must not be all zeros
+            * Must not contain any special characters such as + or -
           type: string
         lodging.room1.numberOfNights:
           description: |-
             The total number of nights the room is booked for.
-            * Format: numeric.
-            * Max length: 4 characters.
+            * Format: numeric
+            * Must be a number between 0 and 99
+            * Max length: 2 characters
           type: string
         lodging.room1.rate:
           description: |-
-            The rate of the room.
-            * Format: numeric.
-            * Max length: 12 characters.
-            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-          type: string
-        lodging.room1.tax:
-          description: |-
-            The total amount of tax to be paid.
-            * Format: numeric.
-            * Max length: 12 chracters.
-            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            The rate for the room, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            * Format: numeric
+            * Max length: 12 characters
+            * Must not be a negative number
           type: string
         lodging.totalRoomTax:
           description: |-
-            The total room tax amount.
-            * Format: numeric.
-            * Max length: 12 characters.
-            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            The total room tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            * Format: numeric
+            * Max length: 12 characters
+            * Must not be a negative number
           type: string
         lodging.totalTax:
           description: |-
-            The total tax amount.
-            * Format: numeric.
-            * Max length: 12 characters.
-            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+            * Format: numeric
+            * Max length: 12 characters
+            * Must not be a negative number
           type: string
         travelEntertainmentAuthData.duration:
           description: |-
             The number of nights. This should be included in the auth message.
-            * Format: numeric.
-            * Max length: 2 characters.
+            * Format: numeric
+            * Max length: 2 characters
           type: string
         travelEntertainmentAuthData.market:
           description: |-
-            Indicates what market-specific dataset will be submitted or is being submitted. Value should be "H" for Hotel. This should be included in the auth message.
+            Indicates what market-specific dataset will be submitted. Must be 'H' for Hotel. This should be included in the auth message.
 
-            * Format: alphanumeric.
-            * Max length: 1 character.
+            * Format: alphanumeric
+            * Max length: 1 character
           type: string
       type: object
     AdditionalDataOpenInvoice:
@@ -6225,50 +6332,60 @@ components:
       properties:
         enhancedSchemeData.customerReference:
           description: |-
-            Customer code, if supplied by a customer.
+            The customer code, if supplied by a customer.
             * Encoding: ASCII
             * maxLength: 25
           type: string
         enhancedSchemeData.employeeName:
           description: |-
-            Name or ID associated with the individual working in a temporary capacity.
+            The name or ID of the person working in a temporary capacity.
             * maxLength: 40
+            * Must not be all zeros
+            * Must not be all spaces
           type: string
         enhancedSchemeData.jobDescription:
           description: |-
-            Description of the job or task of the individual working in a temporary capacity.
+            The job description of the person working in a temporary capacity.
             * maxLength: 40
+            * Must not be all zeros
+            * Must not be all spaces
           type: string
         enhancedSchemeData.regularHoursRate:
           description: |-
-            Amount paid per regular hours worked, minor units.
+            The amount paid for regular hours worked, [minor units](https://docs.adyen.com/development-resources/currency-codes).
             * maxLength: 7
+            * Must not be empty
+            * Can be all zeros
           type: string
         enhancedSchemeData.regularHoursWorked:
           description: |-
-            Amount of time worked during a normal operation for the task or job.
+            The hours worked.
             * maxLength: 7
+            * Must not be empty
+            * Can be all zeros
           type: string
         enhancedSchemeData.requestName:
           description: |-
-            Name of the individual requesting temporary services.
+            The name of the person requesting temporary services.
             * maxLength: 40
+            * Must not be all zeros
+            * Must not be all spaces
           type: string
         enhancedSchemeData.tempStartDate:
           description: |-
-            Date for the beginning of the pay period.
+            The billing period start date.
             * Format: ddMMyy
             * maxLength: 6
           type: string
         enhancedSchemeData.tempWeekEnding:
           description: |-
-            Date of the end of the billing cycle.
+            The billing period end date.
             * Format: ddMMyy
             * maxLength: 6
           type: string
         enhancedSchemeData.totalTaxAmount:
           description: |-
-            Total tax amount, in minor units. For example, 2000 means USD 20.00
+            The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). For example, 2000 means USD 20.00
             * maxLength: 12
           type: string
       type: object

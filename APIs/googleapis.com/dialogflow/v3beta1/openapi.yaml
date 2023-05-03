@@ -3302,7 +3302,7 @@ components:
           description: Optional for both WebhookRequest and WebhookResponse. The value of the parameter. This field can be set by the webhook to change the parameter value.
       type: object
     GoogleCloudDialogflowCxV3QueryInput:
-      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. "
+      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. 5. DTMF digits to invoke an intent and fill in parameter value."
       properties:
         audio:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3AudioInput"
@@ -3610,6 +3610,7 @@ components:
             - PAGE
             - PARAMETERS
             - UTTERANCE
+            - FLOW
           type: string
       type: object
     GoogleCloudDialogflowCxV3TextInput:
@@ -4883,7 +4884,7 @@ components:
       description: Google Cloud Storage location for a Dialogflow operation that writes or exports objects (e.g. exported agent or transcripts) outside of Dialogflow.
       properties:
         uri:
-          description: "Required. The Google Cloud Storage URI for the exported objects. A URI is of the form: gs://bucket/object-name-or-prefix Whether a full object name, or just a prefix, its usage depends on the Dialogflow operation."
+          description: "Required. The Google Cloud Storage URI for the exported objects. A URI is of the form: `gs://bucket/object-name-or-prefix` Whether a full object name, or just a prefix, its usage depends on the Dialogflow operation."
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata:
@@ -5063,7 +5064,7 @@ components:
       description: The agent's intent.
       properties:
         covered:
-          description: Whether or not the intent is covered by at least one of the agent's test cases.
+          description: Whether the intent is covered by at least one of the agent's test cases.
           type: boolean
         intent:
           description: The intent full resource name
@@ -5531,7 +5532,7 @@ components:
           description: Optional for both WebhookRequest and WebhookResponse. The value of the parameter. This field can be set by the webhook to change the parameter value.
       type: object
     GoogleCloudDialogflowCxV3beta1QueryInput:
-      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. "
+      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. 5. DTMF digits to invoke an intent and fill in parameter value."
       properties:
         audio:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AudioInput"
@@ -6179,6 +6180,7 @@ components:
             - PAGE
             - PARAMETERS
             - UTTERANCE
+            - FLOW
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1TextInput:
@@ -6189,12 +6191,12 @@ components:
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1TextToSpeechSettings:
-      description: Settings related to speech generating.
+      description: Settings related to speech synthesizing.
       properties:
         synthesizeSpeechConfigs:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1SynthesizeSpeechConfig"
-          description: Configuration of how speech should be synthesized, mapping from language (https://dialogflow.com/docs/reference/language) to SynthesizeSpeechConfig.
+          description: "Configuration of how speech should be synthesized, mapping from language (https://cloud.google.com/dialogflow/cx/docs/reference/language) to SynthesizeSpeechConfig. These settings affect: - The synthesize configuration used in [phone gateway](https://cloud.google.com/dialogflow/cx/docs/concept/integration/phone-gateway). - You no longer need to specify OutputAudioConfig.synthesize_speech_config when invoking API calls. Your agent will use the pre-configured options for speech synthesizing."
           type: object
       type: object
     GoogleCloudDialogflowCxV3beta1TrainFlowRequest:
@@ -6218,7 +6220,7 @@ components:
       description: A transition in a page.
       properties:
         covered:
-          description: Whether or not the transition is covered by at least one of the agent's test cases.
+          description: Whether the transition is covered by at least one of the agent's test cases.
           type: boolean
         eventHandler:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1EventHandler"
@@ -6318,7 +6320,7 @@ components:
       description: A transition coverage in a transition route group.
       properties:
         covered:
-          description: Whether or not the transition route is covered by at least one of the agent's test cases.
+          description: Whether the transition route is covered by at least one of the agent's test cases.
           type: boolean
         transitionRoute:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TransitionRoute"
@@ -9639,7 +9641,7 @@ components:
           type: string
       type: object
     GoogleCloudLocationLocation:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".

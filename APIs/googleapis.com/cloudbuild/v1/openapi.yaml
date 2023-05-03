@@ -2797,6 +2797,9 @@ components:
             - BITBUCKET_SERVER
             - GITLAB
           type: string
+        repository:
+          description: The fully qualified resource name of the Repo API repository. Either uri or repository can be specified. If unspecified, the repo from which the trigger invocation originated is assumed to be the repo from which to read the specified path.
+          type: string
         revision:
           description: "The branch, tag, arbitrary ref, or SHA version of the repo to use when resolving the filename (optional). This field respects the same syntax/resolution as described here: https://git-scm.com/docs/gitrevisions If unspecified, the revision from which the trigger invocation originated is assumed to be the revision from which to read the specified path."
           type: string
@@ -3033,6 +3036,9 @@ components:
             - GITHUB
             - BITBUCKET_SERVER
             - GITLAB
+          type: string
+        repository:
+          description: The qualified resource name of the Repo API repository Either uri or repository can be specified and is required.
           type: string
         uri:
           description: The URI of the repo. Either uri or repository can be specified and is required.

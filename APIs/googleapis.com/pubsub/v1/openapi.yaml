@@ -1567,6 +1567,13 @@ components:
             type: string
           type: array
       type: object
+    AvroConfig:
+      description: Configuration for writing message data in Avro format. Message payloads and metadata will be written to files as an Avro binary.
+      properties:
+        writeMetadata:
+          description: When true, write the subscription name, message_id, publish_time, attributes, and ordering_key as additional fields in the output.
+          type: boolean
+      type: object
     BigQueryConfig:
       description: Configuration for a BigQuery subscription.
       properties:
@@ -1607,6 +1614,42 @@ components:
         role:
           description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
+      type: object
+    CloudStorageConfig:
+      description: Configuration for a Cloud Storage subscription.
+      properties:
+        avroConfig:
+          $ref: "#/components/schemas/AvroConfig"
+          description: If set, message data will be written to Cloud Storage in Avro format.
+        bucket:
+          description: Required. User-provided name for the Cloud Storage bucket. The bucket must be created by the user. The bucket name must be without any prefix like "gs://". See the [bucket naming requirements] (https://cloud.google.com/storage/docs/buckets#naming).
+          type: string
+        filenamePrefix:
+          description: User-provided prefix for Cloud Storage filename. See the [object naming requirements](https://cloud.google.com/storage/docs/objects#naming).
+          type: string
+        filenameSuffix:
+          description: User-provided suffix for Cloud Storage filename. See the [object naming requirements](https://cloud.google.com/storage/docs/objects#naming).
+          type: string
+        maxBytes:
+          description: The maximum bytes that can be written to a Cloud Storage file before a new file is created. Min 1 KB, max 10 GiB. The max_bytes limit may be exceeded in cases where messages are larger than the limit.
+          format: int64
+          type: string
+        maxDuration:
+          description: The maximum duration that can elapse before a new Cloud Storage file is created. Min 1 minute, max 10 minutes, default 5 minutes. May not exceed the subscription's acknowledgement deadline.
+          format: google-duration
+          type: string
+        state:
+          description: Output only. An output-only field that indicates whether or not the subscription can receive messages.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - PERMISSION_DENIED
+            - NOT_FOUND
+          readOnly: true
+          type: string
+        textConfig:
+          $ref: "#/components/schemas/TextConfig"
+          description: If set, message data will be written to Cloud Storage in text format.
       type: object
     CommitSchemaRequest:
       description: Request for CommitSchema method.
@@ -2006,7 +2049,7 @@ components:
           type: string
       type: object
     Subscription:
-      description: A subscription resource. If none of `push_config` or `bigquery_config` is set, then the subscriber will pull and ack messages using API methods. At most one of these fields may be set.
+      description: A subscription resource. If none of `push_config`, `bigquery_config`, or `cloud_storage_config` is set, then the subscriber will pull and ack messages using API methods. At most one of these fields may be set.
       properties:
         ackDeadlineSeconds:
           description: The approximate amount of time (on a best-effort basis) Pub/Sub waits for the subscriber to acknowledge receipt before resending the message. In the interval after the message is delivered and before it is acknowledged, it is considered to be _outstanding_. During that time period, the message will not be redelivered (on a best-effort basis). For pull subscriptions, this value is used as the initial value for the ack deadline. To override this value for a given message, call `ModifyAckDeadline` with the corresponding `ack_id` if using non-streaming pull or send the `ack_id` in a `StreamingModifyAckDeadlineRequest` if using streaming pull. The minimum custom deadline you can specify is 10 seconds. The maximum custom deadline you can specify is 600 seconds (10 minutes). If this parameter is 0, a default value of 10 seconds is used. For push delivery, this value is also used to set the request timeout for the call to the push endpoint. If the subscriber never acknowledges the message, the Pub/Sub system will eventually redeliver the message.
@@ -2015,6 +2058,9 @@ components:
         bigqueryConfig:
           $ref: "#/components/schemas/BigQueryConfig"
           description: If delivery to BigQuery is used with this subscription, this field is used to configure it.
+        cloudStorageConfig:
+          $ref: "#/components/schemas/CloudStorageConfig"
+          description: If delivery to Google Cloud Storage is used with this subscription, this field is used to configure it.
         deadLetterPolicy:
           $ref: "#/components/schemas/DeadLetterPolicy"
           description: A policy that specifies the conditions for dead lettering messages in this subscription. If dead_letter_policy is not set, dead lettering is disabled. The Cloud Pub/Sub service account associated with this subscriptions's parent project (i.e., service-{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have permission to Acknowledge() messages on this subscription.
@@ -2088,6 +2134,10 @@ components:
           items:
             type: string
           type: array
+      type: object
+    TextConfig:
+      description: Configuration for writing message data in text format. Message payloads will be written to files as raw text, separated by a newline.
+      properties: {}
       type: object
     Topic:
       description: A topic resource.

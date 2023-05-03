@@ -3796,7 +3796,7 @@ components:
           description: Optional for both WebhookRequest and WebhookResponse. The value of the parameter. This field can be set by the webhook to change the parameter value.
       type: object
     GoogleCloudDialogflowCxV3QueryInput:
-      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. "
+      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. 5. DTMF digits to invoke an intent and fill in parameter value."
       properties:
         audio:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3AudioInput"
@@ -4104,6 +4104,7 @@ components:
             - PAGE
             - PARAMETERS
             - UTTERANCE
+            - FLOW
           type: string
       type: object
     GoogleCloudDialogflowCxV3TextInput:
@@ -5038,7 +5039,7 @@ components:
           description: Optional for both WebhookRequest and WebhookResponse. The value of the parameter. This field can be set by the webhook to change the parameter value.
       type: object
     GoogleCloudDialogflowCxV3beta1QueryInput:
-      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. "
+      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. 5. DTMF digits to invoke an intent and fill in parameter value."
       properties:
         audio:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AudioInput"
@@ -5346,6 +5347,7 @@ components:
             - PAGE
             - PARAMETERS
             - UTTERANCE
+            - FLOW
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1TextInput:
@@ -5806,7 +5808,7 @@ components:
           format: google-datetime
           type: string
         clicked:
-          description: Indicates whether the answer/item was clicked by the human agent or not. Default to false.
+          description: Indicates whether the answer/item was clicked by the human agent or not. Default to false. For knowledge search, the answer record is considered to be clicked if the answer was copied or any URI was clicked.
           type: boolean
         correctnessLevel:
           description: The correctness level of the specific answer.
@@ -10401,7 +10403,7 @@ components:
           type: string
       type: object
     GoogleCloudLocationLocation:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".

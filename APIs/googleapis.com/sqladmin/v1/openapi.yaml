@@ -768,7 +768,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Inserts a resource containing information about a database inside a Cloud SQL instance.
+      description: Inserts a resource containing information about a database inside a Cloud SQL instance. **Note:** You can't modify the default character set and collation.
       operationId: sql.databases.insert
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -2857,6 +2857,9 @@ components:
           description: Timestamp, if specified, identifies the time to which the source instance is cloned.
           format: google-datetime
           type: string
+        preferredZone:
+          description: (Point-in-time recovery for PostgreSQL only) Clone to an instance in the specified zone. If no zone is specified, clone to the same zone as the source instance.
+          type: string
       type: object
     ConnectSettings:
       description: Connect settings retrieval response.
@@ -2887,6 +2890,7 @@ components:
             - POSTGRES_12
             - POSTGRES_13
             - POSTGRES_14
+            - POSTGRES_15
             - MYSQL_8_0
             - MYSQL_8_0_18
             - MYSQL_8_0_26
@@ -3011,6 +3015,7 @@ components:
             - POSTGRES_12
             - POSTGRES_13
             - POSTGRES_14
+            - POSTGRES_15
             - MYSQL_8_0
             - MYSQL_8_0_18
             - MYSQL_8_0_26
@@ -3367,6 +3372,7 @@ components:
               - POSTGRES_12
               - POSTGRES_13
               - POSTGRES_14
+              - POSTGRES_15
               - MYSQL_8_0
               - MYSQL_8_0_18
               - MYSQL_8_0_26
@@ -4271,6 +4277,9 @@ components:
       properties:
         kind:
           description: This is always `sql#getDiskShrinkConfig`.
+          type: string
+        message:
+          description: Additional message to customers.
           type: string
         minimalTargetSizeGb:
           description: The minimum size to which a disk can be shrunk in GigaBytes.

@@ -1722,6 +1722,86 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
+  "/v1alpha/{parent}/eventCreateRules":
+    get:
+      description: Lists EventCreateRules on a web data stream.
+      operationId: analyticsadmin.properties.dataStreams.eventCreateRules.list
+      parameters:
+        - description: "Required. Example format: properties/123/dataStreams/456"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200 (higher values will be coerced to the maximum).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListEventCreateRules` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListEventCreateRules` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListEventCreateRulesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an EventCreateRule.
+      operationId: analyticsadmin.properties.dataStreams.eventCreateRules.create
+      parameters:
+        - description: "Required. Example format: properties/123/dataStreams/456"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaEventCreateRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaEventCreateRule"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
   "/v1alpha/{parent}/expandedDataSets":
     get:
       description: Lists ExpandedDataSets on a property.
@@ -3432,6 +3512,9 @@ components:
         enhancedMeasurementSettings:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaEnhancedMeasurementSettings"
           description: A snapshot of EnhancedMeasurementSettings resource in change history.
+        eventCreateRule:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaEventCreateRule"
+          description: A snapshot of an EventCreateRule resource in change history.
         expandedDataSet:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaExpandedDataSet"
           description: A snapshot of an ExpandedDataSet resource in change history.
@@ -3954,6 +4037,30 @@ components:
           description: If enabled, capture video play, progress, and complete events as visitors view embedded videos on your site.
           type: boolean
       type: object
+    GoogleAnalyticsAdminV1alphaEventCreateRule:
+      description: An Event Create Rule defines conditions that will trigger the creation of an entirely new event based upon matched criteria of a source event. Additional mutations of the parameters from the source event can be defined. Unlike Event Edit rules, Event Creation Rules have no defined order. They will all be run independently. Event Edit and Event Create rules can't be used to modify an event created from an Event Create rule.
+      properties:
+        destinationEvent:
+          description: "Required. The name of the new event to be created. This value must: * be less than 40 characters * consist only of letters, digits or _ (underscores) * start with a letter"
+          type: string
+        eventConditions:
+          description: Required. Must have at least one condition, and can have up to 10 max. Conditions on the source event must match for this rule to be applied.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMatchingCondition"
+          type: array
+        name:
+          description: "Output only. Resource name for this EventCreateRule resource. Format: properties/{property}/dataStreams/{data_stream}/eventCreateRules"
+          readOnly: true
+          type: string
+        parameterMutations:
+          description: Parameter mutations define parameter behavior on the new event, and are applied in order. A maximum of 20 mutations can be applied.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaParameterMutation"
+          type: array
+        sourceCopyParameters:
+          description: If true, the source parameters are copied to the new event. If false, or unset, all non-internal parameters are not copied from the source event. Parameter mutations are applied after the parameters have been copied.
+          type: boolean
+      type: object
     GoogleAnalyticsAdminV1alphaExpandedDataSet:
       description: A resource message representing a GA4 ExpandedDataSet.
       properties:
@@ -4351,6 +4458,18 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    GoogleAnalyticsAdminV1alphaListEventCreateRulesResponse:
+      description: Response message for ListEventCreateRules RPC.
+      properties:
+        eventCreateRules:
+          description: List of EventCreateRules. These will be ordered stably, but in an arbitrary order.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaEventCreateRule"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaListExpandedDataSetsResponse:
       description: Response message for ListExpandedDataSets RPC.
       properties:
@@ -4435,6 +4554,38 @@ components:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaUserLink"
           type: array
       type: object
+    GoogleAnalyticsAdminV1alphaMatchingCondition:
+      description: Defines a condition for when an Event Edit or Event Creation rule applies to an event.
+      properties:
+        comparisonType:
+          description: Required. The type of comparison to be applied to the value.
+          enum:
+            - COMPARISON_TYPE_UNSPECIFIED
+            - EQUALS
+            - EQUALS_CASE_INSENSITIVE
+            - CONTAINS
+            - CONTAINS_CASE_INSENSITIVE
+            - STARTS_WITH
+            - STARTS_WITH_CASE_INSENSITIVE
+            - ENDS_WITH
+            - ENDS_WITH_CASE_INSENSITIVE
+            - GREATER_THAN
+            - GREATER_THAN_OR_EQUAL
+            - LESS_THAN
+            - LESS_THAN_OR_EQUAL
+            - REGULAR_EXPRESSION
+            - REGULAR_EXPRESSION_CASE_INSENSITIVE
+          type: string
+        field:
+          description: Required. The name of the field that is compared against for the condition. If 'event_name' is specified this condition will apply to the name of the event. Otherwise the condition will apply to a parameter with the specified name. This value cannot contain spaces.
+          type: string
+        negated:
+          description: Whether or not the result of the comparison should be negated. For example, if `negated` is true, then 'equals' comparisons would function as 'not equals'.
+          type: boolean
+        value:
+          description: Required. The value being compared against for this condition. The runtime implementation may perform type coercion of this value to evaluate this condition based on the type of the parameter value.
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret:
       description: A secret value used for sending hits to Measurement Protocol.
       properties:
@@ -4460,6 +4611,16 @@ components:
         int64Value:
           description: Integer value
           format: int64
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaParameterMutation:
+      description: Defines an event parameter to mutate.
+      properties:
+        parameter:
+          description: "Required. The name of the parameter to mutate. This value must: * be less than 40 characters. * be unique across across all mutations within the rule * consist only of letters, digits or _ (underscores) For event edit rules, the name may also be set to 'event_name' to modify the event_name in place."
+          type: string
+        parameterValue:
+          description: Required. The value mutation to perform. * Must be less than 100 characters. * To specify a constant value for the param, use the value's string. * To copy value from another parameter, use syntax like "[[other_parameter]]" For more details, see this [help center article](https://support.google.com/analytics/answer/10085872?hl=en#modify-an-event&zippy=%2Cin-this-article%2Cmodify-parameters).
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaProperty:
@@ -4747,6 +4908,7 @@ components:
               - CHANNEL_GROUP
               - ENHANCED_MEASUREMENT_SETTINGS
               - AUDIENCE
+              - EVENT_CREATE_RULE
             type: string
           type: array
       type: object

@@ -3219,6 +3219,11 @@ components:
       type: object
     HivePartitioningOptions:
       properties:
+        fields:
+          description: "[Output-only] For permanent external tables, this field is populated with the hive partition keys in the order they were inferred. The types of the partition keys can be deduced by checking the table schema (which will include the partition keys). Not every API will populate this field in the output. For example, Tables.Get will populate it, but Tables.List will not contain this field."
+          items:
+            type: string
+          type: array
         mode:
           description: "[Optional] When set, what mode of hive partitioning to use when reading data. The following modes are supported. (1) AUTO: automatically infer partition key name(s) and type(s). (2) STRINGS: automatically infer partition key name(s). All types are interpreted as strings. (3) CUSTOM: partition key schema is encoded in the source URI prefix. Not all storage formats support hive partitioning. Requesting hive partitioning on an unsupported format will lead to an error. Currently supported types include: AVRO, CSV, JSON, ORC and Parquet."
           type: string
@@ -4285,6 +4290,7 @@ components:
             - DNN_CLASSIFIER
             - TENSORFLOW
             - DNN_REGRESSOR
+            - XGBOOST
             - BOOSTED_TREE_REGRESSOR
             - BOOSTED_TREE_CLASSIFIER
             - ARIMA
@@ -4295,8 +4301,11 @@ components:
             - DNN_LINEAR_COMBINED_REGRESSOR
             - AUTOENCODER
             - ARIMA_PLUS
+            - ARIMA_PLUS_XREG
             - RANDOM_FOREST_REGRESSOR
             - RANDOM_FOREST_CLASSIFIER
+            - TENSORFLOW_LITE
+            - ONNX
           readOnly: true
           type: string
         optimalTrialIds:
@@ -4306,6 +4315,10 @@ components:
             type: string
           readOnly: true
           type: array
+        remoteModelInfo:
+          $ref: "#/components/schemas/RemoteModelInfo"
+          description: Output only. Remote model info
+          readOnly: true
         trainingRuns:
           description: Information for all training runs in increasing order of start_time.
           items:
@@ -4735,6 +4748,32 @@ components:
             type: string
           description: User-defined context as a set of key/value pairs, which will be sent as function invocation context together with batched arguments in the requests to the remote service. The total number of bytes of keys and values must be less than 8KB.
           type: object
+      type: object
+    RemoteModelInfo:
+      description: Remote Model Info
+      properties:
+        connection:
+          description: 'Output only. Fully qualified name of the user-provided connection object of the remote model. Format: ```"projects/{project_id}/locations/{location_id}/connections/{connection_id}"```'
+          readOnly: true
+          type: string
+        endpoint:
+          description: Output only. The endpoint for remote model.
+          readOnly: true
+          type: string
+        maxBatchingRows:
+          description: Output only. Max number of rows in each batch sent to the remote service. If unset, the number of rows in each batch is set dynamically.
+          format: int64
+          readOnly: true
+          type: string
+        remoteServiceType:
+          description: Output only. The remote service type for remote model.
+          enum:
+            - REMOTE_SERVICE_TYPE_UNSPECIFIED
+            - CLOUD_AI_TRANSLATE_V3
+            - CLOUD_AI_VISION_V1
+            - CLOUD_AI_NATURAL_LANGUAGE_V1
+          readOnly: true
+          type: string
       type: object
     Routine:
       description: A user-defined function or a stored procedure.
@@ -5754,6 +5793,9 @@ components:
           items:
             type: string
           type: array
+        instanceWeightColumn:
+          description: Name of the instance weight column for training data. This column isn't be used as a feature.
+          type: string
         integratedGradientsNumSteps:
           description: Number of integral steps for the integrated gradients explain method.
           format: int64
@@ -5876,6 +5918,9 @@ components:
           description: Subsample fraction of the training data to grow tree to prevent overfitting for boosted tree models.
           format: double
           type: number
+        tfVersion:
+          description: Based on the selected TF version, the corresponding docker image is used to train external models.
+          type: string
         timeSeriesDataColumn:
           description: Column to be designated as time series data for ARIMA model.
           type: string
@@ -5917,6 +5962,9 @@ components:
         warmStart:
           description: Whether to train a model from the last checkpoint.
           type: boolean
+        xgboostVersion:
+          description: User-selected XGBoost versions for training of XGBoost models.
+          type: string
       type: object
     TrainingRun:
       description: Information about a single training query run for the model.
