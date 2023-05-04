@@ -1,0 +1,649 @@
+openapi: 3.1.0
+servers:
+  - url: https://api.placekit.co
+info:
+  contact:
+    name: API Support
+    url: https://api.placekit.co
+  description: PlaceKit OpenAPI Specifications ([repository](https://github.com/placekit/api-reference))
+  termsOfService: https://placekit.io/terms
+  title: PlaceKit API Reference
+  version: 1.0.0
+  x-apisguru-categories:
+    - location
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/placekit/api-reference/main/openapi.yml
+      version: "3.1"
+  x-providerName: placekit.co
+security:
+  - api_key: []
+paths:
+  /reverse:
+    post:
+      description: |
+        Performs a reverse geocoding search.
+
+        It will return the closest results around `coordinates`.\
+        If `coordinates` are not set, it will use the user's IP to approximate its coordinates but results will be less accurate (city level accuracy instead of street level accuracy).
+      operationId: reverse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/parameters"
+                - properties:
+                    countryByIP:
+                      default: true
+                      description: |
+                        Automatically select the country to search in via the user IP's detected location.\
+                        Returned results will be coming from the user's country's IP.\
+                        If set to `true`, the parameter `countries` acts as a fallback.
+                      type: boolean
+                  type: object
+        description: Request parameters
+        required: false
+      responses:
+        "200":
+          $ref: "#/components/responses/200"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "412":
+          $ref: "#/components/responses/412"
+        "422":
+          $ref: "#/components/responses/422"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Reverse geocoding
+      x-codeSamples:
+        - lang: curl
+          source: |-
+            curl --location --request POST 'https://api.placekit.co/reverse' \
+                 --header 'Content-Type: application/json' \
+                 --header 'x-placekit-api-key: <PLACEKIT_API_KEY>' \
+                 --data-raw '{
+                  "countries": ["fr"],
+                  "language": "fr",
+                  "types": ["street"],
+                  "maxResults": 5,
+                  "coordinates": "48.873662, 2.295063"
+                }'
+        - lang: go
+          source: |-
+            package main
+
+            import (
+              "fmt"
+              "strings"
+              "net/http"
+              "io/ioutil"
+            )
+
+            func main() {
+
+              url := "https://api.placekit.co/reverse"
+              method := "POST"
+
+              payload := strings.NewReader(`{
+                "countries": ["fr"],
+                "language": "fr",
+                "types": ["street"],
+                "maxResults": 5,
+                "coordinates": "48.873662, 2.295063"
+              }`)
+
+              client := &http.Client {
+              }
+              req, err := http.NewRequest(method, url, payload)
+              
+              if err != nil {
+                fmt.Println(err)
+                return
+              }
+              req.Header.Add("Content-Type", "application/json")
+              req.Header.Add("x-placekit-api-key", "<PLACEKIT_API_KEY>")
+              
+              res, err := client.Do(req)
+              if err != nil {
+                fmt.Println(err)
+                return
+              }
+              defer res.Body.Close()
+              
+              body, err := ioutil.ReadAll(res.Body)
+              if err != nil {
+                fmt.Println(err)
+                return
+              }
+              fmt.Println(string(body))
+            }
+        - lang: js
+          source: |-
+            var myHeaders = new Headers();
+            myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('x-placekit-api-key', '<PLACEKIT_API_KEY>');
+
+            var raw = JSON.stringify({
+              countries: ['fr'],
+              language: 'fr',
+              types: ['street'],
+              maxResults: 5,
+              coordinates: '48.873662, 2.295063'
+            });
+
+            var requestOptions = {
+              method: 'POST',
+              headers: myHeaders,
+              body: raw,
+              redirect: 'follow'
+            };
+
+            fetch('https://api.placekit.co/reverse', requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
+        - lang: python
+          source: |-
+            import http.client
+            import json
+
+            conn = http.client.HTTPSConnection('api.placekit.co')
+            payload = json.dumps({
+              'countries': ['fr'],
+              'language': 'fr',
+              'types': ['street'],
+              'maxResults': 5,
+              'coordinates': '48.873662, 2.295063'
+            })
+            headers = {
+              'Content-Type': 'application/json',
+              'x-placekit-api-key': '<PLACEKIT_API_KEY>'
+            }
+            conn.request('POST', '/reverse', payload, headers)
+            res = conn.getresponse()
+            data = res.read()
+            print(data.decode('utf-8'))
+        - lang: ruby
+          source: |
+            require 'uri'
+            require 'json'
+            require 'net/http'
+
+            url = URI('https://api.placekit.co/reverse')
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Post.new(url)
+            request['Content-Type'] = 'application/json'
+            request['x-placekit-api-key'] = '<PLACEKIT_API_KEY>'
+            request.body = {
+              countries: ['fr'],
+              language: 'fr',
+              types: ['street'],
+              maxResults: 5,
+              coordinates: '48.873662, 2.295063'
+            }.to_json
+
+            response = https.request(request)
+            pp JSON.parse(response.read_body)
+      x-codegen-request-body-name: payload
+  /search:
+    post:
+      description: |
+        Performs a forward geocoding search.
+
+        It will return results around `coordinates` (if provided) and the best matching textual relevance.
+
+        **It is highly recommended** to set the `countries` parameter with the country you need results from for the best accuracy and revelance possible.
+      operationId: search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - properties:
+                    query:
+                      default: ""
+                      description: Search query terms.
+                      example: 42 avenue Champs Elysees Paris
+                      type: string
+                  type: object
+                - $ref: "#/components/schemas/parameters"
+        description: Request parameters
+        required: false
+      responses:
+        "200":
+          $ref: "#/components/responses/200"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "412":
+          $ref: "#/components/responses/412"
+        "422":
+          $ref: "#/components/responses/422"
+        "429":
+          $ref: "#/components/responses/429"
+      summary: Search for addresses
+      x-codeSamples:
+        - lang: curl
+          source: |-
+            curl --location --request POST 'https://api.placekit.co/search' \
+                 --header 'Content-Type: application/json' \
+                 --header 'x-placekit-api-key: <PLACEKIT_API_KEY>' \
+                 --data-raw '{
+                  "query": "42 avenue Champs Elysees Paris",
+                  "countries": ["fr"],
+                  "language": "fr",
+                  "types": ["street"],
+                  "maxResults": 5,
+                  "coordinates": "48.873662, 2.295063"
+                }'
+        - lang: go
+          source: |-
+            package main
+
+            import (
+              "fmt"
+              "strings"
+              "net/http"
+              "io/ioutil"
+            )
+
+            func main() {
+
+              url := "https://api.placekit.co/search"
+              method := "POST"
+
+              payload := strings.NewReader(`{
+                "query": "42 avenue Champs Elysees Paris",
+                "countries": ["fr"],
+                "language": "fr",
+                "types": ["street"],
+                "maxResults": 5,
+                "coordinates": "48.873662, 2.295063"
+              }`)
+
+              client := &http.Client {
+              }
+              req, err := http.NewRequest(method, url, payload)
+
+              if err != nil {
+                fmt.Println(err)
+                return
+              }
+              req.Header.Add("Content-Type", "application/json")
+              req.Header.Add("x-placekit-api-key", "<PLACEKIT_API_KEY>")
+
+              res, err := client.Do(req)
+              if err != nil {
+                fmt.Println(err)
+                return
+              }
+              defer res.Body.Close()
+
+              body, err := ioutil.ReadAll(res.Body)
+              if err != nil {
+                fmt.Println(err)
+                return
+              }
+              fmt.Println(string(body))
+            }
+        - lang: js
+          source: |-
+            var myHeaders = new Headers();
+            myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('x-placekit-api-key', '<PLACEKIT_API_KEY>');
+
+            var raw = JSON.stringify({
+              query: '42 avenue Champs Elysees Paris',
+              countries: ['fr'],
+              language: 'fr',
+              types: ['street'],
+              maxResults: 5,
+              coordinates: '48.873662, 2.295063'
+            });
+
+            var requestOptions = {
+              method: 'POST',
+              headers: myHeaders,
+              body: raw,
+              redirect: 'follow'
+            };
+
+            fetch('https://api.placekit.co/search', requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
+        - lang: python
+          source: |-
+            import http.client
+            import json
+
+            conn = http.client.HTTPSConnection('api.placekit.co')
+            payload = json.dumps({
+              'query': '42 avenue Champs Elysees Paris',
+              'countries': ['fr'],
+              'language': 'fr',
+              'types': ['street'],
+              'maxResults': 5,
+              'coordinates': '48.873662, 2.295063'
+            })
+            headers = {
+              'Content-Type': 'application/json',
+              'x-placekit-api-key': '<PLACEKIT_API_KEY>'
+            }
+            conn.request('POST', '/search', payload, headers)
+            res = conn.getresponse()
+            data = res.read()
+            print(data.decode('utf-8'))
+        - lang: ruby
+          source: |
+            require 'uri'
+            require 'json'
+            require 'net/http'
+
+            url = URI('https://api.placekit.co/search')
+
+            https = Net::HTTP.new(url.host, url.port)
+            https.use_ssl = true
+
+            request = Net::HTTP::Post.new(url)
+            request['Content-Type'] = 'application/json'
+            request['x-placekit-api-key'] = '<PLACEKIT_API_KEY>'
+            request.body = {
+              query: '42 avenue Champs Elysees Paris',
+              countries: ['fr'],
+              language: 'fr',
+              types: ['street'],
+              maxResults: 5,
+              coordinates: '48.873662, 2.295063'
+            }.to_json
+
+            response = https.request(request)
+            pp JSON.parse(response.read_body)
+      x-codegen-request-body-name: payload
+components:
+  responses:
+    "200":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/results"
+      description: Returns a list of matching addresses
+      headers:
+        RateLimit-Limit:
+          description: Request limit per minute.
+          example: 5
+          schema:
+            type: integer
+        RateLimit-Remaining:
+          description: The number of requests left for the time window.
+          example: 2
+          schema:
+            type: integer
+        RateLimit-Reset:
+          description: Indicates how many seconds are left to wait before making a follow-up request.
+          example: 34
+          schema:
+            type: integer
+        Retry-After:
+          description: Indicates how many seconds to wait before making a follow-up request.
+          example: 60
+          schema:
+            type: integer
+    "401":
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                example: Access denied authentication failed
+                type: string
+            type: object
+      description: Access denied authentication failed
+    "403":
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                example: You are not authorized to access this resource
+                type: string
+            type: object
+      description: You are not authorized to access this resource
+    "404":
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                example: Route not found
+                type: string
+            type: object
+      description: Route not found
+    "412":
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                example: Access denied missing credentials
+                type: string
+            type: object
+      description: Access denied missing credentials
+    "422":
+      content:
+        application/json:
+          schema:
+            properties:
+              errors:
+                example:
+                  - location: body
+                    msg: Must be an integer between 1 and 20 included.
+                    param: maxResults
+                    value: 42
+                  - location: body
+                    msg: This country is not supported. Contact us if you need it.
+                    param: countries[0]
+                    value: sx
+                items:
+                  $ref: "#/components/schemas/validationError"
+                type: array
+              message:
+                example: "Invalid body parameters. Check the API documentation: https://api.placekit.io/"
+                type: string
+            type: object
+      description: Invalid body parameters
+    "429":
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                example: Too many requests from this IP, please try again in a minute
+                type: string
+              status:
+                example: 429
+                type: integer
+            type: object
+      description: Too many requests from this IP, please try again in a minute
+  schemas:
+    entity:
+      properties:
+        administrative:
+          description: Administrative name (region).
+          example: Île-de-France
+          type: string
+        city:
+          description: City name.
+          example: Paris 8e Arrondissement
+          type: string
+        country:
+          description: Country name.
+          example: France
+          type: string
+        countrycode:
+          description: |
+            [Two-letter ISO 3166-1 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+          example: fr
+          type: string
+        county:
+          description: County name (department).
+          example: Paris
+          type: string
+        highlight:
+          description: Name of the current entity with highlighted matched words.
+          example: <mark>42 Avenue</mark> des <mark>Champs Élysées</mark>
+          type: string
+        lat:
+          description: Latitude.
+          example: 48.871086
+          type: number
+        lng:
+          description: Longitude.
+          example: 2.3036339
+          type: number
+        name:
+          description: Name of the current entity.
+          example: 42 Avenue des Champs Élysées
+          type: string
+        population:
+          description: Population number of the entity city.
+          example: 2220445
+          type: integer
+        type:
+          description: Type of the entity.
+          enum:
+            - airport
+            - bus
+            - city
+            - country
+            - street
+            - tourism
+            - townhall
+            - train
+          example: street
+          type: string
+        zipcode:
+          description: Postcodes associated with the entity.
+          example:
+            - "75008"
+          items:
+            type: string
+          type: array
+      type: object
+    parameters:
+      properties:
+        coordinates:
+          description: |
+            GPS coordinates latitude and longitude.\
+            Used to improve relevancy of results around the given area.
+          example: 48.873662, 2.295063
+          type: string
+        countries:
+          description: |
+            Array of [two-letter ISO 3166-1 alpha-2 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\
+            Limit the results to given countries.\
+            Select only one country for the best results.
+          example:
+            - fr
+          items:
+            type: string
+          type: array
+        countryByIP:
+          default: false
+          description: |
+            Automatically select the country to search in via the user IP's detected location.\
+            Returned results will be coming from the user's country's IP.\
+            If set to `true`, the parameter `countries` acts as a fallback.
+          type: boolean
+        language:
+          description: |
+            [Two-letter ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\
+            Default results are in their original language.\
+            By setting this parameter, you can change the language of the results, if the translation is available.\
+            Contact us if you need other languages.
+          enum:
+            - en
+            - fr
+          example: fr
+          type: string
+        maxResults:
+          default: 5
+          description: Maximum number of results to return.
+          maximum: 20
+          minimum: 1
+          type: integer
+        types:
+          description: |
+            Select the types of record to return.\
+            Prepend with `-` to omit a type.\
+            Returns all types by default.
+          items:
+            $ref: "#/components/schemas/types"
+          type: array
+      type: object
+    results:
+      properties:
+        maxResults:
+          description: Maximum number of results items returned.
+          example: 5
+          type: integer
+        query:
+          description: Search text query used for this response.
+          example: 42 avenue Champs Elysees Paris
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/entity"
+          type: array
+        resultsCount:
+          description: Number of items results found.
+          example: 2
+          type: integer
+      type: object
+    types:
+      enum:
+        - airport
+        - -airport
+        - bus
+        - -bus
+        - city
+        - -city
+        - country
+        - -country
+        - street
+        - -street
+        - tourism
+        - -tourism
+        - townhall
+        - -townhall
+        - train
+        - -train
+      type: string
+    validationError:
+      properties:
+        location:
+          type: string
+        msg:
+          type: string
+        param:
+          type: string
+        value:
+          type: string
+      type: object
+  securitySchemes:
+    api_key:
+      description: Generate your API key in the [app settings](https://app.placekit.io/).
+      in: header
+      name: x-placekit-api-key
+      type: apiKey

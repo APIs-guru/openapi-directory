@@ -1,0 +1,1740 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.slmonitor.com
+info:
+  title: SafetyLine
+  version: "2.1"
+  x-apisguru-categories:
+    - enterprise
+  x-logo:
+    url: https://images.squarespace-cdn.com/content/v1/5da0d7a42ae7d60e27334f91/1599832509107-MH74LTAWZ4N33TPMZP6M/SafetyLine%2BLogo-min.png
+  x-origin:
+    - format: swagger
+      url: https://api.slmonitor.com/swagger/v2.1/swagger.json
+      version: "2.0"
+  x-providerName: slmonitor.com
+security:
+  - EmailLogin: []
+  - MicrosoftLogin: []
+  - Pin: []
+paths:
+  "/api/v2.1/companies/{companyId}/me":
+    get:
+      description: This operation gets the authenticated user's profile.
+      operationId: Api_GetUser
+      parameters:
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin: []
+        - MicrosoftLogin: []
+        - Pin: []
+      summary: Get the authenticated user
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users":
+    get:
+      description: This operation gets all the users' profiles.
+      operationId: Api_GetUsers
+      parameters:
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/User"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/User"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/User"
+                type: array
+          description: The requested Users
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyAdministrator
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyAdministrator
+            - CompanyMonitor
+        - Pin: []
+      summary: Get all the users
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}":
+    get:
+      description: This operation gets the specified user's profile.
+      operationId: Api_GetUser2
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyAdministrator
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyAdministrator
+            - CompanyMonitor
+        - Pin: []
+      summary: Get the user's profile
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/checkin":
+    post:
+      description: This operation checks the worker in for a default time or a custom time if the optional interval is provided.
+      operationId: Api_CheckIn
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: The optional check-in interval in minutes
+          in: query
+          name: interval
+          schema:
+            format: int32
+            type: integer
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Check in
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/checkin-audio":
+    post:
+      description: This operation checks the worker in for a default time or a custom time if the optional interval is provided, and includes an audio attachment.
+      operationId: Api_CheckInWithAudio
+      parameters:
+        - in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: The optional check-in interval in minutes
+          in: query
+          name: interval
+          schema:
+            format: int32
+            type: integer
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        $ref: "#/components/requestBodies/Audio"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Check in with an audio recording
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/checkin-text":
+    post:
+      description: This operation checks the worker in for a default time or a custom time if the optional interval is provided.
+      operationId: Api_CheckInWithText
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: The optional check-in interval in minutes
+          in: query
+          name: interval
+          schema:
+            format: int32
+            type: integer
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        $ref: "#/components/requestBodies/Api_CheckInWithTextText"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Check in with a text report
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/emergency":
+    post:
+      description: This operation declares an emergency.
+      operationId: Api_Emergency
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Declare an emergency
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/emergency-audio":
+    post:
+      description: This operation declares an emergency, and includes an audio attachment.
+      operationId: Api_EmergencyWithAudio
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        $ref: "#/components/requestBodies/Audio"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Declare an emergency with an audio recording
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/emergency-text":
+    post:
+      description: This operation declares an emergency.
+      operationId: Api_EmergencyWithText
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        $ref: "#/components/requestBodies/Api_CheckInWithTextText"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Declare an emergency with a text report
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/end":
+    post:
+      description: This operation ends monitoring.
+      operationId: Api_End
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: End monitoring
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/end-audio":
+    post:
+      description: This operation ends monitoring, and includes an audio attachment.
+      operationId: Api_EndWithAudio
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        $ref: "#/components/requestBodies/Audio"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updatedUser
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: End monitoring with an audio recording
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/end-text":
+    post:
+      description: This operation ends monitoring.
+      operationId: Api_EndWithText
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        $ref: "#/components/requestBodies/Api_CheckInWithTextText"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: End monitoring with a text report
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/itinerary":
+    put:
+      description: This operation updates the worker's itinerary.
+      operationId: Api_UpdateItinerary
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          application/json-patch+json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+        description: The itinerary text
+        required: true
+        x-nullable: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Update the itinerary
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/itinerary-file":
+    put:
+      description: This operation updates the worker's itinerary.
+      operationId: Api_UpdateItineraryFile
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                itinerary:
+                  description: The itinerary file
+                  format: binary
+                  type: string
+                  x-nullable: true
+              required:
+                - itinerary
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Update the itinerary file
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/location":
+    post:
+      description: This operation adds a location to the worker's event history.
+      operationId: Api_ReportLocation
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/EventLocationData"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventLocationData"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/EventLocationData"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/EventLocationData"
+        description: The EventLocationData
+        required: true
+        x-nullable: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The updated User
+          x-nullable: false
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Report a location
+      tags:
+        - Api
+  "/api/v2.1/companies/{companyId}/users/{uniqueUserId}/text":
+    post:
+      description: The operation adds a text message to the worker's event history.
+      operationId: Api_ReportText
+      parameters:
+        - description: The unique user id
+          in: path
+          name: uniqueUserId
+          required: true
+          schema:
+            type: string
+          x-nullable: true
+        - description: Optional, the device type performing the command.
+          in: query
+          name: deviceType
+          schema:
+            default: 10
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 10
+              - 11
+            type: integer
+          x-nullable: false
+          x-schema:
+            $ref: "#/components/schemas/DeviceType"
+        - in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+          x-nullable: false
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          application/json-patch+json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+        description: The text to report
+        required: true
+        x-nullable: false
+      responses:
+        "200":
+          description: 200 for success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: ""
+          x-nullable: false
+      security:
+        - EmailLogin:
+            - CompanyMonitor
+        - MicrosoftLogin:
+            - CompanyMonitor
+        - Pin: []
+      summary: Send a text message
+      tags:
+        - Api
+components:
+  requestBodies:
+    Api_CheckInWithTextText:
+      content:
+        application/*+json:
+          schema:
+            type: string
+        application/json:
+          schema:
+            type: string
+        application/json-patch+json:
+          schema:
+            type: string
+        text/json:
+          schema:
+            type: string
+      description: The text report
+      required: true
+      x-nullable: false
+    Audio:
+      content:
+        application/*+json:
+          schema:
+            $ref: "#/components/schemas/Audio"
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Audio"
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/schemas/Audio"
+        text/json:
+          schema:
+            $ref: "#/components/schemas/Audio"
+      description: The base 64 encoded audio
+      required: true
+      x-nullable: false
+  schemas:
+    Audio:
+      description: Represents an audio recording.
+      properties:
+        container:
+          $ref: "#/components/schemas/AudioContainer"
+        data:
+          description: The base64 encoded audio data.
+          type: string
+        encoding:
+          $ref: "#/components/schemas/AudioEncoding"
+      required:
+        - data
+        - container
+        - encoding
+      type: object
+    AudioContainer:
+      description: Audio container types.
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+      type: integer
+      x-enumNames:
+        - AIFF
+        - AMR
+        - AU
+        - CAF
+        - MP3
+        - M4A
+        - SD2
+        - SND
+        - WAVE
+    AudioEncoding:
+      description: Audio encoding formats.
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+      type: integer
+      x-enumNames:
+        - A_LAW
+        - AAC
+        - ALAC
+        - AMR
+        - LPCM
+        - MP3
+        - HE_AAC
+        - U_LAW
+    BatteryPowerSource:
+      description: ""
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      type: integer
+      x-enumNames:
+        - Unknown
+        - Battery
+        - AC
+        - Usb
+        - Wireless
+    Company:
+      description: The company information
+      properties:
+        login:
+          description: The login ID
+          type: string
+        name:
+          description: "The company name\n            "
+          type: string
+      required:
+        - login
+        - name
+      type: object
+    DeviceInfo:
+      properties:
+        battery:
+          $ref: "#/components/schemas/PowerInfo"
+        model:
+          type: string
+        platform:
+          type: string
+      type: object
+    DeviceType:
+      description: ""
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 10
+        - 11
+      type: integer
+      x-enumNames:
+        - WebPhone
+        - Telephone
+        - Computer
+        - Html
+        - System
+        - HTTP_API
+        - SatelliteDevice
+    EventLocationData:
+      properties:
+        address:
+          type: string
+        altitude:
+          format: double
+          minimum: -6371000
+          type: number
+        date:
+          format: date-time
+          minLength: 1
+          type: string
+        device:
+          $ref: "#/components/schemas/DeviceInfo"
+        heading:
+          format: double
+          maximum: 360
+          minimum: 0
+          type: number
+        horizontalAccuracy:
+          format: double
+          minimum: 0
+          type: number
+        latitude:
+          format: double
+          maximum: 90
+          minimum: -90
+          type: number
+        longitude:
+          format: double
+          maximum: 180
+          minimum: -180
+          type: number
+        speed:
+          format: double
+          minimum: 0
+          type: number
+        verticalAccuracy:
+          format: double
+          minimum: 0
+          type: number
+      required:
+        - latitude
+        - longitude
+        - date
+        - device
+      type: object
+    Group:
+      description: The group information
+      properties:
+        name:
+          description: "The group name\n            "
+          type: string
+      required:
+        - name
+      type: object
+    Language:
+      description: ""
+      enum:
+        - 1
+        - 2
+        - 3
+      type: integer
+      x-enumNames:
+        - English
+        - French
+        - Spanish
+    Location:
+      description: Location
+      properties:
+        accuracy:
+          description: Accuracy
+          format: double
+          type: number
+        address:
+          description: Address
+          type: string
+        altitude:
+          description: Altitude
+          format: double
+          type: number
+        altitudeAccuracy:
+          description: Altitude accuracy
+          format: double
+          type: number
+        battery:
+          description: Battery level
+          format: double
+          type: number
+        device:
+          $ref: "#/components/schemas/DeviceType"
+        deviceName:
+          description: Device name
+          type: string
+        heading:
+          description: Heading
+          format: double
+          type: number
+        latitude:
+          description: Latitude
+          format: double
+          type: number
+        longitude:
+          description: Longitude
+          format: double
+          type: number
+        speed:
+          description: Speed
+          format: double
+          type: number
+        timestamp:
+          description: Location time stamp
+          format: date-time
+          type: string
+      required:
+        - latitude
+        - longitude
+        - device
+        - timestamp
+        - deviceName
+        - address
+      type: object
+    MonitorAction:
+      description: Actions to perform
+      properties:
+        instructions:
+          description: The instructions for the action
+          type: string
+        order:
+          description: The order of the action
+          format: int32
+          type: integer
+      required:
+        - order
+        - instructions
+      type: object
+    PhoneBookEntry:
+      description: Contacts
+      properties:
+        address:
+          description: The address
+          type: string
+        cell:
+          description: The cell phone number
+          type: string
+        comments:
+          description: Comments
+          type: string
+        email:
+          description: The email address
+          type: string
+        firstName:
+          description: The first name
+          type: string
+        isPrivate:
+          description: Flag to denote if the contact is private
+          type: boolean
+        lastName:
+          description: The last name
+          type: string
+        order:
+          description: The order of the contact
+          format: int32
+          type: integer
+        phone:
+          description: The phone number
+          type: string
+      required:
+        - order
+        - isPrivate
+        - firstName
+        - lastName
+        - phone
+        - cell
+        - address
+        - comments
+        - email
+      type: object
+    PhoneNotification:
+      description: Phone notification
+      properties:
+        order:
+          description: The order
+          format: int32
+          type: integer
+        phoneNumber:
+          description: The phone number
+          type: string
+      required:
+        - order
+        - phoneNumber
+      type: object
+    PowerInfo:
+      properties:
+        batteryLevel:
+          format: double
+          type: number
+        powerSource:
+          $ref: "#/components/schemas/BatteryPowerSource"
+      required:
+        - powerSource
+        - batteryLevel
+      type: object
+    Privilege:
+      description: ""
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      type: integer
+      x-enumNames:
+        - GroupMonitor
+        - CompanyAdministrator
+        - User
+        - CompanyMonitor
+        - GroupAdministrator
+    ProblemDetails:
+      additionalProperties: {}
+      properties:
+        detail:
+          type: string
+        extensions:
+          additionalProperties: {}
+          type: object
+        instance:
+          type: string
+        status:
+          format: int32
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - extensions
+      type: object
+    User:
+      description: User information
+      properties:
+        address:
+          description: Address
+          type: string
+        cell:
+          description: Cell phone number
+          type: string
+        comments:
+          description: Comments
+          type: string
+        company:
+          $ref: "#/components/schemas/Company"
+        firstName:
+          description: First name
+          type: string
+        fullName:
+          description: Full name
+          type: string
+        group:
+          $ref: "#/components/schemas/Group"
+        language:
+          $ref: "#/components/schemas/Language"
+        lastName:
+          description: Last name
+          type: string
+        notificationEmails:
+          description: Notification emails
+          items:
+            type: string
+          type: array
+        notificationPhones:
+          description: Notification phone numbers
+          items:
+            $ref: "#/components/schemas/PhoneNotification"
+          type: array
+        phone:
+          description: Phone number
+          type: string
+        priveleges:
+          description: Privileges
+          items:
+            $ref: "#/components/schemas/Privilege"
+          type: array
+        satelliteDeviceId:
+          description: Satellite device ID
+          type: string
+        uniqueUserId:
+          description: Unique identifier for the user
+          type: string
+        vehicle:
+          $ref: "#/components/schemas/Vehicle"
+        workerInformation:
+          $ref: "#/components/schemas/WorkerInfo"
+      required:
+        - uniqueUserId
+        - firstName
+        - lastName
+        - fullName
+        - company
+        - language
+        - priveleges
+        - phone
+        - cell
+        - address
+        - comments
+        - notificationPhones
+        - notificationEmails
+        - satelliteDeviceId
+      type: object
+    UserState:
+      description: ""
+      enum:
+        - 1
+        - 2
+        - 4
+        - 5
+      type: integer
+      x-enumNames:
+        - NotSystemMonitored
+        - Ok
+        - PanicEmergency
+        - UnconfirmedEmergency
+    Vehicle:
+      description: Vehicle
+      properties:
+        color:
+          description: The color
+          type: string
+        plate:
+          description: The license plate
+          type: string
+        type:
+          description: The type
+          type: string
+      required:
+        - type
+        - color
+        - plate
+      type: object
+    WorkerInfo:
+      description: Information specific to workers
+      properties:
+        actions:
+          description: Actions to follow for the worker
+          items:
+            $ref: "#/components/schemas/MonitorAction"
+          type: array
+        itinerary:
+          description: The worker's itinerary
+          type: string
+        lastLocation:
+          $ref: "#/components/schemas/Location"
+        maximumReportInterval:
+          description: The worker's maximum report interval
+          type: string
+        phoneBook:
+          description: The worker's phone book
+          items:
+            $ref: "#/components/schemas/PhoneBookEntry"
+          type: array
+        reportInterval:
+          description: "The worker's default report interval "
+          format: int32
+          type: integer
+        status:
+          $ref: "#/components/schemas/WorkerStatus"
+      required:
+        - reportInterval
+        - maximumReportInterval
+        - itinerary
+        - status
+        - actions
+        - phoneBook
+      type: object
+    WorkerStatus:
+      description: Worker Status information DTO
+      properties:
+        beginMonitoringUTC:
+          description: The time that the system started monitoring the worker in UTC
+          format: date-time
+          type: string
+        endMonitoringUTC:
+          description: The time that the system stopped monitoring the worker in UTC
+          format: date-time
+          type: string
+        isAcknowledged:
+          description: "A flag indicating whether the emergency for the worker has been acknowledged
+
+            \            "
+          type: boolean
+        lastReportUTC:
+          description: The time the worker last reported OK in UTC
+          format: date-time
+          type: string
+        nextReportUTC:
+          description: The time when the worker's next report is due in UTC
+          format: date-time
+          type: string
+        state:
+          $ref: "#/components/schemas/UserState"
+        stateChangedUTC:
+          description: "The time of the worker's last state change in UTC
+
+            \            "
+          format: date-time
+          type: string
+      required:
+        - state
+        - isAcknowledged
+        - stateChangedUTC
+      type: object
+  securitySchemes:
+    EmailLogin:
+      description: ""
+      flows:
+        implicit:
+          authorizationUrl: https://prodsafetyline.b2clogin.com/prodsafetyline.onmicrosoft.com/B2C_1_si/oauth2/v2.0/authorize
+          scopes:
+            CompanyAdministrator: This scope can only be set within SafetyLine.
+            CompanyMonitor: This scope can only be set within SafetyLine.
+            https://prodsafetyline.onmicrosoft.com/e22f72d0-b056-4155-a2db-da02bc226023/access_as_user: Access the API as the signed-in user
+      type: oauth2
+    MicrosoftLogin:
+      description: ""
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize
+          scopes:
+            CompanyAdministrator: This scope can only be set within SafetyLine.
+            CompanyMonitor: This scope can only be set within SafetyLine.
+            https://prodsafetyline.onmicrosoft.com/e22f72d0-b056-4155-a2db-da02bc226023/.default: Use the default scopes
+      type: oauth2
+    Pin:
+      description: ""
+      scheme: basic
+      type: http
+x-generator: NSwag v13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))
