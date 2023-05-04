@@ -391,7 +391,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: activities
     post:
       description: Create activity
       operationId: activitiesAdd
@@ -840,7 +839,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: companies
     post:
       description: Create company
       operationId: companiesAdd
@@ -1331,7 +1329,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: contacts
     post:
       description: Create contact
       operationId: contactsAdd
@@ -1792,7 +1789,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: leads
     post:
       description: Create lead
       operationId: leadsAdd
@@ -2230,7 +2226,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: notes
     post:
       description: Create note
       operationId: notesAdd
@@ -2526,7 +2521,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: opportunities
     post:
       description: Create opportunity
       operationId: opportunitiesAdd
@@ -2870,7 +2864,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: pipelines
     post:
       description: Create pipeline
       operationId: pipelinesAdd
@@ -3179,7 +3172,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: users
     post:
       description: Create user
       operationId: usersAdd
@@ -4053,7 +4045,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: ActivitiesFilter
-      x-graphql-type-name: ActivitiesFilter
     Activity:
       additionalProperties: false
       properties:
@@ -4248,7 +4239,6 @@ components:
           example: meeting
           type: string
           x-apideck-enum-id: activities.type
-          x-graphql-type-name: ActivityType
         updated_at:
           example: 2020-09-30T07:43:32.000Z
           readOnly: true
@@ -4514,7 +4504,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: addresses.type
-          x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
@@ -4655,7 +4644,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: CompaniesFilter
-      x-graphql-type-name: CompaniesFilter
     CompaniesSort:
       additionalProperties: false
       example:
@@ -4671,12 +4659,10 @@ components:
           example: created_at
           type: string
           x-apideck-enum-id: companies.sort_by
-          x-graphql-type-name: CompaniesSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: CompaniesSort
-      x-graphql-type-name: CompaniesSort
     Company:
       additionalProperties: false
       properties:
@@ -4827,7 +4813,6 @@ components:
           x-apideck-weights:
             id: critical
             name: medium
-          x-graphql-type-name: CompanyRowType
         sales_tax_number:
           example: 12456EN
           nullable: true
@@ -5169,7 +5154,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: ContactsFilter
-      x-graphql-type-name: ContactsFilter
     ContactsSort:
       additionalProperties: false
       example:
@@ -5188,12 +5172,10 @@ components:
           example: created_at
           type: string
           x-apideck-enum-id: contacts.sort_by
-          x-graphql-type-name: ContactsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: ContactsSort
-      x-graphql-type-name: ContactsSort
     CreateActivityResponse:
       properties:
         data:
@@ -6403,7 +6385,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -6457,7 +6438,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetActivitiesResponse
-      x-graphql-type-name: ActivityList
     GetActivityResponse:
       properties:
         data:
@@ -6491,7 +6471,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetActivityResponse
-      x-graphql-type-name: activity
     GetCompaniesResponse:
       properties:
         data:
@@ -6531,7 +6510,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCompaniesResponse
-      x-graphql-type-name: CompanyList
     GetCompanyResponse:
       properties:
         data:
@@ -6565,7 +6543,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCompanyResponse
-      x-graphql-type-name: company
     GetContactResponse:
       properties:
         data:
@@ -6638,7 +6615,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetContactsResponse
-      x-graphql-type-name: ContactList
     GetLeadResponse:
       properties:
         data:
@@ -6711,7 +6687,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetLeadsResponse
-      x-graphql-type-name: LeadList
     GetNoteResponse:
       properties:
         data:
@@ -6745,7 +6720,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetNoteResponse
-      x-graphql-type-name: note
     GetNotesResponse:
       properties:
         data:
@@ -6785,7 +6759,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetNotesResponse
-      x-graphql-type-name: NoteList
     GetOpportunitiesResponse:
       properties:
         data:
@@ -6825,7 +6798,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetOpportunitiesResponse
-      x-graphql-type-name: OpportunityList
     GetOpportunityResponse:
       properties:
         data:
@@ -6931,7 +6903,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetPipelinesResponse
-      x-graphql-type-name: PipelinesList
     GetUserResponse:
       properties:
         data:
@@ -7004,7 +6975,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetUsersResponse
-      x-graphql-type-name: UserList
     LastName:
       description: The last name of the person.
       example: Musk
@@ -7176,7 +7146,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: LeadsFilter
-      x-graphql-type-name: LeadsFilter
     LeadsSort:
       additionalProperties: false
       example:
@@ -7195,12 +7164,10 @@ components:
           example: created_at
           type: string
           x-apideck-enum-id: leads.sort_by
-          x-graphql-type-name: LeadsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: LeadsSort
-      x-graphql-type-name: LeadsSort
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -7410,7 +7377,6 @@ components:
           type: number
       type: object
       x-apideck-schema-id: OpportunitiesFilter
-      x-graphql-type-name: OpportunitiesFilter
     OpportunitiesSort:
       additionalProperties: false
       example:
@@ -7429,12 +7395,10 @@ components:
           example: created_at
           type: string
           x-apideck-enum-id: opportunities.sort_by
-          x-graphql-type-name: OpportunitiesSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: OpportunitiesSort
-      x-graphql-type-name: OpportunitiesSort
     Opportunity:
       additionalProperties: false
       properties:
@@ -7763,7 +7727,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: phone_numbers.type
-          x-graphql-type-name: PhoneType
       required:
         - number
       type: object
@@ -7896,7 +7859,6 @@ components:
       type: string
       x-apideck-enum-id: sort_direction
       x-apideck-schema-id: SortDirection
-      x-graphql-type-name: SortDirection
     Tags:
       example:
         - New
@@ -8441,7 +8403,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: websites.type
-          x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
           minLength: 1

@@ -371,7 +371,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: applicants
     post:
       description: Create applicant
       operationId: applicantsAdd
@@ -624,7 +623,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: jobs
   "/ats/jobs/{id}":
     get:
       description: Get Job
@@ -978,7 +976,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: addresses.type
-          x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
@@ -1223,7 +1220,6 @@ components:
                 example: primary
                 type: string
                 x-apideck-enum-id: websites.type
-                x-graphql-type-name: WebsiteType
               url:
                 example: http://example.com
                 minLength: 1
@@ -1294,7 +1290,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: ApplicantsFilter
-      x-graphql-type-name: ApplicantsFilter
     Archived:
       example: false
       title: Archived
@@ -1320,7 +1315,6 @@ components:
         id: high
         updated_at: medium
         updated_by: edge-case
-      x-graphql-type-name: AtsActivity
     AtsEventType:
       enum:
         - ats.job.created
@@ -2209,7 +2203,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -2251,7 +2244,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetApplicantResponse
-      x-graphql-type-name: Applicant
     GetApplicantsResponse:
       properties:
         data:
@@ -2291,7 +2283,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetApplicantsResponse
-      x-graphql-type-name: ApplicantList
     GetJobResponse:
       properties:
         data:
@@ -2325,7 +2316,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetJobResponse
-      x-graphql-type-name: Job
     GetJobsResponse:
       properties:
         data:
@@ -2365,7 +2355,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetJobsResponse
-      x-graphql-type-name: JobList
     Id:
       description: A unique identifier for an object.
       example: "12345"
@@ -2648,7 +2637,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: JobsFilter
-      x-graphql-type-name: JobsFilter
     Language:
       description: language code according to ISO 639-1. For the United States - EN
       example: EN
@@ -2871,7 +2859,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: phone_numbers.type
-          x-graphql-type-name: PhoneType
       required:
         - number
       type: object

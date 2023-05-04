@@ -349,7 +349,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: customerSupportCustomers
     post:
       description: Create Customer Support Customer
       operationId: customersAdd
@@ -945,7 +944,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: addresses.type
-          x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
@@ -1225,7 +1223,6 @@ components:
           x-apideck-weights:
             id: critical
             name: medium
-          x-graphql-type-name: CompanyRowType
         sales_tax_number:
           example: 12456EN
           nullable: true
@@ -2240,7 +2237,6 @@ components:
           title: Status
           type: string
           x-apideck-enum-id: customers.status
-          x-graphql-type-name: CustomerStatus
         tax_number:
           example: US123945459
           nullable: true
@@ -2320,7 +2316,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -2368,7 +2363,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCustomerSupportCustomerResponse
-      x-graphql-type-name: CustomerSupportCustomer
     GetCustomerSupportCustomersResponse:
       properties:
         data:
@@ -2408,7 +2402,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCustomerSupportCustomersResponse
-      x-graphql-type-name: CustomerSupportCustomerList
     LastName:
       description: The last name of the person.
       example: Musk
@@ -2994,7 +2987,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: phone_numbers.type
-          x-graphql-type-name: PhoneType
       required:
         - number
       type: object
@@ -3226,7 +3218,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: websites.type
-          x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
           minLength: 1

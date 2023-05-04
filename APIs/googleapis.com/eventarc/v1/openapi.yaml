@@ -51,7 +51,7 @@ paths:
           name: etag
           schema:
             type: string
-        - description: Required. If set, validate the request and preview the review, but do not post it.
+        - description: Optional. If set, validate the request and preview the review, but do not post it.
           in: query
           name: validateOnly
           schema:
@@ -126,7 +126,7 @@ paths:
           name: updateMask
           schema:
             type: string
-        - description: Required. If set, validate the request and preview the review, but do not post it.
+        - description: Optional. If set, validate the request and preview the review, but do not post it.
           in: query
           name: validateOnly
           schema:
@@ -444,7 +444,7 @@ paths:
           name: channelId
           schema:
             type: string
-        - description: Required. If set, validate the request and preview the review, but do not post it.
+        - description: Optional. If set, validate the request and preview the review, but do not post it.
           in: query
           name: validateOnly
           schema:
@@ -597,7 +597,7 @@ paths:
           name: triggerId
           schema:
             type: string
-        - description: Required. If set, validate the request and preview the review, but do not post it.
+        - description: Optional. If set, validate the request and preview the review, but do not post it.
           in: query
           name: validateOnly
           schema:

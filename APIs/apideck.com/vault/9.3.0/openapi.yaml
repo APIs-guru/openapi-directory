@@ -264,7 +264,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-sdk-exclude: true
   /vault/callback:
     get:
@@ -318,7 +317,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-sdk-exclude: true
   /vault/connections:
     get:
@@ -371,7 +369,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: connections
   "/vault/connections/{unified_api}/{service_id}":
     delete:
       description: Deletes a connection
@@ -423,7 +420,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: connectionsDelete
     get:
       description: Get a connection
       operationId: connectionsOne
@@ -645,7 +641,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-sdk-exclude: true
   "/vault/connections/{unified_api}/{service_id}/import":
     post:
@@ -726,7 +721,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
   "/vault/connections/{unified_api}/{service_id}/token":
     post:
       description: |
@@ -791,7 +785,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-sdk-exclude: true
   "/vault/connections/{unified_api}/{service_id}/{resource}/config":
     get:
@@ -849,7 +842,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: connectionSettings
     patch:
       description: Update default values for a connection's resource settings
       operationId: connectionSettingsUpdate
@@ -937,7 +929,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: connectionSettingsUpdate
   /vault/consumers:
     get:
       description: |
@@ -985,7 +976,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: consumers
     post:
       description: Create a consumer
       operationId: consumersAdd
@@ -1141,7 +1131,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: consumer
     patch:
       description: Update consumer metadata such as name and email.
       operationId: consumersUpdate
@@ -1258,7 +1247,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: consumerRequestCounts
   /vault/logs:
     get:
       description: |
@@ -1309,7 +1297,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: logs
   "/vault/revoke/{service_id}/{application_id}":
     get:
       description: |
@@ -1370,7 +1357,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-sdk-exclude: true
   /vault/sessions:
     post:
@@ -2359,7 +2345,6 @@ components:
           example: enabled
           type: string
           x-apideck-enum-id: webhooks.status
-          x-graphql-type-name: WebhookStatus
         unified_api:
           $ref: "#/components/schemas/UnifiedApiId"
         updated_at:
@@ -2735,7 +2720,6 @@ components:
           example: select
       type: object
       x-apideck-schema-id: FormField
-      x-graphql-type-name: FormField
     FormFieldOption:
       anyOf:
         - $ref: "#/components/schemas/SimpleFormFieldOption"
@@ -2889,7 +2873,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetLogsResponse
-      x-graphql-type-name: LogList
     IntegrationState:
       description: The current state of the Integration.
       enum:
@@ -3086,7 +3069,6 @@ components:
           type: number
       type: object
       x-apideck-schema-id: LogsFilter
-      x-graphql-type-name: LogsFilter
     Meta:
       description: Response metadata
       properties:
@@ -3345,7 +3327,6 @@ components:
                 $ref: "#/components/schemas/UnifiedApiId"
               type: array
           type: object
-          x-graphql-type-name: SessionSettings
         theme:
           description: Theming options to change the look and feel of Vault.
           properties:

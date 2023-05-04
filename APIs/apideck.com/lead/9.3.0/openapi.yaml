@@ -354,7 +354,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: leads
     post:
       description: Create lead
       operationId: leadsAdd
@@ -1006,7 +1005,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: addresses.type
-          x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
@@ -1821,7 +1819,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -1902,7 +1899,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetLeadsResponse
-      x-graphql-type-name: LeadList
     Lead:
       additionalProperties: false
       properties:
@@ -2115,7 +2111,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: LeadsFilter
-      x-graphql-type-name: LeadsFilter
     LeadsSort:
       additionalProperties: false
       example:
@@ -2134,12 +2129,10 @@ components:
           example: created_at
           type: string
           x-apideck-enum-id: leads.sort_by
-          x-graphql-type-name: LeadsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: LeadsSort
-      x-graphql-type-name: LeadsSort
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -2322,7 +2315,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: phone_numbers.type
-          x-graphql-type-name: PhoneType
       required:
         - number
       type: object
@@ -2372,7 +2364,6 @@ components:
       type: string
       x-apideck-enum-id: sort_direction
       x-apideck-schema-id: SortDirection
-      x-graphql-type-name: SortDirection
     Tags:
       example:
         - New
@@ -2564,7 +2555,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: websites.type
-          x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
           minLength: 1

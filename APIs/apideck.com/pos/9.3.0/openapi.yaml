@@ -389,7 +389,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: items
     post:
       description: Create Item
       operationId: itemsAdd
@@ -769,7 +768,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: locations
     post:
       description: Create Location
       operationId: locationsAdd
@@ -1101,7 +1099,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: merchants
     post:
       description: Create Merchant
       operationId: merchantsAdd
@@ -1455,7 +1452,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: modifierGroups
     post:
       description: Create Modifier Group
       operationId: modifierGroupsAdd
@@ -1763,7 +1759,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: modifiers
     post:
       description: Create Modifier
       operationId: modifiersAdd
@@ -2051,7 +2046,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: orderTypes
     post:
       description: Create Order Type
       operationId: orderTypesAdd
@@ -2328,7 +2322,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: orders
     post:
       description: Create Order
       operationId: ordersAdd
@@ -3356,8 +3349,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
-      x-graphql-field-name: payments
     post:
       description: Create Payment
       operationId: paymentsAdd
@@ -3524,7 +3515,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
   "/pos/payments/{id}":
     delete:
       description: Delete Payment
@@ -3576,7 +3566,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
     get:
       description: Get Payment
       operationId: paymentsOne
@@ -3628,7 +3617,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
     patch:
       description: Update Payment
       operationId: paymentsUpdate
@@ -3797,7 +3785,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
   /pos/tenders:
     get:
       description: List Tenders
@@ -3849,7 +3836,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: tenders
     post:
       description: Create Tender
       operationId: tendersAdd
@@ -4654,7 +4640,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: addresses.type
-          x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
@@ -5955,7 +5940,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -5997,7 +5981,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetItemResponse
-      x-graphql-type-name: Item
     GetItemsResponse:
       properties:
         data:
@@ -6037,7 +6020,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetItemsResponse
-      x-graphql-type-name: ItemList
     GetLocationResponse:
       properties:
         data:
@@ -6071,7 +6053,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetLocationResponse
-      x-graphql-type-name: Location
     GetLocationsResponse:
       properties:
         data:
@@ -6111,7 +6092,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetLocationsResponse
-      x-graphql-type-name: LocationList
     GetMerchantResponse:
       properties:
         data:
@@ -6145,7 +6125,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetMerchantResponse
-      x-graphql-type-name: Merchant
     GetMerchantsResponse:
       properties:
         data:
@@ -6185,7 +6164,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetMerchantsResponse
-      x-graphql-type-name: MerchantList
     GetModifierGroupResponse:
       properties:
         data:
@@ -6219,7 +6197,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetModifierGroupResponse
-      x-graphql-type-name: ModifierGroup
     GetModifierGroupsResponse:
       properties:
         data:
@@ -6259,7 +6236,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetModifierGroupsResponse
-      x-graphql-type-name: ModifierGroupList
     GetModifierResponse:
       properties:
         data:
@@ -6293,7 +6269,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetModifierResponse
-      x-graphql-type-name: Modifier
     GetModifiersResponse:
       properties:
         data:
@@ -6333,7 +6308,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetModifiersResponse
-      x-graphql-type-name: ModifierList
     GetOrderResponse:
       properties:
         data:
@@ -6367,7 +6341,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetOrderResponse
-      x-graphql-type-name: Order
     GetOrderTypeResponse:
       properties:
         data:
@@ -6401,7 +6374,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetOrderTypeResponse
-      x-graphql-type-name: OrderType
     GetOrderTypesResponse:
       properties:
         data:
@@ -6441,7 +6413,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetOrderTypesResponse
-      x-graphql-type-name: OrderTypeList
     GetOrdersResponse:
       properties:
         data:
@@ -6481,7 +6452,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetOrdersResponse
-      x-graphql-type-name: OrderList
     GetPosPaymentResponse:
       properties:
         data:
@@ -6515,7 +6485,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetPosPaymentResponse
-      x-graphql-type-name: PosPayment
     GetPosPaymentsResponse:
       properties:
         data:
@@ -6555,7 +6524,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetPosPaymentsResponse
-      x-graphql-type-name: PosPaymentList
     GetTenderResponse:
       properties:
         data:
@@ -6589,7 +6557,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetTenderResponse
-      x-graphql-type-name: Tender
     GetTendersResponse:
       properties:
         data:
@@ -6629,7 +6596,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetTendersResponse
-      x-graphql-type-name: TenderList
     Hidden:
       example: true
       nullable: true
@@ -7248,7 +7214,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: ModifierGroupFilter
-      x-graphql-type-name: ModifierGroupFilter
     NotFoundResponse:
       properties:
         detail:
@@ -8354,7 +8319,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: phone_numbers.type
-          x-graphql-type-name: PhoneType
       required:
         - number
       type: object
@@ -8604,7 +8568,6 @@ components:
           title: Status
           type: string
           x-apideck-enum-id: pos-payments.status
-          x-graphql-type-name: PosPosPaymentStatus
         tax:
           example: 20
           title: Tax amount (in cents)
@@ -9320,7 +9283,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: websites.type
-          x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
           minLength: 1

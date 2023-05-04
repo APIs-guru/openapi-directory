@@ -1490,7 +1490,7 @@ components:
           type: string
       type: object
     BareMetalAdminCluster:
-      description: Resource that represents a bare metal admin cluster.
+      description: "## Resource that represents a bare metal admin cluster."
       properties:
         annotations:
           additionalProperties:
@@ -1498,6 +1498,7 @@ components:
           description: "Annotations on the bare metal admin cluster. This field has the same restrictions as Kubernetes annotations. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
           type: object
         bareMetalVersion:
+          description: The Anthos clusters on bare metal version for the bare metal admin cluster.
           type: string
         clusterOperations:
           $ref: "#/components/schemas/BareMetalAdminClusterOperationsConfig"
@@ -1734,6 +1735,7 @@ components:
       description: BareMetalAdminPortConfig is the specification of load balancer ports.
       properties:
         controlPlaneLoadBalancerPort:
+          description: The port that control plane hosted load balancers will listen on.
           format: int32
           type: integer
       type: object
@@ -2893,7 +2895,7 @@ components:
           type: array
       type: object
     VmwareAAGConfig:
-      description: "Specifies anti affinity group config for the VMware user cluster. "
+      description: Specifies anti affinity group config for the VMware user cluster.
       properties:
         aagConfigDisabled:
           description: Spread nodes across at least three physical hosts (requires at least three hosts). Enabled by default.
@@ -3426,6 +3428,7 @@ components:
           description: The VIPs used by the load balancer.
       type: object
     VmwareManualLbConfig:
+      description: "Represents configuration parameters for an already existing manual load balancer. Given the nature of manual load balancers it is expected that said load balancer will be fully managed by users. IMPORTANT: Please note that the Anthos On-Prem API will not generate or update ManualLB configurations it can only bind a pre-existing configuration to a new VMware user cluster."
       properties:
         controlPlaneNodePort:
           description: NodePort for control plane service. The Kubernetes API server in the admin cluster is implemented as a Service of type NodePort (ex. 30968).

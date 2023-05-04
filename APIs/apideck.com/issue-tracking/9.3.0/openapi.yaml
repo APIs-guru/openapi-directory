@@ -370,7 +370,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: collections
   "/issue-tracking/collections/{collection_id}":
     get:
       description: Get Collection
@@ -477,7 +476,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: collectionTag
   "/issue-tracking/collections/{collection_id}/tickets":
     get:
       description: List Tickets
@@ -534,7 +532,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: collectionTickets
     post:
       description: Create Ticket
       operationId: collectionTicketsAdd
@@ -722,7 +719,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: collectionTicket
     patch:
       description: Update Ticket
       operationId: collectionTicketsUpdate
@@ -861,7 +857,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: collectionTicketComments
     post:
       description: Create Comment
       operationId: collectionTicketCommentsAdd
@@ -1041,7 +1036,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: collectionTicketComment
     patch:
       description: Update Comment
       operationId: collectionTicketCommentsUpdate
@@ -1161,7 +1155,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: collectionUsers
   "/issue-tracking/collections/{collection_id}/users/{id}":
     get:
       description: Get user
@@ -1568,7 +1561,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: addresses.type
-          x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
@@ -1785,12 +1777,10 @@ components:
           example: name
           type: string
           x-apideck-enum-id: Collections.sort_by
-          x-graphql-type-name: CollectionsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: CollectionsSort
-      x-graphql-type-name: CollectionsSort
     CommentsSort:
       additionalProperties: false
       example:
@@ -1805,12 +1795,10 @@ components:
           example: created_at
           type: string
           x-apideck-enum-id: Comments.sort_by
-          x-graphql-type-name: CommentsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: CommentsSort
-      x-graphql-type-name: CommentsSort
     CompanyId:
       description: The unique identifier of the company.
       example: "23456"
@@ -2645,7 +2633,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -2706,7 +2693,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCollectionResponse
-      x-graphql-type-name: Collection
     GetCollectionTagsResponse:
       properties:
         data:
@@ -2746,7 +2732,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetTagsResponse
-      x-graphql-type-name: TagsList
     GetCollectionUserResponse:
       properties:
         data:
@@ -2780,7 +2765,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCollectionUserResponse
-      x-graphql-type-name: CollectionUser
     GetCollectionUsersResponse:
       properties:
         data:
@@ -2820,7 +2804,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCollectionUsersResponse
-      x-graphql-type-name: CollectionUserList
     GetCollectionsResponse:
       properties:
         data:
@@ -2860,7 +2843,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCollectionsResponse
-      x-graphql-type-name: CollectionList
     GetCommentResponse:
       properties:
         data:
@@ -2894,7 +2876,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCommentResponse
-      x-graphql-type-name: Ticket
     GetCommentsResponse:
       properties:
         data:
@@ -2934,7 +2915,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCommentsResponse
-      x-graphql-type-name: CommentList
     GetTicketResponse:
       properties:
         data:
@@ -2968,7 +2948,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetTicketResponse
-      x-graphql-type-name: Ticket
     GetTicketsResponse:
       properties:
         data:
@@ -3008,7 +2987,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetTicketsResponse
-      x-graphql-type-name: TicketList
     Id:
       description: A unique identifier for an object.
       example: "12345"
@@ -3090,7 +3068,6 @@ components:
           uniqueItems: true
       type: object
       x-apideck-schema-id: IssuesFilter
-      x-graphql-type-name: IssuesFilter
     Language:
       description: language code according to ISO 639-1. For the United States - EN
       example: EN
@@ -3309,7 +3286,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: phone_numbers.type
-          x-graphql-type-name: PhoneType
       required:
         - number
       type: object
@@ -3342,7 +3318,6 @@ components:
       type: string
       x-apideck-enum-id: sort_direction
       x-apideck-schema-id: SortDirection
-      x-graphql-type-name: SortDirection
     Ticket:
       additionalProperties: false
       properties:
@@ -3396,7 +3371,6 @@ components:
           title: Priority
           type: string
           x-apideck-enum-id: tickets.priority
-          x-graphql-type-name: Priority
         status:
           description: "The current status of the ticket. Possible values include: open, in_progress, closed, or - in cases where there is no clear mapping - the original value passed through."
           example: open
@@ -3449,12 +3423,10 @@ components:
           example: created_at
           type: string
           x-apideck-enum-id: Tickets.sort_by
-          x-graphql-type-name: TicketsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: TicketsSort
-      x-graphql-type-name: TicketsSort
     Title:
       description: The job title of the person.
       example: CEO
@@ -3693,7 +3665,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: websites.type
-          x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
           minLength: 1

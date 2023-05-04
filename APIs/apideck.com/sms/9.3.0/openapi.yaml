@@ -349,7 +349,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: messages
     post:
       description: Create Message
       operationId: messagesAdd
@@ -1447,7 +1446,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -1489,7 +1487,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetMessageResponse
-      x-graphql-type-name: Message
     GetMessagesResponse:
       properties:
         data:
@@ -1529,7 +1526,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetMessagesResponse
-      x-graphql-type-name: MessageList
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:

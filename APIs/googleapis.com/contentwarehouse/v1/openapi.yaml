@@ -2002,6 +2002,35 @@ components:
         customerId:
           $ref: "#/components/schemas/AppsDynamiteCustomerId"
       type: object
+    AppsDynamiteSharedSegmentedMembershipCount:
+      description: "Contains info on membership count for member types: HUMAN_USER, APP_USER & ROSTER_MEMBER different states: INVITED, JOINED"
+      properties:
+        memberType:
+          enum:
+            - MEMBER_TYPE_UNSPECIFIED
+            - HUMAN_USER
+            - ROSTER_MEMBER
+          type: string
+        membershipCount:
+          description: count of members with given type and state
+          format: int32
+          type: integer
+        membershipState:
+          enum:
+            - MEMBER_UNKNOWN
+            - MEMBER_INVITED
+            - MEMBER_JOINED
+            - MEMBER_NOT_A_MEMBER
+            - MEMBER_FAILED
+          type: string
+      type: object
+    AppsDynamiteSharedSegmentedMembershipCounts:
+      properties:
+        value:
+          items:
+            $ref: "#/components/schemas/AppsDynamiteSharedSegmentedMembershipCount"
+          type: array
+      type: object
     AppsPeopleActivityBackendDestinationStream:
       description: "A DestinationStream is a /namespace/id[0]/id[1]/.../id[n] that represents a collection of Activities. Example destinations: -The Profile Stream on http://plus.google.com/+JohnDoe/posts -A Square Stream on http://plus.google.com/squares/123 -A \"comment Stream\" (Fountain) on http://www.youtube.com/watch?id=123 It's possible for a single Activity to show in each of these destinations - and it might behave/look slightly differently for each one. Destinations can have their own business logic associated with them at both write-time and read-time server-side (these are documented below). Each DestinationStream is indexed and can be retrieved using the GetDestinationStreamRequest. For the repeated ID space indexing happens at all levels, e.g. if you have: /square/123/abc /square/123/efd /square/456 You can fetch /square/123/abc directly or /square/123 (which includes all Activities in both /square/123/abc and /square/123/efd), or even /square which retrieves all Activities in the Square namespace (visible for that user). On the storage layer, we represent DestinationStream as Channel (http://cs/#google3/social/common/channel/channel.proto), since the storage does not have the concept of a Stream. Both terms are used interchangeably within the service layer, but client of Social Infrastructure should use the term DestinationStream. Next ID: 3"
       properties:
@@ -2494,6 +2523,9 @@ components:
             - CONTACTS_TO_STAR_AFFINITY
             - DECS_AFFINITY
             - GSOX_MOCHI_AFFINITY
+            - MEET_AFFINITY
+            - PMW_TI_AFFINITY
+            - DRIVE_SEARCH_FILTER_PERSON_ONLY
           type: string
         containerId:
           description: The ID of the container
@@ -3526,7 +3558,7 @@ components:
           type: string
       type: object
     AppsPeopleOzExternalMergedpeopleapiInAppReachability:
-      description: This is deprecated in PEOPLE_API/SHARPEN, and should only be used for PROFILES. Which apps the person has indicated they are reachable at for the requester. See go/d13y and com.google.focus.proto.InAppReachability.
+      description: This is deprecated in PEOPLE_API/SHARPEN, and should only be used for PROFILES. Clients should use InAppNotificationTarget field instead. Which apps the person has indicated they are reachable at for the requester. See go/d13y and com.google.focus.proto.InAppReachability.
       properties:
         appType:
           enum:
@@ -6186,6 +6218,64 @@ components:
               - WIFI_ADD_NETWORK_QR_CODE
               - WIFI_CALLING
               - WIFI_HOTSPOT
+              - ACCESSIBILITY_SELECT_TO_SPEAK
+              - CRISIS_ALERTS
+              - REGULATORY_LABELS
+              - SEND_FEEDBACK
+              - OS_BUILD_NUMBER
+              - ACCESSIBILITY_SHORTCUTS
+              - ACCESSIBILITY_MENU
+              - ACCESSIBILITY_SOUND_AMPLIFIER
+              - ACCESSIBILITY_LIVE_TRANSCRIBE
+              - ACCESSIBILITY_SOUND_NOTIFICATIONS
+              - ACCESSIBILITY_TALKBACK
+              - ACCESSIBILITY_TIMEOUT
+              - CAMERA_SETTINGS
+              - BATTERY_SAVER_TOGGLE
+              - COVID_NOTIFICATIONS
+              - APP_LOCATION
+              - LOCATION_SERVICES
+              - PRIVATE_DNS
+              - UNRESTRICTED_DATA
+              - PREFERRED_NETWORK
+              - NETWORK_PREFERENCES
+              - PASSWORDS_AND_ACCOUNTS
+              - PRIVACY_DASHBOARD
+              - MORE_SECURITY
+              - APP_PINNING
+              - CONFIRM_SIM_DELETION
+              - ENCRYPT_PHONE
+              - FACE_UNLOCK
+              - INSTALL_UNKNOWN_APPS
+              - NOW_PLAYING
+              - STAY_AWAKE
+              - ASSISTANT_VOICE
+              - RESET_BLUETOOTH_WIFI
+              - DEFAULT_PHONE_APP
+              - GOOGLE_ACCOUNT
+              - ACCESSIBILITY_CAPTION_SIZE_AND_STYLE
+              - ACCESSIBILITY_CAPTION_STYLE
+              - ACCESSIBILITY_CAPTION_TEXT
+              - ACCESSIBILITY_CAPTION_PREFERENCES
+              - ACCESSIBILITY_COLOR_AND_MOTION
+              - ACCESSIBILITY_BOLD_TEXT
+              - LIVE_CAPTION
+              - POWER_BUTTON_ENDS_CALL
+              - TOUCH_AND_HOLD_DELAY
+              - ACCESSIBILITY_VOICE_ACCESS
+              - SMS_PERMISSIONS
+              - SPECIAL_APP_ACCESS
+              - DARK_THEME_SCHEDULE
+              - LOCK_SCREEN_TEXT
+              - NIGHT_LIGHT_SCHEDULE
+              - AUTOFILL
+              - USAGE_AND_DIAGNOSTICS
+              - SENSITIVE_NOTIFICATIONS
+              - ENCRYPTION_AND_CREDENTIALS
+              - SPACIAL_AUDIO
+              - RESET_OPTIONS
+              - QUICK_TAP
+              - TIPS_AND_SUPPORT
               - ABOUT_PHONE
               - ACCOUNTS
               - APPLICATION
@@ -10225,9 +10315,6 @@ components:
         mid:
           description: The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in its graph.
           type: string
-        naturalProviderId:
-          $ref: "#/components/schemas/AssistantContextProviderIdNaturalProviderId"
-          description: Natural Provider Id returned from Provider Corpus. Note that feature teams should almost always use provider_corpus_id which is the canonical representation for provider. Surface-specific identiers should only be used in final surface rendering.
         providerCorpusId:
           description: ID issued by the Provider Corpus to uniquely identify a provider entity e.g. an Android app, a Cast app or a Cloud provider. In practice, a single partner can have multiple providers entities. For more detail, see go/se-storage-provider-id. This is the preferred/ standardized ID to use for ProviderId that all use-cases should eventually migrate to.
           format: int64
@@ -10235,27 +10322,6 @@ components:
         providerVariant:
           $ref: "#/components/schemas/AssistantContextProviderVariant"
           description: Provider variant corresponding to the current provider. It's used together with mid to uniquely identify provider.
-      type: object
-    AssistantContextProviderIdNaturalProviderId:
-      description: Represents how to naturally identify a provider. A copy of google3/assistant/serviceengine/proto/serving/natural_provider_id.proto.
-      properties:
-        providerType:
-          description: ProviderType is an enum to represent the category of where this id is from.
-          enum:
-            - UNKNOWN
-            - CLOUD_PROJECT
-            - APP_ACTIONS
-            - WEBSITE
-            - NARRATIVE_NEWS
-            - IOS_BUNDLE
-            - CAST_APP
-            - ZEROTH_PARTY
-            - ANDROID_SYSTEM_API
-            - LLM_ACTIONS
-          type: string
-        value:
-          description: String of provider_id_value is the actual value of the id.
-          type: string
       type: object
     AssistantContextProviderVariant:
       description: "Note: As of May 2021, multiple providers use the same mids (e.g. YouTube Main, YouTube Go, and YouTube Music all have the same mids). However, quite often we end up using surface specific identifiers (e.g. Android package names, iOS bundle identifiers, etc.) to differentiate amongst them. This field allows us to move away from surface specific identifiers towards a surface-agnostic enum representing the same information."
@@ -10890,6 +10956,14 @@ components:
         providerGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerProviderGroundingProviderFeatures"
       type: object
+    AssistantGroundingRankerLaaFeature:
+      properties:
+        name:
+          type: string
+        value:
+          format: float
+          type: number
+      type: object
     AssistantGroundingRankerLaaFeatures:
       properties:
         bindingSet:
@@ -10898,6 +10972,10 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerLaaFeaturesCommunicationEndpoint"
         contact:
           $ref: "#/components/schemas/AssistantGroundingRankerLaaFeaturesContact"
+        features:
+          items:
+            $ref: "#/components/schemas/AssistantGroundingRankerLaaFeature"
+          type: array
         provider:
           $ref: "#/components/schemas/AssistantGroundingRankerLaaFeaturesProvider"
       type: object
@@ -11048,11 +11126,19 @@ components:
           type: number
       type: object
     AssistantGroundingRankerPodcastGroundingProviderFeatures:
-      description: "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 2"
+      description: "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 4"
       properties:
         isExclusive:
           description: Whether the podcast is exclusive to a provider a not.
           type: boolean
+        scubedNg3ModelScore:
+          description: The relevance score from Scubed.
+          format: float
+          type: number
+        scubedTstarScore:
+          description: Tstar score is a signal that indicates the quality of the entity.
+          format: double
+          type: number
       type: object
     AssistantGroundingRankerProviderGroundingProviderFeatures:
       description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 5"
@@ -12139,7 +12225,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 48"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 51"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -12191,6 +12277,10 @@ components:
           description: Assistant User Interaction Score which is aggregated using intent name from exp laelaps.
           format: double
           type: number
+        intentNamePauis:
+          description: Intent level Pauis User Interaction Score.
+          format: float
+          type: number
         isFeasible:
           description: "Feasibility of fulfilling the binding set. Eg: For PlayMedia, this is equivalent to playability. More details: go/hgr-feasibility-feature."
           type: boolean
@@ -12205,6 +12295,9 @@ components:
           type: boolean
         isPodcastIntent:
           description: Whether the intent is a podcast intent.
+          type: boolean
+        isVideoIntent:
+          description: Whether the intent is a media object video intent.
           type: boolean
         kscorerRank:
           description: The rank order of the interpretation as determined by kscorer. The kscorer-determined dominant interpretation, if any, gets a rank of 0. The remaining N interpretations get a rank of 1 through N.
@@ -12256,6 +12349,22 @@ components:
           description: A ID corresponding to which bucket a given parsing score belongs in.
           format: int32
           type: integer
+        phase:
+          description: Query understanding phase the intent was produced in.
+          enum:
+            - QU_PHASE_UNSPECIFIED
+            - QU_PHASE_REQUEST
+            - QU_PHASE_QREWRITE
+            - QU_PHASE_QBT
+            - QU_PHASE_PROBE_QUERY
+            - QU_PHASE_MULTI_ACCOUNT
+            - QU_PHASE_CQBT
+            - QU_PHASE_QBT_RESOLUTION
+            - QU_PHASE_HIGH_PRECISION
+            - QU_PHASE_COMBINED_RBT_RESOLUTION
+            - QU_PHASE_ANALYZER_INPUT
+            - QU_PHASE_NAGE
+          type: string
         pq2tVsAssistantIbstCosine:
           description: Cosine similarity between predicted query-to-term model and assistant intent-type-based salient terms. This is intended to be only used for ACE ranking and only populated for assistant traffic.
           format: double
@@ -12283,6 +12392,8 @@ components:
             - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2
             - RANKER_NAME_GROUNDING_RANKER_COMMS_EXP_CALIBRATED
             - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED
+            - RANKER_NAME_EXPERIMENTAL_PFR_SAGE_NEW_DOMAINS
+            - RANKER_NAME_BUCKETED_PARSING_SCORE_FOR_SMARTHOME
           type: string
         searchDispatch:
           description: The determination made by the SearchDispatchingConfig as to whether and how this interpretation should be dispatched to Search.
@@ -13386,7 +13497,7 @@ components:
           type: integer
       type: object
     ClassifierPornSiteData:
-      description: "Next ID: 52"
+      description: "Next ID: 53"
       properties:
         avgPedoPageScore:
           description: The average pedo page score for the site.
@@ -13417,6 +13528,10 @@ components:
           items:
             $ref: "#/components/schemas/ClassifierPornSiteDataVersionedScore"
           type: array
+        violenceScore:
+          description: The cubic mean aggregation of violence page scores in the site.
+          format: float
+          type: number
         violenceStats:
           $ref: "#/components/schemas/ClassifierPornSiteViolenceStats"
       type: object
@@ -24758,7 +24873,7 @@ components:
           description: Specifies whether the max_permitted_speed_kph was derived from a heuristic as opposed to coming from an authoritative source.
           type: boolean
         lane:
-          description: Detailed information about each lane in this direction, if available. Lanes are numbered from inside of the road outward, i.e. the lane next to the center line is lane 0. Note that lanes that are valid for travel in both directions appear in both segments of a segment pair (left turn lanes, one-lane roads, some passing lanes, reversing lanes). Some lanes may not be usable by cars, such as bike lanes. Also, some lanes may not exist along the entire segment, e.g. left- or right-turn lanes that appear just before the intersection.
+          description: Detailed information about each lane in this direction, if available. Lanes are numbered from inside of the road outward, i.e. the lane next to the center line has lane_number 0. Note that lanes that are valid for travel in both directions appear in both segments of a segment pair (left turn lanes, one-lane roads, some passing lanes, reversing lanes). Some lanes may not be usable by cars, such as bike lanes. Also, some lanes may not exist along the entire segment, e.g. left- or right-turn lanes that appear just before the intersection.
           items:
             $ref: "#/components/schemas/GeostoreLaneProto"
           type: array
@@ -26802,7 +26917,7 @@ components:
           description: "*Required* Identifier for the device which sent the request."
       type: object
     GoogleAssistantAccessoryV1DeviceState:
-      description: "Information about the state of the device. This contains any state that Assistant may need to know about in order to fulfill requests, for example which timers and alarms are set. Next ID: 9"
+      description: "Information about the state of the device. This contains any state that Assistant may need to know about in order to fulfill requests, for example which timers and alarms are set. Next ID: 10"
       properties:
         alarmState:
           $ref: "#/components/schemas/GoogleAssistantEmbeddedV1Alarms"
@@ -27392,6 +27507,11 @@ components:
           type: string
         displayUri:
           description: Uri to display the document, for example, in the UI.
+          type: string
+        dispositionTime:
+          description: Output only. If linked to a Collection with RetentionPolicy, the date when the document becomes mutable.
+          format: google-datetime
+          readOnly: true
           type: string
         documentSchemaName:
           description: "The Document schema name. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
@@ -28231,6 +28351,9 @@ components:
           items:
             type: string
           type: array
+        outputPath:
+          description: The output Cloud Storage folder in this pipeline.
+          type: string
       type: object
     GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata:
       description: The metadata message for GcsIngest pipeline.
@@ -28659,7 +28782,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentStyle"
           type: array
         uri:
-          description: Optional. Currently supports Google Cloud Storage URI of the form `gs://bucket_name/object_name`. Object versioning is not supported. See [Google Cloud Storage Request URIs](https://cloud.google.com/storage/docs/reference-uris) for more info.
+          description: Optional. Currently supports Google Cloud Storage URI of the form `gs://bucket_name/object_name`. Object versioning is not supported. For more information, refer to [Google Cloud Storage Request URIs](https://cloud.google.com/storage/docs/reference-uris).
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentEntity:
@@ -29167,17 +29290,17 @@ components:
           $ref: "#/components/schemas/GoogleTypeColor"
           description: Color of the background.
         bold:
-          description: Whether the text is bold (equivalent to font weight >= 700).
+          description: Whether the text is bold (equivalent to font_weight is at least `700`).
           type: boolean
         fontSize:
-          description: Font size in points (1 point is 1/72").
+          description: Font size in points (`1` point is `¹⁄₇₂` inches).
           format: int32
           type: integer
         fontType:
           description: Name or style of the font.
           type: string
         fontWeight:
-          description: TrueType weight on a scale 100 (Thin) to 1000 (Ultra-heavy). Normal is 400, Bold is 700.
+          description: TrueType weight on a scale `100` (thin) to `1000` (ultra-heavy). Normal is `400`, bold is `700`.
           format: int32
           type: integer
         handwritten:
@@ -29191,11 +29314,11 @@ components:
           format: double
           type: number
         pixelFontSize:
-          description: Font size in pixels, equal to unrounded_fontsize * resolution / 72.0.
+          description: Font size in pixels, equal to _unrounded font_size_ * _resolution_ ÷ `72.0`.
           format: double
           type: number
         smallcaps:
-          description: Whether the text are small caps.
+          description: Whether the text is in small caps.
           type: boolean
         strikeout:
           description: Whether the text is strikethrough.
@@ -37077,7 +37200,7 @@ components:
           type: integer
       type: object
     KnowledgeAnswersIntentQueryArgumentSignals:
-      description: 'A message representing the signals associated with an argument. NEXT ID TO USE: 57 For //depot/google3/logs/proto/knowledge/interpretation/intent_query.proto in the "ThenChange", fields under Argument.signals in the serving proto are stored directly under Argument on the logging side. For example, see http://google3/nlp/semantic_parsing/data_management/logs/web_logs/semantic_logging_converters/semantic_logging_request_argument_converter.cc?l=58&rcl=322925428. LINT.IfChange'
+      description: 'A message representing the signals associated with an argument. NEXT ID TO USE: 58 For //depot/google3/logs/proto/knowledge/interpretation/intent_query.proto in the "ThenChange", fields under Argument.signals in the serving proto are stored directly under Argument on the logging side. For example, see http://google3/nlp/semantic_parsing/data_management/logs/web_logs/semantic_logging_converters/semantic_logging_request_argument_converter.cc?l=58&rcl=322925428. LINT.IfChange'
       properties:
         addedByCloseAnswers:
           description: Whether this argument was added by CloseAnswers in Postref. This bit is used to mark the corresponding interpretation/intent query as such by setting is_close_interpretation bit.
@@ -37239,6 +37362,8 @@ components:
         resolvedFromPronoun:
           description: "Whether this argument was resolved from a pronoun mention in the query. Eg: [how old was obama when *he* became president]"
           type: boolean
+        responseMeaningSignals:
+          $ref: "#/components/schemas/KnowledgeAnswersIntentQueryResponseMeaningSignalsResponseMeaningSignals"
         resultSupport:
           description: The list of result supports for this Argument.
           items:
@@ -37947,13 +38072,36 @@ components:
           format: uint64
           type: string
       type: object
+    KnowledgeAnswersIntentQueryResponseMeaningSignalsAnswersHeaderSignals:
+      properties:
+        answersValueGender:
+          enum:
+            - UNKNOWN
+            - FEMALE
+            - MALE
+          type: string
+        numAnswers:
+          format: uint64
+          type: string
+      type: object
     KnowledgeAnswersIntentQueryResponseMeaningSignalsResponseMeaningSignals:
       description: SRM signal data. Properties here should be nonsemantic. Semantic properties should be modeled directly in the SRM.
       properties:
+        answersHeaderSignals:
+          $ref: "#/components/schemas/KnowledgeAnswersIntentQueryResponseMeaningSignalsAnswersHeaderSignals"
+          description: Signals that are used to generate answers header.
         propertyValue:
           items:
             $ref: "#/components/schemas/FreebasePropertyValue"
           type: array
+        responseMeaningApplication:
+          description: The intended application this response meaning is used for. It is intended for downstream dispatching.
+          enum:
+            - DEFAULT
+            - HEADER
+            - VOICE_ANSWERS
+            - DISPLAY_ANSWERS
+          type: string
       type: object
     KnowledgeAnswersIntentQuerySaftSignals:
       description: Signals derived from overlapping saft annotations.
@@ -48260,6 +48408,7 @@ components:
             - NUDGEIT_CAMPAIGN_MANAGER
             - DECS
             - GSOX_MOCHI
+            - PMW_TI
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -52616,7 +52765,7 @@ components:
           type: string
       type: object
     QualityFringeFringeQueryPriorPerDocData:
-      description: "PerDocData for fringe-query-prior (built into the shards for eventual consumption at Fringe classification time). Not stored in DocJoins. NEXT ID: 11"
+      description: "PerDocData for fringe-query-prior (built into the shards for eventual consumption at Fringe classification time). Not stored in DocJoins. NEXT ID: 12"
       properties:
         encodedCalibratedFringeSitePriorScore:
           format: uint32
@@ -52657,6 +52806,12 @@ components:
           description: A score in [0, 1] representing the similarity of this doc to known fringe-vulnerable 'seeds'. See go/fringe-proximity for more information. Encoded for compactness and to restrict visibility.
           format: uint32
           type: integer
+        sensitiveEntitiesIndices:
+          description: Indices on the repository_webref::WebrefEntities::entity field of entities that represent a person or a group of people (aka sensitive entities).
+          items:
+            format: int32
+            type: integer
+          type: array
       type: object
     QualityGenieComplexQueriesComplexQueriesOutputRewrite:
       properties:
@@ -53249,11 +53404,6 @@ components:
           type: number
         url:
           type: string
-        versionedAsrData:
-          description: Versioned map of ASR (authenticity) values.
-          items:
-            $ref: "#/components/schemas/QualityNsrVersionedFloatSignal"
-          type: array
         versionedData:
           description: Versioned map of NSR values for experimenting with the next release.
           items:
@@ -55237,9 +55387,9 @@ components:
             - V5
             - V5_1
             - V5_2
+            - V5_3
             - V1_BODYONLY
             - V2_BODYONLY
-            - RENAME_ME_TO_ADD_NEW_ENUM_16
             - RENAME_ME_TO_ADD_NEW_ENUM_17
             - RENAME_ME_TO_ADD_NEW_ENUM_18
             - RENAME_ME_TO_ADD_NEW_ENUM_19
@@ -55249,6 +55399,7 @@ components:
             - RENAME_ME_TO_ADD_NEW_ENUM_23
             - RENAME_ME_TO_ADD_NEW_ENUM_24
             - RENAME_ME_TO_ADD_NEW_ENUM_25
+            - RENAME_ME_TO_ADD_NEW_ENUM_26
           type: string
       type: object
     QualitySalientTermsSignalData:
@@ -57788,9 +57939,6 @@ components:
           items:
             $ref: "#/components/schemas/RepositoryWebrefPreprocessingNameVariantSignals"
           type: array
-        entity:
-          $ref: "#/components/schemas/RepositoryWebrefEntityJoin"
-          description: Sparse metadata about the entity, usage should be moved back to individual fields, this avoids having cyclic dependencies.
         extendedScoreRatio:
           description: Stores region specific score ratios for the entity when it is significantly different from the language version above.
           items:
@@ -60650,7 +60798,7 @@ components:
           description: Information about the collections of this entity.
         entityJoin:
           $ref: "#/components/schemas/RepositoryWebrefEntityJoin"
-          description: Metadata and raw signals used by the annotator.
+          description: Metadata and raw signals used by the annotator. Intended for internal use. Steer clear of adding new dependencies on fields in this proto, especially external dependencies. If you are a Refx client and would like to consume entity metadata, consider querying TopicServer instead.
         id:
           $ref: "#/components/schemas/RepositoryWebrefWebrefEntityId"
           description: An identifier (usually a MID) for the entity. Consider using GetWebrefEntityMid() in the adjacent webref-entities-util.h to read this.
@@ -64433,6 +64581,20 @@ components:
           description: Title is an optional field that provides a short string that describes the link or its destination. User interfaces often use title as a tooltip or for accessibility purposes. However, they are of course free to present this data in any form. This field is plain text.
           type: string
       type: object
+    SocialCommonSearchLinkData:
+      description: SearchLink metadata, for SEARCH_LINK segments. For a search link, the "text" field should contain the display text. This is currently not indexed.
+      properties:
+        kgEntityConfidence:
+          description: For lightweight scoring in serving time.
+          format: float
+          type: number
+        mid:
+          description: MID of the KG entity being linked.
+          type: string
+        queryBroadnessScore:
+          format: float
+          type: number
+      type: object
     SocialCommonSegment:
       properties:
         formatting:
@@ -64444,6 +64606,9 @@ components:
         linkData:
           $ref: "#/components/schemas/SocialCommonLinkData"
           description: "Type-specific metadata. At most one of these should be populated, and the one that is populated should correspond to the type of the Segment. For LINK type:"
+        searchLinkData:
+          $ref: "#/components/schemas/SocialCommonSearchLinkData"
+          description: "For SEARCH_LINK type:"
         text:
           description: Text content of the Segment. As a general rule, this field should contain the actual text that should be rendered in the UI. Thus, for a hashtag, it should be "#Foo", and for a link, it should be the display text. Clients that do not understand a particular segment type may use this text, along with the Formatting info below, as a fallback for display. The field is not required -- if all relevant information is carried in other metadata fields and there is no need for a fallback, or it is not practical for a fallback to be provided for any other reason, the field may be left blank. A standard example would be a user reference being transmitted between server layers, where a gaia-ID representation may be sufficient and there is no need for a textual fallback. In such a case, it would be valid and useful - though not required - for servers to compute and populate a fallback on the serving path.
           type: string
@@ -64456,6 +64621,7 @@ components:
             - USER_MENTION
             - ALL_USER_MENTION
             - HASHTAG
+            - SEARCH_LINK
           type: string
         userMentionData:
           $ref: "#/components/schemas/SocialCommonUserMentionData"
@@ -65411,13 +65577,15 @@ components:
             - GOOGLE_GROUP
             - BOT
           type: string
+        isMembershipVisibleToCaller:
+          description: "Whether caller has visibility into the direct members of the roster. NEXT TAG: 11"
+          type: boolean
         memberCount:
-          description: Number of members (direct or indirect) in a Google Group. Only an estimate for large groups (currently > 1K direct / indirect members).
+          description: "DEPRECATED: use segmented_membership_counts instead. Number of members (direct or indirect) in a Google Group. Only an estimate for large groups (currently > 1K direct / indirect members)."
           format: int64
           type: string
         organizationInfo:
           $ref: "#/components/schemas/AppsDynamiteSharedOrganizationInfo"
-          description: "NEXT TAG: 9"
         presence:
           enum:
             - UNDEFINED_PRESENCE
@@ -65426,6 +65594,9 @@ components:
             - UNKNOWN
             - SHARING_DISABLED
           type: string
+        segmentedMembershipCounts:
+          $ref: "#/components/schemas/AppsDynamiteSharedSegmentedMembershipCounts"
+          description: Represents the direct membership counts of a Google Group. May contain counts based on member type and membership state.
       type: object
     SocialGraphWireProtoPeopleapiExtensionPaisaExtendedData:
       description: "Next tag number: 3"
@@ -65993,6 +66164,7 @@ components:
             - ISOLATION_PKG_YOUTUBE_PUBLIC_AND_PRIVATE_PLAYLISTS
             - ISOLATION_S3_CREATOR_PRESENCE
             - ISOLATION_S12Y_RECIPE_INGREDIENT_INSIGHTS
+            - ISOLATION_SCOUTS_SOCIETAL_CONTEXT_ENTITIES
             - UMP_TESTING_ONLY
             - INTENTJOINS_NB_SIGNALS
             - ADS_INTEGRITY_ANNOTATION
@@ -68145,6 +68317,7 @@ components:
               - GEARHEAD_WORK_PROFILE_DETECTED_AND_COMPATIBLE
               - GEARHEAD_WORK_PROFILE_QUERYING_ALLOWED
               - PLAY_ADS_REENGAGEMENT_COUNTERFACTUAL
+              - PLAY_ADS_THIRD_LIST_VIEW_ADS_COUNTERFACTUAL
               - GEARHEAD_TOOLTIP_ASSISTANT_LAUNCHER_OPEN
               - GEARHEAD_MULTIPLE_CALLABLE_PHONE_ACCOUNTS_DETECTED
               - GEARHEAD_USER_HAS_SELECTED_OUTGOING_PHONE_ACCOUNT
@@ -68269,6 +68442,13 @@ components:
               - RAM_3GB_TO_4GB_EVENT_LEVEL
               - RAM_4GB_TO_6GB_EVENT_LEVEL
               - RAM_6GB_AND_MORE_EVENT_LEVEL
+              - LOW_STORAGE_AT_INSTALL_PREPROCESSING_EVENT_LEVEL
+              - DSA_P13N_OPTED_IN_AT_EVENT_LEVEL
+              - DSA_P13N_OPTED_OUT_AT_EVENT_LEVEL
+              - USER_P13N_SETTING_UNSPECIFIED_AT_EVENT_LEVEL
+              - USER_P13N_SETTING_ON_AT_EVENT_LEVEL
+              - USER_P13N_SETTING_OFF_AT_EVENT_LEVEL
+              - BATTLESTAR_GAME_IN_MDP_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -68835,6 +69015,15 @@ components:
               - BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_SESSION_LEVEL
               - MDP_WITH_LIVE_OPS_EVER_INSTALLED_USERS_SESSION_LEVEL
               - MDP_WITH_LIVE_OPS_NEVER_INSTALLED_USERS_SESSION_LEVEL
+              - LOW_STORAGE_AT_INSTALL_PREPROCESSING_SESSION_LEVEL
+              - DSA_P13N_OPTED_IN_AT_SESSION_LEVEL
+              - DSA_P13N_OPTED_OUT_AT_SESSION_LEVEL
+              - LANGUAGE_SWITCHER_SERVED_SESSION_LEVEL
+              - HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_SESSION_LEVEL
+              - USER_P13N_SETTING_UNSPECIFIED_AT_SESSION_LEVEL
+              - USER_P13N_SETTING_ON_AT_SESSION_LEVEL
+              - USER_P13N_SETTING_OFF_AT_SESSION_LEVEL
+              - BATTLESTAR_GAME_IN_MDP_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -68971,6 +69160,7 @@ components:
               - GE_IS_SCHEDULED_COFFEE_CARD
               - GE_IS_SCHEDULED_QUEST
               - GE_IS_SCHEDULED_LOYALTY_MULTIPLIER
+              - GE_IS_USER_OPT_IN_P13N
               - IAP_SKU_DEALS_LIVE_OP_DEALS_HOME_USER_LEVEL
               - IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_USER_LEVEL
               - FEATURING_AHC_OR_FHR_TRIGGERED_USER_LEVEL
@@ -69089,6 +69279,13 @@ components:
               - DMA_PRE_CONSENT_PROMPT_SHOWN_USER_LEVEL
               - DMA_PRE_CONSENT_DECISION_MADE_USER_LEVEL
               - DMA_PRE_CONSENT_FLOW_DISMISSED_USER_LEVEL
+              - DSA_P13N_OPTED_IN_AT_USER_LEVEL
+              - DSA_P13N_OPTED_OUT_AT_USER_LEVEL
+              - LIVEOPS_INSTALL_NOTIFICATION_USER_LEVEL
+              - USER_P13N_SETTING_UNSPECIFIED_AT_USER_LEVEL
+              - USER_P13N_SETTING_ON_AT_USER_LEVEL
+              - USER_P13N_SETTING_OFF_AT_USER_LEVEL
+              - LIVEOPS_CLUSTER_SERP_TRIGGERING_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -72511,6 +72708,18 @@ components:
           format: int32
           type: integer
       type: object
+    VideoGoogleVideoClipInfo:
+      description: YT app video information. (go/yt-create-vsi-data)
+      properties:
+        appVersion:
+          description: YT app version (ie. YT Create app version).
+          type: string
+        assetLoggingId:
+          description: List of YT media asset logging ids.
+          items:
+            type: string
+          type: array
+      type: object
     VideoLegosLegosAnnotationsSet:
       properties:
         featureSetName:
@@ -72962,7 +73171,7 @@ components:
           type: array
       type: object
     VideoThumbnailsThumbnailScore:
-      description: "LINT.IfChange Score calculated from a thumbnail. NextID: 15"
+      description: "LINT.IfChange Score calculated from a thumbnail. NextID: 16"
       properties:
         checksum:
           description: Checksum of the thumbnail bytes used to identify which image the score belongs to. Only filled when thumbnail version is 0.
@@ -72981,6 +73190,9 @@ components:
         denseGeneralExtraFeatures:
           $ref: "#/components/schemas/DrishtiFeatureExtra"
           description: FeatureExtra extension for dense features.
+        externalImageId:
+          description: "A unique identifier for the image that is independent of the resolution. The Image ID accompanies the image bytes through its lifecycle, from creation till vanishing. Image ID is not based on image content; it is different than checksum (e.g. two different images with the same bytes may not have the same image ID). This ID is used as a unique identifier for clients such as T&S and classifiers. For more info refer to go/thumbnail-id-ts-ab-testing Note: Image ID's are still in development and are currently not exposed externally (may be done in the future). Please contact yt-thumbnails-core@ before using it. Do not use externally or in logs before contacting yt-thumbnails-core@"
+          type: string
         isAssigned:
           description: If true, score is manually assigned.
           type: boolean
@@ -73315,7 +73527,7 @@ components:
           type: integer
       type: object
     VideoVideoStreamInfo:
-      description: "Note that when a VSI is from a user video, the information reflects the info in that source. Fields like lengths, fps, etc. are not guaranteed to be the same as those of transcodes. If the relevant info in source is too broken, the corresponding fields (e.g., lengths) could be unset or with the default value, meaning VSI cannot compute them from the given info. Next id: 82"
+      description: "Note that when a VSI is from a user video, the information reflects the info in that source. Fields like lengths, fps, etc. are not guaranteed to be the same as those of transcodes. If the relevant info in source is too broken, the corresponding fields (e.g., lengths) could be unset or with the default value, meaning VSI cannot compute them from the given info. Next id: 83"
       properties:
         audioBitrate:
           description: audio bitrate in bits/s
@@ -73822,8 +74034,8 @@ components:
           type: string
         avDistance:
           description: Audio-Video interleaving distance between packets (in bytes)
-          format: int32
-          type: integer
+          format: int64
+          type: string
         avLength:
           description: Audio and video length in seconds. It's the max of the audio and video length. Note that when the VSI is from users videos, it is not guaranteed to be the same as transcode lengths and it could be 0 when the full VSI cannot compute the length from the source header and timestamps (for example when header and timestamps are too broken).
           format: double
@@ -74166,6 +74378,9 @@ components:
           description: High-level file type guessed by looking at the file headers and libmagic.
           format: int32
           type: integer
+        googleVideoClipInfo:
+          $ref: "#/components/schemas/VideoGoogleVideoClipInfo"
+          description: YT app created video information,
         imageStream:
           items:
             $ref: "#/components/schemas/VideoVideoStreamInfoVideoStream"
@@ -79143,6 +79358,7 @@ components:
             - GEO_LEGOS_TEST_SET_V2_TRAVEL_DESTINATIONS
             - GEO_LEGOS_TEST_SET_V2_DINING
             - GEO_LEGOS_TEST_SET_V2_HOTEL
+            - TRAVEL_INTEREST
           type: string
       type: object
     YoutubeDiscoveryLegosLegosTaxonomicRelationship:

@@ -356,7 +356,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: APIs
   "/connector/apis/{id}":
     get:
       description: Get API
@@ -537,7 +536,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: connectors
   "/connector/connectors/{id}":
     get:
       description: Get Connector
@@ -1050,7 +1048,6 @@ components:
           $ref: "#/components/schemas/ApiStatus"
       type: object
       x-apideck-schema-id: ApisFilter
-      x-graphql-type-name: ApisFilter
     BadRequestResponse:
       properties:
         detail:
@@ -1456,7 +1453,6 @@ components:
           $ref: "#/components/schemas/UnifiedApiId"
       type: object
       x-apideck-schema-id: ConnectorsFilter
-      x-graphql-type-name: ConnectorsFilter
     GetApiResourceCoverageResponse:
       properties:
         data:
@@ -1547,7 +1543,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetApisResponse
-      x-graphql-type-name: ApiList
     GetConnectorResourceResponse:
       properties:
         data:
@@ -1616,7 +1611,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetConnectorsResponse
-      x-graphql-type-name: ConnectorList
     Id:
       description: A unique identifier for an object.
       example: "12345"

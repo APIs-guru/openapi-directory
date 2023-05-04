@@ -344,7 +344,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: eventLogs
   "/webhook/w/{id}/{serviceId}":
     post:
       description: Resolve a webhook based on lookup_id and then execute it
@@ -404,7 +403,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-internal: true
       x-sdk-exclude: true
   /webhook/webhooks:
@@ -453,7 +451,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: webhooks
     post:
       description: Create a webhook subscription to receive events
       operationId: webhooksAdd
@@ -724,7 +721,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-internal: true
       x-sdk-exclude: true
   "/webhook/webhooks/{id}/x/{serviceId}":
@@ -787,7 +783,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-internal: true
       x-sdk-exclude: true
 components:
@@ -1155,7 +1150,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetWebhookEventLogsResponse
-      x-graphql-type-name: EventLogList
     GetWebhookResponse:
       properties:
         data:
@@ -1174,7 +1168,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetWebhookResponse
-      x-graphql-type-name: Webhook
     GetWebhooksResponse:
       properties:
         data:
@@ -1199,7 +1192,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetWebhooksResponse
-      x-graphql-type-name: WebhookList
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1385,7 +1377,6 @@ components:
       example: enabled
       type: string
       x-apideck-enum-id: webhooks.status
-      x-graphql-type-name: WebhookStatus
     UnauthorizedResponse:
       properties:
         detail:
@@ -1758,7 +1749,6 @@ components:
           type: object
       type: object
       x-apideck-schema-id: WebhookEventLogsFilter
-      x-graphql-type-name: WebhookEventLogsFilter
     WebhookEventType:
       enum:
         - "*"

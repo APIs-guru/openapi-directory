@@ -464,7 +464,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: bills
     post:
       description: Create Bill
       operationId: billsAdd
@@ -903,7 +902,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: companyInfo
   /accounting/credit-notes:
     get:
       description: List Credit Notes
@@ -956,7 +954,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: CreditNotes
     post:
       description: Create Credit Note
       operationId: creditNotesAdd
@@ -1368,7 +1365,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: customers
     post:
       description: Create Customer
       operationId: customersAdd
@@ -1824,7 +1820,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: invoiceItems
     post:
       description: Create Invoice Item
       operationId: invoiceItemsAdd
@@ -2188,7 +2183,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: invoices
     post:
       description: Create Invoice
       operationId: invoicesAdd
@@ -2687,7 +2681,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: journalEntries
     post:
       description: Create Journal Entry
       operationId: journalEntriesAdd
@@ -3054,7 +3047,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: ledgerAccounts
     post:
       description: Create Ledger Account
       operationId: ledgerAccountsAdd
@@ -3405,7 +3397,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: Payments
     post:
       description: Create Payment
       operationId: paymentsAdd
@@ -3801,7 +3792,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: profitAndLoss
   /accounting/suppliers:
     get:
       description: List Suppliers
@@ -3855,7 +3845,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: Suppliers
     post:
       description: Create Supplier
       operationId: suppliersAdd
@@ -4302,7 +4291,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: taxRates
     post:
       description: Create Tax Rate
       operationId: taxRatesAdd
@@ -5165,7 +5153,6 @@ components:
           title: Status
           type: string
           x-apideck-enum-id: customers.status
-          x-graphql-type-name: CustomerStatus
         suffix:
           $ref: "#/components/schemas/Suffix"
         tax_number:
@@ -5226,7 +5213,6 @@ components:
         updated_at: medium
         updated_by: edge-case
         websites: medium
-      x-graphql-type-name: Customer
     AccountingEventType:
       enum:
         - "*"
@@ -5407,7 +5393,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: addresses.type
-          x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
@@ -5514,7 +5499,6 @@ components:
                         title: Value
                         type: number
                     type: object
-                    x-graphql-type-name: CurrentAssetAccountsList
                   type: array
                 total:
                   description: Total current assets
@@ -5550,7 +5534,6 @@ components:
                       id: medium
                       name: medium
                       value: medium
-                    x-graphql-type-name: FixedAssetAccountsList
                   type: array
                 total:
                   description: Total fixed assets
@@ -5616,7 +5599,6 @@ components:
                   id: medium
                   name: medium
                   value: medium
-                x-graphql-type-name: EquityItemsList
               type: array
             total:
               description: Total equity
@@ -5660,7 +5642,6 @@ components:
                   id: medium
                   name: medium
                   value: medium
-                x-graphql-type-name: LiabilityAccountsList
               type: array
             total:
               description: Total liabilities
@@ -5726,7 +5707,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: BalanceSheetFilter
-      x-graphql-type-name: BalanceSheetFilter
     BankAccount:
       additionalProperties: false
       properties:
@@ -6036,7 +6016,6 @@ components:
           title: Type
           type: string
           x-apideck-enum-id: bills.line_items.type
-          x-graphql-type-name: BillLineItemType
         unit_of_measure:
           $ref: "#/components/schemas/UnitOfMeasure"
         unit_price:
@@ -6083,12 +6062,10 @@ components:
           example: updated_at
           type: string
           x-apideck-enum-id: bills.sort_by
-          x-graphql-type-name: BillsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: BillsSort
-      x-graphql-type-name: BillsSort
     Company:
       additionalProperties: false
       properties:
@@ -6239,7 +6216,6 @@ components:
           x-apideck-weights:
             id: critical
             name: medium
-          x-graphql-type-name: CompanyRowType
         sales_tax_number:
           example: 12456EN
           nullable: true
@@ -7047,7 +7023,6 @@ components:
                 title: Allocation type
                 type: string
                 x-apideck-enum-id: allocations.type
-                x-graphql-type-name: AllocationType
             x-apideck-weights:
               amount: medium
               code: medium
@@ -7131,7 +7106,6 @@ components:
           title: Credit Note status
           type: string
           x-apideck-enum-id: credit-notes.status
-          x-graphql-type-name: CreditNoteStatus
         sub_total:
           description: Sub-total amount, normally before tax.
           example: 27500
@@ -7172,7 +7146,6 @@ components:
           title: Credit Note Type
           type: string
           x-apideck-enum-id: credit-notes.type
-          x-graphql-type-name: CreditNoteType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -7852,7 +7825,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: CustomersFilter
-      x-graphql-type-name: CustomersFilter
     DeleteBillResponse:
       properties:
         data:
@@ -8179,7 +8151,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -8227,7 +8198,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetBalanceSheetResponse
-      x-graphql-type-name: BalanceSheet
     GetBillResponse:
       properties:
         data:
@@ -8261,7 +8231,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetBillResponse
-      x-graphql-type-name: Bill
     GetBillsResponse:
       properties:
         data:
@@ -8301,7 +8270,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetBillsResponse
-      x-graphql-type-name: BillList
     GetCompanyInfoResponse:
       properties:
         data:
@@ -8335,7 +8303,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCompanyInfoResponse
-      x-graphql-type-name: CompanyInfo
     GetCreditNoteResponse:
       properties:
         data:
@@ -8480,7 +8447,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetCustomersResponse
-      x-graphql-type-name: CustomerList
     GetInvoiceItemResponse:
       properties:
         data:
@@ -8514,7 +8480,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetInvoiceItemResponse
-      x-graphql-type-name: InvoiceItem
     GetInvoiceItemsResponse:
       properties:
         data:
@@ -8554,7 +8519,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetInvoiceItemsResponse
-      x-graphql-type-name: InvoiceItemList
     GetInvoiceResponse:
       properties:
         data:
@@ -8588,7 +8552,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetInvoiceResponse
-      x-graphql-type-name: Invoice
     GetInvoicesResponse:
       properties:
         data:
@@ -8628,7 +8591,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetInvoicesResponse
-      x-graphql-type-name: InvoiceList
     GetJournalEntriesResponse:
       properties:
         data:
@@ -8667,7 +8629,6 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: JournalEntryList
     GetJournalEntryResponse:
       properties:
         data:
@@ -8700,7 +8661,6 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: JournalEntry
     GetLedgerAccountResponse:
       properties:
         data:
@@ -8734,7 +8694,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetLedgerAccountResponse
-      x-graphql-type-name: LedgerAccount
     GetLedgerAccountsResponse:
       properties:
         data:
@@ -8774,7 +8733,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetLedgerAccountsResponse
-      x-graphql-type-name: LedgerAccountList
     GetPaymentResponse:
       properties:
         data:
@@ -8808,7 +8766,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetPaymentResponse
-      x-graphql-type-name: Payment
     GetPaymentsResponse:
       properties:
         data:
@@ -8848,7 +8805,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetPaymentsResponse
-      x-graphql-type-name: PaymentList
     GetProfitAndLossResponse:
       properties:
         data:
@@ -8882,7 +8838,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetProfitAndLossResponse
-      x-graphql-type-name: ProfitAndLoss
     GetSupplierResponse:
       properties:
         data:
@@ -8916,7 +8871,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetSupplierResponse
-      x-graphql-type-name: Supplier
     GetSuppliersResponse:
       properties:
         data:
@@ -8956,7 +8910,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetSuppliersResponse
-      x-graphql-type-name: SupplierList
     GetTaxRateResponse:
       properties:
         data:
@@ -8990,7 +8943,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetTaxRateResponse
-      x-graphql-type-name: TaxRateOne
     GetTaxRatesResponse:
       properties:
         data:
@@ -9030,7 +8982,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetTaxRatesResponse
-      x-graphql-type-name: TaxRateList
     Id:
       description: A unique identifier for an object.
       example: "12345"
@@ -9205,7 +9156,6 @@ components:
           title: Invoice type
           type: string
           x-apideck-enum-id: invoices.type
-          x-graphql-type-name: InvoiceType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -9364,7 +9314,6 @@ components:
           title: Type
           type: string
           x-apideck-enum-id: invoice-items.type
-          x-graphql-type-name: InvoiceItemType
         unit_price:
           $ref: "#/components/schemas/UnitPrice"
         updated_at:
@@ -9415,7 +9364,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: InvoiceItemsFilter
-      x-graphql-type-name: InvoiceItemsFilter
     InvoiceLineItem:
       additionalProperties: false
       properties:
@@ -9506,7 +9454,6 @@ components:
           title: Type
           type: string
           x-apideck-enum-id: invoices.lines-items.type
-          x-graphql-type-name: InvoiceLineItemType
         unit_of_measure:
           $ref: "#/components/schemas/UnitOfMeasure"
         unit_price:
@@ -9561,12 +9508,10 @@ components:
           example: updated_at
           type: string
           x-apideck-enum-id: invoices.sort_by
-          x-graphql-type-name: InvoicesSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: InvoicesSort
-      x-graphql-type-name: InvoicesSort
     JournalEntry:
       additionalProperties: false
       properties:
@@ -9675,7 +9620,6 @@ components:
           title: Type
           type: string
           x-apideck-enum-id: JournalEntryLineItemType
-          x-graphql-type-name: JournalEntryLineItemType
       required:
         - ledger_account
         - total_amount
@@ -9855,7 +9799,6 @@ components:
           title: Account status
           type: string
           x-apideck-enum-id: ledger-accounts.status
-          x-graphql-type-name: LedgerAccountStatus
         sub_account:
           description: Whether the account is a sub account or not.
           example: false
@@ -9921,7 +9864,6 @@ components:
           title: Type
           type: string
           x-apideck-enum-id: ledger-accounts.type
-          x-graphql-type-name: LedgerAccountType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -10008,7 +9950,6 @@ components:
         display_id: medium
         display_name: medium
         id: medium
-      x-graphql-type-name: AccountingLinkedCustomer
     LinkedInvoiceItem:
       properties:
         code:
@@ -10037,7 +9978,6 @@ components:
         code: medium
         id: medium
         name: medium
-      x-graphql-type-name: LinkedInvoiceItem
     LinkedLedgerAccount:
       nullable: true
       properties:
@@ -10072,7 +10012,6 @@ components:
         id: medium
         name: medium
         nominal_code: medium
-      x-graphql-type-name: LinkedLedgerAccount
     LinkedParentCustomer:
       description: The parent customer this entity is linked to.
       nullable: true
@@ -10094,7 +10033,6 @@ components:
       x-apideck-schema-id: LinkedParentCustomer
       x-apideck-weights:
         id: critical
-      x-graphql-type-name: AccountingLinkedParentCustomer
     LinkedSupplier:
       description: The supplier this entity is linked to.
       nullable: true
@@ -10129,7 +10067,6 @@ components:
         company_name: edge-case
         display_name: high
         id: medium
-      x-graphql-type-name: AccountingLinkedSupplier
     LinkedTaxRate:
       properties:
         code:
@@ -10165,7 +10102,6 @@ components:
         code: medium
         id: medium
         name: medium
-      x-graphql-type-name: LinkedTaxRate
     LinkedTrackingCategory:
       nullable: true
       properties:
@@ -10184,7 +10120,6 @@ components:
       x-apideck-schema-id: LinkedTrackingCategory
       x-apideck-weights:
         id: critical
-      x-graphql-type-name: LinkedTrackingCategory
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -10358,7 +10293,6 @@ components:
                 title: Allocation type
                 type: string
                 x-apideck-enum-id: allocations.type
-                x-graphql-type-name: AllocationType
             type: object
             x-apideck-strict-any-of:
               - required:
@@ -10372,7 +10306,6 @@ components:
               code: medium
               id: medium
               type: medium
-            x-graphql-type-name: PaymentAllocation
           type: array
         created_at:
           $ref: "#/components/schemas/CreatedAt"
@@ -10446,7 +10379,6 @@ components:
           title: Payment status
           type: string
           x-apideck-enum-id: payments.status
-          x-graphql-type-name: PaymentStatus
         supplier:
           $ref: "#/components/schemas/LinkedSupplier"
         total_amount:
@@ -10475,7 +10407,6 @@ components:
           title: Payment Type
           type: string
           x-apideck-enum-id: payments.type
-          x-graphql-type-name: PaymentType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -10588,7 +10519,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: phone_numbers.type
-          x-graphql-type-name: PhoneType
       required:
         - number
       type: object
@@ -10787,7 +10717,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: ProfitAndLossFilter
-      x-graphql-type-name: ProfitAndLossFilter
     ProfitAndLossRecord:
       example:
         type: Record
@@ -10813,7 +10742,6 @@ components:
       x-apideck-schema-id: ProfitAndLossRecord
       x-apideck-weights:
         type: critical
-      x-graphql-type-name: ProfitAndLossRecord
     ProfitAndLossRecords:
       items:
         anyOf:
@@ -10822,7 +10750,6 @@ components:
       nullable: true
       type: array
       x-apideck-schema-id: ProfitAndLossRecords
-      x-graphql-type-name: ProfitAndLossRecords
     ProfitAndLossSection:
       example:
         total: 200000
@@ -10854,7 +10781,6 @@ components:
         title: medium
         total: medium
         type: critical
-      x-graphql-type-name: ProfitAndLossSection
     Quantity:
       example: 1
       nullable: true
@@ -10903,7 +10829,6 @@ components:
       type: string
       x-apideck-enum-id: sort_direction
       x-apideck-schema-id: SortDirection
-      x-graphql-type-name: SortDirection
     Suffix:
       example: Jr.
       nullable: true
@@ -10987,7 +10912,6 @@ components:
           title: Status
           type: string
           x-apideck-enum-id: suppliers.status
-          x-graphql-type-name: SupplierStatus
         suffix:
           $ref: "#/components/schemas/Suffix"
         tax_number:
@@ -11048,7 +10972,6 @@ components:
         updated_at: medium
         updated_by: edge-case
         websites: medium
-      x-graphql-type-name: Supplier
     SuppliersFilter:
       additionalProperties: false
       example:
@@ -11067,7 +10990,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: SuppliersFilter
-      x-graphql-type-name: SuppliersFilter
     Tags:
       example:
         - New
@@ -11177,7 +11099,6 @@ components:
           title: Tax rate status
           type: string
           x-apideck-enum-id: tax-rates.status
-          x-graphql-type-name: TaxRateStatus
         tax_payable_account_id:
           description: Unique identifier for the account for tax collected.
           example: "123456"
@@ -11272,7 +11193,6 @@ components:
           type: boolean
       type: object
       x-apideck-schema-id: TaxRatesFilter
-      x-graphql-type-name: TaxRatesFilter
     Title:
       description: The job title of the person.
       example: CEO
@@ -11785,7 +11705,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: websites.type
-          x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
           minLength: 1

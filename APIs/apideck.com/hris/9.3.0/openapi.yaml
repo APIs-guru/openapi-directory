@@ -386,7 +386,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: hrisCompanies
     post:
       description: Create Company
       operationId: companiesAdd
@@ -772,7 +771,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: departments
     post:
       description: Create Department
       operationId: departmentsAdd
@@ -1061,7 +1059,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: employees
     post:
       description: Create Employee
       operationId: employeesAdd
@@ -1692,7 +1689,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: jobs
       x-internal: true
       x-sdk-exclude: true
   "/hris/jobs/employees/{employee_id}/jobs/{job_id}":
@@ -1803,7 +1799,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: payrolls
   "/hris/payrolls/employees/{employee_id}":
     get:
       description: List payrolls for employee
@@ -1857,7 +1852,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: employeePayrolls
   "/hris/payrolls/employees/{employee_id}/payrolls/{payroll_id}":
     get:
       description: Get payroll for employee
@@ -1914,7 +1908,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: employeePayroll
   "/hris/payrolls/{payroll_id}":
     get:
       description: Get Payroll
@@ -1967,7 +1960,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: payroll
   "/hris/schedules/employees/{employee_id}":
     get:
       description: List schedules for employee, a schedule is a work pattern, not the actual worked hours, for an employee.
@@ -2020,7 +2012,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: employeeSchedules
   /hris/time-off-requests:
     get:
       description: List Time Off Requests
@@ -2076,7 +2067,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: timeOffRequests
     post:
       description: Create Time Off Request
       operationId: timeOffRequestsAdd
@@ -2774,7 +2764,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: addresses.type
-          x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
@@ -3876,7 +3865,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: emails.type
-          x-graphql-type-name: EmailType
       required:
         - email
       type: object
@@ -4542,7 +4530,6 @@ components:
             - other
           example: active
           type: string
-          x-graphql-type-name: EmploymentStatusFilter
         first_name:
           description: First Name to filter on
           example: Elon
@@ -4561,7 +4548,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: EmployeesFilter
-      x-graphql-type-name: EmployeesFilter
     EmployeesSort:
       additionalProperties: false
       example:
@@ -4578,12 +4564,10 @@ components:
           example: created_at
           type: string
           x-apideck-enum-id: Employees.sort_by
-          x-graphql-type-name: EmployeesSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: EmployeesSort
-      x-graphql-type-name: EmployeesSort
     EmploymentStatus:
       description: The employment status of the employee, indicating whether they are currently employed, inactive, terminated, or in another status.
       enum:
@@ -4596,7 +4580,6 @@ components:
       title: Employment status
       type: string
       x-apideck-enum-id: employees.employment_status
-      x-graphql-type-name: EmployeeEmploymentStatus
     FirstName:
       description: The first name of the person.
       example: Elon
@@ -4649,7 +4632,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetDepartmentResponse
-      x-graphql-type-name: Department
     GetDepartmentsResponse:
       properties:
         data:
@@ -4689,7 +4671,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetDepartmentsResponse
-      x-graphql-type-name: DepartmentList
     GetEmployeePayrollResponse:
       properties:
         data:
@@ -4723,7 +4704,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetEmployeePayrollResponse
-      x-graphql-type-name: EmployeePayroll
     GetEmployeePayrollsResponse:
       properties:
         data:
@@ -4757,7 +4737,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetEmployeePayrollsResponse
-      x-graphql-type-name: EmployeePayrollList
     GetEmployeeResponse:
       properties:
         data:
@@ -4791,7 +4770,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetEmployeeResponse
-      x-graphql-type-name: Employee
     GetEmployeeSchedulesResponse:
       properties:
         data:
@@ -4825,7 +4803,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetEmployeeSchedulesResponse
-      x-graphql-type-name: EmployeeSchedulesList
     GetEmployeesResponse:
       properties:
         data:
@@ -4865,7 +4842,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetEmployeesResponse
-      x-graphql-type-name: EmployeeList
     GetHrisCompaniesResponse:
       properties:
         data:
@@ -4905,7 +4881,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetHrisCompaniesResponse
-      x-graphql-type-name: HrisCompanyList
     GetHrisCompanyResponse:
       properties:
         data:
@@ -4939,7 +4914,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetHrisCompanyResponse
-      x-graphql-type-name: HrisCompany
     GetHrisJobResponse:
       properties:
         data:
@@ -4973,7 +4947,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetHrisJobResponse
-      x-graphql-type-name: Job
     GetHrisJobsResponse:
       properties:
         data:
@@ -5007,7 +4980,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetHrisJobsResponse
-      x-graphql-type-name: JobsList
     GetPayrollResponse:
       properties:
         data:
@@ -5041,7 +5013,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetPayrollResponse
-      x-graphql-type-name: Payroll
     GetPayrollsResponse:
       properties:
         data:
@@ -5077,7 +5048,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetPayrollsResponse
-      x-graphql-type-name: PayrollList
     GetTimeOffRequestResponse:
       properties:
         data:
@@ -5110,7 +5080,6 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: TimeOffRequest
     GetTimeOffRequestsResponse:
       properties:
         data:
@@ -5149,7 +5118,6 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: TimeOffRequestList
     HrisCompany:
       additionalProperties: false
       properties:
@@ -5589,7 +5557,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: PayrollsFilter
-      x-graphql-type-name: PayrollsFilter
     PhoneNumber:
       additionalProperties: false
       properties:
@@ -5633,7 +5600,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: phone_numbers.type
-          x-graphql-type-name: PhoneType
       required:
         - number
       type: object
@@ -5828,7 +5794,6 @@ components:
       type: string
       x-apideck-enum-id: sort_direction
       x-apideck-schema-id: SortDirection
-      x-graphql-type-name: SortDirection
     Tax:
       properties:
         amount:
@@ -5916,7 +5881,6 @@ components:
           example: vacation
           type: string
           x-apideck-enum-id: time-off-requests.type
-          x-graphql-type-name: TimeOffRequestType
         start_date:
           description: The start date of the time off request.
           example: 2022-04-01
@@ -5935,7 +5899,6 @@ components:
           title: Status
           type: string
           x-apideck-enum-id: time-off-requests.status
-          x-graphql-type-name: TimeOffRequestStatus
         units:
           description: "The unit of time off requested. Possible values include: `hours`, `days`, or `other`."
           enum:
@@ -5945,7 +5908,6 @@ components:
           example: hours
           type: string
           x-apideck-enum-id: time-off-requests.units
-          x-graphql-type-name: TimeOffRequestUnits
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -6002,9 +5964,7 @@ components:
             - other
           example: ""
           type: string
-          x-graphql-type-name: TimeOffStatusFilter
       type: object
-      x-graphql-type-name: TimeOffRequestsFilter
     Title:
       description: The job title of the person.
       example: CEO
@@ -6346,7 +6306,6 @@ components:
           example: primary
           type: string
           x-apideck-enum-id: websites.type
-          x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
           minLength: 1

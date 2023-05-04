@@ -375,7 +375,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: driveGroups
     post:
       description: Create DriveGroup
       operationId: driveGroupsAdd
@@ -654,7 +653,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: drives
     post:
       description: Create Drive
       operationId: drivesAdd
@@ -933,7 +931,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: files
     post:
       description: Upload file (max 100MB). Please use the [Upload Sessions API](#operation/uploadSessionsStart) to upload bigger files. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
       operationId: filesUpload
@@ -998,7 +995,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-sdk-exclude: true
   /file-storage/files/search:
     post:
@@ -1275,7 +1271,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
   /file-storage/folders:
     post:
       description: Create Folder
@@ -1572,7 +1567,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
   /file-storage/shared-links:
     get:
       description: List SharedLinks
@@ -1624,7 +1618,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: sharedLinks
     post:
       description: Create Shared Link
       operationId: sharedLinksAdd
@@ -2092,7 +2085,6 @@ paths:
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
       x-sdk-exclude: true
   "/file-storage/upload-sessions/{id}/finish":
     post:
@@ -3139,7 +3131,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: DriveGroupsFilter
-      x-graphql-type-name: DriveGroupsFilter
     DrivesFilter:
       additionalProperties: false
       properties:
@@ -3149,7 +3140,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: DrivesFilter
-      x-graphql-type-name: DrivesFilter
     ExpiresAt:
       example: 2022-09-30T07:43:32.000Z
       format: date-time
@@ -3160,7 +3150,6 @@ components:
       example: 1810673
       type: integer
       x-apideck-schema-id: FileSize
-      x-graphql-type-name: FileSize
     FileStorageEventType:
       enum:
         - "*"
@@ -3181,7 +3170,6 @@ components:
       type: string
       x-apideck-enum-id: files.type
       x-apideck-schema-id: FileType
-      x-graphql-type-name: FileType
     FilesFilter:
       additionalProperties: false
       properties:
@@ -3198,7 +3186,6 @@ components:
           type: boolean
       type: object
       x-apideck-schema-id: FilesFilter
-      x-graphql-type-name: FilesFilter
     FilesSearch:
       additionalProperties: false
       example:
@@ -3230,12 +3217,10 @@ components:
           example: updated_at
           type: string
           x-apideck-enum-id: files.sort_by
-          x-graphql-type-name: FilesSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
       x-apideck-schema-id: FilesSort
-      x-graphql-type-name: FilesSort
     Folder:
       additionalProperties: false
       properties:
@@ -3324,7 +3309,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetDriveGroupResponse
-      x-graphql-type-name: DriveGroup
     GetDriveGroupsResponse:
       properties:
         data:
@@ -3364,7 +3348,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetDriveGroupsResponse
-      x-graphql-type-name: DriveGroupList
     GetDriveResponse:
       properties:
         data:
@@ -3398,7 +3381,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetDriveResponse
-      x-graphql-type-name: Drive
     GetDrivesResponse:
       properties:
         data:
@@ -3438,7 +3420,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetDrivesResponse
-      x-graphql-type-name: DriveList
     GetFileResponse:
       properties:
         data:
@@ -3472,7 +3453,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetFileResponse
-      x-graphql-type-name: File
     GetFilesResponse:
       properties:
         data:
@@ -3512,7 +3492,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetFilesResponse
-      x-graphql-type-name: FileList
     GetFolderResponse:
       properties:
         data:
@@ -3546,7 +3525,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetFolderResponse
-      x-graphql-type-name: Folder
     GetFoldersResponse:
       properties:
         data:
@@ -3586,7 +3564,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetFoldersResponse
-      x-graphql-type-name: FolderList
     GetSharedLinkResponse:
       properties:
         data:
@@ -3620,7 +3597,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetSharedLinkResponse
-      x-graphql-type-name: SharedLink
     GetSharedLinksResponse:
       properties:
         data:
@@ -3660,7 +3636,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetSharedLinksResponse
-      x-graphql-type-name: SharedLinkList
     GetUploadSessionResponse:
       properties:
         data:
@@ -3694,7 +3669,6 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetUploadSessionResponse
-      x-graphql-type-name: UploadSession
     Id:
       description: A unique identifier for an object.
       example: "12345"
@@ -3971,7 +3945,6 @@ components:
       type: string
       x-apideck-enum-id: sort_direction
       x-apideck-schema-id: SortDirection
-      x-graphql-type-name: SortDirection
     TooManyRequestsResponse:
       properties:
         detail:

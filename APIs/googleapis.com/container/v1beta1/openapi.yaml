@@ -3559,6 +3559,9 @@ components:
         desiredEnablePrivateEndpoint:
           description: Enable/Disable private endpoint for the cluster's master.
           type: boolean
+        desiredFleet:
+          $ref: "#/components/schemas/Fleet"
+          description: The desired fleet configuration for the cluster.
         desiredGatewayApiConfig:
           $ref: "#/components/schemas/GatewayAPIConfig"
           description: The desired config of Gateway API on this cluster.
