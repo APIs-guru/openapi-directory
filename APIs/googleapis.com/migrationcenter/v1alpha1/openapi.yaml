@@ -144,23 +144,23 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the details of a source.
-      operationId: migrationcenter.projects.locations.sources.get
+      description: Gets the details of an error frame.
+      operationId: migrationcenter.projects.locations.sources.errorFrames.get
       parameters:
-        - description: Required. Name of the resource.
+        - description: "Required. The name of the frame to retrieve. Format: projects/{project}/locations/{location}/sources/{source}/errorFrames/{error_frame}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Determines what information to retrieve for the Report.
+        - description: Optional. An optional view mode to control the level of details for the frame. The default is a basic frame view.
           in: query
           name: view
           schema:
             enum:
-              - REPORT_VIEW_UNSPECIFIED
-              - REPORT_VIEW_BASIC
-              - REPORT_VIEW_FULL
+              - ERROR_FRAME_VIEW_UNSPECIFIED
+              - ERROR_FRAME_VIEW_BASIC
+              - ERROR_FRAME_VIEW_FULL
               - REPORT_VIEW_STANDARD
             type: string
       responses:
@@ -168,7 +168,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Source"
+                $ref: "#/components/schemas/ErrorFrame"
           description: Successful response
       security:
         - Oauth2:
@@ -698,6 +698,62 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha1/{parent}/errorFrames":
+    get:
+      description: Lists all error frames in a given source and location.
+      operationId: migrationcenter.projects.locations.sources.errorFrames.list
+      parameters:
+        - description: Required. Parent value (the source) for `ListErrorFramesRequest`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Optional. An optional view mode to control the level of details of each error frame. The default is a BASIC frame view.
+          in: query
+          name: view
+          schema:
+            enum:
+              - ERROR_FRAME_VIEW_UNSPECIFIED
+              - ERROR_FRAME_VIEW_BASIC
+              - ERROR_FRAME_VIEW_FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListErrorFramesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/groups":
     get:
       description: Lists all groups in a given project and location.
@@ -2045,6 +2101,29 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
+    ErrorFrame:
+      description: Message representing a frame which failed to be processed due to an error.
+      properties:
+        ingestionTime:
+          description: Output only. Frame ingestion time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The identifier of the ErrorFrame.
+          readOnly: true
+          type: string
+        originalFrame:
+          $ref: "#/components/schemas/AssetFrame"
+          description: Output only. The frame that was originally reported.
+          readOnly: true
+        violations:
+          description: Output only. All the violations that were detected for the frame.
+          items:
+            $ref: "#/components/schemas/FrameViolationEntry"
+          readOnly: true
+          type: array
+      type: object
     ExecutionReport:
       description: A resource that reports result of the import job execution.
       properties:
@@ -2095,6 +2174,16 @@ components:
             - FIT
             - NO_FIT
             - REQUIRES_EFFORT
+          type: string
+      type: object
+    FrameViolationEntry:
+      description: A resource that contains a single violation of a reported `AssetFrame` resource.
+      properties:
+        field:
+          description: The field of the original frame where the violation occurred.
+          type: string
+        violation:
+          description: A message describing the violation.
           type: string
       type: object
     Frames:
@@ -2486,6 +2575,23 @@ components:
           description: A list of assets.
           items:
             $ref: "#/components/schemas/Asset"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListErrorFramesResponse:
+      description: A response for listing error frames.
+      properties:
+        errorFrames:
+          description: The list of error frames.
+          items:
+            $ref: "#/components/schemas/ErrorFrame"
           type: array
         nextPageToken:
           description: A token identifying a page of results the server should return.
@@ -3461,6 +3567,11 @@ components:
         displayName:
           description: User-friendly display name.
           type: string
+        errorFrameCount:
+          description: Output only. The number of frames that were reported by the source and contained errors.
+          format: int32
+          readOnly: true
+          type: integer
         isManaged:
           description: If `true`, the source is managed by other service(s).
           type: boolean

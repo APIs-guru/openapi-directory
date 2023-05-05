@@ -1442,7 +1442,7 @@ paths:
   "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: datamigration.projects.locations.migrationJobs.getIamPolicy
+      operationId: datamigration.projects.locations.privateConnections.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -1496,7 +1496,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: datamigration.projects.locations.migrationJobs.setIamPolicy
+      operationId: datamigration.projects.locations.privateConnections.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -1538,7 +1538,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: datamigration.projects.locations.migrationJobs.testIamPermissions
+      operationId: datamigration.projects.locations.privateConnections.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -2795,6 +2795,7 @@ components:
             - UNSUPPORTED_DATABASE_LOCALE
             - UNSUPPORTED_DATABASE_FDW_CONFIG
             - ERROR_RDBMS
+            - SOURCE_SIZE_EXCEEDS_THRESHOLD
           readOnly: true
           type: string
         errorDetailMessage:

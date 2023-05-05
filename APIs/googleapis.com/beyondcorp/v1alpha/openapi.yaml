@@ -1430,6 +1430,53 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{parent}/proxyConfigs":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new BeyondCorp Enterprise ProxyConfiguration in a given organization and tenant. Can only be called by on onboarded Beyondcorp Enterprise partner.
+      operationId: beyondcorp.organizations.locations.global.tenants.proxyConfigs.create
+      parameters:
+        - description: "Required. The resource name of the ProxyConfig using the form: `organizations/{organization_id}/locations/global/tenants/{tenant_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaProxyConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1alpha/{parent}/subscriptions":
     get:
       description: Lists Subscriptions in a given organization and location.
@@ -1494,6 +1541,53 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudBeyondcorpSaasplatformSubscriptionsV1alphaSubscription"
           description: Successful response
+      tags:
+        - organizations
+  "/v1alpha/{parent}/tenants":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new BeyondCorp Enterprise tenant in a given organization and can only be called by onboarded BeyondCorp Enterprise partner.
+      operationId: beyondcorp.organizations.locations.global.tenants.create
+      parameters:
+        - description: "Required. The resource name of the Tenant using the form: `organizations/{organization_id}/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaTenant"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
   "/v1alpha/{resource}:getIamPolicy":
@@ -2825,6 +2919,168 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaAuthenticationInfo:
+      description: Message contains the authentication information to validate against the proxy server.
+      properties:
+        encryptionSaEmail:
+          description: Optional. Service Account for encrypting the JWT.
+          type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerMetadata:
+      description: Metadata associated with Tenant and is provided by the Partner.
+      properties:
+        partnerTenantId:
+          description: Optional. UUID used by the Partner to refer to the Tenant in their internal systems.
+          type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerServiceOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the caller has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaProxyConfig:
+      description: Proxy Configuration of a Tenant.
+      properties:
+        authenticationInfo:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaAuthenticationInfo"
+          description: Optional. Information to facilitate Authentication against the proxy server.
+        createTime:
+          description: Output only. Timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Optional. An arbitrary caller-provided name for the ProxyConfig. Cannot exceed 64 characters.
+          type: string
+        name:
+          description: Output only. ProxyConfig resource name.
+          readOnly: true
+          type: string
+        proxyUri:
+          description: Required. The URI of the proxy server.
+          type: string
+        routingInfo:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaRoutingInfo"
+          description: Required. Routing info to direct traffic to the proxy server.
+        transportInfo:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaTransportInfo"
+          description: Required. Transport layer information to verify for the proxy server.
+        updateTime:
+          description: Output only. Timestamp when the resource was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaRoutingInfo:
+      description: Message contains the routing information to direct traffic to the proxy server.
+      properties:
+        pacUri:
+          description: Required. Proxy Auto-Configuration (PAC) URI.
+          type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaTenant:
+      description: Information about a BeyoncCorp Enterprise Tenant.
+      properties:
+        createTime:
+          description: Output only. Timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Optional. An arbitrary caller-provided name for the Tenant. Cannot exceed 64 characters.
+          type: string
+        googleGroupEmail:
+          description: Optional. Google group email to which the Tenant is enabled.
+          type: string
+        googleGroupId:
+          description: Optional. Google group ID to which the Tenant is enabled.
+          type: string
+        name:
+          description: Output only. Unique resource name of the Tenant. The name is ignored when creating Tenant.
+          readOnly: true
+          type: string
+        partnerMetadata:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerMetadata"
+          description: Optional. Metadata provided by the Partner associated with Tenant.
+        updateTime:
+          description: Output only. Timestamp when the resource was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaTransportInfo:
+      description: Message contains the transport layer information to verify the proxy server.
+      properties:
+        serverCaCertPem:
+          description: Required. PEM encoded CA certificate associated with the proxy server certificate.
+          type: string
+        sslDecryptCaCertPem:
+          description: Optional. PEM encoded CA certificate associated with the certificate used by proxy server for SSL decryption.
+          type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1mainPartnerServiceOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the caller has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfig:
       description: The configuration that was applied to generate the result.
       properties:
@@ -3110,7 +3366,7 @@ components:
           type: string
       type: object
     GoogleCloudLocationLocation:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".

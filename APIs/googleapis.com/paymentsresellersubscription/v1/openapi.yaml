@@ -955,6 +955,11 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        lineItemIndex:
+          description: Output only. A unique index of the subscription line item.
+          format: int32
+          readOnly: true
+          type: integer
         lineItemPromotionSpecs:
           description: "Optional. The promotions applied on the line item. It can be: - a free trial promotion, which overrides the subscription-level free trial promotion. - an introductory pricing promotion. When used as input in Create or Provision API, specify its resource name only."
           items:

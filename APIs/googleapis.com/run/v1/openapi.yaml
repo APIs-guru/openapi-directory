@@ -2297,6 +2297,16 @@ components:
           description: Optional. Not supported by Cloud Run.
           type: string
       type: object
+    EmptyDirVolumeSource:
+      description: Ephemeral storage which can be backed by real disks (HD, SSD), network storage or memory (i.e. tmpfs). For now only in memory (tmpfs) is supported. It is ephemeral in the sense that when the sandbox is taken down, the data is destroyed with it (it does not persist across sandbox runs).
+      properties:
+        medium:
+          description: "The medium on which the data is stored. The default is \"\" which means to use the node's default medium. Must be an empty string (default) or Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir +optional"
+          type: string
+        sizeLimit:
+          description: "Limit on the storage usable by this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. This field's values are of the 'Quantity' k8s type: https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/. The default is nil which means that the limit is undefined. More info: http://kubernetes.io/docs/user-guide/volumes#emptydir +optional"
+          type: string
+      type: object
     EnvFromSource:
       description: Not supported by Cloud Run. EnvFromSource represents the source of a set of ConfigMaps
       properties:
@@ -3536,6 +3546,9 @@ components:
         configMap:
           $ref: "#/components/schemas/ConfigMapVolumeSource"
           description: Not supported in Cloud Run.
+        emptyDir:
+          $ref: "#/components/schemas/EmptyDirVolumeSource"
+          description: Ephemeral storage used as a shared volume.
         name:
           description: Volume's name. In Cloud Run Fully Managed, the name 'cloudsql' is reserved.
           type: string
