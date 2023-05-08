@@ -2243,6 +2243,9 @@ components:
         locationName:
           description: Location name of the key ring, e.g. "us-west1".
           type: string
+        serviceAccount:
+          description: Optional. The service account used for authentication of this KMS key. If this is not provided, the service account in Client.clientSource will be used.
+          type: string
       type: object
     EnterpriseCrmEventbusProtoCloudSchedulerConfig:
       description: Cloud Scheduler Trigger configuration
@@ -3545,6 +3548,18 @@ components:
             - UNSPECIFIED_EXTERNAL_CATEGORY
             - CORE
             - CONNECTORS
+            - EXTERNAL_HTTP
+            - EXTERNAL_INTEGRATION_SERVICES
+            - EXTERNAL_CUSTOMER_ACTIONS
+            - EXTERNAL_FLOW_CONTROL
+            - EXTERNAL_WORKSPACE
+            - EXTERNAL_SECURITY
+            - EXTERNAL_DATABASES
+            - EXTERNAL_ANALYTICS
+            - EXTERNAL_BYOC
+            - EXTERNAL_BYOT
+            - EXTERNAL_ARTIFICIAL_INTELIGENCE
+            - EXTERNAL_DATA_MANIPULATION
           type: string
         externalCategorySequence:
           description: Sequence with which the task in specific category to be displayed in task discovery panel for external users.

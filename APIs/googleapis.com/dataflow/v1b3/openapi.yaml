@@ -3907,6 +3907,9 @@ components:
             - JOB_STATE_QUEUED
             - JOB_STATE_RESOURCE_CLEANING_UP
           type: string
+        runtimeUpdatableParams:
+          $ref: "#/components/schemas/RuntimeUpdatableParams"
+          description: This field may ONLY be modified at runtime using the projects.jobs.update method to adjust job behavior. This field has no effect when specified at job creation.
         satisfiesPzs:
           description: Reserved for future use. This field is set only in responses from the server; it is ignored if it is set in any requests.
           type: boolean
@@ -4508,6 +4511,9 @@ components:
             - PUBSUB_SUBSCRIPTION
             - BIGQUERY_TABLE
             - JAVASCRIPT_UDF_FILE
+            - SERVICE_ACCOUNT
+            - MACHINE_TYPE
+            - KMS_KEY_NAME
           type: string
         parentName:
           description: Optional. Specifies the name of the parent parameter. Used in conjunction with 'parent_trigger_values' to make this parameter conditional (will only be rendered conditionally). Should be mappable to a ParameterMetadata.name field.
@@ -4823,6 +4829,18 @@ components:
         sdkInfo:
           $ref: "#/components/schemas/SDKInfo"
           description: SDK Info for the template.
+      type: object
+    RuntimeUpdatableParams:
+      description: Additional job parameters that can only be updated during runtime using the projects.jobs.update method. These fields have no effect when specified during job creation.
+      properties:
+        maxNumWorkers:
+          description: The maximum number of workers to cap autoscaling at. This field is currently only supported for Streaming Engine jobs.
+          format: int32
+          type: integer
+        minNumWorkers:
+          description: The minimum number of workers to scale down to. This field is currently only supported for Streaming Engine jobs.
+          format: int32
+          type: integer
       type: object
     SDKInfo:
       description: SDK Information.

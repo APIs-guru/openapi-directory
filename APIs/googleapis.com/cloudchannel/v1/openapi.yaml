@@ -2349,7 +2349,7 @@ components:
           description: "Required. The offer resource name for which the entitlement is to be created. Takes the form: accounts/{account_id}/offers/{offer_id}."
           type: string
         parameters:
-          description: "Extended entitlement parameters. When creating an entitlement, valid parameter names and values are defined in the Offer.parameter_definitions. For Google Workspace, the following Parameters may be accepted as input: - max_units: The maximum assignable units for a flexible offer OR - num_units: The total commitment for commitment-based offers The response may additionally include the following output-only Parameters: - assigned_units: The number of licenses assigned to users. For GCP billing subaccounts, the following Parameter may be accepted as input: - display_name: The display name of the billing subaccount."
+          description: "Extended entitlement parameters. When creating an entitlement, valid parameter names and values are defined in the Offer.parameter_definitions. For Google Workspace, the following Parameters may be accepted as input: - max_units: The maximum assignable units for a flexible offer OR - num_units: The total commitment for commitment-based offers The response may additionally include the following output-only Parameters: - assigned_units: The number of licenses assigned to users. For Google Cloud billing subaccounts, the following Parameter may be accepted as input: - display_name: The display name of the billing subaccount."
           items:
             $ref: "#/components/schemas/GoogleCloudChannelV1Parameter"
           type: array
@@ -2940,7 +2940,7 @@ components:
       description: The payment plan for the Offer. Describes how to make a payment.
       properties:
         billingAccount:
-          description: Reseller Billing account to charge after an offer transaction. Only present for Google Cloud Platform offers.
+          description: Reseller Billing account to charge after an offer transaction. Only present for Google Cloud offers.
           type: string
         paymentCycle:
           $ref: "#/components/schemas/GoogleCloudChannelV1Period"
@@ -3081,7 +3081,7 @@ components:
           readOnly: true
           type: string
         provisioningId:
-          description: Output only. Provisioning ID of the entitlement. For Google Workspace, this is the underlying Subscription ID. For Google Cloud Platform, this is the Billing Account ID of the billing subaccount."
+          description: Output only. Provisioning ID of the entitlement. For Google Workspace, this is the underlying Subscription ID. For Google Cloud, this is the Billing Account ID of the billing subaccount."
           readOnly: true
           type: string
         skuId:
@@ -3141,7 +3141,7 @@ components:
           type: boolean
       type: object
     GoogleCloudChannelV1Report:
-      description: The ID and description of a report that was used to generate report data. For example, "GCP Daily Spend", "Google Workspace License Activity", etc.
+      description: The ID and description of a report that was used to generate report data. For example, "Google Cloud Daily Spend", "Google Workspace License Activity", etc.
       properties:
         columns:
           description: The list of columns included in the report. This defines the schema of the report results.
@@ -3623,7 +3623,7 @@ components:
           description: "Required. The offer resource name for which the entitlement is to be created. Takes the form: accounts/{account_id}/offers/{offer_id}."
           type: string
         parameters:
-          description: "Extended entitlement parameters. When creating an entitlement, valid parameter names and values are defined in the Offer.parameter_definitions. For Google Workspace, the following Parameters may be accepted as input: - max_units: The maximum assignable units for a flexible offer OR - num_units: The total commitment for commitment-based offers The response may additionally include the following output-only Parameters: - assigned_units: The number of licenses assigned to users. For GCP billing subaccounts, the following Parameter may be accepted as input: - display_name: The display name of the billing subaccount."
+          description: "Extended entitlement parameters. When creating an entitlement, valid parameter names and values are defined in the Offer.parameter_definitions. For Google Workspace, the following Parameters may be accepted as input: - max_units: The maximum assignable units for a flexible offer OR - num_units: The total commitment for commitment-based offers The response may additionally include the following output-only Parameters: - assigned_units: The number of licenses assigned to users. For Google Cloud billing subaccounts, the following Parameter may be accepted as input: - display_name: The display name of the billing subaccount."
           items:
             $ref: "#/components/schemas/GoogleCloudChannelV1alpha1Parameter"
           type: array
@@ -3753,7 +3753,7 @@ components:
           readOnly: true
           type: string
         provisioningId:
-          description: Output only. Provisioning ID of the entitlement. For Google Workspace, this is the underlying Subscription ID. For Google Cloud Platform, this is the Billing Account ID of the billing subaccount."
+          description: Output only. Provisioning ID of the entitlement. For Google Workspace, this is the underlying Subscription ID. For Google Cloud, this is the Billing Account ID of the billing subaccount."
           readOnly: true
           type: string
         skuId:
@@ -3799,7 +3799,7 @@ components:
           type: string
       type: object
     GoogleCloudChannelV1alpha1Report:
-      description: The ID and description of a report that was used to generate report data. For example, "GCP Daily Spend", "Google Workspace License Activity", etc.
+      description: The ID and description of a report that was used to generate report data. For example, "Google Cloud Daily Spend", "Google Workspace License Activity", etc.
       properties:
         columns:
           description: The list of columns included in the report. This defines the schema of the report results.

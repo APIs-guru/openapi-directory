@@ -101,16 +101,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the parameters of a single Connection.
-      operationId: connectors.projects.locations.connections.patch
+      description: Updates the parameters of a single ManagedZone.
+      operationId: connectors.projects.locations.global.managedZones.patch
       parameters:
-        - description: "Output only. Resource name of the Connection. Format: projects/{project}/locations/{location}/connections/{connection}"
+        - description: "Output only. Resource name of the Managed Zone. Format: projects/{project}/locations/global/managedZones/{managed_zone}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Required. You can modify only the fields listed below. To lock/unlock a connection: * `lock_config` To suspend/resume a connection: * `suspended` To update the connection details: * `description` * `labels` * `connector_version` * `config_variables` * `auth_config` * `destination_configs` * `node_config`"
+        - description: "Required. The list of fields to update. Fields are specified relative to the managedZone. A field will be overwritten if it is in the mask. You can modify only the fields listed below. To update the managedZone details: * `description` * `labels` * `target_project` * `target_network`"
           in: query
           name: updateMask
           schema:
@@ -119,7 +119,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Connection"
+              $ref: "#/components/schemas/ManagedZone"
       responses:
         "200":
           content:
@@ -469,6 +469,188 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/endpointAttachments":
+    get:
+      description: List EndpointAttachments in a given project
+      operationId: connectors.projects.locations.endpointAttachments.list
+      parameters:
+        - description: "Required. Parent resource od the EndpointAttachment, of the form: `projects/*/locations/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter. https://g3doc.corp.google.com/cloud/control2/g3doc/dev/apihosting/list_filtering.md#filtering.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Order by parameters.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEndpointAttachmentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new EndpointAttachment in a given project and location.
+      operationId: connectors.projects.locations.endpointAttachments.create
+      parameters:
+        - description: "Required. Parent resource of the EndpointAttachment, of the form: `projects/*/locations/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifier to assign to the EndpointAttachment. Must be unique within scope of the parent resource.
+          in: query
+          name: endpointAttachmentId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndpointAttachment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/managedZones":
+    get:
+      description: List ManagedZones in a given project
+      operationId: connectors.projects.locations.global.managedZones.list
+      parameters:
+        - description: "Required. Parent resource of the Managed Zone, of the form: `projects/*/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter. https://g3doc.corp.google.com/cloud/control2/g3doc/dev/apihosting/list_filtering.md#filtering.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Order by parameters.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListManagedZonesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new ManagedZone in a given project and location.
+      operationId: connectors.projects.locations.global.managedZones.create
+      parameters:
+        - description: "Required. Parent resource of the ManagedZone, of the form: `projects/*/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifier to assign to the ManagedZone. Must be unique within scope of the parent resource.
+          in: query
+          name: managedZoneId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ManagedZone"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/providers":
     get:
       description: Lists Providers in a given project and location.
@@ -1147,6 +1329,14 @@ components:
           $ref: "#/components/schemas/ConnectionStatus"
           description: Output only. Current status of the connection.
           readOnly: true
+        subscriptionType:
+          description: Output only. This subscription type enum value states if the metrics should be sent for billing or not.
+          enum:
+            - SUBSCRIPTION_TYPE_UNSPECIFIED
+            - PAY_G
+            - PAID
+          readOnly: true
+          type: string
         suspended:
           description: Optional. Suspended indicates if a user has suspended a connection or not.
           type: boolean
@@ -1437,6 +1627,39 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
+    EndpointAttachment:
+      description: represents the Connector's Endpoint Attachment resource
+      properties:
+        createTime:
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Description of the resource.
+          type: string
+        endpointIp:
+          description: Output only. The Private Service Connect connection endpoint ip
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
+          type: object
+        name:
+          description: "Output only. Resource name of the Endpoint Attachment. Format: projects/{project}/locations/{location}/endpointAttachments/{endpoint_attachment}"
+          readOnly: true
+          type: string
+        serviceAttachment:
+          description: Required. The path of the service attachment
+          type: string
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     EnumOption:
       description: EnumOption definition
       properties:
@@ -1685,6 +1908,23 @@ components:
             type: string
           type: array
       type: object
+    ListEndpointAttachmentsResponse:
+      description: Response message for ConnectorsService.ListEndpointAttachments
+      properties:
+        endpointAttachments:
+          description: EndpointAttachments.
+          items:
+            $ref: "#/components/schemas/EndpointAttachment"
+          type: array
+        nextPageToken:
+          description: Next page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
       properties:
@@ -1695,6 +1935,18 @@ components:
           type: array
         nextPageToken:
           description: The standard List next-page token.
+          type: string
+      type: object
+    ListManagedZonesResponse:
+      description: Response message for ConnectorsService.ListManagedZones
+      properties:
+        managedZones:
+          description: ManagedZones.
+          items:
+            $ref: "#/components/schemas/ManagedZone"
+          type: array
+        nextPageToken:
+          description: Next page token.
           type: string
       type: object
     ListOperationsResponse:
@@ -1751,7 +2003,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
@@ -1781,6 +2033,41 @@ components:
           type: boolean
         reason:
           description: Describes why a connection is locked.
+          type: string
+      type: object
+    ManagedZone:
+      description: represents the Connector's Managed Zone resource
+      properties:
+        createTime:
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Description of the resource.
+          type: string
+        dns:
+          description: Required. DNS Name of the resource
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
+          type: object
+        name:
+          description: "Output only. Resource name of the Managed Zone. Format: projects/{project}/locations/global/managedZones/{managed_zone}"
+          readOnly: true
+          type: string
+        targetProject:
+          description: Required. The name of the Target Project
+          type: string
+        targetVpc:
+          description: Required. The name of the Target Project VPC Network
+          type: string
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     NodeConfig:

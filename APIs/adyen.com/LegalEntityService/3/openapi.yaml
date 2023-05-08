@@ -23,6 +23,8 @@ info:
     ## Versioning
     The Legal Entity Management API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
+    >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
     For example:
     ```
     https://kyc-test.adyen.com/lem/v3/legalEntities
@@ -45,7 +47,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-04-25T13:22:00Z
+  x-timestamp: 2023-05-07T23:21:15Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -57,10 +59,11 @@ tags:
 paths:
   /businessLines:
     post:
-      description: |-
+      description: |+
         Creates a business line. 
 
-        This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
+        This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
       operationId: post-businessLines
       requestBody:
         content:
@@ -392,7 +395,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VoidResponse"
+                $ref: "#/components/schemas/Void"
           description: OK - the request has succeeded.
         "400":
           content:
@@ -568,6 +571,8 @@ paths:
         Creates a legal entity. 
 
         This resource contains information about the user that will be onboarded in your platform. Adyen uses this information to perform verification checks as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses. 
+
+        >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
 
       operationId: post-legalEntities
       requestBody:
@@ -912,7 +917,11 @@ paths:
       x-sortIndex: 2
   "/legalEntities/{id}/onboardingLinks":
     post:
-      description: Returns a link to an Adyen-hosted onboarding page where you need to redirect your user.
+      description: |+
+        Returns a link to an Adyen-hosted onboarding page where you need to redirect your user.
+
+        >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
       operationId: post-legalEntities-id-onboardingLinks
       parameters:
         - description: The unique identifier of the legal entity
@@ -1446,7 +1455,11 @@ paths:
       x-sortIndex: 3
   /themes:
     get:
-      description: Returns a list of hosted onboarding page themes.
+      description: |+
+        Returns a list of hosted onboarding page themes.
+
+        >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
       operationId: get-themes
       responses:
         "200":
@@ -1500,7 +1513,9 @@ paths:
       x-sortIndex: 2
   "/themes/{id}":
     get:
-      description: Returns the details of the theme identified in the path.
+      description: |+
+        Returns the details of the theme identified in the path.>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
       operationId: get-themes-id
       parameters:
         - description: The unique identifier of the theme
@@ -4638,8 +4653,6 @@ components:
           x-addedInVersion: "2"
       type: object
     Void:
-      type: object
-    VoidResponse:
       type: object
     WebData:
       properties:

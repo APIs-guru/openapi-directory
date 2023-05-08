@@ -52,7 +52,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformService
-  x-timestamp: 2023-04-26T16:26:46Z
+  x-timestamp: 2023-05-05T19:25:43Z
 tags:
   - name: Platform
   - name: Grant offers
@@ -3824,40 +3824,6 @@ components:
         - postalCode
         - country
       type: object
-    Address-2:
-      properties:
-        city:
-          description: The name of the city.
-          type: string
-        country:
-          description: |-
-            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
-            >If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
-          type: string
-        line1:
-          description: First line of the address.
-          type: string
-        line2:
-          description: Second line of the address.
-          type: string
-        line3:
-          description: Third line of the address.
-          type: string
-        postalCode:
-          description: |-
-            The postal code.
-            Maximum length:
-            * 5 digits for an address in the US.
-            * 10 characters for an address in all other countries.
-          type: string
-        stateOrProvince:
-          description: |-
-            The two-letterISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
-            > Required for the US and Canada.
-          type: string
-      required:
-        - country
-      type: object
     Amount:
       properties:
         currency:
@@ -4584,10 +4550,44 @@ components:
       required:
         - operation
       type: object
+    DeliveryAddress:
+      properties:
+        city:
+          description: The name of the city.
+          type: string
+        country:
+          description: |-
+            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
+            >If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
+          type: string
+        line1:
+          description: First line of the address.
+          type: string
+        line2:
+          description: Second line of the address.
+          type: string
+        line3:
+          description: Third line of the address.
+          type: string
+        postalCode:
+          description: |-
+            The postal code.
+            Maximum length:
+            * 5 digits for an address in the US.
+            * 10 characters for an address in all other countries.
+          type: string
+        stateOrProvince:
+          description: |-
+            The two-letterISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
+            > Required for the US and Canada.
+          type: string
+      required:
+        - country
+      type: object
     DeliveryContact:
       properties:
         address:
-          $ref: "#/components/schemas/Address-2"
+          $ref: "#/components/schemas/DeliveryAddress"
           description: The address of the contact.
         email:
           description: The email address of the contact.
