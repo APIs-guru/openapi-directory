@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: ATS API
-  version: 9.3.1
+  version: 9.4.0
   x-apideck-api: ats
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -293,15 +293,6 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Applicants
-    x-apideck-model:
-      $ref: "#/components/schemas/Applicant"
-    x-apideck-resource-id: applicants
-  - description: ""
-    name: Employees
-    x-apideck-resource-id: employees
-    x-apideck-upcoming: true
-  - description: ""
     name: Offers
     x-apideck-model:
       $ref: "#/components/schemas/Offer"
@@ -318,10 +309,15 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/Job"
     x-apideck-resource-id: jobs
+  - description: ""
+    name: Applicants
+    x-apideck-model:
+      $ref: "#/components/schemas/Applicant"
+    x-apideck-resource-id: applicants
 paths:
   /ats/applicants:
     get:
-      description: List applicants
+      description: List Applicants
       operationId: applicantsAll
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -349,7 +345,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List applicants
+      summary: List Applicants
       tags:
         - Applicants
       x-apideck-api: ats
@@ -372,7 +368,7 @@ paths:
               console.error(error)
             }
     post:
-      description: Create applicant
+      description: Create Applicant
       operationId: applicantsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -402,7 +398,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create applicant
+      summary: Create Applicant
       tags:
         - Applicants
       x-apideck-api: ats
@@ -521,8 +517,58 @@ paths:
               console.error(error)
             }
   "/ats/applicants/{id}":
+    delete:
+      description: Delete Applicant
+      operationId: applicantsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteApplicantResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Applicant
+      tags:
+        - Applicants
+      x-apideck-api: ats
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.ats.applicantsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
     get:
-      description: Get applicant
+      description: Get Applicant
       operationId: applicantsOne
       parameters:
         - $ref: "#/components/parameters/id"
@@ -548,7 +594,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get applicant
+      summary: Get Applicant
       tags:
         - Applicants
       x-apideck-api: ats
@@ -568,6 +614,157 @@ paths:
               const { data } = await apideck.ats.applicantsOne({
                 id: 'id_example'
               })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Applicant
+      operationId: applicantsUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Applicant"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateApplicantResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Applicant
+      tags:
+        - Applicants
+      x-apideck-api: ats
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              applicant: {
+                position_id: '123',
+                name: 'Elon Musk',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                middle_name: 'D.',
+                initials: 'EM',
+                birthday: '2000-08-12',
+                cover_letter:
+                  'I submit this application to express my sincere interest in the API developer position. In the previous role, I was responsible for leadership and ...',
+                photo_url: 'https://unavatar.io/elon-musk',
+                headline: 'PepsiCo, Inc, Central Perk',
+                title: 'CEO',
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    extension: '105',
+                    type: 'primary'
+                  }
+                ],
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
+                  }
+                ],
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
+                  }
+                ],
+                social_links: [
+                  {
+                    id: '12345',
+                    url: 'https://www.twitter.com/apideck-io',
+                    type: 'twitter'
+                  }
+                ],
+                stage_id: '12345',
+                recruiter_id: '12345',
+                coordinator_id: '12345',
+                applications: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
+                followers: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
+                sources: ['Job site'],
+                confidential: false,
+                anonymized: true,
+                tags: ['New'],
+                archived: false,
+                owner_id: '54321',
+                record_url: 'https://app.intercom.io/contacts/12345',
+                deleted: true
+              }
+            }
+
+            try {
+              const { data } = await apideck.ats.applicantsUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -753,6 +950,12 @@ components:
       schema:
         type: string
   responses:
+    Applicant:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Applicant"
+      description: Applicants
     AtsActivity:
       content:
         application/json:
@@ -777,6 +980,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreateJobResponse"
       description: Jobs
+    DeleteApplicantResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteApplicantResponse"
+      description: Applicants
     DeleteJobResponse:
       content:
         application/json:
@@ -861,6 +1070,12 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
+    UpdateApplicantResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateApplicantResponse"
+      description: Applicants
     UpdateJobResponse:
       content:
         application/json:
@@ -1432,7 +1647,6 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: CreateApplicantResponse
     CreateJobResponse:
       properties:
         data:
@@ -2077,6 +2291,38 @@ components:
         id: critical
         name: medium
         value: critical
+    DeleteApplicantResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Applicants
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: lever
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     DeleteJobResponse:
       properties:
         data:
@@ -3034,6 +3280,38 @@ components:
           type: string
       type: object
       x-apideck-schema-id: Unprocessable
+    UpdateApplicantResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Applicants
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: lever
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     UpdateJobResponse:
       properties:
         data:

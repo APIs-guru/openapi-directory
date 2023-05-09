@@ -20302,6 +20302,70 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionBackendServices
+  "/projects/{project}/regions/{region}/backendServices/{backendService}/setSecurityPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the Google Cloud Armor security policy for the specified backend service. For more information, see Google Cloud Armor Overview
+      operationId: compute.regionBackendServices.setSecurityPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityPolicyReference"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionBackendServices
   "/projects/{project}/regions/{region}/backendServices/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -48427,6 +48491,9 @@ components:
     BulkInsertInstanceResourcePerInstanceProperties:
       description: Per-instance properties to be set on individual instances. To be extended in the future.
       properties:
+        hostname:
+          description: "Specifies the hostname of the instance. More details in: https://cloud.google.com/compute/docs/instances/custom-hostname-vm#naming_convention"
+          type: string
         name:
           description: This field is only temporary. It will be removed. Do not use it.
           type: string
@@ -48575,7 +48642,7 @@ components:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
         splitSourceCommitment:
-          description: Source commitment to be splitted into a new commitment.
+          description: Source commitment to be split into a new commitment.
           type: string
         startTimestamp:
           description: "[Output Only] Commitment start time in RFC3339 text format."
@@ -51720,6 +51787,14 @@ components:
           description: URL of the health check service associated with the health state of the network endpoint.
         healthState:
           description: Health state of the network endpoint determined based on the health checks configured.
+          enum:
+            - DRAINING
+            - HEALTHY
+            - UNHEALTHY
+            - UNKNOWN
+          type: string
+        ipv6HealthState:
+          description: Health state of the ipv6 network endpoint determined based on the health checks configured.
           enum:
             - DRAINING
             - HEALTHY
@@ -56627,7 +56702,7 @@ components:
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
         network:
-          description: "[Output Only] The URL of the network which the Network Attachment belongs to."
+          description: "[Output Only] The URL of the network which the Network Attachment belongs to. Practically it is inferred by fetching the network of the first subnetwork associated. Because it is required that all the subnetworks must be from the same network, it is assured that the Network Attachment belongs to the same network as all the subnetworks."
           type: string
         producerAcceptLists:
           description: Projects that are allowed to connect to this network attachment. The project can be specified using its id or number.
@@ -57073,6 +57148,9 @@ components:
           type: string
         ipAddress:
           description: Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.
+          type: string
+        ipv6Address:
+          description: Optional IPv6 address of network endpoint.
           type: string
         port:
           description: Optional port number of network endpoint. If not specified, the defaultPort for the network endpoint group will be used.
@@ -69021,7 +69099,7 @@ components:
           format: uint32
           type: integer
         peerGatewayInterface:
-          description: The peer gateway interface this VPN tunnel is connected to, the peer gateway could either be an external VPN gateway or GCP VPN gateway.
+          description: The peer gateway interface this VPN tunnel is connected to, the peer gateway could either be an external VPN gateway or a Google Cloud VPN gateway.
           format: uint32
           type: integer
         tunnelUrl:
@@ -69029,7 +69107,7 @@ components:
           type: string
       type: object
     VpnGatewayStatusVpnConnection:
-      description: A VPN connection contains all VPN tunnels connected from this VpnGateway to the same peer gateway. The peer gateway could either be a external VPN gateway or GCP VPN gateway.
+      description: A VPN connection contains all VPN tunnels connected from this VpnGateway to the same peer gateway. The peer gateway could either be an external VPN gateway or a Google Cloud VPN gateway.
       properties:
         peerExternalGateway:
           description: URL reference to the peer external VPN gateways to which the VPN tunnels in this VPN connection are connected. This field is mutually exclusive with peer_gcp_gateway.

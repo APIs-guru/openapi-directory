@@ -5905,7 +5905,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. List of allowed tags. Tags are a set of predefined strings that describe the category that individual recommendation types. User can specify zero or more tags in this field to indicate what group of recommendations they want to receive. Current list of supported tags: - TREND"
+        - description: "Optional. List of allowed tags. Tags are a set of predefined strings that describe the category that individual recommendation types belong to. User can specify zero or more tags in this field to indicate what categories of recommendations they want to receive. Current list of supported tags: - TREND"
           explode: true
           in: query
           name: allowedTag
@@ -8724,6 +8724,44 @@ components:
             type: string
           type: array
       type: object
+    CloudExportAdditionalProperties:
+      description: Product property for the Cloud Retail API. For example, properties for a TV product could be "Screen-Resolution" or "Screen-Size".
+      properties:
+        boolValue:
+          description: Boolean value of the given property. For example for a TV product, "True" or "False" if the screen is UHD.
+          type: boolean
+        floatValue:
+          description: Float values of the given property. For example for a TV product 1.2345. Maximum number of specified values for this field is 400. Values are stored in an arbitrary but consistent order.
+          items:
+            format: float
+            type: number
+          type: array
+        intValue:
+          description: Integer values of the given property. For example, 1080 for a screen resolution of a TV product. Maximum number of specified values for this field is 400. Values are stored in an arbitrary but consistent order.
+          items:
+            format: int64
+            type: string
+          type: array
+        maxValue:
+          description: Maximum float value of the given property. For example for a TV product 100.00.
+          format: float
+          type: number
+        minValue:
+          description: Minimum float value of the given property. For example for a TV product 1.00.
+          format: float
+          type: number
+        propertyName:
+          description: Name of the given property. For example, "Screen-Resolution" for a TV product. Maximum string size is 256 characters.
+          type: string
+        textValue:
+          description: Text value of the given property. For example, "8K(UHD)" could be a text value for a TV product. Maximum number of specified values for this field is 400. Values are stored in an arbitrary but consistent order. Maximum string size is 256 characters.
+          items:
+            type: string
+          type: array
+        unitCode:
+          description: Unit of the given property. For example, "Pixels" for a TV product. Maximum string size is 256 bytes.
+          type: string
+      type: object
     Collection:
       description: The collection message.
       properties:
@@ -9380,7 +9418,7 @@ components:
       properties:
         cutoffTime:
           $ref: "#/components/schemas/CutoffTime"
-          description: Business days cutoff time definition. If not configured the cutoff time will be defaulted to 8AM PST. If local delivery, use Service.StoreConfig.CutoffConfig.
+          description: Business days cutoff time definition. If not configured, the cutoff time will be defaulted to 8AM PST. If local delivery, use Service.StoreConfig.CutoffConfig.
         handlingBusinessDayConfig:
           $ref: "#/components/schemas/BusinessDayConfig"
           description: The business days during which orders can be handled. If not provided, Monday to Friday business days will be assumed.
@@ -12492,6 +12530,11 @@ components:
         channel:
           description: "Required. The item's channel (online or local). Acceptable values are: - \"`local`\" - \"`online`\" "
           type: string
+        cloudExportAdditionalProperties:
+          description: Extra fields to export to the Cloud Retail program.
+          items:
+            $ref: "#/components/schemas/CloudExportAdditionalProperties"
+          type: array
         color:
           description: Color of the item.
           type: string

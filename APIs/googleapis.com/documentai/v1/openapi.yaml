@@ -1368,6 +1368,28 @@ components:
           description: Reads the revision given by the id.
           type: string
       type: object
+    GoogleCloudDocumentaiUiv1beta3SampleDocumentsMetadata:
+      description: Metadata of the sample documents operation.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3SampleDocumentsResponse:
+      description: Response of the sample documents operation.
+      properties:
+        selectedDocuments:
+          description: The result of the sampling process.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3SampleDocumentsResponseSelectedDocument"
+          type: array
+      type: object
+    GoogleCloudDocumentaiUiv1beta3SampleDocumentsResponseSelectedDocument:
+      properties:
+        documentId:
+          description: An internal identifier for document.
+          type: string
+      type: object
     GoogleCloudDocumentaiUiv1beta3SetDefaultProcessorVersionMetadata:
       description: The long-running operation metadata for the SetDefaultProcessorVersion method.
       properties:

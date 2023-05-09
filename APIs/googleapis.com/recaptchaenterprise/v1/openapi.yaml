@@ -756,6 +756,19 @@ components:
       description: Empty response for AnnotateAssessment.
       properties: {}
       type: object
+    GoogleCloudRecaptchaenterpriseV1AppleDeveloperId:
+      description: Contains fields that are required to perform Apple-specific integrity checks.
+      properties:
+        keyId:
+          description: Required. The Apple developer key ID (10-character string).
+          type: string
+        privateKey:
+          description: Required. Input only. A private key (downloaded as a text file with a .p8 file extension) generated for your Apple Developer account.
+          type: string
+        teamId:
+          description: Required. The Apple team ID (10-character string) owning the provisioning profile used to build your application.
+          type: string
+      type: object
     GoogleCloudRecaptchaenterpriseV1Assessment:
       description: A reCAPTCHA Enterprise assessment resource.
       properties:
@@ -1007,6 +1020,9 @@ components:
           items:
             type: string
           type: array
+        appleDeveloperId:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1AppleDeveloperId"
+          description: Apple Developer account details for the app the reCAPTCHA key will protect. reCAPTCHA Enterprise leverages platform specific checks like Apple AppAttest and Apple DeviceCheck to protect your app from abuse. Providing these fields allows reCAPTCHA Enterprise to get a better assessment of the integrity of your app.
       type: object
     GoogleCloudRecaptchaenterpriseV1Key:
       description: A key used to identify and configure applications (web and/or mobile) that use reCAPTCHA Enterprise.

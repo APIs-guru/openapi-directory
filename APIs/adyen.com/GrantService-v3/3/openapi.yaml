@@ -1,0 +1,529 @@
+openapi: 3.1.0
+servers:
+  - url: https://balanceplatform-api-test.adyen.com/btl/v3
+info:
+  contact:
+    email: developer-experience@adyen.com
+    name: Adyen Developer Experience team
+    url: https://www.adyen.help/hc/en-us/community/topics
+    x-twitter: Adyen
+  description: |+
+    Adyen Capital allows you to build an embedded financing offering for your users to serve their operational needs. Learn more about [Adyen Capital](https://docs.adyen.com/marketplaces-and-platforms/capital).
+
+    ## Authentication
+    Your Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:
+
+     ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: YOUR_API_KEY" \
+    ...
+    ```
+
+    Alternatively, you can use the username and password to connect to the API using basic authentication. For example:
+
+    ```
+    curl
+    -H "Content-Type: application/json" \
+    -U "ws@BalancePlatform.YOUR_BALANCE_PLATFORM":"YOUR_WS_PASSWORD" \
+    ...
+    ```
+    ## Roles and permissions
+    To use the Capital API, you need an additional role for your API credential. Your Adyen contact will set up the roles and permissions for you.
+    ## Versioning
+    The Capital API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
+    For example:
+    ```
+    https://balanceplatform-api-test.adyen.com/btl/v3/grants
+    ```
+    ## Going live
+    When going live, your Adyen contact will provide your API credential for the live environment. You can then use the username and password to send requests to `https://balanceplatform-api-live.adyen.com/btl/v3`.
+
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
+  title: Capital API
+  version: "3"
+  x-apisguru-categories:
+    - payment
+  x-logo:
+    url: https://twitter.com/Adyen/profile_image?size=original
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/GrantService-v3.json
+      version: "3.1"
+  x-providerName: adyen.com
+  x-publicVersion: true
+  x-serviceName: GrantService-v3
+  x-timestamp: 2023-05-08T16:23:07Z
+tags:
+  - name: Capital
+paths:
+  /grants:
+    get:
+      description: Returns a list of grants with status and outstanding balances.
+      operationId: get-grants
+      parameters:
+        - description: The counterparty account holder id.
+          in: query
+          name: counterpartyAccountHolderId
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapitalGrants"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Not Found - the payment was not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
+      summary: Get a capital account
+      tags:
+        - Capital
+      x-addedInVersion: "3"
+      x-groupName: Capital
+      x-methodName: getCapitalAccount
+      x-sortIndex: 2
+    post:
+      description: Requests the payout of the selected grant offer.
+      operationId: post-grants
+      requestBody:
+        content:
+          application/json:
+            examples:
+              requestGrant:
+                $ref: "#/components/examples/post-grants-requestGrant"
+            schema:
+              $ref: "#/components/schemas/CapitalGrantInfo"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                requestGrant:
+                  $ref: "#/components/examples/post-grants-requestGrant-200"
+              schema:
+                $ref: "#/components/schemas/CapitalGrant"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Not Found - the payment was not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
+      summary: Request a grant payout
+      tags:
+        - Capital
+      x-addedInVersion: "3"
+      x-groupName: Capital
+      x-methodName: requestGrantPayout
+      x-sortIndex: 1
+  "/grants/{id}":
+    get:
+      description: Returns the details of a capital account specified in the path.
+      operationId: get-grants-id
+      parameters:
+        - description: The unique identifier of the grant.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapitalGrant"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Not Found - the payment was not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
+      summary: Get grant reference details
+      tags:
+        - Capital
+      x-addedInVersion: "3"
+      x-groupName: Capital
+      x-methodName: getGrantReferenceDetails
+      x-sortIndex: 3
+components:
+  examples:
+    post-grants-requestGrant:
+      description: Example request for grant payout
+      summary: Request grant payout to a balance account
+      value:
+        counterparty:
+          accountHolderId: AH00000000000000000000001
+          balanceAccountId: BA00000000000000000000001
+        grantAccountId: CG00000000000000000000001
+        grantOfferId: "0000000000000001"
+    post-grants-requestGrant-200:
+      description: Example response for requesting grant payout
+      summary: Grant payout requested
+      value:
+        amount:
+          currency: EUR
+          value: 1000000
+        balances:
+          - currency: EUR
+            fee: 120000
+            principal: 1000000
+            total: 1120000
+        counterparty:
+          accountHolderId: AH00000000000000000000001
+          balanceAccountId: BA00000000000000000000001
+        fee:
+          amount:
+            currency: EUR
+            value: 120000
+        grantAccountId: CG00000000000000000000001
+        grantOfferId: "0000000000000001"
+        id: GR00000000000000000000001
+        repayment:
+          basisPoints: 1400
+        status: Pending
+  schemas:
+    Amount:
+      properties:
+        currency:
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
+          maxLength: 3
+          minLength: 3
+          type: string
+        value:
+          description: The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+          format: int64
+          type: integer
+      required:
+        - value
+        - currency
+      type: object
+    CapitalBalance:
+      properties:
+        currency:
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
+          type: string
+        fee:
+          description: Fee amount.
+          format: int64
+          type: integer
+        principal:
+          description: Principal amount.
+          format: int64
+          type: integer
+        total:
+          description: Total amount. A sum of principal amount and fee amount.
+          format: int64
+          type: integer
+      required:
+        - principal
+        - fee
+        - total
+        - currency
+      type: object
+    CapitalGrant:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: An object containing the amount of the grant, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+        balances:
+          $ref: "#/components/schemas/CapitalBalance"
+          description: An object containing the details of the existing grant.
+        counterparty:
+          $ref: "#/components/schemas/Counterparty"
+          description: An object containing the details of the receiving party of the grant. Setting either an `accountHolderId`, `balanceAccountId`, or both is required.
+        fee:
+          $ref: "#/components/schemas/Fee"
+          description: An object containing the fee currency and value, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+        grantAccountId:
+          description: The identifier of the grant account used for the grant.
+          type: string
+        grantOfferId:
+          description: The identifier of the grant offer that has been selected and from which the grant details will be used.
+          type: string
+        id:
+          description: The identifier of the grant reference.
+          type: string
+        repayment:
+          $ref: "#/components/schemas/Repayment"
+          description: An object containing the details of the 30-day repayment threshold.
+        status:
+          description: "The current status of the grant. Possible values: **Pending**, **Active**, **Repaid**."
+          enum:
+            - Pending
+            - Active
+            - Repaid
+          type: string
+      required:
+        - grantAccountId
+        - grantOfferId
+        - id
+        - status
+        - balances
+      type: object
+    CapitalGrantInfo:
+      properties:
+        counterparty:
+          $ref: "#/components/schemas/Counterparty"
+          description: An object containing the details of the receiving party of the grant. Setting either an `accountHolderId`, `balanceAccountId`, or both is required.
+        grantAccountId:
+          description: The identifier of the grant account used for the grant.
+          type: string
+        grantOfferId:
+          description: The identifier of the grant offer that has been selected and from which the grant details will be used.
+          type: string
+      required:
+        - grantAccountId
+        - grantOfferId
+      type: object
+    CapitalGrants:
+      properties:
+        grants:
+          description: The unique identifier of the grant.
+          items:
+            $ref: "#/components/schemas/CapitalGrant"
+          type: array
+      required:
+        - grants
+      type: object
+    Counterparty:
+      properties:
+        accountHolderId:
+          description: The identifier of the receiving account holder. The payout will default to the primary balance account of this account holder if no `balanceAccountId` is provided.
+          type: string
+        balanceAccountId:
+          description: The identifier of the balance account that belongs to the receiving account holder.
+          type: string
+        transferInstrumentId:
+          description: The identifier of the transfer instrument that belongs to the legal entity of the account holder.
+          type: string
+      type: object
+    Fee:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: An object containing the fee amount.
+      required:
+        - amount
+      type: object
+    InvalidField:
+      properties:
+        message:
+          description: Description of the validation error.
+          type: string
+        name:
+          description: The field that has an invalid value.
+          type: string
+        value:
+          description: The invalid value.
+          type: string
+      required:
+        - name
+        - value
+        - message
+      type: object
+    JSONObject:
+      properties:
+        paths:
+          items:
+            $ref: "#/components/schemas/JSONPath"
+          type: array
+        rootPath:
+          $ref: "#/components/schemas/JSONPath"
+      type: object
+    JSONPath:
+      properties:
+        content:
+          items:
+            type: string
+          type: array
+      type: object
+    Repayment:
+      properties:
+        basisPoints:
+          description: The repayment that is deducted daily from incoming net volume, in [basis points](https://www.investopedia.com/terms/b/basispoint.asp).
+          format: int32
+          type: integer
+        term:
+          $ref: "#/components/schemas/RepaymentTerm"
+          description: An object containing the details of the configuration for repayment term.
+        threshold:
+          $ref: "#/components/schemas/ThresholdRepayment"
+          description: An object containing the details of the 30-day repayment threshold.
+      required:
+        - basisPoints
+      type: object
+    RepaymentTerm:
+      properties:
+        estimatedDays:
+          description: The estimated term for repaying the grant, in days.
+          format: int32
+          type: integer
+        maximumDays:
+          description: The maximum term for repaying the grant, in days. Only applies when `contractType` is **loan**.
+          format: int32
+          type: integer
+      required:
+        - estimatedDays
+      type: object
+    RestServiceError:
+      properties:
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+        errorCode:
+          description: A code that identifies the problem type.
+          type: string
+        instance:
+          description: A unique URI that identifies the specific occurrence of the problem.
+          type: string
+        invalidFields:
+          description: Detailed explanation of each validation error, when applicable.
+          items:
+            $ref: "#/components/schemas/InvalidField"
+          type: array
+        requestId:
+          description: A unique reference for the request, essentially the same as `pspReference`.
+          type: string
+        response:
+          $ref: "#/components/schemas/JSONObject"
+          description: JSON response payload.
+        status:
+          description: The HTTP status code.
+          format: int32
+          type: integer
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        type:
+          description: A URI that identifies the problem type, pointing to human-readable documentation on this problem type.
+          type: string
+      required:
+        - type
+        - errorCode
+        - title
+        - detail
+        - status
+      type: object
+    ThresholdRepayment:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount to be repaid on a 30-day basis.
+      required:
+        - amount
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
+x-groups:
+  - Capital

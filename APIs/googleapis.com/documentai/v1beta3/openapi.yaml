@@ -1409,6 +1409,28 @@ components:
           description: Reads the revision given by the id.
           type: string
       type: object
+    GoogleCloudDocumentaiUiv1beta3SampleDocumentsMetadata:
+      description: Metadata of the sample documents operation.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3SampleDocumentsResponse:
+      description: Response of the sample documents operation.
+      properties:
+        selectedDocuments:
+          description: The result of the sampling process.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3SampleDocumentsResponseSelectedDocument"
+          type: array
+      type: object
+    GoogleCloudDocumentaiUiv1beta3SampleDocumentsResponseSelectedDocument:
+      properties:
+        documentId:
+          description: An internal identifier for document.
+          type: string
+      type: object
     GoogleCloudDocumentaiUiv1beta3SetDefaultProcessorVersionMetadata:
       description: The long-running operation metadata for the SetDefaultProcessorVersion method.
       properties:
@@ -5003,7 +5025,7 @@ components:
       description: "The request message for the ImportProcessorVersion method. Requirements: - The source processor version and destination processor must be in the same location. - The Document AI [Service Agent](https://cloud.google.com/iam/docs/service-agents) of the destination project must have [Document AI Editor role](https://cloud.google.com/document-ai/docs/access-control/iam-roles) on the source project. The destination project is specified as part of the parent field. The source project is specified as part of the source field."
       properties:
         processorVersionSource:
-          description: The source processor version to import from.
+          description: The source processor version to import from. The source processor version and destination processor need to be in the same environment and region.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3ImportProcessorVersionResponse:

@@ -2185,10 +2185,10 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2ModelFrequentlyBoughtTogetherFeaturesConfig:
-      description: More configs of the frequently-bought-together model type.
+      description: Additional configs for the frequently-bought-together model type.
       properties:
         contextProductsType:
-          description: Optional. Specifies the context of the model when used in predict requests. Only settable for the `frequently-bought-together` type. Will default to MULTI_CONTEXT if not specified.
+          description: Optional. Specifies the context of the model when it is used in predict requests. Can only be set for the `frequently-bought-together` type. If it isn't specified, it defaults to MULTIPLE_CONTEXT_PRODUCTS.
           enum:
             - CONTEXT_PRODUCTS_TYPE_UNSPECIFIED
             - SINGLE_CONTEXT_PRODUCT
@@ -2473,16 +2473,6 @@ components:
             - EXACT_SEARCHABLE_ENABLED
             - EXACT_SEARCHABLE_DISABLED
           type: string
-        facetIntervals:
-          description: If you don't set the facet SearchRequest.FacetSpec.FacetKey.intervals to a numerical attribute, then a weekly pipeline calculates intervals using some percentiles on the distribution of all its product numerical attribute values. The calculated intervals might not be ideal for some attributes. Therefore, we give you the option the overwrite them. For any numerical attribute that is passed as a facet key in the request along with given intervals, the given intervals are the facet intervals returned in the response.
-          items:
-            $ref: "#/components/schemas/GoogleCloudRetailV2alphaInterval"
-          type: array
-        ignoredFacetValues:
-          description: Each instance represents a list of attribute values to ignore as facet values for a specific time range.
-          items:
-            $ref: "#/components/schemas/GoogleCloudRetailV2alphaCatalogAttributeIgnoredFacetValues"
-          type: array
         inUse:
           description: Output only. Indicates whether this attribute has been used by any products. `True` if at least one Product is using this attribute in Product.attributes. Otherwise, this field is `False`. CatalogAttribute can be pre-loaded by using CatalogService.AddCatalogAttribute, CatalogService.ImportCatalogAttributes, or CatalogService.UpdateAttributesConfig APIs. This field is `False` for pre-loaded CatalogAttributes. Only pre-loaded catalog attributes that are neither in use by products nor predefined can be deleted. Catalog attributes that are either in use by products or are predefined attributes cannot be deleted; however, their configuration properties will reset to default values upon removal request. After catalog changes, it takes about 10 minutes for this field to update.
           readOnly: true
@@ -2526,23 +2516,6 @@ components:
             - NUMERICAL
           readOnly: true
           type: string
-      type: object
-    GoogleCloudRetailV2alphaCatalogAttributeIgnoredFacetValues:
-      description: Facet values to ignore on facets during the specified time range for the given SearchResponse.Facet.key attribute.
-      properties:
-        endTime:
-          description: If start time is empty and end time is not empty, then ignore these facet values before end time.
-          format: google-datetime
-          type: string
-        startTime:
-          description: Time range for the current list of facet values to ignore. If multiple time ranges are specified for an facet value for the current attribute, consider all of them. If both are empty, ignore always. If start time and end time are set, then start time must be before end time. If start time is not empty and end time is empty, then will ignore these facet values after the start time.
-          format: google-datetime
-          type: string
-        values:
-          description: List of facet values to ignore for the following time range. The facet values are the same as the attribute values.
-          items:
-            type: string
-          type: array
       type: object
     GoogleCloudRetailV2alphaColorInfo:
       description: The color information of a Product.
@@ -3351,10 +3324,10 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2alphaModelFrequentlyBoughtTogetherFeaturesConfig:
-      description: More configs of the frequently-bought-together model type.
+      description: Additional configs for the frequently-bought-together model type.
       properties:
         contextProductsType:
-          description: Optional. Specifies the context of the model when used in predict requests. Only settable for the `frequently-bought-together` type. Will default to MULTI_CONTEXT if not specified.
+          description: Optional. Specifies the context of the model when it is used in predict requests. Can only be set for the `frequently-bought-together` type. If it isn't specified, it defaults to MULTIPLE_CONTEXT_PRODUCTS.
           enum:
             - CONTEXT_PRODUCTS_TYPE_UNSPECIFIED
             - SINGLE_CONTEXT_PRODUCT
@@ -5010,10 +4983,10 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2betaModelFrequentlyBoughtTogetherFeaturesConfig:
-      description: More configs of the frequently-bought-together model type.
+      description: Additional configs for the frequently-bought-together model type.
       properties:
         contextProductsType:
-          description: Optional. Specifies the context of the model when used in predict requests. Only settable for the `frequently-bought-together` type. Will default to MULTI_CONTEXT if not specified.
+          description: Optional. Specifies the context of the model when it is used in predict requests. Can only be set for the `frequently-bought-together` type. If it isn't specified, it defaults to MULTIPLE_CONTEXT_PRODUCTS.
           enum:
             - CONTEXT_PRODUCTS_TYPE_UNSPECIFIED
             - SINGLE_CONTEXT_PRODUCT

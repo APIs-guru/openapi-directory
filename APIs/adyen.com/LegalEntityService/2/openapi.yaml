@@ -47,7 +47,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-05-07T23:21:15Z
+  x-timestamp: 2023-05-09T12:22:30Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -62,7 +62,9 @@ paths:
       description: |+
         Creates a business line. 
 
-        This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+        This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
+
+        >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
 
       operationId: post-businessLines
       requestBody:
@@ -1816,7 +1818,7 @@ components:
       description: Example response when getting the details of a PCI questionnaire
       summary: Details of a PCI questionnaire
       value:
-        content: JVBERi0xLjUKJdDUxdgKMTAg.....
+        content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
         createdAt: 2023-03-02T17:54:19.538365Z
         id: PCID422GZ22322565HHMH48CW63CPH
         validUntil: 2024-03-01T17:54:19.538365Z
@@ -2358,7 +2360,7 @@ components:
       description: Example response for getting a PCI questionnaire
       summary: PCI questionnaire returned
       value:
-        content: l345JKNFj345FJLG3lk...
+        content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
         language: fr
         pciTemplateReferences:
           - PCIT-T7KC6VGL

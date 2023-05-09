@@ -2062,10 +2062,10 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2ModelFrequentlyBoughtTogetherFeaturesConfig:
-      description: More configs of the frequently-bought-together model type.
+      description: Additional configs for the frequently-bought-together model type.
       properties:
         contextProductsType:
-          description: Optional. Specifies the context of the model when used in predict requests. Only settable for the `frequently-bought-together` type. Will default to MULTI_CONTEXT if not specified.
+          description: Optional. Specifies the context of the model when it is used in predict requests. Can only be set for the `frequently-bought-together` type. If it isn't specified, it defaults to MULTIPLE_CONTEXT_PRODUCTS.
           enum:
             - CONTEXT_PRODUCTS_TYPE_UNSPECIFIED
             - SINGLE_CONTEXT_PRODUCT
@@ -2473,10 +2473,10 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2alphaModelFrequentlyBoughtTogetherFeaturesConfig:
-      description: More configs of the frequently-bought-together model type.
+      description: Additional configs for the frequently-bought-together model type.
       properties:
         contextProductsType:
-          description: Optional. Specifies the context of the model when used in predict requests. Only settable for the `frequently-bought-together` type. Will default to MULTI_CONTEXT if not specified.
+          description: Optional. Specifies the context of the model when it is used in predict requests. Can only be set for the `frequently-bought-together` type. If it isn't specified, it defaults to MULTIPLE_CONTEXT_PRODUCTS.
           enum:
             - CONTEXT_PRODUCTS_TYPE_UNSPECIFIED
             - SINGLE_CONTEXT_PRODUCT
@@ -3669,10 +3669,10 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2betaModelFrequentlyBoughtTogetherFeaturesConfig:
-      description: More configs of the frequently-bought-together model type.
+      description: Additional configs for the frequently-bought-together model type.
       properties:
         contextProductsType:
-          description: Optional. Specifies the context of the model when used in predict requests. Only settable for the `frequently-bought-together` type. Will default to MULTI_CONTEXT if not specified.
+          description: Optional. Specifies the context of the model when it is used in predict requests. Can only be set for the `frequently-bought-together` type. If it isn't specified, it defaults to MULTIPLE_CONTEXT_PRODUCTS.
           enum:
             - CONTEXT_PRODUCTS_TYPE_UNSPECIFIED
             - SINGLE_CONTEXT_PRODUCT

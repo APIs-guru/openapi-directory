@@ -2526,6 +2526,7 @@ components:
             - MEET_AFFINITY
             - PMW_TI_AFFINITY
             - DRIVE_SEARCH_FILTER_PERSON_ONLY
+            - ACCESSIBILITY_TRACKER_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -6276,6 +6277,8 @@ components:
               - RESET_OPTIONS
               - QUICK_TAP
               - TIPS_AND_SUPPORT
+              - SCREEN_ATTENTION
+              - BLUETOOTH_TETHERING
               - ABOUT_PHONE
               - ACCOUNTS
               - APPLICATION
@@ -6325,6 +6328,7 @@ components:
               - BEDTIME_MODE
               - THEATER_MODE
               - TOUCH_LOCK
+              - ASSISTANT_PRESS_AND_HOLD
             type: string
           type: array
         supportsDoNotDisturbWithDuration:
@@ -6381,10 +6385,12 @@ components:
           type: boolean
       type: object
     AssistantApiCoreTypesAndroidAppInfo:
-      description: "The android app information of the provider. Like, Spotify. Next ID: 16 LINT.IfChange"
+      description: "The android app information of the provider. Like, Spotify. Next ID: 17 LINT.IfChange"
       properties:
         accountType:
           type: string
+        activityInfo:
+          $ref: "#/components/schemas/AssistantApiCoreTypesAndroidAppInfoActivityInfo"
         androidIntent:
           description: Intent associated with the app. We include intents here as different versions of the same app may support different intents. In those cases, the package_name is not enough to identify the app and we should use the combination of package_name and android_intent. This field might contain sensitive data, if represents ClientOp with encapsulated PII such as user query.
           type: string
@@ -6432,6 +6438,25 @@ components:
           type: string
         versionName:
           description: 'The android app version name, like "4.1.091.05.40d", "11.2.7.21.alpha". Android Docs: https://developer.android.com/reference/android/content/pm/PackageInfo#versionName'
+          type: string
+      type: object
+    AssistantApiCoreTypesAndroidAppInfoActivityInfo:
+      description: General information about activities in the app.
+      properties:
+        activeLaunchableActivities:
+          description: Activities that are currently active and tagged as ACTION_MAIN and CATEGORY_LAUNCHER. Includes the activity corresponding to android_intent if it falls under CATEGORY_LAUNCHER.
+          items:
+            $ref: "#/components/schemas/AssistantApiCoreTypesAndroidAppInfoActivityInfoActivity"
+          type: array
+      type: object
+    AssistantApiCoreTypesAndroidAppInfoActivityInfoActivity:
+      description: Information about an individual activity.
+      properties:
+        localizedActivityName:
+          description: The localized user visible activity name.
+          type: string
+        shortClassName:
+          description: Short class name for activity, following https://developer.android.com/reference/android/content/ComponentName#getShortClassName()
           type: string
       type: object
     AssistantApiCoreTypesAndroidAppInfoDelta:
@@ -8722,12 +8747,6 @@ components:
         faceMatchEnabled:
           description: Indicates whether the user has enabled Face Match for this device. See go/face-match-server-design for more info on this project.
           type: boolean
-        flAudioCacheEnabled:
-          description: When true, allow data collection of audio on this device for Federated Learning.
-          type: boolean
-        flVisualFramesCacheEnabled:
-          description: When true, allow data collection of frames on this device.
-          type: boolean
         gcmSettings:
           $ref: "#/components/schemas/AssistantApiSettingsGcmSettings"
           description: Stores GCM info associated with a device. See go/quartz-design-doc for more info.
@@ -9817,7 +9836,7 @@ components:
           type: integer
       type: object
     AssistantApiSupportedFeatures:
-      description: "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 63"
+      description: "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 64"
       properties:
         aaeNotificationSourceSupported:
           description: Whether the client supports the alternative message notification sources on AAE, in which case notification-related operations can access it.
@@ -9904,6 +9923,9 @@ components:
           type: boolean
         isPairedPhoneNeededForComms:
           description: Whether a Bluetooth-paired phone is a core component of communications flows on the client.
+          type: boolean
+        justInTimeSupported:
+          description: Whether the client supports confirmation flow when a permission is missing. If set to true, the user will be prompted and on confirmation the original flow will continue.
           type: boolean
         launchKeyboardSupported:
           description: Which way of launching the keyboard the client supports.
@@ -11146,7 +11168,7 @@ components:
         isInAppProvider:
           description: Indicates that fulfillment on this provider will happen within the provider app.
           type: boolean
-        providerClusterId:
+        providerClusterIdDeprecated:
           description: Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.
           items:
             type: string
@@ -12225,7 +12247,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 51"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 52"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -12251,6 +12273,9 @@ components:
           type: number
         fulfillableDominantMedia:
           description: Whether this is a fulfillable, dominant Media intent.
+          type: boolean
+        generatedByLegacyAquaDomain:
+          description: Whether or not the intent was generated by a legacy Aqua domain that PFR should care about.
           type: boolean
         groundabilityScore:
           description: Grounding Signals. Score indicating how grounded the intent is, populated by the Grounding Box.
@@ -32718,6 +32743,22 @@ components:
         info:
           type: string
       type: object
+    ImageQualitySensitiveMediaOrPeopleEntities:
+      description: Goldmine annotation in the CDoc to store the hrid of the 5 entities with higher topicality in the document. Used by the Skin Tone Twiddler to determine if the result set shows mostly one specific KG entity. go/result-set-signal
+      properties:
+        mediaEntitiesId:
+          description: Similar to above, but for media entities (movie name, fictional character, musical band)
+          items:
+            format: uint64
+            type: string
+          type: array
+        peopleEntitiesId:
+          description: hrid of the 5 people entities with higher topicality in the document
+          items:
+            format: uint64
+            type: string
+          type: array
+      type: object
     ImageRegionsImageRegion:
       description: "A single region within an image. NEXT_ID: 11"
       properties:
@@ -48409,6 +48450,7 @@ components:
             - DECS
             - GSOX_MOCHI
             - PMW_TI
+            - ACCESSIBILITY_TRACKER
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -48653,7 +48695,7 @@ components:
           type: string
       type: object
     PerDocData:
-      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 221"
+      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 222"
       properties:
         BlogData:
           $ref: "#/components/schemas/BlogPerDocData"
@@ -48887,6 +48929,9 @@ components:
         localizedCluster:
           $ref: "#/components/schemas/IndexingDupsLocalizedLocalizedCluster"
           description: Information on localized clusters, which is the relationship of translated and/or localized pages.
+        mediaOrPeopleEntities:
+          $ref: "#/components/schemas/ImageQualitySensitiveMediaOrPeopleEntities"
+          description: "Contains the mids of the 5 most topical entities annotated with selected KG collections. This information is currently used on Image Search to detect cases where results converged to mostly a single person or media entity. More details: go/result-set-convergence."
         noimageframeoverlayreason:
           description: If not 0, we should not show the image in overlay mode in image snippets
           format: int32
@@ -49645,8 +49690,25 @@ components:
           description: Depth map units of distance.
           type: string
       type: object
+    PhotosHdrMetadata:
+      description: HDR Metadata describes in what way an image expresses high dynamic range information (e.g. using a gainmap or a specialized color space).
+      properties:
+        gainmap:
+          $ref: "#/components/schemas/PhotosHdrMetadataGainmap"
+          description: Indicates the presence of some kind of gainmap-utilizing format.
+      type: object
+    PhotosHdrMetadataGainmap:
+      description: Details about gainmap-based HDR formats (e.g. go/ghdr). Notably, images can adhere to multiple gainmap specifications concurrently.
+      properties:
+        adobeHdr:
+          description: Indicates that this image can be processed as an Adobe HDR (FlexDR) image by reading the MPF segments.
+          type: boolean
+        googleHdr:
+          description: Indicates that this image can be processed as a go/ghdr (UltraHDR) image by reading the GContainer in the primary XMP block.
+          type: boolean
+      type: object
     PhotosImageMetadata:
-      description: "Next tag value: 381."
+      description: "Next tag value: 382."
       properties:
         DEPRECATEDBlendingtype:
           type: string
@@ -50115,6 +50177,9 @@ components:
         hasAlpha:
           description: "The image has an alpha channel (potential transparency). If the image is decoded, this will be updated to indicate whether there is any active transparency. Formats supporting alpha: png, webp, gif, heif."
           type: boolean
+        hdrMetadata:
+          $ref: "#/components/schemas/PhotosHdrMetadata"
+          description: Indicates that the image has some form of HDR present or available to it.
         headline:
           type: string
         height:
@@ -50372,7 +50437,7 @@ components:
           format: int32
           type: integer
         rotate:
-          description: being returned to caller Use values defined in "MIME_TYPE" This field is deprecated. Rotation is now accomplished via ImageInfo.exif_orientation and ImageInfo.edit_list. Number of degrees (0, 90, 180,
+          description: "This field is deprecated. Rotation is now accomplished via ImageInfo.exif_orientation and ImageInfo.edit_list. WARNING: the presence of rotate is used by FIFE to identify older images. Setting this (even to the correct number of degrees) on newer images can cause incorrectly rotated thumbnails. This was the cause of omg/58543 Number of degrees (0, 90, 180, 270)"
           format: int32
           type: integer
         rowsperstrip:
@@ -53249,7 +53314,7 @@ components:
           type: string
       type: object
     QualityNsrNsrData:
-      description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 52"
+      description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 53"
       properties:
         articleScore:
           description: Score from article classification of the site.
@@ -53340,6 +53405,10 @@ components:
           type: boolean
         pnav:
           description: Fractional signals.
+          format: float
+          type: number
+        pnavClicks:
+          description: denominator for the pnav computation
           format: float
           type: number
         priorAdjustedNsr:
@@ -66735,10 +66804,6 @@ components:
     TravelFlightsAirlineConfig:
       description: "Next ID: 27"
       properties:
-        adwordsCid:
-          description: Populated using airlines_company_ids.csv for AdWords company map
-          format: int64
-          type: string
         alliance:
           description: STAR_ALLIANCE
           enum:
@@ -68449,6 +68514,7 @@ components:
               - USER_P13N_SETTING_ON_AT_EVENT_LEVEL
               - USER_P13N_SETTING_OFF_AT_EVENT_LEVEL
               - BATTLESTAR_GAME_IN_MDP_EVENT_LEVEL
+              - REVIEW_HIGHLIGHTS_TRIGGERING_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -69024,6 +69090,8 @@ components:
               - USER_P13N_SETTING_ON_AT_SESSION_LEVEL
               - USER_P13N_SETTING_OFF_AT_SESSION_LEVEL
               - BATTLESTAR_GAME_IN_MDP_SESSION_LEVEL
+              - REVIEW_HIGHLIGHTS_SESSION_LEVEL
+              - BOOKS_NOTIFICATION_RECEIVED_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -69286,6 +69354,8 @@ components:
               - USER_P13N_SETTING_ON_AT_USER_LEVEL
               - USER_P13N_SETTING_OFF_AT_USER_LEVEL
               - LIVEOPS_CLUSTER_SERP_TRIGGERING_USER_LEVEL
+              - BOOKS_NOTIFICATION_RECEIVED_USER_LEVEL
+              - LIVEOPS_INSTALL_NOTIFICATION_CHURNED_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -69484,6 +69554,7 @@ components:
             - OBJECTIVE_SAM_FEATURES_DONE
             - OBJECTIVE_SPEECH_RECOGNITION_DONE
             - OBJECTIVE_MULTI_TRACK_AUDIO_DONE
+            - OBJECTIVE_SHORTS_READY
           type: string
         outcome:
           description: Whether the objective is reached or not. REQUIRED.
@@ -78731,7 +78802,7 @@ components:
           type: string
       type: object
     YoutubeCommentsClusteringMiniStanza:
-      description: "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 77"
+      description: "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 78"
       properties:
         ansibleScores:
           additionalProperties:
@@ -78934,6 +79005,12 @@ components:
         hasCreatorReply:
           description: If the comment has a creator reply.
           type: boolean
+        impersonationScores:
+          additionalProperties:
+            format: double
+            type: number
+          description: Impersonation scores map. Keyed by secondary key (score type).
+          type: object
         isAuthorSponsor:
           description: If the author is a channel member (sponsor).
           type: boolean
