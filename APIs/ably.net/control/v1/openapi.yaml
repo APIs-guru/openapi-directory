@@ -1,0 +1,3576 @@
+openapi: 3.0.1
+servers:
+  - url: https://control.ably.net/v1
+info:
+  contact:
+    x-twitter: ablyrealtime
+  title: API V1
+  version: v1
+  x-apisguru-categories:
+    - cloud
+    - cloud
+  x-logo:
+    url: https://twitter.com/ablyrealtime/profile_image?size=original
+  x-origin:
+    - format: openapi
+      url: https://ably.com/api-docs/v1/swagger.yaml
+      version: "3.0"
+  x-providerName: ably.net
+  x-serviceName: control
+paths:
+  "/accounts/{account_id}/apps":
+    get:
+      parameters:
+        - in: path
+          name: account_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/app_response"
+                type: array
+          description: App list
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Account not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Lists account apps
+      tags:
+        - apps
+    post:
+      parameters:
+        - in: path
+          name: account_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/app_post"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/app_response"
+          description: App created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Account not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Creates an app
+      tags:
+        - apps
+  "/apps/{app_id}/keys":
+    get:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/key_response"
+                type: array
+          description: Key list
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Lists app keys
+      tags:
+        - keys
+    post:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/key_post"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/key_response"
+          description: Key created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Creates a key
+      tags:
+        - keys
+  "/apps/{app_id}/keys/{key_id}":
+    patch:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: key_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/key_patch"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/key_response"
+          description: Key updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Updates a key
+      tags:
+        - keys
+  "/apps/{app_id}/keys/{key_id}/revoke":
+    post:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: key_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content: {}
+          description: Key revoked
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Revokes a key
+      tags:
+        - keys
+  "/apps/{app_id}/namespaces":
+    get:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/namespace_response"
+                type: array
+          description: Namespace list
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Lists namespaces
+      tags:
+        - namespaces
+    post:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/namespace_post"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/namespace_response"
+          description: Namespace created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Creates a namespace
+      tags:
+        - namespaces
+  "/apps/{app_id}/namespaces/{namespace_id}":
+    delete:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: namespace_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          content: {}
+          description: Namespace deleted
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Deletes a namespace
+      tags:
+        - namespaces
+    patch:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: namespace_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/namespace_patch"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/namespace_response"
+          description: Namespace updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Updates a namespace
+      tags:
+        - namespaces
+  "/apps/{app_id}/queues":
+    get:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/queue_response"
+                type: array
+          description: Queue list
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: 503 Service unavailable
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Lists queues
+      tags:
+        - queues
+    post:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/queue"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/queue_response"
+          description: Queue created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Creates a queue
+      tags:
+        - queues
+  "/apps/{app_id}/queues/{queue_id}":
+    delete:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: queue_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          content: {}
+          description: Queue deleted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App/Queue not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: 503 Service unavailable
+      security:
+        - bearer_auth: []
+      summary: Deletes a queue
+      tags:
+        - queues
+  "/apps/{app_id}/rules":
+    get:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/rule_response"
+                type: array
+          description: Integration Rule list
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Lists Integration rules
+      tags:
+        - rules
+    post:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/rule_post"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/rule_response"
+          description: Integration Rule created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Creates a Integration Rule
+      tags:
+        - rules
+  "/apps/{app_id}/rules/{rule_id}":
+    delete:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          content: {}
+          description: Integration Rule deleted
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Deletes a Integration Rule
+      tags:
+        - rules
+    get:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/rule_response"
+          description: Integration Rule
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Gets a Integration Rule by ID
+      tags:
+        - rules
+    patch:
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/rule_patch"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/rule_response"
+          description: Integration Rule updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Gateway timeout
+      security:
+        - bearer_auth: []
+      summary: Updates a Integration Rule
+      tags:
+        - rules
+  "/apps/{id}":
+    delete:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          content: {}
+          description: App deleted
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Deletes an app
+      tags:
+        - apps
+    patch:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/app_patch"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/app_response"
+          description: App updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Invalid resource
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Updates an app
+      tags:
+        - apps
+  "/apps/{id}/pkcs12":
+    post:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/app_pkcs12"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/app_response"
+          description: App updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: App not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Updates app's APNS info from a .p12 file
+      tags:
+        - apps
+  /me:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/me"
+          description: Token details
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Authentication failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Internal server error
+      security:
+        - bearer_auth: []
+      summary: Get token details
+      tags:
+        - tokens
+components:
+  schemas:
+    amqp_external_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - amqp/external
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            exchange:
+              type: string
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            mandatoryRoute:
+              type: boolean
+            messageTtl:
+              type: integer
+            persistentMessages:
+              type: boolean
+            routingKey:
+              type: string
+            url:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    amqp_external_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - amqp/external
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            exchange:
+              type: string
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            mandatoryRoute:
+              type: boolean
+            messageTtl:
+              type: integer
+            persistentMessages:
+              type: boolean
+            routingKey:
+              type: string
+            url:
+              type: string
+          required:
+            - url
+            - routingKey
+            - mandatoryRoute
+            - persistentMessages
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    amqp_external_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - amqp/external
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            exchange:
+              type: string
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            mandatoryRoute:
+              type: boolean
+            messageTtl:
+              type: integer
+            persistentMessages:
+              type: boolean
+            routingKey:
+              type: string
+            url:
+              type: string
+          required:
+            - url
+            - routingKey
+            - mandatoryRoute
+            - persistentMessages
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    amqp_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - amqp
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            queueId:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    amqp_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - amqp
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            queueId:
+              type: string
+          required:
+            - queueId
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    amqp_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - amqp
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            queueId:
+              type: string
+          required:
+            - queueId
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    app_patch:
+      additionalProperties: false
+      properties:
+        apnsCertificate:
+          nullable: true
+          type: string
+        apnsPrivateKey:
+          nullable: true
+          type: string
+        apnsUseSandboxEndpoint:
+          nullable: true
+          type: boolean
+        fcmKey:
+          nullable: true
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        tlsOnly:
+          nullable: true
+          type: boolean
+      type: object
+    app_pkcs12:
+      additionalProperties: false
+      properties:
+        p12File:
+          format: binary
+          type: string
+        p12Pass:
+          type: string
+      required:
+        - p12File
+        - p12Pass
+      type: object
+    app_post:
+      additionalProperties: false
+      properties:
+        apnsCertificate:
+          nullable: true
+          type: string
+        apnsPrivateKey:
+          nullable: true
+          type: string
+        apnsUseSandboxEndpoint:
+          nullable: true
+          type: boolean
+        fcmKey:
+          nullable: true
+          type: string
+        name:
+          type: string
+        status:
+          deprecated: true
+          type: string
+        tlsOnly:
+          nullable: true
+          type: boolean
+      required:
+        - name
+      type: object
+    app_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        accountId:
+          type: string
+        apnsUseSandboxEndpoint:
+          nullable: true
+          type: boolean
+        created:
+          type: integer
+        id:
+          type: string
+        modified:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+        tlsOnly:
+          nullable: true
+          type: boolean
+      type: object
+    aws_access_keys:
+      additionalProperties: false
+      properties:
+        accessKeyId:
+          type: string
+        authenticationMode:
+          enum:
+            - credentials
+          type: string
+        secretAccessKey:
+          type: string
+      required:
+        - accessKeyId
+        - secretAccessKey
+      type: object
+    aws_access_keys_response:
+      additionalProperties: false
+      properties:
+        accessKeyId:
+          type: string
+        authenticationMode:
+          enum:
+            - credentials
+          type: string
+      type: object
+    aws_assume_role:
+      additionalProperties: false
+      properties:
+        assumeRoleArn:
+          type: string
+        authenticationMode:
+          enum:
+            - assumeRole
+          type: string
+      required:
+        - assumeRoleArn
+      type: object
+    aws_kinesis_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/kinesis
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys"
+                - $ref: "#/components/schemas/aws_assume_role"
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            partitionKey:
+              type: string
+            region:
+              type: string
+            streamName:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    aws_kinesis_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/kinesis
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys"
+                - $ref: "#/components/schemas/aws_assume_role"
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            partitionKey:
+              type: string
+            region:
+              type: string
+            streamName:
+              type: string
+          required:
+            - region
+            - streamName
+            - partitionKey
+            - authentication
+            - format
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    aws_kinesis_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/kinesis
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys_response"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys_response"
+                - $ref: "#/components/schemas/aws_assume_role"
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            partitionKey:
+              type: string
+            region:
+              type: string
+            streamName:
+              type: string
+          required:
+            - region
+            - streamName
+            - partitionKey
+            - authentication
+            - format
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    aws_lambda_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/lambda
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys"
+                - $ref: "#/components/schemas/aws_assume_role"
+            enveloped:
+              nullable: true
+              type: boolean
+            functionName:
+              type: string
+            region:
+              type: string
+          required:
+            - region
+            - functionName
+            - authentication
+          type: object
+      required:
+        - ruleType
+      type: object
+    aws_lambda_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/lambda
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys"
+                - $ref: "#/components/schemas/aws_assume_role"
+            enveloped:
+              nullable: true
+              type: boolean
+            functionName:
+              type: string
+            region:
+              type: string
+          required:
+            - region
+            - functionName
+            - authentication
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    aws_lambda_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/lambda
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys_response"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys_response"
+                - $ref: "#/components/schemas/aws_assume_role"
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            functionName:
+              type: string
+            region:
+              type: string
+          required:
+            - region
+            - functionName
+            - authentication
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    aws_sqs_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/sqs
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys"
+                - $ref: "#/components/schemas/aws_assume_role"
+            awsAccountId:
+              type: string
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            queueName:
+              type: string
+            region:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    aws_sqs_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/sqs
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys"
+                - $ref: "#/components/schemas/aws_assume_role"
+            awsAccountId:
+              type: string
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            queueName:
+              type: string
+            region:
+              type: string
+          required:
+            - region
+            - awsAccountId
+            - queueName
+            - authentication
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    aws_sqs_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - aws/sqs
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  assumeRole: "#/components/schemas/aws_assume_role"
+                  credentials: "#/components/schemas/aws_access_keys_response"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/aws_access_keys_response"
+                - $ref: "#/components/schemas/aws_assume_role"
+            awsAccountId:
+              type: string
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            queueName:
+              type: string
+            region:
+              type: string
+          required:
+            - region
+            - awsAccountId
+            - queueName
+            - authentication
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    azure_function_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/azure-function
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            azureAppId:
+              type: string
+            azureFunctionName:
+              type: string
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    azure_function_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/azure-function
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            azureAppId:
+              type: string
+            azureFunctionName:
+              type: string
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+          required:
+            - azureAppId
+            - azureFunctionName
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    azure_function_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/azure-function
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            azureAppId:
+              type: string
+            azureFunctionName:
+              type: string
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+          required:
+            - azureAppId
+            - azureFunctionName
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    cloudflare_worker_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/cloudflare-worker
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    cloudflare_worker_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/cloudflare-worker
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          required:
+            - url
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    cloudflare_worker_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/cloudflare-worker
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          required:
+            - url
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    error:
+      additionalProperties: false
+      properties:
+        code:
+          type: integer
+        details:
+          nullable: true
+          type: object
+        href:
+          type: string
+        message:
+          type: string
+        statusCode:
+          type: integer
+      required:
+        - message
+        - code
+        - statusCode
+        - href
+      type: object
+    google_cloud_function_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/google-cloud-function
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            functionName:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            projectId:
+              type: string
+            region:
+              type: string
+            signingKeyId:
+              nullable: true
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    google_cloud_function_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/google-cloud-function
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            functionName:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            projectId:
+              type: string
+            region:
+              type: string
+            signingKeyId:
+              nullable: true
+              type: string
+          required:
+            - region
+            - projectId
+            - functionName
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    google_cloud_function_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/google-cloud-function
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            functionName:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            projectId:
+              type: string
+            region:
+              type: string
+            signingKeyId:
+              nullable: true
+              type: string
+          required:
+            - region
+            - projectId
+            - functionName
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    http_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    http_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          required:
+            - url
+            - format
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    http_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          required:
+            - url
+            - format
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    ifttt_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/ifttt
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            eventName:
+              type: string
+            webhookKey:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    ifttt_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/ifttt
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            eventName:
+              type: string
+            webhookKey:
+              type: string
+          required:
+            - webhookKey
+            - eventName
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    ifttt_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/ifttt
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            eventName:
+              type: string
+            webhookKey:
+              type: string
+          required:
+            - webhookKey
+            - eventName
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    kafka_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - kafka
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            auth:
+              additionalProperties: false
+              properties:
+                sasl:
+                  additionalProperties: false
+                  properties:
+                    mechanism:
+                      enum:
+                        - plain
+                        - scram-sha-256
+                        - scram-sha-512
+                      type: string
+                    password:
+                      type: string
+                    username:
+                      type: string
+                  type: object
+              type: object
+            brokers:
+              items:
+                type: string
+              type: array
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            routingKey:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    kafka_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - kafka
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            auth:
+              additionalProperties: false
+              properties:
+                sasl:
+                  additionalProperties: false
+                  properties:
+                    mechanism:
+                      enum:
+                        - plain
+                        - scram-sha-256
+                        - scram-sha-512
+                      type: string
+                    password:
+                      type: string
+                    username:
+                      type: string
+                  type: object
+              type: object
+            brokers:
+              items:
+                type: string
+              type: array
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            routingKey:
+              type: string
+          required:
+            - routingKey
+            - brokers
+            - auth
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    kafka_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - kafka
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            auth:
+              additionalProperties: false
+              properties:
+                sasl:
+                  additionalProperties: false
+                  properties:
+                    mechanism:
+                      enum:
+                        - plain
+                        - scram-sha-256
+                        - scram-sha-512
+                      type: string
+                    password:
+                      type: string
+                    username:
+                      type: string
+                  type: object
+              type: object
+            brokers:
+              items:
+                type: string
+              type: array
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            routingKey:
+              type: string
+          required:
+            - routingKey
+            - brokers
+            - auth
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    key_patch:
+      additionalProperties: false
+      example:
+        capability:
+          channel1:
+            - publish
+            - subscribe
+          channel2:
+            - history
+        name: string
+      properties:
+        capability:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        name:
+          type: string
+      type: object
+    key_post:
+      additionalProperties: false
+      example:
+        capability:
+          channel1:
+            - publish
+            - subscribe
+          channel2:
+            - history
+        name: string
+      properties:
+        capability:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        name:
+          type: string
+      required:
+        - name
+        - capability
+      type: object
+    key_response:
+      additionalProperties: false
+      example:
+        appId: string
+        capability:
+          channel1:
+            - publish
+            - subscribe
+          channel2:
+            - history
+        created: 0
+        id: string
+        key: string
+        modified: 0
+        name: string
+      properties:
+        appId:
+          type: string
+        capability:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        created:
+          type: integer
+        id:
+          type: string
+        key:
+          type: string
+        modified:
+          type: integer
+        name:
+          type: string
+        status:
+          type: integer
+      type: object
+    me:
+      additionalProperties: false
+      properties:
+        account:
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+          required:
+            - id
+            - name
+          type: object
+        token:
+          additionalProperties: false
+          properties:
+            capabilities:
+              items:
+                type: string
+              type: array
+            id:
+              type: string
+            name:
+              type: string
+          required:
+            - id
+            - name
+            - capabilities
+          type: object
+        user:
+          additionalProperties: false
+          properties:
+            email:
+              type: string
+            id:
+              type: integer
+          required:
+            - id
+            - email
+          type: object
+      type: object
+    namespace_patch:
+      additionalProperties: false
+      properties:
+        authenticated:
+          type: boolean
+        exposeTimeserial:
+          type: boolean
+        persistLast:
+          type: boolean
+        persisted:
+          type: boolean
+        pushEnabled:
+          type: boolean
+        tlsOnly:
+          type: boolean
+      type: object
+    namespace_post:
+      additionalProperties: false
+      properties:
+        authenticated:
+          default: false
+          type: boolean
+        exposeTimeserial:
+          default: false
+          type: boolean
+        id:
+          type: string
+        persistLast:
+          default: false
+          type: boolean
+        persisted:
+          default: false
+          type: boolean
+        pushEnabled:
+          default: false
+          type: boolean
+        tlsOnly:
+          default: false
+          type: boolean
+      required:
+        - id
+      type: object
+    namespace_response:
+      additionalProperties: false
+      properties:
+        appId:
+          type: string
+        authenticated:
+          type: boolean
+        created:
+          type: integer
+        exposeTimeserial:
+          type: boolean
+        id:
+          type: string
+        modified:
+          type: integer
+        persistLast:
+          type: boolean
+        persisted:
+          type: boolean
+        pushEnabled:
+          type: boolean
+        tlsOnly:
+          type: boolean
+      type: object
+    pulsar_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - pulsar
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  token: "#/components/schemas/pulsar_token_auth"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/pulsar_token_auth"
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            routingKey:
+              type: string
+            serviceUrl:
+              type: string
+            tlsTrustCerts:
+              items:
+                type: string
+              nullable: true
+              type: array
+            topic:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    pulsar_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - pulsar
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  token: "#/components/schemas/pulsar_token_auth"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/pulsar_token_auth"
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            routingKey:
+              type: string
+            serviceUrl:
+              type: string
+            tlsTrustCerts:
+              items:
+                type: string
+              nullable: true
+              type: array
+            topic:
+              type: string
+          required:
+            - topic
+            - authentication
+            - serviceUrl
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    pulsar_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - pulsar
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            authentication:
+              discriminator:
+                mapping:
+                  token: "#/components/schemas/pulsar_token_auth"
+                propertyName: authenticationMode
+              oneOf:
+                - $ref: "#/components/schemas/pulsar_token_auth"
+            enveloped:
+              nullable: true
+              type: boolean
+            format:
+              type: string
+            routingKey:
+              type: string
+            serviceUrl:
+              type: string
+            tlsTrustCerts:
+              items:
+                type: string
+              nullable: true
+              type: array
+            topic:
+              type: string
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    pulsar_token_auth:
+      additionalProperties: false
+      properties:
+        authenticationMode:
+          enum:
+            - token
+          type: string
+        token:
+          type: string
+      required:
+        - token
+        - authenticationMode
+      type: object
+    queue:
+      additionalProperties: false
+      properties:
+        maxLength:
+          type: integer
+        name:
+          type: string
+        region:
+          type: string
+        ttl:
+          type: integer
+      required:
+        - name
+        - ttl
+        - maxLength
+        - region
+      type: object
+    queue_response:
+      additionalProperties: false
+      properties:
+        amqp:
+          additionalProperties: false
+          properties:
+            queueName:
+              type: string
+            uri:
+              type: string
+          type: object
+        appId:
+          type: string
+        deadletter:
+          type: boolean
+        deadletterId:
+          nullable: true
+          type: string
+        id:
+          type: string
+        maxLength:
+          type: integer
+        messages:
+          additionalProperties: false
+          properties:
+            ready:
+              nullable: true
+              type: integer
+            total:
+              nullable: true
+              type: integer
+            unacknowledged:
+              nullable: true
+              type: integer
+          type: object
+        name:
+          type: string
+        region:
+          type: string
+        state:
+          type: string
+        stats:
+          additionalProperties: false
+          properties:
+            acknowledgementRate:
+              nullable: true
+              type: number
+            deliveryRate:
+              nullable: true
+              type: number
+            publishRate:
+              nullable: true
+              type: number
+          type: object
+        stomp:
+          additionalProperties: false
+          properties:
+            destination:
+              type: string
+            host:
+              type: string
+            uri:
+              type: string
+          type: object
+        ttl:
+          type: integer
+      type: object
+    rule_patch:
+      discriminator:
+        mapping:
+          amqp: "#/components/schemas/amqp_rule_patch"
+          amqp/external: "#/components/schemas/amqp_external_rule_patch"
+          aws/kinesis: "#/components/schemas/aws_kinesis_rule_patch"
+          aws/lambda: "#/components/schemas/aws_lambda_rule_patch"
+          aws/sqs: "#/components/schemas/aws_sqs_rule_patch"
+          http: "#/components/schemas/http_rule_patch"
+          http/azure-function: "#/components/schemas/azure_function_rule_patch"
+          http/cloudflare-worker: "#/components/schemas/cloudflare_worker_rule_patch"
+          http/google-cloud-function: "#/components/schemas/google_cloud_function_rule_patch"
+          http/ifttt: "#/components/schemas/ifttt_rule_patch"
+          http/zapier: "#/components/schemas/zapier_rule_patch"
+          kafka: "#/components/schemas/kafka_rule_patch"
+          pulsar: "#/components/schemas/pulsar_rule_patch"
+        propertyName: ruleType
+      oneOf:
+        - $ref: "#/components/schemas/http_rule_patch"
+        - $ref: "#/components/schemas/ifttt_rule_patch"
+        - $ref: "#/components/schemas/zapier_rule_patch"
+        - $ref: "#/components/schemas/cloudflare_worker_rule_patch"
+        - $ref: "#/components/schemas/azure_function_rule_patch"
+        - $ref: "#/components/schemas/google_cloud_function_rule_patch"
+        - $ref: "#/components/schemas/aws_lambda_rule_patch"
+        - $ref: "#/components/schemas/aws_kinesis_rule_patch"
+        - $ref: "#/components/schemas/aws_sqs_rule_patch"
+        - $ref: "#/components/schemas/amqp_rule_patch"
+        - $ref: "#/components/schemas/amqp_external_rule_patch"
+        - $ref: "#/components/schemas/kafka_rule_patch"
+        - $ref: "#/components/schemas/pulsar_rule_patch"
+    rule_post:
+      discriminator:
+        mapping:
+          amqp: "#/components/schemas/amqp_rule_post"
+          amqp/external: "#/components/schemas/amqp_external_rule_post"
+          aws/kinesis: "#/components/schemas/aws_kinesis_rule_post"
+          aws/lambda: "#/components/schemas/aws_lambda_rule_post"
+          aws/sqs: "#/components/schemas/aws_sqs_rule_post"
+          http: "#/components/schemas/http_rule_post"
+          http/azure-function: "#/components/schemas/azure_function_rule_post"
+          http/cloudflare-worker: "#/components/schemas/cloudflare_worker_rule_post"
+          http/google-cloud-function: "#/components/schemas/google_cloud_function_rule_post"
+          http/ifttt: "#/components/schemas/ifttt_rule_post"
+          http/zapier: "#/components/schemas/zapier_rule_post"
+          kafka: "#/components/schemas/kafka_rule_post"
+          pulsar: "#/components/schemas/pulsar_rule_post"
+        propertyName: ruleType
+      oneOf:
+        - $ref: "#/components/schemas/http_rule_post"
+        - $ref: "#/components/schemas/ifttt_rule_post"
+        - $ref: "#/components/schemas/zapier_rule_post"
+        - $ref: "#/components/schemas/cloudflare_worker_rule_post"
+        - $ref: "#/components/schemas/azure_function_rule_post"
+        - $ref: "#/components/schemas/google_cloud_function_rule_post"
+        - $ref: "#/components/schemas/aws_lambda_rule_post"
+        - $ref: "#/components/schemas/aws_kinesis_rule_post"
+        - $ref: "#/components/schemas/aws_sqs_rule_post"
+        - $ref: "#/components/schemas/amqp_rule_post"
+        - $ref: "#/components/schemas/amqp_external_rule_post"
+        - $ref: "#/components/schemas/kafka_rule_post"
+        - $ref: "#/components/schemas/pulsar_rule_post"
+    rule_response:
+      discriminator:
+        mapping:
+          amqp: "#/components/schemas/amqp_rule_response"
+          amqp/external: "#/components/schemas/amqp_external_rule_response"
+          aws/kinesis: "#/components/schemas/aws_kinesis_rule_response"
+          aws/lambda: "#/components/schemas/aws_lambda_rule_response"
+          aws/sqs: "#/components/schemas/aws_sqs_rule_response"
+          http: "#/components/schemas/http_rule_response"
+          http/azure-function: "#/components/schemas/azure_function_rule_response"
+          http/cloudflare-worker: "#/components/schemas/cloudflare_worker_rule_response"
+          http/google-cloud-function: "#/components/schemas/google_cloud_function_rule_response"
+          http/ifttt: "#/components/schemas/ifttt_rule_response"
+          http/zapier: "#/components/schemas/zapier_rule_response"
+          kafka: "#/components/schemas/kafka_rule_response"
+          pulsar: "#/components/schemas/pulsar_rule_response"
+          unsupported: "#/components/schemas/unsupported_rule_response"
+        propertyName: ruleType
+      oneOf:
+        - $ref: "#/components/schemas/http_rule_response"
+        - $ref: "#/components/schemas/ifttt_rule_response"
+        - $ref: "#/components/schemas/zapier_rule_response"
+        - $ref: "#/components/schemas/cloudflare_worker_rule_response"
+        - $ref: "#/components/schemas/azure_function_rule_response"
+        - $ref: "#/components/schemas/google_cloud_function_rule_response"
+        - $ref: "#/components/schemas/aws_lambda_rule_response"
+        - $ref: "#/components/schemas/aws_kinesis_rule_response"
+        - $ref: "#/components/schemas/aws_sqs_rule_response"
+        - $ref: "#/components/schemas/amqp_rule_response"
+        - $ref: "#/components/schemas/amqp_external_rule_response"
+        - $ref: "#/components/schemas/kafka_rule_response"
+        - $ref: "#/components/schemas/pulsar_rule_response"
+        - $ref: "#/components/schemas/unsupported_rule_response"
+    rule_source:
+      additionalProperties: false
+      properties:
+        channelFilter:
+          type: string
+        type:
+          type: string
+      required:
+        - channelFilter
+        - type
+      type: object
+    rule_source_patch:
+      additionalProperties: false
+      properties:
+        channelFilter:
+          type: string
+        type:
+          type: string
+      type: object
+    unsupported_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - unsupported
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            url:
+              type: string
+          required:
+            - url
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    zapier_rule_patch:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/zapier
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source_patch"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          type: object
+      required:
+        - ruleType
+      type: object
+    zapier_rule_post:
+      additionalProperties: false
+      properties:
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/zapier
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          required:
+            - url
+          type: object
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+    zapier_rule_response:
+      additionalProperties: false
+      properties:
+        _links:
+          nullable: true
+          type: object
+        appId:
+          type: string
+        created:
+          type: number
+        id:
+          type: string
+        modified:
+          type: number
+        requestMode:
+          type: string
+        ruleType:
+          enum:
+            - http/zapier
+          type: string
+        source:
+          $ref: "#/components/schemas/rule_source"
+        status:
+          type: string
+        target:
+          additionalProperties: false
+          properties:
+            headers:
+              items:
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            signingKeyId:
+              nullable: true
+              type: string
+            url:
+              type: string
+          required:
+            - url
+          type: object
+        version:
+          type: string
+      required:
+        - ruleType
+        - requestMode
+        - source
+        - target
+      type: object
+  securitySchemes:
+    bearer_auth:
+      scheme: bearer
+      type: http
