@@ -38,6 +38,7 @@ tags:
   - name: collectionstatuses
   - name: conversionsources
   - name: csses
+  - name: customers
   - name: datafeeds
   - name: datafeedstatuses
   - name: freelistingsprogram
@@ -2558,6 +2559,48 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - conversionsources
+  "/{merchantId}/customers":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Allows uploading one customer information entry. Adding a customer with loyalty data enables the customer to see personalized loyalty annotations on search. Uploading a previously existing customer will overwrite the old entry.
+      operationId: content.customers.create
+      parameters:
+        - description: Required. The ID of the account that owns the customer information.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - customers
   "/{merchantId}/datafeeds":
     get:
       description: Lists the configurations for datafeeds in your Merchant Center account.
@@ -8979,6 +9022,23 @@ components:
           type: string
         value:
           description: The value of the attribute.
+          type: string
+      type: object
+    Customer:
+      description: The object representing a customer to update data for. Includes a customer identifier (such as email address) and any associated metadata to add. LoyaltyData triggers adding customer data for the purpose of loyalty personalization.
+      properties:
+        emailAddress:
+          description: The customer's email address. No extra string processing needed.
+          type: string
+        loyaltyData:
+          $ref: "#/components/schemas/CustomerLoyaltyData"
+          description: Loyalty data associated with the customer.
+      type: object
+    CustomerLoyaltyData:
+      description: The loyalty data of the customer.
+      properties:
+        loyaltyTier:
+          description: The tier information for the given user. Can be an empty string.
           type: string
       type: object
     CustomerReturnReason:

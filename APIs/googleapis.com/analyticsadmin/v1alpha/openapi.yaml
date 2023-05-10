@@ -1031,6 +1031,72 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
+  "/v1alpha/{parent}/adSenseLinks":
+    get:
+      description: Lists AdSenseLinks on a property.
+      operationId: analyticsadmin.properties.adSenseLinks.list
+      parameters:
+        - description: "Required. Resource name of the parent property. Format: properties/{propertyId} Example: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200 (higher values will be coerced to the maximum).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from a previous `ListAdSenseLinks` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAdSenseLinks` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListAdSenseLinksResponse"
+          description: Successful response
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an AdSenseLink.
+      operationId: analyticsadmin.properties.adSenseLinks.create
+      parameters:
+        - description: "Required. The property for which to create an AdSense Link. Format: properties/{propertyId} Example: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAdSenseLink"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAdSenseLink"
+          description: Successful response
+      tags:
+        - properties
   "/v1alpha/{parent}/audiences":
     get:
       description: Lists Audiences on a property. Audiences created before 2020 may not be supported. Default audiences will not show filter definitions.
@@ -2936,6 +3002,17 @@ components:
       description: Response message for AcknowledgeUserDataCollection RPC.
       properties: {}
       type: object
+    GoogleAnalyticsAdminV1alphaAdSenseLink:
+      description: A link between a GA4 Property and an AdSense for Content ad client.
+      properties:
+        adClientCode:
+          description: 'Immutable. The AdSense ad client code that the GA4 property is linked to. Example format: "ca-pub-1234567890"'
+          type: string
+        name:
+          description: "Output only. The resource name for this AdSense Link resource. Format: properties/{propertyId}/adSenseLinks/{linkId} Example: properties/1234/adSenseLinks/6789"
+          readOnly: true
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaApproveDisplayVideo360AdvertiserLinkProposalRequest:
       description: Request message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
       properties: {}
@@ -3476,6 +3553,9 @@ components:
         account:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccount"
           description: A snapshot of an Account resource in change history.
+        adsenseLink:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAdSenseLink"
+          description: A snapshot of an AdSenseLink resource in change history.
         attributionSettings:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAttributionSettings"
           description: A snapshot of AttributionSettings resource in change history.
@@ -4334,6 +4414,18 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    GoogleAnalyticsAdminV1alphaListAdSenseLinksResponse:
+      description: Response message for ListAdSenseLinks method.
+      properties:
+        adsenseLinks:
+          description: List of AdSenseLinks.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAdSenseLink"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaListAudiencesResponse:
       description: Response message for ListAudiences RPC.
       properties:
@@ -4907,6 +4999,7 @@ components:
               - EXPANDED_DATA_SET
               - CHANNEL_GROUP
               - ENHANCED_MEASUREMENT_SETTINGS
+              - ADSENSE_LINK
               - AUDIENCE
               - EVENT_CREATE_RULE
             type: string

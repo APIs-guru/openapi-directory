@@ -3148,6 +3148,9 @@ components:
         password:
           description: Input only. The credentials password. This is write only and can not be read in a GET operation.
           type: string
+        resolvedVcenterHost:
+          description: The hostname of the vcenter.
+          type: string
         thumbprint:
           description: The thumbprint representing the certificate for the vcenter.
           type: string

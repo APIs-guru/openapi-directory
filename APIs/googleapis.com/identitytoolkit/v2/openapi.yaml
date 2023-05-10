@@ -430,6 +430,42 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v2/passwordPolicy:
+    get:
+      description: Gets password policy config set on the project or tenant.
+      operationId: identitytoolkit.getPasswordPolicy
+      parameters:
+        - description: The id of a tenant.
+          in: query
+          name: tenantId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2PasswordPolicy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - v2
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v2/recaptchaConfig:
     get:
       description: Gets parameters needed for reCAPTCHA analysis.
@@ -1327,6 +1363,9 @@ components:
         notification:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2NotificationConfig"
           description: Configuration related to sending notifications to users.
+        passwordPolicyConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2PasswordPolicyConfig"
+          description: The project level password policy configuration.
         quota:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2QuotaConfig"
           description: Configuration related to quotas.
@@ -1347,6 +1386,30 @@ components:
             - FIREBASE_AUTH
           readOnly: true
           type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2CustomStrengthOptions:
+      description: Custom strength options to enforce on user passwords.
+      properties:
+        containsLowercaseCharacter:
+          description: The password must contain a lower case character.
+          type: boolean
+        containsNonAlphanumericCharacter:
+          description: The password must contain a non alpha numeric character.
+          type: boolean
+        containsNumericCharacter:
+          description: The password must contain a number.
+          type: boolean
+        containsUppercaseCharacter:
+          description: The password must contain an upper case character.
+          type: boolean
+        maxPasswordLength:
+          description: Maximum password length. No default max length
+          format: int32
+          type: integer
+        minPasswordLength:
+          description: Minimum password length. Range from 6 to 30
+          format: int32
+          type: integer
       type: object
     GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp:
       description: Standard Identity Toolkit-trusted IDPs.
@@ -1720,6 +1783,42 @@ components:
           description: Do not use. The `token` response type is not supported at the moment.
           type: boolean
       type: object
+    GoogleCloudIdentitytoolkitAdminV2PasswordPolicyConfig:
+      description: The configuration for the password policy on the project.
+      properties:
+        forceUpgradeOnSignin:
+          description: Users must have a password compliant with the password policy to sign-in.
+          type: boolean
+        lastUpdateTime:
+          description: Output only. The last time the password policy on the project was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        passwordPolicyEnforcementState:
+          description: Which enforcement mode to use for the password policy.
+          enum:
+            - PASSWORD_POLICY_ENFORCEMENT_STATE_UNSPECIFIED
+            - OFF
+            - ENFORCE
+          type: string
+        passwordPolicyVersions:
+          description: Must be of length 1. Contains the strength attributes for the password policy.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2PasswordPolicyVersion"
+          type: array
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2PasswordPolicyVersion:
+      description: The strength attributes for the password policy on the project.
+      properties:
+        customStrengthOptions:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2CustomStrengthOptions"
+          description: The custom strength options enforced by the password policy.
+        schemaVersion:
+          description: Output only. schema version number for the password policy
+          format: int32
+          readOnly: true
+          type: integer
+      type: object
     GoogleCloudIdentitytoolkitAdminV2Permissions:
       description: Configuration related to restricting a user's ability to affect their account.
       properties:
@@ -2024,6 +2123,9 @@ components:
           description: 'Output only. Resource name of a tenant. For example: "projects/{project-id}/tenants/{tenant-id}"'
           readOnly: true
           type: string
+        passwordPolicyConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2PasswordPolicyConfig"
+          description: The tenant-level password policy config
         recaptchaConfig:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaConfig"
           description: The tenant-level reCAPTCHA config.
@@ -2139,6 +2241,30 @@ components:
         appSignatureHash:
           description: The Android app's signature hash for Google Play Service's SMS Retriever API.
           type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2CustomStrengthOptions:
+      description: Custom strength options to enforce on user passwords.
+      properties:
+        containsLowercaseCharacter:
+          description: The password must contain a lower case character.
+          type: boolean
+        containsNonAlphanumericCharacter:
+          description: The password must contain a non alpha numeric character.
+          type: boolean
+        containsNumericCharacter:
+          description: The password must contain a number.
+          type: boolean
+        containsUppercaseCharacter:
+          description: The password must contain an upper case character.
+          type: boolean
+        maxPasswordLength:
+          description: Maximum password length. No default max length
+          format: int32
+          type: integer
+        minPasswordLength:
+          description: Minimum password length. Range from 6 to 30
+          format: int32
+          type: integer
       type: object
     GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest:
       description: Finishes enrolling a second factor for the user.
@@ -2304,6 +2430,24 @@ components:
         verificationCode:
           description: User-entered verification code.
           type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2PasswordPolicy:
+      description: Configuration for password policy.
+      properties:
+        allowedNonAlphanumericCharacters:
+          description: Output only. Allowed characters which satisfy the non_alphanumeric requirement.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        customStrengthOptions:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2CustomStrengthOptions"
+          description: The custom strength options enforced by the password policy.
+        schemaVersion:
+          description: Output only. schema version number for the password policy
+          format: int32
+          readOnly: true
+          type: integer
       type: object
     GoogleCloudIdentitytoolkitV2PublicKeyCredentialCreationOptions:
       description: Parameters for creating a FIDO key.

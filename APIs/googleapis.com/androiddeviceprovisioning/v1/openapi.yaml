@@ -1046,6 +1046,10 @@ components:
         dpcResourcePath:
           description: Required. The resource name of the selected DPC (device policy controller) in the format `customers/[CUSTOMER_ID]/dpcs/*`. To list the supported DPCs, call `customers.dpcs.list`.
           type: string
+        forcedResetTime:
+          description: Optional. The timeout before forcing factory reset the device if the device doesn't go through provisioning in the setup wizard, usually due to lack of network connectivity during setup wizard. Ranges from 0-6 hours, with 2 hours being the default if unset.
+          format: google-duration
+          type: string
         isDefault:
           description: Required. Whether this is the default configuration that zero-touch enrollment applies to any new devices the organization purchases in the future. Only one customer configuration can be the default. Setting this value to `true`, changes the previous default configuration's `isDefault` value to `false`.
           type: boolean
@@ -1552,6 +1556,7 @@ components:
             - SINGLE_DEVICE_STATUS_SECTION_NOT_YOURS
             - SINGLE_DEVICE_STATUS_INVALID_TOKEN
             - SINGLE_DEVICE_STATUS_REVOKED_TOKEN
+            - SINGLE_DEVICE_STATUS_DEVICE_LIMIT_EXCEEDED
           type: string
       type: object
     Status:

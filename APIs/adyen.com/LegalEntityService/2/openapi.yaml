@@ -47,7 +47,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-05-09T12:22:30Z
+  x-timestamp: 2023-05-10T11:22:31Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2496,7 +2496,7 @@ components:
           type: string
         stateOrProvince:
           description: |-
-            The two-letter ISO 3166-2 state or province code. For example, **CA** in the US. 
+            The two-letter ISO 3166-2 state or province code. For example, **CA** in the US.
 
             If you specify the state or province, you must also send `city`, `postalCode`, and `street`.
           type: string
@@ -2872,7 +2872,7 @@ components:
             * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.
 
             When uploading other documents:
-            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**. 
+            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**.
 
             * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, or **proofOfIndividualTaxId**.
 
@@ -3062,7 +3062,7 @@ components:
             * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.
 
             When uploading other documents:
-            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**. 
+            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**.
 
             * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, or **proofOfIndividualTaxId**.
 
@@ -3201,9 +3201,9 @@ components:
           type: string
         entityType:
           description: |-
-            The legal entity type of associated legal entity. 
+            The legal entity type of associated legal entity.
 
-            For example, **organization**, **soleProprietorship** or **individual**. 
+            For example, **organization**, **soleProprietorship** or **individual**.
           readOnly: true
           type: string
         jobTitle:
@@ -3223,11 +3223,11 @@ components:
           type: string
         type:
           description: |-
-            Defines the relationship of the legal entity to the current legal entity. 
+            Defines the relationship of the legal entity to the current legal entity.
 
-            Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **signatory**, or **ultimateParentCompany**. 
+            Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **signatory**, or **ultimateParentCompany**.
 
-            Possible values for sole proprietorships: **soleProprietorship**. 
+            Possible values for sole proprietorships: **soleProprietorship**.
           enum:
             - pciSignatory
             - signatory
@@ -3535,7 +3535,7 @@ components:
           x-addedInVersion: "2"
         type:
           description: |-
-            Type of organization. 
+            Type of organization.
 
             Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**, **nonProfit**, **partnershipIncorporated**, **privateCompany**.
           enum:

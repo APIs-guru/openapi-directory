@@ -1395,6 +1395,22 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
+    GoogetArtifact:
+      description: A detailed representation of a GooGet artifact.
+      properties:
+        architecture:
+          description: Output only. Operating system architecture of the artifact.
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The Artifact Registry resource name of the artifact.
+          readOnly: true
+          type: string
+        packageName:
+          description: Output only. The GooGet package name of the artifact.
+          readOnly: true
+          type: string
+      type: object
     GoogleDevtoolsArtifactregistryV1File:
       description: Files store content that is potentially associated with Packages or Versions.
       properties:
@@ -1491,6 +1507,16 @@ components:
             $ref: "#/components/schemas/ImportAptArtifactsErrorInfo"
           type: array
       type: object
+    ImportGoogetArtifactsErrorInfo:
+      description: Error information explaining why a package was not imported.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The detailed error status.
+        gcsSource:
+          $ref: "#/components/schemas/ImportGoogetArtifactsGcsSource"
+          description: Google Cloud Storage location requested.
+      type: object
     ImportGoogetArtifactsGcsSource:
       description: Google Cloud Storage location where the artifacts currently reside.
       properties:
@@ -1503,12 +1529,30 @@ components:
           description: Supports URI wildcards for matching multiple objects from a single URI.
           type: boolean
       type: object
+    ImportGoogetArtifactsMetadata:
+      description: The operation metadata for importing artifacts.
+      properties: {}
+      type: object
     ImportGoogetArtifactsRequest:
       description: The request to import new googet artifacts.
       properties:
         gcsSource:
           $ref: "#/components/schemas/ImportGoogetArtifactsGcsSource"
           description: Google Cloud Storage location where input content is located.
+      type: object
+    ImportGoogetArtifactsResponse:
+      description: The response message from importing artifacts.
+      properties:
+        errors:
+          description: Detailed error info for packages that were not imported.
+          items:
+            $ref: "#/components/schemas/ImportGoogetArtifactsErrorInfo"
+          type: array
+        googetArtifacts:
+          description: The GooGet artifacts updated.
+          items:
+            $ref: "#/components/schemas/GoogetArtifact"
+          type: array
       type: object
     ImportYumArtifactsErrorInfo:
       description: Error information explaining why a package was not imported.
@@ -1689,7 +1733,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
@@ -2088,9 +2132,22 @@ components:
           $ref: "#/components/schemas/Operation"
           description: Operation to be returned to the user.
       type: object
+    UploadGoogetArtifactMetadata:
+      description: The operation metadata for uploading artifacts.
+      properties: {}
+      type: object
     UploadGoogetArtifactRequest:
       description: The request to upload an artifact.
       properties: {}
+      type: object
+    UploadGoogetArtifactResponse:
+      description: The response of the completed artifact upload operation. This response is contained in the Operation and available to users.
+      properties:
+        googetArtifacts:
+          description: The Apt artifacts updated.
+          items:
+            $ref: "#/components/schemas/GoogetArtifact"
+          type: array
       type: object
     UploadKfpArtifactMediaResponse:
       description: The response to upload an artifact.
