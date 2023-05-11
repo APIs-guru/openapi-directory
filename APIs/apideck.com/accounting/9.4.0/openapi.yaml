@@ -444,6 +444,8 @@ paths:
         - Bills
       x-apideck-api: accounting
       x-apideck-gotchas:
+        - connector: clearbooks-uk
+          description: Clearbooks does not support setting the pagination size.
         - connector: freshbooks
           description: The Freshbooks Bills api is currently in beta.
       x-codeSamples:
@@ -936,6 +938,9 @@ paths:
       tags:
         - Credit Notes
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: clearbooks-uk
+          description: Clearbooks does not support setting the pagination size.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1347,6 +1352,9 @@ paths:
       tags:
         - Customers
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: clearbooks-uk
+          description: Clearbooks does not support setting the pagination size.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2219,6 +2227,8 @@ paths:
         - Invoices
       x-apideck-api: accounting
       x-apideck-gotchas:
+        - connector: clearbooks-uk
+          description: Clearbooks does not support setting the pagination size.
         - connector: quickbooks
           description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage or discount_amount applies to entire invoice.
       x-codeSamples:
@@ -3029,6 +3039,9 @@ paths:
       tags:
         - Ledger Accounts
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: clearbooks-uk
+          description: Clearbooks does not support setting the pagination size.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -3356,6 +3369,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/paymentsFilter"
         - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
@@ -3379,6 +3393,9 @@ paths:
       tags:
         - Payments
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: kashflow
+          description: Kashflow only allows to retrieve payments by invoice, so in order to use this endpoint the filter[invoice_number] parameter is required.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -3827,6 +3844,9 @@ paths:
       tags:
         - Suppliers
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: clearbooks-uk
+          description: Clearbooks does not support setting the pagination size.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -4649,6 +4669,14 @@ components:
       name: pass_through
       schema:
         $ref: "#/components/schemas/PassThroughQuery"
+      style: deepObject
+    paymentsFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/PaymentsFilter"
       style: deepObject
     profitAndLossFilter:
       description: Apply filters
@@ -10476,6 +10504,19 @@ components:
           type: string
       type: object
       x-apideck-schema-id: PaymentRequired
+    PaymentsFilter:
+      additionalProperties: false
+      example:
+        invoice_number: "456"
+      properties:
+        invoice_number:
+          description: Invoice number for payments to filter on
+          example: SpaceX
+          title: Invoice number
+          type: string
+      type: object
+      x-apideck-schema-id: PaymentsFilter
+      x-graphql-type-name: PaymentsFilter
     PhoneNumber:
       additionalProperties: false
       properties:

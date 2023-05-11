@@ -4511,6 +4511,16 @@ components:
         connectorVersion:
           description: "Required. Connector version on which the connection is created. The format is: projects/*/locations/*/providers/*/connectors/*/versions/* Only global location is supported for ConnectorVersion resource."
           type: string
+        connectorVersionLaunchStage:
+          description: Output only. Flag to mark the version indicating the launch stage.
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - PREVIEW
+            - GA
+            - DEPRECATED
+            - PRIVATE_PREVIEW
+          readOnly: true
+          type: string
         createTime:
           description: Output only. Created time.
           format: google-datetime
@@ -4565,7 +4575,7 @@ components:
           description: Output only. Current status of the connection.
           readOnly: true
         subscriptionType:
-          description: Output only. This subscription type enum value states if the metrics should be sent for billing or not.
+          description: Output only. This subscription type enum states the subscription type of the project.
           enum:
             - SUBSCRIPTION_TYPE_UNSPECIFIED
             - PAY_G

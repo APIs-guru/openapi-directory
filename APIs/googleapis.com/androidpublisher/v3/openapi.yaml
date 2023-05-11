@@ -3025,7 +3025,7 @@ paths:
           name: productId
           schema:
             type: string
-        - description: Required. A string representing version of the available regions being used for the specified resource. The current version is 2022/02.
+        - description: Required. The latest version is 2022/02.
           in: query
           name: regionsVersion.version
           schema:
@@ -3134,7 +3134,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. A string representing version of the available regions being used for the specified resource. The current version is 2022/02.
+        - description: Required. The latest version is 2022/02.
           in: query
           name: regionsVersion.version
           schema:
@@ -3294,7 +3294,7 @@ paths:
           name: offerId
           schema:
             type: string
-        - description: Required. A string representing version of the available regions being used for the specified resource. The current version is 2022/02.
+        - description: Required. The latest version is 2022/02.
           in: query
           name: regionsVersion.version
           schema:
@@ -3439,7 +3439,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. A string representing version of the available regions being used for the specified resource. The current version is 2022/02.
+        - description: Required. The latest version is 2022/02.
           in: query
           name: regionsVersion.version
           schema:
@@ -5731,10 +5731,10 @@ components:
           type: string
       type: object
     RegionsVersion:
-      description: The version of the available regions being used for the specified resource.
+      description: The version of the available regions being used for the specified resource. A string representing the version of available regions being used for the specified resource. Regional prices for the resource have to be specified according to the information published in [this article](https://support.google.com/googleplay/android-developer/answer/10532353).
       properties:
         version:
-          description: Required. A string representing version of the available regions being used for the specified resource. The current version is 2022/02.
+          description: Required. The latest version is 2022/02.
           type: string
       type: object
     ReplacementCancellation:

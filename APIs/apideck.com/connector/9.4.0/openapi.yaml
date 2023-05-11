@@ -1231,6 +1231,11 @@ components:
           description: List of Unified APIs that feature this connector.
           items:
             properties:
+              auth_only:
+                description: Indicates whether a connector only supports authentication. In this case the connector is not mapped to a Unified API, but can be used with the Proxy API
+                example: true
+                readOnly: true
+                type: boolean
               downstream_unsupported_resources:
                 description: List of resources that are not supported on the downstream.
                 items:

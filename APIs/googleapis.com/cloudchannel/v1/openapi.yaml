@@ -393,6 +393,52 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
+  "/v1/{customer}:queryEligibleBillingAccounts":
+    get:
+      description: "Lists the billing accounts that are eligible to purchase particular SKUs for a given customer. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: Based on the provided list of SKUs, returns a list of SKU groups that must be purchased using the same billing account and the billing accounts eligible to purchase each SKU group."
+      operationId: cloudchannel.accounts.customers.queryEligibleBillingAccounts
+      parameters:
+        - description: "Required. The resource name of the customer to list eligible billing accounts for. Format: accounts/{account_id}/customers/{customer_id}."
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: "Required. List of SKUs to list eligible billing accounts for. At least one SKU is required. Format: products/{product_id}/skus/{sku_id}."
+          explode: true
+          in: query
+          name: skus
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudChannelV1QueryEligibleBillingAccountsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/apps.order
+          Oauth2c:
+            - https://www.googleapis.com/auth/apps.order
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{entitlement}:lookupOffer":
     get:
       description: "Returns the requested Offer resource. Possible error codes: * PERMISSION_DENIED: The entitlement doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Entitlement or offer was not found. Return value: The Offer resource."
@@ -1904,6 +1950,37 @@ components:
           description: The name of the base entitlement, for which this entitlement is an add-on.
           type: string
       type: object
+    GoogleCloudChannelV1BillingAccount:
+      description: Represents a billing account.
+      properties:
+        createTime:
+          description: Output only. The time when this billing account was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        currencyCode:
+          description: Output only. The 3-letter currency code defined in ISO 4217.
+          readOnly: true
+          type: string
+        displayName:
+          description: Display name of the billing account.
+          type: string
+        name:
+          description: "Output only. Resource name of the billing account. Format: accounts/{account_id}/billingAccounts/{billing_account_id}."
+          readOnly: true
+          type: string
+        regionCode:
+          description: Output only. The CLDR region code.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudChannelV1BillingAccountPurchaseInfo:
+      description: Represents a billing account that can be used to make a purchase.
+      properties:
+        billingAccount:
+          $ref: "#/components/schemas/GoogleCloudChannelV1BillingAccount"
+          description: The billing account resource.
+      type: object
     GoogleCloudChannelV1CancelEntitlementRequest:
       description: Request message for CloudChannelService.CancelEntitlement.
       properties:
@@ -3103,6 +3180,15 @@ components:
           $ref: "#/components/schemas/GoogleCloudChannelV1Sku"
           description: SKU
       type: object
+    GoogleCloudChannelV1QueryEligibleBillingAccountsResponse:
+      description: Response message for QueryEligibleBillingAccounts.
+      properties:
+        skuPurchaseGroups:
+          description: List of SKU purchase groups where each group represents a set of SKUs that must be purchased using the same billing account. Each SKU from [QueryEligibleBillingAccountsRequest.skus] will appear in exactly one SKU group.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1SkuPurchaseGroup"
+          type: array
+      type: object
     GoogleCloudChannelV1RegisterSubscriberRequest:
       description: Request Message for RegisterSubscriber.
       properties:
@@ -3336,6 +3422,20 @@ components:
         skuGroup:
           description: 'Specifies a SKU group (https://cloud.google.com/skus/sku-groups). Resource name of SKU group. Format: accounts/{account}/skuGroups/{sku_group}. Example: "accounts/C01234/skuGroups/3d50fd57-3157-4577-a5a9-a219b8490041".'
           type: string
+      type: object
+    GoogleCloudChannelV1SkuPurchaseGroup:
+      description: Represents a set of SKUs that must be purchased using the same billing account.
+      properties:
+        billingAccountPurchaseInfos:
+          description: List of billing accounts that are eligible to purhcase these SKUs.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1BillingAccountPurchaseInfo"
+          type: array
+        skus:
+          description: "Resource names of the SKUs included in this group. Format: products/{product_id}/skus/{sku_id}."
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudChannelV1StartPaidServiceRequest:
       description: Request message for CloudChannelService.StartPaidService.
