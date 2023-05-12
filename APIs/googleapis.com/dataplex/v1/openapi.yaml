@@ -2996,6 +2996,9 @@ components:
     GoogleCloudDataplexV1DataScanEventDataProfileAppliedConfigs:
       description: Applied configs for data profile type data scan job.
       properties:
+        rowFilterApplied:
+          description: Boolean indicating whether a row filter was applied in the DataScan job.
+          type: boolean
         samplingPercent:
           description: The percentage of the records selected from the dataset for DataScan. Value ranges between 0.0 and 100.0. Value 0.0 or 100.0 imply that sampling was not applied.
           format: float
@@ -3012,6 +3015,9 @@ components:
     GoogleCloudDataplexV1DataScanEventDataQualityAppliedConfigs:
       description: Applied configs for data quality type data scan job.
       properties:
+        rowFilterApplied:
+          description: Boolean indicating whether a row filter was applied in the DataScan job.
+          type: boolean
         samplingPercent:
           description: The percentage of the records selected from the dataset for DataScan. Value ranges between 0.0 and 100.0. Value 0.0 or 100.0 imply that sampling was not applied.
           format: float

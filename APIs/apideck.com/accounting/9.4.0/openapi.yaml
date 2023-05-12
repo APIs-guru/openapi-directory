@@ -567,18 +567,19 @@ paths:
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
                     discount_percentage: 0.01,
+                    discount_amount: 19.99,
                     location_id: '1234',
                     department_id: '1234',
                     item: {
                       id: '12344'
                     },
+                    tax_rate: {
+                      id: '123456'
+                    },
                     ledger_account: {
                       id: '123456',
                       nominal_code: 'N091',
                       code: '453'
-                    },
-                    tax_rate: {
-                      id: '123456'
                     },
                     row_version: '1-12345'
                   }
@@ -815,18 +816,19 @@ paths:
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
                     discount_percentage: 0.01,
+                    discount_amount: 19.99,
                     location_id: '1234',
                     department_id: '1234',
                     item: {
                       id: '12344'
                     },
+                    tax_rate: {
+                      id: '123456'
+                    },
                     ledger_account: {
                       id: '123456',
                       nominal_code: 'N091',
                       code: '453'
-                    },
-                    tax_rate: {
-                      id: '123456'
                     },
                     row_version: '1-12345'
                   }
@@ -5933,6 +5935,13 @@ components:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
       x-apideck-schema-id: Bill
+      x-apideck-strict-required:
+        - id
+        - bill_date
+        - due_date
+        - line_items
+        - total
+        - status
       x-apideck-weights:
         balance: high
         bill_date: critical
@@ -5987,11 +5996,17 @@ components:
           nullable: true
           title: Description
           type: string
+        discount_amount:
+          description: Discount amount applied to the line item when supported downstream.
+          example: 19.99
+          nullable: true
+          title: Discount Amount
+          type: number
         discount_percentage:
-          description: Discount percentage
+          description: Discount percentage applied to the line item when supported downstream.
           example: 0.01
           nullable: true
-          title: Discount amount
+          title: Discount Percentage
           type: number
         id:
           $ref: "#/components/schemas/Id"
@@ -6055,26 +6070,27 @@ components:
       type: object
       x-apideck-schema-id: BillLineItem
       x-apideck-weights:
-        code: high
+        code: medium
         created_at: edge-case
         created_by: edge-case
         department_id: low
         description: high
-        discount_percentage: edge-case
-        id: critical
+        discount_amount: low
+        discount_percentage: low
+        id: high
         item: high
         ledger_account: low
-        line_number: edge-case
+        line_number: medium
         location_id: low
-        quantity: medium
+        quantity: high
         row_id: edge-case
         row_version: edge-case
-        tax_amount: low
-        tax_rate: low
+        tax_amount: high
+        tax_rate: medium
         total_amount: critical
-        type: high
+        type: medium
         unit_of_measure: edge-case
-        unit_price: medium
+        unit_price: high
         updated_at: high
         updated_by: edge-case
     BillsSort:
@@ -9498,6 +9514,7 @@ components:
         created_by: edge-case
         department_id: low
         description: high
+        discount_amount: low
         discount_percentage: low
         id: high
         item: high
