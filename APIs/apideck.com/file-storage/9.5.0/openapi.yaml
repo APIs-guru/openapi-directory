@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 9.4.0
+  version: 9.5.0
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4510,17 +4510,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: file
-              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: file-storage.file.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: dropbox
-              unified_api: file-storage
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: file
+                entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: file-storage.file.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: dropbox
+                unified_api: file-storage
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -4552,17 +4556,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: file
-              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: file-storage.file.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: dropbox
-              unified_api: file-storage
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: file
+                entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: file-storage.file.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: dropbox
+                unified_api: file-storage
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -4594,17 +4602,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: file
-              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: file-storage.file.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: dropbox
-              unified_api: file-storage
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: file
+                entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: file-storage.file.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: dropbox
+                unified_api: file-storage
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.

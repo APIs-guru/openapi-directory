@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 9.4.0
+  version: 9.5.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -11822,17 +11822,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: customer
-              entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.customer.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: customer
+                entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.customer.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -11864,17 +11868,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: customer
-              entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.customer.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: customer
+                entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.customer.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -11906,17 +11914,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: customer
-              entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.customer.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: customer
+                entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.customer.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -11948,17 +11960,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: invoice
-              entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.invoice.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: invoice
+                entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.invoice.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -11990,17 +12006,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: invoice
-              entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.invoice.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: invoice
+                entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.invoice.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12032,17 +12052,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: invoice_item
-              entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.invoice_item.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: invoice_item
+                entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.invoice_item.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12074,17 +12098,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: invoice_item
-              entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.invoice_item.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: invoice_item
+                entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.invoice_item.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12116,17 +12144,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: invoice_item
-              entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.invoice_item.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: invoice_item
+                entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.invoice_item.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12158,17 +12190,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: invoice
-              entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.invoice.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: invoice
+                entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.invoice.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12200,17 +12236,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: ledger_account
-              entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.ledger_account.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: ledger_account
+                entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.ledger_account.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12242,17 +12282,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: ledger_account
-              entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.ledger_account.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: ledger_account
+                entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.ledger_account.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12284,17 +12328,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: ledger_account
-              entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.ledger_account.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: ledger_account
+                entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.ledger_account.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12326,17 +12374,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: tax_rate
-              entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.tax_rate.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: tax_rate
+                entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.tax_rate.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12368,17 +12420,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: tax_rate
-              entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.tax_rate.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: tax_rate
+                entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.tax_rate.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -12410,17 +12466,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: tax_rate
-              entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: accounting.tax_rate.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: xero
-              unified_api: accounting
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: tax_rate
+                entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.tax_rate.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
             schema:
-              $ref: "#/components/schemas/AccountingWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.

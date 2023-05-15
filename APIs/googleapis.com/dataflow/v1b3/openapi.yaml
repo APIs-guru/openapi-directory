@@ -4514,6 +4514,8 @@ components:
             - SERVICE_ACCOUNT
             - MACHINE_TYPE
             - KMS_KEY_NAME
+            - WORKER_REGION
+            - WORKER_ZONE
           type: string
         parentName:
           description: Optional. Specifies the name of the parent parameter. Used in conjunction with 'parent_trigger_values' to make this parameter conditional (will only be rendered conditionally). Should be mappable to a ParameterMetadata.name field.

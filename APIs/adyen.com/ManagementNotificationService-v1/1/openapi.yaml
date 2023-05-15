@@ -27,7 +27,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: ManagementNotificationService-v1
-  x-timestamp: 2023-03-30T18:21:57Z
+  x-timestamp: 2023-05-08T19:22:16Z
 tags: []
 components:
   examples:
@@ -245,6 +245,11 @@ components:
       type: object
     CapabilityProblemEntity:
       properties:
+        documents:
+          description: List of document IDs to which the verification errors related to the capabilities correspond to.
+          items:
+            type: string
+          type: array
         id:
           description: The ID of the entity.
           type: string
@@ -264,6 +269,11 @@ components:
       type: object
     CapabilityProblemEntity-recursive:
       properties:
+        documents:
+          description: List of document IDs to which the verification errors related to the capabilities correspond to.
+          items:
+            type: string
+          type: array
         id:
           description: The ID of the entity.
           type: string

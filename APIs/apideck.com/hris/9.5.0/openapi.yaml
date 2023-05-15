@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 9.4.0
+  version: 9.5.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -5200,6 +5200,7 @@ components:
         - "*"
         - hris.employee.created
         - hris.employee.updated
+        - hris.employee.terminated
         - hris.employee.deleted
         - hris.company.created
         - hris.company.updated
@@ -6366,17 +6367,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: company
-              entity_url: https://unify.apideck.com/hris/companies/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: hris.company.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: bamboo
-              unified_api: hris
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: company
+                entity_url: https://unify.apideck.com/hris/companies/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: hris.company.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: bamboo
+                unified_api: hris
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -6408,17 +6413,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: company
-              entity_url: https://unify.apideck.com/hris/companies/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: hris.company.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: bamboo
-              unified_api: hris
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: company
+                entity_url: https://unify.apideck.com/hris/companies/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: hris.company.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: bamboo
+                unified_api: hris
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -6450,17 +6459,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: company
-              entity_url: https://unify.apideck.com/hris/companies/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: hris.company.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: bamboo
-              unified_api: hris
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: company
+                entity_url: https://unify.apideck.com/hris/companies/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: hris.company.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: bamboo
+                unified_api: hris
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -6492,17 +6505,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: employee
-              entity_url: https://unify.apideck.com/hris/employees/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: hris.employee.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: bamboo
-              unified_api: hris
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: employee
+                entity_url: https://unify.apideck.com/hris/employees/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: hris.employee.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: bamboo
+                unified_api: hris
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -6534,17 +6551,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: employee
-              entity_url: https://unify.apideck.com/hris/employees/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: hris.employee.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: bamboo
-              unified_api: hris
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: employee
+                entity_url: https://unify.apideck.com/hris/employees/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: hris.employee.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: bamboo
+                unified_api: hris
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -6576,17 +6597,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: employee
-              entity_url: https://unify.apideck.com/hris/employees/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: hris.employee.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: bamboo
-              unified_api: hris
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: employee
+                entity_url: https://unify.apideck.com/hris/employees/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: hris.employee.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: bamboo
+                unified_api: hris
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/WebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.

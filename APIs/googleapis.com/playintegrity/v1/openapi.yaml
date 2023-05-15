@@ -229,6 +229,22 @@ components:
             type: string
           type: array
       type: object
+    GuidanceDetails:
+      description: Contains guidance details about the Integrity API response, providing additional context to the integrity verdicts.
+      properties:
+        userRemediation:
+          description: This shows when there is an issue with at least one of the integrity verdicts, and provides user remediation guidance.
+          items:
+            enum:
+              - UNKNOWN_USER_REMEDIATION
+              - RESTORE_FACTORY_ROM
+              - LOCK_BOOTLOADER
+              - GET_UNMODIFIED_APP
+              - SIGN_INTO_GOOGLE_ACCOUNT
+              - INSTALL_APP_FROM_PLAY
+            type: string
+          type: array
+      type: object
     RequestDetails:
       description: Contains the integrity request information.
       properties:
@@ -265,6 +281,9 @@ components:
         deviceIntegrity:
           $ref: "#/components/schemas/DeviceIntegrity"
           description: Required. Details about the device integrity.
+        guidanceDetails:
+          $ref: "#/components/schemas/GuidanceDetails"
+          description: Additional guidance related to the integrity API response.
         requestDetails:
           $ref: "#/components/schemas/RequestDetails"
           description: Required. Details about the integrity request.

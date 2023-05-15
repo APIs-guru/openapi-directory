@@ -47,7 +47,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-05-10T11:22:30Z
+  x-timestamp: 2023-05-15T17:21:00Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2430,6 +2430,10 @@ components:
         iban:
           description: The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
           type: string
+        trustedSource:
+          description: Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
+          readOnly: true
+          type: boolean
       required:
         - currencyCode
       type: object
@@ -3536,7 +3540,7 @@ components:
           description: Four last digits of the bank account number.
           type: string
         trustedSource:
-          description: Identifies if the TI was created from a trusted source.
+          description: Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
           readOnly: true
           type: boolean
       required:

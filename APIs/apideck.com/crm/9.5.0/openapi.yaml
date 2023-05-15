@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 9.4.0
+  version: 9.5.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -8471,17 +8471,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: activity
-              entity_url: https://unify.apideck.com/crm/activities/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.activity.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: activity
+                entity_url: https://unify.apideck.com/crm/activities/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.activity.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8513,17 +8517,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: activity
-              entity_url: https://unify.apideck.com/crm/activities/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.activity.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: activity
+                entity_url: https://unify.apideck.com/crm/activities/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.activity.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8555,17 +8563,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: activity
-              entity_url: https://unify.apideck.com/crm/activities/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.activity.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: activity
+                entity_url: https://unify.apideck.com/crm/activities/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.activity.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8597,17 +8609,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: company
-              entity_url: https://unify.apideck.com/crm/companies/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.company.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: company
+                entity_url: https://unify.apideck.com/crm/companies/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.company.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8639,17 +8655,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: company
-              entity_url: https://unify.apideck.com/crm/companies/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.company.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: company
+                entity_url: https://unify.apideck.com/crm/companies/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.company.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8681,17 +8701,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: company
-              entity_url: https://unify.apideck.com/crm/companies/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.company.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: company
+                entity_url: https://unify.apideck.com/crm/companies/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.company.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8723,17 +8747,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: contact
-              entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.contact.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: contact
+                entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.contact.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8765,17 +8793,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: contact
-              entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.contact.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: contact
+                entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.contact.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8807,17 +8839,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: contact
-              entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.contact.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: contact
+                entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.contact.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8849,17 +8885,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: lead
-              entity_url: https://unify.apideck.com/crm/leads/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.lead.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: lead
+                entity_url: https://unify.apideck.com/crm/leads/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.lead.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8891,17 +8931,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: lead
-              entity_url: https://unify.apideck.com/crm/leads/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.lead.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: lead
+                entity_url: https://unify.apideck.com/crm/leads/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.lead.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8933,17 +8977,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: lead
-              entity_url: https://unify.apideck.com/crm/leads/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.lead.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: lead
+                entity_url: https://unify.apideck.com/crm/leads/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.lead.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -8975,17 +9023,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: note
-              entity_url: https://unify.apideck.com/crm/notes/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.note.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: note
+                entity_url: https://unify.apideck.com/crm/notes/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.note.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -9017,17 +9069,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: note
-              entity_url: https://unify.apideck.com/crm/notes/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.note.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: note
+                entity_url: https://unify.apideck.com/crm/notes/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.note.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -9059,17 +9115,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: note
-              entity_url: https://unify.apideck.com/crm/notes/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.note.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: note
+                entity_url: https://unify.apideck.com/crm/notes/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.note.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -9101,17 +9161,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: opportunity
-              entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.opportunity.created
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: opportunity
+                entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.opportunity.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -9143,17 +9207,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: opportunity
-              entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.opportunity.deleted
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: opportunity
+                entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.opportunity.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -9185,17 +9253,21 @@ x-webhooks:
         content:
           application/json:
             example:
-              consumer_id: test_user_id
-              entity_id: 123456ASDF
-              entity_type: opportunity
-              entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
-              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-              event_type: crm.opportunity.updated
-              occurred_at: 2020-01-01T00:00:00.000Z
-              service_id: hubspot
-              unified_api: crm
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: opportunity
+                entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: crm.opportunity.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: hubspot
+                unified_api: crm
             schema:
-              $ref: "#/components/schemas/CrmWebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/CrmWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.

@@ -2745,7 +2745,7 @@ components:
             $ref: "#/components/schemas/ReplicaInfo"
           type: array
         state:
-          description: Output only. The current instance config state.
+          description: Output only. The current instance config state. Applicable only for USER_MANAGED configs.
           enum:
             - STATE_UNSPECIFIED
             - CREATING

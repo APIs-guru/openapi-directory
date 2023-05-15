@@ -1628,6 +1628,18 @@ components:
           description: The resource name of the user that owns this device in the form enterprises/{enterpriseId}/users/{userId}.
           type: string
       type: object
+    DeviceConnectivityManagement:
+      description: Covers controls for device connectivity such as Wi-Fi, USB data access, keyboard/mouse connections, and more.
+      properties:
+        usbDataAccess:
+          description: Controls what can be transferred via USB, files and/or data. This is supported only on company-owned devices.
+          enum:
+            - USB_DATA_ACCESS_UNSPECIFIED
+            - ALLOW_USB_DATA_TRANSFER
+            - DISALLOW_USB_FILE_TRANSFER
+            - DISALLOW_USB_DATA_TRANSFER
+          type: string
+      type: object
     DeviceSettings:
       description: Information about security related device settings on device.
       properties:
@@ -2379,6 +2391,7 @@ components:
             - PENDING
             - APP_INCOMPATIBLE
             - APP_NOT_UPDATED
+            - DEVICE_INCOMPATIBLE
           type: string
         packageName:
           description: The package name indicating which app is out of compliance, if applicable.
@@ -2417,6 +2430,7 @@ components:
             - PENDING
             - APP_INCOMPATIBLE
             - APP_NOT_UPDATED
+            - DEVICE_INCOMPATIBLE
           type: string
         packageName:
           description: The package name of the app that's out of compliance. If not set, then this condition matches any package name.
@@ -2794,6 +2808,9 @@ components:
             - GRANT
             - DENY
           type: string
+        deviceConnectivityManagement:
+          $ref: "#/components/schemas/DeviceConnectivityManagement"
+          description: Covers controls for device connectivity such as Wi-Fi, USB data access, keyboard/mouse connections, and more.
         deviceOwnerLockScreenInfo:
           $ref: "#/components/schemas/UserFacingMessage"
           description: The device owner information to be shown on the lock screen.
@@ -3044,7 +3061,7 @@ components:
           description: Whether configuring VPN is disabled.
           type: boolean
         wifiConfigDisabled:
-          description: "Whether configuring Wi-Fi access points is disabled. Note: If a network connection can't be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled)."
+          description: "Whether configuring Wi-Fi networks is disabled. Supported on fully managed devices and work profiles on company-owned devices. For fully managed devices, setting this to true removes all configured networks and retains only the networks configured using openNetworkConfiguration. For work profiles on company-owned devices, existing configured networks are not affected and the user is not allowed to add, remove, or modify Wi-Fi networks. Note: If a network connection can't be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled)."
           type: boolean
         wifiConfigsLockdownEnabled:
           description: DEPRECATED - Use wifi_config_disabled.

@@ -1109,6 +1109,10 @@ components:
         privateInstance:
           description: Specifies whether the Data Fusion instance should be private. If set to true, all Data Fusion nodes will have private IP addresses and will not be able to access the public internet.
           type: boolean
+        satisfiesPzs:
+          description: Output only. Reserved for future use.
+          readOnly: true
+          type: boolean
         serviceAccount:
           description: Output only. Deprecated. Use tenant_project_id instead to extract the tenant project ID.
           readOnly: true
@@ -1239,7 +1243,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".

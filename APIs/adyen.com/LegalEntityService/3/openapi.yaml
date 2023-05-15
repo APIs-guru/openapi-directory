@@ -47,7 +47,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-05-10T11:22:31Z
+  x-timestamp: 2023-05-15T17:21:01Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2821,6 +2821,10 @@ components:
         countryCode:
           description: The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the bank account is registered. For example, **NL**.
           type: string
+        trustedSource:
+          description: Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
+          readOnly: true
+          type: boolean
       type: object
     BirthData:
       properties:
@@ -4421,7 +4425,7 @@ components:
           description: Four last digits of the bank account number.
           type: string
         trustedSource:
-          description: Identifies if the TI was created from a trusted source.
+          description: Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
           readOnly: true
           type: boolean
       required:

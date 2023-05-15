@@ -861,6 +861,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        sqlserverValidation:
+          $ref: "#/components/schemas/SqlserverValidation"
+          description: The insights data for the sqlserver workload validation.
       type: object
     ListEvaluationsResponse:
       description: Message for response to listing Evaluations
@@ -957,7 +960,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents Google Cloud Platform location.
+      description: A resource that represents a Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
@@ -1204,16 +1207,6 @@ components:
         resourceKind:
           description: ComputeInstance, ComputeDisk, VPC, Bare Metal server, etc.
           type: string
-        resourceState:
-          description: Indicates whether this is a new, updated, or missing resource.
-          enum:
-            - RESOURCE_STATE_UNSPECIFIED
-            - ADDED
-            - UPDATED
-            - REMOVED
-            - REPLACED
-            - MISSING
-          type: string
         resourceType:
           description: The type of this resource.
           enum:
@@ -1263,6 +1256,37 @@ components:
       properties:
         resource:
           description: resource name
+          type: string
+      type: object
+    SqlserverValidation:
+      description: A presentation of SQLServer workload insight. The schema of SqlServer workloads validation related data.
+      properties:
+        agentVersion:
+          description: The agent version collected this data point
+          type: string
+        validationDetails:
+          description: A list of SqlServer validation metrics data.
+          items:
+            $ref: "#/components/schemas/SqlserverValidationValidationDetail"
+          type: array
+      type: object
+    SqlserverValidationValidationDetail:
+      description: Message describing the Sqlserver validation metrics.
+      properties:
+        details:
+          additionalProperties:
+            type: string
+          description: "The pairs of metrics data: field name & field value."
+          type: object
+        instanceId:
+          description: The instance id where the ValidationDetail is generated from
+          type: string
+        type:
+          description: The Sqlserver system that the validation data is from.
+          enum:
+            - SQLSERVER_VALIDATION_TYPE_UNSPECIFIED
+            - OS
+            - DB
           type: string
       type: object
     Status:

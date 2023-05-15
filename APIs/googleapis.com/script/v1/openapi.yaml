@@ -1231,6 +1231,13 @@ components:
         projectName:
           description: Name of the script being executed.
           type: string
+        runtimeVersion:
+          description: Which version of maestro to use to execute the script.
+          enum:
+            - RUNTIME_VERSION_UNSPECIFIED
+            - DEPRECATED_ES5
+            - V8
+          type: string
         startTime:
           description: Time the execution started.
           format: google-datetime

@@ -1003,6 +1003,9 @@ components:
         serviceId:
           description: Required. User-defined ID of the Cloud Run service.
           type: string
+        tag:
+          description: Optional. User-provided TrafficConfig tag to send traffic to. When omitted, traffic is sent to the service-wide URI
+          type: string
       type: object
     Domain:
       description: The intended behavior and status information of a domain.
